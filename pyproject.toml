@@ -1,0 +1,43 @@
+[project]
+name = "xray-cavities"
+version = "0.1.0"
+description = "Local analysis environment for UTAS AGN xray cavity workflows"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "astropy",
+    "breathe",
+    "colorful",
+    "contextlib2",
+    "future",
+    "h5py",
+    "hdf5plugin",
+    "ipykernel",
+    "ipython",
+    "jupyterlab",
+    "matplotlib",
+    "numba",
+    "numpy",
+    "pykdtree",
+    "pytest",
+    "pytest-datafiles",
+    "pyyaml",
+    "scipy<1.14",
+    "sphinx<7",
+    "sphinx-multiversion @ git+https://github.com/Holzhaus/sphinx-multiversion.git",
+    "tabulate",
+    "yt",
+    "plutokore",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# Local editable dependency used by the UTAS AGN workflows cloned under
+# /home/bwbrook/git/utas-agn.
+[tool.uv.sources]
+plutokore = { path = "../../git/utas-agn/plutokore", editable = true }
+
+[tool.uv]
+package = false
