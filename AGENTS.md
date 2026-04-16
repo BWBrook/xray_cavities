@@ -42,6 +42,14 @@ This means:
 
 `jet-setup.wiki` has not been forked and still points at the canonical repo. Treat it as read-only unless the user explicitly asks to change that arrangement.
 
+Current personal working branches on the fork-backed repos are:
+
+- `pluto`: `bwbrook/deep-server-bringup`
+- `jet-setup`: `bwbrook/deep-server-bringup`
+- `plutokore`: `bwbrook/deep-server-bringup`
+
+Use those branches as the default working context unless the user asks to create a new feature branch.
+
 ## First Reads
 
 Start here, in order:

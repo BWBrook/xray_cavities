@@ -44,17 +44,33 @@ Current local checkouts:
 Branch and commit state at time of writing:
 
 - `pluto`
-  - branch: `4.4.0-localchanges`
+  - local source branch at validation time: `4.4.0-localchanges`
+  - personal fork branch now in use: `bwbrook/deep-server-bringup`
   - commit: `587e34d`
 - `jet-setup`
-  - branch: `pluto-4.4`
+  - local source branch at validation time: `pluto-4.4`
+  - personal fork branch now in use: `bwbrook/deep-server-bringup`
   - commit: `0427058`
 - `plutokore`
-  - branch: `master`
+  - local source branch at validation time: `master`
+  - personal fork branch now in use: `bwbrook/deep-server-bringup`
   - commit: `6a47511`
 - `jet-setup.wiki`
   - branch: `master`
   - commit: `14d5aa7`
+
+Remote layout for the code repos:
+
+- `origin` points to Barry's personal GitLab fork under `BWBrook`
+- `upstream` points to the canonical `utas-agn` GitLab repo
+
+This arrangement is now active for:
+
+- `pluto`
+- `jet-setup`
+- `plutokore`
+
+`jet-setup.wiki` has not been forked and still points at the canonical repo.
 
 Important local state:
 
@@ -312,6 +328,12 @@ Remaining known issues are now mostly inside the UTAS AGN repo content:
 - one tabulated HD case fails its own verification thresholds
 - the external 3D RHD case references a missing `.grid.out` file
 - the test harness still does not provide a built-in MPI execution mode
+
+Operationally, the project is now in a safer version-control state than it was during the initial bring-up:
+
+- the code repos are wired to personal forks
+- a personal working branch, `bwbrook/deep-server-bringup`, exists on the fork for `pluto`, `jet-setup`, and `plutokore`
+- the validated `jet-setup` bring-up fixes are checkpointed and pushed on that branch
 
 ## Recommended next steps
 
