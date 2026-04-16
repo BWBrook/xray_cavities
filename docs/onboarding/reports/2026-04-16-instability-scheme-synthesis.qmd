@@ -1,0 +1,146 @@
+---
+title: "PLUTO Instability Scheme Synthesis for Supervisors"
+author: "Barry W. Brook with Codex support"
+date: "2026-04-16"
+---
+
+# Purpose
+
+This note synthesizes the two instability-resolution onboarding studies:
+
+- Rayleigh-Taylor (RT)
+- Kelvin-Helmholtz (KH)
+
+The intent is to give a concise supervisor-facing summary of what was tested,
+what the main findings were, and what numerical scheme looks like a sensible
+working default for the next stage of PLUTO experimentation.
+
+# Scheme Matrix Tested
+
+The supervisor-requested matrices were implemented with the Roe solver fixed.
+
+RT comparison:
+
+- `flat + euler`
+- `linear + hancock`
+- `parabolic + rk3`
+
+KH comparison:
+
+- `flat + euler`
+- `linear + rk2`
+- `parabolic + rk3`
+
+This isolates the effect of reconstruction and time integration, rather than
+mixing those effects with a change in Riemann solver.
+
+# Main Cross-Study Findings
+
+## Consistent result across both instabilities
+
+The strongest and most consistent conclusion is that:
+
+- `flat + euler` is clearly the most diffusive option
+
+That was true for both RT and KH.
+
+In both cases it produced:
+
+- less small-scale structure
+- weaker late-time interface deformation
+- lower mixing or growth proxies than the higher-order alternatives
+
+So the practical takeaway is straightforward: `flat + euler` is useful as a
+low-accuracy baseline, but not as the preferred production-facing scheme.
+
+## RT outcome
+
+For RT, the ordering was clean and intuitive:
+
+1. `parabolic + rk3`
+2. `linear + hancock`
+3. `flat + euler`
+
+The higher-order schemes developed progressively richer roll-up and a broader
+mixed layer, with `parabolic + rk3` giving the strongest late-time interface
+structure.
+
+## KH outcome
+
+For KH, the ordering was more nuanced.
+
+- `flat + euler` was again clearly worst.
+- `linear + rk2` and `parabolic + rk3` were both strong improvements.
+- In the chosen KH growth metrics, `linear + rk2` led by late time.
+- In the tracer snapshots, `parabolic + rk3` still preserved crisp and
+  physically plausible-looking structure.
+
+So KH did not support a simple statement that `parabolic + rk3` dominates by
+all measures.
+
+# Quantitative Highlights
+
+From the RT study at late time (`t = 15`):
+
+- mixed-layer thickness was `1.0078125` for `flat + euler`
+- `1.1718750` for `linear + hancock`
+- `1.2187500` for `parabolic + rk3`
+
+From the KH study at late time (`t = 5`):
+
+- tracer mixing thickness was `0.16015625` for `flat + euler`
+- `0.43359375` for `linear + rk2`
+- `0.32421875` for `parabolic + rk3`
+
+The corresponding KH `mean(vy^2)` values were:
+
+- `5.459243e-04` for `flat + euler`
+- `4.654272e-03` for `linear + rk2`
+- `2.330995e-03` for `parabolic + rk3`
+
+# Recommendation
+
+The recommendation from this onboarding phase is:
+
+1. do not use `flat + euler` as the default for future science-facing runs
+2. use a higher-order scheme family as the working default
+3. treat the choice between `linear + hancock/rk2` and `parabolic + rk3` as a
+   trade-off, not a one-sided win
+
+My current suggested default is:
+
+- prefer `parabolic + rk3` when preserving instability structure and limiting
+  numerical diffusion is the main priority
+- keep `linear + hancock` or `linear + rk2` in play as a strong, possibly more
+  economical alternative, especially where KH-like growth metrics matter most
+
+That is a cautious recommendation rather than a final rule. It is appropriate
+for onboarding because:
+
+- it clearly rejects the low-order baseline
+- it prefers the higher-order schemes overall
+- it acknowledges that the best choice can depend on the flow feature being
+  emphasized
+
+# What This Means For The Next Phase
+
+For later AGN-jet experiments, a sensible next-step policy would be:
+
+- adopt one higher-order scheme as the provisional default
+- keep one second higher-order scheme as a comparison/check option
+- only return to `flat + euler` when a deliberately diffusive baseline is
+  scientifically useful
+
+A practical pairing would be:
+
+- default candidate: `parabolic + rk3`
+- comparison candidate: `linear + hancock` or `linear + rk2`
+
+# Status
+
+This synthesis is based on fully executed RT and KH study workflows, with:
+
+- remote runs on `deep-server`
+- versioned local reports in `xray_cavities`
+- synchronized figures and tables
+- rendered HTML/PDF outputs for supervisor sharing

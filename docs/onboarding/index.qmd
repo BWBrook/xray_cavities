@@ -47,3 +47,16 @@ The workspace-level instructions are also mirrored in:
   Follow-up solver study adding `hll` and `tvdlf`, showing that the contact
   discontinuity is much more sensitive to solver diffusivity than the shock
   position itself.
+- [PLUTO Rayleigh-Taylor Instability Scheme Comparison](reports/2026-04-16-rt-instability-schemes.qmd)
+  Roe-solver RT study comparing `flat + euler`, `linear + hancock`, and
+  `parabolic + rk3`, showing progressively richer interface structure and a
+  broader mixed layer for the higher-order schemes.
+- [PLUTO Kelvin-Helmholtz Instability Scheme Comparison](reports/2026-04-16-kh-instability-schemes.qmd)
+  Custom HD KH study comparing `flat + euler`, `linear + rk2`, and
+  `parabolic + rk3`, showing that both higher-order schemes strongly outgrow the
+  diffusive baseline, with `linear + rk2` leading the chosen growth metrics in
+  this setup.
+- [PLUTO Instability Scheme Synthesis for Supervisors](reports/2026-04-16-instability-scheme-synthesis.qmd)
+  Supervisor-facing synthesis of the RT and KH onboarding studies, highlighting
+  the consistent rejection of `flat + euler` and the more nuanced trade-off
+  between the two higher-order schemes.
