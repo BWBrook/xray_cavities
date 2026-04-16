@@ -19,6 +19,29 @@ The simulation source lives separately under:
 
 Treat this repo as the stable launch point for Python, notebook, verification, and documentation workflows that operate on those checkouts.
 
+## Git remotes
+
+The UTAS AGN code repos are now set up in a fork-based workflow.
+
+For these repos:
+
+- `/home/bwbrook/git/utas-agn/pluto`
+- `/home/bwbrook/git/utas-agn/jet-setup`
+- `/home/bwbrook/git/utas-agn/plutokore`
+
+the remotes are intentionally arranged as:
+
+- `origin` = Barry's personal GitLab fork under `BWBrook`
+- `upstream` = the canonical `utas-agn` GitLab repo
+
+This means:
+
+- use `git fetch upstream` to bring in lab changes
+- use `git push origin ...` or plain `git push` to publish Barry's work safely to the fork
+- do not push directly to the canonical lab repos unless the user explicitly decides to do that
+
+`jet-setup.wiki` has not been forked and still points at the canonical repo. Treat it as read-only unless the user explicitly asks to change that arrangement.
+
 ## First Reads
 
 Start here, in order:
@@ -78,6 +101,7 @@ Important caution:
 - `jet-setup` currently contains local uncommitted fixes and test edits on this machine.
 - Those changes were made to get the local smoke matrix green and are documented in `docs/deep_server_setup.md`.
 - Do not casually discard them.
+- The intended home for those changes is Barry's fork, not the canonical lab repo.
 
 ## Common Commands
 
