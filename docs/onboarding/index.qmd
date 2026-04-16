@@ -43,3 +43,7 @@ The workspace-level instructions are also mirrored in:
 - [PLUTO Sod Shock Tube Baseline](reports/2026-04-16-sod-shock-tube.qmd)
   First plain-PLUTO onboarding exercise: build, solver sweep, resolution sweep,
   exact-solution error pass, and initial interpretation.
+- [PLUTO Sod Shock Tube with Diffusive Solver Comparison](reports/2026-04-16-sod-diffusive-solvers.qmd)
+  Follow-up solver study adding `hll` and `tvdlf`, showing that the contact
+  discontinuity is much more sensitive to solver diffusivity than the shock
+  position itself.
