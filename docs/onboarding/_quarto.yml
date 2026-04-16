@@ -1,0 +1,21 @@
+project:
+  type: default
+  output-dir: _build
+  render:
+    - index.qmd
+    - reports/*.qmd
+
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+  pdf:
+    toc: true
+    number-sections: true
+    documentclass: article
+    geometry:
+      - margin=1in
+
+execute:
+  freeze: auto

@@ -1,0 +1,49 @@
+---
+title: "REPORT TITLE"
+author: "Barry W. Brook with Codex support"
+date: "YYYY-MM-DD"
+---
+
+# Context
+
+Briefly state:
+
+- what task was attempted
+- why it matters scientifically or methodologically
+- where it fits in the onboarding sequence
+
+# Goal
+
+List the concrete questions or outcomes sought in this step.
+
+# Workflow Summary
+
+Summarize the operational steps that were actually executed.
+
+# Setup
+
+Describe the relevant computational setup:
+
+- machine used
+- key scripts or commands
+- data/products generated
+
+# Results
+
+Present the main evidence:
+
+- plots
+- tables
+- key numerical outputs
+
+# Interpretation
+
+Explain what the results mean in plain language.
+
+# Issues Encountered
+
+Record any friction, bugs, or methodological uncertainty.
+
+# Next Step
+
+State the most natural immediate follow-up.

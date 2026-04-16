@@ -1,0 +1,45 @@
+---
+title: "UTAS AGN Onboarding Log"
+subtitle: "Simulated Honours Student Workflow"
+---
+
+# Purpose
+
+This log records the onboarding and early-method development work for the UTAS
+AGN jet/X-ray cavity project.
+
+The working frame for this exercise is deliberately unusual:
+
+- Barry is playing the role of a beginning Honours student in physics
+- the supervisors are Stas Shabala and Patrick Yates-Jones
+- Codex is providing structured, agentic workflow support
+- the aim is to test how much acceleration and uplift this style of working can
+  provide in a real research context
+
+That framing matters. These notes are not just a lab notebook; they are also a
+trace of how an assisted research workflow was constructed, what was learned,
+and how results were validated.
+
+# Operating Model
+
+The current workflow playbook is:
+
+- WSL laptop as the control plane for planning, editing, review, and launch
+- `deep-server` as the preferred execution machine for builds, runs, and
+  heavier analysis
+- remote tasks written as reusable scripts
+- long-running jobs launched inside `tmux`
+- outputs synchronized back with `rsync`
+
+The workspace-level instructions are also mirrored in:
+
+- `/home/bwbrook/git/utas-agn/AGENTS.md`
+- `/home/bwbrook/git/utas-agn/AGENTS.md` on `deep-server`
+
+# Report Register
+
+## 2026-04-16
+
+- [PLUTO Sod Shock Tube Baseline](reports/2026-04-16-sod-shock-tube.qmd)
+  First plain-PLUTO onboarding exercise: build, solver sweep, resolution sweep,
+  exact-solution error pass, and initial interpretation.
