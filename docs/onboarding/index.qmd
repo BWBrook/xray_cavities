@@ -38,6 +38,13 @@ The workspace-level instructions are also mirrored in:
 
 # Report Register
 
+## 2026-04-17
+
+- [PLUTO Jet Setup and Basic Jet Simulation](reports/2026-04-17-jet-setup-basic.qmd)
+  First direct `jet-setup` onboarding exercise: map the roles of `pluto.ini`, `definitions.h`, `definitions_usr.h`, and `init.c`, then build and run a lightweight 2D spherical King-environment jet case on `deep-server`.
+- [PLUTO Basic Jet Parameter Sweep](reports/2026-04-17-jet-parameter-sweep.qmd)
+  Small follow-up on the same 2D spherical jet setup, comparing baseline, higher-power, and wider-angle cases to confirm that simple runtime parameter changes produce sensible morphological differences.
+
 ## 2026-04-16
 
 - [PLUTO Sod Shock Tube Baseline](reports/2026-04-16-sod-shock-tube.qmd)
