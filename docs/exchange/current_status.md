@@ -22,6 +22,14 @@ Known repo heads when this note was written:
 That means both remote machines should pull `origin/main` before a fresh agent
 starts relying on these notes.
 
+Follow-up on the same day:
+
+- `nectar-vm` was successfully pulled forward to the exchange-hub commit
+- `deep-server` could not `git pull` from GitHub because its GitHub SSH auth is
+  not configured yet
+- to keep continuity intact anyway, the exchange docs were synced onto
+  `deep-server` directly from WSL
+
 ## Project Structure
 
 Working model:

@@ -62,8 +62,11 @@ Remote `deep-server` workspaces:
 ## Sync Notes
 
 - committed and pushed `xray_cavities`: yes
-- `nectar-vm` needs a `git pull --ff-only`: yes
-- `deep-server` needs a `git pull --ff-only`: yes
+- `nectar-vm` needs a `git pull --ff-only`: done after this handoff note
+- `deep-server` needs a `git pull --ff-only`: still yes, but currently blocked by
+  missing GitHub SSH auth on that machine
+- exchange docs were therefore synced onto `deep-server` directly from WSL so
+  the notes are still available there immediately
 
 ## Blockers / Risks
 
