@@ -83,4 +83,7 @@ Two version constraints here are deliberate:
 ## Docs
 
 - [AGENTS.md](/home/bwbrook/papers/xray_cavities/AGENTS.md): repo-local instructions for the next agent
+- [docs/exchange/README.md](/home/bwbrook/papers/xray_cavities/docs/exchange/README.md): cross-machine handover system for WSL, `deep-server`, and `nectar-vm`
+- [docs/exchange/current_status.md](/home/bwbrook/papers/xray_cavities/docs/exchange/current_status.md): living project status for the next agent to read first
 - [docs/deep_server_setup.md](/home/bwbrook/papers/xray_cavities/docs/deep_server_setup.md): detailed machine state, toolchain notes, smoke-test results, and MPI validation status
+- [docs/nectar_vm_setup.md](/home/bwbrook/papers/xray_cavities/docs/nectar_vm_setup.md): Nectar VM clone status and production HDF5 validation

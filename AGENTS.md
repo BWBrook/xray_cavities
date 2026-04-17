@@ -55,9 +55,11 @@ Use those branches as the default working context unless the user asks to create
 Start here, in order:
 
 1. [README.md](/home/bwbrook/papers/xray_cavities/README.md)
-2. [docs/deep_server_setup.md](/home/bwbrook/papers/xray_cavities/docs/deep_server_setup.md)
-3. `/home/bwbrook/git/utas-agn/jet-setup/README.md`
-4. `/home/bwbrook/git/utas-agn/plutokore/README.md`
+2. [docs/exchange/README.md](/home/bwbrook/papers/xray_cavities/docs/exchange/README.md)
+3. [docs/exchange/current_status.md](/home/bwbrook/papers/xray_cavities/docs/exchange/current_status.md)
+4. [docs/deep_server_setup.md](/home/bwbrook/papers/xray_cavities/docs/deep_server_setup.md)
+5. `/home/bwbrook/git/utas-agn/jet-setup/README.md`
+6. `/home/bwbrook/git/utas-agn/plutokore/README.md`
 
 ## Environment
 
@@ -158,6 +160,13 @@ For the `king/test-3d-hd-gp-cart` case, `8` MPI ranks worked cleanly and gave a 
 
 ## Working Norms
 
+- Treat `docs/exchange/current_status.md` as the first-stop handover note for
+  cross-machine continuity.
+- Before trusting any handover note, refresh this repo with `git pull --ff-only`
+  on the machine you are using.
+- When handing off between WSL and MacBook/Nectar work, update
+  `docs/exchange/current_status.md` and add a dated note under
+  `docs/exchange/logs/`.
 - Use `uv run --project /home/bwbrook/papers/xray_cavities ...` for Python-facing work on UTAS AGN.
 - Keep machine-state notes in `docs/deep_server_setup.md` up to date when you materially change the environment or validation status.
 - Prefer committing changes in `xray_cavities` separately from edits made inside `/home/bwbrook/git/utas-agn`, unless the user explicitly asks for a broader batch.
