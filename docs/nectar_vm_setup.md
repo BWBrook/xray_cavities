@@ -121,6 +121,12 @@ The three main code repos were configured to match `deep-server`:
 
 `xray_cavities` was cloned from GitHub and tracks `origin/main`.
 
+Nectar-specific PLUTO host definitions were then added in the local `pluto`
+fork to make HDF5-enabled builds explicit and repeatable:
+
+- `Config/Nectar.gcc.defs`
+- `Config/Nectar.mpicc.defs`
+
 ## xray_cavities environment state
 
 The repo-local environment at `/home/ubuntu/papers/xray_cavities` was recreated with:
@@ -194,21 +200,28 @@ Interpretation:
 
 Status:
 
-- package installation and wrapper discovery succeeded
-- runtime parsing of the HDF5 output section was fixed
-- PLUTO still reported `! WriteData: HDF5 library not available` even after HDF5-oriented rebuild attempts
+- succeeded after adding Nectar-specific PLUTO host definitions
 
 Important lesson:
 
 - the machine has MPI-capable HDF5 installed and visible through `h5pcc`
-- the remaining blocker is PLUTO host-configuration integration, not package installation or SSH
-- the stock `Linux.gcc.defs` and `Linux.mpicc.defs` files in this checkout do not wire in HDF5 link flags by default
-- even build-local override attempts using `h5cc` still left PLUTO reporting that HDF5 was unavailable at runtime
+- the stock `Linux.gcc.defs` and `Linux.mpicc.defs` files in this checkout do not wire in HDF5 from the start of the build
+- the reliable fix was to add explicit Nectar host definitions:
+  - `Config/Nectar.gcc.defs`
+  - `Config/Nectar.mpicc.defs`
+- the validated production-oriented path is the parallel definition:
+  - `ARCH = Nectar.mpicc.defs`
+  - `CC = h5pcc`
+  - `PARALLEL = TRUE`
+  - `USE_HDF5 = TRUE`
 
 Interpretation:
 
-- Nectar is ready for `.dbl`-based work right now
-- full production-style HDF5 output still needs a proper PLUTO host definition or equivalent linking fix
+- Nectar is now ready for both `.dbl`-based exploratory work and HDF5-enabled production-style output
+- the validated HDF5 smoke run wrote:
+  - `data.0000.dbl.h5`
+  - `data.0001.dbl.h5`
+  - matching `.xmf` sidecar files
 
 ### jet-setup validation lane
 
@@ -256,7 +269,6 @@ Cross-host validation status:
 Current known differences from `deep-server` are:
 
 - Nectar experienced intermittent `Connection refused` failures on port 22 during validation.
-- PLUTO HDF5 output is still blocked by host-configuration or linking issues inside the current PLUTO build definitions.
 - Nectar reachability is good enough for provisioning and tests, but not yet stable enough to treat as fully reliable unattended infrastructure.
 
 ## Recommended next refresh on nectar-vm
@@ -264,9 +276,7 @@ Current known differences from `deep-server` are:
 Once SSH is stable again, refresh these checks in order:
 
 1. reconnect from WSL and confirm host availability
-2. add a proper Nectar-specific PLUTO `.defs` file or equivalent HDF5 linking path
-3. rerun the HDF5 smoke and confirm a real `data.*.dbl.h5` file is written
-4. recheck the mirrored run manifest directly on Nectar after a stable reconnect
-5. decide whether Nectar should become a full production node now or remain a secondary `.dbl`-first overflow node until HDF5 linking is cleaned up
+2. recheck the mirrored run manifest directly on Nectar after a stable reconnect
+3. decide whether Nectar should become a full production node now or remain the secondary overflow node for selected workloads
 
 That will complete the remaining parity gap with `deep-server`.
