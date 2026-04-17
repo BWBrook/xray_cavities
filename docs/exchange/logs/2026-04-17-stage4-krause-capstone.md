@@ -83,6 +83,10 @@ Remote `deep-server` workspace:
   - `plutokore`
 - `deep-server` already has the capstone workspace and the synced analysis
   script bundle, so it is operational immediately even before repo refresh
+- `nectar-vm` did pull both repos successfully after the checkpoint
+- a follow-up `git pull` of `plutokore` on `deep-server` failed on GitLab SSH
+  auth, so that checkout may still show the manually synced `io.py` change as a
+  local modification even though the code content matches the pushed fix
 
 ## Blockers / Risks
 

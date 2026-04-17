@@ -24,6 +24,12 @@ Follow-up on the same day:
   not configured yet
 - to keep continuity intact anyway, the exchange docs were synced onto
   `deep-server` directly from WSL
+- after the final stage-4 checkpoint, `nectar-vm` also pulled the updated
+  `plutokore` commit cleanly
+- `deep-server` ran the stage-4 capstone successfully, but a later
+  `plutokore` GitLab pull from that machine failed on SSH auth, so its local
+  `plutokore` checkout may remain dirty even though the synced file content used
+  for this task is current
 
 ## Project Structure
 
