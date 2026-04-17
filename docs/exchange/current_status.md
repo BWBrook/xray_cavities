@@ -13,14 +13,9 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-Known repo heads when this note was written:
-
-- WSL `xray_cavities`: `0eb240d`
-- `deep-server` `xray_cavities`: `0801eb5` before pulling
-- `nectar-vm` `xray_cavities`: `eb89e0d` before pulling
-
-That means both remote machines should pull `origin/main` before a fresh agent
-starts relying on these notes.
+This note should be treated as a post-stage-4 handoff. Always pull the latest
+`origin/main` before relying on the exact file set or workflow bundle on any
+machine.
 
 Follow-up on the same day:
 
@@ -56,6 +51,10 @@ Completed satisfactorily:
    - KH: `flat/euler`, `linear/rk2`, `parabolic/rk3`
 3. `jet-setup` familiarization and first basic jet run
 4. small follow-up jet parameter sweep with a refined long-domain rerun
+5. pure-Python Krause-style jet-analysis capstone
+   - fresh two-case jet mini-suite on `deep-server`
+   - tracer-based lobe diagnostics via `plutokore`
+   - remade figures with no `pyPLUTO`
 
 Current onboarding reports are under:
 
@@ -65,6 +64,10 @@ Most recent stage-3 reports:
 
 - `2026-04-17-jet-setup-basic.qmd`
 - `2026-04-17-jet-parameter-sweep.qmd`
+
+Final stage-4 report:
+
+- `2026-04-17-krause-jets-assignment.qmd`
 
 Shareable PDFs are built under `_build/reports/` and copied to:
 
@@ -79,6 +82,7 @@ Important remote workspaces already exist on `deep-server`:
 - `/home/bwbrook/work/pluto-onboarding/kh_instability`
 - `/home/bwbrook/work/pluto-onboarding/jet_setup_basic`
 - `/home/bwbrook/work/pluto-onboarding/jet_parameter_sweep`
+- `/home/bwbrook/work/pluto-onboarding/krause_jets_assignment`
 
 Nectar is now a valid secondary execution node with:
 
@@ -95,30 +99,46 @@ For production-style HDF5 builds on Nectar, use the Nectar-specific PLUTO defs:
 
 ## Most Recent Meaningful Result
 
-The refined long-domain jet sweep is the latest science-facing checkpoint.
+The final onboarding capstone is now the latest science-facing checkpoint.
 
 Summary:
 
-- `higher_power` cleanly advances the jet head farther than the other two cases
-- `wider_angle` mainly broadens the cavity rather than advancing the head at the
-  same final time
-- the longer `60 kpc` radial box fixed the earlier saturated head-position proxy
+- the `higher_power` jet produces a larger tracer-defined lobe than the
+  baseline case at every sampled output
+- by the final output, the higher-power lobe is longer, wider, and about twice
+  the tracer-defined volume of the baseline
+- this step successfully moved the jet-analysis lane away from `pyPLUTO` and
+  onto `plutokore` plus standard Python plotting
 
-Key metrics from the final sweep:
+Key final metrics at `t = 613.2028`:
 
-- baseline: head peak radius `13.44 kpc`
-- higher power: head peak radius `15.62 kpc`
-- wider angle: head peak radius `13.44 kpc`
+- baseline:
+  - lobe length `25.89 kpc`
+  - lobe width `10.24 kpc`
+  - lobe volume `6246.70` code units
+- higher power:
+  - lobe length `33.36 kpc`
+  - lobe width `12.40 kpc`
+  - lobe volume `12548.22` code units
 
-Repo-scoped artifact:
+Repo-scoped artifacts:
 
-- `docs/onboarding/assets/jet_parameter_sweep_2026-04-17/jet_parameter_sweep_metrics.csv`
+- `docs/onboarding/assets/krause_jets_assignment_2026-04-17/krause_jet_density.png`
+- `docs/onboarding/assets/krause_jets_assignment_2026-04-17/krause_jet_tracer.png`
+- `docs/onboarding/assets/krause_jets_assignment_2026-04-17/krause_jet_timeseries.png`
+- `docs/onboarding/assets/krause_jets_assignment_2026-04-17/krause_jet_metrics.csv`
 
 ## Next Recommended Step
 
-The next move is to begin the next supervisor-specified onboarding stage.
+The onboarding sequence is now complete.
 
-This has not been started yet in the code or reports.
+The next move should be to transition from onboarding into the actual
+project-specific research questions, using:
+
+- `jet-setup` for new simulation runs
+- the pure-Python `plutokore` lane for analysis
+- `deep-server` as the default execution machine
+- `nectar-vm` as the continuity node for off-campus or multi-machine work
 
 ## Resume Checklist For A Fresh Agent
 
@@ -133,6 +153,8 @@ This has not been started yet in the code or reports.
    new scratch directories without a reason
 7. if using `nectar-vm`, pull `xray_cavities` and the UTAS AGN repos before
    assuming parity with WSL
+8. read the final onboarding capstone report before proposing new jet-analysis
+   work
 
 ## Handover Checklist
 

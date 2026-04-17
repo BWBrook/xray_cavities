@@ -40,6 +40,8 @@ The workspace-level instructions are also mirrored in:
 
 ## 2026-04-17
 
+- [Martin Krause's Jets Assignment in Pure Python](reports/2026-04-17-krause-jets-assignment.qmd)
+  Final PLUTO/jet onboarding capstone: fresh two-case jet mini-suite on `deep-server`, tracer-based lobe diagnostics via `plutokore`, and remade figures in a pure-Python analysis lane with no `pyPLUTO`.
 - [PLUTO Jet Setup and Basic Jet Simulation](reports/2026-04-17-jet-setup-basic.qmd)
   First direct `jet-setup` onboarding exercise: map the roles of `pluto.ini`, `definitions.h`, `definitions_usr.h`, and `init.c`, then build and run a lightweight 2D spherical King-environment jet case on `deep-server`.
 - [PLUTO Basic Jet Parameter Sweep](reports/2026-04-17-jet-parameter-sweep.qmd)
