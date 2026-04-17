@@ -1,0 +1,11 @@
+run_id: example-run-id
+authoritative_host: deep-server
+status: planned
+code_refs:
+  pluto_commit: null
+  jet_setup_commit: null
+  plutokore_commit: null
+  xray_cavities_commit: null
+restart_source: null
+last_sync_from: null
+last_sync_time: null
