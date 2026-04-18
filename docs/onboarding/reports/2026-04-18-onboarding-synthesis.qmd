@@ -1,0 +1,172 @@
+---
+title: "PLUTO and Jet Onboarding Synthesis"
+subtitle: "Core Outcomes and Workflow Lessons"
+---
+
+# Context
+
+This note synthesizes the completed PLUTO and `jet-setup` onboarding sequence
+for the UTAS AGN jet/X-ray cavity project.
+
+The working frame throughout was deliberately practical: Barry played the role
+of a beginning Honours student in computational physics, while Codex provided
+agentic workflow support aimed at compressing the time needed to become
+operationally and scientifically effective.
+
+The purpose of this synthesis is therefore twofold:
+
+- summarize the main scientific and numerical lessons from the onboarding tasks
+- summarize the workflow lessons that now define the default operating model
+
+# Overall Read
+
+The onboarding sequence can be counted as successful.
+
+It achieved four important outcomes:
+
+1. it established a working intuition for how PLUTO solver, reconstruction, and
+   time-integration choices affect numerical diffusion and instability growth
+2. it established a workable mental model for how the UTAS AGN `jet-setup`
+   layer sits on top of PLUTO
+3. it demonstrated that the jet workflow is already scientifically responsive
+   to simple parameter changes such as jet power and opening angle
+4. it replaced an exploratory `pyPLUTO` dependence with a cleaner pure-Python
+   analysis lane built around `plutokore`, `numpy`, and `matplotlib`
+
+In short, the work moved from "can we run this at all?" to "we can now run,
+compare, and analyze jet simulations in a reproducible way." 
+
+# Stage Summary
+
+| Stage | Core task | Main outcome |
+| --- | --- | --- |
+| 1 | Sod shock tube | `two_shock` was the best of the tested higher-quality solvers, but resolution mattered more than solver choice within the `roe` / `hllc` / `two_shock` set. |
+| 1 extension | Diffusive solver comparison | Adding `hll` and especially `tvdlf` made numerical smearing much easier to recognize, especially at the contact discontinuity. |
+| 2 | RT and KH instability studies | `flat + euler` was consistently too diffusive; higher-order schemes preserved substantially more instability structure, with KH showing a more metric-dependent ordering than RT. |
+| 3 | `jet-setup` familiarization and first jet run | The separation between runtime control, compile-time control, and problem logic became clear, and a lightweight 2D spherical jet case ran successfully. |
+| 3 extension | Jet parameter sweep | The setup responded plausibly to runtime physics changes: higher power advanced the jet head, while wider opening angle mainly broadened the cavity. |
+| 4 | Krause-style pure-Python jet analysis | A fresh two-case jet mini-suite was analyzed without `pyPLUTO`, using tracer-defined lobe metrics and rebuilt figures in standard Python. |
+
+# Scientific and Numerical Lessons
+
+## PLUTO Numerics
+
+The early PLUTO exercises gave a good baseline intuition for what matters most.
+
+- Across the first Sod sweep, `two_shock` gave the lowest `L1` density error at
+  all tested resolutions.
+- `roe` and `hllc` were close to `two_shock`, so the strongest improvement came
+  from increasing resolution rather than changing between those three solvers.
+- The follow-up addition of `hll` and `tvdlf` made the role of solver
+  diffusivity much clearer, particularly around the contact discontinuity.
+
+The practical lesson is that good solvers can look deceptively similar on a
+simple test, so it is useful to include at least one deliberately more
+diffusive baseline when learning what numerical smearing looks like.
+
+## Instability Resolution
+
+The RT and KH studies answered the supervisors' scheme-comparison question well.
+
+- For RT with Roe fixed, the ordering was clear:
+  `flat + euler` < `linear + hancock` < `parabolic + rk3`.
+- For KH, the picture was slightly more nuanced:
+  `flat + euler` was again clearly worst, but `linear + rk2` and
+  `parabolic + rk3` split the advantage depending on whether one emphasized
+  broader nonlinear mixing or crisper interface structure.
+
+The practical takeaway is straightforward:
+
+- `flat + euler` should not be the default for later science runs
+- higher-order reconstruction and time integration are worth the extra cost
+- KH-like problems can show a more metric-dependent ordering than RT, so solver
+  choices should be justified against the actual diagnostic of interest
+
+## Jet Behaviour
+
+The jet-focused onboarding stages showed that the UTAS AGN setup is already
+useful scientifically, not just operationally.
+
+- The first basic jet run produced a physically recognizable low-density jet
+  channel in a stratified atmosphere.
+- The small parameter sweep then showed that increasing `JET_PWR` mainly
+  strengthens and advances the jet head, while increasing opening angle mainly
+  broadens the cavity and reduces near-source collimation.
+- In the final capstone, the higher-power case produced the larger
+  tracer-defined lobe at every sampled time.
+
+By the final capstone output at `t = 613.2028` code units, the higher-power jet
+finished:
+
+- about `29%` longer
+- about `21%` wider
+- about `2.01x` larger in tracer-defined lobe volume
+
+That is enough to show that the workflow is already capable of supporting
+simple, interpretable jet-physics comparisons.
+
+# Workflow Lessons
+
+The onboarding process was also valuable as workflow engineering.
+
+## What Worked Well
+
+The most successful operating pattern was:
+
+- WSL laptop as control plane
+- `deep-server` as default execution host
+- `nectar-vm` as secondary execution node and exchange hub
+- reusable remote scripts rather than long ad hoc SSH chains
+- `tmux` for long-running remote work
+- `rsync` for outputs and Git for source
+- local Quarto reports in `xray_cavities` for traceable reporting
+
+That pattern proved stable across PLUTO test problems, instability studies, and
+jet-analysis tasks.
+
+## Useful Workflow Corrections
+
+Several issues surfaced during onboarding and were turned into durable fixes.
+
+- PLUTO dump times needed nearest-time matching in the RT and KH analysis
+  scripts rather than exact round-number assumptions.
+- The KH tracer variable naming needed to be handled more flexibly.
+- The non-interactive `create-build-script` path was not robust enough for the
+  local `jet-setup` checkout, so PLUTO's underlying `MakeProblem` interface was
+  a better scripted build path.
+- `jet-setup` required a small no-particles adjustment when `PARTICLES = NO`.
+- The new pure-Python jet-analysis lane exposed a Python 3.12 compatibility
+  issue in `plutokore`, which was fixed by updating binary reads from
+  `array.fromstring` to `array.frombytes`.
+
+These are good onboarding outcomes, because they replaced fragile assumptions
+with reusable workflow knowledge.
+
+# Readiness for Project Work
+
+The best summary of the current state is that onboarding is complete and the
+infrastructure is now fit for real project work.
+
+The project is now set up to proceed with:
+
+- `jet-setup` for new simulation campaigns
+- `plutokore` plus standard Python for analysis and figure generation
+- `deep-server` as the default simulation machine
+- `nectar-vm` as the continuity node for off-campus or multi-machine work
+- Quarto-based notes and PDFs as the running reporting layer
+
+That means the next phase should not be more generic PLUTO practice. It should
+be the first genuinely project-facing jet-analysis question, using the workflow
+that has now been validated.
+
+# Closing Assessment
+
+From an Honours-student-onboarding perspective, the exercise worked well.
+
+The numerical experiments built intuition about solver and scheme behaviour. The
+jet exercises converted that intuition into a working understanding of the UTAS
+AGN setup. The final capstone then showed that the project already has a clean,
+reproducible, pure-Python analysis lane for tracer-based jet/lobe diagnostics.
+
+That is a satisfactory endpoint for onboarding and a strong starting point for
+the actual research phase.

@@ -38,6 +38,11 @@ The workspace-level instructions are also mirrored in:
 
 # Report Register
 
+## 2026-04-18
+
+- [PLUTO and Jet Onboarding Synthesis](reports/2026-04-18-onboarding-synthesis.qmd)
+  Concise supervisor-facing synthesis of the full onboarding sequence, summarising the main numerical, jet-physics, and workflow outcomes before the project moves into science-facing work.
+
 ## 2026-04-17
 
 - [Martin Krause's Jets Assignment in Pure Python](reports/2026-04-17-krause-jets-assignment.qmd)
