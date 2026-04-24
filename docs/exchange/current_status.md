@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-04-17
+Last updated: 2026-04-24
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -16,6 +16,20 @@ git pull --ff-only
 This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Update on 2026-04-24:
+
+- Barry is moving active work to a MacBook for a one-week trip.
+- A new primary cross-machine handover has been added at
+  `docs/READ_THIS_FIRST.md`.
+- The current planning package consists of:
+  - `docs/Honours_Research_Plan.md`
+  - `docs/Honours_Research_Meeting_Brief.md`
+  - `docs/Honours_Research_Meeting_Slides.qmd`
+- The next MacBook-side task is to process supervisor-meeting feedback and turn
+  it into the Week 2 execution plan.
+- When the trip ends, the MacBook agent should write a return handoff under
+  `docs/exchange/logs/` before WSL resumes the work.
 
 Follow-up on the same day:
 
