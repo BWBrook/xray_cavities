@@ -280,3 +280,112 @@ Once SSH is stable again, refresh these checks in order:
 3. decide whether Nectar should become a full production node now or remain the secondary overflow node for selected workloads
 
 That will complete the remaining parity gap with `deep-server`.
+
+## MacBook OpenStack CLI state
+
+Recorded on `2026-04-30` from the MacBook.
+
+- Nectar OpenRC file moved to:
+  `/Users/bwbrook/.config/openstack/mewcgpu-openrc.sh`
+- permissions set to `600`
+- the file prompts for the OpenStack password; no password should be committed
+  to this repository
+- OpenStack CLI installed with `uv tool install python-openstackclient --with
+  python-novaclient`
+- `openstack` resolves to:
+  `/Users/bwbrook/.local/bin/openstack`
+- verified CLI version: `openstack 9.0.0`
+
+Use an interactive shell for authenticated Nectar API work:
+
+```bash
+source /Users/bwbrook/.config/openstack/mewcgpu-openrc.sh
+openstack server list
+openstack flavor list | grep c3
+```
+
+Do not run resize automation until the current flavor, target flavor, quota,
+server status, and `/data` mount state have all been checked.
+
+### Resize notes
+
+Confirmed from the MacBook on `2026-04-30` after authenticating with the
+OpenRC file:
+
+- instance name: `deep-vm`
+- instance ID: `b0422d1a-96b4-473d-b40f-7630014bef9e`
+- floating/fixed IP shown in Nectar network: `<campus-ip>`
+- parked flavor: `c3.xsmall`
+  - `1` vCPU
+  - `2048` MB RAM
+  - `30` GB root disk
+- intended compute flavor: `c3.3xlarge`
+  - `64` vCPU
+  - `131072` MB RAM
+  - `30` GB root disk
+
+Because both flavors are `c3` flavors with the same root-disk size and no
+ephemeral disk, direct resize should be the first approach. Resize is still a
+stateful control-plane operation, so do not run it while jobs are active.
+
+Upsize:
+
+```bash
+source /Users/bwbrook/.config/openstack/mewcgpu-openrc.sh
+openstack server resize --flavor c3.3xlarge --wait deep-vm
+ssh -o BatchMode=yes -o ConnectTimeout=8 nectar-vm \
+  'hostname; nproc; free -h; df -h / /data /mnt/data'
+openstack server resize confirm deep-vm
+```
+
+Park:
+
+```bash
+source /Users/bwbrook/.config/openstack/mewcgpu-openrc.sh
+openstack server resize --flavor c3.xsmall --wait deep-vm
+ssh -o BatchMode=yes -o ConnectTimeout=8 nectar-vm \
+  'hostname; nproc; free -h; df -h / /data /mnt/data'
+openstack server resize confirm deep-vm
+```
+
+If post-resize checks fail, use:
+
+```bash
+openstack server resize revert deep-vm
+```
+
+### Resize smoke result
+
+Completed successfully from the MacBook on `2026-04-30`.
+
+Sequence:
+
+1. preflighted `deep-vm` while parked on `c3.xsmall`
+2. resized to `c3.3xlarge`
+3. waited for SSH recovery
+4. verified guest resources:
+   - `64` CPUs
+   - about `125 GiB` RAM
+   - `/`, `/data`, and `/mnt/data` mounted correctly
+5. confirmed the upsize
+6. ran an 8-rank MPI smoke:
+   `mpirun -n 8 hostname`
+7. compiled and ran a tiny parallel-HDF5 write/read smoke with `h5pcc`,
+   `mpirun -n 8`, and `h5dump`
+8. resized back to `c3.xsmall`
+9. waited for SSH recovery
+10. verified parked resources:
+    - `1` CPU
+    - about `1.9 GiB` RAM
+    - `/data` and `/mnt/data` still mounted on `/dev/vdb`
+11. confirmed the park resize
+
+Final state after the smoke:
+
+- `deep-vm` is `ACTIVE`
+- flavor is `c3.xsmall`
+- SSH alias `nectar-vm` works
+- large data volume is mounted at both `/data` and `/mnt/data`
+
+This validates the upsize-run-park control-plane loop for future Nectar smoke
+and moderate compute jobs.

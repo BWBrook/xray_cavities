@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-LOCAL_BASE=/home/bwbrook/papers/xray_cavities/scripts/pluto_onboarding
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+LOCAL_BASE="$SCRIPT_DIR"
 REMOTE_BASE=/home/bwbrook/work/pluto-onboarding
 
-rsync -av "$LOCAL_BASE/rt_instability/" deep-server:"$REMOTE_BASE/rt_instability/scripts/"
-rsync -av "$LOCAL_BASE/jet_setup_basic/" deep-server:"$REMOTE_BASE/jet_setup_basic/scripts/"
-rsync -av "$LOCAL_BASE/kh_instability/" deep-server:"$REMOTE_BASE/kh_instability/scripts/"
-rsync -av "$LOCAL_BASE/jet_parameter_sweep/" deep-server:"$REMOTE_BASE/jet_parameter_sweep/scripts/"
-rsync -av "$LOCAL_BASE/krause_jets_assignment/" deep-server:"$REMOTE_BASE/krause_jets_assignment/scripts/"
+ssh deep-server "mkdir -p '$REMOTE_BASE'"
+rsync -av \
+  --include='*/' \
+  --include='*.py' \
+  --include='*.sh' \
+  --include='README.md' \
+  --exclude='*' \
+  "$LOCAL_BASE/" deep-server:"$REMOTE_BASE/_scripts_sync/"
+
+ssh deep-server "set -e; for d in '$REMOTE_BASE'/_scripts_sync/*; do [ -d \"\$d\" ] || continue; name=\$(basename \"\$d\"); mkdir -p '$REMOTE_BASE'/\"\$name\"/scripts; rsync -a \"\$d\"/ '$REMOTE_BASE'/\"\$name\"/scripts/; done"
 
 echo "Synced PLUTO onboarding workflow scripts to deep-server"

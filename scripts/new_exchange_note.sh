@@ -6,7 +6,8 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 
-ROOT=/home/bwbrook/papers/xray_cavities
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
 TEMPLATE="$ROOT/docs/exchange/templates/handover-note-template.md"
 LOG_DIR="$ROOT/docs/exchange/logs"
 STAMP=$(date +%Y-%m-%d-%H%M)

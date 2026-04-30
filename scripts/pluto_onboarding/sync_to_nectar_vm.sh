@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-LOCAL_BASE=/home/bwbrook/papers/xray_cavities/scripts/pluto_onboarding
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+LOCAL_BASE="$SCRIPT_DIR"
 REMOTE_BASE=/home/ubuntu/work/pluto-onboarding
 
-rsync -av "$LOCAL_BASE/rt_instability/" nectar-vm:"$REMOTE_BASE/rt_instability/scripts/"
-rsync -av "$LOCAL_BASE/jet_setup_basic/" nectar-vm:"$REMOTE_BASE/jet_setup_basic/scripts/"
-rsync -av "$LOCAL_BASE/kh_instability/" nectar-vm:"$REMOTE_BASE/kh_instability/scripts/"
-rsync -av "$LOCAL_BASE/jet_parameter_sweep/" nectar-vm:"$REMOTE_BASE/jet_parameter_sweep/scripts/"
-rsync -av "$LOCAL_BASE/krause_jets_assignment/" nectar-vm:"$REMOTE_BASE/krause_jets_assignment/scripts/"
+ssh nectar-vm "mkdir -p '$REMOTE_BASE'"
+rsync -av \
+  --include='*/' \
+  --include='*.py' \
+  --include='*.sh' \
+  --include='README.md' \
+  --exclude='*' \
+  "$LOCAL_BASE/" nectar-vm:"$REMOTE_BASE/_scripts_sync/"
+
+ssh nectar-vm "set -e; for d in '$REMOTE_BASE'/_scripts_sync/*; do [ -d \"\$d\" ] || continue; name=\$(basename \"\$d\"); mkdir -p '$REMOTE_BASE'/\"\$name\"/scripts; rsync -a \"\$d\"/ '$REMOTE_BASE'/\"\$name\"/scripts/; done"
 
 echo "Synced PLUTO onboarding workflow scripts to nectar-vm"

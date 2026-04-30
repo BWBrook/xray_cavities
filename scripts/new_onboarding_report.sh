@@ -11,7 +11,8 @@ report_slug="$2"
 shift 2
 report_title="$*"
 
-repo_root="/home/bwbrook/papers/xray_cavities"
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+repo_root=$(cd -- "$script_dir/.." && pwd)
 template="$repo_root/docs/onboarding/templates/report-template.qmd"
 target="$repo_root/docs/onboarding/reports/${report_date}-${report_slug}.qmd"
 
@@ -21,9 +22,9 @@ if [ -e "$target" ]; then
 fi
 
 cp "$template" "$target"
-sed -i \
-  -e "s/REPORT TITLE/${report_title//\//\\/}/" \
-  -e "s/YYYY-MM-DD/$report_date/" \
-  "$target"
+REPORT_TITLE="$report_title" REPORT_DATE="$report_date" perl -0pi -e '
+  s/REPORT TITLE/$ENV{REPORT_TITLE}/g;
+  s/YYYY-MM-DD/$ENV{REPORT_DATE}/g;
+' "$target"
 
 echo "Created $target"

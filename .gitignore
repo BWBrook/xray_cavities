@@ -2,3 +2,11 @@
 .doxygen/
 .ipynb_checkpoints/
 __pycache__/
+.DS_Store
+.env
+.env.*
+clouds.yaml
+secure.yaml
+openrc.sh
+*-openrc.sh
+docs/jet-theory/

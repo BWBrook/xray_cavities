@@ -1,0 +1,26 @@
+#PBS -N codex_smoke
+#PBS -q test
+#PBS -l select=1:ncpus=1
+#PBS -l walltime=00:02:00
+#PBS -o codex_smoke.out
+#PBS -e codex_smoke.err
+
+set -eu
+
+WORKDIR=/scratch/bwbrook/codex_smoke
+mkdir -p "$WORKDIR"
+cd "$WORKDIR"
+
+echo "JOB_START=$(date)"
+echo "HOST=$(hostname)"
+echo "USER=$(whoami)"
+echo "PWD=$(pwd)"
+echo "PBS_JOBID=${PBS_JOBID:-}"
+echo "PBS_O_WORKDIR=${PBS_O_WORKDIR:-}"
+echo "PBS_QUEUE=${PBS_QUEUE:-}"
+echo "PBS_NODEFILE=${PBS_NODEFILE:-}"
+if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+  echo "NODEFILE_CONTENTS=$(tr '\n' ' ' < "$PBS_NODEFILE")"
+fi
+echo "NCPUS=$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo unknown)"
+echo "JOB_END=$(date)"

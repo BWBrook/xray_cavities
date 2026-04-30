@@ -38,6 +38,17 @@ The workspace-level instructions are also mirrored in:
 
 # Report Register
 
+## 2026-04-30
+
+- [Official PLUTO HD Jet Assignment](reports/2026-04-30-official-jet-assignment.qmd)
+  Patrick's supplied Martin Krause jet assignment run on resized `nectar-vm`
+  using PLUTO `Test_Problems/HD/Jet`: 2D cylindrical, external Mach `20`, and
+  10 versus 20 cells per beam radius.
+- [Tiny 3D Cartesian Jet-Setup Smoke](reports/2026-04-30-jet-setup-tiny-3d-cart.qmd)
+  First full-3D Cartesian `jet-setup` bridge on resized `nectar-vm`, using a
+  deliberately coarse smoke grid to validate build, run, output, retrieval, and
+  central-slice analysis.
+
 ## 2026-04-18
 
 - [PLUTO and Jet Onboarding Synthesis](reports/2026-04-18-onboarding-synthesis.qmd)

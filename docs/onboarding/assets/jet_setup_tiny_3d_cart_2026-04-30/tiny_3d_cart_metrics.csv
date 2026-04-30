@@ -1,0 +1,2 @@
+final_output,time,shape,rho_min,rho_max,max_abs_vx3,velocity_cells_gt_1e_minus_3,velocity_abs_z_extent
+2,300.0,48x48x72,1.7338814805894433e-05,0.005767304514763405,0.10497164437687295,10680,7.25

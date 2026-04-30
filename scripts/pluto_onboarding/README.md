@@ -19,6 +19,13 @@ our remote execution hosts, not a separate local execution environment.
 - `krause_jets_assignment/`
   Final onboarding capstone: fresh jet mini-suite plus pure-Python tracer/lobe
   analysis with remade figures.
+- `official_jet_assignment/`
+  Patrick's supplied Martin Krause jet assignment, run against PLUTO
+  `Test_Problems/HD/Jet` in 2D cylindrical coordinates at 10 and 20 cells per
+  beam radius.
+- `jet_setup_tiny_3d_cart/`
+  Smoke-sized full-3D Cartesian `jet-setup` bridge after the official 2D jet
+  assignment.
 - `sync_to_deep_server.sh`
   Pushes the local script bundles back to the canonical remote workspaces.
 - `sync_to_nectar_vm.sh`
@@ -35,11 +42,15 @@ remote directory layout used on the execution hosts, for example:
 - `/home/bwbrook/work/pluto-onboarding/jet_setup_basic` on `deep-server`
 - `/home/bwbrook/work/pluto-onboarding/jet_parameter_sweep` on `deep-server`
 - `/home/bwbrook/work/pluto-onboarding/krause_jets_assignment` on `deep-server`
+- `/home/bwbrook/work/pluto-onboarding/official_jet_assignment` on `deep-server`
+- `/home/bwbrook/work/pluto-onboarding/jet_setup_tiny_3d_cart` on `deep-server`
 - `/home/ubuntu/work/pluto-onboarding/rt_instability` on `nectar-vm`
 - `/home/ubuntu/work/pluto-onboarding/kh_instability` on `nectar-vm`
 - `/home/ubuntu/work/pluto-onboarding/jet_setup_basic` on `nectar-vm`
 - `/home/ubuntu/work/pluto-onboarding/jet_parameter_sweep` on `nectar-vm`
 - `/home/ubuntu/work/pluto-onboarding/krause_jets_assignment` on `nectar-vm`
+- `/home/ubuntu/work/pluto-onboarding/official_jet_assignment` on `nectar-vm`
+- `/home/ubuntu/work/pluto-onboarding/jet_setup_tiny_3d_cart` on `nectar-vm`
 - `/home/<user>/git/utas-agn/pluto`
 - `/home/<user>/papers/xray_cavities`
 

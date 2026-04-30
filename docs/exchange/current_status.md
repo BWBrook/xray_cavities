@@ -26,8 +26,9 @@ Update on 2026-04-24:
   - `docs/Honours_Research_Plan.md`
   - `docs/Honours_Research_Meeting_Brief.md`
   - `docs/Honours_Research_Meeting_Slides.qmd`
-- The next MacBook-side task is to process supervisor-meeting feedback and turn
-  it into the Week 2 execution plan.
+- The next MacBook-side task is to turn the revised three-case plan into a
+  concrete pilot/comparison specification and begin execution-path smoke tests,
+  especially on resized `nectar-vm` and `kunanyi`.
 - When the trip ends, the MacBook agent should write a return handoff under
   `docs/exchange/logs/` before WSL resumes the work.
 
@@ -44,6 +45,76 @@ Follow-up on the same day:
   `plutokore` GitLab pull from that machine failed on SSH auth, so its local
   `plutokore` checkout may remain dirty even though the synced file content used
   for this task is current
+
+MacBook follow-up after Stas' 2026-04-24 feedback:
+
+- Stas' plan feedback was added at
+  `docs/Honours_research_plan_feedback_SS_260424.txt`
+- `docs/Honours_Research_Plan.md` was revised so that:
+  - jet power and environment are the primary variables
+  - source age and viewing angle are secondary sampling axes
+  - radio synchrotron products are part of the core project
+  - Step 11 is mandatory rather than optional
+  - the minimum comparison suite is now three simulations:
+    low-power cluster, high-power cluster, and low-power group
+  - the fully relativistic `0.98c` branch is explicitly out of current scope
+- the MacBook has local UTAS AGN mirrors under `/Users/bwbrook/git/utas-agn`
+  for context and light editing, but simulation work should still be offloaded
+  to resized `nectar-vm` and then `kunanyi`
+- MacBook GitLab SSH auth has been checked and now works
+
+MacBook follow-up after Patrick's jet-assignment materials:
+
+- Patrick supplied the missing official Martin Krause jet assignment plus
+  companion jet-theory slides, unpacked locally under ignored
+  `docs/jet-theory/`
+- the prior "Krause-style" capstone remains a useful pure-Python analysis
+  precursor, but the official worksheet is now the canonical next warm-up task
+- the immediate recommended execution path is:
+  - run PLUTO `Test_Problems/HD/Jet` on resized `nectar-vm`
+  - use external Mach `20`, pressure equilibrium, and two resolutions
+    (`10` and `20` cells per beam radius)
+  - produce the worksheet's density snapshots and shock/instability/backflow
+    diagnostics
+  - then repeat the diagnostic exercise as a small full-3D Cartesian
+    `jet-setup` run before returning to the three-case science suite
+- details are in
+  `docs/exchange/logs/2026-04-30-patrick-jet-assignment.md`
+
+MacBook/Nectar follow-up after official assignment execution:
+
+- `nectar-vm` was resized to `c3.3xlarge` and used as the execution host
+- Patrick's official PLUTO `HD/Jet` assignment was run at `10` and `20` cells
+  per beam radius, with external Mach `20`, pressure equilibrium, and four
+  nonzero density snapshots for each resolution
+- the resulting report and artifacts are:
+  - `docs/onboarding/reports/2026-04-30-official-jet-assignment.qmd`
+  - `docs/onboarding/assets/official_jet_assignment_2026-04-30/`
+- a tiny full-3D Cartesian `jet-setup` smoke was also run on resized Nectar:
+  HD, particles off, King environment, `48 x 48 x 72`, final time `300`
+- the resulting report and artifacts are:
+  - `docs/onboarding/reports/2026-04-30-jet-setup-tiny-3d-cart.qmd`
+  - `docs/onboarding/assets/jet_setup_tiny_3d_cart_2026-04-30/`
+- details are in
+  `docs/exchange/logs/2026-04-30-nectar-official-jet-and-3d-smoke.md`
+- after the run, `nectar-vm` was parked back on `c3.xsmall`
+
+MacBook/kunanyi follow-up:
+
+- TPAC jumpbox access was tested successfully via the Open OnDemand 5-minute
+  SSH window
+- local SSH aliases now include `tpac-jumpbox` and `kunanyi`
+- `ssh kunanyi` via jumpbox lands on `<tpac-host>`
+- PBS tools are visible on the login node:
+  - `qsub`: `/opt/pbs/bin/qsub`
+  - `qstat`: `/opt/pbs/bin/qstat`
+- the first clean PBS smoke job completed on compute node `n001.kunanyi`:
+  - job id `688913.kunanyi-ohpc`
+  - queue `test`
+  - scratch workdir `/scratch/bwbrook/codex_smoke`
+- details are in:
+  - `docs/kunanyi_setup.md`
+  - `docs/exchange/logs/2026-04-30-kunanyi-first-pbs-smoke.md`
 
 ## Project Structure
 
@@ -152,13 +223,15 @@ Repo-scoped artifacts:
 
 The onboarding sequence is now complete.
 
-The next move should be to transition from onboarding into the actual
-project-specific research questions, using:
+The next move should be to lock the revised three-case comparison specification
+and begin execution-path smoke tests, using:
 
 - `jet-setup` for new simulation runs
 - the pure-Python `plutokore` lane for analysis
-- `deep-server` as the default execution machine
-- `nectar-vm` as the continuity node for off-campus or multi-machine work
+- the MacBook as a control/orchestration machine only
+- resized `nectar-vm` for tests, 2D runs, and micro-3D smoke runs
+- `kunanyi` for full 3D production once its access/module/build/submission path
+  has been smoke-tested
 
 ## Resume Checklist For A Fresh Agent
 
