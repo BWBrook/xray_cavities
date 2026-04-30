@@ -48,7 +48,8 @@ expect {
   timeout { puts "TIMEOUT waiting for kunanyi shell"; exit 126 }
 }
 
-send "printf %s $payload | base64 -d | bash; rc=\\$?; echo __CODEX_STATUS__=\\$rc\r"
+send -- [format {printf %%s %s | base64 -d | bash; echo __CODEX_STATUS__=$?
+} $payload]
 expect {
   -re "__CODEX_STATUS__=(\[0-9\]+)" {
     set status $expect_out(1,string)

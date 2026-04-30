@@ -133,15 +133,12 @@ automation, set a compatible locale before SSH/PBS submission.
 
 ## Next HPC Smoke Steps
 
-1. Run a targeted module inventory for compilers, MPI, HDF5, CMake, Python, and
-   Git without using a broad `module avail`.
-2. Submit an interactive PBS job for a compile environment.
-3. Clone or sync the UTAS AGN repos into `/scratch/bwbrook` or another agreed
+1. Clone or sync the UTAS AGN repos into `/scratch/bwbrook` or another agreed
    working location.
-4. Build a tiny PLUTO case under PBS.
-5. Retrieve artifacts back through jumpbox/home.
+2. Build a tiny PLUTO case under PBS.
+3. Retrieve artifacts back through jumpbox/home.
 
-The local helper for step 1 is:
+The local helper for targeted module inventory is:
 
 ```bash
 scripts/kunanyi/module_inventory.sh
@@ -149,3 +146,50 @@ scripts/kunanyi/module_inventory.sh
 
 It expects an active TPAC jumpbox SSH window and reads credentials from
 `/Users/bwbrook/.config/tpac/kunanyi.env`.
+
+## Module Inventory
+
+Confirmed on `2026-05-01`:
+
+- `HDF5/1.14.0-gompi-2023a`
+- `OpenMPI/4.1.5-GCC-12.3.0`
+- `GCC/12.3.0`
+- `CMake/3.26.3-GCCcore-12.3.0`
+- `Python/3.11.3-GCCcore-12.3.0`
+- `git/2.41.0-GCCcore-12.3.0-nodocs`
+- `netCDF/4.9.2-gompi-2023a`
+
+The best first PLUTO/HDF5 stack is:
+
+```bash
+module purge
+module load HDF5/1.14.0-gompi-2023a
+```
+
+This loads the GCC 12.3 / OpenMPI 4.1.5 / HDF5 1.14.0 `gompi/2023a`
+environment.
+
+## MPI + Parallel HDF5 Smoke
+
+Confirmed on `2026-05-01` with:
+
+- script: `scripts/kunanyi/hdf5_probe.pbs`
+- job id: `688922.kunanyi-ohpc`
+- queue: `test`
+- compute node: `n001.kunanyi`
+- scratch workdir: `/scratch/bwbrook/codex_hdf5_probe`
+
+The job loaded `HDF5/1.14.0-gompi-2023a`, compiled a C smoke program with
+`h5pcc`, ran it with `mpirun -np 2`, and created/dumped
+`mpi_hdf5_smoke.h5`.
+
+Key output:
+
+```text
+mpirun (Open MPI) 4.1.5
+MPI ranks: 2
+Parallel HDF5 file created.
+```
+
+This validates that the core compiler/MPI/HDF5 stack needed for PLUTO HDF5
+smoke work is available and works on a compute node.

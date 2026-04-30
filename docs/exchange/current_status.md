@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-04-24
+Last updated: 2026-05-01
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -115,6 +115,24 @@ MacBook/kunanyi follow-up:
 - details are in:
   - `docs/kunanyi_setup.md`
   - `docs/exchange/logs/2026-04-30-kunanyi-first-pbs-smoke.md`
+
+MacBook/kunanyi follow-up on 2026-05-01:
+
+- targeted module inventory completed successfully via
+  `scripts/kunanyi/module_inventory.sh`
+- best first PLUTO/HDF5 stack identified as:
+  `HDF5/1.14.0-gompi-2023a`
+- this stack provides GCC 12.3, OpenMPI 4.1.5, and parallel HDF5 1.14.0
+- a PBS compile/run smoke completed on compute node `n001.kunanyi`:
+  - job id `688922.kunanyi-ohpc`
+  - queue `test`
+  - workdir `/scratch/bwbrook/codex_hdf5_probe`
+  - compiled with `h5pcc`
+  - ran with `mpirun -np 2`
+  - created and inspected `mpi_hdf5_smoke.h5`
+- next kunanyi step is a tiny PLUTO build/run under PBS using this module stack
+- details are in:
+  - `docs/exchange/logs/2026-05-01-kunanyi-module-and-hdf5-smoke.md`
 
 ## Project Structure
 

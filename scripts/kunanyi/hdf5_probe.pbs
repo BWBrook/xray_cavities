@@ -1,0 +1,65 @@
+#PBS -N codex_hdf5_probe
+#PBS -q test
+#PBS -l select=1:ncpus=2
+#PBS -l walltime=00:05:00
+#PBS -o hdf5_probe.out
+#PBS -e hdf5_probe.err
+
+set -euo pipefail
+
+WORKDIR=/scratch/bwbrook/codex_hdf5_probe
+mkdir -p "$WORKDIR"
+cd "$WORKDIR"
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+
+echo "JOB_START=$(date)"
+echo "HOST=$(hostname)"
+echo "PBS_JOBID=${PBS_JOBID:-}"
+echo "PBS_NODEFILE=${PBS_NODEFILE:-}"
+echo "MODULES=${LOADEDMODULES:-}"
+echo "gcc=$(command -v gcc)"
+echo "mpicc=$(command -v mpicc)"
+echo "mpirun=$(command -v mpirun)"
+echo "h5pcc=$(command -v h5pcc)"
+echo "h5dump=$(command -v h5dump)"
+mpirun --version | head -2
+h5pcc -show
+
+cat > mpi_hdf5_smoke.c <<'C'
+#include <mpi.h>
+#include "hdf5.h"
+#include <stdio.h>
+
+int main(int argc, char **argv) {
+    MPI_Init(&argc, &argv);
+    int rank = 0, size = 0;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    hid_t plist = H5Pcreate(H5P_FILE_ACCESS);
+    if (plist < 0) return 10;
+    if (H5Pset_fapl_mpio(plist, MPI_COMM_WORLD, MPI_INFO_NULL) < 0) return 11;
+
+    hid_t file = H5Fcreate("mpi_hdf5_smoke.h5", H5F_ACC_TRUNC, H5P_DEFAULT, plist);
+    if (file < 0) return 12;
+
+    if (rank == 0) {
+        printf("MPI ranks: %d\n", size);
+        printf("Parallel HDF5 file created.\n");
+    }
+
+    H5Fclose(file);
+    H5Pclose(plist);
+    MPI_Finalize();
+    return 0;
+}
+C
+
+h5pcc mpi_hdf5_smoke.c -o mpi_hdf5_smoke
+mpirun -np 2 ./mpi_hdf5_smoke
+h5dump -H mpi_hdf5_smoke.h5
+ls -lh mpi_hdf5_smoke mpi_hdf5_smoke.h5
+
+echo "JOB_END=$(date)"
