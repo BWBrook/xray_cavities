@@ -155,6 +155,26 @@ Second MacBook/kunanyi follow-up on 2026-05-01:
 - details are in:
   - `docs/exchange/logs/2026-05-01-kunanyi-pluto-sod-smoke.md`
 
+Third MacBook/kunanyi follow-up on 2026-05-01:
+
+- a tiny official PLUTO `HD/Jet` PBS smoke completed successfully:
+  - job id `688926.kunanyi-ohpc`
+  - queue `test`
+  - compute node `n001.kunanyi`
+  - stack `HDF5/1.14.0-gompi-2023a`
+  - makefile architecture `Kunanyi.defs`
+  - grid `16 x 48`, cylindrical 2D
+  - `ETA = 10`, external Mach target `20`, PLUTO `MACH = 6.32455532034`
+  - run command `mpirun -np 2 ./pluto -i pluto.ini`
+  - outputs included `data.0000.dbl`, `data.0001.dbl`, `data.0002.dbl`,
+    `dbl.out`, `grid.out`, and `pluto.0.log`
+- PBS resource sizing notes were added for single-node and multi-node runs:
+  `select=N:ncpus=28:mpiprocs=28`
+- next kunanyi rung is either a larger 2D official jet run or the first
+  `jet-setup` / tiny 3D smoke path on `kunanyi`
+- details are in:
+  - `docs/exchange/logs/2026-05-01-kunanyi-pluto-jet-smoke.md`
+
 ## Project Structure
 
 Working model:

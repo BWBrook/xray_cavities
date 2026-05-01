@@ -93,6 +93,38 @@ Observed queues included:
 Do not run simulations or compiles on the login node. Submit work through PBS,
 or request an interactive job for builds.
 
+## PBS Resource Sizing
+
+Use `select`, `ncpus`, and `mpiprocs` to control node/core layout.
+
+Small shared-node smoke tests can request only a few cores:
+
+```pbs
+#PBS -l select=1:ncpus=2
+```
+
+For a full 28-core node with one MPI rank per core:
+
+```pbs
+#PBS -l select=1:ncpus=28:mpiprocs=28
+```
+
+For a multi-node run:
+
+```pbs
+#PBS -l select=4:ncpus=28:mpiprocs=28
+```
+
+That layout is intended to pair with:
+
+```bash
+mpirun -np 112 ./pluto -i pluto.ini
+```
+
+Before launching serious 3D jobs, confirm the correct production queue,
+walltime, storage location, and whether TPAC expects full-node requests for
+large MPI work.
+
 ## First PBS Smoke Test
 
 The first clean PBS compute-node smoke used:
@@ -241,3 +273,44 @@ Done
 ```
 
 This is the first confirmed PLUTO build/run smoke on `kunanyi`.
+
+## PLUTO Jet Smoke
+
+Confirmed on `2026-05-01` with:
+
+- script: `scripts/kunanyi/pluto_jet_smoke.pbs`
+- job id: `688926.kunanyi-ohpc`
+- queue: `test`
+- compute node: `n001.kunanyi`
+- scratch PLUTO tree: `/scratch/bwbrook/git/utas-agn/pluto`
+- run directory: `/scratch/bwbrook/pluto_smoke/jet_hd/run`
+
+This was a deliberately tiny official PLUTO `HD/Jet` smoke:
+
+```text
+grid: 16 x 48
+domain: r = 0..4, z = 0..12
+tstop: 1.0
+ETA: 10.0
+external Mach target: 20.0
+MACH parameter: 6.32455532034
+MPI ranks: 2
+```
+
+The job loaded `HDF5/1.14.0-gompi-2023a`, generated a PLUTO makefile with
+`ARCH = Kunanyi.defs`, built with `make -j2`, and ran:
+
+```bash
+mpirun -np 2 ./pluto -i pluto.ini
+```
+
+`dbl.out` recorded the initial output, a mid-run output, and final `t = 1.0`
+output:
+
+```text
+0 0.000000e+00 1.000000e-04 0 single_file little rho vx1 vx2 vx3 prs
+1 4.929819e-01 1.550904e-02 74 single_file little rho vx1 vx2 vx3 prs
+2 1.000000e+00 9.293902e-04 108 single_file little rho vx1 vx2 vx3 prs
+```
+
+This validates the official PLUTO jet problem path under PBS on `kunanyi`.

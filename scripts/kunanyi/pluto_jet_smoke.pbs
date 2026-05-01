@@ -1,0 +1,151 @@
+#PBS -N pluto_jet_smoke
+#PBS -q test
+#PBS -l select=1:ncpus=2
+#PBS -l walltime=00:10:00
+#PBS -o pluto_jet_smoke.out
+#PBS -e pluto_jet_smoke.err
+
+set -euo pipefail
+
+export LC_ALL=C
+export LANG=C
+
+PLUTO_DIR=/scratch/bwbrook/git/utas-agn/pluto
+WORKDIR=/scratch/bwbrook/pluto_smoke/jet_hd
+
+cd "$WORKDIR"
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+export HDF5_DIR="${HDF5_DIR:-${EBROOTHDF5:-/share/apps/software/HDF5/1.14.0-gompi-2023a}}"
+
+echo "JOB_START=$(date)"
+echo "HOST=$(hostname)"
+echo "PBS_JOBID=${PBS_JOBID:-}"
+echo "PBS_NODEFILE=${PBS_NODEFILE:-}"
+echo "MODULES=${LOADEDMODULES:-}"
+echo "HDF5_DIR=${HDF5_DIR}"
+echo "mpicc=$(command -v mpicc)"
+echo "mpirun=$(command -v mpirun)"
+echo "python3=$(command -v python3)"
+
+rm -rf run
+mkdir -p run
+cd run
+
+cp "$PLUTO_DIR/Test_Problems/HD/Jet/init.c" .
+cp "$PLUTO_DIR/Test_Problems/HD/Jet/userdef_output.c" .
+cp "$PLUTO_DIR/Test_Problems/HD/Jet/definitions_01.h" definitions.h
+
+python3 - <<'PY'
+from pathlib import Path
+import math
+
+path = Path("definitions.h")
+lines = path.read_text().splitlines()
+patches = {
+    "DIMENSIONS": "2",
+    "GEOMETRY": "CYLINDRICAL",
+    "RECONSTRUCTION": "LINEAR",
+    "TIME_STEPPING": "RK2",
+    "EOS": "IDEAL",
+    "INCLUDE_JDIR": "TRUE",
+}
+out = []
+for line in lines:
+    parts = line.split()
+    if len(parts) >= 2 and parts[0] == "#define" and parts[1] in patches:
+        key = parts[1]
+        out.append(f"#define  {key.ljust(28)}   {patches[key]}")
+    else:
+        out.append(line)
+path.write_text("\n".join(out) + "\n")
+
+eta = 10.0
+external_mach = 20.0
+mach = external_mach / math.sqrt(eta)
+Path("pluto.ini").write_text(f"""[Grid]
+
+X1-grid    1    0.0    16     u    4.0
+X2-grid    1    0.0    48     u    12.0
+X3-grid    1    0.0    1      u    1.0
+
+[Chombo Refinement]
+
+Levels           4
+Ref_ratio        2 2 2 2 2
+Regrid_interval  2 2 2 2
+Refine_thresh    0.3
+Tag_buffer_size  3
+Block_factor     8
+Max_grid_size    64
+Fill_ratio       0.75
+
+[Time]
+
+CFL              0.35
+CFL_max_var      1.1
+tstop            1.0
+first_dt         1.e-4
+
+[Solver]
+
+Solver           hllc
+
+[Boundary]
+
+X1-beg        axisymmetric
+X1-end        outflow
+X2-beg        userdef
+X2-end        outflow
+X3-beg        periodic
+X3-end        periodic
+
+[Static Grid Output]
+
+uservar    0
+dbl        0.5   -1   single_file
+flt       -1.0   -1   single_file
+vtk       -1.0   -1   single_file
+tab       -1.0   -1
+ppm       -1.0   -1
+png       -1.0   -1
+log        5
+analysis  -1.0   -1
+
+[Chombo HDF5 output]
+
+Checkpoint_interval  -1.0  0
+Plot_interval        -1.0  0
+
+[Parameters]
+
+ETA                         {eta}
+MACH                        {mach:.12g}
+""")
+PY
+
+# PLUTO 4.4's --no-curses path still calls raw_input, so the scratch PLUTO
+# copy must define raw_input = input in Tools/Python/menu.py before this step.
+printf '3\n' | env PLUTO_DIR="$PLUTO_DIR" \
+  python3 "$PLUTO_DIR/setup.py" --no-curses --auto-update
+
+printf '\n--- makefile arch ---\n'
+grep -E '^(ARCH|PLUTO_DIR|VPATH)' makefile
+
+printf '\n--- build ---\n'
+make -j2
+
+printf '\n--- run ---\n'
+mpirun -np 2 ./pluto -i pluto.ini
+
+printf '\n--- outputs ---\n'
+ls -lh | sed -n '1,140p'
+
+printf '\n--- dbl.out ---\n'
+sed -n '1,40p' dbl.out 2>/dev/null || true
+
+printf '\n--- rank 0 log tail ---\n'
+tail -80 pluto.0.log 2>/dev/null || true
+
+echo "JOB_END=$(date)"
