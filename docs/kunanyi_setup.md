@@ -314,3 +314,50 @@ output:
 ```
 
 This validates the official PLUTO jet problem path under PBS on `kunanyi`.
+
+## PLUTO Scaled 2D Jet Smoke
+
+Confirmed on `2026-05-01` with:
+
+- script: `scripts/kunanyi/pluto_jet_2d_scaled.pbs`
+- job id: `688930.kunanyi-ohpc`
+- queue: `test`
+- compute node: `n001.kunanyi`
+- resources: `select=1:ncpus=8:mpiprocs=8`, requested walltime `00:20:00`
+- scratch PLUTO tree: `/scratch/bwbrook/git/utas-agn/pluto`
+- run directory: `/scratch/bwbrook/pluto_smoke/jet_hd_2d_scaled/run`
+
+This scaled the official PLUTO `HD/Jet` smoke while keeping it a deliberately
+small single-node check:
+
+```text
+grid: 64 x 192
+domain: r = 0..4, z = 0..12
+tstop: 2.0
+ETA: 10.0
+external Mach target: 20.0
+MACH parameter: 6.32455532034
+MPI ranks: 8
+```
+
+The job loaded `HDF5/1.14.0-gompi-2023a`, generated a PLUTO makefile with
+`ARCH = Kunanyi.defs`, built with `make -j8`, and ran:
+
+```bash
+mpirun -np 8 ./pluto -i pluto.ini
+```
+
+PBS accounting reported `Exit_status = 0`, `resources_used.walltime =
+00:00:21`, and `exec_host = n001/3*8`. The run produced five double outputs:
+
+```text
+0 0.000000e+00 1.000000e-04 0 single_file little rho vx1 vx2 vx3 prs
+1 4.980701e-01 3.908019e-03 158 single_file little rho vx1 vx2 vx3 prs
+2 9.979077e-01 4.112735e-03 282 single_file little rho vx1 vx2 vx3 prs
+3 1.497833e+00 4.037600e-03 405 single_file little rho vx1 vx2 vx3 prs
+4 2.000000e+00 1.844065e-03 530 single_file little rho vx1 vx2 vx3 prs
+```
+
+This validates a modestly scaled official PLUTO 2D jet path using more than two
+MPI ranks on one `kunanyi` node. The next useful rung is a tiny one-node
+`jet-setup` 3D smoke, followed by an explicit multi-node MPI test.
