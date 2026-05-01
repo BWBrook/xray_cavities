@@ -196,6 +196,32 @@ Fourth MacBook/kunanyi follow-up on 2026-05-01:
 - details are in:
   - `docs/exchange/logs/2026-05-01-kunanyi-pluto-jet-2d-scaled.md`
 
+Fifth MacBook/kunanyi follow-up on 2026-05-01:
+
+- a tiny full-3D Cartesian `jet-setup` PBS smoke completed successfully on one
+  `kunanyi` node:
+  - job id `688935.kunanyi-ohpc`
+  - queue `test`
+  - compute node `n010.kunanyi`
+  - resources `select=1:ncpus=8:mpiprocs=8`, walltime request `00:20:00`
+  - stack `HDF5/1.14.0-gompi-2023a`
+  - makefile architecture `Kunanyi.defs`
+  - grid `48 x 48 x 72`, Cartesian 3D
+  - King atmosphere, HD, particles off
+  - `tstop = 300`
+  - run command `mpirun -np 8 ./pluto -i pluto.ini`
+  - completed with `Exit_status = 0`
+  - PBS accounting reported `walltime = 00:01:26`, `cput = 00:04:55`, and
+    peak memory about `342 MB`
+  - outputs included `data.0000.dbl` through `data.0002.dbl`, `dbl.out`,
+    `grid.out`, and eight per-rank PLUTO logs
+- the first attempt, job `688934.kunanyi-ohpc`, failed because the current
+  `jet-setup` `definitions.h` does not define `COMPONENTS`; the PBS script now
+  leaves that absent define alone
+- next kunanyi rung is an explicit multi-node MPI test
+- details are in:
+  - `docs/exchange/logs/2026-05-01-kunanyi-jet-setup-tiny-3d-cart.md`
+
 ## Project Structure
 
 Working model:

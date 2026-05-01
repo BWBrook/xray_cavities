@@ -359,5 +359,71 @@ PBS accounting reported `Exit_status = 0`, `resources_used.walltime =
 ```
 
 This validates a modestly scaled official PLUTO 2D jet path using more than two
-MPI ranks on one `kunanyi` node. The next useful rung is a tiny one-node
-`jet-setup` 3D smoke, followed by an explicit multi-node MPI test.
+MPI ranks on one `kunanyi` node.
+
+## `jet-setup` Tiny 3D Cartesian Smoke
+
+Confirmed on `2026-05-01` with:
+
+- script: `scripts/kunanyi/jet_setup_tiny_3d_cart.pbs`
+- successful job id: `688935.kunanyi-ohpc`
+- first failed job id: `688934.kunanyi-ohpc`
+- queue: `test`
+- compute node: `n010.kunanyi`
+- resources: `select=1:ncpus=8:mpiprocs=8`, requested walltime `00:20:00`
+- scratch PLUTO tree: `/scratch/bwbrook/git/utas-agn/pluto`
+- scratch `jet-setup` tree: `/scratch/bwbrook/git/utas-agn/jet-setup`
+- run directory: `/scratch/bwbrook/jet_setup_smoke/tiny_3d_cart/problem`
+
+The `jet-setup` source bundle was copied through jumpbox, unpacked under
+`/scratch/bwbrook/git/utas-agn/jet-setup`, and used to scaffold a tiny
+Cartesian 3D problem matching the Nectar smoke exercise:
+
+```text
+grid: 48 x 48 x 72
+domain: x = -12..12, y = -12..12, z = -18..18
+physics: HD
+geometry: Cartesian 3D
+environment: King
+particles: off
+tstop: 300.0
+MPI ranks: 8
+```
+
+The successful job loaded `HDF5/1.14.0-gompi-2023a`, generated a PLUTO
+makefile with `ARCH = Kunanyi.defs`, built with `make -j8`, and ran:
+
+```bash
+mpirun -np 8 ./pluto -i pluto.ini
+```
+
+PBS accounting for `688935.kunanyi-ohpc` reported `Exit_status = 0`,
+`resources_used.walltime = 00:01:26`, `resources_used.cput = 00:04:55`,
+`resources_used.mem = 342164kb`, and `exec_host = n010/1*8`.
+
+`dbl.out` recorded the initial output, a mid-run output, and final `t = 300`
+output:
+
+```text
+0 0.000000e+00 1.000000e-03 0 single_file little rho vx1 vx2 vx3 prs tr1
+1 1.497451e+02 6.727975e-01 282 single_file little rho vx1 vx2 vx3 prs tr1
+2 3.000000e+02 2.431960e-01 506 single_file little rho vx1 vx2 vx3 prs tr1
+```
+
+The output files on scratch include three `7.6 MB` double dumps,
+`grid.out`, `dbl.out`, and eight per-rank PLUTO logs. Rank 0 finished with:
+
+```text
+> Writing file #2 (dbl) to disk...
+> Elapsed time              0d:0h:0m:34s
+> Done
+```
+
+The first attempt, `688934.kunanyi-ohpc`, failed quickly during script setup
+because the current `jet-setup` `definitions.h` does not define `COMPONENTS`.
+The PBS script now leaves that absent define alone. The script still emits a
+harmless `git: command not found` warning from `tools/setup-problem` when the
+Git module is not loaded; it did not affect the green run.
+
+This validates the first one-node `jet-setup` 3D path on `kunanyi`. The next
+useful rung is an explicit multi-node MPI test.
