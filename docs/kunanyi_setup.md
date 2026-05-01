@@ -425,5 +425,122 @@ The PBS script now leaves that absent define alone. The script still emits a
 harmless `git: command not found` warning from `tools/setup-problem` when the
 Git module is not loaded; it did not affect the green run.
 
-This validates the first one-node `jet-setup` 3D path on `kunanyi`. The next
-useful rung is an explicit multi-node MPI test.
+This validates the first one-node `jet-setup` 3D path on `kunanyi`.
+
+## PBS Email Notifications
+
+Confirmed on `2026-05-01` with:
+
+- script: `scripts/kunanyi/email_notify_smoke.pbs`
+- job id: `688936.kunanyi-ohpc`
+- queue: `test`
+- compute node: `n004.kunanyi`
+- mail recipient: `barry.brook@utas.edu.au`
+- mail points: `abe`
+
+The PBS directives are:
+
+```bash
+#PBS -M barry.brook@utas.edu.au
+#PBS -m abe
+```
+
+PBS history recorded:
+
+```text
+Job_Name = email_notify_smoke
+job_state = F
+Mail_Points = abe
+Mail_Users = barry.brook@utas.edu.au
+Exit_status = 0
+resources_used.walltime = 00:00:21
+```
+
+Barry confirmed that the completion email arrived from
+`adm@<tpac-host>`.
+
+For production simulations, use:
+
+```bash
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+```
+
+where `a` means abort and `e` means end. The `b` begin notification is useful
+for smoke tests, but probably too chatty for routine long production jobs.
+
+## `jet-setup` Two-Node 3D MPI Smoke
+
+Confirmed on `2026-05-01` with:
+
+- script: `scripts/kunanyi/jet_setup_tiny_3d_cart_multinode.pbs`
+- job id: `688937.kunanyi-ohpc`
+- queue: `test`
+- compute nodes: `n010.kunanyi` and `n011.kunanyi`
+- resources: `select=2:ncpus=8:mpiprocs=8`, requested walltime `00:20:00`
+- scratch PLUTO tree: `/scratch/bwbrook/git/utas-agn/pluto`
+- scratch `jet-setup` tree: `/scratch/bwbrook/git/utas-agn/jet-setup`
+- run directory:
+  `/scratch/bwbrook/jet_setup_smoke/tiny_3d_cart_multinode/problem`
+
+This reused the tiny Cartesian 3D case and derived rank count from
+`PBS_NODEFILE`:
+
+```bash
+NRANKS=$(wc -l < "$PBS_NODEFILE")
+mpirun -np "$NRANKS" ./pluto -i pluto.ini
+```
+
+The allocation spanned two nodes:
+
+```text
+exec_host = n010/1*8+n011/0*8
+resources_used.ncpus = 16
+```
+
+PBS accounting reported:
+
+```text
+Exit_status = 0
+resources_used.walltime = 00:00:54
+resources_used.cput = 00:05:40
+resources_used.mem = 616720kb
+resources_used.vmem = 5858392kb
+```
+
+The run produced the expected 3D outputs:
+
+```text
+data.0000.dbl
+data.0001.dbl
+data.0002.dbl
+dbl.out
+grid.out
+logs/pluto.0.log ... logs/pluto.15.log
+restart.out
+```
+
+`dbl.out` recorded the same three outputs as the one-node case:
+
+```text
+0 0.000000e+00 1.000000e-03 0 single_file little rho vx1 vx2 vx3 prs tr1
+1 1.497451e+02 6.727975e-01 282 single_file little rho vx1 vx2 vx3 prs tr1
+2 3.000000e+02 2.431960e-01 506 single_file little rho vx1 vx2 vx3 prs tr1
+```
+
+Rank 0 finished with:
+
+```text
+> Writing file #2 (dbl) to disk...
+> Elapsed time              0d:0h:0m:20s
+> Done
+```
+
+This validates that PLUTO/`jet-setup` can run across multiple `kunanyi` nodes.
+For full-node production jobs, the expected pattern is:
+
+```bash
+#PBS -l select=N:ncpus=28:mpiprocs=28
+NRANKS=$(wc -l < "$PBS_NODEFILE")
+mpirun -np "$NRANKS" ./pluto -i pluto.ini
+```

@@ -1,0 +1,26 @@
+#PBS -N email_notify_smoke
+#PBS -q test
+#PBS -l select=1:ncpus=1:mpiprocs=1
+#PBS -l walltime=00:02:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m abe
+#PBS -o /u/bwbrook/codex_kunanyi/email_notify_smoke.out
+#PBS -e /u/bwbrook/codex_kunanyi/email_notify_smoke.err
+
+set -euo pipefail
+
+export LC_ALL=C
+export LANG=C
+
+echo "JOB_START=$(date)"
+echo "HOST=$(hostname)"
+echo "PBS_JOBID=${PBS_JOBID:-}"
+echo "PBS_QUEUE=${PBS_QUEUE:-}"
+echo "PBS_NODEFILE=${PBS_NODEFILE:-}"
+if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+  echo "NODEFILE_CONTENTS=$(tr '\n' ' ' < "$PBS_NODEFILE")"
+fi
+
+sleep 20
+
+echo "JOB_END=$(date)"

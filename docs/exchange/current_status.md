@@ -222,6 +222,35 @@ Fifth MacBook/kunanyi follow-up on 2026-05-01:
 - details are in:
   - `docs/exchange/logs/2026-05-01-kunanyi-jet-setup-tiny-3d-cart.md`
 
+Sixth MacBook/kunanyi follow-up on 2026-05-01:
+
+- PBS email notifications were tested successfully:
+  - script `scripts/kunanyi/email_notify_smoke.pbs`
+  - job id `688936.kunanyi-ohpc`
+  - mail recipient `barry.brook@utas.edu.au`
+  - mail points `abe`
+  - completed with `Exit_status = 0`
+  - Barry confirmed receipt of the PBS completion email
+- a two-node `jet-setup` 3D MPI smoke completed successfully:
+  - script `scripts/kunanyi/jet_setup_tiny_3d_cart_multinode.pbs`
+  - job id `688937.kunanyi-ohpc`
+  - queue `test`
+  - compute nodes `n010.kunanyi` and `n011.kunanyi`
+  - resources `select=2:ncpus=8:mpiprocs=8`, walltime request `00:20:00`
+  - `NRANKS` was computed from `PBS_NODEFILE` as `16`
+  - run command `mpirun -np 16 ./pluto -i pluto.ini`
+  - completed with `Exit_status = 0`
+  - PBS accounting reported `walltime = 00:00:54`, `cput = 00:05:40`, and
+    peak memory about `617 MB`
+  - outputs included `data.0000.dbl` through `data.0002.dbl`, `dbl.out`,
+    `grid.out`, and 16 per-rank PLUTO logs
+- the core launch pattern for production jobs is now validated:
+  `select=N:ncpus=28:mpiprocs=28`, derive ranks from `PBS_NODEFILE`, run with
+  `mpirun -np "$NRANKS"`, and use `#PBS -M barry.brook@utas.edu.au` plus
+  `#PBS -m ae` for completion/failure notifications
+- details are in:
+  - `docs/exchange/logs/2026-05-01-kunanyi-email-and-multinode-smoke.md`
+
 ## Project Structure
 
 Working model:
