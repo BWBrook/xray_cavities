@@ -1,6 +1,6 @@
 # kunanyi Setup Notes
 
-Last updated: 2026-04-30
+Last updated: 2026-05-01
 
 These notes record the first successful MacBook control-plane access path to
 TPAC's `kunanyi` HPC.
@@ -544,3 +544,55 @@ For full-node production jobs, the expected pattern is:
 NRANKS=$(wc -l < "$PBS_NODEFILE")
 mpirun -np "$NRANKS" ./pluto -i pluto.ini
 ```
+
+## Preparation Passes Before Full 3D Jobs
+
+The infrastructure path is now validated, but full production simulations
+should wait until the science/job package is made production-safe. Do these
+preparation passes before submitting any 48-hour multi-node run.
+
+1. Lock the case specification.
+   - Confirm the three-case science suite: low-power cluster, high-power
+     cluster, and low-power group.
+   - Record physics switches, jet parameters, environment parameters, grid,
+     domain, final time, source age outputs, and viewing-angle products.
+   - Confirm whether each case needs particles, radio outputs, X-ray products,
+     tracer/truth products, or all of these.
+
+2. Build a production PBS template.
+   - Use full-node requests when appropriate:
+     `select=N:ncpus=28:mpiprocs=28`.
+   - Derive `NRANKS` from `PBS_NODEFILE`.
+   - Include `#PBS -M barry.brook@utas.edu.au` and `#PBS -m ae`.
+   - Write absolute stdout/stderr paths under `/u/bwbrook/codex_kunanyi/` or a
+     case-specific home log directory.
+   - Emit `JOB_START`, `JOB_END`, module stack, nodefile contents, rank count,
+     source revision, and run directory.
+
+3. Add restart and resume handling.
+   - Set checkpoint cadence in `pluto.ini` before long jobs.
+   - Keep restart files in scratch during the run.
+   - Add simple `DONE` and `FAILED` markers in the run directory.
+   - Make reruns detect whether they are fresh starts or restarts.
+
+4. Confirm output volume and retention plan.
+   - Estimate size of `dbl`, HDF5, particle, radio, X-ray, and diagnostic
+     products before launch.
+   - Decide what stays on scratch temporarily, what is copied to home, and what
+     is pulled back to the MacBook or Nectar for analysis.
+   - Avoid leaving large completed datasets on scratch without an explicit
+     cleanup/transfer step.
+
+5. Run an intermediate-size rehearsal.
+   - Use the production script structure, but with a smaller grid or shorter
+     final time.
+   - Exercise checkpoint writing, restart from checkpoint, `DONE`/`FAILED`
+     markers, email alerts, and artifact retrieval.
+   - Treat this as the last gate before the full three-case run.
+
+6. Launch production jobs.
+   - Submit only after the case spec, PBS template, restart path, output plan,
+     and intermediate rehearsal are green.
+   - After submission, the jumpbox session can close; PBS owns the job.
+   - Monitor via email and later `qstat -x -f <jobid>`, stdout/stderr logs, and
+     run-directory markers.

@@ -251,6 +251,24 @@ Sixth MacBook/kunanyi follow-up on 2026-05-01:
 - details are in:
   - `docs/exchange/logs/2026-05-01-kunanyi-email-and-multinode-smoke.md`
 
+Production-prep follow-up on 2026-05-01:
+
+- `kunanyi` is now infrastructure-ready for full jobs once the science cases
+  are properly packaged
+- `docs/kunanyi_setup.md` now records the remaining preparation passes before
+  any serious 48-hour multi-node production run:
+  - lock the case specification
+  - build a production PBS template
+  - add restart/resume handling and `DONE`/`FAILED` markers
+  - confirm output volume and data retention/transfer plan
+  - run an intermediate-size rehearsal
+  - then launch production jobs
+- a short collaborator-facing status update was added as:
+  - `docs/kunanyi_status_update_2026-05-01.md`
+  - `docs/kunanyi_status_update_2026-05-01.pdf`
+- details are in:
+  - `docs/exchange/logs/2026-05-01-kunanyi-production-prep.md`
+
 ## Project Structure
 
 Working model:
