@@ -193,3 +193,51 @@ Parallel HDF5 file created.
 
 This validates that the core compiler/MPI/HDF5 stack needed for PLUTO HDF5
 smoke work is available and works on a compute node.
+
+## PLUTO Sod Smoke
+
+Confirmed on `2026-05-01` with:
+
+- script: `scripts/kunanyi/pluto_sod_smoke.pbs`
+- job id: `688924.kunanyi-ohpc`
+- queue: `test`
+- compute node: `n001.kunanyi`
+- scratch PLUTO tree: `/scratch/bwbrook/git/utas-agn/pluto`
+- run directory: `/scratch/bwbrook/pluto_smoke/sod_hd/run`
+
+The job loaded `HDF5/1.14.0-gompi-2023a`, generated a PLUTO makefile with
+`ARCH = Kunanyi.defs`, built with `make -j2`, and ran the PLUTO `HD/Sod`
+problem with:
+
+```bash
+mpirun -np 2 ./pluto -i pluto.ini
+```
+
+Key outputs:
+
+```text
+data.0000.dbl
+data.0001.dbl
+dbl.out
+grid.out
+pluto.0.log
+restart.out
+```
+
+`dbl.out` recorded the initial output and final `t = 0.2` output:
+
+```text
+0 0.000000e+00 1.000000e-04 0 single_file little rho vx1 vx2 vx3 prs
+1 2.000000e-01 8.148885e-04 235 single_file little rho vx1 vx2 vx3 prs
+```
+
+The rank-0 PLUTO log reported:
+
+```text
+Number of processors: 2
+Parallel Directions:  X1
+Elapsed time              0d:0h:0m:11s
+Done
+```
+
+This is the first confirmed PLUTO build/run smoke on `kunanyi`.

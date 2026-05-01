@@ -134,6 +134,27 @@ MacBook/kunanyi follow-up on 2026-05-01:
 - details are in:
   - `docs/exchange/logs/2026-05-01-kunanyi-module-and-hdf5-smoke.md`
 
+Second MacBook/kunanyi follow-up on 2026-05-01:
+
+- no existing UTAS AGN source checkout was found under `/u/bwbrook` or
+  `/scratch/bwbrook`
+- a clean PLUTO source bundle was transferred through jumpbox to TPAC home and
+  unpacked to `/scratch/bwbrook/git/utas-agn/pluto`
+- PLUTO's Python 3 `--no-curses` setup path needed a scratch-only
+  `raw_input = input` compatibility patch in `Tools/Python/menu.py`
+- a tiny PLUTO `HD/Sod` smoke built and ran under PBS:
+  - job id `688924.kunanyi-ohpc`
+  - queue `test`
+  - compute node `n001.kunanyi`
+  - stack `HDF5/1.14.0-gompi-2023a`
+  - makefile architecture `Kunanyi.defs`
+  - run command `mpirun -np 2 ./pluto -i pluto.ini`
+  - outputs included `data.0000.dbl`, `data.0001.dbl`, `dbl.out`, `grid.out`,
+    and `pluto.0.log`
+- next kunanyi step is a tiny official PLUTO `HD/Jet` PBS run
+- details are in:
+  - `docs/exchange/logs/2026-05-01-kunanyi-pluto-sod-smoke.md`
+
 ## Project Structure
 
 Working model:

@@ -27,7 +27,7 @@ REMOTE_CMD_B64="$(printf '%s' "$REMOTE_CMD" | base64 | tr -d '\n')"
 export TPAC_USER TPAC_PASSWORD REMOTE_CMD_B64
 
 /usr/bin/expect <<'EXPECT'
-set timeout 120
+set timeout 600
 set user $env(TPAC_USER)
 set password $env(TPAC_PASSWORD)
 set payload $env(REMOTE_CMD_B64)
