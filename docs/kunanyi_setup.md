@@ -1,6 +1,6 @@
 # kunanyi Setup Notes
 
-Last updated: 2026-05-01
+Last updated: 2026-05-02
 
 These notes record the first successful MacBook control-plane access path to
 TPAC's `kunanyi` HPC.
@@ -596,3 +596,56 @@ preparation passes before submitting any 48-hour multi-node run.
    - After submission, the jumpbox session can close; PBS owns the job.
    - Monitor via email and later `qstat -x -f <jobid>`, stdout/stderr logs, and
      run-directory markers.
+
+## Three-Case Science Package
+
+Added on `2026-05-02`:
+
+- frozen science spec:
+  `docs/science/three_case_spec.md`
+- current science asset inventory:
+  `docs/science/asset_inventory_2026-05-02.md`
+- config renderer:
+  `scripts/science/render_three_case_configs.py`
+- production-oriented PBS template:
+  `scripts/kunanyi/jet_setup_production_template.pbs`
+
+The PBS template implements the validated production shape:
+
+```pbs
+#PBS -l select=1:ncpus=28:mpiprocs=28
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+```
+
+It derives `NRANKS` from `PBS_NODEFILE`, logs PLUTO and `jet-setup` source
+revisions, applies generated `definitions_overrides.json`, uses
+`pluto.ini`/`environment.ini` from the selected case bundle, detects fresh
+runs versus restarts, and writes `DONE`/`FAILED` markers under the run
+directory.
+
+Example staging flow after the real Stewart assets are known:
+
+```bash
+python3 scripts/science/render_three_case_configs.py \
+  --variant both \
+  --grid nectar_placeholder \
+  --cluster-tabulated /scratch/bwbrook/path/to/stewart_cluster.csv \
+  --group-tabulated /scratch/bwbrook/path/to/stewart_group.csv \
+  --require-assets \
+  --output build/science/three_case_configs \
+  --force
+```
+
+Then copy the generated case directory to `kunanyi` and submit with case
+variables, for example:
+
+```bash
+qsub -v CASE_ID=C-HI,CASE_VARIANT=hydro,CASE_CONFIG_DIR=/u/bwbrook/xray_cavities_cases/C-HI/hydro \
+  scripts/kunanyi/jet_setup_production_template.pbs
+```
+
+Do not submit this as a 48-hour production run yet. First finish the Stewart
+environment gate on resized `nectar-vm`, the `C-HI` no-particle rehearsal, the
+particle-enabled repeat, and one intermediate `kunanyi` rehearsal using this
+template.

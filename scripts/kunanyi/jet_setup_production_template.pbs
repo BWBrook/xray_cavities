@@ -1,0 +1,327 @@
+#PBS -N xray_cavity_prod
+#PBS -q normal
+#PBS -l select=1:ncpus=28:mpiprocs=28
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/xray_cavity_prod.out
+#PBS -e /u/bwbrook/codex_kunanyi/xray_cavity_prod.err
+
+# Production-oriented jet-setup template for the xray_cavities three-case
+# suite. Submit with qsub -v overrides after staging a generated case bundle,
+# for example:
+#
+#   qsub -v CASE_ID=C-HI,CASE_VARIANT=hydro,CASE_CONFIG_DIR=/u/bwbrook/xray_cavities_cases/C-HI/hydro scripts/kunanyi/jet_setup_production_template.pbs
+#
+# Full production should wait until the Stewart environment files, Nectar
+# stability gates, and an intermediate kunanyi rehearsal are green.
+
+set -euo pipefail
+
+export LC_ALL=C
+export LANG=C
+
+CASE_ID="${CASE_ID:-C-HI}"
+CASE_VARIANT="${CASE_VARIANT:-hydro}"
+CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-/u/bwbrook/xray_cavities_cases/${CASE_ID}/${CASE_VARIANT}}"
+
+PLUTO_DIR="${PLUTO_DIR:-/scratch/bwbrook/git/utas-agn/pluto}"
+JET_SETUP="${JET_SETUP:-/scratch/bwbrook/git/utas-agn/jet-setup}"
+RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs}"
+WORKDIR="${RUN_ROOT}/${CASE_ID}/${CASE_VARIANT}"
+PROBLEM="${WORKDIR}/problem"
+MARKER_DIR="${WORKDIR}/markers"
+LOG_DIR="${WORKDIR}/job_logs"
+
+BUILD_JOBS="${BUILD_JOBS:-8}"
+RESTART_POLICY="${RESTART_POLICY:-auto}"  # auto, fresh, or force-fresh
+RESTART_PARTICLES="${RESTART_PARTICLES:-0}"
+
+mkdir -p "$MARKER_DIR" "$LOG_DIR"
+DONE_MARKER="${MARKER_DIR}/DONE"
+FAILED_MARKER="${MARKER_DIR}/FAILED"
+
+finish() {
+  local rc=$?
+  local end_time
+  end_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  echo "JOB_END=${end_time}"
+  if [ "$rc" -eq 0 ]; then
+    {
+      echo "status=done"
+      echo "case_id=${CASE_ID}"
+      echo "case_variant=${CASE_VARIANT}"
+      echo "pbs_jobid=${PBS_JOBID:-manual}"
+      echo "finished_utc=${end_time}"
+    } > "$DONE_MARKER"
+    rm -f "$FAILED_MARKER"
+  else
+    {
+      echo "status=failed"
+      echo "case_id=${CASE_ID}"
+      echo "case_variant=${CASE_VARIANT}"
+      echo "pbs_jobid=${PBS_JOBID:-manual}"
+      echo "exit_code=${rc}"
+      echo "finished_utc=${end_time}"
+    } > "$FAILED_MARKER"
+  fi
+  exit "$rc"
+}
+trap finish EXIT
+
+require_file() {
+  local path="$1"
+  if [ ! -f "$path" ]; then
+    echo "[error] required file missing: $path" >&2
+    exit 1
+  fi
+}
+
+patch_define() {
+  local path="$1"
+  local key="$2"
+  local value="$3"
+  python3 - "$path" "$key" "$value" <<'PY'
+from pathlib import Path
+import sys
+
+path = Path(sys.argv[1])
+key = sys.argv[2]
+value = sys.argv[3]
+lines = path.read_text().splitlines()
+out = []
+replaced = False
+for line in lines:
+    parts = line.split()
+    if len(parts) >= 2 and parts[0] == "#define" and parts[1] == key:
+        out.append(f"#define  {key.ljust(28)}   {value}")
+        replaced = True
+    else:
+        out.append(line)
+if not replaced:
+    raise SystemExit(f"missing define {key} in {path}")
+path.write_text("\n".join(out) + "\n")
+PY
+}
+
+apply_definition_overrides() {
+  local problem_dir="$1"
+  local overrides_json="$2"
+  python3 - "$problem_dir" "$overrides_json" <<'PY'
+from pathlib import Path
+import json
+import sys
+
+problem = Path(sys.argv[1])
+overrides = json.loads(Path(sys.argv[2]).read_text())
+for relpath, values in overrides.items():
+    path = problem / "src" / relpath
+    lines = path.read_text().splitlines()
+    out = []
+    replaced = {key: False for key in values}
+    for line in lines:
+        parts = line.split()
+        if len(parts) >= 2 and parts[0] == "#define" and parts[1] in values:
+            key = parts[1]
+            out.append(f"#define  {key.ljust(28)}   {values[key]}")
+            replaced[key] = True
+        else:
+            out.append(line)
+    missing = [key for key, ok in replaced.items() if not ok]
+    if missing:
+        raise SystemExit(f"{path}: missing define(s): {', '.join(missing)}")
+    path.write_text("\n".join(out) + "\n")
+PY
+}
+
+write_static_support_files() {
+  local problem_dir="$1"
+  python3 - "$problem_dir" <<'PY'
+from pathlib import Path
+import sys
+
+problem = Path(sys.argv[1])
+(problem / "src" / "local_make").write_text(
+    "OBJ += coordinates.o jet.o units.o environment_utilities.o environment.o "
+    "tools_usr.o read_external_pressure.o galaxy.o\n"
+    "HEADERS += definitions_usr.h pluto_usr.h structs_usr.h coordinates.h jet.h "
+    "units.h environment_utilities.h environment.h tools_usr.h "
+    "read_external_pressure.h galaxy.h\n"
+)
+(problem / "src" / "makefile").write_text("ARCH         = Kunanyi.defs\n")
+PY
+}
+
+latest_dbl_index() {
+  local dbl_out="$1"
+  if [ ! -f "$dbl_out" ]; then
+    return 0
+  fi
+  awk 'NF && $1 ~ /^[0-9]+$/ {n=$1} END{if (n != "") print n}' "$dbl_out"
+}
+
+log_source_revisions() {
+  {
+    echo "case_id=${CASE_ID}"
+    echo "case_variant=${CASE_VARIANT}"
+    echo "case_config_dir=${CASE_CONFIG_DIR}"
+    echo
+    for repo in "$PLUTO_DIR" "$JET_SETUP"; do
+      echo "repo=${repo}"
+      git -C "$repo" rev-parse --show-toplevel 2>/dev/null || true
+      git -C "$repo" rev-parse HEAD 2>/dev/null || true
+      git -C "$repo" status --short 2>/dev/null || true
+      echo
+    done
+    if command -v sha256sum >/dev/null 2>&1; then
+      sha256sum "$CASE_CONFIG_DIR"/case_manifest.json "$CASE_CONFIG_DIR"/pluto.ini "$CASE_CONFIG_DIR"/environment.ini 2>/dev/null || true
+    fi
+  } > "${LOG_DIR}/source_revisions.txt"
+}
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+export HDF5_DIR="${HDF5_DIR:-${EBROOTHDF5:-/share/apps/software/HDF5/1.14.0-gompi-2023a}}"
+export PLUTO_DIR
+
+require_file "${CASE_CONFIG_DIR}/pluto.ini"
+require_file "${CASE_CONFIG_DIR}/environment.ini"
+require_file "${CASE_CONFIG_DIR}/case_manifest.json"
+require_file "${CASE_CONFIG_DIR}/definitions_overrides.json"
+
+echo "JOB_START=$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "HOST=$(hostname)"
+echo "PBS_JOBID=${PBS_JOBID:-}"
+echo "PBS_QUEUE=${PBS_QUEUE:-}"
+echo "PBS_NODEFILE=${PBS_NODEFILE:-}"
+echo "CASE_ID=${CASE_ID}"
+echo "CASE_VARIANT=${CASE_VARIANT}"
+echo "CASE_CONFIG_DIR=${CASE_CONFIG_DIR}"
+echo "WORKDIR=${WORKDIR}"
+echo "MODULES=${LOADEDMODULES:-}"
+echo "HDF5_DIR=${HDF5_DIR}"
+echo "mpicc=$(command -v mpicc)"
+echo "mpirun=$(command -v mpirun)"
+echo "python3=$(command -v python3)"
+
+if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+  cp "$PBS_NODEFILE" "${LOG_DIR}/pbs_nodefile.${PBS_JOBID:-manual}.txt"
+  NRANKS=$(wc -l < "$PBS_NODEFILE")
+else
+  NRANKS="${NRANKS:-28}"
+fi
+echo "NRANKS=${NRANKS}"
+
+if [ -f "$DONE_MARKER" ] && [ "${ALLOW_DONE_RERUN:-0}" != "1" ]; then
+  echo "[info] DONE marker already exists at $DONE_MARKER"
+  echo "[info] set ALLOW_DONE_RERUN=1 to rerun anyway"
+  exit 0
+fi
+
+if [ "$RESTART_POLICY" = "force-fresh" ]; then
+  rm -rf "$PROBLEM"
+fi
+
+if [ ! -x "${PROBLEM}/pluto" ]; then
+  echo "--- setup problem ---"
+  rm -rf "$PROBLEM"
+  mkdir -p "$PROBLEM"
+  (
+    cd "$PROBLEM"
+    "$JET_SETUP/tools/setup-problem"
+  )
+  cp "${CASE_CONFIG_DIR}/pluto.ini" "${PROBLEM}/pluto.ini"
+  cp "${CASE_CONFIG_DIR}/environment.ini" "${PROBLEM}/environment.ini"
+  cp "${CASE_CONFIG_DIR}/case_manifest.json" "${PROBLEM}/case_manifest.json"
+  cp "${CASE_CONFIG_DIR}/definitions_overrides.json" "${PROBLEM}/definitions_overrides.json"
+  cp "${PROBLEM}/pluto.ini" "${PROBLEM}/src/pluto.ini"
+
+  apply_definition_overrides "$PROBLEM" "${PROBLEM}/definitions_overrides.json"
+  write_static_support_files "$PROBLEM"
+
+  python3 - <<'PY'
+from pathlib import Path
+
+path = Path("/scratch/bwbrook/git/utas-agn/pluto/Tools/Python/menu.py")
+text = path.read_text()
+needle = "raw_input = input"
+if needle not in text:
+    text = text.replace(
+        "import os, sys, traceback, time, string",
+        "import os, sys, traceback, time, string\nraw_input = input",
+        1,
+    )
+    path.write_text(text)
+PY
+
+  echo "--- generate makefile ---"
+  (
+    cd "${PROBLEM}/src"
+    python3 - <<PY
+import sys
+sys.path.append("${PLUTO_DIR}/Tools/Python")
+from make_problem import MakeProblem
+MakeProblem("${PROBLEM}/src", "${PLUTO_DIR}", 1, 1)
+PY
+  )
+
+  echo "--- build ---"
+  make -C "${PROBLEM}/src" clean
+  make -C "${PROBLEM}/src" -j"${BUILD_JOBS}"
+  cp "${PROBLEM}/src/pluto" "${PROBLEM}/pluto"
+else
+  echo "[info] reusing existing built problem at ${PROBLEM}"
+fi
+
+log_source_revisions
+
+mkdir -p "${PROBLEM}/outputs/logs"
+RUN_ARGS=(-i pluto.ini -e environment.ini)
+RUN_KIND="fresh"
+
+if [ "$RESTART_POLICY" = "auto" ]; then
+  LATEST_OUTPUT=$(latest_dbl_index "${PROBLEM}/outputs/dbl.out" || true)
+  if [ -n "${LATEST_OUTPUT:-}" ] && [ "$LATEST_OUTPUT" != "0" ]; then
+    if [ "$CASE_VARIANT" = "particles" ] && [ "$RESTART_PARTICLES" = "1" ]; then
+      RUN_ARGS+=(-restart "$LATEST_OUTPUT")
+      RUN_KIND="particle_restart_${LATEST_OUTPUT}"
+    else
+      RUN_ARGS+=(-frestart "$LATEST_OUTPUT")
+      RUN_KIND="fluid_restart_${LATEST_OUTPUT}"
+    fi
+  fi
+elif [ "$RESTART_POLICY" != "fresh" ] && [ "$RESTART_POLICY" != "force-fresh" ]; then
+  echo "[error] RESTART_POLICY must be auto, fresh, or force-fresh" >&2
+  exit 1
+fi
+
+echo "RUN_KIND=${RUN_KIND}"
+echo "RUN_ARGS=${RUN_ARGS[*]}"
+
+(
+  cd "$PROBLEM"
+  mpirun -np "$NRANKS" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
+)
+
+require_file "${PROBLEM}/outputs/dbl.out"
+if [ ! -f "${PROBLEM}/outputs/restart.out" ] && [ ! -f "${PROBLEM}/restart.out" ]; then
+  echo "[warning] restart.out not found in problem or output directory" >&2
+fi
+
+{
+  echo "case_id=${CASE_ID}"
+  echo "case_variant=${CASE_VARIANT}"
+  echo "run_kind=${RUN_KIND}"
+  echo "workdir=${WORKDIR}"
+  echo "problem=${PROBLEM}"
+  echo "pbs_jobid=${PBS_JOBID:-manual}"
+  echo
+  du -sh "${PROBLEM}/outputs" 2>/dev/null || true
+  echo
+  find "${PROBLEM}/outputs" -maxdepth 2 -type f | sort
+} > "${LOG_DIR}/artifact_manifest.${PBS_JOBID:-manual}.txt"
+
+echo "--- output volume ---"
+du -sh "${PROBLEM}/outputs" 2>/dev/null || true
+echo "--- final dbl.out tail ---"
+tail -n 5 "${PROBLEM}/outputs/dbl.out"

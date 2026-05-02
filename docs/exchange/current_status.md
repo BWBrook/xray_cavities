@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-01
+Last updated: 2026-05-02
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -269,6 +269,39 @@ Production-prep follow-up on 2026-05-01:
 - details are in:
   - `docs/exchange/logs/2026-05-01-kunanyi-production-prep.md`
 
+Science-package follow-up on 2026-05-02:
+
+- the next science plan has been converted into a frozen three-case spec:
+  `docs/science/three_case_spec.md`
+- case IDs are now locked as:
+  - `C-HI`: Stewart cluster, `JET_PWR = 1e45 erg/s`, `JET_SPD = 0.1`,
+    first validation case
+  - `C-LO`: Stewart cluster, `JET_PWR = 1e43 erg/s`, `JET_SPD = 0.1`,
+    baseline science anchor
+  - `G-LO`: Stewart group, `JET_PWR = 1e43 erg/s`, `JET_SPD = 0.1`,
+    environment-dependence case
+- shared defaults are locked at HD, centered launch,
+  `JET_RELATIVISTIC_DENSITY = NO`, `15 deg` primary/secondary opening
+  angles, and `300 Myr` active/final time
+- the 3 x 3 observable protocol is locked at snapshots `100`, `200`, and
+  `300 Myr`, viewed at `0`, `45`, and `90 deg`
+- the current asset inventory is recorded in:
+  `docs/science/asset_inventory_2026-05-02.md`
+- the real Stewart cluster/group environment files are still missing as
+  confirmed production assets; the visible tabulated/example files are not to
+  be promoted to science inputs unless Stas/Patrick confirm them
+- the X-ray/GRAiLE or predecessor-project pipeline remains a named asset gate
+- static config scaffolding now exists at:
+  `scripts/science/render_three_case_configs.py`
+- tabulated-environment inspection scaffolding now exists at:
+  `scripts/science/inspect_tabulated_environment.py`
+- a production-oriented `kunanyi` template now exists at:
+  `scripts/kunanyi/jet_setup_production_template.pbs`
+- next science action is asset acquisition and Nectar environment gates, not a
+  full `kunanyi` production submission
+- details are in:
+  - `docs/exchange/logs/2026-05-02-three-case-science-package.md`
+
 ## Project Structure
 
 Working model:
@@ -385,6 +418,10 @@ and begin execution-path smoke tests, using:
 - resized `nectar-vm` for tests, 2D runs, and micro-3D smoke runs
 - `kunanyi` for full 3D production once its access/module/build/submission path
   has been smoke-tested
+
+As of 2026-05-02 the three-case spec is locked, so the immediate next move is
+to obtain/verify the real Stewart cluster and group assets, then run the
+Nectar no-jet stability gates on a temporarily resized `c3.3xlarge` instance.
 
 ## Resume Checklist For A Fresh Agent
 

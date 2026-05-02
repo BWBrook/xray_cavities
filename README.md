@@ -10,6 +10,8 @@ This repo is intentionally lightweight. The simulation source lives in the separ
 - a repo-local `doxygen` install in `.doxygen`
 - the Python analysis stack used by `plutokore` and `jet-setup` verification scripts
 - onboarding and machine-state documentation for the current UTAS AGN setup
+- science-run specifications and launch scaffolding for the three-case
+  X-ray/radio/truth comparison suite
 
 ## Quick start
 
@@ -87,3 +89,5 @@ Two version constraints here are deliberate:
 - [docs/exchange/current_status.md](/home/bwbrook/papers/xray_cavities/docs/exchange/current_status.md): living project status for the next agent to read first
 - [docs/deep_server_setup.md](/home/bwbrook/papers/xray_cavities/docs/deep_server_setup.md): detailed machine state, toolchain notes, smoke-test results, and MPI validation status
 - [docs/nectar_vm_setup.md](/home/bwbrook/papers/xray_cavities/docs/nectar_vm_setup.md): Nectar VM clone status and production HDF5 validation
+- [docs/science/three_case_spec.md](/home/bwbrook/papers/xray_cavities/docs/science/three_case_spec.md): frozen `C-HI`, `C-LO`, `G-LO` science-run spec
+- [docs/science/asset_inventory_2026-05-02.md](/home/bwbrook/papers/xray_cavities/docs/science/asset_inventory_2026-05-02.md): current Stewart/GRAiLE asset inventory and blockers

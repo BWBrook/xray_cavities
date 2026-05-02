@@ -2,6 +2,7 @@
 .doxygen/
 .ipynb_checkpoints/
 __pycache__/
+build/
 .DS_Store
 .env
 .env.*
