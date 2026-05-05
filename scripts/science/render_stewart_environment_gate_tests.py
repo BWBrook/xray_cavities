@@ -39,6 +39,12 @@ def parse_args() -> argparse.Namespace:
         help="Path to a jet-setup environment test makefile template.",
     )
     parser.add_argument(
+        "--definitions-template",
+        type=Path,
+        default=Path("/Users/bwbrook/git/utas-agn/jet-setup/src/definitions.h"),
+        help="Path to a jet-setup definitions.h template.",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=Path("build/science/stewart_environment_gate_tests"),
@@ -61,7 +67,7 @@ def render_test_ini(label: str, csv_name: str) -> str:
     return f"""[Info]
 Name = Stewart {label} tabulated 3D Cartesian no-jet stability gate
 Description = Stability gate for the confirmed Stewart {label} radially averaged tabulated environment
-ExtraFiles = environment.ini,{csv_name},verify-environment-stability.py
+ExtraFiles = environment.ini,{csv_name},verify-environment-stability.py,definitions.h,local_make
 
 [Definitions]
 PHYSICS = HD
@@ -79,6 +85,23 @@ PARTICLES_LP_RAISE = NO
 
 [Verify]
 Script = verify-environment-stability.py
+"""
+
+
+def render_definitions_no_particles(template: str) -> str:
+    lines: list[str] = []
+    for line in template.splitlines():
+        words = line.split()
+        if len(words) >= 3 and words[0] == "#define" and words[1] == "PARTICLES":
+            lines.append("#define  PARTICLES                      NO")
+            continue
+        lines.append(line)
+    return "\n".join(lines) + "\n"
+
+
+def render_local_make() -> str:
+    return """OBJ += coordinates.o jet.o units.o environment_utilities.o environment.o tools_usr.o read_external_pressure.o galaxy.o
+HEADERS += definitions_usr.h pluto_usr.h structs_usr.h coordinates.h jet.h units.h environment_utilities.h environment.h tools_usr.h read_external_pressure.h galaxy.h
 """
 
 
@@ -197,6 +220,7 @@ def write_case(
     source_csv: Path,
     verify_script: Path,
     makefile_template: Path,
+    definitions_template: Path,
     duration_myr: float,
     cells: int,
     half_width_kpc: float,
@@ -207,6 +231,10 @@ def write_case(
     shutil.copy2(source_csv, target / csv_name)
     shutil.copy2(verify_script, target / "verify-environment-stability.py")
     shutil.copy2(makefile_template, target / "makefile")
+    (target / "definitions.h").write_text(
+        render_definitions_no_particles(definitions_template.read_text())
+    )
+    (target / "local_make").write_text(render_local_make())
     (target / "test.ini").write_text(render_test_ini(label, csv_name))
     (target / "environment.ini").write_text(render_environment_ini(csv_name))
     (target / "pluto.ini").write_text(
@@ -220,6 +248,7 @@ def main() -> int:
     group = require_file(args.group_tabulated)
     verify_script = require_file(args.verify_script)
     makefile_template = require_file(args.makefile_template)
+    definitions_template = require_file(args.definitions_template)
 
     output = args.output
     if output.exists():
@@ -234,6 +263,7 @@ def main() -> int:
         cluster,
         verify_script,
         makefile_template,
+        definitions_template,
         args.duration_myr,
         args.cells,
         args.half_width_kpc,
@@ -244,6 +274,7 @@ def main() -> int:
         group,
         verify_script,
         makefile_template,
+        definitions_template,
         args.duration_myr,
         args.cells,
         args.half_width_kpc,
