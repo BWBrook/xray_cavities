@@ -433,6 +433,9 @@ Key gate metrics:
 Repo-scoped artifacts:
 
 - `docs/science/stewart_environment_gate_2026-05-05.md`
+- `docs/science/stewart_environment_gate_2026-05-05.pdf`
+- `docs/science/stewart_environment_gate_status_2026-05-05.md`
+- `docs/science/stewart_environment_gate_status_2026-05-05.pdf`
 - `docs/science/assets/stewart_environment_gate_2026-05-05/stewart_environment_gate_timeseries.png`
 - `docs/science/assets/stewart_environment_gate_2026-05-05/stewart_environment_gate_profiles.png`
 - `docs/science/assets/stewart_environment_gate_2026-05-05/stewart_environment_gate_metrics.csv`

@@ -52,6 +52,9 @@ Both gates ran to `300 Myr` and passed the existing
 Report and plots:
 
 - `docs/science/stewart_environment_gate_2026-05-05.md`
+- `docs/science/stewart_environment_gate_2026-05-05.pdf`
+- `docs/science/stewart_environment_gate_status_2026-05-05.md`
+- `docs/science/stewart_environment_gate_status_2026-05-05.pdf`
 - `docs/science/assets/stewart_environment_gate_2026-05-05/`
 
 ## Important Unit Fix

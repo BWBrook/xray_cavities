@@ -1,3 +1,14 @@
+---
+title: "Stewart Tabulated Environment Gate"
+subtitle: "No-jet Nectar stability check, 2026-05-05"
+date: "2026-05-05"
+format:
+  pdf:
+    colorlinks: true
+    geometry:
+      - margin=22mm
+---
+
 # Stewart Tabulated Environment Gate, 2026-05-05
 
 ## Summary
@@ -14,28 +25,20 @@ tabulated radius profiles, not the full 3D grid environments, because the full
 The tested files were extracted from the ignored `env/environments.zip` archive
 and staged to `nectar-vm`:
 
-| Science role | Stewart environment | File |
+| Science role | Stewart environment | Extracted asset |
 | --- | --- | --- |
-| `C-HI`, `C-LO` | cluster `002_003` | `env/extracted/environments/tabulated/tabulated_cosmo_002003.csv` |
-| `G-LO` | group `002_031` | `env/extracted/environments/tabulated/tabulated_cosmo_002031.csv` |
+| `C-HI`, `C-LO` | cluster `002_003` | `tabulated_cosmo_002003.csv` |
+| `G-LO` | group `002_031` | `tabulated_cosmo_002031.csv` |
 
 The local MacBook remained the control plane. The simulations ran on
 `nectar-vm` after resizing to `c3.3xlarge`.
 
 ## Gate Setup
 
-The tests were rendered with:
-
-```bash
-python3 scripts/science/render_stewart_environment_gate_tests.py \
-  --cluster-tabulated env/extracted/environments/tabulated/tabulated_cosmo_002003.csv \
-  --group-tabulated env/extracted/environments/tabulated/tabulated_cosmo_002031.csv \
-  --verify-script /home/ubuntu/git/utas-agn/jet-setup/test/environment/verify-environment-stability.py \
-  --makefile-template /home/ubuntu/git/utas-agn/jet-setup/test/environment/tabulated/makefile \
-  --definitions-template /home/ubuntu/git/utas-agn/jet-setup/src/definitions.h \
-  --output build/science/stewart_environment_gate_tests \
-  --force
-```
+The tests were rendered with
+`scripts/science/render_stewart_environment_gate_tests.py`, using the extracted
+cluster and group CSVs, the current `jet-setup` environment verifier, and the
+current `jet-setup` makefile and `definitions.h` templates.
 
 Each rendered gate uses:
 
@@ -61,9 +64,8 @@ smoke-scale stability gates, not final production-resolution validation.
 
 ![Stewart environment gate profiles](assets/stewart_environment_gate_2026-05-05/stewart_environment_gate_profiles.png)
 
-The plotted metrics are stored in:
-
-- `docs/science/assets/stewart_environment_gate_2026-05-05/stewart_environment_gate_metrics.csv`
+The plotted metrics are stored as `stewart_environment_gate_metrics.csv` in the
+matching asset directory.
 
 ## Implementation Notes
 
