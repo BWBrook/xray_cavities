@@ -30,6 +30,15 @@ def parse_args() -> argparse.Namespace:
         help="Path to jet-setup's verify-environment-stability.py.",
     )
     parser.add_argument(
+        "--makefile-template",
+        type=Path,
+        default=Path(
+            "/Users/bwbrook/git/utas-agn/jet-setup/test/environment/"
+            "tabulated/makefile"
+        ),
+        help="Path to a jet-setup environment test makefile template.",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=Path("build/science/stewart_environment_gate_tests"),
@@ -187,6 +196,7 @@ def write_case(
     label: str,
     source_csv: Path,
     verify_script: Path,
+    makefile_template: Path,
     duration_myr: float,
     cells: int,
     half_width_kpc: float,
@@ -196,6 +206,7 @@ def write_case(
     csv_name = source_csv.name
     shutil.copy2(source_csv, target / csv_name)
     shutil.copy2(verify_script, target / "verify-environment-stability.py")
+    shutil.copy2(makefile_template, target / "makefile")
     (target / "test.ini").write_text(render_test_ini(label, csv_name))
     (target / "environment.ini").write_text(render_environment_ini(csv_name))
     (target / "pluto.ini").write_text(
@@ -208,6 +219,7 @@ def main() -> int:
     cluster = require_file(args.cluster_tabulated)
     group = require_file(args.group_tabulated)
     verify_script = require_file(args.verify_script)
+    makefile_template = require_file(args.makefile_template)
 
     output = args.output
     if output.exists():
@@ -221,6 +233,7 @@ def main() -> int:
         "cluster_002003",
         cluster,
         verify_script,
+        makefile_template,
         args.duration_myr,
         args.cells,
         args.half_width_kpc,
@@ -230,6 +243,7 @@ def main() -> int:
         "group_002031",
         group,
         verify_script,
+        makefile_template,
         args.duration_myr,
         args.cells,
         args.half_width_kpc,
