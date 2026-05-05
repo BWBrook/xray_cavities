@@ -2,8 +2,10 @@
 
 Spec version: `three-case-v0.1`
 Frozen date: `2026-05-02`
-Status: frozen for scaffolding; blocked from production until the real Stewart
-cluster and group environment assets are identified and verified.
+Updated: `2026-05-05`
+Status: frozen for scaffolding and environment-gate preparation. The Stewart
+tabulated environments are now identified; production remains blocked until the
+Nectar stability gates and the first `C-HI` rehearsals are green.
 
 ## Purpose
 
@@ -20,6 +22,11 @@ The current execution model is:
   to `c3.3xlarge` for serious rehearsal work.
 - `kunanyi`: intermediate and full production jobs after the Nectar gates are
   green.
+
+Patrick supplied the environment archive on `2026-05-05`; Stas confirmed that
+science runs should use the radially averaged tabulated environments, not the
+full 3D grid environments, because the full-grid profiles have too much
+spurious motion for reliable energetics.
 
 ## Case Table
 
@@ -79,31 +86,45 @@ Viewing angles are fixed at:
 Production output is hybrid sparse:
 
 - `dbl` outputs at the three analysis snapshots for known `plutokore`
-  compatibility.
+  compatibility until the analysis path is HDF5-native.
+- `dbl.h5` is the preferred production output family for full simulations, per
+  Patrick's guidance, once read/analysis compatibility has been smoke-tested.
 - PLUTO restart/checkpoint files kept in scratch during long runs.
 - Particle outputs only in the particle-enabled stage, with cadence no denser
   than the three analysis snapshots unless radio testing requires more.
-- HDF5 plot output remains off by default until a specific analysis need is
-  identified; parallel HDF5 itself is already smoke-tested on `kunanyi`.
+- parallel HDF5 itself is already smoke-tested on `kunanyi`.
+
+Important unit convention: `JET_END_TIME` and `JET_ACTIVE_TIME` are set in Myr,
+but PLUTO `tstop`, `dbl`, `dbl.h5`, and checkpoint intervals are in PLUTO code
+time. The archived CosmoDRAGoN INIs use:
+
+```text
+1 Myr = 306.601393788 PLUTO code-time units
+```
+
+Therefore the frozen `300 Myr` science duration corresponds to:
+
+```text
+tstop = 91980.41813640
+100 Myr snapshot cadence = 30660.13937880
+25 Myr checkpoint cadence = 7665.03484470
+```
 
 ## Environment Asset Gate
 
-The real Stewart cluster and group environment files are required before any
-science production run.
+The real Stewart cluster and group environment files are now present locally
+under the ignored `env/` asset drop.
 
-Do not treat the sample `spherical-r200-n3` external-test file as the science
-environment unless Stas or Patrick explicitly confirm it. In the current local
-and Nectar mirrors, that external sample is incomplete because the expected
-`spherical-r200-n3.grid.out` file is not available.
+Use the radially averaged tabulated files for science runs:
 
-Known local candidates as of `2026-05-02`:
+| Environment | File | Rows | Radius range | Status |
+| --- | --- | ---: | --- | --- |
+| Stewart cluster `002_003` | `env/extracted/environments/tabulated/tabulated_cosmo_002003.csv` | `4000` | `0` to `1.697123e24 cm` | selected for `C-HI` and `C-LO` |
+| Stewart group `002_031` | `env/extracted/environments/tabulated/tabulated_cosmo_002031.csv` | `4000` | `0` to `1.697123e24 cm` | selected for `G-LO` |
 
-| Asset | Location | Status |
-| --- | --- | --- |
-| Tabulated example | `/Users/bwbrook/git/utas-agn/jet-setup/resources/tabulated-environments/PLUTO_data_best_fGas=0.010_Mh=4.00E+13_500m_ccc+gal_Mgal=1.00E+12galPot=true_pR=1.45E-17.csv` | Present, not confirmed as the science Stewart cluster/group asset |
-| Tabulated test copy | `/Users/bwbrook/git/utas-agn/jet-setup/test/environment/tabulated/PLUTO_data_best_fGas=0.010_Mh=4.00E+13_500m_ccc+gal_Mgal=1.00E+12galPot=true_pR=1.45E-17.csv` | Present, test fixture |
-| External sample data | `/Users/bwbrook/git/utas-agn/jet-setup/test/environment/external/spherical-r200-n3.dbl` | Present, test fixture |
-| External sample grid | `spherical-r200-n3.grid.out` | Missing locally; documented as missing in prior setup notes |
+The original full environments are also in `env/environments.zip`, but they
+are not the production science inputs after Stas' clarification. They can be
+kept as reference assets only.
 
 The tabulated environment format expected by `jet-setup` is six
 space-separated cgs columns:
@@ -115,12 +136,8 @@ space-separated cgs columns:
 5. gravitational acceleration
 6. gravitational acceleration again
 
-The current tabulated example has `1000` rows. Its first radius is
-`2.429e+20 cm`; its final row reaches `2.429e+24 cm`. These numbers document
-the candidate file only and are not yet a production environment lock.
-
-If the real Stewart environments are external binary PLUTO fields instead of
-tabulated radial profiles, the expected variables are, in order:
+The old full 3D environment format, not selected for science energetics, is a
+`.dbl` plus matching `grid.out` pair containing:
 
 1. `rho`
 2. `prs`
@@ -131,7 +148,8 @@ tabulated radial profiles, the expected variables are, in order:
 7. `vy`
 8. `vz`
 
-They must be in cgs units and paired with a matching `grid.out`.
+These full 3D files must not be substituted back into the science run without a
+supervisor override.
 
 ## Nectar Environment Gates
 
@@ -141,7 +159,7 @@ environments.
 
 Pass criteria:
 
-- The environment imports through the current `jet-setup` path without missing
+- The tabulated environment imports through the current `jet-setup` path without missing
   files or unit errors.
 - A no-jet run remains hydrostatically stable over the chosen rehearsal window.
 - `grid.out`, `dbl.out`, and final `data.*.dbl` products are present and load
@@ -208,9 +226,11 @@ Required first products:
 - one radio luminosity smoke product
 - Level 1 and Level 2 truth values for the same snapshot
 
-The X-ray workflow must use GRAiLE or the predecessor project pipeline. If the
-code or assets are missing, stop and request them from Stas/Patrick rather than
-inventing a substitute.
+The X-ray workflow must use GRAiLE or the predecessor project pipeline.
+Patrick supplied the current GRAiLE/XRAiSE bundle as `env/graile-all.zip`; it
+has been extracted under `env/extracted/graile/` for inspection. The next X-ray
+gate is to port those scripts from Georgia's absolute paths into a repo-local
+or Nectar/kunanyi-friendly workflow.
 
 ## `kunanyi` Production Template Requirements
 
@@ -265,13 +285,11 @@ After that, production launch order is:
 
 The following items remain open and should be resolved before production:
 
-- exact Stewart cluster environment filename and location
-- exact Stewart group environment filename and location
-- whether each environment is tabulated radial or external binary PLUTO data
+- whether Stas/Patrick want any smoothing or trimming of the confirmed
+  tabulated Stewart profiles before production
 - environment grid extents and production-domain size
-- unit conventions for all supplied environment files
 - science inlet radius and whether it should be tied to environment/domain
   scale
 - one-sided vs bipolar convention for the headline injected-energy comparison
-- GRAiLE/predecessor X-ray pipeline location and required assets
+- repo-local GRAiLE/XRAiSE porting details and dependency environment
 - production queue, walltime limit, and storage retention plan on `kunanyi`

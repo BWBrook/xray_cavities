@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-02
+Last updated: 2026-05-05
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -302,6 +302,36 @@ Science-package follow-up on 2026-05-02:
 - details are in:
   - `docs/exchange/logs/2026-05-02-three-case-science-package.md`
 
+Stewart/GRAiLE asset follow-up on 2026-05-05:
+
+- Patrick supplied the missing large environment archive under ignored `env/`
+  as `env/environments.zip`; only lightweight/tabulated assets were extracted
+- Stas clarified that science runs must use the radially averaged tabulated
+  environments, not the full 3D cubes, because spurious grid motion makes the
+  full-grid profiles unreliable for energetics
+- selected science environment files are now:
+  - cluster `002_003`: `env/extracted/environments/tabulated/tabulated_cosmo_002003.csv`
+  - group `002_031`: `env/extracted/environments/tabulated/tabulated_cosmo_002031.csv`
+- both selected files have `4000` rows, six cgs columns, and radius range
+  `0` to `1.697123e24 cm`
+- Patrick also supplied old simulation INIs under `env/inis.zip`; these show
+  the important conversion
+  `1 Myr = 306.601393788 PLUTO code-time units`
+- `scripts/science/render_three_case_configs.py` has been corrected so the
+  frozen `300 Myr` science duration renders as
+  `tstop = 91980.41813640`, with `100 Myr` `dbl`/`dbl.h5` output cadence
+  `30660.13937880`
+- Patrick supplied GRAiLE/XRAiSE assets under `env/graile-all.zip`; the blocker
+  is now porting those scripts from Georgia's absolute paths, not acquiring
+  the X-ray assets
+- new helper for the immediate Nectar gate:
+  `scripts/science/render_stewart_environment_gate_tests.py`
+- next action is to resize `nectar-vm` to `c3.3xlarge`, sync the tabulated
+  assets/gate tests there, and run no-jet stability checks for cluster and
+  group
+- details are in:
+  - `docs/exchange/logs/2026-05-05-stewart-assets-and-graile.md`
+
 ## Project Structure
 
 Working model:
@@ -419,9 +449,9 @@ and begin execution-path smoke tests, using:
 - `kunanyi` for full 3D production once its access/module/build/submission path
   has been smoke-tested
 
-As of 2026-05-02 the three-case spec is locked, so the immediate next move is
-to obtain/verify the real Stewart cluster and group assets, then run the
-Nectar no-jet stability gates on a temporarily resized `c3.3xlarge` instance.
+As of 2026-05-05 the Stewart tabulated assets are present locally. The
+immediate next move is to run the Nectar no-jet stability gates on a
+temporarily resized `c3.3xlarge` instance.
 
 ## Resume Checklist For A Fresh Agent
 

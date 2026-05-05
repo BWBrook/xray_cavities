@@ -18,6 +18,7 @@ from typing import Iterable
 
 SECONDS_PER_MYR = 1_000_000.0 * 365.25 * 24.0 * 3600.0
 ACTIVE_TIME_MYR = 300.0
+CODE_TIME_PER_MYR = 306.601393788
 SNAPSHOTS_MYR = [100.0, 200.0, 300.0]
 VIEWS_DEG = [0.0, 45.0, 90.0]
 
@@ -93,9 +94,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--variant",
-        choices=["hydro", "particles", "both"],
+        choices=["env_gate", "hydro", "particles", "both"],
         default="hydro",
-        help="Generate particle-free, particle-enabled, or both variants.",
+        help=(
+            "Generate no-jet environment-gate, particle-free, "
+            "particle-enabled, or both jet variants."
+        ),
     )
     parser.add_argument(
         "--grid",
@@ -147,6 +151,12 @@ def parse_args() -> argparse.Namespace:
         "--force",
         action="store_true",
         help="Overwrite the output directory if it already exists.",
+    )
+    parser.add_argument(
+        "--duration-myr",
+        type=float,
+        default=ACTIVE_TIME_MYR,
+        help="Physical run duration in Myr for tstop/output conversion.",
     )
     return parser.parse_args()
 
@@ -232,7 +242,7 @@ def particle_settings(variant: str) -> dict[str, str]:
             "particles_define": "PARTICLES_LP",
             "particles_raise": "YES",
             "nparticles_line": "Nparticles          -1    16.0",
-            "particles_dbl_line": "particles_dbl       100.0  -1",
+            "particles_dbl_line": "particles_dbl       {snapshot_code:.8f}  -1",
             "inject_frequency": "1.0",
         }
 
@@ -245,12 +255,22 @@ def particle_settings(variant: str) -> dict[str, str]:
     }
 
 
-def render_pluto_ini(case: CaseSpec, variant: str, grid_name: str) -> str:
+def render_pluto_ini(
+    case: CaseSpec,
+    variant: str,
+    grid_name: str,
+    duration_myr: float,
+) -> str:
     grid = GRIDS[grid_name]
     particles = particle_settings(variant)
     x1_beg, x1_n, x1_end = grid["x1"]
     x2_beg, x2_n, x2_end = grid["x2"]
     x3_beg, x3_n, x3_end = grid["x3"]
+    tstop_code = duration_myr * CODE_TIME_PER_MYR
+    snapshot_code = 100.0 * CODE_TIME_PER_MYR
+    checkpoint_code = 25.0 * CODE_TIME_PER_MYR
+    jet_end_time = 0.0 if variant == "env_gate" else duration_myr
+    jet_active_time = 0.0 if variant == "env_gate" else duration_myr
 
     return f"""[Grid]
 
@@ -273,7 +293,7 @@ Fill_ratio       0.75
 
 CFL              0.33
 CFL_max_var      1.1
-tstop            {ACTIVE_TIME_MYR:.1f}
+tstop            {tstop_code:.8f}
 first_dt         {grid["first_dt"]}
 
 [Solver]
@@ -294,9 +314,9 @@ X3-end           outflow
 log_dir          ./outputs/logs
 output_dir       ./outputs
 uservar          0
-dbl              100.0  -1   single_file
+dbl              {snapshot_code:.8f}  -1   single_file
 flt              -1.0   -1   single_file
-dbl.h5           -1.0   -1
+dbl.h5           {snapshot_code:.8f}  -1
 flt.h5           -1.0   -1
 vtk              -1.0   -1   single_file
 tab              -1.0   -1
@@ -307,13 +327,13 @@ analysis         -1.0   -1
 
 [Chombo HDF5 output]
 
-Checkpoint_interval  25.0  0
+Checkpoint_interval  {checkpoint_code:.8f}  0
 Plot_interval        -1.0  0
 
 [Particles]
 
 {particles["nparticles_line"]}
-{particles["particles_dbl_line"]}
+{particles["particles_dbl_line"].format(snapshot_code=snapshot_code)}
 particles_flt       -1.0  -1
 particles_vtk       -1.0  -1
 particles_tab       -1.0  -1
@@ -332,8 +352,8 @@ JET_X2O                     0.0
 JET_X3O                     0.0
 JET_ROTATION_ANGLE          0.0
 JET_START_TIME              0.0
-JET_END_TIME                300.0
-JET_ACTIVE_TIME             300.0
+JET_END_TIME                {jet_end_time:.1f}
+JET_ACTIVE_TIME             {jet_active_time:.1f}
 JET_EPISODES                1.0
 ENV_RHO_0                   2.4e-27
 ENV_R_SCALING               144.0
@@ -369,8 +389,8 @@ def definitions_overrides(env: dict[str, str | bool], variant: str) -> dict[str,
     }
 
 
-def injected_energy(case: CaseSpec) -> dict[str, float]:
-    one_sided = case.jet_power_erg_s * ACTIVE_TIME_MYR * SECONDS_PER_MYR
+def injected_energy(case: CaseSpec, active_time_myr: float) -> dict[str, float]:
+    one_sided = case.jet_power_erg_s * active_time_myr * SECONDS_PER_MYR
     return {
         "one_sided_erg": one_sided,
         "bipolar_erg": 2.0 * one_sided,
@@ -387,6 +407,7 @@ def render_case(
     variant: str,
     grid_name: str,
     env: dict[str, str | bool],
+    duration_myr: float,
 ) -> None:
     case_dir = root / case.case_id / variant
     case_dir.mkdir(parents=True, exist_ok=True)
@@ -395,14 +416,21 @@ def render_case(
         "case": asdict(case),
         "variant": variant,
         "grid": {"name": grid_name, **GRIDS[grid_name]},
+        "time_conversion": {
+            "code_time_per_myr": CODE_TIME_PER_MYR,
+            "duration_myr": duration_myr,
+            "tstop_code_time": duration_myr * CODE_TIME_PER_MYR,
+            "snapshot_interval_code_time": 100.0 * CODE_TIME_PER_MYR,
+            "checkpoint_interval_code_time": 25.0 * CODE_TIME_PER_MYR,
+        },
         "simulation_defaults": {
             "physics": "HD",
             "geometry": "CARTESIAN",
             "jet_relativistic_density": "NO",
             "opening_angle_primary_deg": 15.0,
             "opening_angle_secondary_deg": 15.0,
-            "jet_end_time_myr": ACTIVE_TIME_MYR,
-            "jet_active_time_myr": ACTIVE_TIME_MYR,
+            "jet_end_time_myr": 0.0 if variant == "env_gate" else duration_myr,
+            "jet_active_time_myr": 0.0 if variant == "env_gate" else duration_myr,
             "tracer_threshold_default": 5.0e-3,
             "tracer_threshold_sensitivity": [1.0e-3, 1.0e-2],
         },
@@ -413,7 +441,9 @@ def render_case(
         "environment": env,
         "truth_conventions": {
             "jet_power_is_assumed_one_sided_until_confirmed": True,
-            "injected_energy": injected_energy(case),
+            "injected_energy": injected_energy(
+                case, 0.0 if variant == "env_gate" else duration_myr
+            ),
         },
         "production_gate": (
             "Do not launch production until the environment status is provided "
@@ -421,13 +451,21 @@ def render_case(
         ),
     }
 
-    (case_dir / "pluto.ini").write_text(render_pluto_ini(case, variant, grid_name))
+    (case_dir / "pluto.ini").write_text(
+        render_pluto_ini(case, variant, grid_name, duration_myr)
+    )
     (case_dir / "environment.ini").write_text(render_environment_ini(env))
     write_json(case_dir / "case_manifest.json", manifest)
     write_json(case_dir / "definitions_overrides.json", definitions_overrides(env, variant))
 
 
-def render_readme(root: Path, cases: Iterable[CaseSpec], variants: Iterable[str], grid_name: str) -> None:
+def render_readme(
+    root: Path,
+    cases: Iterable[CaseSpec],
+    variants: Iterable[str],
+    grid_name: str,
+    duration_myr: float,
+) -> None:
     case_list = ", ".join(case.case_id for case in cases)
     variant_list = ", ".join(variants)
     text = f"""# Generated Three-Case Config Bundles
@@ -437,6 +475,8 @@ Generated by `scripts/science/render_three_case_configs.py`.
 - cases: {case_list}
 - variants: {variant_list}
 - grid preset: `{grid_name}`
+- duration: `{duration_myr} Myr`
+- PLUTO code-time conversion: `{CODE_TIME_PER_MYR} code units per Myr`
 
 These bundles are dry-run launch packages. They are not a production approval.
 
@@ -482,9 +522,9 @@ def main() -> int:
     for case in cases:
         env = envs[case.environment]
         for variant in variants:
-            render_case(output, case, variant, args.grid, env)
+            render_case(output, case, variant, args.grid, env, args.duration_myr)
 
-    render_readme(output, cases, variants, args.grid)
+    render_readme(output, cases, variants, args.grid, args.duration_myr)
     print(f"Rendered {len(cases) * len(variants)} config bundle(s) under {output}")
     return 0
 

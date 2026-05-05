@@ -11,3 +11,4 @@ secure.yaml
 openrc.sh
 *-openrc.sh
 docs/jet-theory/
+env/
