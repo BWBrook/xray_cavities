@@ -269,8 +269,8 @@ def render_pluto_ini(
     tstop_code = duration_myr * CODE_TIME_PER_MYR
     snapshot_code = 100.0 * CODE_TIME_PER_MYR
     checkpoint_code = 25.0 * CODE_TIME_PER_MYR
-    jet_end_time = 0.0 if variant == "env_gate" else duration_myr
-    jet_active_time = 0.0 if variant == "env_gate" else duration_myr
+    jet_end_time_code = 0.0 if variant == "env_gate" else tstop_code
+    jet_active_time_code = 0.0 if variant == "env_gate" else tstop_code
 
     return f"""[Grid]
 
@@ -352,8 +352,8 @@ JET_X2O                     0.0
 JET_X3O                     0.0
 JET_ROTATION_ANGLE          0.0
 JET_START_TIME              0.0
-JET_END_TIME                {jet_end_time:.1f}
-JET_ACTIVE_TIME             {jet_active_time:.1f}
+JET_END_TIME                {jet_end_time_code:.8f}
+JET_ACTIVE_TIME             {jet_active_time_code:.8f}
 JET_EPISODES                1.0
 ENV_RHO_0                   2.4e-27
 ENV_R_SCALING               144.0
@@ -431,6 +431,12 @@ def render_case(
             "opening_angle_secondary_deg": 15.0,
             "jet_end_time_myr": 0.0 if variant == "env_gate" else duration_myr,
             "jet_active_time_myr": 0.0 if variant == "env_gate" else duration_myr,
+            "jet_end_time_code_time": 0.0
+            if variant == "env_gate"
+            else duration_myr * CODE_TIME_PER_MYR,
+            "jet_active_time_code_time": 0.0
+            if variant == "env_gate"
+            else duration_myr * CODE_TIME_PER_MYR,
             "tracer_threshold_default": 5.0e-3,
             "tracer_threshold_sensitivity": [1.0e-3, 1.0e-2],
         },

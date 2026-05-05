@@ -57,9 +57,9 @@ These defaults are locked for the first pass:
 | `JET_RELATIVISTIC_DENSITY` | `NO` |
 | `JET_OA_PRIMARY` | `15.0 deg` |
 | `JET_OA_SECONDARY` | `15.0 deg` |
-| `JET_START_TIME` | `0.0 Myr` |
-| `JET_END_TIME` | `300.0 Myr` |
-| `JET_ACTIVE_TIME` | `300.0 Myr` |
+| physical jet start | `0.0 Myr` |
+| physical jet end | `300.0 Myr` |
+| physical active time | `300.0 Myr` |
 | Particle staging | particles off first, particles on second |
 | Tracer threshold, default | `5e-3` |
 | Tracer threshold, sensitivity | `1e-3`, `1e-2` |
@@ -94,9 +94,9 @@ Production output is hybrid sparse:
   than the three analysis snapshots unless radio testing requires more.
 - parallel HDF5 itself is already smoke-tested on `kunanyi`.
 
-Important unit convention: `JET_END_TIME` and `JET_ACTIVE_TIME` are set in Myr,
-but PLUTO `tstop`, `dbl`, `dbl.h5`, and checkpoint intervals are in PLUTO code
-time. The archived CosmoDRAGoN INIs use:
+Important unit convention: `JET_END_TIME`, `JET_ACTIVE_TIME`, `tstop`, `dbl`,
+`dbl.h5`, and checkpoint intervals are all rendered in PLUTO code time. The
+archived CosmoDRAGoN INIs use:
 
 ```text
 1 Myr = 306.601393788 PLUTO code-time units
@@ -106,6 +106,8 @@ Therefore the frozen `300 Myr` science duration corresponds to:
 
 ```text
 tstop = 91980.41813640
+JET_END_TIME = 91980.41813640
+JET_ACTIVE_TIME = 91980.41813640
 100 Myr snapshot cadence = 30660.13937880
 25 Myr checkpoint cadence = 7665.03484470
 ```
@@ -153,9 +155,12 @@ supervisor override.
 
 ## Nectar Environment Gates
 
-Before a full science run, resize `nectar-vm` to `c3.3xlarge` and run
-standalone no-jet stability checks for the chosen cluster and group
-environments.
+Status on `2026-05-05`: green at smoke scale for both selected tabulated
+environments. The detailed report is
+`docs/science/stewart_environment_gate_2026-05-05.md`.
+
+Before a full production run, keep the same gate pattern available on
+`nectar-vm` at `c3.3xlarge` if the environment files or grid strategy changes.
 
 Pass criteria:
 

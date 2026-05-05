@@ -67,6 +67,25 @@ Interpretation:
 - The host was reachable and configurable.
 - The residual issue looks like VM or network instability rather than an authentication issue.
 
+MacBook update on `2026-05-05`:
+
+- After resizing to `c3.3xlarge`, the VM again showed intermittent
+  `Connection refused` episodes on port 22.
+- OpenStack showed the instance as `ACTIVE` and running, and console output
+  showed Ubuntu booting normally.
+- The immediate fix was to stop socket activation and keep `ssh.service`
+  persistent:
+
+```bash
+sudo systemctl disable --now ssh.socket || true
+sudo systemctl enable --now ssh.service
+sudo systemctl restart ssh.service
+systemctl is-active ssh.service
+ss -ltnp | grep ':22 '
+```
+
+After this, repeated MacBook SSH logins to `nectar-vm` succeeded cleanly.
+
 ### GitHub and GitLab from nectar-vm
 
 Status during successful remote sessions:

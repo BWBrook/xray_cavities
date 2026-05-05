@@ -86,6 +86,21 @@ The bundle is now present, so the blocker has shifted from "missing X-ray
 assets" to "port Georgia's absolute-path script bundle into this repo's
 control-plane and remote-execution workflow."
 
+## 2026-05-05 Nectar Environment Gate
+
+The selected tabulated Stewart environments were staged to resized
+`nectar-vm` and run through no-jet 3D Cartesian stability gates to `300 Myr`.
+
+| Environment | Gate file | Max central density drift | Max central pressure drift | Max Mach | Result |
+| --- | --- | ---: | ---: | ---: | --- |
+| cluster `002_003` | `tabulated_cosmo_002003.csv` | `0.136%` | `0.226%` | `0.0242` | pass |
+| group `002_031` | `tabulated_cosmo_002031.csv` | `0.284%` | `0.473%` | `0.0330` | pass |
+
+Detailed report and plots:
+
+- `docs/science/stewart_environment_gate_2026-05-05.md`
+- `docs/science/assets/stewart_environment_gate_2026-05-05/`
+
 ## 2026-05-02 Environment Files Found
 
 The only environment-like files found in the current UTAS AGN mirrors are
@@ -132,25 +147,18 @@ python3 scripts/science/inspect_tabulated_environment.py \
 
 ## GRAiLE And X-ray Assets
 
-The project documents reference GRAiLE and Alain's predecessor X-ray cavity
-pipeline, but the current local UTAS AGN mirrors do not expose a complete
-runnable X-ray pipeline. The radio-facing `plutokore` path is visible, but the
-X-ray map path is still an asset gate.
-
-Required next input from Stas/Patrick:
-
-- GRAiLE repository or predecessor pipeline location
-- any environment, emissivity, response, or configuration files needed to
-  reproduce the synthetic X-ray maps
-- preferred first snapshot/view for the `C-HI` smoke comparison if not
-  `100 Myr` and `45 deg`
+The GRAiLE/XRAiSE bundle is now present under the ignored `env/` drop, but it
+is not yet repo-native. The next X-ray task is to port Georgia's script bundle
+away from absolute historical paths and into this repo's control-plane plus
+remote-execution layout.
 
 ## Rehearsal Implication
 
-The next compute action should not be a production submission. It should be:
+The next compute action should not be a production submission. The first two
+science gates are now complete: the real Stewart tabulated assets were
+identified, and the no-jet Nectar environment gates passed. The next action is:
 
-1. obtain the real Stewart cluster and group environment assets
-2. resize `nectar-vm` to `c3.3xlarge`
-3. run no-jet environment stability gates
-4. run the `C-HI` no-particle rehearsal
-5. repeat `C-HI` with particles
+1. run the `C-HI` no-particle high-power cluster rehearsal
+2. repeat `C-HI` with particles
+3. port the first GRAiLE/XRAiSE X-ray map path
+4. only then move to the first intermediate `kunanyi` rehearsal

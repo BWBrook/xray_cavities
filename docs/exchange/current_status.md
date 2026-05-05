@@ -406,34 +406,36 @@ For production-style HDF5 builds on Nectar, use the Nectar-specific PLUTO defs:
 
 ## Most Recent Meaningful Result
 
-The final onboarding capstone is now the latest science-facing checkpoint.
+The latest science-facing checkpoint is the Stewart environment gate on
+resized Nectar.
 
 Summary:
 
-- the `higher_power` jet produces a larger tracer-defined lobe than the
-  baseline case at every sampled output
-- by the final output, the higher-power lobe is longer, wider, and about twice
-  the tracer-defined volume of the baseline
-- this step successfully moved the jet-analysis lane away from `pyPLUTO` and
-  onto `plutokore` plus standard Python plotting
+- Patrick supplied the Stewart environment archive and GRAiLE/XRAiSE bundle
+- Stas clarified that science runs should use the radially averaged tabulated
+  environments rather than the full 3D grids
+- the selected cluster `002_003` and group `002_031` tabulated files were
+  staged to Nectar and tested as no-jet hydrostatic gates
+- both gates completed to `300 Myr` and passed the existing
+  `jet-setup/test/environment/verify-environment-stability.py` checks
 
-Key final metrics at `t = 613.2028`:
+Key gate metrics:
 
-- baseline:
-  - lobe length `25.89 kpc`
-  - lobe width `10.24 kpc`
-  - lobe volume `6246.70` code units
-- higher power:
-  - lobe length `33.36 kpc`
-  - lobe width `12.40 kpc`
-  - lobe volume `12548.22` code units
+- cluster `002_003`:
+  - max central density drift `0.136%`
+  - max central pressure drift `0.226%`
+  - max Mach `0.0242`
+- group `002_031`:
+  - max central density drift `0.284%`
+  - max central pressure drift `0.473%`
+  - max Mach `0.0330`
 
 Repo-scoped artifacts:
 
-- `docs/onboarding/assets/krause_jets_assignment_2026-04-17/krause_jet_density.png`
-- `docs/onboarding/assets/krause_jets_assignment_2026-04-17/krause_jet_tracer.png`
-- `docs/onboarding/assets/krause_jets_assignment_2026-04-17/krause_jet_timeseries.png`
-- `docs/onboarding/assets/krause_jets_assignment_2026-04-17/krause_jet_metrics.csv`
+- `docs/science/stewart_environment_gate_2026-05-05.md`
+- `docs/science/assets/stewart_environment_gate_2026-05-05/stewart_environment_gate_timeseries.png`
+- `docs/science/assets/stewart_environment_gate_2026-05-05/stewart_environment_gate_profiles.png`
+- `docs/science/assets/stewart_environment_gate_2026-05-05/stewart_environment_gate_metrics.csv`
 
 ## Next Recommended Step
 
@@ -449,9 +451,18 @@ and begin execution-path smoke tests, using:
 - `kunanyi` for full 3D production once its access/module/build/submission path
   has been smoke-tested
 
-As of 2026-05-05 the Stewart tabulated assets are present locally. The
-immediate next move is to run the Nectar no-jet stability gates on a
-temporarily resized `c3.3xlarge` instance.
+As of 2026-05-05 the Stewart tabulated assets are present locally and the
+Nectar no-jet stability gates are green for both selected science
+environments:
+
+- cluster `002_003` for `C-HI` and `C-LO`: max central density drift `0.136%`,
+  max Mach `0.0242`
+- group `002_031` for `G-LO`: max central density drift `0.284%`, max Mach
+  `0.0330`
+
+The detailed gate report and plots are in
+`docs/science/stewart_environment_gate_2026-05-05.md`. The immediate next move
+is the `C-HI` particle-free high-power cluster rehearsal on resized Nectar.
 
 ## Resume Checklist For A Fresh Agent
 
