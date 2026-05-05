@@ -86,6 +86,10 @@ ss -ltnp | grep ':22 '
 
 After this, repeated MacBook SSH logins to `nectar-vm` succeeded cleanly.
 
+After the `2026-05-05` Stewart environment gates completed, the VM was parked
+back to `c3.xsmall` and verified over SSH as `1` vCPU, about `1.9 GiB` RAM,
+with persistent `ssh.service` still active.
+
 ### GitHub and GitLab from nectar-vm
 
 Status during successful remote sessions:

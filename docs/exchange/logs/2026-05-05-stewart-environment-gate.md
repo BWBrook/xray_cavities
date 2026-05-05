@@ -87,3 +87,6 @@ Repeated SSH logins succeeded after that.
 
 Run the `C-HI` particle-free high-power cluster rehearsal on resized Nectar.
 Only after that is green should the particle-enabled `C-HI` repeat start.
+
+After the gate, `nectar-vm` was parked back to `c3.xsmall` and verified by SSH:
+`1` vCPU, about `1.9 GiB` RAM, and active persistent `ssh.service`.

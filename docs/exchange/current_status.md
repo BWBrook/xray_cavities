@@ -463,6 +463,7 @@ environments:
 The detailed gate report and plots are in
 `docs/science/stewart_environment_gate_2026-05-05.md`. The immediate next move
 is the `C-HI` particle-free high-power cluster rehearsal on resized Nectar.
+After the gate, `nectar-vm` was parked back to `c3.xsmall`.
 
 ## Resume Checklist For A Fresh Agent
 
