@@ -14,6 +14,13 @@ format:
 
 # Executive Summary
 
+Post-meeting correction, `2026-05-07`: this report was prepared before the
+2026-05-06 supervisor meeting. The environment-gate results remain valid, but
+the follow-on plan has changed. The nominal first science run is now
+particles-enabled `C-HI` to about `50 Myr`, and `JET_END_TIME` /
+`JET_ACTIVE_TIME` are Myr values in the user parameter block, not PLUTO
+code-time values.
+
 The main science asset blocker has been cleared. Patrick supplied the Stewart
 environment archive and GRAiLE/XRAiSE bundle, and Stas clarified the key
 science choice: production science runs should use the radially averaged
@@ -25,9 +32,10 @@ resized Nectar VM, and ran no-jet 3D Cartesian stability gates to `300 Myr`.
 Both the cluster and group environments passed the existing `jet-setup`
 stability verifier at smoke scale.
 
-The project is now ready for the next science gate: a particle-free `C-HI`
-high-power cluster rehearsal on resized Nectar, followed by a particle-enabled
-repeat only after the hydrodynamic run is stable and diagnostically useful.
+The project is now ready for the corrected next science gate: a
+production-like, particles-enabled `C-HI` high-power cluster control, preceded
+by a `kunanyi` no-jet environment/MPI/HDF5 validation at closer-to-production
+scale.
 
 # What Is Now Confirmed
 
@@ -50,20 +58,21 @@ default science inputs for the honours energetics path.
 | Geometry | 3D Cartesian |
 | Jet speed | `0.1 c` |
 | Opening angle | `15 deg` |
-| Duration | `300 Myr` |
-| Snapshots | `100`, `200`, `300 Myr` |
+| First duration target | `50 Myr` |
+| Early snapshots | about every `1 Myr`; inspect first `3-5` |
 | Views | `0`, `45`, `90 deg` |
 | First validation case | `C-HI`, `JET_PWR = 1e45 erg/s` |
-| Particle staging | off first, on second |
+| Particle staging | particles enabled for nominal first science run |
 
-Important unit correction: the old Stewart INIs confirmed that PLUTO time
-values are in code-time units. A `300 Myr` run is rendered as:
+Important unit correction after the meeting: PLUTO core controls use code-time
+values, but user-defined jet-duty-cycle parameters are physical Myr values. A
+`50 Myr` first target is rendered as:
 
 ```text
-tstop = 91980.41813640
-JET_END_TIME = 91980.41813640
-JET_ACTIVE_TIME = 91980.41813640
-100 Myr output cadence = 30660.13937880
+tstop = 15330.06968940
+JET_END_TIME = 50.0
+JET_ACTIVE_TIME = 50.0
+1 Myr output cadence = 306.60139379
 ```
 
 # Nectar Environment Gate
@@ -106,8 +115,9 @@ the full `300 Myr` duration, and produce standard `grid.out`, `dbl.out`, and
   environments.
 - `scripts/science/plot_stewart_environment_gate.py`: regenerates the summary
   metrics and plots from gate outputs.
-- `scripts/science/render_three_case_configs.py`: now renders jet active/end
-  times in PLUTO code-time units.
+- `scripts/science/render_three_case_configs.py`: corrected after the meeting
+  so PLUTO core times are code-time values while jet active/end times remain
+  Myr values.
 - `docs/science/three_case_spec.md`: updated to record the tabulated
   environment decision, the green Nectar gate, and the code-time convention.
 
@@ -141,34 +151,42 @@ The science-input path is now green for the first rehearsal:
 
 # Immediate Forward Plan
 
-## Gate 1: `C-HI` Hydrodynamic Rehearsal on Nectar
+## Gate 1: Production-like Kunanyi Environment Check
 
-Run the first high-power cluster case with particles off:
+Repeat the no-jet Stewart tabulated cluster check on `kunanyi`, closer to the
+production setup:
+
+- at least `1 cell/kpc`, preferably `2 cells/kpc` where feasible
+- no jet
+- MPI through PBS
+- HDF5 output enabled
+- available `kunanyi` modules first
+
+Pass criteria:
+
+- compile and run on a compute node
+- HDF5 outputs written and readable
+- no obvious hydrostatic drift
+- no private MPI/HDF5 build needed
+
+## Gate 2: Particles-enabled `C-HI` Symmetric Control
+
+Run the first high-power cluster case with particles enabled:
 
 - case: `C-HI`
-- environment: cluster `002_003` tabulated profile
-- jet power: `1e45 erg/s`
+- environment: cluster `002_003` tabulated profile, centered
+- jet power: `1e45 erg/s`, one-sided
 - jet speed: `0.1 c`
 - opening angle: `15 deg`
-- duration: `300 Myr`
-- outputs: sparse `dbl` at `100`, `200`, `300 Myr`, plus HDF5/checkpoint hooks
+- duration target: about `50 Myr`
+- early outputs: about `1 Myr` cadence
 
 Pass criteria:
 
-- stable completion to `300 Myr`
+- first `3-5` snapshots are stable and diagnostically sensible
 - clear lobe/cavity morphology
-- density, pressure, tracer, and log diagnostics produced
-- no output, restart, or code-time surprises
-
-## Gate 2: Particle-enabled `C-HI` Repeat
-
-Repeat the same case with particles enabled only after Gate 1 is green.
-
-Pass criteria:
-
 - particle output files are produced and load
-- `plutokore` radio functions can produce at least one smoke product
-- radio/tracer/lobe products align at one declared snapshot and view
+- no output, restart, or unit surprises
 
 ## Gate 3: First Observable/Truth Comparison
 
@@ -184,8 +202,7 @@ Build the first aligned comparison package for one `C-HI` snapshot/view:
 
 ## Gate 4: `kunanyi` Intermediate Rehearsal
 
-Only after the Nectar `C-HI` hydro and particle gates are green should we move
-to an intermediate `kunanyi` rehearsal using the production PBS template:
+Use the production PBS template for the intermediate `kunanyi` rehearsal:
 
 ```text
 select=N:ncpus=28:mpiprocs=28
@@ -205,16 +222,15 @@ The production launch order remains:
 The useful discussion points for the 2026-05-06 meeting are:
 
 1. Confirm that the tabulated Stewart files are now the agreed science inputs.
-2. Confirm that `C-HI` remains the first rehearsal case.
-3. Confirm whether `JET_PWR` should be treated as one-sided or total bipolar
-   power in final comparison tables.
-4. Confirm whether `JET_INITIAL_RADIUS` and `JET_INJECTION_HEIGHT` should stay
+2. Confirm whether `JET_INITIAL_RADIUS` and `JET_INJECTION_HEIGHT` should stay
    near the historical Stewart values or be adjusted for the honours grids.
-5. Confirm the preferred first snapshot/view for the aligned X-ray/radio/truth
-   smoke comparison, if not `100 Myr` and `45 deg`.
+3. Confirm the preferred first snapshot for the aligned X-ray/radio/truth
+   smoke comparison.
+4. Confirm the production grid patch structure and storage cadence.
 
 # Bottom Line
 
 We are no longer blocked on the Stewart environment files. The next meaningful
-science task is a live `C-HI` hydrodynamic rehearsal on resized Nectar, with
-the particle and observable/truth paths staged behind it.
+science task is an auditable, particles-enabled `C-HI` package and
+production-like `kunanyi` validation path, with early diagnostics as the first
+science-facing deliverable.

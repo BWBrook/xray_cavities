@@ -52,6 +52,37 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--duration-myr", type=float, default=300.0)
     parser.add_argument("--cells", type=int, default=50)
     parser.add_argument("--half-width-kpc", type=float, default=100.0)
+    parser.add_argument(
+        "--cells-per-kpc",
+        type=float,
+        help=(
+            "If set, derive per-axis cell counts from half-widths. For example, "
+            "--half-width-kpc 200 --cells-per-kpc 1 gives 400 cells per axis."
+        ),
+    )
+    parser.add_argument("--x-cells", type=int)
+    parser.add_argument("--y-cells", type=int)
+    parser.add_argument("--z-cells", type=int)
+    parser.add_argument("--x-half-width-kpc", type=float)
+    parser.add_argument("--y-half-width-kpc", type=float)
+    parser.add_argument("--z-half-width-kpc", type=float)
+    parser.add_argument(
+        "--output-interval-myr",
+        type=float,
+        help="Static dbl output cadence in Myr. Defaults to min(100, duration).",
+    )
+    parser.add_argument(
+        "--hdf5-interval-myr",
+        type=float,
+        default=-1.0,
+        help="Static dbl.h5 output cadence in Myr. Use a positive value to enable.",
+    )
+    parser.add_argument(
+        "--checkpoint-interval-myr",
+        type=float,
+        default=-1.0,
+        help="Chombo checkpoint cadence in Myr. Use a positive value to enable.",
+    )
     parser.add_argument("--force", action="store_true")
     return parser.parse_args()
 
@@ -117,17 +148,40 @@ TabulatedData ./{csv_name}
 """
 
 
-def render_pluto_ini(duration_myr: float, cells: int, half_width_kpc: float) -> str:
-    tstop = duration_myr * CODE_TIME_PER_MYR
-    output_interval = min(100.0, duration_myr) * CODE_TIME_PER_MYR
-    first_dt = max(1.0, CODE_TIME_PER_MYR * 0.01)
+def code_interval(value_myr: float) -> float:
+    if value_myr <= 0.0:
+        return -1.0
+    return value_myr * CODE_TIME_PER_MYR
+
+
+def axis_grid_line(axis: str, cells: int, half_width_kpc: float) -> str:
     lo = -abs(half_width_kpc)
     hi = abs(half_width_kpc)
+    return f"{axis}-grid 1 {lo:.6g} {cells} u {hi:.6g}"
+
+
+def render_pluto_ini(
+    duration_myr: float,
+    x_cells: int,
+    y_cells: int,
+    z_cells: int,
+    x_half_width_kpc: float,
+    y_half_width_kpc: float,
+    z_half_width_kpc: float,
+    output_interval_myr: float,
+    hdf5_interval_myr: float,
+    checkpoint_interval_myr: float,
+) -> str:
+    tstop = duration_myr * CODE_TIME_PER_MYR
+    output_interval = output_interval_myr * CODE_TIME_PER_MYR
+    hdf5_interval = code_interval(hdf5_interval_myr)
+    checkpoint_interval = code_interval(checkpoint_interval_myr)
+    first_dt = max(1.0, CODE_TIME_PER_MYR * 0.01)
     return f"""[Grid]
 
-X1-grid 1 {lo:.6g} {cells} u {hi:.6g}
-X2-grid 1 {lo:.6g} {cells} u {hi:.6g}
-X3-grid 1 {lo:.6g} {cells} u {hi:.6g}
+{axis_grid_line("X1", x_cells, x_half_width_kpc)}
+{axis_grid_line("X2", y_cells, y_half_width_kpc)}
+{axis_grid_line("X3", z_cells, z_half_width_kpc)}
 
 [Chombo Refinement]
 
@@ -165,6 +219,8 @@ X3-end           reflective
 uservar          0
 dbl              {output_interval:.8f}  -1   single_file
 flt              -1.0  -1   single_file
+dbl.h5           {hdf5_interval:.8f}  -1
+flt.h5           -1.0  -1
 vtk              -1.0  -1   single_file
 tab              -1.0  -1
 ppm              -1.0  -1
@@ -173,7 +229,7 @@ analysis         -1.0  -1
 
 [Chombo HDF5 output]
 
-Checkpoint_interval  -1.0  0
+Checkpoint_interval  {checkpoint_interval:.8f}  0
 Plot_interval        -1.0  0
 
 [Particles]
@@ -222,8 +278,15 @@ def write_case(
     makefile_template: Path,
     definitions_template: Path,
     duration_myr: float,
-    cells: int,
-    half_width_kpc: float,
+    x_cells: int,
+    y_cells: int,
+    z_cells: int,
+    x_half_width_kpc: float,
+    y_half_width_kpc: float,
+    z_half_width_kpc: float,
+    output_interval_myr: float,
+    hdf5_interval_myr: float,
+    checkpoint_interval_myr: float,
 ) -> None:
     target = root / label
     target.mkdir(parents=True, exist_ok=True)
@@ -238,8 +301,40 @@ def write_case(
     (target / "test.ini").write_text(render_test_ini(label, csv_name))
     (target / "environment.ini").write_text(render_environment_ini(csv_name))
     (target / "pluto.ini").write_text(
-        render_pluto_ini(duration_myr, cells, half_width_kpc)
+        render_pluto_ini(
+            duration_myr,
+            x_cells,
+            y_cells,
+            z_cells,
+            x_half_width_kpc,
+            y_half_width_kpc,
+            z_half_width_kpc,
+            output_interval_myr,
+            hdf5_interval_myr,
+            checkpoint_interval_myr,
+        )
     )
+
+
+def axis_settings(args: argparse.Namespace) -> tuple[int, int, int, float, float, float, float]:
+    x_half = args.x_half_width_kpc or args.half_width_kpc
+    y_half = args.y_half_width_kpc or args.half_width_kpc
+    z_half = args.z_half_width_kpc or args.half_width_kpc
+
+    def cells(explicit: int | None, half_width: float) -> int:
+        if explicit is not None:
+            return explicit
+        if args.cells_per_kpc is not None:
+            return int(round(2.0 * half_width * args.cells_per_kpc))
+        return args.cells
+
+    x_cells = cells(args.x_cells, x_half)
+    y_cells = cells(args.y_cells, y_half)
+    z_cells = cells(args.z_cells, z_half)
+    if min(x_cells, y_cells, z_cells) <= 0:
+        raise SystemExit("all axis cell counts must be positive")
+    output_interval_myr = args.output_interval_myr or min(100.0, args.duration_myr)
+    return x_cells, y_cells, z_cells, x_half, y_half, z_half, output_interval_myr
 
 
 def main() -> int:
@@ -256,6 +351,15 @@ def main() -> int:
             raise SystemExit(f"{output} already exists; use --force to overwrite")
         shutil.rmtree(output)
     output.mkdir(parents=True)
+    (
+        x_cells,
+        y_cells,
+        z_cells,
+        x_half,
+        y_half,
+        z_half,
+        output_interval_myr,
+    ) = axis_settings(args)
 
     write_case(
         output,
@@ -265,8 +369,15 @@ def main() -> int:
         makefile_template,
         definitions_template,
         args.duration_myr,
-        args.cells,
-        args.half_width_kpc,
+        x_cells,
+        y_cells,
+        z_cells,
+        x_half,
+        y_half,
+        z_half,
+        output_interval_myr,
+        args.hdf5_interval_myr,
+        args.checkpoint_interval_myr,
     )
     write_case(
         output,
@@ -276,8 +387,15 @@ def main() -> int:
         makefile_template,
         definitions_template,
         args.duration_myr,
-        args.cells,
-        args.half_width_kpc,
+        x_cells,
+        y_cells,
+        z_cells,
+        x_half,
+        y_half,
+        z_half,
+        output_interval_myr,
+        args.hdf5_interval_myr,
+        args.checkpoint_interval_myr,
     )
     print(f"Rendered Stewart environment gate tests under {output}")
     return 0

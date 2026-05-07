@@ -17,9 +17,11 @@ from typing import Iterable
 
 
 SECONDS_PER_MYR = 1_000_000.0 * 365.25 * 24.0 * 3600.0
-ACTIVE_TIME_MYR = 300.0
+DEFAULT_DURATION_MYR = 50.0
+DEFAULT_SNAPSHOT_INTERVAL_MYR = 1.0
+DEFAULT_CHECKPOINT_INTERVAL_MYR = 5.0
 CODE_TIME_PER_MYR = 306.601393788
-SNAPSHOTS_MYR = [100.0, 200.0, 300.0]
+EARLY_DIAGNOSTIC_SNAPSHOTS_MYR = [1.0, 2.0, 3.0, 4.0, 5.0]
 VIEWS_DEG = [0.0, 45.0, 90.0]
 
 
@@ -95,10 +97,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--variant",
         choices=["env_gate", "hydro", "particles", "both"],
-        default="hydro",
+        default="particles",
         help=(
-            "Generate no-jet environment-gate, particle-free, "
-            "particle-enabled, or both jet variants."
+            "Generate no-jet environment-gate, particle-free debug, "
+            "particle-enabled nominal science, or both jet variants."
         ),
     )
     parser.add_argument(
@@ -155,8 +157,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--duration-myr",
         type=float,
-        default=ACTIVE_TIME_MYR,
+        default=DEFAULT_DURATION_MYR,
         help="Physical run duration in Myr for tstop/output conversion.",
+    )
+    parser.add_argument(
+        "--snapshot-interval-myr",
+        type=float,
+        default=DEFAULT_SNAPSHOT_INTERVAL_MYR,
+        help="Physical science-output cadence in Myr, rendered in PLUTO code time.",
+    )
+    parser.add_argument(
+        "--checkpoint-interval-myr",
+        type=float,
+        default=DEFAULT_CHECKPOINT_INTERVAL_MYR,
+        help="Physical restart-checkpoint cadence in Myr, rendered in PLUTO code time.",
     )
     return parser.parse_args()
 
@@ -260,6 +274,8 @@ def render_pluto_ini(
     variant: str,
     grid_name: str,
     duration_myr: float,
+    snapshot_interval_myr: float,
+    checkpoint_interval_myr: float,
 ) -> str:
     grid = GRIDS[grid_name]
     particles = particle_settings(variant)
@@ -267,10 +283,10 @@ def render_pluto_ini(
     x2_beg, x2_n, x2_end = grid["x2"]
     x3_beg, x3_n, x3_end = grid["x3"]
     tstop_code = duration_myr * CODE_TIME_PER_MYR
-    snapshot_code = 100.0 * CODE_TIME_PER_MYR
-    checkpoint_code = 25.0 * CODE_TIME_PER_MYR
-    jet_end_time_code = 0.0 if variant == "env_gate" else tstop_code
-    jet_active_time_code = 0.0 if variant == "env_gate" else tstop_code
+    snapshot_code = snapshot_interval_myr * CODE_TIME_PER_MYR
+    checkpoint_code = checkpoint_interval_myr * CODE_TIME_PER_MYR
+    jet_end_time_myr = 0.0 if variant == "env_gate" else duration_myr
+    jet_active_time_myr = 0.0 if variant == "env_gate" else duration_myr
 
     return f"""[Grid]
 
@@ -352,8 +368,8 @@ JET_X2O                     0.0
 JET_X3O                     0.0
 JET_ROTATION_ANGLE          0.0
 JET_START_TIME              0.0
-JET_END_TIME                {jet_end_time_code:.8f}
-JET_ACTIVE_TIME             {jet_active_time_code:.8f}
+JET_END_TIME                {jet_end_time_myr:.8f}
+JET_ACTIVE_TIME             {jet_active_time_myr:.8f}
 JET_EPISODES                1.0
 ENV_RHO_0                   2.4e-27
 ENV_R_SCALING               144.0
@@ -401,6 +417,49 @@ def write_json(path: Path, payload: object) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
 
 
+def pluto_first_value(text: str, key: str) -> str | None:
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) >= 2 and parts[0] == key:
+            return parts[1]
+    return None
+
+
+def render_validation(
+    pluto_text: str,
+    case: CaseSpec,
+    variant: str,
+    duration_myr: float,
+    snapshot_interval_myr: float,
+    checkpoint_interval_myr: float,
+) -> dict[str, object]:
+    active_time_myr = 0.0 if variant == "env_gate" else duration_myr
+    checks = {
+        "tstop": f"{duration_myr * CODE_TIME_PER_MYR:.8f}",
+        "dbl": f"{snapshot_interval_myr * CODE_TIME_PER_MYR:.8f}",
+        "dbl.h5": f"{snapshot_interval_myr * CODE_TIME_PER_MYR:.8f}",
+        "Checkpoint_interval": f"{checkpoint_interval_myr * CODE_TIME_PER_MYR:.8f}",
+        "JET_PWR": f"{case.jet_power_erg_s:.6g}",
+        "JET_SPD": str(case.jet_speed_c),
+        "JET_END_TIME": f"{active_time_myr:.8f}",
+        "JET_ACTIVE_TIME": f"{active_time_myr:.8f}",
+    }
+    rendered = {key: pluto_first_value(pluto_text, key) for key in checks}
+    results = {
+        key: {"expected": expected, "rendered": rendered[key], "ok": rendered[key] == expected}
+        for key, expected in checks.items()
+    }
+    return {
+        "ok": all(item["ok"] for item in results.values()),
+        "checks": results,
+        "note": (
+            "This static validation checks the generated pluto.ini against the "
+            "run definition. A later gate should compare PLUTO startup logs "
+            "against these same intended values."
+        ),
+    }
+
+
 def render_case(
     root: Path,
     case: CaseSpec,
@@ -408,11 +467,47 @@ def render_case(
     grid_name: str,
     env: dict[str, str | bool],
     duration_myr: float,
+    snapshot_interval_myr: float,
+    checkpoint_interval_myr: float,
 ) -> None:
     case_dir = root / case.case_id / variant
     case_dir.mkdir(parents=True, exist_ok=True)
+    active_time_myr = 0.0 if variant == "env_gate" else duration_myr
+    snapshot_interval_code = snapshot_interval_myr * CODE_TIME_PER_MYR
+    checkpoint_interval_code = checkpoint_interval_myr * CODE_TIME_PER_MYR
+    run_definition = {
+        "case_id": case.case_id,
+        "run_name": f"{case.case_id}_{variant}",
+        "variant": variant,
+        "environment": env,
+        "science_intent": {
+            "role": case.role,
+            "jet_power_erg_s_one_sided": case.jet_power_erg_s,
+            "jet_speed_c": case.jet_speed_c,
+            "opening_angle_primary_deg": 15.0,
+            "opening_angle_secondary_deg": 15.0,
+            "particles_enabled": variant == "particles",
+            "duration_myr": duration_myr,
+            "active_time_myr": active_time_myr,
+            "snapshot_interval_myr": snapshot_interval_myr,
+            "checkpoint_interval_myr": checkpoint_interval_myr,
+            "views_deg": VIEWS_DEG,
+            "early_diagnostic_snapshots_myr": EARLY_DIAGNOSTIC_SNAPSHOTS_MYR,
+        },
+        "unit_contract": {
+            "tstop": "PLUTO code time",
+            "static_grid_output_intervals": "PLUTO code time",
+            "checkpoint_intervals": "PLUTO code time",
+            "JET_START_TIME": "Myr",
+            "JET_END_TIME": "Myr",
+            "JET_ACTIVE_TIME": "Myr",
+            "jet_injection_dimensions": "kpc",
+            "environment_offsets": "kpc",
+            "JET_PWR": "one-sided erg/s",
+        },
+    }
     manifest = {
-        "spec_version": "three-case-v0.1",
+        "spec_version": "three-case-v0.2",
         "case": asdict(case),
         "variant": variant,
         "grid": {"name": grid_name, **GRIDS[grid_name]},
@@ -420,8 +515,14 @@ def render_case(
             "code_time_per_myr": CODE_TIME_PER_MYR,
             "duration_myr": duration_myr,
             "tstop_code_time": duration_myr * CODE_TIME_PER_MYR,
-            "snapshot_interval_code_time": 100.0 * CODE_TIME_PER_MYR,
-            "checkpoint_interval_code_time": 25.0 * CODE_TIME_PER_MYR,
+            "snapshot_interval_myr": snapshot_interval_myr,
+            "snapshot_interval_code_time": snapshot_interval_code,
+            "checkpoint_interval_myr": checkpoint_interval_myr,
+            "checkpoint_interval_code_time": checkpoint_interval_code,
+            "note": (
+                "PLUTO core time controls and output intervals use code time; "
+                "JET_END_TIME and JET_ACTIVE_TIME are physical Myr parameters."
+            ),
         },
         "simulation_defaults": {
             "physics": "HD",
@@ -429,39 +530,55 @@ def render_case(
             "jet_relativistic_density": "NO",
             "opening_angle_primary_deg": 15.0,
             "opening_angle_secondary_deg": 15.0,
-            "jet_end_time_myr": 0.0 if variant == "env_gate" else duration_myr,
-            "jet_active_time_myr": 0.0 if variant == "env_gate" else duration_myr,
-            "jet_end_time_code_time": 0.0
-            if variant == "env_gate"
-            else duration_myr * CODE_TIME_PER_MYR,
-            "jet_active_time_code_time": 0.0
-            if variant == "env_gate"
-            else duration_myr * CODE_TIME_PER_MYR,
+            "jet_end_time_myr": active_time_myr,
+            "jet_active_time_myr": active_time_myr,
+            "particles_enabled": variant == "particles",
             "tracer_threshold_default": 5.0e-3,
             "tracer_threshold_sensitivity": [1.0e-3, 1.0e-2],
         },
         "sampling": {
-            "snapshots_myr": SNAPSHOTS_MYR,
+            "early_diagnostic_snapshots_myr": EARLY_DIAGNOSTIC_SNAPSHOTS_MYR,
+            "snapshot_interval_myr": snapshot_interval_myr,
             "views_deg": VIEWS_DEG,
+            "views_are_post_processing_only": True,
         },
         "environment": env,
         "truth_conventions": {
-            "jet_power_is_assumed_one_sided_until_confirmed": True,
+            "jet_power_is_one_sided": True,
             "injected_energy": injected_energy(
-                case, 0.0 if variant == "env_gate" else duration_myr
+                case, active_time_myr
             ),
         },
         "production_gate": (
-            "Do not launch production until the environment status is provided "
-            "and the Nectar no-jet stability gate is green."
+            "Do not launch multi-day production until generated config files "
+            "have been reviewed by Patrick/Stas and the kunanyi environment, "
+            "MPI, HDF5, and restart path are green."
         ),
     }
 
-    (case_dir / "pluto.ini").write_text(
-        render_pluto_ini(case, variant, grid_name, duration_myr)
+    pluto_text = render_pluto_ini(
+        case,
+        variant,
+        grid_name,
+        duration_myr,
+        snapshot_interval_myr,
+        checkpoint_interval_myr,
     )
+    (case_dir / "pluto.ini").write_text(pluto_text)
     (case_dir / "environment.ini").write_text(render_environment_ini(env))
+    write_json(case_dir / "run_definition.json", run_definition)
     write_json(case_dir / "case_manifest.json", manifest)
+    write_json(
+        case_dir / "render_validation.json",
+        render_validation(
+            pluto_text,
+            case,
+            variant,
+            duration_myr,
+            snapshot_interval_myr,
+            checkpoint_interval_myr,
+        ),
+    )
     write_json(case_dir / "definitions_overrides.json", definitions_overrides(env, variant))
 
 
@@ -471,6 +588,8 @@ def render_readme(
     variants: Iterable[str],
     grid_name: str,
     duration_myr: float,
+    snapshot_interval_myr: float,
+    checkpoint_interval_myr: float,
 ) -> None:
     case_list = ", ".join(case.case_id for case in cases)
     variant_list = ", ".join(variants)
@@ -482,19 +601,33 @@ Generated by `scripts/science/render_three_case_configs.py`.
 - variants: {variant_list}
 - grid preset: `{grid_name}`
 - duration: `{duration_myr} Myr`
+- science-output cadence: `{snapshot_interval_myr} Myr`
+- restart-checkpoint cadence: `{checkpoint_interval_myr} Myr`
 - PLUTO code-time conversion: `{CODE_TIME_PER_MYR} code units per Myr`
 
 These bundles are dry-run launch packages. They are not a production approval.
+The nominal science variant is `particles`; `hydro` is retained as a narrow
+debugging fallback.
+
+Unit contract:
+
+- PLUTO `tstop`, static-grid outputs, and checkpoint intervals are rendered in
+  PLUTO code time.
+- `JET_END_TIME` and `JET_ACTIVE_TIME` are rendered in physical Myr.
+- `JET_PWR` is one-sided jet power.
 
 Each case variant contains:
 
 - `pluto.ini`
 - `environment.ini`
+- `run_definition.json`
 - `definitions_overrides.json`
 - `case_manifest.json`
+- `render_validation.json`
 
-Production remains blocked until the real Stewart cluster and group
-environment files are supplied and the Nectar environment gates are green.
+Multi-day production remains blocked until Patrick/Stas review the generated
+configuration package and the production-like kunanyi environment/MPI/HDF5
+gate is green.
 """
     (root / "README.md").write_text(text)
 
@@ -528,9 +661,26 @@ def main() -> int:
     for case in cases:
         env = envs[case.environment]
         for variant in variants:
-            render_case(output, case, variant, args.grid, env, args.duration_myr)
+            render_case(
+                output,
+                case,
+                variant,
+                args.grid,
+                env,
+                args.duration_myr,
+                args.snapshot_interval_myr,
+                args.checkpoint_interval_myr,
+            )
 
-    render_readme(output, cases, variants, args.grid, args.duration_myr)
+    render_readme(
+        output,
+        cases,
+        variants,
+        args.grid,
+        args.duration_myr,
+        args.snapshot_interval_myr,
+        args.checkpoint_interval_myr,
+    )
     print(f"Rendered {len(cases) * len(variants)} config bundle(s) under {output}")
     return 0
 

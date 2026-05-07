@@ -1,5 +1,11 @@
 # 2026-05-05 Stewart Environment Gate
 
+Post-meeting correction, `2026-05-07`: the environment-gate result remains
+valid, but the unit interpretation and next-step plan below were superseded by
+the 2026-05-06 supervisor meeting. `JET_END_TIME` and `JET_ACTIVE_TIME` are
+physical Myr values in the user-defined parameter block; PLUTO core controls
+such as `tstop` and output intervals are the values converted to code time.
+
 ## Context
 
 Patrick supplied the Stewart environment archive plus historical INIs and the
@@ -57,16 +63,16 @@ Report and plots:
 - `docs/science/stewart_environment_gate_status_2026-05-05.pdf`
 - `docs/science/assets/stewart_environment_gate_2026-05-05/`
 
-## Important Unit Fix
+## Superseded Unit Note
 
-The old Stewart INIs confirm that `JET_END_TIME` and `JET_ACTIVE_TIME` are
-PLUTO code-time values, like `tstop` and output intervals. The three-case
-renderer was updated so the physical `300 Myr` science duration renders as:
+The note originally recorded here said that `JET_END_TIME` and
+`JET_ACTIVE_TIME` should be rendered in PLUTO code time. Patrick corrected this
+in the supervisor meeting. The corrected `50 Myr` first-target rendering is:
 
 ```text
-JET_END_TIME = 91980.41813640
-JET_ACTIVE_TIME = 91980.41813640
-tstop = 91980.41813640
+JET_END_TIME = 50.0
+JET_ACTIVE_TIME = 50.0
+tstop = 15330.06968940
 ```
 
 The no-jet gates were unaffected because the jet active/end times were zero.
@@ -88,8 +94,9 @@ Repeated SSH logins succeeded after that.
 
 ## Next Step
 
-Run the `C-HI` particle-free high-power cluster rehearsal on resized Nectar.
-Only after that is green should the particle-enabled `C-HI` repeat start.
+Generate the particles-enabled `C-HI` symmetric run package, validate the
+rendered config against the run definition, and run a production-like no-jet
+Stewart environment/MPI/HDF5 gate on `kunanyi` before any long jet run.
 
 After the gate, `nectar-vm` was parked back to `c3.xsmall` and verified by SSH:
 `1` vCPU, about `1.9 GiB` RAM, and active persistent `ssh.service`.

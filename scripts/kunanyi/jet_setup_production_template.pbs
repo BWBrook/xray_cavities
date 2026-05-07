@@ -11,10 +11,10 @@
 # suite. Submit with qsub -v overrides after staging a generated case bundle,
 # for example:
 #
-#   qsub -v CASE_ID=C-HI,CASE_VARIANT=hydro,CASE_CONFIG_DIR=/u/bwbrook/xray_cavities_cases/C-HI/hydro scripts/kunanyi/jet_setup_production_template.pbs
+#   qsub -v CASE_ID=C-HI,CASE_VARIANT=particles,CASE_CONFIG_DIR=/u/bwbrook/xray_cavities_cases/C-HI/particles scripts/kunanyi/jet_setup_production_template.pbs
 #
-# Full production should wait until the Stewart environment files, Nectar
-# stability gates, and an intermediate kunanyi rehearsal are green.
+# Full production should wait until the generated configuration package has
+# been checked by Patrick/Stas and an intermediate kunanyi rehearsal is green.
 
 set -euo pipefail
 
@@ -22,7 +22,7 @@ export LC_ALL=C
 export LANG=C
 
 CASE_ID="${CASE_ID:-C-HI}"
-CASE_VARIANT="${CASE_VARIANT:-hydro}"
+CASE_VARIANT="${CASE_VARIANT:-particles}"
 CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-/u/bwbrook/xray_cavities_cases/${CASE_ID}/${CASE_VARIANT}}"
 
 PLUTO_DIR="${PLUTO_DIR:-/scratch/bwbrook/git/utas-agn/pluto}"

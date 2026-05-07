@@ -57,6 +57,9 @@ Useful implementation facts from the old INIs:
 - PLUTO `tstop` and output intervals use code time, not Myr.
 - The conversion implied by the archived runs is
   `1 Myr = 306.601393788` PLUTO code-time units.
+- The 2026-05-06 supervisor meeting clarified that user-defined jet duty-cycle
+  parameters such as `JET_END_TIME` and `JET_ACTIVE_TIME` remain physical Myr
+  values even though PLUTO core time controls are code time.
 - The common CosmoDRAGoN production grid family used stretched Cartesian
   domains with dense central coverage and larger outer cells.
 - Old particle-enabled runs commonly used `Nparticles -1 16.0` and
@@ -154,11 +157,12 @@ remote-execution layout.
 
 ## Rehearsal Implication
 
-The next compute action should not be a production submission. The first two
-science gates are now complete: the real Stewart tabulated assets were
+The next compute action should not be a long production submission. The first
+two science gates are now complete: the real Stewart tabulated assets were
 identified, and the no-jet Nectar environment gates passed. The next action is:
 
-1. run the `C-HI` no-particle high-power cluster rehearsal
-2. repeat `C-HI` with particles
-3. port the first GRAiLE/XRAiSE X-ray map path
-4. only then move to the first intermediate `kunanyi` rehearsal
+1. generate and validate the particles-enabled `C-HI` symmetric run package
+2. run a production-like `kunanyi` no-jet environment/MPI/HDF5 gate
+3. ask Patrick/Stas to inspect the generated `C-HI` package before a long run
+4. run early `C-HI` snapshots and diagnostics at about `1 Myr` cadence
+5. port the first GRAiLE/XRAiSE X-ray map path once a usable snapshot exists

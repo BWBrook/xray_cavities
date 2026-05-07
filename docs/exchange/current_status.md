@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-05
+Last updated: 2026-05-07
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -271,6 +271,8 @@ Production-prep follow-up on 2026-05-01:
 
 Science-package follow-up on 2026-05-02:
 
+- This block is historical. The 2026-05-07 supervisor-meeting-2 follow-up below
+  supersedes the `300 Myr` first-run target and hydro-first staging.
 - the next science plan has been converted into a frozen three-case spec:
   `docs/science/three_case_spec.md`
 - case IDs are now locked as:
@@ -317,10 +319,9 @@ Stewart/GRAiLE asset follow-up on 2026-05-05:
 - Patrick also supplied old simulation INIs under `env/inis.zip`; these show
   the important conversion
   `1 Myr = 306.601393788 PLUTO code-time units`
-- `scripts/science/render_three_case_configs.py` has been corrected so the
-  frozen `300 Myr` science duration renders as
-  `tstop = 91980.41813640`, with `100 Myr` `dbl`/`dbl.h5` output cadence
-  `30660.13937880`
+- post-meeting correction: `scripts/science/render_three_case_configs.py` now
+  renders PLUTO core time controls in code time, while keeping
+  `JET_END_TIME` and `JET_ACTIVE_TIME` as physical Myr values
 - Patrick supplied GRAiLE/XRAiSE assets under `env/graile-all.zip`; the blocker
   is now porting those scripts from Georgia's absolute paths, not acquiring
   the X-ray assets
@@ -331,6 +332,33 @@ Stewart/GRAiLE asset follow-up on 2026-05-05:
   group
 - details are in:
   - `docs/exchange/logs/2026-05-05-stewart-assets-and-graile.md`
+
+Supervisor-meeting-2 follow-up on 2026-05-07:
+
+- Barry supplied the 2026-05-06 supervisor meeting transcript and a GPT-5.5
+  Pro draft action plan:
+  - `docs/codex_utas_phys_hons_meeting_2_transcript.md`
+  - `docs/codex_utas_phys_hons_meeting_2_action_plan.md`
+- the action plan has been reconciled against the transcript and repo state
+- key corrections now binding:
+  - `JET_END_TIME` and `JET_ACTIVE_TIME` are physical Myr values, not PLUTO
+    code-time values
+  - PLUTO core controls such as `tstop`, output intervals, and checkpoint
+    intervals remain in PLUTO code time
+  - the nominal first science run is particles-enabled `C-HI`, not a
+    hydro-only rehearsal
+  - first target duration is about `50 Myr`, not `300 Myr`
+  - early diagnostics should be inspected after the first `3-5` snapshots at
+    about `1 Myr` cadence
+  - `JET_PWR` is confirmed as one-sided jet power
+  - views are post-processing only; use `0 deg` as the easiest first view
+- `docs/science/three_case_spec.md` is now spec version `three-case-v0.2`
+- `scripts/science/render_three_case_configs.py` now defaults to the
+  particles-enabled nominal science variant and writes `run_definition.json`
+  plus `render_validation.json`
+- the `kunanyi` production template now defaults to `CASE_VARIANT=particles`
+- details are in:
+  - `docs/exchange/logs/2026-05-07-supervisor-meeting-2-plan-update.md`
 
 ## Project Structure
 
@@ -464,9 +492,17 @@ environments:
   `0.0330`
 
 The detailed gate report and plots are in
-`docs/science/stewart_environment_gate_2026-05-05.md`. The immediate next move
-is the `C-HI` particle-free high-power cluster rehearsal on resized Nectar.
-After the gate, `nectar-vm` was parked back to `c3.xsmall`.
+`docs/science/stewart_environment_gate_2026-05-05.md`; that report has been
+marked with a post-meeting correction note where the follow-on plan changed.
+The immediate next move is now:
+
+1. generate and validate the particles-enabled `C-HI` symmetric package
+2. run a production-like no-jet Stewart tabulated environment/MPI/HDF5 gate on
+   `kunanyi`
+3. send the generated `C-HI` package to Patrick/Stas before any long run
+4. run only early, restartable `C-HI` snapshots first
+
+After the Nectar environment gate, `nectar-vm` was parked back to `c3.xsmall`.
 
 ## Resume Checklist For A Fresh Agent
 

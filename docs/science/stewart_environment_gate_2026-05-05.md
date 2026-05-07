@@ -11,6 +11,13 @@ format:
 
 # Stewart Tabulated Environment Gate, 2026-05-05
 
+Post-meeting correction, `2026-05-07`: the environment-gate results remain
+valid, but the "next gate" and jet-duty-cycle unit interpretation below were
+superseded by the 2026-05-06 supervisor meeting. `JET_END_TIME` and
+`JET_ACTIVE_TIME` are physical Myr values in the user parameter block; PLUTO
+core controls such as `tstop` and output intervals are the values that use
+PLUTO code time.
+
 ## Summary
 
 The confirmed Stewart radially averaged environments passed the first no-jet
@@ -74,25 +81,29 @@ Two small operational fixes came out of the gate:
 - `scripts/science/render_stewart_environment_gate_tests.py` now renders a
   hydro-only `definitions.h` and a particle-free `local_make`, because the
   current `jet-setup` source template otherwise keeps `PARTICLES_LP` enabled.
-- `scripts/science/render_three_case_configs.py` now writes `JET_END_TIME` and
-  `JET_ACTIVE_TIME` in PLUTO code-time units. The old Stewart INIs confirmed
-  that jet active/end times are code time, not Myr literals.
+- `scripts/science/render_three_case_configs.py` was later corrected after the
+  supervisor meeting so `JET_END_TIME` and `JET_ACTIVE_TIME` remain physical
+  Myr values; only `tstop`, output intervals, and checkpoint intervals are
+  converted to PLUTO code time.
 
 During the run, `nectar-vm` SSH was switched from fragile socket activation to
 persistent `ssh.service`; this is recorded in `docs/nectar_vm_setup.md`.
 
 ## Next Gate
 
-The environment asset blocker is now cleared. The next science gate is the
-`C-HI` particle-free high-power cluster rehearsal using:
+The environment asset blocker is now cleared. After the supervisor meeting, the
+next science gate is the production-like `C-HI` high-power cluster package
+using:
 
 - cluster tabulated environment `002_003`
 - `JET_PWR = 1e45 erg/s`
 - `JET_SPD = 0.1`
 - `JET_OA_PRIMARY = JET_OA_SECONDARY = 15 deg`
-- physical duration `300 Myr`, rendered as `91980.41813640` PLUTO code-time
-  units
-- sparse `dbl` outputs at `100`, `200`, `300 Myr`, plus HDF5/checkpoint hooks
+- particles enabled for the nominal science run
+- first target duration about `50 Myr`
+- early outputs at about `1 Myr` cadence
+- double restart checkpoints every `2-5 Myr` and at walltime stop
+- HDF5/MPI validation on `kunanyi`
 
-Only after this hydro rehearsal is green should the particle-enabled `C-HI`
-repeat begin.
+Hydro-only `C-HI` is now a narrow debugging fallback, not the planned first
+science gate.

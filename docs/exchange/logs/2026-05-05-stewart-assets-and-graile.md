@@ -1,5 +1,11 @@
 # 2026-05-05 Stewart Assets And GRAiLE Bundle
 
+Post-meeting correction, `2026-05-07`: the environment assets and GRAiLE notes
+remain current, but the follow-on plan below was superseded by the 2026-05-06
+supervisor meeting. The nominal first science package is now particles-enabled
+`C-HI` to about `50 Myr`, with `JET_END_TIME` and `JET_ACTIVE_TIME` rendered as
+Myr values.
+
 ## Summary
 
 Patrick supplied the missing environment and X-ray assets under ignored
@@ -67,11 +73,14 @@ Important detail from these old INIs:
 1 Myr = 306.601393788 PLUTO code-time units
 ```
 
-The config renderer has been updated so `300 Myr` now renders as:
+The corrected config renderer now keeps this conversion for PLUTO core
+controls and outputs. For the first `50 Myr` target, this renders as:
 
 ```text
-tstop = 91980.41813640
-dbl/dbl.h5 snapshot interval = 30660.13937880
+tstop = 15330.06968940
+dbl/dbl.h5 snapshot interval = 306.60139379
+JET_END_TIME = 50.0
+JET_ACTIVE_TIME = 50.0
 ```
 
 ## GRAiLE/XRAiSE
@@ -113,10 +122,8 @@ python3 scripts/science/render_stewart_environment_gate_tests.py \
 
 ## Next Gate
 
-1. Ensure `nectar-vm` is resized to `c3.3xlarge`.
-2. Sync `xray_cavities`, the two tabulated files, and the generated gate tests
-   to Nectar.
-3. Run the cluster and group no-jet stability gates using the existing
-   `jet-setup/test/run-tests.py` pattern.
-4. If both environments pass, generate the `C-HI` hydro case from the same
-   tabulated cluster file.
+1. Generate and validate the particles-enabled `C-HI` symmetric package.
+2. Run a production-like no-jet Stewart tabulated environment/MPI/HDF5 gate on
+   `kunanyi`.
+3. Send the generated `C-HI` package to Patrick/Stas for sanity checking.
+4. Run early, restartable `C-HI` snapshots only after those gates are green.
