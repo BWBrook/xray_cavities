@@ -659,7 +659,16 @@ For a `48:00:00` PBS walltime, leave the template default
 output before PBS can kill the job. Override only for shorter rehearsals, for
 example `PLUTO_MAXTIME_HOURS=1.5` for a two-hour walltime.
 
-Do not submit this as a 48-hour production run yet. First run the
-production-like no-jet Stewart environment/MPI/HDF5 gate on `kunanyi`, ask
-Patrick/Stas to inspect the generated `C-HI` package, and only then launch an
-early, restartable particles-enabled `C-HI` segment.
+Do not submit this as a 48-hour production run yet. The production-like no-jet
+Stewart environment/MPI/HDF5 gate passed on `kunanyi` for both confirmed
+radially averaged environments on `2026-05-08`:
+
+- `cluster_002003`: `690366.kunanyi-ohpc`, exit status `0`, walltime
+  `00:48:57`
+- `group_002031`: `690371.kunanyi-ohpc`, exit status `0`, walltime
+  `00:45:22`
+
+The next run should be an early, restartable, particles-enabled `C-HI` segment,
+using the locked generated case package and `-maxtime`/`dbl.h5` restart path.
+Keep the first segment short enough to inspect morphology, output cadence,
+particle files, and restart behaviour before launching a long production job.

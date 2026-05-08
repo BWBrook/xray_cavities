@@ -394,10 +394,37 @@ Patrick/Stas configuration review applied on 2026-05-08:
 - static config validation passed with `render_validation.json: ok = true`
 - a transfer-ready local tarball was prepared at
   `build/science/kunanyi_stage_2026-05-08/c_hi_and_environment_gate_2026-05-08.tar.gz`
-- next live action remains a `kunanyi` job gate, but it should use the updated
-  bundle and `-h5restart`/`-maxtime` run path
+- the production-like `kunanyi` Stewart no-jet environment/MPI/HDF5 gate
+  passed for both confirmed radially averaged Stewart environments:
+  `cluster_002003` and `group_002031`
+- `cluster_002003` gate:
+  - job id: `690366.kunanyi-ohpc`
+  - exit status: `0`
+  - walltime: `00:48:57`
+  - peak memory reported by PBS: `24518028kb`
+  - six `dbl.h5` outputs were written from `0` to `50 Myr`
+  - live output footprint was about `33 GB`
+- `group_002031` gate:
+  - job id: `690371.kunanyi-ohpc`
+  - exit status: `0`
+  - walltime: `00:45:22`
+  - peak memory reported by PBS: `24520976kb`
+  - six `dbl.h5` outputs were written from `0` to `50 Myr`
+  - live output footprint was about `33 GB`
+- during that first gate, the one-off remote PBS script exposed an output-dir
+  mismatch; the durable fix is now in
+  `scripts/science/render_stewart_environment_gate_tests.py` and
+  `scripts/kunanyi/stewart_environment_gate.pbs`
+- compact Kunanyi gate artifacts have been retrieved locally at
+  `build/science/kunanyi_stage_2026-05-08/stewart_gate_compact_results_2026-05-08.tar.gz`
+  with SHA-256
+  `adb099cd1557b192d23f48b6d5a1976225a607ebce9df7c2854b66d44a125c80`
+- next live action is to prepare an early, restartable, particles-enabled
+  `C-HI` segment using the locked configuration package and the production
+  template's `-maxtime`/`dbl.h5` restart path
 - details are in:
   - `docs/exchange/logs/2026-05-08-patrick-stas-c-hi-feedback.md`
+  - `docs/exchange/logs/2026-05-08-kunanyi-stewart-environment-gates.md`
 
 ## Project Structure
 

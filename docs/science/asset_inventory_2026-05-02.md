@@ -157,12 +157,14 @@ remote-execution layout.
 
 ## Rehearsal Implication
 
-The next compute action should not be a long production submission. The first
-two science gates are now complete: the real Stewart tabulated assets were
-identified, and the no-jet Nectar environment gates passed. The next action is:
+The next compute action should not be a long production submission. The early
+science gates are now complete: the real Stewart tabulated assets were
+identified, the no-jet Nectar environment gates passed, and the
+production-like one-node `kunanyi` no-jet/MPI/HDF5 gates passed for both
+confirmed Stewart environments on `2026-05-08`. The next action is:
 
 1. generate and validate the particles-enabled `C-HI` symmetric run package
-2. run a production-like `kunanyi` no-jet environment/MPI/HDF5 gate
-3. ask Patrick/Stas to inspect the generated `C-HI` package before a long run
-4. run early `C-HI` snapshots and diagnostics at about `1 Myr` cadence
-5. port the first GRAiLE/XRAiSE X-ray map path once a usable snapshot exists
+2. ask Patrick/Stas to inspect the generated `C-HI` package before a long run
+3. run an early, restartable, particles-enabled `C-HI` segment and diagnostics
+   at about `1 Myr` cadence
+4. port the first GRAiLE/XRAiSE X-ray map path once a usable snapshot exists

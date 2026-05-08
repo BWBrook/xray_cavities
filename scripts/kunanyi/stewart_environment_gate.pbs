@@ -1,0 +1,273 @@
+#!/bin/bash -l
+#PBS -N st_env_gate
+#PBS -q normal
+#PBS -l select=1:ncpus=28:mpiprocs=28
+#PBS -l walltime=01:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/stewart_environment_gate.out
+#PBS -e /u/bwbrook/codex_kunanyi/stewart_environment_gate.err
+
+# Production-like no-jet Stewart tabulated environment gate for xray_cavities.
+# Submit from kunanyi after staging the transfer bundle, for example:
+#
+#   qsub -v GATE_CASE=cluster_002003,PLUTO_MAXTIME_HOURS=0.75 \
+#     /u/bwbrook/codex_kunanyi/stage_2026-05-08/scripts/kunanyi/stewart_environment_gate.pbs
+
+set -euo pipefail
+
+export LC_ALL=C
+export LANG=C
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/stage_2026-05-08}"
+GATE_CASE="${GATE_CASE:-cluster_002003}"
+CONFIG_DIR="${CONFIG_DIR:-${STAGE_ROOT}/kunanyi_gate/${GATE_CASE}}"
+PLUTO_DIR="${PLUTO_DIR:-/scratch/bwbrook/git/utas-agn/pluto}"
+JET_SETUP="${JET_SETUP:-/scratch/bwbrook/git/utas-agn/jet-setup}"
+RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_gates/2026-05-08}"
+WORKDIR="${RUN_ROOT}/${GATE_CASE}/${PBS_JOBID:-manual}"
+PROBLEM="${WORKDIR}/problem"
+RESULTS="${STAGE_ROOT}/results/${GATE_CASE}/${PBS_JOBID:-manual}"
+MARKERS="${STAGE_ROOT}/results/${GATE_CASE}/markers"
+PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-0.75}"
+BUILD_JOBS="${BUILD_JOBS:-8}"
+DISABLE_RAW_DBL="${DISABLE_RAW_DBL:-1}"
+
+mkdir -p "$RESULTS" "$MARKERS"
+
+copy_small_artifacts() {
+  mkdir -p "$RESULTS/logs"
+  if [ -d "$PROBLEM/outputs" ]; then
+    du -sh "$PROBLEM/outputs" > "$RESULTS/output_volume.txt" 2>&1 || true
+    find -L "$PROBLEM/outputs" -maxdepth 2 -type f | sort > "$RESULTS/output_files.txt" 2>/dev/null || true
+    cp "$PROBLEM/outputs"/*.out "$RESULTS"/ 2>/dev/null || true
+    cp "$PROBLEM/outputs"/grid.out "$RESULTS"/ 2>/dev/null || true
+    cp "$PROBLEM/outputs"/restart.out "$RESULTS"/ 2>/dev/null || true
+    cp "$PROBLEM/outputs/logs"/* "$RESULTS/logs"/ 2>/dev/null || true
+  fi
+  cp "$PROBLEM"/*.out "$RESULTS"/ 2>/dev/null || true
+  cp "$PROBLEM"/grid.out "$RESULTS"/ 2>/dev/null || true
+  cp "$PROBLEM"/restart.out "$RESULTS"/ 2>/dev/null || true
+  cp "$PROBLEM"/pluto.ini "$RESULTS"/ 2>/dev/null || true
+  cp "$PROBLEM"/environment.ini "$RESULTS"/ 2>/dev/null || true
+  cp "$PROBLEM"/src/definitions.h "$RESULTS"/ 2>/dev/null || true
+  cp "$PROBLEM"/src/definitions_usr.h "$RESULTS"/ 2>/dev/null || true
+}
+
+finish() {
+  local rc=$?
+  local end_time
+  end_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  echo "JOB_END=${end_time}"
+  echo "EXIT_CODE=${rc}"
+  copy_small_artifacts
+  if [ "$rc" -eq 0 ]; then
+    {
+      echo "status=done"
+      echo "case=${GATE_CASE}"
+      echo "jobid=${PBS_JOBID:-manual}"
+      echo "finished_utc=${end_time}"
+    } > "${MARKERS}/DONE.${GATE_CASE}"
+    rm -f "${MARKERS}/FAILED.${GATE_CASE}"
+  else
+    {
+      echo "status=failed"
+      echo "case=${GATE_CASE}"
+      echo "jobid=${PBS_JOBID:-manual}"
+      echo "exit_code=${rc}"
+      echo "finished_utc=${end_time}"
+    } > "${MARKERS}/FAILED.${GATE_CASE}"
+  fi
+  exit "$rc"
+}
+trap finish EXIT
+
+require_file() {
+  local path="$1"
+  if [ ! -f "$path" ]; then
+    echo "[error] required file missing: $path" >&2
+    exit 1
+  fi
+}
+
+patch_define() {
+  local path="$1"
+  local key="$2"
+  local value="$3"
+  python3 - "$path" "$key" "$value" <<'PY'
+from pathlib import Path
+import sys
+
+path = Path(sys.argv[1])
+key = sys.argv[2]
+value = sys.argv[3]
+lines = path.read_text().splitlines()
+out = []
+replaced = False
+for line in lines:
+    parts = line.split()
+    if len(parts) >= 2 and parts[0] == "#define" and parts[1] == key:
+        out.append(f"#define  {key.ljust(28)}   {value}")
+        replaced = True
+    else:
+        out.append(line)
+if not replaced:
+    raise SystemExit(f"missing define {key} in {path}")
+path.write_text("\n".join(out) + "\n")
+PY
+}
+
+disable_raw_dbl_output() {
+  local ini="$1"
+  python3 - "$ini" <<'PY'
+from pathlib import Path
+import sys
+
+path = Path(sys.argv[1])
+lines = []
+for line in path.read_text().splitlines():
+    if line.startswith("dbl              "):
+        lines.append("dbl              -1.0  -1   single_file")
+    else:
+        lines.append(line)
+path.write_text("\n".join(lines) + "\n")
+PY
+}
+
+sync_root_outputs_into_output_dir() {
+  mkdir -p "$PROBLEM/outputs/logs"
+  for name in dbl.h5.out dbl.out grid.out restart.out; do
+    [ -e "${PROBLEM}/${name}" ] || continue
+    ln -sfn "../${name}" "${PROBLEM}/outputs/${name}"
+  done
+  for path in "$PROBLEM"/data.*.dbl.h5 "$PROBLEM"/data.*.dbl.xmf "$PROBLEM"/data.*.dbl; do
+    [ -e "$path" ] || continue
+    ln -sfn "../$(basename "$path")" "${PROBLEM}/outputs/$(basename "$path")"
+  done
+}
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+export HDF5_DIR="${HDF5_DIR:-${EBROOTHDF5:-/share/apps/software/HDF5/1.14.0-gompi-2023a}}"
+export PLUTO_DIR
+
+require_file "${CONFIG_DIR}/pluto.ini"
+require_file "${CONFIG_DIR}/environment.ini"
+require_file "${CONFIG_DIR}/local_make"
+
+if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+  NRANKS=$(wc -l < "$PBS_NODEFILE")
+  cp "$PBS_NODEFILE" "$RESULTS/pbs_nodefile.txt"
+else
+  NRANKS="${NRANKS:-28}"
+fi
+
+{
+  echo "JOB_START=$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+  echo "HOST=$(hostname -f)"
+  echo "PBS_JOBID=${PBS_JOBID:-}"
+  echo "PBS_QUEUE=${PBS_QUEUE:-}"
+  echo "PBS_NODEFILE=${PBS_NODEFILE:-}"
+  echo "GATE_CASE=${GATE_CASE}"
+  echo "CONFIG_DIR=${CONFIG_DIR}"
+  echo "WORKDIR=${WORKDIR}"
+  echo "NRANKS=${NRANKS}"
+  echo "MODULES=${LOADEDMODULES:-}"
+  echo "HDF5_DIR=${HDF5_DIR}"
+  echo "PLUTO_MAXTIME_HOURS=${PLUTO_MAXTIME_HOURS}"
+  echo "mpicc=$(command -v mpicc)"
+  echo "mpirun=$(command -v mpirun)"
+  echo "python3=$(command -v python3)"
+} | tee "$RESULTS/job_start.txt"
+
+rm -rf "$WORKDIR"
+mkdir -p "$PROBLEM"
+(
+  cd "$PROBLEM"
+  "$JET_SETUP/tools/setup-problem"
+)
+
+cp "$CONFIG_DIR/pluto.ini" "$PROBLEM/pluto.ini"
+cp "$CONFIG_DIR/environment.ini" "$PROBLEM/environment.ini"
+cp "$CONFIG_DIR"/tabulated_cosmo_*.csv "$PROBLEM"/
+cp "$CONFIG_DIR/local_make" "$PROBLEM/src/local_make"
+cp "$PROBLEM/pluto.ini" "$PROBLEM/src/pluto.ini"
+printf "ARCH         = Kunanyi.defs\n" > "$PROBLEM/src/makefile"
+
+if [ "$DISABLE_RAW_DBL" = "1" ]; then
+  disable_raw_dbl_output "$PROBLEM/pluto.ini"
+  cp "$PROBLEM/pluto.ini" "$PROBLEM/src/pluto.ini"
+fi
+
+patch_define "$PROBLEM/src/definitions.h" PHYSICS HD
+patch_define "$PROBLEM/src/definitions.h" DIMENSIONS 3
+patch_define "$PROBLEM/src/definitions.h" GEOMETRY CARTESIAN
+patch_define "$PROBLEM/src/definitions.h" BODY_FORCE VECTOR
+patch_define "$PROBLEM/src/definitions.h" PARTICLES NO
+patch_define "$PROBLEM/src/definitions.h" EOS IDEAL
+patch_define "$PROBLEM/src/definitions_usr.h" DENSITY_PROFILE ENV_TABULATED
+patch_define "$PROBLEM/src/definitions_usr.h" JET_INJECTION_ROTATED NO
+patch_define "$PROBLEM/src/definitions_usr.h" JET_RELATIVISTIC_DENSITY NO
+patch_define "$PROBLEM/src/definitions_usr.h" PARTICLES_LP_RAISE NO
+
+python3 - <<PY
+from pathlib import Path
+path = Path("${PLUTO_DIR}/Tools/Python/menu.py")
+text = path.read_text()
+needle = "raw_input = input"
+if needle not in text:
+    text = text.replace(
+        "import os, sys, traceback, time, string",
+        "import os, sys, traceback, time, string\\nraw_input = input",
+        1,
+    )
+    path.write_text(text)
+PY
+
+(
+  cd "$PROBLEM/src"
+  python3 - <<PY
+import sys
+sys.path.append("${PLUTO_DIR}/Tools/Python")
+from make_problem import MakeProblem
+MakeProblem("${PROBLEM}/src", "${PLUTO_DIR}", 1, 1)
+PY
+)
+
+grep -E "^(ARCH|PLUTO_DIR|PARALLEL|USE_HDF5|CC)" "$PROBLEM/src/makefile" | tee "$RESULTS/makefile_summary.txt" || true
+make -C "$PROBLEM/src" clean
+make -C "$PROBLEM/src" -j"$BUILD_JOBS"
+cp "$PROBLEM/src/pluto" "$PROBLEM/pluto"
+
+mkdir -p "$PROBLEM/outputs/logs"
+RUN_ARGS=(-i pluto.ini -e environment.ini)
+if [ -n "$PLUTO_MAXTIME_HOURS" ] && [ "$PLUTO_MAXTIME_HOURS" != "0" ]; then
+  RUN_ARGS+=(-maxtime "$PLUTO_MAXTIME_HOURS")
+fi
+
+(
+  cd "$PROBLEM"
+  mpirun -np "$NRANKS" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
+)
+
+sync_root_outputs_into_output_dir
+
+if [ ! -f "$PROBLEM/outputs/dbl.h5.out" ]; then
+  echo "[error] expected dbl.h5.out missing" >&2
+  find -L "$PROBLEM/outputs" -maxdepth 2 -type f | sort >&2 || true
+  exit 1
+fi
+if ! ls "$PROBLEM/outputs"/data.*.dbl.h5 >/dev/null 2>&1; then
+  echo "[error] expected data.*.dbl.h5 output missing" >&2
+  find -L "$PROBLEM/outputs" -maxdepth 2 -type f | sort >&2 || true
+  exit 1
+fi
+
+echo "--- output volume ---"
+du -sh "$PROBLEM/outputs"
+echo "--- output files ---"
+find -L "$PROBLEM/outputs" -maxdepth 2 -type f | sort | sed -n "1,120p"
+echo "--- dbl.h5.out ---"
+sed -n "1,120p" "$PROBLEM/outputs/dbl.h5.out"
+echo "--- pluto log tail ---"
+tail -120 "$PROBLEM/outputs/logs/pluto_${PBS_JOBID:-manual}.log"

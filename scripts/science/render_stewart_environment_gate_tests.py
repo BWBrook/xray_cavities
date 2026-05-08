@@ -218,6 +218,8 @@ X3-end           reflective
 
 [Static Grid Output]
 
+log_dir          ./outputs/logs
+output_dir       ./outputs
 uservar          0
 dbl              {output_interval:.8f}  -1   single_file
 flt              -1.0  -1   single_file
