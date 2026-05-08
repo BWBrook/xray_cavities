@@ -586,6 +586,46 @@ def render_validation(
     }
 
 
+def stage_environment_assets(
+    case_dir: Path,
+    env: dict[str, str | bool],
+) -> dict[str, str | bool]:
+    """Copy visible environment assets into the launch bundle.
+
+    The generated `environment.ini` should be runnable after the case directory
+    is staged to a remote host. Keep the original source paths in the manifest
+    for provenance, but point PLUTO at local filenames when the assets are
+    visible on this machine.
+    """
+
+    staged = dict(env)
+    if staged.get("status") != "provided":
+        return staged
+
+    if staged.get("kind") == "tabulated":
+        source = Path(str(staged["tabulated_data"])).expanduser()
+        staged["source_tabulated_data"] = str(staged["tabulated_data"])
+        if source.exists():
+            target = case_dir / source.name
+            shutil.copy2(source, target)
+            staged["tabulated_data"] = target.name
+        return staged
+
+    if staged.get("kind") == "external":
+        for key, source_key in (
+            ("external_data", "source_external_data"),
+            ("external_grid", "source_external_grid"),
+        ):
+            source = Path(str(staged[key])).expanduser()
+            staged[source_key] = str(staged[key])
+            if source.exists():
+                target = case_dir / source.name
+                shutil.copy2(source, target)
+                staged[key] = target.name
+
+    return staged
+
+
 def render_case(
     root: Path,
     case: CaseSpec,
@@ -600,6 +640,7 @@ def render_case(
 ) -> None:
     case_dir = root / case.case_id / variant
     case_dir.mkdir(parents=True, exist_ok=True)
+    launch_env = stage_environment_assets(case_dir, env)
     active_time_myr = 0.0 if variant == "env_gate" else duration_myr
     snapshot_interval_code = snapshot_interval_myr * CODE_TIME_PER_MYR
     dbl_h5_interval_code = dbl_h5_interval_myr * CODE_TIME_PER_MYR
@@ -608,7 +649,7 @@ def render_case(
         "case_id": case.case_id,
         "run_name": f"{case.case_id}_{variant}",
         "variant": variant,
-        "environment": env,
+        "environment": launch_env,
         "science_intent": {
             "role": case.role,
             "jet_power_erg_s_one_sided": case.jet_power_erg_s,
@@ -688,7 +729,7 @@ def render_case(
             "views_deg": VIEWS_DEG,
             "views_are_post_processing_only": True,
         },
-        "environment": env,
+        "environment": launch_env,
         "truth_conventions": {
             "jet_power_is_one_sided": True,
             "injected_energy": injected_energy(
@@ -713,7 +754,7 @@ def render_case(
         particles_per_injection,
     )
     (case_dir / "pluto.ini").write_text(pluto_text)
-    (case_dir / "environment.ini").write_text(render_environment_ini(env))
+    (case_dir / "environment.ini").write_text(render_environment_ini(launch_env))
     write_json(case_dir / "run_definition.json", run_definition)
     write_json(case_dir / "case_manifest.json", manifest)
     write_json(
@@ -732,7 +773,7 @@ def render_case(
     write_json(
         case_dir / "definitions_overrides.json",
         definitions_overrides(
-            env,
+            launch_env,
             variant,
             particle_interval_myr,
             particles_per_injection,

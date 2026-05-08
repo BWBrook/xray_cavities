@@ -261,6 +261,9 @@ if [ ! -x "${PROBLEM}/pluto" ]; then
   cp "${CASE_CONFIG_DIR}/environment.ini" "${PROBLEM}/environment.ini"
   cp "${CASE_CONFIG_DIR}/case_manifest.json" "${PROBLEM}/case_manifest.json"
   cp "${CASE_CONFIG_DIR}/definitions_overrides.json" "${PROBLEM}/definitions_overrides.json"
+  cp "${CASE_CONFIG_DIR}"/*.csv "${PROBLEM}/" 2>/dev/null || true
+  cp "${CASE_CONFIG_DIR}"/*.dbl "${PROBLEM}/" 2>/dev/null || true
+  cp "${CASE_CONFIG_DIR}"/*.grid.out "${PROBLEM}/" 2>/dev/null || true
   cp "${PROBLEM}/pluto.ini" "${PROBLEM}/src/pluto.ini"
 
   apply_definition_overrides "$PROBLEM" "${PROBLEM}/definitions_overrides.json"
