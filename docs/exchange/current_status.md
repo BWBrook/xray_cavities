@@ -419,12 +419,30 @@ Patrick/Stas configuration review applied on 2026-05-08:
   `build/science/kunanyi_stage_2026-05-08/stewart_gate_compact_results_2026-05-08.tar.gz`
   with SHA-256
   `adb099cd1557b192d23f48b6d5a1976225a607ebce9df7c2854b66d44a125c80`
-- next live action is to prepare an early, restartable, particles-enabled
-  `C-HI` segment using the locked configuration package and the production
-  template's `-maxtime`/`dbl.h5` restart path
+- the first jet-bearing, particles-enabled `C-HI` one-node segment is now
+  running on `kunanyi`:
+  - active job id: `690426.kunanyi-ohpc`
+  - job name: `c_hi_1node`
+  - resources: `select=1:ncpus=28:mpiprocs=28`
+  - walltime: `02:00:00`; `PLUTO_MAXTIME_HOURS=1.5`
+  - run root:
+    `/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment`
+  - pre-handoff poll: `job_state = R`, `exec_host = n033/0*28`,
+    `resources_used.walltime = 00:11:29`, `resources_used.mem = 30426628kb`
+  - initial `dbl.h5`, initial `flt.h5`, and `particles.0000.dbl` were
+    written, and the rank-0 log reached `Starting computation`
+- two useful launch lessons were captured:
+  - the production template needs `-include Particles/makefile` when
+    `PARTICLES_LP` is enabled
+  - the full `stewart_stretched_250` grid parses as roughly
+    `960 x 960 x 1014` cells and is too large for a one-node particle
+    shakedown; use `kunanyi_single_node_250` for this stage
+- next live action is to wait for the PBS email for `690426.kunanyi-ohpc`,
+  then inspect the `DONE`/`FAILED` marker and output manifests
 - details are in:
   - `docs/exchange/logs/2026-05-08-patrick-stas-c-hi-feedback.md`
   - `docs/exchange/logs/2026-05-08-kunanyi-stewart-environment-gates.md`
+  - `docs/exchange/logs/2026-05-08-c-hi-single-node-particle-segment.md`
 
 ## Project Structure
 

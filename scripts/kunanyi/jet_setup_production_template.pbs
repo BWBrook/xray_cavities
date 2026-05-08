@@ -144,6 +144,7 @@ import sys
 
 problem = Path(sys.argv[1])
 (problem / "src" / "local_make").write_text(
+    "-include Particles/makefile\n"
     "OBJ += coordinates.o jet.o units.o environment_utilities.o environment.o "
     "tools_usr.o read_external_pressure.o galaxy.o\n"
     "HEADERS += definitions_usr.h pluto_usr.h structs_usr.h coordinates.h jet.h "

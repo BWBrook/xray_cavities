@@ -121,6 +121,26 @@ GRIDS = {
             "dx~1.6930 kpc in the cell spanning 200 kpc."
         ),
     },
+    "kunanyi_single_node_250": {
+        "description": (
+            "single-node C-HI particle shakedown grid: full +/-200 kpc X1/X2 "
+            "and +/-250 kpc X3 extents with the original 0.05 kpc central jet "
+            "resolution retained, but reduced outer stretch counts so the "
+            "problem fits one 128 GB Kunanyi node. This is not the final "
+            "production grid."
+        ),
+        "x1_line": "X1-grid     5   -200 72 s -10 80 s -2.5 100 u 2.5 80 s 10 72 s 200",
+        "x2_line": "X2-grid     5   -200 72 s -10 80 s -2.5 100 u 2.5 80 s 10 72 s 200",
+        "x3_line": "X3-grid     5   -250 96 s -10 80 s -2.5 100 u 2.5 80 s 10 96 s 250",
+        "first_dt": "1.0e-5",
+        "source": "derived from stewart_stretched_250 after one-node particle memory gate",
+        "resolution_note": (
+            "Central -2.5..2.5 kpc region remains 100 uniform cells, so "
+            "dx=0.05 kpc around the inlet. Outer stretches are intentionally "
+            "coarser than the production grid to keep this as a single-node "
+            "build/run/restart rehearsal."
+        ),
+    },
 }
 
 

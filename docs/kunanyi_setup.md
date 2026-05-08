@@ -668,7 +668,21 @@ radially averaged environments on `2026-05-08`:
 - `group_002031`: `690371.kunanyi-ohpc`, exit status `0`, walltime
   `00:45:22`
 
-The next run should be an early, restartable, particles-enabled `C-HI` segment,
-using the locked generated case package and `-maxtime`/`dbl.h5` restart path.
-Keep the first segment short enough to inspect morphology, output cadence,
-particle files, and restart behaviour before launching a long production job.
+The first jet-bearing `C-HI` particles segment was submitted on `2026-05-08`
+as `690426.kunanyi-ohpc`. It uses one Kunanyi node, `28` MPI ranks, a
+`02:00:00` walltime, and `PLUTO_MAXTIME_HOURS=1.5`.
+
+Two practical launch lessons are now folded into the workflow:
+
+- particle builds need the generated problem `local_make` to include
+  `Particles/makefile`; otherwise `PARTICLES_LP` builds fail on
+  `particles.h`
+- the full `stewart_stretched_250` grid is too large for a one-node particle
+  shakedown, parsing as roughly `960 x 960 x 1014` cells; use the
+  `kunanyi_single_node_250` grid for one-node rehearsal and keep the full grid
+  for multi-node production planning
+
+At handoff, `690426.kunanyi-ohpc` had written initial `dbl.h5`, `flt.h5`, and
+`particles.0000.dbl` outputs and had reached `Starting computation`. Wait for
+the PBS completion email, then inspect the run markers and output manifests
+before deciding whether to continue/restart or promote to a larger job.
