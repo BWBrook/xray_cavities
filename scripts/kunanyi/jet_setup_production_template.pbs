@@ -1,3 +1,4 @@
+#!/bin/bash -l
 #PBS -N xray_cavity_prod
 #PBS -q normal
 #PBS -l select=1:ncpus=28:mpiprocs=28
@@ -36,6 +37,7 @@ LOG_DIR="${WORKDIR}/job_logs"
 BUILD_JOBS="${BUILD_JOBS:-8}"
 RESTART_POLICY="${RESTART_POLICY:-auto}"  # auto, fresh, or force-fresh
 RESTART_PARTICLES="${RESTART_PARTICLES:-0}"
+PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-47.5}"
 
 mkdir -p "$MARKER_DIR" "$LOG_DIR"
 DONE_MARKER="${MARKER_DIR}/DONE"
@@ -152,12 +154,36 @@ problem = Path(sys.argv[1])
 PY
 }
 
-latest_dbl_index() {
-  local dbl_out="$1"
-  if [ ! -f "$dbl_out" ]; then
+latest_output_index() {
+  local out_file="$1"
+  if [ ! -f "$out_file" ]; then
     return 0
   fi
-  awk 'NF && $1 ~ /^[0-9]+$/ {n=$1} END{if (n != "") print n}' "$dbl_out"
+  awk 'NF && $1 ~ /^[0-9]+$/ {n=$1} END{if (n != "") print n}' "$out_file"
+}
+
+latest_restart_output() {
+  local source=""
+  local index=""
+  local candidate
+
+  candidate=$(latest_output_index "${PROBLEM}/outputs/dbl.h5.out" || true)
+  if [ -n "${candidate:-}" ]; then
+    source="dbl.h5"
+    index="$candidate"
+  fi
+
+  candidate=$(latest_output_index "${PROBLEM}/outputs/dbl.out" || true)
+  if [ -n "${candidate:-}" ]; then
+    if [ -z "$index" ] || [ "$candidate" -gt "$index" ]; then
+      source="dbl"
+      index="$candidate"
+    fi
+  fi
+
+  if [ -n "$index" ]; then
+    echo "${source} ${index}"
+  fi
 }
 
 log_source_revisions() {
@@ -200,6 +226,7 @@ echo "CASE_CONFIG_DIR=${CASE_CONFIG_DIR}"
 echo "WORKDIR=${WORKDIR}"
 echo "MODULES=${LOADEDMODULES:-}"
 echo "HDF5_DIR=${HDF5_DIR}"
+echo "PLUTO_MAXTIME_HOURS=${PLUTO_MAXTIME_HOURS}"
 echo "mpicc=$(command -v mpicc)"
 echo "mpirun=$(command -v mpirun)"
 echo "python3=$(command -v python3)"
@@ -277,17 +304,25 @@ log_source_revisions
 
 mkdir -p "${PROBLEM}/outputs/logs"
 RUN_ARGS=(-i pluto.ini -e environment.ini)
+if [ -n "$PLUTO_MAXTIME_HOURS" ] && [ "$PLUTO_MAXTIME_HOURS" != "0" ]; then
+  RUN_ARGS+=(-maxtime "$PLUTO_MAXTIME_HOURS")
+fi
 RUN_KIND="fresh"
 
 if [ "$RESTART_POLICY" = "auto" ]; then
-  LATEST_OUTPUT=$(latest_dbl_index "${PROBLEM}/outputs/dbl.out" || true)
-  if [ -n "${LATEST_OUTPUT:-}" ] && [ "$LATEST_OUTPUT" != "0" ]; then
-    if [ "$CASE_VARIANT" = "particles" ] && [ "$RESTART_PARTICLES" = "1" ]; then
+  LATEST_RESTART=$(latest_restart_output || true)
+  if [ -n "${LATEST_RESTART:-}" ]; then
+    LATEST_SOURCE=${LATEST_RESTART%% *}
+    LATEST_OUTPUT=${LATEST_RESTART##* }
+    if [ "$LATEST_SOURCE" = "dbl.h5" ]; then
+      RUN_ARGS+=(-h5restart "$LATEST_OUTPUT")
+      RUN_KIND="h5_restart_${LATEST_OUTPUT}"
+    elif [ "$CASE_VARIANT" = "particles" ] && [ "$RESTART_PARTICLES" = "1" ]; then
       RUN_ARGS+=(-restart "$LATEST_OUTPUT")
-      RUN_KIND="particle_restart_${LATEST_OUTPUT}"
+      RUN_KIND="dbl_particle_restart_${LATEST_OUTPUT}"
     else
       RUN_ARGS+=(-frestart "$LATEST_OUTPUT")
-      RUN_KIND="fluid_restart_${LATEST_OUTPUT}"
+      RUN_KIND="dbl_fluid_restart_${LATEST_OUTPUT}"
     fi
   fi
 elif [ "$RESTART_POLICY" != "fresh" ] && [ "$RESTART_POLICY" != "force-fresh" ]; then
@@ -303,7 +338,10 @@ echo "RUN_ARGS=${RUN_ARGS[*]}"
   mpirun -np "$NRANKS" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
 )
 
-require_file "${PROBLEM}/outputs/dbl.out"
+if [ ! -f "${PROBLEM}/outputs/dbl.h5.out" ] && [ ! -f "${PROBLEM}/outputs/dbl.out" ]; then
+  echo "[error] neither dbl.h5.out nor dbl.out exists after PLUTO run" >&2
+  exit 1
+fi
 if [ ! -f "${PROBLEM}/outputs/restart.out" ] && [ ! -f "${PROBLEM}/restart.out" ]; then
   echo "[warning] restart.out not found in problem or output directory" >&2
 fi
@@ -323,5 +361,10 @@ fi
 
 echo "--- output volume ---"
 du -sh "${PROBLEM}/outputs" 2>/dev/null || true
-echo "--- final dbl.out tail ---"
-tail -n 5 "${PROBLEM}/outputs/dbl.out"
+if [ -f "${PROBLEM}/outputs/dbl.h5.out" ]; then
+  echo "--- final dbl.h5.out tail ---"
+  tail -n 5 "${PROBLEM}/outputs/dbl.h5.out"
+else
+  echo "--- final dbl.out tail ---"
+  tail -n 5 "${PROBLEM}/outputs/dbl.out"
+fi

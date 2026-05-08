@@ -19,10 +19,15 @@ from typing import Iterable
 SECONDS_PER_MYR = 1_000_000.0 * 365.25 * 24.0 * 3600.0
 DEFAULT_DURATION_MYR = 50.0
 DEFAULT_SNAPSHOT_INTERVAL_MYR = 1.0
-DEFAULT_CHECKPOINT_INTERVAL_MYR = 5.0
+DEFAULT_DBL_H5_INTERVAL_MYR = 5.0
+DEFAULT_PARTICLE_INTERVAL_MYR = 0.01
+DEFAULT_PARTICLES_PER_INJECTION = 16.0
 CODE_TIME_PER_MYR = 306.601393788
 EARLY_DIAGNOSTIC_SNAPSHOTS_MYR = [1.0, 2.0, 3.0, 4.0, 5.0]
 VIEWS_DEG = [0.0, 45.0, 90.0]
+JET_CHI = "1.0"
+JET_INJECTION_HEIGHT_KPC = "0.75"
+JET_INITIAL_RADIUS_KPC = "0.1"
 
 
 @dataclass(frozen=True)
@@ -80,6 +85,41 @@ GRIDS = {
         "x2": (-24.0, 96, 24.0),
         "x3": (-36.0, 144, 36.0),
         "first_dt": "1.0e-3",
+    },
+    "stewart_stretched_200": {
+        "description": (
+            "stretched CosmoDRAGoN-style grid copied from the old Stewart "
+            "cluster 002_003/F.ini template; retained for provenance only "
+            "after Patrick/Stas requested an extended X3 domain"
+        ),
+        "x1_line": "X1-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200",
+        "x2_line": "X2-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200",
+        "x3_line": "X3-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200",
+        "first_dt": "1.0e-5",
+        "source": "env/extracted/inis/002_003/F.ini",
+        "open_issue": (
+            "Superseded for C-HI by stewart_stretched_250 after the "
+            "2026-05-08 Patrick/Stas feedback."
+        ),
+    },
+    "stewart_stretched_250": {
+        "description": (
+            "C-HI supervisor-approved grid after the 2026-05-08 feedback: "
+            "X1/X2 retain the historical +/-200 kpc Stewart patching, while "
+            "X3 is extended to +/-250 kpc with 357 outer stretch cells on "
+            "each side so the cell size near 200 kpc matches the old grid."
+        ),
+        "x1_line": "X1-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200",
+        "x2_line": "X2-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200",
+        "x3_line": "X3-grid     5   -250 357 s -10 100 s -2.5 100 u 2.5 100 s 10 357 s 250",
+        "first_dt": "1.0e-5",
+        "source": "env/extracted/inis/002_003/F.ini plus Patrick/Stas 2026-05-08 feedback",
+        "resolution_note": (
+            "Using the PLUTO stretched-grid recurrence, the old 10-200 kpc "
+            "outer patch has dx~1.6923 kpc at 200 kpc. Extending X3 from "
+            "10 to 250 kpc with the same central dx and N=357 gives "
+            "dx~1.6930 kpc in the cell spanning 200 kpc."
+        ),
     },
 }
 
@@ -167,12 +207,38 @@ def parse_args() -> argparse.Namespace:
         help="Physical science-output cadence in Myr, rendered in PLUTO code time.",
     )
     parser.add_argument(
-        "--checkpoint-interval-myr",
+        "--dbl-h5-interval-myr",
+        dest="dbl_h5_interval_myr",
         type=float,
-        default=DEFAULT_CHECKPOINT_INTERVAL_MYR,
-        help="Physical restart-checkpoint cadence in Myr, rendered in PLUTO code time.",
+        default=None,
+        help=(
+            "Physical dbl.h5 cadence in Myr, rendered in PLUTO code time. "
+            "Static-grid PLUTO uses dbl.h5 files for restarts."
+        ),
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--checkpoint-interval-myr",
+        dest="dbl_h5_interval_myr",
+        type=float,
+        default=None,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--particle-interval-myr",
+        type=float,
+        default=DEFAULT_PARTICLE_INTERVAL_MYR,
+        help="Particle output and injection cadence in physical Myr.",
+    )
+    parser.add_argument(
+        "--particles-per-injection",
+        type=float,
+        default=DEFAULT_PARTICLES_PER_INJECTION,
+        help="Second field of Nparticles for the particle-enabled variant.",
+    )
+    args = parser.parse_args()
+    if args.dbl_h5_interval_myr is None:
+        args.dbl_h5_interval_myr = DEFAULT_DBL_H5_INTERVAL_MYR
+    return args
 
 
 def selected_variants(value: str) -> list[str]:
@@ -239,10 +305,12 @@ def environment_for(case: CaseSpec, args: argparse.Namespace) -> dict[str, str |
 
 
 def render_environment_ini(env: dict[str, str | bool]) -> str:
+    external_data = env["external_data"] or "UNUSED_FOR_TABULATED_ENVIRONMENT.dbl"
+    external_grid = env["external_grid"] or "UNUSED_FOR_TABULATED_ENVIRONMENT.grid.out"
     return f"""[External Environment]
 
-ExternalData {env["external_data"]}
-ExternalGrid {env["external_grid"]}
+ExternalData {external_data}
+ExternalGrid {external_grid}
 
 [Tabulated Environment]
 
@@ -250,14 +318,29 @@ TabulatedData {env["tabulated_data"]}
 """
 
 
-def particle_settings(variant: str) -> dict[str, str]:
+def fmt_number(value: float) -> str:
+    text = f"{value:.8g}"
+    if "e" not in text and "." not in text:
+        text += ".0"
+    return text
+
+
+def particle_settings(
+    variant: str,
+    particle_interval_myr: float,
+    particles_per_injection: float,
+) -> dict[str, str]:
+    particle_interval_code = particle_interval_myr * CODE_TIME_PER_MYR
+    inject_frequency = fmt_number(particle_interval_myr)
     if variant == "particles":
         return {
             "particles_define": "PARTICLES_LP",
             "particles_raise": "YES",
-            "nparticles_line": "Nparticles          -1    16.0",
-            "particles_dbl_line": "particles_dbl       {snapshot_code:.8f}  -1",
-            "inject_frequency": "1.0",
+            "nparticles_line": (
+                f"Nparticles          -1    {fmt_number(particles_per_injection)}"
+            ),
+            "particles_dbl_line": f"particles_dbl       {particle_interval_code:.8f}  -1",
+            "inject_frequency": inject_frequency,
         }
 
     return {
@@ -265,7 +348,7 @@ def particle_settings(variant: str) -> dict[str, str]:
         "particles_raise": "NO",
         "nparticles_line": "Nparticles          -1    -1",
         "particles_dbl_line": "particles_dbl       -1.0  -1",
-        "inject_frequency": "1.0",
+        "inject_frequency": inject_frequency,
     }
 
 
@@ -275,24 +358,34 @@ def render_pluto_ini(
     grid_name: str,
     duration_myr: float,
     snapshot_interval_myr: float,
-    checkpoint_interval_myr: float,
+    dbl_h5_interval_myr: float,
+    particle_interval_myr: float,
+    particles_per_injection: float,
 ) -> str:
     grid = GRIDS[grid_name]
-    particles = particle_settings(variant)
-    x1_beg, x1_n, x1_end = grid["x1"]
-    x2_beg, x2_n, x2_end = grid["x2"]
-    x3_beg, x3_n, x3_end = grid["x3"]
+    particles = particle_settings(variant, particle_interval_myr, particles_per_injection)
+    if "x1_line" in grid:
+        x1_line = str(grid["x1_line"])
+        x2_line = str(grid["x2_line"])
+        x3_line = str(grid["x3_line"])
+    else:
+        x1_beg, x1_n, x1_end = grid["x1"]
+        x2_beg, x2_n, x2_end = grid["x2"]
+        x3_beg, x3_n, x3_end = grid["x3"]
+        x1_line = f"X1-grid  1  {x1_beg}   {x1_n}  u   {x1_end}"
+        x2_line = f"X2-grid  1  {x2_beg}   {x2_n}  u   {x2_end}"
+        x3_line = f"X3-grid  1  {x3_beg}   {x3_n}  u   {x3_end}"
     tstop_code = duration_myr * CODE_TIME_PER_MYR
     snapshot_code = snapshot_interval_myr * CODE_TIME_PER_MYR
-    checkpoint_code = checkpoint_interval_myr * CODE_TIME_PER_MYR
+    dbl_h5_code = dbl_h5_interval_myr * CODE_TIME_PER_MYR
     jet_end_time_myr = 0.0 if variant == "env_gate" else duration_myr
     jet_active_time_myr = 0.0 if variant == "env_gate" else duration_myr
 
     return f"""[Grid]
 
-X1-grid  1  {x1_beg}   {x1_n}  u   {x1_end}
-X2-grid  1  {x2_beg}   {x2_n}  u   {x2_end}
-X3-grid  1  {x3_beg}   {x3_n}  u   {x3_end}
+{x1_line}
+{x2_line}
+{x3_line}
 
 [Chombo Refinement]
 
@@ -330,10 +423,10 @@ X3-end           outflow
 log_dir          ./outputs/logs
 output_dir       ./outputs
 uservar          0
-dbl              {snapshot_code:.8f}  -1   single_file
+dbl              -1.0   -1   single_file
 flt              -1.0   -1   single_file
-dbl.h5           {snapshot_code:.8f}  -1
-flt.h5           -1.0   -1
+dbl.h5           {dbl_h5_code:.8f}  -1
+flt.h5           {snapshot_code:.8f}  -1
 vtk              -1.0   -1   single_file
 tab              -1.0   -1
 ppm              -1.0   -1
@@ -343,13 +436,13 @@ analysis         -1.0   -1
 
 [Chombo HDF5 output]
 
-Checkpoint_interval  {checkpoint_code:.8f}  0
+Checkpoint_interval  -1.0  0
 Plot_interval        -1.0  0
 
 [Particles]
 
 {particles["nparticles_line"]}
-{particles["particles_dbl_line"].format(snapshot_code=snapshot_code)}
+{particles["particles_dbl_line"]}
 particles_flt       -1.0  -1
 particles_vtk       -1.0  -1
 particles_tab       -1.0  -1
@@ -358,11 +451,11 @@ particles_tab       -1.0  -1
 
 JET_PWR                     {case.jet_power_erg_s:.6g}
 JET_SPD                     {case.jet_speed_c}
-JET_CHI                     100.0
+JET_CHI                     {JET_CHI}
 JET_OA_PRIMARY              15.0
 JET_OA_SECONDARY            15.0
-JET_INJECTION_HEIGHT        1.0
-JET_INITIAL_RADIUS          1.0
+JET_INJECTION_HEIGHT        {JET_INJECTION_HEIGHT_KPC}
+JET_INITIAL_RADIUS          {JET_INITIAL_RADIUS_KPC}
 JET_X1O                     0.0
 JET_X2O                     0.0
 JET_X3O                     0.0
@@ -384,8 +477,13 @@ STELLAR_MASS                0.0
 """
 
 
-def definitions_overrides(env: dict[str, str | bool], variant: str) -> dict[str, dict[str, str]]:
-    particles = particle_settings(variant)
+def definitions_overrides(
+    env: dict[str, str | bool],
+    variant: str,
+    particle_interval_myr: float,
+    particles_per_injection: float,
+) -> dict[str, dict[str, str]]:
+    particles = particle_settings(variant, particle_interval_myr, particles_per_injection)
     return {
         "definitions.h": {
             "PHYSICS": "HD",
@@ -417,11 +515,11 @@ def write_json(path: Path, payload: object) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
 
 
-def pluto_first_value(text: str, key: str) -> str | None:
+def pluto_value(text: str, key: str, field_index: int = 1) -> str | None:
     for line in text.splitlines():
         parts = line.split()
-        if len(parts) >= 2 and parts[0] == key:
-            return parts[1]
+        if len(parts) > field_index and parts[0] == key:
+            return parts[field_index]
     return None
 
 
@@ -431,23 +529,51 @@ def render_validation(
     variant: str,
     duration_myr: float,
     snapshot_interval_myr: float,
-    checkpoint_interval_myr: float,
+    dbl_h5_interval_myr: float,
+    particle_interval_myr: float,
+    particles_per_injection: float,
 ) -> dict[str, object]:
     active_time_myr = 0.0 if variant == "env_gate" else duration_myr
-    checks = {
-        "tstop": f"{duration_myr * CODE_TIME_PER_MYR:.8f}",
-        "dbl": f"{snapshot_interval_myr * CODE_TIME_PER_MYR:.8f}",
-        "dbl.h5": f"{snapshot_interval_myr * CODE_TIME_PER_MYR:.8f}",
-        "Checkpoint_interval": f"{checkpoint_interval_myr * CODE_TIME_PER_MYR:.8f}",
-        "JET_PWR": f"{case.jet_power_erg_s:.6g}",
-        "JET_SPD": str(case.jet_speed_c),
-        "JET_END_TIME": f"{active_time_myr:.8f}",
-        "JET_ACTIVE_TIME": f"{active_time_myr:.8f}",
-    }
-    rendered = {key: pluto_first_value(pluto_text, key) for key in checks}
+    particles = particle_settings(variant, particle_interval_myr, particles_per_injection)
+    checks = [
+        ("tstop", "tstop", 1, f"{duration_myr * CODE_TIME_PER_MYR:.8f}"),
+        ("dbl", "dbl", 1, "-1.0"),
+        (
+            "dbl.h5",
+            "dbl.h5",
+            1,
+            f"{dbl_h5_interval_myr * CODE_TIME_PER_MYR:.8f}",
+        ),
+        (
+            "flt.h5",
+            "flt.h5",
+            1,
+            f"{snapshot_interval_myr * CODE_TIME_PER_MYR:.8f}",
+        ),
+        ("Checkpoint_interval", "Checkpoint_interval", 1, "-1.0"),
+        ("particles_dbl", "particles_dbl", 1, pluto_value(particles["particles_dbl_line"], "particles_dbl") or "-1.0"),
+        ("Nparticles_second_field", "Nparticles", 2, fmt_number(particles_per_injection) if variant == "particles" else "-1"),
+        ("JET_PWR", "JET_PWR", 1, f"{case.jet_power_erg_s:.6g}"),
+        ("JET_SPD", "JET_SPD", 1, str(case.jet_speed_c)),
+        ("JET_CHI", "JET_CHI", 1, JET_CHI),
+        ("JET_INJECTION_HEIGHT", "JET_INJECTION_HEIGHT", 1, JET_INJECTION_HEIGHT_KPC),
+        ("JET_INITIAL_RADIUS", "JET_INITIAL_RADIUS", 1, JET_INITIAL_RADIUS_KPC),
+        ("JET_END_TIME", "JET_END_TIME", 1, f"{active_time_myr:.8f}"),
+        ("JET_ACTIVE_TIME", "JET_ACTIVE_TIME", 1, f"{active_time_myr:.8f}"),
+        (
+            "PART_INJECT_FREQUENCY",
+            "PART_INJECT_FREQUENCY",
+            1,
+            particles["inject_frequency"],
+        ),
+    ]
     results = {
-        key: {"expected": expected, "rendered": rendered[key], "ok": rendered[key] == expected}
-        for key, expected in checks.items()
+        label: {
+            "expected": expected,
+            "rendered": pluto_value(pluto_text, key, field_index),
+            "ok": pluto_value(pluto_text, key, field_index) == expected,
+        }
+        for label, key, field_index, expected in checks
     }
     return {
         "ok": all(item["ok"] for item in results.values()),
@@ -468,13 +594,16 @@ def render_case(
     env: dict[str, str | bool],
     duration_myr: float,
     snapshot_interval_myr: float,
-    checkpoint_interval_myr: float,
+    dbl_h5_interval_myr: float,
+    particle_interval_myr: float,
+    particles_per_injection: float,
 ) -> None:
     case_dir = root / case.case_id / variant
     case_dir.mkdir(parents=True, exist_ok=True)
     active_time_myr = 0.0 if variant == "env_gate" else duration_myr
     snapshot_interval_code = snapshot_interval_myr * CODE_TIME_PER_MYR
-    checkpoint_interval_code = checkpoint_interval_myr * CODE_TIME_PER_MYR
+    dbl_h5_interval_code = dbl_h5_interval_myr * CODE_TIME_PER_MYR
+    particle_interval_code = particle_interval_myr * CODE_TIME_PER_MYR
     run_definition = {
         "case_id": case.case_id,
         "run_name": f"{case.case_id}_{variant}",
@@ -490,17 +619,24 @@ def render_case(
             "duration_myr": duration_myr,
             "active_time_myr": active_time_myr,
             "snapshot_interval_myr": snapshot_interval_myr,
-            "checkpoint_interval_myr": checkpoint_interval_myr,
+            "dbl_h5_interval_myr": dbl_h5_interval_myr,
+            "chombo_checkpoint_interval": "disabled",
+            "particle_interval_myr": particle_interval_myr,
+            "particles_per_injection": (
+                particles_per_injection if variant == "particles" else None
+            ),
             "views_deg": VIEWS_DEG,
             "early_diagnostic_snapshots_myr": EARLY_DIAGNOSTIC_SNAPSHOTS_MYR,
         },
         "unit_contract": {
             "tstop": "PLUTO code time",
             "static_grid_output_intervals": "PLUTO code time",
-            "checkpoint_intervals": "PLUTO code time",
+            "static_grid_dbl_h5_restart_outputs": "PLUTO code time",
+            "chombo_checkpoint_interval": "disabled for static-grid PLUTO",
             "JET_START_TIME": "Myr",
             "JET_END_TIME": "Myr",
             "JET_ACTIVE_TIME": "Myr",
+            "PART_INJECT_FREQUENCY": "Myr",
             "jet_injection_dimensions": "kpc",
             "environment_offsets": "kpc",
             "JET_PWR": "one-sided erg/s",
@@ -517,8 +653,11 @@ def render_case(
             "tstop_code_time": duration_myr * CODE_TIME_PER_MYR,
             "snapshot_interval_myr": snapshot_interval_myr,
             "snapshot_interval_code_time": snapshot_interval_code,
-            "checkpoint_interval_myr": checkpoint_interval_myr,
-            "checkpoint_interval_code_time": checkpoint_interval_code,
+            "dbl_h5_interval_myr": dbl_h5_interval_myr,
+            "dbl_h5_interval_code_time": dbl_h5_interval_code,
+            "particle_interval_myr": particle_interval_myr,
+            "particle_interval_code_time": particle_interval_code,
+            "chombo_checkpoint_interval": "disabled",
             "note": (
                 "PLUTO core time controls and output intervals use code time; "
                 "JET_END_TIME and JET_ACTIVE_TIME are physical Myr parameters."
@@ -530,9 +669,16 @@ def render_case(
             "jet_relativistic_density": "NO",
             "opening_angle_primary_deg": 15.0,
             "opening_angle_secondary_deg": 15.0,
+            "jet_chi": float(JET_CHI),
+            "jet_injection_height_kpc": float(JET_INJECTION_HEIGHT_KPC),
+            "jet_initial_radius_kpc": float(JET_INITIAL_RADIUS_KPC),
             "jet_end_time_myr": active_time_myr,
             "jet_active_time_myr": active_time_myr,
             "particles_enabled": variant == "particles",
+            "particle_interval_myr": particle_interval_myr if variant == "particles" else None,
+            "particles_per_injection": (
+                particles_per_injection if variant == "particles" else None
+            ),
             "tracer_threshold_default": 5.0e-3,
             "tracer_threshold_sensitivity": [1.0e-3, 1.0e-2],
         },
@@ -562,7 +708,9 @@ def render_case(
         grid_name,
         duration_myr,
         snapshot_interval_myr,
-        checkpoint_interval_myr,
+        dbl_h5_interval_myr,
+        particle_interval_myr,
+        particles_per_injection,
     )
     (case_dir / "pluto.ini").write_text(pluto_text)
     (case_dir / "environment.ini").write_text(render_environment_ini(env))
@@ -576,10 +724,20 @@ def render_case(
             variant,
             duration_myr,
             snapshot_interval_myr,
-            checkpoint_interval_myr,
+            dbl_h5_interval_myr,
+            particle_interval_myr,
+            particles_per_injection,
         ),
     )
-    write_json(case_dir / "definitions_overrides.json", definitions_overrides(env, variant))
+    write_json(
+        case_dir / "definitions_overrides.json",
+        definitions_overrides(
+            env,
+            variant,
+            particle_interval_myr,
+            particles_per_injection,
+        ),
+    )
 
 
 def render_readme(
@@ -589,7 +747,9 @@ def render_readme(
     grid_name: str,
     duration_myr: float,
     snapshot_interval_myr: float,
-    checkpoint_interval_myr: float,
+    dbl_h5_interval_myr: float,
+    particle_interval_myr: float,
+    particles_per_injection: float,
 ) -> None:
     case_list = ", ".join(case.case_id for case in cases)
     variant_list = ", ".join(variants)
@@ -602,7 +762,10 @@ Generated by `scripts/science/render_three_case_configs.py`.
 - grid preset: `{grid_name}`
 - duration: `{duration_myr} Myr`
 - science-output cadence: `{snapshot_interval_myr} Myr`
-- restart-checkpoint cadence: `{checkpoint_interval_myr} Myr`
+- dbl.h5 restart-output cadence: `{dbl_h5_interval_myr} Myr`
+- Chombo `Checkpoint_interval`: disabled for static-grid PLUTO
+- particle cadence: `{particle_interval_myr} Myr`
+- particles per injection: `{particles_per_injection}`
 - PLUTO code-time conversion: `{CODE_TIME_PER_MYR} code units per Myr`
 
 These bundles are dry-run launch packages. They are not a production approval.
@@ -611,9 +774,10 @@ debugging fallback.
 
 Unit contract:
 
-- PLUTO `tstop`, static-grid outputs, and checkpoint intervals are rendered in
-  PLUTO code time.
+- PLUTO `tstop` and static-grid output intervals are rendered in PLUTO code
+  time.
 - `JET_END_TIME` and `JET_ACTIVE_TIME` are rendered in physical Myr.
+- `PART_INJECT_FREQUENCY` is rendered in physical Myr.
 - `JET_PWR` is one-sided jet power.
 
 Each case variant contains:
@@ -669,7 +833,9 @@ def main() -> int:
                 env,
                 args.duration_myr,
                 args.snapshot_interval_myr,
-                args.checkpoint_interval_myr,
+                args.dbl_h5_interval_myr,
+                args.particle_interval_myr,
+                args.particles_per_injection,
             )
 
     render_readme(
@@ -679,7 +845,9 @@ def main() -> int:
         args.grid,
         args.duration_myr,
         args.snapshot_interval_myr,
-        args.checkpoint_interval_myr,
+        args.dbl_h5_interval_myr,
+        args.particle_interval_myr,
+        args.particles_per_injection,
     )
     print(f"Rendered {len(cases) * len(variants)} config bundle(s) under {output}")
     return 0

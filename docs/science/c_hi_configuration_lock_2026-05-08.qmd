@@ -1,0 +1,114 @@
+---
+title: "C-HI Configuration Lock"
+subtitle: "Patrick/Stas feedback applied before Kunanyi gate"
+author: "Barry W. Brook and Codex"
+date: "2026-05-08"
+format:
+  pdf:
+    toc: true
+    number-sections: false
+    colorlinks: true
+    geometry:
+      - margin=22mm
+---
+
+# Purpose
+
+This note records the revised `C-HI` configuration after Patrick and Stas
+reviewed the first supervisor packet. It is now the working configuration for
+the next `kunanyi` gate, subject to live scheduler/build validation.
+
+The tracked artifacts are under:
+
+```text
+docs/science/assets/c_hi_configuration_lock_2026-05-08/
+```
+
+# Decisions Applied
+
+| Topic | Locked value |
+| --- | --- |
+| Case | `C-HI`, Stewart cluster `002_003` |
+| Environment | radially averaged tabulated file `tabulated_cosmo_002003.csv` |
+| Physics | static-grid HD, 3D Cartesian |
+| Jet power | `1e45 erg/s`, one-sided |
+| Jet speed | `0.1 c` |
+| Opening angle | `15 deg` primary and secondary |
+| `JET_RELATIVISTIC_DENSITY` | `NO` |
+| `JET_INITIAL_RADIUS` | `0.1 kpc` |
+| `JET_INJECTION_HEIGHT` | `0.75 kpc` |
+| `JET_CHI` | `1.0` pressure-matched |
+| First run target | `50 Myr` |
+| First view | `0 deg` |
+
+# Grid
+
+Stas requested extending the jet axis to `X3 = +/-250 kpc` while preserving the
+resolution at `200 kpc` across coordinates. The rendered grid is:
+
+```text
+X1-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200
+X2-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200
+X3-grid     5   -250 357 s -10 100 s -2.5 100 u 2.5 100 s 10 357 s 250
+```
+
+The old `10-200 kpc` outer stretch patch has `dx ~ 1.6923 kpc` at `200 kpc`.
+Using `357` outer cells in the `10-250 kpc` X3 patch gives `dx ~ 1.6930 kpc`
+in the cell spanning `200 kpc`.
+
+# Output And Restart
+
+Patrick clarified that this static-grid PLUTO build restarts from `*.dbl` or
+`*.dbl.h5`, not Chombo checkpoint files. The rendered output plan is therefore:
+
+| Output | Cadence | Role |
+| --- | ---: | --- |
+| `flt.h5` | `1 Myr` (`306.60139379`) | science snapshots |
+| `dbl.h5` | `5 Myr` (`1533.00696894`) | restart-capable double output |
+| `particles_dbl` | `0.01 Myr` (`3.06601394`) | high-time-resolution particle proxy |
+| `Checkpoint_interval` | disabled (`-1.0`) | not used for static-grid PLUTO |
+
+The particle-enabled run injects `16` particles every `0.01 Myr`:
+
+```text
+Nparticles          -1    16.0
+PART_INJECT_FREQUENCY       0.01
+```
+
+The `kunanyi` PBS template now passes PLUTO a walltime-safe maximum runtime:
+
+```bash
+./pluto -i pluto.ini -e environment.ini -maxtime 47.5
+```
+
+For restarts from HDF5 double outputs, the template detects `dbl.h5.out` and
+uses:
+
+```bash
+./pluto -h5restart <n>
+```
+
+# Static Validation
+
+`config/render_validation.json` reports `ok = true`.
+
+| Check | Expected | Rendered |
+| --- | ---: | ---: |
+| `tstop` | `15330.06968940` | `15330.06968940` |
+| `flt.h5` | `306.60139379` | `306.60139379` |
+| `dbl.h5` | `1533.00696894` | `1533.00696894` |
+| `Checkpoint_interval` | `-1.0` | `-1.0` |
+| `particles_dbl` | `3.06601394` | `3.06601394` |
+| `Nparticles` second field | `16.0` | `16.0` |
+| `PART_INJECT_FREQUENCY` | `0.01` | `0.01` |
+| `JET_CHI` | `1.0` | `1.0` |
+| `JET_INITIAL_RADIUS` | `0.1` | `0.1` |
+| `JET_INJECTION_HEIGHT` | `0.75` | `0.75` |
+
+# Next Gate
+
+The next live step is a `kunanyi` no-jet Stewart tabulated environment/MPI/HDF5
+gate using the updated assets. After that is green, the first jet-bearing run
+should be an early, restartable, particles-enabled `C-HI` segment. The first
+inspection point remains the first healthy `3-5` snapshots, with density,
+pressure, tracer, and jet-axis velocity diagnostics before continuing.

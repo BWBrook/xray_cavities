@@ -1,0 +1,81 @@
+{
+  "checks": {
+    "Checkpoint_interval": {
+      "expected": "-1.0",
+      "ok": true,
+      "rendered": "-1.0"
+    },
+    "JET_ACTIVE_TIME": {
+      "expected": "50.00000000",
+      "ok": true,
+      "rendered": "50.00000000"
+    },
+    "JET_CHI": {
+      "expected": "1.0",
+      "ok": true,
+      "rendered": "1.0"
+    },
+    "JET_END_TIME": {
+      "expected": "50.00000000",
+      "ok": true,
+      "rendered": "50.00000000"
+    },
+    "JET_INITIAL_RADIUS": {
+      "expected": "0.1",
+      "ok": true,
+      "rendered": "0.1"
+    },
+    "JET_INJECTION_HEIGHT": {
+      "expected": "0.75",
+      "ok": true,
+      "rendered": "0.75"
+    },
+    "JET_PWR": {
+      "expected": "1e+45",
+      "ok": true,
+      "rendered": "1e+45"
+    },
+    "JET_SPD": {
+      "expected": "0.1",
+      "ok": true,
+      "rendered": "0.1"
+    },
+    "Nparticles_second_field": {
+      "expected": "16.0",
+      "ok": true,
+      "rendered": "16.0"
+    },
+    "PART_INJECT_FREQUENCY": {
+      "expected": "0.01",
+      "ok": true,
+      "rendered": "0.01"
+    },
+    "dbl": {
+      "expected": "-1.0",
+      "ok": true,
+      "rendered": "-1.0"
+    },
+    "dbl.h5": {
+      "expected": "1533.00696894",
+      "ok": true,
+      "rendered": "1533.00696894"
+    },
+    "flt.h5": {
+      "expected": "306.60139379",
+      "ok": true,
+      "rendered": "306.60139379"
+    },
+    "particles_dbl": {
+      "expected": "3.06601394",
+      "ok": true,
+      "rendered": "3.06601394"
+    },
+    "tstop": {
+      "expected": "15330.06968940",
+      "ok": true,
+      "rendered": "15330.06968940"
+    }
+  },
+  "note": "This static validation checks the generated pluto.ini against the run definition. A later gate should compare PLUTO startup logs against these same intended values.",
+  "ok": true
+}

@@ -1,11 +1,11 @@
 # Three-Case Science Run Specification
 
-Spec version: `three-case-v0.2`
+Spec version: `three-case-v0.3`
 Frozen date: `2026-05-02`
-Updated: `2026-05-07`
-Status: frozen for first production-like `C-HI` preparation after the
-2026-05-06 supervisor meeting. This version supersedes the earlier hydro-first,
-300 Myr-first scaffold.
+Updated: `2026-05-08`
+Status: frozen for the first production-like `C-HI` preparation after Patrick
+and Stas' configuration review. This version supersedes the earlier
+hydro-first, 300 Myr-first scaffold and the 2026-05-07 pre-review C-HI packet.
 
 ## Purpose
 
@@ -33,6 +33,20 @@ The 2026-05-06 supervisor meeting made the next gate more specific:
 - enable particles from the first nominal science run
 - target about `50 Myr` initially, not `300 Myr`
 - treat `JET_END_TIME` and `JET_ACTIVE_TIME` as Myr physical parameters
+
+Patrick and Stas' 2026-05-08 review then locked the first-pass injection,
+particle, restart, and grid corrections:
+
+- extend the jet-axis grid to `X3 = +/-250 kpc`
+- preserve the old resolution at about `200 kpc` when extending X3
+- set `JET_INITIAL_RADIUS = 0.1 kpc`
+- set `JET_INJECTION_HEIGHT = 0.75 kpc`
+- set `JET_CHI = 1.0` for a pressure-matched non-relativistic jet
+- output particles every `0.01 Myr` and inject at least `16` particles at that
+  cadence
+- use static-grid `dbl.h5` files every `5 Myr` for restart support
+- leave Chombo `Checkpoint_interval` disabled
+- run PLUTO with `-maxtime`, e.g. `47.5` hours for a `48` hour PBS job
 
 ## Case Table
 
@@ -64,17 +78,18 @@ These defaults are locked for the first production-like package:
 | `JET_PWR` convention | one-sided jet power, applied to both jets |
 | `JET_OA_PRIMARY` | `15.0 deg` |
 | `JET_OA_SECONDARY` | `15.0 deg` |
+| `JET_INITIAL_RADIUS` | `0.1 kpc` |
+| `JET_INJECTION_HEIGHT` | `0.75 kpc` |
+| `JET_CHI` | `1.0` |
 | physical jet start | `0.0 Myr` |
 | first target physical jet end | `50.0 Myr` |
 | first target physical active time | `50.0 Myr` |
 | particles | enabled for nominal `C-HI`; disabled only for no-jet gates or narrow debugging |
+| particle output cadence | `0.01 Myr` (`3.06601394` PLUTO code-time units for `particles_dbl`) |
+| particle injection cadence | `0.01 Myr` via `PART_INJECT_FREQUENCY` |
+| particles per injection | `16.0` initially, with `32` or `64` available if supervisors request denser sampling |
 | Tracer threshold, default | `5e-3` |
 | Tracer threshold, sensitivity | `1e-3`, `1e-2` |
-
-The current `jet-setup` example uses `JET_INITIAL_RADIUS = 0.1`, while recent
-smoke tests used `JET_INITIAL_RADIUS = 1.0`. That inlet radius is not yet
-frozen for science. It must be confirmed with Stas/Patrick or derived from the
-chosen Stewart/CosmoDRAGoN grid before production.
 
 ## Unit Convention
 
@@ -84,8 +99,9 @@ The meeting clarified a critical unit split:
 | --- | --- |
 | PLUTO core controls such as `tstop` | PLUTO code time |
 | static-grid output intervals such as `dbl`, `flt`, `dbl.h5`, `flt.h5` | PLUTO code time |
-| Chombo/HDF5 checkpoint and plot intervals | PLUTO code time |
+| Chombo `Checkpoint_interval` and `Plot_interval` | disabled for static-grid PLUTO |
 | `JET_END_TIME`, `JET_ACTIVE_TIME`, `JET_START_TIME` | Myr |
+| `PART_INJECT_FREQUENCY` | Myr |
 | jet injection dimensions and environment offsets | kpc |
 | density inputs | `g cm^-3` |
 | `JET_PWR` | one-sided `erg/s` |
@@ -103,8 +119,10 @@ Therefore the first `50 Myr` target should render as:
 tstop = 15330.06968940
 JET_END_TIME = 50.0
 JET_ACTIVE_TIME = 50.0
-1 Myr output cadence = 306.60139379
-5 Myr checkpoint cadence = 1533.00696894
+1 Myr flt.h5 cadence = 306.60139379
+5 Myr dbl.h5 restart-output cadence = 1533.00696894
+0.01 Myr particles_dbl cadence = 3.06601394
+Checkpoint_interval = -1.0
 ```
 
 No current source-of-truth document should describe `JET_END_TIME` or
@@ -136,8 +154,11 @@ volume.
 
 Production output should be sparse and auditable:
 
-- float or HDF5 science snapshots at the declared physical cadence
-- double-precision restart checkpoints every `2-5 Myr` and at walltime stop
+- `flt.h5` science snapshots every `1 Myr`
+- `dbl.h5` restart-capable outputs every `5 Myr`
+- particle outputs every `0.01 Myr` as high-time-resolution tracer proxies
+- PLUTO `-maxtime` set below the PBS walltime so the code writes a final
+  `*.{flt,dbl}.h5` output before scheduler termination
 - full output catalogue mapping output number to physical time and file role
 - cluster-side analysis by PBS job or interactive compute session
 
@@ -221,8 +242,7 @@ The first nominal science sequence is:
 2. Render `pluto.ini`, `environment.ini`, `definitions_overrides.json`, and
    `case_manifest.json`.
 3. Validate rendered values against the run definition.
-4. Send the generated package to Patrick/Stas for sanity checking before
-   serious compute.
+4. Confirm the rendered package contains Patrick/Stas' 2026-05-08 corrections.
 5. Run a production-like, particles-enabled `C-HI` control on `kunanyi`.
 6. Inspect the first `3-5` snapshots at about `1 Myr` cadence.
 7. Continue toward about `50 Myr` only if early morphology, outputs, and
@@ -231,11 +251,17 @@ The first nominal science sequence is:
 Hydro-only `C-HI` remains allowed as a narrow debugging fallback, not as the
 nominal science gate.
 
-The rehearsal grid must be derived from the verified Stewart environment and
-the old 0.1c/0.3c CosmoDRAGoN-style INIs. The meeting target is roughly:
+The rehearsal grid is derived from the verified Stewart environment, the old
+0.1c/0.3c CosmoDRAGoN-style INIs, and Stas' 2026-05-08 X3 resolution
+constraint:
 
-- `X/Y`: about `-200` to `+200 kpc`
-- `Z`: about `-250` to `+250 kpc`
+- `X1/X2`: keep the old `-200` to `+200 kpc` stretched grid:
+  `330 s, 100 s, 100 u, 100 s, 330 s`
+- `X3`: extend to `-250` to `+250 kpc`
+- `X3` outer stretched patches: use `357` cells on each side, not `330`
+- rationale: the PLUTO stretched-grid recurrence gives `dx ~ 1.6923 kpc` at
+  `200 kpc` in the old `10-200 kpc` outer patch, and `357` cells in the
+  `10-250 kpc` patch gives `dx ~ 1.6930 kpc` in the cell spanning `200 kpc`
 - stretched grid preserving central/injection-region resolution
 
 If the jet or bow shock reaches the domain boundary, the run cannot be patched
@@ -301,7 +327,7 @@ The run script must derive rank count from `PBS_NODEFILE`:
 
 ```bash
 NRANKS=$(wc -l < "$PBS_NODEFILE")
-mpirun -np "$NRANKS" ./pluto -i pluto.ini -e environment.ini
+mpirun -np "$NRANKS" ./pluto -i pluto.ini -e environment.ini -maxtime 47.5
 ```
 
 Required production-safety features:
@@ -315,7 +341,8 @@ Required production-safety features:
 - output-volume estimate before submission
 - output catalogue mapping file number to physical time and file role
 - walltime-safe PLUTO stop before PBS termination
-- double-precision restart checkpoint at walltime stop
+- double-precision HDF5 restart output at walltime stop
+- static-grid `.dbl.h5` restart via `-h5restart n`
 - email notifications to `barry.brook@utas.edu.au`
 
 One intermediate `C-HI` `kunanyi` rehearsal must pass before any multi-day

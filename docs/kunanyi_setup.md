@@ -570,7 +570,10 @@ preparation passes before submitting any 48-hour multi-node run.
      source revision, and run directory.
 
 3. Add restart and resume handling.
-   - Set checkpoint cadence in `pluto.ini` before long jobs.
+   - Set `dbl.h5` cadence in `pluto.ini` before long jobs; static-grid PLUTO
+     restarts from `*.dbl` or `*.dbl.h5`, not Chombo checkpoints.
+   - Keep Chombo `Checkpoint_interval` disabled unless the adaptive-grid code
+     is deliberately introduced later.
    - Keep restart files in scratch during the run.
    - Add simple `DONE` and `FAILED` markers in the run directory.
    - Make reruns detect whether they are fresh starts or restarts.
@@ -586,7 +589,7 @@ preparation passes before submitting any 48-hour multi-node run.
 5. Run an intermediate-size rehearsal.
    - Use the production script structure, but with a smaller grid or shorter
      final time.
-   - Exercise checkpoint writing, restart from checkpoint, `DONE`/`FAILED`
+   - Exercise `dbl.h5` writing, restart with `-h5restart`, `DONE`/`FAILED`
      markers, email alerts, and artifact retrieval.
    - Treat this as the last gate before the full three-case run.
 
@@ -599,7 +602,8 @@ preparation passes before submitting any 48-hour multi-node run.
 
 ## Three-Case Science Package
 
-Added on `2026-05-02`:
+Added on `2026-05-02`; corrected after the `2026-05-06` supervisor meeting
+and Patrick/Stas' `2026-05-08` configuration review:
 
 - frozen science spec:
   `docs/science/three_case_spec.md`
@@ -621,19 +625,24 @@ The PBS template implements the validated production shape:
 It derives `NRANKS` from `PBS_NODEFILE`, logs PLUTO and `jet-setup` source
 revisions, applies generated `definitions_overrides.json`, uses
 `pluto.ini`/`environment.ini` from the selected case bundle, detects fresh
-runs versus restarts, and writes `DONE`/`FAILED` markers under the run
-directory.
+runs versus `.dbl.h5`/`.dbl` restarts, passes `-maxtime` to PLUTO by default,
+and writes `DONE`/`FAILED` markers under the run directory.
 
-Example staging flow after the real Stewart assets are known:
+Example review-package render after the real Stewart assets are known:
 
 ```bash
 python3 scripts/science/render_three_case_configs.py \
-  --variant both \
-  --grid nectar_placeholder \
-  --cluster-tabulated /scratch/bwbrook/path/to/stewart_cluster.csv \
-  --group-tabulated /scratch/bwbrook/path/to/stewart_group.csv \
-  --require-assets \
-  --output build/science/three_case_configs \
+  --variant particles \
+  --case C-HI \
+  --grid stewart_stretched_250 \
+  --duration-myr 50 \
+  --snapshot-interval-myr 1 \
+  --dbl-h5-interval-myr 5 \
+  --particle-interval-myr 0.01 \
+  --particles-per-injection 16 \
+  --cluster-tabulated env/extracted/environments/tabulated/tabulated_cosmo_002003.csv \
+  --check-local-assets \
+  --output build/science/c_hi_configuration_lock_2026-05-08 \
   --force
 ```
 
@@ -641,11 +650,16 @@ Then copy the generated case directory to `kunanyi` and submit with case
 variables, for example:
 
 ```bash
-qsub -v CASE_ID=C-HI,CASE_VARIANT=hydro,CASE_CONFIG_DIR=/u/bwbrook/xray_cavities_cases/C-HI/hydro \
+qsub -v CASE_ID=C-HI,CASE_VARIANT=particles,CASE_CONFIG_DIR=/u/bwbrook/xray_cavities_cases/C-HI/particles \
   scripts/kunanyi/jet_setup_production_template.pbs
 ```
 
-Do not submit this as a 48-hour production run yet. First finish the Stewart
-environment gate on resized `nectar-vm`, the `C-HI` no-particle rehearsal, the
-particle-enabled repeat, and one intermediate `kunanyi` rehearsal using this
-template.
+For a `48:00:00` PBS walltime, leave the template default
+`PLUTO_MAXTIME_HOURS=47.5` in place so PLUTO writes a final static-grid HDF5
+output before PBS can kill the job. Override only for shorter rehearsals, for
+example `PLUTO_MAXTIME_HOURS=1.5` for a two-hour walltime.
+
+Do not submit this as a 48-hour production run yet. First run the
+production-like no-jet Stewart environment/MPI/HDF5 gate on `kunanyi`, ask
+Patrick/Stas to inspect the generated `C-HI` package, and only then launch an
+early, restartable particles-enabled `C-HI` segment.

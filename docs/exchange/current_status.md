@@ -343,8 +343,9 @@ Supervisor-meeting-2 follow-up on 2026-05-07:
 - key corrections now binding:
   - `JET_END_TIME` and `JET_ACTIVE_TIME` are physical Myr values, not PLUTO
     code-time values
-  - PLUTO core controls such as `tstop`, output intervals, and checkpoint
-    intervals remain in PLUTO code time
+  - PLUTO core controls such as `tstop` and static-grid output intervals
+    remain in PLUTO code time; later review clarified that Chombo
+    `Checkpoint_interval` is disabled for the static-grid run path
   - the nominal first science run is particles-enabled `C-HI`, not a
     hydro-only rehearsal
   - first target duration is about `50 Myr`, not `300 Myr`
@@ -352,13 +353,51 @@ Supervisor-meeting-2 follow-up on 2026-05-07:
     about `1 Myr` cadence
   - `JET_PWR` is confirmed as one-sided jet power
   - views are post-processing only; use `0 deg` as the easiest first view
-- `docs/science/three_case_spec.md` is now spec version `three-case-v0.2`
+- `docs/science/three_case_spec.md` is now spec version `three-case-v0.3`
 - `scripts/science/render_three_case_configs.py` now defaults to the
   particles-enabled nominal science variant and writes `run_definition.json`
   plus `render_validation.json`
 - the `kunanyi` production template now defaults to `CASE_VARIANT=particles`
 - details are in:
   - `docs/exchange/logs/2026-05-07-supervisor-meeting-2-plan-update.md`
+
+Patrick/Stas configuration review applied on 2026-05-08:
+
+- Patrick confirmed the jet parameters and corrected the restart/output plan:
+  static-grid PLUTO restarts from `*.dbl` or `*.dbl.h5`, so `dbl.h5` should
+  be written every `5 Myr`; Chombo `Checkpoint_interval` is disabled
+- PLUTO production/rehearsal jobs should pass `-maxtime`, e.g. `47.5` for a
+  `48` hour PBS walltime, so a final `*.{flt,dbl}.h5` output is written before
+  PBS termination
+- Stas confirmed X3 should extend to `+/-250 kpc` and asked that the grid
+  preserve the `200 kpc` resolution across coordinates
+- the new grid preset is `stewart_stretched_250`:
+  - X1/X2 retain the old `+/-200 kpc` patching
+  - X3 uses `357` outer stretch cells on each side between `10` and `250 kpc`
+  - this matches the old `dx` at about `200 kpc` (`~1.693 kpc`)
+- the first-pass C-HI injection/output defaults are now:
+  - `JET_INITIAL_RADIUS = 0.1`
+  - `JET_INJECTION_HEIGHT = 0.75`
+  - `JET_CHI = 1.0`
+  - `JET_RELATIVISTIC_DENSITY = NO`
+  - `particles_dbl = 3.06601394` code-time units (`0.01 Myr`)
+  - `PART_INJECT_FREQUENCY = 0.01`
+  - `Nparticles -1 16.0`
+- `scripts/science/render_three_case_configs.py`,
+  `scripts/science/render_stewart_environment_gate_tests.py`, and
+  `scripts/kunanyi/jet_setup_production_template.pbs` have been updated to
+  encode these rules
+- the pre-review 2026-05-07 packet has been superseded by:
+  - `docs/science/c_hi_configuration_lock_2026-05-08.qmd`
+  - `docs/science/c_hi_configuration_lock_2026-05-08.pdf`
+  - `docs/science/assets/c_hi_configuration_lock_2026-05-08/`
+- static config validation passed with `render_validation.json: ok = true`
+- a transfer-ready local tarball was prepared at
+  `build/science/kunanyi_stage_2026-05-08/c_hi_and_environment_gate_2026-05-08.tar.gz`
+- next live action remains a `kunanyi` job gate, but it should use the updated
+  bundle and `-h5restart`/`-maxtime` run path
+- details are in:
+  - `docs/exchange/logs/2026-05-08-patrick-stas-c-hi-feedback.md`
 
 ## Project Structure
 

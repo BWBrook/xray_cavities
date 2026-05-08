@@ -81,7 +81,10 @@ def parse_args() -> argparse.Namespace:
         "--checkpoint-interval-myr",
         type=float,
         default=-1.0,
-        help="Chombo checkpoint cadence in Myr. Use a positive value to enable.",
+        help=(
+            "Deprecated/ignored for static-grid PLUTO. Restarts use dbl or "
+            "dbl.h5 outputs; Chombo Checkpoint_interval is always disabled."
+        ),
     )
     parser.add_argument("--force", action="store_true")
     return parser.parse_args()
@@ -175,7 +178,6 @@ def render_pluto_ini(
     tstop = duration_myr * CODE_TIME_PER_MYR
     output_interval = output_interval_myr * CODE_TIME_PER_MYR
     hdf5_interval = code_interval(hdf5_interval_myr)
-    checkpoint_interval = code_interval(checkpoint_interval_myr)
     first_dt = max(1.0, CODE_TIME_PER_MYR * 0.01)
     return f"""[Grid]
 
@@ -229,7 +231,7 @@ analysis         -1.0  -1
 
 [Chombo HDF5 output]
 
-Checkpoint_interval  {checkpoint_interval:.8f}  0
+Checkpoint_interval  -1.0  0
 Plot_interval        -1.0  0
 
 [Particles]
@@ -244,11 +246,11 @@ particles_tab       -1.0  -1
 
 JET_PWR                     1e45
 JET_SPD                     0.1
-JET_CHI                     100.0
+JET_CHI                     1.0
 JET_OA_PRIMARY              15.0
 JET_OA_SECONDARY            15.0
-JET_INJECTION_HEIGHT        0.2
-JET_INITIAL_RADIUS          0.2
+JET_INJECTION_HEIGHT        0.75
+JET_INITIAL_RADIUS          0.1
 JET_X1O                     0.0
 JET_X2O                     0.0
 JET_X3O                     0.0
@@ -265,7 +267,7 @@ ENV_TEMP                    3.462e7
 ENV_X1O                     0.0
 ENV_X2O                     0.0
 ENV_X3O                     0.0
-PART_INJECT_FREQUENCY       1.0
+PART_INJECT_FREQUENCY       0.01
 STELLAR_MASS                0.0
 """
 
