@@ -454,9 +454,23 @@ Patrick/Stas configuration review applied on 2026-05-08:
   `build/science/kunanyi_stage_2026-05-08/c_hi_1node_690426_compact_results_2026-05-09.tar.gz`
   with SHA-256
   `bba6a6505bd29cb832d419ae54d38471676f3f1e8b131bf9d6592c2de7477d26`
-- next science action is to inspect the early `C-HI` outputs for basic jet,
-  tracer, and particle sanity; this run validates the build/output/restart
-  path, but it is not yet a production science snapshot
+- first early-output quick-look diagnostics have now been generated:
+  - quick-look extraction job id: `690451.kunanyi-ohpc`
+  - inspected file: `data.0001.flt.h5`
+  - inspected time: `0.4474 Myr`
+  - products:
+    `docs/science/c_hi_quicklook_2026-05-09.md` and
+    `docs/science/c_hi_quicklook_2026-05-09.pdf`, with figures under
+    `docs/science/assets/c_hi_quicklook_2026-05-09/`
+  - at the default `tracer > 5e-3` threshold the early tracer region spans
+    about `x,y = +/-2.33 kpc` and `z = +/-6.22 kpc`
+  - central zoom maps show the expected symmetric bipolar tracer, density,
+    pressure, and `vz` structure
+- this validates the build/output/restart/quick-look path, but it is not yet a
+  production science snapshot
+- the next science decision is whether to continue from this restart on the
+  one-node shakedown grid, run a longer one-node segment, or promote to an
+  intermediate multi-node rehearsal
 - details are in:
   - `docs/exchange/logs/2026-05-08-patrick-stas-c-hi-feedback.md`
   - `docs/exchange/logs/2026-05-08-kunanyi-stewart-environment-gates.md`

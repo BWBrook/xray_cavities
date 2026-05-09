@@ -692,3 +692,27 @@ and step `583`, so this is an infrastructure shakedown rather than a science
 snapshot. Compact evidence is stored locally under
 `build/science/kunanyi_stage_2026-05-08/` with SHA-256
 `bba6a6505bd29cb832d419ae54d38471676f3f1e8b131bf9d6592c2de7477d26`.
+
+## Jumpbox SSH Window Automation
+
+The Open OnDemand endpoint for enabling jumpbox SSH is:
+
+```text
+https://<tpac-host>/pun/sys/enable_ssh/
+```
+
+A plain `curl` request to this URL is not enough because the request is routed
+through the UTAS SAML/AAF browser login flow and can end in a stale-request
+page. The practical automation route on the MacBook is therefore to reuse the
+authenticated Safari session.
+
+If Safari is already logged in to the Kunanyi portal, this helper opens the
+Enable SSH endpoint and starts a fresh five-minute window:
+
+```bash
+scripts/kunanyi/enable_jumpbox_ssh_safari.sh
+```
+
+Computer Use can also click the portal's `Enable Jumpbox SSH` link directly.
+That route was tested successfully on 2026-05-09 and opened a new window
+ending at `Sat May 9 13:36:27 2026`.
