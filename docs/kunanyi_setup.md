@@ -668,9 +668,11 @@ radially averaged environments on `2026-05-08`:
 - `group_002031`: `690371.kunanyi-ohpc`, exit status `0`, walltime
   `00:45:22`
 
-The first jet-bearing `C-HI` particles segment was submitted on `2026-05-08`
-as `690426.kunanyi-ohpc`. It uses one Kunanyi node, `28` MPI ranks, a
-`02:00:00` walltime, and `PLUTO_MAXTIME_HOURS=1.5`.
+The first jet-bearing `C-HI` particles segment completed on `2026-05-09` as
+`690426.kunanyi-ohpc`. It used one Kunanyi node, `28` MPI ranks, a
+`02:00:00` walltime, and `PLUTO_MAXTIME_HOURS=1.5`. PBS reported
+`Exit_status = 0`, `walltime = 01:39:28`, `cput = 44:04:38`, and peak memory
+`30525360kb`.
 
 Two practical launch lessons are now folded into the workflow:
 
@@ -682,7 +684,11 @@ Two practical launch lessons are now folded into the workflow:
   `kunanyi_single_node_250` grid for one-node rehearsal and keep the full grid
   for multi-node production planning
 
-At handoff, `690426.kunanyi-ohpc` had written initial `dbl.h5`, `flt.h5`, and
-`particles.0000.dbl` outputs and had reached `Starting computation`. Wait for
-the PBS completion email, then inspect the run markers and output manifests
-before deciding whether to continue/restart or promote to a larger job.
+The completed run wrote a `DONE` marker, stopped cleanly through PLUTO
+`-maxtime`, and wrote `data.0000`/`data.0001` for both `dbl.h5` and `flt.h5`
+plus `particles.0000.dbl` through `particles.0045.dbl`. `h5ls` can read the
+HDF5 files. The final forced HDF5 output is at `t = 1.371692e+02` code units
+and step `583`, so this is an infrastructure shakedown rather than a science
+snapshot. Compact evidence is stored locally under
+`build/science/kunanyi_stage_2026-05-08/` with SHA-256
+`bba6a6505bd29cb832d419ae54d38471676f3f1e8b131bf9d6592c2de7477d26`.

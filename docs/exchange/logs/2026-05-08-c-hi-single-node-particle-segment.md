@@ -169,22 +169,100 @@ step:0; t = 0.0000e+00; dt = 1.0000e-05; 0.0 %
         [Nparticles/tot: 0 / 48; Nsub = 1; <Ek> = 2.8608e-03]
 ```
 
-## Next
+## Completion
 
-Wait for the PBS completion email for `690426.kunanyi-ohpc`. After completion,
-open a jumpgate and inspect:
+`690426.kunanyi-ohpc` completed cleanly.
+
+PBS accounting:
 
 ```text
-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/markers/
-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/
-/u/bwbrook/codex_kunanyi/c_hi_1node.out
-/u/bwbrook/codex_kunanyi/c_hi_1node.err
+Exit_status = 0
+resources_used.cpupercent = 2800
+resources_used.cput = 44:04:38
+resources_used.mem = 30525360kb
+resources_used.ncpus = 28
+resources_used.vmem = 39726444kb
+resources_used.walltime = 01:39:28
+exec_host = n033/0*28
 ```
 
-Pass criteria for this shakedown are:
+The run wrote a `DONE` marker:
 
-- exit status `0`, or clean `-maxtime` stop with restartable HDF5 output
-- `DONE` marker written
-- later `dbl.h5` and `flt.h5` outputs beyond file `0`
-- particle outputs beyond `particles.0000.dbl`
-- no restart/output-path surprises
+```text
+status=done
+case_id=C-HI
+case_variant=particles
+pbs_jobid=690426.kunanyi-ohpc
+finished_utc=2026-05-08T14:15:17Z
+```
+
+PLUTO stopped through the requested `-maxtime` path rather than being killed by
+PBS:
+
+```text
+> Max time 1.500000 hours reached.
+> Writing file #1 (dbl.h5) to disk...
+> Writing file #1 (flt.h5) to disk...
+> Writing particle file #45 (dbl) to disk...
+> Done
+```
+
+Output checks:
+
+```text
+data.0000.dbl.h5 5.0G
+data.0001.dbl.h5 5.0G
+data.0000.flt.h5 3.4G
+data.0001.flt.h5 3.4G
+particles.0000.dbl through particles.0045.dbl
+output directory footprint: 17G
+```
+
+`dbl.h5.out` and `flt.h5.out` both record the final forced output as:
+
+```text
+1 1.371692e+02 2.988724e-01 583 single_file little rho vx1 vx2 vx3 prs tr1
+```
+
+The HDF5 files were readable via `h5ls`; the selected files exposed the
+expected `Timestep_*`, `cell_coords`, and `node_coords` groups.
+
+The generated grid for this one-node shakedown was:
+
+```text
+X1: 404 cells, [-200, 200], min dx 0.05 kpc, max dx 11.0828 kpc
+X2: 404 cells, [-200, 200], min dx 0.05 kpc, max dx 11.0828 kpc
+X3: 452 cells, [-250, 250], min dx 0.05 kpc, max dx 10.4413 kpc
+```
+
+The central inlet-scale patch remains well resolved. The outer grid is
+deliberately coarse because this was the one-node particle shakedown, not the
+final supervisor-grade multi-node grid.
+
+Compact evidence was retrieved to the Mac at:
+
+```text
+build/science/kunanyi_stage_2026-05-08/c_hi_1node_690426_compact_results_2026-05-09.tar.gz
+```
+
+SHA-256:
+
+```text
+bba6a6505bd29cb832d419ae54d38471676f3f1e8b131bf9d6592c2de7477d26
+```
+
+## Result
+
+This shakedown passed the intended infrastructure gate:
+
+- particle-enabled PLUTO builds now work on `kunanyi`
+- HDF5 static-grid outputs are written and readable
+- the `-maxtime` shutdown path writes a final restart-capable output set
+- particle files are produced beyond the initial file
+- the PBS template writes durable `DONE`/`FAILED` markers
+
+It should not be treated as a science result yet. The final time is an early
+segment, and the grid is the one-node rehearsal grid. The next move is to run
+quick-look diagnostics on the early `C-HI` HDF5 and particle outputs, then
+decide whether to continue this run from restart, launch a longer one-node
+segment, or promote to an intermediate multi-node rehearsal.

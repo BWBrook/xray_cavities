@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-07
+Last updated: 2026-05-09
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -419,26 +419,44 @@ Patrick/Stas configuration review applied on 2026-05-08:
   `build/science/kunanyi_stage_2026-05-08/stewart_gate_compact_results_2026-05-08.tar.gz`
   with SHA-256
   `adb099cd1557b192d23f48b6d5a1976225a607ebce9df7c2854b66d44a125c80`
-- the first jet-bearing, particles-enabled `C-HI` one-node segment is now
-  running on `kunanyi`:
-  - active job id: `690426.kunanyi-ohpc`
+- the first jet-bearing, particles-enabled `C-HI` one-node segment completed
+  cleanly on `kunanyi`:
+  - job id: `690426.kunanyi-ohpc`
   - job name: `c_hi_1node`
   - resources: `select=1:ncpus=28:mpiprocs=28`
   - walltime: `02:00:00`; `PLUTO_MAXTIME_HOURS=1.5`
+  - exit status: `0`
+  - PBS walltime used: `01:39:28`
+  - PBS CPU time used: `44:04:38`
+  - PBS peak memory: `30525360kb`
   - run root:
     `/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment`
-  - pre-handoff poll: `job_state = R`, `exec_host = n033/0*28`,
-    `resources_used.walltime = 00:11:29`, `resources_used.mem = 30426628kb`
-  - initial `dbl.h5`, initial `flt.h5`, and `particles.0000.dbl` were
-    written, and the rank-0 log reached `Starting computation`
+  - `DONE` marker written, with no `FAILED` marker observed
+  - PLUTO stopped itself via `-maxtime` and wrote final restart-capable HDF5
+    outputs before PBS termination
+  - output directory footprint: about `17 GB`
+  - output files: `data.0000` and `data.0001` for both `dbl.h5` and `flt.h5`,
+    plus `particles.0000.dbl` through `particles.0045.dbl`
+  - final recorded time in `dbl.h5.out`/`flt.h5.out`: `t = 1.371692e+02`
+    code units, step `583`
+  - `h5ls` can read the `dbl.h5`/`flt.h5` files and sees the expected
+    `Timestep_*`, `cell_coords`, and `node_coords` groups
+  - generated grid: `404 x 404 x 452`; the central uniform patch remains
+    `0.05 kpc`, while outer one-node shakedown edge cells are deliberately
+    coarse
 - two useful launch lessons were captured:
   - the production template needs `-include Particles/makefile` when
     `PARTICLES_LP` is enabled
   - the full `stewart_stretched_250` grid parses as roughly
     `960 x 960 x 1014` cells and is too large for a one-node particle
     shakedown; use `kunanyi_single_node_250` for this stage
-- next live action is to wait for the PBS email for `690426.kunanyi-ohpc`,
-  then inspect the `DONE`/`FAILED` marker and output manifests
+- compact evidence from the completed run has been retrieved locally at
+  `build/science/kunanyi_stage_2026-05-08/c_hi_1node_690426_compact_results_2026-05-09.tar.gz`
+  with SHA-256
+  `bba6a6505bd29cb832d419ae54d38471676f3f1e8b131bf9d6592c2de7477d26`
+- next science action is to inspect the early `C-HI` outputs for basic jet,
+  tracer, and particle sanity; this run validates the build/output/restart
+  path, but it is not yet a production science snapshot
 - details are in:
   - `docs/exchange/logs/2026-05-08-patrick-stas-c-hi-feedback.md`
   - `docs/exchange/logs/2026-05-08-kunanyi-stewart-environment-gates.md`
