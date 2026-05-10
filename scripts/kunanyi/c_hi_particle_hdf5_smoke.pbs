@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_part_h5
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1
+#PBS -l walltime=01:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_particle_hdf5_smoke.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_particle_hdf5_smoke.err
+
+set -euo pipefail
+
+RUN_OUT="${RUN_OUT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs}"
+RUNTIME_DIR="${RUNTIME_DIR:-/u/bwbrook/codex_kunanyi/particle_loss_runtime}"
+SCRIPT="${SCRIPT:-$RUNTIME_DIR/plutokore_particle_hdf5_smoke.py}"
+PLUTOKORE_SRC="${PLUTOKORE_SRC:-$RUNTIME_DIR/plutokore/src}"
+COMPAT_DIR="${COMPAT_DIR:-$RUNTIME_DIR/python_compat}"
+OUTPUT_DIR="${OUTPUT_DIR:-/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particles-hdf5}"
+OUTPUT_HDF5="${OUTPUT_HDF5:-$OUTPUT_DIR/C-HI.particles.hdf5}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-/u/bwbrook/codex_kunanyi/c_hi_particle_hdf5_smoke_2026-05-10_summary.tar.gz}"
+
+module purge
+module load Anaconda3/2024.02-1
+
+export PYTHONPATH="$COMPAT_DIR:$PLUTOKORE_SRC${PYTHONPATH:+:$PYTHONPATH}"
+export OMP_NUM_THREADS=1
+export NUMBA_NUM_THREADS=1
+
+mkdir -p "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "python=$(command -v python)"
+python --version
+echo "run_out=$RUN_OUT"
+echo "runtime_dir=$RUNTIME_DIR"
+echo "plutokore_src=$PLUTOKORE_SRC"
+echo "compat_dir=$COMPAT_DIR"
+echo "output_hdf5=$OUTPUT_HDF5"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+python "$SCRIPT" \
+  --sim-dir "$RUN_OUT" \
+  --output-dir "$OUTPUT_DIR" \
+  --output-hdf5 "$OUTPUT_HDF5"
+
+ls -lh "$OUTPUT_HDF5"
+find "$OUTPUT_DIR" -maxdepth 1 -type f -printf "%f\t%s bytes\n" | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar --exclude='*.hdf5' -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$OUTPUT_DIR")" "$(basename "$OUTPUT_DIR")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

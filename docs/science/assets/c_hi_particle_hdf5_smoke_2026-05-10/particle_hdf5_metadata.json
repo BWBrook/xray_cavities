@@ -1,0 +1,143 @@
+{
+  "fields": [
+    {
+      "dtype": "float64",
+      "field": "id",
+      "finite_count": 4817788,
+      "max": 17515.0,
+      "mean": 5839.856075443751,
+      "min": 0.0,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "x1",
+      "finite_count": 4817788,
+      "max": 9.26437849161047,
+      "mean": 0.020734733439434862,
+      "min": -9.25536358478251,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "x2",
+      "finite_count": 4817788,
+      "max": 9.262309019849889,
+      "mean": -0.010055428431551048,
+      "min": -9.286303746770205,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "x3",
+      "finite_count": 4817788,
+      "max": 33.41899734840883,
+      "mean": 0.01623711855444268,
+      "min": -33.4195734976945,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "vx1",
+      "finite_count": 4817788,
+      "max": 0.06422489078002787,
+      "mean": -6.242143045343643e-06,
+      "min": -0.06445972528480207,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "vx2",
+      "finite_count": 4817788,
+      "max": 0.06328701351871822,
+      "mean": -1.1095108388617044e-05,
+      "min": -0.06497141666284698,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "vx3",
+      "finite_count": 4817788,
+      "max": 0.10013230380593481,
+      "mean": 1.6112217097150262e-05,
+      "min": -0.10013230893265775,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "tinj",
+      "finite_count": 4817788,
+      "max": 1672.210205078125,
+      "mean": 554.6502129514564,
+      "min": 0.0,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "color",
+      "finite_count": 4817788,
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "tracer",
+      "finite_count": 4817788,
+      "max": 1.0000000000000007,
+      "mean": 0.38537032987605474,
+      "min": 0.0,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "last_shock_time",
+      "finite_count": 14453364,
+      "max": 1672.210205078125,
+      "mean": 997.7606081926587,
+      "min": 0.0,
+      "nan_count": 14448036,
+      "shape": "17516x550x3"
+    },
+    {
+      "dtype": "float64",
+      "field": "density",
+      "finite_count": 4817788,
+      "max": 0.07979902967980604,
+      "mean": 0.0038668216224916523,
+      "min": 0.0,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    },
+    {
+      "dtype": "float64",
+      "field": "pressure",
+      "finite_count": 4817788,
+      "max": 4.830534809795404e-05,
+      "mean": 5.42478598905547e-07,
+      "min": 0.0,
+      "nan_count": 4816012,
+      "shape": "17516x550"
+    }
+  ],
+  "grid_outputs": 9,
+  "output_hdf5": "/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particles-hdf5/C-HI.particles.hdf5",
+  "particle_outputs": 549,
+  "particle_time_count": 550,
+  "particle_time_max_code": 1672.524171766,
+  "particle_time_max_myr": 5.455044255068948,
+  "particle_time_min_code": 0.0,
+  "particle_time_min_myr": 0.0,
+  "simulation_directory": "/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs"
+}

@@ -1,0 +1,15 @@
+metric,value,unit
+grid_output,8,index
+grid_time_myr,4.9994358508106655,Myr
+particle_output,503,index
+particle_time_myr,4.999435003568512,Myr
+emissivity_shape,17516x1x1,array
+finite_count,17516,loss_factor
+positive_count,13144,loss_factor
+nan_count,0,loss_factor
+min,0.0,loss_factor
+max,4.2874063006224175,loss_factor
+mean,0.7759846208637153,loss_factor
+positive_min,0.1851950760834578,loss_factor
+positive_max,4.2874063006224175,loss_factor
+positive_mean,1.0340951475234963,loss_factor

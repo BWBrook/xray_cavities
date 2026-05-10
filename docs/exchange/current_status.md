@@ -80,8 +80,21 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - raw pre-correction 1 keV map max: `1.4382e6 mJy sr^-1`
   - APEC/Gaunt-corrected 1 keV map max: `2.8783e6 mJy sr^-1`
   - correction-ratio range: `1.3273` to `2.4404`
-- this supersedes the earlier C bridge for the grid-thermal X-ray map, while
-  the particle-loss-aware GRAiLE/XRAiSE component remains pending
+- this supersedes the earlier C bridge for the grid-thermal X-ray map
+- the particle-loss-aware GRAiLE/XRAiSE runtime gate is also complete:
+  - particle HDF5 preprocessing job: `690635.kunanyi-ohpc` (`c_hi_part_h5`)
+  - particle-loss smoke job: `690636.kunanyi-ohpc` (`c_hi_ploss5`)
+  - staged runtime: `plutokore` plus tiny import shims under
+    `/u/bwbrook/codex_kunanyi/particle_loss_runtime`
+  - processed particle HDF5:
+    `/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particles-hdf5/C-HI.particles.hdf5`
+  - particle IDs represented: `17516`
+  - particle times represented: `550`, spanning `0.0` to `5.4550 Myr`
+  - full-loss emissivity smoke at grid output `8`, particle output `503`:
+    `17516` finite values, `13144` positive values, `0` NaNs, max `4.2874`
+- the remaining observable upgrade is to map or raytrace these particle
+  emissivities into a first radio/lobe product and compare it with the aligned
+  X-ray, cavity, and truth outputs
 - the latest report and PDF are:
   - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
   - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
@@ -91,11 +104,12 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - `docs/science/c_hi_cavity_stub_2026-05-10.pdf`
   - `docs/science/c_hi_xraise_grid_smoke_2026-05-10.md`
   - `docs/science/c_hi_xraise_grid_smoke_2026-05-10.pdf`
+  - `docs/science/c_hi_particle_loss_smoke_2026-05-10.md`
+  - `docs/science/c_hi_particle_loss_smoke_2026-05-10.pdf`
 - latest exchange note:
-  `docs/exchange/logs/2026-05-10-c-hi-xraise-grid-smoke.md`
-- next science-facing step: set up the particle-loss-aware GRAiLE/XRAiSE lane
-  by staging `plutokore`, satisfying the remaining Python dependencies, and
-  producing the preprocessed `*.particles.hdf5` expected by Georgia's driver
+  `docs/exchange/logs/2026-05-10-c-hi-particle-loss-smoke.md`
+- next science-facing step: turn the particle emissivity vector into the first
+  mapped/raytraced radio smoke for the same `C-HI`, 5 Myr, `0 deg` target
 
 Update on 2026-04-24:
 
@@ -692,8 +706,8 @@ For production-style HDF5 builds on Nectar, use the Nectar-specific PLUTO defs:
 
 ## Most Recent Meaningful Result
 
-The latest science-facing checkpoint is the `C-HI` particles-enabled 5 Myr
-`kunanyi` continuation plus first Level 1/2 truth smoke.
+The latest science-facing checkpoint is the aligned `C-HI` particles-enabled
+5 Myr observable/truth smoke package on `kunanyi`.
 
 Summary:
 
@@ -705,15 +719,22 @@ Summary:
   boundaries
 - Level 1 injected-energy accounting and Level 2 tracer-mask lobe energetics
   have been extracted for the same `data.0008.flt.h5` snapshot
-- the next work is the observable half of the smoke package: GRAiLE/XRAiSE
-  X-ray and particle/radio products at a declared snapshot/view
+- the XRAiSE grid-thermal path and the particle-loss-aware runtime path are now
+  both proven for the declared 5 Myr, `0 deg` target
+- the next work is to turn the particle emissivity vector into a mapped or
+  raytraced radio product for the same snapshot/view
 
 Repo-scoped artifacts:
 
 - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
 - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
+- `docs/science/c_hi_xraise_grid_smoke_2026-05-10.md`
+- `docs/science/c_hi_xraise_grid_smoke_2026-05-10.pdf`
+- `docs/science/c_hi_particle_loss_smoke_2026-05-10.md`
+- `docs/science/c_hi_particle_loss_smoke_2026-05-10.pdf`
 - `docs/science/assets/c_hi_to5_quicklook_2026-05-10/`
-- `docs/exchange/logs/2026-05-10-c-hi-to5-continuation.md`
+- `docs/science/assets/c_hi_particle_loss_smoke_2026-05-10/`
+- `docs/exchange/logs/2026-05-10-c-hi-particle-loss-smoke.md`
 
 The previous major science-facing checkpoint was the Stewart environment gate on
 resized Nectar.
@@ -752,10 +773,11 @@ Repo-scoped artifacts:
 ## Next Recommended Step
 
 The onboarding sequence and the early `C-HI` execution-path smoke tests are now
-complete through the 5 Myr diagnostic snapshot, including first truth and
-bridge-observable products for the same snapshot/view.
+complete through the 5 Myr diagnostic snapshot, including first truth,
+cavity-protocol, XRAiSE grid-thermal, and particle-loss runtime products for the
+same snapshot/view.
 
-The next move should be to complete the first aligned observable smoke package,
+The next move should be to complete the first aligned radio/lobe observable,
 using:
 
 - `jet-setup` for new simulation runs
@@ -768,10 +790,11 @@ using:
 As of 2026-05-10, the immediate target remains the 5 Myr `C-HI`, `0 deg`
 snapshot unless we deliberately choose to wait for a later, larger cavity:
 
-1. set up the full Python GRAiLE/XRAiSE runtime and rerun this target with the
-   complete loss-kernel pipeline
-2. add the first cavity-protocol stub: ellipsoidal boundary, local pressure,
-   `pV`, and `4pV`
+1. map or raytrace the particle emissivity vector into one radio/lobe product
+   and one radio-luminosity smoke for the same target
+2. run a deterministic particle-loss cross-check, at minimum comparing
+   `NUMBA_NUM_THREADS=1` and `4`, because supplied `xraise.py` emits a Numba
+   parallel-safety warning
 3. only then decide whether to continue `C-HI` toward longer snapshots or begin
    preparing the full production chain
 

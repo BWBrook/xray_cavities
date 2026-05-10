@@ -1,0 +1,30 @@
+{
+  "emissivity_shape": [
+    17516,
+    1,
+    1
+  ],
+  "frequency_hz": 2.417990504024e+17,
+  "grid_output": 8,
+  "grid_time_myr": 4.9994358508106655,
+  "loss_key": "full",
+  "losses": 4,
+  "particle_hdf5": "/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particles-hdf5/C-HI.particles.hdf5",
+  "particle_output": 503,
+  "particle_sampling_myr": 0.01,
+  "particle_time_myr": 4.999435003568512,
+  "redshift": 0.05,
+  "sim_dir": "/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs",
+  "stats": {
+    "finite_count": 17516,
+    "max": 4.2874063006224175,
+    "mean": 0.7759846208637153,
+    "min": 0.0,
+    "nan_count": 0,
+    "positive_count": 13144,
+    "positive_max": 4.2874063006224175,
+    "positive_mean": 1.0340951475234963,
+    "positive_min": 0.1851950760834578
+  },
+  "xraise_py": "/u/bwbrook/codex_kunanyi/particle_loss_runtime/xraise.py"
+}
