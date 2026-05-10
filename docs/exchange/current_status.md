@@ -102,6 +102,15 @@ Latest MacBook/kunanyi update on 2026-05-10:
     `3.1963e27` and `3.1487e27 W Hz^-1`
 - the aligned 5 Myr smoke package now has truth, cavity, XRAiSE grid-thermal,
   particle-loss, and radio/lobe products for the same snapshot/view
+- the aligned comparison and deterministic particle-radio gate is complete:
+  - comparison assets:
+    `docs/science/assets/c_hi_aligned_comparison_2026-05-10/`
+  - determinism job: `690644.kunanyi-ohpc` (`c_hi_rdet5`)
+  - rerun comparison: `NUMBA_NUM_THREADS=1` versus `4`
+  - result: exact hashes matched, arrays allclose, max array relative
+    difference `0.0`, max scalar-metric relative difference `0.0`
+  - determinism assets:
+    `docs/science/assets/c_hi_particle_radio_determinism_2026-05-10/`
 - the latest report and PDF are:
   - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
   - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
@@ -115,11 +124,13 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - `docs/science/c_hi_particle_loss_smoke_2026-05-10.pdf`
   - `docs/science/c_hi_particle_radio_smoke_2026-05-10.md`
   - `docs/science/c_hi_particle_radio_smoke_2026-05-10.pdf`
+  - `docs/science/c_hi_aligned_comparison_and_determinism_2026-05-10.md`
+  - `docs/science/c_hi_aligned_comparison_and_determinism_2026-05-10.pdf`
 - latest exchange note:
-  `docs/exchange/logs/2026-05-10-c-hi-particle-radio-smoke.md`
-- next science-facing step: build the aligned one-page comparison package and
-  run the deterministic particle-loss/radio cross-check before using this lane
-  for longer snapshots
+  `docs/exchange/logs/2026-05-10-c-hi-aligned-comparison-determinism.md`
+- next science-facing step: extend the aligned extraction/reporting path to
+  additional early snapshots, then decide whether to continue the existing
+  `C-HI` run toward the first `50 Myr` milestone or adjust settings first
 
 Update on 2026-04-24:
 

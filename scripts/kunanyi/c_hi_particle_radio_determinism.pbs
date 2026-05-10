@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_rdet5
+#PBS -q normal
+#PBS -l select=1:ncpus=4:mpiprocs=1
+#PBS -l walltime=02:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_particle_radio_determinism.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_particle_radio_determinism.err
+
+set -euo pipefail
+
+RUN_OUT="${RUN_OUT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs}"
+RUNTIME_DIR="${RUNTIME_DIR:-/u/bwbrook/codex_kunanyi/particle_loss_runtime}"
+RADIO_SCRIPT="${RADIO_SCRIPT:-$RUNTIME_DIR/xraise_particle_radio_smoke.py}"
+COMPARE_SCRIPT="${COMPARE_SCRIPT:-$RUNTIME_DIR/compare_particle_radio_determinism.py}"
+XRAISE_PY="${XRAISE_PY:-$RUNTIME_DIR/xraise.py}"
+PLUTOKORE_SRC="${PLUTOKORE_SRC:-$RUNTIME_DIR/plutokore/src}"
+COMPAT_DIR="${COMPAT_DIR:-$RUNTIME_DIR/python_compat}"
+PARTICLE_HDF5="${PARTICLE_HDF5:-/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particles-hdf5/C-HI.particles.hdf5}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particle-radio-determinism}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-/u/bwbrook/codex_kunanyi/c_hi_particle_radio_determinism_2026-05-10.tar.gz}"
+GRID_OUTPUT="${GRID_OUTPUT:-8}"
+
+module purge
+module load Anaconda3/2024.02-1
+
+export PYTHONPATH="$COMPAT_DIR:$PLUTOKORE_SRC:$RUNTIME_DIR${PYTHONPATH:+:$PYTHONPATH}"
+export OMP_NUM_THREADS=1
+
+rm -rf "$OUTPUT_ROOT"
+mkdir -p "$OUTPUT_ROOT/threads1" "$OUTPUT_ROOT/threads4" "$OUTPUT_ROOT/comparison"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "python=$(command -v python)"
+python --version
+echo "run_out=$RUN_OUT"
+echo "particle_hdf5=$PARTICLE_HDF5"
+echo "xraise_py=$XRAISE_PY"
+echo "grid_output=$GRID_OUTPUT"
+echo "output_root=$OUTPUT_ROOT"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+for threads in 1 4; do
+  export NUMBA_NUM_THREADS="$threads"
+  echo "running_numba_threads=$NUMBA_NUM_THREADS"
+  python "$RADIO_SCRIPT" \
+    --sim-dir "$RUN_OUT" \
+    --particle-hdf5 "$PARTICLE_HDF5" \
+    --xraise-py "$XRAISE_PY" \
+    --output-dir "$OUTPUT_ROOT/threads${threads}" \
+    --grid-output "$GRID_OUTPUT"
+done
+
+python "$COMPARE_SCRIPT" \
+  --threads1-dir "$OUTPUT_ROOT/threads1" \
+  --threads4-dir "$OUTPUT_ROOT/threads4" \
+  --output-dir "$OUTPUT_ROOT/comparison"
+
+find "$OUTPUT_ROOT" -maxdepth 2 -type f -printf "%P\t%s bytes\n" | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$OUTPUT_ROOT")" "$(basename "$OUTPUT_ROOT")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

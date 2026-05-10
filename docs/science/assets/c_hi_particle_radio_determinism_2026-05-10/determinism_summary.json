@@ -1,0 +1,11 @@
+{
+  "arrays_allclose": true,
+  "exact_hashes": true,
+  "max_array_rel_diff": 0.0,
+  "max_metric_rel_diff": 0.0,
+  "note": "exact_hashes can be false if metadata contains path or runtime-specific text; pass is numeric.",
+  "passed": true,
+  "rtol": 1e-10,
+  "threads1_dir": "build/science/kunanyi_stage_2026-05-08/c_hi_particle_radio_determinism_extract/2026-05-10-c-hi-particle-radio-determinism/threads1",
+  "threads4_dir": "build/science/kunanyi_stage_2026-05-08/c_hi_particle_radio_determinism_extract/2026-05-10-c-hi-particle-radio-determinism/threads4"
+}

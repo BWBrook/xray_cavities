@@ -1,0 +1,6 @@
+metric,value,unit
+arrays_allclose,True,boolean
+exact_hashes,True,boolean
+max_array_rel_diff,0.0,relative
+max_metric_rel_diff,0.0,relative
+passed,True,boolean

@@ -1,0 +1,14 @@
+category,metric,value,unit,source
+target,grid_time,4.9994358508106655,Myr,particle_radio_smoke_summary.csv
+truth_level1,injected_energy_one_sided_elapsed,1.5777016424340663e+59,erg,level1_injected_energy.csv
+truth_level1,injected_energy_bipolar_elapsed,3.1554032848681326e+59,erg,level1_injected_energy.csv
+truth_level2,tracer_lobe_volume_bipolar,10791.774671553838,kpc^3,level2_tracer_lobe_truth.csv
+truth_level2,tracer_lobe_total_energy_bipolar,1.8459025555752513e+59,erg,level2_tracer_lobe_truth.csv
+cavity,pV_bipolar,6.341864992895443e+58,erg,cavity_stub_summary.csv
+cavity,four_pV_bipolar,2.5367459971581773e+59,erg,cavity_stub_summary.csv
+cavity,sound_age_mean,13.448351200192388,Myr,cavity_stub_summary.csv
+xray,corrected_xray_max,2878348.591265787,mJy sr^-1,xraise_grid_smoke_summary.csv
+xray,corrected_xray_sum,1093671118.598218,mJy sr^-1 pixels,xraise_grid_smoke_summary.csv
+radio,radio_map_max,3684663031633046.5,mJy sr^-1,particle_radio_smoke_summary.csv
+radio,radio_luminosity_bipolar,6.345037307063195e+27,W Hz^-1,particle_radio_smoke_summary.csv
+radio,radio_lobe_balance_positive_over_negative,0.9851118210460905,ratio,particle_radio_lobe_summary.csv

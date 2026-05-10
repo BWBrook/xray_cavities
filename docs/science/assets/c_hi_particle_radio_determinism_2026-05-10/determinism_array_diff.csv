@@ -1,0 +1,7 @@
+product,shape_threads1,shape_threads4,max_abs_diff,max_rel_diff,sum_abs_diff,nonzero_diff_count,allclose
+radio_150mhz_particle_loss_mjy_sr.tsv,220x180,220x180,0.0,0.0,0.0,0,True
+radio_150mhz_particle_lossless_mjy_sr.tsv,220x180,220x180,0.0,0.0,0.0,0,True
+radio_particle_count_map.tsv,220x180,220x180,0.0,0.0,0.0,0,True
+radio_particle_mean_loss_factor.tsv,220x180,220x180,0.0,0.0,0.0,0,True
+x_kpc.tsv,180,180,0.0,0.0,0.0,0,True
+z_kpc.tsv,220,220,0.0,0.0,0.0,0,True
