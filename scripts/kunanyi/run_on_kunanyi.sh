@@ -22,18 +22,22 @@ if [ -z "${TPAC_USER:-}" ] || [ -z "${TPAC_PASSWORD:-}" ]; then
   exit 2
 fi
 
+TPAC_JUMPBOX_ALIAS="${TPAC_JUMPBOX_ALIAS:-tpac-jumpbox}"
+TPAC_CLUSTER_HOST="${TPAC_CLUSTER_HOST:-kunanyi}"
 REMOTE_CMD="$*"
 REMOTE_CMD_B64="$(printf '%s' "$REMOTE_CMD" | base64 | tr -d '\n')"
-export TPAC_USER TPAC_PASSWORD REMOTE_CMD_B64
+export TPAC_USER TPAC_PASSWORD TPAC_JUMPBOX_ALIAS TPAC_CLUSTER_HOST REMOTE_CMD_B64
 
 /usr/bin/expect <<'EXPECT'
 set timeout 600
 set user $env(TPAC_USER)
 set password $env(TPAC_PASSWORD)
+set jumpbox_alias $env(TPAC_JUMPBOX_ALIAS)
+set cluster_host $env(TPAC_CLUSTER_HOST)
 set payload $env(REMOTE_CMD_B64)
 set status 255
 
-spawn ssh -tt -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 tpac-jumpbox
+spawn ssh -tt -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 $jumpbox_alias
 expect {
   -re "(?i)password:" { send "$password\r"; exp_continue }
   -re "$user@jumpbox-\[0-9\]+:.*\[\$#%\] ?$" { }
@@ -41,7 +45,7 @@ expect {
   timeout { puts "TIMEOUT waiting for jumpbox shell"; exit 125 }
 }
 
-send "ssh -tt kunanyi\r"
+send "ssh -tt $cluster_host\r"
 expect {
   -re "(?i)password:" { send "$password\r"; exp_continue }
   -re "$user@kunanyi-\[0-9\]+:.*\[\$#%\] ?$" { }

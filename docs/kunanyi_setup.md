@@ -1,6 +1,6 @@
 # kunanyi Setup Notes
 
-Last updated: 2026-05-02
+Last updated: 2026-05-10
 
 These notes record the first successful MacBook control-plane access path to
 TPAC's `kunanyi` HPC.
@@ -43,6 +43,27 @@ The first successful login path landed on:
 
 - jumpbox: `jumpbox-2`
 - login node: `<tpac-host>`
+
+Update on 2026-05-10: direct terminal SSH from the MacBook's current network
+may time out to `<tpac-host>:22` even when the portal button has been
+clicked. The reusable control-plane repo at `/Users/bwbrook/work/nectar` now
+records a validated fallback route:
+
+```text
+MacBook -> nectar-codex -> tpac-jumpbox-via-nectar -> kunanyi
+```
+
+The `xray_cavities` helper `scripts/kunanyi/run_on_kunanyi.sh` now supports
+that route via environment variables:
+
+```bash
+TPAC_JUMPBOX_ALIAS=tpac-jumpbox-via-nectar \
+  scripts/kunanyi/run_on_kunanyi.sh 'hostname; qstat -Q | sed -n "1,8p"'
+```
+
+The default remains the direct `tpac-jumpbox` alias. Use the via-Nectar alias
+when direct MacBook TCP/22 times out but the Nectar source IP can reach the
+jumpbox.
 
 ## Secret Location
 
