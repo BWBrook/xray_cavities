@@ -1,0 +1,26 @@
+metric,value,unit
+input_h5,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0008.flt.h5,path
+timestep,Timestep_8,label
+time_code,1532.8336836509316,code_time
+time_myr,4.9994348189788402,Myr
+view_angle_deg,0,deg
+redshift,0.050000000000000003,dimensionless
+nx,404,cells
+ny,404,cells
+nz,452,cells
+xray_frequency,2.417990504024e+17,Hz
+radio_frequency,150000000,Hz
+tracer_threshold,0.0050000000000000001,dimensionless
+xray_raw_mjy_sr_min,1.23753890401616673e+02,mJy/sr
+xray_raw_mjy_sr_max,1.43817970254628127e+06,mJy/sr
+xray_raw_mjy_sr_sum,7.99609060780459523e+08,mJy/sr_pixel_sum
+xray_positive_pixels,182608,count
+radio_proxy_mjy_sr_min,0.00000000000000000e+00,mJy/sr
+radio_proxy_mjy_sr_max,6.62042573865387400e+15,mJy/sr
+radio_proxy_mjy_sr_sum,2.20080075789670656e+17,mJy/sr_pixel_sum
+radio_positive_pixels,78880,count
+radio_luminosity_proxy,5.41491871903462736e+26,W/Hz
+radio_lobe_cells_counted,14296426,cells
+tracer_los_max,1.00000000000000000e+00,dimensionless
+xray_formula,XRAiSE grid_bremsstrahlung before APEC/Gaunt correction,text
+radio_formula,plutokore pressure/tracer lossless surface-brightness scaling,text

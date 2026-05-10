@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_obs5
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1
+#PBS -l walltime=00:30:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_observable_smoke.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_observable_smoke.err
+
+set -euo pipefail
+
+RUN_OUT="${RUN_OUT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs}"
+INPUT_H5="${INPUT_H5:-$RUN_OUT/data.0008.flt.h5}"
+TIMESTEP="${TIMESTEP:-Timestep_8}"
+PARTICLE_FILE="${PARTICLE_FILE:-$RUN_OUT/particles.0500.dbl}"
+EXTRACTOR_C="${EXTRACTOR_C:?Set EXTRACTOR_C to pluto_h5_observable_smoke_extract.c}"
+OUTPUT_DIR="${OUTPUT_DIR:-/u/bwbrook/codex_kunanyi/c_hi_observable_smoke_2026-05-10}"
+REDSHIFT="${REDSHIFT:-0.05}"
+VIEW_ANGLE_DEG="${VIEW_ANGLE_DEG:-0.0}"
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+
+mkdir -p "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "input_h5=$INPUT_H5"
+echo "timestep=$TIMESTEP"
+echo "particle_file=$PARTICLE_FILE"
+echo "extractor_c=$EXTRACTOR_C"
+echo "output_dir=$OUTPUT_DIR"
+echo "redshift=$REDSHIFT"
+echo "view_angle_deg=$VIEW_ANGLE_DEG"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+H5CC="$(command -v h5pcc || command -v h5cc)"
+"$H5CC" -O2 "$EXTRACTOR_C" -lm -o "$OUTPUT_DIR/pluto_h5_observable_smoke_extract"
+"$OUTPUT_DIR/pluto_h5_observable_smoke_extract" \
+  "$INPUT_H5" \
+  "$TIMESTEP" \
+  "$PARTICLE_FILE" \
+  "$OUTPUT_DIR" \
+  "$REDSHIFT" \
+  "$VIEW_ANGLE_DEG"
+
+find "$OUTPUT_DIR" -maxdepth 1 -type f -printf "%f\t%s bytes\n" | sort
+tar -czf "${OUTPUT_DIR}.tar.gz" -C "$(dirname "$OUTPUT_DIR")" "$(basename "$OUTPUT_DIR")"
+sha256sum "${OUTPUT_DIR}.tar.gz"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

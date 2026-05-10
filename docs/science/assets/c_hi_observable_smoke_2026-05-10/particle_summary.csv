@@ -1,0 +1,15 @@
+metric,value,unit
+particle_file,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/particles.0503.dbl,path
+particle_time_code,1532.833683651,code_time
+particle_time_myr,4.9994348189790641,Myr
+nparticles,16056,count
+x_min,-8.8388817383102527,kpc
+x_max,9.014863354428627,kpc
+y_min,-8.814523049217156,kpc
+y_max,8.7046103316743366,kpc
+z_min,-32.243939468190113,kpc
+z_max,32.202869086579064,kpc
+tinj_min_code,0,code_time
+tinj_max_code,1532.519775390625,code_time
+tinj_min_myr,0,Myr
+tinj_max_myr,4.998410987167679,Myr

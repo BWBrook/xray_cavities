@@ -43,15 +43,33 @@ Latest MacBook/kunanyi update on 2026-05-10:
 - Level 2 default tracer-mask (`tracer > 5e-3`) bipolar quantities are
   `10791.8 kpc^3`, `9.6642e58 erg` thermal, `8.7948e58 erg` kinetic, and
   `1.8459e59 erg` total
+- the first aligned observable smoke job, `690612.kunanyi-ohpc`
+  (`c_hi_obs5`), completed against the same 5 Myr target:
+  - grid file: `data.0008.flt.h5`
+  - grid time: `4.9994348189788402 Myr`
+  - particle file: `particles.0503.dbl`
+  - particle time: `4.9994348189790641 Myr`
+  - view: `0 deg`
+- this observable product is a bridge smoke, not the final full
+  GRAiLE/XRAiSE pipeline: it ports the XRAiSE grid bremsstrahlung expression
+  before APEC/Gaunt correction and a lossless `plutokore` radio
+  pressure/tracer scaling because `kunanyi` does not yet have the required
+  Python analysis stack loaded
+- bridge observable metrics:
+  - particles loaded: `16056`
+  - raw 1 keV X-ray map max: `1.4382e6 mJy sr^-1`
+  - 150 MHz radio proxy max: `6.6204e15 mJy sr^-1`
+  - 150 MHz radio luminosity proxy: `5.4149e26 W Hz^-1`
 - the latest report and PDF are:
   - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
   - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
+  - `docs/science/c_hi_observable_smoke_2026-05-10.md`
+  - `docs/science/c_hi_observable_smoke_2026-05-10.pdf`
 - latest exchange note:
-  `docs/exchange/logs/2026-05-10-c-hi-to5-continuation.md`
-- next science-facing step: complete the observable half of the first aligned
-  smoke package, beginning with the GRAiLE/XRAiSE X-ray path and a
-  particle/radio smoke product for the 5 Myr, `0 deg` target unless a later
-  target is chosen
+  `docs/exchange/logs/2026-05-10-c-hi-observable-smoke.md`
+- next science-facing step: either set up the full Python GRAiLE/XRAiSE
+  runtime and rerun this exact target with the full loss-kernel pipeline, or
+  add the first cavity-protocol stub against this same snapshot/view
 
 Update on 2026-04-24:
 
@@ -708,7 +726,8 @@ Repo-scoped artifacts:
 ## Next Recommended Step
 
 The onboarding sequence and the early `C-HI` execution-path smoke tests are now
-complete through the 5 Myr diagnostic snapshot.
+complete through the 5 Myr diagnostic snapshot, including first truth and
+bridge-observable products for the same snapshot/view.
 
 The next move should be to complete the first aligned observable smoke package,
 using:
@@ -720,14 +739,14 @@ using:
 - `kunanyi` for full 3D production once its access/module/build/submission path
   has been smoke-tested
 
-As of 2026-05-10, the immediate target is the 5 Myr `C-HI`, `0 deg` smoke
-package unless we deliberately choose to wait for a later, larger cavity:
+As of 2026-05-10, the immediate target remains the 5 Myr `C-HI`, `0 deg`
+snapshot unless we deliberately choose to wait for a later, larger cavity:
 
-1. port/run the supplied GRAiLE/XRAiSE X-ray path against `data.0008.flt.h5`
-2. produce one particle/radio smoke product through `plutokore`
-3. add the first cavity-protocol stub: ellipsoidal boundary, local pressure,
+1. set up the full Python GRAiLE/XRAiSE runtime and rerun this target with the
+   complete loss-kernel pipeline
+2. add the first cavity-protocol stub: ellipsoidal boundary, local pressure,
    `pV`, and `4pV`
-4. only then decide whether to continue `C-HI` toward longer snapshots or begin
+3. only then decide whether to continue `C-HI` toward longer snapshots or begin
    preparing the full production chain
 
 The Stewart tabulated assets are present locally and the Nectar no-jet
