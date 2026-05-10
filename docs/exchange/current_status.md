@@ -19,6 +19,25 @@ machine.
 
 Latest MacBook/kunanyi update on 2026-05-10:
 
+- the next bounded continuation has been launched:
+  - PBS job `690650.kunanyi-ohpc` (`c_hi_to10`)
+  - route: `kunanyi-via-nectar`, because direct MacBook SSH to the jumpbox
+    again timed out from the current network path
+  - allocation: `select=2:ncpus=28:mpiprocs=28`, walltime `07:00:00`
+  - startup nodes: `n093` and `n103`
+  - restart point: latest HDF5 restart output `data.0005.dbl.h5`
+    at about `5.455 Myr`
+  - intended PLUTO command pattern:
+    `./pluto -i pluto.ini -e environment.ini -maxtime 6.5 -h5restart 5`
+  - target: extend the reduced-grid shakedown run toward the next regular
+    snapshot block, ideally about `10 Myr`
+  - launch note:
+    `docs/exchange/logs/2026-05-10-c-hi-to10-continuation-launch.md`
+- the meeting transcript gives the relevant full-grid production scale:
+  Stas described a standard run as about `80 nodes x 28 cores per node`, with
+  about three `48 h` chunks to reach `100 Myr`; the current 2-node jobs should
+  therefore be read as reduced-grid shakedown/continuation runs, not as the
+  intended final full-grid allocation
 - the particles-enabled high-power cluster case, `C-HI`, has now passed the
   early diagnostic run gate on `kunanyi`
 - continuation job `690560.kunanyi-ohpc` (`c_hi_2node_to5`) completed with
