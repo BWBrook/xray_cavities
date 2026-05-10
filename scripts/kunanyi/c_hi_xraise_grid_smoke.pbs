@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_xrgrid5
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1
+#PBS -l walltime=00:45:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_xraise_grid_smoke.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_xraise_grid_smoke.err
+
+set -euo pipefail
+
+RUN_OUT="${RUN_OUT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs}"
+INPUT_H5="${INPUT_H5:-$RUN_OUT/data.0008.flt.h5}"
+TIMESTEP="${TIMESTEP:-Timestep_8}"
+OUTPUT_DIR="${OUTPUT_DIR:-/u/bwbrook/codex_kunanyi/c_hi_xraise_grid_smoke_2026-05-10}"
+RUNTIME_DIR="${RUNTIME_DIR:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+SCRIPT="${SCRIPT:-$RUNTIME_DIR/xraise_grid_smoke.py}"
+XRAISE_PY="${XRAISE_PY:-$RUNTIME_DIR/xraise.py}"
+APEC_TABLE="${APEC_TABLE:-$RUNTIME_DIR/apec_corrections.txt}"
+GAUNT_LUT="${GAUNT_LUT:-$RUNTIME_DIR/gaunt_lut_2d.npz}"
+Y_CHUNK="${Y_CHUNK:-8}"
+REDSHIFT="${REDSHIFT:-0.05}"
+
+module purge
+module load Anaconda3/2024.02-1
+
+mkdir -p "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "python=$(command -v python)"
+python --version
+echo "input_h5=$INPUT_H5"
+echo "timestep=$TIMESTEP"
+echo "runtime_dir=$RUNTIME_DIR"
+echo "output_dir=$OUTPUT_DIR"
+echo "redshift=$REDSHIFT"
+echo "y_chunk=$Y_CHUNK"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+python "$SCRIPT" \
+  --input-h5 "$INPUT_H5" \
+  --timestep "$TIMESTEP" \
+  --output-dir "$OUTPUT_DIR" \
+  --xraise-py "$XRAISE_PY" \
+  --apec-table "$APEC_TABLE" \
+  --gaunt-lut "$GAUNT_LUT" \
+  --redshift "$REDSHIFT" \
+  --y-chunk "$Y_CHUNK"
+
+find "$OUTPUT_DIR" -maxdepth 1 -type f -printf "%f\t%s bytes\n" | sort
+tar -czf "${OUTPUT_DIR}.tar.gz" -C "$(dirname "$OUTPUT_DIR")" "$(basename "$OUTPUT_DIR")"
+sha256sum "${OUTPUT_DIR}.tar.gz"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

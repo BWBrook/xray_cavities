@@ -72,6 +72,16 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - sound age: `13.45 Myr` per lobe
 - the cavity buoyancy/refill ages are recorded only as provisional smoke
   values because their gravity term is currently a hydrostatic shell proxy
+- the first XRAiSE grid-thermal smoke job, `690624.kunanyi-ohpc`
+  (`c_hi_xrgrid5`), completed against the same 5 Myr target:
+  - runtime: `Anaconda3/2024.02-1` on a `kunanyi` compute node
+  - supplied assets used: `xraise.py`, `apec_corrections.txt`, and
+    `gaunt_lut_2d.npz`
+  - raw pre-correction 1 keV map max: `1.4382e6 mJy sr^-1`
+  - APEC/Gaunt-corrected 1 keV map max: `2.8783e6 mJy sr^-1`
+  - correction-ratio range: `1.3273` to `2.4404`
+- this supersedes the earlier C bridge for the grid-thermal X-ray map, while
+  the particle-loss-aware GRAiLE/XRAiSE component remains pending
 - the latest report and PDF are:
   - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
   - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
@@ -79,12 +89,13 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - `docs/science/c_hi_observable_smoke_2026-05-10.pdf`
   - `docs/science/c_hi_cavity_stub_2026-05-10.md`
   - `docs/science/c_hi_cavity_stub_2026-05-10.pdf`
+  - `docs/science/c_hi_xraise_grid_smoke_2026-05-10.md`
+  - `docs/science/c_hi_xraise_grid_smoke_2026-05-10.pdf`
 - latest exchange note:
-  `docs/exchange/logs/2026-05-10-c-hi-cavity-stub.md`
-- next science-facing step: set up the full Python GRAiLE/XRAiSE runtime and
-  rerun this exact target with the full loss-kernel pipeline, then decide
-  whether to extend the current `C-HI` run beyond 5 Myr or continue the
-  observable stack first
+  `docs/exchange/logs/2026-05-10-c-hi-xraise-grid-smoke.md`
+- next science-facing step: set up the particle-loss-aware GRAiLE/XRAiSE lane
+  by staging `plutokore`, satisfying the remaining Python dependencies, and
+  producing the preprocessed `*.particles.hdf5` expected by Georgia's driver
 
 Update on 2026-04-24:
 
