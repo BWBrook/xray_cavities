@@ -60,16 +60,31 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - raw 1 keV X-ray map max: `1.4382e6 mJy sr^-1`
   - 150 MHz radio proxy max: `6.6204e15 mJy sr^-1`
   - 150 MHz radio luminosity proxy: `5.4149e26 W Hz^-1`
+- the first cavity-protocol stub job, `690620.kunanyi-ohpc`
+  (`c_hi_cavity5`), completed against the same 5 Myr target:
+  - one tracer-defined ellipsoid per lobe, threshold `tracer > 5e-3`
+  - local ambient pressure/density from a same-side ellipsoidal shell with
+    `tracer <= 1e-3`
+  - fitted semi-axes: `9.465 x 9.465 x 16.510 kpc` for both lobes
+  - local ambient pressure: `1.7422e-10 dyn cm^-2`
+  - `pV`: `3.1709e58 erg` per lobe
+  - `4pV`: `1.2684e59 erg` per lobe
+  - sound age: `13.45 Myr` per lobe
+- the cavity buoyancy/refill ages are recorded only as provisional smoke
+  values because their gravity term is currently a hydrostatic shell proxy
 - the latest report and PDF are:
   - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
   - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
   - `docs/science/c_hi_observable_smoke_2026-05-10.md`
   - `docs/science/c_hi_observable_smoke_2026-05-10.pdf`
+  - `docs/science/c_hi_cavity_stub_2026-05-10.md`
+  - `docs/science/c_hi_cavity_stub_2026-05-10.pdf`
 - latest exchange note:
-  `docs/exchange/logs/2026-05-10-c-hi-observable-smoke.md`
-- next science-facing step: either set up the full Python GRAiLE/XRAiSE
-  runtime and rerun this exact target with the full loss-kernel pipeline, or
-  add the first cavity-protocol stub against this same snapshot/view
+  `docs/exchange/logs/2026-05-10-c-hi-cavity-stub.md`
+- next science-facing step: set up the full Python GRAiLE/XRAiSE runtime and
+  rerun this exact target with the full loss-kernel pipeline, then decide
+  whether to extend the current `C-HI` run beyond 5 Myr or continue the
+  observable stack first
 
 Update on 2026-04-24:
 

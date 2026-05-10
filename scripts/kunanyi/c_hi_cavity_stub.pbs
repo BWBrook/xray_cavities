@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_cavity5
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1
+#PBS -l walltime=00:30:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_cavity_stub.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_cavity_stub.err
+
+set -euo pipefail
+
+RUN_OUT="${RUN_OUT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs}"
+INPUT_H5="${INPUT_H5:-$RUN_OUT/data.0008.flt.h5}"
+TIMESTEP="${TIMESTEP:-Timestep_8}"
+EXTRACTOR_C="${EXTRACTOR_C:?Set EXTRACTOR_C to pluto_h5_cavity_stub_extract.c}"
+OUTPUT_DIR="${OUTPUT_DIR:-/u/bwbrook/codex_kunanyi/c_hi_cavity_stub_2026-05-10}"
+TRACER_THRESHOLD="${TRACER_THRESHOLD:-0.005}"
+AMBIENT_TRACER_MAX="${AMBIENT_TRACER_MAX:-0.001}"
+SHELL_INNER="${SHELL_INNER:-1.00}"
+SHELL_MID="${SHELL_MID:-1.15}"
+SHELL_OUTER="${SHELL_OUTER:-1.35}"
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+
+mkdir -p "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "input_h5=$INPUT_H5"
+echo "timestep=$TIMESTEP"
+echo "extractor_c=$EXTRACTOR_C"
+echo "output_dir=$OUTPUT_DIR"
+echo "tracer_threshold=$TRACER_THRESHOLD"
+echo "ambient_tracer_max=$AMBIENT_TRACER_MAX"
+echo "shell_inner=$SHELL_INNER"
+echo "shell_mid=$SHELL_MID"
+echo "shell_outer=$SHELL_OUTER"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+H5CC="$(command -v h5pcc || command -v h5cc)"
+"$H5CC" -O2 "$EXTRACTOR_C" -lm -o "$OUTPUT_DIR/pluto_h5_cavity_stub_extract"
+"$OUTPUT_DIR/pluto_h5_cavity_stub_extract" \
+  "$INPUT_H5" \
+  "$TIMESTEP" \
+  "$OUTPUT_DIR" \
+  "$TRACER_THRESHOLD" \
+  "$AMBIENT_TRACER_MAX" \
+  "$SHELL_INNER" \
+  "$SHELL_MID" \
+  "$SHELL_OUTER"
+
+find "$OUTPUT_DIR" -maxdepth 1 -type f -printf "%f\t%s bytes\n" | sort
+tar -czf "${OUTPUT_DIR}.tar.gz" -C "$(dirname "$OUTPUT_DIR")" "$(basename "$OUTPUT_DIR")"
+sha256sum "${OUTPUT_DIR}.tar.gz"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
