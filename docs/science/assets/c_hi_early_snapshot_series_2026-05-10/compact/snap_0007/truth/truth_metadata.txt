@@ -1,0 +1,12 @@
+input_h5=/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0007.flt.h5
+timestep=Timestep_7
+time_code=1226.142432216214
+time_myr=3.9991417425330522
+shape_nz_ny_nx=452,404,404
+jet_power_erg_s=9.9999999999999993e+44
+active_time_myr=50
+unit_density_cgs=1.0023678e-24
+unit_length_cm=3.0856775814913673e+21
+unit_velocity_cm_s=29979245800
+unit_pressure_barye=0.0009008832512490307
+unit_energy_erg=2.646794042725503e+61

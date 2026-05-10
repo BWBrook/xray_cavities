@@ -1,0 +1,10 @@
+metric,value,unit
+time_myr,1.999579431070309,Myr
+frequency_hz,2.417990504024e+17,Hz
+redshift,0.05,dimensionless
+raw_xray_max,1439300.495931689,mJy sr^-1
+corrected_xray_max,2880325.559054476,mJy sr^-1
+raw_xray_sum,787084361.8129385,mJy sr^-1 pixels
+corrected_xray_sum,1069232243.222751,mJy sr^-1 pixels
+correction_ratio_positive_max,2.437215865097217,dimensionless
+correction_ratio_positive_sum,245410.4227713617,dimensionless pixels

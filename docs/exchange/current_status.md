@@ -111,6 +111,18 @@ Latest MacBook/kunanyi update on 2026-05-10:
     difference `0.0`, max scalar-metric relative difference `0.0`
   - determinism assets:
     `docs/science/assets/c_hi_particle_radio_determinism_2026-05-10/`
+- the aligned early-snapshot scalar-series gate is complete:
+  - PBS job: `690646.kunanyi-ohpc` (`c_hi_eseries`)
+  - regular grid outputs processed: `2`, `4`, `6`, `7`, and `8`
+    (`0.9990`, `1.9996`, `2.9999`, `3.9991`, and `4.9994 Myr`)
+  - compact assets:
+    `docs/science/assets/c_hi_early_snapshot_series_2026-05-10/`
+  - tracer volume grows from `539.62` to `10791.77 kpc^3`
+  - tracer z extent grows from `10.08` to `33.04 kpc`
+  - by 5 Myr, Level 2 tracer-lobe energy is about `0.585` of elapsed
+    bipolar injection, and bipolar `4pV` is about `0.804` of elapsed bipolar
+    injection
+  - radio lobe balance stays near unity, ranging from `0.9720` to `1.0579`
 - the latest report and PDF are:
   - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
   - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
@@ -126,11 +138,13 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - `docs/science/c_hi_particle_radio_smoke_2026-05-10.pdf`
   - `docs/science/c_hi_aligned_comparison_and_determinism_2026-05-10.md`
   - `docs/science/c_hi_aligned_comparison_and_determinism_2026-05-10.pdf`
+  - `docs/science/c_hi_early_snapshot_series_2026-05-10.md`
+  - `docs/science/c_hi_early_snapshot_series_2026-05-10.pdf`
 - latest exchange note:
-  `docs/exchange/logs/2026-05-10-c-hi-aligned-comparison-determinism.md`
-- next science-facing step: extend the aligned extraction/reporting path to
-  additional early snapshots, then decide whether to continue the existing
-  `C-HI` run toward the first `50 Myr` milestone or adjust settings first
+  `docs/exchange/logs/2026-05-10-c-hi-early-snapshot-series.md`
+- next science-facing step: continue the existing `C-HI` run in a bounded
+  restart segment toward the first `50 Myr` milestone, targeting the next block
+  of regular snapshots rather than a blind full-duration push
 
 Update on 2026-04-24:
 

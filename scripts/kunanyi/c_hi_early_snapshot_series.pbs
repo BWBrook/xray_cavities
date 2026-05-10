@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_eseries
+#PBS -q normal
+#PBS -l select=1:ncpus=4:mpiprocs=1
+#PBS -l walltime=03:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_early_snapshot_series.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_early_snapshot_series.err
+
+set -euo pipefail
+
+RUN_OUT="${RUN_OUT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-early-snapshot-series}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-/u/bwbrook/codex_kunanyi/c_hi_early_snapshot_series_2026-05-10.tar.gz}"
+RUNTIME_DIR="${RUNTIME_DIR:-/u/bwbrook/codex_kunanyi/early_snapshot_series_runtime}"
+XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+PARTICLE_RUNTIME="${PARTICLE_RUNTIME:-/u/bwbrook/codex_kunanyi/particle_loss_runtime}"
+PLUTOKORE_SRC="${PLUTOKORE_SRC:-$PARTICLE_RUNTIME/plutokore/src}"
+COMPAT_DIR="${COMPAT_DIR:-$PARTICLE_RUNTIME/python_compat}"
+PARTICLE_HDF5="${PARTICLE_HDF5:-/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particles-hdf5/C-HI.particles.hdf5}"
+SNAPSHOT_OUTPUTS="${SNAPSHOT_OUTPUTS:-2 4 6 7 8}"
+JET_POWER_ERG_S="${JET_POWER_ERG_S:-1e45}"
+JET_ACTIVE_TIME_MYR="${JET_ACTIVE_TIME_MYR:-50.0}"
+
+mkdir -p "$OUTPUT_ROOT"
+rm -rf "$OUTPUT_ROOT"/snap_*
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "run_out=$RUN_OUT"
+echo "output_root=$OUTPUT_ROOT"
+echo "runtime_dir=$RUNTIME_DIR"
+echo "xraise_runtime=$XRAISE_RUNTIME"
+echo "particle_runtime=$PARTICLE_RUNTIME"
+echo "particle_hdf5=$PARTICLE_HDF5"
+echo "snapshot_outputs=$SNAPSHOT_OUTPUTS"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+H5CC="$(command -v h5pcc || command -v h5cc)"
+"$H5CC" -O2 "$RUNTIME_DIR/pluto_h5_truth_extract.c" -lm -o "$OUTPUT_ROOT/pluto_h5_truth_extract"
+"$H5CC" -O2 "$RUNTIME_DIR/pluto_h5_cavity_stub_extract.c" -lm -o "$OUTPUT_ROOT/pluto_h5_cavity_stub_extract"
+
+printf "output,timestep,input_h5\n" > "$OUTPUT_ROOT/snapshots.csv"
+for output in $SNAPSHOT_OUTPUTS; do
+  snap_id="$(printf 'snap_%04d' "$output")"
+  input_h5="$RUN_OUT/data.$(printf '%04d' "$output").flt.h5"
+  timestep="Timestep_${output}"
+  snap_dir="$OUTPUT_ROOT/$snap_id"
+  mkdir -p "$snap_dir/truth" "$snap_dir/cavity"
+  printf "%s,%s,%s\n" "$output" "$timestep" "$input_h5" >> "$OUTPUT_ROOT/snapshots.csv"
+
+  echo "truth_cavity_output=$output input=$input_h5 timestep=$timestep"
+  "$OUTPUT_ROOT/pluto_h5_truth_extract" \
+    "$input_h5" \
+    "$timestep" \
+    "$snap_dir/truth" \
+    "$JET_POWER_ERG_S" \
+    "$JET_ACTIVE_TIME_MYR"
+  "$OUTPUT_ROOT/pluto_h5_cavity_stub_extract" \
+    "$input_h5" \
+    "$timestep" \
+    "$snap_dir/cavity" \
+    0.005 \
+    0.001 \
+    1.00 \
+    1.15 \
+    1.35
+done
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONPATH="$COMPAT_DIR:$PLUTOKORE_SRC:$PARTICLE_RUNTIME${PYTHONPATH:+:$PYTHONPATH}"
+export OMP_NUM_THREADS=1
+export NUMBA_NUM_THREADS="${NUMBA_NUM_THREADS:-4}"
+
+for output in $SNAPSHOT_OUTPUTS; do
+  snap_id="$(printf 'snap_%04d' "$output")"
+  input_h5="$RUN_OUT/data.$(printf '%04d' "$output").flt.h5"
+  timestep="Timestep_${output}"
+  snap_dir="$OUTPUT_ROOT/$snap_id"
+  mkdir -p "$snap_dir/xray" "$snap_dir/radio"
+
+  neg_volume="$(awk -F, '$1=="5e-03" && $2=="negative_z" {print $5}' "$snap_dir/truth/level2_tracer_lobe_truth.csv")"
+  pos_volume="$(awk -F, '$1=="5e-03" && $2=="positive_z" {print $5}' "$snap_dir/truth/level2_tracer_lobe_truth.csv")"
+  if [ -z "$neg_volume" ] || [ -z "$pos_volume" ]; then
+    echo "Could not read per-side lobe volumes for output $output" >&2
+    exit 3
+  fi
+
+  echo "xray_radio_output=$output neg_volume=$neg_volume pos_volume=$pos_volume"
+  python "$XRAISE_RUNTIME/xraise_grid_smoke.py" \
+    --input-h5 "$input_h5" \
+    --timestep "$timestep" \
+    --output-dir "$snap_dir/xray" \
+    --xraise-py "$XRAISE_RUNTIME/xraise.py" \
+    --apec-table "$XRAISE_RUNTIME/apec_corrections.txt" \
+    --gaunt-lut "$XRAISE_RUNTIME/gaunt_lut_2d.npz" \
+    --redshift 0.05 \
+    --y-chunk 8
+
+  python "$PARTICLE_RUNTIME/xraise_particle_radio_smoke.py" \
+    --sim-dir "$RUN_OUT" \
+    --particle-hdf5 "$PARTICLE_HDF5" \
+    --xraise-py "$PARTICLE_RUNTIME/xraise.py" \
+    --output-dir "$snap_dir/radio" \
+    --grid-output "$output" \
+    --negative-volume-kpc3 "$neg_volume" \
+    --positive-volume-kpc3 "$pos_volume"
+done
+
+mkdir -p "$OUTPUT_ROOT/compact"
+cp "$OUTPUT_ROOT/snapshots.csv" "$OUTPUT_ROOT/compact/"
+for output in $SNAPSHOT_OUTPUTS; do
+  snap_id="$(printf 'snap_%04d' "$output")"
+  compact_snap="$OUTPUT_ROOT/compact/$snap_id"
+  mkdir -p "$compact_snap/truth" "$compact_snap/cavity" "$compact_snap/xray" "$compact_snap/radio"
+  cp "$OUTPUT_ROOT/$snap_id/truth/level1_injected_energy.csv" "$compact_snap/truth/"
+  cp "$OUTPUT_ROOT/$snap_id/truth/level2_tracer_lobe_truth.csv" "$compact_snap/truth/"
+  cp "$OUTPUT_ROOT/$snap_id/truth/truth_metadata.txt" "$compact_snap/truth/"
+  cp "$OUTPUT_ROOT/$snap_id/cavity/cavity_stub_summary.csv" "$compact_snap/cavity/"
+  cp "$OUTPUT_ROOT/$snap_id/xray/xraise_grid_smoke_summary.csv" "$compact_snap/xray/"
+  cp "$OUTPUT_ROOT/$snap_id/xray/xraise_grid_smoke_metadata.json" "$compact_snap/xray/"
+  cp "$OUTPUT_ROOT/$snap_id/radio/particle_radio_smoke_summary.csv" "$compact_snap/radio/"
+  cp "$OUTPUT_ROOT/$snap_id/radio/particle_radio_lobe_summary.csv" "$compact_snap/radio/"
+  cp "$OUTPUT_ROOT/$snap_id/radio/particle_radio_smoke_metadata.json" "$compact_snap/radio/"
+done
+
+find "$OUTPUT_ROOT/compact" -type f -printf "%P\t%s bytes\n" | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$OUTPUT_ROOT" compact
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
