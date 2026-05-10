@@ -92,9 +92,16 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - particle times represented: `550`, spanning `0.0` to `5.4550 Myr`
   - full-loss emissivity smoke at grid output `8`, particle output `503`:
     `17516` finite values, `13144` positive values, `0` NaNs, max `4.2874`
-- the remaining observable upgrade is to map or raytrace these particle
-  emissivities into a first radio/lobe product and compare it with the aligned
-  X-ray, cavity, and truth outputs
+- the first particle-loss-aware radio/lobe smoke is complete:
+  - radio smoke job: `690641.kunanyi-ohpc` (`c_hi_radio5`)
+  - frequency: `150 MHz`
+  - selected particles: `16054`
+  - lossy radio map max: `3.6847e15 mJy sr^-1`
+  - bipolar lossy luminosity proxy: `6.3450e27 W Hz^-1`
+  - negative-z and positive-z lobe luminosity proxies are closely matched:
+    `3.1963e27` and `3.1487e27 W Hz^-1`
+- the aligned 5 Myr smoke package now has truth, cavity, XRAiSE grid-thermal,
+  particle-loss, and radio/lobe products for the same snapshot/view
 - the latest report and PDF are:
   - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
   - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
@@ -106,10 +113,13 @@ Latest MacBook/kunanyi update on 2026-05-10:
   - `docs/science/c_hi_xraise_grid_smoke_2026-05-10.pdf`
   - `docs/science/c_hi_particle_loss_smoke_2026-05-10.md`
   - `docs/science/c_hi_particle_loss_smoke_2026-05-10.pdf`
+  - `docs/science/c_hi_particle_radio_smoke_2026-05-10.md`
+  - `docs/science/c_hi_particle_radio_smoke_2026-05-10.pdf`
 - latest exchange note:
-  `docs/exchange/logs/2026-05-10-c-hi-particle-loss-smoke.md`
-- next science-facing step: turn the particle emissivity vector into the first
-  mapped/raytraced radio smoke for the same `C-HI`, 5 Myr, `0 deg` target
+  `docs/exchange/logs/2026-05-10-c-hi-particle-radio-smoke.md`
+- next science-facing step: build the aligned one-page comparison package and
+  run the deterministic particle-loss/radio cross-check before using this lane
+  for longer snapshots
 
 Update on 2026-04-24:
 
@@ -721,8 +731,10 @@ Summary:
   have been extracted for the same `data.0008.flt.h5` snapshot
 - the XRAiSE grid-thermal path and the particle-loss-aware runtime path are now
   both proven for the declared 5 Myr, `0 deg` target
-- the next work is to turn the particle emissivity vector into a mapped or
-  raytraced radio product for the same snapshot/view
+- the first particle-loss-aware radio/lobe map and luminosity proxy are also
+  complete for the same snapshot/view
+- the next work is to build a compact aligned comparison package and run the
+  deterministic particle-loss/radio cross-check
 
 Repo-scoped artifacts:
 
@@ -732,9 +744,12 @@ Repo-scoped artifacts:
 - `docs/science/c_hi_xraise_grid_smoke_2026-05-10.pdf`
 - `docs/science/c_hi_particle_loss_smoke_2026-05-10.md`
 - `docs/science/c_hi_particle_loss_smoke_2026-05-10.pdf`
+- `docs/science/c_hi_particle_radio_smoke_2026-05-10.md`
+- `docs/science/c_hi_particle_radio_smoke_2026-05-10.pdf`
 - `docs/science/assets/c_hi_to5_quicklook_2026-05-10/`
 - `docs/science/assets/c_hi_particle_loss_smoke_2026-05-10/`
-- `docs/exchange/logs/2026-05-10-c-hi-particle-loss-smoke.md`
+- `docs/science/assets/c_hi_particle_radio_smoke_2026-05-10/`
+- `docs/exchange/logs/2026-05-10-c-hi-particle-radio-smoke.md`
 
 The previous major science-facing checkpoint was the Stewart environment gate on
 resized Nectar.
@@ -774,10 +789,10 @@ Repo-scoped artifacts:
 
 The onboarding sequence and the early `C-HI` execution-path smoke tests are now
 complete through the 5 Myr diagnostic snapshot, including first truth,
-cavity-protocol, XRAiSE grid-thermal, and particle-loss runtime products for the
-same snapshot/view.
+cavity-protocol, XRAiSE grid-thermal, particle-loss runtime, and
+particle-loss-aware radio/lobe products for the same snapshot/view.
 
-The next move should be to complete the first aligned radio/lobe observable,
+The next move should be to build the first aligned comparison package,
 using:
 
 - `jet-setup` for new simulation runs
@@ -790,9 +805,9 @@ using:
 As of 2026-05-10, the immediate target remains the 5 Myr `C-HI`, `0 deg`
 snapshot unless we deliberately choose to wait for a later, larger cavity:
 
-1. map or raytrace the particle emissivity vector into one radio/lobe product
-   and one radio-luminosity smoke for the same target
-2. run a deterministic particle-loss cross-check, at minimum comparing
+1. fold the aligned X-ray, radio, truth, and cavity quantities into a compact
+   one-page comparison report for the 5 Myr target
+2. run a deterministic particle-loss/radio cross-check, at minimum comparing
    `NUMBA_NUM_THREADS=1` and `4`, because supplied `xraise.py` emits a Numba
    parallel-safety warning
 3. only then decide whether to continue `C-HI` toward longer snapshots or begin

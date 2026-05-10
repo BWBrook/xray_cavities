@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_radio5
+#PBS -q normal
+#PBS -l select=1:ncpus=4:mpiprocs=1
+#PBS -l walltime=02:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_particle_radio_smoke.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_particle_radio_smoke.err
+
+set -euo pipefail
+
+RUN_OUT="${RUN_OUT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs}"
+RUNTIME_DIR="${RUNTIME_DIR:-/u/bwbrook/codex_kunanyi/particle_loss_runtime}"
+SCRIPT="${SCRIPT:-$RUNTIME_DIR/xraise_particle_radio_smoke.py}"
+XRAISE_PY="${XRAISE_PY:-$RUNTIME_DIR/xraise.py}"
+PLUTOKORE_SRC="${PLUTOKORE_SRC:-$RUNTIME_DIR/plutokore/src}"
+COMPAT_DIR="${COMPAT_DIR:-$RUNTIME_DIR/python_compat}"
+PARTICLE_HDF5="${PARTICLE_HDF5:-/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particles-hdf5/C-HI.particles.hdf5}"
+OUTPUT_DIR="${OUTPUT_DIR:-/scratch/bwbrook/xray_cavities_analysis/2026-05-10-c-hi-particle-radio-smoke}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-/u/bwbrook/codex_kunanyi/c_hi_particle_radio_smoke_2026-05-10.tar.gz}"
+GRID_OUTPUT="${GRID_OUTPUT:-8}"
+
+module purge
+module load Anaconda3/2024.02-1
+
+export PYTHONPATH="$COMPAT_DIR:$PLUTOKORE_SRC:$RUNTIME_DIR${PYTHONPATH:+:$PYTHONPATH}"
+export OMP_NUM_THREADS=1
+export NUMBA_NUM_THREADS="${NUMBA_NUM_THREADS:-4}"
+
+mkdir -p "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "python=$(command -v python)"
+python --version
+echo "run_out=$RUN_OUT"
+echo "particle_hdf5=$PARTICLE_HDF5"
+echo "xraise_py=$XRAISE_PY"
+echo "grid_output=$GRID_OUTPUT"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+python "$SCRIPT" \
+  --sim-dir "$RUN_OUT" \
+  --particle-hdf5 "$PARTICLE_HDF5" \
+  --xraise-py "$XRAISE_PY" \
+  --output-dir "$OUTPUT_DIR" \
+  --grid-output "$GRID_OUTPUT"
+
+find "$OUTPUT_DIR" -maxdepth 1 -type f -printf "%f\t%s bytes\n" | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$OUTPUT_DIR")" "$(basename "$OUTPUT_DIR")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
