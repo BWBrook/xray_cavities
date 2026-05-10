@@ -1,0 +1,11 @@
+output_number,file_type,precision,time_code,time_myr,step,path,is_regular_science_output,is_restart_checkpoint,notes
+0,dbl.h5,double,0.000000,0.0000,0,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0000.dbl.h5,false,true,initial restart-capable output
+1,dbl.h5,double,137.169200,0.4474,583,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0001.dbl.h5,false,true,first walltime-forced restart output
+2,dbl.h5,double,309.714700,1.0102,1146,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0002.dbl.h5,false,true,second walltime-forced restart output
+3,dbl.h5,double,659.218800,2.1501,2267,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0003.dbl.h5,false,true,two-node walltime-forced restart output
+0,flt.h5,float,0.000000,0.0000,0,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0000.flt.h5,false,false,initial float output
+1,flt.h5,float,137.169200,0.4474,583,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0001.flt.h5,false,false,first walltime-forced float output
+2,flt.h5,float,306.296100,0.9990,1135,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0002.flt.h5,true,false,nominal 1 Myr science-cadence output
+3,flt.h5,float,309.714700,1.0102,1146,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0003.flt.h5,false,false,second walltime-forced float output
+4,flt.h5,float,613.073841,1.9996,2120,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0004.flt.h5,true,false,nominal 2 Myr science-cadence output
+5,flt.h5,float,659.218800,2.1501,2267,/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0005.flt.h5,false,false,two-node walltime-forced float output

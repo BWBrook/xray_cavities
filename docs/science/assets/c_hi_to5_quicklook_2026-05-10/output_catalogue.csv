@@ -1,0 +1,17 @@
+output,type,time_code,time_myr,dt_code,step,regular_science_output,restart_checkpoint,role,path
+0,dbl.h5,0.000000,0.0000,0.000010,0,no,yes,initial output,data.0000.dbl.h5
+1,dbl.h5,137.169200,0.4474,0.298872,583,no,yes,restart-capable double output,data.0001.dbl.h5
+2,dbl.h5,309.714700,1.0102,0.308549,1146,no,yes,restart-capable double output,data.0002.dbl.h5
+3,dbl.h5,659.218800,2.1501,0.313911,2267,no,yes,restart-capable double output,data.0003.dbl.h5
+4,dbl.h5,1532.834000,4.9994,0.313911,5050,no,yes,restart-capable double output,data.0004.dbl.h5
+5,dbl.h5,1672.524000,5.4550,0.313911,5495,no,yes,restart-capable double output,data.0005.dbl.h5
+0,flt.h5,0.000000,0.0000,0.000010,0,yes,no,initial output,data.0000.flt.h5
+1,flt.h5,137.169200,0.4474,0.298872,583,no,no,walltime-forced float output,data.0001.flt.h5
+2,flt.h5,306.296100,0.9990,0.311861,1135,yes,no,nominal 1 Myr science-cadence output,data.0002.flt.h5
+3,flt.h5,309.714700,1.0102,0.308549,1146,no,no,walltime-forced float output,data.0003.flt.h5
+4,flt.h5,613.073800,1.9996,0.313911,2120,yes,no,nominal 2 Myr science-cadence output,data.0004.flt.h5
+5,flt.h5,659.218800,2.1501,0.313911,2267,no,no,walltime-forced float output,data.0005.flt.h5
+6,flt.h5,919.765100,2.9999,0.313911,3097,yes,no,nominal 3 Myr science-cadence output,data.0006.flt.h5
+7,flt.h5,1226.142000,3.9991,0.313911,4073,yes,no,nominal 4 Myr science-cadence output,data.0007.flt.h5
+8,flt.h5,1532.834000,4.9994,0.313911,5050,yes,no,nominal 5 Myr science-cadence output,data.0008.flt.h5
+9,flt.h5,1672.524000,5.4550,0.313911,5495,no,no,walltime-forced float output,data.0009.flt.h5

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-09
+Last updated: 2026-05-10
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -16,6 +16,42 @@ git pull --ff-only
 This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest MacBook/kunanyi update on 2026-05-10:
+
+- the particles-enabled high-power cluster case, `C-HI`, has now passed the
+  early diagnostic run gate on `kunanyi`
+- continuation job `690560.kunanyi-ohpc` (`c_hi_2node_to5`) completed with
+  `Exit_status = 0`
+- resources were `select=2:ncpus=28:mpiprocs=28` on nodes `n194` and `n029`
+  for `56` MPI ranks
+- the run restarted from `data.0003.dbl.h5` with `-h5restart 3` and stopped
+  safely with Patrick's `-maxtime` pattern
+- regular science-cadence `flt.h5` outputs now exist at about `1`, `2`, `3`,
+  `4`, and `5 Myr`
+- restart-capable `dbl.h5` outputs now exist through the nominal `5 Myr`
+  checkpoint plus a walltime-forced `5.455 Myr` checkpoint
+- quick-look job `690583.kunanyi-ohpc` extracted the nominal 5 Myr output,
+  `data.0008.flt.h5`, successfully
+- default-threshold tracer extent at `4.9994 Myr` is about `+/-9.46 kpc` in
+  `x/y` and `+/-33.0 kpc` in `z`, comfortably inside the `X3 = +/-250 kpc`
+  domain
+- first truth smoke job `690585.kunanyi-ohpc` also completed with
+  `Exit_status = 0` against the same `data.0008.flt.h5` snapshot
+- Level 1 elapsed injected energy at `4.9994 Myr` is `1.5777e59 erg`
+  one-sided and `3.1554e59 erg` bipolar
+- Level 2 default tracer-mask (`tracer > 5e-3`) bipolar quantities are
+  `10791.8 kpc^3`, `9.6642e58 erg` thermal, `8.7948e58 erg` kinetic, and
+  `1.8459e59 erg` total
+- the latest report and PDF are:
+  - `docs/science/c_hi_to5_quicklook_2026-05-10.md`
+  - `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
+- latest exchange note:
+  `docs/exchange/logs/2026-05-10-c-hi-to5-continuation.md`
+- next science-facing step: complete the observable half of the first aligned
+  smoke package, beginning with the GRAiLE/XRAiSE X-ray path and a
+  particle/radio smoke product for the 5 Myr, `0 deg` target unless a later
+  target is chosen
 
 Update on 2026-04-24:
 
@@ -466,15 +502,77 @@ Patrick/Stas configuration review applied on 2026-05-08:
     about `x,y = +/-2.33 kpc` and `z = +/-6.22 kpc`
   - central zoom maps show the expected symmetric bipolar tracer, density,
     pressure, and `vz` structure
+- the first restart-continuation segment has now completed cleanly:
+  - run job id: `690452.kunanyi-ohpc`
+  - job name: `c_hi_restart`
+  - resources: `select=1:ncpus=28:mpiprocs=28`
+  - restart mode: `RUN_KIND=h5_restart_1`
+  - PLUTO args: `-i pluto.ini -e environment.ini -maxtime 1.5 -h5restart 1`
+  - exit status: `0`
+  - PBS walltime used: `01:40:09`
+  - PBS CPU time used: `44:14:47`
+  - PBS peak memory: `30588076kb`
+  - new restart-capable output: `data.0002.dbl.h5` at `1.0101 Myr`
+  - nominal science-cadence output: `data.0002.flt.h5` at `0.9990 Myr`
+  - forced float output: `data.0003.flt.h5` at `1.0101 Myr`
+  - particles now extend through `particles.0103.dbl`
+  - `markers/DONE` was written, with no `FAILED` marker observed
+- a 1 Myr restart quick-look has now been generated:
+  - quick-look extraction job id: `690479.kunanyi-ohpc`
+  - inspected file: `data.0002.flt.h5`
+  - inspected time: `0.9990 Myr`
+  - products:
+    `docs/science/c_hi_restart_quicklook_2026-05-09.md`, with figures under
+    `docs/science/assets/c_hi_restart_quicklook_2026-05-09/`
+  - at the default `tracer > 5e-3` threshold the tracer region spans about
+    `x,y = +/-3.84 kpc` and `z = +/-10.1 kpc`
+  - compact evidence bundle:
+    `build/science/kunanyi_stage_2026-05-08/c_hi_restart_690452_quicklook_690479_compact_2026-05-09.tar.gz`
+  - compact evidence SHA-256:
+    `fe6c5259dcbe95d759d965d5b2e574e323af168dd127469a9c39d404e2cec2f2`
 - this validates the build/output/restart/quick-look path, but it is not yet a
   production science snapshot
-- the next science decision is whether to continue from this restart on the
-  one-node shakedown grid, run a longer one-node segment, or promote to an
-  intermediate multi-node rehearsal
+- the intermediate two-node restart rehearsal has now completed successfully:
+  - first failed attempt `690481.kunanyi-ohpc` exposed an OpenMPI slot-discovery
+    issue; the template now writes an explicit hostfile from `PBS_NODEFILE`
+  - second failed attempt `690483.kunanyi-ohpc` exposed missing HDF5 runtime
+    library propagation to the second node; the template now exports
+    `PATH`, `LD_LIBRARY_PATH`, and HDF5-related variables through `mpirun`
+  - successful run job id: `690484.kunanyi-ohpc`
+  - job name: `c_hi_2node_env`
+  - resources: `select=2:ncpus=28:mpiprocs=28`
+  - nodes: `n038` and `n083`
+  - restart mode: `RUN_KIND=h5_restart_2`
+  - exit status: `0`
+  - PBS walltime used: `01:45:08`
+  - PBS CPU time used: `45:43:18`
+  - PBS peak memory: `18587788kb`
+  - new restart-capable output: `data.0003.dbl.h5` at `2.1501 Myr`
+  - nominal 2 Myr science-cadence output: `data.0004.flt.h5` at `1.9996 Myr`
+  - forced float output: `data.0005.flt.h5` at `2.1501 Myr`
+  - particles now extend through `particles.0218.dbl`
+  - `markers/DONE` was written, with no `FAILED` marker observed
+- a 2 Myr two-node quick-look has now been generated:
+  - quick-look extraction job id: `690559.kunanyi-ohpc`
+  - inspected file: `data.0004.flt.h5`
+  - inspected time: `1.9996 Myr`
+  - products:
+    `docs/science/c_hi_2node_quicklook_2026-05-09.md`, with figures under
+    `docs/science/assets/c_hi_2node_quicklook_2026-05-09/`
+  - at the default `tracer > 5e-3` threshold the tracer region spans about
+    `x,y = +/-5.63 kpc` and `z = +/-16.5 kpc`
+  - compact evidence bundle:
+    `build/science/kunanyi_stage_2026-05-08/c_hi_2node_690484_quicklook_690559_compact_2026-05-09.tar.gz`
+  - compact evidence SHA-256:
+    `e002e0df31f5f2749ce823f7ca5b897c4b6b4cb7b322be9e29e9fb8cf9b045bb`
+- the subsequent 5 Myr continuation is now complete; see the 2026-05-10
+  update at the top of this file for the current state
 - details are in:
   - `docs/exchange/logs/2026-05-08-patrick-stas-c-hi-feedback.md`
   - `docs/exchange/logs/2026-05-08-kunanyi-stewart-environment-gates.md`
   - `docs/exchange/logs/2026-05-08-c-hi-single-node-particle-segment.md`
+  - `docs/exchange/logs/2026-05-09-c-hi-restart-segment.md`
+  - `docs/exchange/logs/2026-05-09-c-hi-two-node-restart-rehearsal.md`
 
 ## Project Structure
 
@@ -550,7 +648,30 @@ For production-style HDF5 builds on Nectar, use the Nectar-specific PLUTO defs:
 
 ## Most Recent Meaningful Result
 
-The latest science-facing checkpoint is the Stewart environment gate on
+The latest science-facing checkpoint is the `C-HI` particles-enabled 5 Myr
+`kunanyi` continuation plus first Level 1/2 truth smoke.
+
+Summary:
+
+- `C-HI` now has regular HDF5 float outputs at about `1`, `2`, `3`, `4`, and
+  `5 Myr`
+- HDF5 restart and two-node MPI launch are validated through the production
+  template
+- the nominal 5 Myr quick-look is symmetric and far from the outer grid
+  boundaries
+- Level 1 injected-energy accounting and Level 2 tracer-mask lobe energetics
+  have been extracted for the same `data.0008.flt.h5` snapshot
+- the next work is the observable half of the smoke package: GRAiLE/XRAiSE
+  X-ray and particle/radio products at a declared snapshot/view
+
+Repo-scoped artifacts:
+
+- `docs/science/c_hi_to5_quicklook_2026-05-10.md`
+- `docs/science/c_hi_to5_quicklook_2026-05-10.pdf`
+- `docs/science/assets/c_hi_to5_quicklook_2026-05-10/`
+- `docs/exchange/logs/2026-05-10-c-hi-to5-continuation.md`
+
+The previous major science-facing checkpoint was the Stewart environment gate on
 resized Nectar.
 
 Summary:
@@ -586,10 +707,11 @@ Repo-scoped artifacts:
 
 ## Next Recommended Step
 
-The onboarding sequence is now complete.
+The onboarding sequence and the early `C-HI` execution-path smoke tests are now
+complete through the 5 Myr diagnostic snapshot.
 
-The next move should be to lock the revised three-case comparison specification
-and begin execution-path smoke tests, using:
+The next move should be to complete the first aligned observable smoke package,
+using:
 
 - `jet-setup` for new simulation runs
 - the pure-Python `plutokore` lane for analysis
@@ -598,25 +720,27 @@ and begin execution-path smoke tests, using:
 - `kunanyi` for full 3D production once its access/module/build/submission path
   has been smoke-tested
 
-As of 2026-05-05 the Stewart tabulated assets are present locally and the
-Nectar no-jet stability gates are green for both selected science
-environments:
+As of 2026-05-10, the immediate target is the 5 Myr `C-HI`, `0 deg` smoke
+package unless we deliberately choose to wait for a later, larger cavity:
+
+1. port/run the supplied GRAiLE/XRAiSE X-ray path against `data.0008.flt.h5`
+2. produce one particle/radio smoke product through `plutokore`
+3. add the first cavity-protocol stub: ellipsoidal boundary, local pressure,
+   `pV`, and `4pV`
+4. only then decide whether to continue `C-HI` toward longer snapshots or begin
+   preparing the full production chain
+
+The Stewart tabulated assets are present locally and the Nectar no-jet
+stability gates are green for both selected science environments:
 
 - cluster `002_003` for `C-HI` and `C-LO`: max central density drift `0.136%`,
   max Mach `0.0242`
 - group `002_031` for `G-LO`: max central density drift `0.284%`, max Mach
   `0.0330`
 
-The detailed gate report and plots are in
+The detailed Stewart gate report and plots are in
 `docs/science/stewart_environment_gate_2026-05-05.md`; that report has been
 marked with a post-meeting correction note where the follow-on plan changed.
-The immediate next move is now:
-
-1. generate and validate the particles-enabled `C-HI` symmetric package
-2. run a production-like no-jet Stewart tabulated environment/MPI/HDF5 gate on
-   `kunanyi`
-3. send the generated `C-HI` package to Patrick/Stas before any long run
-4. run only early, restartable `C-HI` snapshots first
 
 After the Nectar environment gate, `nectar-vm` was parked back to `c3.xsmall`.
 

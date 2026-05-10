@@ -306,6 +306,29 @@ fi
 
 log_source_revisions
 
+MPI_EXPORT_ARGS=(-x PATH -x LD_LIBRARY_PATH)
+if [ -n "${HDF5_DIR:-}" ]; then
+  MPI_EXPORT_ARGS+=(-x HDF5_DIR)
+fi
+if [ -n "${CPATH:-}" ]; then
+  MPI_EXPORT_ARGS+=(-x CPATH)
+fi
+if [ -n "${LIBRARY_PATH:-}" ]; then
+  MPI_EXPORT_ARGS+=(-x LIBRARY_PATH)
+fi
+if [ -n "${PKG_CONFIG_PATH:-}" ]; then
+  MPI_EXPORT_ARGS+=(-x PKG_CONFIG_PATH)
+fi
+
+MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" -np "$NRANKS")
+if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+  MPI_HOSTFILE="${LOG_DIR}/openmpi_hostfile.${PBS_JOBID:-manual}.txt"
+  awk '{slots[$0] += 1} END {for (host in slots) print host " slots=" slots[host]}' "$PBS_NODEFILE" | sort > "$MPI_HOSTFILE"
+  MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" --hostfile "$MPI_HOSTFILE" -np "$NRANKS")
+  echo "MPI_HOSTFILE=${MPI_HOSTFILE}"
+  cat "$MPI_HOSTFILE"
+fi
+
 mkdir -p "${PROBLEM}/outputs/logs"
 RUN_ARGS=(-i pluto.ini -e environment.ini)
 if [ -n "$PLUTO_MAXTIME_HOURS" ] && [ "$PLUTO_MAXTIME_HOURS" != "0" ]; then
@@ -339,7 +362,7 @@ echo "RUN_ARGS=${RUN_ARGS[*]}"
 
 (
   cd "$PROBLEM"
-  mpirun -np "$NRANKS" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
+  mpirun "${MPI_LAUNCH_ARGS[@]}" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
 )
 
 if [ ! -f "${PROBLEM}/outputs/dbl.h5.out" ] && [ ! -f "${PROBLEM}/outputs/dbl.out" ]; then

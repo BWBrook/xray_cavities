@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_truth
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1
+#PBS -l walltime=00:30:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_truth.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_truth.err
+
+set -euo pipefail
+
+INPUT_H5="${INPUT_H5:?Set INPUT_H5 to the PLUTO HDF5 file to inspect}"
+TIMESTEP="${TIMESTEP:-Timestep_8}"
+EXTRACTOR_C="${EXTRACTOR_C:?Set EXTRACTOR_C to pluto_h5_truth_extract.c}"
+OUTPUT_DIR="${OUTPUT_DIR:?Set OUTPUT_DIR for compact truth outputs}"
+JET_POWER_ERG_S="${JET_POWER_ERG_S:-1e45}"
+JET_ACTIVE_TIME_MYR="${JET_ACTIVE_TIME_MYR:-50.0}"
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+
+mkdir -p "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "input_h5=$INPUT_H5"
+echo "timestep=$TIMESTEP"
+echo "extractor_c=$EXTRACTOR_C"
+echo "output_dir=$OUTPUT_DIR"
+echo "jet_power_erg_s=$JET_POWER_ERG_S"
+echo "jet_active_time_myr=$JET_ACTIVE_TIME_MYR"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+H5CC="$(command -v h5pcc || command -v h5cc)"
+"$H5CC" -O2 "$EXTRACTOR_C" -lm -o "$OUTPUT_DIR/pluto_h5_truth_extract"
+"$OUTPUT_DIR/pluto_h5_truth_extract" \
+  "$INPUT_H5" \
+  "$TIMESTEP" \
+  "$OUTPUT_DIR" \
+  "$JET_POWER_ERG_S" \
+  "$JET_ACTIVE_TIME_MYR"
+
+find "$OUTPUT_DIR" -maxdepth 1 -type f -printf "%f\t%s bytes\n" | sort
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
