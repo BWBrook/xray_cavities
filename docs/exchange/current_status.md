@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-10
+Last updated: 2026-05-11
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -17,22 +17,36 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
-Latest MacBook/kunanyi update on 2026-05-10:
+Latest MacBook/kunanyi update on 2026-05-11:
 
-- the next bounded continuation has been launched:
-  - PBS job `690650.kunanyi-ohpc` (`c_hi_to10`)
-  - route: `kunanyi-via-nectar`, because direct MacBook SSH to the jumpbox
-    again timed out from the current network path
-  - allocation: `select=2:ncpus=28:mpiprocs=28`, walltime `07:00:00`
-  - startup nodes: `n093` and `n103`
-  - restart point: latest HDF5 restart output `data.0005.dbl.h5`
-    at about `5.455 Myr`
-  - intended PLUTO command pattern:
-    `./pluto -i pluto.ini -e environment.ini -maxtime 6.5 -h5restart 5`
-  - target: extend the reduced-grid shakedown run toward the next regular
-    snapshot block, ideally about `10 Myr`
-  - launch note:
-    `docs/exchange/logs/2026-05-10-c-hi-to10-continuation-launch.md`
+- bounded continuation job `690650.kunanyi-ohpc` (`c_hi_to10`) completed
+  successfully with `Exit_status = 0`
+- the run used `select=2:ncpus=28:mpiprocs=28`, `56` MPI ranks, and consumed
+  `06:44:13` walltime
+- output volume is now about `95G`
+- regular `flt.h5` outputs now cover the intended `6-10 Myr` block:
+  - output `10`: `5.999728 Myr`
+  - output `11`: `6.998996 Myr`
+  - output `12`: `7.999292 Myr`
+  - output `13`: `8.999584 Myr`
+  - output `14`: `9.999876 Myr`
+  - output `15`: `10.278362 Myr`, walltime-stop output
+- restart-capable `dbl.h5` outputs now include:
+  - output `6`: `9.999876 Myr`
+  - output `7`: `10.278362 Myr`
+- for the next continuation, use `-h5restart 7` to continue from the final
+  walltime-stop checkpoint, or `-h5restart 6` to deliberately restart from the
+  nominal `10 Myr` checkpoint
+- direct MacBook jumpbox access worked again after Barry refreshed the TPAC
+  Open OnDemand SSH window
+- follow-up diagnostics were submitted as a dependency chain:
+  - `690680.kunanyi-ohpc` (`c_hi_ph5_10`): rebuild particle HDF5 through the
+    new particle outputs
+  - `690681.kunanyi-ohpc` (`c_hi_s10`): afterok dependency on `690680`, compact
+    truth/cavity/XRAiSE/radio scalar series for outputs `10 11 12 13 14`
+- latest exchange notes:
+  - `docs/exchange/logs/2026-05-10-c-hi-to10-continuation-launch.md`
+  - `docs/exchange/logs/2026-05-11-c-hi-to10-complete-and-diagnostics.md`
 - the meeting transcript gives the relevant full-grid production scale:
   Stas described a standard run as about `80 nodes x 28 cores per node`, with
   about three `48 h` chunks to reach `100 Myr`; the current 2-node jobs should
