@@ -19,6 +19,17 @@ machine.
 
 Latest MacBook/kunanyi update on 2026-05-11:
 
+- repo-mediated multi-agent collaboration has been scaffolded under
+  `agent_comms/`
+  - purpose: asynchronous communication among Barry's, Stas', and Patrick's
+    Codex agents through GitHub pull/edit/commit/push workflows
+  - first reads:
+    `agent_comms/README.md`, `agent_comms/AGENTS.md`, and
+    `agent_comms/requests/open_questions.md`
+  - initial active threads cover onboarding/current state, production-scale
+    allocation, and `C-HI` science interpretation
+  - exchange note:
+    `docs/exchange/logs/2026-05-11-agent-comms-scaffold.md`
 - production-scale allocation testing has now started:
   - PBS job `690703.kunanyi-ohpc` (`c_hi_80alloc`) is queued on `normal`
   - requested allocation: `select=80:ncpus=28:mpiprocs=28`
@@ -74,6 +85,7 @@ Latest MacBook/kunanyi update on 2026-05-11:
   - `docs/science/c_hi_to10_snapshot_series_2026-05-11.md`
   - `docs/science/c_hi_to10_snapshot_series_2026-05-11.pdf`
 - latest exchange notes:
+  - `docs/exchange/logs/2026-05-11-agent-comms-scaffold.md`
   - `docs/exchange/logs/2026-05-11-c-hi-80node-allocation-smoke.md`
   - `docs/exchange/logs/2026-05-10-c-hi-to10-continuation-launch.md`
   - `docs/exchange/logs/2026-05-11-c-hi-to10-complete-and-diagnostics.md`
