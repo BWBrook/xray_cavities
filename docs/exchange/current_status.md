@@ -44,6 +44,23 @@ Latest MacBook/kunanyi update on 2026-05-11:
     new particle outputs
   - `690681.kunanyi-ohpc` (`c_hi_s10`): afterok dependency on `690680`, compact
     truth/cavity/XRAiSE/radio scalar series for outputs `10 11 12 13 14`
+- both follow-up diagnostics completed successfully with `Exit_status = 0`
+- the particle HDF5 cache now spans `0-10.278 Myr`, with `1033` particle times
+  and a full remote HDF5 size of `423 MB`
+- compact through-10-Myr diagnostics are now stored under:
+  - `docs/science/assets/c_hi_to10_snapshot_series_2026-05-11/`
+  - `docs/science/assets/c_hi_to10_particle_hdf5_2026-05-11/`
+  - `docs/science/assets/c_hi_to10_combined_series_2026-05-11/`
+- at the nominal `10 Myr` output:
+  - Level 2 tracer-lobe bipolar volume: `3.6574e4 kpc^3`
+  - Level 2 tracer-lobe bipolar energy: `3.4309e59 erg`
+  - bipolar `4pV`: `6.8561e59 erg`
+  - tracer z extent: `47.71 kpc`
+  - lossy `150 MHz` radio luminosity proxy: `7.7444e27 W Hz^-1`
+  - radio lobe balance, `+z / -z`: `0.977`
+- the latest through-10-Myr report and PDF are:
+  - `docs/science/c_hi_to10_snapshot_series_2026-05-11.md`
+  - `docs/science/c_hi_to10_snapshot_series_2026-05-11.pdf`
 - latest exchange notes:
   - `docs/exchange/logs/2026-05-10-c-hi-to10-continuation-launch.md`
   - `docs/exchange/logs/2026-05-11-c-hi-to10-complete-and-diagnostics.md`
@@ -173,11 +190,14 @@ Latest MacBook/kunanyi update on 2026-05-11:
   - `docs/science/c_hi_aligned_comparison_and_determinism_2026-05-10.pdf`
   - `docs/science/c_hi_early_snapshot_series_2026-05-10.md`
   - `docs/science/c_hi_early_snapshot_series_2026-05-10.pdf`
+  - `docs/science/c_hi_to10_snapshot_series_2026-05-11.md`
+  - `docs/science/c_hi_to10_snapshot_series_2026-05-11.pdf`
 - latest exchange note:
-  `docs/exchange/logs/2026-05-10-c-hi-early-snapshot-series.md`
-- next science-facing step: continue the existing `C-HI` run in a bounded
-  restart segment toward the first `50 Myr` milestone, targeting the next block
-  of regular snapshots rather than a blind full-duration push
+  `docs/exchange/logs/2026-05-11-c-hi-to10-complete-and-diagnostics.md`
+- next science-facing step: decide whether to continue the reduced-grid
+  `C-HI` lane from `data.0007.dbl.h5` toward the next regular snapshot block,
+  or run a short production-scale allocation/scaling test before moving toward
+  the full-grid `80 node` pattern
 
 Update on 2026-04-24:
 

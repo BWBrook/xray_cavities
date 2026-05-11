@@ -131,3 +131,44 @@ Two thin wrappers were added locally and staged to `/u/bwbrook/codex_kunanyi`:
 
 They reuse the previously validated particle-HDF5 and early-snapshot scalar
 series scripts, but pin the `to10` output roots and snapshot list.
+
+## Diagnostic Results
+
+Both follow-up jobs completed successfully:
+
+```text
+690680.kunanyi-ohpc  c_hi_ph5_10  Exit_status=0
+690681.kunanyi-ohpc  c_hi_s10     Exit_status=0
+```
+
+The particle HDF5 cache now spans `0-10.278 Myr`, with `1033` particle times
+and `423 MB` stored at:
+
+```text
+/scratch/bwbrook/xray_cavities_analysis/2026-05-11-c-hi-to10-particles-hdf5/C-HI.to10.particles.hdf5
+```
+
+The compact scalar diagnostics were fetched locally under:
+
+```text
+docs/science/assets/c_hi_to10_snapshot_series_2026-05-11/
+docs/science/assets/c_hi_to10_particle_hdf5_2026-05-11/
+docs/science/assets/c_hi_to10_combined_series_2026-05-11/
+```
+
+At the nominal `10 Myr` output, the compact lane reports:
+
+- Level 2 tracer-lobe bipolar volume: `3.6574e4 kpc^3`
+- Level 2 tracer-lobe bipolar energy: `3.4309e59 erg`
+- bipolar `4pV`: `6.8561e59 erg`
+- tracer z extent: `47.71 kpc`
+- fitted cavity centres: about `+/-23.87 kpc`
+- lossy `150 MHz` radio luminosity proxy: `7.7444e27 W Hz^-1`
+- radio lobe balance, `+z / -z`: `0.977`
+
+Report:
+
+```text
+docs/science/c_hi_to10_snapshot_series_2026-05-11.md
+docs/science/c_hi_to10_snapshot_series_2026-05-11.pdf
+```

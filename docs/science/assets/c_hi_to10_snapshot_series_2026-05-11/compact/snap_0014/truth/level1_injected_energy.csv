@@ -1,0 +1,10 @@
+metric,value,unit
+time_code,3065.9760296160089,code_time
+time_myr,9.9998763597808686,Myr
+jet_power_one_sided,9.9999999999999993e+44,erg/s
+active_time_configured,50,Myr
+active_time_elapsed,9.9998763597808686,Myr
+injected_energy_one_sided_elapsed,3.15572098211420706e+59,erg
+injected_energy_bipolar_elapsed,6.31144196422841412e+59,erg
+injected_energy_one_sided_full_active_time,1.57787999999999974e+60,erg
+injected_energy_bipolar_full_active_time,3.15575999999999949e+60,erg

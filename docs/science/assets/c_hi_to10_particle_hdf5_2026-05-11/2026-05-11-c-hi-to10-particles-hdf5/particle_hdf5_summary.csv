@@ -1,0 +1,8 @@
+metric,value,unit
+grid_outputs,15,index
+particle_outputs,1032,index
+particle_time_count,1033,outputs
+particle_time_max_code,3151.359878531,code_time
+particle_time_max_myr,10.278361228635472,Myr
+field_count,13,fields
+output_hdf5,/scratch/bwbrook/xray_cavities_analysis/2026-05-11-c-hi-to10-particles-hdf5/C-HI.to10.particles.hdf5,path

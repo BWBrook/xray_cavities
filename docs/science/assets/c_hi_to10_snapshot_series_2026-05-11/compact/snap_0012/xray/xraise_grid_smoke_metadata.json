@@ -1,0 +1,48 @@
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 182608,
+    "max": 2876990.5987276733,
+    "min": 168.98465617380205,
+    "positive_cells": 182608,
+    "positive_max": 2876990.5987276733,
+    "positive_min": 168.98465617380205,
+    "positive_sum": 1085535393.1725724,
+    "sum": 1085535393.1725724
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 182608,
+    "max": 2.443160082528116,
+    "min": 1.3273927768840965,
+    "positive_cells": 182608,
+    "positive_max": 2.443160082528116,
+    "positive_min": 1.3273927768840965,
+    "positive_sum": 246889.7158158666,
+    "sum": 246889.7158158666
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    452,
+    404,
+    404
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem/outputs/data.0012.flt.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "raw_stats_mjy_sr": {
+    "finite_cells": 182608,
+    "max": 1437298.427537811,
+    "min": 124.4888480648261,
+    "positive_cells": 182608,
+    "positive_max": 1437298.427537811,
+    "positive_min": 124.4888480648261,
+    "positive_sum": 794051015.8113192,
+    "sum": 794051015.8113192
+  },
+  "redshift": 0.05,
+  "time_code": 2452.5935267461296,
+  "time_myr": 7.999290206887841,
+  "timestep": "Timestep_12",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}

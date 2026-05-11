@@ -1,0 +1,14 @@
+metric,value,unit
+grid_output,14,index
+grid_time_myr,9.999876263264698,Myr
+particle_output,1004,index
+particle_time_myr,9.999876505333885,Myr
+frequency_hz,150000000.0,Hz
+selected_particles,32065,count
+in_frame_particles,32065,count
+radio_map_max_mjy_sr,2586333125732426.0,mJy/sr
+radio_map_sum_mjy_sr_pixel,2.589025042410754e+17,mJy/sr_pixel_sum
+radio_positive_pixels,7768,pixels
+negative_z_lossy_luminosity_doppler,3.917302014328216e+27,W/Hz
+positive_z_lossy_luminosity_doppler,3.827087964565414e+27,W/Hz
+bipolar_total_lossy_luminosity_doppler,7.744389978893631e+27,W/Hz

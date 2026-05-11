@@ -103,7 +103,7 @@ def write_metrics(path: Path, rows: list[dict[str, float | int]]) -> None:
         writer.writerows(rows)
 
 
-def plot(rows: list[dict[str, float | int]], output_png: Path) -> None:
+def plot(rows: list[dict[str, float | int]], output_png: Path, title: str) -> None:
     t = np.array([float(row["grid_time_myr"]) for row in rows])
     injected = np.array([float(row["injected_energy_bipolar_erg"]) for row in rows]) / 1.0e59
     tracer_energy = np.array([float(row["tracer_total_energy_bipolar_erg"]) for row in rows]) / 1.0e59
@@ -163,7 +163,7 @@ def plot(rows: list[dict[str, float | int]], output_png: Path) -> None:
     lines2, labels2 = ax2.get_legend_handles_labels()
     ax.legend(lines + lines2, labels + labels2, loc="best")
 
-    fig.suptitle("C-HI aligned early-snapshot scalar series", fontsize=14)
+    fig.suptitle(title, fontsize=14)
     output_png.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_png, dpi=220)
     plt.close(fig)
@@ -181,12 +181,27 @@ def main() -> None:
         type=Path,
         default=ROOT / "docs/science/assets/c_hi_early_snapshot_series_2026-05-10",
     )
+    parser.add_argument(
+        "--metrics-name",
+        default="early_snapshot_series_metrics.csv",
+        help="Output CSV filename within --output-dir.",
+    )
+    parser.add_argument(
+        "--figure-name",
+        default="c_hi_early_snapshot_series.png",
+        help="Output PNG filename within --output-dir.",
+    )
+    parser.add_argument(
+        "--title",
+        default="C-HI aligned early-snapshot scalar series",
+        help="Figure title.",
+    )
     args = parser.parse_args()
     rows = collect(args.input_dir)
     if not rows:
         raise SystemExit(f"no snap_* directories found in {args.input_dir}")
-    write_metrics(args.output_dir / "early_snapshot_series_metrics.csv", rows)
-    plot(rows, args.output_dir / "c_hi_early_snapshot_series.png")
+    write_metrics(args.output_dir / args.metrics_name, rows)
+    plot(rows, args.output_dir / args.figure_name, args.title)
     print(f"wrote {args.output_dir}")
 
 
