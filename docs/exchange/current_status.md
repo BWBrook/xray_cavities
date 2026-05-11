@@ -19,6 +19,18 @@ machine.
 
 Latest MacBook/kunanyi update on 2026-05-11:
 
+- production-scale allocation testing has now started:
+  - PBS job `690703.kunanyi-ohpc` (`c_hi_80alloc`) is queued on `normal`
+  - requested allocation: `select=80:ncpus=28:mpiprocs=28`
+  - requested MPI ranks: `2240`
+  - walltime: `00:20:00`
+  - purpose: validate production-scale PBS nodefile, OpenMPI hostfile launch,
+    and collective HDF5 write without running a PLUTO science segment
+  - initial scheduler comment:
+    `Not Running: Not enough free nodes available`
+  - expected email notifications: begin, abort, and end (`#PBS -m abe`)
+  - launch note:
+    `docs/exchange/logs/2026-05-11-c-hi-80node-allocation-smoke.md`
 - bounded continuation job `690650.kunanyi-ohpc` (`c_hi_to10`) completed
   successfully with `Exit_status = 0`
 - the run used `select=2:ncpus=28:mpiprocs=28`, `56` MPI ranks, and consumed
@@ -62,6 +74,7 @@ Latest MacBook/kunanyi update on 2026-05-11:
   - `docs/science/c_hi_to10_snapshot_series_2026-05-11.md`
   - `docs/science/c_hi_to10_snapshot_series_2026-05-11.pdf`
 - latest exchange notes:
+  - `docs/exchange/logs/2026-05-11-c-hi-80node-allocation-smoke.md`
   - `docs/exchange/logs/2026-05-10-c-hi-to10-continuation-launch.md`
   - `docs/exchange/logs/2026-05-11-c-hi-to10-complete-and-diagnostics.md`
 - the meeting transcript gives the relevant full-grid production scale:
@@ -194,10 +207,9 @@ Latest MacBook/kunanyi update on 2026-05-11:
   - `docs/science/c_hi_to10_snapshot_series_2026-05-11.pdf`
 - latest exchange note:
   `docs/exchange/logs/2026-05-11-c-hi-to10-complete-and-diagnostics.md`
-- next science-facing step: decide whether to continue the reduced-grid
-  `C-HI` lane from `data.0007.dbl.h5` toward the next regular snapshot block,
-  or run a short production-scale allocation/scaling test before moving toward
-  the full-grid `80 node` pattern
+- next science-facing step: wait for the `690703.kunanyi-ohpc` allocation smoke
+  email, then fetch the summary archive and decide whether to proceed to a
+  production-rank PLUTO startup/checkpoint test
 
 Update on 2026-04-24:
 
