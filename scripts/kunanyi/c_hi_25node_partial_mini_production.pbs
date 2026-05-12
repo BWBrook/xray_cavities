@@ -1,0 +1,27 @@
+#!/bin/bash
+#PBS -N c_hi_25x20
+#PBS -q normal
+#PBS -l select=25:ncpus=20:mpiprocs=20
+#PBS -l place=scatter
+#PBS -l walltime=15:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m abe
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_25node_partial_mini_production.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_25node_partial_mini_production.err
+
+set -euo pipefail
+
+# Scheduler-fit C-HI mini-production continuation. This keeps the intended
+# 25-node spread but requests 20 MPI ranks per node instead of full 28-core
+# nodes, which is more robust on a fragmented PBS scheduler.
+export CASE_ID="${CASE_ID:-C-HI}"
+export CASE_VARIANT="${CASE_VARIANT:-particles}"
+export RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment}"
+export CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-${RUN_ROOT}/${CASE_ID}/${CASE_VARIANT}/problem}"
+export PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-14.5}"
+export RESTART_POLICY="${RESTART_POLICY:-auto}"
+export ALLOW_DONE_RERUN="${ALLOW_DONE_RERUN:-1}"
+export BUILD_JOBS="${BUILD_JOBS:-8}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/jet_setup_production_template_latest.pbs}"
+exec bash "$BASE_SCRIPT"

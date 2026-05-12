@@ -1,0 +1,26 @@
+#!/bin/bash
+#PBS -N c_hi_23mini
+#PBS -q normal
+#PBS -l select=23:ncpus=28:mpiprocs=28
+#PBS -l walltime=15:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m abe
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_23node_mini_production.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_23node_mini_production.err
+
+set -euo pipefail
+
+# Scheduler-fit C-HI mini-production continuation. This is the same reduced-grid
+# C-HI continuation as the 25-node wrapper, but trimmed to 23 nodes after PBS
+# reported fewer than 700 CPUs available on 2026-05-12.
+export CASE_ID="${CASE_ID:-C-HI}"
+export CASE_VARIANT="${CASE_VARIANT:-particles}"
+export RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment}"
+export CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-${RUN_ROOT}/${CASE_ID}/${CASE_VARIANT}/problem}"
+export PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-14.5}"
+export RESTART_POLICY="${RESTART_POLICY:-auto}"
+export ALLOW_DONE_RERUN="${ALLOW_DONE_RERUN:-1}"
+export BUILD_JOBS="${BUILD_JOBS:-8}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/jet_setup_production_template_latest.pbs}"
+exec bash "$BASE_SCRIPT"

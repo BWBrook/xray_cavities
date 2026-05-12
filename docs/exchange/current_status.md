@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-11
+Last updated: 2026-05-12
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -17,7 +17,43 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
-Latest MacBook/kunanyi update on 2026-05-11:
+Latest MacBook/kunanyi update on 2026-05-12:
+
+- the long-queued `80` node allocation smoke was cancelled after more than a
+  day in queue:
+  - cancelled PBS job: `690703.kunanyi-ohpc` (`c_hi_80alloc`)
+  - reason: supervisor advice and meeting-driven need for a runnable
+    mini-production segment before 2026-05-13 13:00 AEST
+- several scheduler-fit shapes were tried and cancelled after PBS reported
+  insufficient CPU resources:
+  - `691414.kunanyi-ohpc`: `25` full nodes, `700` ranks
+  - `691416.kunanyi-ohpc`: `23` full nodes, `644` ranks
+  - `691417.kunanyi-ohpc`: `25` partial nodes, `500` ranks
+  - `691418.kunanyi-ohpc`: `16` full nodes, `448` ranks
+- live mini-production continuation:
+  - PBS job: `691422.kunanyi-ohpc` (`c_hi_8mini`)
+  - request: `select=8:ncpus=28:mpiprocs=28`
+  - ranks: `224`
+  - walltime: `15:00:00`
+  - PLUTO guard: `-maxtime 14.5`
+  - start status: running from `Tue May 12 20:31 AEST 2026`
+  - latest poll in this handoff: still running at `20:39 AEST`, walltime
+    `00:07:21`, with `224` CPUs assigned
+  - purpose: continue the reduced-grid particles-enabled `C-HI` case from the
+    latest HDF5 restart checkpoint and produce a meeting-ready mini-production
+    segment
+  - expected notification: PBS begin/end/abort email to
+    `barry.brook@utas.edu.au`
+- added runnable mini-production PBS wrappers:
+  - `scripts/kunanyi/c_hi_25node_mini_production.pbs`
+  - `scripts/kunanyi/c_hi_25node_partial_mini_production.pbs`
+  - `scripts/kunanyi/c_hi_16node_mini_production.pbs`
+  - `scripts/kunanyi/c_hi_8node_mini_production.pbs`
+  - `scripts/kunanyi/c_hi_23node_mini_production.pbs`
+- launch note:
+  `docs/exchange/logs/2026-05-12-c-hi-mini-production-pivot.md`
+
+Previous MacBook/kunanyi update on 2026-05-11:
 
 - repo-mediated multi-agent collaboration has been scaffolded under
   `agent_comms/`
@@ -30,8 +66,9 @@ Latest MacBook/kunanyi update on 2026-05-11:
     allocation, and `C-HI` science interpretation
   - exchange note:
     `docs/exchange/logs/2026-05-11-agent-comms-scaffold.md`
-- production-scale allocation testing has now started:
-  - PBS job `690703.kunanyi-ohpc` (`c_hi_80alloc`) is queued on `normal`
+- production-scale allocation testing started, later superseded by the
+  2026-05-12 mini-production pivot above:
+  - PBS job `690703.kunanyi-ohpc` (`c_hi_80alloc`) was queued on `normal`
   - requested allocation: `select=80:ncpus=28:mpiprocs=28`
   - requested MPI ranks: `2240`
   - walltime: `00:20:00`
@@ -219,9 +256,9 @@ Latest MacBook/kunanyi update on 2026-05-11:
   - `docs/science/c_hi_to10_snapshot_series_2026-05-11.pdf`
 - latest exchange note:
   `docs/exchange/logs/2026-05-11-c-hi-to10-complete-and-diagnostics.md`
-- next science-facing step: wait for the `690703.kunanyi-ohpc` allocation smoke
-  email, then fetch the summary archive and decide whether to proceed to a
-  production-rank PLUTO startup/checkpoint test
+- this next-step note was superseded on 2026-05-12: `690703.kunanyi-ohpc` was
+  cancelled, and the active job became the `8` node mini-production
+  continuation `691422.kunanyi-ohpc`
 
 Update on 2026-04-24:
 

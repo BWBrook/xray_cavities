@@ -1,0 +1,26 @@
+#!/bin/bash
+#PBS -N c_hi_8mini
+#PBS -q normal
+#PBS -l select=8:ncpus=28:mpiprocs=28
+#PBS -l walltime=15:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m abe
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_8node_mini_production.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_8node_mini_production.err
+
+set -euo pipefail
+
+# Meeting-ready C-HI mini-production continuation. This keeps a multi-node
+# production-style launch while avoiding the current fragmented 16-25 node
+# queue bottleneck on 2026-05-12.
+export CASE_ID="${CASE_ID:-C-HI}"
+export CASE_VARIANT="${CASE_VARIANT:-particles}"
+export RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment}"
+export CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-${RUN_ROOT}/${CASE_ID}/${CASE_VARIANT}/problem}"
+export PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-14.5}"
+export RESTART_POLICY="${RESTART_POLICY:-auto}"
+export ALLOW_DONE_RERUN="${ALLOW_DONE_RERUN:-1}"
+export BUILD_JOBS="${BUILD_JOBS:-8}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/jet_setup_production_template_latest.pbs}"
+exec bash "$BASE_SCRIPT"
