@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_s33
+#PBS -q normal
+#PBS -l select=1:ncpus=4:mpiprocs=1:mem=16gb
+#PBS -l walltime=04:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_to33_snapshot_series.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_to33_snapshot_series.err
+
+set -euo pipefail
+
+export OUTPUT_ROOT="${OUTPUT_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-05-13-c-hi-to33-snapshot-series}"
+export SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-/u/bwbrook/codex_kunanyi/c_hi_to33_snapshot_series_2026-05-13.tar.gz}"
+export PARTICLE_HDF5="${PARTICLE_HDF5:-/scratch/bwbrook/xray_cavities_analysis/2026-05-13-c-hi-to33-particles-hdf5/C-HI.to33.particles.hdf5}"
+export SNAPSHOT_OUTPUTS="${SNAPSHOT_OUTPUTS:-15 20 25 30 35 39}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/c_hi_early_snapshot_series.pbs}"
+exec bash "$BASE_SCRIPT"

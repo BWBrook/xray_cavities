@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-12
+Last updated: 2026-05-13
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -17,7 +17,35 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
-Latest MacBook/kunanyi update on 2026-05-12:
+Latest MacBook/kunanyi update on 2026-05-13:
+
+- the `8` node `C-HI` mini-production continuation completed cleanly:
+  - PBS job: `691422.kunanyi-ohpc` (`c_hi_8mini`)
+  - exit status: `0`
+  - request: `select=8:ncpus=28:mpiprocs=28`
+  - ranks: `224`
+  - walltime used: `14:45:00`
+  - restart mode: `-h5restart 7`
+  - PLUTO guard: `-maxtime 14.5`
+  - start checkpoint: `10.278362 Myr`
+  - final regular output: `data.0039.flt.h5`, `33.374180 Myr`
+  - final restart-capable checkpoint: `data.0012.dbl.h5`, `33.374180 Myr`
+  - particle files now extend through `particles.3343.dbl`
+  - output volume after run: `217G`
+- compact run metadata was fetched locally:
+  `build/science/kunanyi_stage_2026-05-08/c_hi_8mini_691422_compact_2026-05-13.tar.gz`
+- meeting-facing update:
+  - `docs/science/c_hi_8node_mini_production_2026-05-13.md`
+  - `docs/science/c_hi_8node_mini_production_2026-05-13.pdf`
+- follow-up diagnostic dependency chain submitted:
+  - `691762.kunanyi-ohpc` (`c_hi_ph5_33`): rebuild particle HDF5 through
+    roughly `33 Myr`
+  - `691763.kunanyi-ohpc` (`c_hi_s33`): afterok dependency on `691762`; extract
+    truth/cavity/XRAiSE/radio scalar series for outputs `15 20 25 30 35 39`
+- latest exchange note:
+  `docs/exchange/logs/2026-05-13-c-hi-8mini-complete.md`
+
+Previous MacBook/kunanyi update on 2026-05-12:
 
 - the long-queued `80` node allocation smoke was cancelled after more than a
   day in queue:

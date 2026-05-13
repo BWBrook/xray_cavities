@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_ph5_33
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=16gb
+#PBS -l walltime=02:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_to33_particle_hdf5.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_to33_particle_hdf5.err
+
+set -euo pipefail
+
+export OUTPUT_DIR="${OUTPUT_DIR:-/scratch/bwbrook/xray_cavities_analysis/2026-05-13-c-hi-to33-particles-hdf5}"
+export OUTPUT_HDF5="${OUTPUT_HDF5:-$OUTPUT_DIR/C-HI.to33.particles.hdf5}"
+export SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-/u/bwbrook/codex_kunanyi/c_hi_to33_particle_hdf5_2026-05-13.tar.gz}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/c_hi_particle_hdf5_smoke.pbs}"
+exec bash "$BASE_SCRIPT"
