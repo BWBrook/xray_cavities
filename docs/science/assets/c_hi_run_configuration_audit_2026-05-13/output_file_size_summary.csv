@@ -1,0 +1,4 @@
+kind,count,first_index,last_index,min_file_size_bytes,max_file_size_bytes,typical_file_size,total_size
+flt.h5,40,0,39,3547500148,3547500148,3.55 GB,141.90 GB
+dbl.h5,13,0,12,5318067316,5318067316,5.32 GB,69.13 GB
+particles.dbl,3344,0,3343,2457,12830469,0.01 GB,21.44 GB

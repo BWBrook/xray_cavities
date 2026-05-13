@@ -1,0 +1,243 @@
+{
+  "case": {
+    "case_id": "C-HI",
+    "environment": "cluster",
+    "jet_power_erg_s": 1e+45,
+    "jet_power_w": "1e38",
+    "jet_speed_c": 0.1,
+    "role": "first high-visibility validation case"
+  },
+  "environment": {
+    "density_profile_define": "ENV_TABULATED",
+    "external_data": "",
+    "external_grid": "",
+    "kind": "tabulated",
+    "source_tabulated_data": "env/extracted/environments/tabulated/tabulated_cosmo_002003.csv",
+    "status": "provided",
+    "tabulated_data": "tabulated_cosmo_002003.csv"
+  },
+  "final_dbl": {
+    "index": 12,
+    "step": 32764,
+    "time_myr": 33.374179659063536
+  },
+  "final_flt": {
+    "index": 39,
+    "step": 32764,
+    "time_myr": 33.374179659063536
+  },
+  "grid_manifest": {
+    "description": "single-node C-HI particle shakedown grid: full +/-200 kpc X1/X2 and +/-250 kpc X3 extents with the original 0.05 kpc central jet resolution retained, but reduced outer stretch counts so the problem fits one 128 GB Kunanyi node. This is not the final production grid.",
+    "first_dt": "1.0e-5",
+    "name": "kunanyi_single_node_250",
+    "resolution_note": "Central -2.5..2.5 kpc region remains 100 uniform cells, so dx=0.05 kpc around the inlet. Outer stretches are intentionally coarser than the production grid to keep this as a single-node build/run/restart rehearsal.",
+    "source": "derived from stewart_stretched_250 after one-node particle memory gate",
+    "x1_line": "X1-grid     5   -200 72 s -10 80 s -2.5 100 u 2.5 80 s 10 72 s 200",
+    "x2_line": "X2-grid     5   -200 72 s -10 80 s -2.5 100 u 2.5 80 s 10 72 s 200",
+    "x3_line": "X3-grid     5   -250 96 s -10 80 s -2.5 100 u 2.5 80 s 10 96 s 250"
+  },
+  "grid_summary": [
+    {
+      "axis": "X1",
+      "cells": 404,
+      "center_dx_kpc": 0.05000000000000018,
+      "center_near_100kpc": 99.24026618652,
+      "center_near_10kpc": 9.9221021345165,
+      "center_near_200kpc": 194.45859333825,
+      "center_near_50kpc": 49.86479588003,
+      "dx_near_100kpc": 5.444620415759999,
+      "dx_near_10kpc": 0.15579573096700017,
+      "dx_near_200kpc": 11.082813323500005,
+      "dx_near_50kpc": 2.5209350830999995,
+      "edge_dx_kpc": 11.082813323500005,
+      "max_dx_kpc": 11.082813323500005,
+      "max_kpc": 200.0,
+      "median_dx_kpc": 0.10392658525600007,
+      "min_dx_kpc": 0.04999999999999982,
+      "min_kpc": -200.0
+    },
+    {
+      "axis": "X2",
+      "cells": 404,
+      "center_dx_kpc": 0.05000000000000018,
+      "center_near_100kpc": 99.24026618652,
+      "center_near_10kpc": 9.9221021345165,
+      "center_near_200kpc": 194.45859333825,
+      "center_near_50kpc": 49.86479588003,
+      "dx_near_100kpc": 5.444620415759999,
+      "dx_near_10kpc": 0.15579573096700017,
+      "dx_near_200kpc": 11.082813323500005,
+      "dx_near_50kpc": 2.5209350830999995,
+      "edge_dx_kpc": 11.082813323500005,
+      "max_dx_kpc": 11.082813323500005,
+      "max_kpc": 200.0,
+      "median_dx_kpc": 0.10392658525600007,
+      "min_dx_kpc": 0.04999999999999982,
+      "min_kpc": -200.0
+    },
+    {
+      "axis": "X3",
+      "cells": 452,
+      "center_dx_kpc": 0.05000000000000018,
+      "center_near_100kpc": 101.392673944765,
+      "center_near_10kpc": 9.9221021345165,
+      "center_near_200kpc": 197.88652423025,
+      "center_near_250kpc": 244.77932728395,
+      "center_near_50kpc": 49.560233638845,
+      "dx_near_100kpc": 4.161740670269992,
+      "dx_near_10kpc": 0.15579573096700017,
+      "dx_near_200kpc": 8.387679609700001,
+      "dx_near_250kpc": 10.441345432100007,
+      "dx_near_50kpc": 1.891743907090003,
+      "edge_dx_kpc": 10.441345432100007,
+      "max_dx_kpc": 10.441345432100007,
+      "max_kpc": 250.0,
+      "median_dx_kpc": 0.12324363245100001,
+      "min_dx_kpc": 0.04999999999999982,
+      "min_kpc": -250.0
+    }
+  ],
+  "output_summary": [
+    {
+      "count": 40,
+      "first_index": 0,
+      "kind": "flt.h5",
+      "last_index": 39,
+      "max_file_size_bytes": 3547500148,
+      "min_file_size_bytes": 3547500148,
+      "total_size": "141.90 GB",
+      "typical_file_size": "3.55 GB"
+    },
+    {
+      "count": 13,
+      "first_index": 0,
+      "kind": "dbl.h5",
+      "last_index": 12,
+      "max_file_size_bytes": 5318067316,
+      "min_file_size_bytes": 5318067316,
+      "total_size": "69.13 GB",
+      "typical_file_size": "5.32 GB"
+    },
+    {
+      "count": 3344,
+      "first_index": 0,
+      "kind": "particles.dbl",
+      "last_index": 3343,
+      "max_file_size_bytes": 12830469,
+      "min_file_size_bytes": 2457,
+      "total_size": "21.44 GB",
+      "typical_file_size": "0.01 GB"
+    }
+  ],
+  "pbs": {
+    "CASE_CONFIG_DIR": "/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles/problem",
+    "CASE_ID": "C-HI",
+    "CASE_VARIANT": "particles",
+    "HDF5_DIR": "/share/apps/software/HDF5/1.14.0-gompi-2023a",
+    "MODULES": "GCCcore/12.3.0:zlib/1.2.13-GCCcore-12.3.0:binutils/2.40-GCCcore-12.3.0:GCC/12.3.0:numactl/2.0.16-GCCcore-12.3.0:XZ/5.4.2-GCCcore-12.3.0:libxml2/2.11.4-GCCcore-12.3.0:libpciaccess/0.17-GCCcore-12.3.0:hwloc/2.9.1-GCCcore-12.3.0:OpenSSL/1.1:libevent/2.1.12-GCCcore-12.3.0:UCX/1.14.1-GCCcore-12.3.0:libfabric/1.18.0-GCCcore-12.3.0:PMIx/4.2.4-GCCcore-12.3.0:UCC/1.2.0-GCCcore-12.3.0:OpenMPI/4.1.5-GCC-12.3.0:gompi/2023a:Szip/2.1.1-GCCcore-12.3.0:HDF5/1.14.0-gompi-2023a",
+    "NRANKS": "224",
+    "PBS_JOBID": "691422.kunanyi-ohpc",
+    "PBS_QUEUE": "normal",
+    "PLUTO_MAXTIME_HOURS": "14.5",
+    "RUN_ARGS": "-i pluto.ini -e environment.ini -maxtime 14.5 -h5restart 7",
+    "RUN_KIND": "h5_restart_7",
+    "WORKDIR": "/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment/C-HI/particles",
+    "mpicc": "/share/apps/software/OpenMPI/4.1.5-GCC-12.3.0/bin/mpicc",
+    "mpirun": "/share/apps/software/OpenMPI/4.1.5-GCC-12.3.0/bin/mpirun"
+  },
+  "pluto_grid": {
+    "X1-grid": "5 -200 72 s -10 80 s -2.5 100 u 2.5 80 s 10 72 s 200",
+    "X2-grid": "5 -200 72 s -10 80 s -2.5 100 u 2.5 80 s 10 72 s 200",
+    "X3-grid": "5 -250 96 s -10 80 s -2.5 100 u 2.5 80 s 10 96 s 250"
+  },
+  "pluto_parameters": {
+    "ENV_B_EXPONENT": "0.38",
+    "ENV_DELTA_NFW": "0.0",
+    "ENV_RHO_0": "2.4e-27",
+    "ENV_R_SCALING": "144.0",
+    "ENV_TEMP": "3.462e7",
+    "ENV_X1O": "0.0",
+    "ENV_X2O": "0.0",
+    "ENV_X3O": "0.0",
+    "JET_ACTIVE_TIME": "50.00000000",
+    "JET_CHI": "1.0",
+    "JET_END_TIME": "50.00000000",
+    "JET_EPISODES": "1.0",
+    "JET_INITIAL_RADIUS": "0.1",
+    "JET_INJECTION_HEIGHT": "0.75",
+    "JET_OA_PRIMARY": "15.0",
+    "JET_OA_SECONDARY": "15.0",
+    "JET_PWR": "1e+45",
+    "JET_ROTATION_ANGLE": "0.0",
+    "JET_SPD": "0.1",
+    "JET_START_TIME": "0.0",
+    "JET_X1O": "0.0",
+    "JET_X2O": "0.0",
+    "JET_X3O": "0.0",
+    "PART_INJECT_FREQUENCY": "0.01",
+    "STELLAR_MASS": "0.0"
+  },
+  "pluto_particles": {
+    "Nparticles": "-1 16.0",
+    "particles_dbl": "3.06601394 -1",
+    "particles_flt": "-1.0 -1",
+    "particles_tab": "-1.0 -1",
+    "particles_vtk": "-1.0 -1"
+  },
+  "pluto_static_outputs": {
+    "analysis": "-1.0 -1",
+    "dbl": "-1.0 -1 single_file",
+    "dbl.h5": "1533.00696894 -1",
+    "flt": "-1.0 -1 single_file",
+    "flt.h5": "306.60139379 -1",
+    "log": "100",
+    "log_dir": "./outputs/logs",
+    "output_dir": "./outputs",
+    "png": "-1.0 -1",
+    "ppm": "-1.0 -1",
+    "tab": "-1.0 -1",
+    "uservar": "0",
+    "vtk": "-1.0 -1 single_file"
+  },
+  "simulation_defaults": {
+    "geometry": "CARTESIAN",
+    "jet_active_time_myr": 50.0,
+    "jet_chi": 1.0,
+    "jet_end_time_myr": 50.0,
+    "jet_initial_radius_kpc": 0.1,
+    "jet_injection_height_kpc": 0.75,
+    "jet_relativistic_density": "NO",
+    "opening_angle_primary_deg": 15.0,
+    "opening_angle_secondary_deg": 15.0,
+    "particle_interval_myr": 0.01,
+    "particles_enabled": true,
+    "particles_per_injection": 16.0,
+    "physics": "HD",
+    "tracer_threshold_default": 0.005,
+    "tracer_threshold_sensitivity": [
+      0.001,
+      0.01
+    ]
+  },
+  "time_conversion": {
+    "chombo_checkpoint_interval": "disabled",
+    "code_time_per_myr": 306.601393788,
+    "dbl_h5_interval_code_time": 1533.00696894,
+    "dbl_h5_interval_myr": 5.0,
+    "duration_myr": 50.0,
+    "note": "PLUTO core time controls and output intervals use code time; JET_END_TIME and JET_ACTIVE_TIME are physical Myr parameters.",
+    "particle_interval_code_time": 3.06601393788,
+    "particle_interval_myr": 0.01,
+    "snapshot_interval_code_time": 306.601393788,
+    "snapshot_interval_myr": 1.0,
+    "tstop_code_time": 15330.0696894
+  },
+  "truth_conventions": {
+    "injected_energy": {
+      "bipolar_erg": 3.1557599999999995e+60,
+      "one_sided_erg": 1.5778799999999997e+60
+    },
+    "jet_power_is_one_sided": true
+  },
+  "variant": "particles"
+}

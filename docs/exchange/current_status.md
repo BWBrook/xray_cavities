@@ -37,13 +37,38 @@ Latest MacBook/kunanyi update on 2026-05-13:
 - meeting-facing update:
   - `docs/science/c_hi_8node_mini_production_2026-05-13.md`
   - `docs/science/c_hi_8node_mini_production_2026-05-13.pdf`
+- meeting-3 configuration audit now exists and should be treated as the next
+  pre-production review packet:
+  - `docs/science/c_hi_run_configuration_audit_2026-05-13.md`
+  - `docs/science/c_hi_run_configuration_audit_2026-05-13.pdf`
+  - generated assets under
+    `docs/science/assets/c_hi_run_configuration_audit_2026-05-13/`
+  - key finding: `691422.kunanyi-ohpc` used the reduced
+    `kunanyi_single_node_250` grid (`404 x 404 x 452`, central `0.05 kpc`,
+    coarse outer cells), so it is a good rehearsal lane but not the final
+    production grid
+- `docs/science/c_hi_8node_mini_production_2026-05-13.md` was updated with a
+  run-spec block covering grid, parameters, output file sizes, modules, and
+  rank layout
+- `agent_comms/threads/2026-05-13-c-hi-grid-config-review.md` asks Patrick's
+  and Stas' agents to review the concrete run spec and final-grid assumptions
+  before full-grid production
+- `scripts/kunanyi/jet_setup_production_template.pbs` now records more explicit
+  source provenance for future jobs: git root/branch/head/status when
+  available, missing-git state when not, and PLUTO binary SHA-256
+- `scripts/kunanyi/c_hi_to33_particle_hdf5.pbs` now requests `48gb` memory for
+  future reruns, matching the observed memory scale of the completed
+  particle-HDF5 rebuild more honestly than the temporary `16gb` scheduler-fit
+  request
 - follow-up diagnostic dependency chain submitted:
-  - `691762.kunanyi-ohpc` (`c_hi_ph5_33`): rebuild particle HDF5 through
-    roughly `33 Myr`
-  - `691763.kunanyi-ohpc` (`c_hi_s33`): afterok dependency on `691762`; extract
-    truth/cavity/XRAiSE/radio scalar series for outputs `15 20 25 30 35 39`
-- latest exchange note:
-  `docs/exchange/logs/2026-05-13-c-hi-8mini-complete.md`
+  - `691762.kunanyi-ohpc` (`c_hi_ph5_33`): completed successfully; rebuilt
+    particle HDF5 through roughly `33 Myr`
+  - `691763.kunanyi-ohpc` (`c_hi_s33`): running as of
+    `2026-05-13 14:52 AEST`; extracts truth/cavity/XRAiSE/radio scalar series
+    for outputs `15 20 25 30 35 39`
+- latest exchange notes:
+  - `docs/exchange/logs/2026-05-13-c-hi-8mini-complete.md`
+  - `docs/exchange/logs/2026-05-13-c-hi-run-config-audit.md`
 
 Previous MacBook/kunanyi update on 2026-05-12:
 

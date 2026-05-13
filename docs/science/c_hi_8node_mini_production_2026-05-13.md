@@ -33,16 +33,36 @@ The run used the production template staged as
 `/u/bwbrook/codex_kunanyi/jet_setup_production_template_latest.pbs` and reused
 the existing particles-enabled reduced-grid `C-HI` problem build.
 
+## Run Specification Block
+
+This report now records the concrete run specification requested in the
+2026-05-13 configuration discussion with Patrick and Stas. A fuller audit is in
+`docs/science/c_hi_run_configuration_audit_2026-05-13.md`.
+
+| Item | Value |
+| --- | --- |
+| Environment | Stewart/Three Hundred tabulated cluster `002003`; `tabulated_cosmo_002003.csv` |
+| Grid preset | `kunanyi_single_node_250` reduced-grid rehearsal, not final production grid |
+| Generated grid | `404 x 404 x 452` cells; X1/X2 `+/-200 kpc`, X3 `+/-250 kpc` |
+| Central cell width | `0.05 kpc` in all axes |
+| Outer cell width near `200 kpc` | X1/X2 about `11.08 kpc`; X3 about `8.39 kpc` |
+| Physics | HD, Cartesian, particles enabled, `JET_RELATIVISTIC_DENSITY = NO` |
+| Jet parameters | `JET_PWR = 1e45 erg/s`, `JET_SPD = 0.1`, `JET_CHI = 1.0`, opening angles `15 deg` |
+| Injection geometry | `JET_INITIAL_RADIUS = 0.1 kpc`, `JET_INJECTION_HEIGHT = 0.75 kpc`, centred launch |
+| Active duration | `50 Myr` |
+| Output cadence | `flt.h5` every `1 Myr`; `dbl.h5` every `5 Myr`; particles every `0.01 Myr` |
+| Runtime stack | `HDF5/1.14.0-gompi-2023a`, `OpenMPI/4.1.5-GCC-12.3.0`, `GCC/12.3.0` |
+
 ## Output Coverage
 
 The job added a long block of regular `flt.h5` outputs and a new set of
 restart-capable `dbl.h5` checkpoints.
 
-| Output type | New useful outputs | Time coverage |
-| --- | --- | --- |
-| `flt.h5` | `16-39` | `10.999144-33.374180 Myr` |
-| `dbl.h5` | `8-12` | `14.999293-33.374180 Myr` |
-| particles | through `particles.3343.dbl` | about `33.4 Myr` |
+| Output type | New useful outputs | Time coverage | File sizes |
+| --- | --- | --- | --- |
+| `flt.h5` | `16-39` | `10.999144-33.374180 Myr` | `3.55 GB` each; `40` files total |
+| `dbl.h5` | `8-12` | `14.999293-33.374180 Myr` | `5.32 GB` each; `13` files total |
+| particles | through `particles.3343.dbl` | about `33.4 Myr` | growing to `12.83 MB`; `3344` files total |
 
 ![C-HI 8-node output times](assets/c_hi_8mini_2026-05-13/c_hi_8mini_output_times.png)
 

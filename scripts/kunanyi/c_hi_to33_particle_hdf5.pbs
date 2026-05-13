@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #PBS -N c_hi_ph5_33
 #PBS -q normal
-#PBS -l select=1:ncpus=1:mpiprocs=1:mem=16gb
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=48gb
 #PBS -l walltime=02:00:00
 #PBS -M barry.brook@utas.edu.au
 #PBS -m ae
