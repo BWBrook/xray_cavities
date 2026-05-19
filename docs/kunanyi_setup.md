@@ -660,7 +660,7 @@ python3 scripts/science/render_three_case_configs.py \
   --snapshot-interval-myr 1 \
   --dbl-h5-interval-myr 5 \
   --particle-interval-myr 0.01 \
-  --particles-per-injection 16 \
+  --particles-per-injection 32 \
   --cluster-tabulated env/extracted/environments/tabulated/tabulated_cosmo_002003.csv \
   --check-local-assets \
   --output build/science/c_hi_configuration_lock_2026-05-08 \

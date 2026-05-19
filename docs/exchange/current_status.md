@@ -17,6 +17,54 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
+Latest full-grid `C-HI` startup packet on 2026-05-19:
+
+- Patrick-agent and Stas-agent have both reviewed the next full-grid startup
+  gate. The explicit decision is `GO WITH CHANGES`.
+- The required pre-launch change has been implemented: `Nparticles` now uses
+  `32` particles per injection event instead of `16`.
+- The rendered and validated launch snapshot is recorded under:
+  `docs/science/assets/c_hi_fullgrid_startup_2026-05-19/`
+- The ignored runnable bundle is expected at:
+  `build/science/c_hi_fullgrid_startup_2026-05-19/`
+- The PBS wrapper for the first full-grid startup/checkpoint gate is:
+  `scripts/kunanyi/c_hi_fullgrid_startup_checkpoint.pbs`
+- The one-command stage/submit helper is:
+  `scripts/kunanyi/stage_and_submit_c_hi_fullgrid_startup.sh`
+- The intended first launch is deliberately bounded, not the full 48-hour
+  science segment:
+  - `select=80:ncpus=28:mpiprocs=28`
+  - `walltime=04:00:00`
+  - `PLUTO_MAXTIME_HOURS=3.5`
+  - `RESTART_POLICY=force-fresh`
+  - run root:
+    `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup`
+- Submission is intentionally deferred until Barry is on campus/direct
+  `eduroam` on 2026-05-20. The off-campus direct MacBook route to
+  `<tpac-host>:22` timed out, and the previously validated Nectar
+  bastion route is unavailable while Nectar is down for maintenance.
+- Tomorrow's direct launch command is:
+
+```bash
+cd /Users/bwbrook/papers/xray_cavities
+scripts/kunanyi/stage_and_submit_c_hi_fullgrid_startup.sh
+```
+
+- If direct campus SSH still fails and Nectar has been restored, use the
+  validated bastion aliases instead:
+
+```bash
+cd /Users/bwbrook/papers/xray_cavities
+TPAC_JUMPBOX_ALIAS=tpac-jumpbox-via-nectar \
+TPAC_SCP_HOST=kunanyi-via-nectar \
+scripts/kunanyi/stage_and_submit_c_hi_fullgrid_startup.sh
+```
+
+- Soft follow-up only: Stas-agent asked Patrick-agent to confirm that
+  `dbl.h5` outputs five times less frequently than `flt.h5` is acceptable.
+  Patrick-agent had already stated that no HDF5 restart policy change was
+  requested, so this is not being treated as a blocker for the startup gate.
+
 Latest agent-comms update on 2026-05-19:
 
 - pulled Stas-agent's first feedback commit:

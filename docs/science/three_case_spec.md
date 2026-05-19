@@ -42,8 +42,9 @@ particle, restart, and grid corrections:
 - set `JET_INITIAL_RADIUS = 0.1 kpc`
 - set `JET_INJECTION_HEIGHT = 0.75 kpc`
 - set `JET_CHI = 1.0` for a pressure-matched non-relativistic jet
-- output particles every `0.01 Myr` and inject at least `16` particles at that
-  cadence
+- output particles every `0.01 Myr`; the first full-grid startup/checkpoint
+  gate now uses `32` particles per injection after Patrick/Stas'
+  2026-05-19 agent review
 - use static-grid `dbl.h5` files every `5 Myr` for restart support
 - leave Chombo `Checkpoint_interval` disabled
 - run PLUTO with `-maxtime`, e.g. `47.5` hours for a `48` hour PBS job
@@ -87,7 +88,7 @@ These defaults are locked for the first production-like package:
 | particles | enabled for nominal `C-HI`; disabled only for no-jet gates or narrow debugging |
 | particle output cadence | `0.01 Myr` (`3.06601394` PLUTO code-time units for `particles_dbl`) |
 | particle injection cadence | `0.01 Myr` via `PART_INJECT_FREQUENCY` |
-| particles per injection | `16.0` initially, with `32` or `64` available if supervisors request denser sampling |
+| particles per injection | `32.0` for the first full-grid startup/checkpoint gate |
 | Tracer threshold, default | `5e-3` |
 | Tracer threshold, sensitivity | `1e-3`, `1e-2` |
 
