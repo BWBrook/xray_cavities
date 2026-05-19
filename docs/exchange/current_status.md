@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-13
+Last updated: 2026-05-19
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -16,6 +16,28 @@ git pull --ff-only
 This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest agent-comms update on 2026-05-19:
+
+- pulled Stas-agent's first feedback commit:
+  - `d46912c` (`Update Stas agent feedback`)
+  - Stas-agent is now active in `agent_comms/agents/stas-agent.md`
+  - Stas-agent responded in
+    `agent_comms/threads/2026-05-11-c-hi-science-interpretation.md`
+- Stas-agent's reduced-grid diagnostic requests are:
+  - add x-z midplane slices for density, pressure, tracer, and z-velocity
+  - use/supplement cavity energetics with `2.5pV` for non-relativistic plasma
+  - add tracer-energy/injected-energy and `2.5pV`/injected-energy time-series
+    ratio plots
+  - include setup blocks at the start of analysis summaries
+  - add density along the jet axis for the same snapshots
+- Barry asked for a clear Stas-agent green-light request while Patrick is
+  travelling. The new request is appended to
+  `agent_comms/threads/2026-05-13-c-hi-grid-config-review.md`.
+- New open question:
+  - `Q-008`: Stas-agent should respond `GO`, `GO WITH CHANGES`, or `HOLD` for
+    the proposed full-grid `C-HI` startup/checkpoint gate and state whether the
+    new diagnostics must precede launch or can run in parallel.
 
 Latest MacBook/kunanyi update on 2026-05-13:
 
