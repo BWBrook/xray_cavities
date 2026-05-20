@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-19
+Last updated: 2026-05-20
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -17,7 +17,29 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
-Latest full-grid `C-HI` startup packet on 2026-05-19:
+Latest full-grid `C-HI` startup/checkpoint launch on 2026-05-20:
+
+- The prepared full-grid startup/checkpoint packet was staged to `kunanyi`
+  and submitted from campus/`eduroam`.
+- PBS job: `692369.kunanyi-ohpc`
+- PBS name: `c_hi_fg_start`
+- Initial state after submission: `Q` on queue `normal`
+- Remote validation before `qsub` passed:
+  - `REMOTE_RENDER_VALIDATION_OK=1`
+  - `NPARTICLES=32.0`
+- Request:
+  - `select=80:ncpus=28:mpiprocs=28`
+  - `walltime=04:00:00`
+  - `PLUTO_MAXTIME_HOURS=3.5`
+  - `RESTART_POLICY=force-fresh`
+- Mail notifications are enabled for `barry.brook@utas.edu.au`.
+- Expected next action: wait for the PBS email, then use the job logs and
+  output catalogue under
+  `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup`
+  to verify build, startup, HDF5 output, restart marker, and `DONE`/`FAILED`
+  state.
+
+Prepared full-grid `C-HI` startup packet on 2026-05-19:
 
 - Patrick-agent and Stas-agent have both reviewed the next full-grid startup
   gate. The explicit decision is `GO WITH CHANGES`.
@@ -39,26 +61,8 @@ Latest full-grid `C-HI` startup packet on 2026-05-19:
   - `RESTART_POLICY=force-fresh`
   - run root:
     `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup`
-- Submission is intentionally deferred until Barry is on campus/direct
-  `eduroam` on 2026-05-20. The off-campus direct MacBook route to
-  `<tpac-host>:22` timed out, and the previously validated Nectar
-  bastion route is unavailable while Nectar is down for maintenance.
-- Tomorrow's direct launch command is:
-
-```bash
-cd /Users/bwbrook/papers/xray_cavities
-scripts/kunanyi/stage_and_submit_c_hi_fullgrid_startup.sh
-```
-
-- If direct campus SSH still fails and Nectar has been restored, use the
-  validated bastion aliases instead:
-
-```bash
-cd /Users/bwbrook/papers/xray_cavities
-TPAC_JUMPBOX_ALIAS=tpac-jumpbox-via-nectar \
-TPAC_SCP_HOST=kunanyi-via-nectar \
-scripts/kunanyi/stage_and_submit_c_hi_fullgrid_startup.sh
-```
+- The launch command used on campus/`eduroam` was:
+  `scripts/kunanyi/stage_and_submit_c_hi_fullgrid_startup.sh`
 
 - Soft follow-up only: Stas-agent asked Patrick-agent to confirm that
   `dbl.h5` outputs five times less frequently than `flt.h5` is acceptable.
@@ -79,13 +83,16 @@ Latest agent-comms update on 2026-05-19:
     ratio plots
   - include setup blocks at the start of analysis summaries
   - add density along the jet axis for the same snapshots
-- Barry asked for a clear Stas-agent green-light request while Patrick is
-  travelling. The new request is appended to
+- Barry asked for a clear Stas-agent green-light request while Patrick was
+  travelling. The request is appended to
   `agent_comms/threads/2026-05-13-c-hi-grid-config-review.md`.
-- New open question:
-  - `Q-008`: Stas-agent should respond `GO`, `GO WITH CHANGES`, or `HOLD` for
-    the proposed full-grid `C-HI` startup/checkpoint gate and state whether the
-    new diagnostics must precede launch or can run in parallel.
+- Stas-agent responded `GO WITH CHANGES`; the required `Nparticles = 32`
+  change has been implemented and the startup/checkpoint gate has been
+  submitted.
+- Remaining open question:
+  - `Q-009`: Patrick-agent should confirm Stas-agent's non-blocking question
+    about whether `dbl.h5` cadence every `5 Myr` remains acceptable relative
+    to `flt.h5` every `1 Myr`.
 
 Latest MacBook/kunanyi update on 2026-05-13:
 
