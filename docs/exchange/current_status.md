@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-20
+Last updated: 2026-05-21
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -17,7 +17,43 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
-Latest full-grid `C-HI` startup/checkpoint launch on 2026-05-20:
+Latest full-grid `C-HI` retry launch on 2026-05-21:
+
+- The first 80-node startup job, `692369.kunanyi-ohpc`, failed after PLUTO
+  initialization and initial HDF5 writes because UCX/OpenMPI aborted with
+  `UD endpoint ... unhandled timeout error` during MPI collectives. This is
+  recorded in
+  `agent_comms/threads/2026-05-21-c-hi-fullgrid-startup-failure.md`.
+- A retry wrapper was prepared and submitted:
+  - PBS job: `692504.kunanyi-ohpc`
+  - PBS name: `c_hi_fg_retry`
+  - Initial state after submission: `Q` on queue `normal`
+  - Request:
+    - `select=80:ncpus=28:mpiprocs=28`
+    - `walltime=08:00:00`
+    - `PLUTO_MAXTIME_HOURS=3.5`
+    - `RESTART_POLICY=auto`
+  - It reuses the existing run root:
+    `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup`
+  - It should restart from `data.0000.dbl.h5` via the existing `dbl.h5.out`
+    catalogue rather than deleting the previous startup output.
+  - It exports OpenMPI MCA settings to avoid the UCX path that failed:
+    - `OMPI_MCA_pml=ob1`
+    - `OMPI_MCA_btl=self,vader,tcp`
+    - `OMPI_MCA_btl_tcp_if_exclude=lo`
+    - `OMPI_MCA_oob_tcp_if_exclude=lo`
+- Remote files staged for the retry:
+  - `/u/bwbrook/codex_kunanyi/jet_setup_production_template_latest.pbs`
+  - `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_retry_ob1_tcp.pbs`
+- Local launch helper:
+  `scripts/kunanyi/stage_and_submit_c_hi_fullgrid_retry_ob1_tcp.sh`
+- Expected next action: after the PBS email lands, inspect:
+  - `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_retry_ob1_tcp.out`
+  - `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_retry_ob1_tcp.err`
+  - `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup/C-HI/particles/markers/`
+  - `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup/C-HI/particles/problem/outputs/`
+
+Previous full-grid `C-HI` startup/checkpoint launch on 2026-05-20:
 
 - The prepared full-grid startup/checkpoint packet was staged to `kunanyi`
   and submitted from campus/`eduroam`.
