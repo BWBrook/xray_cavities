@@ -1,0 +1,38 @@
+#!/bin/bash
+#PBS -N c_hi_fg_retry
+#PBS -q normal
+#PBS -l select=80:ncpus=28:mpiprocs=28
+#PBS -l walltime=08:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_retry_ob1_tcp.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_retry_ob1_tcp.err
+
+set -euo pipefail
+
+# Retry the first full-grid C-HI startup/checkpoint gate after job
+# 692369.kunanyi-ohpc died in UCX UD transport during MPI collectives.
+#
+# Important differences from the first wrapper:
+# - restart from the existing initial HDF5 checkpoint instead of deleting it
+# - keep the same run root so `RESTART_POLICY=auto` finds `dbl.h5.out`
+# - force OpenMPI onto the OB1/TCP path to avoid the failing UCX UD transport
+# - give PBS extra walltime because TCP may be slower than the UCX fabric path
+export CASE_ID="${CASE_ID:-C-HI}"
+export CASE_VARIANT="${CASE_VARIANT:-particles}"
+export CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-/u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_2026-05-19/C-HI/particles}"
+export RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup}"
+export PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-3.5}"
+export RESTART_POLICY="${RESTART_POLICY:-auto}"
+export ALLOW_DONE_RERUN="${ALLOW_DONE_RERUN:-1}"
+export BUILD_JOBS="${BUILD_JOBS:-28}"
+
+# Conservative transport fallback. This avoids UCX entirely for the PLUTO MPI
+# ranks, trading speed for a better chance of completing the checkpoint gate.
+export OMPI_MCA_pml="${OMPI_MCA_pml:-ob1}"
+export OMPI_MCA_btl="${OMPI_MCA_btl:-self,vader,tcp}"
+export OMPI_MCA_btl_tcp_if_exclude="${OMPI_MCA_btl_tcp_if_exclude:-lo}"
+export OMPI_MCA_oob_tcp_if_exclude="${OMPI_MCA_oob_tcp_if_exclude:-lo}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/jet_setup_production_template_latest.pbs}"
+exec bash "$BASE_SCRIPT"

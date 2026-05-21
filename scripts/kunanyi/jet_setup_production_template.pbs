@@ -246,6 +246,9 @@ echo "PLUTO_MAXTIME_HOURS=${PLUTO_MAXTIME_HOURS}"
 echo "mpicc=$(command -v mpicc)"
 echo "mpirun=$(command -v mpirun)"
 echo "python3=$(command -v python3)"
+echo "MPI_TUNING_ENV_BEGIN"
+env | sort | grep -E '^(OMPI_MCA_|PMIX_MCA_|PRTE_MCA_|UCX_|MPI_EXTRA_EXPORTS=)' || true
+echo "MPI_TUNING_ENV_END"
 
 if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
   cp "$PBS_NODEFILE" "${LOG_DIR}/pbs_nodefile.${PBS_JOBID:-manual}.txt"
@@ -334,6 +337,21 @@ fi
 if [ -n "${PKG_CONFIG_PATH:-}" ]; then
   MPI_EXPORT_ARGS+=(-x PKG_CONFIG_PATH)
 fi
+while IFS='=' read -r var _; do
+  case "$var" in
+    OMPI_MCA_*|PMIX_MCA_*|PRTE_MCA_*|UCX_*)
+      MPI_EXPORT_ARGS+=(-x "$var")
+      ;;
+  esac
+done < <(env)
+if [ -n "${MPI_EXTRA_EXPORTS:-}" ]; then
+  for var in $MPI_EXTRA_EXPORTS; do
+    if [ -n "${!var:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x "$var")
+    fi
+  done
+fi
+echo "MPI_EXPORT_ARGS=${MPI_EXPORT_ARGS[*]}"
 
 MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" -np "$NRANKS")
 if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
