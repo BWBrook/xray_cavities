@@ -54,6 +54,19 @@ Latest full-grid `C-HI` retry launch on 2026-05-21:
   - `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_retry_ob1_tcp.err`
   - `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup/C-HI/particles/markers/`
   - `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup/C-HI/particles/problem/outputs/`
+- Home-network access update:
+  - direct MacBook TCP/22 to `<tpac-host>` still hangs from Barry's
+    home network
+  - MacBook -> Tailscale `utas-ubuntu` / `deep-server` -> TPAC jumpbox ->
+    `kunanyi` works
+  - local Mac SSH aliases now include `tpac-jumpbox-via-deep` and
+    `kunanyi-via-deep`
+  - `scripts/kunanyi/run_on_kunanyi.sh` works from home with:
+    `TPAC_JUMPBOX_ALIAS=tpac-jumpbox-via-deep TPAC_CLUSTER_HOST=kunanyi`
+  - `scripts/kunanyi/copy_to_kunanyi.sh` should use
+    `TPAC_SCP_HOST=kunanyi-via-deep` for uploads over the same route
+  - a probe at `2026-05-21 23:09 AEST` showed `692504.kunanyi-ohpc` running
+    with `resources_used.walltime = 00:28:27`
 
 Previous full-grid `C-HI` startup/checkpoint launch on 2026-05-20:
 
