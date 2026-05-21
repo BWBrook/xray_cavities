@@ -28,6 +28,8 @@ Latest full-grid `C-HI` retry launch on 2026-05-21:
   - PBS job: `692504.kunanyi-ohpc`
   - PBS name: `c_hi_fg_retry`
   - Initial state after submission: `Q` on queue `normal`
+  - Follow-up `qstat` at `2026-05-21 16:15` showed:
+    `comment = Not Running: Not enough free nodes available`
   - Request:
     - `select=80:ncpus=28:mpiprocs=28`
     - `walltime=08:00:00`

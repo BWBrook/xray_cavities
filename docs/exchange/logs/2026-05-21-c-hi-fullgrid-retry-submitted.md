@@ -92,6 +92,18 @@ Resource_List.walltime = 08:00:00
 Mail_Users = barry.brook@utas.edu.au
 ```
 
+A follow-up `qstat` at `2026-05-21 16:15` confirmed the job was still queued:
+
+```text
+Job Id: 692504.kunanyi-ohpc
+Job_Name = c_hi_fg_retry
+job_state = Q
+queue = normal
+Resource_List.select = 80:ncpus=28:mpiprocs=28
+Resource_List.walltime = 08:00:00
+comment = Not Running: Not enough free nodes available
+```
+
 ## Follow-Up
 
 After the PBS email lands, inspect:
