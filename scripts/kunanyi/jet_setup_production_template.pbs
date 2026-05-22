@@ -42,6 +42,7 @@ PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-47.5}"
 mkdir -p "$MARKER_DIR" "$LOG_DIR"
 DONE_MARKER="${MARKER_DIR}/DONE"
 FAILED_MARKER="${MARKER_DIR}/FAILED"
+JOB_SIGNAL=""
 
 finish() {
   local rc=$?
@@ -64,12 +65,26 @@ finish() {
       echo "case_variant=${CASE_VARIANT}"
       echo "pbs_jobid=${PBS_JOBID:-manual}"
       echo "exit_code=${rc}"
+      if [ -n "${JOB_SIGNAL:-}" ]; then
+        echo "signal=${JOB_SIGNAL}"
+      fi
       echo "finished_utc=${end_time}"
     } > "$FAILED_MARKER"
+    rm -f "$DONE_MARKER"
   fi
   exit "$rc"
 }
 trap finish EXIT
+
+handle_signal() {
+  local signal="$1"
+  local rc="$2"
+  JOB_SIGNAL="$signal"
+  echo "JOB_SIGNAL=${signal}"
+  exit "$rc"
+}
+trap 'handle_signal TERM 143' TERM
+trap 'handle_signal INT 130' INT
 
 require_file() {
   local path="$1"
@@ -393,10 +408,17 @@ fi
 echo "RUN_KIND=${RUN_KIND}"
 echo "RUN_ARGS=${RUN_ARGS[*]}"
 
+set +e
 (
   cd "$PROBLEM"
   mpirun "${MPI_LAUNCH_ARGS[@]}" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
 )
+MPI_EXIT_CODE=$?
+set -e
+echo "MPI_EXIT_CODE=${MPI_EXIT_CODE}"
+if [ "$MPI_EXIT_CODE" -ne 0 ]; then
+  exit "$MPI_EXIT_CODE"
+fi
 
 if [ ! -f "${PROBLEM}/outputs/dbl.h5.out" ] && [ ! -f "${PROBLEM}/outputs/dbl.out" ]; then
   echo "[error] neither dbl.h5.out nor dbl.out exists after PLUTO run" >&2

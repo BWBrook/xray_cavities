@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-21
+Last updated: 2026-05-22
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -17,7 +17,36 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
-Latest full-grid `C-HI` retry launch on 2026-05-21:
+Latest full-grid `C-HI` retry diagnosis on 2026-05-22:
+
+- Retry job `692504.kunanyi-ohpc` finished after the full `8` hour walltime:
+  - `Exit_status = 271`
+  - `resources_used.walltime = 08:00:52`
+  - PBS stderr: `job killed: walltime 28842 exceeded limit 28800`
+- The retry did use the intended restart and transport settings:
+  - `RUN_KIND=h5_restart_0`
+  - `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 3.5 -h5restart 0`
+  - `OMPI_MCA_pml=ob1`
+  - `OMPI_MCA_btl=self,vader,tcp`
+- It made no useful simulation progress beyond the existing initial output:
+  - `dbl.h5.out` still contains only output `0`
+  - `flt.h5.out` still contains only output `0`
+  - only `data.0000.dbl.h5`, `data.0000.flt.h5`, and
+    `particles.0000.dbl` exist
+- Interpretation: forcing OB1/TCP avoided the previous UCX UD timeout
+  signature but is not a viable `80` node production transport path for this
+  full-grid job; it stalled or progressed too slowly and was killed by PBS
+  walltime.
+- The remote marker directory showed a misleading `DONE` marker after the
+  PBS walltime kill. The production template has now been patched locally so
+  future non-zero `mpirun` exits and TERM/INT signals write `FAILED` and
+  remove stale `DONE` markers.
+- Recommended next move: do not rerun the `80` node full-grid case with plain
+  TCP. Ask TPAC about the UCX `UD endpoint ... unhandled timeout error` from
+  job `692369`, and test a smaller transport ladder or a UCX setting that
+  avoids UD without falling all the way back to TCP.
+
+Previous full-grid `C-HI` retry launch on 2026-05-21:
 
 - The first 80-node startup job, `692369.kunanyi-ohpc`, failed after PLUTO
   initialization and initial HDF5 writes because UCX/OpenMPI aborted with
