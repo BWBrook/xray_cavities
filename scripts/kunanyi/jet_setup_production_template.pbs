@@ -43,6 +43,7 @@ mkdir -p "$MARKER_DIR" "$LOG_DIR"
 DONE_MARKER="${MARKER_DIR}/DONE"
 FAILED_MARKER="${MARKER_DIR}/FAILED"
 JOB_SIGNAL=""
+FAILURE_REASON=""
 
 finish() {
   local rc=$?
@@ -67,6 +68,9 @@ finish() {
       echo "exit_code=${rc}"
       if [ -n "${JOB_SIGNAL:-}" ]; then
         echo "signal=${JOB_SIGNAL}"
+      fi
+      if [ -n "${FAILURE_REASON:-}" ]; then
+        echo "reason=${FAILURE_REASON}"
       fi
       echo "finished_utc=${end_time}"
     } > "$FAILED_MARKER"
@@ -182,23 +186,54 @@ latest_restart_output() {
   local source=""
   local index=""
   local candidate
+  local path
 
   candidate=$(latest_output_index "${PROBLEM}/outputs/dbl.h5.out" || true)
   if [ -n "${candidate:-}" ]; then
-    source="dbl.h5"
-    index="$candidate"
+    path=$(printf "%s/outputs/data.%04d.dbl.h5" "$PROBLEM" "$candidate")
+    if [ -f "$path" ]; then
+      source="dbl.h5"
+      index="$candidate"
+    else
+      echo "[warning] latest dbl.h5 catalogue index ${candidate} has no file: ${path}" >&2
+    fi
   fi
 
   candidate=$(latest_output_index "${PROBLEM}/outputs/dbl.out" || true)
   if [ -n "${candidate:-}" ]; then
-    if [ -z "$index" ] || [ "$candidate" -gt "$index" ]; then
+    path=$(printf "%s/outputs/data.%04d.dbl" "$PROBLEM" "$candidate")
+    if [ -f "$path" ] && { [ -z "$index" ] || [ "$candidate" -gt "$index" ]; }; then
       source="dbl"
       index="$candidate"
+    elif [ ! -f "$path" ]; then
+      echo "[warning] latest dbl catalogue index ${candidate} has no file: ${path}" >&2
     fi
   fi
 
   if [ -n "$index" ]; then
     echo "${source} ${index}"
+  fi
+}
+
+classify_mpi_failure() {
+  local log_file="$1"
+  local rc="$2"
+  if [ ! -f "$log_file" ]; then
+    echo "mpi_exit_${rc}_no_log"
+    return
+  fi
+  if grep -qi "Fatal: UD endpoint.*unhandled timeout error" "$log_file"; then
+    echo "ucx_ud_endpoint_timeout"
+  elif grep -qi "Killed by signal 15" "$log_file"; then
+    echo "mpi_signal_15_or_walltime"
+  elif grep -qi "segmentation fault" "$log_file"; then
+    echo "segmentation_fault"
+  elif grep -qi "MPI_ABORT" "$log_file"; then
+    echo "mpi_abort"
+  elif grep -qi "HDF5" "$log_file"; then
+    echo "hdf5_related_mpi_failure"
+  else
+    echo "mpi_exit_${rc}"
   fi
 }
 
@@ -417,6 +452,8 @@ MPI_EXIT_CODE=$?
 set -e
 echo "MPI_EXIT_CODE=${MPI_EXIT_CODE}"
 if [ "$MPI_EXIT_CODE" -ne 0 ]; then
+  FAILURE_REASON=$(classify_mpi_failure "${PROBLEM}/outputs/logs/pluto_${PBS_JOBID:-manual}.log" "$MPI_EXIT_CODE")
+  echo "FAILURE_REASON=${FAILURE_REASON}"
   exit "$MPI_EXIT_CODE"
 fi
 

@@ -630,6 +630,8 @@ and Patrick/Stas' `2026-05-08` configuration review:
   `docs/science/three_case_spec.md`
 - current science asset inventory:
   `docs/science/asset_inventory_2026-05-02.md`
+- restart-first production operations:
+  `docs/kunanyi_restart_framework.md`
 - config renderer:
   `scripts/science/render_three_case_configs.py`
 - production-oriented PBS template:
@@ -647,7 +649,10 @@ It derives `NRANKS` from `PBS_NODEFILE`, logs PLUTO and `jet-setup` source
 revisions, applies generated `definitions_overrides.json`, uses
 `pluto.ini`/`environment.ini` from the selected case bundle, detects fresh
 runs versus `.dbl.h5`/`.dbl` restarts, passes `-maxtime` to PLUTO by default,
-and writes `DONE`/`FAILED` markers under the run directory.
+and writes `DONE`/`FAILED` markers under the run directory. The current
+restart framework treats PBS jobs as disposable segments and `dbl.h5` outputs
+as the persistent simulation state; see `docs/kunanyi_restart_framework.md`
+for the continuation and inspection helpers.
 
 Example review-package render after the real Stewart assets are known:
 

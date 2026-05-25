@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-22
+Last updated: 2026-05-25
 Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
 
 ## Read This First
@@ -16,6 +16,35 @@ git pull --ff-only
 This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest restart-framework update on 2026-05-25:
+
+- Long `kunanyi` PLUTO runs should now be treated as restartable PBS
+  segments, not single precious jobs. Barry will feed PBS failures from email;
+  Codex should inspect, classify, and continue from the latest valid
+  restart-capable `dbl.h5` output.
+- New restart operations guide:
+  `docs/kunanyi_restart_framework.md`
+- New inspection helper:
+  `scripts/kunanyi/inspect_c_hi_fullgrid_restart_state.sh <jobid>`
+- New continuation wrapper/helper:
+  - `scripts/kunanyi/c_hi_fullgrid_continue.pbs`
+  - `scripts/kunanyi/stage_and_submit_c_hi_fullgrid_continue.sh`
+- The generic remote helpers now default to the home-network Tailscale route
+  through `deep-server`:
+  - `scripts/kunanyi/run_on_kunanyi.sh` defaults to
+    `TPAC_JUMPBOX_ALIAS=tpac-jumpbox-via-deep`
+  - `scripts/kunanyi/copy_to_kunanyi.sh` and
+    `scripts/kunanyi/fetch_from_kunanyi.sh` default to
+    `TPAC_SCP_HOST=kunanyi-via-deep`
+- The production template now verifies restart catalogue entries against
+  actual `data.NNNN.dbl.h5`/`data.NNNN.dbl` files before restart, records
+  `MPI_EXIT_CODE`, classifies common MPI failures, and carries the reason into
+  `FAILED`.
+- Do not launch the 80-node continuation yet. The next science/ops decision is
+  still to resolve the OpenMPI/UCX transport issue from `692369.kunanyi-ohpc`
+  with Stas/Patrick or TPAC; plain OB1/TCP was tested and is too slow to be a
+  useful 80-node production fallback.
 
 Latest full-grid `C-HI` retry diagnosis on 2026-05-22:
 

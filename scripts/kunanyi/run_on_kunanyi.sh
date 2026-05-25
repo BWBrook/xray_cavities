@@ -22,7 +22,7 @@ if [ -z "${TPAC_USER:-}" ] || [ -z "${TPAC_PASSWORD:-}" ]; then
   exit 2
 fi
 
-TPAC_JUMPBOX_ALIAS="${TPAC_JUMPBOX_ALIAS:-tpac-jumpbox}"
+TPAC_JUMPBOX_ALIAS="${TPAC_JUMPBOX_ALIAS:-tpac-jumpbox-via-deep}"
 TPAC_CLUSTER_HOST="${TPAC_CLUSTER_HOST:-kunanyi}"
 REMOTE_CMD="$*"
 REMOTE_CMD_B64="$(printf '%s' "$REMOTE_CMD" | base64 | tr -d '\n')"

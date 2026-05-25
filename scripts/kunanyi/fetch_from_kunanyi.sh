@@ -27,7 +27,7 @@ LOCAL_PATH="$2"
 LOCAL_PARENT="$(dirname "$LOCAL_PATH")"
 mkdir -p "$LOCAL_PARENT"
 
-TPAC_SCP_HOST="${TPAC_SCP_HOST:-kunanyi-via-nectar}"
+TPAC_SCP_HOST="${TPAC_SCP_HOST:-kunanyi-via-deep}"
 export TPAC_PASSWORD REMOTE_PATH LOCAL_PATH TPAC_SCP_HOST
 
 /usr/bin/expect <<'EXPECT'

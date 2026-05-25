@@ -24,7 +24,7 @@ fi
 
 LOCAL_PATH="$1"
 REMOTE_PATH="$2"
-TPAC_SCP_HOST="${TPAC_SCP_HOST:-kunanyi-via-nectar}"
+TPAC_SCP_HOST="${TPAC_SCP_HOST:-kunanyi-via-deep}"
 export TPAC_PASSWORD LOCAL_PATH REMOTE_PATH TPAC_SCP_HOST
 
 /usr/bin/expect <<'EXPECT'
