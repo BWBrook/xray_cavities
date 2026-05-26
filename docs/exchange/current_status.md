@@ -1,7 +1,8 @@
 # Current Status
 
-Last updated: 2026-05-25
-Primary checkpoint repo: `/home/bwbrook/papers/xray_cavities`
+Last updated: 2026-05-26
+Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
+or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
 ## Read This First
 
@@ -45,6 +46,36 @@ Latest restart-framework update on 2026-05-25:
   still to resolve the OpenMPI/UCX transport issue from `692369.kunanyi-ohpc`
   with Stas/Patrick or TPAC; plain OB1/TCP was tested and is too slow to be a
   useful 80-node production fallback.
+
+Latest Mac Mini migration checkpoint on 2026-05-26:
+
+- The always-on Mac Mini is reachable as `dev-box-ts` from the MacBook over
+  Tailscale and is now a valid first-class development/control host for this
+  repo.
+- New handover for a fresh Mac Mini agent:
+  `docs/exchange/dev_box_ts_handover.md`
+- Mac Mini `xray_cavities` checkout:
+  - path: `/Users/bwbrook/papers/xray_cavities`
+  - branch: `main`
+  - HEAD after pull: `aadf938`
+  - state: clean and even with `origin/main`
+- Mac Mini repo-local Python environment was built with `uv sync --frozen`.
+  Basic smoke checks passed for Python `3.12.13`, `h5py`, `pytest`, and the
+  editable `plutokore` distribution.
+- Relevant UTAS AGN GitLab checkouts are present under
+  `/Users/bwbrook/git/utas-agn`:
+  - `pluto` on `bwbrook/deep-server-bringup` at `2674fc3`
+  - `jet-setup` on `bwbrook/deep-server-bringup` at `e17ac8f`
+  - `plutokore` on `bwbrook/deep-server-bringup` at `e80252c`
+  - `jet-setup.wiki` on `master` at `14d5aa7`
+- The fork-backed GitLab repos now have both Barry fork `origin` and canonical
+  `upstream` remotes configured on the Mac Mini.
+- The TPAC secret env file was copied to the Mac Mini at
+  `~/.config/tpac/kunanyi.env` with mode `600`; do not commit or print it.
+- The Mac Mini does not currently have the ignored large `env/` payloads, an
+  OpenStack/Nectar secret env, or `openstack` CLI on PATH. That is not a
+  blocker for the current `kunanyi` wait state; use `/Users/bwbrook/work/nectar`
+  if Nectar resizing/control needs to move to the Mini later.
 
 Latest full-grid `C-HI` retry diagnosis on 2026-05-22:
 

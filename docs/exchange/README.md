@@ -2,20 +2,23 @@
 
 This directory is the cross-machine handover system for UTAS AGN work.
 
-Its job is to let a fresh agent on WSL, `deep-server`, or the MacBook via
-`nectar-vm` pick up quickly without depending on chat history.
+Its job is to let a fresh agent on WSL, the Mac Mini dev box, `deep-server`,
+or the MacBook via `nectar-vm` pick up quickly without depending on chat
+history.
 
 ## Canonical locations
 
 The same repo-relative path should exist on all machines:
 
 - WSL: `/home/bwbrook/papers/xray_cavities/docs/exchange`
+- Mac Mini dev box: `/Users/bwbrook/papers/xray_cavities/docs/exchange`
+- MacBook: `/Users/bwbrook/papers/xray_cavities/docs/exchange`
 - `deep-server`: `/home/bwbrook/papers/xray_cavities/docs/exchange`
 - `nectar-vm`: `/home/ubuntu/papers/xray_cavities/docs/exchange`
 
-For MacBook continuity, treat the Nectar path as the most reliable shared entry
-point, because the MacBook can usually reach `nectar-vm` even when it cannot
-reach `deep-server`.
+For always-on macOS continuity, prefer the Mac Mini `dev-box-ts` checkout when
+it is reachable. For Linux/HPC control-plane continuity, Nectar and
+`deep-server` remain useful shared entry points.
 
 ## First-read rule for a fresh agent
 
@@ -23,9 +26,10 @@ Before doing any real work, read these in order:
 
 1. `AGENTS.md`
 2. `docs/exchange/README.md`
-3. `docs/exchange/current_status.md`
-4. the newest relevant note under `docs/exchange/logs/`
-5. machine-specific notes if needed:
+3. `docs/exchange/dev_box_ts_handover.md` if arriving on the Mac Mini
+4. `docs/exchange/current_status.md`
+5. the newest relevant note under `docs/exchange/logs/`
+6. machine-specific notes if needed:
    - `docs/deep_server_setup.md`
    - `docs/nectar_vm_setup.md`
 
