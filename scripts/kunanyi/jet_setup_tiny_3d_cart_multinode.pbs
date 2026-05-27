@@ -12,15 +12,55 @@ set -euo pipefail
 export LC_ALL=C
 export LANG=C
 
-PLUTO_DIR=/scratch/bwbrook/git/utas-agn/pluto
-JET_SETUP=/scratch/bwbrook/git/utas-agn/jet-setup
-WORKDIR=/scratch/bwbrook/jet_setup_smoke/tiny_3d_cart_multinode
+PLUTO_DIR="${PLUTO_DIR:-/scratch/bwbrook/git/utas-agn/pluto}"
+JET_SETUP="${JET_SETUP:-/scratch/bwbrook/git/utas-agn/jet-setup}"
+WORKDIR="${WORKDIR:-/scratch/bwbrook/jet_setup_smoke/tiny_3d_cart_multinode}"
 PROBLEM="$WORKDIR/problem"
 RESULTS="$WORKDIR/results"
 
 module purge
-module load HDF5/1.14.0-gompi-2023a
-export HDF5_DIR="${HDF5_DIR:-${EBROOTHDF5:-/share/apps/software/HDF5/1.14.0-gompi-2023a}}"
+KUNANYI_MODULE_STACK="${KUNANYI_MODULE_STACK:-gompi_2023a}"
+MPI_FLAVOR="${MPI_FLAVOR:-}"
+case "$KUNANYI_MODULE_STACK" in
+  agn_intel_impi)
+    module use "${AGN_MODULEFILES:-/ds/projects/agn/modulefiles}"
+    module load intel impi hdf5/1.12.1p zfp/0.5.5
+    MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+    ;;
+  public_intel_impi)
+    module load intel/18.0.1.163 impi/2018.1.163 hdf5/1.10.4
+    MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+    ;;
+  gompi_2023a)
+    module load HDF5/1.14.0-gompi-2023a
+    MPI_FLAVOR="${MPI_FLAVOR:-openmpi}"
+    ;;
+  *)
+    echo "[error] unknown KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}" >&2
+    exit 2
+    ;;
+esac
+
+if [ -z "${HDF5_DIR:-}" ] && [ -n "${EBROOTHDF5:-}" ]; then
+  export HDF5_DIR="${EBROOTHDF5}"
+fi
+if [ -z "${HDF5_DIR:-}" ] && [ -n "${LD_LIBRARY_PATH:-}" ]; then
+  IFS=: read -r -a ld_paths <<< "$LD_LIBRARY_PATH"
+  for lib_dir in "${ld_paths[@]}"; do
+    if [ -f "${lib_dir}/libhdf5.so" ] || [ -f "${lib_dir}/libhdf5.a" ]; then
+      export HDF5_DIR="$(dirname "$lib_dir")"
+      break
+    fi
+  done
+fi
+if [ -z "${HDF5_DIR:-}" ]; then
+  echo "[error] HDF5_DIR is unset and could not be inferred from loaded modules" >&2
+  exit 2
+fi
+if [ -z "${MPI_FLAVOR:-}" ]; then
+  echo "[error] MPI_FLAVOR was not set for KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}" >&2
+  exit 2
+fi
 export PLUTO_DIR
 
 echo "JOB_START=$(date)"
@@ -34,6 +74,8 @@ else
   NRANKS=16
 fi
 echo "NRANKS=$NRANKS"
+echo "KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}"
+echo "MPI_FLAVOR=${MPI_FLAVOR}"
 echo "MODULES=${LOADEDMODULES:-}"
 echo "HDF5_DIR=${HDF5_DIR}"
 echo "mpicc=$(command -v mpicc)"
@@ -231,7 +273,11 @@ echo "--- run ---"
   cd "$PROBLEM"
   rm -rf outputs
   mkdir -p outputs/logs
-  mpirun -np "$NRANKS" ./pluto -i pluto.ini > outputs/logs/pluto.log 2>&1
+  if [ "$MPI_FLAVOR" = "intelmpi" ] && [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+    mpirun -np "$NRANKS" -machinefile "$PBS_NODEFILE" ./pluto -i pluto.ini > outputs/logs/pluto.log 2>&1
+  else
+    mpirun -np "$NRANKS" ./pluto -i pluto.ini > outputs/logs/pluto.log 2>&1
+  fi
 )
 
 if [ ! -f "$PROBLEM/outputs/data.0002.dbl" ]; then

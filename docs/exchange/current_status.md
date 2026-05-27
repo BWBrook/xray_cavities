@@ -77,6 +77,37 @@ Latest Mac Mini migration checkpoint on 2026-05-26:
   blocker for the current `kunanyi` wait state; use `/Users/bwbrook/work/nectar`
   if Nectar resizing/control needs to move to the Mini later.
 
+Latest Patrick AGN-stack follow-up on 2026-05-27:
+
+- Patrick-agent recommended switching away from the failing
+  GCC/OpenMPI/UCX/HDF5 path and testing the AGN group Intel/IMPI/HDF5/ZFP
+  stack:
+  `module use /ds/projects/agn/modulefiles; ml intel impi hdf5/1.12.1p zfp/0.5.5`.
+- Mac Mini `dev-box-ts` can reach `kunanyi` through the normal
+  Tailscale/deep-server jumpbox route, and Computer Use/Safari successfully
+  refreshed the Open OnDemand `Enable Jumpbox SSH` window.
+- The exact AGN stack is currently blocked by Unix permissions:
+  `bwbrook` is only in group `hpcusers`, while `/ds/projects/agn` is
+  `drwxrwxr-- pmyates agn`; the account can see the directory entry but cannot
+  traverse into `/ds/projects/agn/modulefiles` or `/ds/projects/agn/libraries`.
+- As a result, `hdf5/1.12.1p` and `zfp/0.5.5` are not loadable for this
+  account. Public modules expose `intel/18.0.1.163`, `impi/2018.1.163`, and
+  `hdf5/1.10.4`, but that is not Patrick's requested AGN stack.
+- New local helpers prepared the retry path:
+  - `scripts/kunanyi/probe_agn_intel_impi_stack.sh`
+  - `scripts/kunanyi/stage_and_submit_agn_intel_impi_tiny_smoke.sh`
+  - `scripts/kunanyi/jet_setup_tiny_3d_cart_multinode.pbs` now supports
+    `KUNANYI_MODULE_STACK=agn_intel_impi` with Intel MPI launch syntax.
+- The tiny smoke PBS wrapper was staged to
+  `/u/bwbrook/codex_kunanyi/jet_setup_tiny_3d_cart_agn_intel_impi_smoke.pbs`,
+  but the helper correctly refused to submit a PBS job while
+  `/ds/projects/agn` is not traversable.
+- Next required action: Patrick/TPAC needs to add Barry to group `agn` or
+  grant equivalent execute/traverse access/ACL on `/ds/projects/agn` so the
+  proposed modulefiles and libraries can be read. After that, rerun the probe
+  and staging helper; still do not launch an 80-node continuation until the
+  small Intel/IMPI smoke is green.
+
 Latest full-grid `C-HI` retry diagnosis on 2026-05-22:
 
 - Retry job `692504.kunanyi-ohpc` finished after the full `8` hour walltime:
