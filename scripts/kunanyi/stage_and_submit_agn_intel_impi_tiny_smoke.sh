@@ -5,6 +5,8 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 REMOTE_BASE="${REMOTE_BASE:-/u/bwbrook/codex_kunanyi}"
 REMOTE_SCRIPT="${REMOTE_SCRIPT:-${REMOTE_BASE}/jet_setup_tiny_3d_cart_agn_intel_impi_smoke.pbs}"
+REMOTE_STDOUT="${REMOTE_STDOUT:-${REMOTE_BASE}/jet_setup_tiny_3d_cart_agn_intel_impi_smoke.out}"
+REMOTE_STDERR="${REMOTE_STDERR:-${REMOTE_BASE}/jet_setup_tiny_3d_cart_agn_intel_impi_smoke.err}"
 REMOTE_WORKDIR="${REMOTE_WORKDIR:-/scratch/bwbrook/jet_setup_smoke/tiny_3d_cart_agn_intel_impi}"
 LOCAL_SCRIPT="${LOCAL_SCRIPT:-${ROOT}/scripts/kunanyi/jet_setup_tiny_3d_cart_multinode.pbs}"
 
@@ -60,13 +62,19 @@ printf 'AGN_SMOKE_MPIRUN=%s\n' "$(command -v mpirun)"
 printf 'AGN_SMOKE_HDF5_DIR=%s\n' "${HDF5_DIR:-}"
 printf 'AGN_SMOKE_ZFP_DIR=%s\n' "${ZFP_DIR:-}"
 
-job_id=$(qsub -v KUNANYI_MODULE_STACK=agn_intel_impi,MPI_FLAVOR=intelmpi,WORKDIR="${REMOTE_WORKDIR}" "${REMOTE_SCRIPT}")
+job_id=$(qsub \
+  -o "${REMOTE_STDOUT}" \
+  -e "${REMOTE_STDERR}" \
+  -v KUNANYI_MODULE_STACK=agn_intel_impi,MPI_FLAVOR=intelmpi,WORKDIR="${REMOTE_WORKDIR}" \
+  "${REMOTE_SCRIPT}")
 echo SUBMITTED_JOB_ID=${job_id}
 qstat -f "${job_id}" | egrep 'Job Id:|Job_Name|job_state|queue|Resource_List.select|Resource_List.walltime|Mail_Users|comment' || true
 REMOTE
 )
 
 REMOTE_CMD="REMOTE_SCRIPT=$(quote "$REMOTE_SCRIPT")
+REMOTE_STDOUT=$(quote "$REMOTE_STDOUT")
+REMOTE_STDERR=$(quote "$REMOTE_STDERR")
 REMOTE_WORKDIR=$(quote "$REMOTE_WORKDIR")
 ${REMOTE_CMD}"
 

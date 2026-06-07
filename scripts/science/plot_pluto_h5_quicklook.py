@@ -164,7 +164,7 @@ def write_summary(
             f"- Mid-plane maps, central zoom: `{zoom_map_path.name}`",
             f"- Axis profiles: `{profile_path.name}`",
             "",
-            "This is an early-segment run-health diagnostic, not a science measurement.",
+            "This is a compact run-health diagnostic, not a science measurement.",
             "",
         ]
     )

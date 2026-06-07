@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-05-26
+Last updated: 2026-06-07
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -42,10 +42,9 @@ Latest restart-framework update on 2026-05-25:
   actual `data.NNNN.dbl.h5`/`data.NNNN.dbl` files before restart, records
   `MPI_EXIT_CODE`, classifies common MPI failures, and carries the reason into
   `FAILED`.
-- Do not launch the 80-node continuation yet. The next science/ops decision is
-  still to resolve the OpenMPI/UCX transport issue from `692369.kunanyi-ohpc`
-  with Stas/Patrick or TPAC; plain OB1/TCP was tested and is too slow to be a
-  useful 80-node production fallback.
+- Superseded by the 2026-05-31 AGN Intel/IMPI 80-node result below. The
+  current large-scale blocker is no longer the original OpenMPI/UCX abort
+  signature; it is an AGN Intel/IMPI parallel HDF5 restart hang at 2240 ranks.
 
 Latest Mac Mini migration checkpoint on 2026-05-26:
 
@@ -77,36 +76,669 @@ Latest Mac Mini migration checkpoint on 2026-05-26:
   blocker for the current `kunanyi` wait state; use `/Users/bwbrook/work/nectar`
   if Nectar resizing/control needs to move to the Mini later.
 
-Latest Patrick AGN-stack follow-up on 2026-05-27:
+Latest AGN Intel/IMPI follow-up on 2026-05-29:
 
-- Patrick-agent recommended switching away from the failing
-  GCC/OpenMPI/UCX/HDF5 path and testing the AGN group Intel/IMPI/HDF5/ZFP
-  stack:
+- Patrick changed `/ds/projects/agn` from `drwxrwxr--` to `drwxrwxr-x`,
+  which is enough for Barry's `bwbrook` account to traverse the AGN group tree
+  without an ACL.
+- The exact Patrick-agent stack now loads on `kunanyi`:
   `module use /ds/projects/agn/modulefiles; ml intel impi hdf5/1.12.1p zfp/0.5.5`.
-- Mac Mini `dev-box-ts` can reach `kunanyi` through the normal
-  Tailscale/deep-server jumpbox route, and Computer Use/Safari successfully
-  refreshed the Open OnDemand `Enable Jumpbox SSH` window.
-- The exact AGN stack is currently blocked by Unix permissions:
-  `bwbrook` is only in group `hpcusers`, while `/ds/projects/agn` is
-  `drwxrwxr-- pmyates agn`; the account can see the directory entry but cannot
-  traverse into `/ds/projects/agn/modulefiles` or `/ds/projects/agn/libraries`.
-- As a result, `hdf5/1.12.1p` and `zfp/0.5.5` are not loadable for this
-  account. Public modules expose `intel/18.0.1.163`, `impi/2018.1.163`, and
-  `hdf5/1.10.4`, but that is not Patrick's requested AGN stack.
-- New local helpers prepared the retry path:
-  - `scripts/kunanyi/probe_agn_intel_impi_stack.sh`
-  - `scripts/kunanyi/stage_and_submit_agn_intel_impi_tiny_smoke.sh`
-  - `scripts/kunanyi/jet_setup_tiny_3d_cart_multinode.pbs` now supports
-    `KUNANYI_MODULE_STACK=agn_intel_impi` with Intel MPI launch syntax.
-- The tiny smoke PBS wrapper was staged to
-  `/u/bwbrook/codex_kunanyi/jet_setup_tiny_3d_cart_agn_intel_impi_smoke.pbs`,
-  but the helper correctly refused to submit a PBS job while
-  `/ds/projects/agn` is not traversable.
-- Next required action: Patrick/TPAC needs to add Barry to group `agn` or
-  grant equivalent execute/traverse access/ACL on `/ds/projects/agn` so the
-  proposed modulefiles and libraries can be read. After that, rerun the probe
-  and staging helper; still do not launch an 80-node continuation until the
-  small Intel/IMPI smoke is green.
+- The loaded compiler/MPI paths are:
+  - `mpicc=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin_ohpc/mpicc`
+  - `mpirun=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpirun`
+  - `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+- The guarded tiny PLUTO 3D Cartesian smoke was submitted and completed green:
+  - PBS job: `696012.kunanyi-ohpc`
+  - request: `select=2:ncpus=8:mpiprocs=8`, `walltime=00:20:00`
+  - nodes: `(n166:ncpus=8)+(n190:ncpus=8)`
+  - `resources_used.walltime=00:17:39`
+  - `Exit_status=0`
+  - output catalogue reached `data.0000.dbl`, `data.0001.dbl`, and
+    `data.0002.dbl`
+  - no UCX `UD endpoint ... unhandled timeout error` signature appeared.
+- Non-fatal caveats: PBS stderr still includes a startup/module warning about
+  an attempted `gnu8/ohpc` load while `intel` is active, and
+  `jet-setup/tools/setup-problem` still reports `git: command not found`.
+  Neither blocked the tiny Intel/IMPI run.
+- The next bounded production-style `C-HI` full-grid restart was submitted
+  under the same AGN Intel/IMPI/HDF5/ZFP stack and completed green:
+  - PBS job: `696086.kunanyi-ohpc`
+  - request: `select=8:ncpus=28:mpiprocs=28`, `walltime=02:00:00`
+  - `resources_used.walltime=00:39:20`
+  - `Exit_status=0`
+  - `KUNANYI_MODULE_STACK=agn_intel_impi`
+  - `MPI_FLAVOR=intelmpi`
+  - `FORCE_REBUILD=1`
+  - `RUN_KIND=h5_restart_0`
+  - `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 0.5 -h5restart 0`
+  - `MPI_EXIT_CODE=0`
+  - PLUTO saw `Number of processors: 224`, restarted from
+    `data.0000.dbl.h5`, and wrote fresh full-grid `data.0001.dbl.h5`,
+    `data.0001.flt.h5`, `particles.0001.dbl` through `particles.0004.dbl`,
+    and `restart.out`.
+  - `dbl.h5.out` and `flt.h5.out` now both include output `1` at
+    `t = 1.011234e+01`, `dt = 2.777278e-01`, step `135`.
+  - No UCX `UD endpoint ... unhandled timeout error`, `MPI_ABORT`, or
+    segmentation-fault signature appeared.
+- Caveats remain non-fatal: the Lmod `gnu8/ohpc` versus `intel` warning,
+  `setup-problem: line 11: git: command not found`, and the known
+  `SetOutputVar(): var_name 'energy' cannot be set/unset for writing` message.
+- Next action: treat the AGN Intel/IMPI path as validated at 8-node full-grid
+  restart scale.
+- Barry chose to proceed directly to the full 80-node AGN Intel/IMPI
+  continuation. It has been staged and submitted:
+  - PBS job: `696197.kunanyi-ohpc`
+  - job name: `c_hi_fg_agn80`
+  - queue/state at submit: `normal` / `Q`
+  - request: `select=80:ncpus=28:mpiprocs=28`, `walltime=48:00:00`
+  - wrapper: `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_80node_continue.pbs`
+  - stdout/stderr:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_80node_continue.out`
+    and
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_80node_continue.err`
+  - restart source verified at submit:
+    `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup/C-HI/particles/problem/outputs/data.0001.dbl.h5`
+  - restart index: `1`
+  - `dbl.h5.out` submit tail included outputs `0` and `1`, with output `1`
+    at `t = 1.011234e+01`, `dt = 2.777278e-01`, step `135`.
+  - module stack verified immediately before `qsub`:
+    `intel/18.0.1.163`, `impi/2018.1.163`, `hdf5/1.12.1p`, `zfp/0.5.5`.
+- The 80-node AGN Intel/IMPI continuation completed with a walltime kill:
+  - PBS job: `696197.kunanyi-ohpc`
+  - `Exit_status=271`
+  - `resources_used.walltime=48:01:46`
+  - `resources_used.cput=1342:50:36`
+  - `resources_used.ncpus=2240`
+  - stderr: `PBS: job killed: walltime 172896 exceeded limit 172800`
+  - local marker: `FAILED`, with `exit_code=143`, `signal=TERM`,
+    `finished_utc=2026-05-31T03:20:28Z`.
+- The run rebuilt under AGN Intel/IMPI and launched as intended:
+  - `KUNANYI_MODULE_STACK=agn_intel_impi`
+  - `MPI_FLAVOR=intelmpi`
+  - `MODULES=intel/18.0.1.163:impi/2018.1.163:hdf5/1.12.1p:zfp/0.5.5`
+  - `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+  - `NRANKS=2240`
+  - `RUN_KIND=h5_restart_1`
+  - `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 47.5 -h5restart 1`
+- The failure mode is now sharply localized:
+  - all `2240` per-rank logs reached their final
+    `> restarting from file #1 (dbl.h5)` line.
+  - a post-restart scan found `0` rank logs reaching `Starting computation`,
+    `Restarting from Particle`, a `step:` line, or a `Writing file` line after
+    that final restart line.
+  - `dbl.h5.out` and `flt.h5.out` still stop at output `1`; no
+    `data.0002.*` file was written.
+  - the only output file newer than the 696197 nodefile was `grid.out`, written
+    during startup.
+  - no UCX `UD endpoint ... unhandled timeout error`, `MPI_ABORT`, or
+    segmentation-fault signature was found for this AGN Intel/IMPI run.
+- Interpretation: `696197` did not reproduce the old UCX crash. It appears to
+  have hung or effectively stalled inside the full-grid parallel HDF5 restart
+  from `data.0001.dbl.h5` at 80 nodes / 2240 ranks. CPU utilization was very
+  low for the allocation, so this looks like an MPI-IO/HDF5/filesystem-scale
+  issue rather than productive compute.
+- Next action: package this evidence for Patrick/Stas/TPAC. The key question is
+  why the same AGN Intel/IMPI/HDF5 stack restarts the full-grid HDF5 output at
+  8 nodes / 224 ranks but stalls before particle restart/computation at
+  80 nodes / 2240 ranks.
+
+Latest Patrick fresh-start completion on 2026-06-03:
+
+- Patrick advised trying a fresh run rather than restarting from previous
+  outputs, and setting `HDF5_USE_FILE_LOCKING=FALSE` if the simulation hangs
+  while writing HDF5 on the older HDF5 stack.
+- Patrick-agent's latest `origin/main` access reply was incorporated into the
+  local working tree without fast-forwarding over the dirty worktree. That
+  reply confirms the AGN module/library access issue was resolved; the tiny
+  smoke and 8-node restart checks are already green as documented above.
+- A fresh 80-node full-grid `C-HI` particles job was staged, submitted, and
+  completed green:
+  - PBS job: `696619.kunanyi-ohpc`
+  - job name: `c_hi_fg_fresh`
+  - final state: `F`
+  - `Exit_status=0`
+  - `resources_used.walltime=47:33:46`
+  - `resources_used.cput=1329:31:13`
+  - `resources_used.ncpus=2240`
+  - request: `select=80:ncpus=28:mpiprocs=28`, `walltime=48:00:00`
+  - wrapper: `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_fresh_start.pbs`
+  - stdout/stderr:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_fresh_start.out`
+    and
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_fresh_start.err`
+  - run root:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh`
+  - config source:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_2026-05-19/C-HI/particles`
+  - `RESTART_POLICY=force-fresh`
+  - `HDF5_USE_FILE_LOCKING=FALSE`
+  - `KUNANYI_MODULE_STACK=agn_intel_impi`
+  - `MPI_FLAVOR=intelmpi`
+  - `RUN_KIND=fresh`
+  - `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 47.5`
+  - `MPI_EXIT_CODE=0`
+  - `JOB_START=2026-06-01T03:06:33Z`
+  - `JOB_END=2026-06-03T02:40:14Z`
+- The new run root deliberately avoids clobbering the previous
+  `/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup`
+  evidence tree. The stage helper also refuses to submit if the fresh output
+  directory already contains files unless explicitly overridden.
+- Remote verification found a `DONE` marker and no `FAILED` marker:
+  `status=done`, `case_id=C-HI`, `case_variant=particles`,
+  `pbs_jobid=696619.kunanyi-ohpc`,
+  `finished_utc=2026-06-03T02:40:14Z`.
+- Output products reached the intended fresh-run endpoint:
+  - output volume: `2.5T`
+  - `dbl.h5.out_lines=10`, ending at output `9`,
+    `t = 1.311314e+04`, step `42194`
+  - `flt.h5.out_lines=44`, ending at output `43`,
+    `t = 1.311314e+04`, step `42194`
+  - HDF5 counts: `10` double-precision HDF5 outputs and `44`
+    floating-point HDF5 outputs
+  - particle outputs: `4278`, ending at `particles.4277.dbl`
+  - final large outputs include `data.0009.dbl.h5` and `data.0043.flt.h5`
+- In-place product integrity/readability checks on 2026-06-03 were green:
+  - final double HDF5:
+    `data.0009.dbl.h5`, size `67318639276`, HDF5 readable, with
+    `/Timestep_9/vars/{rho,vx1,vx2,vx3,prs,tr1}` datasets shaped
+    `{1014, 960, 960}`
+  - final float HDF5:
+    `data.0043.flt.h5`, size `44890581676`, HDF5 readable, with
+    `/Timestep_43/vars/{rho,vx1,vx2,vx3,prs,tr1}` datasets shaped
+    `{1014, 960, 960}`
+  - scalar reads succeeded for both double and float `rho` and `vx1`;
+    for example `rho(0,0,0)=0.00106042` and
+    `vx1(0,0,0)=4.16167e-05`
+  - XMF sidecars reference the expected final HDF5 files and time
+    `1.311314e+04`
+  - `restart.out` exists, is non-empty, and is `1280` bytes
+  - final particle file `particles.4277.dbl` exists, is `20220069` bytes, and
+    its ASCII header reports `nparticles=168496`,
+    `time=1.311314069772e+04`, and `stepNumber=42194`
+- Bounded rank-log sampling found `2240` rank logs; sampled ranks ended with
+  `> Done` after writing `particles.4277.dbl`. No UCX, UD endpoint,
+  `MPI_ABORT`, segmentation fault, or HDF5 diagnostic signature appeared in
+  the checked stdout/stderr/sample tails. Stderr still has the known non-fatal
+  Lmod compiler-module warning and `setup-problem: line 11: git: command not
+  found`.
+- Interpretation: Patrick's fresh-start pathway works at full 80-node /
+  2240-rank scale under the AGN Intel/IMPI/HDF5/ZFP stack with
+  `HDF5_USE_FILE_LOCKING=FALSE`. The previous 80-node failure remains best
+  interpreted as restart-specific or restart-triggered, not a general inability
+  of the stack to run the full-grid case at scale.
+- Next recommended action: submit a short bounded 80-node restart probe from
+  output `9` with the same AGN Intel/IMPI stack and
+  `HDF5_USE_FILE_LOCKING=FALSE`. Success means the segmented production
+  pathway is viable; a stall would crisply localize the issue to full-scale
+  HDF5 restart behaviour even from a clean fresh-generated output.
+- The bounded 80-node restart probe from output `9` has now been staged and
+  submitted:
+  - PBS job: `696911.kunanyi-ohpc`
+  - job name: `c_hi_fg_r9probe`
+  - queue/state at submit: `normal` / `Q`
+  - request: `select=80:ncpus=28:mpiprocs=28`, `walltime=02:00:00`
+  - wrapper:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_80node_restart_probe.pbs`
+  - stdout/stderr:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_80node_restart_probe.out`
+    and
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_80node_restart_probe.err`
+  - local helper:
+    `scripts/kunanyi/stage_and_submit_c_hi_fullgrid_agn_impi_80node_restart_probe.sh`
+  - remote run root:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh`
+  - `EXPECTED_RESTART_INDEX=9`
+  - `RESTART_POLICY=auto`
+  - expected template `RUN_KIND`: `h5_restart_9`
+  - `PLUTO_MAXTIME_HOURS=0.5`
+  - `HDF5_USE_FILE_LOCKING=FALSE`
+  - `KUNANYI_MODULE_STACK=agn_intel_impi`
+  - `MPI_FLAVOR=intelmpi`
+- Pre-submit remote validation re-read
+  `/Timestep_9/vars/rho` from `data.0009.dbl.h5`, verified the AGN module
+  stack, and confirmed the latest `dbl.h5.out` restart index was exactly `9`
+  before `qsub`.
+- Expected next action: when Barry's PBS email lands for `696911.kunanyi-ohpc`,
+  inspect whether `RUN_KIND=h5_restart_9` reached computation and wrote a new
+  HDF5 output, ideally `data.0010.dbl.h5`. A green result validates segmented
+  full-scale production. A stall cleanly reproduces the restart-specific
+  blocker from a known-good fresh output.
+- Result now known: `696911.kunanyi-ohpc` reproduced the full-scale restart
+  blocker.
+  - job name: `c_hi_fg_r9probe`
+  - `Exit_status=271`
+  - `resources_used.walltime=02:01:12`
+  - `resources_used.cput=56:05:35`
+  - `resources_used.ncpus=2240`
+  - PBS stderr: `PBS: job killed: walltime 7262 exceeded limit 7200`
+  - marker state: only `FAILED`, with `exit_code=143`, `signal=TERM`,
+    `finished_utc=2026-06-03T07:22:18Z`
+  - launch state:
+    `RUN_KIND=h5_restart_9`,
+    `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 0.5 -h5restart 9`,
+    `NRANKS=2240`,
+    `HDF5_USE_FILE_LOCKING=FALSE`,
+    `KUNANYI_MODULE_STACK=agn_intel_impi`,
+    `MPI_FLAVOR=intelmpi`,
+    `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+  - no new science products appeared:
+    `data.0010.dbl.h5`, `data.0044.flt.h5`, and `particles.4278.dbl` are
+    absent; `dbl.h5.out` still has `10` lines ending at output `9`, and
+    `flt.h5.out` still has `44` lines ending at output `43`
+  - `data.*.dbl.h5` count remains `10`, `data.*.flt.h5` count remains `44`,
+    and particle output count remains `4278`
+  - direct sampled rank logs (`pluto.0`, `pluto.1`, `pluto.27`, `pluto.28`,
+    `pluto.1119`, `pluto.1120`, `pluto.2238`, `pluto.2239`) all end at
+    `> restarting from file #9 (dbl.h5)`, with no subsequent
+    `Starting computation`, particle restart, `step:`, or write line in the
+    sampled tails
+  - the full rank-log set is large (`2240` files, about `1.03 GB` total);
+    broad all-rank scans were deliberately abandoned after they became slow on
+    remote scratch. The deterministic sample plus unchanged output catalogues
+    is enough to classify the run.
+- Interpretation: the clean fresh 80-node run and HDF5 products are good, but
+  a 2240-rank restart from the clean output `9` still stalls inside or
+  immediately after the parallel HDF5 restart read, before particle restart or
+  computation. Patrick's `HDF5_USE_FILE_LOCKING=FALSE` write-hang mitigation
+  was carried through, so this is not simply the old file-locking write issue.
+  It is now best framed for Patrick/TPAC as a full-scale parallel HDF5 restart
+  read problem under the AGN Intel/IMPI/HDF5 stack.
+- Next recommended action: do not spend another 80-node allocation on the same
+  restart path unchanged. Escalate this evidence to Patrick/TPAC, and if more
+  local probing is useful, run a node-count ladder from the same clean output
+  `9` to locate the restart failure threshold before trying another production
+  continuation. A fresh full-duration strategy remains viable, but segmented
+  full-scale restart is not yet validated.
+- Barry has sent the short evidence summary to Patrick. The first node-count
+  ladder rung has been staged and submitted from the same clean fresh output
+  `9`, isolated from the successful fresh run tree:
+  - PBS job: `697160.kunanyi-ohpc`
+  - job name: `c_hi_r9_08n`
+  - queue/state at submit: `normal` / `Q`
+  - request: `select=8:ncpus=28:mpiprocs=28`, `walltime=02:00:00`
+  - wrapper:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_restart_ladder.pbs`
+  - stdout/stderr:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_r9_ladder_08node.out`
+    and
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_r9_ladder_08node.err`
+  - local helper:
+    `scripts/kunanyi/stage_and_submit_c_hi_fullgrid_agn_impi_restart_ladder.sh`
+  - isolated rung run root:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-05-c-hi-fullgrid-agn-impi-r9-ladder-08node`
+  - source fresh run root:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh`
+  - restart input:
+    `data.0009.dbl.h5`, restart index `9`
+  - particle input:
+    `particles.4277.dbl`
+  - `PLUTO_MAXTIME_HOURS=0.5`
+  - `HDF5_USE_FILE_LOCKING=FALSE`
+  - `KUNANYI_MODULE_STACK=agn_intel_impi`
+  - `MPI_FLAVOR=intelmpi`
+- The ladder helper copies only small catalogues/metadata into the rung work
+  root and symlinks the large HDF5/particle restart inputs back to the
+  known-good fresh products. This prevents a successful rung from appending
+  `data.0010.*` or `particles.4278.dbl` into the clean fresh production tree.
+- Result now known: `697160.kunanyi-ohpc` completed green at 8 nodes /
+  224 ranks.
+  - job name: `c_hi_r9_08n`
+  - `Exit_status=0`
+  - `resources_used.walltime=00:39:50`
+  - `resources_used.cput=17:40:28`
+  - `resources_used.ncpus=224`
+  - marker state: only `DONE`, with `status=done`,
+    `pbs_jobid=697160.kunanyi-ohpc`,
+    `finished_utc=2026-06-05T04:10:41Z`
+  - launch state:
+    `RUN_KIND=h5_restart_9`,
+    `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 0.5 -h5restart 9`,
+    `NRANKS=224`,
+    `HDF5_USE_FILE_LOCKING=FALSE`,
+    `KUNANYI_MODULE_STACK=agn_intel_impi`,
+    `MPI_FLAVOR=intelmpi`,
+    `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+  - the isolated rung wrote new regular outputs while preserving symlinks to
+    the fresh-run restart inputs:
+    `data.0010.dbl.h5`, `data.0044.flt.h5`, and
+    `particles.4278.dbl` through `particles.4287.dbl`
+  - `dbl.h5.out` now has `11` lines ending at output `10`,
+    `t = 1.314390e+04`, `dt = 3.139112e-01`, step `42292`
+  - `flt.h5.out` now has `45` lines ending at output `44`,
+    `t = 1.314390e+04`, `dt = 3.139112e-01`, step `42292`
+  - sampled ranks `0`, `1`, `27`, `28`, `111`, `112`, `222`, and `223`
+    all reached writes and ended with `> Done`.
+- Interpretation: restart from the clean fresh output `9` is still valid at
+  8-node scale under the AGN Intel/IMPI/HDF5 stack. The failure threshold is
+  therefore above 224 ranks and below or at 2240 ranks.
+- Result now known: `697174.kunanyi-ohpc` completed green at 16 nodes /
+  448 ranks.
+  - PBS job: `697174.kunanyi-ohpc`
+  - job name: `c_hi_r9_16n`
+  - `Exit_status=0`
+  - `resources_used.walltime=00:37:52`
+  - `resources_used.cput=16:37:43`
+  - `resources_used.ncpus=448`
+  - request: `select=16:ncpus=28:mpiprocs=28`, `walltime=02:00:00`
+  - marker state: only `DONE`, with `status=done`,
+    `pbs_jobid=697174.kunanyi-ohpc`,
+    `finished_utc=2026-06-05T04:55:40Z`
+  - launch state:
+    `RUN_KIND=h5_restart_9`,
+    `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 0.5 -h5restart 9`,
+    `NRANKS=448`,
+    `HDF5_USE_FILE_LOCKING=FALSE`,
+    `KUNANYI_MODULE_STACK=agn_intel_impi`,
+    `MPI_FLAVOR=intelmpi`,
+    `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+  - the isolated rung wrote `data.0010.dbl.h5`, `data.0044.flt.h5`, and
+    particle outputs through `particles.4298.dbl`; source restart files remained
+    symlinks to the fresh run
+  - `dbl.h5.out` now has `11` lines ending at output `10`,
+    `t = 1.317530e+04`, `dt = 3.139112e-01`, step `42392`
+  - `flt.h5.out` now has `45` lines ending at output `44`,
+    `t = 1.317530e+04`, `dt = 3.139112e-01`, step `42392`
+  - sampled ranks `0`, `1`, `27`, `28`, `223`, `224`, `446`, and `447`
+    all reached particle write `#4298` and ended with `> Done`.
+  - non-fatal stderr is still the known Lmod compiler-module warning about
+    `gnu8/8.3.0` while `intel` is active.
+- Interpretation: restart from the clean fresh output `9` is valid through
+  16-node scale under the AGN Intel/IMPI/HDF5 stack. The failure threshold is
+  therefore above 448 ranks and below or at 2240 ranks.
+- Result now known: `697223.kunanyi-ohpc` completed green at 32 nodes /
+  896 ranks.
+  - PBS job: `697223.kunanyi-ohpc`
+  - job name: `c_hi_r9_32n`
+  - `Exit_status=0`
+  - `resources_used.walltime=00:35:03`
+  - `resources_used.cput=15:27:14`
+  - `resources_used.ncpus=896`
+  - request: `select=32:ncpus=28:mpiprocs=28`, `walltime=02:00:00`
+  - marker state: only `DONE`, with `status=done`,
+    `pbs_jobid=697223.kunanyi-ohpc`,
+    `finished_utc=2026-06-05T06:53:35Z`
+  - launch state:
+    `RUN_KIND=h5_restart_9`,
+    `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 0.5 -h5restart 9`,
+    `NRANKS=896`,
+    `HDF5_USE_FILE_LOCKING=FALSE`,
+    `KUNANYI_MODULE_STACK=agn_intel_impi`,
+    `MPI_FLAVOR=intelmpi`,
+    `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+  - the isolated rung wrote `data.0010.dbl.h5`, floating HDF5 outputs through
+    `data.0045.flt.h5`, and particle outputs through `particles.4307.dbl`;
+    source restart files remained symlinks to the fresh run
+  - `dbl.h5.out` now has `11` lines ending at output `10`,
+    `t = 1.320512e+04`, `dt = 3.139112e-01`, step `42487`
+  - `flt.h5.out` now has `46` lines ending at output `45`,
+    `t = 1.320512e+04`, `dt = 3.139112e-01`, step `42487`
+  - sampled ranks `0`, `1`, `27`, `28`, `447`, `448`, `894`, and `895`
+    all reached particle write `#4307` and ended with `> Done`.
+  - non-fatal stderr is still the known Lmod compiler-module warning about
+    `gnu8/8.3.0` while `intel` is active.
+- Interpretation: restart from the clean fresh output `9` is valid through
+  32-node scale under the AGN Intel/IMPI/HDF5 stack. The failure threshold is
+  therefore above 896 ranks and below or at 2240 ranks.
+- Result now known: `697235.kunanyi-ohpc` completed green at 48 nodes /
+  1344 ranks.
+  - PBS job: `697235.kunanyi-ohpc`
+  - job name: `c_hi_r9_48n`
+  - `Exit_status=0`
+  - `resources_used.walltime=00:34:58`
+  - `resources_used.cput=15:09:47`
+  - `resources_used.ncpus=1344`
+  - request: `select=48:ncpus=28:mpiprocs=28`, `walltime=02:00:00`
+  - marker state: only `DONE`, with `status=done`,
+    `pbs_jobid=697235.kunanyi-ohpc`,
+    `finished_utc=2026-06-05T08:07:58Z`
+  - launch state:
+    `RUN_KIND=h5_restart_9`,
+    `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 0.5 -h5restart 9`,
+    `NRANKS=1344`,
+    `HDF5_USE_FILE_LOCKING=FALSE`,
+    `KUNANYI_MODULE_STACK=agn_intel_impi`,
+    `MPI_FLAVOR=intelmpi`,
+    `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+  - the isolated rung wrote `data.0010.dbl.h5`, floating HDF5 outputs through
+    `data.0045.flt.h5`, and particle outputs through `particles.4320.dbl`;
+    source restart files remained symlinks to the fresh run
+  - `dbl.h5.out` now has `11` lines ending at output `10`,
+    `t = 1.324467e+04`, `dt = 3.139112e-01`, step `42613`
+  - `flt.h5.out` now has `46` lines ending at output `45`,
+    `t = 1.324467e+04`, `dt = 3.139112e-01`, step `42613`
+  - sampled ranks `0`, `1`, `27`, `28`, `671`, `672`, `1342`, and `1343`
+    all reached particle write `#4320` and ended with `> Done`.
+  - all `1344` `pluto.<rank>.log` files ended with `> Done`.
+  - non-fatal stderr is still the known Lmod compiler-module warning about
+    `gnu8/8.3.0` while `intel` is active.
+- Interpretation: restart from the clean fresh output `9` is valid through
+  48-node scale under the AGN Intel/IMPI/HDF5 stack. The failure threshold is
+  therefore above 1344 ranks and below or at 2240 ranks.
+- Result now known: `697252.kunanyi-ohpc` completed green at 64 nodes /
+  1792 ranks.
+  - PBS job: `697252.kunanyi-ohpc`
+  - job name: `c_hi_r9_64n`
+  - `Exit_status=0`
+  - `resources_used.walltime=00:35:12`
+  - `resources_used.cput=15:13:03`
+  - `resources_used.ncpus=1792`
+  - request: `select=64:ncpus=28:mpiprocs=28`, `walltime=02:00:00`
+  - marker state: only `DONE`, with `status=done`,
+    `pbs_jobid=697252.kunanyi-ohpc`,
+    `finished_utc=2026-06-05T15:39:57Z`
+  - launch state:
+    `RUN_KIND=h5_restart_9`,
+    `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 0.5 -h5restart 9`,
+    `NRANKS=1792`,
+    `HDF5_USE_FILE_LOCKING=FALSE`,
+    `KUNANYI_MODULE_STACK=agn_intel_impi`,
+    `MPI_FLAVOR=intelmpi`,
+    `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+  - the isolated rung wrote `data.0010.dbl.h5`, floating HDF5 outputs through
+    `data.0045.flt.h5`, and particle outputs through `particles.4326.dbl`;
+    source restart files remained symlinks to the fresh run
+  - `dbl.h5.out` now has `11` lines ending at output `10`,
+    `t = 1.326068e+04`, `dt = 3.139112e-01`, step `42664`
+  - `flt.h5.out` now has `46` lines ending at output `45`,
+    `t = 1.326068e+04`, `dt = 3.139112e-01`, step `42664`
+  - sampled ranks `0`, `1`, `27`, `28`, `895`, `896`, `1790`, and `1791`
+    all reached particle write `#4326` and ended with `> Done`.
+  - all `1792` `pluto.<rank>.log` files ended with `> Done`.
+  - non-fatal stderr is still the known Lmod compiler-module warning about
+    `gnu8/8.3.0` while `intel` is active.
+- Interpretation: restart from the clean fresh output `9` is valid through
+  64-node scale under the AGN Intel/IMPI/HDF5 stack. The failure threshold is
+  therefore above 1792 ranks and below or at 2240 ranks.
+- Result now known: `697285.kunanyi-ohpc` reproduced the 80-node restart stall
+  at 2240 ranks.
+  - PBS job: `697285.kunanyi-ohpc`
+  - job name: `c_hi_r9_80n`
+  - `Exit_status=271`
+  - `resources_used.walltime=02:01:12`
+  - `resources_used.cput=55:16:36`
+  - `resources_used.ncpus=2240`
+  - request: `select=80:ncpus=28:mpiprocs=28`, `walltime=02:00:00`
+  - marker state: only `FAILED`, with `status=failed`,
+    `pbs_jobid=697285.kunanyi-ohpc`,
+    `exit_code=143`,
+    `signal=TERM`,
+    `finished_utc=2026-06-06T02:11:45Z`
+  - launch state:
+    `RUN_KIND=h5_restart_9`,
+    `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 0.5 -h5restart 9`,
+    `NRANKS=2240`,
+    `HDF5_USE_FILE_LOCKING=FALSE`,
+    `KUNANYI_MODULE_STACK=agn_intel_impi`,
+    `MPI_FLAVOR=intelmpi`,
+    `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi`
+  - `MPI_EXIT_CODE` was not emitted; stdout ended with `JOB_SIGNAL=TERM` and
+    `JOB_END=2026-06-06T02:11:45Z`
+  - stderr included PBS walltime termination:
+    `job killed: walltime 7262 exceeded limit 7200`
+  - no new HDF5 or particle products were written:
+    `data.0010.dbl.h5`, `data.0044.flt.h5`, `data.0045.flt.h5`, and
+    `particles.4278.dbl` were absent; only the source symlinks
+    `data.0009.dbl.h5` and `particles.4277.dbl` existed
+  - `dbl.h5.out`, `flt.h5.out`, and `restart.out` remained at their source
+    lengths (`10`, `44`, and `11` lines respectively)
+  - all `2240` `pluto.<rank>.log` files ended with
+    `> restarting from file #9 (dbl.h5)`;
+    exact aggregate:
+    `TOTAL=2240`,
+    `RESTART_LAST=2240`,
+    `DONE_LAST=0`,
+    `WRITING_LAST=0`,
+    `OTHER_LAST=0`,
+    `RESTART_SEEN=2240`,
+    `DONE_SEEN=0`,
+    `WRITING_SEEN=0`
+- Interpretation: the 80-node restart stall is reproducible under the AGN
+  Intel/IMPI/HDF5 stack from the clean fresh output `9`. The practical
+  production restart size is therefore 64 nodes / 1792 ranks. The failure
+  boundary lies between 64 and 80 nodes, and it appears to be a parallel HDF5
+  restart-read / MPI-IO / filesystem-scale issue rather than a simulation-time
+  compute issue.
+- Recommended next action:
+  - treat 64 nodes as the current production sweet spot for C-HI restarts;
+  - send Patrick/TPAC the concise 64-pass / 80-fail evidence bundle if they want
+    to debug the 2240-rank boundary;
+  - only pursue 80-node debugging if there is a real throughput requirement for
+    80 nodes, since 64 nodes is already multi-node production scale and has
+    passed the restart ladder cleanly.
+- Barry and Codex then restarted science production at the 64-node sweet spot:
+  - PBS job: `697298.kunanyi-ohpc`
+  - job name: `c_hi_r9_p64`
+  - queue/state at submit: `normal` / `Q`
+  - request: `select=64:ncpus=28:mpiprocs=28`, `walltime=48:00:00`
+  - PLUTO maxtime: `47.5` hours
+  - wrapper:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_restart_ladder.pbs`
+  - stdout/stderr:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_r9_prod64.out`
+    and
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_r9_prod64.err`
+  - source workdir:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles`
+  - production continuation root:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64`
+  - production workdir:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles`
+  - restart source:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0009.dbl.h5`
+  - particle source:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/particles.4277.dbl`
+  - submit validation loaded `intel/18.0.1.163`, `impi/2018.1.163`,
+    `hdf5/1.12.1p`, and `zfp/0.5.5`; confirmed
+    `HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi` and
+    `HDF5_USE_FILE_LOCKING=FALSE`; and confirmed source restart index `9`.
+- Result now known: `697298.kunanyi-ohpc` completed green, and the short
+  walltime is explained by the finite C-HI `tstop`.
+  - `Exit_status=0`
+  - `resources_used.walltime=07:49:58`
+  - `resources_used.cput=217:45:08`
+  - `resources_used.ncpus=1792`
+  - marker state: only `DONE`, with `status=done`,
+    `pbs_jobid=697298.kunanyi-ohpc`,
+    `finished_utc=2026-06-06T11:22:11Z`
+  - launch state:
+    `RUN_KIND=h5_restart_9`,
+    `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 47.5 -h5restart 9`,
+    `NRANKS=1792`,
+    `MPI_EXIT_CODE=0`,
+    `HDF5_USE_FILE_LOCKING=FALSE`,
+    `KUNANYI_MODULE_STACK=agn_intel_impi`,
+    `MPI_FLAVOR=intelmpi`
+  - `pluto.ini` has `tstop = 15330.06968940`
+  - `dbl.h5.out` now has `12` lines, ending at output `11`:
+    `1.533007e+04`, `dt = 1.377728e-01`, step `49253`
+  - `flt.h5.out` now has `52` lines, ending at output `51`:
+    `1.533007e+04`, `dt = 1.377728e-01`, step `49253`
+  - new regular products include `data.0010.dbl.h5`, `data.0011.dbl.h5`,
+    `data.0044.flt.h5` through `data.0051.flt.h5`, and particle outputs
+    through `particles.5000.dbl`
+  - sampled ranks `0`, `1`, `27`, `28`, `895`, `896`, `1790`, and `1791`
+    all reached `particles.5000.dbl`, reported elapsed time
+    `0d:7h:47m:36s`, and ended with `> Done`
+  - exact all-rank scan:
+    `TOTAL=1792`,
+    `DONE_LAST=1792`,
+    `RESTART_SEEN=1792`,
+    `DONE_SEEN=1792`,
+    `WRITE11_SEEN=1792`,
+    `OTHER_LAST=0`
+- Interpretation: this was not an early failure. The 64-node continuation
+  consumed the remaining simulation interval from clean output `9` to the
+  configured C-HI endpoint, wrote the final HDF5 and particle products, and
+  exited normally. Treat the
+  `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64`
+  tree as the current completed science production endpoint.
+- Product-integrity/readability checks on 2026-06-07 were green under the AGN
+  Intel/IMPI HDF5 stack:
+  - HDF5 tools resolved from
+    `/ds/projects/agn/libraries/hdf5p/1.12.1-impi/bin`
+  - final `data.0011.dbl.h5` size: `67318639276` bytes
+  - final `data.0051.flt.h5` size: `44890581676` bytes
+  - both final HDF5 files contain `/vars/{prs,rho,tr1,vx1,vx2,vx3}` with shape
+    `{1014, 960, 960}`
+  - scalar reads succeeded for `rho`, `vx1`, and `tr1` from both final files
+  - final XMF sidecars reference `<Time Value="1.533007e+04"/>` and the
+    matching final HDF5 datasets
+  - final particle file `particles.5000.dbl` reports `196732` particles,
+    `time = 1.533006968940e+04`, and `stepNumber = 49253`
+  - detailed note:
+    `docs/exchange/logs/2026-06-07-c-hi-fullgrid-agn-impi-r9-prod64-integrity.md`
+- Compact quick-look extraction completed on 2026-06-07:
+  - PBS job: `697386.kunanyi-ohpc`
+  - job name: `c_hi_final_ql`
+  - result: `Exit_status = 0`
+  - walltime used: `00:04:34`
+  - peak memory: `3771068kb`
+  - request: `select=1:ncpus=1:mpiprocs=1:mem=32gb`, `walltime=01:00:00`
+  - input:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5`
+  - timestep: `Timestep_51`
+  - compact output directory:
+    `/scratch/bwbrook/xray_cavities_analysis/2026-06-07-c-hi-fullgrid-final-quicklook`
+  - compact archive fetched locally:
+    `build/science/kunanyi_stage_2026-06-07/c_hi_fullgrid_final_quicklook_697386_compact_2026-06-07.tar.gz`
+  - archive SHA-256:
+    `26f8ab57e4f8e3913bc629abb391f699c75b45296d474fe2c411736a0b71098c`
+  - report:
+    `docs/science/c_hi_fullgrid_final_quicklook_2026-06-07.md`
+  - PDF:
+    `docs/science/c_hi_fullgrid_final_quicklook_2026-06-07.pdf`
+  - assets:
+    `docs/science/assets/c_hi_fullgrid_final_quicklook_2026-06-07/`
+  - detailed note:
+    `docs/exchange/logs/2026-06-07-c-hi-fullgrid-final-quicklook-complete.md`
+- Next action: promote the 50 Myr endpoint into the aligned truth, X-ray,
+  radio, and cavity-analysis workflow.
+- Patrick's 2026-06-05 troubleshooting reply is now incorporated into the
+  decision tree:
+  - keep running the node-count restart ladder;
+  - verify the restart HDF5 file size/datasets/shape;
+  - confirm `HDF5_COMPRESSION` is disabled and no
+    `> HDF5 compression enabled` banner appears;
+  - inspect PLUTO/stdout/stderr logs for hints;
+  - if the ladder identifies a failure threshold, add targeted print logging in
+    `jet-setup/src/hdf5_io.c` restart logic to narrow the exact stuck call;
+  - if scratch/NFS remains implicated, try a bounded restart from `/u/bwbrook/`
+    using only the final `.dbl.h5`, final particle file, and `*.out` catalogues.
+- Quick follow-up checks on 2026-06-05 already cover the first compression/HDF5
+  items:
+  - source restart file:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0009.dbl.h5`
+  - `ls -lh` size: `63G`; final particle file
+    `particles.4277.dbl` size: `20M`
+  - AGN `h5ls -r` found `/Timestep_9/vars/{prs,rho,tr1,vx1,vx2,vx3}` all with
+    shape `{1014, 960, 960}`
+  - AGN `h5dump` scalar read of `/Timestep_9/vars/rho[0,0,0]` returned
+    `0.00106042`
+  - sampled rank-0 logs from the fresh run and green 8/16/32-node ladder rungs
+    had no `HDF5 compression enabled` banner
+  - local and remote source/config searches found no active
+    `HDF5_COMPRESSION` hit; the only local hit was the banner print site in
+    `/Users/bwbrook/git/utas-agn/jet-setup/src/hdf5_io.c`
 
 Latest full-grid `C-HI` retry diagnosis on 2026-05-22:
 

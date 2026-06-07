@@ -1,0 +1,20 @@
+jobid=697386.kunanyi-ohpc
+host=n004.kunanyi
+input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5
+timestep=Timestep_51
+extractor_c=/u/bwbrook/codex_kunanyi/pluto_h5_quicklook_extract.c
+output_dir=/scratch/bwbrook/xray_cavities_analysis/2026-06-07-c-hi-fullgrid-final-quicklook
+started_utc=2026-06-07T04:58:48Z
+Extracted quick-look products to /scratch/bwbrook/xray_cavities_analysis/2026-06-07-c-hi-fullgrid-final-quicklook
+axis_profile_z.tsv	96102 bytes
+metadata.txt	231 bytes
+pluto_h5_quicklook_extract	4252808 bytes
+slice_xz_prs.tsv	14493067 bytes
+slice_xz_rho.tsv	13742799 bytes
+slice_xz_tr1.tsv	8677231 bytes
+slice_xz_vx3.tsv	14479067 bytes
+summary_metrics.csv	966 bytes
+x_centres.tsv	18354 bytes
+y_centres.tsv	18354 bytes
+z_centres.tsv	19409 bytes
+finished_utc=2026-06-07T05:03:02Z

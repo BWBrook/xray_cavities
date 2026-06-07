@@ -38,6 +38,14 @@ BUILD_JOBS="${BUILD_JOBS:-8}"
 RESTART_POLICY="${RESTART_POLICY:-auto}"  # auto, fresh, or force-fresh
 RESTART_PARTICLES="${RESTART_PARTICLES:-0}"
 PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-47.5}"
+KUNANYI_MODULE_STACK="${KUNANYI_MODULE_STACK:-gompi_2023a}"
+AGN_MODULEFILES="${AGN_MODULEFILES:-/ds/projects/agn/modulefiles}"
+MPI_FLAVOR="${MPI_FLAVOR:-}"
+FORCE_REBUILD="${FORCE_REBUILD:-0}"
+HDF5_USE_FILE_LOCKING="${HDF5_USE_FILE_LOCKING:-}"
+if [ -n "$HDF5_USE_FILE_LOCKING" ]; then
+  export HDF5_USE_FILE_LOCKING
+fi
 
 mkdir -p "$MARKER_DIR" "$LOG_DIR"
 DONE_MARKER="${MARKER_DIR}/DONE"
@@ -272,8 +280,45 @@ log_source_revisions() {
 }
 
 module purge
-module load HDF5/1.14.0-gompi-2023a
-export HDF5_DIR="${HDF5_DIR:-${EBROOTHDF5:-/share/apps/software/HDF5/1.14.0-gompi-2023a}}"
+case "$KUNANYI_MODULE_STACK" in
+  agn_intel_impi)
+    module use "$AGN_MODULEFILES"
+    module load intel impi hdf5/1.12.1p zfp/0.5.5
+    MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+    ;;
+  public_intel_impi)
+    module load intel/18.0.1.163 impi/2018.1.163 hdf5/1.10.4
+    MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+    ;;
+  gompi_2023a)
+    module load HDF5/1.14.0-gompi-2023a
+    MPI_FLAVOR="${MPI_FLAVOR:-openmpi}"
+    ;;
+  *)
+    echo "[error] unknown KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}" >&2
+    exit 2
+    ;;
+esac
+if [ -z "${HDF5_DIR:-}" ] && [ -n "${EBROOTHDF5:-}" ]; then
+  export HDF5_DIR="${EBROOTHDF5}"
+fi
+if [ -z "${HDF5_DIR:-}" ] && [ -n "${LD_LIBRARY_PATH:-}" ]; then
+  IFS=: read -r -a ld_paths <<< "$LD_LIBRARY_PATH"
+  for lib_dir in "${ld_paths[@]}"; do
+    if [ -f "${lib_dir}/libhdf5.so" ] || [ -f "${lib_dir}/libhdf5.a" ]; then
+      export HDF5_DIR="$(dirname "$lib_dir")"
+      break
+    fi
+  done
+fi
+if [ -z "${HDF5_DIR:-}" ]; then
+  echo "[error] HDF5_DIR is unset and could not be inferred from loaded modules" >&2
+  exit 2
+fi
+if [ -z "${MPI_FLAVOR:-}" ]; then
+  echo "[error] MPI_FLAVOR was not set for KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}" >&2
+  exit 2
+fi
 export PLUTO_DIR
 
 require_file "${CASE_CONFIG_DIR}/pluto.ini"
@@ -290,14 +335,19 @@ echo "CASE_ID=${CASE_ID}"
 echo "CASE_VARIANT=${CASE_VARIANT}"
 echo "CASE_CONFIG_DIR=${CASE_CONFIG_DIR}"
 echo "WORKDIR=${WORKDIR}"
+echo "KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}"
+echo "MPI_FLAVOR=${MPI_FLAVOR}"
 echo "MODULES=${LOADEDMODULES:-}"
 echo "HDF5_DIR=${HDF5_DIR}"
+echo "HDF5_USE_FILE_LOCKING=${HDF5_USE_FILE_LOCKING:-}"
+echo "ZFP_DIR=${ZFP_DIR:-}"
+echo "FORCE_REBUILD=${FORCE_REBUILD}"
 echo "PLUTO_MAXTIME_HOURS=${PLUTO_MAXTIME_HOURS}"
 echo "mpicc=$(command -v mpicc)"
 echo "mpirun=$(command -v mpirun)"
 echo "python3=$(command -v python3)"
 echo "MPI_TUNING_ENV_BEGIN"
-env | sort | grep -E '^(OMPI_MCA_|PMIX_MCA_|PRTE_MCA_|UCX_|MPI_EXTRA_EXPORTS=)' || true
+env | sort | grep -E '^(OMPI_MCA_|PMIX_MCA_|PRTE_MCA_|UCX_|I_MPI_|FI_|PSM2_|MPI_EXTRA_EXPORTS=)' || true
 echo "MPI_TUNING_ENV_END"
 
 if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
@@ -318,9 +368,16 @@ if [ "$RESTART_POLICY" = "force-fresh" ]; then
   rm -rf "$PROBLEM"
 fi
 
+if [ "$FORCE_REBUILD" = "1" ] && [ "$RESTART_POLICY" != "force-fresh" ] && [ -d "$PROBLEM" ]; then
+  echo "[info] FORCE_REBUILD=1: removing built executable and source tree while preserving outputs"
+  rm -rf "${PROBLEM}/src" "${PROBLEM}/pluto" "${PROBLEM}/setup_version"
+fi
+
 if [ ! -x "${PROBLEM}/pluto" ]; then
   echo "--- setup problem ---"
-  rm -rf "$PROBLEM"
+  if [ "$RESTART_POLICY" = "force-fresh" ] || [ ! -d "$PROBLEM" ]; then
+    rm -rf "$PROBLEM"
+  fi
   mkdir -p "$PROBLEM"
   (
     cd "$PROBLEM"
@@ -374,43 +431,69 @@ fi
 
 log_source_revisions
 
-MPI_EXPORT_ARGS=(-x PATH -x LD_LIBRARY_PATH)
-if [ -n "${HDF5_DIR:-}" ]; then
-  MPI_EXPORT_ARGS+=(-x HDF5_DIR)
-fi
-if [ -n "${CPATH:-}" ]; then
-  MPI_EXPORT_ARGS+=(-x CPATH)
-fi
-if [ -n "${LIBRARY_PATH:-}" ]; then
-  MPI_EXPORT_ARGS+=(-x LIBRARY_PATH)
-fi
-if [ -n "${PKG_CONFIG_PATH:-}" ]; then
-  MPI_EXPORT_ARGS+=(-x PKG_CONFIG_PATH)
-fi
-while IFS='=' read -r var _; do
-  case "$var" in
-    OMPI_MCA_*|PMIX_MCA_*|PRTE_MCA_*|UCX_*)
-      MPI_EXPORT_ARGS+=(-x "$var")
-      ;;
-  esac
-done < <(env)
-if [ -n "${MPI_EXTRA_EXPORTS:-}" ]; then
-  for var in $MPI_EXTRA_EXPORTS; do
-    if [ -n "${!var:-}" ]; then
-      MPI_EXPORT_ARGS+=(-x "$var")
+MPI_LAUNCH_ARGS=(-np "$NRANKS")
+case "$MPI_FLAVOR" in
+  openmpi)
+    MPI_EXPORT_ARGS=(-x PATH -x LD_LIBRARY_PATH)
+    if [ -n "${HDF5_DIR:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x HDF5_DIR)
     fi
-  done
-fi
-echo "MPI_EXPORT_ARGS=${MPI_EXPORT_ARGS[*]}"
-
-MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" -np "$NRANKS")
-if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
-  MPI_HOSTFILE="${LOG_DIR}/openmpi_hostfile.${PBS_JOBID:-manual}.txt"
-  awk '{slots[$0] += 1} END {for (host in slots) print host " slots=" slots[host]}' "$PBS_NODEFILE" | sort > "$MPI_HOSTFILE"
-  MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" --hostfile "$MPI_HOSTFILE" -np "$NRANKS")
-  echo "MPI_HOSTFILE=${MPI_HOSTFILE}"
-  cat "$MPI_HOSTFILE"
-fi
+    if [ -n "${HDF5_USE_FILE_LOCKING:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x HDF5_USE_FILE_LOCKING)
+    fi
+    if [ -n "${CPATH:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x CPATH)
+    fi
+    if [ -n "${LIBRARY_PATH:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x LIBRARY_PATH)
+    fi
+    if [ -n "${PKG_CONFIG_PATH:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x PKG_CONFIG_PATH)
+    fi
+    while IFS='=' read -r var _; do
+      case "$var" in
+        OMPI_MCA_*|PMIX_MCA_*|PRTE_MCA_*|UCX_*)
+          MPI_EXPORT_ARGS+=(-x "$var")
+          ;;
+      esac
+    done < <(env)
+    if [ -n "${MPI_EXTRA_EXPORTS:-}" ]; then
+      for var in $MPI_EXTRA_EXPORTS; do
+        if [ -n "${!var:-}" ]; then
+          MPI_EXPORT_ARGS+=(-x "$var")
+        fi
+      done
+    fi
+    echo "MPI_EXPORT_ARGS=${MPI_EXPORT_ARGS[*]}"
+    MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" -np "$NRANKS")
+    if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+      MPI_HOSTFILE="${LOG_DIR}/openmpi_hostfile.${PBS_JOBID:-manual}.txt"
+      awk '{slots[$0] += 1} END {for (host in slots) print host " slots=" slots[host]}' "$PBS_NODEFILE" | sort > "$MPI_HOSTFILE"
+      MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" --hostfile "$MPI_HOSTFILE" -np "$NRANKS")
+      echo "MPI_HOSTFILE=${MPI_HOSTFILE}"
+      cat "$MPI_HOSTFILE"
+    fi
+    ;;
+  intelmpi)
+    MPI_GENV_ARGS=()
+    if [ -n "${HDF5_USE_FILE_LOCKING:-}" ]; then
+      MPI_GENV_ARGS+=(-genv HDF5_USE_FILE_LOCKING "$HDF5_USE_FILE_LOCKING")
+    fi
+    if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+      MPI_MACHINEFILE="${LOG_DIR}/intelmpi_machinefile.${PBS_JOBID:-manual}.txt"
+      cp "$PBS_NODEFILE" "$MPI_MACHINEFILE"
+      MPI_LAUNCH_ARGS=("${MPI_GENV_ARGS[@]}" -np "$NRANKS" -machinefile "$MPI_MACHINEFILE")
+      echo "MPI_MACHINEFILE=${MPI_MACHINEFILE}"
+      cat "$MPI_MACHINEFILE"
+    elif [ "${#MPI_GENV_ARGS[@]}" -gt 0 ]; then
+      MPI_LAUNCH_ARGS=("${MPI_GENV_ARGS[@]}" -np "$NRANKS")
+    fi
+    ;;
+  *)
+    echo "[error] unknown MPI_FLAVOR=${MPI_FLAVOR}" >&2
+    exit 2
+    ;;
+esac
 
 mkdir -p "${PROBLEM}/outputs/logs"
 RUN_ARGS=(-i pluto.ini -e environment.ini)

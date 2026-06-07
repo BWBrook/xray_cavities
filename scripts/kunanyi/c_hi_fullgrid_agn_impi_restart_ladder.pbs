@@ -1,0 +1,34 @@
+#!/bin/bash
+#PBS -N c_hi_r9_08n
+#PBS -q normal
+#PBS -l select=8:ncpus=28:mpiprocs=28
+#PBS -l walltime=02:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_r9_ladder_08node.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_r9_ladder_08node.err
+
+set -euo pipefail
+
+# Restart-ladder rung from the successful fresh full-grid C-HI output 9.
+# qsub resource flags override the default 8-node PBS directives for later
+# rungs; the stage helper also passes RUN_ROOT per rung so outputs stay
+# isolated from the known-good fresh products.
+export LADDER_NODES="${LADDER_NODES:-8}"
+export CASE_ID="${CASE_ID:-C-HI}"
+export CASE_VARIANT="${CASE_VARIANT:-particles}"
+export CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-/u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_2026-05-19/C-HI/particles}"
+export RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-06-05-c-hi-fullgrid-agn-impi-r9-ladder-08node}"
+export PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-0.5}"
+export RESTART_POLICY="${RESTART_POLICY:-auto}"
+export ALLOW_DONE_RERUN="${ALLOW_DONE_RERUN:-1}"
+export BUILD_JOBS="${BUILD_JOBS:-28}"
+export FORCE_REBUILD="${FORCE_REBUILD:-0}"
+export KUNANYI_MODULE_STACK="${KUNANYI_MODULE_STACK:-agn_intel_impi}"
+export MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+export HDF5_USE_FILE_LOCKING="${HDF5_USE_FILE_LOCKING:-FALSE}"
+
+echo "LADDER_NODES=${LADDER_NODES}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/jet_setup_production_template_latest.pbs}"
+exec bash "$BASE_SCRIPT"

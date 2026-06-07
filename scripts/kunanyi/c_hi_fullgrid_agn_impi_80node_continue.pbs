@@ -1,0 +1,30 @@
+#!/bin/bash
+#PBS -N c_hi_fg_agn80
+#PBS -q normal
+#PBS -l select=80:ncpus=28:mpiprocs=28
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_80node_continue.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_fullgrid_agn_impi_80node_continue.err
+
+set -euo pipefail
+
+# Full 80-node continuation for the full-grid C-HI particles run under
+# Patrick's AGN Intel/IMPI/HDF5/ZFP stack. This deliberately follows the green
+# 8-node AGN restart test, restarts from the latest dbl.h5 catalogue entry, and
+# rebuilds PLUTO under the AGN stack while preserving existing outputs.
+export CASE_ID="${CASE_ID:-C-HI}"
+export CASE_VARIANT="${CASE_VARIANT:-particles}"
+export CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-/u/bwbrook/codex_kunanyi/c_hi_fullgrid_startup_2026-05-19/C-HI/particles}"
+export RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup}"
+export PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-47.5}"
+export RESTART_POLICY="${RESTART_POLICY:-auto}"
+export ALLOW_DONE_RERUN="${ALLOW_DONE_RERUN:-1}"
+export BUILD_JOBS="${BUILD_JOBS:-28}"
+export FORCE_REBUILD="${FORCE_REBUILD:-1}"
+export KUNANYI_MODULE_STACK="${KUNANYI_MODULE_STACK:-agn_intel_impi}"
+export MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/jet_setup_production_template_latest.pbs}"
+exec bash "$BASE_SCRIPT"

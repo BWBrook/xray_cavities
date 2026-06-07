@@ -43,8 +43,12 @@ else
   status=11
 fi
 
-echo MODULE_AVAIL_AGN_FILTER
-module --ignore-cache avail 2>&1 | grep -Ei "(^|[ /])(intel|impi|hdf5|zfp)(/|$)" | sed -n "1,200p" || true
+if [ "${RUN_MODULE_AVAIL:-0}" = 1 ]; then
+  echo MODULE_AVAIL_AGN_FILTER
+  module --ignore-cache avail 2>&1 | grep -Ei "(^|[ /])(intel|impi|hdf5|zfp)(/|$)" | sed -n "1,200p" || true
+else
+  echo MODULE_AVAIL_AGN_FILTER=skipped_set_RUN_MODULE_AVAIL_1
+fi
 
 if module load intel impi hdf5/1.12.1p zfp/0.5.5 2>/tmp/agn_module_load.err; then
   echo MODULE_LOAD_OK=agn_intel_impi_hdf5_zfp
