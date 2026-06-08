@@ -711,9 +711,13 @@ Latest Patrick fresh-start completion on 2026-06-03:
     `docs/science/assets/c_hi_fullgrid_final_quicklook_2026-06-07/`
   - detailed note:
     `docs/exchange/logs/2026-06-07-c-hi-fullgrid-final-quicklook-complete.md`
-- Full-grid final particle-HDF5 feasibility preflight submitted on 2026-06-08:
+- Full-grid final particle-HDF5 feasibility preflight completed on 2026-06-08:
   - PBS job: `697639.kunanyi-ohpc`
   - job name: `c_hi_ph5_pf`
+  - result: `Exit_status=0`
+  - walltime used: `00:08:13`
+  - peak memory: `188228kb`
+  - CPU time: `00:00:08`
   - request: `select=1:ncpus=1:mpiprocs=1:mem=8gb`, `walltime=00:30:00`
   - wrapper:
     `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_particle_hdf5_preflight.pbs`
@@ -729,14 +733,22 @@ Latest Patrick fresh-start completion on 2026-06-03:
     `bab5037 Add C-HI particle cache feasibility preflight`
   - staging note: the Mac-origin tar extraction on Kunanyi printed harmless
     `LIBARCHIVE.xattr.com.apple.provenance` warnings before `qsub` succeeded.
+  - final particle output count: `5001`
+  - final particle count: `196732`
+  - particle field count: `13`
+  - total field width: `15` scalar-field equivalents
+  - dense raw float64 matrix estimate: `109.9545581638813 GiB`
+  - saved float32 matrix estimate: `54.97727908194065 GiB`
+  - conservative peak-memory estimate: `1099.545581638813 GiB`
+  - recommendation:
+    `DO_NOT_BUILD_FULL_HISTORY_CACHE_WITH_CURRENT_APPROACH`
   - detailed note:
-    `docs/exchange/logs/2026-06-08-c-hi-fullgrid-final-particle-hdf5-preflight-submitted.md`
-- Next action: wait for Barry's PBS completion email for
-  `697639.kunanyi-ohpc`, then inspect the feasibility summary. If it returns
-  `DO_NOT_BUILD_FULL_HISTORY_CACHE_WITH_CURRENT_APPROACH`, pivot to endpoint
-  and/or sparse-window particle analysis rather than attempting a naive
-  full-history `plutokore.load_all_particles()` cache over all `5001` particle
-  outputs.
+    `docs/exchange/logs/2026-06-08-c-hi-fullgrid-final-particle-hdf5-preflight-complete.md`
+- Next action: do not submit a blind full-history
+  `plutokore.load_all_particles()` particle-HDF5 cache over all `5001`
+  particle outputs. Pivot to endpoint-only or sparse-window particle analysis,
+  or design a streaming/chunked particle workflow that does not materialize the
+  full dense history in memory.
 - Patrick's 2026-06-05 troubleshooting reply is now incorporated into the
   decision tree:
   - keep running the node-count restart ladder;
