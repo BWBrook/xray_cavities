@@ -18,6 +18,62 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
+Latest final sparse radio bridge on 2026-06-08:
+
+- The completed 50 Myr `C-HI` full-grid sparse particle window has now been
+  connected to a first 150 MHz radio bridge product.
+- New tooling:
+  - `scripts/science/sparse_particle_radio_bridge.py`
+  - `scripts/kunanyi/c_hi_fullgrid_final_sparse_radio_bridge.pbs`
+  - `tests/test_sparse_particle_radio_bridge.py`
+- Local verification passed:
+  - `uv run pytest tests/test_sparse_particle_radio_bridge.py -q`
+  - `uv run pytest tests/test_sparse_particle_radio_bridge.py tests/test_pluto_particle_sparse_window.py -q`
+  - `bash -n scripts/kunanyi/c_hi_fullgrid_final_sparse_radio_bridge.pbs`
+- Remote staging used the authenticated Chrome/Open OnDemand shell because
+  plain SSH control-socket auth was unavailable. The reliable route was a fresh
+  shell tab plus terminal-iframe textarea typing; long hterm clipboard batches
+  can concatenate and corrupt staged data.
+- Staged remote checksums matched local:
+  - `spr.py`:
+    `29d827cff6a8587e00f0c7b909c32ed9bd6f0c3ec3ad208052ddedc684d124dd`
+  - `spr.pbs`:
+    `dbf2315ba4df7557c2c10571216cceab40357a135df39cc36dc1669f50c2f1a5`
+- PBS job `697646.kunanyi-ohpc` completed green:
+  - job name: `c_hi_spr_fin`
+  - `Exit_status=0`
+  - `resources_used.walltime=00:00:05`
+  - `resources_used.cput=00:00:04`
+  - stderr size: `0` bytes
+- Remote output directory:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-sparse-radio-bridge`
+- Remote archive:
+  `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_sparse_radio_bridge_2026-06-08.tar.gz`
+- Archive SHA-256:
+  `2be0b61dcc7330727192123f9afd9c9a7138d26ea4f552ba62753cd72e24effe`
+- Compact products were pulled locally through the Open OnDemand Files app and
+  unpacked under:
+  `docs/science/assets/c_hi_fullgrid_final_sparse_radio_bridge_2026-06-08/`
+- Headline metrics:
+  - target index: `5000`
+  - sparse trajectory rows consumed: `218909`
+  - selected target particles: `20000`
+  - particles in frame: `20000`
+  - map shape: `460 x 90`
+  - pressure-history loss proxy mean: `0.8957169833296894`
+  - bipolar proxy luminosity: `4.4514434941743747e27 W Hz^-1`
+- Science report:
+  `docs/science/c_hi_fullgrid_final_sparse_radio_bridge_2026-06-08.md`
+- Exchange log:
+  `docs/exchange/logs/2026-06-08-c-hi-fullgrid-final-sparse-radio-bridge.md`
+- Interpretation: this is a morphology/continuity bridge, not the final sparse
+  PRAiSE loss kernel. The loss term is
+  `clip(final pressure / max positive sparse-window pressure, 0, 1)`, and the
+  luminosity scale uses `1.0 kpc^3` per selected particle.
+- Next action: replace the pressure-history proxy with a true sparse
+  PRAiSE-compatible loss interface, then couple that map to final grid/tracer
+  volumes and the observable comparison page.
+
 Latest restart-framework update on 2026-05-25:
 
 - Long `kunanyi` PLUTO runs should now be treated as restartable PBS

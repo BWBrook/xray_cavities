@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_spr_fin
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=8gb
+#PBS -l walltime=00:30:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_sparse_radio_bridge.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_sparse_radio_bridge.err
+
+set -euo pipefail
+
+SPARSE_WINDOW_DIR="${SPARSE_WINDOW_DIR:-/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-particle-sparse-window}"
+RADIO_SCRIPT="${RADIO_SCRIPT:-/u/bwbrook/codex_kunanyi/spr.py}"
+OUTPUT_DIR="${OUTPUT_DIR:-/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-sparse-radio-bridge}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-/u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_sparse_radio_bridge_2026-06-08.tar.gz}"
+TARGET_INDEX="${TARGET_INDEX:-5000}"
+TRACER_THRESHOLD="${TRACER_THRESHOLD:-5e-3}"
+XLIM_KPC="${XLIM_KPC:-45}"
+ZLIM_KPC="${ZLIM_KPC:-230}"
+PIXEL_KPC="${PIXEL_KPC:-1}"
+UNIT_VOLUME_KPC3="${UNIT_VOLUME_KPC3:-1}"
+
+module purge
+module load Anaconda3/2024.02-1
+
+mkdir -p "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "sparse_window_dir=$SPARSE_WINDOW_DIR"
+echo "radio_script=$RADIO_SCRIPT"
+echo "output_dir=$OUTPUT_DIR"
+echo "target_index=$TARGET_INDEX"
+echo "tracer_threshold=$TRACER_THRESHOLD"
+echo "xlim_kpc=$XLIM_KPC"
+echo "zlim_kpc=$ZLIM_KPC"
+echo "pixel_kpc=$PIXEL_KPC"
+echo "unit_volume_kpc3=$UNIT_VOLUME_KPC3"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+python "$RADIO_SCRIPT" \
+  --sparse-window-dir "$SPARSE_WINDOW_DIR" \
+  --output-dir "$OUTPUT_DIR" \
+  --target-index "$TARGET_INDEX" \
+  --tracer-threshold "$TRACER_THRESHOLD" \
+  --xlim-kpc "$XLIM_KPC" \
+  --zlim-kpc "$ZLIM_KPC" \
+  --pixel-kpc "$PIXEL_KPC" \
+  --unit-volume-kpc3 "$UNIT_VOLUME_KPC3"
+
+find "$OUTPUT_DIR" -maxdepth 1 -type f -printf "%f\t%s bytes\n" | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$OUTPUT_DIR")" "$(basename "$OUTPUT_DIR")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
