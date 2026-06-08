@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-06-07
+Last updated: 2026-06-08
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -711,8 +711,32 @@ Latest Patrick fresh-start completion on 2026-06-03:
     `docs/science/assets/c_hi_fullgrid_final_quicklook_2026-06-07/`
   - detailed note:
     `docs/exchange/logs/2026-06-07-c-hi-fullgrid-final-quicklook-complete.md`
-- Next action: promote the 50 Myr endpoint into the aligned truth, X-ray,
-  radio, and cavity-analysis workflow.
+- Full-grid final particle-HDF5 feasibility preflight submitted on 2026-06-08:
+  - PBS job: `697639.kunanyi-ohpc`
+  - job name: `c_hi_ph5_pf`
+  - request: `select=1:ncpus=1:mpiprocs=1:mem=8gb`, `walltime=00:30:00`
+  - wrapper:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_particle_hdf5_preflight.pbs`
+  - estimator:
+    `/u/bwbrook/codex_kunanyi/particle_loss_runtime/estimate_particle_hdf5_feasibility.py`
+  - input run output directory:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs`
+  - compact output directory:
+    `/scratch/bwbrook/xray_cavities_analysis/2026-06-07-c-hi-fullgrid-final-particle-hdf5-preflight`
+  - summary archive:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_particle_hdf5_preflight_2026-06-07.tar.gz`
+  - local helper commit:
+    `bab5037 Add C-HI particle cache feasibility preflight`
+  - staging note: the Mac-origin tar extraction on Kunanyi printed harmless
+    `LIBARCHIVE.xattr.com.apple.provenance` warnings before `qsub` succeeded.
+  - detailed note:
+    `docs/exchange/logs/2026-06-08-c-hi-fullgrid-final-particle-hdf5-preflight-submitted.md`
+- Next action: wait for Barry's PBS completion email for
+  `697639.kunanyi-ohpc`, then inspect the feasibility summary. If it returns
+  `DO_NOT_BUILD_FULL_HISTORY_CACHE_WITH_CURRENT_APPROACH`, pivot to endpoint
+  and/or sparse-window particle analysis rather than attempting a naive
+  full-history `plutokore.load_all_particles()` cache over all `5001` particle
+  outputs.
 - Patrick's 2026-06-05 troubleshooting reply is now incorporated into the
   decision tree:
   - keep running the node-count restart ladder;
