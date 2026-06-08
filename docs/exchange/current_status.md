@@ -779,11 +779,45 @@ Latest Patrick fresh-start completion on 2026-06-03:
     `docs/science/c_hi_fullgrid_final_particle_endpoint_summary_2026-06-08.md`
   - detailed note:
     `docs/exchange/logs/2026-06-08-c-hi-fullgrid-final-particle-endpoint-summary.md`
-- Next action: do not submit a blind full-history
-  `plutokore.load_all_particles()` particle-HDF5 cache over all `5001`
-  particle outputs. Use the green endpoint particle summary as the seed for a
-  sparse-window or streaming particle-loss/radio workflow that does not
-  materialize the full dense history in memory.
+- Sparse-window final particle trajectory extraction completed on 2026-06-08:
+  - PBS job: `697644.kunanyi-ohpc`
+  - job name: `c_hi_psw_fin`
+  - result: `Exit_status = 0`
+  - walltime used: `00:01:04`
+  - CPU time: `00:00:13`
+  - peak memory: `92200kb`
+  - peak virtual memory: `684996kb`
+  - request: `select=1:ncpus=1:mpiprocs=1:mem=8gb`,
+    `walltime=00:30:00`
+  - stderr was empty
+  - staged remote script:
+    `/u/bwbrook/codex_kunanyi/psw.py`
+  - staged remote wrapper:
+    `/u/bwbrook/codex_kunanyi/psw.pbs`
+  - local script:
+    `scripts/science/pluto_particle_sparse_window.py`
+  - input particle directory:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs`
+  - window:
+    target `5000`, start `4950`, end `5000`, stride `5`
+  - tracer threshold: `0.005`
+  - target candidates: `195558`
+  - selected IDs: `20000`
+  - trajectory rows: `218909`
+  - compact output directory:
+    `/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-particle-sparse-window`
+  - summary archive:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_particle_sparse_window_2026-06-08.tar.gz`
+  - archive SHA-256:
+    `9894f2dfc6cae5b76257b1c5b66b9438fdc25424d66d43ea68df1b2dbc80dc62`
+  - report:
+    `docs/science/c_hi_fullgrid_final_particle_sparse_window_2026-06-08.md`
+  - detailed note:
+    `docs/exchange/logs/2026-06-08-c-hi-fullgrid-final-particle-sparse-window.md`
+- Next action: connect the sparse trajectory product to particle-loss/radio
+  calculations for the final output. Do not return to a blind dense
+  all-history `plutokore.load_all_particles()` particle-HDF5 cache over all
+  `5001` particle outputs.
 - Patrick's 2026-06-05 troubleshooting reply is now incorporated into the
   decision tree:
   - keep running the node-count restart ladder;

@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_psw_fin
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=8gb
+#PBS -l walltime=00:30:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_particle_sparse_window.out
+#PBS -e /u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_particle_sparse_window.err
+
+set -euo pipefail
+
+RUN_OUT="${RUN_OUT:-/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs}"
+SPARSE_SCRIPT="${SPARSE_SCRIPT:-/u/bwbrook/codex_kunanyi/psw.py}"
+OUTPUT_DIR="${OUTPUT_DIR:-/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-particle-sparse-window}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-/u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_particle_sparse_window_2026-06-08.tar.gz}"
+TARGET_INDEX="${TARGET_INDEX:-5000}"
+START_INDEX="${START_INDEX:-4950}"
+END_INDEX="${END_INDEX:-5000}"
+STRIDE="${STRIDE:-5}"
+MAX_SELECTED_IDS="${MAX_SELECTED_IDS:-20000}"
+TRACER_THRESHOLD="${TRACER_THRESHOLD:-5e-3}"
+
+module purge
+module load Anaconda3/2024.02-1
+
+mkdir -p "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "run_out=$RUN_OUT"
+echo "sparse_script=$SPARSE_SCRIPT"
+echo "output_dir=$OUTPUT_DIR"
+echo "target_index=$TARGET_INDEX"
+echo "start_index=$START_INDEX"
+echo "end_index=$END_INDEX"
+echo "stride=$STRIDE"
+echo "max_selected_ids=$MAX_SELECTED_IDS"
+echo "tracer_threshold=$TRACER_THRESHOLD"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+python "$SPARSE_SCRIPT" \
+  --particle-dir "$RUN_OUT" \
+  --output-dir "$OUTPUT_DIR" \
+  --target-index "$TARGET_INDEX" \
+  --start-index "$START_INDEX" \
+  --end-index "$END_INDEX" \
+  --stride "$STRIDE" \
+  --max-selected-ids "$MAX_SELECTED_IDS" \
+  --tracer-threshold "$TRACER_THRESHOLD"
+
+find "$OUTPUT_DIR" -maxdepth 1 -type f -printf "%f\t%s bytes\n" | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$OUTPUT_DIR")" "$(basename "$OUTPUT_DIR")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
