@@ -744,11 +744,46 @@ Latest Patrick fresh-start completion on 2026-06-03:
     `DO_NOT_BUILD_FULL_HISTORY_CACHE_WITH_CURRENT_APPROACH`
   - detailed note:
     `docs/exchange/logs/2026-06-08-c-hi-fullgrid-final-particle-hdf5-preflight-complete.md`
+- Endpoint-only final particle summary completed on 2026-06-08:
+  - PBS job: `697643.kunanyi-ohpc`
+  - job name: `c_hi_pend_sum`
+  - result: `Exit_status = 0`
+  - walltime used: `00:00:39`
+  - CPU time: `00:00:02`
+  - peak memory: `9444kb`
+  - peak virtual memory: `367032kb`
+  - request: `select=1:ncpus=1:mpiprocs=1:mem=8gb`,
+    `walltime=00:30:00`
+  - stderr was empty
+  - staged remote script:
+    `/u/bwbrook/codex_kunanyi/pes.py`
+  - staged remote wrapper:
+    `/u/bwbrook/codex_kunanyi/pend.pbs`
+  - input particle file:
+    `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/particles.5000.dbl`
+  - compact output directory:
+    `/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-particle-endpoint-summary`
+  - summary archive:
+    `/u/bwbrook/codex_kunanyi/c_hi_fullgrid_final_particle_endpoint_summary_2026-06-08.tar.gz`
+  - archive SHA-256:
+    `a25a805858a438f56369fe4d3690c31bdd358efb0082f73c3d5e51b0633e35e1`
+  - final particle count: `196732`
+  - endpoint time: `50.00000000000777 Myr`
+  - position envelope:
+    `x=-29.695625916316235..30.132441460503376 kpc`,
+    `y=-32.27023110544345..30.062788186588232 kpc`,
+    `z=-215.6060699853556..216.06201669846072 kpc`
+  - lobe particle split:
+    `97451` negative-z particles and `99281` positive-z particles
+  - report:
+    `docs/science/c_hi_fullgrid_final_particle_endpoint_summary_2026-06-08.md`
+  - detailed note:
+    `docs/exchange/logs/2026-06-08-c-hi-fullgrid-final-particle-endpoint-summary.md`
 - Next action: do not submit a blind full-history
   `plutokore.load_all_particles()` particle-HDF5 cache over all `5001`
-  particle outputs. Pivot to endpoint-only or sparse-window particle analysis,
-  or design a streaming/chunked particle workflow that does not materialize the
-  full dense history in memory.
+  particle outputs. Use the green endpoint particle summary as the seed for a
+  sparse-window or streaming particle-loss/radio workflow that does not
+  materialize the full dense history in memory.
 - Patrick's 2026-06-05 troubleshooting reply is now incorporated into the
   decision tree:
   - keep running the node-count restart ladder;
