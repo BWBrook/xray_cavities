@@ -123,6 +123,75 @@ def read_sparse_window(
     return target_rows, pressure_history_max, history_counts, trajectory_rows
 
 
+def parse_particle_id(value: str, *, context: str) -> int:
+    particle_id = parse_float(value)
+    if not math.isfinite(particle_id) or not particle_id.is_integer():
+        raise ValueError(f"{context} must be an integer particle ID")
+    return int(particle_id)
+
+
+def table_delimiter(path: Path) -> str:
+    if path.suffix.lower() in {".tsv", ".tab"}:
+        return "\t"
+    return ","
+
+
+def read_external_loss_table(
+    path: Path,
+    selected_ids: np.ndarray,
+    *,
+    id_column: str,
+    loss_factor_column: str,
+) -> tuple[np.ndarray, dict[str, Any]]:
+    if not path.exists():
+        raise FileNotFoundError(path)
+
+    selected_id_list = [int(value) for value in selected_ids]
+    selected_id_set = set(selected_id_list)
+    loss_by_id: dict[int, float] = {}
+    row_count = 0
+
+    with path.open(newline="") as handle:
+        reader = csv.DictReader(handle, delimiter=table_delimiter(path))
+        missing = sorted({id_column, loss_factor_column} - set(reader.fieldnames or []))
+        if missing:
+            raise ValueError(f"{path} missing columns: {', '.join(missing)}")
+
+        for raw in reader:
+            row_count += 1
+            particle_id = parse_particle_id(
+                raw[id_column],
+                context=f"loss-table {id_column} value on row {row_count}",
+            )
+            if particle_id in loss_by_id:
+                raise ValueError(f"duplicate loss-table particle ID: {particle_id}")
+
+            loss_factor = parse_float(raw[loss_factor_column])
+            if not math.isfinite(loss_factor):
+                raise ValueError(f"loss factor for particle ID {particle_id} must be finite")
+            if loss_factor < 0.0:
+                raise ValueError(f"loss factor for particle ID {particle_id} must be non-negative")
+            loss_by_id[particle_id] = loss_factor
+
+    missing_ids = sorted(selected_id_set - set(loss_by_id))
+    if missing_ids:
+        preview = ", ".join(str(value) for value in missing_ids[:20])
+        suffix = "" if len(missing_ids) <= 20 else f", ... ({len(missing_ids)} total)"
+        raise ValueError(f"missing loss factors for selected particle IDs: {preview}{suffix}")
+
+    values = np.asarray([loss_by_id[particle_id] for particle_id in selected_id_list], dtype=np.float64)
+    metadata = {
+        "path": str(path),
+        "delimiter": "tab" if table_delimiter(path) == "\t" else "comma",
+        "id_column": id_column,
+        "loss_factor_column": loss_factor_column,
+        "table_rows": row_count,
+        "matched_selected_ids": len(selected_id_list),
+        "extra_ids": len(set(loss_by_id) - selected_id_set),
+    }
+    return values, metadata
+
+
 def adiabatic_index(pressure_si: np.ndarray, density_si: np.ndarray) -> np.ndarray:
     theta = pressure_si / (density_si * C_LIGHT**2)
     enthalpy = 2.5 * theta + np.sqrt(2.25 * theta**2 + 1.0)
@@ -351,8 +420,41 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         )
     lossless = np.nan_to_num(lossless, nan=0.0, posinf=0.0, neginf=0.0)
     doppler = doppler_term(data["vx1"], data["vx2"], data["vx3"], args.s) if particle_count else np.array([])
-    loss_proxy = data["loss_proxy"]
-    lossy_rest = lossless * loss_proxy
+    if args.loss_table is None:
+        loss_values = data["loss_proxy"]
+        loss_model_key = "pressure_history_proxy"
+        loss_model = "pressure-history attenuation proxy"
+        loss_value_column = "loss_proxy"
+        loss_map_file = "radio_150mhz_sparse_loss_proxy_mjy_sr.tsv"
+        mean_loss_map_file = "radio_sparse_mean_loss_proxy.tsv"
+        loss_definition = "clip(final pressure / maximum positive pressure across sparse window, 0, 1)"
+        loss_method = (
+            "lossless synchrotron emissivity from C-HI particle endpoint rows "
+            "multiplied by sparse pressure-history loss proxy"
+        )
+        loss_table_metadata = None
+    else:
+        loss_values, loss_table_metadata = read_external_loss_table(
+            args.loss_table,
+            data["id"],
+            id_column=args.loss_id_column,
+            loss_factor_column=args.loss_factor_column,
+        )
+        loss_model_key = "external_praise_compatible"
+        loss_model = "external PRAiSE-compatible particle loss table"
+        loss_value_column = "loss_factor"
+        loss_map_file = "radio_150mhz_sparse_external_praise_loss_mjy_sr.tsv"
+        mean_loss_map_file = "radio_sparse_mean_external_praise_loss.tsv"
+        loss_definition = (
+            "finite non-negative per-particle factor supplied by an external "
+            "PRAiSE-compatible table keyed by selected particle ID"
+        )
+        loss_method = (
+            "lossless synchrotron emissivity from C-HI particle endpoint rows "
+            "multiplied by an external PRAiSE-compatible particle loss table"
+        )
+
+    lossy_rest = lossless * loss_values
     lossless_doppler = lossless * doppler
     lossy_doppler = lossy_rest * doppler
 
@@ -399,7 +501,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         data["z_kpc"][in_frame],
         data["x_kpc"][in_frame],
         bins=[z_edges, x_edges],
-        weights=loss_proxy[in_frame],
+        weights=loss_values[in_frame],
     )
     mean_loss_map = np.divide(
         loss_sum_map,
@@ -410,10 +512,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
     write_vector(out_dir / "x_kpc.tsv", x_centres)
     write_vector(out_dir / "z_kpc.tsv", z_centres)
-    write_matrix(out_dir / "radio_150mhz_sparse_loss_proxy_mjy_sr.tsv", lossy_map)
+    write_matrix(out_dir / loss_map_file, lossy_map)
     write_matrix(out_dir / "radio_150mhz_sparse_lossless_mjy_sr.tsv", lossless_map)
     write_matrix(out_dir / "radio_sparse_particle_count_map.tsv", count_map)
-    write_matrix(out_dir / "radio_sparse_mean_loss_proxy.tsv", mean_loss_map)
+    write_matrix(out_dir / mean_loss_map_file, mean_loss_map)
 
     with (out_dir / "sparse_particle_radio_positions_0deg.tsv").open("w", newline="") as handle:
         writer = csv.writer(handle, delimiter="\t")
@@ -430,7 +532,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "pressure_history_max",
                 "history_rows",
                 "history_coverage_fraction",
-                "loss_proxy",
+                loss_value_column,
                 "doppler_term",
                 "lossless_emissivity_si",
                 "lossy_emissivity_si",
@@ -450,7 +552,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     data["pressure_history_max"][index],
                     int(data["history_rows"][index]),
                     data["history_coverage_fraction"][index],
-                    loss_proxy[index],
+                    loss_values[index],
                     doppler[index],
                     lossless[index],
                     lossy_doppler[index],
@@ -467,7 +569,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         xmin, xmax = finite_range(data["x_kpc"][mask])
         ymin, ymax = finite_range(data["y_kpc"][mask])
         zmin, zmax = finite_range(data["z_kpc"][mask])
-        loss_stats = stats(loss_proxy[mask])
+        loss_stats = stats(loss_values[mask])
         side_rows.append(
             {
                 "side": side,
@@ -482,10 +584,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "y_max_kpc": ymax,
                 "z_min_kpc": zmin,
                 "z_max_kpc": zmax,
-                "loss_proxy_min": loss_stats.get("min", float("nan")),
-                "loss_proxy_max": loss_stats.get("max", float("nan")),
-                "loss_proxy_mean": loss_stats.get("mean", float("nan")),
-                "loss_proxy_positive_count": loss_stats.get("positive_count", 0),
+                f"{loss_value_column}_min": loss_stats.get("min", float("nan")),
+                f"{loss_value_column}_max": loss_stats.get("max", float("nan")),
+                f"{loss_value_column}_mean": loss_stats.get("mean", float("nan")),
+                f"{loss_value_column}_positive_count": loss_stats.get("positive_count", 0),
             }
         )
 
@@ -512,14 +614,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "radio_map_max_mjy_sr": float(lossy_map.max()) if lossy_map.size else 0.0,
         "radio_map_sum_mjy_sr_pixel": float(lossy_map.sum()),
         "radio_positive_pixels": int(map_positive.size),
-        "loss_model": "pressure-history attenuation proxy",
-        "loss_proxy_definition": "clip(final pressure / maximum positive pressure across sparse window, 0, 1)",
-        "loss_proxy_stats": stats(loss_proxy),
+        "loss_model": loss_model,
+        "loss_model_key": loss_model_key,
+        "loss_value_column": loss_value_column,
+        "loss_map_file": loss_map_file,
+        "mean_loss_map_file": mean_loss_map_file,
+        f"{loss_value_column}_definition": loss_definition,
+        f"{loss_value_column}_stats": stats(loss_values),
         "volume_assignment": volume_assignment,
         "side_summary": side_rows,
         "projection": "0 deg, projected along simulation y onto x-z plane",
-        "method": "lossless synchrotron emissivity from C-HI particle endpoint rows multiplied by sparse pressure-history loss proxy",
+        "method": loss_method,
+        "science_status": "local interface product only; not a final PRAiSE science radio product",
     }
+    if loss_table_metadata is not None:
+        metadata["loss_table"] = loss_table_metadata
     (out_dir / "sparse_particle_radio_metadata.json").write_text(
         json.dumps(metadata, indent=2, sort_keys=True) + "\n"
     )
@@ -534,7 +643,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         writer.writerow(["radio_map_max_mjy_sr", metadata["radio_map_max_mjy_sr"], "mJy/sr"])
         writer.writerow(["radio_map_sum_mjy_sr_pixel", metadata["radio_map_sum_mjy_sr_pixel"], "mJy/sr_pixel_sum"])
         writer.writerow(["radio_positive_pixels", metadata["radio_positive_pixels"], "pixels"])
-        writer.writerow(["loss_proxy_mean", metadata["loss_proxy_stats"].get("mean", float("nan")), "dimensionless"])
+        writer.writerow(
+            [
+                f"{loss_value_column}_mean",
+                metadata[f"{loss_value_column}_stats"].get("mean", float("nan")),
+                "dimensionless",
+            ]
+        )
         for side in side_rows:
             writer.writerow(
                 [
@@ -566,6 +681,9 @@ def main() -> None:
     parser.add_argument("--negative-volume-kpc3", type=float, default=0.0)
     parser.add_argument("--positive-volume-kpc3", type=float, default=0.0)
     parser.add_argument("--unit-volume-kpc3", type=float, default=1.0)
+    parser.add_argument("--loss-table", type=Path)
+    parser.add_argument("--loss-id-column", default="id")
+    parser.add_argument("--loss-factor-column", default="loss_factor")
     args = parser.parse_args()
     if args.pixel_kpc <= 0.0:
         raise ValueError("--pixel-kpc must be positive")
