@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-06-08
+Last updated: 2026-06-11
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -17,6 +17,50 @@ git pull --ff-only
 This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest final volume-coupled sparse comparison on 2026-06-11:
+
+- The completed 50 Myr `C-HI` final grid/tracer endpoint has now been used to
+  declare side volumes for the existing sparse PRAiSE-compatible radio bridge.
+- New tooling:
+  - `scripts/science/build_final_volume_coupled_comparison.py`
+  - `scripts/kunanyi/c_hi_fullgrid_final_volume_coupled_comparison.pbs`
+  - `tests/test_final_volume_coupled_comparison.py`
+- The remote truth extraction used final HDF5 endpoint
+  `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5`
+  and timestep `Timestep_51`.
+- PBS job `697875.kunanyi-ohpc` completed green:
+  - job name: `c_hi_vc_cmp`
+  - request: `select=1:ncpus=1:mpiprocs=1:mem=96gb`
+  - output root:
+    `/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-fullgrid-final-volume-coupled-comparison`
+  - remote archive:
+    `/u/bwbrook/codex_kunanyi/goal003_final_volume_coupled_comparison/final_volume_coupled_comparison_2026-06-11.tar.gz`
+  - archive SHA-256:
+    `0fe05b959843748aec1fdbdd0e08a871e03dccfb3017b78351b31f9c569a0083`
+- Final `tracer > 5e-3` declared side volumes:
+  - negative z: `367123.31815126061 kpc^3`
+  - positive z: `373343.26830024854 kpc^3`
+  - bipolar total: `740466.58644933475 kpc^3`
+- The volume-coupled external-loss bridge preserved the Goal 001/002 selected
+  ID and loss-table contract:
+  - selected particles: `20000`
+  - matched selected IDs: `20000`
+  - extra loss-table IDs: `0`
+  - `loss_model_key = external_praise_compatible`
+  - `volume_assignment = declared side volumes divided evenly across selected particles`
+- Local review assets:
+  `docs/science/assets/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11/`
+- Science note:
+  `docs/science/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11.md`
+- Exchange log:
+  `docs/exchange/logs/2026-06-11-c-hi-fullgrid-final-volume-coupled-comparison.md`
+- Interpretation: this is a final-endpoint volume-coupling comparison product,
+  not a publication-ready observable. It does not change the sparse selected-ID
+  population, PRAiSE parameters, observing frequency, redshift, tracer
+  threshold, or sparse-window selection.
+- Next action: frame the next final-observable or manuscript-facing review
+  goal from this accepted volume-coupled comparison baseline.
 
 Latest final sparse radio bridge on 2026-06-08:
 

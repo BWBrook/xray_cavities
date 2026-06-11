@@ -1,0 +1,141 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_vc_cmp
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=96gb
+#PBS -l walltime=02:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal003_final_volume_coupled_comparison/c_hi_fullgrid_final_volume_coupled_comparison.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal003_final_volume_coupled_comparison/c_hi_fullgrid_final_volume_coupled_comparison.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal003_final_volume_coupled_comparison}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-fullgrid-final-volume-coupled-comparison}"
+INPUT_H5="${INPUT_H5:-/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5}"
+TIMESTEP="${TIMESTEP:-Timestep_51}"
+SPARSE_WINDOW_DIR="${SPARSE_WINDOW_DIR:-/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-particle-sparse-window}"
+LOSS_TABLE="${LOSS_TABLE:-/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-fullgrid-final-sparse-praise-loss/full/sparse_praise_loss_table.csv}"
+TRUTH_EXTRACTOR_C="${TRUTH_EXTRACTOR_C:-$STAGE_DIR/pluto_h5_truth_extract.c}"
+RADIO_SCRIPT="${RADIO_SCRIPT:-$STAGE_DIR/sparse_particle_radio_bridge.py}"
+TRUTH_DIR="${TRUTH_DIR:-$ANALYSIS_ROOT/final_truth}"
+BRIDGE_DIR="${BRIDGE_DIR:-$ANALYSIS_ROOT/bridge_external_loss_volume_coupled}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-$STAGE_DIR/final_volume_coupled_comparison_2026-06-11.tar.gz}"
+JET_POWER_ERG_S="${JET_POWER_ERG_S:-1e45}"
+JET_ACTIVE_TIME_MYR="${JET_ACTIVE_TIME_MYR:-50.0}"
+TARGET_INDEX="${TARGET_INDEX:-5000}"
+TRACER_THRESHOLD="${TRACER_THRESHOLD:-5e-3}"
+XLIM_KPC="${XLIM_KPC:-45}"
+ZLIM_KPC="${ZLIM_KPC:-230}"
+PIXEL_KPC="${PIXEL_KPC:-1}"
+
+mkdir -p "$STAGE_DIR" "$ANALYSIS_ROOT" "$TRUTH_DIR" "$BRIDGE_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "stage_dir=$STAGE_DIR"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "input_h5=$INPUT_H5"
+echo "timestep=$TIMESTEP"
+echo "sparse_window_dir=$SPARSE_WINDOW_DIR"
+echo "loss_table=$LOSS_TABLE"
+echo "truth_dir=$TRUTH_DIR"
+echo "bridge_dir=$BRIDGE_DIR"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+H5CC="$(command -v h5pcc || command -v h5cc)"
+"$H5CC" -O2 "$TRUTH_EXTRACTOR_C" -lm -o "$TRUTH_DIR/pluto_h5_truth_extract"
+"$TRUTH_DIR/pluto_h5_truth_extract" \
+  "$INPUT_H5" \
+  "$TIMESTEP" \
+  "$TRUTH_DIR" \
+  "$JET_POWER_ERG_S" \
+  "$JET_ACTIVE_TIME_MYR"
+
+module purge
+module load Anaconda3/2024.02-1
+
+read -r NEGATIVE_VOLUME_KPC3 POSITIVE_VOLUME_KPC3 BIPOLAR_VOLUME_KPC3 < <(
+  TRUTH_DIR="$TRUTH_DIR" python - <<'PY'
+import csv
+import math
+import os
+from pathlib import Path
+
+path = Path(os.environ["TRUTH_DIR"]) / "level2_tracer_lobe_truth.csv"
+rows = list(csv.DictReader(path.open()))
+selected = {}
+for row in rows:
+    try:
+        threshold = float(row["threshold"])
+    except ValueError:
+        continue
+    if math.isclose(threshold, 5.0e-3, rel_tol=0.0, abs_tol=5.0e-11):
+        selected[row["side"]] = float(row["volume_kpc3"])
+for side in ("negative_z", "positive_z", "bipolar_total"):
+    if side not in selected:
+        raise SystemExit(f"missing 5e-3 row for {side}")
+    if not math.isfinite(selected[side]) or selected[side] <= 0.0:
+        raise SystemExit(f"invalid 5e-3 volume for {side}: {selected[side]}")
+side_sum = selected["negative_z"] + selected["positive_z"]
+if not math.isclose(side_sum, selected["bipolar_total"], rel_tol=1e-8, abs_tol=1e-8):
+    raise SystemExit(f"side volume sum mismatch: {side_sum} vs {selected['bipolar_total']}")
+print(selected["negative_z"], selected["positive_z"], selected["bipolar_total"])
+PY
+)
+
+echo "negative_volume_kpc3=$NEGATIVE_VOLUME_KPC3"
+echo "positive_volume_kpc3=$POSITIVE_VOLUME_KPC3"
+echo "bipolar_volume_kpc3=$BIPOLAR_VOLUME_KPC3"
+
+python "$RADIO_SCRIPT" \
+  --sparse-window-dir "$SPARSE_WINDOW_DIR" \
+  --loss-table "$LOSS_TABLE" \
+  --negative-volume-kpc3 "$NEGATIVE_VOLUME_KPC3" \
+  --positive-volume-kpc3 "$POSITIVE_VOLUME_KPC3" \
+  --target-index "$TARGET_INDEX" \
+  --tracer-threshold "$TRACER_THRESHOLD" \
+  --xlim-kpc "$XLIM_KPC" \
+  --zlim-kpc "$ZLIM_KPC" \
+  --pixel-kpc "$PIXEL_KPC" \
+  --output-dir "$BRIDGE_DIR"
+
+TRUTH_DIR="$TRUTH_DIR" BRIDGE_DIR="$BRIDGE_DIR" python - <<'PY'
+import csv
+import json
+import math
+import os
+from pathlib import Path
+
+truth_path = Path(os.environ["TRUTH_DIR"]) / "level2_tracer_lobe_truth.csv"
+bridge_dir = Path(os.environ["BRIDGE_DIR"])
+metadata = json.loads((bridge_dir / "sparse_particle_radio_metadata.json").read_text())
+lobes = {row["side"]: row for row in csv.DictReader((bridge_dir / "sparse_particle_radio_lobe_summary.csv").open())}
+truth = {}
+for row in csv.DictReader(truth_path.open()):
+    if math.isclose(float(row["threshold"]), 5.0e-3, rel_tol=0.0, abs_tol=5.0e-11):
+        truth[row["side"]] = float(row["volume_kpc3"])
+if metadata.get("loss_model_key") != "external_praise_compatible":
+    raise SystemExit("bridge did not report external_praise_compatible")
+if "declared side volumes" not in metadata.get("volume_assignment", ""):
+    raise SystemExit("bridge did not report declared side volumes")
+loss_table = metadata.get("loss_table") or {}
+if int(loss_table.get("extra_ids", 0)) != 0:
+    raise SystemExit("bridge reported extra loss-table IDs")
+for side in ("negative_z", "positive_z", "bipolar_total"):
+    observed = float(lobes[side]["volume_kpc3"])
+    expected = truth[side]
+    if not math.isclose(observed, expected, rel_tol=1e-8, abs_tol=1e-8):
+        raise SystemExit(f"{side} bridge volume mismatch: {observed} vs {expected}")
+print("bridge_validation=passed")
+PY
+
+find "$ANALYSIS_ROOT" -maxdepth 2 -type f -printf "%P\t%s bytes\n" | sort
+find "$ANALYSIS_ROOT" -maxdepth 2 -type f -exec sha256sum {} \; | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$ANALYSIS_ROOT")" "$(basename "$ANALYSIS_ROOT")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

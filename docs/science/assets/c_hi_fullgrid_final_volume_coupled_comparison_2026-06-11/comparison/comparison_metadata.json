@@ -1,0 +1,76 @@
+{
+  "bridge_validation": {
+    "checked_volumes_kpc3": {
+      "bipolar_total": 740466.5864515094,
+      "negative_z": 367123.3181512607,
+      "positive_z": 373343.2683002487
+    },
+    "loss_model_key": "external_praise_compatible",
+    "loss_table": {
+      "delimiter": "comma",
+      "extra_ids": 0,
+      "id_column": "id",
+      "loss_factor_column": "loss_factor",
+      "matched_selected_ids": 20000,
+      "path": "/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-fullgrid-final-sparse-praise-loss/full/sparse_praise_loss_table.csv",
+      "table_rows": 20000
+    },
+    "volume_assignment": "declared side volumes divided evenly across selected particles"
+  },
+  "declared_volumes_kpc3": {
+    "bipolar_total": 740466.5864493347,
+    "negative_z": 367123.3181512606,
+    "positive_z": 373343.26830024854
+  },
+  "level1": {
+    "active_time_configured": {
+      "metric": "active_time_configured",
+      "unit": "Myr",
+      "value": "50"
+    },
+    "active_time_elapsed": {
+      "metric": "active_time_elapsed",
+      "unit": "Myr",
+      "value": "50"
+    },
+    "injected_energy_bipolar_elapsed": {
+      "metric": "injected_energy_bipolar_elapsed",
+      "unit": "erg",
+      "value": "3.15575999999999949e+60"
+    },
+    "injected_energy_bipolar_full_active_time": {
+      "metric": "injected_energy_bipolar_full_active_time",
+      "unit": "erg",
+      "value": "3.15575999999999949e+60"
+    },
+    "injected_energy_one_sided_elapsed": {
+      "metric": "injected_energy_one_sided_elapsed",
+      "unit": "erg",
+      "value": "1.57787999999999974e+60"
+    },
+    "injected_energy_one_sided_full_active_time": {
+      "metric": "injected_energy_one_sided_full_active_time",
+      "unit": "erg",
+      "value": "1.57787999999999974e+60"
+    },
+    "jet_power_one_sided": {
+      "metric": "jet_power_one_sided",
+      "unit": "erg/s",
+      "value": "9.9999999999999993e+44"
+    },
+    "time_code": {
+      "metric": "time_code",
+      "unit": "code_time",
+      "value": "15330.069689399999"
+    },
+    "time_myr": {
+      "metric": "time_myr",
+      "unit": "Myr",
+      "value": "50.000000000007773"
+    }
+  },
+  "old_bridge_dir": "docs/science/assets/c_hi_fullgrid_final_sparse_praise_loss_2026-06-11/bridge_external_loss",
+  "threshold": "5e-03",
+  "truth_dir": "docs/science/assets/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11/final_truth",
+  "volume_coupled_bridge_dir": "docs/science/assets/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11/bridge_external_loss_volume_coupled"
+}

@@ -1,0 +1,12 @@
+metric,value,unit
+target_index,5000,index
+frequency_hz,150000000.0,Hz
+selected_particles,20000,count
+in_frame_particles,20000,count
+radio_map_max_mjy_sr,4.622467967906506e+17,mJy/sr
+radio_map_sum_mjy_sr_pixel,1.3830684314552033e+18,mJy/sr_pixel_sum
+radio_positive_pixels,11783,pixels
+loss_factor_mean,0.9928540493456512,dimensionless
+negative_z_lossy_luminosity_doppler,5.20526129346918e+28,W/Hz
+positive_z_lossy_luminosity_doppler,1.1343085864598182e+29,W/Hz
+bipolar_total_lossy_luminosity_doppler,1.6548347158067362e+29,W/Hz
