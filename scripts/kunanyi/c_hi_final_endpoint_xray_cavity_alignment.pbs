@@ -1,0 +1,163 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_xcav51
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=96gb
+#PBS -l walltime=06:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal005_final_xray_cavity_alignment/c_hi_final_endpoint_xray_cavity_alignment.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal005_final_xray_cavity_alignment/c_hi_final_endpoint_xray_cavity_alignment.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal005_final_xray_cavity_alignment}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-final-endpoint-xray-cavity-alignment}"
+INPUT_H5="${INPUT_H5:-/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5}"
+TIMESTEP="${TIMESTEP:-Timestep_51}"
+XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+XRAISE_SCRIPT="${XRAISE_SCRIPT:-$STAGE_DIR/xraise_grid_smoke.py}"
+CAVITY_EXTRACTOR_C="${CAVITY_EXTRACTOR_C:-$STAGE_DIR/pluto_h5_cavity_stub_extract.c}"
+XRAISE_PY="${XRAISE_PY:-$XRAISE_RUNTIME/xraise.py}"
+APEC_TABLE="${APEC_TABLE:-$XRAISE_RUNTIME/apec_corrections.txt}"
+GAUNT_LUT="${GAUNT_LUT:-$XRAISE_RUNTIME/gaunt_lut_2d.npz}"
+XRAISE_DIR="${XRAISE_DIR:-$ANALYSIS_ROOT/xraise_grid}"
+CAVITY_DIR="${CAVITY_DIR:-$ANALYSIS_ROOT/cavity_stub}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-$STAGE_DIR/final_endpoint_xray_cavity_alignment_2026-06-11.tar.gz}"
+Y_CHUNK="${Y_CHUNK:-8}"
+REDSHIFT="${REDSHIFT:-0.05}"
+TRACER_THRESHOLD="${TRACER_THRESHOLD:-0.005}"
+AMBIENT_TRACER_MAX="${AMBIENT_TRACER_MAX:-0.001}"
+SHELL_INNER="${SHELL_INNER:-1.00}"
+SHELL_MID="${SHELL_MID:-1.15}"
+SHELL_OUTER="${SHELL_OUTER:-1.35}"
+
+mkdir -p "$STAGE_DIR" "$ANALYSIS_ROOT" "$XRAISE_DIR" "$CAVITY_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "stage_dir=$STAGE_DIR"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "input_h5=$INPUT_H5"
+echo "timestep=$TIMESTEP"
+echo "xraise_runtime=$XRAISE_RUNTIME"
+echo "xraise_dir=$XRAISE_DIR"
+echo "cavity_dir=$CAVITY_DIR"
+echo "summary_archive=$SUMMARY_ARCHIVE"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+for path in "$INPUT_H5" "$XRAISE_SCRIPT" "$CAVITY_EXTRACTOR_C" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT"; do
+  if [ ! -r "$path" ]; then
+    echo "missing required input: $path" >&2
+    exit 2
+  fi
+  sha256sum "$path"
+done
+
+module purge
+module load Anaconda3/2024.02-1
+
+python - <<'PY' "$INPUT_H5" "$TIMESTEP"
+import sys
+from pathlib import Path
+
+import h5py
+
+path = Path(sys.argv[1])
+timestep = sys.argv[2]
+with h5py.File(path, "r") as h5:
+    if timestep not in h5:
+        raise SystemExit(f"missing timestep {timestep}")
+    for rel in ("vars/rho", "vars/prs", "vars/tr1"):
+        full = f"/{timestep}/{rel}"
+        if full not in h5:
+            raise SystemExit(f"missing dataset {full}")
+    shape = h5[f"/{timestep}/vars/rho"].shape
+    time = float(h5[f"/{timestep}"].attrs["Time"])
+print(f"hdf5_preflight=passed shape_nz_ny_nx={shape} time_code={time:.17g}")
+PY
+
+python "$XRAISE_SCRIPT" \
+  --input-h5 "$INPUT_H5" \
+  --timestep "$TIMESTEP" \
+  --output-dir "$XRAISE_DIR" \
+  --xraise-py "$XRAISE_PY" \
+  --apec-table "$APEC_TABLE" \
+  --gaunt-lut "$GAUNT_LUT" \
+  --redshift "$REDSHIFT" \
+  --y-chunk "$Y_CHUNK"
+
+python - <<'PY' "$XRAISE_DIR"
+import csv
+import math
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1]) / "xraise_grid_smoke_summary.csv"
+metrics = {row["metric"]: float(row["value"]) for row in csv.DictReader(path.open())}
+for key in (
+    "raw_xray_max",
+    "corrected_xray_max",
+    "raw_xray_sum",
+    "corrected_xray_sum",
+    "correction_ratio_positive_max",
+):
+    value = metrics[key]
+    if not math.isfinite(value) or value <= 0.0:
+        raise SystemExit(f"invalid X-ray metric {key}: {value}")
+print("xray_validation=passed")
+PY
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+
+H5CC="$(command -v h5pcc || command -v h5cc)"
+"$H5CC" -O2 "$CAVITY_EXTRACTOR_C" -lm -o "$CAVITY_DIR/pluto_h5_cavity_stub_extract"
+"$CAVITY_DIR/pluto_h5_cavity_stub_extract" \
+  "$INPUT_H5" \
+  "$TIMESTEP" \
+  "$CAVITY_DIR" \
+  "$TRACER_THRESHOLD" \
+  "$AMBIENT_TRACER_MAX" \
+  "$SHELL_INNER" \
+  "$SHELL_MID" \
+  "$SHELL_OUTER"
+
+module purge
+module load Anaconda3/2024.02-1
+
+python - <<'PY' "$CAVITY_DIR"
+import csv
+import math
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1]) / "cavity_stub_summary.csv"
+rows = {row["side"]: row for row in csv.DictReader(path.open())}
+for side in ("negative_z", "positive_z"):
+    if side not in rows:
+        raise SystemExit(f"missing cavity side {side}")
+    for key in (
+        "ambient_pressure_dyn_cm2",
+        "ambient_density_g_cm3",
+        "pV_erg",
+        "four_pV_erg",
+        "sound_age_myr",
+        "buoyancy_age_myr",
+        "refill_age_myr",
+        "semi_x_kpc",
+        "semi_y_kpc",
+        "semi_z_kpc",
+    ):
+        value = float(rows[side][key])
+        if not math.isfinite(value) or value <= 0.0:
+            raise SystemExit(f"invalid {side} {key}: {value}")
+print("cavity_validation=passed")
+PY
+
+find "$ANALYSIS_ROOT" -maxdepth 2 -type f -printf "%P\t%s bytes\n" | sort
+find "$ANALYSIS_ROOT" -maxdepth 2 -type f -exec sha256sum {} \; | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$ANALYSIS_ROOT")" "$(basename "$ANALYSIS_ROOT")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

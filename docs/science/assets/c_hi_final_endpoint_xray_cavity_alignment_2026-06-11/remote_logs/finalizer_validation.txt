@@ -1,0 +1,101 @@
+Goal 005 lightweight finalizer validation transcript
+====================================================
+
+Purpose
+-------
+This transcript records the lightweight validation evidence for the already-
+produced Goal 005 remote outputs after PBS job 697898.kunanyi-ohpc completed
+the heavy XRAiSE/cavity extraction but ended with historical Exit_status = 1
+from the post-cavity validation Python/module mismatch.
+
+No XRAiSE extraction, cavity extraction, PBS submission, or PLUTO production
+run was performed by this finalizer step.
+
+Equivalent reproducible command
+-------------------------------
+Run on Kunanyi against the existing products:
+
+```bash
+STAGE_DIR=/u/bwbrook/codex_kunanyi/goal005_final_xray_cavity_alignment
+ANALYSIS_ROOT=/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-final-endpoint-xray-cavity-alignment
+XRAISE_DIR="$ANALYSIS_ROOT/xraise_grid"
+CAVITY_DIR="$ANALYSIS_ROOT/cavity_stub"
+SUMMARY_ARCHIVE="$STAGE_DIR/final_endpoint_xray_cavity_alignment_2026-06-11.tar.gz"
+
+module purge
+module load Anaconda3/2024.02-1
+
+python - <<'PY' "$XRAISE_DIR" "$CAVITY_DIR"
+import csv
+import math
+import sys
+from pathlib import Path
+
+xraise_dir = Path(sys.argv[1])
+cavity_dir = Path(sys.argv[2])
+
+xray_metrics = {
+    row["metric"]: float(row["value"])
+    for row in csv.DictReader((xraise_dir / "xraise_grid_smoke_summary.csv").open())
+}
+for key in (
+    "raw_xray_max",
+    "corrected_xray_max",
+    "raw_xray_sum",
+    "corrected_xray_sum",
+    "correction_ratio_positive_max",
+):
+    value = xray_metrics[key]
+    if not math.isfinite(value) or value <= 0.0:
+        raise SystemExit(f"invalid X-ray metric {key}: {value}")
+
+cavity_rows = {
+    row["side"]: row
+    for row in csv.DictReader((cavity_dir / "cavity_stub_summary.csv").open())
+}
+for side in ("negative_z", "positive_z"):
+    if side not in cavity_rows:
+        raise SystemExit(f"missing cavity side {side}")
+    for key in (
+        "ambient_pressure_dyn_cm2",
+        "ambient_density_g_cm3",
+        "pV_erg",
+        "four_pV_erg",
+        "sound_age_myr",
+        "buoyancy_age_myr",
+        "refill_age_myr",
+        "semi_x_kpc",
+        "semi_y_kpc",
+        "semi_z_kpc",
+    ):
+        value = float(cavity_rows[side][key])
+        if not math.isfinite(value) or value <= 0.0:
+            raise SystemExit(f"invalid {side} {key}: {value}")
+
+print("finalize_validation=passed")
+PY
+
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$ANALYSIS_ROOT")" "$(basename "$ANALYSIS_ROOT")"
+sha256sum "$SUMMARY_ARCHIVE"
+```
+
+Captured output
+---------------
+
+```text
+finalize_validation=passed
+2d75e982a389ac0db6f9459c14d27ab3c5e749d045da18050f47df544f4c155e  /u/bwbrook/codex_kunanyi/goal005_final_xray_cavity_alignment/final_endpoint_xray_cavity_alignment_2026-06-11.tar.gz
+```
+
+Historical PBS status retained for audit
+----------------------------------------
+
+```text
+jobid = 697898.kunanyi-ohpc
+exec_host = n196/1
+resources_used.walltime = 00:21:39
+resources_used.cput = 00:12:46
+resources_used.mem = 1218084kb
+Exit_status = 1
+```

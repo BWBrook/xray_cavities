@@ -1,0 +1,4 @@
+  File "<stdin>", line 10
+    raise SystemExit(f"missing cavity side {side}")
+                                                 ^
+SyntaxError: invalid syntax

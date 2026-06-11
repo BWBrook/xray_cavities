@@ -1,0 +1,13 @@
+category,metric,value,unit,source
+xray,time_myr,50.00000000000777,Myr,xraise_grid_smoke_summary.csv
+xray,raw_xray_max,1435453.943161817,mJy sr^-1,xraise_grid_smoke_summary.csv
+xray,corrected_xray_max,2874403.714611562,mJy sr^-1,xraise_grid_smoke_summary.csv
+xray,raw_xray_sum,2386267961.414721,mJy sr^-1 pixels,xraise_grid_smoke_summary.csv
+xray,corrected_xray_sum,3212610085.481297,mJy sr^-1 pixels,xraise_grid_smoke_summary.csv
+xray,correction_ratio_positive_max,2.451117643672624,dimensionless,xraise_grid_smoke_summary.csv
+truth_level1,injected_energy_one_sided_elapsed,1.5778799999999997e+60,erg,level1_injected_energy.csv
+truth_level1,injected_energy_bipolar_elapsed,3.1557599999999995e+60,erg,level1_injected_energy.csv
+cavity,pV_bipolar,6.87805393912703e+59,erg,cavity_stub_summary.csv
+cavity,four_pV_bipolar,2.751221575650812e+60,erg,cavity_stub_summary.csv
+cavity,four_pV_over_level2_energy_bipolar,1.9819430042244381,ratio,final_xray_cavity_alignment_lobes.csv
+radio,radio_luminosity_bipolar,1.6548347158067362e+29,W Hz^-1,sparse_particle_radio_lobe_summary.csv

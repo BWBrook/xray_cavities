@@ -14,9 +14,50 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-stage-4 handoff. Always pull the latest
+This note should be treated as a post-Goal-005 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest final endpoint X-ray/cavity alignment gate on 2026-06-11:
+
+- Accepted Goal 005 produced the first final 50 Myr `C-HI`, `0 deg` X-ray/cavity
+  alignment product using the completed endpoint, accepted Level 1/2 truth, and
+  Goal 003 volume-coupled radio scalars.
+- New tooling:
+  - `scripts/science/build_final_xray_cavity_alignment.py`
+  - `scripts/kunanyi/c_hi_final_endpoint_xray_cavity_alignment.pbs`
+  - `tests/test_final_xray_cavity_alignment.py`
+- The final X-ray/cavity extraction used:
+  `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5`
+  and timestep `Timestep_51`.
+- PBS job `697898.kunanyi-ohpc` completed the heavy X-ray and cavity
+  extraction but exited `1` during post-cavity validation because `python`
+  resolved to an older interpreter after the HDF5 module load. The wrapper was
+  corrected to reload `Anaconda3/2024.02-1`; a lightweight finalizer validated
+  the already-produced outputs and wrote the archive.
+- Remote output root:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-final-endpoint-xray-cavity-alignment`
+- Remote archive:
+  `/u/bwbrook/codex_kunanyi/goal005_final_xray_cavity_alignment/final_endpoint_xray_cavity_alignment_2026-06-11.tar.gz`
+- Archive SHA-256:
+  `2d75e982a389ac0db6f9459c14d27ab3c5e749d045da18050f47df544f4c155e`
+- Local review assets:
+  `docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/`
+- Science note:
+  `docs/science/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11.md`
+- Exchange log:
+  `docs/exchange/logs/2026-06-11-c-hi-final-endpoint-xray-cavity-alignment.md`
+- Headline result: `gate_status = green`. The corrected 1 keV X-ray map is
+  finite/nonblank with max `2.874403714611562e6 mJy sr^-1`; the cavity tracer
+  volumes match accepted Level 2 `tracer > 5e-3` side volumes to numerical
+  precision; bipolar cavity `4pV = 2.751221575650812e60 erg`, which is
+  `0.8718095088507404` of Level 1 bipolar injected energy and
+  `1.9819430042244381` times the Level 2 tracer-lobe energy.
+- Interpretation: the final `C-HI` endpoint X-ray/cavity path is accepted as
+  green for bounded prove-out review, not a publication-ready observable. The
+  next decision should be a Barry/Stas/Patrick review of the cavity protocol
+  and whether the Level 3 ambient-energy/method goal must come before
+  broadening to `C-LO`, `G-LO`, multi-angle, or source-age sampling.
 
 Latest production prove-out gap audit on 2026-06-11:
 
@@ -34,11 +75,8 @@ Latest production prove-out gap audit on 2026-06-11:
   coupling. It does not yet prove the final X-ray path, final cavity protocol,
   Level 3 ambient-energy method, beam/instrument treatment, viewing-angle or
   source-age sampling, or readiness for the mandatory `C-LO`/`G-LO` cases.
-- Recommended next action: open a narrow Goal 005 for a final `C-HI` endpoint
-  X-ray/cavity alignment gate at `50 Myr`, initially `0 deg`, comparing cavity
-  `pV`/`4pV`/age estimates against accepted Level 1/2 truth and the Goal 003
-  volume-coupled radio scalars. Do not launch a new PLUTO production run before
-  this gate is reviewed.
+- Recommended next action: superseded by the Goal 005 final endpoint
+  X-ray/cavity alignment gate above.
 
 Latest final volume-coupled sparse comparison on 2026-06-11:
 

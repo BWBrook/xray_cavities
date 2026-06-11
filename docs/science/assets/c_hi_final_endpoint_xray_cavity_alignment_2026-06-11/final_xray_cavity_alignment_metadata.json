@@ -1,0 +1,76 @@
+{
+  "caveats": [
+    "cavity ages are hydrostatic-proxy ambient-shell estimates",
+    "Level 3 ambient thermal/kinetic/gravitational energy is not included",
+    "no beam, detector, exposure, source-age sampling, or multi-angle treatment is included"
+  ],
+  "cavity_dir": "docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/cavity_stub",
+  "cavity_metadata": {
+    "age_gravity": "hydrostatic_proxy_from_inner_outer_ambient_shell_pressure_gradient",
+    "ambient_shell": "ellipsoidal_radius_1.00_to_1.35_same_side_tracer_le_0.001",
+    "drag_coefficient": "0.75",
+    "geometry": "one_ellipsoid_per_lobe_from_3d_tracer_extent",
+    "grid_shape_nz_ny_nx": "1014,960,960",
+    "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5",
+    "time_code": "15330.069689399999",
+    "time_myr": "50.000000000007773",
+    "timestep": "Timestep_51"
+  },
+  "gate_status": "green",
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5",
+  "radio_dir": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11/bridge_external_loss_volume_coupled",
+  "timestep": "Timestep_51",
+  "tracer_threshold": "5e-03",
+  "truth_dir": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11/final_truth",
+  "view": "0 deg, projected along simulation y axis",
+  "xraise_dir": "docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/xraise_grid",
+  "xraise_metadata": {
+    "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+    "corrected_stats_mjy_sr": {
+      "finite_cells": 973440,
+      "max": 2874403.7146115615,
+      "min": 179.5423028066272,
+      "positive_cells": 973440,
+      "positive_max": 2874403.7146115615,
+      "positive_min": 179.5423028066272,
+      "positive_sum": 3212610085.4812965,
+      "sum": 3212610085.4812965
+    },
+    "correction_ratio_stats": {
+      "finite_cells": 973440,
+      "max": 2.451117643672624,
+      "min": 1.3311572709524928,
+      "positive_cells": 973440,
+      "positive_max": 2.451117643672624,
+      "positive_min": 1.3311572709524928,
+      "positive_sum": 1310233.1687746937,
+      "sum": 1310233.1687746937
+    },
+    "frequency_hz": 2.417990504024e+17,
+    "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+    "grid_shape_nz_ny_nx": [
+      1014,
+      960,
+      960
+    ],
+    "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5",
+    "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+    "raw_stats_mjy_sr": {
+      "finite_cells": 973440,
+      "max": 1435453.9431618168,
+      "min": 133.6437179790111,
+      "positive_cells": 973440,
+      "positive_max": 1435453.9431618168,
+      "positive_min": 133.6437179790111,
+      "positive_sum": 2386267961.4147205,
+      "sum": 2386267961.4147205
+    },
+    "redshift": 0.05,
+    "time_code": 15330.0696894,
+    "time_myr": 50.00000000000777,
+    "timestep": "Timestep_51",
+    "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+    "y_chunk": 8
+  },
+  "xray_energy": "1 keV"
+}
