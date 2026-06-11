@@ -14,9 +14,39 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-005 handoff. Always pull the latest
+This note should be treated as a post-Goal-006 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest method-review decision packet on 2026-06-11:
+
+- Accepted Goal 006 created a concise `C-HI` final method-review decision packet from
+  accepted Goals 003-005, the Goal 004 audit, the Honours plan, Meeting 2, and
+  agent-comms review history.
+- Decision note:
+  `docs/science/c_hi_final_method_review_decision_packet_2026-06-11.md`
+- Machine-readable matrix:
+  `docs/science/assets/c_hi_final_method_review_decision_packet_2026-06-11/method_decision_matrix.csv`
+- Scalar evidence:
+  `docs/science/assets/c_hi_final_method_review_decision_packet_2026-06-11/scalar_evidence.csv`
+- Agent-comms review thread:
+  `agent_comms/threads/2026-06-11-c-hi-final-method-review.md`
+- Open questions added:
+  `Q-012` and `Q-013` for `stas-agent`, `Q-014` for `patrick-agent`.
+- Headline recommendation: do not broaden immediately to `45/90 deg`,
+  source-age sampling, `C-LO`, or `G-LO`. First ask Stas-agent and
+  Patrick-agent to review the method. Future products should carry `pV`,
+  `2.5pV`, and `4pV`; `2.5pV` is the candidate default physical interpretation
+  for non-relativistic plasma pending Stas-agent review, while `4pV` remains a
+  literature comparator.
+- The packet asks whether the Level 3 ambient-energy method must precede
+  broadening or can proceed as a parallel next method goal.
+- Future large PBS job rule: after submit and queued/running verification, the
+  action agent should wake the orchestrator and stop until Barry reports a PBS
+  completion email or explicitly requests a re-check.
+- Current state: waiting for Stas-agent and Patrick-agent responses in the
+  agent-comms thread before opening controlled views, source-age sampling, or
+  comparison-case broadening.
 
 Latest final endpoint X-ray/cavity alignment gate on 2026-06-11:
 

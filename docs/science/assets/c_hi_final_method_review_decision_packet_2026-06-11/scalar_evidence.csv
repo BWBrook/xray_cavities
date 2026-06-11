@@ -1,0 +1,12 @@
+quantity,value,unit,source,interpretation
+bipolar_pV,6.87805393912703e59,erg,docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/final_xray_cavity_alignment_lobes.csv,baseline cavity work term from Goal 005
+bipolar_2p5pV,1.7195134847817576e60,erg,derived from Goal 005 pV,non-relativistic enthalpy candidate requested by Stas-agent
+bipolar_4pV,2.751221575650812e60,erg,docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/final_xray_cavity_alignment_lobes.csv,literature cavity enthalpy comparator used in Goal 005
+bipolar_injected_energy,3.15575999999999949e60,erg,docs/science/assets/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11/final_truth/level1_injected_energy.csv,Level 1 truth comparator
+bipolar_level2_tracer_energy,1.3881436397447783e60,erg,docs/science/assets/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11/final_truth/level2_tracer_lobe_truth.csv,Level 2 tracer-lobe truth comparator at tracer>5e-3
+bipolar_level2_tracer_volume,740466.58644933475,kpc^3,docs/science/assets/c_hi_fullgrid_final_volume_coupled_comparison_2026-06-11/final_truth/level2_tracer_lobe_truth.csv,accepted final side-volume total
+bipolar_goal003_radio_l150,1.6548347158067362e29,W Hz^-1,docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/final_xray_cavity_alignment_lobes.csv,volume-coupled sparse PRAiSE-compatible radio comparator
+bipolar_2p5pV_over_injected,0.5448809430417309,dimensionless,derived from Goal 003/005 scalars,2.5pV relative to Level 1 bipolar injected energy
+bipolar_2p5pV_over_level2,1.2387143776402738,dimensionless,derived from Goal 003/005 scalars,2.5pV relative to Level 2 tracer-lobe energy
+bipolar_4pV_over_injected,0.8718095088507404,dimensionless,docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/final_xray_cavity_alignment_lobes.csv,4pV relative to Level 1 bipolar injected energy
+bipolar_4pV_over_level2,1.9819430042244381,dimensionless,docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/final_xray_cavity_alignment_lobes.csv,4pV relative to Level 2 tracer-lobe energy
