@@ -18,6 +18,28 @@ This note should be treated as a post-stage-4 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
+Latest production prove-out gap audit on 2026-06-11:
+
+- Accepted Goal 004 reconciled the Meeting 2 action plan, Honours plan and Stas
+  feedback, accepted Goals 001-003, and current full-run evidence.
+- Audit note:
+  `docs/science/c_hi_final_production_prove_out_gap_audit_2026-06-11.md`
+- Machine-readable matrix:
+  `docs/science/assets/c_hi_final_production_prove_out_gap_audit_2026-06-11/prove_out_matrix.csv`
+- Exchange log:
+  `docs/exchange/logs/2026-06-11-c-hi-final-production-prove-out-gap-audit.md`
+- Headline conclusion: the first full 50 Myr `C-HI` run is a credible anchor
+  for continued prove-out, with green endpoint integrity, particle state,
+  sparse-window, Level 1/2 truth, and sparse PRAiSE-compatible radio-volume
+  coupling. It does not yet prove the final X-ray path, final cavity protocol,
+  Level 3 ambient-energy method, beam/instrument treatment, viewing-angle or
+  source-age sampling, or readiness for the mandatory `C-LO`/`G-LO` cases.
+- Recommended next action: open a narrow Goal 005 for a final `C-HI` endpoint
+  X-ray/cavity alignment gate at `50 Myr`, initially `0 deg`, comparing cavity
+  `pV`/`4pV`/age estimates against accepted Level 1/2 truth and the Goal 003
+  volume-coupled radio scalars. Do not launch a new PLUTO production run before
+  this gate is reviewed.
+
 Latest final volume-coupled sparse comparison on 2026-06-11:
 
 - The completed 50 Myr `C-HI` final grid/tracer endpoint has now been used to
@@ -56,11 +78,10 @@ Latest final volume-coupled sparse comparison on 2026-06-11:
 - Exchange log:
   `docs/exchange/logs/2026-06-11-c-hi-fullgrid-final-volume-coupled-comparison.md`
 - Interpretation: this is a final-endpoint volume-coupling comparison product,
-  not a publication-ready observable. It does not change the sparse selected-ID
-  population, PRAiSE parameters, observing frequency, redshift, tracer
-  threshold, or sparse-window selection.
-- Next action: frame the next final-observable or manuscript-facing review
-  goal from this accepted volume-coupled comparison baseline.
+  not a finished observational result. It does not change the sparse
+  selected-ID population, PRAiSE parameters, observing frequency, redshift,
+  tracer threshold, or sparse-window selection.
+- Next action: superseded by the Goal 004 prove-out audit above.
 
 Latest final sparse radio bridge on 2026-06-08:
 
