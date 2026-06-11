@@ -1,0 +1,16 @@
+metric,value,unit
+selected_id_count,20000,count
+target_index,5000,index
+frequency_hz,150000000.0,Hz
+redshift,0.05,dimensionless
+loss_table_sha256,23cbcb4ea85dae35689648dc6e63489a9403a51055e4fa462f6b9b8ddec2c320,sha256
+loss_factor_finite_count,20000,dimensionless
+loss_factor_positive_count,19777,dimensionless
+loss_factor_nan_count,0,dimensionless
+loss_factor_min,0.0,dimensionless
+loss_factor_max,2.5362859154522237,dimensionless
+loss_factor_mean,0.9928540493456512,dimensionless
+loss_factor_sum,19857.080986913024,dimensionless
+loss_factor_positive_min,0.7687704937161209,dimensionless
+loss_factor_positive_max,2.5362859154522237,dimensionless
+loss_factor_positive_mean,1.0040491979022614,dimensionless

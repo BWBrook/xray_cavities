@@ -1,0 +1,81 @@
+{
+  "coverage": {
+    "missing_at_target": 0,
+    "missing_counts": [
+      199,
+      179,
+      159,
+      139,
+      119,
+      99,
+      79,
+      59,
+      39,
+      20,
+      0
+    ],
+    "present_counts": [
+      19801,
+      19821,
+      19841,
+      19861,
+      19881,
+      19901,
+      19921,
+      19941,
+      19961,
+      19980,
+      20000
+    ]
+  },
+  "eta": 0.03,
+  "frequency_hz": 150000000.0,
+  "gmax": 100000.0,
+  "gmin": 500.0,
+  "loss_factor_stats": {
+    "finite_count": 20000,
+    "max": 2.5362859154522237,
+    "mean": 0.9928540493456512,
+    "min": 0.0,
+    "nan_count": 0,
+    "positive_count": 19777,
+    "positive_max": 2.5362859154522237,
+    "positive_mean": 1.0040491979022614,
+    "positive_min": 0.7687704937161209,
+    "sum": 19857.080986913024
+  },
+  "loss_table": "/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-fullgrid-final-sparse-praise-loss/full/sparse_praise_loss_table.csv",
+  "loss_table_sha256": "23cbcb4ea85dae35689648dc6e63489a9403a51055e4fa462f6b9b8ddec2c320",
+  "losses": 4,
+  "lst_index": 2,
+  "max_selected_ids": 0,
+  "output_dir": "/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-fullgrid-final-sparse-praise-loss/full",
+  "particle_dir": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs",
+  "particle_spacing_myr": 0.01,
+  "praise": {
+    "loss_key": "full",
+    "part_output": 10
+  },
+  "redshift": 0.05,
+  "s": 2.2,
+  "science_status": "sparse-window PRAiSE-compatible loss table; not a final science radio product",
+  "selected_id_count": 20000,
+  "smooth_order": 3,
+  "sparse_window_dir": "/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-particle-sparse-window",
+  "target_index": 5000,
+  "window_indices": [
+    4950,
+    4955,
+    4960,
+    4965,
+    4970,
+    4975,
+    4980,
+    4985,
+    4990,
+    4995,
+    5000
+  ],
+  "window_width": 5,
+  "xraise_py": "/u/bwbrook/codex_kunanyi/particle_loss_runtime/xraise.py"
+}

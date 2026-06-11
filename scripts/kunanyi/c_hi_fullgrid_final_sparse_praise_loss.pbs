@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_sploss
+#PBS -q normal
+#PBS -l select=1:ncpus=4:mpiprocs=1:mem=16gb
+#PBS -l walltime=01:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal002_sparse_praise_loss/c_hi_fullgrid_final_sparse_praise_loss.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal002_sparse_praise_loss/c_hi_fullgrid_final_sparse_praise_loss.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal002_sparse_praise_loss}"
+RUNTIME_DIR="${RUNTIME_DIR:-/u/bwbrook/codex_kunanyi/particle_loss_runtime}"
+SPARSE_WINDOW_DIR="${SPARSE_WINDOW_DIR:-/scratch/bwbrook/xray_cavities_analysis/2026-06-08-c-hi-fullgrid-final-particle-sparse-window}"
+PARTICLE_DIR="${PARTICLE_DIR:-/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-06-11-c-hi-fullgrid-final-sparse-praise-loss}"
+RUN_LABEL="${RUN_LABEL:-smoke}"
+MAX_SELECTED_IDS="${MAX_SELECTED_IDS:-64}"
+DO_BRIDGE="${DO_BRIDGE:-0}"
+LOSS_SCRIPT="${LOSS_SCRIPT:-$STAGE_DIR/sparse_praise_loss_table.py}"
+RADIO_SCRIPT="${RADIO_SCRIPT:-$STAGE_DIR/sparse_particle_radio_bridge.py}"
+XRAISE_PY="${XRAISE_PY:-$RUNTIME_DIR/xraise.py}"
+PLUTOKORE_SRC="${PLUTOKORE_SRC:-$RUNTIME_DIR/plutokore/src}"
+COMPAT_DIR="${COMPAT_DIR:-$RUNTIME_DIR/python_compat}"
+OUTPUT_DIR="${OUTPUT_DIR:-$OUTPUT_ROOT/$RUN_LABEL}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-$STAGE_DIR/${RUN_LABEL}_sparse_praise_loss_2026-06-11.tar.gz}"
+TARGET_INDEX="${TARGET_INDEX:-5000}"
+TRACER_THRESHOLD="${TRACER_THRESHOLD:-5e-3}"
+XLIM_KPC="${XLIM_KPC:-45}"
+ZLIM_KPC="${ZLIM_KPC:-230}"
+PIXEL_KPC="${PIXEL_KPC:-1}"
+UNIT_VOLUME_KPC3="${UNIT_VOLUME_KPC3:-1}"
+
+module purge
+module load Anaconda3/2024.02-1
+
+export PYTHONPATH="$COMPAT_DIR:$PLUTOKORE_SRC:$RUNTIME_DIR:$STAGE_DIR${PYTHONPATH:+:$PYTHONPATH}"
+export OMP_NUM_THREADS=1
+export NUMBA_NUM_THREADS="${NUMBA_NUM_THREADS:-4}"
+
+mkdir -p "$STAGE_DIR" "$OUTPUT_DIR"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "run_label=$RUN_LABEL"
+echo "numba_num_threads=$NUMBA_NUM_THREADS"
+echo "sparse_window_dir=$SPARSE_WINDOW_DIR"
+echo "particle_dir=$PARTICLE_DIR"
+echo "runtime_dir=$RUNTIME_DIR"
+echo "loss_script=$LOSS_SCRIPT"
+echo "radio_script=$RADIO_SCRIPT"
+echo "xraise_py=$XRAISE_PY"
+echo "output_dir=$OUTPUT_DIR"
+echo "max_selected_ids=$MAX_SELECTED_IDS"
+echo "do_bridge=$DO_BRIDGE"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+loss_args=(
+  --particle-dir "$PARTICLE_DIR"
+  --sparse-window-dir "$SPARSE_WINDOW_DIR"
+  --xraise-py "$XRAISE_PY"
+  --output-dir "$OUTPUT_DIR"
+)
+if [ "$MAX_SELECTED_IDS" -gt 0 ]; then
+  loss_args+=(--max-selected-ids "$MAX_SELECTED_IDS")
+fi
+
+python "$LOSS_SCRIPT" "${loss_args[@]}"
+
+if [ "$DO_BRIDGE" = "1" ]; then
+  python "$RADIO_SCRIPT" \
+    --sparse-window-dir "$SPARSE_WINDOW_DIR" \
+    --output-dir "$OUTPUT_DIR/bridge_external_loss" \
+    --target-index "$TARGET_INDEX" \
+    --tracer-threshold "$TRACER_THRESHOLD" \
+    --xlim-kpc "$XLIM_KPC" \
+    --zlim-kpc "$ZLIM_KPC" \
+    --pixel-kpc "$PIXEL_KPC" \
+    --unit-volume-kpc3 "$UNIT_VOLUME_KPC3" \
+    --loss-table "$OUTPUT_DIR/sparse_praise_loss_table.csv"
+fi
+
+find "$OUTPUT_DIR" -maxdepth 2 -type f -printf "%P\t%s bytes\n" | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$OUTPUT_DIR")" "$(basename "$OUTPUT_DIR")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
