@@ -1,0 +1,43 @@
+{
+  "cavity_boundary_file": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/cavity_stub/cavity_ellipse_boundary_0deg.tsv",
+  "contrast_method": {
+    "boxcar_pixels": 41,
+    "name": "boxcar_unsharp_residual",
+    "residual_units": "log10 mJy sr^-1 residual"
+  },
+  "date": "2026-06-16",
+  "figure_file": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_observational_product_readiness_2026-06-16/c_hi_final_observational_product_readiness.png",
+  "focus_fov_kpc": {
+    "x_max": 90.0,
+    "x_min": -90.0,
+    "z_max": 235.0,
+    "z_min": -235.0
+  },
+  "image_stretch": {
+    "contrast": "log10(corrected X-ray) minus boxcar-smoothed log10(corrected X-ray)",
+    "surface_brightness": "log10(corrected 1 keV mJy sr^-1), robust 0.5-99.7 percentile color limits"
+  },
+  "overlay_statement": "Tracer contours and cavity ellipses are diagnostic overlays; the ellipses are not X-ray-fitted cavities.",
+  "product": "c_hi_final_observational_product_readiness",
+  "projection_angle": "0 deg, projected along simulation y axis",
+  "provenance_rows": 10,
+  "radio_diagnostic_limitation": "Sparse PRAiSE/particle-binned radio products remain particle-emissivity diagnostics, not validated radio observables.",
+  "radio_status_rows": 3,
+  "ready_for_patrick_review": true,
+  "recommended_next_goal": "full raytraced radio surface-brightness at two or more frequencies plus an X-ray-based cavity/topology fitting method if Patrick-agent continues HOLD",
+  "snapshot": "50 Myr final C-HI endpoint",
+  "timestep": "Timestep_51",
+  "topology_rows": 4,
+  "topology_statement": "Ready for Patrick-agent review; current evidence should be read as connected-envelope versus two-tracer-lobe topology unresolved for observational fitting.",
+  "tracer_file": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/xraise_grid/tracer_max_los.tsv",
+  "tracer_threshold": "5e-03",
+  "wide_field_fov_kpc": {
+    "goal005_main_x_width": 90.0,
+    "x_max": 199.1538544,
+    "x_min": -199.1538544,
+    "x_width": 398.3077088,
+    "z_max": 248.9480743,
+    "z_min": -248.9480743
+  },
+  "xray_map_file": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/xraise_grid/xray_1kev_xraise_corrected_mjy_sr.tsv"
+}

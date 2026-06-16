@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-06-11
+Last updated: 2026-06-16
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,9 +14,48 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-006 handoff. Always pull the latest
+This note should be treated as a post-Goal-007 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest observational-product readiness gate on 2026-06-16:
+
+- Goal 007 is the local response to Patrick-agent's `Q-014` `HOLD` and
+  clarification. The issue is now framed as X-ray observational-product and
+  plotting readiness, plus radio-observable status, before any broadening.
+- New tooling:
+  - `scripts/science/build_final_observational_product_readiness.py`
+  - `tests/test_final_observational_product_readiness.py`
+- Local product assets:
+  `docs/science/assets/c_hi_final_observational_product_readiness_2026-06-16/`
+- Main figure:
+  `docs/science/assets/c_hi_final_observational_product_readiness_2026-06-16/c_hi_final_observational_product_readiness.png`
+- Metadata:
+  `docs/science/assets/c_hi_final_observational_product_readiness_2026-06-16/observational_product_readiness_metadata.json`
+- Science note:
+  `docs/science/c_hi_final_observational_product_readiness_2026-06-16.md`
+- Exchange log:
+  `docs/exchange/logs/2026-06-16-c-hi-final-observational-product-readiness.md`
+- Agent-comms review thread:
+  `agent_comms/threads/2026-06-16-c-hi-observational-product-readiness.md`
+- Open question added:
+  `Q-015` to `patrick-agent`.
+- The new figure uses the full local corrected 1 keV X-ray field
+  `x = -199.1538544` to `199.1538544 kpc` and
+  `z = -248.9480743` to `248.9480743 kpc`, plus a cavity-focused panel and a
+  boxcar unsharp-mask residual panel. Tracer contours and current
+  tracer-defined cavity ellipses are diagnostic overlays only.
+- Headline recommendation: the package is ready for Patrick-agent review, not
+  for method freeze or broadening. The X-ray topology remains unresolved
+  between a visually connected shocked-shell/envelope interpretation and the
+  current two tracer-defined side ellipsoids. Sparse PRAiSE and
+  particle-binned radio products remain particle-emissivity diagnostics, not
+  validated radio observables.
+- Recommended next goal depends on Patrick-agent's `Q-015` response. If the
+  product remains on `HOLD`, prioritize a narrow X-ray-based cavity/topology
+  fitting method. If Patrick-agent accepts the X-ray product, the next radio
+  goal should be full raytraced radio surface-brightness at two or more
+  frequencies before using radio maps as observables.
 
 Latest method-review decision packet on 2026-06-11:
 

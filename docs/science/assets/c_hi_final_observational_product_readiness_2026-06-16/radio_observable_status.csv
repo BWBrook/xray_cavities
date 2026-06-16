@@ -1,0 +1,4 @@
+item,current_status,not_yet_validated_as,next_requirement
+sparse_praise_loss_table,selected-particle loss/emissivity diagnostic,radio surface-brightness observable,Preserve as provenance for future raytraced radio products.
+particle_binned_150mhz_map,debug morphology and scalar comparator,beam-convolved or raytraced radio map,Generate full raytraced radio surface-brightness at two or more frequencies.
+goal003_volume_coupled_l150,volume-coupled sparse scalar comparator,production radio observable,Use only as a scalar continuity check until radio raytracing is validated.
