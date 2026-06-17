@@ -1,0 +1,12 @@
+decision,status,choice,rationale
+baseline_reference,identified,/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5::Timestep_0,Earliest full-grid initial output from the same C-HI production chain found remotely.
+final_endpoint,identified,/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5::Timestep_51,"Accepted final 50 Myr C-HI endpoint used by Goals 003, 005, and 007."
+grid_compatibility,preflight_passed,"shape [1014, 960, 960]",Baseline and final expose matching rho/prs/tr1/vx1/vx2/vx3 datasets and grid shape.
+coordinate_compatibility,enforced_by_extractor_not_remote_preflight,"compare baseline/final X, Y, and Z coordinate axes with rtol=0 and atol=1e-10 kpc",Remote preflight observed only shape and dataset presence; the extractor now fails fast before subtraction if coordinate axes differ.
+ambient_tracer_exclusion,selected,final cells with tr1 <= 5e-3 are ambient; tr1 > 5e-3 remains Level 2 lobe truth,Keeps Level 3 compatible with the accepted Level 2 tracer-lobe threshold.
+spatial_mask,selected,"whole-grid side-aware mask, split by z < 0 and z >= 0 plus bipolar total",Captures shocked ambient gas outside the tracer-defined lobes without adding a new cavity geometry.
+thermal_formula,ready_for_bounded_postprocessing,sum((prs_final - prs_baseline) * dV / (gamma - 1)) * unit_energy,Matches the pressure-volume unit convention in pluto_h5_truth_extract.c.
+kinetic_formula,ready_for_bounded_postprocessing,sum(0.5 * (rho_final*v_final^2 - rho_baseline*v_baseline^2) * dV) * unit_energy,Uses the same PLUTO code-unit energy conversion as Level 2 truth.
+thermal_kinetic_extractor,tested_local_ready_not_run_remote,scripts/science/pluto_h5_level3_ambient_extract.py,"Synthetic-HDF5 tests validate the final tracer mask, grid-shape check, and thermal/kinetic sums."
+remote_postprocessing_access,blocked_remote_postprocessing_access,terminal SSH/SCP denied at jumpbox after Open OnDemand enablement; OOD web shell allowed read-only preflight,Full-grid extraction needs bounded Kunanyi post-processing and reliable staging/retrieval.
+gravitational_component,blocked_missing_potential,not computed in Goal 008,"The accepted HDF5 vars do not include potential, and no reviewed potential/profile convention is in this repo."

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-06-16
+Last updated: 2026-06-17
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,9 +14,54 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-007 handoff. Always pull the latest
+This note should be treated as a post-Goal-008 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Level 3 ambient-energy method gate on 2026-06-17:
+
+- Goal 008 responded to Stas-agent's `Q-013` answer that Level 3 ambient energy
+  is required before broadening. Patrick-agent's `Q-015` answer accepted the
+  Goal 007 X-ray product as product-adequate, and Stas-agent's `Q-012` answer
+  adopted `2.5pV` as the non-relativistic interpretation while retaining
+  `4pV` as the literature comparison.
+- New tooling:
+  - `scripts/science/pluto_h5_level3_ambient_extract.py`
+  - `scripts/science/build_final_level3_ambient_energy.py`
+  - `tests/test_pluto_h5_level3_ambient_extract.py`
+  - `tests/test_final_level3_ambient_energy.py`
+- Local product assets:
+  `docs/science/assets/c_hi_final_level3_ambient_energy_2026-06-17/`
+- Science note:
+  `docs/science/c_hi_final_level3_ambient_energy_2026-06-17.md`
+- Exchange log:
+  `docs/exchange/logs/2026-06-17-c-hi-final-level3-ambient-energy.md`
+- Result status:
+  `blocked_remote_postprocessing_access`.
+- Remote preflight via Open OnDemand shell identified the baseline
+  `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5`
+  at `Timestep_0` and the accepted final endpoint
+  `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5`
+  at `Timestep_51`. Both expose `rho`, `prs`, `tr1`, `vx1`, `vx2`, and `vx3`
+  with shape `1014 x 960 x 960`.
+- Thermal and kinetic formulas are defined and the streaming extractor is
+  locally tested. A local review iteration hardened the extractor to compare
+  baseline and final `X`, `Y`, and `Z` coordinate axes with `rtol = 0` and
+  `atol = 1e-10 kpc` before cell-wise subtraction. The remote preflight
+  verified only dataset presence and shape; the coordinate check has not yet
+  run on the full remote pair. Full-grid extraction did not run because
+  terminal SSH/SCP through the TPAC jumpbox still returned `Permission denied
+  (publickey,password)` after Open OnDemand SSH enablement. No PBS job was
+  submitted, so the PBS stop rule was not invoked.
+- Gravitational component status:
+  `blocked_missing_potential`. The accepted HDF5 vars do not contain
+  gravitational potential, and this repo does not yet contain a reviewed
+  potential/profile zero-point convention.
+- Headline recommendation: do not broaden yet. Next goal should repair
+  terminal SSH/SCP or approve a reliable Open OnDemand staging/retrieval route,
+  then run the tested bounded Level 3 extractor on the existing baseline/final
+  HDF5 pair. Keep gravitational energy blocked unless Stas/Patrick provide a
+  reviewed potential/profile convention.
 
 Latest observational-product readiness gate on 2026-06-16:
 

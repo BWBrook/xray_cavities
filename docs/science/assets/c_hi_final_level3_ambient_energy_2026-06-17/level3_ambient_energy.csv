@@ -1,0 +1,5 @@
+side,component,status,value_erg,unit,note,ratio_to_level1_bipolar_injected,ratio_to_level2_bipolar_lobe,ratio_to_pV_bipolar,ratio_to_2.5pV_bipolar,ratio_to_4pV_bipolar
+bipolar_total,ambient_thermal_delta,blocked_remote_postprocessing_access,,erg,"Baseline and final fields exist and the streaming extractor is tested locally, but bounded remote post-processing has not completed.",,,,,
+bipolar_total,ambient_kinetic_delta,blocked_remote_postprocessing_access,,erg,"Baseline and final fields exist and the streaming extractor is tested locally, but bounded remote post-processing has not completed.",,,,,
+bipolar_total,ambient_thermal_plus_kinetic_delta,blocked_remote_postprocessing_access,,erg,"Baseline and final fields exist and the streaming extractor is tested locally, but bounded remote post-processing has not completed.",,,,,
+bipolar_total,ambient_gravitational_delta,blocked_missing_potential,,erg,The final and baseline HDF5 outputs expose rho/prs/tr1/vx1/vx2/vx3 but no gravitational potential. The repo does not contain a reviewed potential/profile zero-point convention for Level 3 gravitational energy.,,,,,

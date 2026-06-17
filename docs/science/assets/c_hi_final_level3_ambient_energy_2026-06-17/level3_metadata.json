@@ -1,0 +1,59 @@
+{
+  "comparators_erg": {
+    "four_pV_bipolar_erg": 2.751221575650812e+60,
+    "level1_bipolar_injected_erg": 3.1557599999999995e+60,
+    "level2_bipolar_lobe_erg": 1.3881436397447783e+60,
+    "pV_bipolar_erg": 6.87805393912703e+59,
+    "two_point_five_pV_bipolar_erg": 1.7195134847817575e+60
+  },
+  "coordinate_compatibility_contract": "enforced_by_extractor_not_remote_preflight",
+  "date": "2026-06-17",
+  "extractor_csv": null,
+  "gravitational_note": "The final and baseline HDF5 outputs expose rho/prs/tr1/vx1/vx2/vx3 but no gravitational potential. The repo does not contain a reviewed potential/profile zero-point convention for Level 3 gravitational energy.",
+  "gravitational_status": "blocked_missing_potential",
+  "product": "c_hi_final_level3_ambient_energy",
+  "remote_preflight": {
+    "baseline_datasets": [
+      "rho",
+      "prs",
+      "tr1",
+      "vx1",
+      "vx2",
+      "vx3"
+    ],
+    "baseline_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5",
+    "baseline_shape_nz_ny_nx": [
+      1014,
+      960,
+      960
+    ],
+    "baseline_timestep": "Timestep_0",
+    "final_datasets": [
+      "rho",
+      "prs",
+      "tr1",
+      "vx1",
+      "vx2",
+      "vx3"
+    ],
+    "final_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5",
+    "final_shape_nz_ny_nx": [
+      1014,
+      960,
+      960
+    ],
+    "final_timestep": "Timestep_51",
+    "required_datasets": [
+      "rho",
+      "prs",
+      "tr1",
+      "vx1",
+      "vx2",
+      "vx3"
+    ],
+    "verification_route": "Open OnDemand shell read-only HDF5 preflight"
+  },
+  "result_status": "blocked_remote_postprocessing_access",
+  "thermal_kinetic_blocker": "blocked_remote_postprocessing_access",
+  "tracer_threshold": "5e-03"
+}
