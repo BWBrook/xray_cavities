@@ -14,9 +14,43 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-009 handoff. Always pull the latest
+This note should be treated as a post-Goal-010 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Level 3 broadening decision packet on 2026-06-18:
+
+- Goal 010 created a docs-only decision packet asking whether the Goal 009
+  thermal/kinetic Level 3 closeout is sufficient to open the first controlled
+  `C-HI` broadening step while gravitational Level 3 remains
+  `blocked_missing_potential`.
+- Candidate recommendation:
+  `PROCEED WITH CHANGES`, pending Stas-agent and Patrick-agent review.
+- New science note:
+  `docs/science/c_hi_level3_broadening_decision_packet_2026-06-18.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_level3_broadening_decision_packet_2026-06-18/`,
+  including `broadening_decision_matrix.csv` and
+  `level3_evidence_summary.csv`.
+- New agent-comms review thread:
+  `agent_comms/threads/2026-06-18-c-hi-level3-broadening-decision.md`.
+- New open questions:
+  - `Q-016` to `stas-agent`: does Goal 009 thermal+kinetic Level 3, with
+    overall status `partial_green_with_gravitational_blocker`, satisfy `Q-013`,
+    or must gravitational Level 3 be defined first?
+  - `Q-017` to `patrick-agent`: do Goal 007 product adequacy plus Goal 009
+    thermal/kinetic Level 3 remove remaining observational/runtime blockers for
+    a first controlled `C-HI` broadening goal?
+- New exchange log:
+  `docs/exchange/logs/2026-06-18-c-hi-level3-broadening-decision-packet.md`.
+- No broadening, remote commands, PBS jobs, PLUTO, XRAiSE, PRAiSE, radio,
+  cavity extraction, product regeneration, scientific-default changes, commits,
+  or pushes occurred in Goal 010.
+- Recommended next action: send the packet through Stas-agent and Patrick-agent
+  review. If both reviewers answer proceed or proceed-with-changes, write a
+  narrow post-processing-only `C-HI` broadening goal with all topology,
+  radio-observable, and large-PBS stop-rule guardrails. If Stas-agent requires
+  gravitational Level 3 first, write a gravity convention goal instead.
 
 Latest Level 3 remote extraction closeout attempt on 2026-06-18:
 

@@ -1,0 +1,13 @@
+item,status,value,unit,source,note
+thermal_kinetic_status,green_level3_thermal_kinetic_closeout,,,docs/science/c_hi_final_level3_remote_extraction_closeout_2026-06-18.md,Goal 009 completed bounded thermal and kinetic extraction.
+overall_level3_status,partial_green_with_gravitational_blocker,,,docs/science/c_hi_final_level3_remote_extraction_closeout_2026-06-18.md,Thermal and kinetic are green; gravitational remains blocked_missing_potential.
+ambient_thermal_delta_bipolar,computed,2.259405474647962e60,erg,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_ambient_energy.csv,Bipolar final ambient cells minus matching baseline cells.
+ambient_kinetic_delta_bipolar,computed,5.422582705702232e59,erg,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_ambient_energy.csv,Bipolar final ambient cells minus matching baseline cells.
+ambient_thermal_plus_kinetic_bipolar,computed,2.8016637452181852e60,erg,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_ambient_energy.csv,Headline Goal 009 Level 3 thermal plus kinetic value.
+ratio_to_level1_bipolar_injected,computed,0.887793667838551,ratio,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_ambient_energy.csv,Ratio for bipolar thermal plus kinetic Level 3.
+ratio_to_level2_bipolar_lobe,computed,2.018280864459599,ratio,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_ambient_energy.csv,Ratio for bipolar thermal plus kinetic Level 3.
+ratio_to_2.5pV_bipolar,computed,1.6293351404416438,ratio,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_ambient_energy.csv,Uses Stas-agent Q-012 adopted non-relativistic convention.
+ratio_to_4pV_bipolar,computed,1.0183344627760273,ratio,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_ambient_energy.csv,Uses literature-comparison cavity enthalpy.
+gravitational_level3,blocked_missing_potential,,erg,docs/science/c_hi_final_level3_remote_extraction_closeout_2026-06-18.md,No reviewed potential/profile zero-point convention is available inside authorized evidence.
+coordinate_compatibility,executed_by_remote_extractor_success,,,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_method_decisions.csv,Extractor compared baseline/final X Y Z axes before streaming subtraction.
+patrick_product_status,PRODUCT ADEQUATE,,,agent_comms/threads/2026-06-16-c-hi-observational-product-readiness.md,Goal 007 cleared the X-ray visual-context concern for review.
