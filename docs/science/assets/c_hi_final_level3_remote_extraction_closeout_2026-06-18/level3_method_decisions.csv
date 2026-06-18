@@ -1,0 +1,11 @@
+decision,status,choice,rationale
+baseline_reference,identified,/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5::Timestep_0,Earliest full-grid initial output from the same C-HI production chain.
+final_endpoint,identified,/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5::Timestep_51,"Accepted final 50 Myr C-HI endpoint used by Goals 003, 005, 007, and 008."
+grid_compatibility,remote_preflight_passed,"shape [1014, 960, 960]",Remote job preflight confirmed required datasets and matching field shapes.
+coordinate_compatibility,executed_by_remote_extractor_success,"compare baseline/final X, Y, and Z coordinate axes with rtol=0 and atol=1e-10 kpc",The SHA-matched extractor unconditionally validates coordinates before streaming subtraction; the remote job reached extractor validation and Exit_status=0.
+ambient_tracer_exclusion,selected,final cells with tr1 <= 5e-3 are ambient; tr1 > 5e-3 remains Level 2 lobe truth,Keeps Level 3 compatible with the accepted Level 2 tracer-lobe threshold.
+spatial_mask,selected,"whole-grid side-aware mask, split by z < 0 and z >= 0 plus bipolar total",Captures shocked ambient gas outside tracer-defined lobes without adding a new cavity geometry.
+thermal_formula,computed,sum((prs_final - prs_baseline) * dV / (gamma - 1)) * unit_energy,Matches the pressure-volume unit convention in pluto_h5_truth_extract.c.
+kinetic_formula,computed,sum(0.5 * (rho_final*v_final^2 - rho_baseline*v_baseline^2) * dV) * unit_energy,Uses the same PLUTO code-unit energy conversion as Level 2 truth.
+remote_postprocessing_access,completed,"699326.kunanyi-ohpc, Exit_status=0",Bounded one-node PBS post-processing job completed and compact outputs were retrieved.
+gravitational_component,blocked_missing_potential,not computed in Goal 009,No reviewed potential/profile zero-point convention is available inside authorized evidence.

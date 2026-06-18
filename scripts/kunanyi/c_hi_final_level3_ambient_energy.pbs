@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_l3amb
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=64gb
+#PBS -l walltime=04:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy/c_hi_final_level3_ambient_energy.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy/c_hi_final_level3_ambient_energy.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-06-18-c-hi-final-level3-ambient-energy}"
+BASELINE_H5="${BASELINE_H5:-/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5}"
+BASELINE_TIMESTEP="${BASELINE_TIMESTEP:-Timestep_0}"
+FINAL_H5="${FINAL_H5:-/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5}"
+FINAL_TIMESTEP="${FINAL_TIMESTEP:-Timestep_51}"
+TRACER_THRESHOLD="${TRACER_THRESHOLD:-5e-3}"
+EXTRACTOR="${EXTRACTOR:-$STAGE_DIR/pluto_h5_level3_ambient_extract.py}"
+OUTPUT_CSV="${OUTPUT_CSV:-$ANALYSIS_ROOT/level3_extractor_output.csv}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-$STAGE_DIR/final_level3_ambient_energy_2026-06-18.tar.gz}"
+
+mkdir -p "$STAGE_DIR" "$ANALYSIS_ROOT" "$ANALYSIS_ROOT/remote_logs"
+cd "$PBS_O_WORKDIR"
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "stage_dir=$STAGE_DIR"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "baseline_h5=$BASELINE_H5"
+echo "baseline_timestep=$BASELINE_TIMESTEP"
+echo "final_h5=$FINAL_H5"
+echo "final_timestep=$FINAL_TIMESTEP"
+echo "tracer_threshold=$TRACER_THRESHOLD"
+echo "extractor=$EXTRACTOR"
+echo "output_csv=$OUTPUT_CSV"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+for path in "$BASELINE_H5" "$FINAL_H5" "$EXTRACTOR"; do
+  if [ ! -r "$path" ]; then
+    echo "missing required input: $path" >&2
+    exit 2
+  fi
+done
+sha256sum "$EXTRACTOR"
+ls -lh "$BASELINE_H5" "$FINAL_H5"
+
+module purge
+module load Anaconda3/2024.02-1
+
+python - <<'PY' "$BASELINE_H5" "$BASELINE_TIMESTEP" "$FINAL_H5" "$FINAL_TIMESTEP"
+import sys
+from pathlib import Path
+
+import h5py
+
+required = ("rho", "prs", "tr1", "vx1", "vx2", "vx3")
+baseline_h5, baseline_timestep, final_h5, final_timestep = sys.argv[1:5]
+for label, h5_path, timestep in (
+    ("baseline", baseline_h5, baseline_timestep),
+    ("final", final_h5, final_timestep),
+):
+    with h5py.File(Path(h5_path), "r") as h5:
+        if timestep not in h5:
+            raise SystemExit(f"missing {label} timestep {timestep}")
+        shape = None
+        for name in required:
+            path = f"/{timestep}/vars/{name}"
+            if path not in h5:
+                raise SystemExit(f"missing {label} dataset {path}")
+            current_shape = tuple(h5[path].shape)
+            if shape is None:
+                shape = current_shape
+            elif current_shape != shape:
+                raise SystemExit(f"{label} dataset shape mismatch: {path} {current_shape} vs {shape}")
+        for axis in ("X", "Y", "Z"):
+            path = f"/cell_coords/{axis}"
+            if path not in h5:
+                raise SystemExit(f"missing {label} coordinate dataset {path}")
+        print(f"{label}_hdf5_preflight=passed shape_nz_ny_nx={shape}")
+PY
+
+python "$EXTRACTOR" \
+  --baseline-h5 "$BASELINE_H5" \
+  --baseline-timestep "$BASELINE_TIMESTEP" \
+  --final-h5 "$FINAL_H5" \
+  --final-timestep "$FINAL_TIMESTEP" \
+  --tracer-threshold "$TRACER_THRESHOLD" \
+  --output-csv "$OUTPUT_CSV"
+
+python - <<'PY' "$OUTPUT_CSV"
+import csv
+import math
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+rows = {row["side"]: row for row in csv.DictReader(path.open())}
+expected = {"negative_z", "positive_z", "bipolar_total"}
+missing = expected - set(rows)
+if missing:
+    raise SystemExit(f"missing output sides: {sorted(missing)}")
+for side, row in rows.items():
+    count = int(row["ambient_cell_count"])
+    volume = float(row["ambient_volume_kpc3"])
+    thermal = float(row["thermal_delta_erg"])
+    kinetic = float(row["kinetic_delta_erg"])
+    total = float(row["thermal_plus_kinetic_delta_erg"])
+    if count <= 0:
+        raise SystemExit(f"{side} ambient_cell_count is not positive: {count}")
+    for key, value in (
+        ("ambient_volume_kpc3", volume),
+        ("thermal_delta_erg", thermal),
+        ("kinetic_delta_erg", kinetic),
+        ("thermal_plus_kinetic_delta_erg", total),
+    ):
+        if not math.isfinite(value):
+            raise SystemExit(f"{side} {key} is not finite: {value}")
+    if not math.isclose(total, thermal + kinetic, rel_tol=1e-12, abs_tol=0.0):
+        raise SystemExit(f"{side} total mismatch: {total} vs {thermal + kinetic}")
+print("level3_extractor_validation=passed")
+PY
+
+cp "$PBS_O_WORKDIR/$(basename "$0")" "$ANALYSIS_ROOT/remote_logs/" 2>/dev/null || true
+find "$ANALYSIS_ROOT" -maxdepth 2 -type f -printf "%P\t%s bytes\n" | sort
+find "$ANALYSIS_ROOT" -maxdepth 2 -type f -exec sha256sum {} \; | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$ANALYSIS_ROOT")" "$(basename "$ANALYSIS_ROOT")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

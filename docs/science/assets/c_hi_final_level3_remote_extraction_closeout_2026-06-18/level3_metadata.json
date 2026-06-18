@@ -1,0 +1,94 @@
+{
+  "checksums_sha256": {
+    "extractor_csv": "efa7640360f548ed776cfd96ad2213f9e863848113b538c182f798a375ec1c3b",
+    "remote_archive": "77d01152913072afcfcf4a0ebffdb9d50a50afea8a25ddb9c311e04cb8cd1d96",
+    "remote_archive_expected": "77d01152913072afcfcf4a0ebffdb9d50a50afea8a25ddb9c311e04cb8cd1d96",
+    "staged_extractor": "00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de",
+    "staged_pbs_wrapper": "3e84ff8a27571d1dac66b958390a97d924d17b9694262788380b98b66c8fdc97"
+  },
+  "comparators_erg": {
+    "four_pV_bipolar_erg": 2.751221575650812e+60,
+    "level1_bipolar_injected_erg": 3.1557599999999995e+60,
+    "level2_bipolar_lobe_erg": 1.3881436397447783e+60,
+    "pV_bipolar_erg": 6.87805393912703e+59,
+    "two_point_five_pV_bipolar_erg": 1.7195134847817575e+60
+  },
+  "coordinate_compatibility_contract": "executed_by_remote_extractor_success",
+  "date": "2026-06-18",
+  "gravitational_note": "The accepted HDF5 outputs do not expose gravitational potential, and this repo does not contain a reviewed potential/profile zero-point convention for Level 3 gravitational energy.",
+  "gravitational_status": "blocked_missing_potential",
+  "product": "c_hi_final_level3_remote_extraction_closeout",
+  "remote_analysis_root": "/scratch/bwbrook/xray_cavities_analysis/2026-06-18-c-hi-final-level3-ambient-energy",
+  "remote_job": {
+    "ctime": "Thu Jun 18 13:06:14 2026",
+    "exit_status": 0,
+    "job_id": "699326.kunanyi-ohpc",
+    "job_name": "c_hi_l3amb",
+    "mtime": "Thu Jun 18 13:08:53 2026",
+    "queue": "normal",
+    "resource_request": {
+      "select": "1:ncpus=1:mpiprocs=1:mem=64gb",
+      "walltime": "04:00:00"
+    },
+    "resources_used": {
+      "cpupercent": 30,
+      "cput": "00:01:12",
+      "mem": "150096kb",
+      "ncpus": 1,
+      "vmem": "423060kb",
+      "walltime": "00:02:39"
+    },
+    "state": "F"
+  },
+  "remote_preflight": {
+    "baseline_datasets": [
+      "rho",
+      "prs",
+      "tr1",
+      "vx1",
+      "vx2",
+      "vx3"
+    ],
+    "baseline_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5",
+    "baseline_shape_nz_ny_nx": [
+      1014,
+      960,
+      960
+    ],
+    "baseline_timestep": "Timestep_0",
+    "final_datasets": [
+      "rho",
+      "prs",
+      "tr1",
+      "vx1",
+      "vx2",
+      "vx3"
+    ],
+    "final_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5",
+    "final_shape_nz_ny_nx": [
+      1014,
+      960,
+      960
+    ],
+    "final_timestep": "Timestep_51",
+    "required_datasets": [
+      "rho",
+      "prs",
+      "tr1",
+      "vx1",
+      "vx2",
+      "vx3"
+    ],
+    "verification_route": "Open OnDemand shell read-only HDF5 preflight"
+  },
+  "remote_stage_dir": "/u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy",
+  "result_status": "partial_green_with_gravitational_blocker",
+  "retrieved_files": {
+    "archive": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/remote_logs/final_level3_ambient_energy_2026-06-18.tar.gz",
+    "extractor_csv": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_extractor_output.csv",
+    "stderr": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/remote_logs/c_hi_final_level3_ambient_energy.err",
+    "stdout": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/remote_logs/c_hi_final_level3_ambient_energy.out"
+  },
+  "thermal_kinetic_status": "green_level3_thermal_kinetic_closeout",
+  "tracer_threshold": "5e-03"
+}

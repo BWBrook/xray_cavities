@@ -1,0 +1,22 @@
+jobid=699326.kunanyi-ohpc
+host=n009.kunanyi
+stage_dir=/u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-06-18-c-hi-final-level3-ambient-energy
+baseline_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5
+baseline_timestep=Timestep_0
+final_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5
+final_timestep=Timestep_51
+tracer_threshold=5e-3
+extractor=/u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy/pluto_h5_level3_ambient_extract.py
+output_csv=/scratch/bwbrook/xray_cavities_analysis/2026-06-18-c-hi-final-level3-ambient-energy/level3_extractor_output.csv
+started_utc=2026-06-18T03:06:14Z
+00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de  /u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy/pluto_h5_level3_ambient_extract.py
+-rw-r--r--. 1 bwbrook hpcadmin 42G Jun  1 13:10 /scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5
+-rw-r--r--. 1 bwbrook hpcadmin 42G Jun  6 21:21 /scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5
+baseline_hdf5_preflight=passed shape_nz_ny_nx=(1014, 960, 960)
+final_hdf5_preflight=passed shape_nz_ny_nx=(1014, 960, 960)
+level3_extractor_validation=passed
+level3_extractor_output.csv	635 bytes
+efa7640360f548ed776cfd96ad2213f9e863848113b538c182f798a375ec1c3b  /scratch/bwbrook/xray_cavities_analysis/2026-06-18-c-hi-final-level3-ambient-energy/level3_extractor_output.csv
+77d01152913072afcfcf4a0ebffdb9d50a50afea8a25ddb9c311e04cb8cd1d96  /u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy/final_level3_ambient_energy_2026-06-18.tar.gz
+finished_utc=2026-06-18T03:08:53Z

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-06-17
+Last updated: 2026-06-18
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,9 +14,92 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-008 handoff. Always pull the latest
+This note should be treated as a post-Goal-009 handoff. Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Level 3 remote extraction closeout attempt on 2026-06-18:
+
+- Goal 009 closed out the bounded Level 3 thermal/kinetic ambient-energy
+  extraction on the existing `C-HI` baseline/final HDF5 pair.
+- New local PBS wrapper prepared and syntax-checked:
+  `scripts/kunanyi/c_hi_final_level3_ambient_energy.pbs`.
+- New package helper:
+  `scripts/science/build_final_level3_remote_extraction_closeout.py`.
+- New focused package test:
+  `tests/test_final_level3_remote_extraction_closeout.py`.
+- The wrapper is for the existing HDF5 inputs only:
+  `/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0000.flt.h5`
+  at `Timestep_0`, and
+  `/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5`
+  at `Timestep_51`.
+- Intended remote stage/output paths:
+  `/u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy` and
+  `/scratch/bwbrook/xray_cavities_analysis/2026-06-18-c-hi-final-level3-ambient-energy`.
+- Local validation passed:
+  `uv run pytest tests/test_final_level3_ambient_energy.py tests/test_pluto_h5_level3_ambient_extract.py tests/test_final_volume_coupled_comparison.py -q`
+  returned `14 passed`; `bash -n scripts/kunanyi/c_hi_final_level3_ambient_energy.pbs`
+  and `git diff --check` produced no output.
+- Terminal raw `BatchMode=yes` probes through `kunanyi-via-deep` and
+  `kunanyi-via-nectar` failed at the jumpbox with
+  `Permission denied (publickey,password)`, but this was not the decisive route.
+  After X-ray Cavities refreshed the Open OnDemand 5-minute jumpbox selector
+  through Chrome / `@chrome`, the repo-local secret-safe expect helper worked:
+  `scripts/kunanyi/run_on_kunanyi.sh 'hostname; pwd'` returned
+  `<tpac-host>` and `/u/bwbrook`.
+- Staged remote files matched local SHA-256:
+  - `pluto_h5_level3_ambient_extract.py`:
+    `00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de`
+  - `c_hi_final_level3_ambient_energy.pbs`:
+    `3e84ff8a27571d1dac66b958390a97d924d17b9694262788380b98b66c8fdc97`
+- PBS job submitted and verified queued:
+  - job id: `699326.kunanyi-ohpc`
+  - job name: `c_hi_l3amb`
+  - state at submission verification: `Q`
+  - queue: `normal`
+  - request: `select=1:ncpus=1:mpiprocs=1:mem=64gb`,
+    `walltime=04:00:00`
+  - queued at: `Thu Jun 18 13:06:14 2026`
+- Barry later reported the PBS completion email and X-ray Cavities explicitly
+  authorized the re-check/retrieval. Remote job completion evidence:
+  `Exit_status = 0`, `resources_used.walltime = 00:02:39`,
+  `resources_used.cput = 00:01:12`, `resources_used.mem = 150096kb`.
+- Retrieved remote products:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-06-18-c-hi-final-level3-ambient-energy/level3_extractor_output.csv`,
+  `/scratch/bwbrook/xray_cavities_analysis/2026-06-18-c-hi-final-level3-ambient-energy/remote_logs/`,
+  and
+  `/u/bwbrook/codex_kunanyi/goal009_final_level3_ambient_energy/final_level3_ambient_energy_2026-06-18.tar.gz`.
+- Local asset bundle:
+  `docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/`.
+- Science note:
+  `docs/science/c_hi_final_level3_remote_extraction_closeout_2026-06-18.md`.
+- Exchange log:
+  `docs/exchange/logs/2026-06-18-c-hi-level3-remote-extraction-closeout.md`.
+- Remote stdout recorded:
+  `baseline_hdf5_preflight=passed shape_nz_ny_nx=(1014, 960, 960)`,
+  `final_hdf5_preflight=passed shape_nz_ny_nx=(1014, 960, 960)`, and
+  `level3_extractor_validation=passed`. Remote stderr is zero bytes.
+- The coordinate-compatibility contract executed inside the remote extractor:
+  the SHA-matched extractor compares baseline/final `X`, `Y`, and `Z` axes
+  with `rtol=0` and `atol=1e-10 kpc` before streaming field subtraction.
+- Thermal/kinetic result status: `green_level3_thermal_kinetic_closeout`.
+  Overall status: `partial_green_with_gravitational_blocker`.
+- Headline bipolar values:
+  - ambient thermal delta: `2.259405474647962e60 erg`
+  - ambient kinetic delta: `5.422582705702232e59 erg`
+  - ambient thermal plus kinetic delta: `2.8016637452181852e60 erg`
+  - ratio to Level 1 bipolar injected energy: `0.887793667838551`
+  - ratio to Level 2 tracer-lobe energy: `2.018280864459599`
+  - ratio to `pV`: `4.073337851104109`
+  - ratio to adopted `2.5pV`: `1.6293351404416438`
+  - ratio to `4pV`: `1.0183344627760273`
+- Gravitational Level 3 remains `blocked_missing_potential`; no reviewed
+  potential/profile zero-point convention is available inside authorized
+  evidence.
+- Recommended next action: review Goal 009 as the thermal/kinetic Level 3
+  closeout for the final `C-HI` endpoint, then decide whether controlled
+  broadening can open or whether Stas/Patrick require a gravitational Level 3
+  convention first.
 
 Latest Level 3 ambient-energy method gate on 2026-06-17:
 
