@@ -14,10 +14,81 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-012 complete-product handoff.
+This note should be treated as a post-Goal-013 decision-gate handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 013 viewing-angle trio next-step decision gate on 2026-06-23:
+
+- Goal 013 created a docs/evidence/agent-comms decision packet after X-ray
+  Cavities accepted the final `C-HI` `0/45/90 deg` projection-sensitivity trio.
+- Current status:
+  `complete_decision_packet`.
+- Clean launch point was confirmed:
+  `main...origin/main` at `8ae40b0`.
+- This is deliberately a decision gate before any further broadening. It does
+  not authorize source-age sampling, `C-LO`, `G-LO`, comparison-case
+  processing, new observables, manuscript work, or publication-ready claims.
+- New science note:
+  `docs/science/c_hi_viewing_angle_trio_next_step_decision_gate_2026-06-23.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_viewing_angle_trio_next_step_decision_gate_2026-06-23/`.
+- New compact CSV assets:
+  - `trio_evidence_summary.csv`
+  - `next_step_decision_matrix.csv`
+- New agent-comms review thread:
+  `agent_comms/threads/2026-06-23-c-hi-viewing-angle-trio-next-step.md`.
+- New open questions:
+  - `Q-018` to `stas-agent`: after the accepted final `C-HI` `0/45/90 deg`
+    projection-sensitivity trio, should the next science move be X-ray
+    topology/cavity-method refinement, limited `C-HI` source-age sampling,
+    gravitational Level 3 convention work, or hold?
+  - `Q-019` to `patrick-agent`: does the visible 90-degree X-ray striping and
+    unresolved X-ray-fitted topology require X-ray/cavity-method refinement
+    before source-age sampling, or is a caveated limited `C-HI` source-age
+    probe acceptable from the observational/runtime side?
+- New exchange log:
+  `docs/exchange/logs/2026-06-23-c-hi-viewing-angle-trio-next-step-decision-gate.md`.
+- New Goal 013 log:
+  `docs/goals/013-c-hi-viewing-angle-trio-next-step-decision-gate/Log.md`.
+- Headline recommendation:
+  `PROCEED WITH REVIEWED NEXT STEP, NOT BROAD BATCH`.
+- Decision alternatives explicitly compared:
+  - X-ray topology/cavity-method refinement before more sampling;
+  - limited `C-HI` source-age sampling only;
+  - comparison-case preparation for `C-LO`/`G-LO` or future production work;
+  - radio-observable/raytracing readiness work;
+  - gravitational Level 3 convention work;
+  - no-go/hold if the trio exposes a blocker.
+- Current recommendation is not to open a broad batch. The strongest next
+  branch is a reviewer choice between X-ray/cavity-method refinement and a
+  tightly bounded `C-HI` source-age sampling plan.
+- The Goal 012 `90 deg` corrected X-ray panel has visible vertical striping.
+  Treat it as review-significant evidence. Do not hide it, do not smooth it
+  away in prose, and do not overstate it as a calculation error unless reviewer
+  evidence supports that.
+- Caveats preserved: projection-sensitivity only, not publication-ready
+  observables; connected-envelope/X-ray-topology caveat; sparse-radio
+  diagnostic caveat; Level 3 gravity remains `blocked_missing_potential`; carry
+  Stas-agent `pV`, adopted `2.5pV`, and `4pV` convention.
+- Validation passed:
+  `git diff --check`, targeted placeholder/unresolved-marker scan over the new
+  decision note, exchange log, agent-comms thread, current status, open
+  questions, and Goal 013 log, plus CSV parse/expected-column checks for
+  `trio_evidence_summary.csv` and `next_step_decision_matrix.csv`.
+- No project tests were run because Goal 013 introduced no executable helper
+  code.
+- No remote commands, Open OnDemand, SSH/SCP, PBS jobs, finalizers, Kunanyi
+  staging, PLUTO production, XRAiSE/PRAiSE/radio/cavity product regeneration,
+  source-age sweep, `C-LO`, `G-LO`, comparison-case processing, broad batch
+  work, document builds, commits, pushes, scientific-default changes, or
+  external human contact occurred in Goal 013.
+- Recommended next action: send `Q-018` and `Q-019` through Stas-agent and
+  Patrick-agent review. If both accept a caveated source-age probe, write a
+  narrow `C-HI` source-age sampling goal. If Patrick-agent flags the striping
+  or topology as method-blocking, write an X-ray/cavity-method refinement goal.
+  If Stas-agent elevates gravity again, write a gravitational convention goal.
 
 Latest Goal 012 90-degree viewing-angle broadening state on 2026-06-23:
 
