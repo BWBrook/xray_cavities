@@ -1,0 +1,7 @@
+metric,value_0deg,value_45deg,value_90deg,ratio_45deg_to_0deg,ratio_90deg_to_0deg,ratio_90deg_to_45deg,unit,interpretation
+raw_xray_max,1435453.943161817,159806.3123774619,222643.695189851,0.11132806673369326,0.1551033359520004,1.3932096415814128,mJy sr^-1,projection diagnostic; pixel sums are not luminosity integrals
+corrected_xray_max,2874403.714611562,329837.9248043104,461477.6271700215,0.11475003428628802,0.16054725535740694,1.3991042038110435,mJy sr^-1,projection diagnostic; pixel sums are not luminosity integrals
+raw_xray_sum,2386267961.414721,1068842893.446097,1511572115.95757,0.44791402756479354,0.6334460925592869,1.4142135623730938,mJy sr^-1 pixels,projection diagnostic; pixel sums are not luminosity integrals
+corrected_xray_sum,3212610085.481297,1433987537.616477,2027964623.971217,0.44636214774306926,0.6312514030682306,1.4142135623730925,mJy sr^-1 pixels,projection diagnostic; pixel sums are not luminosity integrals
+correction_ratio_positive_max,2.451117643672624,2.283936965590594,2.324381436823162,0.9317941027785449,0.9482945230406944,1.017708225683063,dimensionless,projection diagnostic; pixel sums are not luminosity integrals
+correction_ratio_positive_sum,1310233.168774694,1275771.933090332,762619.4364273,0.9736983946784148,0.5820486418768407,0.5977709782186454,dimensionless pixels,projection diagnostic; pixel sums are not luminosity integrals

@@ -14,10 +14,113 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-011 complete-product handoff.
+This note should be treated as a post-Goal-012 complete-product handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 012 90-degree viewing-angle broadening state on 2026-06-23:
+
+- Goal 012 completed the final `C-HI` viewing-angle trio by adding one new
+  post-processing-only target: `90 deg`.
+- Current status:
+  `complete_product`.
+- Clean launch point was confirmed:
+  `main...origin/main` at `72b6d05`.
+- Evidence read confirmed Goal 011 is accepted as `complete_product`, supplying
+  the final `45 deg` comparator.
+- Local and remote preparation completed:
+  `scripts/kunanyi/c_hi_final_90deg_viewing_angle_broadening.pbs`.
+- The wrapper targets:
+  `/u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle`
+  and
+  `/scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening`.
+- Local SHA-256 values:
+  - `xraise_grid_smoke.py`:
+    `551bf8b0ab49b1d996eef2384239d221a430566125274df7e8979bd0dc29ec13`
+  - `pluto_h5_cavity_stub_extract.c`:
+    `46ae0502715ef21a8977647dd9a0f3a0f517bd3e0afd629864705defeb400fd7`
+  - `c_hi_final_90deg_viewing_angle_broadening.pbs`:
+    `9592b8b8eeaa49586f9f076266427ef2c8c6a3da5419d76e03b5b0c712bcc778`
+- Initial remote helper probe failed before staging because the TPAC jumpbox
+  selector had expired. After X-ray Cavities refreshed the selector, the three
+  required files were staged and verified on Kunanyi.
+- Remote staged SHA-256 checks passed for:
+  `xraise_grid_smoke.py`, `pluto_h5_cavity_stub_extract.c`, and
+  `c_hi_final_90deg_viewing_angle_broadening.pbs`.
+- Remote wrapper syntax passed:
+  `bash -n c_hi_final_90deg_viewing_angle_broadening.pbs`.
+- PBS job submitted and verified running:
+  - job id: `699822.kunanyi-ohpc`
+  - job name: `c_hi_xcav90`
+  - state at submission verification: `R`
+  - queue: `normal`
+  - request: `select=1:ncpus=1:mpiprocs=1:mem=96gb`,
+    `walltime=06:00:00`
+  - ctime: `Tue Jun 23 23:15:06 2026`
+- Barry reported the PBS completion email:
+  - `Exit_status=0`
+  - `resources_used.walltime=00:16:34`
+  - `resources_used.cput=00:12:10`
+  - `resources_used.mem=1288828kb`
+- After a further authorized Chrome/Open OnDemand selector refresh, retrieval
+  succeeded. `qstat -x -f` confirmed:
+  - `job_state=F`
+  - `Exit_status=0`
+  - `resources_used.walltime=00:16:34`
+  - `Resource_List.select=1:ncpus=1:mpiprocs=1:mem=96gb`
+  - `Resource_List.walltime=06:00:00`
+- Retrieved remote archive:
+  `/u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle/final_90deg_viewing_angle_broadening_2026-06-23.tar.gz`.
+- Archive SHA-256:
+  `0a27e7ad51d91a930ec5f1e853265093ec4bf59915bc4c172be8e7fba7150d6f`.
+- Retrieved remote stdout/stderr:
+  `/u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle/c_hi_final_90deg_viewing_angle_broadening.out`
+  and
+  `/u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle/c_hi_final_90deg_viewing_angle_broadening.err`.
+- Remote stdout markers:
+  `hdf5_preflight=passed`, `xray_90deg_validation=passed`,
+  `cavity_validation=passed`, and `finished_utc=2026-06-23T13:31:40Z`.
+- Remote stderr is zero bytes.
+- Analysis root:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening`.
+- Local product:
+  `docs/science/c_hi_final_90deg_viewing_angle_broadening_2026-06-23.md`.
+- Local asset bundle:
+  `docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/`.
+- Primary product files:
+  - `c_hi_final_90deg_viewing_angle_broadening.png`
+  - `viewing_angle_comparison.csv`
+  - `viewing_angle_trio_comparison.csv`
+  - `projection_metrics.csv`
+  - `cavity_energy_convention.csv`
+  - `product_provenance.csv`
+  - `final_90deg_viewing_angle_metadata.json`
+  - `cavity_stub/cavity_ellipse_boundary_90deg.tsv`
+- The fetched `cavity_stub/cavity_ellipse_boundary_0deg.tsv` is retained as
+  provenance only. The review figure uses a locally projected 90-degree
+  boundary derived from the 3D cavity summary rows.
+- Headline scalar comparison:
+  - corrected X-ray max `45/0 = 0.11475003428628802`
+  - corrected X-ray max `90/0 = 0.16054725535740694`
+  - corrected X-ray max `90/45 = 1.3991042038110435`
+  - corrected X-ray pixel-sum diagnostic `45/0 = 0.44636214774306926`
+  - corrected X-ray pixel-sum diagnostic `90/0 = 0.6312514030682306`
+  - corrected X-ray pixel-sum diagnostic `90/45 = 1.4142135623730925`
+- Focused validation passed:
+  `uv run pytest tests/test_xraise_grid_smoke_projection.py tests/test_final_90deg_viewing_angle_broadening.py -q`
+  returned `7 passed`; `bash -n scripts/kunanyi/c_hi_final_90deg_viewing_angle_broadening.pbs`,
+  JSON parsing, CSV parsing, and `git diff --check` passed.
+- Bipolar cavity convention carried forward:
+  `pV = 6.87805393912703e59 erg`,
+  adopted `2.5pV = 1.7195134847817575e60 erg`,
+  `4pV = 2.751221575650812e60 erg`.
+- Preserved caveats: projection-sensitivity only, connected-envelope/X-ray
+  topology caveat, sparse-radio diagnostic caveat, Level 3 gravity tracked
+  gap, and Stas-agent `pV`/`2.5pV`/`4pV` convention.
+- Recommended next action: review and accept or reject the Goal 012
+  `90 deg` product. If accepted, write a decision gate before any broadening
+  beyond this completed viewing-angle trio.
 
 Latest Goal 011 45-degree viewing-angle broadening state on 2026-06-23:
 

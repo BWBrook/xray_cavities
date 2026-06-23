@@ -1,0 +1,7 @@
+metric,value_0deg,value_90deg,ratio_90deg_to_0deg,unit,interpretation
+raw_xray_max,1435453.943161817,222643.695189851,0.1551033359520004,mJy sr^-1,projection diagnostic; pixel sums are not luminosity integrals
+corrected_xray_max,2874403.714611562,461477.6271700215,0.16054725535740694,mJy sr^-1,projection diagnostic; pixel sums are not luminosity integrals
+raw_xray_sum,2386267961.414721,1511572115.95757,0.6334460925592869,mJy sr^-1 pixels,projection diagnostic; pixel sums are not luminosity integrals
+corrected_xray_sum,3212610085.481297,2027964623.971217,0.6312514030682306,mJy sr^-1 pixels,projection diagnostic; pixel sums are not luminosity integrals
+correction_ratio_positive_max,2.451117643672624,2.324381436823162,0.9482945230406944,dimensionless,projection diagnostic; pixel sums are not luminosity integrals
+correction_ratio_positive_sum,1310233.168774694,762619.4364273,0.5820486418768407,dimensionless pixels,projection diagnostic; pixel sums are not luminosity integrals

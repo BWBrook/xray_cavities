@@ -1,0 +1,46 @@
+{
+  "case": "C-HI",
+  "caveats": [
+    "projection-sensitivity probe, not publication-ready observables",
+    "X-ray topology remains connected-envelope/single-lobe caveat pending later X-ray-based cavity fitting",
+    "sparse particle-binned radio remains diagnostic, not a validated radio observable",
+    "Level 3 gravitational energy remains blocked_missing_potential",
+    "cavity energy convention carries pV, 2.5pV, and 4pV with 2.5pV as adopted non-relativistic interpretation"
+  ],
+  "endpoint": "final 50 Myr",
+  "outputs": {
+    "cavity_energy_convention": "docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/cavity_energy_convention.csv",
+    "figure": "docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/c_hi_final_90deg_viewing_angle_broadening.png",
+    "product_provenance": "docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/product_provenance.csv",
+    "projected_boundary_90deg": "docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/cavity_stub/cavity_ellipse_boundary_90deg.tsv",
+    "projection_metrics": "docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/projection_metrics.csv",
+    "viewing_angle_comparison": "docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/viewing_angle_comparison.csv",
+    "viewing_angle_trio_comparison": "docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/viewing_angle_trio_comparison.csv"
+  },
+  "package": "c_hi_final_90deg_viewing_angle_broadening_2026-06-23",
+  "remote_analysis_root": "/scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening",
+  "remote_archive_sha256": "0a27e7ad51d91a930ec5f1e853265093ec4bf59915bc4c172be8e7fba7150d6f",
+  "remote_job_id": "699822.kunanyi-ohpc",
+  "remote_stage": "/u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle",
+  "status": "complete_product",
+  "target_projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 960,
+    "sky_horizontal_max_kpc": 199.78813031514485,
+    "sky_horizontal_min_kpc": -199.78813031514485,
+    "view_angle_deg": 90.0
+  },
+  "target_view_angle_deg": 90.0,
+  "validation_markers": {
+    "cavity": true,
+    "hdf5_preflight": true,
+    "stderr_empty": true,
+    "xray_90deg": true
+  },
+  "view_angles_deg": [
+    0.0,
+    45.0,
+    90.0
+  ]
+}

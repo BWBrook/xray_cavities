@@ -1,0 +1,106 @@
+jobid=699822.kunanyi-ohpc
+host=n001.kunanyi
+stage_dir=/u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening
+input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5
+timestep=Timestep_51
+view_angle_deg=90
+projected_u_bins=960
+xraise_runtime=/u/bwbrook/codex_kunanyi/xraise_runtime
+xraise_dir=/scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg
+cavity_dir=/scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/cavity_stub
+summary_archive=/u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle/final_90deg_viewing_angle_broadening_2026-06-23.tar.gz
+started_utc=2026-06-23T13:15:06Z
+b6cfefa7c9d6c5dbe948a727141feeb1ed54688e1fc7dae3af73fdcc144f7421  /scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5
+551bf8b0ab49b1d996eef2384239d221a430566125274df7e8979bd0dc29ec13  /u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle/xraise_grid_smoke.py
+46ae0502715ef21a8977647dd9a0f3a0f517bd3e0afd629864705defeb400fd7  /u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle/pluto_h5_cavity_stub_extract.c
+4bf17cb8e63e2d87a06615c170c7dd307788554a0cee83409762223123ec8da5  /u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py
+e0f53a9f276a956f347af0e4fe627ee152762abc8b5116fc458070ee5f0925e3  /u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt
+64df88d39896f14064bb799fd5b70c6f68d20bcbdc5a15d19e2e4fd15b22f747  /u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz
+hdf5_preflight=passed shape_nz_ny_nx=(1014, 960, 960) time_code=15330.069689399999
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 461477.6271700215,
+    "min": 0.0,
+    "positive_cells": 567840,
+    "positive_max": 461477.6271700215,
+    "positive_min": 160.93620108450523,
+    "positive_sum": 2027964623.9712186,
+    "sum": 2027964623.9712174
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 567840,
+    "max": 2.3243814368231623,
+    "min": 1.3311570279114957,
+    "positive_cells": 567840,
+    "positive_max": 2.3243814368231623,
+    "positive_min": 1.3311570279114957,
+    "positive_sum": 762619.4364273,
+    "sum": 762619.4364273
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 960,
+    "sky_horizontal_max_kpc": 199.78813031514485,
+    "sky_horizontal_min_kpc": -199.78813031514485,
+    "view_angle_deg": 90.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 222643.69518985102,
+    "min": 0.0,
+    "positive_cells": 567840,
+    "positive_max": 222643.69518985102,
+    "positive_min": 119.96003114138031,
+    "positive_sum": 1511572115.9575703,
+    "sum": 1511572115.95757
+  },
+  "redshift": 0.05,
+  "time_code": 15330.0696894,
+  "time_myr": 50.00000000000777,
+  "timestep": "Timestep_51",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}
+xray_90deg_validation=passed
+cavity_validation=passed
+cavity_stub/cavity_ellipse_boundary_0deg.tsv	36005 bytes
+cavity_stub/cavity_stub_metadata.txt	475 bytes
+cavity_stub/cavity_stub_summary.csv	1737 bytes
+cavity_stub/pluto_h5_cavity_stub_extract	4257096 bytes
+xraise_grid_90deg/tracer_max_los.tsv	16548480 bytes
+xraise_grid_90deg/u_kpc.tsv	11898 bytes
+xraise_grid_90deg/x_kpc.tsv	11898 bytes
+xraise_grid_90deg/xraise_grid_smoke_metadata.json	1869 bytes
+xraise_grid_90deg/xraise_grid_smoke_summary.csv	438 bytes
+xraise_grid_90deg/xray_1kev_correction_ratio.tsv	16548480 bytes
+xraise_grid_90deg/xray_1kev_raw_mjy_sr.tsv	16548480 bytes
+xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv	16548480 bytes
+xraise_grid_90deg/z_kpc.tsv	12437 bytes
+161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/u_kpc.tsv
+161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/x_kpc.tsv
+2638e9ea82fc4e860f353fc8f84a76d5a2e0f71ecef7edd3cd17eb9ba15300e3  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv
+2b93e5b1748bb12bac8663333138984e6d3eab7a85d8ac1364b8e31fa70707a0  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/cavity_stub/pluto_h5_cavity_stub_extract
+32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/z_kpc.tsv
+4274b9a8f4f7adea27e30913207a7c0241333816876bb55e0bd2c0174cc75f4c  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/cavity_stub/cavity_ellipse_boundary_0deg.tsv
+568c42dcf1bf9657e5cacc025cc2fea433ccee747c900332dd799da77d3e72c8  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/xray_1kev_raw_mjy_sr.tsv
+57593569d12fc34aebe20ad329ab10a6f28580377823759b1646515f0fef4081  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/cavity_stub/cavity_stub_summary.csv
+73b8c9ab28d6966ef98f11b751dd1d9953dd285af50365a64104589c376db590  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/cavity_stub/cavity_stub_metadata.txt
+a273004bcb7cb06208f7779d9cf8823caf39cf7b7bb73c6114719957d9020900  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/tracer_max_los.tsv
+d9f984c9373aae142284c7ac79fd7b15120a013e4da5ba4ef6c035cbffc33acd  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/xraise_grid_smoke_metadata.json
+f39b5304962d4b815e56c7b9d413ec9cb96003966e820b975830a8fcc314ad05  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/xray_1kev_correction_ratio.tsv
+f7352a607760d51871e77157fc5339f1b350f17523c04a1066a1e1e6e72db59b  /scratch/bwbrook/xray_cavities_analysis/2026-06-23-c-hi-final-90deg-viewing-angle-broadening/xraise_grid_90deg/xraise_grid_smoke_summary.csv
+0a27e7ad51d91a930ec5f1e853265093ec4bf59915bc4c172be8e7fba7150d6f  /u/bwbrook/codex_kunanyi/goal012_c_hi_final_90deg_viewing_angle/final_90deg_viewing_angle_broadening_2026-06-23.tar.gz
+finished_utc=2026-06-23T13:31:40Z
