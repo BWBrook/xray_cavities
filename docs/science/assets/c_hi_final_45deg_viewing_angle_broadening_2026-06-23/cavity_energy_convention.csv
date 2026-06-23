@@ -1,0 +1,4 @@
+side,pV_erg,two_point_five_pV_erg,four_pV_erg,default_interpretation,caveat
+negative_z,3.436843916631997e+59,8.592109791579992e+59,1.3747375666527988e+60,2.5pV adopted non-relativistic convention,projection product reuses 3D tracer-defined cavity scalars
+positive_z,3.4412100224950333e+59,8.603025056237583e+59,1.3764840089980133e+60,2.5pV adopted non-relativistic convention,projection product reuses 3D tracer-defined cavity scalars
+bipolar_total,6.87805393912703e+59,1.7195134847817575e+60,2.751221575650812e+60,2.5pV adopted non-relativistic convention,projection product reuses 3D tracer-defined cavity scalars

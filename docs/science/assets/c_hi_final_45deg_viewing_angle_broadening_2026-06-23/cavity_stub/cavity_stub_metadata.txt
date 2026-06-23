@@ -1,0 +1,9 @@
+input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5
+timestep=Timestep_51
+time_code=15330.069689399999
+time_myr=50.000000000007773
+grid_shape_nz_ny_nx=1014,960,960
+geometry=one_ellipsoid_per_lobe_from_3d_tracer_extent
+ambient_shell=ellipsoidal_radius_1.00_to_1.35_same_side_tracer_le_0.001
+age_gravity=hydrostatic_proxy_from_inner_outer_ambient_shell_pressure_gradient
+drag_coefficient=0.75

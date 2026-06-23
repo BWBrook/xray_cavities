@@ -1,0 +1,3 @@
+side,view_angle_deg,center_u_kpc,center_z_kpc,semi_u_kpc,semi_z_kpc,projected_ellipse_area_kpc2,source
+negative_z,45.0,0.2255530744909004,-108.73230285663158,30.44976137638979,108.70730285625905,10399.021756844779,3D cavity ellipsoid projected into u-z sky plane
+positive_z,45.0,1.6545618665652597,108.73230285663158,30.235010461740867,108.70730285625905,10325.68129922569,3D cavity ellipsoid projected into u-z sky plane

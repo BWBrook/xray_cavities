@@ -12,6 +12,7 @@ import argparse
 import csv
 import importlib.util
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +45,83 @@ def widths_from_centres(values: np.ndarray) -> np.ndarray:
     widths[0] = values[1] - values[0]
     widths[-1] = values[-1] - values[-2]
     return np.abs(widths)
+
+
+def centres_to_edges(values: np.ndarray) -> np.ndarray:
+    values = np.asarray(values, dtype=float)
+    if values.ndim != 1 or values.size < 2:
+        raise ValueError("need at least two coordinate centres")
+    mids = 0.5 * (values[:-1] + values[1:])
+    first = values[0] - (mids[0] - values[0])
+    last = values[-1] + (values[-1] - mids[-1])
+    return np.concatenate([[first], mids, [last]])
+
+
+def projected_axis(
+    x: np.ndarray,
+    y: np.ndarray,
+    *,
+    view_angle_deg: float,
+    projected_u_bins: int | None,
+) -> tuple[np.ndarray, np.ndarray]:
+    if projected_u_bins is None:
+        projected_u_bins = len(x)
+    if projected_u_bins < 2:
+        raise ValueError("projected_u_bins must be at least 2")
+
+    theta = math.radians(view_angle_deg)
+    x_edges = centres_to_edges(x)
+    y_edges = centres_to_edges(y)
+    corner_u = [
+        x_edge * math.cos(theta) - y_edge * math.sin(theta)
+        for x_edge in (x_edges[0], x_edges[-1])
+        for y_edge in (y_edges[0], y_edges[-1])
+    ]
+    u_edges = np.linspace(min(corner_u), max(corner_u), projected_u_bins + 1)
+    u_centres = 0.5 * (u_edges[:-1] + u_edges[1:])
+    return u_centres, u_edges
+
+
+def accumulate_projected_chunk(
+    *,
+    raw_path: np.ndarray,
+    corrected_path: np.ndarray,
+    tracer_max: np.ndarray,
+    raw: np.ndarray,
+    corrected: np.ndarray,
+    tracer: np.ndarray,
+    x: np.ndarray,
+    y_chunk: np.ndarray,
+    x_widths: np.ndarray,
+    y_widths_chunk: np.ndarray,
+    u_edges: np.ndarray,
+    view_angle_deg: float,
+) -> None:
+    theta = math.radians(view_angle_deg)
+    u_widths = np.diff(u_edges)
+    if np.any(u_widths <= 0.0):
+        raise ValueError("projected u edges must be strictly increasing")
+
+    u_coord = x[np.newaxis, :] * math.cos(theta) - y_chunk[:, np.newaxis] * math.sin(theta)
+    bins = np.searchsorted(u_edges, u_coord, side="right") - 1
+    valid = (bins >= 0) & (bins < len(u_widths))
+    if not np.any(valid):
+        return
+
+    flat_bins = bins[valid].astype(np.int64)
+    flat_widths = (x_widths[np.newaxis, :] * y_widths_chunk[:, np.newaxis] / u_widths[bins])[valid]
+    n_u = len(u_widths)
+
+    for z_index in range(raw.shape[0]):
+        raw_values = raw[z_index][valid] * flat_widths
+        corrected_values = corrected[z_index][valid] * flat_widths
+        raw_path[z_index] += np.bincount(flat_bins, weights=raw_values, minlength=n_u)
+        corrected_path[z_index] += np.bincount(flat_bins, weights=corrected_values, minlength=n_u)
+
+        tracer_values = np.nan_to_num(tracer[z_index][valid], nan=0.0, posinf=0.0, neginf=0.0)
+        tracer_by_bin = np.zeros(n_u, dtype=np.float64)
+        np.maximum.at(tracer_by_bin, flat_bins, tracer_values)
+        tracer_max[z_index] = np.maximum(tracer_max[z_index], tracer_by_bin)
 
 
 def write_vector(path: Path, values: np.ndarray) -> None:
@@ -131,12 +209,26 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         prs_ds = h5[f"/{args.timestep}/vars/prs"]
         trc_ds = h5[f"/{args.timestep}/vars/tr1"]
         x, y, z = read_coords(h5)
-        dy_m = widths_from_centres(y) * KPC_M
+        x_width_kpc = widths_from_centres(x)
+        y_width_kpc = widths_from_centres(y)
+        y_width_m = y_width_kpc * KPC_M
 
         nz, ny, nx = rho_ds.shape
-        xray_raw = np.zeros((nz, nx), dtype=np.float64)
-        xray_corrected = np.zeros((nz, nx), dtype=np.float64)
-        tracer_max = np.zeros((nz, nx), dtype=np.float64)
+        if abs(args.view_angle_deg) <= 1.0e-12:
+            sky_x = x
+            sky_edges = None
+            n_sky = nx
+        else:
+            sky_x, sky_edges = projected_axis(
+                x,
+                y,
+                view_angle_deg=args.view_angle_deg,
+                projected_u_bins=args.projected_u_bins,
+            )
+            n_sky = len(sky_x)
+        xray_raw = np.zeros((nz, n_sky), dtype=np.float64)
+        xray_corrected = np.zeros((nz, n_sky), dtype=np.float64)
+        tracer_max = np.zeros((nz, n_sky), dtype=np.float64)
 
         for start in range(0, ny, args.y_chunk):
             stop = min(start + args.y_chunk, ny)
@@ -161,10 +253,30 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             gaunt = gaunt_interp(np.stack([temp_k, freq_grid], axis=-1))
             corrected = np.nan_to_num(raw * apec * gaunt, nan=0.0, posinf=0.0, neginf=0.0)
 
-            path_m = dy_m[start:stop][np.newaxis, :, np.newaxis]
-            xray_raw += np.sum(raw * path_m, axis=1) / 1.0e-29
-            xray_corrected += np.sum(corrected * path_m, axis=1) / 1.0e-29
-            tracer_max = np.maximum(tracer_max, np.nanmax(trc, axis=1))
+            if sky_edges is None:
+                path_m = y_width_m[start:stop][np.newaxis, :, np.newaxis]
+                xray_raw += np.sum(raw * path_m, axis=1) / 1.0e-29
+                xray_corrected += np.sum(corrected * path_m, axis=1) / 1.0e-29
+                tracer_max = np.maximum(tracer_max, np.nanmax(trc, axis=1))
+            else:
+                raw_path = np.zeros_like(xray_raw)
+                corrected_path = np.zeros_like(xray_corrected)
+                accumulate_projected_chunk(
+                    raw_path=raw_path,
+                    corrected_path=corrected_path,
+                    tracer_max=tracer_max,
+                    raw=raw,
+                    corrected=corrected,
+                    tracer=trc,
+                    x=x,
+                    y_chunk=y[start:stop],
+                    x_widths=x_width_kpc,
+                    y_widths_chunk=y_width_kpc[start:stop],
+                    u_edges=sky_edges,
+                    view_angle_deg=args.view_angle_deg,
+                )
+                xray_raw += raw_path * KPC_M / 1.0e-29
+                xray_corrected += corrected_path * KPC_M / 1.0e-29
 
     ratio = np.divide(
         xray_corrected,
@@ -173,7 +285,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         where=xray_raw > 0,
     )
 
-    write_vector(out_dir / "x_kpc.tsv", x)
+    write_vector(out_dir / "x_kpc.tsv", sky_x)
+    if abs(args.view_angle_deg) > 1.0e-12:
+        write_vector(out_dir / "u_kpc.tsv", sky_x)
     write_vector(out_dir / "z_kpc.tsv", z)
     write_matrix(out_dir / "xray_1kev_raw_mjy_sr.tsv", xray_raw)
     write_matrix(out_dir / "xray_1kev_xraise_corrected_mjy_sr.tsv", xray_corrected)
@@ -188,6 +302,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "frequency_hz": args.frequency_hz,
         "redshift": args.redshift,
         "grid_shape_nz_ny_nx": [int(nz), int(ny), int(nx)],
+        "projection": {
+            "view_angle_deg": args.view_angle_deg,
+            "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+            "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+            "sky_horizontal_bins": int(n_sky),
+            "sky_horizontal_min_kpc": float(sky_x[0]),
+            "sky_horizontal_max_kpc": float(sky_x[-1]),
+        },
         "y_chunk": args.y_chunk,
         "xraise_source": str(args.xraise_py),
         "apec_table": str(args.apec_table),
@@ -228,6 +350,8 @@ def main() -> None:
     parser.add_argument("--frequency-hz", type=float, default=DEFAULT_FREQ_HZ)
     parser.add_argument("--redshift", type=float, default=0.05)
     parser.add_argument("--y-chunk", type=int, default=8)
+    parser.add_argument("--view-angle-deg", type=float, default=0.0)
+    parser.add_argument("--projected-u-bins", type=int, default=None)
     args = parser.parse_args()
     metadata = run(args)
     print(json.dumps(metadata, indent=2, sort_keys=True))
