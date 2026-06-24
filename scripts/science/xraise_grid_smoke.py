@@ -82,6 +82,90 @@ def projected_axis(
     return u_centres, u_edges
 
 
+def projected_overlap_contributions(
+    *,
+    x_edges: np.ndarray,
+    y_edges_chunk: np.ndarray,
+    u_edges: np.ndarray,
+    view_angle_deg: float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return cell-to-projected-bin path weights for edge-aware accumulation."""
+
+    x_edges = np.asarray(x_edges, dtype=float)
+    y_edges_chunk = np.asarray(y_edges_chunk, dtype=float)
+    u_edges = np.asarray(u_edges, dtype=float)
+    if x_edges.ndim != 1 or y_edges_chunk.ndim != 1 or u_edges.ndim != 1:
+        raise ValueError("x_edges, y_edges_chunk, and u_edges must be one-dimensional")
+    if x_edges.size < 2 or y_edges_chunk.size < 2 or u_edges.size < 2:
+        raise ValueError("need at least one source cell and one projected bin")
+    if np.any(np.diff(x_edges) <= 0.0) or np.any(np.diff(y_edges_chunk) <= 0.0):
+        raise ValueError("source grid edges must be strictly increasing")
+
+    u_widths = np.diff(u_edges)
+    if np.any(u_widths <= 0.0):
+        raise ValueError("projected u edges must be strictly increasing")
+
+    theta = math.radians(view_angle_deg)
+    cos_theta = math.cos(theta)
+    sin_theta = math.sin(theta)
+
+    x_left = x_edges[:-1]
+    x_right = x_edges[1:]
+    y_low = y_edges_chunk[:-1]
+    y_high = y_edges_chunk[1:]
+    cell_area = np.diff(y_edges_chunk)[:, np.newaxis] * np.diff(x_edges)[np.newaxis, :]
+
+    corners = (
+        x_left[np.newaxis, :] * cos_theta - y_low[:, np.newaxis] * sin_theta,
+        x_left[np.newaxis, :] * cos_theta - y_high[:, np.newaxis] * sin_theta,
+        x_right[np.newaxis, :] * cos_theta - y_low[:, np.newaxis] * sin_theta,
+        x_right[np.newaxis, :] * cos_theta - y_high[:, np.newaxis] * sin_theta,
+    )
+    u_min = np.minimum.reduce(corners)
+    u_max = np.maximum.reduce(corners)
+    projected_width = u_max - u_min
+    if np.any(projected_width <= 0.0):
+        raise ValueError("projected source-cell width must be positive")
+
+    first_bins = np.searchsorted(u_edges, u_min.ravel(), side="right") - 1
+    last_bins = np.searchsorted(u_edges, u_max.ravel(), side="left") - 1
+    first_bins = np.clip(first_bins, 0, len(u_widths) - 1)
+    last_bins = np.clip(last_bins, 0, len(u_widths) - 1)
+
+    flat_u_min = u_min.ravel()
+    flat_u_max = u_max.ravel()
+    flat_area = cell_area.ravel()
+    flat_projected_width = projected_width.ravel()
+
+    cell_indices: list[int] = []
+    bin_indices: list[int] = []
+    path_weights: list[float] = []
+    for cell_index, (first_bin, last_bin) in enumerate(zip(first_bins, last_bins, strict=True)):
+        for bin_index in range(int(first_bin), int(last_bin) + 1):
+            overlap = min(flat_u_max[cell_index], u_edges[bin_index + 1]) - max(
+                flat_u_min[cell_index], u_edges[bin_index]
+            )
+            if overlap <= 0.0:
+                continue
+            cell_indices.append(int(cell_index))
+            bin_indices.append(bin_index)
+            path_weights.append(
+                float(flat_area[cell_index] * overlap / (flat_projected_width[cell_index] * u_widths[bin_index]))
+            )
+
+    if not cell_indices:
+        return (
+            np.array([], dtype=np.int64),
+            np.array([], dtype=np.int64),
+            np.array([], dtype=np.float64),
+        )
+    return (
+        np.asarray(cell_indices, dtype=np.int64),
+        np.asarray(bin_indices, dtype=np.int64),
+        np.asarray(path_weights, dtype=np.float64),
+    )
+
+
 def accumulate_projected_chunk(
     *,
     raw_path: np.ndarray,
@@ -96,29 +180,40 @@ def accumulate_projected_chunk(
     y_widths_chunk: np.ndarray,
     u_edges: np.ndarray,
     view_angle_deg: float,
+    x_edges: np.ndarray | None = None,
+    y_edges_chunk: np.ndarray | None = None,
 ) -> None:
-    theta = math.radians(view_angle_deg)
     u_widths = np.diff(u_edges)
     if np.any(u_widths <= 0.0):
         raise ValueError("projected u edges must be strictly increasing")
 
-    u_coord = x[np.newaxis, :] * math.cos(theta) - y_chunk[:, np.newaxis] * math.sin(theta)
-    bins = np.searchsorted(u_edges, u_coord, side="right") - 1
-    valid = (bins >= 0) & (bins < len(u_widths))
-    if not np.any(valid):
+    if x_edges is None:
+        x_edges = centres_to_edges(x)
+    if y_edges_chunk is None:
+        y_edges_chunk = centres_to_edges(y_chunk)
+    if len(x_edges) != len(x) + 1:
+        raise ValueError("x_edges length must be len(x) + 1")
+    if len(y_edges_chunk) != len(y_chunk) + 1:
+        raise ValueError("y_edges_chunk length must be len(y_chunk) + 1")
+
+    flat_cells, flat_bins, flat_weights = projected_overlap_contributions(
+        x_edges=x_edges,
+        y_edges_chunk=y_edges_chunk,
+        u_edges=u_edges,
+        view_angle_deg=view_angle_deg,
+    )
+    if flat_cells.size == 0:
         return
 
-    flat_bins = bins[valid].astype(np.int64)
-    flat_widths = (x_widths[np.newaxis, :] * y_widths_chunk[:, np.newaxis] / u_widths[bins])[valid]
     n_u = len(u_widths)
 
     for z_index in range(raw.shape[0]):
-        raw_values = raw[z_index][valid] * flat_widths
-        corrected_values = corrected[z_index][valid] * flat_widths
+        raw_values = raw[z_index].ravel()[flat_cells] * flat_weights
+        corrected_values = corrected[z_index].ravel()[flat_cells] * flat_weights
         raw_path[z_index] += np.bincount(flat_bins, weights=raw_values, minlength=n_u)
         corrected_path[z_index] += np.bincount(flat_bins, weights=corrected_values, minlength=n_u)
 
-        tracer_values = np.nan_to_num(tracer[z_index][valid], nan=0.0, posinf=0.0, neginf=0.0)
+        tracer_values = np.nan_to_num(tracer[z_index].ravel()[flat_cells], nan=0.0, posinf=0.0, neginf=0.0)
         tracer_by_bin = np.zeros(n_u, dtype=np.float64)
         np.maximum.at(tracer_by_bin, flat_bins, tracer_values)
         tracer_max[z_index] = np.maximum(tracer_max[z_index], tracer_by_bin)
@@ -209,6 +304,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         prs_ds = h5[f"/{args.timestep}/vars/prs"]
         trc_ds = h5[f"/{args.timestep}/vars/tr1"]
         x, y, z = read_coords(h5)
+        x_edges = centres_to_edges(x)
+        y_edges = centres_to_edges(y)
         x_width_kpc = widths_from_centres(x)
         y_width_kpc = widths_from_centres(y)
         y_width_m = y_width_kpc * KPC_M
@@ -274,6 +371,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     y_widths_chunk=y_width_kpc[start:stop],
                     u_edges=sky_edges,
                     view_angle_deg=args.view_angle_deg,
+                    x_edges=x_edges,
+                    y_edges_chunk=y_edges[start : stop + 1],
                 )
                 xray_raw += raw_path * KPC_M / 1.0e-29
                 xray_corrected += corrected_path * KPC_M / 1.0e-29
@@ -309,6 +408,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "sky_horizontal_bins": int(n_sky),
             "sky_horizontal_min_kpc": float(sky_x[0]),
             "sky_horizontal_max_kpc": float(sky_x[-1]),
+            "projected_accumulation": (
+                "edge_overlap_uniform_cell_projection"
+                if abs(args.view_angle_deg) > 1.0e-12
+                else "direct_y_axis_sum"
+            ),
         },
         "y_chunk": args.y_chunk,
         "xraise_source": str(args.xraise_py),

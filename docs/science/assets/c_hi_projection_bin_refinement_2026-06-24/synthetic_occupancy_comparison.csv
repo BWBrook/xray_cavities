@@ -1,0 +1,5 @@
+scenario,view_angle_deg,method,projected_bins,positive_bins,empty_bins,empty_bin_fraction,integrated_path_weight,expected_source_area,relative_conservation_error
+near90_stretched_grid,90,legacy_center_bin,24,6,18,0.75,29.8,29.8,0
+near90_stretched_grid,90,edge_overlap_uniform_cell_projection,24,24,0,0,29.8,29.8,0
+nonpathological_45deg_grid,45,legacy_center_bin,4,3,1,0.25,16,16,0
+nonpathological_45deg_grid,45,edge_overlap_uniform_cell_projection,4,4,0,0,16,16,0

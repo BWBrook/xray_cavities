@@ -14,10 +14,75 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-014 diagnostic handoff.
+This note should be treated as a post-Goal-015 method-refinement handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 015 X-ray projection-bin refinement on 2026-06-24:
+
+- Goal 015 refined the local nonzero-view X-ray projection accumulator so
+  near-90-degree projections do not create pathological all-zero projected
+  columns from center-only source-cell assignment on stretched/nonuniform
+  grids.
+- Current status:
+  `complete_method_refinement`.
+- Clean launch point was confirmed:
+  `main...origin/main` at `a3369cf`.
+- New decision label:
+  `LOCAL_METHOD_REFINED_READY_FOR_BOUNDED_RERUN`.
+- Updated implementation:
+  `scripts/science/xraise_grid_smoke.py`.
+- New method:
+  `edge_overlap_uniform_cell_projection`.
+- The normal `0 deg` product path remains the direct y-axis sum.
+- New future metadata field:
+  `projection.projected_accumulation`, recording either
+  `edge_overlap_uniform_cell_projection` for nonzero projected views or
+  `direct_y_axis_sum` for `0 deg`.
+- Updated tests:
+  `tests/test_xraise_grid_smoke_projection.py`.
+- New diagnostic helper:
+  `scripts/science/diagnose_projection_bin_refinement.py`.
+- New science/method note:
+  `docs/science/c_hi_projection_bin_refinement_2026-06-24.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_projection_bin_refinement_2026-06-24/`.
+- New compact assets:
+  - `synthetic_occupancy_comparison.csv`
+  - `method_comparison.csv`
+- New exchange log:
+  `docs/exchange/logs/2026-06-24-c-hi-projection-bin-refinement.md`.
+- New Goal 015 log:
+  `docs/goals/015-c-hi-projection-bin-refinement/Log.md`.
+- Synthetic proof:
+  - near-90 stretched-grid legacy center-bin path reproduced the failure with
+    `18/24` empty bins;
+  - refined edge-overlap method reduced that to `0/24` empty bins;
+  - nonpathological 45-degree synthetic view had `0/4` empty bins under the
+    refined method;
+  - all synthetic rows conserved integrated path weight with
+    `relative_conservation_error=0`.
+- Focused validation passed:
+  `uv run pytest tests/test_xraise_grid_smoke_projection.py tests/test_90deg_xray_striping_diagnostic.py -q`,
+  regenerating the synthetic diagnostic assets with
+  `uv run python scripts/science/diagnose_projection_bin_refinement.py`, CSV
+  parse and expected-column checks, `git diff --check`, and a targeted
+  unresolved-marker scan over the new note, exchange log, current status, and
+  Goal 015 log.
+- No real HDF5 post-processing rerun occurred and no accepted Goal 011/012
+  product assets were overwritten.
+- No remote commands, Open OnDemand, SSH/SCP, PBS jobs, finalizers, Kunanyi
+  staging, remote retrieval, PLUTO production, PRAiSE/radio/cavity product
+  regeneration, source-age sweep, `C-LO`, `G-LO`, comparison-case processing,
+  broad batch work, document builds, commits, pushes, scientific-default
+  changes, external human/agent contact, or `agent_comms` changes occurred in
+  Goal 015.
+- Recommended next action: write a bounded existing-output rerun goal for the
+  affected projection products, primarily final `C-HI`, `90 deg`, with a
+  `45 deg` sanity rerun if authorized. The rerun should compare before/after
+  empty-bin occupancy and scalar X-ray summaries before deciding whether
+  source-age sampling can proceed.
 
 Latest Goal 014 90-degree X-ray striping/projection diagnostic on 2026-06-24:
 
