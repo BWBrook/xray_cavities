@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-06-23
+Last updated: 2026-06-24
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,10 +14,71 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-013 decision-gate handoff.
+This note should be treated as a post-Goal-014 diagnostic handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 014 90-degree X-ray striping/projection diagnostic on 2026-06-24:
+
+- Goal 014 created a local-only diagnostic package for the visible vertical
+  striping in the Goal 012 final `C-HI`, `90 deg` corrected X-ray panel.
+- Current status:
+  `complete_diagnostic`.
+- Clean launch point was confirmed:
+  `main...origin/main` at `cb87524`.
+- New science note:
+  `docs/science/c_hi_90deg_xray_striping_projection_diagnostic_2026-06-24.md`.
+- New diagnostic helper:
+  `scripts/science/diagnose_90deg_xray_striping.py`.
+- New focused test:
+  `tests/test_90deg_xray_striping_diagnostic.py`.
+- New asset bundle:
+  `docs/science/assets/c_hi_90deg_xray_striping_projection_diagnostic_2026-06-24/`.
+- New compact assets:
+  - `striping_diagnostics.csv`
+  - `projection_axis_diagnostics.csv`
+  - `next_step_recommendation.csv`
+  - `column_positive_fraction_profiles.png`
+- New exchange log:
+  `docs/exchange/logs/2026-06-24-c-hi-90deg-xray-striping-projection-diagnostic.md`.
+- New Goal 014 log:
+  `docs/goals/014-c-hi-90deg-xray-striping-projection-diagnostic/Log.md`.
+- Headline diagnostic conclusion:
+  `X_RAY_METHOD_REFINEMENT_FIRST`.
+- Key evidence:
+  - `90 deg` raw/corrected/correction-ratio X-ray layers each have `400/960`
+    all-zero projected columns.
+  - `45 deg` raw/corrected/correction-ratio X-ray layers each have `22/960`
+    all-zero projected columns.
+  - `0 deg` corrected X-ray has no all-zero projected columns.
+  - the `90 deg` raw/corrected/correction-ratio positive masks are identical.
+  - the `90 deg` `x_kpc.tsv` and `u_kpc.tsv` identity is expected by the
+    current nonzero-view writer and is not itself suspicious.
+- Interpretation: the evidence supports a projection/binning occupancy issue
+  at or near `90 deg`, not a display-only artifact, not an APEC/Gaunt
+  correction-only artifact, not a physically meaningful cavity feature, and
+  not an immediate Stas/Patrick escalation.
+- Q-018 and Q-019 remain useful review inputs but do not need to block the next
+  local method-refinement goal.
+- Recommended next action: write Goal 015 as a local X-ray/projection-method
+  refinement goal that reproduces the empty-bin failure with a synthetic
+  stretched grid, revises the near-90-degree projected-bin accumulation method,
+  and reruns only bounded existing-output post-processing if the local method
+  test passes and X-ray Cavities authorizes it.
+- Validation passed:
+  `uv run pytest tests/test_90deg_xray_striping_diagnostic.py -q`,
+  regenerating the diagnostic assets with
+  `uv run python scripts/science/diagnose_90deg_xray_striping.py`, CSV parse
+  and expected-column checks, `git diff --check`, and a targeted
+  unresolved-marker scan over the new note, exchange log, current status, and
+  Goal 014 log.
+- No remote commands, Open OnDemand, SSH/SCP, PBS jobs, finalizers, Kunanyi
+  staging, PLUTO production, XRAiSE/PRAiSE/radio/cavity product regeneration
+  from HDF5, source-age sweep, `C-LO`, `G-LO`, comparison-case processing,
+  broad batch work, document builds, commits, pushes, scientific-default
+  changes, external human/agent contact, or `agent_comms` changes occurred in
+  Goal 014.
 
 Latest Goal 013 viewing-angle trio next-step decision gate on 2026-06-23:
 
