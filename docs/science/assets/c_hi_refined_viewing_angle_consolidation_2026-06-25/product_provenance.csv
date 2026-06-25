@@ -1,0 +1,9 @@
+product_id,role,source_goal,source_asset_path,status,note
+accepted_0deg_baseline,unchanged_control_view,Goal 005,docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/,accepted_unchanged,Use as the 0-degree control baseline for refined trio context.
+historical_45deg_projection,historical_diagnostic,Goal 011,docs/science/assets/c_hi_final_45deg_viewing_angle_broadening_2026-06-23/,preserved_historical_artifact,Superseded for future viewing-angle evidence by the Goal 016 refined 45-degree product.
+historical_90deg_projection,historical_diagnostic,Goal 012,docs/science/assets/c_hi_final_90deg_viewing_angle_broadening_2026-06-23/,preserved_historical_artifact,Superseded for future viewing-angle evidence by the Goal 016 refined 90-degree product.
+refined_45deg_projection,preferred_future_viewing_angle_evidence,Goal 016,docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/,accepted_refined_projection,Uses edge_overlap_uniform_cell_projection and removes 45-degree empty X-ray columns.
+refined_90deg_projection,preferred_future_viewing_angle_evidence,Goal 016,docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/,accepted_refined_projection,Uses edge_overlap_uniform_cell_projection and fixes the 90-degree empty-column failure.
+projection_method_refinement,method_basis,Goal 015,docs/science/c_hi_projection_bin_refinement_2026-06-24.md,accepted_method_refinement,Synthetic proof for the edge-overlap projected-bin accumulator.
+striping_diagnostic,problem_diagnosis,Goal 014,docs/science/c_hi_90deg_xray_striping_projection_diagnostic_2026-06-24.md,accepted_diagnostic,Diagnosed historical 90-degree striping as projection/binning occupancy.
+level3_gravity_gap,carried_caveat,Goal 009/010,docs/science/assets/c_hi_level3_broadening_decision_packet_2026-06-18/level3_evidence_summary.csv,blocked_missing_potential,Thermal/kinetic Level 3 is green; gravitational Level 3 remains blocked.

@@ -1,0 +1,45 @@
+{
+  "caveats": [
+    "not publication-ready observables",
+    "connected-envelope/X-ray topology unresolved",
+    "sparse radio remains diagnostic",
+    "Level 3 gravity remains blocked_missing_potential",
+    "pV/2.5pV/4pV convention remains active"
+  ],
+  "decision_label": "REFINED_VIEWING_ANGLE_EVIDENCE_READY_FOR_NEXT_STEP_PLANNING",
+  "empty_column_repair": {
+    "45deg": {
+      "corrected": {
+        "historical": 22,
+        "refined": 0
+      },
+      "raw": {
+        "historical": 22,
+        "refined": 0
+      }
+    },
+    "90deg": {
+      "corrected": {
+        "historical": 400,
+        "refined": 0
+      },
+      "raw": {
+        "historical": 400,
+        "refined": 0
+      }
+    }
+  },
+  "recommended_goal018_shape": "local planning packet for tightly bounded C-HI source-age sampling after maintenance",
+  "recommended_next_option": "tightly_bounded_c_hi_source_age_sampling_after_maintenance",
+  "status": "complete_consolidation",
+  "supersession": {
+    "0deg": "Goal 005 remains the unchanged accepted baseline",
+    "45deg": "Goal 016 refined projection supersedes Goal 011 for future viewing-angle evidence",
+    "90deg": "Goal 016 refined projection supersedes Goal 012 for future viewing-angle evidence"
+  },
+  "trio_products": [
+    "accepted_unchanged_baseline",
+    "refined_projection_product",
+    "refined_projection_product"
+  ]
+}

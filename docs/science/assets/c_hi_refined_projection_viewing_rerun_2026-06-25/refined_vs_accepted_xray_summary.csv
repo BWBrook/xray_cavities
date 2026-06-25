@@ -1,0 +1,19 @@
+view,metric,unit,accepted_value,refined_value,absolute_delta,relative_delta_fraction,assessment
+90deg,time_myr,Myr,50.00000000000777,50.00000000000777,0,0,review
+90deg,frequency_hz,Hz,2.417990504024e+17,2.417990504024e+17,0,0,review
+90deg,redshift,dimensionless,0.05,0.05,0,0,review
+90deg,raw_xray_max,mJy sr^-1,222643.695189851,222958.3030634067,314.6078735557094,0.001413055390081625,small_bin_distribution_change
+90deg,corrected_xray_max,mJy sr^-1,461477.6271700215,461969.8325346413,492.2053646198474,0.001066585540968176,small_bin_distribution_change
+90deg,raw_xray_sum,mJy sr^-1 pixels,1511572115.95757,1511572115.957571,9.5367431640625e-07,6.309155258544209e-16,conserved_within_roundoff
+90deg,corrected_xray_sum,mJy sr^-1 pixels,2027964623.971217,2027964623.971218,1.192092895507812e-06,5.878272635611478e-16,conserved_within_roundoff
+90deg,correction_ratio_positive_max,dimensionless,2.324381436823162,2.320548465643372,-0.003832971179789979,-0.001649028476594907,small_bin_distribution_change
+90deg,correction_ratio_positive_sum,dimensionless pixels,762619.4364273,1305789.270166474,543169.8337391739,0.7122423161463103,positive_pixel_support_expanded
+45deg,time_myr,Myr,50.00000000000777,50.00000000000777,0,0,review
+45deg,frequency_hz,Hz,2.417990504024e+17,2.417990504024e+17,0,0,review
+45deg,redshift,dimensionless,0.05,0.05,0,0,review
+45deg,raw_xray_max,mJy sr^-1,159806.3123774619,159772.0477299036,-34.26464755830239,-0.0002144136051232408,small_bin_distribution_change
+45deg,corrected_xray_max,mJy sr^-1,329837.9248043104,329792.4492921288,-45.47551218158333,-0.0001378722965485655,small_bin_distribution_change
+45deg,raw_xray_sum,mJy sr^-1 pixels,1068842893.446097,1068842893.446097,0,0,conserved_within_roundoff
+45deg,corrected_xray_sum,mJy sr^-1 pixels,1433987537.616477,1433987537.616475,-1.9073486328125e-06,-1.33010126153734e-15,conserved_within_roundoff
+45deg,correction_ratio_positive_max,dimensionless,2.283936965590594,2.281882045615042,-0.002054919975551961,-0.0008997270968993611,small_bin_distribution_change
+45deg,correction_ratio_positive_sum,dimensionless pixels,1275771.933090332,1305705.930189224,29933.997098892,0.02346343913240212,positive_pixel_support_expanded

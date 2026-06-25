@@ -1,0 +1,177 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_xrefprj
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=96gb
+#PBS -l walltime=04:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal016_refined_projection_viewing_rerun/c_hi_refined_projection_viewing_rerun.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal016_refined_projection_viewing_rerun/c_hi_refined_projection_viewing_rerun.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal016_refined_projection_viewing_rerun}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-06-25-c-hi-refined-projection-viewing-rerun}"
+INPUT_H5="${INPUT_H5:-/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5}"
+TIMESTEP="${TIMESTEP:-Timestep_51}"
+XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+XRAISE_SCRIPT="${XRAISE_SCRIPT:-$STAGE_DIR/xraise_grid_smoke.py}"
+XRAISE_PY="${XRAISE_PY:-$XRAISE_RUNTIME/xraise.py}"
+APEC_TABLE="${APEC_TABLE:-$XRAISE_RUNTIME/apec_corrections.txt}"
+GAUNT_LUT="${GAUNT_LUT:-$XRAISE_RUNTIME/gaunt_lut_2d.npz}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-$STAGE_DIR/refined_projection_viewing_rerun_2026-06-25.tar.gz}"
+Y_CHUNK="${Y_CHUNK:-8}"
+PROJECTED_U_BINS="${PROJECTED_U_BINS:-960}"
+REDSHIFT="${REDSHIFT:-0.05}"
+EMPTY_COLUMN_FRACTION_MAX="${EMPTY_COLUMN_FRACTION_MAX:-0.05}"
+RUN_45_DEG="${RUN_45_DEG:-1}"
+
+mkdir -p "$STAGE_DIR" "$ANALYSIS_ROOT" "$ANALYSIS_ROOT/remote_logs"
+cd "$PBS_O_WORKDIR"
+
+INNER_STDOUT="$ANALYSIS_ROOT/remote_logs/refined_projection_viewing_rerun.stdout.log"
+INNER_STDERR="$ANALYSIS_ROOT/remote_logs/refined_projection_viewing_rerun.stderr.log"
+exec > >(tee -a "$INNER_STDOUT") 2> >(tee -a "$INNER_STDERR" >&2)
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "stage_dir=$STAGE_DIR"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "input_h5=$INPUT_H5"
+echo "timestep=$TIMESTEP"
+echo "projected_u_bins=$PROJECTED_U_BINS"
+echo "run_45_deg=$RUN_45_DEG"
+echo "xraise_runtime=$XRAISE_RUNTIME"
+echo "xraise_script=$XRAISE_SCRIPT"
+echo "summary_archive=$SUMMARY_ARCHIVE"
+echo "empty_column_fraction_max=$EMPTY_COLUMN_FRACTION_MAX"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+for path in "$INPUT_H5" "$XRAISE_SCRIPT" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT"; do
+  if [ ! -r "$path" ]; then
+    echo "missing required input: $path" >&2
+    exit 2
+  fi
+  sha256sum "$path"
+done
+
+module purge
+module load Anaconda3/2024.02-1
+
+python - <<'PY' "$INPUT_H5" "$TIMESTEP"
+import sys
+from pathlib import Path
+
+import h5py
+
+path = Path(sys.argv[1])
+timestep = sys.argv[2]
+with h5py.File(path, "r") as h5:
+    if timestep not in h5:
+        raise SystemExit(f"missing timestep {timestep}")
+    for rel in ("vars/rho", "vars/prs", "vars/tr1"):
+        full = f"/{timestep}/{rel}"
+        if full not in h5:
+            raise SystemExit(f"missing dataset {full}")
+    shape = h5[f"/{timestep}/vars/rho"].shape
+    time = float(h5[f"/{timestep}"].attrs["Time"])
+print(f"hdf5_preflight=passed shape_nz_ny_nx={shape} time_code={time:.17g}")
+PY
+
+run_view() {
+  local angle="$1"
+  local label="$2"
+  local xraise_dir="$ANALYSIS_ROOT/xraise_grid_${label}_refined"
+
+  mkdir -p "$xraise_dir"
+  echo "view_${label}_started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo "view_${label}_xraise_dir=$xraise_dir"
+
+  python "$XRAISE_SCRIPT" \
+    --input-h5 "$INPUT_H5" \
+    --timestep "$TIMESTEP" \
+    --output-dir "$xraise_dir" \
+    --xraise-py "$XRAISE_PY" \
+    --apec-table "$APEC_TABLE" \
+    --gaunt-lut "$GAUNT_LUT" \
+    --redshift "$REDSHIFT" \
+    --y-chunk "$Y_CHUNK" \
+    --view-angle-deg "$angle" \
+    --projected-u-bins "$PROJECTED_U_BINS"
+
+  python - <<'PY' "$xraise_dir" "$angle" "$label" "$EMPTY_COLUMN_FRACTION_MAX"
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+import numpy as np
+
+xraise_dir = Path(sys.argv[1])
+view_angle_deg = float(sys.argv[2])
+label = sys.argv[3]
+empty_column_fraction_max = float(sys.argv[4])
+metrics = {
+    row["metric"]: float(row["value"])
+    for row in csv.DictReader((xraise_dir / "xraise_grid_smoke_summary.csv").open())
+}
+for key in (
+    "raw_xray_max",
+    "corrected_xray_max",
+    "raw_xray_sum",
+    "corrected_xray_sum",
+    "correction_ratio_positive_max",
+):
+    value = metrics[key]
+    if not math.isfinite(value) or value <= 0.0:
+        raise SystemExit(f"invalid X-ray metric {key}: {value}")
+metadata = json.loads((xraise_dir / "xraise_grid_smoke_metadata.json").read_text())
+projection = metadata["projection"]
+actual = float(projection["view_angle_deg"])
+if abs(actual - view_angle_deg) > 1.0e-9:
+    raise SystemExit(f"view angle mismatch: {actual} != {view_angle_deg}")
+if projection.get("projected_accumulation") != "edge_overlap_uniform_cell_projection":
+    raise SystemExit(f"unexpected projected_accumulation: {projection.get('projected_accumulation')}")
+if int(projection["sky_horizontal_bins"]) <= 1:
+    raise SystemExit("invalid sky_horizontal_bins")
+
+empty_rows = []
+for layer, filename in (
+    ("raw_xray", "xray_1kev_raw_mjy_sr.tsv"),
+    ("corrected_xray", "xray_1kev_xraise_corrected_mjy_sr.tsv"),
+    ("correction_ratio", "xray_1kev_correction_ratio.tsv"),
+):
+    values = np.loadtxt(xraise_dir / filename, delimiter="\t")
+    positive = np.isfinite(values) & (values > 0.0)
+    empty_columns = int(np.count_nonzero(positive.mean(axis=0) == 0.0))
+    empty_fraction = empty_columns / positive.shape[1]
+    empty_rows.append((layer, empty_columns, empty_fraction))
+    if empty_fraction > empty_column_fraction_max:
+        raise SystemExit(
+            f"{label} {layer} empty-column fraction {empty_fraction:.6g} "
+            f"exceeds {empty_column_fraction_max:.6g}"
+        )
+
+with (xraise_dir / "refined_projection_empty_columns.csv").open("w", newline="") as handle:
+    writer = csv.writer(handle)
+    writer.writerow(["view", "layer", "empty_columns", "empty_column_fraction"])
+    for layer, empty_columns, empty_fraction in empty_rows:
+        writer.writerow([label, layer, empty_columns, f"{empty_fraction:.16g}"])
+
+print(f"xray_{label}_refined_validation=passed empty_columns={empty_rows}")
+PY
+  echo "view_${label}_finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+}
+
+run_view 90 90deg
+if [ "$RUN_45_DEG" = "1" ]; then
+  run_view 45 45deg
+fi
+
+find "$ANALYSIS_ROOT" -maxdepth 3 -type f -printf "%P\t%s bytes\n" | sort
+find "$ANALYSIS_ROOT" -maxdepth 3 -type f -exec sha256sum {} \; | sort
+rm -f "$SUMMARY_ARCHIVE"
+tar -czf "$SUMMARY_ARCHIVE" -C "$(dirname "$ANALYSIS_ROOT")" "$(basename "$ANALYSIS_ROOT")"
+sha256sum "$SUMMARY_ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

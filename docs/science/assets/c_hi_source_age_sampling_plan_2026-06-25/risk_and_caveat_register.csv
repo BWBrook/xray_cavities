@@ -1,0 +1,8 @@
+risk_id,status,applies_to,mitigation,source_evidence,next_goal_implication
+connected_envelope_xray_topology,active_caveat,all source-age X-ray/cavity interpretation,"frame products as control-surface diagnostics, not publication-ready topology claims",Goal 017 consolidation note,keep topology refinement as a separate near-term option if sampling exposes sensitivity
+sparse_radio_observable_status,diagnostic_only,radio/PRAiSE products,do not include final radio observables in the first source-age execution goal,Goal 001/002/017 caveats,radio/raytracing readiness stays a separate method lane
+level3_gravity,blocked_missing_potential,ambient energy accounting,carry thermal/kinetic Level 3 as available and keep gravitational component blocked,docs/science/assets/c_hi_final_level3_remote_extraction_closeout_2026-06-18/level3_metadata.json,do not solve gravity inside source-age sampling
+cavity_energy_convention,active,cavity energetics summaries,"carry pV, adopted 2.5pV, and 4pV if any energy summary is included",Goal 010 and Goal 017 notes,avoid 4pV-only language
+fullgrid_snapshot_availability,preflight_required,"outputs 46 and 49, plus any substitution","future execution goal must verify file presence, timestep, shape, and vars before submission",local catalogue tail and current_status; no remote probing in Goal 018,wake before substituting any source age
+maintenance_window,execution_hold_until_after_outage,Kunanyi staging/submission,Goal 018 is local-only; future execution waits for explicit approval after maintenance,Goal 018 delegation,no remote work from this packet
+comparison_cases,out_of_scope,C-LO/G-LO and broader production work,keep first pass within C-HI only,Goal 017 next-step readiness,comparison-case preparation remains a later decision

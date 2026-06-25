@@ -1,0 +1,7 @@
+view,layer,accepted_empty_columns,accepted_empty_column_fraction,accepted_positive_columns,accepted_positive_mask_equal_to_raw,refined_empty_columns,refined_empty_column_fraction,refined_positive_columns,refined_positive_mask_equal_to_raw,empty_columns_delta,empty_column_fraction_delta,assessment
+90deg,raw_xray,400,0.4166666666666667,560,true,0,0,960,true,-400,-0.4166666666666667,empty_column_artifact_removed
+90deg,corrected_xray,400,0.4166666666666667,560,true,0,0,960,true,-400,-0.4166666666666667,empty_column_artifact_removed
+90deg,correction_ratio,400,0.4166666666666667,560,true,0,0,960,true,-400,-0.4166666666666667,empty_column_artifact_removed
+45deg,raw_xray,22,0.02291666666666667,938,true,0,0,960,true,-22,-0.02291666666666667,empty_column_artifact_removed
+45deg,corrected_xray,22,0.02291666666666667,938,true,0,0,960,true,-22,-0.02291666666666667,empty_column_artifact_removed
+45deg,correction_ratio,22,0.02291666666666667,938,true,0,0,960,true,-22,-0.02291666666666667,empty_column_artifact_removed

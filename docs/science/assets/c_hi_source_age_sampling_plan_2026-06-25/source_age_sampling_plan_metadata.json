@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-25",
+  "goal": "018-c-hi-source-age-sampling-plan",
+  "status": "complete_plan",
+  "decision_label": "SOURCE_AGE_SAMPLING_PLAN_READY_FOR_POST_MAINTENANCE_AUTHORIZATION",
+  "no_execution_authorized": true,
+  "recommended_design": {
+    "new_source_age_outputs": [
+      "data.0046.flt.h5::Timestep_46",
+      "data.0049.flt.h5::Timestep_49"
+    ],
+    "reference_control": "reuse accepted data.0051.flt.h5 endpoint: 0deg Goal005 plus 45/90deg Goal016 refined",
+    "views_per_new_source_age": [
+      "0deg",
+      "45deg",
+      "90deg"
+    ],
+    "nonzero_view_accumulator": "edge_overlap_uniform_cell_projection"
+  },
+  "known_from_local_evidence": [
+    "early 1-10 Myr segment diagnostics exist locally",
+    "final-production outputs 46-51 are locally catalogued in integrity evidence",
+    "final 50 Myr endpoint products are accepted and refined for 45/90deg"
+  ],
+  "unknown_until_future_authorized_preflight": [
+    "live Kunanyi availability after maintenance",
+    "immediate HDF5 readability and timestep presence for outputs 46 and 49",
+    "whether any earlier 5/10 Myr final-production equivalents should replace the late-source-age pilot"
+  ],
+  "hard_boundaries_observed": [
+    "no remote commands",
+    "no staging or PBS submission",
+    "no source-age execution",
+    "no commits or pushes",
+    "no accepted asset overwrites"
+  ]
+}

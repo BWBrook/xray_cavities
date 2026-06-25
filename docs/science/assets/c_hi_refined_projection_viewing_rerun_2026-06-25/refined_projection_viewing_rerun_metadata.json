@@ -1,0 +1,55 @@
+{
+  "archive_sha256": "363b942f93908a342141d88220f30e5c2585bde74679e57322beb751e15dbf77",
+  "caveat": "This package validates a projection-method repair for existing-output C-HI views; it is not a publication-ready observable product.",
+  "job": {
+    "exit_status": 0,
+    "id": "700044.kunanyi-ohpc",
+    "name": "c_hi_xrefprj",
+    "walltime": "00:22:01"
+  },
+  "result_label": "REFINED_PROJECTION_FIXES_EMPTY_COLUMN_FAILURE",
+  "status": "complete_product",
+  "stderr_bytes": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "925c9e932dd1da5357a55b5be23ff8022f243dab8a50b5fd3034b018ced8d090",
+  "views": {
+    "45deg": {
+      "corrected_xray_empty_columns": {
+        "accepted": 22,
+        "refined": 0
+      },
+      "corrected_xray_sum_relative_delta": -1.33010126153734e-15,
+      "correction_ratio_empty_columns": {
+        "accepted": 22,
+        "refined": 0
+      },
+      "correction_ratio_positive_sum_relative_delta": 0.02346343913240212,
+      "projected_accumulation": "edge_overlap_uniform_cell_projection",
+      "raw_xray_empty_columns": {
+        "accepted": 22,
+        "refined": 0
+      },
+      "raw_xray_sum_relative_delta": 0.0,
+      "view_angle_deg": 45.0
+    },
+    "90deg": {
+      "corrected_xray_empty_columns": {
+        "accepted": 400,
+        "refined": 0
+      },
+      "corrected_xray_sum_relative_delta": 5.878272635611478e-16,
+      "correction_ratio_empty_columns": {
+        "accepted": 400,
+        "refined": 0
+      },
+      "correction_ratio_positive_sum_relative_delta": 0.7122423161463103,
+      "projected_accumulation": "edge_overlap_uniform_cell_projection",
+      "raw_xray_empty_columns": {
+        "accepted": 400,
+        "refined": 0
+      },
+      "raw_xray_sum_relative_delta": 6.309155258544209e-16,
+      "view_angle_deg": 90.0
+    }
+  }
+}

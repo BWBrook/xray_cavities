@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-06-24
+Last updated: 2026-06-25
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,10 +14,277 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-015 method-refinement handoff.
+This note should be treated as a post-Goal-018 source-age sampling planning
+handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 018 source-age sampling plan on 2026-06-25:
+
+- Goal 018 created a local-only planning/control packet for a future bounded
+  `C-HI` source-age sampling run after Kunanyi maintenance and explicit
+  X-ray Cavities/Barry authorization.
+- Current phase:
+  `complete_plan`.
+- Start state was the expected dirty accepted Goal 016/017 package on
+  `main...origin/main` at `bd161e6`; no fast-forward, staging, commit, push, or
+  cleanup was performed.
+- Decision label:
+  `SOURCE_AGE_SAMPLING_PLAN_READY_FOR_POST_MAINTENANCE_AUTHORIZATION`.
+- New science note:
+  `docs/science/c_hi_source_age_sampling_plan_2026-06-25.md`.
+- New compact asset bundle:
+  `docs/science/assets/c_hi_source_age_sampling_plan_2026-06-25/`.
+- New exchange log:
+  `docs/exchange/logs/2026-06-25-c-hi-source-age-sampling-plan.md`.
+- New Goal 018 log:
+  `docs/goals/018-c-hi-source-age-sampling-plan/Log.md`.
+- New local builder and tests:
+  - `scripts/science/build_source_age_sampling_plan.py`
+  - `tests/test_source_age_sampling_plan.py`
+- Compact assets:
+  - `source_age_candidate_snapshots.csv`
+  - `proposed_sampling_plan.csv`
+  - `post_maintenance_run_contract.csv`
+  - `runtime_resource_estimate.csv`
+  - `risk_and_caveat_register.csv`
+  - `source_age_sampling_plan_metadata.json`
+- Recommended future execution design:
+  1. after Kunanyi maintenance and explicit authorization, preflight final
+     production `prod64` outputs `data.0046.flt.h5`, `data.0049.flt.h5`, and
+     the accepted endpoint `data.0051.flt.h5`;
+  2. if preflight passes, process two new late-source-age samples:
+     `Timestep_46` at about `44.999274 Myr` and `Timestep_49` at about
+     `47.999129 Myr`;
+  3. use `0/45/90 deg` views per new source age, with
+     `edge_overlap_uniform_cell_projection` required for nonzero views;
+  4. reuse the accepted `50 Myr` endpoint control surface:
+     Goal 005 `0 deg`, Goal 016 refined `45 deg`, and Goal 016 refined
+     `90 deg`.
+- Why this is the preferred first pass:
+  final-production outputs `46-51` are locally catalogued in the accepted
+  full-grid `prod64` integrity evidence, while the locally useful `5 Myr` and
+  `10 Myr` anchors are segment-era diagnostics that should wait for a future
+  authorized full-grid-equivalent preflight before becoming execution targets.
+- Unknowns for the future execution goal:
+  live post-maintenance Kunanyi access/queue status; immediate HDF5
+  presence/readability for outputs `46` and `49`; exact companion
+  particle/cavity input sufficiency for the chosen product surface; whether
+  X-ray Cavities later wants early `5/10 Myr` full-grid equivalents as a second
+  wave.
+- Runtime estimate:
+  one new source age with `0/45/90 deg` compact products is estimated at
+  `35-60 minutes` walltime; the two-new-age first pass is estimated at roughly
+  `75-120 minutes`, plus preflight/queue overhead. This is bounded
+  post-processing, not a `48 h` or production-scale simulation commitment.
+- Caveats remain active:
+  projection products are not publication-ready observables; connected-envelope
+  X-ray topology remains unresolved; sparse radio remains diagnostic; Level 3
+  gravity remains `blocked_missing_potential`; the `pV`, adopted `2.5pV`, and
+  `4pV` convention remains active; `C-LO`, `G-LO`, comparison-case processing,
+  and broad batches remain on hold.
+- Validation passed:
+  `uv run pytest tests/test_source_age_sampling_plan.py tests/test_refined_viewing_angle_consolidation.py tests/test_refined_projection_viewing_rerun.py -q`,
+  regenerating the assets with
+  `uv run python scripts/science/build_source_age_sampling_plan.py`, JSON parse
+  of the metadata, CSV expected-column/nonempty checks, `git diff --check`, and
+  a targeted unresolved-marker scan over the new note, exchange log, Goal log,
+  and `current_status.md`.
+- No remote commands, Open OnDemand, SSH/SCP, Kunanyi staging, `qstat`, PBS
+  submission, finalizer, retrieval, job polling, PLUTO production,
+  source-age sampling execution, `C-LO`, `G-LO`, comparison-case processing,
+  PRAiSE/radio/cavity regeneration, heavy XRAiSE rerun, scientific-default
+  changes, commits, pushes, staging, cleanup, `agent_comms` changes, or
+  Stas/Patrick escalation occurred in Goal 018.
+- Accepted Goal 005/011/012/016/017 assets were not overwritten.
+
+Latest Goal 017 refined viewing-angle consolidation on 2026-06-25:
+
+- Goal 017 created a local-only consolidation package for the accepted refined
+  viewing-angle evidence.
+- Current phase:
+  `complete_consolidation`.
+- Start state was the expected dirty accepted Goal 016 package on
+  `main...origin/main` at `bd161e6`; no fast-forward, staging, commit, push, or
+  cleanup was performed.
+- Decision label:
+  `REFINED_VIEWING_ANGLE_EVIDENCE_READY_FOR_NEXT_STEP_PLANNING`.
+- New science note:
+  `docs/science/c_hi_refined_viewing_angle_consolidation_2026-06-25.md`.
+- New compact asset bundle:
+  `docs/science/assets/c_hi_refined_viewing_angle_consolidation_2026-06-25/`.
+- New exchange log:
+  `docs/exchange/logs/2026-06-25-c-hi-refined-viewing-angle-consolidation.md`.
+- New Goal 017 log:
+  `docs/goals/017-c-hi-refined-viewing-angle-consolidation/Log.md`.
+- New local builder and tests:
+  - `scripts/science/build_refined_viewing_angle_consolidation.py`
+  - `tests/test_refined_viewing_angle_consolidation.py`
+- Compact assets:
+  - `historical_vs_refined_viewing_products.csv`
+  - `refined_trio_context.csv`
+  - `product_provenance.csv`
+  - `next_step_readiness.csv`
+  - `refined_viewing_angle_consolidation_metadata.json`
+- Supersession decision:
+  - Goal 016 refined `45 deg` supersedes Goal 011 for future 45-degree viewing
+    evidence.
+  - Goal 016 refined `90 deg` supersedes Goal 012 for future 90-degree viewing
+    evidence.
+  - Goal 005 remains the accepted unchanged `0 deg` control baseline.
+- Key consolidated evidence:
+  - `45 deg` raw/corrected/correction-ratio empty X-ray columns:
+    `22/960 -> 0/960`
+  - `90 deg` raw/corrected/correction-ratio empty X-ray columns:
+    `400/960 -> 0/960`
+  - `45 deg` raw/corrected X-ray sum relative deltas: `0`, `-1.33e-15`
+  - `90 deg` raw/corrected X-ray sum relative deltas: `6.31e-16`,
+    `5.88e-16`
+- Current preferred trio context:
+  - `0 deg`: accepted unchanged Goal 005 baseline
+  - `45 deg`: accepted refined Goal 016 projection
+  - `90 deg`: accepted refined Goal 016 projection
+- Recommended Goal 018 shape:
+  prepare a tightly bounded `C-HI` source-age sampling plan for after the
+  Kunanyi maintenance outage; do not run it yet.
+- Next-step readiness ranking:
+  1. tightly bounded `C-HI` source-age sampling after maintenance
+  2. X-ray/cavity topology refinement
+  3. radio observable/raytracing method work
+  4. gravitational Level 3 convention work
+  5. comparison-case preparation for `C-LO`/`G-LO`
+- Caveats remain active:
+  projection products are not publication-ready observables; connected-envelope
+  X-ray topology remains unresolved; sparse radio remains diagnostic; Level 3
+  gravity remains `blocked_missing_potential`; the `pV`, adopted `2.5pV`, and
+  `4pV` convention remains active.
+- Validation passed:
+  `uv run pytest tests/test_refined_viewing_angle_consolidation.py tests/test_refined_projection_viewing_rerun.py tests/test_xraise_grid_smoke_projection.py tests/test_90deg_xray_striping_diagnostic.py -q`,
+  regenerating the consolidation assets with
+  `uv run python scripts/science/build_refined_viewing_angle_consolidation.py`,
+  JSON parse of the metadata, CSV expected-column/nonempty checks,
+  `git diff --check`, and a targeted unresolved-marker scan.
+- No remote commands, Open OnDemand, SSH/SCP, Kunanyi staging, `qstat`, PBS
+  submission, finalizer, retrieval, job polling, PLUTO production,
+  source-age sampling, `C-LO`, `G-LO`, comparison-case processing,
+  PRAiSE/radio/cavity regeneration, heavy XRAiSE rerun, scientific-default
+  changes, commits, pushes, staging, cleanup, `agent_comms` changes, or
+  Stas/Patrick escalation occurred in Goal 017.
+- Accepted Goal 005/011/012/016 assets were not overwritten.
+
+Latest Goal 016 refined-projection existing-output rerun state on 2026-06-25:
+
+- Goal 016 completed retrieval, packaging, and review of one bounded Kunanyi
+  post-processing rerun using the Goal 015 refined projection accumulator.
+- Current phase:
+  `complete_product`.
+- Clean launch point was confirmed:
+  `main...origin/main` at `bd161e6`.
+- New PBS wrapper:
+  `scripts/kunanyi/c_hi_refined_projection_viewing_rerun.pbs`.
+- New science note:
+  `docs/science/c_hi_refined_projection_viewing_rerun_2026-06-25.md`.
+- New compact asset bundle:
+  `docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/`.
+- New exchange log:
+  `docs/exchange/logs/2026-06-25-c-hi-refined-projection-viewing-rerun.md`.
+- New Goal 016 log:
+  `docs/goals/016-c-hi-refined-projection-viewing-rerun/Log.md`.
+- New package builder and tests:
+  - `scripts/science/build_refined_projection_viewing_rerun.py`
+  - `tests/test_refined_projection_viewing_rerun.py`
+- Required refined product:
+  final `C-HI`, `90 deg`, X-ray/tracer rerun with
+  `projection.projected_accumulation=edge_overlap_uniform_cell_projection`.
+- Included sanity product:
+  final `C-HI`, `45 deg`, X-ray/tracer rerun in the same bounded job.
+- Maintenance-window judgment: prior single-view Goal 011/012 jobs each
+  completed in about 17 minutes; the combined refined rerun uses one node, one
+  CPU, 96 GB memory, and 4 hours walltime, so it remains small/bounded and
+  compatible with the Friday 2026-06-26 09:00 Kunanyi outage if it starts
+  promptly.
+- Remote stage:
+  `/u/bwbrook/codex_kunanyi/goal016_refined_projection_viewing_rerun`.
+- Remote analysis root:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-06-25-c-hi-refined-projection-viewing-rerun`.
+- Expected archive:
+  `/u/bwbrook/codex_kunanyi/goal016_refined_projection_viewing_rerun/refined_projection_viewing_rerun_2026-06-25.tar.gz`.
+- Output directories inside the fetched archive:
+  - `xraise_grid_90deg_refined`
+  - `xraise_grid_45deg_refined`
+- PBS completion evidence:
+  - job id: `700044.kunanyi-ohpc`
+  - job name: `c_hi_xrefprj`
+  - exit status: `0`
+  - state: `F`
+  - walltime: `00:22:01`
+  - CPU time: `00:17:40`
+  - memory: `1362356kb`
+- Retrieved local archive:
+  `docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/remote_logs/refined_projection_viewing_rerun_2026-06-25.tar.gz`.
+- Archive SHA-256:
+  `363b942f93908a342141d88220f30e5c2585bde74679e57322beb751e15dbf77`.
+- Retrieved stdout/stderr:
+  - `docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/remote_logs/c_hi_refined_projection_viewing_rerun.out`
+  - `docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/remote_logs/c_hi_refined_projection_viewing_rerun.err`
+- Remote stderr is zero bytes.
+- Result label:
+  `REFINED_PROJECTION_FIXES_EMPTY_COLUMN_FAILURE`.
+- The refined `90 deg` raw/corrected/correction-ratio X-ray products improved
+  from `400/960` all-zero projected columns to `0/960`.
+- The refined `45 deg` sanity products improved from `22/960` all-zero
+  projected columns to `0/960`.
+- Raw and corrected X-ray pixel sums are conserved to roundoff relative to the
+  accepted historical products:
+  - `90 deg`: raw sum relative delta `6.31e-16`, corrected sum relative delta
+    `5.88e-16`
+  - `45 deg`: raw sum relative delta `0`, corrected sum relative delta
+    `-1.33e-15`
+- Correction-ratio positive support expands as expected after previously empty
+  projected columns become populated:
+  - `90 deg`: positive ratio sum relative delta `0.712242`
+  - `45 deg`: positive ratio sum relative delta `0.023463`
+- Machine-readable package outputs:
+  - `refined_projection_metrics.csv`
+  - `empty_column_before_after.csv`
+  - `refined_vs_accepted_xray_summary.csv`
+  - `product_provenance.csv`
+  - `refined_projection_viewing_rerun_metadata.json`
+- Local validation passed before staging:
+  `uv run pytest tests/test_xraise_grid_smoke_projection.py tests/test_90deg_xray_striping_diagnostic.py -q`,
+  `bash -n scripts/kunanyi/c_hi_refined_projection_viewing_rerun.pbs`, and
+  `git diff --check`.
+- Chrome/Open OnDemand enabled the SSH selector; page status reported a window
+  closing at `Thu Jun 25 13:11:02 2026`.
+- Staged remote files:
+  - `/u/bwbrook/codex_kunanyi/goal016_refined_projection_viewing_rerun/xraise_grid_smoke.py`
+  - `/u/bwbrook/codex_kunanyi/goal016_refined_projection_viewing_rerun/c_hi_refined_projection_viewing_rerun.pbs`
+- Remote hashes matched local:
+  - `xraise_grid_smoke.py`:
+    `a7ef3553a18ef79ee7c29fd40f4b3cbc13a6376e7bc45b0152ea004f05232c0c`
+  - `c_hi_refined_projection_viewing_rerun.pbs`:
+    `eb0f83c82e355de88ef20ae348b4a8f553026a83e8ebdca6a244b95e736bcbb7`
+- Remote wrapper syntax passed:
+  `bash -n c_hi_refined_projection_viewing_rerun.pbs`.
+- Submitted PBS job:
+  - job id: `700044.kunanyi-ohpc`
+  - job name: `c_hi_xrefprj`
+  - queue/state at verification: `normal` / `Q`
+  - ctime: `Thu Jun 25 13:06:42 2026`
+  - request: `select=1:ncpus=1:mpiprocs=1:mem=96gb`
+  - walltime: `04:00:00`
+- Retrieval/package validation passed:
+  `uv run pytest tests/test_refined_projection_viewing_rerun.py tests/test_xraise_grid_smoke_projection.py tests/test_90deg_xray_striping_diagnostic.py -q`,
+  `bash -n scripts/kunanyi/c_hi_refined_projection_viewing_rerun.pbs`,
+  JSON parse of the metadata, CSV expected-column/nonempty checks,
+  `git diff --check`, and targeted unresolved-marker scan.
+- Accepted Goal 011/012 assets must remain historical products and must not be
+  overwritten.
+- Recommended next action: review/accept Goal 016, then choose a narrow Goal
+  017 to either package reviewer-facing refined 45/90 figures/trio context or
+  proceed to tightly bounded `C-HI` source-age sampling using the refined
+  projection method. Do not open a broad batch by implication.
 
 Latest Goal 015 X-ray projection-bin refinement on 2026-06-24:
 
