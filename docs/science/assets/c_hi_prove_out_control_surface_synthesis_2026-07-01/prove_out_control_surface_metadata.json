@@ -1,0 +1,47 @@
+{
+  "product": "c_hi_prove_out_control_surface_synthesis",
+  "date": "2026-07-01",
+  "status": "complete_local_synthesis_decision_packet",
+  "decision_label": "C_HI_PROVE_OUT_CONTROL_SURFACE_READY_COMPARISON_PREP_NEXT",
+  "selected_next_branch": "comparison_case_preparation_readiness_gate",
+  "recommended_next_goal_shape": "local_comparison_case_readiness_decision_packet",
+  "c_hi_control_surface_status": "credible_first_full_production_prove_out_control_case_not_manuscript_ready",
+  "accepted_control_surfaces": [
+    "Goal005 0deg final endpoint X-ray/cavity alignment",
+    "Goal016 refined 45deg and 90deg projection products",
+    "Goal019-022 late source-age axis across outputs 46 48 49 50 51",
+    "Goal027 conditional endpoint topology application at 1 percent residual-core mask",
+    "Goal009 thermal and kinetic Level3 closeout with gravitational blocker retained"
+  ],
+  "active_caveats": [
+    "final observational topology is not frozen",
+    "sparse radio products remain diagnostic and not validated observables",
+    "Level3 gravitational energy remains blocked_missing_potential",
+    "products are prove-out evidence and not publication-ready observables",
+    "comparison cases C-LO and G-LO are not yet produced"
+  ],
+  "autonomous_decision": true,
+  "requires_stas_or_patrick_now": false,
+  "requires_barry_before_remote_compute": true,
+  "no_remote_work": true,
+  "no_rerun": true,
+  "no_accepted_asset_overwrite": true,
+  "project_tests_needed": false,
+  "source_context": [
+    "docs/science/c_hi_conditional_endpoint_topology_application_2026-07-01.md",
+    "docs/science/c_hi_late_age_axis_decision_gate_2026-07-01.md",
+    "docs/science/c_hi_refined_viewing_angle_consolidation_2026-06-25.md",
+    "docs/science/c_hi_final_level3_remote_extraction_closeout_2026-06-18.md",
+    "docs/science/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11.md",
+    "docs/science/c_hi_final_observational_product_readiness_2026-06-16.md",
+    "docs/science/three_case_spec.md"
+  ],
+  "asset_files": [
+    "control_surface_register.csv",
+    "remaining_caveat_register.csv",
+    "next_branch_decision_matrix.csv",
+    "expert_escalation_thresholds.csv",
+    "next_step_recommendation.csv",
+    "prove_out_control_surface_metadata.json"
+  ]
+}

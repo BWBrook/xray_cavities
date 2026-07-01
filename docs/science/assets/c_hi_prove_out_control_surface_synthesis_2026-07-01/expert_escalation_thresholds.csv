@@ -1,0 +1,10 @@
+decision_or_event,autonomous_status,escalate_to,trigger,action_if_triggered
+local_evidence_synthesis,autonomous,xray_cavities_orchestrator,Normal docs tables and provenance work inside repo,Proceed locally and record evidence
+local_comparison_case_readiness_plan,autonomous,xray_cavities_orchestrator,Planning C-LO or G-LO run contracts without staging or submission,Proceed locally and wake on completion
+production_compute_submission,requires_authorization,Barry_and_xray_cavities,Any PBS submission staging remote preflight or long production commitment,Stop and request explicit authorization or follow a new goal packet
+scientific_default_change,requires_expert_review,Barry_Stas_Patrick,Changing jet power environment tracer threshold projection physics radio parameters or energy convention,Stop before changing defaults and request review
+final_observational_topology_freeze,requires_expert_review,Patrick_and_Barry,Claiming final X-ray cavity topology or replacing accepted tracer-proxy products,Stop and request topology method review
+gravitational_level3_convention,requires_expert_review,Stas_and_Barry,Defining potential profile or gravity-energy convention for Level3 closure,Stop and request method convention decision
+radio_observable_method_freeze,requires_expert_review,Patrick_and_Barry,Promoting radio maps to surface-brightness observables or freezing raytracing convention,Stop and request radio-method review
+comparison_case_selection_for_actual_run,requires_lab_lead_authorization,Barry,Choosing and launching C-LO or G-LO production computation,Prepare evidence then request explicit run authorization
+publication_or_manuscript_claim,requires_lab_lead_authorization,Barry,Presenting products as publication-ready observables or manuscript results,Stop and reframe as review evidence unless authorized

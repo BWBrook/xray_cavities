@@ -1,0 +1,9 @@
+caveat,status,source_goals,why_it_matters,blocks_next_branch,recommended_handling
+final_observational_topology_not_frozen,active,Goal007;Goal023;Goal024;Goal025;Goal026;Goal027,Conditional connected-core result is useful but threshold sensitive,no,Carry as caveat and do not replace accepted tracer-proxy products
+sparse_radio_diagnostic_only,active,Goal001;Goal002;Goal003;Goal007,Radio scalar and particle-binned products are not validated surface-brightness observables,no,Keep radio observable and raytracing method as a separate future branch
+level3_gravity_blocked_missing_potential,active,Goal009;Goal010,Full ambient-energy closure lacks a reviewed gravitational potential convention,no,Preserve blocker before broad energy claims
+no_comparison_cases_completed,active,HonoursPlan;ThreeCaseSpec;Goal028,C-HI control case has not yet been contrasted with C-LO or G-LO,yes_for_science_comparison_not_for_readiness,Make local comparison-case readiness the next branch before any production run
+not_publication_ready_observables,active,Goal005;Goal007;Goal016;Goal022;Goal027,Products are prove-out and method-control evidence not manuscript-ready observations,no,Use review-facing language only
+production_compute_not_authorized_by_goal028,active,Goal028,This goal is local-only and cannot stage or submit remote work,yes_for_remote_actions,Limit next step to local readiness unless later authorization is explicit
+accepted_assets_no_overwrite,active,Goal005;Goal016;Goal017;Goal019;Goal020;Goal021;Goal022;Goal027,Historical and accepted products must remain provenance-stable,no,Create additive assets only
+expert_input_threshold,active,Goal006;Goal010;Goal028,Barry Stas or Patrick input is needed only for material compute or physics or final-observable forks,no,Escalate only when thresholds in expert_escalation_thresholds.csv are met

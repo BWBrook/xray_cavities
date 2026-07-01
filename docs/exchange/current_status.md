@@ -14,11 +14,66 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-027 conditional endpoint topology
-application handoff.
+This note should be treated as a post-Goal-028 C-HI prove-out control-surface
+synthesis handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 028 C-HI prove-out control-surface synthesis on 2026-07-01:
+
+- Status:
+  `complete_local_synthesis_decision_packet`.
+- Decision label:
+  `C_HI_PROVE_OUT_CONTROL_SURFACE_READY_COMPARISON_PREP_NEXT`.
+- New science note:
+  `docs/science/c_hi_prove_out_control_surface_synthesis_2026-07-01.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_prove_out_control_surface_synthesis_2026-07-01/`.
+- Machine-readable assets:
+  - `control_surface_register.csv`
+  - `remaining_caveat_register.csv`
+  - `next_branch_decision_matrix.csv`
+  - `expert_escalation_thresholds.csv`
+  - `next_step_recommendation.csv`
+  - `prove_out_control_surface_metadata.json`
+- New Goal log:
+  `docs/goals/028-c-hi-prove-out-control-surface-synthesis/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-prove-out-control-surface-synthesis.md`.
+- Control-surface result:
+  `C-HI` is now a credible first full-production prove-out control case, not a
+  manuscript-ready product. The accepted surface includes the Goal 005
+  endpoint, Goal 016 refined `45/90 deg` projections, Goal 019-022 late-age
+  axis, Goal 027 conditional endpoint topology application, and Goal 009
+  thermal/kinetic Level 3 closeout with gravity still blocked.
+- Selected next branch:
+  `comparison_case_preparation_readiness_gate`. The next recommended goal is a
+  local comparison-case readiness decision packet for `C-LO` and `G-LO`
+  preparation, with no remote staging or production submission.
+- Active caveats:
+  final observational topology is not frozen; sparse radio remains diagnostic;
+  Level 3 gravitational energy remains `blocked_missing_potential`; products
+  are prove-out evidence rather than publication-ready observables; and no
+  comparison-case product has yet been produced.
+- Escalation posture:
+  Stas/Patrick input is not needed for the next local readiness packet.
+  Escalate before production compute, scientific-default changes, final
+  topology freeze, radio-observable method freeze, gravitational Level 3
+  convention freeze, or publication-facing claims.
+- Validation:
+  no helper code was added, so no project tests were needed. Metadata JSON
+  parsed with `uv run python -m json.tool`; all five new CSV assets parsed with
+  expected columns and nonempty rows; `git diff --check` passed; and the
+  targeted unresolved-marker scan returned no matches.
+- Boundary confirmation:
+  Goal 028 is local-only. No remote commands, Open OnDemand, SSH/SCP, `qstat`,
+  Kunanyi staging, PBS jobs, finalizers, retrieval, remote file reads,
+  HDF5/XRAiSE reruns, PLUTO, PRAiSE, radio, cavity regeneration, endpoint
+  rerun, source-age substitution, `C-LO`, `G-LO`, comparison-case processing,
+  early-age branch, broad source-age sweep, publication-facing claims,
+  scientific-default changes, commits, pushes, cleanup, `agent_comms` edits,
+  or accepted-asset overwrites occurred.
 
 Latest Goal 027 conditional endpoint topology application on 2026-07-01:
 
