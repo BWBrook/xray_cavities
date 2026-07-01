@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-01",
+  "goal": "027-c-hi-conditional-endpoint-topology-application",
+  "status": "complete_conditional_endpoint_topology_application_package",
+  "decision_label": "CONDITIONAL_CONNECTED_CORE_APPLICATION_NO_FINAL_FREEZE",
+  "selected_threshold_percentile": "1",
+  "selected_residual_threshold": "-0.04586436454772977",
+  "selected_application_status": "selected_conditional_connected_core",
+  "observed_topology_class": "connected_envelope_single_system",
+  "final_observational_topology_frozen": false,
+  "accepted_product_relationship": "sits_beside_does_not_replace_goal005_goal007",
+  "figure_reference": "docs/science/assets/c_hi_residual_threshold_sensitivity_review_2026-07-01/residual_threshold_sensitivity.png",
+  "headline_result": "The 1 percent residual-core mask is selected as the representative conditional connected-core endpoint application. Goal026 threshold sensitivity remains first-class evidence: 0.5 and 2 percent support the narrow connected regime, while 3 percent and broader thresholds are ambiguity bounds.",
+  "boundary_confirmation": {
+    "remote_commands": false,
+    "open_ondemand_or_ssh": false,
+    "pbs_jobs": false,
+    "hdf5_xraise_rerun": false,
+    "cavity_regeneration": false,
+    "endpoint_rerun": false,
+    "source_age_substitution": false,
+    "agent_comms_edits": false,
+    "commits_or_pushes": false,
+    "accepted_assets_overwritten": false
+  },
+  "active_caveats": [
+    "final_observational_topology_not_frozen",
+    "threshold_sensitivity",
+    "tracer_proxy_seeds_not_xray_fit",
+    "unlabelled_residual_islands",
+    "accepted_products_no_overwrite",
+    "sparse_radio_diagnostic_only",
+    "level3_gravity_blocked_missing_potential",
+    "energy_convention"
+  ],
+  "asset_files": [
+    "conditional_topology_application_summary.csv",
+    "selected_threshold_component_summary.csv",
+    "threshold_sensitivity_carried_forward.csv",
+    "accepted_product_relationship.csv",
+    "caveat_register.csv",
+    "next_step_recommendation.csv",
+    "conditional_endpoint_topology_application_metadata.json"
+  ]
+}

@@ -14,11 +14,76 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-026 residual-threshold sensitivity
-review handoff.
+This note should be treated as a post-Goal-027 conditional endpoint topology
+application handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 027 conditional endpoint topology application on 2026-07-01:
+
+- Status:
+  `complete_conditional_endpoint_topology_application_package`.
+- Decision label:
+  `CONDITIONAL_CONNECTED_CORE_APPLICATION_NO_FINAL_FREEZE`.
+- New builder/tests:
+  - `scripts/science/build_conditional_endpoint_topology_application.py`
+  - `tests/test_conditional_endpoint_topology_application.py`
+- New science note:
+  `docs/science/c_hi_conditional_endpoint_topology_application_2026-07-01.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_conditional_endpoint_topology_application_2026-07-01/`.
+- Machine-readable assets:
+  - `conditional_topology_application_summary.csv`
+  - `selected_threshold_component_summary.csv`
+  - `threshold_sensitivity_carried_forward.csv`
+  - `accepted_product_relationship.csv`
+  - `caveat_register.csv`
+  - `next_step_recommendation.csv`
+  - `conditional_endpoint_topology_application_metadata.json`
+- New Goal log:
+  `docs/goals/027-c-hi-conditional-endpoint-topology-application/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-conditional-endpoint-topology-application.md`.
+- Selected application:
+  the `1` percent residual-core mask is the representative conditional
+  connected-core endpoint application. It is the Goal 025 representative
+  threshold and sits inside the Goal 026 narrow-threshold connected regime.
+- Application result:
+  observed topology class `connected_envelope_single_system`, gate `pass`,
+  mask pixels `9735`, one seeded component spanning both tracer-proxy side
+  labels, six significant unlabelled residual islands retained as caveats,
+  and final observational endpoint topology frozen = `false`.
+- Threshold sensitivity carried forward:
+  `0.5` and `2` percent masks support narrow-threshold robustness; `3`, `5`,
+  `10`, and `20` percent masks remain ambiguity bounds. This sensitivity is
+  part of the application package, not a footnote.
+- Relationship to accepted products:
+  Goal 027 sits beside the accepted Goal 005/007 endpoint products. It does
+  not overwrite them, replace the Goal 005 tracer-defined ellipses, create a
+  new final cavity boundary, or claim tracer seeds are X-ray-fitted cavities.
+  The package references the Goal 026 PNG directly instead of duplicating it.
+- Recommended next action:
+  `conditional_topology_application_acceptance_review`: decide whether X-ray
+  Cavities accepts this as the conditional endpoint topology control surface.
+  Keep that next step docs/evidence-only unless a new bounded method/product
+  step is explicitly authorized.
+- Validation:
+  `uv run pytest tests/test_conditional_endpoint_topology_application.py tests/test_residual_threshold_sensitivity_review.py tests/test_hybrid_xray_cavity_topology.py -q`;
+  `uv run python scripts/science/build_conditional_endpoint_topology_application.py`;
+  JSON parse for `conditional_endpoint_topology_application_metadata.json`;
+  CSV parse/expected-column/nonempty checks for all six new CSV assets;
+  referenced Goal 026 PNG existence/nonempty check; `git diff --check`; and
+  targeted unresolved-marker scan over the science note, exchange log, Goal
+  log, and current status.
+- Boundary confirmation:
+  Goal 027 is local-only. No remote commands, Open OnDemand, SSH/SCP, `qstat`,
+  Kunanyi staging, PBS jobs, finalizers, retrieval, HDF5/XRAiSE reruns, PLUTO,
+  PRAiSE, radio, cavity regeneration, endpoint rerun, source-age substitution,
+  `C-LO`, `G-LO`, comparison-case processing, early-age branch, broad
+  source-age sweep, publication-facing claims, scientific-default changes,
+  commits, pushes, cleanup, `agent_comms` edits, or accepted-asset overwrites
+  occurred.
 
 Latest Goal 026 residual-threshold sensitivity review on 2026-07-01:
 

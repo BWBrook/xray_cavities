@@ -1,0 +1,9 @@
+caveat,status,meaning,consequence
+final_observational_topology_not_frozen,active,"Goal027 preserves a conditional connected-core result, not a final cavity-topology method",do not use as publication-ready cavity topology
+threshold_sensitivity,active,0.5/1/2 percent masks are connected; 3 percent and broader masks are ambiguous,carry sensitivity rows beside the selected application
+tracer_proxy_seeds_not_xray_fit,active,"side labels come from tracer threshold and z sign, not X-ray-fitted cavity boundaries",do not claim tracer seeds are observational X-ray cavities
+unlabelled_residual_islands,active,unlabelled residual components are reported explicitly but ignored for seeded topology class,reviewers can see what the seeded classifier excludes
+accepted_products_no_overwrite,active,Goal005/007 accepted endpoint products remain unchanged,Goal027 sits beside accepted assets as a review/application artifact
+sparse_radio_diagnostic_only,active,"sparse radio products remain diagnostics, not validated radio observables",do not use this topology package to imply radio-observable readiness
+level3_gravity_blocked_missing_potential,active,gravitational Level 3 remains blocked without a reviewed potential/profile convention,do not treat energy accounting as fully closed
+energy_convention,active,"report pV, adopted non-relativistic 2.5pV, and 4pV where energy context is needed",preserve Stas-agent convention in future summaries
