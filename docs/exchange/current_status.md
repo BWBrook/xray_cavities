@@ -14,11 +14,63 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-022 late-age axis decision-gate
+This note should be treated as a post-Goal-023 X-ray/cavity topology method
 handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 023 X-ray/cavity topology method decision on 2026-07-01:
+
+- Status:
+  `complete_local_method_decision_package`.
+- Decision label:
+  `TRACER_PROXY_OK_HYBRID_XRAY_TOPOLOGY_METHOD_NEXT`.
+- New science note:
+  `docs/science/c_hi_xray_cavity_topology_method_decision_2026-07-01.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_xray_cavity_topology_method_decision_2026-07-01/`.
+- Machine-readable assets:
+  - `topology_evidence_register.csv`
+  - `method_option_matrix.csv`
+  - `go_no_go_criteria.csv`
+  - `next_step_recommendation.csv`
+  - `topology_method_decision_metadata.json`
+- New Goal log:
+  `docs/goals/023-c-hi-xray-cavity-topology-method-decision/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-xray-cavity-topology-method-decision.md`.
+- Headline result:
+  current tracer-defined side ellipsoids remain adequate as reproducible
+  prove-out/provenance proxies, but should not be frozen as the final
+  observational X-ray cavity topology method.
+- Evidence basis:
+  Goal 005 side-aware tracer ellipsoids and energy scalars; Goal 007
+  observational-product review context; Goals 014/015/016/017 projection
+  artifact diagnosis and repair; Goals 021/022 late-age axis stabilization;
+  Goal 006 energy-convention context; and Goal 009 Level 3 caveats.
+- Decision:
+  pause additional late-age sampling and do not broaden to comparison cases by
+  implication. The next useful move is a local-only hybrid tracer-seeded,
+  X-ray-constrained topology method design and synthetic/local evidence gate.
+- Rerun gate:
+  no accepted product should be touched or rerun until a deterministic local
+  topology protocol passes a synthetic/local gate and X-ray Cavities explicitly
+  authorizes a bounded existing-output rerun.
+- Validation:
+  no helper code was added, so no project tests were required; JSON parse for
+  `topology_method_decision_metadata.json`; CSV parse/expected-column/nonempty
+  checks for all four new CSV assets; `git diff --check`; and targeted
+  unresolved-marker scan over the science note, exchange log, Goal log, and
+  current status.
+- Boundary confirmation:
+  Goal 023 is local-only. No remote commands, Open OnDemand, SSH/SCP, `qstat`,
+  Kunanyi staging, PBS jobs, finalizers, retrieval, HDF5/XRAiSE reruns, PLUTO,
+  PRAiSE, radio, cavity regeneration, endpoint rerun, source-age substitution,
+  `C-LO`, `G-LO`, comparison-case processing, early-age branch, broad
+  source-age sweep, publication-facing claims, scientific-default changes,
+  commits, pushes, cleanup, `agent_comms` edits, or accepted-asset overwrites
+  occurred.
 
 Latest Goal 022 late-age C-HI axis decision gate on 2026-07-01:
 

@@ -1,0 +1,39 @@
+{
+  "date": "2026-07-01",
+  "goal": "023-c-hi-xray-cavity-topology-method-decision",
+  "status": "complete_local_method_decision_package",
+  "decision_label": "TRACER_PROXY_OK_HYBRID_XRAY_TOPOLOGY_METHOD_NEXT",
+  "headline_recommendation": "Keep current tracer-defined side ellipsoids as prove-out/provenance proxies, but do not freeze them as the final X-ray cavity topology method. Next goal should design and locally gate a hybrid tracer-seeded, X-ray-constrained topology method using existing compact assets first.",
+  "current_proxy_assessment": {
+    "tracer_defined_side_ellipsoids": "adequate_as_review_prove_out_proxy",
+    "final_observational_topology_method": "not_sufficient_without_xray_topology_fit_or_reviewed_protocol"
+  },
+  "recommended_next_goal_shape": "local-only hybrid tracer-seeded/X-ray-constrained cavity topology method design plus synthetic/local evidence gate; no production rerun until gate passes and is explicitly authorized",
+  "active_caveats": [
+    "not publication-ready observables",
+    "connected-envelope versus two-side-cavity topology remains unresolved for observational fitting",
+    "sparse radio remains diagnostic only",
+    "Level 3 gravity remains blocked_missing_potential",
+    "pV/adopted 2.5pV/4pV convention remains active",
+    "no remote work, HDF5/XRAiSE rerun, accepted asset overwrite, comparison-case broadening, or scientific-default change is authorized by this package"
+  ],
+  "boundary_confirmation": {
+    "remote_commands": false,
+    "open_ondemand_or_ssh": false,
+    "pbs_jobs": false,
+    "hdf5_xraise_rerun": false,
+    "cavity_regeneration": false,
+    "endpoint_rerun": false,
+    "source_age_substitution": false,
+    "agent_comms_edits": false,
+    "commits_or_pushes": false,
+    "accepted_assets_overwritten": false
+  },
+  "asset_files": [
+    "topology_evidence_register.csv",
+    "method_option_matrix.csv",
+    "go_no_go_criteria.csv",
+    "next_step_recommendation.csv",
+    "topology_method_decision_metadata.json"
+  ]
+}
