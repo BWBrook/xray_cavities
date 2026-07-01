@@ -1,0 +1,5 @@
+blocker,status,evidence,consequence,recommended_resolution
+ignored_stewart_tabulated_csvs_not_visible,active_for_future_preflight,Local checks did not find env/extracted/environments/tabulated/tabulated_cosmo_002003.csv or tabulated_cosmo_002031.csv,Future config render or staging must not assume these files are present,Restore or verify the ignored env asset drop before remote staging
+no_case_specific_c_lo_g_lo_wrapper,active_for_future_execution,Scripts include generic jet_setup_production_template.pbs and many C-HI wrappers but no C-LO or G-LO specific wrapper,Future execution needs a bounded case-specific wrapper or exact qsub contract,Create C-LO preflight wrapper first and hold G-LO behind it
+comparison_outputs_absent,expected_gap,No C-LO or G-LO output product exists in accepted local assets,No comparison science claims can be made,Run only after explicit future authorization and preflight
+local_docs_decision_blocker,none,Three-case spec Goal028 contracts and environment-gate notes are sufficient for a local readiness decision,Does not block this Goal029 packet,Proceed with recommendation for C-LO preflight next

@@ -14,11 +14,75 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-028 C-HI prove-out control-surface
-synthesis handoff.
+This note should be treated as a post-Goal-029 C-LO/G-LO comparison-readiness
+handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 029 C-LO/G-LO comparison-case readiness decision on 2026-07-01:
+
+- Status:
+  `complete_local_readiness_decision_packet`.
+- Decision label:
+  `C_LO_G_LO_READINESS_LOCAL_DOCS_SUFFICIENT_C_LO_PREFLIGHT_NEXT`.
+- New science note:
+  `docs/science/c_lo_g_lo_comparison_readiness_2026-07-01.md`.
+- New asset bundle:
+  `docs/science/assets/c_lo_g_lo_comparison_readiness_2026-07-01/`.
+- Machine-readable assets:
+  - `comparison_case_readiness_matrix.csv`
+  - `inherited_c_hi_contracts.csv`
+  - `local_blocker_register.csv`
+  - `future_preflight_requirements.csv`
+  - `authorization_thresholds.csv`
+  - `next_step_recommendation.csv`
+  - `comparison_readiness_metadata.json`
+- New Goal log:
+  `docs/goals/029-c-lo-g-lo-comparison-readiness/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-lo-g-lo-comparison-readiness.md`.
+- Readiness result:
+  repo-local docs/config evidence is sufficient for a comparison-readiness
+  decision. `C-LO` is the selected first comparison preflight branch because it
+  changes jet power while retaining the Stewart cluster environment family used
+  by the accepted `C-HI` control. `G-LO` remains queued as the
+  environment-dependence case.
+- Selected next branch:
+  `barry_authorized_c_lo_config_asset_preflight_packet`. This is a future
+  branch requiring Barry authorization before any remote preflight, staging, or
+  compute. It should verify or restore the Stewart cluster `002_003` tabulated
+  asset, render a `C-LO` config bundle, validate inherited `C-HI` contracts,
+  and create or bind a bounded wrapper/qsub contract.
+- Local operational blockers for execution:
+  the ignored Stewart tabulated CSVs are not visible in this checkout at the
+  documented `env/extracted/environments/tabulated/` paths, and no
+  case-specific `C-LO` or `G-LO` wrapper exists yet. These are future preflight
+  requirements, not reasons to change scientific defaults.
+- Inherited `C-HI` contracts:
+  endpoint-first comparison; views `0/45/90 deg`; refined
+  `edge_overlap_uniform_cell_projection` for nonzero views; conditional
+  topology caveat; Level 3 gravity blocker; sparse-radio diagnostic status;
+  no-overwrite provenance; PBS stop rule; and stable archive contract.
+- Escalation posture:
+  no Stas/Patrick input is needed for local readiness. Barry authorization is
+  required before local execution-ready config rendering, remote preflight,
+  staging, or PBS work. Stas/Patrick input is needed only for scientific
+  defaults, final topology/radio/gravity conventions, or publication-facing
+  claims.
+- Validation:
+  no helper code was added, so no project tests were needed. Metadata JSON
+  parsed with `uv run python -m json.tool`; all six new CSV assets parsed with
+  expected columns and nonempty rows; `git diff --check` passed; and the
+  targeted unresolved-marker scan passed after validation text was updated.
+- Boundary confirmation:
+  Goal 029 is local-only. No remote commands, Open OnDemand, SSH/SCP, `qstat`,
+  Kunanyi staging, PBS jobs, finalizers, retrieval, polling, remote file reads,
+  HDF5/XRAiSE reruns, PLUTO, PRAiSE, radio, cavity regeneration, endpoint
+  rerun, source-age substitution, `C-LO`/`G-LO` processing, comparison-case
+  compute, early-age branch, broad source-age sweep, publication-facing claims,
+  scientific-default changes, commits, pushes, cleanup, `agent_comms` edits,
+  or accepted-asset overwrites occurred.
 
 Latest Goal 028 C-HI prove-out control-surface synthesis on 2026-07-01:
 

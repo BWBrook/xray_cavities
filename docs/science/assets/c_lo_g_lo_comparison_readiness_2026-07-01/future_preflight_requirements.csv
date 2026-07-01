@@ -1,0 +1,10 @@
+requirement,case_scope,when,barry_authorization_required,remote_required,pass_criteria,stop_if_fail
+restore_or_verify_tabulated_environment_asset,C-LO;G-LO,before rendering or staging,true,false,Expected Stewart tabulated CSV is present and checksum or row-count provenance is recorded,Stop and request asset repair
+render_case_config_bundle,C-LO,after asset verification,true,false,pluto.ini environment.ini definitions_overrides.json and case_manifest render with intended C-LO values,Stop and patch local config packet
+static_validate_units_and_defaults,C-LO,after rendering,true,false,JET_END_TIME and JET_ACTIVE_TIME remain Myr and PLUTO core times are code-time converted,Stop before remote action
+remote_source_and_module_preflight,C-LO,before any production submission,true,true,Kunanyi source clones modules MPI HDF5 and paths match expected production stack,Wake if unavailable
+remote_environment_asset_preflight,C-LO,before any production submission,true,true,Remote cluster 002_003 tabulated input is readable and matches selected science environment,Wake if missing or changed
+wrapper_syntax_and_hash_check,C-LO,before qsub,true,true,Remote files match local SHA-256 and bash -n passes,Wake if mismatch
+bounded_pbs_submission,C-LO,only in a later execution packet,true,true,Exactly one authorized bounded job is submitted and verified Q or R,Wake with job id and stop
+postprocessing_surface_validation,C-LO,after completion email only,true,true,0deg 45deg 90deg products validate with inherited C-HI contracts,Do not retrieve or poll before completion authorization
+repeat_readiness_for_g_lo,G-LO,after C-LO preflight or Barry override,true,false,G-LO readiness packet inherits C-LO lessons and verifies group 002_031 path,Hold if C-LO preflight exposes unresolved blockers

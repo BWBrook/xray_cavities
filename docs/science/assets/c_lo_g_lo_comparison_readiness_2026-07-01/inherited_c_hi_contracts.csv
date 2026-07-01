@@ -1,0 +1,11 @@
+contract,source_goals,carry_forward_rule,applies_to,exception_or_caveat
+endpoint_first_control_surface,Goal005;Goal016;Goal017;Goal021;Goal022,Use a 50 Myr endpoint-first comparison surface before broad source-age sampling,C-LO;G-LO,Do not rerun C-HI endpoint or infer comparison outputs before they exist
+viewing_angles,Goal016;Goal017,Use 0deg 45deg and 90deg as the default comparison views,C-LO;G-LO,Nonzero views must use the refined accumulator
+refined_nonzero_projection,Goal015;Goal016;Goal017,Require projection.projected_accumulation=edge_overlap_uniform_cell_projection for 45deg and 90deg,C-LO;G-LO,Do not revive historical center-bin nonzero projection products
+late_age_axis_guardrail,Goal019;Goal020;Goal021;Goal022,Do not open a comparison-case source-age axis until endpoint products are clean,C-LO;G-LO,Late-age C-HI surface is a control reference not a mandate for immediate sampling
+conditional_topology_caveat,Goal023;Goal024;Goal025;Goal026;Goal027,Carry connected-envelope conditional topology status as a caveat not a final method,C-LO;G-LO,Do not freeze final observational topology without expert review
+level3_energy_caveat,Goal009;Goal010,Carry thermal and kinetic Level3 as reviewable and gravitational Level3 as blocked_missing_potential,C-LO;G-LO,Do not make full energy-closure claims before gravity convention work
+sparse_radio_status,Goal001;Goal002;Goal003;Goal007,Keep sparse PRAiSE and particle-binned radio as diagnostic only,C-LO;G-LO,Do not promote to radio surface-brightness observables
+no_overwrite_provenance,Goal005;Goal016;Goal017;Goal019;Goal020;Goal021;Goal022;Goal027;Goal028,Add new comparison-case products beside accepted C-HI assets,C-LO;G-LO,Do not overwrite accepted C-HI historical or refined products
+pbs_stop_rule,Goal009;Goal011;Goal012;Goal016;Goal019;Goal021,If a future authorized PBS job is submitted and verified queued or running then wake and stop,C-LO;G-LO,No polling or retrieval until Barry reports completion or explicitly requests recheck
+stable_archive_contract,Goal019;Goal021,Archive from stable snapshots or file lists rather than live mutating directories,C-LO;G-LO,Do not repeat the Goal019 live-directory tar race

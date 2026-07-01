@@ -1,0 +1,39 @@
+{
+  "product": "c_lo_g_lo_comparison_readiness",
+  "date": "2026-07-01",
+  "status": "complete_local_readiness_decision_packet",
+  "decision_label": "C_LO_G_LO_READINESS_LOCAL_DOCS_SUFFICIENT_C_LO_PREFLIGHT_NEXT",
+  "selected_next_branch": "barry_authorized_c_lo_config_asset_preflight_packet",
+  "recommended_first_case": "C-LO",
+  "queued_second_case": "G-LO",
+  "local_docs_sufficient_for_readiness_decision": true,
+  "local_execution_assets_complete": false,
+  "local_asset_gap": "ignored Stewart tabulated CSVs are not visible at env/extracted/environments/tabulated/ in this checkout",
+  "requires_barry_before_remote_preflight": true,
+  "requires_stas_or_patrick_now": false,
+  "no_remote_work": true,
+  "no_run": true,
+  "no_commit_or_push": true,
+  "no_agent_comms": true,
+  "no_accepted_asset_overwrite": true,
+  "project_tests_needed": false,
+  "source_context": [
+    "docs/science/c_hi_prove_out_control_surface_synthesis_2026-07-01.md",
+    "docs/science/three_case_spec.md",
+    "docs/Honours_Research_Plan.md",
+    "docs/codex_utas_phys_hons_meeting_2_action_plan.md",
+    "docs/science/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11.md",
+    "docs/science/c_hi_refined_projection_viewing_rerun_2026-06-25.md",
+    "docs/science/c_hi_late_age_axis_decision_gate_2026-07-01.md",
+    "docs/science/c_hi_conditional_endpoint_topology_application_2026-07-01.md"
+  ],
+  "asset_files": [
+    "comparison_case_readiness_matrix.csv",
+    "inherited_c_hi_contracts.csv",
+    "local_blocker_register.csv",
+    "future_preflight_requirements.csv",
+    "authorization_thresholds.csv",
+    "next_step_recommendation.csv",
+    "comparison_readiness_metadata.json"
+  ]
+}

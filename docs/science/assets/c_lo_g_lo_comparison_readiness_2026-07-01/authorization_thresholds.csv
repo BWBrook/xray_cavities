@@ -1,0 +1,11 @@
+threshold,barry_needed,stas_patrick_needed,reason,action
+local_docs_readiness_decision,false,false,Goal029 only maps evidence and readiness inside repo,Proceed autonomously and wake X-ray Cavities
+local_config_render_for_preflight,true,false,Rendering execution-ready C-LO or G-LO bundles is a step toward remote preflight,Use a new Barry-authorized packet
+remote_preflight_or_staging,true,false,Any SSH SCP Kunanyi staging or qstat is outside local readiness,Stop until explicitly authorized
+pbs_submission_or_production_compute,true,false,Any PBS submission consumes project compute and triggers stop rule,Submit only under explicit future goal and stop after Q or R
+scientific_default_change,true,true,Changing jet power environment tracer threshold projection physics or product contracts affects science interpretation,Stop and request expert review
+launch_order_change,true,false,Changing C-LO before G-LO order is project-management and compute sequencing,Ask Barry or X-ray Cavities before deviating
+final_observational_topology_freeze,true,true,Freezing topology method or replacing tracer-proxy products affects observational claims,Request Patrick and Barry review
+radio_observable_method_freeze,true,true,Promoting radio diagnostics to observables requires method agreement,Request Patrick and Barry review
+gravitational_level3_convention,true,true,Defining missing potential convention is physics-sensitive,Request Stas and Barry review
+publication_ready_claim,true,true,Manuscript-facing claims need lab-lead and expert review,Stop and reframe as review evidence unless authorized

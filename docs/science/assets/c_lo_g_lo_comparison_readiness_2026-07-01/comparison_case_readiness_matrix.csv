@@ -1,0 +1,13 @@
+case_id,evidence_category,current_evidence,readiness,missing_or_later_check,next_gate
+C-LO,case_definition,Three-case spec defines C-LO as Stewart cluster 002_003 with 1e43 erg/s and 0.1c,ready,No science-default change needed,Carry into C-LO preflight packet
+C-LO,environment_docs,Cluster 002_003 is selected for C-HI and C-LO and passed prior stability gates,ready_with_asset_recheck,Ignored local CSV is not visible in this checkout,Restore or verify tabulated_cosmo_002003.csv before staging
+C-LO,config_scaffolding,render_three_case_configs.py contains a C-LO CaseSpec and asset-aware render path,ready_for_future_render,Renderer was not run in this local-only goal,Render under a future authorized preflight
+C-LO,production_wrapper,Generic jet_setup_production_template.pbs exists but no C-LO-specific wrapper exists,needs_future_packet,Need bounded wrapper or staged template variables,Create C-LO preflight wrapper or exact qsub contract later
+C-LO,post_processing_contract,C-HI accepted contracts define 0deg plus refined 45deg and 90deg product surface,ready,Need future case outputs before applying products,Inherit C-HI product surface after C-LO endpoint exists
+C-LO,authorization,Goal029 does not authorize remote preflight or compute,not_authorized_now,Barry must authorize any remote preflight staging or PBS work,Wake for Barry-authorized C-LO preflight goal
+G-LO,case_definition,Three-case spec defines G-LO as Stewart group 002_031 with 1e43 erg/s and 0.1c,ready,No science-default change needed,Keep queued after C-LO by default
+G-LO,environment_docs,Group 002_031 is selected for G-LO and passed prior stability gates,ready_with_asset_recheck,Ignored local CSV is not visible in this checkout,Restore or verify tabulated_cosmo_002031.csv before staging
+G-LO,config_scaffolding,render_three_case_configs.py contains a G-LO CaseSpec and asset-aware render path,ready_for_future_render,Renderer was not run in this local-only goal,Render under a future authorized preflight
+G-LO,production_wrapper,Generic template exists but no G-LO-specific wrapper exists,needs_future_packet,Need bounded wrapper or staged template variables,Prepare after C-LO or in a later paired readiness packet
+G-LO,post_processing_contract,C-HI accepted contracts define the inherited comparison product surface,ready,Need future case outputs before applying products,Inherit C-HI product surface after G-LO endpoint exists
+G-LO,authorization,Goal029 does not authorize remote preflight or compute,not_authorized_now,Barry must authorize any remote preflight staging or PBS work,Hold until C-LO preflight decision or explicit Barry override
