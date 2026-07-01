@@ -145,3 +145,75 @@ def test_synthetic_gate_rows_are_deterministic_and_machine_readable() -> None:
         "side_labels",
         "classification_rule",
     }
+
+
+def test_classifies_direct_cavity_mask_without_rethresholding_xray() -> None:
+    module = load_script_module()
+    mask = np.zeros((6, 8), dtype=bool)
+    mask[2:4, 2:6] = True
+    side_labels = two_side_seed_labels(mask.shape)
+
+    result = module.classify_hybrid_topology_from_mask(
+        mask,
+        side_labels,
+        parameters=module.TopologyParameters(min_component_pixels=4, bridge_connectivity=4),
+        case_id="direct_mask_fixture",
+    )
+
+    assert result.topology_class == "connected_envelope_single_system"
+    assert result.component_side_classes == ["spans_negative_and_positive"]
+    assert result.cavity_candidate_pixels == 8
+
+
+def test_direct_mask_can_ignore_unseeded_components_for_seeded_topology() -> None:
+    module = load_script_module()
+    mask = np.zeros((8, 10), dtype=bool)
+    mask[3:5, 3:7] = True
+    mask[0:2, 0:2] = True
+    side_labels = two_side_seed_labels(mask.shape)
+    side_labels[0:2, 0:2] = 0
+
+    result = module.classify_hybrid_topology_from_mask(
+        mask,
+        side_labels,
+        parameters=module.TopologyParameters(min_component_pixels=4, bridge_connectivity=4),
+        case_id="direct_mask_with_unseeded_island",
+        ignore_unlabelled_components=True,
+    )
+
+    assert result.topology_class == "connected_envelope_single_system"
+    assert result.significant_component_count == 1
+    assert result.component_side_classes == ["spans_negative_and_positive"]
+
+
+def test_derives_side_seed_labels_from_tracer_threshold_and_z_axis() -> None:
+    module = load_script_module()
+    tracer = np.array(
+        [
+            [0.0, 0.01, 0.0],
+            [0.02, 0.0, 0.0],
+            [0.0, 0.0, 0.03],
+        ]
+    )
+    z_kpc = np.array([-1.0, 0.0, 1.0])
+
+    labels = module.derive_tracer_side_seed_labels(
+        tracer,
+        z_kpc,
+        tracer_threshold=5.0e-3,
+    )
+
+    np.testing.assert_array_equal(labels, np.array([[0, -1, 0], [0, 0, 0], [0, 0, 1]]))
+
+
+def test_unsharp_residual_percentile_mask_selects_dark_residual_core() -> None:
+    module = load_script_module()
+    xray = np.ones((7, 7), dtype=float)
+    xray[3, 3] = 0.1
+
+    residual = module.boxcar_log_residual(xray, boxcar_pixels=3)
+    mask, threshold = module.low_residual_percentile_mask(residual, percentile=1.0)
+
+    assert residual[3, 3] < 0.0
+    assert mask[3, 3]
+    assert threshold < 0.0

@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-01",
+  "goal": "025-c-hi-existing-asset-topology-application-design",
+  "status": "complete_conditional_local_application_design",
+  "decision_label": "CONDITIONAL_LOCAL_APPLICATION_CONNECTED_CORE_NOT_FINAL",
+  "headline_result": "Existing Goal005/007 compact assets support a deterministic conditional residual-core application. The selected 1 percent residual-core mask classifies as connected_envelope_single_system, but broader threshold sensitivity becomes mixed/ambiguous, so this is not a final endpoint topology claim.",
+  "endpoint_application_made": true,
+  "final_observational_topology_claim": false,
+  "selected_application": {
+    "side_seed_protocol": "tracer_threshold_z_sign_seed",
+    "xray_mask_protocol": "goal007_boxcar_unsharp_low_residual_core",
+    "residual_percentile": 1.0,
+    "boxcar_pixels": 41,
+    "min_component_pixels": 50,
+    "bridge_connectivity": 4,
+    "observed_topology_class": "connected_envelope_single_system",
+    "gate_status": "pass"
+  },
+  "boundary_confirmation": {
+    "remote_commands": false,
+    "open_ondemand_or_ssh": false,
+    "pbs_jobs": false,
+    "hdf5_xraise_rerun": false,
+    "cavity_regeneration": false,
+    "endpoint_rerun": false,
+    "source_age_substitution": false,
+    "agent_comms_edits": false,
+    "commits_or_pushes": false,
+    "accepted_assets_overwritten": false
+  },
+  "active_caveats": [
+    "not publication-ready observables",
+    "conditional residual-core classification is not a final observational endpoint topology",
+    "tracer side labels remain provenance proxies, not X-ray-fitted cavities",
+    "threshold sensitivity needs local review before any bounded application/rerun",
+    "sparse radio remains diagnostic only",
+    "Level 3 gravity remains blocked_missing_potential",
+    "pV/adopted 2.5pV/4pV convention remains active"
+  ],
+  "asset_files": [
+    "input_asset_contract.csv",
+    "side_seed_protocol.csv",
+    "xray_mask_protocol.csv",
+    "application_readiness_decision.csv",
+    "topology_application_result.csv",
+    "topology_component_summary.csv",
+    "next_step_recommendation.csv",
+    "existing_asset_topology_application_metadata.json"
+  ]
+}

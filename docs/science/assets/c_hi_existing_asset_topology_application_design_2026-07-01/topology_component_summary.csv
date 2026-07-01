@@ -1,0 +1,8 @@
+component_index,pixel_count,negative_seed_overlap_pixels,positive_seed_overlap_pixels,side_class,used_for_seeded_topology_classification
+7,1533,0,0,unlabelled,false
+2,1509,0,0,unlabelled,false
+1,1467,0,0,unlabelled,false
+5,1443,724,719,spans_negative_and_positive,true
+6,1438,0,0,unlabelled,false
+3,1178,0,0,unlabelled,false
+4,1167,0,0,unlabelled,false

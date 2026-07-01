@@ -14,11 +14,78 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-024 hybrid X-ray/cavity topology
-gate handoff.
+This note should be treated as a post-Goal-025 existing-asset topology
+application-design handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 025 existing-asset topology application design on 2026-07-01:
+
+- Status:
+  `complete_conditional_local_application_design`.
+- Decision label:
+  `CONDITIONAL_LOCAL_APPLICATION_CONNECTED_CORE_NOT_FINAL`.
+- Extended helper/tests:
+  - `scripts/science/hybrid_xray_cavity_topology.py`
+  - `tests/test_hybrid_xray_cavity_topology.py`
+- New builder:
+  `scripts/science/build_existing_asset_topology_application_design.py`.
+- New science note:
+  `docs/science/c_hi_existing_asset_topology_application_design_2026-07-01.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_existing_asset_topology_application_design_2026-07-01/`.
+- Machine-readable assets:
+  - `input_asset_contract.csv`
+  - `side_seed_protocol.csv`
+  - `xray_mask_protocol.csv`
+  - `application_readiness_decision.csv`
+  - `topology_application_result.csv`
+  - `topology_component_summary.csv`
+  - `next_step_recommendation.csv`
+  - `existing_asset_topology_application_metadata.json`
+- New Goal log:
+  `docs/goals/025-c-hi-existing-asset-topology-application-design/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-existing-asset-topology-application-design.md`.
+- Input contract:
+  Goal 005 corrected X-ray and tracer max LOS arrays are both `1014x960`;
+  `z_kpc` has `1014` rows and `x_kpc` has `960` columns. The local compact
+  arrays are compatible for a no-rerun residual-core application design.
+- Selected side seed:
+  `tracer_max_los >= 5e-3`, split by `z_kpc` sign. This yields `230967`
+  negative-z seed pixels and `230250` positive-z seed pixels.
+- Selected conditional X-ray mask:
+  Goal 007-style `41` pixel boxcar unsharp residual,
+  `log10(corrected_xray) - boxcar_smooth(log10(corrected_xray))`, with the
+  residual-core mask set to the 1st percentile.
+- Endpoint application:
+  a conditional local application was made. The selected 1 percent residual
+  core classifies as `connected_envelope_single_system` with one significant
+  seeded component spanning both tracer-proxy side labels.
+- Threshold sensitivity:
+  1-2 percent residual cores classify as connected-envelope; broader
+  5/10/20 percent residual masks become `ambiguous_needs_review`. Therefore
+  this is not a final observational endpoint topology claim.
+- Recommended next action:
+  `local_residual_threshold_sensitivity_review_package`: a no-remote
+  reviewer-facing residual/mask sensitivity package from existing Goal 005/007
+  arrays before any bounded endpoint topology application/rerun.
+- Validation:
+  `uv run pytest tests/test_hybrid_xray_cavity_topology.py -q` (`9 passed`);
+  `uv run python scripts/science/build_existing_asset_topology_application_design.py`;
+  JSON parse for `existing_asset_topology_application_metadata.json`; CSV
+  parse/expected-column/nonempty checks for all seven new CSV assets;
+  `git diff --check`; and targeted unresolved-marker scan over the science
+  note, exchange log, Goal log, and current status.
+- Boundary confirmation:
+  Goal 025 is local-only. No remote commands, Open OnDemand, SSH/SCP, `qstat`,
+  Kunanyi staging, PBS jobs, finalizers, retrieval, HDF5/XRAiSE reruns, PLUTO,
+  PRAiSE, radio, cavity regeneration, endpoint rerun, source-age substitution,
+  `C-LO`, `G-LO`, comparison-case processing, early-age branch, broad
+  source-age sweep, publication-facing claims, scientific-default changes,
+  commits, pushes, cleanup, `agent_comms` edits, or accepted-asset overwrites
+  occurred.
 
 Latest Goal 024 hybrid X-ray/cavity topology gate on 2026-07-01:
 

@@ -232,6 +232,106 @@ def classify_hybrid_topology(
     return result
 
 
+def classify_hybrid_topology_from_mask(
+    cavity_mask: np.ndarray,
+    side_labels: np.ndarray,
+    *,
+    parameters: TopologyParameters | None = None,
+    case_id: str = "case",
+    fail_on_ambiguous: bool = False,
+    ignore_unlabelled_components: bool = False,
+) -> TopologyResult:
+    params = parameters or TopologyParameters()
+    cavity_mask = np.asarray(cavity_mask, dtype=bool)
+    side_labels = np.asarray(side_labels, dtype=int)
+    validate_inputs(cavity_mask.astype(float), side_labels, params)
+
+    components = connected_components(cavity_mask, connectivity=params.bridge_connectivity)
+    significant = [
+        component
+        for component in components
+        if int(np.count_nonzero(component)) >= params.min_component_pixels
+    ]
+    component_sides = [component_side_class(component, side_labels) for component in significant]
+    if ignore_unlabelled_components:
+        component_sides = [side for side in component_sides if side != "unlabelled"]
+    topology_class, gate_status, reason = classify_from_component_sides(component_sides)
+    result = TopologyResult(
+        case_id=case_id,
+        topology_class=topology_class,
+        gate_status=gate_status,
+        reason=reason,
+        significant_component_count=len(component_sides),
+        component_side_classes=component_sides,
+        side_label_summary=side_label_summary(side_labels),
+        parameters=params.as_metadata()
+        | {
+            "cavity_mask_input": "precomputed_boolean_mask",
+            "ignore_unlabelled_components": str(ignore_unlabelled_components).lower(),
+        },
+        cavity_threshold=float("nan"),
+        cavity_candidate_pixels=int(np.count_nonzero(cavity_mask)),
+    )
+    if fail_on_ambiguous and topology_class == "ambiguous_needs_review":
+        raise AmbiguousTopologyError(f"{case_id}: {reason}")
+    return result
+
+
+def derive_tracer_side_seed_labels(
+    tracer_max_los: np.ndarray,
+    z_kpc: np.ndarray,
+    *,
+    tracer_threshold: float,
+) -> np.ndarray:
+    tracer = np.asarray(tracer_max_los, dtype=float)
+    z = np.asarray(z_kpc, dtype=float)
+    if tracer.ndim != 2:
+        raise ValueError("tracer_max_los must be two-dimensional")
+    if z.ndim != 1 or z.shape[0] != tracer.shape[0]:
+        raise ValueError("z_kpc must be one-dimensional and match tracer rows")
+    if not np.all(np.isfinite(tracer)) or not np.all(np.isfinite(z)):
+        raise ValueError("tracer_max_los and z_kpc must be finite")
+    if tracer_threshold <= 0.0:
+        raise ValueError("tracer_threshold must be positive")
+    labels = np.zeros(tracer.shape, dtype=np.int8)
+    seed = tracer >= tracer_threshold
+    labels[seed & (z[:, np.newaxis] < 0.0)] = -1
+    labels[seed & (z[:, np.newaxis] > 0.0)] = 1
+    if not {-1, 1}.issubset(set(np.unique(labels).astype(int).tolist())):
+        raise ValueError("derived side labels must contain both -1 and 1")
+    return labels
+
+
+def boxcar_log_residual(xray: np.ndarray, *, boxcar_pixels: int) -> np.ndarray:
+    from scipy.ndimage import uniform_filter
+
+    values = np.asarray(xray, dtype=float)
+    if values.ndim != 2:
+        raise ValueError("xray must be two-dimensional")
+    if boxcar_pixels < 3 or boxcar_pixels % 2 == 0:
+        raise ValueError("boxcar_pixels must be an odd integer >= 3")
+    if not np.all(np.isfinite(values)) or np.any(values <= 0.0):
+        raise ValueError("xray must contain finite positive values")
+    log_xray = np.log10(values)
+    return log_xray - uniform_filter(log_xray, size=boxcar_pixels, mode="nearest")
+
+
+def low_residual_percentile_mask(
+    residual: np.ndarray,
+    *,
+    percentile: float,
+) -> tuple[np.ndarray, float]:
+    values = np.asarray(residual, dtype=float)
+    if values.ndim != 2:
+        raise ValueError("residual must be two-dimensional")
+    if not np.all(np.isfinite(values)):
+        raise ValueError("residual must contain finite values")
+    if not (0.0 < percentile < 50.0):
+        raise ValueError("percentile must be between 0 and 50")
+    threshold = float(np.percentile(values, percentile))
+    return values <= threshold, threshold
+
+
 def two_side_seed_labels(shape: tuple[int, int]) -> np.ndarray:
     labels = np.zeros(shape, dtype=int)
     labels[:, : shape[1] // 2] = -1

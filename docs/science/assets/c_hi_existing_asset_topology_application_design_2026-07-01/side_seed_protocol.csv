@@ -1,0 +1,3 @@
+protocol_option,status,parameters,negative_seed_pixels,positive_seed_pixels,unlabelled_pixels,reason,limitation
+tracer_threshold_z_sign_seed,selected,tracer_max_los >= 0.005; negative_z if z_kpc < 0; positive_z if z_kpc > 0,230967,230250,512223,deterministic from local tracer max LOS and z axis; preserves tracer-proxy side provenance,side labels remain tracer proxies and are not X-ray-fitted cavity boundaries
+cavity_ellipse_boundary_seed,not_selected,accepted Goal005 ellipse overlay,,,,ellipse is useful provenance but is already the tracer-defined proxy being tested,would circularly reuse the proxy overlay as the X-ray topology seed
