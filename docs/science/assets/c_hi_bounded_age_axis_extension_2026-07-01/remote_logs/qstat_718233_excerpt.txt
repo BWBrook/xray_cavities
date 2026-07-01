@@ -1,0 +1,11 @@
+Job Id: 718233.kunanyi-ohpc
+    Job_Name = c_hi_ageext
+    resources_used.cpupercent = 98
+    resources_used.cput = 00:38:08
+    resources_used.mem = 1337596kb
+    resources_used.ncpus = 1
+    resources_used.vmem = 1770088kb
+    resources_used.walltime = 00:52:48
+    job_state = F
+    Stageout_status = 1
+    Exit_status = 0

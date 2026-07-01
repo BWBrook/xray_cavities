@@ -1,0 +1,69 @@
+{
+  "active_caveats": [
+    "Stageout_status=1 retained as scheduler caveat; archive/stdout/stderr were retrieved directly from stage and validated locally",
+    "late-age X-ray/tracer review product only, not publication-ready observables",
+    "connected-envelope/X-ray topology unresolved",
+    "sparse radio remains diagnostic only",
+    "Level 3 gravity remains blocked_missing_potential",
+    "pV/2.5pV/4pV convention remains active",
+    "no C-LO/G-LO, comparison cases, early ages, broad sweep, endpoint rerun, or scientific-default changes"
+  ],
+  "boundary_confirmation": {
+    "agent_comms_edits": false,
+    "commits_or_pushes": false,
+    "endpoint_rerun": false,
+    "finalizer_run": false,
+    "hdf5_xraise_rerun": false,
+    "new_pbs_submission": false,
+    "source_age_substitution": false
+  },
+  "date": "2026-07-01",
+  "decision_label": "BOUNDED_LATE_AXIS_EXTENSION_COMPLETE_REVIEW_READY",
+  "goal": "021-c-hi-bounded-age-axis-extension",
+  "headline_result": "Goal 021 completed cleanly with Exit_status=0; outputs 48 and 50 fill the late C-HI age-axis surface between the accepted 46/49 pilot and endpoint 51 controls.",
+  "pbs_completion": {
+    "exit_status": 0,
+    "job_id": "718233.kunanyi-ohpc",
+    "job_name": "c_hi_ageext",
+    "job_state": "F",
+    "resources_used": {
+      "cpupercent": 98,
+      "cput": "00:38:08",
+      "mem": "1337596kb",
+      "ncpus": 1,
+      "vmem": "1770088kb",
+      "walltime": "00:52:48"
+    },
+    "stageout_status": 1
+  },
+  "recommended_next_goal_shape": "local-only late age-axis consolidation/decision gate using outputs 46/48/49/50 plus endpoint 51 before any additional sampling or broadening.",
+  "retrieved_files": {
+    "archive": "docs/science/assets/c_hi_bounded_age_axis_extension_2026-07-01/remote_logs/c_hi_bounded_age_axis_extension_2026-07-01.tar.gz",
+    "archive_sha256": "8147e945034df15510e831f85e0393c7b88c74cd8d70ae1fa16ca025b86e71e7",
+    "stderr": "docs/science/assets/c_hi_bounded_age_axis_extension_2026-07-01/remote_logs/c_hi_late_age_axis_extension.err",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "docs/science/assets/c_hi_bounded_age_axis_extension_2026-07-01/remote_logs/c_hi_late_age_axis_extension.out",
+    "stdout_sha256": "24057dc3a96b92335234780e0777d42870daa956f71624d9224f1a363e06be4f"
+  },
+  "status": "complete_product_retrieved_and_packaged",
+  "validated_product_surface": {
+    "context_outputs": [
+      "46",
+      "49",
+      "51"
+    ],
+    "endpoint_control": "51 reused, not rerun",
+    "new_product_count": 6,
+    "new_product_validation": "all six Goal 021 products passed finite/positive metric checks, expected metadata, and 0/0/0 empty-column support",
+    "nonzero_view_accumulator": "edge_overlap_uniform_cell_projection",
+    "outputs": [
+      "48",
+      "50"
+    ],
+    "views": [
+      "0deg",
+      "45deg",
+      "90deg"
+    ]
+  }
+}

@@ -14,11 +14,109 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-020 late-source-age pilot
-consolidation handoff.
+This note should be treated as a post-Goal-021 bounded age-axis extension
+completion handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 021 bounded C-HI age-axis extension completion on 2026-07-01:
+
+- Status:
+  `complete_product_retrieved_and_packaged`.
+- Decision label:
+  `BOUNDED_LATE_AXIS_EXTENSION_COMPLETE_REVIEW_READY`.
+- New science note:
+  `docs/science/c_hi_bounded_age_axis_extension_2026-07-01.md`.
+- New review asset bundle:
+  `docs/science/assets/c_hi_bounded_age_axis_extension_2026-07-01/`.
+- Retrieved remote logs/archive:
+  - `remote_logs/c_hi_bounded_age_axis_extension_2026-07-01.tar.gz`
+  - `remote_logs/c_hi_late_age_axis_extension.out`
+  - `remote_logs/c_hi_late_age_axis_extension.err`
+  - `remote_logs/qstat_718233_excerpt.txt`
+- Archive SHA-256:
+  `8147e945034df15510e831f85e0393c7b88c74cd8d70ae1fa16ca025b86e71e7`.
+- Machine-readable assets:
+  - `per_age_view_comparison.csv`
+  - `goal021_product_validation.csv`
+  - `age_axis_trend_summary.csv`
+  - `product_provenance.csv`
+  - `next_step_recommendation.csv`
+  - `bounded_age_axis_extension_metadata.json`
+- New wrapper:
+  `scripts/kunanyi/c_hi_late_age_axis_extension.pbs`.
+- New wrapper tests:
+  `tests/test_late_age_axis_extension_wrapper.py`.
+- New Goal 021 log:
+  `docs/goals/021-c-hi-bounded-age-axis-extension/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-bounded-age-axis-extension.md`.
+- Target surface:
+  process only final-production `C-HI` outputs `48` and `50`, each with
+  `0deg`, `45deg`, and `90deg` compact X-ray/tracer products. Endpoint-control
+  `51` was preflighted for consistency only and is not rerun by default.
+- Projection contract:
+  nonzero views require `edge_overlap_uniform_cell_projection`.
+- Local validation passed:
+  `uv run pytest tests/test_source_age_sampling_plan.py tests/test_refined_projection_viewing_rerun.py tests/test_xraise_grid_smoke_projection.py tests/test_late_source_age_pilot_wrapper.py tests/test_late_age_axis_extension_wrapper.py -q`
+  (`21 passed`), `bash -n scripts/kunanyi/c_hi_late_age_axis_extension.pbs`,
+  `git diff --check`, and targeted unresolved-marker scan.
+- Remote stage:
+  `/u/bwbrook/codex_kunanyi/goal021_c_hi_bounded_age_axis_extension`.
+- Remote analysis root:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension`.
+- Expected archive:
+  `/u/bwbrook/codex_kunanyi/goal021_c_hi_bounded_age_axis_extension/c_hi_bounded_age_axis_extension_2026-07-01.tar.gz`.
+- Staged hashes verified:
+  `xraise_grid_smoke.py`
+  `a7ef3553a18ef79ee7c29fd40f4b3cbc13a6376e7bc45b0152ea004f05232c0c`;
+  `c_hi_late_age_axis_extension.pbs`
+  `6f96e26435fc25eeed726618932e0e2ebe35eae0b35411b9214dfd219592d526`.
+- Remote preflight passed:
+  HDF5 files `data.0048.flt.h5`, `data.0050.flt.h5`, and endpoint-control
+  `data.0051.flt.h5` were readable with timesteps `Timestep_48`,
+  `Timestep_50`, and `Timestep_51`; required datasets `rho`, `prs`, `tr1`,
+  `vx1`, `vx2`, `vx3` were present; shape consistency passed at
+  `(1014, 960, 960)`.
+- PBS job submitted:
+  `718233.kunanyi-ohpc`, job name `c_hi_ageext`, state `Q`, queue `normal`,
+  `select=1:ncpus=1:mpiprocs=1:mem=96gb`, walltime `04:00:00`, qtime
+  `Wed Jul 1 11:42:52 2026`.
+- PBS completion:
+  Barry reported `Exit_status=0`; final `qstat -x -f` evidence found
+  `job_state=F`, `Exit_status=0`, `Stageout_status=1`,
+  `resources_used.cpupercent=98`, `cput=00:38:08`, `mem=1337596kb`,
+  `ncpus=1`, `vmem=1770088kb`, and `walltime=00:52:48`.
+- Scheduler caveat:
+  `Stageout_status=1` remains visible, but the expected archive/stdout/stderr
+  were retrieved directly from the Goal 021 stage and validated locally.
+- Product validation:
+  all six intended Goal 021 products are present and reviewable:
+  `48/0deg`, `48/45deg`, `48/90deg`, `50/0deg`, `50/45deg`, `50/90deg`.
+  The `45deg` and `90deg` products use
+  `edge_overlap_uniform_cell_projection`; raw/corrected/correction-ratio
+  empty projected columns are `0/0/0` for every Goal 021 product.
+- Completion validation passed:
+  `uv run pytest tests/test_source_age_sampling_plan.py tests/test_refined_projection_viewing_rerun.py tests/test_xraise_grid_smoke_projection.py tests/test_late_source_age_pilot_wrapper.py tests/test_late_age_axis_extension_wrapper.py -q`
+  (`21 passed`), `bash -n scripts/kunanyi/c_hi_late_age_axis_extension.pbs`,
+  JSON parse for `bounded_age_axis_extension_metadata.json`, CSV
+  parse/expected-column/nonempty checks, `tar -tzf` for the retrieved archive,
+  `git diff --check`, and targeted unresolved-marker scan.
+- Late-axis context:
+  the package compares accepted `46/49` Goal 019/020 pilot rows, new `48/50`
+  Goal 021 rows, and endpoint `51` controls across `0/45/90deg`.
+  Corrected X-ray sums move smoothly toward the endpoint within each view.
+- Recommended next action:
+  run a local-only late age-axis consolidation/decision gate using outputs
+  `46/48/49/50` plus endpoint `51` before any additional sampling,
+  broadening, comparison-case work, or publication-facing interpretation.
+- Boundary confirmation:
+  no new PBS job, finalizer, HDF5/XRAiSE rerun, source-age substitution,
+  endpoint rerun, `C-LO`, `G-LO`, comparison-case processing, early
+  `5/10 Myr`, broad sweep, PLUTO production, PRAiSE/radio/cavity
+  regeneration, scientific-default change, commit, push, cleanup, or
+  `agent_comms` edit occurred during retrieval and packaging.
 
 Latest Goal 020 late-source-age pilot consolidation on 2026-07-01:
 

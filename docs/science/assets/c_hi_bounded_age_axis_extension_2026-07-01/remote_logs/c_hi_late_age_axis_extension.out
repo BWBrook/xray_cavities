@@ -1,0 +1,397 @@
+jobid=718233.kunanyi-ohpc
+host=n002.kunanyi.UDEF
+stage_dir=/u/bwbrook/codex_kunanyi/goal021_c_hi_bounded_age_axis_extension
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension
+prod64_outputs=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs
+source_ages=48|Timestep_48|46.999852 50|Timestep_50|48.999418
+endpoint_control=51|Timestep_51|50.000000
+views=0|0deg|direct_y_axis_sum 45|45deg|edge_overlap_uniform_cell_projection 90|90deg|edge_overlap_uniform_cell_projection
+projected_u_bins=960
+empty_column_fraction_max=0.05
+xraise_runtime=/u/bwbrook/codex_kunanyi/xraise_runtime
+xraise_script=/u/bwbrook/codex_kunanyi/goal021_c_hi_bounded_age_axis_extension/xraise_grid_smoke.py
+summary_archive=/u/bwbrook/codex_kunanyi/goal021_c_hi_bounded_age_axis_extension/c_hi_bounded_age_axis_extension_2026-07-01.tar.gz
+archive_snapshot_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension/archive_snapshot
+started_utc=2026-07-01T01:42:52Z
+a7ef3553a18ef79ee7c29fd40f4b3cbc13a6376e7bc45b0152ea004f05232c0c  /u/bwbrook/codex_kunanyi/goal021_c_hi_bounded_age_axis_extension/xraise_grid_smoke.py
+4bf17cb8e63e2d87a06615c170c7dd307788554a0cee83409762223123ec8da5  /u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py
+e0f53a9f276a956f347af0e4fe627ee152762abc8b5116fc458070ee5f0925e3  /u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt
+64df88d39896f14064bb799fd5b70c6f68d20bcbdc5a15d19e2e4fd15b22f747  /u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz
+hdf5_preflight=passed output=48 timestep=Timestep_48 expected_myr=46.999852 shape_nz_ny_nx=(1014, 960, 960) time_code=14410.221814328825 path=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0048.flt.h5
+hdf5_preflight=passed output=50 timestep=Timestep_50 expected_myr=48.999418 shape_nz_ny_nx=(1014, 960, 960) time_code=15023.29040598768 path=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0050.flt.h5
+hdf5_preflight=passed output=51 timestep=Timestep_51 expected_myr=50.000000 shape_nz_ny_nx=(1014, 960, 960) time_code=15330.069689399999 path=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5
+hdf5_shape_consistency=passed shape_nz_ny_nx=(1014, 960, 960)
+view_started_utc=2026-07-01T01:43:06Z output=48 timestep=Timestep_48 view=0deg
+view_input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0048.flt.h5
+view_output_dir=/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension/output0048_Timestep_48/xraise_grid_0deg
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 2874604.8628305476,
+    "min": 178.0663512728725,
+    "positive_cells": 973440,
+    "positive_max": 2874604.8628305476,
+    "positive_min": 178.0663512728725,
+    "positive_sum": 3268033099.94184,
+    "sum": 3268033099.94184
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 973440,
+    "max": 2.4504602859886164,
+    "min": 1.330831409034936,
+    "positive_cells": 973440,
+    "positive_max": 2.4504602859886164,
+    "positive_min": 1.330831409034936,
+    "positive_sum": 1310643.9305680469,
+    "sum": 1310643.9305680469
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0048.flt.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "direct_y_axis_sum",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 960,
+    "sky_horizontal_max_kpc": 199.1538543701172,
+    "sky_horizontal_min_kpc": -199.1538543701172,
+    "view_angle_deg": 0.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 1435600.9295778144,
+    "min": 132.500421834545,
+    "positive_cells": 973440,
+    "positive_max": 1435600.9295778144,
+    "positive_min": 132.500421834545,
+    "positive_sum": 2426009772.912447,
+    "sum": 2426009772.912447
+  },
+  "redshift": 0.05,
+  "time_code": 14410.221814328825,
+  "time_myr": 46.9998574901947,
+  "timestep": "Timestep_48",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}
+xray_validation=passed output=48 timestep=Timestep_48 view=0deg accumulator=direct_y_axis_sum empty_columns=[('raw_xray', 0, 0.0), ('corrected_xray', 0, 0.0), ('correction_ratio', 0, 0.0)]
+view_finished_utc=2026-07-01T01:55:05Z output=48 timestep=Timestep_48 view=0deg
+view_started_utc=2026-07-01T01:55:05Z output=48 timestep=Timestep_48 view=45deg
+view_input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0048.flt.h5
+view_output_dir=/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension/output0048_Timestep_48/xraise_grid_45deg
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 330020.8171536855,
+    "min": 0.39823315175503793,
+    "positive_cells": 973440,
+    "positive_max": 330020.8171536855,
+    "positive_min": 0.39823315175503793,
+    "positive_sum": 1442428311.2846231,
+    "sum": 1442428311.2846231
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 973440,
+    "max": 2.2784506256589996,
+    "min": 1.331292332144634,
+    "positive_cells": 973440,
+    "positive_max": 2.2784506256589996,
+    "positive_min": 1.331292332144634,
+    "positive_sum": 1305807.772804111,
+    "sum": 1305807.772804111
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0048.flt.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "edge_overlap_uniform_cell_projection",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 960,
+    "sky_horizontal_max_kpc": 282.5430834928411,
+    "sky_horizontal_min_kpc": -282.5430834928411,
+    "view_angle_deg": 45.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 159939.9366278745,
+    "min": 0.2957003903537346,
+    "positive_cells": 973440,
+    "positive_max": 159939.9366278745,
+    "positive_min": 0.2957003903537346,
+    "positive_sum": 1074758038.2640114,
+    "sum": 1074758038.2640114
+  },
+  "redshift": 0.05,
+  "time_code": 14410.221814328825,
+  "time_myr": 46.9998574901947,
+  "timestep": "Timestep_48",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}
+xray_validation=passed output=48 timestep=Timestep_48 view=45deg accumulator=edge_overlap_uniform_cell_projection empty_columns=[('raw_xray', 0, 0.0), ('corrected_xray', 0, 0.0), ('correction_ratio', 0, 0.0)]
+view_finished_utc=2026-07-01T02:02:27Z output=48 timestep=Timestep_48 view=45deg
+view_started_utc=2026-07-01T02:02:27Z output=48 timestep=Timestep_48 view=90deg
+view_input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0048.flt.h5
+view_output_dir=/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension/output0048_Timestep_48/xraise_grid_90deg
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 462158.4134528524,
+    "min": 178.06635127287282,
+    "positive_cells": 973440,
+    "positive_max": 462158.4134528524,
+    "positive_min": 178.06635127287282,
+    "positive_sum": 2039901680.5696335,
+    "sum": 2039901680.5696335
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 973440,
+    "max": 2.318669435048426,
+    "min": 1.3308312071433492,
+    "positive_cells": 973440,
+    "positive_max": 2.318669435048426,
+    "positive_min": 1.3308312071433492,
+    "positive_sum": 1305862.039929235,
+    "sum": 1305862.039929235
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0048.flt.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "edge_overlap_uniform_cell_projection",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 960,
+    "sky_horizontal_max_kpc": 199.78813031514485,
+    "sky_horizontal_min_kpc": -199.78813031514485,
+    "view_angle_deg": 90.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 223095.8806537652,
+    "min": 132.50042183454502,
+    "positive_cells": 973440,
+    "positive_max": 223095.8806537652,
+    "positive_min": 132.50042183454502,
+    "positive_sum": 1519937393.9824653,
+    "sum": 1519937393.9824653
+  },
+  "redshift": 0.05,
+  "time_code": 14410.221814328825,
+  "time_myr": 46.9998574901947,
+  "timestep": "Timestep_48",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}
+xray_validation=passed output=48 timestep=Timestep_48 view=90deg accumulator=edge_overlap_uniform_cell_projection empty_columns=[('raw_xray', 0, 0.0), ('corrected_xray', 0, 0.0), ('correction_ratio', 0, 0.0)]
+view_finished_utc=2026-07-01T02:09:33Z output=48 timestep=Timestep_48 view=90deg
+view_started_utc=2026-07-01T02:09:33Z output=50 timestep=Timestep_50 view=0deg
+view_input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0050.flt.h5
+view_output_dir=/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension/output0050_Timestep_50/xraise_grid_0deg
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 2874473.7209664052,
+    "min": 179.0474169868759,
+    "positive_cells": 973440,
+    "positive_max": 2874473.7209664052,
+    "positive_min": 179.0474169868759,
+    "positive_sum": 3230766589.09722,
+    "sum": 3230766589.09722
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 973440,
+    "max": 2.4508951718978347,
+    "min": 1.3310502695359558,
+    "positive_cells": 973440,
+    "positive_max": 2.4508951718978347,
+    "positive_min": 1.3310502695359558,
+    "positive_sum": 1310367.966480403,
+    "sum": 1310367.966480403
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0050.flt.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "direct_y_axis_sum",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 960,
+    "sky_horizontal_max_kpc": 199.1538543701172,
+    "sky_horizontal_min_kpc": -199.1538543701172,
+    "view_angle_deg": 0.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 1435505.2653729857,
+    "min": 133.2607020193396,
+    "positive_cells": 973440,
+    "positive_max": 1435505.2653729857,
+    "positive_min": 133.2607020193396,
+    "positive_sum": 2399313441.2150025,
+    "sum": 2399313441.2150025
+  },
+  "redshift": 0.05,
+  "time_code": 15023.29040598768,
+  "time_myr": 48.999419801652614,
+  "timestep": "Timestep_50",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}
+xray_validation=passed output=50 timestep=Timestep_50 view=0deg accumulator=direct_y_axis_sum empty_columns=[('raw_xray', 0, 0.0), ('corrected_xray', 0, 0.0), ('correction_ratio', 0, 0.0)]
+view_finished_utc=2026-07-01T02:20:42Z output=50 timestep=Timestep_50 view=0deg
+view_started_utc=2026-07-01T02:20:42Z output=50 timestep=Timestep_50 view=45deg
+view_input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0050.flt.h5
+view_output_dir=/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension/output0050_Timestep_50/xraise_grid_45deg
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 329859.18986397266,
+    "min": 0.4005257950775972,
+    "positive_cells": 973440,
+    "positive_max": 329859.18986397266,
+    "positive_min": 0.4005257950775972,
+    "positive_sum": 1436830643.3400345,
+    "sum": 1436830643.3400345
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 973440,
+    "max": 2.280811524957027,
+    "min": 1.3314721695407292,
+    "positive_cells": 973440,
+    "positive_max": 2.280811524957027,
+    "positive_min": 1.3314721695407292,
+    "positive_sum": 1305741.1397202245,
+    "sum": 1305741.1397202245
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0050.flt.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "edge_overlap_uniform_cell_projection",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 960,
+    "sky_horizontal_max_kpc": 282.5430834928411,
+    "sky_horizontal_min_kpc": -282.5430834928411,
+    "view_angle_deg": 45.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 159821.029022675,
+    "min": 0.2976295211501293,
+    "positive_cells": 973440,
+    "positive_max": 159821.029022675,
+    "positive_min": 0.2976295211501293,
+    "positive_sum": 1070840840.2224302,
+    "sum": 1070840840.2224302
+  },
+  "redshift": 0.05,
+  "time_code": 15023.29040598768,
+  "time_myr": 48.999419801652614,
+  "timestep": "Timestep_50",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}
+xray_validation=passed output=50 timestep=Timestep_50 view=45deg accumulator=edge_overlap_uniform_cell_projection empty_columns=[('raw_xray', 0, 0.0), ('corrected_xray', 0, 0.0), ('correction_ratio', 0, 0.0)]
+view_finished_utc=2026-07-01T02:27:52Z output=50 timestep=Timestep_50 view=45deg
+view_started_utc=2026-07-01T02:27:52Z output=50 timestep=Timestep_50 view=90deg
+view_input_h5=/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0050.flt.h5
+view_output_dir=/scratch/bwbrook/xray_cavities_analysis/2026-07-01-c-hi-bounded-age-axis-extension/output0050_Timestep_50/xraise_grid_90deg
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 462034.2678659705,
+    "min": 179.04741698687613,
+    "positive_cells": 973440,
+    "positive_max": 462034.2678659705,
+    "positive_min": 179.04741698687613,
+    "positive_sum": 2031985382.644735,
+    "sum": 2031985382.644735
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 973440,
+    "max": 2.319900782821467,
+    "min": 1.3311135029211851,
+    "positive_cells": 973440,
+    "positive_max": 2.319900782821467,
+    "positive_min": 1.3311135029211851,
+    "positive_sum": 1305815.227597764,
+    "sum": 1305815.227597764
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0050.flt.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "edge_overlap_uniform_cell_projection",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 960,
+    "sky_horizontal_max_kpc": 199.78813031514485,
+    "sky_horizontal_min_kpc": -199.78813031514485,
+    "view_angle_deg": 90.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 973440,
+    "max": 223005.70514803115,
+    "min": 133.26070201933956,
+    "positive_cells": 973440,
+    "positive_max": 223005.70514803115,
+    "positive_min": 133.26070201933956,
+    "positive_sum": 1514397639.3855608,
+    "sum": 1514397639.3855608
+  },
+  "redshift": 0.05,
+  "time_code": 15023.29040598768,
+  "time_myr": 48.999419801652614,
+  "timestep": "Timestep_50",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}
+xray_validation=passed output=50 timestep=Timestep_50 view=90deg accumulator=edge_overlap_uniform_cell_projection empty_columns=[('raw_xray', 0, 0.0), ('corrected_xray', 0, 0.0), ('correction_ratio', 0, 0.0)]
+view_finished_utc=2026-07-01T02:35:08Z output=50 timestep=Timestep_50 view=90deg
+8147e945034df15510e831f85e0393c7b88c74cd8d70ae1fa16ca025b86e71e7  /u/bwbrook/codex_kunanyi/goal021_c_hi_bounded_age_axis_extension/c_hi_bounded_age_axis_extension_2026-07-01.tar.gz
+finished_utc=2026-07-01T02:35:40Z
