@@ -14,11 +14,77 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-025 existing-asset topology
-application-design handoff.
+This note should be treated as a post-Goal-026 residual-threshold sensitivity
+review handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 026 residual-threshold sensitivity review on 2026-07-01:
+
+- Status:
+  `complete_local_threshold_sensitivity_review`.
+- Decision label:
+  `CONNECTED_CORE_PRESERVED_THRESHOLD_SENSITIVE_NOT_FINAL`.
+- New builder/tests:
+  - `scripts/science/build_residual_threshold_sensitivity_review.py`
+  - `tests/test_residual_threshold_sensitivity_review.py`
+- New science note:
+  `docs/science/c_hi_residual_threshold_sensitivity_review_2026-07-01.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_residual_threshold_sensitivity_review_2026-07-01/`.
+- Machine-readable assets:
+  - `residual_threshold_sensitivity.csv`
+  - `residual_component_sensitivity.csv`
+  - `mask_seed_overlap_summary.csv`
+  - `figure_provenance.csv`
+  - `next_step_recommendation.csv`
+  - `residual_threshold_sensitivity_metadata.json`
+  - `residual_threshold_sensitivity.png`
+- New Goal log:
+  `docs/goals/026-c-hi-residual-threshold-sensitivity-review/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-residual-threshold-sensitivity-review.md`.
+- Evidence basis:
+  existing local Goal 005 corrected X-ray/tracer/axis compact assets, Goal 007
+  residual-display metadata/topology context, and Goal 025 conditional
+  residual-core application assets. No HDF5/XRAiSE rerun was performed.
+- Method:
+  Goal 007-style `41` pixel boxcar unsharp residual,
+  `log10(corrected_xray) - boxcar_smooth(log10(corrected_xray))`; tracer-proxy
+  side labels from `tracer_max_los >= 5e-3` split by `z_kpc` sign;
+  `min_component_pixels=50`; `connectivity=4`.
+- Threshold surface:
+  `0.5`, `1`, and `2` percent residual-core masks classify as
+  `connected_envelope_single_system`; `3`, `5`, `10`, and `20` percent masks
+  classify as `ambiguous_needs_review`.
+- Interpretation:
+  the connected residual core is preserved in the narrow residual-core regime,
+  but the `3` percent transition to ambiguous means this remains a conditional
+  local application surface, not a final observational endpoint topology
+  claim. Unlabelled residual islands are reported explicitly in tables and
+  figure rather than silently discarded.
+- Recommended next action:
+  `bounded_conditional_endpoint_topology_application_package`: a no-overwrite
+  package that carries the connected-core result and threshold sensitivity
+  together. Do not replace accepted products, rerun HDF5/XRAiSE by default, or
+  claim final endpoint topology from this review.
+- Validation:
+  `uv run pytest tests/test_residual_threshold_sensitivity_review.py tests/test_hybrid_xray_cavity_topology.py -q`;
+  `uv run python scripts/science/build_residual_threshold_sensitivity_review.py`;
+  JSON parse for `residual_threshold_sensitivity_metadata.json`; CSV
+  parse/expected-column/nonempty checks for all five new CSV assets; PNG
+  existence/nonempty and image-open check; `git diff --check`; and targeted
+  unresolved-marker scan over the science note, exchange log, Goal log, and
+  current status.
+- Boundary confirmation:
+  Goal 026 is local-only. No remote commands, Open OnDemand, SSH/SCP, `qstat`,
+  Kunanyi staging, PBS jobs, finalizers, retrieval, HDF5/XRAiSE reruns, PLUTO,
+  PRAiSE, radio, cavity regeneration, endpoint rerun, source-age substitution,
+  `C-LO`, `G-LO`, comparison-case processing, early-age branch, broad
+  source-age sweep, publication-facing claims, scientific-default changes,
+  commits, pushes, cleanup, `agent_comms` edits, or accepted-asset overwrites
+  occurred.
 
 Latest Goal 025 existing-asset topology application design on 2026-07-01:
 

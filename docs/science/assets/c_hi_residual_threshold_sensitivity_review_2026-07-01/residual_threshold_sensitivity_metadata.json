@@ -1,0 +1,62 @@
+{
+  "date": "2026-07-01",
+  "goal": "026-c-hi-residual-threshold-sensitivity-review",
+  "status": "complete_local_threshold_sensitivity_review",
+  "decision_label": "CONNECTED_CORE_PRESERVED_THRESHOLD_SENSITIVE_NOT_FINAL",
+  "selected_next_step_recommendation": "bounded_conditional_endpoint_topology_application_package",
+  "headline_result": "The 1-2 percent residual-core masks preserve the connected-envelope seeded topology result, while broader 5/10/20 percent masks are ambiguous; this supports only a conditional bounded application package, not a final endpoint topology claim.",
+  "threshold_percentiles": [
+    "0.5",
+    "1",
+    "2",
+    "3",
+    "5",
+    "10",
+    "20"
+  ],
+  "method_parameters": {
+    "residual": "log10(corrected_xray) - boxcar_smooth(log10(corrected_xray))",
+    "boxcar_pixels": 41,
+    "side_seed": "tracer_max_los >= tracer_threshold split by z_kpc sign",
+    "tracer_threshold": 0.005,
+    "min_component_pixels": 50,
+    "bridge_connectivity": 4,
+    "classification_unlabelled_components": "reported explicitly; ignored for seeded topology class"
+  },
+  "input_shape": {
+    "xray_rows": 1014,
+    "xray_columns": 960,
+    "x_axis_columns": 960,
+    "z_axis_rows": 1014
+  },
+  "active_caveats": [
+    "not publication-ready observables",
+    "threshold sensitivity prevents a final observational endpoint topology claim",
+    "tracer side labels remain provenance proxies, not X-ray-fitted cavities",
+    "connected residual core is conditional under the selected residual/mask protocol",
+    "sparse radio remains diagnostic only",
+    "Level 3 gravity remains blocked_missing_potential",
+    "pV/adopted 2.5pV/4pV convention remains active"
+  ],
+  "boundary_confirmation": {
+    "remote_commands": false,
+    "open_ondemand_or_ssh": false,
+    "pbs_jobs": false,
+    "hdf5_xraise_rerun": false,
+    "cavity_regeneration": false,
+    "endpoint_rerun": false,
+    "source_age_substitution": false,
+    "agent_comms_edits": false,
+    "commits_or_pushes": false,
+    "accepted_assets_overwritten": false
+  },
+  "asset_files": [
+    "residual_threshold_sensitivity.csv",
+    "residual_component_sensitivity.csv",
+    "mask_seed_overlap_summary.csv",
+    "figure_provenance.csv",
+    "next_step_recommendation.csv",
+    "residual_threshold_sensitivity_metadata.json",
+    "residual_threshold_sensitivity.png"
+  ]
+}
