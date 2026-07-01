@@ -1,0 +1,7 @@
+output,timestep,view,accumulator,validation_status,empty_raw_xray_columns,empty_corrected_xray_columns,empty_correction_ratio_columns,product_path
+46,Timestep_46,0deg,direct_y_axis_sum,passed,0,0,0,/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg
+46,Timestep_46,45deg,edge_overlap_uniform_cell_projection,passed,0,0,0,/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg
+46,Timestep_46,90deg,edge_overlap_uniform_cell_projection,passed,0,0,0,/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg
+49,Timestep_49,0deg,direct_y_axis_sum,passed,0,0,0,/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg
+49,Timestep_49,45deg,edge_overlap_uniform_cell_projection,passed,0,0,0,/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg
+49,Timestep_49,90deg,edge_overlap_uniform_cell_projection,passed,0,0,0,/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg

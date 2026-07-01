@@ -1,0 +1,25 @@
+{
+  "clean_archive": "remote_logs/c_hi_late_source_age_pilot_repackaged_2026-07-01.tar.gz",
+  "clean_archive_sha256": "ec99aef8ca2394ee15bd8679b37cc7027cf78179249fe1ee6dc2e2bd124de110",
+  "failure_class": "wrapper_archive_race_live_directory_changed_during_tar",
+  "hdf5_xraise_recomputed": false,
+  "nonzero_view_accumulator": "edge_overlap_uniform_cell_projection",
+  "original_exit_status": 1,
+  "original_job_id": "706130.kunanyi-ohpc",
+  "pbs_submitted": false,
+  "product_inventory": "product_inventory.csv",
+  "remote_archive": "/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot_repackaged_2026-07-01.tar.gz",
+  "repair_mode": "local_wrapper_patch_plus_no_rerun_existing_output_repackage",
+  "status": "repair_complete_no_rerun_package_ready",
+  "validated_outputs": [
+    "46",
+    "49"
+  ],
+  "validated_rows": 6,
+  "validated_views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ],
+  "validation_summary": "repackage_validation_summary.csv"
+}

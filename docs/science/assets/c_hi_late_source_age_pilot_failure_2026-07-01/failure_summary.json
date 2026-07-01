@@ -1,0 +1,37 @@
+{
+  "archive_member_file_count": 60,
+  "archive_readable_by_tarfile": true,
+  "archive_sha256": "ad3863ca7e0d249a566b246da6927cf7677db5ab5182b51d6b7e88188b84e60f",
+  "expected_validation_markers": 6,
+  "failure_class": "wrapper_archive_race_live_directory_changed_during_tar",
+  "first_failure_point": "archive step tar returned nonzero after all six view validations passed",
+  "job_id": "706130.kunanyi-ohpc",
+  "job_name": "c_hi_lsapil",
+  "qstat": {
+    "Exit_status": "1",
+    "Resource_List.mem": "96gb",
+    "Resource_List.select": "1:ncpus=1:mpiprocs=1:mem=96gb",
+    "Resource_List.walltime": "04:00:00",
+    "Stageout_status": "1",
+    "exec_host": "n135/1",
+    "job_state": "F",
+    "queue": "normal",
+    "resources_used.cpupercent": "98",
+    "resources_used.cput": "00:36:52",
+    "resources_used.mem": "1338348kb",
+    "resources_used.ncpus": "1",
+    "resources_used.vmem": "1770104kb",
+    "resources_used.walltime": "00:49:52"
+  },
+  "retrieved_archive": "docs/science/assets/c_hi_late_source_age_pilot_failure_2026-07-01/remote_logs/c_hi_late_source_age_pilot_2026-06-30.tar.gz",
+  "retrieved_stderr": "docs/science/assets/c_hi_late_source_age_pilot_failure_2026-07-01/remote_logs/c_hi_late_source_age_pilot.err",
+  "retrieved_stdout": "docs/science/assets/c_hi_late_source_age_pilot_failure_2026-07-01/remote_logs/c_hi_late_source_age_pilot.out",
+  "science_product_status": "all_six_views_validated_but_job_failed_at_archive_step; treat as failure closeout until repackaged/accepted",
+  "smallest_safe_next_step": "local wrapper patch to archive from a stable manifest/snapshot or exclude live remote_logs, then a no-rerun packaging/finalizer or targeted rerun only if X-ray Cavities authorizes",
+  "status": "failed_diagnostic_complete",
+  "stderr": [
+    "tar: 2026-06-30-c-hi-late-source-age-pilot/remote_logs: file changed as we read it",
+    "tar: 2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49: file changed as we read it"
+  ],
+  "validation_markers_passed": 6
+}

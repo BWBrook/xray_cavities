@@ -1,0 +1,17 @@
+{
+  "analysis_root": "/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot",
+  "expected_rows": 6,
+  "max_allowed_empty_column_fraction": 0.05,
+  "mode": "no_rerun_existing_output_repackage",
+  "nonzero_view_accumulator": "edge_overlap_uniform_cell_projection",
+  "status": "passed",
+  "validated_rows": 6,
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg",
+    "0deg",
+    "45deg",
+    "90deg"
+  ]
+}

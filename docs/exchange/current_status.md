@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-06-25
+Last updated: 2026-07-01
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,232 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-018 source-age sampling planning
-handoff.
+This note should be treated as a post-Goal-020 late-source-age pilot
+consolidation handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 020 late-source-age pilot consolidation on 2026-07-01:
+
+- Status:
+  `complete_local_consolidation`.
+- Decision label:
+  `LATE_SOURCE_AGE_PILOT_READY_FOR_BOUNDED_C_HI_AGE_AXIS_NEXT_STEP`.
+- New consolidation note:
+  `docs/science/c_hi_late_source_age_pilot_consolidation_2026-07-01.md`.
+- New consolidation bundle:
+  `docs/science/assets/c_hi_late_source_age_pilot_consolidation_2026-07-01/`.
+- Machine-readable assets:
+  - `per_age_view_comparison.csv`
+  - `source_age_trend_readiness.csv`
+  - `product_provenance.csv`
+  - `next_step_recommendation.csv`
+  - `late_source_age_pilot_consolidation_metadata.json`
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-late-source-age-pilot-consolidation.md`.
+- New Goal 020 log:
+  `docs/goals/020-c-hi-late-source-age-pilot-consolidation/Log.md`.
+- Key result:
+  repaired Goal 019 outputs `46` and `49` are finite, support-complete, and
+  smoothly close to the accepted endpoint/refined-viewing surface across
+  `0/45/90deg`; all comparison rows have zero raw/corrected/correction-ratio
+  empty projected columns, and nonzero views use
+  `edge_overlap_uniform_cell_projection`.
+- Scheduler caveat remains visible:
+  original Goal 019 PBS job `706130.kunanyi-ohpc` exited with `Exit_status=1`
+  and `Stageout_status=1`; the accepted repair rests on the clean no-rerun
+  archive, SHA-256
+  `ec99aef8ca2394ee15bd8679b37cc7027cf78179249fe1ee6dc2e2bd124de110`.
+- Recommended next action:
+  review/authorize a bounded C-HI age-axis extension that chooses or preflights
+  one or two additional final-production source-age targets, keeps the
+  `0/45/90deg` compact X-ray/tracer surface, uses refined projection for
+  nonzero views, and does not broaden to comparison cases or a source-age sweep.
+- Boundary confirmation:
+  Goal 020 was local-only. No remote command, Open OnDemand, SSH/SCP, qstat,
+  Kunanyi staging, PBS job, finalizer, retrieval, HDF5/XRAiSE rerun, PLUTO
+  production, PRAiSE/radio/cavity regeneration, source-age substitution,
+  `C-LO`, `G-LO`, comparison-case processing, broad batch, commit, push,
+  cleanup, `agent_comms` change, or scientific-default change occurred.
+
+Latest Goal 019 archive repair iteration on 2026-07-01:
+
+- Status:
+  `repair_complete_no_rerun_package_ready`.
+- Original PBS job remains nonzero:
+  `706130.kunanyi-ohpc` (`c_hi_lsapil`) had `Exit_status = 1` and
+  `Stageout_status = 1`.
+- Failure class remains isolated to packaging:
+  `wrapper_archive_race_live_directory_changed_during_tar`.
+- Wrapper repair:
+  `scripts/kunanyi/c_hi_late_source_age_pilot.pbs` now builds the final
+  archive from a stable snapshot plus explicit file list. It no longer tars
+  the live analysis root directly.
+- Tests updated:
+  `tests/test_late_source_age_pilot_wrapper.py` now checks that the wrapper
+  uses the stable snapshot/file-list archive contract and includes completed
+  product directories, copied logs, manifest, and checksums.
+- New repair note:
+  `docs/science/c_hi_late_source_age_pilot_repair_2026-07-01.md`.
+- New repair bundle:
+  `docs/science/assets/c_hi_late_source_age_pilot_repair_2026-07-01/`.
+- Clean no-rerun archive:
+  `docs/science/assets/c_hi_late_source_age_pilot_repair_2026-07-01/remote_logs/c_hi_late_source_age_pilot_repackaged_2026-07-01.tar.gz`.
+- Clean archive SHA-256:
+  `ec99aef8ca2394ee15bd8679b37cc7027cf78179249fe1ee6dc2e2bd124de110`.
+- Remote clean archive path:
+  `/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot_repackaged_2026-07-01.tar.gz`.
+- No-rerun validation:
+  all six existing products validated from the existing analysis root only:
+  `46/0deg`, `46/45deg`, `46/90deg`, `49/0deg`, `49/45deg`, `49/90deg`.
+  Nonzero views report `edge_overlap_uniform_cell_projection`; raw,
+  corrected, and correction-ratio empty projected columns are all zero in the
+  validation summary.
+- Machine-readable repair evidence:
+  - `repair_summary.json`
+  - `repackage_validation_summary.csv`
+  - `repackage_validation_summary.json`
+  - `product_inventory.csv`
+  - `repackage_manifest.tsv`
+  - `repackage_checksums.sha256`
+  - `repackage_archive_file_list.txt`
+  - `remote_logs/no_rerun_repackage_filelist.stdout.log`
+- Boundary confirmation:
+  no new PBS submission, HDF5/XRAiSE rerun, endpoint rerun, source-age
+  substitution, early `5/10 Myr` branch, PLUTO production, `C-LO`, `G-LO`,
+  comparison-case processing, PRAiSE/radio/cavity regeneration, broad batch,
+  48-hour production commitment, scientific-default change, commit, push,
+  cleanup, Stas/Patrick escalation, or `agent_comms` change occurred.
+
+Latest Goal 019 late-source-age pilot failure closeout on 2026-07-01:
+
+- PBS job `706130.kunanyi-ohpc` (`c_hi_lsapil`) completed with nonzero status:
+  `Exit_status = 1`, `Stageout_status = 1`, `job_state = F`.
+- Barry's completion email reported:
+  `resources_used.cpupercent=98`, `cput=00:36:52`, `mem=1338348kb`,
+  `ncpus=1`, `vmem=1770104kb`, `walltime=00:49:52`.
+- Retrieved failure bundle:
+  `docs/science/assets/c_hi_late_source_age_pilot_failure_2026-07-01/`.
+- New failure note:
+  `docs/science/c_hi_late_source_age_pilot_failure_2026-07-01.md`.
+- Retrieved logs/archive:
+  - `remote_logs/qstat_listing_706130.txt`
+  - `remote_logs/c_hi_late_source_age_pilot.out`
+  - `remote_logs/c_hi_late_source_age_pilot.err`
+  - `remote_logs/c_hi_late_source_age_pilot_2026-06-30.tar.gz`
+- Retrieved archive SHA-256:
+  `ad3863ca7e0d249a566b246da6927cf7677db5ab5182b51d6b7e88188b84e60f`.
+- Machine-readable diagnostics:
+  - `failure_summary.json`
+  - `failure_summary.csv`
+  - `partial_output_inventory.csv`
+  - `remote_file_checksums.csv`
+- First failure point:
+  GNU `tar` returned nonzero at the archive step after all six source-age/view
+  validations had passed. Stderr:
+  `tar: 2026-06-30-c-hi-late-source-age-pilot/remote_logs: file changed as we read it`
+  and
+  `tar: 2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49: file changed as we read it`.
+- Partial-output inventory:
+  all six intended projections have `xray_validation=passed` markers:
+  `46/0deg`, `46/45deg`, `46/90deg`, `49/0deg`, `49/45deg`, `49/90deg`.
+  Nonzero views report `edge_overlap_uniform_cell_projection` and zero
+  catastrophic empty-column recurrence in the wrapper validation markers.
+- Archive status:
+  the retrieved archive is locally readable with `tar -tzf` and contains the
+  required compact files for all six source-age/view products. Because the PBS
+  job still exited nonzero, this remains a failure closeout rather than an
+  accepted Goal 019 science product until reviewed.
+- Recommended next step:
+  patch the wrapper/package contract so archive creation uses a stable manifest
+  or otherwise avoids live-directory/log changes during `tar`; then, if X-ray
+  Cavities authorizes, run only a tiny no-rerun finalizer/repackaging step
+  against existing outputs, or accept the retrieved archive after review.
+- Boundary confirmation:
+  retrieval and diagnosis only; no new PBS submission, rerun, finalizer,
+  endpoint rerun, source-age substitution, early `5/10 Myr` branch, PLUTO
+  production, `C-LO`, `G-LO`, comparison-case processing,
+  PRAiSE/radio/cavity regeneration, broad batch, 48-hour production
+  commitment, scientific-default change, commits, pushes, cleanup,
+  Stas/Patrick escalation, or `agent_comms` changes occurred.
+- Accepted Goal 005/011/012/016/017/018 assets were not overwritten.
+
+Previous Goal 019 late-source-age pilot submission state on 2026-06-30:
+
+- Goal 019 prepared, preflighted, staged, and submitted the post-maintenance
+  bounded submission wrapper for the first late-source-age `C-HI` pilot.
+- Current phase:
+  `submitted_waiting_pbs_completion`.
+- Start state was clean:
+  `main...origin/main` at `63f980e`; `git fetch --prune origin` and
+  `git merge --ff-only origin/main` reported already up to date.
+- New PBS wrapper:
+  `scripts/kunanyi/c_hi_late_source_age_pilot.pbs`.
+- New wrapper contract tests:
+  `tests/test_late_source_age_pilot_wrapper.py`.
+- New Goal 019 log:
+  `docs/goals/019-c-hi-late-source-age-pilot/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-06-30-c-hi-late-source-age-pilot.md`.
+- Target product surface remains:
+  - process only `data.0046.flt.h5::Timestep_46` and
+    `data.0049.flt.h5::Timestep_49`;
+  - use `0/45/90 deg` compact X-ray/tracer projection products for each new
+    source age;
+  - require `edge_overlap_uniform_cell_projection` for `45/90 deg`;
+  - preflight but do not rerun endpoint control
+    `data.0051.flt.h5::Timestep_51`.
+- Local validation passed:
+  `uv run pytest tests/test_source_age_sampling_plan.py tests/test_refined_projection_viewing_rerun.py tests/test_xraise_grid_smoke_projection.py tests/test_late_source_age_pilot_wrapper.py -q`,
+  `bash -n scripts/kunanyi/c_hi_late_source_age_pilot.pbs`, and
+  `git diff --check`.
+- Initial remote access blocker:
+  the repo-local helper reached jumpbox, but the inner `ssh kunanyi` failed
+  because the post-maintenance Kunanyi host key no longer matched
+  `/u/bwbrook/.ssh/known_hosts` on jumpbox. X-ray Cavities/Barry accepted the
+  new ED25519 fingerprint
+  `SHA256:IzXcim01EZc9FMqnrbDIfX9WfFSrK1RMwFq5McL4zpI` and authorized a narrow
+  host-key repair.
+- Host-key repair evidence:
+  the replacement ED25519 key was scanned from the authorized jumpbox route and
+  matched the accepted fingerprint exactly before any update. The stale
+  `kunanyi` entries were removed only after backup:
+  `/u/bwbrook/.ssh/known_hosts.goal019_pre_kunanyi_repair_20260630T105724Z`
+  and
+  `/Users/bwbrook/.ssh/known_hosts.goal019_pre_kunanyi_repair_20260630T105949Z`.
+  No strict-checking bypass was used.
+- Staged files and SHA-256 verification:
+  `/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/xraise_grid_smoke.py`
+  has SHA-256
+  `a7ef3553a18ef79ee7c29fd40f4b3cbc13a6376e7bc45b0152ea004f05232c0c`;
+  `/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.pbs`
+  has SHA-256
+  `468aeaaa07e05a2cc077c089ab9999dced8dd9490a31bd63cfe6a8a2463e5550`.
+- Remote preflight passed:
+  wrapper `bash -n`; required XRAiSE runtime/table inputs present; HDF5
+  outputs `46`, `49`, and endpoint-control `51` readable with timesteps
+  `Timestep_46`, `Timestep_49`, and `Timestep_51`; required datasets `rho`,
+  `prs`, `tr1`, `vx1`, `vx2`, `vx3`; consistent shape
+  `(1014, 960, 960)`.
+- PBS job submitted and stop rule invoked:
+  `706130.kunanyi-ohpc`, job name `c_hi_lsapil`, queue/state `normal/Q`,
+  resources `select=1:ncpus=1:mpiprocs=1:mem=96gb`, walltime `04:00:00`,
+  qtime `Tue Jun 30 21:01:36 2026`.
+- Expected archive after completion:
+  `/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot_2026-06-30.tar.gz`.
+- Expected stdout/stderr:
+  `/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.out`
+  and
+  `/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.err`.
+- Boundary confirmation:
+  no polling after queued verification, retrieval/package, endpoint rerun,
+  source-age substitution,
+  PLUTO production, early `5/10 Myr` branch, `C-LO`, `G-LO`,
+  comparison-case processing, PRAiSE/radio/cavity regeneration, broad batch,
+  48-hour production commitment, scientific-default change, commits, pushes,
+  cleanup, Stas/Patrick escalation, or `agent_comms` changes occurred.
+- Accepted Goal 005/011/012/016/017/018 assets were not overwritten.
 
 Latest Goal 018 source-age sampling plan on 2026-06-25:
 

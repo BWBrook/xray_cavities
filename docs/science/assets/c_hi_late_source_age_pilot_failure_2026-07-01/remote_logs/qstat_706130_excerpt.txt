@@ -1,0 +1,24 @@
+Job Id: 706130.kunanyi-ohpc
+    Job_Name = c_hi_lsapil
+    resources_used.cpupercent = 98
+    resources_used.cput = 00:36:52
+    resources_used.mem = 1338348kb
+    resources_used.ncpus = 1
+    resources_used.vmem = 1770104kb
+    resources_used.walltime = 00:49:52
+    job_state = F
+    queue = normal
+    ctime = Tue Jun 30 21:01:36 2026
+    exec_host = n135/1
+    qtime = Tue Jun 30 21:01:36 2026
+    Resource_List.mem = 96gb
+    Resource_List.mpiprocs = 1
+    Resource_List.ncpus = 1
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=1:mpiprocs=1:mem=96gb
+    Resource_List.walltime = 04:00:00
+    stime = Tue Jun 30 21:01:36 2026
+    comment = Job run at Tue Jun 30 at 21:01 on (n135:ncpus=1:mem=100663296kb) 
+    Stageout_status = 1
+    Exit_status = 1

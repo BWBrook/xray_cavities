@@ -1,0 +1,275 @@
+spawn ssh -tt -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 tpac-jumpbox-via-deep
+bwbrook@<tpac-host>'s password: 
+System & service status for eResearch HPC Clusters is available here:
+
+  https://utas1.service-now.com/selfservice?id=services_status
+
+============================================================================================
+
+
+JUMPBOX - this host provides secure access to various HPC clusters
+          note jumpbox is accessible from anywhere on the Internet.
+
+The login nodes of the clusters that you can ssh to are as follows:
+
+  - cluster name OS          - login node name - Purpose
+  - kunanyi OHPC Centos 7.4  -  kunanyi        - General purpose
+  - Rosalind OHPC Centos 7.7 -  rosalind       - Genomics
+
+
+If you need access to X11 based applications then remember to add -X or -Y to your ssh command.
+ssh -Y is a good choice if using Matlab with the graphical user interface.
+
+It is recommended you use 'screen' on the login node of the cluster to preserve your session
+as this jumpbox will automatically reboot for security update patches.
+This will happen on a regular basis.
+
+============================================================================================
+
+*** You cannot submit jobs from jumpbox.  You must connect to one of the cluster login
+*** nodes listed above to submit jobs to the cluster.
+
+============================================================================================
+Last login: Tue Jun 30 21:01:35 2026 from <campus-ip>
+bwbrook@jumpbox-2:~$ ssh -tt kunanyi
+Last login: Tue Jun 30 21:01:35 2026 from <tpac-host>
+bwbrook@kunanyi-00:~$ printf %s c2V0IC1ldW8gcGlwZWZhaWwKSk9CPTcwNjEzMC5rdW5hb<f %s c2V0IC1ldW8gcGlwZWZhaWwKSk9CPTcwNjEzMC5rdW5hbn                         lpLW9ocGMKU1RBR0U9L3UvYnd<WwKSk9CPTcwNjEzMC5rdW5hbnlpLW9ocGMKU1RBR0U9L3UvYndi                         cm9vay9jb2RleF9rdW5hbnlpL<pLW9ocGMKU1RBR0U9L3UvYndicm9vay9jb2RleF9rdW5hbnlpL2                         dvYWwwMTlfY19oaV9sYXRlX3N<m9vay9jb2RleF9rdW5hbnlpL2dvYWwwMTlfY19oaV9sYXRlX3Nv                         dXJjZV9hZ2VfcGlsb3QKQU5BT<vYWwwMTlfY19oaV9sYXRlX3NvdXJjZV9hZ2VfcGlsb3QKQU5BTF                         lTSVM9L3NjcmF0Y2gvYndicm9<XJjZV9hZ2VfcGlsb3QKQU5BTFlTSVM9L3NjcmF0Y2gvYndicm9v                         ay94cmF5X2Nhdml0aWVzX2FuY<TSVM9L3NjcmF0Y2gvYndicm9vay94cmF5X2Nhdml0aWVzX2FuYW                         x5c2lzLzIwMjYtMDYtMzAtYy1<y94cmF5X2Nhdml0aWVzX2FuYWx5c2lzLzIwMjYtMDYtMzAtYy1o                         aS1sYXRlLXNvdXJjZS1hZ2Utc<5c2lzLzIwMjYtMDYtMzAtYy1oaS1sYXRlLXNvdXJjZS1hZ2UtcG                         lsb3QKZWNobyAicXN0YXRfeF9<S1sYXRlLXNvdXJjZS1hZ2UtcGlsb3QKZWNobyAicXN0YXRfeF9m                         X2JlZ2luIgpxc3RhdCAteCAtZ<sb3QKZWNobyAicXN0YXRfeF9mX2JlZ2luIgpxc3RhdCAteCAtZi                         AiJEpPQiIKZWNobyAicXN0YXR<2JlZ2luIgpxc3RhdCAteCAtZiAiJEpPQiIKZWNobyAicXN0YXRf                         eF9mX2VuZCIKZWNobyAic3RhZ<iJEpPQiIKZWNobyAicXN0YXRfeF9mX2VuZCIKZWNobyAic3RhZ2                         VfbGlzdGluZ19iZWdpbiIKaWY<F9mX2VuZCIKZWNobyAic3RhZ2VfbGlzdGluZ19iZWdpbiIKaWYg                         WyAtZCAiJFNUQUdFIiBdOyB0a<fbGlzdGluZ19iZWdpbiIKaWYgWyAtZCAiJFNUQUdFIiBdOyB0aG                         VuCiAgZmluZCAiJFNUQUdFIiA<yAtZCAiJFNUQUdFIiBdOyB0aGVuCiAgZmluZCAiJFNUQUdFIiAt                         bWF4ZGVwdGggMiAtdHlwZSBmI<uCiAgZmluZCAiJFNUQUdFIiAtbWF4ZGVwdGggMiAtdHlwZSBmIC                         1wcmludGYgIiVwXHQlcyBieXR<WF4ZGVwdGggMiAtdHlwZSBmIC1wcmludGYgIiVwXHQlcyBieXRl                         c1x0JVRZLSVUbS0lVGQgJVRIO<wcmludGYgIiVwXHQlcyBieXRlc1x0JVRZLSVUbS0lVGQgJVRIOi                         VUTTolVFNcbiIgfCBzb3J0CmV<1x0JVRZLSVUbS0lVGQgJVRIOiVUTTolVFNcbiIgfCBzb3J0CmVs                         c2UKICBlY2hvICJtaXNzaW5nX<UTTolVFNcbiIgfCBzb3J0CmVsc2UKICBlY2hvICJtaXNzaW5nX3                         N0YWdlX2Rpcj0kU1RBR0UiCmZ<2UKICBlY2hvICJtaXNzaW5nX3N0YWdlX2Rpcj0kU1RBR0UiCmZp                         CmVjaG8gInN0YWdlX2xpc3Rpb<0YWdlX2Rpcj0kU1RBR0UiCmZpCmVjaG8gInN0YWdlX2xpc3Rpbm                         dfZW5kIgplY2hvICJzdGFnZV9<mVjaG8gInN0YWdlX2xpc3RpbmdfZW5kIgplY2hvICJzdGFnZV9j                         aGVja3N1bXNfYmVnaW4iCmZvc<fZW5kIgplY2hvICJzdGFnZV9jaGVja3N1bXNfYmVnaW4iCmZvci                         BwYXRoIGluICIkU1RBR0UvY19<GVja3N1bXNfYmVnaW4iCmZvciBwYXRoIGluICIkU1RBR0UvY19o                         aV9sYXRlX3NvdXJjZV9hZ2Vfc<wYXRoIGluICIkU1RBR0UvY19oaV9sYXRlX3NvdXJjZV9hZ2VfcG                         lsb3Qub3V0IiAiJFNUQUdFL2N<V9sYXRlX3NvdXJjZV9hZ2VfcGlsb3Qub3V0IiAiJFNUQUdFL2Nf                         aGlfbGF0ZV9zb3VyY2VfYWdlX<sb3Qub3V0IiAiJFNUQUdFL2NfaGlfbGF0ZV9zb3VyY2VfYWdlX3                         BpbG90LmVyciIgIiRTVEFHRS9<GlfbGF0ZV9zb3VyY2VfYWdlX3BpbG90LmVyciIgIiRTVEFHRS9j                         X2hpX2xhdGVfc291cmNlX2FnZ<pbG90LmVyciIgIiRTVEFHRS9jX2hpX2xhdGVfc291cmNlX2FnZV                         9waWxvdF8yMDI2LTA2LTMwLnR<2hpX2xhdGVfc291cmNlX2FnZV9waWxvdF8yMDI2LTA2LTMwLnRh                         ci5neiI7IGRvCiAgaWYgWyAtZ<waWxvdF8yMDI2LTA2LTMwLnRhci5neiI7IGRvCiAgaWYgWyAtZi                         AiJHBhdGgiIF07IHRoZW4gc2h<i5neiI7IGRvCiAgaWYgWyAtZiAiJHBhdGgiIF07IHRoZW4gc2hh                         MjU2c3VtICIkcGF0aCI7IGVsc<iJHBhdGgiIF07IHRoZW4gc2hhMjU2c3VtICIkcGF0aCI7IGVsc2                         UgZWNobyAibWlzc2luZyAkcGF<jU2c3VtICIkcGF0aCI7IGVsc2UgZWNobyAibWlzc2luZyAkcGF0                         aCI7IGZpCmRvbmUKZWNobyAic<gZWNobyAibWlzc2luZyAkcGF0aCI7IGZpCmRvbmUKZWNobyAic3                         RhZ2VfY2hlY2tzdW1zX2VuZCI<CI7IGZpCmRvbmUKZWNobyAic3RhZ2VfY2hlY2tzdW1zX2VuZCIK                         ZWNobyAiYW5hbHlzaXNfbGlzd<hZ2VfY2hlY2tzdW1zX2VuZCIKZWNobyAiYW5hbHlzaXNfbGlzdG                         luZ19iZWdpbiIKaWYgWyAtZCA<WNobyAiYW5hbHlzaXNfbGlzdGluZ19iZWdpbiIKaWYgWyAtZCAi                         JEFOQUxZU0lTIiBdOyB0aGVuC<uZ19iZWdpbiIKaWYgWyAtZCAiJEFOQUxZU0lTIiBdOyB0aGVuCi                         AgZmluZCAiJEFOQUxZU0lTIiA<EFOQUxZU0lTIiBdOyB0aGVuCiAgZmluZCAiJEFOQUxZU0lTIiAt                         bWF4ZGVwdGggNCAtdHlwZSBmI<gZmluZCAiJEFOQUxZU0lTIiAtbWF4ZGVwdGggNCAtdHlwZSBmIC                         1wcmludGYgIiVwXHQlcyBieXR<WF4ZGVwdGggNCAtdHlwZSBmIC1wcmludGYgIiVwXHQlcyBieXRl                         c1x0JVRZLSVUbS0lVGQgJVRIO<wcmludGYgIiVwXHQlcyBieXRlc1x0JVRZLSVUbS0lVGQgJVRIOi                         VUTTolVFNcbiIgfCBzb3J0CmV<1x0JVRZLSVUbS0lVGQgJVRIOiVUTTolVFNcbiIgfCBzb3J0CmVs                         c2UKICBlY2hvICJtaXNzaW5nX<UTTolVFNcbiIgfCBzb3J0CmVsc2UKICBlY2hvICJtaXNzaW5nX2                         FuYWx5c2lzX2Rpcj0kQU5BTFl<2UKICBlY2hvICJtaXNzaW5nX2FuYWx5c2lzX2Rpcj0kQU5BTFlT                         SVMiCmZpCmVjaG8gImFuYWx5c<uYWx5c2lzX2Rpcj0kQU5BTFlTSVMiCmZpCmVjaG8gImFuYWx5c2                         lzX2xpc3RpbmdfZW5kIgplY2h<VMiCmZpCmVjaG8gImFuYWx5c2lzX2xpc3RpbmdfZW5kIgplY2hv                         ICJhbmFseXNpc19jaGVja3N1b<zX2xpc3RpbmdfZW5kIgplY2hvICJhbmFseXNpc19jaGVja3N1bX                         NfYmVnaW4iCmlmIFsgLWQgIiR<CJhbmFseXNpc19jaGVja3N1bXNfYmVnaW4iCmlmIFsgLWQgIiRB                         TkFMWVNJUyIgXTsgdGhlbgogI<fYmVnaW4iCmlmIFsgLWQgIiRBTkFMWVNJUyIgXTsgdGhlbgogIG                         ZpbmQgIiRBTkFMWVNJUyIgLW1<kFMWVNJUyIgXTsgdGhlbgogIGZpbmQgIiRBTkFMWVNJUyIgLW1h                         eGRlcHRoIDQgLXR5cGUgZiBcK<pbmQgIiRBTkFMWVNJUyIgLW1heGRlcHRoIDQgLXR5cGUgZiBcKC                         AtbmFtZSAiKi5jc3YiIC1vIC1<GRlcHRoIDQgLXR5cGUgZiBcKCAtbmFtZSAiKi5jc3YiIC1vIC1u                         YW1lICIqLmpzb24iIC1vIC1uY<tbmFtZSAiKi5jc3YiIC1vIC1uYW1lICIqLmpzb24iIC1vIC1uYW                         1lICIqLmxvZyIgXCkgLWV4ZWM<W1lICIqLmpzb24iIC1vIC1uYW1lICIqLmxvZyIgXCkgLWV4ZWMg                         c2hhMjU2c3VtIHt9IFw7IHwgc<lICIqLmxvZyIgXCkgLWV4ZWMgc2hhMjU2c3VtIHt9IFw7IHwgc2                         9ydApmaQplY2hvICJhbmFseXN<2hhMjU2c3VtIHt9IFw7IHwgc29ydApmaQplY2hvICJhbmFseXNp                         c19jaGVja3N1bXNfZW5kIg== <ydApmaQplY2hvICJhbmFseXNpc19jaGVja3N1bXNfZW5kIg== |                          base64 -d | bash; echo _<19jaGVja3N1bXNfZW5kIg== | base64 -d | bash; echo __                         CODEX_STATUS__=$?
+qstat_x_f_begin
+Job Id: 706130.kunanyi-ohpc
+    Job_Name = c_hi_lsapil
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 98
+    resources_used.cput = 00:36:52
+    resources_used.mem = 1338348kb
+    resources_used.ncpus = 1
+    resources_used.vmem = 1770104kb
+    resources_used.walltime = 00:49:52
+    job_state = F
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Tue Jun 30 21:01:36 2026
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal019_c_hi_l
+	ate_source_age_pilot/c_hi_late_source_age_pilot.err
+    exec_host = n135/1
+    exec_vnode = (n135:ncpus=1:mem=100663296kb)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = ae
+    Mail_Users = barry.brook@utas.edu.au
+    mtime = Tue Jun 30 21:51:28 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal019_c_hi_
+	late_source_age_pilot/c_hi_late_source_age_pilot.out
+    Priority = 0
+    qtime = Tue Jun 30 21:01:36 2026
+    Rerunable = True
+    Resource_List.mem = 96gb
+    Resource_List.mpiprocs = 1
+    Resource_List.ncpus = 1
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=1:mpiprocs=1:mem=96gb
+    Resource_List.walltime = 04:00:00
+    stime = Tue Jun 30 21:01:36 2026
+    session_id = 27942
+    jobdir = /u/bwbrook
+    substate = 93
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=C.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/pr
+	un/1.3:/opt/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/
+	bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pi
+	lot,PBS_O_SYSTEM=Linux,LMOD_FAMILY_COMPILER_VERSION=8.3.0,
+	MANPATH=/opt/ohpc/pub/compiler/gcc/8.3.0/share/man:/opt/ohpc/pub/utils
+	/autotools/share/man:/usr/local/share/man:/usr/share/man/overrides:/usr
+	/share/man/en:/usr/share/man:/opt/pbs/share/man,XDG_SESSION_ID=1052,
+	HOSTNAME=<tpac-host>,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGM
+	vcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L3NoYXJlL2FwcHMvZWItbW
+	9kdWxlcy9hbGwiLH0=,SHELL=/bin/bash,TERM=dumb,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:1;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1,
+	HISTSIZE=1000,LMOD_ROOT=/opt/ohpc/admin/lmod,
+	SSH_CLIENT=<private-ip> 33250 22,LMOD_PKG=/opt/ohpc/admin/lmod/lmod,
+	OLDPWD=/u/bwbrook,LMOD_QUIET=yes,LMOD_VERSION=8.1.18,
+	SSH_TTY=/dev/pts/15,LC_ALL=C,
+	__LMOD_REF_COUNT_LOADEDMODULES=autotools:1;prun/1.3:1;gnu8/8.3.0:1;ohp
+	c:1,QT_GRAPHICSSYSTEM_CHECKED=1,USER=bwbrook,HISTFILESIZE=2000,LS_COLORS=,
+	LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib64,
+	__LMOD_REF_COUNT__LMFILES_=/opt/ohpc/pub/modulefiles/autotools:1;/opt/
+	ohpc/pub/modulefiles/prun/1.3:1;/opt/ohpc/pub/modulefiles/gnu8/8.3.0:1;
+	/opt/ohpc/pub/modulefiles/ohpc:1,LMOD_PREPEND_BLOCK=normal,
+	PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/prun/1.3
+	:/opt/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/bin:/u
+	sr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXtbImNvbXBpbGVyIl09ImdudTgiLH0sbVQ9e2F1dG90b29scz17WyJmbiJdPSIvb3B0L29
+	ocGMvcHViL21vZHVsZWZpbGVzL2F1dG90b29scyIsWyJmdWxsTmFtZSJdPSJhdXRvdG9vbH
+	MiLFsibG9hZE9yZGVyIl09MSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzI
+	l09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJhdXRvdG9vbHMiLH0sZ251OD17WyJmbiJdPSIv
+	b3B0L29ocGMvcHViL21vZHVsZWZpbGVzL2dudTgvOC4zLjAiLFsiZnVsbE5hbWUiXT0iZ25
+	1OC84LjMuMCIsWyJsb2FkT3JkZXIiXT0z,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot,
+	_LMFILES_=/opt/ohpc/pub/modulefiles/autotools:/opt/ohpc/pub/modulefile
+	s/prun/1.3:/opt/ohpc/pub/modulefiles/gnu8/8.3.0:/opt/ohpc/pub/modulefil
+	es/ohpc,LANG=C.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all,
+	LOADEDMODULES=autotools:prun/1.3:gnu8/8.3.0:ohpc,_ModuleTable_Sz_=3,
+	LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=2,
+	__LMOD_REF_COUNT_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:1;/opt/ohpc
+	/pub/utils/prun/1.3:1;/opt/ohpc/pub/utils/autotools/bin:1;/share/apps/b
+	in:1;/opt/ohpc/pub/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;
+	/usr/sbin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iY
+	WN0aXZlIixbInVzZXJOYW1lIl09ImdudTgiLH0sb2hwYz17WyJmbiJdPSIvb3B0L29ocGMv
+	cHViL21vZHVsZWZpbGVzL29ocGMiLFsiZnVsbE5hbWUiXT0ib2hwYyIsWyJsb2FkT3JkZXI
+	iXT00LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbIn
+	VzZXJOYW1lIl09Im9ocGMiLH0scHJ1bj17WyJmbiJdPSIvb3B0L29ocGMvcHViL21vZHVsZ
+	WZpbGVzL3BydW4vMS4zIixbImZ1bGxOYW1lIl09InBydW4vMS4zIixbImxvYWRPcmRlciJd
+	PTIscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXN
+	lck5hbWUiXT0icHJ1biIsfSx9LG1wYXRo,
+	__LMOD_REF_COUNT_INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include:1,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	LC_CTYPE=C.UTF-8,SSH_CONNECTION=<private-ip> 33250 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	LESSOPEN=||/usr/bin/lesspipe.sh %s,LMOD_SETTARG_FULL_SUPPORT=no,
+	__LMOD_REF_COUNT_LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib6
+	4:1,PROMPT_COMMAND=history -a,LMOD_FULL_SETTARG_SUPPORT=no,
+	LMOD_FAMILY_COMPILER=gnu8,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include,
+	LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	__LMOD_REF_COUNT_MANPATH=/opt/ohpc/pub/compiler/gcc/8.3.0/share/man:1;
+	/opt/ohpc/pub/utils/autotools/share/man:1;/usr/local/share/man:1;/usr/s
+	hare/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1,
+	LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=normal,
+	PBS_O_HOST=<tpac-host>
+    comment = Job run at Tue Jun 30 at 21:01 on (n135:ncpus=1:mem=100663296kb) 
+	and failed
+    etime = Tue Jun 30 21:01:36 2026
+    run_count = 1
+    Stageout_status = 1
+    Exit_status = 1
+    Submit_arguments = c_hi_late_source_age_pilot.pbs
+    history_timestamp = 1782820288
+    project = _pbs_project_default
+
+qstat_x_f_end
+stage_listing_begin
+/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.err	177 bytes	2026-06-30 21:51:27.8063863960
+/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.out	35057 bytes	2026-06-30 21:51:08.2799408650
+/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.pbs	9332 bytes	2026-06-30 21:00:01.4194065680
+/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot_2026-06-30.tar.gz	96901037 bytes	2026-06-30 21:51:27.8688905520
+/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/xraise_grid_smoke.py	17952 bytes	2026-06-30 20:59:59.1295847180
+stage_listing_end
+stage_checksums_begin
+34b9c1f807c7ba039b6d749caf7e3039cf201ff7baf4cf6348af2c2d061432fc  /u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.out
+27b2f90d91cd26de321900928de81164a44029836e037a7c039f0ca83fec6d72  /u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.err
+ad3863ca7e0d249a566b246da6927cf7677db5ab5182b51d6b7e88188b84e60f  /u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot_2026-06-30.tar.gz
+stage_checksums_end
+analysis_listing_begin
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/projection_empty_columns.csv	180 bytes	2026-06-30 21:13:09.1471758440
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/tracer_max_los.tsv	16548480 bytes	2026-06-30 21:13:07.9418971060
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/x_kpc.tsv	11798 bytes	2026-06-30 21:13:04.9778984890
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/xraise_grid_smoke_metadata.json	1960 bytes	2026-06-30 21:13:08.0852645710
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/xraise_grid_smoke_summary.csv	443 bytes	2026-06-30 21:13:08.1511686860
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/xray_1kev_correction_ratio.tsv	16548480 bytes	2026-06-30 21:13:07.0839780960
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/xray_1kev_raw_mjy_sr.tsv	16548480 bytes	2026-06-30 21:13:05.6155225540
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv	16548480 bytes	2026-06-30 21:13:06.3773495920
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/z_kpc.tsv	12437 bytes	2026-06-30 21:13:05.0343237050
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/projection_empty_columns.csv	183 bytes	2026-06-30 21:19:55.5959732560
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/tracer_max_los.tsv	16548480 bytes	2026-06-30 21:19:54.1567601310
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/u_kpc.tsv	11906 bytes	2026-06-30 21:19:51.0660999090
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/x_kpc.tsv	11906 bytes	2026-06-30 21:19:51.0613870900
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/xraise_grid_smoke_metadata.json	1978 bytes	2026-06-30 21:19:54.5147031310
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/xraise_grid_smoke_summary.csv	441 bytes	2026-06-30 21:19:54.5242205730
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/xray_1kev_correction_ratio.tsv	16548480 bytes	2026-06-30 21:19:53.2816807200
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/xray_1kev_raw_mjy_sr.tsv	16548480 bytes	2026-06-30 21:19:51.7155788870
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv	16548480 bytes	2026-06-30 21:19:52.5605463940
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/z_kpc.tsv	12437 bytes	2026-06-30 21:19:51.0704948540
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/projection_empty_columns.csv	183 bytes	2026-06-30 21:26:35.1965530350
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/tracer_max_los.tsv	16548480 bytes	2026-06-30 21:26:33.8208830570
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/u_kpc.tsv	11898 bytes	2026-06-30 21:26:30.7002334950
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/x_kpc.tsv	11898 bytes	2026-06-30 21:26:30.6604297970
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/xraise_grid_smoke_metadata.json	1982 bytes	2026-06-30 21:26:34.2353713410
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/xraise_grid_smoke_summary.csv	443 bytes	2026-06-30 21:26:34.2377556240
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/xray_1kev_correction_ratio.tsv	16548480 bytes	2026-06-30 21:26:32.8027868280
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/xray_1kev_raw_mjy_sr.tsv	16548480 bytes	2026-06-30 21:26:31.2904399340
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv	16548480 bytes	2026-06-30 21:26:32.1503995410
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/z_kpc.tsv	12437 bytes	2026-06-30 21:26:30.7516870900
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/projection_empty_columns.csv	180 bytes	2026-06-30 21:37:39.6232179220
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/tracer_max_los.tsv	16548480 bytes	2026-06-30 21:37:38.1816998830
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/x_kpc.tsv	11798 bytes	2026-06-30 21:37:35.1672711290
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/xraise_grid_smoke_metadata.json	1959 bytes	2026-06-30 21:37:38.7000989490
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/xraise_grid_smoke_summary.csv	441 bytes	2026-06-30 21:37:38.7545307970
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/xray_1kev_correction_ratio.tsv	16548480 bytes	2026-06-30 21:37:37.5241525170
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/xray_1kev_raw_mjy_sr.tsv	16548480 bytes	2026-06-30 21:37:35.9326693660
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv	16548480 bytes	2026-06-30 21:37:36.8249649910
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/z_kpc.tsv	12437 bytes	2026-06-30 21:37:35.1735842710
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/projection_empty_columns.csv	183 bytes	2026-06-30 21:44:21.7006373070
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/tracer_max_los.tsv	16548480 bytes	2026-06-30 21:44:20.4173300460
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/u_kpc.tsv	11906 bytes	2026-06-30 21:44:17.8907991850
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/x_kpc.tsv	11906 bytes	2026-06-30 21:44:17.7907434430
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/xraise_grid_smoke_metadata.json	1979 bytes	2026-06-30 21:44:20.5560518340
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/xraise_grid_smoke_summary.csv	440 bytes	2026-06-30 21:44:20.5585855610
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/xray_1kev_correction_ratio.tsv	16548480 bytes	2026-06-30 21:44:19.8387328890
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/xray_1kev_raw_mjy_sr.tsv	16548480 bytes	2026-06-30 21:44:18.4844752570
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv	16548480 bytes	2026-06-30 21:44:19.1149362000
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/z_kpc.tsv	12437 bytes	2026-06-30 21:44:17.9442733420
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/projection_empty_columns.csv	183 bytes	2026-06-30 21:51:06.6248113170
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/tracer_max_los.tsv	16548480 bytes	2026-06-30 21:51:05.2353382790
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/u_kpc.tsv	11898 bytes	2026-06-30 21:51:01.9764876450
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/x_kpc.tsv	11898 bytes	2026-06-30 21:51:01.9717731330
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/xraise_grid_smoke_metadata.json	1977 bytes	2026-06-30 21:51:05.4757367900
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/xraise_grid_smoke_summary.csv	441 bytes	2026-06-30 21:51:05.4783864270
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/xray_1kev_correction_ratio.tsv	16548480 bytes	2026-06-30 21:51:04.6314012590
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/xray_1kev_raw_mjy_sr.tsv	16548480 bytes	2026-06-30 21:51:02.6448292410
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv	16548480 bytes	2026-06-30 21:51:03.3201454360
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/z_kpc.tsv	12437 bytes	2026-06-30 21:51:02.0937415120
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/remote_logs/c_hi_late_source_age_pilot.stderr.log	177 bytes	2026-06-30 21:51:28.3994507270
+/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/remote_logs/c_hi_late_source_age_pilot.stdout.log	35057 bytes	2026-06-30 21:51:08.2943744830
+analysis_listing_end
+analysis_checksums_begin
+057abd726cb9f19e9e56374a45c1056b1ffe840c3800f06f47e0b505a54bf065  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/projection_empty_columns.csv
+1799b6aab23e732f72c97d5b2d050694daf8d34f4706b10cb204c3a8379dcd42  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/xraise_grid_smoke_metadata.json
+269e6f805b55d9b301574f52e7a6c438e9edb10cd99e20441bc07b3f1adeca7d  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/xraise_grid_smoke_summary.csv
+27b2f90d91cd26de321900928de81164a44029836e037a7c039f0ca83fec6d72  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/remote_logs/c_hi_late_source_age_pilot.stderr.log
+34b9c1f807c7ba039b6d749caf7e3039cf201ff7baf4cf6348af2c2d061432fc  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/remote_logs/c_hi_late_source_age_pilot.stdout.log
+371f74494bd9dbf245743355cba6f00448d4c4b9126465b0143a2a77badd092d  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/xraise_grid_smoke_metadata.json
+387abbdb89df3b4309f72c4122d6f29d84246fa1333af3854cb04917dffb6bcb  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/projection_empty_columns.csv
+439fb982f2b2341a9f30eda34fec52682665e1d8502596c336dc43d09159b2d8  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/projection_empty_columns.csv
+48ef7361b7fc3e9f2e3f3b23e62b78003ab08061077327c6ac1f53d6a8d3ba4e  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/xraise_grid_smoke_summary.csv
+4f04cf7fefb9a076334a4d12384c887004dacf9354935a22a5ba66ab7f801c65  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/xraise_grid_smoke_summary.csv
+5b8edabf023757da83b06344a45fb1ef3fef131fa8a1fba0aba02887cc805d9c  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_45deg/xraise_grid_smoke_summary.csv
+5ecd27581413182b16a6acfb38bec2515f54a77fae4f5aba8fcd22feddf1a839  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/xraise_grid_smoke_summary.csv
+7c9aeb9594eee4e2eb9d072108a88c01468753e6d92c240605ea612bc46ec53c  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_90deg/xraise_grid_smoke_metadata.json
+7f8a265759565cc829c0bdbc54cfe270e7d74b685d632800e410d603a95a2f5e  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/projection_empty_columns.csv
+90902b27d667abd110e004a571174e3ec0516876a268ae2f5ad8973dd123c663  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/xraise_grid_smoke_metadata.json
+af0646c70c4d837e616745ebe152b06f7fcd6cfab0adfead8e7e4eefb53cf59d  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/projection_empty_columns.csv
+d72f6af1535004f3c4ef81e8eaff239134bee8d6d440d16e2aaf4a49ed554c0f  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/projection_empty_columns.csv
+e0676f1daaccabb277edc775d5d155c0c88889894e60ecdae914ba93ee1fe049  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_45deg/xraise_grid_smoke_summary.csv
+e2267136c560fa6f6ce3cceddd67e60879bb752f16ec76dd6ce0b54a746368c3  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_90deg/xraise_grid_smoke_metadata.json
+e499fb5ace70b398027237c0240780ebc9bea1d97dd4cdedb5e5dfb5f9bee390  /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0049_Timestep_49/xraise_grid_0deg/xraise_grid_smoke_metadata.json
+analysis_checksums_end
+__CODEX_STATUS__=0
+bwbrook@kunanyi-00:~$ exit
+logout
+Connection to kunanyi closed.
+bwbrook@jumpbox-2:~$ exit
+logout
+Connection to <tpac-host> closed.

@@ -1,0 +1,309 @@
+#!/usr/bin/env bash
+#PBS -N c_hi_lsapil
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=96gb
+#PBS -l walltime=04:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot/c_hi_late_source_age_pilot.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal019_c_hi_late_source_age_pilot}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot}"
+PROD64_OUTPUTS="${PROD64_OUTPUTS:-/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs}"
+XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+XRAISE_SCRIPT="${XRAISE_SCRIPT:-$STAGE_DIR/xraise_grid_smoke.py}"
+XRAISE_PY="${XRAISE_PY:-$XRAISE_RUNTIME/xraise.py}"
+APEC_TABLE="${APEC_TABLE:-$XRAISE_RUNTIME/apec_corrections.txt}"
+GAUNT_LUT="${GAUNT_LUT:-$XRAISE_RUNTIME/gaunt_lut_2d.npz}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-$STAGE_DIR/c_hi_late_source_age_pilot_2026-06-30.tar.gz}"
+Y_CHUNK="${Y_CHUNK:-8}"
+PROJECTED_U_BINS="${PROJECTED_U_BINS:-960}"
+REDSHIFT="${REDSHIFT:-0.05}"
+EMPTY_COLUMN_FRACTION_MAX="${EMPTY_COLUMN_FRACTION_MAX:-0.05}"
+ARCHIVE_SNAPSHOT_ROOT="${ARCHIVE_SNAPSHOT_ROOT:-$ANALYSIS_ROOT/archive_snapshot}"
+ARCHIVE_PAYLOAD_DIR="$ARCHIVE_SNAPSHOT_ROOT/$(basename "$ANALYSIS_ROOT")"
+ARCHIVE_FILE_LIST="$ARCHIVE_SNAPSHOT_ROOT/archive_file_list.txt"
+
+SOURCE_AGES=(
+  "46|Timestep_46|44.999274"
+  "49|Timestep_49|47.999129"
+)
+ENDPOINT_CONTROL="51|Timestep_51|50.000000"
+VIEWS=(
+  "0|0deg|direct_y_axis_sum"
+  "45|45deg|edge_overlap_uniform_cell_projection"
+  "90|90deg|edge_overlap_uniform_cell_projection"
+)
+
+mkdir -p "$STAGE_DIR" "$ANALYSIS_ROOT" "$ANALYSIS_ROOT/remote_logs"
+cd "$PBS_O_WORKDIR"
+
+INNER_STDOUT="$ANALYSIS_ROOT/remote_logs/c_hi_late_source_age_pilot.stdout.log"
+INNER_STDERR="$ANALYSIS_ROOT/remote_logs/c_hi_late_source_age_pilot.stderr.log"
+exec > >(tee -a "$INNER_STDOUT") 2> >(tee -a "$INNER_STDERR" >&2)
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "stage_dir=$STAGE_DIR"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "prod64_outputs=$PROD64_OUTPUTS"
+echo "source_ages=${SOURCE_AGES[*]}"
+echo "endpoint_control=$ENDPOINT_CONTROL"
+echo "views=${VIEWS[*]}"
+echo "projected_u_bins=$PROJECTED_U_BINS"
+echo "empty_column_fraction_max=$EMPTY_COLUMN_FRACTION_MAX"
+echo "xraise_runtime=$XRAISE_RUNTIME"
+echo "xraise_script=$XRAISE_SCRIPT"
+echo "summary_archive=$SUMMARY_ARCHIVE"
+echo "archive_snapshot_root=$ARCHIVE_SNAPSHOT_ROOT"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+for path in "$XRAISE_SCRIPT" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT"; do
+  if [ ! -r "$path" ]; then
+    echo "missing required runtime input: $path" >&2
+    exit 2
+  fi
+  sha256sum "$path"
+done
+
+module purge
+module load Anaconda3/2024.02-1
+
+python - <<'PY' "$PROD64_OUTPUTS" "${SOURCE_AGES[@]}" "$ENDPOINT_CONTROL"
+import sys
+from pathlib import Path
+
+import h5py
+
+outputs = Path(sys.argv[1])
+records = sys.argv[2:]
+required_vars = ("rho", "prs", "tr1", "vx1", "vx2", "vx3")
+shapes = {}
+for record in records:
+    output, timestep, expected_myr = record.split("|")
+    h5_path = outputs / f"data.{int(output):04d}.flt.h5"
+    if not h5_path.is_file():
+        raise SystemExit(f"missing HDF5 file: {h5_path}")
+    if not h5_path.stat().st_size > 0:
+        raise SystemExit(f"empty HDF5 file: {h5_path}")
+    with h5py.File(h5_path, "r") as h5:
+        if timestep not in h5:
+            raise SystemExit(f"{h5_path}: missing timestep {timestep}")
+        for var in required_vars:
+            full = f"/{timestep}/vars/{var}"
+            if full not in h5:
+                raise SystemExit(f"{h5_path}: missing dataset {full}")
+        shape = tuple(int(v) for v in h5[f"/{timestep}/vars/rho"].shape)
+        for var in required_vars[1:]:
+            other_shape = tuple(int(v) for v in h5[f"/{timestep}/vars/{var}"].shape)
+            if other_shape != shape:
+                raise SystemExit(f"{h5_path}: shape mismatch rho {shape} vs {var} {other_shape}")
+        time_code = float(h5[f"/{timestep}"].attrs["Time"])
+        shapes[output] = shape
+    print(
+        "hdf5_preflight=passed "
+        f"output={output} timestep={timestep} expected_myr={expected_myr} "
+        f"shape_nz_ny_nx={shape} time_code={time_code:.17g} path={h5_path}"
+    )
+
+unique_shapes = set(shapes.values())
+if len(unique_shapes) != 1:
+    raise SystemExit(f"inconsistent target shapes: {shapes}")
+print(f"hdf5_shape_consistency=passed shape_nz_ny_nx={next(iter(unique_shapes))}")
+PY
+
+run_view() {
+  local output="$1"
+  local timestep="$2"
+  local expected_myr="$3"
+  local angle="$4"
+  local label="$5"
+  local expected_accumulator="$6"
+  local input_h5="$PROD64_OUTPUTS/data.$(printf '%04d' "$output").flt.h5"
+  local sample_dir="$ANALYSIS_ROOT/output$(printf '%04d' "$output")_${timestep}"
+  local xraise_dir="$sample_dir/xraise_grid_${label}"
+
+  mkdir -p "$xraise_dir"
+  echo "view_started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ) output=$output timestep=$timestep view=$label"
+  echo "view_input_h5=$input_h5"
+  echo "view_output_dir=$xraise_dir"
+
+  python "$XRAISE_SCRIPT" \
+    --input-h5 "$input_h5" \
+    --timestep "$timestep" \
+    --output-dir "$xraise_dir" \
+    --xraise-py "$XRAISE_PY" \
+    --apec-table "$APEC_TABLE" \
+    --gaunt-lut "$GAUNT_LUT" \
+    --redshift "$REDSHIFT" \
+    --y-chunk "$Y_CHUNK" \
+    --view-angle-deg "$angle" \
+    --projected-u-bins "$PROJECTED_U_BINS"
+
+  python - <<'PY' "$xraise_dir" "$output" "$timestep" "$expected_myr" "$angle" "$label" "$expected_accumulator" "$EMPTY_COLUMN_FRACTION_MAX"
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+import numpy as np
+
+xraise_dir = Path(sys.argv[1])
+output = sys.argv[2]
+timestep = sys.argv[3]
+expected_myr = float(sys.argv[4])
+view_angle_deg = float(sys.argv[5])
+label = sys.argv[6]
+expected_accumulator = sys.argv[7]
+empty_column_fraction_max = float(sys.argv[8])
+
+summary_path = xraise_dir / "xraise_grid_smoke_summary.csv"
+metadata_path = xraise_dir / "xraise_grid_smoke_metadata.json"
+metrics = {
+    row["metric"]: float(row["value"])
+    for row in csv.DictReader(summary_path.open())
+}
+for key in (
+    "time_myr",
+    "raw_xray_max",
+    "corrected_xray_max",
+    "raw_xray_sum",
+    "corrected_xray_sum",
+    "correction_ratio_positive_max",
+    "correction_ratio_positive_sum",
+):
+    value = metrics[key]
+    if not math.isfinite(value) or value <= 0.0:
+        raise SystemExit(f"{output} {label}: invalid X-ray metric {key}: {value}")
+if abs(metrics["time_myr"] - expected_myr) > 0.02:
+    raise SystemExit(
+        f"{output} {label}: time_myr {metrics['time_myr']:.8f} differs from expected {expected_myr:.8f}"
+    )
+
+metadata = json.loads(metadata_path.read_text())
+if metadata["timestep"] != timestep:
+    raise SystemExit(f"{output} {label}: timestep mismatch {metadata['timestep']} != {timestep}")
+actual_angle = float(metadata["projection"]["view_angle_deg"])
+if abs(actual_angle - view_angle_deg) > 1.0e-9:
+    raise SystemExit(f"{output} {label}: view angle mismatch {actual_angle} != {view_angle_deg}")
+actual_accumulator = metadata["projection"].get("projected_accumulation")
+if actual_accumulator != expected_accumulator:
+    raise SystemExit(
+        f"{output} {label}: projected_accumulation {actual_accumulator} != {expected_accumulator}"
+    )
+if int(metadata["projection"]["sky_horizontal_bins"]) <= 1:
+    raise SystemExit(f"{output} {label}: invalid sky_horizontal_bins")
+
+empty_rows = []
+for layer, filename in (
+    ("raw_xray", "xray_1kev_raw_mjy_sr.tsv"),
+    ("corrected_xray", "xray_1kev_xraise_corrected_mjy_sr.tsv"),
+    ("correction_ratio", "xray_1kev_correction_ratio.tsv"),
+):
+    values = np.loadtxt(xraise_dir / filename, delimiter="\t")
+    positive = np.isfinite(values) & (values > 0.0)
+    empty_columns = int(np.count_nonzero(positive.mean(axis=0) == 0.0))
+    empty_fraction = empty_columns / positive.shape[1]
+    empty_rows.append((layer, empty_columns, empty_fraction))
+    if empty_fraction > empty_column_fraction_max:
+        raise SystemExit(
+            f"{output} {label} {layer}: empty-column fraction {empty_fraction:.6g} "
+            f"exceeds {empty_column_fraction_max:.6g}"
+        )
+
+with (xraise_dir / "projection_empty_columns.csv").open("w", newline="") as handle:
+    writer = csv.writer(handle)
+    writer.writerow(["output", "timestep", "view", "layer", "empty_columns", "empty_column_fraction"])
+    for layer, empty_columns, empty_fraction in empty_rows:
+        writer.writerow([output, timestep, label, layer, empty_columns, f"{empty_fraction:.16g}"])
+
+print(
+    f"xray_validation=passed output={output} timestep={timestep} view={label} "
+    f"accumulator={actual_accumulator} empty_columns={empty_rows}"
+)
+PY
+  echo "view_finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ) output=$output timestep=$timestep view=$label"
+}
+
+copy_completed_products_to_archive_snapshot() {
+  for record in "${SOURCE_AGES[@]}"; do
+    IFS="|" read -r output timestep expected_myr <<<"$record"
+    for view in "${VIEWS[@]}"; do
+      IFS="|" read -r angle label expected_accumulator <<<"$view"
+      local sample_name="output$(printf '%04d' "$output")_${timestep}"
+      local src="$ANALYSIS_ROOT/$sample_name/xraise_grid_${label}"
+      local dest="$ARCHIVE_PAYLOAD_DIR/$sample_name/xraise_grid_${label}"
+      if [ ! -d "$src" ]; then
+        echo "missing completed product directory for archive snapshot: $src" >&2
+        exit 3
+      fi
+      if [ -z "$(find "$src" -maxdepth 1 -type f -print -quit)" ]; then
+        echo "empty completed product directory for archive snapshot: $src" >&2
+        exit 3
+      fi
+      mkdir -p "$dest"
+      find "$src" -maxdepth 1 -type f -exec cp -p {} "$dest"/ \;
+    done
+  done
+}
+
+copy_remote_logs_to_archive_snapshot() {
+  mkdir -p "$ARCHIVE_PAYLOAD_DIR/remote_logs"
+  if [ -f "$INNER_STDOUT" ]; then
+    cp -p "$INNER_STDOUT" "$ARCHIVE_PAYLOAD_DIR/remote_logs/c_hi_late_source_age_pilot.stdout.log"
+  fi
+  if [ -f "$INNER_STDERR" ]; then
+    cp -p "$INNER_STDERR" "$ARCHIVE_PAYLOAD_DIR/remote_logs/c_hi_late_source_age_pilot.stderr.log"
+  fi
+}
+
+write_archive_manifest() {
+  (
+    cd "$ARCHIVE_PAYLOAD_DIR"
+    find . \
+      -type f \
+      ! -name archive_manifest.tsv \
+      ! -name archive_checksums.sha256 \
+      -printf "%P\t%s bytes\n" \
+      | sort > archive_manifest.tsv
+    find . \
+      -type f \
+      ! -name archive_manifest.tsv \
+      ! -name archive_checksums.sha256 \
+      -print \
+      | sort \
+      | while IFS= read -r path; do
+          sha256sum "$path"
+        done > archive_checksums.sha256
+  )
+  (
+    cd "$ARCHIVE_SNAPSHOT_ROOT"
+    find "$(basename "$ARCHIVE_PAYLOAD_DIR")" -type f | sort > "$ARCHIVE_FILE_LIST"
+  )
+}
+
+build_summary_archive() {
+  rm -rf "$ARCHIVE_SNAPSHOT_ROOT"
+  mkdir -p "$ARCHIVE_PAYLOAD_DIR"
+  copy_completed_products_to_archive_snapshot
+  copy_remote_logs_to_archive_snapshot
+  write_archive_manifest
+  rm -f "$SUMMARY_ARCHIVE"
+  tar -czf "$SUMMARY_ARCHIVE" -C "$ARCHIVE_SNAPSHOT_ROOT" --files-from "$ARCHIVE_FILE_LIST"
+  sha256sum "$SUMMARY_ARCHIVE"
+}
+
+for record in "${SOURCE_AGES[@]}"; do
+  IFS="|" read -r output timestep expected_myr <<<"$record"
+  for view in "${VIEWS[@]}"; do
+    IFS="|" read -r angle label expected_accumulator <<<"$view"
+    run_view "$output" "$timestep" "$expected_myr" "$angle" "$label" "$expected_accumulator"
+  done
+done
+
+build_summary_archive
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
