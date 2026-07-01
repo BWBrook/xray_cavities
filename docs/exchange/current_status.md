@@ -14,11 +14,72 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-023 X-ray/cavity topology method
-handoff.
+This note should be treated as a post-Goal-024 hybrid X-ray/cavity topology
+gate handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 024 hybrid X-ray/cavity topology gate on 2026-07-01:
+
+- Status:
+  `complete_synthetic_local_gate`.
+- Decision label:
+  `HYBRID_TOPOLOGY_SYNTHETIC_GATE_PASSED_LOCAL_APPLICATION_PROTOCOL_NEXT`.
+- New helper:
+  `scripts/science/hybrid_xray_cavity_topology.py`.
+- New tests:
+  `tests/test_hybrid_xray_cavity_topology.py`.
+- New science note:
+  `docs/science/c_hi_hybrid_xray_cavity_topology_gate_2026-07-01.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_hybrid_xray_cavity_topology_gate_2026-07-01/`.
+- Machine-readable assets:
+  - `synthetic_topology_cases.csv`
+  - `topology_gate_results.csv`
+  - `method_parameters.csv`
+  - `accepted_asset_application_readiness.csv`
+  - `next_step_recommendation.csv`
+  - `hybrid_topology_gate_metadata.json`
+- New Goal log:
+  `docs/goals/024-c-hi-hybrid-xray-cavity-topology-gate/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-hybrid-xray-cavity-topology-gate.md`.
+- Headline result:
+  the helper separates tracer-proxy side labels from X-ray topology class and
+  passes synthetic tests for `two_separate_cavities`,
+  `connected_envelope_single_system`, and `ambiguous_needs_review`.
+- Synthetic gate:
+  three synthetic cases were generated; expected and observed classifications
+  all match. The ambiguous one-side case fails as intended rather than being
+  forced into a false decisive topology.
+- Existing-asset readiness:
+  Goal 005/007 compact assets are available but only partially sufficient for
+  real endpoint application. They include corrected X-ray/tracer/metadata
+  evidence, but not a deterministic side-seed derivation table or parseable
+  X-ray residual/topology-mask layer.
+- Decision:
+  the method contract is viable locally, but the real endpoint topology is not
+  reclassified by Goal 024 and no product rerun is authorized.
+- Recommended next action:
+  a local existing-asset application design goal that derives parseable
+  side-seed and X-ray residual/topology-mask tables from existing Goal 005/007
+  compact assets without HDF5/XRAiSE rerun.
+- Validation:
+  `uv run pytest tests/test_hybrid_xray_cavity_topology.py -q` (`5 passed`);
+  `python3 scripts/science/hybrid_xray_cavity_topology.py`; JSON parse for
+  `hybrid_topology_gate_metadata.json`; CSV parse/expected-column/nonempty
+  checks for all five new CSV assets; `git diff --check`; and targeted
+  unresolved-marker scan over the science note, exchange log, Goal log, and
+  current status.
+- Boundary confirmation:
+  Goal 024 is local-only. No remote commands, Open OnDemand, SSH/SCP, `qstat`,
+  Kunanyi staging, PBS jobs, finalizers, retrieval, HDF5/XRAiSE reruns, PLUTO,
+  PRAiSE, radio, cavity regeneration, endpoint rerun, source-age substitution,
+  `C-LO`, `G-LO`, comparison-case processing, early-age branch, broad
+  source-age sweep, publication-facing claims, scientific-default changes,
+  commits, pushes, cleanup, `agent_comms` edits, or accepted-asset overwrites
+  occurred.
 
 Latest Goal 023 X-ray/cavity topology method decision on 2026-07-01:
 

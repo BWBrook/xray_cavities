@@ -1,0 +1,8 @@
+parameter,value,role
+cavity_fraction_of_background,0.5,deterministic_topology_protocol
+background_statistic,median finite X-ray value,deterministic_topology_protocol
+cavity_mask_rule,xray <= median(xray) * cavity_fraction_of_background,deterministic_topology_protocol
+min_component_pixels,4,deterministic_topology_protocol
+bridge_connectivity,4,deterministic_topology_protocol
+side_labels,"-1=negative_z tracer proxy, +1=positive_z tracer proxy, 0=unlabelled",deterministic_topology_protocol
+classification_rule,two significant side-specific components => two_separate_cavities; one significant component spanning both sides => connected_envelope_single_system; otherwise ambiguous_needs_review,deterministic_topology_protocol

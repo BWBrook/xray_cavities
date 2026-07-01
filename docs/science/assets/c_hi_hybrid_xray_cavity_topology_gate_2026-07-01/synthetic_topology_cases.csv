@@ -1,0 +1,4 @@
+case_id,shape,expected_topology_class,expected_gate_status,xray_background,xray_cavity_value,side_label_contract
+synthetic_two_separate_cavities,12x16,two_separate_cavities,pass,1.0,0.2,"-1 negative_z proxy, +1 positive_z proxy"
+synthetic_connected_envelope_single_system,12x16,connected_envelope_single_system,pass,1.0,0.2,"-1 negative_z proxy, +1 positive_z proxy"
+synthetic_one_side_only_ambiguous,12x16,ambiguous_needs_review,fail,1.0,0.2,"-1 negative_z proxy, +1 positive_z proxy"

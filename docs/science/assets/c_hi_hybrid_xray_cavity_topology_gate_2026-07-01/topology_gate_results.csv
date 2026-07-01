@@ -1,0 +1,4 @@
+case_id,expected_topology_class,observed_topology_class,classification_matches_expected,gate_status,reason,significant_component_count,component_side_classes,negative_seed_pixels,positive_seed_pixels,cavity_candidate_pixels,cavity_threshold
+synthetic_two_separate_cavities,two_separate_cavities,two_separate_cavities,true,pass,two significant X-ray cavity components map separately to negative_z and positive_z labels,2,negative_z;positive_z,96,96,18,0.5
+synthetic_connected_envelope_single_system,connected_envelope_single_system,connected_envelope_single_system,true,pass,one significant X-ray cavity component spans both tracer-proxy side labels,1,spans_negative_and_positive,96,96,30,0.5
+synthetic_one_side_only_ambiguous,ambiguous_needs_review,ambiguous_needs_review,true,fail,topology does not satisfy two-side or connected-envelope criteria,1,negative_z,96,96,9,0.5
