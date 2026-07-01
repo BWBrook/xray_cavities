@@ -14,11 +14,61 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-021 bounded age-axis extension
-completion handoff.
+This note should be treated as a post-Goal-022 late-age axis decision-gate
+handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 022 late-age C-HI axis decision gate on 2026-07-01:
+
+- Status:
+  `complete_local_decision_gate`.
+- Decision label:
+  `LATE_AXIS_SUFFICIENT_FOR_NOW_TOPOLOGY_METHOD_NEXT`.
+- New science note:
+  `docs/science/c_hi_late_age_axis_decision_gate_2026-07-01.md`.
+- New asset bundle:
+  `docs/science/assets/c_hi_late_age_axis_decision_gate_2026-07-01/`.
+- Machine-readable assets:
+  - `late_axis_summary.csv`
+  - `age_axis_decision_matrix.csv`
+  - `candidate_age_gap_assessment.csv`
+  - `product_provenance.csv`
+  - `late_age_axis_decision_metadata.json`
+- New Goal log:
+  `docs/goals/022-c-hi-late-age-axis-decision-gate/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-01-c-hi-late-age-axis-decision-gate.md`.
+- Evidence surface:
+  accepted late-axis `C-HI` outputs `46/48/49/50/51` across
+  `0/45/90deg`.
+- Headline result:
+  raw and corrected X-ray sums converge monotonically toward the endpoint in
+  every view; all rows have `0/0/0` raw/corrected/correction-ratio
+  empty-column support; nonzero views use
+  `edge_overlap_uniform_cell_projection`.
+- Decision:
+  pause additional late-age `C-HI` sampling for now. The only concrete
+  remaining late-age candidate is `output47`, but it would mainly answer an
+  interpolation gap between `46` and `48` and is not recommended unless a
+  reviewer identifies a specific need for that adjacent point.
+- Validation passed:
+  no helper code was added, so no project tests were required; JSON parse for
+  `late_age_axis_decision_metadata.json`; CSV parse/expected-column/nonempty
+  checks for all four new CSV assets; `git diff --check`; and targeted
+  unresolved-marker scan over the science note, exchange log, Goal log, and
+  current status.
+- Recommended next action:
+  create a local X-ray/cavity topology and method decision/refinement package
+  using existing assets before broader sampling or comparison-case work.
+- Boundary confirmation:
+  Goal 022 was local-only. No remote commands, Open OnDemand, SSH/SCP,
+  `qstat`, Kunanyi staging, PBS jobs, finalizers, retrieval, HDF5/XRAiSE
+  reruns, endpoint rerun, source-age substitution, `C-LO`, `G-LO`, early-age
+  branch, comparison-case processing, PLUTO/PRAiSE/radio/cavity work,
+  scientific-default changes, commits, pushes, cleanup, `agent_comms` edits,
+  or accepted-asset overwrites occurred.
 
 Latest Goal 021 bounded C-HI age-axis extension completion on 2026-07-01:
 

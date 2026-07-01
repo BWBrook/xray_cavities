@@ -1,0 +1,55 @@
+{
+  "date": "2026-07-01",
+  "goal": "022-c-hi-late-age-axis-decision-gate",
+  "status": "complete_local_decision_gate",
+  "decision_label": "LATE_AXIS_SUFFICIENT_FOR_NOW_TOPOLOGY_METHOD_NEXT",
+  "headline_recommendation": "Pause additional late-age C-HI sampling for now and make the next project move a local X-ray/cavity topology/method decision-refinement package.",
+  "evidence_surface": {
+    "outputs": [
+      "46",
+      "48",
+      "49",
+      "50",
+      "51"
+    ],
+    "views": [
+      "0deg",
+      "45deg",
+      "90deg"
+    ],
+    "new_inputs": "none; Goal 022 uses existing local compact assets only",
+    "late_axis_summary": "corrected and raw X-ray sums converge monotonically toward endpoint in every view; support and projection contracts are clean"
+  },
+  "one_more_age_assessment": {
+    "recommended": false,
+    "only_concrete_candidate_if_required": "data.0047.flt.h5::Timestep_47",
+    "reason_not_recommended_now": "Would fill an interpolation gap between 46 and 48, but the current 46/48/49/50/51 surface is already smooth and support-complete."
+  },
+  "recommended_next_goal_shape": "local X-ray/cavity topology and method decision/refinement package using existing assets, before broader sampling or comparison-case work",
+  "active_caveats": [
+    "late-age X-ray/tracer evidence only, not publication-ready observables",
+    "connected-envelope/X-ray topology remains unresolved and is now the leading interpretive caveat",
+    "sparse radio remains diagnostic only",
+    "Level 3 gravity remains blocked_missing_potential",
+    "pV/adopted 2.5pV/4pV convention remains active",
+    "C-LO/G-LO, early ages, comparison cases, radio observables, broad batches, endpoint rerun, and scientific-default changes remain out of scope"
+  ],
+  "boundary_confirmation": {
+    "remote_commands": false,
+    "open_ondemand_or_ssh": false,
+    "pbs_jobs": false,
+    "hdf5_xraise_rerun": false,
+    "endpoint_rerun": false,
+    "source_age_substitution": false,
+    "agent_comms_edits": false,
+    "commits_or_pushes": false,
+    "accepted_assets_overwritten": false
+  },
+  "asset_files": [
+    "late_axis_summary.csv",
+    "age_axis_decision_matrix.csv",
+    "candidate_age_gap_assessment.csv",
+    "product_provenance.csv",
+    "late_age_axis_decision_metadata.json"
+  ]
+}
