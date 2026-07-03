@@ -1,0 +1,36 @@
+GOAL031_REMOTE_PREFLIGHT_RUNTIME_MODULES
+UTC=2026-07-03T02:52:28Z
+<tpac-host>
+/u/bwbrook
+STAGE=/u/bwbrook/codex_kunanyi/goal031_c_lo_asset_restore_preflight
+rendered_c_lo_config/README.md: OK
+rendered_c_lo_config/C-LO/particles/case_manifest.json: OK
+rendered_c_lo_config/C-LO/particles/definitions_overrides.json: OK
+rendered_c_lo_config/C-LO/particles/environment.ini: OK
+rendered_c_lo_config/C-LO/particles/pluto.ini: OK
+rendered_c_lo_config/C-LO/particles/render_validation.json: OK
+rendered_c_lo_config/C-LO/particles/run_definition.json: OK
+rendered_c_lo_config/C-LO/particles/tabulated_cosmo_002003.csv: OK
+c_lo_config_asset_preflight_contract.pbs: OK
+HASH_CHECK=pass
+WRAPPER_BASH_N=pass
+C_LO_PREFLIGHT_OK=1
+CONFIG_DIR=/u/bwbrook/codex_kunanyi/goal031_c_lo_asset_restore_preflight/rendered_c_lo_config/C-LO/particles
+ENV_ASSET=/u/bwbrook/codex_kunanyi/goal031_c_lo_asset_restore_preflight/rendered_c_lo_config/C-LO/particles/tabulated_cosmo_002003.csv
+ENV_ASSET_ROWS=4000
+ENV_ASSET_SHA256=30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa
+WRAPPER_MANUAL_VALIDATION=pass
+PLUTO_DIR=pass:/scratch/bwbrook/git/utas-agn/pluto
+JET_SETUP=pass:/scratch/bwbrook/git/utas-agn/jet-setup
+JET_SETUP_SETUP_PROBLEM=pass
+AGN_MODULEFILES=pass
+
+Currently Loaded Modules:
+  1) intel/18.0.1.163   2) impi/2018.1.163   3) hdf5/1.12.1p   4) zfp/0.5.5
+
+
+
+MPICC=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin_ohpc/mpicc
+MPIRUN=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpirun
+PBS_SUBMISSION=not_attempted
+REMOTE_PREFLIGHT_RUNTIME_MODULES=pass

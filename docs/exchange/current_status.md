@@ -14,11 +14,74 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-030 C-LO config/asset preflight
+This note should be treated as a post-Goal-031 Stewart asset restore and C-LO
+config/asset preflight
 handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 031 Stewart cluster asset restore and C-LO preflight on
+2026-07-03:
+
+- Status:
+  `complete_asset_restored_preflight_clean`.
+- Decision label:
+  `C_LO_ASSET_RESTORED_PREFLIGHT_CLEAN_EXECUTION_PACKET_READY`.
+- New science note:
+  `docs/science/stewart_cluster_asset_restore_c_lo_preflight_2026-07-03.md`.
+- New asset bundle:
+  `docs/science/assets/stewart_cluster_asset_restore_c_lo_preflight_2026-07-03/`.
+- Machine-readable assets:
+  - `asset_source_search.csv`
+  - `restored_asset_manifest.csv`
+  - `asset_validation.csv`
+  - `asset_backed_c_lo_config_audit.csv`
+  - `remote_preflight_status.csv`
+  - `preflight_blocker_register.csv`
+  - `next_step_recommendation.csv`
+  - `stewart_cluster_asset_restore_c_lo_preflight_metadata.json`
+  - `rendered_c_lo_config/`
+  - `remote_logs/`
+- New Goal log:
+  `docs/goals/031-stewart-cluster-asset-restore-c-lo-preflight/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-03-stewart-cluster-asset-restore-c-lo-preflight.md`.
+- Asset restore result:
+  the missing ignored Stewart cluster `002_003` table was restored from the
+  trusted May 8 Kunanyi gate path
+  `/u/bwbrook/codex_kunanyi/stage_2026-05-08/kunanyi_gate/cluster_002003/tabulated_cosmo_002003.csv`
+  into
+  `env/extracted/environments/tabulated/tabulated_cosmo_002003.csv`.
+  The raw CSV remains ignored under `env/` and is not committed. It validates
+  as SHA-256
+  `30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa`,
+  `608000` bytes, `4000` rows, `6` columns, and strictly increasing radius.
+- C-LO config audit:
+  C-LO was rerendered with real assets using
+  `--require-assets --check-local-assets`, variant `particles`, grid
+  `stewart_stretched_250`, and the restored cluster tabulated path. The audit
+  confirms `C-LO`, Stewart cluster `002_003`, `JET_PWR = 1e43 erg/s`,
+  `JET_SPD = 0.1 c`, and 50 Myr as `15330.06968940` PLUTO code-time units.
+- Remote preflight status:
+  passed. A bounded read-only Kunanyi stage under
+  `/u/bwbrook/codex_kunanyi/goal031_c_lo_asset_restore_preflight` verified
+  staged SHA-256 values, remote wrapper syntax, manual wrapper validation,
+  PLUTO and `jet-setup` path presence, `jet-setup/tools/setup-problem`, AGN
+  modulefiles, and runtime module loading after `module purge`. No `qsub` or
+  PBS submission was attempted.
+- Recommended next branch:
+  `barry_authorized_bounded_c_lo_execution_packet`. This future goal should
+  submit at most one bounded C-LO job only after Barry explicitly authorizes
+  compute, then wake and stop once the job is queued/running. It should carry
+  the restored Stewart asset, asset-backed C-LO config, inherited C-HI
+  contracts, module-purge hygiene, stable archive contract, and PBS stop rule.
+- Boundary confirmation:
+  no PBS job, PLUTO run, XRAiSE run, PRAiSE run, radio or cavity extraction,
+  source-age product, endpoint product, C-LO/G-LO science compute, finalizer,
+  science-output retrieval, polling loop, scientific-default change,
+  environment substitution, commit, push, cleanup, Stas/Patrick contact,
+  `agent_comms` edit, or accepted-asset overwrite occurred.
 
 Latest Goal 030 C-LO config/asset preflight on 2026-07-03:
 

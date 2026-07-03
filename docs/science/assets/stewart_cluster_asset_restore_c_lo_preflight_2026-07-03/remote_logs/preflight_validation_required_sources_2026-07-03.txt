@@ -1,0 +1,40 @@
+GOAL031_REMOTE_PREFLIGHT_REQUIRED_SOURCES
+UTC=2026-07-03T02:52:01Z
+<tpac-host>
+/u/bwbrook
+STAGE=/u/bwbrook/codex_kunanyi/goal031_c_lo_asset_restore_preflight
+rendered_c_lo_config/README.md: OK
+rendered_c_lo_config/C-LO/particles/case_manifest.json: OK
+rendered_c_lo_config/C-LO/particles/definitions_overrides.json: OK
+rendered_c_lo_config/C-LO/particles/environment.ini: OK
+rendered_c_lo_config/C-LO/particles/pluto.ini: OK
+rendered_c_lo_config/C-LO/particles/render_validation.json: OK
+rendered_c_lo_config/C-LO/particles/run_definition.json: OK
+rendered_c_lo_config/C-LO/particles/tabulated_cosmo_002003.csv: OK
+c_lo_config_asset_preflight_contract.pbs: OK
+HASH_CHECK=pass
+WRAPPER_BASH_N=pass
+C_LO_PREFLIGHT_OK=1
+CONFIG_DIR=/u/bwbrook/codex_kunanyi/goal031_c_lo_asset_restore_preflight/rendered_c_lo_config/C-LO/particles
+ENV_ASSET=/u/bwbrook/codex_kunanyi/goal031_c_lo_asset_restore_preflight/rendered_c_lo_config/C-LO/particles/tabulated_cosmo_002003.csv
+ENV_ASSET_ROWS=4000
+ENV_ASSET_SHA256=30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa
+WRAPPER_MANUAL_VALIDATION=pass
+SOURCE_PATH	/scratch/bwbrook/git/utas-agn/pluto	pass	directory_present
+SOURCE_HEAD	/scratch/bwbrook/git/utas-agn/pluto	not_git_worktree	not_git_worktree
+SOURCE_PATH	/scratch/bwbrook/git/utas-agn/jet-setup	pass	directory_present
+SOURCE_HEAD	/scratch/bwbrook/git/utas-agn/jet-setup	not_git_worktree	not_git_worktree
+JET_SETUP_SETUP_PROBLEM=pass
+AGN_MODULEFILES=pass
+Lmod has detected the following error: You can only have one compiler module
+loaded at a time.
+You already have gnu8 loaded.
+To correct the situation, please execute the following command:
+
+  $ module swap gnu8 intel/18.0.1.163
+
+
+While processing the following module(s):
+    Module fullname   Module Filename
+    ---------------   ---------------
+    intel/18.0.1.163  /share/apps/modules/intel/18.0.1.163

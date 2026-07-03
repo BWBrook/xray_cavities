@@ -1,0 +1,8 @@
+blocker,status,severity,evidence,required_resolution
+local_stewart_cluster_002003_asset_absent,resolved,was_blocking,"Restored env/extracted/environments/tabulated/tabulated_cosmo_002003.csv from trusted May 8 Kunanyi gate path","Keep raw asset ignored; do not commit it"
+c_lo_asset_backed_config_not_rendered,resolved,was_blocking,"C-LO particles config rendered with --require-assets --check-local-assets and status=provided","Use this asset-backed compact config surface for future execution packet review"
+remote_preflight_not_attempted,resolved,was_consequence,"Bounded read-only Kunanyi preflight ran after local gate passed","No PBS submission occurred"
+remote_default_gnu8_module_conflict,resolved,minor_operational,"Initial runtime-module load failed because gnu8 was already loaded; rerun with module purge loaded intel/impi/hdf5/zfp cleanly","Future wrapper/preflight should purge or swap modules before loading the production stack"
+plutokore_absent_under_scratch,nonblocking,not_required_for_contract,"Initial broader source check reported /scratch/bwbrook/git/utas-agn/plutokore absent; required preflight source paths are PLUTO and jet-setup","Only revisit if future execution code explicitly imports plutokore on Kunanyi"
+c_lo_execution_authorization,active_future_gate,blocking_for_compute,"Goal 031 authorizes restoration and read-only preflight only","Barry must explicitly authorize a future C-LO execution packet before any qsub or compute"
+no_active_goal031_preflight_blocker,none,none,"Asset restored, local config gate passed, remote read-only preflight passed","Write the smallest future C-LO execution packet with inherited C-HI contracts and PBS stop rule"

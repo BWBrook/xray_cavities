@@ -1,0 +1,5 @@
+rank,next_goal_shape,recommendation,status,rationale,boundary
+1,barry_authorized_bounded_c_lo_execution_packet,recommended,ready_after_goal031,"The Stewart asset is restored, asset-backed C-LO config render passes, and read-only Kunanyi config/source/module preflight is clean","Requires explicit Barry authorization; submit at most one bounded PBS job and stop once queued/running"
+2,c_lo_execution_packet_local_dry_audit,acceptable_if_barry_wants_extra_review,optional,"A purely local wrapper review could further reduce risk but Goal031 already proves the asset/config/preflight gate","No remote compute and no scientific-default changes"
+3,g_lo_config_asset_preflight,later,queued_behind_c_lo,"G-LO is the environment-dependence comparison and should inherit lessons from C-LO first","Do not advance before C-LO execution decision unless Barry overrides"
+4,c_hi_or_c_lo_science_method_changes,not_recommended_now,not_needed,"Goal031 found no science-default blocker; this was an operational asset/preflight repair","Escalate only for scientific-default or production-scope changes"

@@ -1,0 +1,54 @@
+{
+  "case_id": "C-LO",
+  "environment": {
+    "density_profile_define": "ENV_TABULATED",
+    "external_data": "",
+    "external_grid": "",
+    "kind": "tabulated",
+    "source_tabulated_data": "env/extracted/environments/tabulated/tabulated_cosmo_002003.csv",
+    "status": "provided",
+    "tabulated_data": "tabulated_cosmo_002003.csv"
+  },
+  "run_name": "C-LO_particles",
+  "science_intent": {
+    "active_time_myr": 50.0,
+    "chombo_checkpoint_interval": "disabled",
+    "dbl_h5_interval_myr": 5.0,
+    "duration_myr": 50.0,
+    "early_diagnostic_snapshots_myr": [
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0
+    ],
+    "jet_power_erg_s_one_sided": 1e+43,
+    "jet_speed_c": 0.1,
+    "opening_angle_primary_deg": 15.0,
+    "opening_angle_secondary_deg": 15.0,
+    "particle_interval_myr": 0.01,
+    "particles_enabled": true,
+    "particles_per_injection": 32.0,
+    "role": "baseline science anchor",
+    "snapshot_interval_myr": 1.0,
+    "views_deg": [
+      0.0,
+      45.0,
+      90.0
+    ]
+  },
+  "unit_contract": {
+    "JET_ACTIVE_TIME": "Myr",
+    "JET_END_TIME": "Myr",
+    "JET_PWR": "one-sided erg/s",
+    "JET_START_TIME": "Myr",
+    "PART_INJECT_FREQUENCY": "Myr",
+    "chombo_checkpoint_interval": "disabled for static-grid PLUTO",
+    "environment_offsets": "kpc",
+    "jet_injection_dimensions": "kpc",
+    "static_grid_dbl_h5_restart_outputs": "PLUTO code time",
+    "static_grid_output_intervals": "PLUTO code time",
+    "tstop": "PLUTO code time"
+  },
+  "variant": "particles"
+}

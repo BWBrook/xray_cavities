@@ -1,0 +1,51 @@
+{
+  "status": "complete_asset_restored_preflight_clean",
+  "decision_label": "C_LO_ASSET_RESTORED_PREFLIGHT_CLEAN_EXECUTION_PACKET_READY",
+  "date": "2026-07-03",
+  "repo": "/Users/bwbrook/papers/xray_cavities",
+  "start_head": "2393f19",
+  "restored_asset": {
+    "name": "tabulated_cosmo_002003.csv",
+    "source_path": "/u/bwbrook/codex_kunanyi/stage_2026-05-08/kunanyi_gate/cluster_002003/tabulated_cosmo_002003.csv",
+    "local_ignored_path": "env/extracted/environments/tabulated/tabulated_cosmo_002003.csv",
+    "sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+    "size_bytes": 608000,
+    "row_count": 4000,
+    "column_count": 6,
+    "radius_first_cm": 0.0,
+    "radius_last_cm": 1.697122669820252e24,
+    "git_status": "ignored_raw_asset_not_committed"
+  },
+  "local_config_gate": {
+    "renderer": "scripts/science/render_three_case_configs.py",
+    "case": "C-LO",
+    "variant": "particles",
+    "grid": "stewart_stretched_250",
+    "require_assets": true,
+    "check_local_assets": true,
+    "render_status": "passed",
+    "rendered_bundle": "docs/science/assets/stewart_cluster_asset_restore_c_lo_preflight_2026-07-03/rendered_c_lo_config",
+    "raw_csv_removed_from_committed_render_bundle": true
+  },
+  "remote_preflight": {
+    "status": "passed",
+    "stage": "/u/bwbrook/codex_kunanyi/goal031_c_lo_asset_restore_preflight",
+    "logs": [
+      "docs/science/assets/stewart_cluster_asset_restore_c_lo_preflight_2026-07-03/remote_logs/preflight_validation_2026-07-03.txt",
+      "docs/science/assets/stewart_cluster_asset_restore_c_lo_preflight_2026-07-03/remote_logs/preflight_validation_required_sources_2026-07-03.txt",
+      "docs/science/assets/stewart_cluster_asset_restore_c_lo_preflight_2026-07-03/remote_logs/preflight_validation_runtime_modules_2026-07-03.txt"
+    ],
+    "pbs_submission": "not_attempted",
+    "module_hygiene_note": "module purge was required before loading intel impi hdf5/1.12.1p zfp/0.5.5 because gnu8 was preloaded"
+  },
+  "boundaries": {
+    "no_pbs_submission": true,
+    "no_science_compute": true,
+    "no_scientific_default_changes": true,
+    "no_environment_substitution": true,
+    "no_commits_or_pushes": true,
+    "no_agent_comms_edits": true,
+    "accepted_assets_overwritten": false
+  },
+  "recommended_next_goal": "Barry-authorized bounded C-LO execution packet using the restored Stewart 002_003 asset, asset-backed C-LO config, inherited C-HI contracts, module purge hygiene, stable archive contract, and PBS stop rule."
+}
