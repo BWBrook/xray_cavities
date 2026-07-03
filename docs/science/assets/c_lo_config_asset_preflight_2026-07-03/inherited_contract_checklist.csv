@@ -1,0 +1,11 @@
+contract,status,source_goals,goal030_application,caveat
+endpoint_first_control_surface,carried_forward,Goal005;Goal016;Goal017;Goal021;Goal022,"Future C-LO products should be endpoint-first before any comparison-case source-age axis","No C-LO endpoint product is authorized or produced in Goal030"
+viewing_angles,carried_forward,Goal016;Goal017,"Future comparison surface should use 0deg 45deg and 90deg views","No view products are generated in Goal030"
+refined_nonzero_projection,carried_forward,Goal015;Goal016;Goal017,"Future 45deg and 90deg products must declare edge_overlap_uniform_cell_projection","This is a post-processing contract, not a PLUTO config change"
+late_age_axis_guardrail,carried_forward,Goal019;Goal020;Goal021;Goal022,"Do not open C-LO source-age sampling before a clean endpoint comparison exists","Goal030 is preflight only"
+conditional_topology_caveat,carried_forward,Goal023;Goal024;Goal025;Goal026;Goal027,"Carry conditional connected-envelope topology as caveat, not final method","No topology application is run in Goal030"
+level3_energy_caveat,carried_forward,Goal009;Goal010,"Thermal/kinetic Level3 reviewable; gravitational Level3 remains blocked_missing_potential","No energy closure claim is made"
+sparse_radio_status,carried_forward,Goal001;Goal002;Goal003;Goal007,"Sparse PRAiSE/radio remains diagnostic only","No radio product is generated"
+no_overwrite_provenance,carried_forward,Goal005;Goal016;Goal017;Goal019;Goal020;Goal021;Goal022;Goal027;Goal028;Goal029,"Future C-LO outputs must sit beside accepted C-HI assets","No accepted assets are overwritten"
+pbs_stop_rule,carried_forward,Goal009;Goal011;Goal012;Goal016;Goal019;Goal021,"Future authorized PBS submission must wake after Q/R verification and stop","Goal030 submits no PBS job"
+stable_archive_contract,carried_forward,Goal019;Goal021,"Future compact outputs must archive from stable snapshot/file-list contract","No archive is created in Goal030"

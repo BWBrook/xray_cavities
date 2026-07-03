@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-01
+Last updated: 2026-07-03
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,75 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-029 C-LO/G-LO comparison-readiness
+This note should be treated as a post-Goal-030 C-LO config/asset preflight
 handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 030 C-LO config/asset preflight on 2026-07-03:
+
+- Status:
+  `blocked_local_asset_missing_no_remote_preflight`.
+- Decision label:
+  `C_LO_PREFLIGHT_BLOCKED_MISSING_LOCAL_STEWART_002003_ASSET`.
+- New science note:
+  `docs/science/c_lo_config_asset_preflight_2026-07-03.md`.
+- New asset bundle:
+  `docs/science/assets/c_lo_config_asset_preflight_2026-07-03/`.
+- Machine-readable assets:
+  - `local_asset_preflight.csv`
+  - `c_lo_config_audit.csv`
+  - `inherited_contract_checklist.csv`
+  - `wrapper_contract_audit.csv`
+  - `remote_preflight_status.csv`
+  - `preflight_blocker_register.csv`
+  - `next_step_recommendation.csv`
+  - `c_lo_config_asset_preflight_metadata.json`
+  - `rendered_c_lo_placeholder_config/`
+- New wrapper/preflight contract:
+  `scripts/kunanyi/c_lo_config_asset_preflight_contract.pbs`.
+- New focused wrapper test:
+  `tests/test_c_lo_config_asset_preflight_contract.py`.
+- New Goal log:
+  `docs/goals/030-c-lo-config-asset-preflight/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-03-c-lo-config-asset-preflight.md`.
+- Local asset result:
+  the current checkout does not contain
+  `env/extracted/environments/tabulated/tabulated_cosmo_002003.csv`, and the
+  documented ignored recovery archive `env/environments.zip` is also absent.
+  No committed copy of the Stewart `002_003` tabulated CSV was found under
+  `docs/science/assets/`.
+- C-LO config audit:
+  a placeholder-only C-LO config bundle was rendered for static audit under
+  `rendered_c_lo_placeholder_config/`. It confirms the intended C-LO constants
+  (`JET_PWR = 1e43 erg/s`, `JET_SPD = 0.1 c`, 50 Myr converted to
+  `15330.06968940` PLUTO code-time units), but its manifest records
+  `environment.status = missing_stewart_asset`. It is not launch-ready.
+- Wrapper/contract status:
+  the new `c_lo_config_asset_preflight_contract.pbs` is a read-only future
+  preflight contract. It validates staged config files plus
+  `tabulated_cosmo_002003.csv` row count/SHA and does not build or run PLUTO,
+  run XRAiSE/PRAiSE, generate products, archive outputs, or submit anything by
+  itself.
+- Remote preflight status:
+  not attempted. The Goal 030 remote path was conditioned on a clean local
+  asset gate, and that gate failed.
+- Recommended next branch:
+  `restore_local_stewart_cluster_asset_and_rerun_c_lo_preflight`. Restore the
+  ignored Stewart cluster `002_003` tabulated CSV from a trusted source, verify
+  checksum/size/row-count/provenance locally, rerender C-LO with
+  `--require-assets --check-local-assets`, then attempt bounded read-only
+  Kunanyi source/module/asset/hash/wrapper-syntax preflight. No C-LO compute is
+  authorized until a later explicit Barry-authorized execution packet.
+- Boundary confirmation:
+  no remote commands, Open OnDemand, SSH/SCP, `qstat`, Kunanyi staging, PBS
+  jobs, finalizers, retrieval, polling, PLUTO, XRAiSE, PRAiSE, radio, cavity
+  extraction, source-age products, endpoint products, `C-LO`/`G-LO`
+  processing, comparison-case compute, broad sweeps, scientific-default
+  changes, commits, pushes, cleanup, Stas/Patrick contact, `agent_comms`
+  edits, or accepted-asset overwrites occurred.
 
 Latest Goal 029 C-LO/G-LO comparison-case readiness decision on 2026-07-01:
 

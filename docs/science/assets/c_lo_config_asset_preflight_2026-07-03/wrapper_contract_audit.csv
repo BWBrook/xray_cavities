@@ -1,0 +1,9 @@
+contract_item,status,evidence,next_action
+wrapper_file,created_not_submitted,scripts/kunanyi/c_lo_config_asset_preflight_contract.pbs,"Syntax-check locally; stage only in a future authorized remote preflight packet"
+wrapper_scope,read_only_preflight_only,"Wrapper checks staged C-LO config files and tabulated_cosmo_002003.csv row count/SHA; it does not build or run PLUTO","Use as a contract for remote config/asset preflight, not production compute"
+resources,bounded,"select=1:ncpus=1:mpiprocs=1:mem=4gb walltime=00:10:00","Keep future preflight modest; production resources require a separate packet"
+case_binding,C-LO,"EXPECTED_CASE_ID=C-LO and EXPECTED_JET_PWR=1e+43","Do not substitute C-HI or G-LO in this contract"
+environment_binding,cluster_002003,"ENV_ASSET defaults to staged tabulated_cosmo_002003.csv","Restore or stage the verified Stewart cluster asset before remote use"
+config_validation,defined,"Requires pluto.ini environment.ini case_manifest.json run_definition.json render_validation.json definitions_overrides.json","Future remote preflight must stage the asset-backed rendered bundle"
+submission_status,not_authorized,"Goal030 prohibits qsub/PBS submission","Submit nothing until a later explicit execution/preflight packet authorizes it"
+production_execution,not_present,"Wrapper contains no mpiexec setup-problem PLUTO XRAiSE PRAiSE or product generation path","A future execution wrapper must be reviewed separately"

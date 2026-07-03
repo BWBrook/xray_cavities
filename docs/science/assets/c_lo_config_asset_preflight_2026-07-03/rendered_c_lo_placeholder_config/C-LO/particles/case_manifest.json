@@ -1,0 +1,87 @@
+{
+  "case": {
+    "case_id": "C-LO",
+    "environment": "cluster",
+    "jet_power_erg_s": 1e+43,
+    "jet_power_w": "1e36",
+    "jet_speed_c": 0.1,
+    "role": "baseline science anchor"
+  },
+  "environment": {
+    "density_profile_define": "ENV_TABULATED",
+    "external_data": "NEEDS_STEWART_CLUSTER_DATA.dbl",
+    "external_grid": "NEEDS_STEWART_CLUSTER_GRID.grid.out",
+    "kind": "placeholder",
+    "status": "missing_stewart_asset",
+    "tabulated_data": "NEEDS_STEWART_CLUSTER_TABULATED.csv"
+  },
+  "grid": {
+    "description": "C-HI supervisor-approved grid after the 2026-05-08 feedback: X1/X2 retain the historical +/-200 kpc Stewart patching, while X3 is extended to +/-250 kpc with 357 outer stretch cells on each side so the cell size near 200 kpc matches the old grid.",
+    "first_dt": "1.0e-5",
+    "name": "stewart_stretched_250",
+    "resolution_note": "Using the PLUTO stretched-grid recurrence, the old 10-200 kpc outer patch has dx~1.6923 kpc at 200 kpc. Extending X3 from 10 to 250 kpc with the same central dx and N=357 gives dx~1.6930 kpc in the cell spanning 200 kpc.",
+    "source": "env/extracted/inis/002_003/F.ini plus Patrick/Stas 2026-05-08 feedback",
+    "x1_line": "X1-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200",
+    "x2_line": "X2-grid     5   -200 330 s -10 100 s -2.5 100 u 2.5 100 s 10 330 s 200",
+    "x3_line": "X3-grid     5   -250 357 s -10 100 s -2.5 100 u 2.5 100 s 10 357 s 250"
+  },
+  "production_gate": "Do not launch multi-day production until generated config files have been reviewed by Patrick/Stas and the kunanyi environment, MPI, HDF5, and restart path are green.",
+  "sampling": {
+    "early_diagnostic_snapshots_myr": [
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0
+    ],
+    "snapshot_interval_myr": 1.0,
+    "views_are_post_processing_only": true,
+    "views_deg": [
+      0.0,
+      45.0,
+      90.0
+    ]
+  },
+  "simulation_defaults": {
+    "geometry": "CARTESIAN",
+    "jet_active_time_myr": 50.0,
+    "jet_chi": 1.0,
+    "jet_end_time_myr": 50.0,
+    "jet_initial_radius_kpc": 0.1,
+    "jet_injection_height_kpc": 0.75,
+    "jet_relativistic_density": "NO",
+    "opening_angle_primary_deg": 15.0,
+    "opening_angle_secondary_deg": 15.0,
+    "particle_interval_myr": 0.01,
+    "particles_enabled": true,
+    "particles_per_injection": 32.0,
+    "physics": "HD",
+    "tracer_threshold_default": 0.005,
+    "tracer_threshold_sensitivity": [
+      0.001,
+      0.01
+    ]
+  },
+  "spec_version": "three-case-v0.2",
+  "time_conversion": {
+    "chombo_checkpoint_interval": "disabled",
+    "code_time_per_myr": 306.601393788,
+    "dbl_h5_interval_code_time": 1533.00696894,
+    "dbl_h5_interval_myr": 5.0,
+    "duration_myr": 50.0,
+    "note": "PLUTO core time controls and output intervals use code time; JET_END_TIME and JET_ACTIVE_TIME are physical Myr parameters.",
+    "particle_interval_code_time": 3.06601393788,
+    "particle_interval_myr": 0.01,
+    "snapshot_interval_code_time": 306.601393788,
+    "snapshot_interval_myr": 1.0,
+    "tstop_code_time": 15330.0696894
+  },
+  "truth_conventions": {
+    "injected_energy": {
+      "bipolar_erg": 3.1557600000000003e+58,
+      "one_sided_erg": 1.5778800000000002e+58
+    },
+    "jet_power_is_one_sided": true
+  },
+  "variant": "particles"
+}

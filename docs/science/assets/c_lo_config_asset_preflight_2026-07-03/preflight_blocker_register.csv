@@ -1,0 +1,6 @@
+blocker,status,severity,evidence,required_resolution
+local_stewart_cluster_002003_asset_absent,active,blocking,"env/extracted/environments/tabulated/tabulated_cosmo_002003.csv is missing and env/environments.zip is also absent","Restore the ignored Stewart asset surface locally from a trusted source, then rerun C-LO config render with --require-assets --check-local-assets"
+c_lo_asset_backed_config_not_rendered,active,blocking,"Only a placeholder C-LO config audit can be rendered without the Stewart CSV","After asset restoration render C-LO particles config with stewart_stretched_250 and confirmed cluster tabulated asset"
+remote_preflight_not_attempted,active,consequence,"Remote preflight is conditioned on local gate passing; it did not pass","After local asset/config gate passes, run bounded read-only Kunanyi preflight"
+case_specific_execution_wrapper_absent,active_for_future_execution,nonblocking_for_blocker_packet,"Goal030 adds a read-only preflight contract, not a production execution wrapper","Future execution packet should create or bind a C-LO production wrapper only after preflight is clean"
+comparison_case_compute_not_authorized,active,guardrail,"Goal030 is preflight/blocker packaging only","Barry must explicitly authorize any C-LO compute packet"

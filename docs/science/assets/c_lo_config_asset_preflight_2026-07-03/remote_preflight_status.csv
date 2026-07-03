@@ -1,0 +1,8 @@
+target,status,evidence,next_action
+kunanyi_route,not_attempted_local_gate_failed,"Local Stewart cluster asset gate failed before remote preflight",Restore local asset surface first
+remote_source_paths,not_attempted_local_gate_failed,"No remote reads were made under Goal030",After local gate passes verify /scratch/bwbrook/git/utas-agn source paths read-only
+remote_runtime_modules,not_attempted_local_gate_failed,"No module or environment probes were run",After local gate passes verify production stack read-only
+remote_cluster_002003_asset,not_attempted_local_gate_failed,"No remote environment asset read was attempted",After local gate passes verify remote tabulated_cosmo_002003.csv path and checksum/provenance
+staged_config_hashes,not_attempted_local_gate_failed,"No files were staged because local config is placeholder-only",After asset-backed render stage exact files and compare SHA-256
+remote_wrapper_syntax,not_attempted_local_gate_failed,"No remote bash -n was run",After local gate passes run remote bash -n on the staged preflight contract
+pbs_submission,not_authorized,"Goal030 explicitly forbids qsub/PBS submission",Needs a later explicit authorization packet

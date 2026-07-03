@@ -1,0 +1,87 @@
+#!/bin/bash
+#PBS -N c_lo_preflight
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=4gb
+#PBS -l walltime=00:10:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal030_c_lo_config_asset_preflight/c_lo_config_asset_preflight.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal030_c_lo_config_asset_preflight/c_lo_config_asset_preflight.err
+
+set -euo pipefail
+
+# Read-only C-LO config/asset preflight contract for a later explicitly
+# authorized packet. This script verifies staged config and Stewart asset
+# surfaces only; it does not build or run a comparison-case simulation.
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal030_c_lo_config_asset_preflight}"
+CONFIG_DIR="${CONFIG_DIR:-$STAGE_DIR/rendered_c_lo_config/C-LO/particles}"
+ENV_ASSET="${ENV_ASSET:-$CONFIG_DIR/tabulated_cosmo_002003.csv}"
+EXPECTED_CASE_ID="${EXPECTED_CASE_ID:-C-LO}"
+EXPECTED_JET_PWR="${EXPECTED_JET_PWR:-1e+43}"
+EXPECTED_JET_SPD="${EXPECTED_JET_SPD:-0.1}"
+EXPECTED_ENV_ROWS="${EXPECTED_ENV_ROWS:-4000}"
+EXPECTED_TSTOP="${EXPECTED_TSTOP:-15330.06968940}"
+EXPECTED_ACTIVE_MYR="${EXPECTED_ACTIVE_MYR:-50.00000000}"
+
+require_file() {
+  local path="$1"
+  if [ ! -f "$path" ]; then
+    echo "MISSING_REQUIRED_FILE=$path" >&2
+    exit 2
+  fi
+}
+
+require_file "$CONFIG_DIR/pluto.ini"
+require_file "$CONFIG_DIR/environment.ini"
+require_file "$CONFIG_DIR/case_manifest.json"
+require_file "$CONFIG_DIR/run_definition.json"
+require_file "$CONFIG_DIR/render_validation.json"
+require_file "$CONFIG_DIR/definitions_overrides.json"
+require_file "$ENV_ASSET"
+
+python3 - <<PY
+import csv
+import hashlib
+import json
+from pathlib import Path
+
+config_dir = Path("${CONFIG_DIR}")
+env_asset = Path("${ENV_ASSET}")
+expected_case_id = "${EXPECTED_CASE_ID}"
+expected_rows = int("${EXPECTED_ENV_ROWS}")
+
+manifest = json.loads((config_dir / "case_manifest.json").read_text())
+validation = json.loads((config_dir / "render_validation.json").read_text())
+run_definition = json.loads((config_dir / "run_definition.json").read_text())
+
+if manifest["case"]["case_id"] != expected_case_id:
+    raise SystemExit(f"case_id mismatch: {manifest['case']['case_id']}")
+if run_definition["case_id"] != expected_case_id:
+    raise SystemExit(f"run_definition case_id mismatch: {run_definition['case_id']}")
+if not validation.get("ok"):
+    raise SystemExit("render_validation.json is not ok")
+
+checks = validation["checks"]
+for label, expected in {
+    "JET_PWR": "${EXPECTED_JET_PWR}",
+    "JET_SPD": "${EXPECTED_JET_SPD}",
+    "tstop": "${EXPECTED_TSTOP}",
+    "JET_ACTIVE_TIME": "${EXPECTED_ACTIVE_MYR}",
+    "JET_END_TIME": "${EXPECTED_ACTIVE_MYR}",
+}.items():
+    rendered = checks[label]["rendered"]
+    if rendered != expected:
+        raise SystemExit(f"{label} mismatch: {rendered} != {expected}")
+
+with env_asset.open(newline="") as handle:
+    rows = sum(1 for _ in csv.reader(handle))
+if rows != expected_rows:
+    raise SystemExit(f"environment row-count mismatch: {rows} != {expected_rows}")
+
+digest = hashlib.sha256(env_asset.read_bytes()).hexdigest()
+print(f"C_LO_PREFLIGHT_OK=1")
+print(f"CONFIG_DIR={config_dir}")
+print(f"ENV_ASSET={env_asset}")
+print(f"ENV_ASSET_ROWS={rows}")
+print(f"ENV_ASSET_SHA256={digest}")
+PY

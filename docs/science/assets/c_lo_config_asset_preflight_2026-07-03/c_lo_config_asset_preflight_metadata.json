@@ -1,0 +1,45 @@
+{
+  "active_caveats": [
+    "Goal030 is a bounded preflight/blocker packet, not C-LO production authorization",
+    "Stewart cluster 002_003 tabulated CSV is documented but absent from the current local checkout",
+    "Placeholder config rendering does not make a launch-ready C-LO bundle",
+    "No remote preflight was attempted because the local asset gate failed",
+    "Accepted C-HI products and assets remain unchanged"
+  ],
+  "boundary_confirmation": {
+    "accepted_assets_overwritten": false,
+    "agent_comms_edited": false,
+    "commits_or_pushes": false,
+    "comparison_case_compute": false,
+    "pbs_submission": false,
+    "remote_preflight_attempted": false,
+    "scientific_defaults_changed": false
+  },
+  "date": "2026-07-03",
+  "decision_label": "C_LO_PREFLIGHT_BLOCKED_MISSING_LOCAL_STEWART_002003_ASSET",
+  "evidence_read": [
+    "AGENTS.md",
+    "docs/exchange/current_status.md",
+    "docs/science/c_lo_g_lo_comparison_readiness_2026-07-01.md",
+    "docs/science/assets/c_lo_g_lo_comparison_readiness_2026-07-01/future_preflight_requirements.csv",
+    "docs/science/assets/c_lo_g_lo_comparison_readiness_2026-07-01/local_blocker_register.csv",
+    "docs/science/assets/c_lo_g_lo_comparison_readiness_2026-07-01/inherited_c_hi_contracts.csv",
+    "docs/science/assets/c_lo_g_lo_comparison_readiness_2026-07-01/next_step_recommendation.csv",
+    "docs/science/three_case_spec.md",
+    "scripts/science/render_three_case_configs.py",
+    "scripts/kunanyi/jet_setup_production_template.pbs",
+    "docs/exchange/logs/2026-05-05-stewart-assets-and-graile.md",
+    "docs/science/asset_inventory_2026-05-02.md"
+  ],
+  "local_asset_gate": {
+    "expected_asset": "env/extracted/environments/tabulated/tabulated_cosmo_002003.csv",
+    "expected_recovery_archive": "env/environments.zip",
+    "result": "failed",
+    "row_count_from_prior_docs": 4000
+  },
+  "next_goal_recommendation": "restore_local_stewart_cluster_asset_and_rerun_c_lo_preflight",
+  "placeholder_config_bundle": "docs/science/assets/c_lo_config_asset_preflight_2026-07-03/rendered_c_lo_placeholder_config/",
+  "remote_preflight_status": "not_attempted_local_gate_failed",
+  "status": "blocked_local_asset_missing_no_remote_preflight",
+  "wrapper_contract": "scripts/kunanyi/c_lo_config_asset_preflight_contract.pbs"
+}

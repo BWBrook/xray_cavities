@@ -1,0 +1,5 @@
+rank,next_goal_shape,recommendation,status,rationale,boundary
+1,restore_local_stewart_cluster_asset_and_rerun_c_lo_preflight,recommended,ready_to_authorize,"The only hard blocker is operational asset absence; restoring tabulated_cosmo_002003.csv unlocks asset-backed render and remote read-only preflight","No compute and no scientific-default change"
+2,asset_backed_c_lo_config_render_and_remote_readonly_preflight,next_after_asset_restore,blocked_by_rank1,"Once the local asset is visible, render with --require-assets --check-local-assets and verify remote source/module/asset surfaces read-only","No qsub/PBS submission"
+3,barry_authorized_c_lo_execution_packet,future_only,blocked_until_clean_preflight,"Only after config and remote preflight are clean should a bounded C-LO execution packet be considered","Requires explicit Barry authorization and PBS stop rule"
+4,g_lo_readiness_or_preflight,later,queued_behind_c_lo,"G-LO changes environment family and should inherit lessons from C-LO asset/config preflight","Do not advance before C-LO blocker is resolved unless Barry overrides"
