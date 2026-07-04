@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-03
+Last updated: 2026-07-04
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,12 +14,122 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-031 Stewart asset restore and C-LO
-config/asset preflight
-handoff.
+This note should be treated as a post-Goal-032 bounded C-LO execution
+completion handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 032 C-LO execution completion retrieval on 2026-07-04:
+
+- Status:
+  `complete_execution_checkpoint_surface_green`.
+- Decision label:
+  `C_LO_BOUNDED_EXECUTION_CHECKPOINT_SURFACE_GREEN`.
+- New science note:
+  `docs/science/c_lo_bounded_execution_completion_2026-07-04.md`.
+- New asset bundle:
+  `docs/science/assets/c_lo_bounded_execution_completion_2026-07-04/`.
+- Machine-readable assets:
+  - `qstat_final.csv`
+  - `remote_log_inventory.csv`
+  - `run_output_inventory.csv`
+  - `completion_summary.csv`
+  - `next_step_recommendation.csv`
+  - `c_lo_bounded_execution_completion_metadata.json`
+  - `remote_logs/`
+- PBS completion:
+  `750065.kunanyi-ohpc` finished with `Exit_status=0`,
+  `resources_used.walltime=03:34:35`, `resources_used.cput=99:36:16`,
+  `resources_used.ncpus=2240`, `resources_used.mem=7188268kb`, and
+  `resources_used.vmem=26357460kb`.
+- Remote execution evidence:
+  stdout reports `RUN_KIND=fresh`, `RUN_ARGS=-i pluto.ini -e environment.ini
+  -maxtime 3.5`, `MPI_EXIT_CODE=0`, and
+  `JOB_END=2026-07-03T08:11:42Z`. The remote `markers/DONE` file exists.
+- Output inventory:
+  remote output volume is `482G`; HDF5 inventory reports `10` HDF5 outputs
+  (`7` `flt.h5`, `3` `dbl.h5`); particle text outputs are present through
+  `particles.0501.dbl`.
+- Checkpoint status:
+  the latest HDF5 output time recorded in `dbl.h5.out` and `flt.h5.out` is
+  `1.533095e+03` code-time units at step `5920`. This is a green bounded
+  execution/checkpoint surface, not a final 50 Myr endpoint product.
+- Caveats:
+  qstat reports `Stageout_status=1`, but requested stdout/stderr and the
+  submission transcript were present and retrieved. Stderr contains one
+  `setup-problem` warning that `git` was not found, so source Git metadata is
+  unavailable in `source_revisions.txt`.
+- Recommended next branch:
+  `bounded_c_lo_checkpoint_inspection_and_continuation_decision`. Review this
+  clean checkpoint surface and prepare the smallest Barry-authorized
+  continuation packet toward the C-LO endpoint. Do not start C-LO science
+  post-processing until a suitable endpoint or deliberately selected later
+  checkpoint exists.
+- Boundary confirmation:
+  no new PBS job, retry, continuation, polling loop, PLUTO rerun, finalizer,
+  XRAiSE, PRAiSE, radio/cavity extraction, source-age product, endpoint
+  comparison product, observable generation, bulky HDF5 retrieval,
+  scientific-default change, environment substitution, source-age
+  substitution, commit, push, cleanup, Stas/Patrick contact, `agent_comms`
+  edit, or accepted-asset overwrite occurred.
+
+Latest Goal 032 bounded C-LO execution submission on 2026-07-03:
+
+- Status:
+  `submitted_waiting_pbs_completion`.
+- Decision label:
+  `C_LO_BOUNDED_EXECUTION_SUBMITTED_WAITING_PBS_COMPLETION`.
+- New wrapper:
+  `scripts/kunanyi/c_lo_bounded_execution.pbs`.
+- New focused wrapper test:
+  `tests/test_c_lo_bounded_execution_wrapper.py`.
+- New Goal log:
+  `docs/goals/032-c-lo-bounded-execution/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-03-c-lo-bounded-execution.md`.
+- Submitted PBS job:
+  `750065.kunanyi-ohpc`.
+- Job name/state at stop:
+  `c_lo_bound`, `Q` in the `normal` queue.
+- Resources:
+  `select=80:ncpus=28:mpiprocs=28`, `ncpus=2240`,
+  `mpiprocs=2240`, `mem=128gb`, walltime `04:00:00`.
+- Stage root:
+  `/u/bwbrook/codex_kunanyi/goal032_c_lo_bounded_execution`.
+- Run root:
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution`.
+- Expected stdout/stderr:
+  `/u/bwbrook/codex_kunanyi/goal032_c_lo_bounded_execution/c_lo_bounded_execution.out`
+  and
+  `/u/bwbrook/codex_kunanyi/goal032_c_lo_bounded_execution/c_lo_bounded_execution.err`.
+- Submission/preflight transcript:
+  `/u/bwbrook/codex_kunanyi/goal032_c_lo_bounded_execution/remote_logs/submission_preflight_2026-07-03.txt`.
+- Execution contract:
+  first bounded `C-LO`/`particles` startup/checkpoint run only, using the
+  restored Stewart `002_003` asset, asset-backed C-LO config, inherited C-HI
+  production-template conventions, the AGN Intel/IMPI stack, and
+  `PLUTO_MAXTIME_HOURS=3.5`.
+- Remote pre-submission status:
+  passed. Staged SHA-256 checks, remote wrapper syntax, asset-backed config
+  validation, run-root no-overwrite check, PLUTO/`jet-setup` source path
+  checks, setup-problem/modulefile checks, and module loading after
+  `module purge` all passed before `qsub`.
+- Stop rule:
+  active. Do not poll or retrieve until Barry reports the PBS completion email,
+  or X-ray Cavities explicitly authorizes a re-check.
+- Retrieval/check targets after completion authorization:
+  `qstat -x -f 750065.kunanyi-ohpc`, the stdout/stderr above, the submission
+  transcript above, and
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles`
+  with its `problem/outputs/`, `markers/`, and `job_logs/` subdirectories.
+- Boundary confirmation:
+  exactly one `C-LO` PBS job was submitted. No `G-LO`, retry, follow-on job,
+  post-queue polling, retrieval, finalizer, post-processing, XRAiSE/PRAiSE,
+  radio/cavity extraction, source-age product, endpoint comparison product,
+  observable generation, scientific-default change, environment substitution,
+  source-age substitution, commit, push, cleanup, Stas/Patrick contact,
+  `agent_comms` edit, or accepted-asset overwrite occurred.
 
 Latest Goal 031 Stewart cluster asset restore and C-LO preflight on
 2026-07-03:

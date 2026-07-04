@@ -1,0 +1,25 @@
+field,value,evidence
+job_id,750065.kunanyi-ohpc,qstat -x -f 750065.kunanyi-ohpc
+job_name,c_lo_bound,qstat final record
+job_state,F,qstat final record
+queue,normal,qstat final record
+exit_status,0,qstat final record and Barry PBS completion email
+stageout_status,1,qstat final record; stdout and stderr were nevertheless present at requested stage paths
+run_count,1,qstat final record
+resource_list_select,80:ncpus=28:mpiprocs=28,qstat final record
+resource_list_walltime,04:00:00,qstat final record
+resource_list_ncpus,2240,qstat final record
+resource_list_mpiprocs,2240,qstat final record
+resource_list_mem,128gb,qstat final record
+resources_used_cpupercent,2814,qstat final record and Barry PBS completion email
+resources_used_cput,99:36:16,qstat final record and Barry PBS completion email
+resources_used_mem,7188268kb,qstat final record and Barry PBS completion email
+resources_used_ncpus,2240,qstat final record and Barry PBS completion email
+resources_used_vmem,26357460kb,qstat final record and Barry PBS completion email
+resources_used_walltime,03:34:35,qstat final record and Barry PBS completion email
+qtime,"Fri Jul 3 14:37:08 2026",qstat final record
+stime,"Fri Jul 3 14:37:08 2026",qstat final record
+mtime,"Fri Jul 3 18:11:43 2026",qstat final record
+output_path,/u/bwbrook/codex_kunanyi/goal032_c_lo_bounded_execution/c_lo_bounded_execution.out,qstat final record
+error_path,/u/bwbrook/codex_kunanyi/goal032_c_lo_bounded_execution/c_lo_bounded_execution.err,qstat final record
+submit_arguments,/u/bwbrook/codex_kunanyi/goal032_c_lo_bounded_execution/c_lo_bounded_execution.pbs,qstat final record

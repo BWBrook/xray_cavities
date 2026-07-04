@@ -1,0 +1,5 @@
+rank,next_goal_shape,recommendation,why_not_now
+1,bounded_c_lo_checkpoint_inspection_and_continuation_decision,Recommended next. Review this clean checkpoint surface and prepare the smallest Barry-authorized continuation packet toward the C-LO endpoint, preserving the no-overwrite and PBS-stop rules.,"Goal 032 reached a clean checkpoint surface around the first 5 Myr interval, not the final 50 Myr endpoint."
+2,c_lo_endpoint_postprocessing_plan,Defer until a C-LO endpoint or sufficient later checkpoint surface exists.,"XRAiSE/PRAiSE/radio/cavity products were explicitly out of scope and should not be planned as immediate execution before deciding the continuation path."
+3,g_lo_config_preflight,Hold.,"Goal 032 was C-LO only; G-LO remains behind C-LO comparison-case progress."
+4,c_lo_rerun_or_retry,Do not do.,"Exit_status=0, MPI_EXIT_CODE=0, DONE marker, and expected checkpoint outputs exist; no rerun evidence."
