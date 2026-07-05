@@ -1,0 +1,81 @@
+GOAL033_SUBMISSION_PREFLIGHT_BEGIN
+host=<tpac-host>
+stage=/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation
+source_workdir=/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles
+run_root=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation
+workdir=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles
+sha256_begin
+6b8619c2fa9c324d86a57f756e1f92f44d96377c022fd7474da1a36c79cd6739  /u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.pbs
+9085e64fe1ca58010909790f3b6fa01abed7962c752d7d106f260bd3403356fc  /u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/jet_setup_production_template_latest.pbs
+3c6b127b716f3c8d112a5cccd37f42d13aee10962e869a6d1ac0e8b5e3485341  /u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/pluto.ini
+3b49690db1185c70742400925fb19f3f51abead2967f0e46a732b9734c86630b  /u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/environment.ini
+019cb4eda5b9d1009d4a73e57a7b1ac5ca6f15b24eaf583a4b480b5d6a593c3b  /u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/case_manifest.json
+a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c  /u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/definitions_overrides.json
+30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa  /u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/tabulated_cosmo_002003.csv
+sha256_end
+expect_sha,c_lo_checkpoint_continuation.pbs,6b8619c2fa9c324d86a57f756e1f92f44d96377c022fd7474da1a36c79cd6739
+expect_sha,jet_setup_production_template_latest.pbs,9085e64fe1ca58010909790f3b6fa01abed7962c752d7d106f260bd3403356fc
+expect_sha,pluto.ini,3c6b127b716f3c8d112a5cccd37f42d13aee10962e869a6d1ac0e8b5e3485341
+expect_sha,environment.ini,3b49690db1185c70742400925fb19f3f51abead2967f0e46a732b9734c86630b
+expect_sha,case_manifest.json,019cb4eda5b9d1009d4a73e57a7b1ac5ca6f15b24eaf583a4b480b5d6a593c3b
+expect_sha,definitions_overrides.json,a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c
+expect_sha,tabulated_cosmo_002003.csv,30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa
+/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.pbs: OK
+/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/jet_setup_production_template_latest.pbs: OK
+/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/pluto.ini: OK
+/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/environment.ini: OK
+/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/case_manifest.json: OK
+/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/definitions_overrides.json: OK
+/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/tabulated_cosmo_002003.csv: OK
+syntax_check_begin
+syntax_check_ok=true
+syntax_check_end
+source_latest_dbl=2 1.533095e+03 2.702729e-01 5920
+source_latest_flt=6 1.533095e+03 2.702729e-01 5920
+source_restart_file=/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/data.0002.dbl.h5
+source_particle_file=/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/particles.0501.dbl
+source_restart_size=67318639276
+source_particle_size=2808546
+prepared_workdir=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles
+prepared_restart_index=2
+prepared_particle_index=0501
+prepared_catalog_dbl_tail_begin
+0 0.000000e+00 1.000000e-05 0 single_file little rho vx1 vx2 vx3 prs tr1
+1 1.532825e+03 2.699803e-01 5919 single_file little rho vx1 vx2 vx3 prs tr1
+2 1.533095e+03 2.702729e-01 5920 single_file little rho vx1 vx2 vx3 prs tr1
+prepared_catalog_dbl_tail_end
+prepared_catalog_flt_tail_begin
+4 1.226318e+03 2.696182e-01 4786 single_file little rho vx1 vx2 vx3 prs tr1
+5 1.532825e+03 2.699803e-01 5919 single_file little rho vx1 vx2 vx3 prs tr1
+6 1.533095e+03 2.702729e-01 5920 single_file little rho vx1 vx2 vx3 prs tr1
+prepared_catalog_flt_tail_end
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/case_manifest.json
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/definitions_overrides.json
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/environment.ini
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs/data.0002.dbl.h5
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs/data.0002.dbl.xmf
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs/dbl.h5.out
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs/flt.h5.out
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs/particles.0501.dbl
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs/restart.out
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/pluto
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/pluto.ini
+prepared_path=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/tabulated_cosmo_002003.csv
+module_stack_ok=true
+mpirun=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpirun
+mpicc=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin_ohpc/mpicc
+HDF5_DIR=/ds/projects/agn/libraries/hdf5p/1.12.1-impi
+HDF5_USE_FILE_LOCKING=FALSE
+SUBMITTED_JOB_ID=750931.kunanyi-ohpc
+qstat_begin
+Job Id: 750931.kunanyi-ohpc
+    Job_Name = c_lo_cont
+    job_state = Q
+    queue = normal
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal033_c_lo_c
+    Mail_Users = barry.brook@utas.edu.au
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal033_c_lo_
+    Resource_List.select = 64:ncpus=28:mpiprocs=28
+    Resource_List.walltime = 04:00:00
+qstat_end
+GOAL033_SUBMISSION_PREFLIGHT_END

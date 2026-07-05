@@ -1,0 +1,19 @@
+check,status,value,evidence
+local_wrapper_tests,pass,"8 passed","uv run pytest tests/test_c_lo_checkpoint_continuation_wrapper.py tests/test_c_lo_bounded_execution_wrapper.py -q"
+local_wrapper_syntax,pass,bash_syntax_ok,"bash -n scripts/kunanyi/c_lo_checkpoint_continuation.pbs && bash -n scripts/kunanyi/jet_setup_production_template.pbs"
+config_render,pass,"C-LO particles rendered with --require-assets --check-local-assets","build/science/c_lo_checkpoint_continuation_2026-07-04/rendered_c_lo_config"
+config_json_parse,pass,config_json_ok,"render_validation.json and case_manifest.json parsed"
+remote_wrapper_sha,pass,6b8619c2fa9c324d86a57f756e1f92f44d96377c022fd7474da1a36c79cd6739,/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.pbs
+remote_template_sha,pass,9085e64fe1ca58010909790f3b6fa01abed7962c752d7d106f260bd3403356fc,/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/jet_setup_production_template_latest.pbs
+remote_pluto_ini_sha,pass,3c6b127b716f3c8d112a5cccd37f42d13aee10962e869a6d1ac0e8b5e3485341,/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/pluto.ini
+remote_environment_ini_sha,pass,3b49690db1185c70742400925fb19f3f51abead2967f0e46a732b9734c86630b,/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/environment.ini
+remote_case_manifest_sha,pass,019cb4eda5b9d1009d4a73e57a7b1ac5ca6f15b24eaf583a4b480b5d6a593c3b,/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/case_manifest.json
+remote_definitions_overrides_sha,pass,a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c,/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/definitions_overrides.json
+remote_stewart_asset_sha,pass,30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa,/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/rendered_c_lo_config/C-LO/particles/tabulated_cosmo_002003.csv
+remote_syntax,pass,syntax_check_ok,true for staged wrapper and production template
+isolated_restart_root,pass,prepared_workdir,/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles
+restart_index,pass,2,Prepared from Goal 032 data.0002.dbl.h5
+particle_index,pass,501,Prepared from Goal 032 particles.0501.dbl
+module_stack,pass,agn_intel_impi,"intel impi hdf5/1.12.1p zfp/0.5.5"
+submission,pass,750931.kunanyi-ohpc,"qsub returned job id and qstat state Q"
+pbs_state_at_stop,pass,Q,"qstat -f 750931.kunanyi-ohpc"

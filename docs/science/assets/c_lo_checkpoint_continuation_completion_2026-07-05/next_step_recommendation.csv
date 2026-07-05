@@ -1,0 +1,3 @@
+rank,next_goal_shape,rationale
+1,c_lo_endpoint_or_next_continuation_decision,Use compact catalogs to decide whether another continuation is required before any C-LO post-processing; do not infer finality from Exit_status alone.
+2,bounded_c_lo_post_checkpoint_log_review,If the current catalog is enough for an endpoint-or-checkpoint decision, keep the next goal local/read-only before any post-processing.

@@ -1,0 +1,51 @@
+GOAL033_COMPLETION_INVENTORY_BEGIN
+generated_utc=2026-07-05T02:49:39Z
+host=<tpac-host>
+job=750931.kunanyi-ohpc
+stage=/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation
+run=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles
+problem=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem
+outputs=/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs
+qstat_excerpt_begin
+Job Id: 750931.kunanyi-ohpc
+    Job_Name = c_lo_cont
+    resources_used.cpupercent = 2820
+    resources_used.cput = 98:54:40
+    resources_used.mem = 9870960kb
+    resources_used.ncpus = 1792
+    resources_used.vmem = 27588972kb
+    resources_used.walltime = 03:33:08
+    job_state = F
+    queue = normal
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal033_c_lo_c
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal033_c_lo_
+    Resource_List.select = 64:ncpus=28:mpiprocs=28
+    Resource_List.walltime = 04:00:00
+    Stageout_status = 1
+    Exit_status = 0
+qstat_excerpt_end
+stage_files_begin
+stage_file=/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.out size=25295 sha256=0d983efda126c9e9fec6e169e5e38c3430528d323fa5520a13fdf28e32acc2ce
+stage_file=/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.err size=0 sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+stage_file=/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/remote_logs/submission_preflight_2026-07-04.txt size=6800 sha256=7c35e36b54cee2edde6b390eb06a1d2a9efb992fb610aa53ec8d93bad358e08e
+stage_files_end
+markers_begin
+DONE size=112
+markers_end
+job_logs_begin
+artifact_manifest.750931.kunanyi-ohpc.txt artifact_manifest.750931.kunanyi-ohpc.txt
+intelmpi_machinefile.750931.kunanyi-ohpc.txt intelmpi_machinefile.750931.kunanyi-ohpc.txt
+pbs_nodefile.750931.kunanyi-ohpc.txt pbs_nodefile.750931.kunanyi-ohpc.txt
+source_revisions.txt source_revisions.txt
+job_logs_end
+output_catalog_tail_begin
+dbl.h5.out: 4 3.270555e+03 2.680126e-01 12349 single_file little rho vx1 vx2 vx3 prs tr1
+flt.h5.out: 12 3.270555e+03 2.680126e-01 12349 single_file little rho vx1 vx2 vx3 prs tr1
+grid.out:  1014   2.478961377761e+02    2.500000000000e+02
+restart.out: [binary restart catalogue present; content omitted from text inventory]
+output_catalog_tail_end
+problem_file_sizes_begin
+/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/pluto.ini size=2237 sha256=3c6b127b716f3c8d112a5cccd37f42d13aee10962e869a6d1ac0e8b5e3485341
+/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/environment.ini size=196 sha256=3b49690db1185c70742400925fb19f3f51abead2967f0e46a732b9734c86630b
+problem_file_sizes_end
+GOAL033_COMPLETION_INVENTORY_END

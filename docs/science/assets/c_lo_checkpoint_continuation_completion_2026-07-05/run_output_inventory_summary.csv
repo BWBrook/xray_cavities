@@ -1,0 +1,14 @@
+metric,value,notes
+count_dbl_hdf5_catalog,1,remote inventory only; payloads not retrieved
+count_dbl_hdf5_checkpoint,2,remote inventory only; payloads not retrieved
+count_dbl_xmf_catalog,2,remote inventory only; payloads not retrieved
+count_flt_hdf5_catalog,1,remote inventory only; payloads not retrieved
+count_flt_hdf5_output,6,remote inventory only; payloads not retrieved
+count_flt_xmf_catalog,6,remote inventory only; payloads not retrieved
+count_job_log,4,remote inventory only; payloads not retrieved
+count_marker,1,remote inventory only; payloads not retrieved
+count_output_catalog,2,remote inventory only; payloads not retrieved
+count_particle_restart,567,remote inventory only; payloads not retrieved
+latest_dbl_hdf5_checkpoint,problem/outputs/data.0004.dbl.h5,size_bytes=67318639276; remote only
+latest_flt_hdf5_output,problem/outputs/data.0012.flt.h5,size_bytes=44890581676; remote only
+latest_particle_restart,problem/outputs/particles.1068.dbl,size_bytes=5894467; remote only

@@ -1,0 +1,15 @@
+field,value
+job_id,750931.kunanyi-ohpc
+job_name,c_lo_cont
+job_state,F
+queue,normal
+exit_status,0
+stageout_status,1
+resources_used_cpupercent,2820
+resources_used_cput,98:54:40
+resources_used_mem,9870960kb
+resources_used_ncpus,1792
+resources_used_vmem,27588972kb
+resources_used_walltime,03:33:08
+resource_list_select,64:ncpus=28:mpiprocs=28
+resource_list_walltime,04:00:00

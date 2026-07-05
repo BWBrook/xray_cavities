@@ -1,0 +1,49 @@
+{
+  "status": "submitted_waiting_pbs_completion",
+  "decision_label": "C_LO_CHECKPOINT_SURFACE_CLEAN_CONTINUATION_SUBMITTED",
+  "date": "2026-07-04",
+  "case_id": "C-LO",
+  "variant": "particles",
+  "source_goal": "Goal032",
+  "source_job_id": "750065.kunanyi-ohpc",
+  "submitted_job_id": "750931.kunanyi-ohpc",
+  "submitted_job_name": "c_lo_cont",
+  "pbs_state_at_stop": "Q",
+  "queue": "normal",
+  "resources": {
+    "select": "64:ncpus=28:mpiprocs=28",
+    "walltime": "04:00:00",
+    "pluto_maxtime_hours": 3.5,
+    "nranks": 1792
+  },
+  "paths": {
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation",
+    "workdir": "/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles",
+    "stdout": "/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.out",
+    "stderr": "/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.err",
+    "submission_preflight_transcript": "/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/remote_logs/submission_preflight_2026-07-04.txt"
+  },
+  "restart_surface": {
+    "latest_dbl_index": 2,
+    "latest_flt_index": 6,
+    "latest_time_code": "1.533095e+03",
+    "latest_step": 5920,
+    "particle_restart_index": 501,
+    "source_restart_hdf5_size_bytes": 67318639276,
+    "source_particle_size_bytes": 2808546
+  },
+  "resource_judgment": "Used 64 nodes because C-HI restart evidence identified 64 nodes / 1792 ranks as clean and 80 nodes / 2240 ranks as a reproducible HDF5 restart-stall boundary.",
+  "boundary_confirmation": {
+    "pbs_jobs_submitted": 1,
+    "no_polling_after_q_or_r": true,
+    "no_retrieval": true,
+    "no_postprocessing": true,
+    "no_g_lo": true,
+    "no_scientific_default_change": true,
+    "no_agent_comms_change": true,
+    "no_commit_or_push": true,
+    "accepted_assets_overwritten": false
+  },
+  "next_step": "Wait for Barry's PBS completion email for 750931.kunanyi-ohpc before retrieval or any re-check."
+}

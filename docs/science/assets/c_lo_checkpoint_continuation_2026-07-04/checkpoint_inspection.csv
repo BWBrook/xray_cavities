@@ -1,0 +1,16 @@
+check,item,status,value,source_path,notes
+marker,DONE,pass,"status=done; pbs_jobid=750065.kunanyi-ohpc; finished_utc=2026-07-03T08:11:42Z",/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/markers/DONE,Accepted Goal 032 checkpoint marker is present.
+marker,FAILED,pass,absent,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/markers/FAILED,No failed marker was present at the checkpoint source.
+catalog,dbl_h5,pass,"latest index 2; time_code 1.533095e+03; dt 2.702729e-01; step 5920; lines 3",/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/dbl.h5.out,Latest restart-capable HDF5 catalogue entry found.
+catalog,flt_h5,pass,"latest index 6; time_code 1.533095e+03; dt 2.702729e-01; step 5920; lines 7",/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/flt.h5.out,Latest float HDF5 catalogue entry agrees with restart time.
+restart_surface,data.0002.dbl.h5,pass,"size_bytes 67318639276",/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/data.0002.dbl.h5,Latest restart HDF5 exists and was not copied locally.
+restart_surface,data.0002.dbl.xmf,pass,present,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/data.0002.dbl.xmf,Matching XMF sidecar exists for restart HDF5.
+particle_surface,particles.0501.dbl,pass,"size_bytes 2808546",/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/particles.0501.dbl,Latest particle restart surface exists.
+catalog,restart_out,pass,"size_bytes 384",/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/restart.out,Restart catalogue exists.
+inventory,hdf5_count,pass,10,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs,Goal 032 output inventory count.
+inventory,particle_count,pass,502,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs,Goal 032 particle text output count.
+no_overwrite,new_continuation_workdir,pass,absent,/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles,Continuation workdir did not exist before staging.
+runtime_path,jet_setup_setup_problem,pass,present,/scratch/bwbrook/git/utas-agn/jet-setup/tools/setup-problem,Required source/tool path exists.
+runtime_path,pluto_source,pass,present,/scratch/bwbrook/git/utas-agn/pluto,Required PLUTO source path exists.
+runtime_path,agn_modulefiles,pass,present,/ds/projects/agn/modulefiles,AGN modulefiles path exists.
+hdf5_header_probe,h5dump_restart_header,skipped,h5dump not available on login path,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/data.0002.dbl.h5,Header-only probe was skipped rather than substituting a heavy read.

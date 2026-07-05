@@ -1,0 +1,17 @@
+check,status,value,notes
+qstat_exit_status,pass,0,scheduler Exit_status
+qstat_job_state,pass,F,final scheduler state
+qstat_stageout_status,caveat,1,PBS stageout status; logs are inspected directly at stage root
+walltime_used,info,03:33:08,resources_used.walltime
+ncpus_used,info,1792,resources_used.ncpus
+mem_used,info,9870960kb,resources_used.mem
+done_marker,pass,present,run marker
+failed_marker_absent,pass,absent,run marker
+stdout_mpi_exit_zero,pass,MPI_EXIT_CODE=0,wrapper stdout marker
+stderr_empty,pass,0,stderr bytes
+latest_dbl_catalog,info,4/3.270555e+03/data.0004.dbl.h5,latest dbl.h5 catalog row and file
+latest_flt_catalog,info,12/3.270555e+03/data.0012.flt.h5,latest flt.h5 catalog row and file
+latest_particle_restart,info,particles.1068.dbl,latest particle restart file
+hdf5_file_count,info,8,remote inventory count only; not retrieved
+particle_restart_count,info,567,remote inventory count only; not retrieved
+endpoint_interpretation,caveat,checkpoint_not_endpoint,do not call endpoint complete unless follow-up review accepts catalog evidence

@@ -1,0 +1,9 @@
+role,remote_path,kind,index,time_code,step,size_bytes,source_goal,status
+source_workdir,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles,directory,NA,NA,NA,NA,Goal032,accepted_checkpoint_surface
+latest_restart_hdf5,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/data.0002.dbl.h5,dbl_h5,2,1.533095e+03,5920,67318639276,Goal032,symlinked_into_goal033_workdir
+latest_restart_xmf,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/data.0002.dbl.xmf,dbl_xmf,2,1.533095e+03,5920,NA,Goal032,symlinked_into_goal033_workdir
+latest_float_hdf5,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/data.0006.flt.h5,flt_h5,6,1.533095e+03,5920,44890581676,Goal032,inspection_only
+latest_particle_restart,/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles/problem/outputs/particles.0501.dbl,particle_dbl,501,NA,NA,2808546,Goal032,symlinked_into_goal033_workdir
+dbl_catalog,/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs/dbl.h5.out,catalog,2,1.533095e+03,5920,228,Goal033,copied_from_goal032_checkpoint
+flt_catalog,/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles/problem/outputs/flt.h5.out,catalog,6,1.533095e+03,5920,536,Goal033,copied_from_goal032_checkpoint
+continuation_workdir,/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles,directory,NA,NA,NA,NA,Goal033,prepared_no_overwrite_continuation_root

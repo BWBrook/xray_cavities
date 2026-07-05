@@ -1,0 +1,47 @@
+{
+  "status": "complete_checkpoint_review",
+  "decision_label": "C_LO_CONTINUATION_CHECKPOINT_SURFACE_GREEN_NOT_ENDPOINT",
+  "created_utc": "2026-07-05T02:53:31+00:00",
+  "job": {
+    "id": "750931.kunanyi-ohpc",
+    "name": "c_lo_cont",
+    "exit_status": "0",
+    "job_state": "F",
+    "stageout_status": "1",
+    "walltime_used": "03:33:08",
+    "ncpus_used": "1792",
+    "mem_used": "9870960kb"
+  },
+  "remote_paths": {
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles"
+  },
+  "checkpoint_evidence": {
+    "done_marker": "present",
+    "failed_marker": "absent",
+    "stdout_mpi_exit_zero": "MPI_EXIT_CODE=0",
+    "stderr_bytes": "0",
+    "latest_dbl_catalog": "4/3.270555e+03/data.0004.dbl.h5",
+    "latest_flt_catalog": "12/3.270555e+03/data.0012.flt.h5",
+    "latest_particle_restart": "particles.1068.dbl",
+    "hdf5_file_count": "8",
+    "particle_restart_count": "567",
+    "endpoint_interpretation": "checkpoint_not_endpoint"
+  },
+  "boundaries": {
+    "no_new_pbs_submission": true,
+    "no_c_lo_retry_or_continuation": true,
+    "no_science_postprocessing": true,
+    "no_bulk_hdf5_or_particle_payload_retrieval": true,
+    "no_g_lo_work": true,
+    "no_agent_comms_edits": true,
+    "no_commits_or_pushes": true
+  },
+  "caveats": [
+    "This is a clean continuation checkpoint surface, not a 50 Myr C-LO endpoint.",
+    "PBS qstat reports Stageout_status=1, but requested stage-root stdout/stderr and logs were present and retrieved or reconstructed as compact evidence.",
+    "Remote HDF5 and particle files were inventoried by path/size only and were not copied locally."
+  ],
+  "recommended_next_goal_shape": "bounded C-LO endpoint-or-next-continuation decision from compact checkpoint catalogues; no post-processing until endpoint status is explicitly resolved",
+  "compact_log_handling": "Stage-root stdout/preflight/generated inventory were retrieved as compact text evidence and line-end whitespace was normalized in local review copies; remote retrieval_manifest_2026-07-05.sha256 records the source-stage hashes."
+}

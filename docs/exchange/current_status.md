@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-04
+Last updated: 2026-07-05
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,136 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-032 bounded C-LO execution
-completion handoff.
+This note should be treated as a post-Goal-033 bounded C-LO checkpoint
+continuation completion-review handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 033 C-LO checkpoint continuation completion review on 2026-07-05:
+
+- Status:
+  `complete_checkpoint_review`.
+- Decision label:
+  `C_LO_CONTINUATION_CHECKPOINT_SURFACE_GREEN_NOT_ENDPOINT`.
+- New science note:
+  `docs/science/c_lo_checkpoint_continuation_completion_2026-07-05.md`.
+- New asset bundle:
+  `docs/science/assets/c_lo_checkpoint_continuation_completion_2026-07-05/`.
+- Machine-readable assets:
+  - `qstat_final.csv`
+  - `completion_summary.csv`
+  - `run_output_inventory.csv`
+  - `run_output_inventory_summary.csv`
+  - `remote_log_inventory.csv`
+  - `next_step_recommendation.csv`
+  - `c_lo_checkpoint_continuation_completion_metadata.json`
+  - `remote_logs/`
+- PBS completion:
+  `750931.kunanyi-ohpc` / `c_lo_cont` finished with `Exit_status=0`,
+  `resources_used.walltime=03:33:08`, `resources_used.cput=98:54:40`,
+  `resources_used.ncpus=1792`, `resources_used.mem=9870960kb`, and
+  `resources_used.vmem=27588972kb`.
+- Scheduler caveat:
+  `Stageout_status=1`, but the requested compact stage-root stdout/stderr and
+  submission preflight transcript were present and retrieved or reconstructed
+  into the local evidence bundle.
+- Remote completion evidence:
+  `markers/DONE` present, `markers/FAILED` absent, wrapper stdout reports
+  `MPI_EXIT_CODE=0`, and stderr is empty.
+- Latest C-LO continuation checkpoint catalogues:
+  `dbl.h5.out` row `4 3.270555e+03 2.680126e-01 12349` and `flt.h5.out`
+  row `12 3.270555e+03 2.680126e-01 12349`.
+- Latest remote restart surfaces:
+  `data.0004.dbl.h5`, `data.0012.flt.h5`, and `particles.1068.dbl`.
+- Remote inventory:
+  `8` HDF5 files and `567` particle restart files inventoried by path/size
+  only; no HDF5 or particle payloads were copied locally.
+- Interpretation:
+  this is a green continuation checkpoint surface. It advanced the `C-LO`
+  trajectory from the Goal 032 checkpoint near `1.533095e+03` to
+  `3.270555e+03` code-time units. It is not the 50 Myr endpoint.
+- Recommended next branch:
+  a bounded `C-LO` endpoint-or-next-continuation decision from compact
+  checkpoint catalogues. Do not start C-LO post-processing until endpoint
+  status is explicitly resolved.
+- Boundary confirmation:
+  no new PBS job, retry, continuation, polling loop, bulky retrieval,
+  finalizer, XRAiSE/PRAiSE, radio/cavity extraction, endpoint product,
+  `G-LO`, scientific-default change, environment substitution, source-age
+  substitution, commit, push, cleanup, Stas/Patrick contact, `agent_comms`
+  edit, or accepted-asset overwrite occurred.
+
+Previous Goal 033 C-LO checkpoint continuation submission on 2026-07-04:
+
+- Status:
+  `submitted_waiting_pbs_completion`.
+- Decision label:
+  `C_LO_CHECKPOINT_SURFACE_CLEAN_CONTINUATION_SUBMITTED`.
+- New wrapper:
+  `scripts/kunanyi/c_lo_checkpoint_continuation.pbs`.
+- New focused wrapper test:
+  `tests/test_c_lo_checkpoint_continuation_wrapper.py`.
+- New science note:
+  `docs/science/c_lo_checkpoint_continuation_decision_2026-07-04.md`.
+- New asset bundle:
+  `docs/science/assets/c_lo_checkpoint_continuation_2026-07-04/`.
+- Machine-readable assets:
+  - `checkpoint_inspection.csv`
+  - `restart_surface_manifest.csv`
+  - `continuation_submission_preflight.csv`
+  - `next_step_recommendation.csv`
+  - `c_lo_checkpoint_continuation_metadata.json`
+- New Goal log:
+  `docs/goals/033-c-lo-checkpoint-continuation/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-04-c-lo-checkpoint-continuation.md`.
+- Checkpoint inspection result:
+  the accepted Goal 032 source
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution/C-LO/particles`
+  had `markers/DONE`, no `markers/FAILED`, latest restart HDF5
+  `data.0002.dbl.h5` at `1.533095e+03` code-time units / step `5920`,
+  matching `data.0002.dbl.xmf`, and latest particle restart surface
+  `particles.0501.dbl`.
+- Resource judgment:
+  the continuation uses `64` nodes / `1792` ranks and walltime `04:00:00`,
+  with `PLUTO_MAXTIME_HOURS=3.5`, because C-HI restart evidence identified
+  `64` nodes as clean and `80` nodes / `2240` ranks as a reproducible HDF5
+  restart-stall boundary.
+- Submitted PBS job:
+  `750931.kunanyi-ohpc`.
+- Job name/state at stop:
+  `c_lo_cont`, `Q` in the `normal` queue.
+- Stage root:
+  `/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation`.
+- Continuation run root:
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation`.
+- Expected stdout/stderr:
+  `/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.out`
+  and
+  `/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/c_lo_checkpoint_continuation.err`.
+- Submission/preflight transcript:
+  `/u/bwbrook/codex_kunanyi/goal033_c_lo_checkpoint_continuation/remote_logs/submission_preflight_2026-07-04.txt`.
+- Remote pre-submission status:
+  passed. Staged SHA-256 checks, remote wrapper/template syntax, source
+  checkpoint marker/catalogue/restart/particle checks, no-overwrite
+  continuation workdir preparation, and AGN Intel/IMPI/HDF5 module loading all
+  passed before `qsub`.
+- Stop rule:
+  active. Do not poll or retrieve until Barry reports the PBS completion email,
+  or X-ray Cavities explicitly authorizes a re-check.
+- Retrieval/check targets after completion authorization:
+  `qstat -x -f 750931.kunanyi-ohpc`, the stdout/stderr above, the submission
+  transcript above, and
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles`
+  with its `problem/outputs/`, `markers/`, and `job_logs/` subdirectories.
+- Boundary confirmation:
+  exactly one `C-LO` continuation PBS job was submitted. No `G-LO`, retry,
+  follow-on job, post-queue polling, retrieval, finalizer, post-processing,
+  XRAiSE/PRAiSE, radio/cavity extraction, endpoint product, scientific-default
+  change, environment substitution, source-age substitution, commit, push,
+  cleanup, Stas/Patrick contact, `agent_comms` edit, or accepted-asset
+  overwrite occurred.
 
 Latest Goal 032 C-LO execution completion retrieval on 2026-07-04:
 
