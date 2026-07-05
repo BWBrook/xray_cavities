@@ -1,0 +1,13 @@
+check,status,value,notes
+stage_root,pass,/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation,remote stage root
+run_root,pass,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-bounded-continuation-2,remote no-overwrite run root
+wrapper_hash,pass,5571c0eb1f84ca0872aa6874fef74b8e2b9f33f4c6f4df08387cd4e64f1ab681,staged wrapper SHA-256 matched local
+template_hash,pass,9085e64fe1ca58010909790f3b6fa01abed7962c752d7d106f260bd3403356fc,staged production template SHA-256 matched local
+rendered_config,pass,Goal033 rendered C-LO config copied into Goal034 stage,reuse accepted C-LO config contract
+remote_bash_n,pass,wrapper and production template,remote syntax checks passed
+restart_surface,pass,data.0004.dbl.h5 plus particles.1068.dbl,prepared restart surface present
+module_stack,pass,intel/18.0.1.163:impi/2018.1.163:hdf5/1.12.1p:zfp/0.5.5,AGN modulefile stack loaded
+resource_request,pass,select=64:ncpus=28:mpiprocs=28 walltime=04:00:00,conservative restart resources
+pluto_maxtime,pass,3.5 hours,clean checkpoint before walltime
+qsub_status,pass,750944.kunanyi-ohpc,submitted exactly one PBS job
+qstat_state,pass,R,verified queued/running stop condition

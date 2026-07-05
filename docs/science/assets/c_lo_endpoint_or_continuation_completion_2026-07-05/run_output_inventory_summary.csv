@@ -1,0 +1,15 @@
+metric,value,notes
+count_dbl_h5,2,remote inventory only; payloads not retrieved
+latest_dbl_h5,data.0006.dbl.h5,size_bytes=67318639276; latest_catalogue_row=6\ 4.930755e+03\ 2.678869e-01\ 18546\ single_file\ little\ rho\ vx1\ vx2\ vx3\ prs\ tr1\
+count_dbl_xmf,2,remote inventory only; payloads not retrieved
+latest_dbl_xmf,data.0006.dbl.xmf,size_bytes=3005; matching_visualization_sidecar
+count_flt_h5,7,remote inventory only; payloads not retrieved
+latest_flt_h5,data.0019.flt.h5,size_bytes=44890581676; latest_catalogue_row=19\ 4.930755e+03\ 2.678869e-01\ 18546\ single_file\ little\ rho\ vx1\ vx2\ vx3\ prs\ tr1\
+count_flt_xmf,7,remote inventory only; payloads not retrieved
+latest_flt_xmf,data.0019.flt.xmf,size_bytes=3011; matching_visualization_sidecar
+count_particle_restart_dbl,543,remote inventory only; payloads not retrieved
+latest_particle_restart_dbl,particles.1611.dbl,size_bytes=8869027; latest_restart_surface
+count_particle_output_flt,0,remote inventory only; payloads not retrieved
+count_catalogue_text,4,remote inventory only; payloads not retrieved
+latest_catalogue_text,restart.out,size_bytes=896; dbl_flt_restart_catalogues
+output_directory_size,422G,remote du -sh; payload not retrieved

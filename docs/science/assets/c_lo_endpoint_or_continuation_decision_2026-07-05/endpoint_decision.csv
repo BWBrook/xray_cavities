@@ -1,0 +1,7 @@
+decision_item,status,value,notes
+goal033_checkpoint_clean,pass,true,DONE present and FAILED absent
+endpoint_complete,fail,false,latest code time remains below endpoint target
+latest_code_time,info,3270.555,from live dbl.h5.out row
+endpoint_target_code_time,info,15330.06968940,accepted C-LO 50 Myr config contract
+endpoint_fraction,info,0.21334247,latest_code_time divided by endpoint target
+recommended_action,pass,wait_for_pbs_completion_email,job 750944.kunanyi-ohpc submitted and verified running

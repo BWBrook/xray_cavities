@@ -14,11 +14,83 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a post-Goal-033 bounded C-LO checkpoint
-continuation completion-review handoff.
+This note should be treated as a Goal-034 C-LO continuation-2 completion
+review handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 034 C-LO continuation-2 completion review on 2026-07-05:
+
+- Status:
+  `complete_checkpoint_review`.
+- Decision label:
+  `C_LO_CONTINUATION2_CHECKPOINT_SURFACE_GREEN_NOT_ENDPOINT`.
+- New wrapper:
+  `scripts/kunanyi/c_lo_endpoint_or_continuation.pbs`.
+- New focused wrapper test:
+  `tests/test_c_lo_endpoint_or_continuation_wrapper.py`.
+- Submission science note:
+  `docs/science/c_lo_endpoint_or_continuation_decision_2026-07-05.md`.
+- Submission asset bundle:
+  `docs/science/assets/c_lo_endpoint_or_continuation_decision_2026-07-05/`.
+- Completion science note:
+  `docs/science/c_lo_endpoint_or_continuation_completion_2026-07-05.md`.
+- Completion asset bundle:
+  `docs/science/assets/c_lo_endpoint_or_continuation_completion_2026-07-05/`.
+- New Goal log:
+  `docs/goals/034-c-lo-endpoint-or-continuation-decision/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-05-c-lo-endpoint-or-continuation-decision.md`.
+- PBS completion:
+  `750944.kunanyi-ohpc` / `c_lo_cont2` finished with `Exit_status=0`,
+  `resources_used.walltime=03:32:55`, `resources_used.cput=98:38:39`,
+  `resources_used.ncpus=1792`, `resources_used.mem=9868484kb`, and
+  `resources_used.vmem=27590612kb`.
+- Scheduler/runtime caveats:
+  `qstat` reports `Stageout_status=1`, but requested compact stage-root logs
+  were present and retrieved. Stderr contains a nonfatal
+  `setup-problem: git: command not found` warning while stdout records
+  `MPI_EXIT_CODE=0`.
+- Remote completion evidence:
+  `markers/DONE` present, `markers/FAILED` absent, latest `dbl.h5.out` row
+  `6 4.930755e+03 2.678869e-01 18546`, latest `flt.h5.out` row
+  `19 4.930755e+03 2.678869e-01 18546`, latest double checkpoint
+  `data.0006.dbl.h5`, latest float output `data.0019.flt.h5`, and latest
+  particle restart `particles.1611.dbl`.
+- Remote compact inventory:
+  `9` HDF5 files and `543` particle restart files inventoried by count, path,
+  and size only; output directory size `422G`; no bulky payloads copied
+  locally.
+- Endpoint interpretation:
+  not endpoint-complete. Latest compact catalogue time is `4930.755`, which is
+  `0.32163944` of the accepted `15330.06968940` code-time endpoint target.
+- Continuation-2 stage root:
+  `/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation`.
+- Continuation-2 run root:
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-bounded-continuation-2`.
+- Retrieved stdout/stderr:
+  `/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation/c_lo_endpoint_or_continuation.out`
+  and
+  `/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation/c_lo_endpoint_or_continuation.err`.
+- Final preflight transcript:
+  `/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation/remote_logs/submission_preflight_2026-07-05_final.txt`.
+- Recommendation:
+  next packet should be another bounded `C-LO` endpoint-or-next-continuation
+  decision. Do not start C-LO post-processing until endpoint status is
+  explicitly resolved.
+- Validation:
+  focused wrapper tests passed (`12 passed in 0.01s`), wrapper/template
+  `bash -n` checks passed, JSON/CSV parse checks passed, `git diff --check`
+  passed, targeted unresolved-marker scan passed, and the no-bulky guard found
+  no `.h5`, `data.*`, `particles.*`, or files larger than `5 MB` in the local
+  completion asset bundle.
+- Boundary confirmation:
+  no new PBS job, retry, continuation, polling loop, XRAiSE/PRAiSE, radio,
+  cavity, source-age, endpoint-comparison, observable workflow, `G-LO`,
+  scientific-default change, bulky output retrieval, commit, push, cleanup,
+  Stas/Patrick contact, `agent_comms` edit, or accepted-asset overwrite
+  occurred in the completion-review pass.
 
 Latest Goal 033 C-LO checkpoint continuation completion review on 2026-07-05:
 

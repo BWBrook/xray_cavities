@@ -1,0 +1,110 @@
+remote_host=<tpac-host>
+remote_pwd=/u/bwbrook
+remote_time=2026-07-05T07:50:40Z
+staged_wrapper_sha=5571c0eb1f84ca0872aa6874fef74b8e2b9f33f4c6f4df08387cd4e64f1ab681
+staged_template_sha=9085e64fe1ca58010909790f3b6fa01abed7962c752d7d106f260bd3403356fc
+config_case_manifest_sha=019cb4eda5b9d1009d4a73e57a7b1ac5ca6f15b24eaf583a4b480b5d6a593c3b
+config_pluto_ini_sha=3c6b127b716f3c8d112a5cccd37f42d13aee10962e869a6d1ac0e8b5e3485341
+config_environment_ini_sha=3b49690db1185c70742400925fb19f3f51abead2967f0e46a732b9734c86630b
+config_definitions_overrides_sha=a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c
+config_stewart_csv_sha=30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa
+remote_bash_n=pass
+prepared_latest_dbl_row=4 3.270555e+03 2.680126e-01 12349 single_file little rho vx1 vx2 vx3 prs tr1
+prepared_latest_dbl_index=4
+prepared_latest_code_time=3.270555e+03
+prepared_restart_surface=data.0004.dbl.h5 size=120
+prepared_restart_surface=data.0004.dbl.xmf size=121
+prepared_restart_surface=data.0012.flt.h5 size=120
+prepared_restart_surface=data.0012.flt.xmf size=121
+prepared_restart_surface=particles.1068.dbl size=122
+prepared_restart_surface=restart.out size=640
+prepared_restart_surface=dbl.h5.out size=384
+prepared_restart_surface=flt.h5.out size=1004
+prepared_restart_surface=grid.out size=143880
+source_paths=present
+modules_loaded=intel/18.0.1.163:impi/2018.1.163:hdf5/1.12.1p:zfp/0.5.5
+mpicc=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin_ohpc/mpicc
+mpirun=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpirun
+submitted_job_id=750944.kunanyi-ohpc
+Job Id: 750944.kunanyi-ohpc
+    Job_Name = c_lo_cont2
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 0
+    resources_used.cput = 00:00:00
+    resources_used.mem = 0kb
+    resources_used.ncpus = 1792
+    resources_used.vmem = 0kb
+    resources_used.walltime = 00:00:00
+    job_state = R
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sun Jul  5 17:50:42 2026
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal034_c_lo_e
+	ndpoint_or_continuation/c_lo_endpoint_or_continuation.err
+    exec_host = n142/0*28+n035/0*28+n140/0*28+n145/0*28+n153/0*28+n149/0*28+n14
+	6/0*28+n186/0*28+n152/0*28+n036/0*28+n151/0*28+n150/0*28+n166/0*28+n170
+	/0*28+n167/0*28+n154/0*28+n172/0*28+n171/0*28+n180/0*28+n176/0*28+n174/
+	0*28+n173/0*28+n177/0*28+n179/0*28+n178/0*28+n175/0*28+n184/0*28+n181/0
+	*28+n192/0*28+n037/0*28+n113/0*28+n187/0*28+n188/0*28+n156/0*28+n189/0*
+	28+n190/0*28+n159/0*28+n155/0*28+n158/0*28+n161/0*28+n157/0*28+n081/0*2
+	8+n162/0*28+n086/0*28+n120/0*28+n114/0*28+n164/0*28+n082/0*28+n038/0*28
+	+n083/0*28+n116/0*28+n085/0*28+n118/0*28+n098/0*28+n039/0*28+n115/0*28+
+	n040/0*28+n117/0*28+n121/0*28+n125/0*28+n126/0*28+n122/0*28+n127/0*28+n
+	067/0*28
+    exec_vnode = (n142:ncpus=28)+(n035:ncpus=28)+(n140:ncpus=28)+(n145:ncpus=28
+	)+(n153:ncpus=28)+(n149:ncpus=28)+(n146:ncpus=28)+(n186:ncpus=28)+(n152
+	:ncpus=28)+(n036:ncpus=28)+(n151:ncpus=28)+(n150:ncpus=28)+(n166:ncpus=
+	28)+(n170:ncpus=28)+(n167:ncpus=28)+(n154:ncpus=28)+(n172:ncpus=28)+(n1
+	71:ncpus=28)+(n180:ncpus=28)+(n176:ncpus=28)+(n174:ncpus=28)+(n173:ncpu
+	s=28)+(n177:ncpus=28)+(n179:ncpus=28)+(n178:ncpus=28)+(n175:ncpus=28)+(
+	n184:ncpus=28)+(n181:ncpus=28)+(n192:ncpus=28)+(n037:ncpus=28)+(n113:nc
+	pus=28)+(n187:ncpus=28)+(n188:ncpus=28)+(n156:ncpus=28)+(n189:ncpus=28)
+	+(n190:ncpus=28)+(n159:ncpus=28)+(n155:ncpus=28)+(n158:ncpus=28)+(n161:
+	ncpus=28)+(n157:ncpus=28)+(n081:ncpus=28)+(n162:ncpus=28)+(n086:ncpus=2
+	8)+(n120:ncpus=28)+(n114:ncpus=28)+(n164:ncpus=28)+(n082:ncpus=28)+(n03
+	8:ncpus=28)+(n083:ncpus=28)+(n116:ncpus=28)+(n085:ncpus=28)+(n118:ncpus
+	=28)+(n098:ncpus=28)+(n039:ncpus=28)+(n115:ncpus=28)+(n040:ncpus=28)+(n
+	117:ncpus=28)+(n121:ncpus=28)+(n125:ncpus=28)+(n126:ncpus=28)+(n122:ncp
+	us=28)+(n127:ncpus=28)+(n067:ncpus=28)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = ae
+    Mail_Users = barry.brook@utas.edu.au
+    mtime = Sun Jul  5 17:50:42 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal034_c_lo_
+	endpoint_or_continuation/c_lo_endpoint_or_continuation.out
+    Priority = 0
+    qtime = Sun Jul  5 17:50:42 2026
+    Rerunable = True
+    Resource_List.mem = 128gb
+    Resource_List.mpiprocs = 1792
+    Resource_List.ncpus = 1792
+    Resource_List.nodect = 64
+    Resource_List.place = scatter
+    Resource_List.select = 64:ncpus=28:mpiprocs=28
+    Resource_List.walltime = 04:00:00
+    stime = Sun Jul  5 17:50:42 2026
+    session_id = 10028
+    jobdir = /u/bwbrook
+    substate = 42
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=C.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/ds/projects/agn/libraries/zfp/0.5.5/bin:/share/apps/intel/
+	xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bi
+	n_ohpc:/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1
+	.163/linux/mpi/intel64/bin:/share/apps/intel/xe_2018_update1/compilers_
+	and_libraries_2018.1.163/linux/bin/intel64:/ds/projects/agn/libraries/h
+	df5p/1.12.1-impi/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:
+	/opt/pbs/bin,PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook,PBS_O_SYSTEM=Linux,
+	MKLROOT=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018
+	.1.163/linux/mkl,LMOD_FAMILY_COMPILER_VERSION=18.0.1.163,
+	CPLUS_INCLUDE_PATH=/ds/projects/agn/libraries/hdf5p/1.12.1-impi/includ
+	e,
+	MANPATH=/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018
+	.1.163/linux/mpi/man:/usr/local/share/man:/usr/share/man:/share/apps/in
+	tel/xe_2018_update1/man/common:/share/apps/intel/xe_2018_update1/docume
+submitted_job_state=R
+submission_record=/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation/remote_logs/submission_record_2026-07-05.txt

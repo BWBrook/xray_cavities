@@ -1,0 +1,10 @@
+relative_path,role,size_bytes,source
+problem/outputs/data.0004.dbl.h5,latest_double_checkpoint,67318639276,live Kunanyi stat
+problem/outputs/data.0004.dbl.xmf,latest_double_checkpoint_xmf,3005,live Kunanyi stat
+problem/outputs/data.0012.flt.h5,latest_float_output,44890581676,live Kunanyi stat
+problem/outputs/data.0012.flt.xmf,latest_float_output_xmf,3011,live Kunanyi stat
+problem/outputs/particles.1068.dbl,latest_particle_restart,5894467,live Kunanyi stat
+problem/outputs/restart.out,restart_catalogue,640,live Kunanyi stat
+problem/outputs/dbl.h5.out,double_hdf5_catalogue,384,live Kunanyi stat
+problem/outputs/flt.h5.out,float_hdf5_catalogue,1004,live Kunanyi stat
+problem/outputs/grid.out,grid_catalogue,143880,live Kunanyi stat

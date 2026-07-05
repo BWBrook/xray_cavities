@@ -1,0 +1,62 @@
+{
+  "status": "submitted_waiting_pbs_completion",
+  "decision_label": "C_LO_CHECKPOINT_CLEAN_NOT_ENDPOINT_CONTINUATION2_SUBMITTED",
+  "created_utc": "2026-07-05T07:40:00+00:00",
+  "start_head": "ab40275",
+  "checkpoint_source": {
+    "goal": "033",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles",
+    "done_marker": "present",
+    "failed_marker": "absent",
+    "latest_dbl_row": "4 3.270555e+03 2.680126e-01 12349 single_file little rho vx1 vx2 vx3 prs tr1",
+    "latest_flt_row": "12 3.270555e+03 2.680126e-01 12349 single_file little rho vx1 vx2 vx3 prs tr1",
+    "latest_double_checkpoint": "data.0004.dbl.h5",
+    "latest_float_output": "data.0012.flt.h5",
+    "latest_particle_restart": "particles.1068.dbl",
+    "latest_code_time": 3270.555,
+    "endpoint_target_code_time": 15330.06968940,
+    "endpoint_fraction": 0.21334247,
+    "endpoint_complete": false
+  },
+  "continuation_contract": {
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-bounded-continuation-2",
+    "job_name": "c_lo_cont2",
+    "resources": "select=64:ncpus=28:mpiprocs=28",
+    "walltime": "04:00:00",
+    "pluto_maxtime_hours": 3.5,
+    "module_stack": "agn_intel_impi",
+    "mpi_flavor": "intelmpi",
+    "restart_policy": "auto"
+  },
+  "submission": {
+    "submitted": true,
+    "job_id": "750944.kunanyi-ohpc",
+    "job_name": "c_lo_cont2",
+    "queue": "normal",
+    "state_at_stop": "R",
+    "ncpus": 1792,
+    "mpiprocs": 1792,
+    "mem": "128gb",
+    "walltime": "04:00:00",
+    "stdout": "/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation/c_lo_endpoint_or_continuation.out",
+    "stderr": "/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation/c_lo_endpoint_or_continuation.err",
+    "preflight_transcript": "/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation/remote_logs/submission_preflight_2026-07-05_final.txt",
+    "submission_record": "/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation/remote_logs/submission_record_2026-07-05.txt"
+  },
+  "boundaries": {
+    "max_one_pbs_submission": true,
+    "no_polling_after_queued_or_running": true,
+    "no_bulk_hdf5_or_particle_payload_retrieval": true,
+    "no_science_postprocessing": true,
+    "no_g_lo_work": true,
+    "no_agent_comms_edits": true,
+    "no_commits_or_pushes": true
+  },
+  "caveats": [
+    "Goal 034 is an endpoint-or-continuation decision and submission packet only.",
+    "The Goal 033 checkpoint is clean but not endpoint-complete.",
+    "The run surface uses restart.out plus particle restart files; no separate particles.dbl.out catalogue is expected from current evidence."
+  ],
+  "recommended_next_goal_shape": "wait for Barry PBS completion email, then run compact C-LO continuation-2 retrieval and endpoint review"
+}

@@ -1,0 +1,9 @@
+category,count,latest_file,latest_size_bytes,notes
+dbl_h5,2,data.0006.dbl.h5,67318639276,latest_catalogue_row=6\ 4.930755e+03\ 2.678869e-01\ 18546\ single_file\ little\ rho\ vx1\ vx2\ vx3\ prs\ tr1\
+dbl_xmf,2,data.0006.dbl.xmf,3005,matching_visualization_sidecar
+flt_h5,7,data.0019.flt.h5,44890581676,latest_catalogue_row=19\ 4.930755e+03\ 2.678869e-01\ 18546\ single_file\ little\ rho\ vx1\ vx2\ vx3\ prs\ tr1\
+flt_xmf,7,data.0019.flt.xmf,3011,matching_visualization_sidecar
+particle_restart_dbl,543,particles.1611.dbl,8869027,latest_restart_surface
+particle_output_flt,0,,,latest_particle_float_output_if_any
+catalogue_text,4,restart.out,896,dbl_flt_restart_catalogues
+output_directory_size,,,422G,du_sh_outputs

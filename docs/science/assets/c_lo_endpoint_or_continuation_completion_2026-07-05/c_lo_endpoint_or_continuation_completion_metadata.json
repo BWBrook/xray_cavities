@@ -1,0 +1,56 @@
+{
+  "status": "complete_checkpoint_review",
+  "decision_label": "C_LO_CONTINUATION2_CHECKPOINT_SURFACE_GREEN_NOT_ENDPOINT",
+  "created_utc": "2026-07-05T12:02:39+00:00",
+  "job": {
+    "id": "750944.kunanyi-ohpc",
+    "name": "c_lo_cont2",
+    "exit_status": "0",
+    "job_state": "F",
+    "stageout_status": "1",
+    "walltime_used": "03:32:55",
+    "cput_used": "98:38:39",
+    "ncpus_used": "1792",
+    "mem_used": "9868484kb",
+    "vmem_used": "27590612kb"
+  },
+  "remote_paths": {
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal034_c_lo_endpoint_or_continuation",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-bounded-continuation-2/C-LO/particles"
+  },
+  "checkpoint_evidence": {
+    "done_marker": "present",
+    "failed_marker": "absent",
+    "stdout_mpi_exit_zero": "MPI_EXIT_CODE=0",
+    "stderr_bytes": "93",
+    "stderr_note": "/scratch/bwbrook/git/utas-agn/jet-setup/tools/setup-problem: line 11: git: command not found",
+    "latest_dbl_catalog_row": "6 4.930755e+03 2.678869e-01 18546 single_file little rho vx1 vx2 vx3 prs tr1 ",
+    "latest_flt_catalog_row": "19 4.930755e+03 2.678869e-01 18546 single_file little rho vx1 vx2 vx3 prs tr1 ",
+    "latest_dbl_h5": "data.0006.dbl.h5",
+    "latest_flt_h5": "data.0019.flt.h5",
+    "latest_particle_restart": "particles.1611.dbl",
+    "hdf5_file_count": "9",
+    "particle_restart_count": "543",
+    "output_directory_size": "422G",
+    "endpoint_target_code_time": "15330.06968940",
+    "latest_code_time": "4.930755e+03",
+    "endpoint_fraction": "0.32163944",
+    "endpoint_interpretation": "checkpoint_not_endpoint"
+  },
+  "boundaries": {
+    "no_new_pbs_submission": true,
+    "no_c_lo_retry_or_continuation": true,
+    "no_science_postprocessing": true,
+    "no_bulk_hdf5_or_particle_payload_retrieval": true,
+    "no_g_lo_work": true,
+    "no_agent_comms_edits": true,
+    "no_commits_or_pushes": true
+  },
+  "caveats": [
+    "This is a clean continuation-2 checkpoint surface, not a 50 Myr C-LO endpoint.",
+    "PBS qstat reports Stageout_status=1, but requested stage-root stdout/stderr and logs were present and retrieved as compact evidence.",
+    "stderr contains a setup-problem git-command warning while MPI_EXIT_CODE remains 0; carry as nonfatal runtime-environment caveat.",
+    "Remote HDF5 and particle files were inventoried by path/count/size only and were not copied locally."
+  ],
+  "recommended_next_goal_shape": "bounded C-LO endpoint-or-next-continuation decision; no post-processing until endpoint status is explicitly resolved"
+}

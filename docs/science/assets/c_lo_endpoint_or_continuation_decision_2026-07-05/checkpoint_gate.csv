@@ -1,0 +1,14 @@
+check,status,value,notes
+source_root_exists,pass,/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation/C-LO/particles,live Kunanyi check
+done_marker,pass,present,live marker check
+failed_marker,pass,absent,live marker check
+latest_dbl_row,pass,"4 3.270555e+03 2.680126e-01 12349 single_file little rho vx1 vx2 vx3 prs tr1",live catalogue row
+latest_flt_row,pass,"12 3.270555e+03 2.680126e-01 12349 single_file little rho vx1 vx2 vx3 prs tr1",live catalogue row
+latest_particle_restart,pass,particles.1068.dbl,latest sorted particle restart file
+restart_out,pass,present,particle restart catalogue convention for this run surface
+hdf5_count,info,8,remote inventory only
+particle_restart_count,info,567,remote inventory only
+dest_root_absent,pass,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-bounded-continuation-2,no-overwrite gate before staging
+source_dependencies,pass,/scratch/bwbrook/git/utas-agn plus Goal033 config/template,remote dependency gate
+module_probe,pass,AGN Intel/IMPI/HDF5 stack,remote module load probe
+particle_catalogue_note,info,no separate particles.dbl.out,not present in Goal033 inventory; restart.out plus particle files are used

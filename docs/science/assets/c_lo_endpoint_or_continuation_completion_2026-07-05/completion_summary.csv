@@ -1,0 +1,22 @@
+check,status,value,notes
+qstat_exit_status,pass,0,scheduler Exit_status
+qstat_job_state,pass,F,final scheduler state
+qstat_stageout_status,caveat,1,PBS stageout status; stage-root compact logs were present and retrieved
+walltime_used,info,03:32:55,resources_used.walltime
+cput_used,info,98:38:39,resources_used.cput
+ncpus_used,info,1792,resources_used.ncpus
+mem_used,info,9868484kb,resources_used.mem
+done_marker,pass,present,run marker
+failed_marker_absent,pass,absent,run marker
+stdout_mpi_exit_zero,pass,MPI_EXIT_CODE=0,wrapper stdout marker
+stderr_status,caveat,93,/scratch/bwbrook/git/utas-agn/jet-setup/tools/setup-problem: line 11: git: command not found
+latest_dbl_catalog,info,6/4.930755e+03/data.0006.dbl.h5,latest dbl.h5 catalogue row and file
+latest_flt_catalog,info,19/4.930755e+03/data.0019.flt.h5,latest flt.h5 catalogue row and file
+latest_particle_restart,info,particles.1611.dbl,latest particle restart file
+hdf5_file_count,info,9,remote inventory count only; not retrieved
+particle_restart_count,info,543,remote inventory count only; not retrieved
+endpoint_target_code_time,info,15330.06968940,configured 50 Myr endpoint target
+latest_code_time,info,4.930755e+03,latest compact catalogue code time
+endpoint_fraction,info,0.32163944,latest_code_time / endpoint_target_code_time
+endpoint_remaining_code_time,info,10399.314689,endpoint target minus latest code time
+endpoint_interpretation,caveat,checkpoint_not_endpoint,do not call endpoint complete; latest catalogue time is well short of target

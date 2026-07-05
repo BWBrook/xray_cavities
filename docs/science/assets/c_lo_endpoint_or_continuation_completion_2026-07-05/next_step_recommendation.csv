@@ -1,0 +1,4 @@
+rank,next_goal_shape,rationale
+1,bounded_c_lo_endpoint_or_next_continuation_decision,Continuation-2 is clean but still only 0.32163944 of the configured endpoint target; decide whether to authorize exactly one more continuation before any post-processing.
+2,hold_c_lo_until_resource_review,"If the repeated 64-node continuations are judged too costly for incremental progress, pause C-LO and review runtime strategy before another submission."
+3,do_not_start_c_lo_postprocessing,Endpoint status is not resolved; XRAiSE/PRAiSE/radio/cavity products would be premature.

@@ -1,0 +1,4 @@
+rank,next_goal_shape,rationale
+1,wait_for_c_lo_continuation2_pbs_completion_email,"If submitted and queued/running, stop and wait for Barry's PBS completion email before retrieval."
+2,c_lo_continuation2_completion_retrieval_and_endpoint_review,"After completion authorization, retrieve compact logs/inventories only and decide whether endpoint status is reached."
+3,hold_c_lo_postprocessing_until_endpoint_resolved,Do not run XRAiSE/PRAiSE/radio/cavity/observable work until endpoint status is explicit.
