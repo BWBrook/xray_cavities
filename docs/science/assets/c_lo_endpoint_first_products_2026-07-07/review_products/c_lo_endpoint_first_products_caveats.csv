@@ -1,0 +1,6 @@
+caveat,status,consequence
+first_compact_endpoint_products,active,review/prove-out surface only
+observational_claim,not_final,do not treat as publication-ready observable
+sparse_radio,diagnostic_only,no final radio observable generated here
+level3_gravity,blocked_missing_potential,carry existing C-HI caveat into comparison context
+topology_method,conditional_for_c_hi_not_recomputed_for_c_lo,comparison is X-ray/tracer scalar-first

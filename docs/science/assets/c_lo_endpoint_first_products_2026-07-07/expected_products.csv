@@ -1,0 +1,12 @@
+product,remote_path_or_pattern,status,notes
+c_lo_0deg_product,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/xraise_grid_0deg,expected,C-LO endpoint 0 deg compact X-ray/tracer product
+c_lo_45deg_product,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/xraise_grid_45deg,expected,C-LO endpoint 45 deg compact X-ray/tracer product using edge_overlap_uniform_cell_projection
+c_lo_90deg_product,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/xraise_grid_90deg,expected,C-LO endpoint 90 deg compact X-ray/tracer product using edge_overlap_uniform_cell_projection
+c_lo_endpoint_preflight.csv,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/c_lo_endpoint_preflight.csv,expected,endpoint input checks
+c_lo_endpoint_projection_metrics.csv,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/c_lo_endpoint_projection_metrics.csv,expected,per-view C-LO scalar metrics and projection support
+c_hi_c_lo_endpoint_comparison.csv,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/c_hi_c_lo_endpoint_comparison.csv,expected,initial C-HI versus C-LO scalar comparison
+c_lo_product_provenance.csv,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/c_lo_product_provenance.csv,expected,product-source provenance
+c_lo_endpoint_first_products_caveats.csv,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/c_lo_endpoint_first_products_caveats.csv,expected,caveat register
+summary_archive,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products_2026-07-07.tar.gz,expected,stable snapshot archive
+stdout,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products.out,expected,PBS stdout to retrieve after completion
+stderr,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products.err,expected,PBS stderr to retrieve after completion

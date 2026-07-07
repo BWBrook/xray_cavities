@@ -1,0 +1,13 @@
+check,status,value,notes
+pbs_exit_status,pass,0,qstat final record for 751098.kunanyi-ohpc
+pbs_job_state,pass,F,finished scheduler record
+pbs_walltime,pass,00:27:19,completion email reported 00:27:19
+stdout_validation_markers,pass,3,three view validation markers expected
+stderr_empty,pass,0,stderr byte count
+archive_readable,pass,38,tar member count
+archive_sha256,pass,041eed367d0b74e5bbfbfd3d2ca1e9b51c0eb24b90c7fdd32c36a8bec95646c1,retrieved archive sha256
+endpoint_preflight,pass,12/12,remote endpoint input checks packaged in archive
+product_views_present,pass,0deg;45deg;90deg,expected C-LO endpoint products
+no_bulky_payloads_local,pass,0,no .h5 data.* or particles.* files in local Goal 036 asset bundle
+large_file_inventory,pass,13 files >5MiB,large files are expected TSV review arrays plus retained remote archive; none are HDF5/data.* or particle payloads and all are below 100MiB
+csv_duplicate_headers,pass,0 duplicates,all local Goal 036 CSV review surfaces have unique headers after schema repair

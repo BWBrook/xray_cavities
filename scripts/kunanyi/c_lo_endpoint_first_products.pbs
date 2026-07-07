@@ -1,0 +1,523 @@
+#!/usr/bin/env bash
+#PBS -N c_lo_xprod
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=96gb
+#PBS -l walltime=04:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products}"
+ENDPOINT_RUN_ROOT="${ENDPOINT_RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles}"
+ENDPOINT_OUTPUTS="${ENDPOINT_OUTPUTS:-$ENDPOINT_RUN_ROOT/problem/outputs}"
+INPUT_H5="${INPUT_H5:-$ENDPOINT_OUTPUTS/data.0053.flt.h5}"
+TIMESTEP="${TIMESTEP:-Timestep_53}"
+ENDPOINT_TARGET_CODE_TIME="${ENDPOINT_TARGET_CODE_TIME:-15330.06968940}"
+XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+XRAISE_SCRIPT="${XRAISE_SCRIPT:-$STAGE_DIR/xraise_grid_smoke.py}"
+XRAISE_PY="${XRAISE_PY:-$XRAISE_RUNTIME/xraise.py}"
+APEC_TABLE="${APEC_TABLE:-$XRAISE_RUNTIME/apec_corrections.txt}"
+GAUNT_LUT="${GAUNT_LUT:-$XRAISE_RUNTIME/gaunt_lut_2d.npz}"
+C_HI_REFERENCE="${C_HI_REFERENCE:-$STAGE_DIR/c_hi_refined_trio_context.csv}"
+SUMMARY_ARCHIVE="${SUMMARY_ARCHIVE:-$STAGE_DIR/c_lo_endpoint_first_products_2026-07-07.tar.gz}"
+Y_CHUNK="${Y_CHUNK:-8}"
+PROJECTED_U_BINS="${PROJECTED_U_BINS:-960}"
+REDSHIFT="${REDSHIFT:-0.05}"
+EMPTY_COLUMN_FRACTION_MAX="${EMPTY_COLUMN_FRACTION_MAX:-0.05}"
+ARCHIVE_SNAPSHOT_ROOT="${ARCHIVE_SNAPSHOT_ROOT:-$ANALYSIS_ROOT/archive_snapshot}"
+ARCHIVE_PAYLOAD_DIR="$ARCHIVE_SNAPSHOT_ROOT/$(basename "$ANALYSIS_ROOT")"
+ARCHIVE_FILE_LIST="$ARCHIVE_SNAPSHOT_ROOT/archive_file_list.txt"
+
+VIEWS=(
+  "0|0deg|direct_y_axis_sum"
+  "45|45deg|edge_overlap_uniform_cell_projection"
+  "90|90deg|edge_overlap_uniform_cell_projection"
+)
+
+mkdir -p "$STAGE_DIR" "$ANALYSIS_ROOT" "$ANALYSIS_ROOT/remote_logs"
+cd "$PBS_O_WORKDIR"
+
+INNER_STDOUT="$ANALYSIS_ROOT/remote_logs/c_lo_endpoint_first_products.stdout.log"
+INNER_STDERR="$ANALYSIS_ROOT/remote_logs/c_lo_endpoint_first_products.stderr.log"
+exec > >(tee -a "$INNER_STDOUT") 2> >(tee -a "$INNER_STDERR" >&2)
+
+echo "jobid=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "stage_dir=$STAGE_DIR"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "endpoint_run_root=$ENDPOINT_RUN_ROOT"
+echo "endpoint_outputs=$ENDPOINT_OUTPUTS"
+echo "input_h5=$INPUT_H5"
+echo "timestep=$TIMESTEP"
+echo "endpoint_target_code_time=$ENDPOINT_TARGET_CODE_TIME"
+echo "views=${VIEWS[*]}"
+echo "projected_u_bins=$PROJECTED_U_BINS"
+echo "empty_column_fraction_max=$EMPTY_COLUMN_FRACTION_MAX"
+echo "xraise_runtime=$XRAISE_RUNTIME"
+echo "xraise_script=$XRAISE_SCRIPT"
+echo "c_hi_reference=$C_HI_REFERENCE"
+echo "summary_archive=$SUMMARY_ARCHIVE"
+echo "archive_snapshot_root=$ARCHIVE_SNAPSHOT_ROOT"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+for path in "$XRAISE_SCRIPT" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT" "$C_HI_REFERENCE"; do
+  if [ ! -r "$path" ]; then
+    echo "missing required runtime input: $path" >&2
+    exit 2
+  fi
+  sha256sum "$path"
+done
+
+module purge
+module load Anaconda3/2024.02-1
+
+python - <<'PY' "$ENDPOINT_RUN_ROOT" "$INPUT_H5" "$TIMESTEP" "$ENDPOINT_TARGET_CODE_TIME" "$ANALYSIS_ROOT"
+import csv
+import math
+import sys
+from pathlib import Path
+
+import h5py
+
+run_root = Path(sys.argv[1])
+input_h5 = Path(sys.argv[2])
+timestep = sys.argv[3]
+endpoint_target = float(sys.argv[4])
+analysis_root = Path(sys.argv[5])
+
+checks = []
+
+def record(check, status, value, notes):
+    checks.append((check, status, value, notes))
+
+required_paths = {
+    "done_marker": run_root / "markers" / "DONE",
+    "failed_marker": run_root / "markers" / "FAILED",
+    "latest_double_hdf5": run_root / "problem" / "outputs" / "data.0013.dbl.h5",
+    "latest_float_hdf5": input_h5,
+    "latest_particle_restart": run_root / "problem" / "outputs" / "particles.5003.dbl",
+    "double_catalogue": run_root / "problem" / "outputs" / "dbl.h5.out",
+    "float_catalogue": run_root / "problem" / "outputs" / "flt.h5.out",
+    "restart_log": run_root / "problem" / "outputs" / "restart.out",
+    "grid_catalogue": run_root / "problem" / "outputs" / "grid.out",
+}
+
+if not required_paths["done_marker"].is_file():
+    raise SystemExit(f"missing DONE marker: {required_paths['done_marker']}")
+record("done_marker", "pass", "present", str(required_paths["done_marker"]))
+
+if required_paths["failed_marker"].exists():
+    raise SystemExit(f"FAILED marker present: {required_paths['failed_marker']}")
+record("failed_marker_absent", "pass", "absent", str(required_paths["failed_marker"]))
+
+for name, path in required_paths.items():
+    if name in {"done_marker", "failed_marker"}:
+        continue
+    if not path.is_file():
+        raise SystemExit(f"missing required endpoint file {name}: {path}")
+    if path.stat().st_size <= 0:
+        raise SystemExit(f"empty required endpoint file {name}: {path}")
+    record(name, "pass", path.name, f"size_bytes={path.stat().st_size}")
+
+required_vars = ("rho", "prs", "tr1", "vx1", "vx2", "vx3")
+with h5py.File(input_h5, "r") as h5:
+    if timestep not in h5:
+        raise SystemExit(f"{input_h5}: missing timestep {timestep}")
+    for var in required_vars:
+        full = f"/{timestep}/vars/{var}"
+        if full not in h5:
+            raise SystemExit(f"{input_h5}: missing dataset {full}")
+    shape = tuple(int(v) for v in h5[f"/{timestep}/vars/rho"].shape)
+    for var in required_vars[1:]:
+        other_shape = tuple(int(v) for v in h5[f"/{timestep}/vars/{var}"].shape)
+        if other_shape != shape:
+            raise SystemExit(f"{input_h5}: shape mismatch rho {shape} vs {var} {other_shape}")
+    time_code = float(h5[f"/{timestep}"].attrs["Time"])
+
+if not math.isfinite(time_code) or abs(time_code - endpoint_target) > 0.1:
+    raise SystemExit(
+        f"endpoint time {time_code:.17g} differs from target {endpoint_target:.17g}"
+    )
+
+record("hdf5_timestep", "pass", timestep, str(input_h5))
+record("hdf5_shape", "pass", "x".join(str(v) for v in shape), "rho/prs/tr1/vx1/vx2/vx3")
+record("hdf5_time_code", "pass", f"{time_code:.17g}", f"target={endpoint_target:.17g}")
+
+with (analysis_root / "c_lo_endpoint_preflight.csv").open("w", newline="") as handle:
+    writer = csv.writer(handle)
+    writer.writerow(["check", "status", "value", "notes"])
+    writer.writerows(checks)
+
+print(
+    "endpoint_preflight=passed "
+    f"timestep={timestep} shape_nz_ny_nx={shape} time_code={time_code:.17g}"
+)
+PY
+
+run_view() {
+  local angle="$1"
+  local label="$2"
+  local expected_accumulator="$3"
+  local xraise_dir="$ANALYSIS_ROOT/xraise_grid_${label}"
+
+  mkdir -p "$xraise_dir"
+  echo "view_started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ) view=$label"
+  echo "view_input_h5=$INPUT_H5"
+  echo "view_output_dir=$xraise_dir"
+
+  python "$XRAISE_SCRIPT" \
+    --input-h5 "$INPUT_H5" \
+    --timestep "$TIMESTEP" \
+    --output-dir "$xraise_dir" \
+    --xraise-py "$XRAISE_PY" \
+    --apec-table "$APEC_TABLE" \
+    --gaunt-lut "$GAUNT_LUT" \
+    --redshift "$REDSHIFT" \
+    --y-chunk "$Y_CHUNK" \
+    --view-angle-deg "$angle" \
+    --projected-u-bins "$PROJECTED_U_BINS"
+
+  python - <<'PY' "$xraise_dir" "$TIMESTEP" "$ENDPOINT_TARGET_CODE_TIME" "$angle" "$label" "$expected_accumulator" "$EMPTY_COLUMN_FRACTION_MAX"
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+import numpy as np
+
+xraise_dir = Path(sys.argv[1])
+timestep = sys.argv[2]
+endpoint_target_code_time = float(sys.argv[3])
+view_angle_deg = float(sys.argv[4])
+label = sys.argv[5]
+expected_accumulator = sys.argv[6]
+empty_column_fraction_max = float(sys.argv[7])
+
+summary_path = xraise_dir / "xraise_grid_smoke_summary.csv"
+metadata_path = xraise_dir / "xraise_grid_smoke_metadata.json"
+metrics = {
+    row["metric"]: float(row["value"])
+    for row in csv.DictReader(summary_path.open())
+}
+for key in (
+    "time_myr",
+    "raw_xray_max",
+    "corrected_xray_max",
+    "raw_xray_sum",
+    "corrected_xray_sum",
+    "correction_ratio_positive_max",
+    "correction_ratio_positive_sum",
+):
+    value = metrics[key]
+    if not math.isfinite(value) or value <= 0.0:
+        raise SystemExit(f"{label}: invalid X-ray metric {key}: {value}")
+
+metadata = json.loads(metadata_path.read_text())
+if metadata["timestep"] != timestep:
+    raise SystemExit(f"{label}: timestep mismatch {metadata['timestep']} != {timestep}")
+time_code = float(metadata.get("time_code", endpoint_target_code_time))
+if abs(time_code - endpoint_target_code_time) > 0.1:
+    raise SystemExit(
+        f"{label}: time_code {time_code:.17g} differs from target {endpoint_target_code_time:.17g}"
+    )
+actual_angle = float(metadata["projection"]["view_angle_deg"])
+if abs(actual_angle - view_angle_deg) > 1.0e-9:
+    raise SystemExit(f"{label}: view angle mismatch {actual_angle} != {view_angle_deg}")
+actual_accumulator = metadata["projection"].get("projected_accumulation")
+if actual_accumulator != expected_accumulator:
+    raise SystemExit(f"{label}: projected_accumulation {actual_accumulator} != {expected_accumulator}")
+if int(metadata["projection"]["sky_horizontal_bins"]) <= 1:
+    raise SystemExit(f"{label}: invalid sky_horizontal_bins")
+
+empty_rows = []
+for layer, filename in (
+    ("raw_xray", "xray_1kev_raw_mjy_sr.tsv"),
+    ("corrected_xray", "xray_1kev_xraise_corrected_mjy_sr.tsv"),
+    ("correction_ratio", "xray_1kev_correction_ratio.tsv"),
+):
+    values = np.loadtxt(xraise_dir / filename, delimiter="\t")
+    positive = np.isfinite(values) & (values > 0.0)
+    empty_columns = int(np.count_nonzero(positive.mean(axis=0) == 0.0))
+    empty_fraction = empty_columns / positive.shape[1]
+    empty_rows.append((layer, empty_columns, empty_fraction))
+    if empty_fraction > empty_column_fraction_max:
+        raise SystemExit(
+            f"{label} {layer}: empty-column fraction {empty_fraction:.6g} "
+            f"exceeds {empty_column_fraction_max:.6g}"
+        )
+
+with (xraise_dir / "projection_empty_columns.csv").open("w", newline="") as handle:
+    writer = csv.writer(handle)
+    writer.writerow(["case", "timestep", "view", "layer", "empty_columns", "empty_column_fraction"])
+    for layer, empty_columns, empty_fraction in empty_rows:
+        writer.writerow(["C-LO", timestep, label, layer, empty_columns, f"{empty_fraction:.16g}"])
+
+print(
+    f"xray_validation=passed case=C-LO timestep={timestep} view={label} "
+    f"accumulator={actual_accumulator} empty_columns={empty_rows}"
+)
+PY
+  echo "view_finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ) view=$label"
+}
+
+write_product_tables() {
+  python - <<'PY' "$ANALYSIS_ROOT" "$C_HI_REFERENCE" "$TIMESTEP" "$ENDPOINT_TARGET_CODE_TIME"
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+analysis_root = Path(sys.argv[1])
+c_hi_reference = Path(sys.argv[2])
+timestep = sys.argv[3]
+endpoint_target_code_time = float(sys.argv[4])
+
+views = ("0deg", "45deg", "90deg")
+summary_fields = (
+    "raw_xray_max",
+    "corrected_xray_max",
+    "raw_xray_sum",
+    "corrected_xray_sum",
+    "correction_ratio_positive_max",
+    "correction_ratio_positive_sum",
+)
+
+def read_summary(path):
+    return {
+        row["metric"]: float(row["value"])
+        for row in csv.DictReader(path.open())
+    }
+
+def read_empty(path):
+    rows = list(csv.DictReader(path.open()))
+    out = {}
+    for row in rows:
+        out[row["layer"]] = {
+            "empty_columns": int(row["empty_columns"]),
+            "empty_column_fraction": float(row["empty_column_fraction"]),
+        }
+    return out
+
+def safe_ratio(num, den):
+    if den == 0 or not math.isfinite(den):
+        return ""
+    return f"{(num / den):.16g}"
+
+c_lo_rows = []
+for view in views:
+    product_dir = analysis_root / f"xraise_grid_{view}"
+    metadata = json.loads((product_dir / "xraise_grid_smoke_metadata.json").read_text())
+    metrics = read_summary(product_dir / "xraise_grid_smoke_summary.csv")
+    empty = read_empty(product_dir / "projection_empty_columns.csv")
+    row = {
+        "case": "C-LO",
+        "view": view,
+        "view_angle_deg": f"{float(metadata['projection']['view_angle_deg']):.16g}",
+        "timestep": timestep,
+        "endpoint_target_code_time": f"{endpoint_target_code_time:.16g}",
+        "time_myr": f"{metrics['time_myr']:.16g}",
+        "projected_accumulation": metadata["projection"].get("projected_accumulation", ""),
+        "sky_horizontal_bins": str(metadata["projection"].get("sky_horizontal_bins", "")),
+        "raw_empty_columns": str(empty["raw_xray"]["empty_columns"]),
+        "corrected_empty_columns": str(empty["corrected_xray"]["empty_columns"]),
+        "correction_ratio_empty_columns": str(empty["correction_ratio"]["empty_columns"]),
+    }
+    for field in summary_fields:
+        row[field] = f"{metrics[field]:.16g}"
+    c_lo_rows.append(row)
+
+projection_columns = [
+    "case",
+    "view",
+    "view_angle_deg",
+    "timestep",
+    "endpoint_target_code_time",
+    "time_myr",
+    "projected_accumulation",
+    "sky_horizontal_bins",
+    "raw_empty_columns",
+    "corrected_empty_columns",
+    "correction_ratio_empty_columns",
+    *summary_fields,
+]
+if len(projection_columns) != len(set(projection_columns)):
+    duplicates = sorted({name for name in projection_columns if projection_columns.count(name) > 1})
+    raise SystemExit(f"duplicate projection metric columns: {duplicates}")
+with (analysis_root / "c_lo_endpoint_projection_metrics.csv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=projection_columns)
+    writer.writeheader()
+    writer.writerows(c_lo_rows)
+
+c_hi_rows = {row["view"]: row for row in csv.DictReader(c_hi_reference.open())}
+comparison_rows = []
+for c_lo in c_lo_rows:
+    view = c_lo["view"]
+    c_hi = c_hi_rows[view]
+    comparison_rows.append({
+        "view": view,
+        "c_hi_source_goal": c_hi["source_goal"],
+        "c_hi_projected_accumulation": c_hi["projected_accumulation"],
+        "c_lo_projected_accumulation": c_lo["projected_accumulation"],
+        "c_hi_raw_xray_sum": c_hi["raw_xray_sum"],
+        "c_lo_raw_xray_sum": c_lo["raw_xray_sum"],
+        "c_lo_to_c_hi_raw_xray_sum_ratio": safe_ratio(float(c_lo["raw_xray_sum"]), float(c_hi["raw_xray_sum"])),
+        "c_hi_corrected_xray_sum": c_hi["corrected_xray_sum"],
+        "c_lo_corrected_xray_sum": c_lo["corrected_xray_sum"],
+        "c_lo_to_c_hi_corrected_xray_sum_ratio": safe_ratio(float(c_lo["corrected_xray_sum"]), float(c_hi["corrected_xray_sum"])),
+        "c_hi_corrected_xray_max": c_hi["corrected_xray_max"],
+        "c_lo_corrected_xray_max": c_lo["corrected_xray_max"],
+        "c_lo_to_c_hi_corrected_xray_max_ratio": safe_ratio(float(c_lo["corrected_xray_max"]), float(c_hi["corrected_xray_max"])),
+        "c_hi_corrected_empty_columns": c_hi["corrected_empty_columns"],
+        "c_lo_corrected_empty_columns": c_lo["corrected_empty_columns"],
+        "comparison_status": "first_pass_scalar_comparison",
+        "interpretation_boundary": "compact endpoint prove-out comparison, not a final observable claim",
+    })
+
+comparison_columns = [
+    "view",
+    "c_hi_source_goal",
+    "c_hi_projected_accumulation",
+    "c_lo_projected_accumulation",
+    "c_hi_raw_xray_sum",
+    "c_lo_raw_xray_sum",
+    "c_lo_to_c_hi_raw_xray_sum_ratio",
+    "c_hi_corrected_xray_sum",
+    "c_lo_corrected_xray_sum",
+    "c_lo_to_c_hi_corrected_xray_sum_ratio",
+    "c_hi_corrected_xray_max",
+    "c_lo_corrected_xray_max",
+    "c_lo_to_c_hi_corrected_xray_max_ratio",
+    "c_hi_corrected_empty_columns",
+    "c_lo_corrected_empty_columns",
+    "comparison_status",
+    "interpretation_boundary",
+]
+with (analysis_root / "c_hi_c_lo_endpoint_comparison.csv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=comparison_columns)
+    writer.writeheader()
+    writer.writerows(comparison_rows)
+
+with (analysis_root / "c_lo_product_provenance.csv").open("w", newline="") as handle:
+    writer = csv.writer(handle)
+    writer.writerow(["product", "case", "source", "path", "status"])
+    writer.writerow(["endpoint_hdf5", "C-LO", "Goal 035 endpoint run root", str(analysis_root), "remote_product_generated_from_endpoint_hdf5"])
+    for view in views:
+        writer.writerow([
+            f"xraise_grid_{view}",
+            "C-LO",
+            "Goal 036 endpoint product job",
+            str(analysis_root / f"xraise_grid_{view}"),
+            "compact_product",
+        ])
+    writer.writerow([
+        "c_hi_refined_trio_context",
+        "C-HI",
+        "Goal 017 accepted control surface",
+        str(c_hi_reference),
+        "reference_table",
+    ])
+
+with (analysis_root / "c_lo_endpoint_first_products_caveats.csv").open("w", newline="") as handle:
+    writer = csv.writer(handle)
+    writer.writerow(["caveat", "status", "consequence"])
+    writer.writerow(["first_compact_endpoint_products", "active", "review/prove-out surface only"])
+    writer.writerow(["observational_claim", "not_final", "do not treat as publication-ready observable"])
+    writer.writerow(["sparse_radio", "diagnostic_only", "no final radio observable generated here"])
+    writer.writerow(["level3_gravity", "blocked_missing_potential", "carry existing C-HI caveat into comparison context"])
+    writer.writerow(["topology_method", "conditional_for_c_hi_not_recomputed_for_c_lo", "comparison is X-ray/tracer scalar-first"])
+
+print("product_tables=written")
+PY
+}
+
+copy_completed_products_to_archive_snapshot() {
+  for view in "${VIEWS[@]}"; do
+    IFS="|" read -r angle label expected_accumulator <<<"$view"
+    local src="$ANALYSIS_ROOT/xraise_grid_${label}"
+    local dest="$ARCHIVE_PAYLOAD_DIR/xraise_grid_${label}"
+    if [ ! -d "$src" ]; then
+      echo "missing completed product directory for archive snapshot: $src" >&2
+      exit 3
+    fi
+    if [ -z "$(find "$src" -maxdepth 1 -type f -print -quit)" ]; then
+      echo "empty completed product directory for archive snapshot: $src" >&2
+      exit 3
+    fi
+    mkdir -p "$dest"
+    find "$src" -maxdepth 1 -type f -exec cp -p {} "$dest"/ \;
+  done
+
+  for table in \
+    c_lo_endpoint_preflight.csv \
+    c_lo_endpoint_projection_metrics.csv \
+    c_hi_c_lo_endpoint_comparison.csv \
+    c_lo_product_provenance.csv \
+    c_lo_endpoint_first_products_caveats.csv; do
+    if [ ! -s "$ANALYSIS_ROOT/$table" ]; then
+      echo "missing compact table for archive snapshot: $ANALYSIS_ROOT/$table" >&2
+      exit 3
+    fi
+    cp -p "$ANALYSIS_ROOT/$table" "$ARCHIVE_PAYLOAD_DIR/$table"
+  done
+}
+
+copy_remote_logs_to_archive_snapshot() {
+  mkdir -p "$ARCHIVE_PAYLOAD_DIR/remote_logs"
+  if [ -f "$INNER_STDOUT" ]; then
+    cp -p "$INNER_STDOUT" "$ARCHIVE_PAYLOAD_DIR/remote_logs/c_lo_endpoint_first_products.stdout.log"
+  fi
+  if [ -f "$INNER_STDERR" ]; then
+    cp -p "$INNER_STDERR" "$ARCHIVE_PAYLOAD_DIR/remote_logs/c_lo_endpoint_first_products.stderr.log"
+  fi
+}
+
+write_archive_manifest() {
+  (
+    cd "$ARCHIVE_PAYLOAD_DIR"
+    find . \
+      -type f \
+      ! -name archive_manifest.tsv \
+      ! -name archive_checksums.sha256 \
+      -printf "%P\t%s bytes\n" \
+      | sort > archive_manifest.tsv
+    find . \
+      -type f \
+      ! -name archive_manifest.tsv \
+      ! -name archive_checksums.sha256 \
+      -print \
+      | sort \
+      | while IFS= read -r path; do
+          sha256sum "$path"
+        done > archive_checksums.sha256
+  )
+  (
+    cd "$ARCHIVE_SNAPSHOT_ROOT"
+    find "$(basename "$ARCHIVE_PAYLOAD_DIR")" -type f | sort > "$ARCHIVE_FILE_LIST"
+  )
+}
+
+build_summary_archive() {
+  rm -rf "$ARCHIVE_SNAPSHOT_ROOT"
+  mkdir -p "$ARCHIVE_PAYLOAD_DIR"
+  copy_completed_products_to_archive_snapshot
+  copy_remote_logs_to_archive_snapshot
+  write_archive_manifest
+  rm -f "$SUMMARY_ARCHIVE"
+  tar -czf "$SUMMARY_ARCHIVE" -C "$ARCHIVE_SNAPSHOT_ROOT" --files-from "$ARCHIVE_FILE_LIST"
+  sha256sum "$SUMMARY_ARCHIVE"
+}
+
+for view in "${VIEWS[@]}"; do
+  IFS="|" read -r angle label expected_accumulator <<<"$view"
+  run_view "$angle" "$label" "$expected_accumulator"
+done
+
+write_product_tables
+build_summary_archive
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

@@ -1,0 +1,4 @@
+rank,next_step,status,rationale
+1,review_accept_goal036_c_lo_endpoint_products,ready,Job 751098 completed with Exit_status=0 and the compact C-LO 0/45/90 endpoint products plus C-HI/C-LO scalar comparison validated locally.
+2,bounded_c_hi_c_lo_endpoint_interpretation_packet,recommended_option,Use the first compact C-LO endpoint surface to interpret robust scalar differences without claiming final observables.
+3,g_lo_readiness_or_execution_decision,alternate_next_branch,After C-LO endpoint products are accepted X-ray Cavities may choose to complete the three-case ladder with a bounded G-LO readiness/execution packet.

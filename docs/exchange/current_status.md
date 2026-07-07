@@ -14,10 +14,84 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-035 C-LO endpoint-status review handoff.
+This note should be treated as a Goal-036 C-LO endpoint-first-products
+completion handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 036 C-LO endpoint-first-products completion on 2026-07-07:
+
+- Status:
+  `complete_product`.
+- Decision label:
+  `C_LO_ENDPOINT_FIRST_PRODUCTS_COMPLETE_COMPACT_COMPARISON_READY`.
+- PBS completion:
+  `751098.kunanyi-ohpc` / `c_lo_xprod` finished with `Exit_status=0`,
+  `resources_used.walltime=00:27:19`, `resources_used.cput=00:17:39`,
+  `resources_used.mem=1144972kb`, `resources_used.ncpus=1`, and
+  `resources_used.vmem=1709232kb`.
+- Scheduler caveat:
+  qstat reports `Stageout_status=1`, but requested stage-root archive,
+  stdout, stderr, final qstat, and remote logs were present and retrieved.
+- Stage root:
+  `/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products`.
+- Analysis root:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products`.
+- Retrieved archive SHA-256:
+  `041eed367d0b74e5bbfbfd3d2ca1e9b51c0eb24b90c7fdd32c36a8bec95646c1`.
+- Package/schema hardening:
+  the original retrieved archive is retained unchanged under `remote_logs/`;
+  the local schema-clean review copy lives under `review_products/`. The
+  archive-original `c_lo_endpoint_projection_metrics.csv` had a duplicate
+  `time_myr` header; the local review copy repairs it, and the wrapper/tests
+  now fail on duplicate projection-metric columns.
+- Large-file policy:
+  the Goal 036 asset bundle is about `229 MB`, with `13` files above `5 MiB`:
+  the retrieved `39.419 MiB` archive plus twelve `15.782 MiB` TSV endpoint
+  review arrays. These TSVs are retained as compact 2-D C-LO endpoint review
+  payloads, not HDF5/PLUTO `data.*`/particle files; every retained file is
+  below `100 MiB`.
+- Endpoint preflight:
+  accepted Goal 035 C-LO endpoint run root was readable; `markers/DONE`
+  present, `markers/FAILED` absent, `data.0053.flt.h5::Timestep_53`
+  contains `rho`, `prs`, `tr1`, `vx1`, `vx2`, and `vx3` with shared shape
+  `(1014, 960, 960)`, and endpoint HDF5 time `15330.069689399999` matches
+  target `15330.06968940`.
+- Product validation:
+  C-LO endpoint `0deg`, `45deg`, and `90deg` compact X-ray/tracer products
+  were retrieved and validated; `45deg` and `90deg` declare
+  `edge_overlap_uniform_cell_projection`; all raw, corrected, and
+  correction-ratio layers report `0/960` empty projected columns.
+- Review validation:
+  focused tests passed with `12 passed`; wrapper `bash -n`, metadata JSON
+  parse, CSV expected-column/nonempty/duplicate-header checks across `18`
+  Goal 036 CSV surfaces, archive `tar -tzf`, no-bulky-payload guard, targeted
+  unresolved/stale-label scan, and `git diff --check` all passed.
+- Headline C-LO/C-HI corrected X-ray sum ratios:
+  `0deg=1.087839647658863`,
+  `45deg=0.9665266425113752`, and
+  `90deg=0.9665266425113748`.
+- Science note:
+  `docs/science/c_lo_endpoint_first_products_2026-07-07.md`.
+- Asset bundle:
+  `docs/science/assets/c_lo_endpoint_first_products_2026-07-07/`.
+- Local files added:
+  `scripts/kunanyi/c_lo_endpoint_first_products.pbs`,
+  `tests/test_c_lo_endpoint_first_products_wrapper.py`,
+  `docs/science/c_lo_endpoint_first_products_2026-07-07.md`,
+  `docs/science/assets/c_lo_endpoint_first_products_2026-07-07/`,
+  `docs/goals/036-c-lo-endpoint-first-products/Log.md`, and
+  `docs/exchange/logs/2026-07-07-c-lo-endpoint-first-products.md`.
+- Recommendation:
+  review and accept Goal 036 as the first compact C-LO endpoint product
+  surface; the next goal should either interpret the C-HI/C-LO endpoint
+  comparison surface or prepare the next G-LO readiness/execution branch.
+- Boundary confirmation:
+  no new PBS submission during completion, G-LO work, new PLUTO production,
+  C-LO continuation, source-age sweep, broad batch, scientific-default change,
+  bulky HDF5/data/particle retrieval, commit, push, cleanup, Stas/Patrick
+  contact, `agent_comms` edit, or accepted-asset overwrite occurred.
 
 Latest Goal 035 C-LO endpoint-oriented continuation completion review on
 2026-07-07:

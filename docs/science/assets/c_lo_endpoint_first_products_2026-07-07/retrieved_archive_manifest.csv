@@ -1,0 +1,2 @@
+artifact,local_path,size_bytes,sha256,tar_member_count,contains_hdf5,contains_data_payload,contains_particle_payload,status,notes
+c_lo_endpoint_first_products_archive,docs/science/assets/c_lo_endpoint_first_products_2026-07-07/remote_logs/c_lo_endpoint_first_products_2026-07-07.tar.gz,41334073,041eed367d0b74e5bbfbfd3d2ca1e9b51c0eb24b90c7fdd32c36a8bec95646c1,38,False,False,False,pass,compact archive retrieved from Goal 036 stage root and readable with tar -tzf

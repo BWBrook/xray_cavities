@@ -1,0 +1,111 @@
+{
+  "status": "complete_product",
+  "decision_label": "C_LO_ENDPOINT_FIRST_PRODUCTS_COMPLETE_COMPACT_COMPARISON_READY",
+  "date": "2026-07-07",
+  "case": "C-LO",
+  "job_id": "751098.kunanyi-ohpc",
+  "job_name": "c_lo_xprod",
+  "job_state_at_stop": "Q",
+  "queue": "normal",
+  "resource_request": "select=1:ncpus=1:mpiprocs=1:mem=96gb",
+  "walltime": "04:00:00",
+  "stage_root": "/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products",
+  "analysis_root": "/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products",
+  "expected_archive": "/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products_2026-07-07.tar.gz",
+  "endpoint_run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles",
+  "endpoint_input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs/data.0053.flt.h5",
+  "endpoint_timestep": "Timestep_53",
+  "endpoint_target_code_time": 15330.0696894,
+  "endpoint_preflight_time_code": 15330.0696894,
+  "endpoint_hdf5_shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ],
+  "nonzero_view_projected_accumulation": "edge_overlap_uniform_cell_projection",
+  "c_hi_reference_contract": "docs/science/assets/c_hi_refined_viewing_angle_consolidation_2026-06-25/refined_trio_context.csv",
+  "boundary_confirmations": {
+    "no_g_lo": true,
+    "no_new_pluto_production": true,
+    "no_c_lo_continuation": true,
+    "no_source_age_sweep": true,
+    "no_scientific_default_changes": true,
+    "no_bulky_local_payload_retrieval": true,
+    "no_commit_or_push": true,
+    "pbs_stop_rule_invoked": true,
+    "no_new_pbs_submission_during_completion": true,
+    "no_xraise_rerun_during_completion": true,
+    "no_praise_radio_cavity_or_endpoint_comparison_rerun": true,
+    "no_bulky_hdf5_data_or_particle_payload_local_copy": true,
+    "large_tsv_review_arrays_documented": true
+  },
+  "recommended_next_step": "review_and_accept_goal036_then_prepare_a_bounded_c_lo_vs_c_hi_product_interpretation_or_g_lo_readiness_decision_packet",
+  "pbs_completion": {
+    "job_id": "751098.kunanyi-ohpc",
+    "job_name": "c_lo_xprod",
+    "job_state": "F",
+    "exit_status": 0,
+    "stageout_status": "1",
+    "resources_used_cpupercent": "95",
+    "resources_used_cput": "00:17:39",
+    "resources_used_mem": "1144972kb",
+    "resources_used_ncpus": "1",
+    "resources_used_vmem": "1709232kb",
+    "resources_used_walltime": "00:27:19"
+  },
+  "retrieved_archive": {
+    "local_path": "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/remote_logs/c_lo_endpoint_first_products_2026-07-07.tar.gz",
+    "sha256": "041eed367d0b74e5bbfbfd3d2ca1e9b51c0eb24b90c7fdd32c36a8bec95646c1",
+    "size_bytes": 41334073,
+    "tar_member_count": 38
+  },
+  "local_extracted_product_root": "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products",
+  "completion_validation_assets": [
+    "completion_summary.csv",
+    "retrieved_archive_manifest.csv",
+    "product_validation_summary.csv",
+    "headline_c_hi_c_lo_comparison.csv",
+    "large_file_inventory.csv",
+    "schema_repair_manifest.csv"
+  ],
+  "headline_results": {
+    "c_lo_views_validated": [
+      "0deg",
+      "45deg",
+      "90deg"
+    ],
+    "nonzero_view_projected_accumulation": "edge_overlap_uniform_cell_projection",
+    "empty_projected_columns_raw_corrected_ratio": "0 for all C-LO views/layers",
+    "c_lo_to_c_hi_corrected_xray_sum_ratio_by_view": {
+      "0deg": "1.087839647658863",
+      "45deg": "0.9665266425113752",
+      "90deg": "0.9665266425113748"
+    },
+    "c_lo_to_c_hi_raw_xray_sum_ratio_by_view": {
+      "0deg": "1.101367748136191",
+      "45deg": "0.9732792952759747",
+      "90deg": "0.9732792952759742"
+    }
+  },
+  "local_review_product_root": "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products",
+  "package_policy": {
+    "large_review_payload_retained": true,
+    "large_file_inventory": "large_file_inventory.csv",
+    "large_file_count_gt_5MiB": 13,
+    "large_file_policy": "Retain 2-D TSV endpoint review arrays and retrieved archive as compact review/provenance payloads; no HDF5, PLUTO data.*, or particle payload files are present.",
+    "max_file_size_mib": 39.419,
+    "all_files_below_100MiB": true
+  },
+  "schema_policy": {
+    "duplicate_header_issue": "remote archive c_lo_endpoint_projection_metrics.csv contained duplicate time_myr header",
+    "local_review_copy": "schema-cleaned under review_products/c_lo_endpoint_projection_metrics.csv",
+    "remote_archive": "retained unchanged under remote_logs as immutable provenance",
+    "schema_repair_manifest": "schema_repair_manifest.csv",
+    "future_wrapper": "patched to avoid duplicate projection metrics columns"
+  }
+}

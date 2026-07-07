@@ -1,0 +1,2 @@
+artifact,status,original_issue,local_action,remote_archive_policy,data_values_policy,notes
+review_products/c_lo_endpoint_projection_metrics.csv,schema_repaired_local_review_copy,remote archive product had duplicate time_myr header,removed duplicate time_myr column from local review CSV header and rows,remote retrieved archive retained unchanged under remote_logs as immutable provenance,duplicate column carried the same time_myr values; retained first occurrence,wrapper patched so future generated projection metrics use unique columns

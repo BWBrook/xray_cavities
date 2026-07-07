@@ -1,0 +1,16 @@
+item,status,value,notes
+access_route,pass,Chrome/Open OnDemand selector plus repo-local password-auth helper,Safari was not used
+remote_wrapper_syntax,pass,bash -n /u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products.pbs,passed before qsub
+job_submission,submitted,751098.kunanyi-ohpc,exactly one bounded PBS post-processing job submitted
+job_name,submitted,c_lo_xprod,PBS job name
+job_state_at_stop,pass,Q,verified with qstat immediately after qsub
+queue,pass,normal,qstat queue
+resources,pass,select=1:ncpus=1:mpiprocs=1:mem=96gb,post-processing resource request
+walltime,pass,04:00:00,post-processing walltime request
+pbs_stop_rule,pass,invoked after queued verification,no polling or retrieval after Q state
+stage_root,pass,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products,staged wrapper/helper/reference and remote logs
+analysis_root,planned,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products,expected compact product root
+expected_archive,planned,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products_2026-07-07.tar.gz,archive to retrieve after PBS completion email
+stdout,planned,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products.out,retrieve after PBS completion email
+stderr,planned,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products.err,retrieve after PBS completion email
+submission_preflight_log,planned,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/remote_logs/submission_preflight_2026-07-07.txt,remote compact text log

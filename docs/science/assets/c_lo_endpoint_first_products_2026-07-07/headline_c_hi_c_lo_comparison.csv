@@ -1,0 +1,4 @@
+view,c_hi_source_goal,c_hi_projected_accumulation,c_lo_projected_accumulation,c_lo_to_c_hi_raw_xray_sum_ratio,c_lo_to_c_hi_corrected_xray_sum_ratio,c_lo_to_c_hi_corrected_xray_max_ratio,empty_columns_status,interpretation_boundary
+0deg,Goal 005,direct_y_axis_sum_accepted_baseline,direct_y_axis_sum,1.101367748136191,1.087839647658863,0.003018414118929397,pass,"compact endpoint prove-out comparison, not a final observable claim"
+45deg,Goal 016,edge_overlap_uniform_cell_projection,edge_overlap_uniform_cell_projection,0.9732792952759747,0.9665266425113752,0.02383693282436476,pass,"compact endpoint prove-out comparison, not a final observable claim"
+90deg,Goal 016,edge_overlap_uniform_cell_projection,edge_overlap_uniform_cell_projection,0.9732792952759742,0.9665266425113748,0.01674149034101392,pass,"compact endpoint prove-out comparison, not a final observable claim"

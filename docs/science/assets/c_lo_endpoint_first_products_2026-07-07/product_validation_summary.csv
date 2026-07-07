@@ -1,0 +1,4 @@
+case,view,timestep,time_myr,projected_accumulation,accumulator_status,raw_empty_columns,corrected_empty_columns,correction_ratio_empty_columns,empty_column_status,raw_xray_sum,corrected_xray_sum,corrected_xray_max,c_lo_to_c_hi_corrected_xray_sum_ratio,c_lo_to_c_hi_corrected_xray_max_ratio,validation_status
+C-LO,0deg,Timestep_53,50.00000000000777,direct_y_axis_sum,pass,0,0,0,pass,2628158571.11287,3494804623.455285,8676.140755686643,1.087839647658863,0.003018414118929397,pass
+C-LO,45deg,Timestep_53,50.00000000000777,edge_overlap_uniform_cell_projection,pass,0,0,0,pass,1040282658.093951,1385987160.135606,7861.240459759196,0.9665266425113752,0.02383693282436476,pass
+C-LO,90deg,Timestep_53,50.00000000000777,edge_overlap_uniform_cell_projection,pass,0,0,0,pass,1471181843.777998,1960081839.138744,7734.063489218517,0.9665266425113748,0.01674149034101392,pass

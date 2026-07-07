@@ -1,0 +1,15 @@
+started_utc=2026-07-07T01:38:19Z
+stage=/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products
+33b64132f78698cdbf679b39f823e0cecefa36dcf2081f89f3ac3a799518dcfc  /u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_lo_endpoint_first_products.pbs
+a7ef3553a18ef79ee7c29fd40f4b3cbc13a6376e7bc45b0152ea004f05232c0c  /u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/xraise_grid_smoke.py
+3f08990d50882043399b863c48e32ca695aafb9bec6c5f4b840ee7a634cce3a7  /u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_hi_refined_trio_context.csv
+remote_wrapper_syntax=passed
+submitting=1
+jobid=751098.kunanyi-ohpc
+Job Id: 751098.kunanyi-ohpc
+    Job_Name = c_lo_xprod
+    job_state = Q
+    queue = normal
+    Resource_List.select = 1:ncpus=1:mpiprocs=1:mem=96gb
+    Resource_List.walltime = 04:00:00
+finished_utc=2026-07-07T01:38:19Z

@@ -1,0 +1,13 @@
+check,status,value,notes
+done_marker,pass,present,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/markers/DONE
+failed_marker_absent,pass,absent,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/markers/FAILED
+latest_double_hdf5,pass,data.0013.dbl.h5,size_bytes=67318639276
+latest_float_hdf5,pass,data.0053.flt.h5,size_bytes=44890581676
+latest_particle_restart,pass,particles.5003.dbl,size_bytes=27340389
+double_catalogue,pass,dbl.h5.out,size_bytes=1090
+float_catalogue,pass,flt.h5.out,size_bytes=4243
+restart_log,pass,restart.out,size_bytes=1792
+grid_catalogue,pass,grid.out,size_bytes=143880
+hdf5_timestep,pass,Timestep_53,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs/data.0053.flt.h5
+hdf5_shape,pass,1014x960x960,rho/prs/tr1/vx1/vx2/vx3
+hdf5_time_code,pass,15330.069689399999,target=15330.069689399999

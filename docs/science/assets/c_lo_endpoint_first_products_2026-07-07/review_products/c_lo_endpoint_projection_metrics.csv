@@ -1,0 +1,4 @@
+case,view,view_angle_deg,timestep,endpoint_target_code_time,time_myr,projected_accumulation,sky_horizontal_bins,raw_empty_columns,corrected_empty_columns,correction_ratio_empty_columns,raw_xray_max,corrected_xray_max,raw_xray_sum,corrected_xray_sum,correction_ratio_positive_max,correction_ratio_positive_sum
+C-LO,0deg,0,Timestep_53,15330.0696894,50.00000000000777,direct_y_axis_sum,960,0,0,0,6303.830823104741,8676.140755686643,2628158571.11287,3494804623.455285,1.376329363391305,1297890.875495037
+C-LO,45deg,45,Timestep_53,15330.0696894,50.00000000000777,edge_overlap_uniform_cell_projection,960,0,0,0,5920.143329482839,7861.240459759196,1040282658.093951,1385987160.135606,1.350669241330346,1302470.831905396
+C-LO,90deg,90,Timestep_53,15330.0696894,50.00000000000777,edge_overlap_uniform_cell_projection,960,0,0,0,5797.837361236661,7734.063489218517,1471181843.777998,1960081839.138744,1.346500578781533,1301015.713714466

@@ -1,0 +1,6 @@
+product,case,source,path,status
+endpoint_hdf5,C-LO,Goal 035 endpoint run root,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products,remote_product_generated_from_endpoint_hdf5
+xraise_grid_0deg,C-LO,Goal 036 endpoint product job,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/xraise_grid_0deg,compact_product
+xraise_grid_45deg,C-LO,Goal 036 endpoint product job,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/xraise_grid_45deg,compact_product
+xraise_grid_90deg,C-LO,Goal 036 endpoint product job,/scratch/bwbrook/xray_cavities_analysis/2026-07-07-c-lo-endpoint-first-products/xraise_grid_90deg,compact_product
+c_hi_refined_trio_context,C-HI,Goal 017 accepted control surface,/u/bwbrook/codex_kunanyi/goal036_c_lo_endpoint_first_products/c_hi_refined_trio_context.csv,reference_table
