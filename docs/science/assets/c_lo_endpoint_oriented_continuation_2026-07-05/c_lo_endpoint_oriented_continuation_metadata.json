@@ -1,0 +1,62 @@
+{
+  "status": "submitted_waiting_pbs_completion",
+  "decision_label": "C_LO_RESTART_GATE_CLEAN_ENDPOINT_ORIENTED_48H_CONTINUATION_SUBMITTED",
+  "created_utc": "2026-07-05T12:20:00+00:00",
+  "restart_source": {
+    "goal": "Goal034",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-bounded-continuation-2/C-LO/particles",
+    "latest_code_time": 4930.755,
+    "endpoint_target_code_time": 15330.06968940,
+    "endpoint_fraction": 0.32163944,
+    "latest_dbl_catalogue_row": "6 4.930755e+03 2.678869e-01 18546 single_file little rho vx1 vx2 vx3 prs tr1",
+    "latest_flt_catalogue_row": "19 4.930755e+03 2.678869e-01 18546 single_file little rho vx1 vx2 vx3 prs tr1",
+    "required_restart_files": [
+      "data.0006.dbl.h5",
+      "data.0006.dbl.xmf",
+      "particles.1611.dbl",
+      "dbl.h5.out",
+      "flt.h5.out",
+      "restart.out",
+      "grid.out"
+    ]
+  },
+  "resource_decision": {
+    "queue": "normal",
+    "queue_max_walltime": "48:00:00",
+    "requested_walltime": "48:00:00",
+    "pluto_maxtime_hours": 47.5,
+    "nodes": 64,
+    "mpiprocs_per_node": 28,
+    "total_mpi_ranks": 1792,
+    "reason": "A 48-hour rung matches the normal queue walltime ceiling confirmed by qstat and Barry's amendment, and is designed to reach the endpoint if restart performance remains comparable while preserving the accepted 64-node restart-safe scale."
+  },
+  "remote_paths": {
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+    "stdout": "/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.out",
+    "stderr": "/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.err",
+    "preflight_transcript": "/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/remote_logs/submission_preflight_2026-07-05_endpoint_oriented.txt"
+  },
+  "submitted_job": {
+    "id": "750947.kunanyi-ohpc",
+    "name": "c_lo_endpt",
+    "queue": "normal",
+    "state_at_stop": "R",
+    "resources": "select=64:ncpus=28:mpiprocs=28,walltime=48:00:00",
+    "ncpus": 1792,
+    "mpiprocs": 1792,
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation"
+  },
+  "boundaries": {
+    "submit_at_most_one_pbs_job": true,
+    "no_polling_after_queued_or_running": true,
+    "no_postprocessing": true,
+    "no_g_lo_work": true,
+    "no_bulk_payload_retrieval": true,
+    "no_scientific_default_changes": true,
+    "no_commits_or_pushes": true,
+    "no_agent_comms_edits": true
+  },
+  "recommended_next_goal_shape": "Wait for Barry's PBS completion email, then run a compact completion/endpoint review without post-processing."
+}

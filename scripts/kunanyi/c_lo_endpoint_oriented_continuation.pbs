@@ -1,0 +1,31 @@
+#!/bin/bash
+#PBS -N c_lo_endpt
+#PBS -q normal
+#PBS -l select=64:ncpus=28:mpiprocs=28
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.err
+
+set -euo pipefail
+
+# Endpoint-oriented C-LO continuation from the accepted Goal034 restart
+# surface. The submitting agent stages an isolated workdir with symlinks to
+# the accepted restart files, submits exactly one PBS job if the restart and
+# queue gates are clean, then stops under the PBS completion-email rule.
+export CASE_ID="${CASE_ID:-C-LO}"
+export CASE_VARIANT="${CASE_VARIANT:-particles}"
+export CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/rendered_c_lo_config/C-LO/particles}"
+export RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation}"
+export PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-47.5}"
+export RESTART_POLICY="${RESTART_POLICY:-auto}"
+export ALLOW_DONE_RERUN="${ALLOW_DONE_RERUN:-0}"
+export BUILD_JOBS="${BUILD_JOBS:-28}"
+export FORCE_REBUILD="${FORCE_REBUILD:-0}"
+export KUNANYI_MODULE_STACK="${KUNANYI_MODULE_STACK:-agn_intel_impi}"
+export MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+export HDF5_USE_FILE_LOCKING="${HDF5_USE_FILE_LOCKING:-FALSE}"
+
+BASE_SCRIPT="${BASE_SCRIPT:-/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/jet_setup_production_template_latest.pbs}"
+exec bash "$BASE_SCRIPT"

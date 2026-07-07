@@ -1,0 +1,17 @@
+metric,value
+run_root_size,1.9T
+outputs_size,1.9T
+hdf5_count,41
+double_hdf5_count,7
+float_hdf5_count,34
+particle_restart_count,3392
+latest_double_hdf5,data.0013.dbl.h5
+latest_float_hdf5,data.0053.flt.h5
+latest_particle_restart,particles.5003.dbl
+latest_dbl_row,"13 1.533007e+04 2.422549e-03 57029 single_file little rho vx1 vx2 vx3 prs tr1 "
+latest_flt_row,"53 1.533007e+04 2.422549e-03 57029 single_file little rho vx1 vx2 vx3 prs tr1 "
+endpoint_status,endpoint_reached
+latest_time,15330.07
+target_time,15330.06968940
+remaining_gap,-0.000310600000375
+fraction_of_endpoint,1.00000002026

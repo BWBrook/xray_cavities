@@ -1,0 +1,4 @@
+rank,recommendation,status,rationale,requires_authorization
+1,bounded_c_lo_endpoint_postprocessing_preflight,recommended,C-LO compact catalogues now support endpoint reached; next step should inspect endpoint products and plan bounded XRAiSE/cavity/radio post-processing without starting it implicitly.,Barry/X-ray Cavities
+2,c_lo_endpoint_science_product_generation,defer,Do not run XRAiSE/PRAiSE/radio/cavity products until the endpoint-status package is reviewed and accepted.,Barry/X-ray Cavities
+3,g_lo_execution_branch,hold,G-LO remains outside Goal 035 and should wait for explicit comparison-case authorization.,Barry/X-ray Cavities

@@ -1,0 +1,5 @@
+status=endpoint_reached
+latest_time=15330.07
+target_time=15330.0696894
+remaining_gap=-0.000310600000375
+fraction_of_endpoint=1.00000002026

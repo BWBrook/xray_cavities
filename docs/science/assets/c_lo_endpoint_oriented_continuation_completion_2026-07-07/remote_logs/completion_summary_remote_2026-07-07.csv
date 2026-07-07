@@ -1,0 +1,15 @@
+check,status,value,detail
+job_id,info,750947.kunanyi-ohpc,750947.kunanyi-ohpc
+run_root,info,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles
+stage_root,info,/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation,/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation
+marker_done,present,present,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/markers/DONE
+marker_failed,absent,absent,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/markers/FAILED
+dbl_catalogue,present,13 1.533007e+04 2.422549e-03 57029 single_file little rho vx1 vx2 vx3 prs tr1 ,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs/dbl.h5.out
+flt_catalogue,present,53 1.533007e+04 2.422549e-03 57029 single_file little rho vx1 vx2 vx3 prs tr1 ,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs/flt.h5.out
+restart_catalogue,present,1792,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs/restart.out
+grid_catalogue,present,143880,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs/grid.out
+stdout,present,78473,/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.out
+stderr,present,93,/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.err
+preflight,present,22047,/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/remote_logs/submission_preflight_2026-07-05_endpoint_oriented.txt
+endpoint_target,info,15330.06968940,/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/rendered_c_lo_config/C-LO/particles/pluto.ini
+endpoint_status,endpoint_reached,endpoint_reached,latest=15330.07 target=15330.06968940 gap=-0.000310600000375 fraction=1.00000002026

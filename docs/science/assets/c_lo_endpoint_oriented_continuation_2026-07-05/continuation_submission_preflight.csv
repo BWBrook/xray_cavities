@@ -1,0 +1,11 @@
+check,status,value,notes
+local_wrapper_syntax,pass,scripts/kunanyi/c_lo_endpoint_oriented_continuation.pbs,bash -n passed locally after Barry amendment.
+local_template_syntax,pass,scripts/kunanyi/jet_setup_production_template.pbs,bash -n passed locally.
+local_focused_tests,pass,16 passed in 0.02s,Endpoint-oriented and existing C-LO wrapper tests passed.
+remote_stage_root,pass,/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation,Stage root prepared for exactly one submission.
+remote_run_root,pass,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation,No-overwrite run root was absent before preparation.
+remote_hash_verification,pass,wrapper/template/config/Stewart CSV,Remote SHA-256 checks matched local expected values.
+remote_wrapper_syntax,pass,wrapper/template,Remote bash -n passed.
+remote_restart_symlink_gate,pass,data.0006.dbl.h5 and particles.1611.dbl symlinked; catalogues copied,Large restart payloads symlinked while compact catalogues were copied into Goal035 run root to avoid mutating Goal034 outputs.
+pbs_submission,pass,750947.kunanyi-ohpc,Exactly one C-LO endpoint-oriented PBS job submitted.
+pbs_state_after_submission,pass,R,qstat in the submission command reported job_state R in normal queue.

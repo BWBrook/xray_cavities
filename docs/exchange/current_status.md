@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-05
+Last updated: 2026-07-07
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,128 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-034 C-LO continuation-2 completion
-review handoff.
+This note should be treated as a Goal-035 C-LO endpoint-status review handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 035 C-LO endpoint-oriented continuation completion review on
+2026-07-07:
+
+- Status:
+  `complete_endpoint_review`.
+- Decision label:
+  `C_LO_ENDPOINT_ORIENTED_RUN_REACHED_ENDPOINT_COMPACT_EVIDENCE_GREEN`.
+- PBS completion:
+  `750947.kunanyi-ohpc` / `c_lo_endpt` finished with `Exit_status=0`,
+  `resources_used.walltime=24:47:37`, `resources_used.cput=692:21:26`,
+  `resources_used.ncpus=1792`, `resources_used.mem=9891168kb`, and
+  `resources_used.vmem=27596320kb`.
+- Scheduler caveat:
+  `qstat` reports `Stageout_status=1`, but requested stage-root stdout/stderr,
+  final `qstat`, submission preflight transcript, and compact inventories were
+  present and retrieved.
+- Remote endpoint evidence:
+  `markers/DONE` present, `markers/FAILED` absent, stdout reports
+  `MPI_EXIT_CODE=0`, and stderr contains only the known nonfatal
+  `setup-problem: git: command not found` warning.
+- Latest C-LO endpoint-oriented catalogues:
+  `dbl.h5.out` row
+  `13 1.533007e+04 2.422549e-03 57029` and `flt.h5.out` row
+  `53 1.533007e+04 2.422549e-03 57029`.
+- Endpoint interpretation:
+  the configured target remains `15330.06968940` code-time units. The latest
+  compact catalogue time is `15330.07`, giving endpoint fraction
+  `1.00000002026` and remaining gap `-0.000310600000375`; compact catalogues
+  therefore support that C-LO reached the 50 Myr endpoint.
+- Remote inventory:
+  `41` HDF5 files and `3392` particle restart files inventoried by path/size
+  only; remote output directory size `1.9T`; no HDF5 or particle payloads were
+  copied locally.
+- New completion science note:
+  `docs/science/c_lo_endpoint_oriented_continuation_completion_2026-07-07.md`.
+- New completion asset bundle:
+  `docs/science/assets/c_lo_endpoint_oriented_continuation_completion_2026-07-07/`.
+- Machine-readable assets:
+  `qstat_final.csv`, `completion_summary.csv`, `run_output_inventory.csv`,
+  `run_output_inventory_summary.csv`, `remote_log_inventory.csv`,
+  `next_step_recommendation.csv`,
+  `c_lo_endpoint_oriented_continuation_completion_metadata.json`,
+  `local_asset_manifest.sha256`, and compact `remote_logs/`.
+- Recommendation:
+  next packet should be a bounded C-LO endpoint post-processing preflight or
+  inspection packet after X-ray Cavities accepts this endpoint-status package.
+  Do not start C-LO XRAiSE/PRAiSE/radio/cavity products, endpoint-comparison
+  products, observables, or `G-LO` work from this closeout alone.
+- Boundary confirmation:
+  no new PBS job, retry, continuation, polling loop, bulky retrieval,
+  finalizer, XRAiSE/PRAiSE, radio/cavity extraction, endpoint product,
+  `G-LO`, scientific-default change, environment substitution, source-age
+  substitution, commit, push, cleanup, Stas/Patrick contact, `agent_comms`
+  edit, or accepted-asset overwrite occurred.
+
+Latest Goal 035 C-LO endpoint-oriented continuation preparation on 2026-07-05:
+
+- Status:
+  `submitted_waiting_pbs_completion`.
+- Decision label:
+  `C_LO_RESTART_GATE_CLEAN_ENDPOINT_ORIENTED_48H_CONTINUATION_SUBMITTED`.
+- New wrapper:
+  `scripts/kunanyi/c_lo_endpoint_oriented_continuation.pbs`.
+- New focused wrapper test:
+  `tests/test_c_lo_endpoint_oriented_continuation_wrapper.py`.
+- New science note:
+  `docs/science/c_lo_endpoint_oriented_continuation_2026-07-05.md`.
+- New asset bundle:
+  `docs/science/assets/c_lo_endpoint_oriented_continuation_2026-07-05/`.
+- New Goal log:
+  `docs/goals/035-c-lo-endpoint-oriented-continuation/Log.md`.
+- New exchange log:
+  `docs/exchange/logs/2026-07-05-c-lo-endpoint-oriented-continuation.md`.
+- Restart gate:
+  accepted Goal 034 surface is clean and not endpoint-complete:
+  `markers/DONE` present, `markers/FAILED` absent, latest `dbl.h5.out` row
+  `6 4.930755e+03 2.678869e-01 18546`, latest `flt.h5.out` row
+  `19 4.930755e+03 2.678869e-01 18546`, latest restart surfaces
+  `data.0006.dbl.h5`, `data.0006.dbl.xmf`, and `particles.1611.dbl`.
+- Endpoint interpretation:
+  latest compact catalogue time is `4930.755`, which is `0.32163944` of the
+  accepted `15330.06968940` code-time endpoint target.
+- Queue/resource decision:
+  `normal` queue reports `resources_max.walltime = 48:00:00`, and Barry
+  clarified that Kunanyi generally accepts jobs up to 48 hours; Goal 035 is
+  therefore prepared as the preferred endpoint-oriented job with
+  `walltime=48:00:00` and `PLUTO_MAXTIME_HOURS=47.5`, while retaining
+  `64` nodes / `1792` ranks because the 80-node restart-stall caveat remains
+  unresolved.
+- Planned stage root:
+  `/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation`.
+- Planned run root:
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation`.
+- Boundary:
+  submit at most one C-LO PBS job only if local/remote staging gates pass;
+  stop after Q/R verification; no post-processing, endpoint observables,
+  `G-LO`, bulky output retrieval, scientific-default changes, commits, pushes,
+  cleanup, or `agent_comms` edits are authorized.
+- Submitted PBS job:
+  `750947.kunanyi-ohpc` / `c_lo_endpt`, verified `R` in the `normal` queue.
+  Requested resources are `select=64:ncpus=28:mpiprocs=28` and
+  `walltime=48:00:00`, with `PLUTO_MAXTIME_HOURS=47.5`.
+- Submission evidence:
+  remote SHA-256 checks, remote wrapper/template syntax, queue 48-hour ceiling,
+  restart-surface checks, no-overwrite run-root preparation, and module-stack
+  checks passed before qsub. The helper returned a late `141` after qstat
+  output, but qsub succeeded and the qstat record showed state `R`.
+- Retrieval targets after Barry's PBS completion email:
+  `/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.out`,
+  `/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.err`,
+  `/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/remote_logs/submission_preflight_2026-07-05_endpoint_oriented.txt`,
+  `/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/remote_logs/submission_record_2026-07-05_endpoint_oriented.txt`,
+  and compact inventory of
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles`.
+- Stop rule:
+  active. Do not poll or retrieve until Barry reports the PBS completion email,
+  or X-ray Cavities explicitly authorizes a re-check.
 
 Latest Goal 034 C-LO continuation-2 completion review on 2026-07-05:
 

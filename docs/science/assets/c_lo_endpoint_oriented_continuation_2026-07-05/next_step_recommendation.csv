@@ -1,0 +1,4 @@
+rank,next_goal_shape,rationale
+1,wait_for_pbs_completion_email,Goal035 submitted 750947.kunanyi-ohpc and qstat reported R; stop until Barry reports PBS completion or X-ray Cavities explicitly authorizes a re-check.
+2,endpoint_completion_review_after_email,"After completion authorization, determine endpoint status from compact catalogues before any C-LO post-processing."
+3,do_not_start_postprocessing_until_endpoint_resolved,XRAiSE/PRAiSE/radio/cavity/observable work remains unauthorized until endpoint status is explicit.

@@ -1,0 +1,14 @@
+check,status,value,notes
+source_run_root,pass,/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-bounded-continuation-2/C-LO/particles,Accepted Goal034 C-LO continuation-2 surface.
+done_marker,pass,present,Remote read-only gate confirmed markers/DONE.
+failed_marker,pass,absent,Remote read-only gate confirmed markers/FAILED absent.
+latest_dbl_catalogue_row,pass,"6 4.930755e+03 2.678869e-01 18546 single_file little rho vx1 vx2 vx3 prs tr1",Matches accepted Goal034 catalogue expectation.
+latest_flt_catalogue_row,pass,"19 4.930755e+03 2.678869e-01 18546 single_file little rho vx1 vx2 vx3 prs tr1",Matches accepted Goal034 catalogue expectation.
+restart_hdf5,pass,data.0006.dbl.h5,Required restart file present remotely.
+restart_xmf,pass,data.0006.dbl.xmf,Matching restart sidecar present remotely.
+particle_restart,pass,particles.1611.dbl,Latest particle restart surface present remotely.
+restart_catalogues,pass,"dbl.h5.out;flt.h5.out;restart.out;grid.out",Required compact catalogues/logs present remotely.
+endpoint_target_code_time,pass,15330.06968940,Retained from accepted C-LO config.
+latest_code_time,info,4930.755,Latest compact catalogue time from Goal034 surface.
+endpoint_fraction,info,0.32163944,Latest code time divided by endpoint target.
+endpoint_status,pass,not_endpoint_complete,Clean checkpoint; endpoint still unresolved.

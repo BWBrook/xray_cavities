@@ -1,0 +1,11 @@
+submitted_utc=2026-07-05T12:25:24Z
+job_id=750947.kunanyi-ohpc
+job_name=c_lo_endpt
+queue=normal
+resources=select=64:ncpus=28:mpiprocs=28,walltime=48:00:00
+pluto_maxtime_hours=47.5
+stage_root=/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation
+run_root=/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation
+stdout=/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.out
+stderr=/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/c_lo_endpoint_oriented_continuation.err
+preflight_transcript=/u/bwbrook/codex_kunanyi/goal035_c_lo_endpoint_oriented_continuation/remote_logs/submission_preflight_2026-07-05_endpoint_oriented.txt

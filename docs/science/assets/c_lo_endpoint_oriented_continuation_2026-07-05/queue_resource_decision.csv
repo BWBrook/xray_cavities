@@ -1,0 +1,12 @@
+check,status,value,notes
+queue_name,pass,normal,Kunanyi queue inspected by read-only qstat.
+queue_enabled_started,pass,true,Queue was enabled and started during live gate.
+queue_max_walltime,pass,48:00:00,qstat -Qf normal reports resources_max.walltime.
+chosen_walltime,pass,48:00:00,Matches the normal queue walltime ceiling confirmed by qstat and Barry's amendment.
+chosen_pluto_maxtime_hours,pass,47.5,Conservative margin below PBS walltime for clean PLUTO checkpoint/final write.
+node_count,pass,64,Preserves accepted restart-safe scale after 80-node restart-stall caveat.
+mpi_ranks,pass,1792,64 nodes times 28 mpiprocs per node.
+recent_restart_rate_estimate,info,474.34_code_time_per_pluto_hour,Goal034 advanced 1660.2 code-time units over a 3.5 hour PLUTO maxtime rung.
+remaining_code_time,info,10399.31468940,Endpoint target minus latest Goal034 code time.
+estimated_pluto_hours_to_endpoint,info,21.92,Remaining code time divided by recent restart-rate estimate.
+resource_decision,pass,endpoint_oriented_single_rung,Chosen walltime uses the preferred up-to-48-hour ambition to reach the endpoint if restart performance remains comparable.

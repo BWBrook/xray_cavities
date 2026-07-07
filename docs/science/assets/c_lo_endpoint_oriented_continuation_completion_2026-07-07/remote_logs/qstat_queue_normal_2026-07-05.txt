@@ -1,0 +1,16 @@
+Queue: normal
+    queue_type = Execution
+    total_jobs = 41
+    state_count = Transit:0 Queued:0 Held:0 Waiting:0 Running:38 Exiting:0 Begu
+	n:3
+    max_queued = [u:PBS_GENERIC=4000]
+    max_queued_res.ncpus = [u:PBS_GENERIC=7000]
+    resources_max.mem = 128gb
+    resources_max.walltime = 48:00:00
+    resources_assigned.mem = 4261412864kb
+    resources_assigned.mpiprocs = 96
+    resources_assigned.ncpus = 130
+    resources_assigned.nodect = 38
+    max_run = [u:PBS_GENERIC=3000]
+    enabled = True
+    started = True
