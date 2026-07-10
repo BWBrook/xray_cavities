@@ -1,0 +1,10 @@
+path,size_bytes,role,status
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/g_lo_endpoint_oriented_production.out,77874,compact_evidence,present
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/g_lo_endpoint_oriented_production.err,163,compact_evidence,present
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/submission_preflight_2026-07-07_g_lo.txt,2989,compact_evidence,present
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/qstat_final_2026-07-10.txt,8631,compact_evidence,present
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/FAILED_marker_2026-07-10.txt,0,compact_evidence,present
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/checkpoint_catalogues_2026-07-10.txt,1423,compact_evidence,present
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/completion_summary_remote_2026-07-10.csv,1645,compact_evidence,present
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/run_output_inventory_remote_2026-07-10.csv,67415,compact_evidence,present
+/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/run_output_inventory_summary_remote_2026-07-10.csv,595,compact_evidence,present

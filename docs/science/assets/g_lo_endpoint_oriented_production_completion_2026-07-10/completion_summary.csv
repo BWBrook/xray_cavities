@@ -1,0 +1,42 @@
+check,status,value,notes
+completion_status,info,complete_failure_diagnosis_checkpoint_preserved,reviewed completion classification
+decision_label,info,G_LO_HDF5_WRITE_STALL_SAFE_FLUID_CHECKPOINT_PRESERVED_RESTART_PREFLIGHT_REQUIRED,reviewed completion decision
+job_id,info,751105.kunanyi-ohpc,PBS job
+scheduler_outcome,fail,walltime_termination_symptom_exit_271,"terminal scheduler symptom; walltime 48:01:33 against requested 48:00:00"
+strongest_root_cause,fail,parallel_double_hdf5_write_stall_at_regular_15_myr_output,"partial data.0003 mtime was about 10:22:34 after launch and stale about 37:38:48 before termination"
+physics_failure,info,not_demonstrated,compact evidence shows an output-path stall rather than a demonstrated physics failure
+done_marker,fail,absent,run marker
+failed_marker,fail,present_zero_bytes,termination interrupted marker writing
+latest_dbl_catalogue_row,pass,"2 3.065935e+03 3.213700e-01 10578 single_file little rho vx1 vx2 vx3 prs tr1 ",latest completed double-HDF5 catalogue row
+latest_inventoried_double_hdf5,caveat,data.0003.dbl.h5,"latest filename only; incomplete termination artifact; not restartable"
+latest_inventoried_double_size_bytes,caveat,44741404952,"66.462135054% of a complete 67318639276-byte double file"
+partial_double_missing_bytes,caveat,22577234324,bytes short of the complete double-file size
+partial_double_catalogue_row,fail,absent,no dbl.h5.out row for index 3
+partial_double_matching_xmf,fail,absent,no data.0003.dbl.xmf
+validated_fluid_checkpoint_preserved,pass,data.0002.dbl.h5,"valid 10 Myr fluid checkpoint; catalogue index 2"
+latest_validated_restart_checkpoint_size_bytes,pass,67318639276,matches the complete double-file size
+latest_validated_restart_xmf,pass,data.0002.dbl.xmf,matching XMF present
+latest_validated_restart_code_time,pass,3065.935,catalogue index 2
+latest_validated_restart_time_myr,info,9.999742539,scaled against the configured 50 Myr endpoint
+candidate_paired_particle_restart,preflight_required,particles.1000.dbl,"nearest remote mtime only; content and pairing are not validated"
+candidate_paired_particle_size_bytes,info,5044387,inventory evidence only
+candidate_particle_mtime_delta_seconds,info,44,written after data.0002.dbl.h5 by remote mtime
+latest_inventoried_particle_restart,info,particles.1499.dbl,"latest particle filename; not the candidate paired surface for checkpoint 2"
+latest_complete_float_hdf5,pass,data.0014.flt.h5,complete float output at catalogue index 14
+latest_complete_float_code_time,pass,4292.332,catalogue index 14
+latest_complete_float_time_myr,info,13.999714571,scaled against the configured 50 Myr endpoint
+restartable_endpoint_fraction,info,0.199994850781,validated fluid checkpoint progress
+latest_float_endpoint_fraction,info,0.279994291413,latest complete float-output progress
+restart_rollback_code_time,caveat,1226.397,latest complete float time minus safe restart time
+restart_rollback_myr,caveat,3.999972032,about 4 Myr of non-restartable later progress
+restart_rollback_endpoint_percentage_points,caveat,7.999944063,about 8 percentage points of the 50 Myr target
+partial_double_last_progress_after_job_start,diagnostic,10:22:34,derived from wrapper start and remote partial-file mtime
+partial_double_stale_before_job_end,diagnostic,37:38:48,derived from remote partial-file mtime and wrapper end
+pluto_maxtime_cause,info,not_cause,"stall began about 10.4 hours after launch, long before the 47.5-hour maxtime guard"
+restart_guardrail,required,h5restart_2_only,"do not stage or select data.0003.dbl.h5"
+particle_guardrail,required,explicit_preflight,"validate particles.1000.dbl content and pairing before submission"
+full_fluid_particle_restart,preflight_required,conditional,"validated fluid checkpoint alone does not validate the full restart surface"
+watchdog_guardrail,required,fail_closed_no_progress_watchdog,"abort safely if the collective-output path stops making progress"
+next_run_contract,authorization_required,64_nodes_48h_explicit_h5restart_2,"only after Barry authorization; exclude data.0003; retain 5 Myr dbl.h5 cadence and 47.5 h PLUTO maxtime"
+safe_restart_raw_format,caveat,literal_backslash_n_sequences,"raw provenance preserved; local reviewed summaries normalize fields"
+remote_sha_manifest_scope,caveat,predates_supplemental_restart_and_empty_diagnostic_files,local_asset_manifest.sha256 covers the complete final bundle

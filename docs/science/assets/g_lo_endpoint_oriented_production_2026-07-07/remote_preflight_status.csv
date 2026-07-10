@@ -1,0 +1,10 @@
+check,status,evidence,notes
+remote_staged_hashes,pass,All wrapper/template/rendered config/table hashes matched local values in remote preflight transcript.,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/submission_preflight_2026-07-07_g_lo.txt
+remote_wrapper_template_syntax,pass,Remote bash -n passed for g_lo_endpoint_oriented_production.pbs and jet_setup_production_template_latest.pbs.,
+remote_config_sanity,pass,"Remote Python asserted G-LO, group environment, tabulated_cosmo_002031.csv, JET_PWR=1e+43, JET_SPD=0.1, tstop=15330.06968940.",
+remote_group_asset_table,pass,asset_rows=4000 asset_bad_col_rows=0 asset_radius_monotonic=1.,
+source_paths,pass,"PLUTO, jet-setup, setup-problem, and /ds/projects/agn/modulefiles existed.",
+module_stack,pass,"module purge/use/load succeeded for intel/18.0.1.163, impi/2018.1.163, hdf5/1.12.1p, zfp/0.5.5; mpicc/mpirun present.",
+no_overwrite_run_root,pass,workdir_absent=/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles,
+queue_policy,pass,normal enabled/started; resources_max.walltime=48:00:00; Resource_List request uses 64 nodes and 1792 ranks.,
+submission_helper_exit,warn_after_q_proof,"qsub returned job id and qstat showed job_state=Q, then helper reported __CODEX_STATUS__=141 due pipe/session status after proof was printed.",No further remote commands run after Q proof.

@@ -1,0 +1,12 @@
+check,status,value,detail
+job_id,info,751105.kunanyi-ohpc,751105.kunanyi-ohpc
+run_root,info,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles
+stage_root,info,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production
+marker_done,absent,absent,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/markers/DONE
+marker_failed,present,present,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/markers/FAILED
+dbl_catalogue,present,2 3.065935e+03 3.213700e-01 10578 single_file little rho vx1 vx2 vx3 prs tr1 ,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/dbl.h5.out
+flt_catalogue,present,14 4.292332e+03 3.164317e-01 14424 single_file little rho vx1 vx2 vx3 prs tr1 ,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/flt.h5.out
+stdout,present,77874,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/g_lo_endpoint_oriented_production.out
+stderr,present,163,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/g_lo_endpoint_oriented_production.err
+endpoint_target,info,15330.06968940,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/rendered_g_lo_config/G-LO/particles/pluto.ini
+scheduler_outcome,walltime_exceeded,Exit_status=271,walltime=48:01:33 requested=48:00:00

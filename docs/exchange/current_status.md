@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-07
+Last updated: 2026-07-10
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,148 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-036 C-LO endpoint-first-products
-completion handoff.
+This note should be treated as a Goal-037 G-LO HDF5-write-stall diagnosis and
+preserved-checkpoint handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 037 G-LO endpoint-oriented production completion review on
+2026-07-10:
+
+- Status:
+  `complete_failure_diagnosis_checkpoint_preserved`.
+- Decision label:
+  `G_LO_HDF5_WRITE_STALL_SAFE_FLUID_CHECKPOINT_PRESERVED_RESTART_PREFLIGHT_REQUIRED`.
+- Terminal scheduler symptom:
+  `751105.kunanyi-ohpc` / `g_lo_endpt` ended `F` with `Exit_status=271`,
+  `Stageout_status=1`, and walltime `48:01:33` against requested `48:00:00`.
+- Termination evidence:
+  stderr says PBS killed the job because walltime `172883` exceeded limit
+  `172800`; stdout records `RUN_KIND=fresh`,
+  `RUN_ARGS=-i pluto.ini -e environment.ini -maxtime 47.5`, and
+  `JOB_SIGNAL=TERM`.
+- Strongest root cause:
+  `data.0003.dbl.h5` stopped changing about `10:22:34` after launch and
+  remained stale about `37:38:48` before termination, consistent with a
+  stalled regular 15 Myr parallel collective-HDF5 write. Scheduler walltime is
+  the terminal symptom; no physics failure is demonstrated.
+- PLUTO maxtime interpretation:
+  `PLUTO_MAXTIME_HOURS=47.5` is not the cause because the stall began about
+  10.4 hours after launch.
+- Marker interpretation:
+  `markers/DONE` is absent; `markers/FAILED` exists but is zero bytes because
+  termination interrupted marker writing.
+- Critical restart guardrail:
+  `data.0003.dbl.h5` is only the latest inventoried double file. At
+  `44,741,404,952` bytes, with no `dbl.h5.out` row, it is an incomplete
+  termination artifact and must not be used for restart.
+- Validated fluid checkpoint preserved:
+  `data.0002.dbl.h5`, size `67,318,639,276` bytes, with matching
+  `data.0002.dbl.xmf`; catalogue row index `2`, time `3065.935`, step
+  `10578`.
+- Candidate paired particle restart:
+  `particles.1000.dbl`, size `5,044,387` bytes, is nearest by remote mtime at
+  a 44-second delta. This is not content validation and requires explicit
+  particle/content preflight before submission; the full fluid/particle
+  restart remains conditional and requires a fail-closed no-progress
+  watchdog.
+- Catalogue/file offset:
+  latest inventoried double index `3`; latest validated restart index `2`.
+- Latest complete progress:
+  float row index `14`, time `4292.332`, step `14424`; endpoint
+  `15330.06968940`, fraction `0.279994291413`, remaining gap
+  `11037.73768940`.
+- Remote inventory:
+  `863G`, `19` HDF5 files (`4` double and `15` float), and `1500` particle
+  restart files, inventoried by path and size only.
+- Interpretation:
+  diagnosed parallel double-HDF5 write stall with a validated 10 Myr fluid
+  checkpoint preserved; full restart preflight required; not endpoint and not
+  science product.
+- Provenance caveats:
+  raw `safe_restart_surface_2026-07-10.txt` contains literal backslash-`n`
+  sequences and is preserved unchanged while local summaries normalize it;
+  the remote SHA manifest predates that file and the empty PLUTO diagnostic
+  extracts, so the local manifest covers the complete final bundle.
+- Completion science note:
+  `docs/science/g_lo_endpoint_oriented_production_completion_2026-07-10.md`.
+- Completion asset bundle:
+  `docs/science/assets/g_lo_endpoint_oriented_production_completion_2026-07-10/`.
+- Recommendation:
+  only after Barry authorization, preflight and submit at most one further
+  64-node, 48-hour restart with explicit `-h5restart 2`; exclude
+  `data.0003.dbl.h5`, retain the 5 Myr double cadence, validate the candidate
+  `particles.1000.dbl`, and require a fail-closed no-progress watchdog.
+- Boundary confirmation:
+  the completion turn used Chrome/Open OnDemand, remote read-only final qstat
+  and inventory generation, and compact retrieval. It submitted no new PBS
+  job and retrieved no bulky HDF5, `data.*`, or particle payload; no staging,
+  cleanup, commit, push, post-processing, endpoint product, or science-product
+  work occurred.
+
+Latest Goal 037 G-LO endpoint-oriented production submission on 2026-07-07:
+
+- Status:
+  `submitted_waiting_pbs_completion`.
+- Decision label:
+  `G_LO_ENDPOINT_ORIENTED_PRODUCTION_SUBMITTED_WAITING_PBS_COMPLETION`.
+- PBS job:
+  `751105.kunanyi-ohpc` / `g_lo_endpt`.
+- Queue/state at stop:
+  `normal` / `Q`.
+- Requested resources:
+  `select=64:ncpus=28:mpiprocs=28`, `ncpus=1792`, `mpiprocs=1792`,
+  `nodect=64`, `walltime=48:00:00`.
+- Stop rule:
+  no more qstat, polling, retrieval, checkpoint review, or product work until
+  Barry reports the PBS completion email or X-ray Cavities explicitly
+  authorizes a re-check.
+- Restored ignored Stewart group asset:
+  `env/extracted/environments/tabulated/tabulated_cosmo_002031.csv`, sourced
+  from
+  `/u/bwbrook/codex_kunanyi/stage_2026-05-08/kunanyi_gate/group_002031/tabulated_cosmo_002031.csv`;
+  SHA-256
+  `1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a`;
+  validated as `4000` rows, `6` columns, strictly increasing radius, and
+  ignored by Git.
+- Rendered config:
+  asset-backed `G-LO` / `particles` config with Stewart group `002_031`,
+  `JET_PWR=1e43 erg/s`, `JET_SPD=0.1 c`, and
+  `tstop=15330.06968940`.
+- Wrapper:
+  `scripts/kunanyi/g_lo_endpoint_oriented_production.pbs`.
+- Stage root:
+  `/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production`.
+- Run root:
+  `/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production`.
+- Expected stdout/stderr:
+  `/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/g_lo_endpoint_oriented_production.out`
+  and
+  `/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/g_lo_endpoint_oriented_production.err`.
+- Remote preflight:
+  staged hashes matched local; remote wrapper/template `bash -n` passed;
+  config sanity passed for `G-LO`, group asset, `JET_PWR=1e+43`,
+  `JET_SPD=0.1`, and `tstop=15330.06968940`; PLUTO/`jet-setup`/module paths
+  existed; AGN Intel/IMPI/HDF5/ZFP stack loaded; no-overwrite workdir was
+  absent; queue `normal` allowed `48:00:00`.
+- Submission caveat:
+  the repo-local helper returned status `141` after `qsub` and `qstat` printed
+  the queued-state proof. This is retained as a helper/session pipe-status
+  caveat, not as a failed submission.
+- Science note:
+  `docs/science/g_lo_endpoint_oriented_production_2026-07-07.md`.
+- Asset bundle:
+  `docs/science/assets/g_lo_endpoint_oriented_production_2026-07-07/`.
+- Recommendation:
+  wait for Barry's PBS completion email, then run a bounded Goal 037
+  completion retrieval/checkpoint review for compact qstat/stdout/stderr and
+  catalogues only. Do not retrieve bulky HDF5, `data.*`, or particle payloads.
+- Boundary confirmation:
+  no polling after Q proof, retrieval, checkpoint review, post-processing,
+  XRAiSE/PRAiSE/radio/cavity/source-age work, C-HI/C-LO rerun, G-LO product
+  generation, scientific-default change, commit, push, cleanup, Stas/Patrick
+  contact, `agent_comms` edit, or accepted-asset overwrite occurred.
 
 Latest Goal 036 C-LO endpoint-first-products completion on 2026-07-07:
 

@@ -1,0 +1,15 @@
+field,value
+status,submitted_waiting_pbs_completion
+decision_label,G_LO_ENDPOINT_ORIENTED_PRODUCTION_SUBMITTED_WAITING_PBS_COMPLETION
+job_id,751105.kunanyi-ohpc
+job_name,g_lo_endpt
+queue,normal
+job_state_at_stop,Q
+resources,"select=64:ncpus=28:mpiprocs=28, ncpus=1792, mpiprocs=1792, nodect=64, walltime=48:00:00"
+stage_root,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production
+run_root,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production
+expected_stdout,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/g_lo_endpoint_oriented_production.out
+expected_stderr,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/g_lo_endpoint_oriented_production.err
+preflight_transcript,/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production/remote_logs/submission_preflight_2026-07-07_g_lo.txt
+expected_workdir,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles
+retrieval_instruction,"Wait for Barry PBS completion email before any qstat/retrieval; then retrieve compact stdout/stderr/qstat/catalogues only, no bulky HDF5/particle payloads."

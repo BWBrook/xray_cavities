@@ -1,0 +1,6 @@
+rank,recommendation,status,rationale,requires_authorization
+1,"Validate particles.1000.dbl against restart.out and the index-2 fluid time",required_preflight,"The 44-second mtime proximity is a candidate association only, not content validation",Barry/X-ray Cavities
+2,"Stage an isolated continuation surface containing data.0002.dbl.h5, its XMF and catalogue row, and only the preflight-approved particle restart",required_guardrail,"data.0003.dbl.h5 is partial and must not enter restart selection",Barry/X-ray Cavities
+3,"Submit one 64-node, 1792-rank, 48-hour continuation with explicit h5restart 2 and a fail-closed no-progress watchdog",recommended_after_authorization,"This retains the production scale while failing closed on another collective-HDF5 no-progress condition",Barry
+4,"Retain PLUTO maxtime 47.5 hours as a secondary graceful-stop guard",recommended,"The stall began about 10.4 hours after launch, so PLUTO maxtime did not cause this failure",Barry/X-ray Cavities
+5,"Retain the 5 Myr dbl.h5 cadence for the next run",recommended,"More frequent doubles add 67.3 GB writes and I/O exposure; less frequent doubles weaken restartability before the stalled-write cause is resolved",Barry/X-ray Cavities

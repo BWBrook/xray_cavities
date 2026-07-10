@@ -1,0 +1,14 @@
+metric,value
+run_root,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles
+outputs_size,863G
+hdf5_count,19
+double_hdf5_count,4
+float_hdf5_count,15
+particle_restart_count,1500
+latest_double_hdf5,data.0003.dbl.h5
+latest_float_hdf5,data.0014.flt.h5
+latest_particle_restart,particles.1499.dbl
+latest_dbl_row,2 3.065935e+03 3.213700e-01 10578 single_file little rho vx1 vx2 vx3 prs tr1 
+latest_flt_row,14 4.292332e+03 3.164317e-01 14424 single_file little rho vx1 vx2 vx3 prs tr1 
+endpoint_target,15330.06968940
+scheduler_outcome,walltime_exceeded_exit_271

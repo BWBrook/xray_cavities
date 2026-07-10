@@ -1,0 +1,34 @@
+metric,value,notes
+completion_status,complete_failure_diagnosis_checkpoint_preserved,reviewed completion classification
+decision_label,G_LO_HDF5_WRITE_STALL_SAFE_FLUID_CHECKPOINT_PRESERVED_RESTART_PREFLIGHT_REQUIRED,reviewed completion decision
+run_root,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles,remote run root
+outputs_size,863G,remote inventory only
+hdf5_count,19,remote inventory count
+double_hdf5_count,4,"includes one incomplete file, data.0003.dbl.h5"
+float_hdf5_count,15,remote inventory count
+particle_restart_count,1500,remote inventory count
+latest_inventoried_double_hdf5,data.0003.dbl.h5,incomplete termination artifact; not restartable
+latest_inventoried_double_size_bytes,44741404952,66.462135054% of complete double-file size
+validated_fluid_checkpoint_preserved,data.0002.dbl.h5,valid 10 Myr fluid checkpoint at catalogue index 2 with matching XMF
+latest_validated_restart_checkpoint_size_bytes,67318639276,complete double-file size
+latest_validated_restart_catalogue_index,2,safe h5restart index
+latest_validated_restart_code_time,3065.935,about 9.999742539 Myr
+candidate_paired_particle_restart,particles.1000.dbl,mtime-only candidate; explicit content and pairing preflight required
+candidate_paired_particle_size_bytes,5044387,inventory evidence only
+candidate_particle_mtime_delta_seconds,44,relative to data.0002.dbl.h5
+latest_inventoried_particle_restart,particles.1499.dbl,not paired to safe fluid checkpoint
+latest_complete_float_hdf5,data.0014.flt.h5,full-size float output at catalogue index 14
+latest_complete_float_code_time,4292.332,about 13.999714571 Myr
+restartable_endpoint_fraction,0.199994850781,about 20.0% of endpoint
+latest_float_endpoint_fraction,0.279994291413,about 28.0% of endpoint
+rollback_from_latest_float_code_time,1226.397,latest float minus safe restart
+rollback_from_latest_float_myr,3.999972032,about 4 Myr
+endpoint_target,15330.06968940,50 Myr configured target
+scheduler_outcome,walltime_termination_symptom_exit_271,terminal symptom rather than strongest root cause
+strongest_root_cause,parallel_double_hdf5_write_stall_at_regular_15_myr_output,partial file stalled about 10:22:34 after launch and stayed stale about 37:38:48
+physics_failure,not_demonstrated,compact evidence supports an output-path stall
+pluto_maxtime_cause,not_cause,stall began about 10.4 hours after launch
+full_fluid_particle_restart,conditional,requires particle/content preflight and fail-closed no-progress watchdog
+next_run_contract,64_nodes_48h_explicit_h5restart_2_after_barry_authorization,exclude data.0003 and retain 5 Myr double cadence
+safe_restart_raw_format,literal_backslash_n_sequences,raw provenance preserved and local summaries normalized
+remote_sha_manifest_scope,predates_supplemental_files,local manifest covers full final bundle

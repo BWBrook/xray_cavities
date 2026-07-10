@@ -1,0 +1,8 @@
+field,expected,observed,status
+job_name,g_lo_endpt,#PBS -N g_lo_endpt,pass
+resources,select=64:ncpus=28:mpiprocs=28,#PBS -l select=64:ncpus=28:mpiprocs=28,pass
+walltime,48:00:00,#PBS -l walltime=48:00:00,pass
+pluto_maxtime_hours,47.5,PLUTO_MAXTIME_HOURS default 47.5,pass
+restart_policy,force-fresh,RESTART_POLICY default force-fresh,pass
+module_stack,agn_intel_impi,KUNANYI_MODULE_STACK default agn_intel_impi,pass
+no_postprocessing,no xraise/praise/cavity/source-age/qsub in wrapper,validated by pytest static checks,pass

@@ -1,0 +1,35 @@
+{
+  "asset_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+  "boundaries": {
+    "no_commits_or_pushes": true,
+    "no_poll_after_q_or_r": true,
+    "no_postprocessing": true,
+    "no_scientific_default_changes": true,
+    "submit_at_most_one_job": true
+  },
+  "case": "G-LO",
+  "date": "2026-07-07",
+  "decision_label": "G_LO_ENDPOINT_ORIENTED_PRODUCTION_SUBMITTED_WAITING_PBS_COMPLETION",
+  "pbs_job": {
+    "id": "751105.kunanyi-ohpc",
+    "name": "g_lo_endpt",
+    "queue": "normal",
+    "state_at_stop": "Q",
+    "submitted_local_time": "2026-07-07T13:50:29+10:00"
+  },
+  "remote_preflight": "pass",
+  "resources": {
+    "mpiprocs_per_node": 28,
+    "ncpus_per_node": 28,
+    "pluto_maxtime_hours": 47.5,
+    "select": 64,
+    "total_ranks": 1792,
+    "walltime": "48:00:00"
+  },
+  "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+  "stage_root": "/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production",
+  "staged_hashes": "match",
+  "status": "submitted_waiting_pbs_completion",
+  "stewart_group": "002_031",
+  "submission_helper_caveat": "Helper returned status 141 after qsub/qstat Q-state proof was printed; no additional remote polling was performed."
+}

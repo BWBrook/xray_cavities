@@ -1,0 +1,6 @@
+check,expected,observed,status
+sha256_matches_remote,1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a,1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a,pass
+row_count,4000,4000,pass
+column_count_all_rows,6,6,pass
+radius_strictly_increasing,true,true,pass
+local_asset_ignored_by_git,env ignored,validated with git check-ignore,pass

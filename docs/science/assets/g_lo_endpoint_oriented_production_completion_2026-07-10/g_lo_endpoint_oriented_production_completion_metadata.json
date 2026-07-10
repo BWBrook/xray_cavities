@@ -1,0 +1,124 @@
+{
+  "status": "complete_failure_diagnosis_checkpoint_preserved",
+  "decision_label": "G_LO_HDF5_WRITE_STALL_SAFE_FLUID_CHECKPOINT_PRESERVED_RESTART_PREFLIGHT_REQUIRED",
+  "created_local": "2026-07-10",
+  "classification": {
+    "scheduler_outcome": "walltime_termination_symptom",
+    "strongest_root_cause": "parallel_double_hdf5_write_stall_at_regular_15_myr_output",
+    "fluid_checkpoint": "validated_10_myr_fluid_checkpoint_preserved",
+    "full_fluid_particle_restart": "conditional_on_explicit_preflight_and_fail_closed_no_progress_watchdog",
+    "endpoint_status": "not_endpoint",
+    "science_product_status": "not_science_product"
+  },
+  "job": {
+    "id": "751105.kunanyi-ohpc",
+    "name": "g_lo_endpt",
+    "job_state": "F",
+    "queue": "normal",
+    "exit_status": "271",
+    "stageout_status": "1",
+    "walltime_used": "48:01:33",
+    "cput_used": "1343:30:34",
+    "ncpus_used": "1792",
+    "mem_used": "8534012kb",
+    "vmem_used": "26323104kb",
+    "resource_select": "64:ncpus=28:mpiprocs=28",
+    "resource_walltime": "48:00:00"
+  },
+  "remote_paths": {
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles"
+  },
+  "termination_evidence": {
+    "stderr_scheduler_message": "PBS: job killed: walltime 172883 exceeded limit 172800",
+    "run_kind": "fresh",
+    "run_args": "-i pluto.ini -e environment.ini -maxtime 47.5",
+    "job_signal": "TERM",
+    "stdout_mpi_exit_zero": "absent",
+    "done_marker": "absent",
+    "failed_marker": "present",
+    "failed_marker_bytes": "0",
+    "failed_marker_note": "termination interrupted marker writing; zero-byte contents do not imply a clean run"
+  },
+  "root_cause_evidence": {
+    "partial_double_file": "data.0003.dbl.h5",
+    "partial_double_mtime": "2026-07-08 00:13:04 +1000",
+    "job_start": "2026-07-07T03:50:30Z",
+    "last_partial_progress_after_launch": "10:22:34",
+    "partial_file_stale_before_termination": "37:38:48",
+    "intended_output_age_myr": "15",
+    "classification": "parallel_double_hdf5_write_stall_at_regular_15_myr_output",
+    "scheduler_walltime_role": "terminal_symptom",
+    "pluto_maxtime_47_5_role": "not_cause_stall_began_about_10.4_hours_after_launch",
+    "physics_failure_demonstrated": false
+  },
+  "restart_surface": {
+    "latest_validated_fluid_checkpoint": {
+      "file": "data.0002.dbl.h5",
+      "size_bytes": "67318639276",
+      "matching_xmf": "data.0002.dbl.xmf",
+      "matching_xmf_status": "present",
+      "catalogue_index": "2",
+      "catalogue_time": "3065.935",
+      "catalogue_step": "10578"
+    },
+    "candidate_paired_particle_restart": {
+      "file": "particles.1000.dbl",
+      "size_bytes": "5044387",
+      "pairing_basis": "nearest_remote_mtime",
+      "mtime_delta_seconds": "44",
+      "content_validated": false,
+      "requires_explicit_preflight": true
+    },
+    "latest_inventoried_double_file": {
+      "file": "data.0003.dbl.h5",
+      "size_bytes": "44741404952",
+      "catalogue_row": "absent",
+      "interpretation": "incomplete_termination_artifact",
+      "restart_allowed": false
+    },
+    "catalogue_inventory_index_offset": "1",
+    "guardrail": "after Barry authorization, use explicit -h5restart 2 from data.0002.dbl.h5 only after particle/content preflight and with a fail-closed no-progress watchdog; never stage data.0003.dbl.h5; retain 5 Myr double cadence"
+  },
+  "progress_evidence": {
+    "latest_dbl_catalog_row": "2 3.065935e+03 3.213700e-01 10578 single_file little rho vx1 vx2 vx3 prs tr1 ",
+    "latest_flt_catalog_row": "14 4.292332e+03 3.164317e-01 14424 single_file little rho vx1 vx2 vx3 prs tr1 ",
+    "latest_float_hdf5": "data.0014.flt.h5",
+    "latest_particle_restart": "particles.1499.dbl",
+    "latest_code_time": "4292.332",
+    "latest_step": "14424",
+    "endpoint_target_code_time": "15330.06968940",
+    "endpoint_fraction": "0.279994291413",
+    "remaining_gap_code_time": "11037.73768940",
+    "hdf5_file_count": "19",
+    "double_hdf5_file_count": "4",
+    "float_hdf5_file_count": "15",
+    "particle_restart_count": "1500",
+    "output_directory_size": "863G"
+  },
+  "boundaries": {
+    "chrome_open_ondemand_used_for_completion_access": true,
+    "remote_read_only_qstat_and_inventory_generation": true,
+    "compact_evidence_retrieval": true,
+    "no_new_pbs_submission": true,
+    "no_staging_cleanup_commit_or_push": true,
+    "no_science_postprocessing": true,
+    "no_bulk_hdf5_data_or_particle_retrieval": true,
+    "no_agent_comms_edits": true
+  },
+  "caveats": [
+    "Scheduler walltime termination is the terminal symptom; the strongest supported root cause is a stalled regular 15 Myr parallel double-HDF5 write.",
+    "The 10 Myr fluid checkpoint is validated and preserved, but a full fluid/particle restart remains conditional on explicit particle/content preflight and a fail-closed no-progress watchdog.",
+    "data.0003.dbl.h5 is the newest inventoried double file but is partial and has no matching dbl.h5.out row; it must not be used for restart.",
+    "particles.1000.dbl is paired to data.0002.dbl.h5 only by nearest remote mtime and requires explicit content and compatibility preflight.",
+    "PLUTO maxtime 47.5 is not the cause because the partial write stalled about 10.4 hours after launch.",
+    "No physics failure is demonstrated by the compact evidence.",
+    "Remote HDF5 and particle payloads were inventoried by path and size only and were not copied locally."
+  ],
+  "provenance": {
+    "safe_restart_surface_raw_note": "remote_logs/safe_restart_surface_2026-07-10.txt contains literal backslash-n sequences and is preserved unchanged; local reviewed summaries normalize its fields",
+    "remote_manifest_scope_note": "remote_logs/remote_compact_evidence_manifest_2026-07-10.sha256 predates safe_restart_surface_2026-07-10.txt and the empty PLUTO diagnostic extracts",
+    "final_bundle_manifest": "local_asset_manifest.sha256 covers the complete final local bundle"
+  },
+  "recommended_next_goal_shape": "only after Barry authorization, preflight and submit at most one 64-node 48-hour G-LO restart with explicit -h5restart 2 from data.0002.dbl.h5; exclude data.0003; retain 5 Myr double cadence; validate particles.1000 content/pairing; require a fail-closed no-progress watchdog"
+}

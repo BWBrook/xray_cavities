@@ -1,0 +1,12 @@
+field,expected,observed,status
+case_id,G-LO,G-LO,pass
+environment,group,group,pass
+stewart_group,002_031,002_031 from tabulated_cosmo_002031.csv,pass
+jet_power_erg_s_one_sided,1e43,1e+43,pass
+jet_speed_c,0.1,0.1,pass
+tstop_code_time,15330.06968940,15330.06968940,pass
+tabulated_asset_sha256,1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a,1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a,pass
+render_validation_JET_PWR,1e+43,1e+43,pass
+render_validation_JET_SPD,0.1,0.1,pass
+render_validation_dbl_h5_interval,1533.00696894,1533.00696894,pass
+render_validation_flt_h5_interval,306.60139379,306.60139379,pass

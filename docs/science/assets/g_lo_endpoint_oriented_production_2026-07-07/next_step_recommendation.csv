@@ -1,0 +1,3 @@
+rank,next_goal_shape,recommendation,requires_remote,notes
+1,retrieve_and_review_g_lo_checkpoint_after_pbs_completion_email,"Wait for Barry PBS completion email, then retrieve compact logs/catalogues only and classify endpoint/checkpoint status.",yes_after_completion,No polling after queued/running proof.
+2,blocked_preflight_repair,"If preflight or submission blocks, repair only the failing operational gate before retry authorization.",bounded,No substitute environment or scientific defaults.

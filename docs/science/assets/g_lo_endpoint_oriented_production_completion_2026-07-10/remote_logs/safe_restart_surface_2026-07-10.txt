@@ -1,0 +1,9 @@
+safe_fluid_checkpoint=data.0002.dbl.h5
+safe_fluid_size=67318639276\nsafe_fluid_mtime_epoch=1783421979\nsafe_fluid_mtime=2026-07-07 20:59:39.112588563 +1000
+safe_xmf=present
+nearest_particle_by_mtime=particles.1000.dbl
+nearest_particle_mtime_epoch=1783422023
+nearest_particle_delta_seconds=44
+nearest_particle_size=5044387\nnearest_particle_mtime=2026-07-07 21:00:23.014569482 +1000
+partial_double=data.0003.dbl.h5
+partial_double_size=44741404952\npartial_double_mtime=2026-07-08 00:13:04.676734459 +1000

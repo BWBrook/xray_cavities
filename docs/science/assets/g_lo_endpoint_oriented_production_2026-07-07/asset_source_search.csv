@@ -1,0 +1,3 @@
+candidate_path,scope,result,sha256,notes
+env/extracted/environments/tabulated/tabulated_cosmo_002031.csv,local_ignored_asset,absent_before_restore_present_after_fetch,1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a,Restored during Goal 037 from trusted May 8 Kunanyi gate path.
+/u/bwbrook/codex_kunanyi/stage_2026-05-08/kunanyi_gate/group_002031/tabulated_cosmo_002031.csv,trusted_remote_may8_gate,found_selected,1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a,Only exact trusted group_002031 candidate found under stage_2026-05-08 during bounded remote search.

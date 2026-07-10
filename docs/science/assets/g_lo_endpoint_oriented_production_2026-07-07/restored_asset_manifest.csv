@@ -1,0 +1,2 @@
+asset_role,source_path,local_ignored_path,sha256,size_bytes,rows,columns,first_radius_cm,last_radius_cm,git_tracking
+Stewart group 002_031 tabulated environment,/u/bwbrook/codex_kunanyi/stage_2026-05-08/kunanyi_gate/group_002031/tabulated_cosmo_002031.csv,env/extracted/environments/tabulated/tabulated_cosmo_002031.csv,1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a,608000,4000,6,0.000000000000000000e+00,1.697122669820251998e+24,ignored_by_env_gitignore

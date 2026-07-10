@@ -1,0 +1,59 @@
+PREFLIGHT_START=2026-07-07T03:49:40Z
+HOST=<tpac-host>
+STAGE=/u/bwbrook/codex_kunanyi/goal037_g_lo_endpoint_oriented_production
+RUN_ROOT=/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production
+--- remote staged hashes ---
+5a2e6d4800420dd8316786015b2f56ac530f68d1ada09f7a2b3b490ac85781a0  g_lo_endpoint_oriented_production.pbs
+9085e64fe1ca58010909790f3b6fa01abed7962c752d7d106f260bd3403356fc  jet_setup_production_template_latest.pbs
+ec81836378ec3fa39f150570f1557ace64e7c097b785b19d9f9b584d6c8bd257  rendered_g_lo_config/G-LO/particles/case_manifest.json
+3c6b127b716f3c8d112a5cccd37f42d13aee10962e869a6d1ac0e8b5e3485341  rendered_g_lo_config/G-LO/particles/pluto.ini
+b222f3a4ec1b4a78fa3b99d4db0c66c44b63146b00424e9ff451bdf3c141fce5  rendered_g_lo_config/G-LO/particles/environment.ini
+a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c  rendered_g_lo_config/G-LO/particles/definitions_overrides.json
+2ce2366223098514b6589a3302ed862e1846614f3ec8a66ff5c0a3b7ff300bae  rendered_g_lo_config/G-LO/particles/render_validation.json
+2fe4c03c5d32563244df7e8197f4353d59a1f5cfc562fb8561cdcf0de0b62dba  rendered_g_lo_config/G-LO/particles/run_definition.json
+1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a  rendered_g_lo_config/G-LO/particles/tabulated_cosmo_002031.csv
+--- syntax ---
+syntax=pass
+--- config sanity ---
+config_sanity=pass
+asset_rows=4000 asset_bad_col_rows=0 asset_radius_monotonic=1
+--- source paths ---
+exists=/scratch/bwbrook/git/utas-agn/pluto
+exists=/scratch/bwbrook/git/utas-agn/jet-setup
+exists=/scratch/bwbrook/git/utas-agn/jet-setup/tools/setup-problem
+exists=/ds/projects/agn/modulefiles
+--- module stack ---
+
+Currently Loaded Modules:
+  1) intel/18.0.1.163   2) impi/2018.1.163   3) hdf5/1.12.1p   4) zfp/0.5.5
+
+ 
+
+/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin_ohpc/mpicc
+/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpirun
+icc (ICC) 18.0.1 20171018
+Copyright (C) 1985-2017 Intel Corporation.  All rights reserved.
+Intel(R) MPI Library for Linux* OS, Version 2018 Update 1 Build 20171011 (id: 17941)
+Copyright (C) 2003-2017, Intel Corporation. All rights reserved.
+--- no-overwrite run root ---
+workdir_absent=/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles
+--- queue policy ---
+Queue: normal
+    queue_type = Execution
+    total_jobs = 62
+    state_count = Transit:0 Queued:0 Held:0 Waiting:0 Running:59 Exiting:0 Begu
+	n:3 
+    max_queued = [u:PBS_GENERIC=4000]
+    max_queued_res.ncpus = [u:PBS_GENERIC=7000]
+    resources_max.mem = 128gb
+    resources_max.walltime = 48:00:00
+    resources_assigned.mem = 5792333824kb
+    resources_assigned.mpiprocs = 616
+    resources_assigned.ncpus = 730
+    resources_assigned.nodect = 91
+    max_run = [u:PBS_GENERIC=3000]
+    enabled = True
+    started = True
+
+PREFLIGHT_END=2026-07-07T03:49:42Z
+PREFLIGHT_STATUS=pass
