@@ -1,0 +1,14 @@
+preflight_started_utc=2026-07-10T03:31:56Z
+g_lo_hdf5_stall_guarded_continuation.pbs: OK
+jet_setup_production_template_latest.pbs: OK
+run_with_progress_watchdog.sh: OK
+validate_pluto_particle_restart_pair.py: OK
+rendered_g_lo_config/G-LO/particles/case_manifest.json: OK
+rendered_g_lo_config/G-LO/particles/pluto.ini: OK
+rendered_g_lo_config/G-LO/particles/environment.ini: OK
+rendered_g_lo_config/G-LO/particles/definitions_overrides.json: OK
+rendered_g_lo_config/G-LO/particles/tabulated_cosmo_002031.csv: OK
+  File "validate_pluto_particle_restart_pair.py", line 4
+    from __future__ import annotations
+    ^
+SyntaxError: future feature annotations is not defined

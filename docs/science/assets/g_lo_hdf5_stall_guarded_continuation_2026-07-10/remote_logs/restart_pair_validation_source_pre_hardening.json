@@ -1,0 +1,70 @@
+{
+  "fluid_restart": {
+    "dt": 0.32136999098797486,
+    "index": 2,
+    "nstep": 10578,
+    "output_slot": 2,
+    "record_index": 2,
+    "time": 3065.934704693023
+  },
+  "particle_restart": {
+    "PLUTO_version": "4.4-patch3",
+    "content": {
+      "id_max": 42032,
+      "id_min": 1,
+      "records_scanned": 42032,
+      "unique_ids": 42032
+    },
+    "dimensions": 3,
+    "dt_particles": 1e+38,
+    "endianity": "little",
+    "field_dim": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      3,
+      1,
+      1
+    ],
+    "field_names": [
+      "id",
+      "x1",
+      "x2",
+      "x3",
+      "vx1",
+      "vx2",
+      "vx3",
+      "tinj",
+      "color",
+      "tracer",
+      "last_shock_time",
+      "density",
+      "pressure"
+    ],
+    "header_offset": 547,
+    "idCounter": 42032,
+    "index": 1000,
+    "nelem": 15,
+    "nfields": 13,
+    "nflux": 5,
+    "nparticles": 42032,
+    "output_slot": 8,
+    "particletype": 1,
+    "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/particles.1000.dbl",
+    "precision": "double",
+    "size_bytes": 5044387,
+    "stepNumber": 10578,
+    "time": 3065.934704693
+  },
+  "restart_out": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/restart.out",
+  "status": "ok",
+  "time_atol": 0.005,
+  "time_delta": 2.2737367544323206e-11
+}

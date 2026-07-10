@@ -1,0 +1,16 @@
+contract,status,value,evidence
+restart_record_count,pass,3,Validated restart.out is exactly 384 bytes using 128-byte records
+selected_record,pass,record 2,Unique runtime output slot 2 equals double HDF5 index 2
+float_pair,pass,slot 3 index 10,Selected record binds the matching 10 Myr float output
+particle_pair,pass,slot 8 index 1000,Selected record binds particles.1000.dbl
+fluid_step,pass,10578,Selected restart record nstep
+particle_step,pass,10578,Particle header stepNumber and direct record comparison
+fluid_time,pass,3065.934704693023,Selected restart record time
+particle_time,pass,3065.934704693,Absolute delta 2.2737367544323206e-11 code units
+fluid_hdf5_size,pass,67318639276,Exact data.0002.dbl.h5 byte-size contract
+fluid_hdf5_shape,pass,1014x960x960,Required rho prs tr1 vx1 vx2 vx3 datasets
+particle_size,pass,5044387,Exact header plus 42032 by 15 double payload
+particle_schema,pass,id x1 x2 x3 vx1 vx2 vx3 tinj color tracer last_shock_time density pressure,Exact ordered field names and dimensions
+particle_content,pass,42032 finite unique integral IDs,Full payload scan
+input_hash_binding,enforced in submitted job,trusted source and isolated HDF5 plus catalogue restart and particle,Goal 038 job fails before mpirun unless compute-node source HDF5 SHA matches the isolated copy and all restart inputs validate
+excluded_surface,pass,data.0003.dbl.h5,Incomplete 44741404952-byte file is absent from the isolated staging contract

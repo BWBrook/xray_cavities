@@ -1,0 +1,8 @@
+milestone,retain,eligible_to_supersede,gate
+active_production,"current and preceding validated restart tuples plus all compact catalogues/provenance","older restart payloads not selected as age-axis sources","two restart generations validated and dependency ledger complete"
+endpoint_integrity,"endpoint tuple one prior known-good tuple and selected age-axis sources","other transient double checkpoints and particle restarts","endpoint time datasets markers catalogues and hashes accepted"
+first_products_accepted,"endpoint and explicit raw sources for unresolved X-ray radio topology and energy lanes","raw sources whose complete dependent product set is accepted","processed products validated and provenance links recorded"
+case_comparison_accepted,"canonical case endpoints selected age-axis sources and durable processed comparison","superseded scale ladders and duplicate case segments","C-HI C-LO G-LO control comparison accepted"
+method_lane_closed,"only sources needed by still-open lanes or reproducibility contract","unique raw sources for the closed lane","method accepted or lane explicitly abandoned"
+sanctioned_archive_verified,"archive checksum manifest and retrieval instructions plus compact Git provenance","scratch copy after approval","archive is writable durable and retrieval-tested"
+deletion_closeout,"all keep contracts and compact provenance","only exact DELETE_APPROVED payloads","pre/post inventories hashes authorization and post-write probe pass"

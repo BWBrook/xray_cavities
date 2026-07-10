@@ -37,6 +37,7 @@ LOG_DIR="${WORKDIR}/job_logs"
 BUILD_JOBS="${BUILD_JOBS:-8}"
 RESTART_POLICY="${RESTART_POLICY:-auto}"  # auto, fresh, or force-fresh
 RESTART_PARTICLES="${RESTART_PARTICLES:-0}"
+H5_RESTART_INDEX="${H5_RESTART_INDEX:-}"
 PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-47.5}"
 KUNANYI_MODULE_STACK="${KUNANYI_MODULE_STACK:-gompi_2023a}"
 AGN_MODULEFILES="${AGN_MODULEFILES:-/ds/projects/agn/modulefiles}"
@@ -46,6 +47,13 @@ HDF5_USE_FILE_LOCKING="${HDF5_USE_FILE_LOCKING:-}"
 if [ -n "$HDF5_USE_FILE_LOCKING" ]; then
   export HDF5_USE_FILE_LOCKING
 fi
+
+PROGRESS_WATCHDOG_SCRIPT="${PROGRESS_WATCHDOG_SCRIPT:-}"
+PROGRESS_WATCHDOG_TIMEOUT_SECONDS="${PROGRESS_WATCHDOG_TIMEOUT_SECONDS:-0}"
+PROGRESS_WATCHDOG_POLL_SECONDS="${PROGRESS_WATCHDOG_POLL_SECONDS:-60}"
+PROGRESS_WATCHDOG_TERM_GRACE_SECONDS="${PROGRESS_WATCHDOG_TERM_GRACE_SECONDS:-120}"
+PROGRESS_WATCHDOG_STATUS_LOG="${PROGRESS_WATCHDOG_STATUS_LOG:-${LOG_DIR}/progress_watchdog.${PBS_JOBID:-manual}.tsv}"
+PROGRESS_WATCHDOG_TRIGGER_FILE="${PROGRESS_WATCHDOG_TRIGGER_FILE:-${MARKER_DIR}/progress_watchdog.${PBS_JOBID:-manual}.triggered}"
 
 mkdir -p "$MARKER_DIR" "$LOG_DIR"
 DONE_MARKER="${MARKER_DIR}/DONE"
@@ -104,6 +112,35 @@ require_file() {
     echo "[error] required file missing: $path" >&2
     exit 1
   fi
+}
+
+require_nonnegative_integer() {
+  local name="$1"
+  local value="$2"
+  case "$value" in
+    ''|*[!0-9]*)
+      echo "[error] ${name} must be a nonnegative integer: ${value}" >&2
+      exit 2
+      ;;
+  esac
+}
+
+require_positive_integer() {
+  local name="$1"
+  local value="$2"
+  require_nonnegative_integer "$name" "$value"
+  if [ "$value" -eq 0 ]; then
+    echo "[error] ${name} must be greater than zero" >&2
+    exit 2
+  fi
+}
+
+validate_h5_restart_catalogue() {
+  local catalogue_path="$1"
+  local selected_index="$2"
+  awk -v restart_index="$selected_index" \
+    'NF && $1 ~ /^[0-9]+$/ && $1 == restart_index {matches++} END {exit matches != 1}' \
+    "$catalogue_path"
 }
 
 patch_define() {
@@ -279,6 +316,13 @@ log_source_revisions() {
   } > "${LOG_DIR}/source_revisions.txt"
 }
 
+require_nonnegative_integer "PROGRESS_WATCHDOG_TIMEOUT_SECONDS" "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS"
+if [ "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" -gt 0 ]; then
+  require_file "$PROGRESS_WATCHDOG_SCRIPT"
+  require_positive_integer "PROGRESS_WATCHDOG_POLL_SECONDS" "$PROGRESS_WATCHDOG_POLL_SECONDS"
+  require_nonnegative_integer "PROGRESS_WATCHDOG_TERM_GRACE_SECONDS" "$PROGRESS_WATCHDOG_TERM_GRACE_SECONDS"
+fi
+
 module purge
 case "$KUNANYI_MODULE_STACK" in
   agn_intel_impi)
@@ -343,6 +387,15 @@ echo "HDF5_USE_FILE_LOCKING=${HDF5_USE_FILE_LOCKING:-}"
 echo "ZFP_DIR=${ZFP_DIR:-}"
 echo "FORCE_REBUILD=${FORCE_REBUILD}"
 echo "PLUTO_MAXTIME_HOURS=${PLUTO_MAXTIME_HOURS}"
+echo "H5_RESTART_INDEX=${H5_RESTART_INDEX}"
+echo "PROGRESS_WATCHDOG_TIMEOUT_SECONDS=${PROGRESS_WATCHDOG_TIMEOUT_SECONDS}"
+if [ "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" -gt 0 ]; then
+  echo "PROGRESS_WATCHDOG_SCRIPT=${PROGRESS_WATCHDOG_SCRIPT}"
+  echo "PROGRESS_WATCHDOG_POLL_SECONDS=${PROGRESS_WATCHDOG_POLL_SECONDS}"
+  echo "PROGRESS_WATCHDOG_TERM_GRACE_SECONDS=${PROGRESS_WATCHDOG_TERM_GRACE_SECONDS}"
+  echo "PROGRESS_WATCHDOG_STATUS_LOG=${PROGRESS_WATCHDOG_STATUS_LOG}"
+  echo "PROGRESS_WATCHDOG_TRIGGER_FILE=${PROGRESS_WATCHDOG_TRIGGER_FILE}"
+fi
 echo "mpicc=$(command -v mpicc)"
 echo "mpirun=$(command -v mpirun)"
 echo "python3=$(command -v python3)"
@@ -502,7 +555,25 @@ if [ -n "$PLUTO_MAXTIME_HOURS" ] && [ "$PLUTO_MAXTIME_HOURS" != "0" ]; then
 fi
 RUN_KIND="fresh"
 
-if [ "$RESTART_POLICY" = "auto" ]; then
+if [ -n "$H5_RESTART_INDEX" ]; then
+  case "$H5_RESTART_INDEX" in
+    *[!0-9]*)
+      echo "[error] H5_RESTART_INDEX must be a nonnegative integer: ${H5_RESTART_INDEX}" >&2
+      exit 1
+      ;;
+  esac
+  H5_RESTART_INDEX=$((10#$H5_RESTART_INDEX))
+  H5_RESTART_PATH=$(printf "%s/outputs/data.%04d.dbl.h5" "$PROBLEM" "$H5_RESTART_INDEX")
+  require_file "$H5_RESTART_PATH"
+  require_file "${PROBLEM}/outputs/dbl.h5.out"
+  if ! validate_h5_restart_catalogue "${PROBLEM}/outputs/dbl.h5.out" \
+    "$H5_RESTART_INDEX"; then
+    echo "[error] H5_RESTART_INDEX=${H5_RESTART_INDEX} must have exactly one matching numeric dbl.h5.out row" >&2
+    exit 1
+  fi
+  RUN_ARGS+=(-h5restart "$H5_RESTART_INDEX")
+  RUN_KIND="h5_restart_${H5_RESTART_INDEX}"
+elif [ "$RESTART_POLICY" = "auto" ]; then
   LATEST_RESTART=$(latest_restart_output || true)
   if [ -n "${LATEST_RESTART:-}" ]; then
     LATEST_SOURCE=${LATEST_RESTART%% *}
@@ -529,13 +600,31 @@ echo "RUN_ARGS=${RUN_ARGS[*]}"
 set +e
 (
   cd "$PROBLEM"
-  mpirun "${MPI_LAUNCH_ARGS[@]}" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
+  if [ "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" -gt 0 ]; then
+    bash "$PROGRESS_WATCHDOG_SCRIPT" \
+      --timeout-seconds "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" \
+      --poll-seconds "$PROGRESS_WATCHDOG_POLL_SECONDS" \
+      --term-grace-seconds "$PROGRESS_WATCHDOG_TERM_GRACE_SECONDS" \
+      --progress-dir "outputs" \
+      --command-log "outputs/logs/pluto_${PBS_JOBID:-manual}.log" \
+      --status-log "$PROGRESS_WATCHDOG_STATUS_LOG" \
+      --trigger-file "$PROGRESS_WATCHDOG_TRIGGER_FILE" \
+      -- mpirun "${MPI_LAUNCH_ARGS[@]}" ./pluto "${RUN_ARGS[@]}"
+  else
+    mpirun "${MPI_LAUNCH_ARGS[@]}" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
+  fi
 )
 MPI_EXIT_CODE=$?
 set -e
 echo "MPI_EXIT_CODE=${MPI_EXIT_CODE}"
 if [ "$MPI_EXIT_CODE" -ne 0 ]; then
-  FAILURE_REASON=$(classify_mpi_failure "${PROBLEM}/outputs/logs/pluto_${PBS_JOBID:-manual}.log" "$MPI_EXIT_CODE")
+  if [ "$MPI_EXIT_CODE" -eq 124 ] &&
+    [ "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" -gt 0 ] &&
+    [ -f "$PROGRESS_WATCHDOG_TRIGGER_FILE" ]; then
+    FAILURE_REASON="no_progress_watchdog_timeout"
+  else
+    FAILURE_REASON=$(classify_mpi_failure "${PROBLEM}/outputs/logs/pluto_${PBS_JOBID:-manual}.log" "$MPI_EXIT_CODE")
+  fi
   echo "FAILURE_REASON=${FAILURE_REASON}"
   exit "$MPI_EXIT_CODE"
 fi

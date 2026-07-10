@@ -1,0 +1,38 @@
+{
+  "date": "2026-07-10",
+  "decision_label": "PROMOTE_PROVE_PRUNE_DATA_LIFECYCLE_ADOPTED",
+  "deletion_authority": {
+    "automatic": [
+      "zero-byte failed staging root",
+      "byte-identical duplicate with validated canonical copy and no active dependency"
+    ],
+    "explicit_barry_approval": "all unique scientific source data including nonzero partial or corrupt payloads"
+  },
+  "generic_cleanup_requires": [
+    "dependency graph",
+    "per-file or homogeneous-group ledger",
+    "pre and post inventories",
+    "hash and collision checks",
+    "idempotent fail-closed execution"
+  ],
+  "goal038_compactor_scope": "one_off_not_generic",
+  "lifecycle_states": [
+    "DISCOVERED",
+    "VALIDATED",
+    "PROMOTED",
+    "ACCEPTED",
+    "ARCHIVED",
+    "SUPERSEDED",
+    "DELETE_APPROVED",
+    "DELETED"
+  ],
+  "goal038_capacity_classification": "pre_policy_exception_retrospectively_red_or_unquantified",
+  "policy": "promote_prove_then_prune",
+  "scratch_gate": {
+    "amber_minimum_headroom_ratio": 1.1,
+    "forecast_safety_fraction": 0.2,
+    "green_minimum_headroom_ratio": 1.5,
+    "write_probe_required": true
+  },
+  "status": "adopted_for_future_production_and_postprocessing"
+}

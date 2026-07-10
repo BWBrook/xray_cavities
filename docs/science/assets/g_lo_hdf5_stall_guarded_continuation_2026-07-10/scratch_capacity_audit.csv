@@ -1,0 +1,16 @@
+check,status,value,unit,evidence,notes
+scratch_tree_usage,observed,8797984508061,bytes,remote stat on /scratch/bwbrook,Recursive-size metadata at preflight time
+apparent_quota_boundary,inferred,8796093022208,bytes,8 TiB boundary,Usage exceeded this boundary by about 1.89 GB when a 930 KB copy failed with Disk quota exceeded
+apparent_quota_overage,inferred,1891485853,bytes,usage minus 8 TiB,Quota service itself returned connection refused so the numeric limit remains an evidence-backed inference
+shared_filesystem_capacity,pass,49,percent_used,remote df -h /scratch/bwbrook,Shared NFS capacity is not the blocker
+partial_goal038_root_before_compaction,observed,0,bytes,remote max-depth inventory,Only directories and a zero-byte pluto file were created before preflight stopped
+home_stage_write,pass,5,probe_bytes,temporary /u/bwbrook stage probe,Stage-root home storage remains writable
+project_filesystem_write,unavailable,0,writable_paths,test -w /ds/projects/agn,No sanctioned writable alternate production root was found
+remaining_standard_hdf5_estimate,planned,2334172381248,bytes,8 double plus 40 float HDF5 outputs from the 10 Myr restart,Particle outputs logs and safety margin are additional
+curated_compaction_estimate,approved,2809864155567,bytes,scratch_retention_plan.csv,Barry approved the documented one-off retention plan
+compaction_initial_pass_reported,session_observed,2344938776583,bytes,orchestrator-observed remote summary,First-pass raw manifest may have been overwritten and is not local
+compaction_corrective_pass_reported,session_observed,465358011179,bytes,orchestrator-observed remote summary,Corrective raw manifests remain remote-only pending completion retrieval
+compaction_total_reported,not_independently_reconstructable,2810296787762,bytes,sum of two session-observed summaries,Reported reclaimed payload is 432632195 bytes above estimate but the first-pass source manifest may be overwritten
+post_compaction_write_probe,pass,16777216,bytes,temporary scratch write and remove probe,Confirms scratch accepted a 16 MiB write after compaction
+post_compaction_recursive_du,rejected,47900000000000,apparent_bytes,remote du -sb result,Internally implausible for the retained inventory and not used as a headroom claim
+goal038_pbs_job,submitted,751292,job numeric id,qsub plus qstat queued proof,Job g_lo_guard verified Q on normal then stop rule invoked

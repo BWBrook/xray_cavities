@@ -1,0 +1,12 @@
+review_finding,severity,resolution,status
+validator not enforced or bound to HDF5,P1,Goal 038 wrapper now invokes validator before the production template and requires structural scalar and SHA-256 binding,implemented
+watchdog kills only launcher PID,P1,Watchdog launches the command in a dedicated process group and TERM/KILL targets the full group,implemented
+fluid and particle step comparison optional,P2,Validator now directly requires particle stepNumber to equal selected restart nstep,implemented
+restart record count and float slot not locked,P1,Validator and wrapper require exactly three records and slot 3 index 10,implemented
+dbl.h5.out and XMF omitted from staging,P1,Isolated root includes truncated dbl/flt catalogues data.0002.dbl.xmf and restart.out,resolved and staged
+mutable executable or config provenance,P1,Isolated root reuses Goal 037 executable and exact rendered config with source-target hashes,resolved and staged
+scratch quota prevents isolated root,P1,Barry-approved fail-closed compaction reclaimed 2810296787762 manifest bytes and a 16 MiB write probe passed,resolved
+awk built-in name blocks restart catalogue validation,P1,Renamed the awk variable and added executable valid duplicate and malformed catalogue tests,resolved locally
+validated and launched targets can diverge,P1,Pinned case variant config run root restart policy restart index resources and module stack,resolved locally
+dbl.h5.out not structurally or SHA-bound,P2,Validator now checks unique row time and step and includes the catalogue SHA-256,resolved locally
+source and staged large HDF5 equality not proven on login node,P1,Submitted wrapper computes trusted source SHA on the compute node and requires the isolated HDF5 to match before mpirun,resolved in job contract

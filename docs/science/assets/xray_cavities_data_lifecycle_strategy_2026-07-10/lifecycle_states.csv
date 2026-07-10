@@ -1,0 +1,9 @@
+state,entry_criterion,allowed_next_state,meaning
+DISCOVERED,path inventoried with size and ownership,VALIDATED,Payload exists but has no trusted scientific or restart status
+VALIDATED,structure content and provenance checks pass,PROMOTED,Payload is trusted for its stated role
+PROMOTED,canonical copy and dependency edges recorded,ACCEPTED or ARCHIVED,Canonical working copy selected
+ACCEPTED,science or operational gate passes,ARCHIVED or SUPERSEDED,Payload is part of the accepted project control surface
+ARCHIVED,sanctioned archive copy checksum and retrieval contract verified,SUPERSEDED or DELETE_APPROVED,Durable non-scratch copy exists
+SUPERSEDED,a newer accepted surface serves the same role,DELETE_APPROVED,Payload has no unique active role but is not yet deletable
+DELETE_APPROVED,required authority accepted exact keep/delete ledger,DELETED,Destructive action may execute fail-closed
+DELETED,post-inventory proves removal and retained contracts,none,Payload removed with permanent provenance retained

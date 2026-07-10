@@ -14,11 +14,78 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-037 G-LO HDF5-write-stall diagnosis and
-preserved-checkpoint handoff.
+This note should be treated as a Goal-038 G-LO guarded-continuation queued-job
+handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 038 G-LO HDF5-stall guarded continuation on 2026-07-10:
+
+- Status:
+  `submitted_waiting_pbs_completion`.
+- Decision label:
+  `G_LO_GUARDED_CONTINUATION_SUBMITTED_WAITING_PBS_COMPLETION`.
+- Submission:
+  exactly one job, `751292.kunanyi-ohpc` / `g_lo_guard`, was submitted and
+  verified `Q` on `normal` at `Fri Jul 10 15:04:00 2026`.
+- Requested resources:
+  `select=64:ncpus=28:mpiprocs=28`, 1,792 ranks, 128 GB,
+  `walltime=48:00:00`, and PLUTO maximum runtime 47.5 hours.
+- Restart validation:
+  exact three-record `restart.out`; selected record 2 binds double index 2,
+  float index 10, particle index 1000, step 10578, and code time
+  3065.934704693023. Full 42,032-particle payload validation passed.
+- HDF5 hardening:
+  the Goal 038 wrapper now requires the exact 67,318,639,276-byte
+  `data.0002.dbl.h5::Timestep_2`, `1014 x 960 x 960` required datasets, matching
+  HDF5 time/scalar samples, a unique `dbl.h5.out` index/time/step row, and
+  SHA-256 binding of HDF5, catalogue, `restart.out`, and particle inputs before
+  `mpirun`.
+- Watchdog hardening:
+  output-only 90-minute fail-closed watchdog with atomic trigger, Intel MPI
+  propagation, and TERM/KILL of the complete launcher process group.
+- Independent review:
+  initial and final-review blockers were reproduced red-first and fixed. The
+  recovery wrapper now pins its validated launch target and resource/module
+  contract; executable catalogue tests cover valid, duplicate, and malformed
+  rows; the final integrated suite passed 89 tests. A final independent
+  73-test review reported no correctness or launch-safety findings.
+- Approved compaction:
+  the first preflight exposed an apparent scratch quota, Barry approved the
+  curated retention plan, and two idempotent passes reclaimed
+  `2,810,296,787,762` manifest bytes. Accepted endpoints, production
+  float-HDF5 age surfaces, required restart tuples, the Level 3 baseline,
+  catalogues/configuration, and compact provenance were retained. A 16 MiB
+  scratch write probe then passed. The exact total comes from
+  orchestrator-observed remote summaries. Corrective-pass manifests remain in
+  the remote stage root, while the first-pass manifest may have been
+  overwritten; the exact sum is not independently reconstructable locally.
+- Final remote preflight:
+  the submission session observed staged SHA equality, remote syntax, exact
+  isolated-root inventory,
+  catalogues, full particle scan, HDF5 structure/time/shape/datasets, module
+  stack, and queue limits passed. Trusted-source/staged HDF5 SHA equality is a
+  fail-closed compute-node check before `mpirun`. The raw post-compaction
+  preflight/qstat transcript is remote-only until the completion wake-up.
+- Data lifecycle:
+  `docs/science/xray_cavities_data_lifecycle_strategy_2026-07-10.md` now
+  defines promote-and-prune classes, science holds, scratch gates, and
+  deletion authority. The Goal 038 compactor is explicitly one-off, and this
+  submission is recorded as a pre-policy capacity exception that would be red
+  or unquantified under the prospective 20-percent-safety gate.
+- Science note:
+  `docs/science/g_lo_hdf5_stall_guarded_continuation_2026-07-10.md`.
+- Goal log:
+  `docs/goals/038-g-lo-hdf5-stall-guarded-continuation/Log.md`.
+- Recommendation:
+  wait for Barry's PBS completion email for `751292.kunanyi-ohpc`, then run one
+  compact completion/endpoint review. Do not poll or retrieve before that.
+- Boundary confirmation:
+  approved scratch compaction and exactly one PBS submission occurred; no
+  post-submission polling, retrieval, accepted Goal 037 source mutation,
+  post-processing, endpoint product, commit, push, or scientific-default
+  change occurred.
 
 Latest Goal 037 G-LO endpoint-oriented production completion review on
 2026-07-10:

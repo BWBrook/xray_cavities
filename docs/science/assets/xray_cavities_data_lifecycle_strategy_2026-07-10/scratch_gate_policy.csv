@@ -1,0 +1,4 @@
+gate,conditions,submission_policy,required_evidence
+GREEN,"write probe passes; trusted inventory; free headroom at least 1.5 times forecast growth",submit under normal production controls,"manifest bytes forecast with 20 percent safety and no-overwrite check"
+AMBER,"write probe passes; trusted inventory; free headroom 1.1 to less than 1.5 times forecast growth",submit only when restart-safe with closeout compaction plan and project-lead acceptance,"checkpoint contract watchdog or clean walltime stop plus exact retention plan"
+RED,"write probe fails; inventory untrusted; or free headroom below 1.1 times forecast growth",do not submit,"repair capacity then rerun manifest forecast and write probe"

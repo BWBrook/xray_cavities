@@ -1,0 +1,6 @@
+hold,status,protected_raw_surface,retirement_criterion
+radio_method,active,"radio-relevant particle source snapshots and required fluid context","accepted raytraced radio observable method or explicit decision to abandon that source set"
+xray_topology,active,"endpoint and selected age-axis HDF5 needed for conditional topology rerun","final observational topology method accepted"
+level3_gravity,active,"accepted baseline and endpoint fluid surfaces","potential/profile convention accepted or gravitational component explicitly scoped out"
+three_case_comparison,active,"accepted C-HI and C-LO endpoints plus G-LO restart/endpoint surfaces","C-HI C-LO G-LO endpoint comparison control surface accepted"
+production_restart,active,"current and preceding valid G-LO restart tuples","G-LO endpoint and first products accepted"

@@ -1,0 +1,57 @@
+{
+  "date": "2026-07-10",
+  "decision_label": "G_LO_GUARDED_CONTINUATION_SUBMITTED_WAITING_PBS_COMPLETION",
+  "goal": 38,
+  "job": {
+    "ctime": "Fri Jul 10 15:04:00 2026",
+    "id": "751292.kunanyi-ohpc",
+    "name": "g_lo_guard",
+    "queue": "normal",
+    "state_at_stop": "Q"
+  },
+  "remote": {
+    "analysis_source": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles",
+    "run_root": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal038_g_lo_hdf5_stall_guarded_continuation"
+  },
+  "restart": {
+    "double_hdf5_index": 2,
+    "float_hdf5_index": 10,
+    "particle_index": 1000,
+    "record_count": 3,
+    "step": 10578,
+    "time_code": 3065.934704693023
+  },
+  "resources": {
+    "memory": "128gb",
+    "nodes": 64,
+    "ncpus": 1792,
+    "pluto_maxtime_hours": 47.5,
+    "walltime": "48:00:00",
+    "watchdog_no_progress_seconds": 5400
+  },
+  "scratch": {
+    "reported_freed_bytes_from_orchestrator_session": 2810296787762,
+    "apparent_quota_bytes": 8796093022208,
+    "initial_pass_freed_bytes": 2344938776583,
+    "observed_pre_compaction_usage_bytes": 8797984508061,
+    "post_compaction_write_probe_bytes": 16777216,
+    "quota_is_inferred": true,
+    "retention_plan_estimated_freed_bytes": 2809864155567,
+    "reported_total_independently_reconstructable": false,
+    "second_pass_freed_bytes": 465358011179
+  },
+  "validation": {
+    "integrated_tests_passed": 89,
+    "restart_inputs_sha_bound": [
+      "trusted source data.0002.dbl.h5",
+      "isolated data.0002.dbl.h5",
+      "dbl.h5.out",
+      "restart.out",
+      "particles.1000.dbl"
+    ],
+    "shell_syntax": "passed"
+  },
+  "status": "submitted_waiting_pbs_completion",
+  "stop_rule": "active_no_polling_after_queued_proof"
+}

@@ -1,0 +1,13 @@
+field,value,evidence
+job_id,751292.kunanyi-ohpc,qsub output and qstat queued proof
+job_name,g_lo_guard,qstat queued proof
+state_at_stop,Q,qstat queued proof
+queue,normal,qstat queued proof
+ctime,Fri Jul 10 15:04:00 2026,qstat queued proof
+select,64:ncpus=28:mpiprocs=28,qstat queued proof
+ncpus,1792,qstat queued proof
+mpiprocs,1792,qstat queued proof
+memory,128gb,qstat queued proof
+walltime,48:00:00,qstat queued proof
+pluto_maxtime_hours,47.5,submitted wrapper contract
+stop_rule,active_no_polling_after_queued_proof,orchestrator handoff

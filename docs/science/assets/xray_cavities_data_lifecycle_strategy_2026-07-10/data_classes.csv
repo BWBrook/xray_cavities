@@ -1,0 +1,8 @@
+data_class,typical_contents,primary_location,default_retention,deletion_authority
+raw_checkpoint,"fluid HDF5/XMF and particle restart payloads",Kunanyi scratch,"current and preceding validated generations during active production",Barry approval for unique science data
+restart_essential,"selected fluid HDF5/XMF restart.out particle restart catalogues executable/config hashes",Kunanyi scratch plus compact provenance in Git,"through successful continuation or endpoint integrity and first-product acceptance",Barry approval unless byte-identical duplicate
+age_axis_source,"selected float HDF5 and particle snapshots used by X-ray radio topology or energy lanes",Kunanyi scratch or future sanctioned archive,"until every named dependency is accepted or explicitly abandoned",Barry approval
+processed_science,"validated maps arrays tables metrics and figures",Git when practical otherwise sanctioned archive plus Git manifest,"durable while scientifically relevant",project decision after supersession and archive verification
+immutable_provenance,"qstat stdout stderr configs hashes inventories validation and decision notes",Git,"permanent",not normally deletable
+invalid_or_duplicate,"zero-byte failed staging roots and byte-identical noncanonical copies",scratch,"only until classification and canonical-copy checks pass",automatic after fail-closed ledger validation
+quarantined_partial,"unique nonzero incomplete or corrupt scientific payload",scratch quarantine area or future sanctioned archive,"until explicit disposition is approved",Barry approval required for deletion
