@@ -1,0 +1,2 @@
+row_count,started_count,progress_count,poll_count,command_exit_count,command_exit_code,maximum_no_progress_seconds,triggered,first_timestamp_utc,last_timestamp_utc
+1133,1,1126,5,1,0,301,False,2026-07-10T06:16:26Z,2026-07-11T12:38:31Z

@@ -1,0 +1,119 @@
+#!/bin/bash
+#PBS -N g_lo_guard
+#PBS -q normal
+#PBS -l select=64:ncpus=28:mpiprocs=28
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal038_g_lo_hdf5_stall_guarded_continuation/g_lo_hdf5_stall_guarded_continuation.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal038_g_lo_hdf5_stall_guarded_continuation/g_lo_hdf5_stall_guarded_continuation.err
+
+set -euo pipefail
+
+# Endpoint-oriented G-LO continuation from the Goal037 restart record whose
+# fluid and particle surfaces are validated together before submission. The
+# watchdog values are intentionally fixed for this recovery run.
+readonly SAFE_H5_RESTART_INDEX="2"
+readonly SAFE_FLOAT_OUTPUT_INDEX="10"
+readonly SAFE_PARTICLE_RESTART_INDEX="1000"
+readonly SAFE_RESTART_STEP="10578"
+readonly SAFE_HDF5_BYTES="67318639276"
+readonly SAFE_HDF5_TIMESTEP="Timestep_2"
+readonly WATCHDOG_TIMEOUT_SECONDS="5400"
+readonly WATCHDOG_POLL_SECONDS="60"
+readonly WATCHDOG_TERM_GRACE_SECONDS="120"
+
+readonly CASE_ID="G-LO"
+readonly CASE_VARIANT="particles"
+readonly STAGE_ROOT="/u/bwbrook/codex_kunanyi/goal038_g_lo_hdf5_stall_guarded_continuation"
+readonly CASE_CONFIG_DIR="${STAGE_ROOT}/rendered_g_lo_config/G-LO/particles"
+readonly RUN_ROOT="/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation"
+readonly PLUTO_MAXTIME_HOURS="47.5"
+readonly RESTART_POLICY="auto"
+readonly H5_RESTART_INDEX="$SAFE_H5_RESTART_INDEX"
+readonly ALLOW_DONE_RERUN="0"
+readonly BUILD_JOBS="28"
+readonly FORCE_REBUILD="0"
+readonly KUNANYI_MODULE_STACK="agn_intel_impi"
+readonly MPI_FLAVOR="intelmpi"
+readonly HDF5_USE_FILE_LOCKING="FALSE"
+readonly I_MPI_JOB_SIGNAL_PROPAGATION="1"
+export CASE_ID CASE_VARIANT CASE_CONFIG_DIR RUN_ROOT PLUTO_MAXTIME_HOURS
+export RESTART_POLICY H5_RESTART_INDEX ALLOW_DONE_RERUN BUILD_JOBS FORCE_REBUILD
+export KUNANYI_MODULE_STACK MPI_FLAVOR HDF5_USE_FILE_LOCKING
+export I_MPI_JOB_SIGNAL_PROPAGATION
+
+readonly WORK_ROOT="${RUN_ROOT}/G-LO/particles"
+readonly SAFE_OUTPUTS="${WORK_ROOT}/problem/outputs"
+readonly SAFE_HDF5_PATH="${SAFE_OUTPUTS}/data.0002.dbl.h5"
+readonly SAFE_SOURCE_HDF5_PATH="/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/data.0002.dbl.h5"
+readonly SAFE_FLUID_CATALOGUE="${SAFE_OUTPUTS}/dbl.h5.out"
+readonly RESTART_PAIR_VALIDATOR="${STAGE_ROOT}/validate_pluto_particle_restart_pair.py"
+readonly RESTART_PAIR_REPORT="${STAGE_ROOT}/remote_logs/restart_pair_validation_job.json"
+export PROGRESS_WATCHDOG_SCRIPT="${STAGE_ROOT}/run_with_progress_watchdog.sh"
+export PROGRESS_WATCHDOG_TIMEOUT_SECONDS="$WATCHDOG_TIMEOUT_SECONDS"
+export PROGRESS_WATCHDOG_POLL_SECONDS="$WATCHDOG_POLL_SECONDS"
+export PROGRESS_WATCHDOG_TERM_GRACE_SECONDS="$WATCHDOG_TERM_GRACE_SECONDS"
+export PROGRESS_WATCHDOG_STATUS_LOG="${WORK_ROOT}/job_logs/progress_watchdog.${PBS_JOBID:-manual}.tsv"
+export PROGRESS_WATCHDOG_TRIGGER_FILE="${WORK_ROOT}/markers/progress_watchdog.${PBS_JOBID:-manual}.triggered"
+
+module purge
+module load Anaconda3/2024.02-1
+VALIDATOR_PYTHON="${VALIDATOR_PYTHON:-$(command -v python)}"
+if [ ! -x "$VALIDATOR_PYTHON" ]; then
+  echo "[error] validator Python is not executable: ${VALIDATOR_PYTHON}" >&2
+  exit 2
+fi
+if [ ! -f "$RESTART_PAIR_VALIDATOR" ]; then
+  echo "[error] restart-pair validator is missing: ${RESTART_PAIR_VALIDATOR}" >&2
+  exit 2
+fi
+mkdir -p "${STAGE_ROOT}/remote_logs"
+if [ ! -f "$SAFE_SOURCE_HDF5_PATH" ]; then
+  echo "[error] trusted source HDF5 is missing: ${SAFE_SOURCE_HDF5_PATH}" >&2
+  exit 2
+fi
+SOURCE_HDF5_SHA256=$(sha256sum "$SAFE_SOURCE_HDF5_PATH" | awk '{print $1}')
+if [[ ! "$SOURCE_HDF5_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+  echo "[error] invalid trusted source HDF5 SHA-256: ${SOURCE_HDF5_SHA256}" >&2
+  exit 2
+fi
+echo "source_hdf5_sha256=${SOURCE_HDF5_SHA256}"
+
+VALIDATOR_ARGS=(
+  "--restart-out" "${SAFE_OUTPUTS}/restart.out"
+  "--fluid-restart-index" "$SAFE_H5_RESTART_INDEX"
+  "--fluid-output-slot" "2"
+  "--particle-output-slot" "8"
+  "--expected-particle-index" "$SAFE_PARTICLE_RESTART_INDEX"
+  "--expected-record-count" "3"
+  "--expected-output-index" "3" "$SAFE_FLOAT_OUTPUT_INDEX"
+  "--particle-dir" "$SAFE_OUTPUTS"
+  "--expected-step" "$SAFE_RESTART_STEP"
+  "--expected-field-names"
+  "id" "x1" "x2" "x3" "vx1" "vx2" "vx3" "tinj" "color" "tracer"
+  "last_shock_time" "density" "pressure"
+  "--expected-field-dims"
+  "1" "1" "1" "1" "1" "1" "1" "1" "1" "1" "3" "1" "1"
+  "--nonnegative-field" "density"
+  "--nonnegative-field" "pressure"
+  "--fluid-hdf5" "$SAFE_HDF5_PATH"
+  "--fluid-catalogue" "$SAFE_FLUID_CATALOGUE"
+  "--fluid-timestep" "$SAFE_HDF5_TIMESTEP"
+  "--expected-fluid-hdf5-size" "$SAFE_HDF5_BYTES"
+  "--expected-fluid-hdf5-sha256" "$SOURCE_HDF5_SHA256"
+  "--expected-fluid-shape" "1014" "960" "960"
+  "--required-fluid-dataset" "rho"
+  "--required-fluid-dataset" "prs"
+  "--required-fluid-dataset" "tr1"
+  "--required-fluid-dataset" "vx1"
+  "--required-fluid-dataset" "vx2"
+  "--required-fluid-dataset" "vx3"
+  "--hash-inputs"
+  "--json-output" "$RESTART_PAIR_REPORT"
+)
+"$VALIDATOR_PYTHON" "$RESTART_PAIR_VALIDATOR" "${VALIDATOR_ARGS[@]}"
+echo "restart_pair_validation=passed report=${RESTART_PAIR_REPORT}"
+
+readonly BASE_SCRIPT="${STAGE_ROOT}/jet_setup_production_template_latest.pbs"
+exec bash "$BASE_SCRIPT"

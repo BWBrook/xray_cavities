@@ -1,0 +1,12 @@
+submitted_job_id=751292.kunanyi-ohpc
+    Job_Name = g_lo_guard
+    job_state = Q
+    queue = normal
+    ctime = Fri Jul 10 15:04:00 2026
+    qtime = Fri Jul 10 15:04:00 2026
+    Resource_List.mem = 128gb
+    Resource_List.mpiprocs = 1792
+    Resource_List.ncpus = 1792
+    Resource_List.nodect = 64
+    Resource_List.select = 64:ncpus=28:mpiprocs=28
+    Resource_List.walltime = 48:00:00

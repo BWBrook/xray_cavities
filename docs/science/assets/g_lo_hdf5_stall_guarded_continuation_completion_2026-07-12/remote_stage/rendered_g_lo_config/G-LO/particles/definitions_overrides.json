@@ -1,0 +1,17 @@
+{
+  "definitions.h": {
+    "BODY_FORCE": "VECTOR",
+    "DIMENSIONS": "3",
+    "EOS": "IDEAL",
+    "GEOMETRY": "CARTESIAN",
+    "PARTICLES": "PARTICLES_LP",
+    "PHYSICS": "HD"
+  },
+  "definitions_usr.h": {
+    "DENSITY_PROFILE": "ENV_TABULATED",
+    "JET_DENSITY_CALCULATION": "DENSITY_LENGTH_SCALE",
+    "JET_INJECTION_ROTATED": "NO",
+    "JET_RELATIVISTIC_DENSITY": "NO",
+    "PARTICLES_LP_RAISE": "YES"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "after_manifest_bytes": 5911013217798,
+  "before_manifest_bytes": 6376371228977,
+  "execute": true,
+  "freed_manifest_bytes": 465358011179,
+  "preflight": {
+    "c_lo_endpoint": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs",
+    "c_lo_state": "promoted",
+    "g_lo_restart": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/data.0002.dbl.h5",
+    "planned_purge_roots": 11
+  },
+  "runs_root": "/scratch/bwbrook/xray_cavities_runs",
+  "status": "compaction_complete"
+}

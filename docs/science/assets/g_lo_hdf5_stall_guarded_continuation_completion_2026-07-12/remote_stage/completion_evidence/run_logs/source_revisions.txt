@@ -1,0 +1,15 @@
+case_id=G-LO
+case_variant=particles
+case_config_dir=/u/bwbrook/codex_kunanyi/goal038_g_lo_hdf5_stall_guarded_continuation/rendered_g_lo_config/G-LO/particles
+
+repo=/scratch/bwbrook/git/utas-agn/pluto
+realpath=/scratch/bwbrook/git/utas-agn/pluto
+git_metadata=unavailable
+
+repo=/scratch/bwbrook/git/utas-agn/jet-setup
+realpath=/scratch/bwbrook/git/utas-agn/jet-setup
+git_metadata=unavailable
+
+ec81836378ec3fa39f150570f1557ace64e7c097b785b19d9f9b584d6c8bd257  /u/bwbrook/codex_kunanyi/goal038_g_lo_hdf5_stall_guarded_continuation/rendered_g_lo_config/G-LO/particles/case_manifest.json
+3c6b127b716f3c8d112a5cccd37f42d13aee10962e869a6d1ac0e8b5e3485341  /u/bwbrook/codex_kunanyi/goal038_g_lo_hdf5_stall_guarded_continuation/rendered_g_lo_config/G-LO/particles/pluto.ini
+b222f3a4ec1b4a78fa3b99d4db0c66c44b63146b00424e9ff451bdf3c141fce5  /u/bwbrook/codex_kunanyi/goal038_g_lo_hdf5_stall_guarded_continuation/rendered_g_lo_config/G-LO/particles/environment.ini

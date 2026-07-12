@@ -1,0 +1,4 @@
+case,timestep,view,layer,empty_columns,empty_column_fraction
+G-LO,Timestep_50,0deg,raw_xray,0,0
+G-LO,Timestep_50,0deg,corrected_xray,0,0
+G-LO,Timestep_50,0deg,correction_ratio,0,0

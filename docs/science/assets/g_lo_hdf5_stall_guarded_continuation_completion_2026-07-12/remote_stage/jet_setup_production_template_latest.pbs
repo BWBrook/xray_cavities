@@ -1,0 +1,661 @@
+#!/bin/bash -l
+#PBS -N xray_cavity_prod
+#PBS -q normal
+#PBS -l select=1:ncpus=28:mpiprocs=28
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/xray_cavity_prod.out
+#PBS -e /u/bwbrook/codex_kunanyi/xray_cavity_prod.err
+
+# Production-oriented jet-setup template for the xray_cavities three-case
+# suite. Submit with qsub -v overrides after staging a generated case bundle,
+# for example:
+#
+#   qsub -v CASE_ID=C-HI,CASE_VARIANT=particles,CASE_CONFIG_DIR=/u/bwbrook/xray_cavities_cases/C-HI/particles scripts/kunanyi/jet_setup_production_template.pbs
+#
+# Full production should wait until the generated configuration package has
+# been checked by Patrick/Stas and an intermediate kunanyi rehearsal is green.
+
+set -euo pipefail
+
+export LC_ALL=C
+export LANG=C
+
+CASE_ID="${CASE_ID:-C-HI}"
+CASE_VARIANT="${CASE_VARIANT:-particles}"
+CASE_CONFIG_DIR="${CASE_CONFIG_DIR:-/u/bwbrook/xray_cavities_cases/${CASE_ID}/${CASE_VARIANT}}"
+
+PLUTO_DIR="${PLUTO_DIR:-/scratch/bwbrook/git/utas-agn/pluto}"
+JET_SETUP="${JET_SETUP:-/scratch/bwbrook/git/utas-agn/jet-setup}"
+RUN_ROOT="${RUN_ROOT:-/scratch/bwbrook/xray_cavities_runs}"
+WORKDIR="${RUN_ROOT}/${CASE_ID}/${CASE_VARIANT}"
+PROBLEM="${WORKDIR}/problem"
+MARKER_DIR="${WORKDIR}/markers"
+LOG_DIR="${WORKDIR}/job_logs"
+
+BUILD_JOBS="${BUILD_JOBS:-8}"
+RESTART_POLICY="${RESTART_POLICY:-auto}"  # auto, fresh, or force-fresh
+RESTART_PARTICLES="${RESTART_PARTICLES:-0}"
+H5_RESTART_INDEX="${H5_RESTART_INDEX:-}"
+PLUTO_MAXTIME_HOURS="${PLUTO_MAXTIME_HOURS:-47.5}"
+KUNANYI_MODULE_STACK="${KUNANYI_MODULE_STACK:-gompi_2023a}"
+AGN_MODULEFILES="${AGN_MODULEFILES:-/ds/projects/agn/modulefiles}"
+MPI_FLAVOR="${MPI_FLAVOR:-}"
+FORCE_REBUILD="${FORCE_REBUILD:-0}"
+HDF5_USE_FILE_LOCKING="${HDF5_USE_FILE_LOCKING:-}"
+if [ -n "$HDF5_USE_FILE_LOCKING" ]; then
+  export HDF5_USE_FILE_LOCKING
+fi
+
+PROGRESS_WATCHDOG_SCRIPT="${PROGRESS_WATCHDOG_SCRIPT:-}"
+PROGRESS_WATCHDOG_TIMEOUT_SECONDS="${PROGRESS_WATCHDOG_TIMEOUT_SECONDS:-0}"
+PROGRESS_WATCHDOG_POLL_SECONDS="${PROGRESS_WATCHDOG_POLL_SECONDS:-60}"
+PROGRESS_WATCHDOG_TERM_GRACE_SECONDS="${PROGRESS_WATCHDOG_TERM_GRACE_SECONDS:-120}"
+PROGRESS_WATCHDOG_STATUS_LOG="${PROGRESS_WATCHDOG_STATUS_LOG:-${LOG_DIR}/progress_watchdog.${PBS_JOBID:-manual}.tsv}"
+PROGRESS_WATCHDOG_TRIGGER_FILE="${PROGRESS_WATCHDOG_TRIGGER_FILE:-${MARKER_DIR}/progress_watchdog.${PBS_JOBID:-manual}.triggered}"
+
+mkdir -p "$MARKER_DIR" "$LOG_DIR"
+DONE_MARKER="${MARKER_DIR}/DONE"
+FAILED_MARKER="${MARKER_DIR}/FAILED"
+JOB_SIGNAL=""
+FAILURE_REASON=""
+
+finish() {
+  local rc=$?
+  local end_time
+  end_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  echo "JOB_END=${end_time}"
+  if [ "$rc" -eq 0 ]; then
+    {
+      echo "status=done"
+      echo "case_id=${CASE_ID}"
+      echo "case_variant=${CASE_VARIANT}"
+      echo "pbs_jobid=${PBS_JOBID:-manual}"
+      echo "finished_utc=${end_time}"
+    } > "$DONE_MARKER"
+    rm -f "$FAILED_MARKER"
+  else
+    {
+      echo "status=failed"
+      echo "case_id=${CASE_ID}"
+      echo "case_variant=${CASE_VARIANT}"
+      echo "pbs_jobid=${PBS_JOBID:-manual}"
+      echo "exit_code=${rc}"
+      if [ -n "${JOB_SIGNAL:-}" ]; then
+        echo "signal=${JOB_SIGNAL}"
+      fi
+      if [ -n "${FAILURE_REASON:-}" ]; then
+        echo "reason=${FAILURE_REASON}"
+      fi
+      echo "finished_utc=${end_time}"
+    } > "$FAILED_MARKER"
+    rm -f "$DONE_MARKER"
+  fi
+  exit "$rc"
+}
+trap finish EXIT
+
+handle_signal() {
+  local signal="$1"
+  local rc="$2"
+  JOB_SIGNAL="$signal"
+  echo "JOB_SIGNAL=${signal}"
+  exit "$rc"
+}
+trap 'handle_signal TERM 143' TERM
+trap 'handle_signal INT 130' INT
+
+require_file() {
+  local path="$1"
+  if [ ! -f "$path" ]; then
+    echo "[error] required file missing: $path" >&2
+    exit 1
+  fi
+}
+
+require_nonnegative_integer() {
+  local name="$1"
+  local value="$2"
+  case "$value" in
+    ''|*[!0-9]*)
+      echo "[error] ${name} must be a nonnegative integer: ${value}" >&2
+      exit 2
+      ;;
+  esac
+}
+
+require_positive_integer() {
+  local name="$1"
+  local value="$2"
+  require_nonnegative_integer "$name" "$value"
+  if [ "$value" -eq 0 ]; then
+    echo "[error] ${name} must be greater than zero" >&2
+    exit 2
+  fi
+}
+
+validate_h5_restart_catalogue() {
+  local catalogue_path="$1"
+  local selected_index="$2"
+  awk -v restart_index="$selected_index" \
+    'NF && $1 ~ /^[0-9]+$/ && $1 == restart_index {matches++} END {exit matches != 1}' \
+    "$catalogue_path"
+}
+
+patch_define() {
+  local path="$1"
+  local key="$2"
+  local value="$3"
+  python3 - "$path" "$key" "$value" <<'PY'
+from pathlib import Path
+import sys
+
+path = Path(sys.argv[1])
+key = sys.argv[2]
+value = sys.argv[3]
+lines = path.read_text().splitlines()
+out = []
+replaced = False
+for line in lines:
+    parts = line.split()
+    if len(parts) >= 2 and parts[0] == "#define" and parts[1] == key:
+        out.append(f"#define  {key.ljust(28)}   {value}")
+        replaced = True
+    else:
+        out.append(line)
+if not replaced:
+    raise SystemExit(f"missing define {key} in {path}")
+path.write_text("\n".join(out) + "\n")
+PY
+}
+
+apply_definition_overrides() {
+  local problem_dir="$1"
+  local overrides_json="$2"
+  python3 - "$problem_dir" "$overrides_json" <<'PY'
+from pathlib import Path
+import json
+import sys
+
+problem = Path(sys.argv[1])
+overrides = json.loads(Path(sys.argv[2]).read_text())
+for relpath, values in overrides.items():
+    path = problem / "src" / relpath
+    lines = path.read_text().splitlines()
+    out = []
+    replaced = {key: False for key in values}
+    for line in lines:
+        parts = line.split()
+        if len(parts) >= 2 and parts[0] == "#define" and parts[1] in values:
+            key = parts[1]
+            out.append(f"#define  {key.ljust(28)}   {values[key]}")
+            replaced[key] = True
+        else:
+            out.append(line)
+    missing = [key for key, ok in replaced.items() if not ok]
+    if missing:
+        raise SystemExit(f"{path}: missing define(s): {', '.join(missing)}")
+    path.write_text("\n".join(out) + "\n")
+PY
+}
+
+write_static_support_files() {
+  local problem_dir="$1"
+  python3 - "$problem_dir" <<'PY'
+from pathlib import Path
+import sys
+
+problem = Path(sys.argv[1])
+(problem / "src" / "local_make").write_text(
+    "-include Particles/makefile\n"
+    "OBJ += coordinates.o jet.o units.o environment_utilities.o environment.o "
+    "tools_usr.o read_external_pressure.o galaxy.o\n"
+    "HEADERS += definitions_usr.h pluto_usr.h structs_usr.h coordinates.h jet.h "
+    "units.h environment_utilities.h environment.h tools_usr.h "
+    "read_external_pressure.h galaxy.h\n"
+)
+(problem / "src" / "makefile").write_text("ARCH         = Kunanyi.defs\n")
+PY
+}
+
+latest_output_index() {
+  local out_file="$1"
+  if [ ! -f "$out_file" ]; then
+    return 0
+  fi
+  awk 'NF && $1 ~ /^[0-9]+$/ {n=$1} END{if (n != "") print n}' "$out_file"
+}
+
+latest_restart_output() {
+  local source=""
+  local index=""
+  local candidate
+  local path
+
+  candidate=$(latest_output_index "${PROBLEM}/outputs/dbl.h5.out" || true)
+  if [ -n "${candidate:-}" ]; then
+    path=$(printf "%s/outputs/data.%04d.dbl.h5" "$PROBLEM" "$candidate")
+    if [ -f "$path" ]; then
+      source="dbl.h5"
+      index="$candidate"
+    else
+      echo "[warning] latest dbl.h5 catalogue index ${candidate} has no file: ${path}" >&2
+    fi
+  fi
+
+  candidate=$(latest_output_index "${PROBLEM}/outputs/dbl.out" || true)
+  if [ -n "${candidate:-}" ]; then
+    path=$(printf "%s/outputs/data.%04d.dbl" "$PROBLEM" "$candidate")
+    if [ -f "$path" ] && { [ -z "$index" ] || [ "$candidate" -gt "$index" ]; }; then
+      source="dbl"
+      index="$candidate"
+    elif [ ! -f "$path" ]; then
+      echo "[warning] latest dbl catalogue index ${candidate} has no file: ${path}" >&2
+    fi
+  fi
+
+  if [ -n "$index" ]; then
+    echo "${source} ${index}"
+  fi
+}
+
+classify_mpi_failure() {
+  local log_file="$1"
+  local rc="$2"
+  if [ ! -f "$log_file" ]; then
+    echo "mpi_exit_${rc}_no_log"
+    return
+  fi
+  if grep -qi "Fatal: UD endpoint.*unhandled timeout error" "$log_file"; then
+    echo "ucx_ud_endpoint_timeout"
+  elif grep -qi "Killed by signal 15" "$log_file"; then
+    echo "mpi_signal_15_or_walltime"
+  elif grep -qi "segmentation fault" "$log_file"; then
+    echo "segmentation_fault"
+  elif grep -qi "MPI_ABORT" "$log_file"; then
+    echo "mpi_abort"
+  elif grep -qi "HDF5" "$log_file"; then
+    echo "hdf5_related_mpi_failure"
+  else
+    echo "mpi_exit_${rc}"
+  fi
+}
+
+log_source_revisions() {
+  {
+    echo "case_id=${CASE_ID}"
+    echo "case_variant=${CASE_VARIANT}"
+    echo "case_config_dir=${CASE_CONFIG_DIR}"
+    echo
+    for repo in "$PLUTO_DIR" "$JET_SETUP"; do
+      echo "repo=${repo}"
+      if [ -d "$repo" ]; then
+        echo "realpath=$(readlink -f "$repo" 2>/dev/null || echo "$repo")"
+        if git -C "$repo" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+          echo "git_root=$(git -C "$repo" rev-parse --show-toplevel 2>/dev/null || true)"
+          echo "git_head=$(git -C "$repo" rev-parse HEAD 2>/dev/null || true)"
+          echo "git_branch=$(git -C "$repo" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+          echo "git_status_begin"
+          git -C "$repo" status --short 2>/dev/null || true
+          echo "git_status_end"
+        else
+          echo "git_metadata=unavailable"
+        fi
+      else
+        echo "repo_missing=YES"
+      fi
+      echo
+    done
+    if command -v sha256sum >/dev/null 2>&1; then
+      sha256sum "$CASE_CONFIG_DIR"/case_manifest.json "$CASE_CONFIG_DIR"/pluto.ini "$CASE_CONFIG_DIR"/environment.ini 2>/dev/null || true
+      if [ -x "$CASE_CONFIG_DIR/pluto" ]; then
+        sha256sum "$CASE_CONFIG_DIR/pluto" 2>/dev/null || true
+      fi
+    fi
+  } > "${LOG_DIR}/source_revisions.txt"
+}
+
+require_nonnegative_integer "PROGRESS_WATCHDOG_TIMEOUT_SECONDS" "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS"
+if [ "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" -gt 0 ]; then
+  require_file "$PROGRESS_WATCHDOG_SCRIPT"
+  require_positive_integer "PROGRESS_WATCHDOG_POLL_SECONDS" "$PROGRESS_WATCHDOG_POLL_SECONDS"
+  require_nonnegative_integer "PROGRESS_WATCHDOG_TERM_GRACE_SECONDS" "$PROGRESS_WATCHDOG_TERM_GRACE_SECONDS"
+fi
+
+module purge
+case "$KUNANYI_MODULE_STACK" in
+  agn_intel_impi)
+    module use "$AGN_MODULEFILES"
+    module load intel impi hdf5/1.12.1p zfp/0.5.5
+    MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+    ;;
+  public_intel_impi)
+    module load intel/18.0.1.163 impi/2018.1.163 hdf5/1.10.4
+    MPI_FLAVOR="${MPI_FLAVOR:-intelmpi}"
+    ;;
+  gompi_2023a)
+    module load HDF5/1.14.0-gompi-2023a
+    MPI_FLAVOR="${MPI_FLAVOR:-openmpi}"
+    ;;
+  *)
+    echo "[error] unknown KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}" >&2
+    exit 2
+    ;;
+esac
+if [ -z "${HDF5_DIR:-}" ] && [ -n "${EBROOTHDF5:-}" ]; then
+  export HDF5_DIR="${EBROOTHDF5}"
+fi
+if [ -z "${HDF5_DIR:-}" ] && [ -n "${LD_LIBRARY_PATH:-}" ]; then
+  IFS=: read -r -a ld_paths <<< "$LD_LIBRARY_PATH"
+  for lib_dir in "${ld_paths[@]}"; do
+    if [ -f "${lib_dir}/libhdf5.so" ] || [ -f "${lib_dir}/libhdf5.a" ]; then
+      export HDF5_DIR="$(dirname "$lib_dir")"
+      break
+    fi
+  done
+fi
+if [ -z "${HDF5_DIR:-}" ]; then
+  echo "[error] HDF5_DIR is unset and could not be inferred from loaded modules" >&2
+  exit 2
+fi
+if [ -z "${MPI_FLAVOR:-}" ]; then
+  echo "[error] MPI_FLAVOR was not set for KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}" >&2
+  exit 2
+fi
+export PLUTO_DIR
+
+require_file "${CASE_CONFIG_DIR}/pluto.ini"
+require_file "${CASE_CONFIG_DIR}/environment.ini"
+require_file "${CASE_CONFIG_DIR}/case_manifest.json"
+require_file "${CASE_CONFIG_DIR}/definitions_overrides.json"
+
+echo "JOB_START=$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "HOST=$(hostname)"
+echo "PBS_JOBID=${PBS_JOBID:-}"
+echo "PBS_QUEUE=${PBS_QUEUE:-}"
+echo "PBS_NODEFILE=${PBS_NODEFILE:-}"
+echo "CASE_ID=${CASE_ID}"
+echo "CASE_VARIANT=${CASE_VARIANT}"
+echo "CASE_CONFIG_DIR=${CASE_CONFIG_DIR}"
+echo "WORKDIR=${WORKDIR}"
+echo "KUNANYI_MODULE_STACK=${KUNANYI_MODULE_STACK}"
+echo "MPI_FLAVOR=${MPI_FLAVOR}"
+echo "MODULES=${LOADEDMODULES:-}"
+echo "HDF5_DIR=${HDF5_DIR}"
+echo "HDF5_USE_FILE_LOCKING=${HDF5_USE_FILE_LOCKING:-}"
+echo "ZFP_DIR=${ZFP_DIR:-}"
+echo "FORCE_REBUILD=${FORCE_REBUILD}"
+echo "PLUTO_MAXTIME_HOURS=${PLUTO_MAXTIME_HOURS}"
+echo "H5_RESTART_INDEX=${H5_RESTART_INDEX}"
+echo "PROGRESS_WATCHDOG_TIMEOUT_SECONDS=${PROGRESS_WATCHDOG_TIMEOUT_SECONDS}"
+if [ "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" -gt 0 ]; then
+  echo "PROGRESS_WATCHDOG_SCRIPT=${PROGRESS_WATCHDOG_SCRIPT}"
+  echo "PROGRESS_WATCHDOG_POLL_SECONDS=${PROGRESS_WATCHDOG_POLL_SECONDS}"
+  echo "PROGRESS_WATCHDOG_TERM_GRACE_SECONDS=${PROGRESS_WATCHDOG_TERM_GRACE_SECONDS}"
+  echo "PROGRESS_WATCHDOG_STATUS_LOG=${PROGRESS_WATCHDOG_STATUS_LOG}"
+  echo "PROGRESS_WATCHDOG_TRIGGER_FILE=${PROGRESS_WATCHDOG_TRIGGER_FILE}"
+fi
+echo "mpicc=$(command -v mpicc)"
+echo "mpirun=$(command -v mpirun)"
+echo "python3=$(command -v python3)"
+echo "MPI_TUNING_ENV_BEGIN"
+env | sort | grep -E '^(OMPI_MCA_|PMIX_MCA_|PRTE_MCA_|UCX_|I_MPI_|FI_|PSM2_|MPI_EXTRA_EXPORTS=)' || true
+echo "MPI_TUNING_ENV_END"
+
+if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+  cp "$PBS_NODEFILE" "${LOG_DIR}/pbs_nodefile.${PBS_JOBID:-manual}.txt"
+  NRANKS=$(wc -l < "$PBS_NODEFILE")
+else
+  NRANKS="${NRANKS:-28}"
+fi
+echo "NRANKS=${NRANKS}"
+
+if [ -f "$DONE_MARKER" ] && [ "${ALLOW_DONE_RERUN:-0}" != "1" ]; then
+  echo "[info] DONE marker already exists at $DONE_MARKER"
+  echo "[info] set ALLOW_DONE_RERUN=1 to rerun anyway"
+  exit 0
+fi
+
+if [ "$RESTART_POLICY" = "force-fresh" ]; then
+  rm -rf "$PROBLEM"
+fi
+
+if [ "$FORCE_REBUILD" = "1" ] && [ "$RESTART_POLICY" != "force-fresh" ] && [ -d "$PROBLEM" ]; then
+  echo "[info] FORCE_REBUILD=1: removing built executable and source tree while preserving outputs"
+  rm -rf "${PROBLEM}/src" "${PROBLEM}/pluto" "${PROBLEM}/setup_version"
+fi
+
+if [ ! -x "${PROBLEM}/pluto" ]; then
+  echo "--- setup problem ---"
+  if [ "$RESTART_POLICY" = "force-fresh" ] || [ ! -d "$PROBLEM" ]; then
+    rm -rf "$PROBLEM"
+  fi
+  mkdir -p "$PROBLEM"
+  (
+    cd "$PROBLEM"
+    "$JET_SETUP/tools/setup-problem"
+  )
+  cp "${CASE_CONFIG_DIR}/pluto.ini" "${PROBLEM}/pluto.ini"
+  cp "${CASE_CONFIG_DIR}/environment.ini" "${PROBLEM}/environment.ini"
+  cp "${CASE_CONFIG_DIR}/case_manifest.json" "${PROBLEM}/case_manifest.json"
+  cp "${CASE_CONFIG_DIR}/definitions_overrides.json" "${PROBLEM}/definitions_overrides.json"
+  cp "${CASE_CONFIG_DIR}"/*.csv "${PROBLEM}/" 2>/dev/null || true
+  cp "${CASE_CONFIG_DIR}"/*.dbl "${PROBLEM}/" 2>/dev/null || true
+  cp "${CASE_CONFIG_DIR}"/*.grid.out "${PROBLEM}/" 2>/dev/null || true
+  cp "${PROBLEM}/pluto.ini" "${PROBLEM}/src/pluto.ini"
+
+  apply_definition_overrides "$PROBLEM" "${PROBLEM}/definitions_overrides.json"
+  write_static_support_files "$PROBLEM"
+
+  python3 - <<'PY'
+from pathlib import Path
+
+path = Path("/scratch/bwbrook/git/utas-agn/pluto/Tools/Python/menu.py")
+text = path.read_text()
+needle = "raw_input = input"
+if needle not in text:
+    text = text.replace(
+        "import os, sys, traceback, time, string",
+        "import os, sys, traceback, time, string\nraw_input = input",
+        1,
+    )
+    path.write_text(text)
+PY
+
+  echo "--- generate makefile ---"
+  (
+    cd "${PROBLEM}/src"
+    python3 - <<PY
+import sys
+sys.path.append("${PLUTO_DIR}/Tools/Python")
+from make_problem import MakeProblem
+MakeProblem("${PROBLEM}/src", "${PLUTO_DIR}", 1, 1)
+PY
+  )
+
+  echo "--- build ---"
+  make -C "${PROBLEM}/src" clean
+  make -C "${PROBLEM}/src" -j"${BUILD_JOBS}"
+  cp "${PROBLEM}/src/pluto" "${PROBLEM}/pluto"
+else
+  echo "[info] reusing existing built problem at ${PROBLEM}"
+fi
+
+log_source_revisions
+
+MPI_LAUNCH_ARGS=(-np "$NRANKS")
+case "$MPI_FLAVOR" in
+  openmpi)
+    MPI_EXPORT_ARGS=(-x PATH -x LD_LIBRARY_PATH)
+    if [ -n "${HDF5_DIR:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x HDF5_DIR)
+    fi
+    if [ -n "${HDF5_USE_FILE_LOCKING:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x HDF5_USE_FILE_LOCKING)
+    fi
+    if [ -n "${CPATH:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x CPATH)
+    fi
+    if [ -n "${LIBRARY_PATH:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x LIBRARY_PATH)
+    fi
+    if [ -n "${PKG_CONFIG_PATH:-}" ]; then
+      MPI_EXPORT_ARGS+=(-x PKG_CONFIG_PATH)
+    fi
+    while IFS='=' read -r var _; do
+      case "$var" in
+        OMPI_MCA_*|PMIX_MCA_*|PRTE_MCA_*|UCX_*)
+          MPI_EXPORT_ARGS+=(-x "$var")
+          ;;
+      esac
+    done < <(env)
+    if [ -n "${MPI_EXTRA_EXPORTS:-}" ]; then
+      for var in $MPI_EXTRA_EXPORTS; do
+        if [ -n "${!var:-}" ]; then
+          MPI_EXPORT_ARGS+=(-x "$var")
+        fi
+      done
+    fi
+    echo "MPI_EXPORT_ARGS=${MPI_EXPORT_ARGS[*]}"
+    MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" -np "$NRANKS")
+    if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+      MPI_HOSTFILE="${LOG_DIR}/openmpi_hostfile.${PBS_JOBID:-manual}.txt"
+      awk '{slots[$0] += 1} END {for (host in slots) print host " slots=" slots[host]}' "$PBS_NODEFILE" | sort > "$MPI_HOSTFILE"
+      MPI_LAUNCH_ARGS=("${MPI_EXPORT_ARGS[@]}" --hostfile "$MPI_HOSTFILE" -np "$NRANKS")
+      echo "MPI_HOSTFILE=${MPI_HOSTFILE}"
+      cat "$MPI_HOSTFILE"
+    fi
+    ;;
+  intelmpi)
+    MPI_GENV_ARGS=()
+    if [ -n "${HDF5_USE_FILE_LOCKING:-}" ]; then
+      MPI_GENV_ARGS+=(-genv HDF5_USE_FILE_LOCKING "$HDF5_USE_FILE_LOCKING")
+    fi
+    if [ -n "${PBS_NODEFILE:-}" ] && [ -f "$PBS_NODEFILE" ]; then
+      MPI_MACHINEFILE="${LOG_DIR}/intelmpi_machinefile.${PBS_JOBID:-manual}.txt"
+      cp "$PBS_NODEFILE" "$MPI_MACHINEFILE"
+      MPI_LAUNCH_ARGS=("${MPI_GENV_ARGS[@]}" -np "$NRANKS" -machinefile "$MPI_MACHINEFILE")
+      echo "MPI_MACHINEFILE=${MPI_MACHINEFILE}"
+      cat "$MPI_MACHINEFILE"
+    elif [ "${#MPI_GENV_ARGS[@]}" -gt 0 ]; then
+      MPI_LAUNCH_ARGS=("${MPI_GENV_ARGS[@]}" -np "$NRANKS")
+    fi
+    ;;
+  *)
+    echo "[error] unknown MPI_FLAVOR=${MPI_FLAVOR}" >&2
+    exit 2
+    ;;
+esac
+
+mkdir -p "${PROBLEM}/outputs/logs"
+RUN_ARGS=(-i pluto.ini -e environment.ini)
+if [ -n "$PLUTO_MAXTIME_HOURS" ] && [ "$PLUTO_MAXTIME_HOURS" != "0" ]; then
+  RUN_ARGS+=(-maxtime "$PLUTO_MAXTIME_HOURS")
+fi
+RUN_KIND="fresh"
+
+if [ -n "$H5_RESTART_INDEX" ]; then
+  case "$H5_RESTART_INDEX" in
+    *[!0-9]*)
+      echo "[error] H5_RESTART_INDEX must be a nonnegative integer: ${H5_RESTART_INDEX}" >&2
+      exit 1
+      ;;
+  esac
+  H5_RESTART_INDEX=$((10#$H5_RESTART_INDEX))
+  H5_RESTART_PATH=$(printf "%s/outputs/data.%04d.dbl.h5" "$PROBLEM" "$H5_RESTART_INDEX")
+  require_file "$H5_RESTART_PATH"
+  require_file "${PROBLEM}/outputs/dbl.h5.out"
+  if ! validate_h5_restart_catalogue "${PROBLEM}/outputs/dbl.h5.out" \
+    "$H5_RESTART_INDEX"; then
+    echo "[error] H5_RESTART_INDEX=${H5_RESTART_INDEX} must have exactly one matching numeric dbl.h5.out row" >&2
+    exit 1
+  fi
+  RUN_ARGS+=(-h5restart "$H5_RESTART_INDEX")
+  RUN_KIND="h5_restart_${H5_RESTART_INDEX}"
+elif [ "$RESTART_POLICY" = "auto" ]; then
+  LATEST_RESTART=$(latest_restart_output || true)
+  if [ -n "${LATEST_RESTART:-}" ]; then
+    LATEST_SOURCE=${LATEST_RESTART%% *}
+    LATEST_OUTPUT=${LATEST_RESTART##* }
+    if [ "$LATEST_SOURCE" = "dbl.h5" ]; then
+      RUN_ARGS+=(-h5restart "$LATEST_OUTPUT")
+      RUN_KIND="h5_restart_${LATEST_OUTPUT}"
+    elif [ "$CASE_VARIANT" = "particles" ] && [ "$RESTART_PARTICLES" = "1" ]; then
+      RUN_ARGS+=(-restart "$LATEST_OUTPUT")
+      RUN_KIND="dbl_particle_restart_${LATEST_OUTPUT}"
+    else
+      RUN_ARGS+=(-frestart "$LATEST_OUTPUT")
+      RUN_KIND="dbl_fluid_restart_${LATEST_OUTPUT}"
+    fi
+  fi
+elif [ "$RESTART_POLICY" != "fresh" ] && [ "$RESTART_POLICY" != "force-fresh" ]; then
+  echo "[error] RESTART_POLICY must be auto, fresh, or force-fresh" >&2
+  exit 1
+fi
+
+echo "RUN_KIND=${RUN_KIND}"
+echo "RUN_ARGS=${RUN_ARGS[*]}"
+
+set +e
+(
+  cd "$PROBLEM"
+  if [ "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" -gt 0 ]; then
+    bash "$PROGRESS_WATCHDOG_SCRIPT" \
+      --timeout-seconds "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" \
+      --poll-seconds "$PROGRESS_WATCHDOG_POLL_SECONDS" \
+      --term-grace-seconds "$PROGRESS_WATCHDOG_TERM_GRACE_SECONDS" \
+      --progress-dir "outputs" \
+      --command-log "outputs/logs/pluto_${PBS_JOBID:-manual}.log" \
+      --status-log "$PROGRESS_WATCHDOG_STATUS_LOG" \
+      --trigger-file "$PROGRESS_WATCHDOG_TRIGGER_FILE" \
+      -- mpirun "${MPI_LAUNCH_ARGS[@]}" ./pluto "${RUN_ARGS[@]}"
+  else
+    mpirun "${MPI_LAUNCH_ARGS[@]}" ./pluto "${RUN_ARGS[@]}" > "outputs/logs/pluto_${PBS_JOBID:-manual}.log" 2>&1
+  fi
+)
+MPI_EXIT_CODE=$?
+set -e
+echo "MPI_EXIT_CODE=${MPI_EXIT_CODE}"
+if [ "$MPI_EXIT_CODE" -ne 0 ]; then
+  if [ "$MPI_EXIT_CODE" -eq 124 ] &&
+    [ "$PROGRESS_WATCHDOG_TIMEOUT_SECONDS" -gt 0 ] &&
+    [ -f "$PROGRESS_WATCHDOG_TRIGGER_FILE" ]; then
+    FAILURE_REASON="no_progress_watchdog_timeout"
+  else
+    FAILURE_REASON=$(classify_mpi_failure "${PROBLEM}/outputs/logs/pluto_${PBS_JOBID:-manual}.log" "$MPI_EXIT_CODE")
+  fi
+  echo "FAILURE_REASON=${FAILURE_REASON}"
+  exit "$MPI_EXIT_CODE"
+fi
+
+if [ ! -f "${PROBLEM}/outputs/dbl.h5.out" ] && [ ! -f "${PROBLEM}/outputs/dbl.out" ]; then
+  echo "[error] neither dbl.h5.out nor dbl.out exists after PLUTO run" >&2
+  exit 1
+fi
+if [ ! -f "${PROBLEM}/outputs/restart.out" ] && [ ! -f "${PROBLEM}/restart.out" ]; then
+  echo "[warning] restart.out not found in problem or output directory" >&2
+fi
+
+{
+  echo "case_id=${CASE_ID}"
+  echo "case_variant=${CASE_VARIANT}"
+  echo "run_kind=${RUN_KIND}"
+  echo "workdir=${WORKDIR}"
+  echo "problem=${PROBLEM}"
+  echo "pbs_jobid=${PBS_JOBID:-manual}"
+  echo
+  du -sh "${PROBLEM}/outputs" 2>/dev/null || true
+  echo
+  find "${PROBLEM}/outputs" -maxdepth 2 -type f | sort
+} > "${LOG_DIR}/artifact_manifest.${PBS_JOBID:-manual}.txt"
+
+echo "--- output volume ---"
+du -sh "${PROBLEM}/outputs" 2>/dev/null || true
+if [ -f "${PROBLEM}/outputs/dbl.h5.out" ]; then
+  echo "--- final dbl.h5.out tail ---"
+  tail -n 5 "${PROBLEM}/outputs/dbl.h5.out"
+else
+  echo "--- final dbl.out tail ---"
+  tail -n 5 "${PROBLEM}/outputs/dbl.out"
+fi

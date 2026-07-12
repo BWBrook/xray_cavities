@@ -1,0 +1,10 @@
+metric,value,interpretation
+status,complete_endpoint_review,green
+decision_label,G_LO_GUARDED_CONTINUATION_REACHED_ENDPOINT_GREEN,green
+endpoint_code_time,15330.0696894,target_reached
+endpoint_step,49462,validated
+fluid_restart_index,10,validated
+particle_restart_index,5000,validated
+particle_count,197568,full_scan
+stageout_status,1,scheduler_caveat_evidence_retrieved
+remote_output_size,2.3T,raw_payload_retained_remote

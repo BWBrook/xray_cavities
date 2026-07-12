@@ -1,0 +1,91 @@
+{
+  "boundaries": {
+    "no_bulk_hdf5_or_particle_retrieval": true,
+    "no_new_pbs_submission_during_completion": true,
+    "no_science_postprocessing": true,
+    "raw_remote_output_retained": true
+  },
+  "classification": {
+    "endpoint_status": "endpoint_reached",
+    "production_status": "green",
+    "science_product_status": "not_yet_generated",
+    "stageout_status_role": "scheduler_caveat_compact_evidence_present_and_retrieved"
+  },
+  "compaction": {
+    "after_manifest_bytes": 5911013217798,
+    "before_manifest_bytes": 6376371228977,
+    "execute": true,
+    "freed_manifest_bytes": 465358011179,
+    "preflight": {
+      "c_lo_endpoint": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs",
+      "c_lo_state": "promoted",
+      "g_lo_restart": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/data.0002.dbl.h5",
+      "planned_purge_roots": 11
+    },
+    "runs_root": "/scratch/bwbrook/xray_cavities_runs",
+    "status": "compaction_complete"
+  },
+  "completion_gates": {
+    "done_marker": true,
+    "endpoint_validator_exit": 0,
+    "failed_marker": false,
+    "mpi_exit_zero": true,
+    "stderr_bytes": 0
+  },
+  "created_local": "2026-07-12",
+  "decision_label": "G_LO_GUARDED_CONTINUATION_REACHED_ENDPOINT_GREEN",
+  "endpoint": {
+    "float_output_index": 50,
+    "fluid_hdf5_shape": [
+      1014,
+      960,
+      960
+    ],
+    "fluid_hdf5_size_bytes": 67318639276,
+    "fluid_hdf5_time": 15330.0696894,
+    "fluid_restart_index": 10,
+    "particle_count": 197568,
+    "particle_ids_unique": 197568,
+    "particle_restart_index": 5000,
+    "restart_pair_validation": "ok",
+    "step": 49462,
+    "target_code_time": 15330.0696894
+  },
+  "job": {
+    "cput_used": "848:25:00",
+    "exit_status": 0,
+    "id": "751292.kunanyi-ohpc",
+    "mem_used": "9889184kb",
+    "name": "g_lo_guard",
+    "ncpus_used": 1792,
+    "resource_select": "64:ncpus=28:mpiprocs=28",
+    "resource_walltime": "48:00:00",
+    "stageout_status": 1,
+    "state": "F",
+    "vmem_used": "27657004kb",
+    "walltime_used": "30:38:44"
+  },
+  "run_output_inventory": {
+    "double_hdf5_count": 9,
+    "float_hdf5_count": 40,
+    "inventory_bytes": 2459102490234,
+    "inventory_rows": 4099,
+    "latest_double_hdf5": "data.0010.dbl.h5",
+    "latest_float_hdf5": "data.0050.flt.h5",
+    "latest_particle_restart": "particles.5000.dbl",
+    "particle_restart_count": 4001
+  },
+  "status": "complete_endpoint_review",
+  "watchdog": {
+    "command_exit_code": 0,
+    "command_exit_count": 1,
+    "first_timestamp_utc": "2026-07-10T06:16:26Z",
+    "last_timestamp_utc": "2026-07-11T12:38:31Z",
+    "maximum_no_progress_seconds": 301,
+    "poll_count": 5,
+    "progress_count": 1126,
+    "row_count": 1133,
+    "started_count": 1,
+    "triggered": false
+  }
+}

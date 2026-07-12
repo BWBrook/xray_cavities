@@ -1,0 +1,17 @@
+path,exists,size_bytes,regular_files,symlinks
+/scratch/bwbrook/xray_cavities_runs/2026-05-08-c-hi-segment,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-05-19-c-hi-fullgrid-startup,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-06-05-c-hi-fullgrid-agn-impi-r9-ladder-08node,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-06-05-c-hi-fullgrid-agn-impi-r9-ladder-16node,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-06-05-c-hi-fullgrid-agn-impi-r9-ladder-32node,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-06-05-c-hi-fullgrid-agn-impi-r9-ladder-48node,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-06-05-c-hi-fullgrid-agn-impi-r9-ladder-64node,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-06-05-c-hi-fullgrid-agn-impi-r9-ladder-80node,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh,True,2043562170496,2536,0
+/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64,True,426625479067,1827,3
+/scratch/bwbrook/xray_cavities_runs/2026-07-03-c-lo-bounded-execution,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-07-04-c-lo-bounded-continuation,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-bounded-continuation-2,False,0,0,0
+/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation,True,2559460091001,2107,0
+/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production,True,881365477234,3528,0
+/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation,False,0,0,0

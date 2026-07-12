@@ -1,0 +1,128 @@
+{
+  "status": "complete_product",
+  "decision_label": "THREE_CASE_ENDPOINT_FIRST_PRODUCTS_COMPLETE",
+  "case_order": [
+    "C-HI",
+    "C-LO",
+    "G-LO"
+  ],
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ],
+  "map_scaling": "independent_per_panel_log_percentile",
+  "scaling_warning": "panel colours are not on a common absolute scale",
+  "quantitative_authority": "three_case_endpoint_comparison.csv",
+  "comparison_table": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12/review_products/three_case_endpoint_comparison.csv",
+  "panels": [
+    {
+      "case": "C-HI",
+      "view": "0deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/xraise_grid/xray_1kev_xraise_corrected_mjy_sr.tsv",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 296.14131952,
+      "positive_percentile_99_8": 7005.1790857982,
+      "corrected_sum_ratio_to_c_hi": 1.0
+    },
+    {
+      "case": "C-HI",
+      "view": "45deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/remote_logs/refined_projection_viewing_rerun_2026-06-25.tar.gz::45deg",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 4.0629890838,
+      "positive_percentile_99_8": 7057.3998906298,
+      "corrected_sum_ratio_to_c_hi": 1.0
+    },
+    {
+      "case": "C-HI",
+      "view": "90deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/remote_logs/refined_projection_viewing_rerun_2026-06-25.tar.gz::90deg",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 232.97371272,
+      "positive_percentile_99_8": 7000.9710981188,
+      "corrected_sum_ratio_to_c_hi": 1.0
+    },
+    {
+      "case": "C-LO",
+      "view": "0deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 296.14131952,
+      "positive_percentile_99_8": 7690.062879917,
+      "corrected_sum_ratio_to_c_hi": 1.087839647658863
+    },
+    {
+      "case": "C-LO",
+      "view": "45deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 4.0629890838,
+      "positive_percentile_99_8": 7800.541096488999,
+      "corrected_sum_ratio_to_c_hi": 0.9665266425113752
+    },
+    {
+      "case": "C-LO",
+      "view": "90deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 232.97371283,
+      "positive_percentile_99_8": 7654.9273459272,
+      "corrected_sum_ratio_to_c_hi": 0.9665266425113748
+    },
+    {
+      "case": "G-LO",
+      "view": "0deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12/review_products/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 5.0604854653,
+      "positive_percentile_99_8": 548.03875807058,
+      "corrected_sum_ratio_to_c_hi": 0.06194623211515937
+    },
+    {
+      "case": "G-LO",
+      "view": "45deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12/review_products/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 0.059964620153,
+      "positive_percentile_99_8": 548.7967576054599,
+      "corrected_sum_ratio_to_c_hi": 0.04676663763930208
+    },
+    {
+      "case": "G-LO",
+      "view": "90deg",
+      "source": "/Users/bwbrook/papers/xray_cavities/docs/science/assets/g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12/review_products/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+      "shape": [
+        1014,
+        960
+      ],
+      "positive_percentile_1": 3.6149727947,
+      "positive_percentile_99_8": 546.4640362627599,
+      "corrected_sum_ratio_to_c_hi": 0.04676663763930209
+    }
+  ]
+}

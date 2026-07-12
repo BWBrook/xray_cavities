@@ -1,0 +1,7 @@
+preflight_started_utc=2026-07-10T03:35:02Z
+g_lo_hdf5_stall_guarded_continuation.pbs: OK
+jet_setup_production_template_latest.pbs: OK
+run_with_progress_watchdog.sh: OK
+validate_pluto_particle_restart_pair.py: OK
+Python 3.11.3
+cp: failed to close '/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/pluto': Disk quota exceeded

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-10
+Last updated: 2026-07-12
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,13 +14,74 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-038 G-LO guarded-continuation queued-job
-handoff.
+This note should be treated as a Goal-039 three-case endpoint first-products
+completion handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
 
-Latest Goal 038 G-LO HDF5-stall guarded continuation on 2026-07-10:
+Latest Goal 039 G-LO endpoint first-products and three-case comparison on
+2026-07-12:
+
+- Status: `complete_product`.
+- Decision label:
+  `THREE_CASE_ENDPOINT_FIRST_PRODUCTS_COMPLETE`.
+- Scheduler: `756090.kunanyi-ohpc` / `g_lo_xprod` ended `F` with
+  `Exit_status=0`, walltime `00:29:05`, and empty stderr. `Stageout_status=1`
+  remains a scheduler caveat, but archive/log/qstat evidence was directly
+  retrieved.
+- Endpoint input: accepted Goal 038
+  `data.0050.flt.h5::Timestep_50`, remotely validated at
+  `15330.069689399999` code time with shape `1014 x 960 x 960` and required
+  datasets.
+- Product scope: G-LO `0/45/90 deg` X-ray/tracer products using direct-y at
+  zero degrees and refined edge-overlap accumulation for nonzero views, plus
+  a nine-row `C-HI`/`C-LO`/`G-LO` endpoint comparison.
+- Product integrity: all three G-LO views passed, all raw/corrected/ratio layers
+  have zero empty columns, all 37 archive members and checksums validate, and
+  the comparison contains exactly nine case/view rows.
+- Headline observation: C-LO corrected sums are 0.97-1.09 of same-view C-HI;
+  G-LO corrected sums are 0.047-0.062 of C-HI. This is a processed-total
+  contrast, not yet a cavity-deficit or feedback interpretation.
+- Figure:
+  `docs/science/assets/g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12/g_lo_three_case_endpoint_comparison.png`.
+- Asset policy: 234 MB local review bundle; 13 deliberate files above 5 MiB;
+  no raw HDF5/data/particle payload; complete SHA manifest present.
+- Recommendation: execute a three-case, multi-view endpoint cavity-recovery
+  and Level 1/2 truth-alignment analysis using existing outputs. Do not launch
+  another production run for this next step.
+- Goal log:
+  `docs/goals/039-g-lo-endpoint-first-products-and-three-case-comparison/Log.md`.
+- Science note:
+  `docs/science/g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12.md`.
+
+Latest completed Goal 038 G-LO HDF5-stall guarded continuation on 2026-07-12:
+
+- Status: `complete_endpoint_review`.
+- Decision label: `G_LO_GUARDED_CONTINUATION_REACHED_ENDPOINT_GREEN`.
+- Scheduler: `751292.kunanyi-ohpc` / `g_lo_guard` ended `F` with
+  `Exit_status=0`, walltime `30:38:44`, and 1,792 CPUs. `Stageout_status=1`
+  remains a scheduler caveat, but required compact stage evidence was present
+  and retrieved.
+- Runtime: stdout records `RUN_KIND=h5_restart_2` and `MPI_EXIT_CODE=0`;
+  stderr is empty; `markers/DONE` is present; no failed marker is present.
+- Watchdog: 1,133 rows, 1,126 progress events, no trigger, and command exit
+  zero.
+- Endpoint: double index 10, float index 50, particle index 5000, step 49462,
+  and code time `15330.0696894` agree. The fluid HDF5 has required datasets at
+  `1014 x 960 x 960`; the full particle scan validates 197,568 unique IDs.
+- Data lifecycle: the raw endpoint root is approximately 2.3 TB and remains
+  remote and protected. No bulky production payload was copied locally.
+- Science status: endpoint integrity is green; no G-LO endpoint science
+  product or final observable has yet been generated.
+- Science note:
+  `docs/science/g_lo_hdf5_stall_guarded_continuation_completion_2026-07-12.md`.
+- Recommendation: proceed to G-LO endpoint `0/45/90 deg` first-products and a
+  coherent `C-HI`/`C-LO`/`G-LO` endpoint comparison. Do not add another PLUTO
+  production rung; do not prune protected raw endpoint/restart surfaces until
+  product validation and lifecycle promotion pass.
+
+Prior submitted-waiting Goal 038 handoff on 2026-07-10:
 
 - Status:
   `submitted_waiting_pbs_completion`.

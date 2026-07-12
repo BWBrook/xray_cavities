@@ -1,0 +1,7 @@
+/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin_ohpc/mpicc
+/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpirun
+set queue normal queue_type = Execution
+set queue normal resources_max.walltime = 48:00:00
+set queue normal enabled = True
+set queue normal started = True
+pre_submission_gate=passed

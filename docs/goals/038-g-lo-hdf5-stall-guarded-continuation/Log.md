@@ -218,3 +218,45 @@ One approved scratch compaction and one PBS submission occurred. No
 post-submission polling, retrieval, follow-on job, post-processing, endpoint
 product, XRAiSE/PRAiSE/radio/cavity work, commit, push, scientific-default
 change, or accepted Goal 037 source mutation occurred.
+
+## Completion Review - 2026-07-12
+
+Barry reported that `751292.kunanyi-ohpc` / `g_lo_guard` ended with
+`Exit_status=0` after `30:38:44`. One final qstat and compact evidence
+retrieval were then performed through the authorized Chrome-selector and
+repo-local terminal-helper route.
+
+Final evidence is green:
+
+- `job_state=F`, `Exit_status=0`, `Stageout_status=1`;
+- stdout records `RUN_KIND=h5_restart_2` and `MPI_EXIT_CODE=0`; stderr is empty;
+- `markers/DONE` is present and no failed marker is present;
+- the watchdog contains 1,133 rows, 1,126 progress events, no trigger, and one
+  command-exit event with exit code zero;
+- double index 10 and float index 50 reach step 49462 and endpoint code time;
+- endpoint restart-pair validation passed for the complete 67 GB fluid HDF5
+  and `particles.5000.dbl`; and
+- the particle validator scanned all 197,568 records and found 197,568 unique
+  IDs.
+
+The compact package is under
+`docs/science/assets/g_lo_hdf5_stall_guarded_continuation_completion_2026-07-12/`.
+No production payload was copied locally. The remote raw root is approximately
+2.3 TB and remains protected pending endpoint post-processing and lifecycle
+promotion.
+
+Completion validation includes the new evidence packager's red-green tests,
+fresh integrated project tests, structured JSON/CSV checks, shell syntax,
+manifest verification, and `git diff --check`.
+
+A narrow independent `sol_max_auditor` direct-profile review was attempted
+against the compact endpoint claim only. Persisted metadata confirms
+`gpt-5.6-sol`, `reasoning_effort=max`, recursive multi-agent disabled, and the
+expected direct-runner boundary. It timed out at its deliberate 300-second
+ceiling before returning a final report. Its partial read-only audit found no
+contradiction, but it is treated as an audit non-result and was not retried or
+used as acceptance evidence.
+
+Status: `complete_endpoint_review`.
+
+Decision label: `G_LO_GUARDED_CONTINUATION_REACHED_ENDPOINT_GREEN`.
