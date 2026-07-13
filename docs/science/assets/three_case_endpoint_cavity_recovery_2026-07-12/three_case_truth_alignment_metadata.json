@@ -1,0 +1,61 @@
+{
+  "status": "complete_product",
+  "decision_label": "THREE_CASE_CAVITY_RECOVERY_AND_LEVEL12_ALIGNMENT_COMPLETE",
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-LO"
+  ],
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ],
+  "base_tracer_threshold": 0.005,
+  "kpc_cm": 3.0856775814913673e+21,
+  "final_observational_topology_frozen": false,
+  "publication_ready": false,
+  "evidence_layers": {
+    "observer_side": "existing X-ray recovery products are treated as fixed inputs",
+    "simulation_truth": "Level 1 injected energy and Level 2 tracer-lobe truth are independent retrieved evidence",
+    "hybrid_context": "tracer-shell ambient pressure combined with X-ray-derived volumes after recovery"
+  },
+  "interpretation_boundaries": {
+    "xray_volume": "X-ray volume is projection/method sensitive",
+    "pressure": "pressure is tracer-shell context",
+    "energy": "energy is a hybrid proxy",
+    "proxy_label": "hybrid tracer-pressure/X-ray-volume proxies, not observer-only estimates"
+  },
+  "pressure_conventions": {
+    "truth_alignment": "side-specific tracer-shell pressure",
+    "method_sensitivity": "case_mean_pressure_sensitivity_only"
+  },
+  "row_counts": {
+    "case_truth_summary": 3,
+    "truth_threshold_sensitivity": 9,
+    "tracer_shell_pressure_context": 6,
+    "xray_truth_alignment": 9,
+    "xray_truth_method_sensitivity": 135,
+    "remote_completion_summary": 1
+  },
+  "remote_completion": {
+    "job_id": "756092.kunanyi-ohpc",
+    "exit_status": "0",
+    "stageout_status": "1",
+    "walltime": "00:22:16",
+    "archive_sha256": "474c06f81d09acdb616345bc56d7919738d894d317b0d98a1fee7f941b9d2e6b",
+    "stdout_sha256": "e375354ab5a4d4c3d2f9e31065010fc7d3a48760886d8633a314078af5e5bd6f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "validation_marker_c_hi": "case_validation=passed case=C-HI level2_rows=9 cavity_rows=2",
+    "validation_marker_c_lo": "case_validation=passed case=C-LO level2_rows=9 cavity_rows=2",
+    "validation_marker_g_lo": "case_validation=passed case=G-LO level2_rows=9 cavity_rows=2",
+    "validation_marker_all_cases": "three_case_truth_validation=passed"
+  },
+  "input_provenance": {
+    "recovery_summary": "docs/science/assets/three_case_endpoint_cavity_recovery_2026-07-12/xray_recovery_summary.csv",
+    "component_summary": "docs/science/assets/three_case_endpoint_cavity_recovery_2026-07-12/xray_component_summary.csv",
+    "method_sensitivity": "docs/science/assets/three_case_endpoint_cavity_recovery_2026-07-12/method_sensitivity.csv",
+    "remote_products": "docs/science/assets/three_case_endpoint_cavity_recovery_2026-07-12/remote_products",
+    "remote_logs": "docs/science/assets/three_case_endpoint_cavity_recovery_2026-07-12/remote_logs"
+  }
+}

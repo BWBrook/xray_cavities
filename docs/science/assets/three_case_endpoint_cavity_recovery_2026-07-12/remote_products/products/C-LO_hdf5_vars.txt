@@ -1,0 +1,6 @@
+prs                      Dataset {1014, 960, 960}
+rho                      Dataset {1014, 960, 960}
+tr1                      Dataset {1014, 960, 960}
+vx1                      Dataset {1014, 960, 960}
+vx2                      Dataset {1014, 960, 960}
+vx3                      Dataset {1014, 960, 960}

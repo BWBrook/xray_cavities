@@ -1,0 +1,29 @@
+{
+  "status": "complete_product",
+  "decision_label": "THREE_CASE_CAVITY_RECOVERY_AND_LEVEL12_ALIGNMENT_COMPLETE",
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-LO"
+  ],
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ],
+  "evidence_layers": {
+    "observer": "corrected_xray_only",
+    "simulation_truth": "projected_tracer_post_hoc_only",
+    "remote_truth": "level1_level2_and_tracer_shell_pressure"
+  },
+  "base_protocol": {
+    "radial_bin_kpc": 5.0,
+    "radial_smoothing_kpc": 10.0,
+    "candidate_fraction_percent": 1.0,
+    "is_base": true
+  },
+  "candidate_selection_basis": "projected_physical_area_fraction",
+  "sensitivity_rows": 135,
+  "final_observational_topology_frozen": false,
+  "publication_ready": false
+}

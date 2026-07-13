@@ -1,0 +1,15 @@
+job_id=756092.kunanyi-ohpc
+host=n002.kunanyi.UDEF
+started_utc=2026-07-12T12:46:27Z
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-12-three-case-endpoint-truth-alignment
+d01d9be561440937a60ca5872112fe6fe149d6e6c4b81acb29e9f0eef43923a3  /u/bwbrook/codex_kunanyi/goal040_three_case_endpoint_truth_alignment/pluto_h5_truth_extract.c
+46ae0502715ef21a8977647dd9a0f3a0f517bd3e0afd629864705defeb400fd7  /u/bwbrook/codex_kunanyi/goal040_three_case_endpoint_truth_alignment/pluto_h5_cavity_stub_extract.c
+Extracted truth diagnostics to /scratch/bwbrook/xray_cavities_analysis/2026-07-12-three-case-endpoint-truth-alignment/C-HI/truth
+Extracted truth diagnostics to /scratch/bwbrook/xray_cavities_analysis/2026-07-12-three-case-endpoint-truth-alignment/C-LO/truth
+Extracted truth diagnostics to /scratch/bwbrook/xray_cavities_analysis/2026-07-12-three-case-endpoint-truth-alignment/G-LO/truth
+case_validation=passed case=C-HI level2_rows=9 cavity_rows=2
+case_validation=passed case=C-LO level2_rows=9 cavity_rows=2
+case_validation=passed case=G-LO level2_rows=9 cavity_rows=2
+three_case_truth_validation=passed
+474c06f81d09acdb616345bc56d7919738d894d317b0d98a1fee7f941b9d2e6b  /u/bwbrook/codex_kunanyi/goal040_three_case_endpoint_truth_alignment/three_case_endpoint_truth_alignment_2026-07-12.tar.gz
+finished_utc=2026-07-12T13:08:43Z

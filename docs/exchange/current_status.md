@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-12
+Last updated: 2026-07-13
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,62 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-039 three-case endpoint first-products
-completion handoff.
+This note should be treated as a Goal-040 three-case endpoint cavity-recovery
+and truth-alignment completion handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 040 three-case endpoint cavity recovery and truth alignment on
+2026-07-12:
+
+- Status: `complete_product`.
+- Decision label:
+  `THREE_CASE_CAVITY_RECOVERY_AND_LEVEL12_ALIGNMENT_COMPLETE`.
+- Local observer layer: a tracer-blind azimuthal-median radial background,
+  180 kpc background field, nested 120 kpc candidate aperture, base highest-
+  deficit 1 percent of projected physical area, and 25 kpc2 component gate
+  were applied to all nine accepted C-HI/C-LO/G-LO `0/45/90 deg` maps.
+- Audit correction: pixel-count thresholding was rejected because unequal
+  projected pixel areas caused false view dependence. The physical-area rule
+  is now regression-tested and used for the base and all sensitivity rows.
+- Local result: two opposite-side X-ray components in all nine base panels.
+  Against projected tracer `>=5e-3`, X-ray precision is `1.0` while tracer
+  recall is `0.0208-0.2015`; the X-ray deficit is a high-purity but incomplete
+  tracer-lobe subset.
+- Corrected geometric-depth volumes: C-HI `5.48e3-5.96e3 kpc3`, C-LO
+  `5.16e3-5.18e3 kpc3`, and G-LO `5.18e3-5.20e3 kpc3` across views.
+- Sensitivity: 135 rows cover three physical radial-profile choices crossed
+  with five candidate fractions. Broader masks expose topology instability,
+  so no final observational topology is frozen.
+- Scheduler: `756092.kunanyi-ohpc` / `tri_truth` ended `F` with
+  `Exit_status=0`, walltime `00:22:16`, empty stderr, all case validations,
+  and aggregate truth validation passed. `Stageout_status=1` remains a
+  scheduler caveat; the requested artifacts were present and retrieved.
+- Truth surface at tracer threshold `5e-3`: Level 2 / Level 1 energy is
+  `0.439876` for C-HI, `0.638114` for C-LO, and `0.507338` for G-LO.
+- Base geometric X-ray volume / Level 2 volume spans `0.00740-0.00804` for
+  C-HI, `0.3906-0.3918` for C-LO, and `0.0655-0.0656` for G-LO.
+- Adopted geometric-depth `2.5pV` / Level 1 spans `0.00358-0.00389`,
+  `0.478-0.480`, and `0.0497-0.0499`, respectively. These are hybrid
+  tracer-pressure/X-ray-volume proxies, not observer-only energies.
+- Figures:
+  `docs/science/assets/three_case_endpoint_cavity_recovery_2026-07-12/three_case_endpoint_cavity_recovery.png`.
+  `docs/science/assets/three_case_endpoint_cavity_recovery_2026-07-12/three_case_truth_alignment.png`.
+- Archive SHA-256:
+  `474c06f81d09acdb616345bc56d7919738d894d317b0d98a1fee7f941b9d2e6b`.
+- No bulky HDF5, PLUTO `data.*`, or particle payload was copied locally.
+- Science note:
+  `docs/science/three_case_endpoint_cavity_recovery_2026-07-12.md`.
+- Goal log:
+  `docs/goals/040-three-case-endpoint-cavity-recovery-and-truth-alignment/Log.md`.
+- Recommendation: make Goal 041 a common-age three-case evolution analysis
+  using existing production outputs, provisionally at `10/20/30/40/50 Myr`
+  and `0/45/90 deg`, with the corrected physical-area recovery, Level 1/2
+  truth, and hybrid energy labels carried consistently. Preflight exact common
+  snapshots first, but do not launch another PLUTO production run by default;
+  the present production data should be exploited before extending beyond
+  50 Myr or opening offset-environment cases.
 
 Latest Goal 039 G-LO endpoint first-products and three-case comparison on
 2026-07-12:

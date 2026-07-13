@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+#PBS -N tri_truth
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=96gb
+#PBS -l walltime=06:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal040_three_case_endpoint_truth_alignment/three_case_endpoint_truth_alignment.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal040_three_case_endpoint_truth_alignment/three_case_endpoint_truth_alignment.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal040_three_case_endpoint_truth_alignment}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-12-three-case-endpoint-truth-alignment}"
+TRUTH_SOURCE="${TRUTH_SOURCE:-$STAGE_DIR/pluto_h5_truth_extract.c}"
+CAVITY_SOURCE="${CAVITY_SOURCE:-$STAGE_DIR/pluto_h5_cavity_stub_extract.c}"
+BUILD_DIR="${BUILD_DIR:-$STAGE_DIR/build}"
+TRUTH_EXE="$BUILD_DIR/pluto_h5_truth_extract"
+CAVITY_EXE="$BUILD_DIR/pluto_h5_cavity_stub_extract"
+ARCHIVE="${ARCHIVE:-$STAGE_DIR/three_case_endpoint_truth_alignment_2026-07-12.tar.gz}"
+ARCHIVE_PAYLOAD="${ARCHIVE_PAYLOAD:-$STAGE_DIR/archive_payload}"
+ARCHIVE_PAYLOAD_TMP="${ARCHIVE_PAYLOAD_TMP:-$STAGE_DIR/archive_payload.tmp}"
+
+CASE_SPECS=(
+  "C-HI|/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5|Timestep_51|1e45"
+  "C-LO|/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs/data.0053.flt.h5|Timestep_53|1e43"
+  "G-LO|/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/data.0050.flt.h5|Timestep_50|1e43"
+)
+
+mkdir -p "$STAGE_DIR" "$BUILD_DIR"
+if [ -e "$ANALYSIS_ROOT" ]; then
+  echo "refusing to overwrite existing analysis root: $ANALYSIS_ROOT" >&2
+  exit 2
+fi
+mkdir -p "$ANALYSIS_ROOT"
+
+echo "job_id=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "analysis_root=$ANALYSIS_ROOT"
+
+for source in "$TRUTH_SOURCE" "$CAVITY_SOURCE"; do
+  test -r "$source" || { echo "missing staged source: $source" >&2; exit 2; }
+  sha256sum "$source"
+done
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+H5CC="$(command -v h5pcc || command -v h5cc)"
+test -n "$H5CC"
+"$H5CC" -O2 "$TRUTH_SOURCE" -lm -o "$TRUTH_EXE"
+"$H5CC" -O2 "$CAVITY_SOURCE" -lm -o "$CAVITY_EXE"
+
+for spec in "${CASE_SPECS[@]}"; do
+  IFS='|' read -r case_id hdf5 timestep jet_power <<<"$spec"
+  test -r "$hdf5" || { echo "missing endpoint HDF5: $hdf5" >&2; exit 2; }
+  h5ls "$hdf5/$timestep/vars" >"$ANALYSIS_ROOT/${case_id}_hdf5_vars.txt"
+  for variable in rho prs tr1 vx1 vx2 vx3; do
+    grep -Eq "^[[:space:]]*$variable[[:space:]]" "$ANALYSIS_ROOT/${case_id}_hdf5_vars.txt" || {
+      echo "missing $case_id/$timestep/vars/$variable" >&2
+      exit 2
+    }
+  done
+  case_dir="$ANALYSIS_ROOT/$case_id"
+  truth_dir="$case_dir/truth"
+  cavity_dir="$case_dir/cavity"
+  mkdir -p "$truth_dir" "$cavity_dir"
+  "$TRUTH_EXE" "$hdf5" "$timestep" "$truth_dir" "$jet_power" 50.0
+  "$CAVITY_EXE" "$hdf5" "$timestep" "$cavity_dir" 5e-3 1e-3 1.00 1.15 1.35
+done
+
+module purge
+module load Anaconda3/2024.02-1
+python - "$ANALYSIS_ROOT" <<'PY'
+import csv
+import math
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+for case_id in ("C-HI", "C-LO", "G-LO"):
+    truth = root / case_id / "truth"
+    cavity = root / case_id / "cavity"
+    level1 = list(csv.DictReader((truth / "level1_injected_energy.csv").open()))
+    level2 = list(csv.DictReader((truth / "level2_tracer_lobe_truth.csv").open()))
+    cavity_rows = list(csv.DictReader((cavity / "cavity_stub_summary.csv").open()))
+    if len(level1) < 1 or len(level2) != 9 or len(cavity_rows) != 2:
+        raise SystemExit(
+            f"invalid row counts for {case_id}: {len(level1)}, {len(level2)}, {len(cavity_rows)}"
+        )
+    if {row["side"] for row in cavity_rows} != {"negative_z", "positive_z"}:
+        raise SystemExit(f"invalid cavity sides for {case_id}")
+    for row in cavity_rows:
+        for column in ("ambient_pressure_dyn_cm2", "ellipsoid_volume_kpc3", "pV_erg"):
+            value = float(row[column])
+            if not math.isfinite(value) or value <= 0.0:
+                raise SystemExit(f"invalid {case_id} {row['side']} {column}: {value}")
+    for row in level2:
+        for column in ("volume_kpc3", "total_energy_erg"):
+            value = float(row[column])
+            if not math.isfinite(value) or value <= 0.0:
+                raise SystemExit(f"invalid {case_id} Level 2 {column}: {value}")
+    print(f"case_validation=passed case={case_id} level2_rows={len(level2)} cavity_rows={len(cavity_rows)}")
+print("three_case_truth_validation=passed")
+PY
+
+rm -rf "$ARCHIVE_PAYLOAD_TMP"
+mkdir -p "$ARCHIVE_PAYLOAD_TMP/products"
+for case_id in C-HI C-LO G-LO; do
+  cp -a "$ANALYSIS_ROOT/$case_id" "$ARCHIVE_PAYLOAD_TMP/products/$case_id"
+  cp "$ANALYSIS_ROOT/${case_id}_hdf5_vars.txt" "$ARCHIVE_PAYLOAD_TMP/products/"
+done
+find "$ARCHIVE_PAYLOAD_TMP" -type f -printf "%P\t%s bytes\n" | sort \
+  >"$ARCHIVE_PAYLOAD_TMP/archive_manifest.tsv"
+(
+  cd "$ARCHIVE_PAYLOAD_TMP"
+  find . -type f ! -name archive_checksums.sha256 -exec sha256sum {} \; | sort \
+    >archive_checksums.sha256
+)
+rm -rf "$ARCHIVE_PAYLOAD"
+mv "$ARCHIVE_PAYLOAD_TMP" "$ARCHIVE_PAYLOAD"
+(
+  cd "$ARCHIVE_PAYLOAD"
+  find . -type f ! -name archive_file_list.txt -print | sort >archive_file_list.txt
+  printf './archive_file_list.txt\n' >>archive_file_list.txt
+)
+rm -f "$ARCHIVE"
+tar -czf "$ARCHIVE" -C "$ARCHIVE_PAYLOAD" \
+  --files-from "$ARCHIVE_PAYLOAD/archive_file_list.txt"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

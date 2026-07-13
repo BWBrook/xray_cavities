@@ -1,0 +1,9 @@
+parameter,value,role
+background_radius_kpc,180,ambient_profile_field
+candidate_radius_kpc,120,edge_safe_search_aperture
+radial_bin_kpc,5,base_azimuthal_median_bin
+radial_smoothing_kpc,10,base_profile_smoothing
+candidate_fraction_percent,1,base_high_deficit_physical_area_tail
+minimum_component_area_kpc2,25,physical_component_gate
+connectivity,8,component_labelling
+tracer_thresholds,1e-3;5e-3;1e-2,validation_only

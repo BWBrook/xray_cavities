@@ -1,0 +1,12 @@
+input_h5=/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation/C-LO/particles/problem/outputs/data.0053.flt.h5
+timestep=Timestep_53
+time_code=15330.069689399999
+time_myr=50.000000000007773
+shape_nz_ny_nx=1014,960,960
+jet_power_erg_s=1e+43
+active_time_myr=50
+unit_density_cgs=1.0023678e-24
+unit_length_cm=3.0856775814913673e+21
+unit_velocity_cm_s=29979245800
+unit_pressure_barye=0.0009008832512490307
+unit_energy_erg=2.646794042725503e+61
