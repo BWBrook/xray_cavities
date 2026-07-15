@@ -116,8 +116,11 @@ def _topology_class(summaries: list[recovery.ComponentSummary]) -> str:
     return "multiple_or_one_sided_components"
 
 
-def analyse_loaded_map(loaded: recovery.LoadedMap) -> MapAnalysis:
+def analyse_loaded_map(loaded: recovery.LoadedMap, time_myr: float = 50.0) -> MapAnalysis:
     """Apply the fixed X-ray protocol, then validate against tracer truth."""
+
+    if not np.isfinite(time_myr) or time_myr <= 0.0:
+        raise ValueError("time_myr must be finite and positive")
 
     observer_mask, deficit, threshold, selected = _observer_mask(
         loaded,
@@ -139,7 +142,7 @@ def analyse_loaded_map(loaded: recovery.LoadedMap) -> MapAnalysis:
     summary_row = {
         "case": loaded.spec.case,
         "view": loaded.spec.view,
-        "time_myr": 50.0,
+        "time_myr": float(time_myr),
         "background_radius_kpc": recovery.BACKGROUND_RADIUS_KPC,
         "candidate_radius_kpc": recovery.CANDIDATE_RADIUS_KPC,
         "radial_bin_kpc": recovery.RADIAL_BIN_KPC,

@@ -1,0 +1,4 @@
+case,status,level1_truth_rows,level2_truth_rows,level3_ambient_energy_rows,projection_validation_rows,xray_recovery_summary_rows,xray_component_summary_rows,xray_method_sensitivity_rows,cavity_energy_power_alignment_rows,endpoint_merge_status
+C-HI,complete_case_product_pending_endpoint_merge,36,36,15,12,12,31,180,252,pending
+C-LO,complete_case_product_pending_endpoint_merge,36,36,15,12,12,24,180,234,pending
+G-LO,complete_case_product_pending_endpoint_merge,36,36,15,12,12,25,180,234,pending

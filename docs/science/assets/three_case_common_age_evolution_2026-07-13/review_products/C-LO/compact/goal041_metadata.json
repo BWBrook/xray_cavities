@@ -1,0 +1,55 @@
+{
+  "archive_policy": "compact CSV/JSON/TXT/log/checksum/provenance only; TSV arrays remain remote under analysis root",
+  "case": "C-LO",
+  "dependency_count": 90,
+  "endpoint_reuse": "Goal 040 accepted X-ray recovery and Level 1/2/cavity surface",
+  "goal": "041",
+  "gravity_status": "excluded_blocked",
+  "level3_ages_myr": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "new_xray_truth_cavity_ages_myr": [
+    10,
+    20,
+    30,
+    40
+  ],
+  "nominal_ages_myr": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "observer_protocol": "Goal 040 physical-area recovery reused",
+  "projection_accumulators": {
+    "0deg": "direct_y_axis_sum",
+    "45deg": "edge_overlap_uniform_cell_projection",
+    "90deg": "edge_overlap_uniform_cell_projection"
+  },
+  "row_counts": {
+    "cavity_energy_power_alignment": 234,
+    "cavity_shell_context": 8,
+    "level1_truth": 36,
+    "level2_truth": 36,
+    "level3_ambient_energy": 15,
+    "product_dependency_ledger": 90,
+    "projected_tracer_alignment": 36,
+    "projection_validation": 12,
+    "source_time_manifest_case": 5,
+    "xray_component_summary": 24,
+    "xray_method_sensitivity": 180,
+    "xray_recovery_summary": 12
+  },
+  "status": "complete_case_product_pending_endpoint_merge",
+  "tracer_role": "post_hoc_validation_only",
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ]
+}

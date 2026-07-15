@@ -1,0 +1,8 @@
+check,status,evidence
+initial_failure_common_cause,passed,all three jobs failed at first truth-extractor launch because libsz.so.2 was absent after module purge
+hdf5_dependency_paths_retained,passed,HDF5/1.14.0-gompi-2023a remained loaded while Anaconda3/2024.02-1 was added
+python_h5py_combined_stack,passed,h5py imported under the combined module environment
+compiled_extractor_linkage,passed,ldd found no unresolved libraries across all six existing truth and cavity binaries
+wrapper_fail_closed_link_check,passed,wrapper exits before analysis when ldd reports any not found dependency
+staged_hash_manifest,passed,all 20 staged and shared dependencies matched after wrapper restaging
+retry_no_overwrite_targets,passed,new 2026-07-14 retry analysis roots archives stdout and stderr paths were absent

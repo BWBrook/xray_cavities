@@ -1,0 +1,23 @@
+{
+  "analysis_parent": "/scratch/bwbrook/xray_cavities_analysis/2026-07-13-three-case-common-age-evolution",
+  "available_bytes": 3204297185558528,
+  "c_hi_forecast_bytes": 1144713908,
+  "c_lo_forecast_bytes": 1144713908,
+  "deletion_authority": "barry_only_after_goal041_synthesis_acceptance",
+  "forecast_cases": {
+    "C-HI": 1144713908,
+    "C-LO": 1144713908,
+    "G-LO": 1144713908
+  },
+  "forecast_source": "docs/science/assets/three_case_common_age_evolution_2026-07-13/scratch_forecast.csv",
+  "forecast_total_bytes": 3434141724,
+  "g_lo_forecast_bytes": 1144713908,
+  "gate_status": "GREEN",
+  "headroom_ratio": "777558.9562425739",
+  "minimum_headroom_ratio": 1.5,
+  "particle_outputs_bytes": 0,
+  "required_with_safety_bytes": 4120970069,
+  "safety_factor": 1.2,
+  "status": "scratch_capacity_gate_green",
+  "write_probe_status": "passed"
+}

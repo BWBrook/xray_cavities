@@ -1,0 +1,10 @@
+gate,status,evidence
+compact_sha256_manifests,passed,three case manifests verified
+case_age_coverage,passed,3 cases x 5 ages
+observer_coverage,passed,3 cases x 5 ages x 3 views
+hybrid_coverage,passed,returned age rows plus 243 endpoint rows
+method_sensitivity_coverage,passed,45 panels x 15 protocols
+authoritative_power_binding,passed,frozen three-case power contract
+endpoint_method_contract,passed,Goal040 physical-area base method
+topology_invalid_values_flagged,passed,connected/missing/multiple masks diagnostic only
+gravity_excluded,passed,no gravitational normalization emitted

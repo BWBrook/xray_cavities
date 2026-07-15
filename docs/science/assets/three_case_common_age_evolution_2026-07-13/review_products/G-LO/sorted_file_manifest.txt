@@ -1,0 +1,17 @@
+compact/cavity_energy_power_alignment.csv	112840 bytes
+compact/cavity_shell_context.csv	5426 bytes
+compact/endpoint_reuse_contract.csv	2425 bytes
+compact/goal041_metadata.json	1339 bytes
+compact/goal041_sha256_manifest.sha256	1413 bytes
+compact/level1_truth.csv	2862 bytes
+compact/level2_truth.csv	14834 bytes
+compact/level3_ambient_energy.csv	3290 bytes
+compact/product_dependency_ledger.csv	40068 bytes
+compact/projected_tracer_alignment.csv	5324 bytes
+compact/projection_validation.csv	1496 bytes
+compact/scratch_capacity_gate.csv	509 bytes
+compact/source_time_manifest_case.csv	2571 bytes
+compact/xray_component_summary.csv	6471 bytes
+compact/xray_method_sensitivity.csv	32292 bytes
+compact/xray_recovery_summary.csv	4510 bytes
+remote_logs/goal041_g_lo.log	24971 bytes

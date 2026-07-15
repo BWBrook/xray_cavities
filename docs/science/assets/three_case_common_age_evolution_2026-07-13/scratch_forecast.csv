@@ -1,0 +1,4 @@
+case,xray_products_bytes,transient_working_bytes,archive_duplication_bytes,particle_outputs_bytes,forecast_basis
+C-HI,794713908,250000000,100000000,0,"four new ages times measured accepted 0/45/90 XRAiSE TSV surface of 198678477 bytes; plus one-age transient allowance and conservative compact archive/log allowance"
+C-LO,794713908,250000000,100000000,0,"four new ages times measured accepted 0/45/90 XRAiSE TSV surface of 198678477 bytes; plus one-age transient allowance and conservative compact archive/log allowance"
+G-LO,794713908,250000000,100000000,0,"four new ages times measured accepted 0/45/90 XRAiSE TSV surface of 198678477 bytes; plus one-age transient allowance and conservative compact archive/log allowance"

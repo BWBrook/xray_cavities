@@ -1,0 +1,33 @@
+{
+  "candidate_selection_basis": "projected_physical_area_fraction",
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-LO"
+  ],
+  "endpoint_time_myr": 50.0,
+  "final_observational_topology_frozen": false,
+  "locked_assets": {
+    "case_truth_summary.csv": "7f3ab83df0b2a51716d8fea66879beb36a65a72a25536d8117ccdf2f9c2d4a08",
+    "method_sensitivity.csv": "2660889c88f11c8cd9f7b5ebe5b5f67cd145988a0406dd2e6379ed81aa550b9f",
+    "three_case_endpoint_cavity_recovery_metadata.json": "084ff904123d89854237aa8506cdf57cf6b74983217b3d749653845dd5b914d9",
+    "three_case_truth_alignment_metadata.json": "0ce24359c3ea675cc6474df4a9a476791a812c841eb27ffd5a5cd1b60d3b81bc",
+    "tracer_shell_pressure_context.csv": "6082368d589b3772769c1d84ec768f772034d3f187cddd01139460443fbc0dad",
+    "truth_threshold_sensitivity.csv": "d20cecfd8d05ce08bc2392dcfbcd95e67da0ef7ff71eb0004e12970adc4a0809",
+    "xray_component_summary.csv": "4f9f5be058faf4b94dd1821c98b6310b0dbf5738f76ddb3390a4c9ddaea7c5eb",
+    "xray_recovery_summary.csv": "cc6b0609360b1ab421313c2c97bd46436cd56b6b85467ba97870f332996df54d",
+    "xray_truth_alignment.csv": "7909b24d00a6e1970d6d9e24780872ba80b934fb96f08f42dbaabb676182bdcf"
+  },
+  "locked_assets_digest_sha256": "0967cc58764f84a08c7c1ced1fcd73a71922bb032e2b150f57aba88bcf43cb98",
+  "publication_ready": false,
+  "row_count": 9,
+  "sensitivity_protocols_per_case_view": 15,
+  "source_goal": "040",
+  "source_root": "docs/science/assets/three_case_endpoint_cavity_recovery_2026-07-12",
+  "status": "endpoint_reuse_contract_green",
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ]
+}

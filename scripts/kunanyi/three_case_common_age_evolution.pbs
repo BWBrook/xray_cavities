@@ -1,0 +1,281 @@
+#!/usr/bin/env bash
+#PBS -N common_age_case
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=96gb
+#PBS -l walltime=12:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+CASE="${CASE:?Set CASE to C-HI, C-LO, or G-LO}"
+SOURCE_MANIFEST="${SOURCE_MANIFEST:?Set SOURCE_MANIFEST to the selected five-age CSV}"
+ENDPOINT_CONTRACT="${ENDPOINT_CONTRACT:?Set ENDPOINT_CONTRACT to the validated Goal 040 endpoint CSV}"
+SCRATCH_GATE="${SCRATCH_GATE:?Set SCRATCH_GATE to the green Goal 041 scratch gate CSV}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:?Set ANALYSIS_ROOT to a new remote analysis root}"
+STAGE_DIR="${STAGE_DIR:?Set STAGE_DIR to the staged Goal 041 runtime}"
+TRUTH_SOURCE="${TRUTH_SOURCE:?Set TRUTH_SOURCE to the staged Level 1/2 helper source}"
+CAVITY_SOURCE="${CAVITY_SOURCE:?Set CAVITY_SOURCE to the staged cavity helper source}"
+XRAISE_SCRIPT="${XRAISE_SCRIPT:?Set XRAISE_SCRIPT to the staged XRAiSE runtime}"
+XRAISE_PY="${XRAISE_PY:?Set XRAISE_PY to the staged XRAiSE helper module}"
+APEC_TABLE="${APEC_TABLE:?Set APEC_TABLE to the staged APEC table}"
+GAUNT_LUT="${GAUNT_LUT:?Set GAUNT_LUT to the staged Gaunt LUT}"
+LEVEL3_EXTRACTOR="${LEVEL3_EXTRACTOR:?Set LEVEL3_EXTRACTOR to the staged Level 3 extractor}"
+ANALYSIS_SCRIPT="${ANALYSIS_SCRIPT:?Set ANALYSIS_SCRIPT to the staged compact analysis builder}"
+STAGED_HASH_MANIFEST="${STAGED_HASH_MANIFEST:?Set STAGED_HASH_MANIFEST to staged SHA-256 records}"
+ARCHIVE="${ARCHIVE:?Set ARCHIVE to a new compact archive path}"
+PYTHON="${PYTHON:-python3}"
+Y_CHUNK="${Y_CHUNK:-8}"
+PROJECTED_U_BINS="${PROJECTED_U_BINS:-960}"
+REDSHIFT="${REDSHIFT:-0.05}"
+EMPTY_COLUMN_FRACTION_MAX="${EMPTY_COLUMN_FRACTION_MAX:-0.05}"
+CASE_SLUG="${CASE,,}"
+CASE_SLUG="${CASE_SLUG//-/_}"
+BUILD_DIR="$STAGE_DIR/build_$CASE_SLUG"
+TRUTH_EXE="$BUILD_DIR/common_age_truth_extract"
+CAVITY_EXE="$BUILD_DIR/common_age_cavity_extract"
+COMPACT_OUTPUT="$ANALYSIS_ROOT/compact"
+SNAPSHOT_TMP="$STAGE_DIR/compact_snapshot_${CASE_SLUG}.tmp"
+# Required age directories are age_10myr, age_20myr, age_30myr, age_40myr, and age_50myr.
+# Each new age contains xraise_grid_0deg, xraise_grid_45deg, and xraise_grid_90deg.
+
+case "$CASE" in C-HI|C-LO|G-LO) ;; *) echo "invalid CASE: $CASE" >&2; exit 2 ;; esac
+if [ -e "$ANALYSIS_ROOT" ]; then
+  echo "refusing to overwrite existing analysis root: $ANALYSIS_ROOT" >&2
+  exit 2
+fi
+if [ -e "$ARCHIVE" ] || [ -e "$SNAPSHOT_TMP" ]; then
+  echo "refusing to overwrite existing archive or snapshot" >&2
+  exit 2
+fi
+mkdir -p "$BUILD_DIR"
+
+for path in "$SOURCE_MANIFEST" "$ENDPOINT_CONTRACT" "$SCRATCH_GATE" "$TRUTH_SOURCE" "$CAVITY_SOURCE" "$XRAISE_SCRIPT" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT" "$LEVEL3_EXTRACTOR" "$ANALYSIS_SCRIPT" "$STAGED_HASH_MANIFEST"; do
+  test -r "$path" || { echo "missing staged input: $path" >&2; exit 2; }
+done
+while read -r expected path; do
+  [ -z "${expected:-}" ] && continue
+  observed="$(sha256sum "$path" | awk '{print $1}')"
+  [ "$observed" = "$expected" ] || { echo "staged hash mismatch: $path" >&2; exit 2; }
+done < "$STAGED_HASH_MANIFEST"
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+"$PYTHON" - "$SOURCE_MANIFEST" "$CASE" "$ENDPOINT_CONTRACT" "$SCRATCH_GATE" <<'PY'
+import csv
+import sys
+from pathlib import Path
+import h5py
+
+CODE_TIME_PER_MYR = 306.6013937879523
+EXPECTED_POWER_ERG_S = {"C-HI": 1.0e45, "C-LO": 1.0e43, "G-LO": 1.0e43}
+required = ("rho", "prs", "tr1", "vx1", "vx2", "vx3")
+manifest, case, endpoint_contract, scratch_gate = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3]), Path(sys.argv[4])
+with manifest.open(newline="") as handle:
+    rows = [row for row in csv.DictReader(handle) if row.get("case") == case]
+if len(rows) != 5 or {int(row["nominal_age_myr"]) for row in rows} != {10, 20, 30, 40, 50}:
+    raise SystemExit("manifest must contain exactly the five requested ages")
+shape = None
+for row in rows:
+    age = int(row["nominal_age_myr"])
+    expected_action = "reuse_endpoint_plus_level3" if age == 50 else "compute_new"
+    if row.get("action") != expected_action or row.get("compute_level3") != "true":
+        raise SystemExit(f"invalid flags at age {age}")
+    if row.get("selection_status") != "selected":
+        raise SystemExit(f"manifest selection_status is not selected at age {age}")
+    if row.get("endpoint_reuse_id") != f"{case}:50myr":
+        raise SystemExit(f"manifest endpoint_reuse_id drift at age {age}")
+    if not math.isclose(float(row["jet_power_erg_s"]), EXPECTED_POWER_ERG_S[case], rel_tol=1e-12):
+        raise SystemExit(f"manifest jet power violates the authoritative three-case contract at age {age}")
+    if age < 50 and (row.get("compute_xray") != "true" or row.get("compute_truth_cavity") != "true"):
+        raise SystemExit(f"missing new-product flags at age {age}")
+    if age == 50 and (row.get("compute_xray") != "false" or row.get("compute_truth_cavity") != "false"):
+        raise SystemExit("endpoint reuse flags are not closed")
+    actual = float(row["actual_time_myr"])
+    with h5py.File(row["input_h5"], "r") as h5:
+        timestep = row["timestep"]
+        if timestep not in h5 or "Time" not in h5[timestep].attrs:
+            raise SystemExit(f"missing selected time group: {row['input_h5']}::{timestep}")
+        if abs(float(h5[timestep].attrs["Time"]) / CODE_TIME_PER_MYR - actual) > 0.05:
+            raise SystemExit(f"selected time mismatch at age {age}")
+        current = []
+        for name in required:
+            path = f"/{timestep}/vars/{name}"
+            if path not in h5:
+                raise SystemExit(f"missing required dataset {path}")
+            if len(h5[path].shape) != 3:
+                raise SystemExit(f"required dataset is not 3-D: {path}")
+            current.append(tuple(h5[path].shape))
+        if len(set(current)) != 1:
+            raise SystemExit(f"selected dataset shapes differ at age {age}")
+        shape = shape or current[0]
+        if current[0] != shape:
+            raise SystemExit("selected grid shapes differ across ages")
+    with h5py.File(row["baseline_h5"], "r") as h5:
+        baseline_timestep = row["baseline_timestep"]
+        if baseline_timestep not in h5 or "Time" not in h5[baseline_timestep].attrs:
+            raise SystemExit("missing baseline timestep")
+        baseline_time_myr = float(h5[baseline_timestep].attrs["Time"]) / CODE_TIME_PER_MYR
+        if abs(baseline_time_myr) > 1e-6 or abs(float(row["baseline_time_myr"])) > 1e-6:
+            raise SystemExit(f"Level 3 baseline is not a zero-time surface: {baseline_time_myr}")
+        baseline_shapes = []
+        for name in required:
+            path = f"/{baseline_timestep}/vars/{name}"
+            if path not in h5:
+                raise SystemExit(f"missing required baseline dataset {path}")
+            baseline_shapes.append(tuple(h5[path].shape))
+        if len(set(baseline_shapes)) != 1 or baseline_shapes[0] != shape:
+            raise SystemExit("baseline grid shape is incompatible with selected surfaces")
+        if row.get("baseline_grid_shape_nz_ny_nx") != "x".join(str(value) for value in shape):
+            raise SystemExit("baseline shape manifest binding drift")
+
+with endpoint_contract.open(newline="") as handle:
+    endpoint_rows = [row for row in csv.DictReader(handle) if row.get("case") == case]
+if len(endpoint_rows) != 3 or {row.get("view") for row in endpoint_rows} != {"0deg", "45deg", "90deg"}:
+    raise SystemExit("endpoint contract does not cover all three views")
+for row in endpoint_rows:
+    view = row["view"]
+    expected_accumulator = "direct_y_axis_sum" if view == "0deg" else "edge_overlap_uniform_cell_projection"
+    if row.get("endpoint_reuse_status") != "accepted_goal040":
+        raise SystemExit(f"endpoint reuse status is not accepted for {case}/{view}")
+    if row.get("endpoint_reuse_id") != f"{case}:50myr" or abs(float(row["endpoint_time_myr"]) - 50.0) > 1e-9:
+        raise SystemExit(f"endpoint time binding drift for {case}/{view}")
+    if row.get("candidate_selection_basis") != "projected_physical_area_fraction":
+        raise SystemExit(f"endpoint recovery protocol drift for {case}/{view}")
+    if row.get("projection_accumulator") != expected_accumulator or int(row.get("sensitivity_protocol_count", 0)) != 15:
+        raise SystemExit(f"endpoint projection/method contract drift for {case}/{view}")
+
+with scratch_gate.open(newline="") as handle:
+    scratch_rows = list(csv.DictReader(handle))
+if len(scratch_rows) != 1:
+    raise SystemExit("scratch capacity gate must contain one row")
+scratch = scratch_rows[0]
+if scratch.get("gate_status") != "GREEN" or scratch.get("write_probe_status") != "passed":
+    raise SystemExit("scratch capacity gate is not GREEN")
+if float(scratch["headroom_ratio"]) < max(1.5, float(scratch["minimum_headroom_ratio"])):
+    raise SystemExit("scratch headroom is below the required threshold")
+if int(scratch["particle_outputs_bytes"]) != 0:
+    raise SystemExit("scratch gate unexpectedly includes particle output growth")
+print(f"manifest_preflight=passed case={case} shape={shape} endpoint_contract=passed scratch_gate=GREEN")
+PY
+
+mkdir -p "$ANALYSIS_ROOT/remote_logs"
+INNER_LOG="$ANALYSIS_ROOT/remote_logs/goal041_${CASE_SLUG}.log"
+exec > >(tee -a "$INNER_LOG") 2>&1
+
+module purge
+module load HDF5/1.14.0-gompi-2023a
+H5CC="$(command -v h5pcc || command -v h5cc)"
+test -n "$H5CC"
+"$H5CC" -O2 "$TRUTH_SOURCE" -lm -o "$TRUTH_EXE"
+"$H5CC" -O2 "$CAVITY_SOURCE" -lm -o "$CAVITY_EXE"
+
+# Keep the HDF5 dependency paths active for the compiled extractors while
+# adding the Python runtime used by the analysis controller.
+module load Anaconda3/2024.02-1
+for extractor in "$TRUTH_EXE" "$CAVITY_EXE"; do
+  if ldd "$extractor" | grep -q "not found"; then
+    echo "compiled extractor has unresolved runtime libraries: $extractor" >&2
+    ldd "$extractor" >&2
+    exit 2
+  fi
+done
+echo "extractor_runtime_link_validation=passed"
+PYTHON="$(command -v python)"
+"$PYTHON" - "$SOURCE_MANIFEST" "$CASE" "$ANALYSIS_ROOT" "$TRUTH_EXE" "$CAVITY_EXE" "$LEVEL3_EXTRACTOR" "$XRAISE_SCRIPT" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT" "$Y_CHUNK" "$PROJECTED_U_BINS" "$REDSHIFT" "$EMPTY_COLUMN_FRACTION_MAX" <<'PY'
+import csv
+import json
+import math
+import subprocess
+import sys
+from pathlib import Path
+
+import numpy as np
+
+manifest, case, root = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
+truth_exe, cavity_exe, level3, xraise, xraise_py, apec, gaunt = map(Path, sys.argv[4:11])
+y_chunk, projected_u_bins = int(sys.argv[11]), int(sys.argv[12])
+redshift, max_empty = float(sys.argv[13]), float(sys.argv[14])
+rows = [row for row in csv.DictReader(manifest.open(newline="")) if row.get("case") == case]
+for row in rows:
+    age = int(row["nominal_age_myr"])
+    age_dir = root / f"age_{age}myr"
+    (age_dir / "level3").mkdir(parents=True, exist_ok=True)
+    if age < 50:
+        (age_dir / "truth").mkdir(parents=True, exist_ok=True)
+        (age_dir / "cavity").mkdir(parents=True, exist_ok=True)
+        subprocess.run([str(truth_exe), row["input_h5"], row["timestep"], str(age_dir / "truth"), row["jet_power_erg_s"], row["actual_time_myr"]], check=True)
+        subprocess.run([str(cavity_exe), row["input_h5"], row["timestep"], str(age_dir / "cavity"), "5e-3", "1e-3", "1.00", "1.15", "1.35"], check=True)
+        for view, label in ((0, "0deg"), (45, "45deg"), (90, "90deg")):
+            out = age_dir / f"xraise_grid_{label}"
+            subprocess.run([
+                sys.executable, str(xraise), "--input-h5", row["input_h5"],
+                "--timestep", row["timestep"], "--output-dir", str(out),
+                "--xraise-py", str(xraise_py), "--apec-table", str(apec),
+                "--gaunt-lut", str(gaunt), "--redshift", str(redshift),
+                "--y-chunk", str(y_chunk), "--view-angle-deg", str(view),
+                "--projected-u-bins", str(projected_u_bins),
+            ], check=True)
+            metadata = json.loads((out / "xraise_grid_smoke_metadata.json").read_text())
+            expected = "direct_y_axis_sum" if view == 0 else "edge_overlap_uniform_cell_projection"
+            if metadata["projection"].get("projected_accumulation") != expected or abs(float(metadata["time_myr"]) - float(row["actual_time_myr"])) > 1e-6:
+                raise SystemExit(f"projection validation failed at age {age}/{label}")
+            metrics = {item["metric"]: float(item["value"]) for item in csv.DictReader((out / "xraise_grid_smoke_summary.csv").open())}
+            for key in ("corrected_xray_max", "corrected_xray_sum", "correction_ratio_positive_max", "correction_ratio_positive_sum"):
+                if not math.isfinite(metrics[key]) or metrics[key] <= 0:
+                    raise SystemExit(f"invalid XRAiSE metric at age {age}/{label}/{key}")
+            empty_rows = []
+            for layer, filename in (
+                ("raw_xray", "xray_1kev_raw_mjy_sr.tsv"),
+                ("corrected_xray", "xray_1kev_xraise_corrected_mjy_sr.tsv"),
+                ("correction_ratio", "xray_1kev_correction_ratio.tsv"),
+            ):
+                values = np.loadtxt(out / filename, delimiter="\t", ndmin=2)
+                empty_columns = int(np.count_nonzero(~np.any(np.isfinite(values) & (values > 0.0), axis=0)))
+                empty_fraction = empty_columns / values.shape[1]
+                if empty_fraction > max_empty:
+                    raise SystemExit(f"empty-column fraction exceeds {max_empty} at age {age}/{label}/{layer}")
+                empty_rows.append({
+                    "case": case, "nominal_age_myr": age,
+                    "actual_time_myr": row["actual_time_myr"], "view": label,
+                    "layer": layer, "empty_columns": empty_columns,
+                    "empty_column_fraction": f"{empty_fraction:.16g}",
+                })
+            with (out / "projection_empty_columns.csv").open("w", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(empty_rows[0]))
+                writer.writeheader(); writer.writerows(empty_rows)
+            print(f"validation_marker=passed age_view={age}/{label}")
+    subprocess.run([sys.executable, str(level3), "--baseline-h5", row["baseline_h5"], "--baseline-timestep", row["baseline_timestep"], "--final-h5", row["input_h5"], "--final-timestep", row["timestep"], "--tracer-threshold", "5e-3", "--output-csv", str(age_dir / "level3/level3_extractor_output.csv")], check=True)
+PY
+
+"$PYTHON" "$ANALYSIS_SCRIPT" --case "$CASE" --source-manifest "$SOURCE_MANIFEST" --analysis-root "$ANALYSIS_ROOT" --compact-output "$COMPACT_OUTPUT"
+cp "$ENDPOINT_CONTRACT" "$COMPACT_OUTPUT/endpoint_reuse_contract.csv"
+cp "$SCRATCH_GATE" "$COMPACT_OUTPUT/scratch_capacity_gate.csv"
+(
+  cd "$COMPACT_OUTPUT"
+  find . -maxdepth 1 -type f ! -name 'goal041_sha256_manifest.sha256' -print0 \
+    | sort -z | xargs -0 sha256sum > goal041_sha256_manifest.sha256
+)
+if find "$COMPACT_OUTPUT" -type f -name '*.tsv' -print -quit | grep -q .; then
+  echo "TSV array leaked into compact output" >&2
+  exit 2
+fi
+
+mkdir "$SNAPSHOT_TMP"
+cp -a "$COMPACT_OUTPUT" "$SNAPSHOT_TMP/compact"
+cp -a "$ANALYSIS_ROOT/remote_logs" "$SNAPSHOT_TMP/remote_logs"
+(
+  cd "$SNAPSHOT_TMP"
+  find . -type f ! -name '*.tsv' ! -name 'sorted_file_manifest.txt' \
+    -printf '%P\t%s bytes\n' | sort > sorted_file_manifest.txt
+  find . -type f ! -name '*.tsv' ! -name 'sorted_checksums.sha256' \
+    ! -name 'archive_file_list.txt' -print0 | xargs -0 sha256sum | sort \
+    > sorted_checksums.sha256
+  { find . -type f ! -name '*.tsv' ! -name 'archive_file_list.txt' -print; \
+    printf './archive_file_list.txt\n'; } | sort -u > archive_file_list.txt
+)
+tar -czf "$ARCHIVE" -C "$SNAPSHOT_TMP" --files-from "$SNAPSHOT_TMP/archive_file_list.txt"
+tar -tzf "$ARCHIVE" | sort > "$STAGE_DIR/archive_listing_${CASE_SLUG}.txt"
+sha256sum "$ARCHIVE"
+echo "validation_marker=passed case=$CASE final_compact_analysis"
+echo "GOAL041_COMMON_AGE_EVOLUTION_COMPLETE case=$CASE"

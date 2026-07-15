@@ -1,0 +1,2 @@
+gate_status,analysis_parent,write_probe_status,available_bytes,forecast_total_bytes,safety_factor,required_with_safety_bytes,headroom_ratio,minimum_headroom_ratio,c_hi_forecast_bytes,c_lo_forecast_bytes,g_lo_forecast_bytes,particle_outputs_bytes,deletion_authority
+GREEN,/scratch/bwbrook/xray_cavities_analysis/2026-07-13-three-case-common-age-evolution,passed,3204297185558528,3434141724,1.2,4120970069,777558.9562425739,1.5,1144713908,1144713908,1144713908,0,barry_only_after_goal041_synthesis_acceptance

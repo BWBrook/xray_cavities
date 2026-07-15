@@ -1,0 +1,116 @@
+{
+  "status": "complete_local_synthesis",
+  "decision_label": "THREE_CASE_COMMON_AGE_SYNTHESIS_COMPLETE",
+  "goal": "041",
+  "date": "2026-07-13",
+  "last_updated": "2026-07-15",
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-LO"
+  ],
+  "nominal_ages_myr": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ],
+  "new_xray_truth_cavity_ages_myr": [
+    10,
+    20,
+    30,
+    40
+  ],
+  "level3_thermal_kinetic_ages_myr": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "endpoint_reuse": "accepted Goal 040 50 Myr X-ray recovery and Level 1/2/cavity surface",
+  "gravity_status": "excluded_blocked_missing_potential",
+  "projection_accumulators": {
+    "0deg": "direct_y_axis_sum",
+    "45deg": "edge_overlap_uniform_cell_projection",
+    "90deg": "edge_overlap_uniform_cell_projection"
+  },
+  "initial_failed_jobs": [
+    {
+      "case": "C-HI",
+      "job_id": "757145.kunanyi-ohpc",
+      "job_name": "c_hi_ageev",
+      "final_state": "F",
+      "exit_status": 1
+    },
+    {
+      "case": "C-LO",
+      "job_id": "757146.kunanyi-ohpc",
+      "job_name": "c_lo_ageev",
+      "final_state": "F",
+      "exit_status": 1
+    },
+    {
+      "case": "G-LO",
+      "job_id": "757147.kunanyi-ohpc",
+      "job_name": "g_lo_ageev",
+      "final_state": "F",
+      "exit_status": 1
+    }
+  ],
+  "retry_jobs": [
+    {
+      "case": "C-HI",
+      "job_id": "770758.kunanyi-ohpc",
+      "job_name": "c_hi_ageev_r1",
+      "state_at_stop": "Q",
+      "final_state": "F",
+      "exit_status": 0,
+      "stageout_status": 1,
+      "walltime": "02:16:43"
+    },
+    {
+      "case": "C-LO",
+      "job_id": "770759.kunanyi-ohpc",
+      "job_name": "c_lo_ageev_r1",
+      "state_at_stop": "Q",
+      "final_state": "F",
+      "exit_status": 0,
+      "stageout_status": 1,
+      "walltime": "02:22:12"
+    },
+    {
+      "case": "G-LO",
+      "job_id": "770760.kunanyi-ohpc",
+      "job_name": "g_lo_ageev_r1",
+      "state_at_stop": "Q",
+      "final_state": "F",
+      "exit_status": 0,
+      "stageout_status": 1,
+      "walltime": "02:22:59"
+    }
+  ],
+  "resource_request_per_job": "select=1:ncpus=1:mpiprocs=1:mem=96gb; walltime=12:00:00",
+  "scratch_available_bytes": 3204297185558528,
+  "scratch_forecast_total_bytes": 3434141724,
+  "scratch_required_with_safety_bytes": 4120970069,
+  "scratch_headroom_ratio": 777558.9562425739,
+  "raw_data_lifecycle": "selected source HDF5 and zero-time baselines remain protected until Goal 041 synthesis acceptance; deletion requires Barry approval",
+  "processed_data_lifecycle": "full TSV maps remain remote under case analysis roots; compact validated CSV/JSON/log/provenance archives are retrieval targets",
+  "initial_failure": "all three original jobs failed within 8-12 seconds because the compiled truth extractor could not resolve libsz.so.2 after the wrapper purged the HDF5 module environment",
+  "runtime_repair": "retain HDF5 dependency paths while adding Anaconda and fail closed on unresolved ldd dependencies",
+  "retry_completion": "all three retries finished with Exit_status=0; compact archives were retrieved, opened, and verified against their internal SHA-256 manifests",
+  "scheduler_caveat": "all three final scheduler records report Stageout_status=1 despite intact stage-root stdout, empty stderr, and valid compact archives; absent completion email is not treated as scientific failure",
+  "endpoint_merge_status": "complete_local_merge_with_accepted_goal040_endpoint",
+  "local_synthesis": "docs/science/assets/three_case_common_age_evolution_2026-07-13/synthesis",
+  "power_binding_correction": "retrieved C-HI source manifests used 1e44 erg/s instead of the authoritative 1e45 erg/s; original products are preserved and the synthesis corrects derived Level 1 values and dependent ratios only",
+  "pbs_stop_rule": "re-invoked after one verified Q record for all three repaired retry jobs; next scheduler check occurred only after Barry explicitly requested it",
+  "publication_ready": false,
+  "final_observational_topology_frozen": false
+}

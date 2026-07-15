@@ -1,0 +1,13 @@
+gate,status,evidence
+retained_source_chains,passed,"C-HI float HDF5 segments 0-43 and 44-51; C-LO consolidated 0-53; G-LO segments 0-14 and 11-50"
+zero_time_baselines,passed,"all three Timestep_0 baselines have Time=0 and required datasets on shape 1014x960x960"
+common_age_selection,passed,"exactly one HDF5 Time match within 0.05 Myr at each nominal age 10/20/30/40/50 for every case"
+endpoint_reuse_contract,passed,"accepted Goal 040 endpoint recovery/truth surface hash-locked across three cases and three views"
+scratch_write_probe,passed,"write/read/remove probe passed under /scratch/bwbrook/xray_cavities_analysis/2026-07-13-three-case-common-age-evolution"
+scratch_capacity,passed,"3204297185558528 available bytes; forecast plus 20 percent safety gives headroom ratio 777558.9562425739"
+xraise_runtime,passed,"xraise.py APEC table and Gaunt LUT readable with accepted SHA-256 values"
+staged_hashes,passed,"all 20 staged and shared dependency paths matched staged_hash_manifest.sha256"
+python_runtime,passed,"Anaconda3/2024.02-1 compiled all staged Python modules and parsed source endpoint and scratch contracts"
+hdf5_build_runtime,passed,"HDF5/1.14.0-gompi-2023a loaded and h5pcc resolved"
+no_overwrite,passed,"all C-HI C-LO G-LO analysis roots and all three archive targets were absent before submission"
+queue,passed,"normal queue enabled and started with resources_max.walltime=48:00:00"

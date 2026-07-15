@@ -1,0 +1,4 @@
+case,job_id,job_name,final_state,exit_status,stageout_status,start_time,end_time,walltime,cput,mem_kb,ncpus
+C-HI,770758.kunanyi-ohpc,c_hi_ageev_r1,F,0,1,2026-07-14T21:52:11+10:00,2026-07-15T00:08:54+10:00,02:16:43,01:24:02,39671356,1
+C-LO,770759.kunanyi-ohpc,c_lo_ageev_r1,F,0,1,2026-07-14T21:52:11+10:00,2026-07-15T00:14:23+10:00,02:22:12,01:40:41,35430164,1
+G-LO,770760.kunanyi-ohpc,g_lo_ageev_r1,F,0,1,2026-07-14T21:52:11+10:00,2026-07-15T00:15:10+10:00,02:22:59,01:38:52,40401472,1

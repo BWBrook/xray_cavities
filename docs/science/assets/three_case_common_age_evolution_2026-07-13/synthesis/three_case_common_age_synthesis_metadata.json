@@ -1,0 +1,59 @@
+{
+  "authoritative_one_sided_jet_power_erg_s": {
+    "C-HI": 1e+45,
+    "C-LO": 1e+43,
+    "G-LO": 1e+43
+  },
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-LO"
+  ],
+  "corrections": [
+    {
+      "authoritative_one_sided_power_erg_s": 1e+45,
+      "authority": "docs/science/three_case_spec.md; docs/codex_utas_phys_hons_meeting_2_action_plan.md; accepted Goal 040 Level1",
+      "case": "C-HI",
+      "correction_factor": 10.0,
+      "correction_scope": "derived_level1_and_dependent_ratios_only",
+      "derived_outputs_corrected_nominal_ages_myr": "10;20;30;40",
+      "interpretation": "Goal041 source-manifest packaging error; no simulation or observational product rerun required",
+      "reported_one_sided_power_erg_s": 1e+44,
+      "source_manifest_affected_nominal_ages_myr": "10;20;30;40;50",
+      "unmodified_surfaces": "retrieved compact archives; XRAiSE; Level2; Level3; cavity geometry; shell context"
+    }
+  ],
+  "decision_label": "THREE_CASE_COMMON_AGE_SYNTHESIS_COMPLETE",
+  "final_observational_topology_frozen": false,
+  "gravity_status": "excluded_blocked_missing_potential",
+  "method_uncertainty": "prespecified 15-protocol envelope only",
+  "next_step": "scientific review and raw-data lifecycle decision; no additional compute required for Goal041",
+  "nominal_ages_myr": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "projection_uncertainty": "three-view sensitivity only, not sampling uncertainty",
+  "publication_ready": false,
+  "ratio_interpretation": "normalized responses, not a closed energy partition or efficiency estimate",
+  "replication": "one deterministic simulation per case; ages and views are not independent replicates",
+  "row_counts": {
+    "case_age_provenance": 15,
+    "descriptive_contrasts": 20,
+    "hybrid_cavity_evolution": 963,
+    "method_sensitivity_summary": 45,
+    "observer_recovery_evolution": 45,
+    "truth_energy_evolution": 15,
+    "validation_report": 9
+  },
+  "scientific_scope": "descriptive_three_case_production_prove_out",
+  "status": "complete_local_synthesis",
+  "topology_rule": "quantitative volumes and hybrid trajectories require exactly two separate components",
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ]
+}

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-13
+Last updated: 2026-07-15
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,87 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-040 three-case endpoint cavity-recovery
-and truth-alignment completion handoff.
+This note should be treated as a Goal-041 three-case common-age evolution
+local-synthesis-complete handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 041 three-case common-age evolution synthesis on 2026-07-15:
+
+- Status: `complete_local_synthesis`.
+- Decision label:
+  `THREE_CASE_COMMON_AGE_SYNTHESIS_COMPLETE`.
+- Scope: C-HI, C-LO, and G-LO at nominal `10/20/30/40/50 Myr` and
+  `0/45/90 deg`, using existing production HDF5 only.
+- Source selection: exact HDF5 `Time` matches within `0.05 Myr`; all selected
+  ages are within `0.001 Myr` of nominal. All Level 3 baselines are exact
+  zero-time surfaces on the shared `1014 x 960 x 960` grid.
+- New products: XRAiSE, Level 1/2 truth, cavity/shell context, full Goal 040
+  physical-area recovery and 15-protocol sensitivity at 10-40 Myr. The
+  accepted hash-locked Goal 040 endpoint is reused at 50 Myr.
+- Level 3: thermal plus kinetic ambient-energy change at all five ages;
+  gravitational energy remains excluded pending a reviewed potential and
+  zero-point convention.
+- Storage gate: live write probe passed; `3,204,297,185,558,528` bytes were
+  available against `4,120,970,069` bytes required after safety. Full TSV maps
+  stay remote; compact archives are retrieved; selected HDF5/baselines remain
+  protected until synthesis acceptance and Barry-approved deletion.
+- Initial failure: jobs `757145-757147` entered PBS and started, but all failed
+  within `8-12` seconds with `Exit_status=1`; the compiled truth extractor
+  could not resolve `libsz.so.2` after the wrapper purged the HDF5 runtime.
+- Repair: retain HDF5 dependency paths while adding Anaconda and fail closed
+  on unresolved `ldd` dependencies. Local tests, all 20 remote hashes,
+  combined Python/HDF5 import, all six existing extractor binaries, wrapper
+  syntax, and retry no-overwrite targets passed.
+- Retry completion:
+  - C-HI `770758.kunanyi-ohpc`: `F`, `Exit_status=0`, walltime `02:16:43`;
+  - C-LO `770759.kunanyi-ohpc`: `F`, `Exit_status=0`, walltime `02:22:12`;
+  - G-LO `770760.kunanyi-ohpc`: `F`, `Exit_status=0`, walltime `02:22:59`.
+- All started immediately at `2026-07-14 21:52:11 +10:00`. All final records
+  report `Stageout_status=1`; this is retained as a scheduler caveat and may be
+  related to the absent completion emails, but the exact mechanism is not
+  established.
+- Stage-root stdout/stderr/archives were intact. All stderr files are empty;
+  all archives open; all internal compact-product SHA manifests pass. Each case
+  reports `complete_case_product_pending_endpoint_merge`.
+- Local merge: complete against the accepted hash-locked Goal 040 endpoint.
+  The synthesis has 15 truth rows, 45 observer rows, 963 hybrid rows, 45
+  method-sensitivity summaries, 20 descriptive contrasts, and two figures.
+- Power-binding correction: returned C-HI manifests used `1e44 erg/s`; the
+  frozen design and accepted endpoint use `1e45 erg/s`. Retrieved products are
+  preserved; the synthesis corrects only derived Level 1 values and dependent
+  ratios. The case builder and PBS preflight now fail closed on recurrence.
+- Headline normalized responses, 10 -> 50 Myr:
+  - C-HI Level 2/injection `0.513 -> 0.440`; Level 3/injection `0.722 -> 0.888`;
+  - C-LO Level 2/injection `0.480 -> 0.638`; Level 3/injection `3.32 -> 12.46`;
+  - G-LO Level 2/injection `0.461 -> 0.507`; Level 3/injection `0.871 -> 1.091`.
+- Interpretation: descriptive normalized responses, not a closed energy
+  partition, efficiency, independent replication, or causal estimate. X-ray
+  volumes and hybrid proxies are quantitative only for two-component topology.
+- Products:
+  `docs/science/assets/three_case_common_age_evolution_2026-07-13/synthesis/`.
+- Next: scientific acceptance and a separate raw/intermediate lifecycle
+  decision. No further remote compute is required for Goal 041.
+- Science note:
+  `docs/science/three_case_common_age_evolution_2026-07-13.md`.
+- Goal log:
+  `docs/goals/041-three-case-common-age-evolution/Log.md`.
+
+Goal 042 proposal drafted on 2026-07-15:
+
+- Status: `proposed_awaiting_barry_approval`.
+- Proposed scope: read-only three-case remote inventory, dependency ledger,
+  full hashes, byte-recovery forecast, and a hash-locked Goal 043 execution
+  contract. Goal 042 itself cannot delete or move remote data.
+- Boundary: all particles remain held pending a radio source-retention
+  contract; accepted baseline/common-age/late-age/endpoint sources and restart
+  tuples remain protected; actual deletion requires Barry to approve the exact
+  later ledger digest.
+- Cover note:
+  `docs/goals/042-three-case-lifecycle-compaction-packet/Cover_Note.md`.
+- No remote inventory, PBS job, or deletion has occurred. Publication of this
+  proposal does not authorize any of those actions.
 
 Latest Goal 040 three-case endpoint cavity recovery and truth alignment on
 2026-07-12:

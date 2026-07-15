@@ -1,0 +1,16 @@
+case,nominal_age_myr,actual_time_myr,environment_family,source_goal,endpoint_reuse_id,source_manifest_one_sided_power_erg_s,authoritative_one_sided_power_erg_s,accepted_endpoint_one_sided_power_erg_s,power_binding_status,gravity_status,inference_scope
+C-HI,10,9.999889603297177,Stewart_cluster_002003,Goal 041,C-HI:50myr,1e+44,1e+45,1e+45,corrected_from_authoritative_contract,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-HI,20,19.99911131620285,Stewart_cluster_002003,Goal 041,C-HI:50myr,1e+44,1e+45,1e+45,corrected_from_authoritative_contract,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-HI,30,29.999994397799835,Stewart_cluster_002003,Goal 041,C-HI:50myr,1e+44,1e+45,1e+45,corrected_from_authoritative_contract,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-HI,40,39.99985363794803,Stewart_cluster_002003,Goal 041,C-HI:50myr,1e+44,1e+45,1e+45,corrected_from_authoritative_contract,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-HI,50,50.00000000000777,Stewart_cluster_002003,Goal 040,C-HI:50myr,1e+44,1e+45,1e+45,accepted_goal040_authoritative,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-LO,10,9.999174201142063,Stewart_cluster_002003,Goal 041,C-LO:50myr,1e+43,1e+43,1e+43,authoritative_manifest_match,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-LO,20,19.999891477337624,Stewart_cluster_002003,Goal 041,C-LO:50myr,1e+43,1e+43,1e+43,authoritative_manifest_match,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-LO,30,29.99916629402413,Stewart_cluster_002003,Goal 041,C-LO:50myr,1e+43,1e+43,1e+43,authoritative_manifest_match,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-LO,40,39.99915124190092,Stewart_cluster_002003,Goal 041,C-LO:50myr,1e+43,1e+43,1e+43,authoritative_manifest_match,excluded_blocked_missing_potential,descriptive_single_simulation_case
+C-LO,50,50.00000000000777,Stewart_cluster_002003,Goal 040,C-LO:50myr,1e+43,1e+43,1e+43,accepted_goal040_authoritative,excluded_blocked_missing_potential,descriptive_single_simulation_case
+G-LO,10,9.999741575908963,Stewart_group_002031,Goal 041,G-LO:50myr,1e+43,1e+43,1e+43,authoritative_manifest_match,excluded_blocked_missing_potential,descriptive_single_simulation_case
+G-LO,20,19.999784373238473,Stewart_group_002031,Goal 041,G-LO:50myr,1e+43,1e+43,1e+43,authoritative_manifest_match,excluded_blocked_missing_potential,descriptive_single_simulation_case
+G-LO,30,29.999643622014947,Stewart_group_002031,Goal 041,G-LO:50myr,1e+43,1e+43,1e+43,authoritative_manifest_match,excluded_blocked_missing_potential,descriptive_single_simulation_case
+G-LO,40,39.99998617349845,Stewart_group_002031,Goal 041,G-LO:50myr,1e+43,1e+43,1e+43,authoritative_manifest_match,excluded_blocked_missing_potential,descriptive_single_simulation_case
+G-LO,50,50.00000000000777,Stewart_group_002031,Goal 040,G-LO:50myr,1e+43,1e+43,1e+43,accepted_goal040_authoritative,excluded_blocked_missing_potential,descriptive_single_simulation_case
