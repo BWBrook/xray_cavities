@@ -1,0 +1,12 @@
+{
+  "decision_label": "XRAY_CAVITY_PRODUCTION_VALIDATION_FAILED_CLOSED",
+  "gate_count": 10,
+  "passed_gate_count": 7,
+  "predeclared_acceptance_criteria": "/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation/contracts/acceptance_criteria.csv",
+  "real_endpoint": "C-HI Timestep_51",
+  "status": "fail",
+  "synthetic_cases": [
+    "axisymmetric",
+    "nonaxisymmetric"
+  ]
+}

@@ -1,0 +1,3 @@
+case,path,sha256,shape_nz_ny_nx,x_nonuniform,y_nonuniform,z_nonuniform,negative_cavity_cells,positive_cavity_cells,ambient_pressure_code_median
+axisymmetric,/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation/fixtures/axisymmetric.h5,fbe059267d912ade4ede30f01d6e3ab1fab9201e0c5e879919e405dba197cea1,61x45x49,True,True,True,605,605,3.169572868287347e-08
+nonaxisymmetric,/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation/fixtures/nonaxisymmetric.h5,f9106072898744405a7b167c73f912cd46bbb47191e9193387ff6d4a43755594,61x45x49,True,True,True,406,393,3.174606298178986e-08

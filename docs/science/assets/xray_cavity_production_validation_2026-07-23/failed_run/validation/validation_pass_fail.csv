@@ -1,0 +1,11 @@
+gate,status,observed,tolerance
+fixture_schema,pass,two production-schema fixtures with nonuniform x/y/z,all pass
+physical_flux_conservation,pass,1.2379950358787574e-10,<=1e-9
+native_axis_equivalence,pass,8.534190750687258e-11,<=1e-9
+near_90_continuity,pass,0.00018657644121316622,<=0.05
+projected_occupancy,pass,0,0
+synthetic_cavity_recovery,fail,6/12 two-component; min precision=1,all two-component and precision>=0.95
+real_endpoint_recovery,fail,topology=two_separate_components/two_separate_components; area_error=0.0435031; volume_error=0.023621,same topology; errors<=1e-9
+energy_convention,fail,81 finite positive hybrid energy rows,all finite positive; multipliers 1/2.5/4
+determinism,pass,113/113 byte-identical,all byte-identical
+provenance,pass,"apec_table,cavity_recovery,gaunt_lut,pressure_context,real_endpoint_hdf5,validation_helper,xraise_cli,xraise_runtime","apec_table,cavity_recovery,gaunt_lut,real_endpoint_hdf5,validation_helper,xraise_cli,xraise_runtime"

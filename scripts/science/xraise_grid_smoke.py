@@ -82,6 +82,40 @@ def projected_axis(
     return u_centres, u_edges
 
 
+def resolve_projection_method(view_angle_deg: float, projection_mode: str) -> str:
+    """Resolve the requested projection mode while preserving legacy defaults."""
+
+    if projection_mode not in {"auto", "direct_axis", "edge_overlap"}:
+        raise ValueError(f"unknown projection mode: {projection_mode}")
+    at_zero = abs(view_angle_deg) <= 1.0e-12
+    at_ninety = abs(view_angle_deg - 90.0) <= 1.0e-12
+    if projection_mode == "auto":
+        return "direct_y_axis_sum" if at_zero else "edge_overlap_uniform_cell_projection"
+    if projection_mode == "direct_axis":
+        if at_zero:
+            return "direct_y_axis_sum"
+        if at_ninety:
+            return "direct_x_axis_sum"
+        raise ValueError("direct_axis projection requires a view angle of exactly 0 or 90 degrees")
+    return "edge_overlap_uniform_cell_projection"
+
+
+def direct_x_axis_projection(
+    *,
+    raw: np.ndarray,
+    corrected: np.ndarray,
+    tracer: np.ndarray,
+    x_width_m: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Integrate along native x cells and return columns ordered by increasing ``u=-y``."""
+
+    weights = np.asarray(x_width_m, dtype=float)[np.newaxis, np.newaxis, :]
+    raw_path = np.sum(raw * weights, axis=2)[:, ::-1]
+    corrected_path = np.sum(corrected * weights, axis=2)[:, ::-1]
+    tracer_max = np.nanmax(tracer, axis=2)[:, ::-1]
+    return raw_path, corrected_path, tracer_max
+
+
 def projected_overlap_contributions(
     *,
     x_edges: np.ndarray,
@@ -311,10 +345,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         y_width_m = y_width_kpc * KPC_M
 
         nz, ny, nx = rho_ds.shape
-        if abs(args.view_angle_deg) <= 1.0e-12:
+        projection_method = resolve_projection_method(
+            args.view_angle_deg, getattr(args, "projection_mode", "auto")
+        )
+        if projection_method == "direct_y_axis_sum":
             sky_x = x
             sky_edges = None
             n_sky = nx
+        elif projection_method == "direct_x_axis_sum":
+            sky_x = -y[::-1]
+            sky_edges = None
+            n_sky = ny
         else:
             sky_x, sky_edges = projected_axis(
                 x,
@@ -350,11 +391,22 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             gaunt = gaunt_interp(np.stack([temp_k, freq_grid], axis=-1))
             corrected = np.nan_to_num(raw * apec * gaunt, nan=0.0, posinf=0.0, neginf=0.0)
 
-            if sky_edges is None:
+            if projection_method == "direct_y_axis_sum":
                 path_m = y_width_m[start:stop][np.newaxis, :, np.newaxis]
                 xray_raw += np.sum(raw * path_m, axis=1) / 1.0e-29
                 xray_corrected += np.sum(corrected * path_m, axis=1) / 1.0e-29
                 tracer_max = np.maximum(tracer_max, np.nanmax(trc, axis=1))
+            elif projection_method == "direct_x_axis_sum":
+                raw_path, corrected_path, tracer_path = direct_x_axis_projection(
+                    raw=raw,
+                    corrected=corrected,
+                    tracer=trc,
+                    x_width_m=x_width_kpc * KPC_M,
+                )
+                target = slice(ny - stop, ny - start)
+                xray_raw[:, target] = raw_path / 1.0e-29
+                xray_corrected[:, target] = corrected_path / 1.0e-29
+                tracer_max[:, target] = tracer_path
             else:
                 raw_path = np.zeros_like(xray_raw)
                 corrected_path = np.zeros_like(xray_corrected)
@@ -403,16 +455,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "grid_shape_nz_ny_nx": [int(nz), int(ny), int(nx)],
         "projection": {
             "view_angle_deg": args.view_angle_deg,
+            "requested_mode": getattr(args, "projection_mode", "auto"),
             "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
             "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
             "sky_horizontal_bins": int(n_sky),
             "sky_horizontal_min_kpc": float(sky_x[0]),
             "sky_horizontal_max_kpc": float(sky_x[-1]),
-            "projected_accumulation": (
-                "edge_overlap_uniform_cell_projection"
-                if abs(args.view_angle_deg) > 1.0e-12
-                else "direct_y_axis_sum"
-            ),
+            "projected_accumulation": projection_method,
         },
         "y_chunk": args.y_chunk,
         "xraise_source": str(args.xraise_py),
@@ -456,6 +505,12 @@ def main() -> None:
     parser.add_argument("--y-chunk", type=int, default=8)
     parser.add_argument("--view-angle-deg", type=float, default=0.0)
     parser.add_argument("--projected-u-bins", type=int, default=None)
+    parser.add_argument(
+        "--projection-mode",
+        choices=("auto", "direct_axis", "edge_overlap"),
+        default="auto",
+        help="auto preserves legacy direct-y-at-zero behavior; direct_axis adds a native x sum at 90 degrees",
+    )
     args = parser.parse_args()
     metadata = run(args)
     print(json.dumps(metadata, indent=2, sort_keys=True))

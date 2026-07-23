@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-15
+Last updated: 2026-07-23
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,113 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-041 three-case common-age evolution
-local-synthesis-complete handoff.
+This note should be treated as a Goal-045 X-ray cavity recovery-refinement
+completion handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 045 X-ray cavity recovery method refinement on 2026-07-23:
+
+- Status: `complete_product`.
+- Decision label: `XRAY_CAVITY_RECOVERY_METHOD_REFINEMENT_GREEN`.
+- Goal 044 remains an immutable failed-closed record; Goal 045 evaluates its
+  existing maps only and does not rerun XRAiSE or PLUTO.
+- Frozen method: one-percent physical-area seeds by jet hemisphere; robust
+  degree-6 normalized Chebyshev log-intensity background with SVD and fixed
+  lower-outlier clipping; connected deficit-support growth; area-weighted
+  truth metrics; explicit fragments and geometry resolution.
+- Stability/controls: degree-5/6/7 convergence, conditioning, blocked spatial
+  cross-validation, independent radial smooth-null and one-sided-ablation
+  controls, and common-grid direct-90/edge-90 recovery equivalence.
+- Local scientific gate: 12/12 side-angle recoveries and 18/18 controls passed.
+  Minimum IoU was `0.79044`; maximum centroid error `1.8091 kpc`, area error
+  `0.20956`, volume-proxy error `0.286441`, and fragment fraction `0.0`.
+- Local/remote engineering gate: combined suite `69 passed`; wrapper syntax,
+  Python compilation, `git diff --check`, staged hashes, and remote source
+  preflight passed. An independent review repaired missing provenance roles
+  and early-failure evidence preservation before submission.
+- PBS: `775522.kunanyi-ohpc` / `xcav_refine` ended `F` with `Exit_status=0`,
+  walltime `00:00:30`, CPU time `00:00:25`, and empty stderr.
+  `Stageout_status=1` remains a scheduler caveat; the requested stage-root
+  evidence was present and retrieved directly.
+- Remote validation: `7/7` gates passed, including `12/12` synthetic
+  side-angle rows, `18/18` controls, `3/3` common-grid cases, `24/24`
+  resolved geometries, `42/42` positive energy rows, `14/14` exact multiplier
+  groups, and complete input provenance.
+- Archive SHA-256:
+  `462199cc4537cf987556c04961dd807e5a0a465ede40f0af46c1c2f34a4675a1`;
+  all internal checksums passed.
+- Decision: accept Goal 045. Goal 044's X-ray recovery-refinement requirement
+  and its lifecycle hold are resolved. This does not itself authorize
+  deletion; Goal 042 dependencies and a separately approved Goal 043 ledger
+  still govern lifecycle execution.
+- Scope limit: this is fixture-informed production-pipeline validation, not a
+  general observational or publication-method certification. The tightest
+  gate margin is the axisymmetric 45-degree volume error `0.286441` against
+  the frozen `0.30` ceiling.
+- Goal log:
+  `docs/goals/045-xray-cavity-recovery-method-refinement/Log.md`.
+- Science note:
+  `docs/science/xray_cavity_recovery_method_refinement_2026-07-23.md`.
+- Evidence:
+  `docs/science/assets/xray_cavity_recovery_method_refinement_2026-07-23/`.
+
+Latest Goal 044 X-ray cavity production validation on 2026-07-23:
+
+- Status: `failed_closed_recovery_method_refinement_required`.
+- Decision label:
+  `XRAY_CAVITY_PRODUCTION_VALIDATION_FAILED_CLOSED_RECOVERY_METHOD_REFINEMENT_REQUIRED`.
+- Purpose: answer Patrick-agent's `Q-021` with a fail-closed, end-to-end
+  validation of the production X-ray/cavity path using synthetic
+  production-schema HDF5 fixtures and one accepted real C-HI endpoint.
+- Implementation: `xraise_grid_smoke.py` now exposes explicit `auto`,
+  `direct_axis`, and `edge_overlap` projection modes. Existing defaults are
+  preserved; an independent native x-axis integral is available at exactly
+  90 degrees.
+- Validation contract: nonuniform axisymmetric and non-axisymmetric synthetic
+  fixtures; direct-axis 0/90-degree references; edge-overlap
+  0/45/89.9/90-degree products; physical-flux conservation, continuity,
+  occupancy, cavity recovery, provenance, energy-convention, and byte-level
+  determinism gates; plus a real C-HI endpoint replay with shared-scale
+  comparison outputs.
+- Local gate: focused wrapper/projector/recovery suite passed with `30 passed
+  in 0.79s`; wrapper syntax and Python compilation passed; `git diff --check`
+  was clean before submission.
+- Remote preflight: six staged files matched local SHA-256 values; remote
+  wrapper syntax passed; XRAiSE runtime and accepted C-HI endpoint HDF5 were
+  readable; no-overwrite stage, analysis, and archive targets were absent.
+- PBS result: `775513.kunanyi-ohpc` / `xcav_valid` ended `F` with
+  `Exit_status=1`, walltime `00:32:35`, and peak reported memory `1303676kb`.
+  All 24 synthetic and four real/repeat XRAiSE products completed before the
+  validator intentionally failed closed at `7/10` gates.
+- Green evidence: flux conservation, native-axis equivalence, near-90-degree
+  continuity, zero empty columns, `113/113` byte-identical outputs, and
+  provenance passed. Worst native-axis normalized L1 residual was
+  `8.534190750687258e-11`.
+- Failed evidence: the fixed one-percent X-ray mask recovered two components
+  in only `6/12` synthetic views; direct-90 versus edge-90 recovery compared
+  different native grids and differed by `4.35%` in area and `2.36%` in
+  geometric volume; degenerate synthetic fragments propagated zero energies.
+- Interpretation: projector validation is green, but downstream cavity
+  recovery is not certified. The synthetic result is a material method
+  limitation; the real recovery exact-equality gate is a validation-design
+  defect because it did not use the requested common physical grid.
+- Retrieved evidence root:
+  `docs/science/assets/xray_cavity_production_validation_2026-07-23/failed_run/`.
+- Remote analysis root:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation`.
+- Repair boundary: no XRAiSE or PLUTO rerun was submitted. The wrapper now
+  preserves compact evidence even when a future validation exits nonzero, and
+  energy reporting now checks positive rows and exact multipliers honestly.
+- Holds: no new PLUTO production is authorized. Goal 042 remains a read-only
+  lifecycle packet and Goal 043 remains separately reserved for approved
+  lifecycle execution; their X-ray validation hold remains active until Goal
+  044 recovery refinement is resolved or explicitly accepted with caveats.
+- Science note:
+  `docs/science/xray_cavity_production_validation_2026-07-23.md`.
+- Goal log:
+  `docs/goals/044-xray-cavity-production-validation/Log.md`.
 
 Latest Goal 041 three-case common-age evolution synthesis on 2026-07-15:
 

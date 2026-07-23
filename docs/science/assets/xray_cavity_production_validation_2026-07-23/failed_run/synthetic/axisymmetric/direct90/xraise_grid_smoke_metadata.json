@@ -1,0 +1,58 @@
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 2745,
+    "max": 8969.189756660697,
+    "min": 1740.2452957014252,
+    "positive_cells": 2745,
+    "positive_max": 8969.189756660697,
+    "positive_min": 1740.2452957014252,
+    "positive_sum": 12265624.766866464,
+    "sum": 12265624.766866464
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 2745,
+    "max": 1.3719058093831544,
+    "min": 1.3320825596421841,
+    "positive_cells": 2745,
+    "positive_max": 1.3719058093831544,
+    "positive_min": 1.3320825596421841,
+    "positive_sum": 3689.4308313458932,
+    "sum": 3689.4308313458932
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    61,
+    45,
+    49
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation/fixtures/axisymmetric.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "direct_x_axis_sum",
+    "requested_mode": "direct_axis",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 45,
+    "sky_horizontal_max_kpc": 200.0,
+    "sky_horizontal_min_kpc": -200.0,
+    "view_angle_deg": 90.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 2745,
+    "max": 6718.701938017983,
+    "min": 1268.4874455658776,
+    "positive_cells": 2745,
+    "positive_max": 6718.701938017983,
+    "positive_min": 1268.4874455658776,
+    "positive_sum": 9148670.172767248,
+    "sum": 9148670.172767248
+  },
+  "redshift": 0.05,
+  "time_code": 15330.0696894,
+  "time_myr": 50.00000000000777,
+  "timestep": "Timestep_0",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}

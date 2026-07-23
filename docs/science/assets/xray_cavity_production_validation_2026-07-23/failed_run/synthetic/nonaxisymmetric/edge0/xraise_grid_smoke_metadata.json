@@ -1,0 +1,58 @@
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 2989,
+    "max": 8960.864756882318,
+    "min": 1739.4226018719248,
+    "positive_cells": 2989,
+    "positive_max": 8960.864756882318,
+    "positive_min": 1739.4226018719248,
+    "positive_sum": 12926781.324020682,
+    "sum": 12926781.324020682
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 2989,
+    "max": 1.3719008137792241,
+    "min": 1.3320766777544664,
+    "positive_cells": 2989,
+    "positive_max": 1.3719008137792241,
+    "positive_min": 1.3320766777544664,
+    "positive_sum": 4019.5518242049066,
+    "sum": 4019.5518242049066
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    61,
+    45,
+    49
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation/fixtures/nonaxisymmetric.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "edge_overlap_uniform_cell_projection",
+    "requested_mode": "edge_overlap",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 49,
+    "sky_horizontal_max_kpc": 201.26985878003234,
+    "sky_horizontal_min_kpc": -201.26985878003228,
+    "view_angle_deg": 0.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 2989,
+    "max": 6712.493752288995,
+    "min": 1267.8923901796336,
+    "positive_cells": 2989,
+    "positive_max": 6712.493752288995,
+    "positive_min": 1267.8923901796336,
+    "positive_sum": 9637404.557882242,
+    "sum": 9637404.557882242
+  },
+  "redshift": 0.05,
+  "time_code": 15330.0696894,
+  "time_myr": 50.00000000000777,
+  "timestep": "Timestep_0",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}

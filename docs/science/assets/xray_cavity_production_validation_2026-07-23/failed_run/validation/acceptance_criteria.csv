@@ -1,0 +1,11 @@
+gate,comparison,tolerance
+fixture_schema,required datasets and nonuniform axes,all pass
+physical_flux_conservation,direct versus edge and 89.9 versus 90,relative_error<=1e-9
+native_axis_equivalence,direct versus edge on common grid,normalized_l1<=1e-9
+near_90_continuity,edge 89.9 versus edge 90 on common grid,normalized_l1<=0.05
+projected_occupancy,raw/corrected/ratio positive support,zero empty columns
+synthetic_cavity_recovery,all synthetic products,two opposite-side components and xray_precision>=0.95
+real_endpoint_recovery,direct 90 versus edge 90,"same topology, area and volume relative_error<=1e-9"
+energy_convention,"hybrid pV, 2.5pV, 4pV",finite positive and exact multipliers
+determinism,repeated synthetic products and real edge 90,byte-identical output files
+provenance,raw/staged/runtime dependencies,complete SHA-256 manifest

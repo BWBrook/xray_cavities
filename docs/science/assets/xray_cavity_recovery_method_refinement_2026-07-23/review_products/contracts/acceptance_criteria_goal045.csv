@@ -1,0 +1,8 @@
+gate,comparison,tolerance
+background_stability,degree 5/6/7 fits on six unique synthetic maps,all converged; condition_number<1e6; finite blocked-CV RMSE; degree 6 not a numerical knife-edge
+synthetic_recovery,two fixtures x unique physical angles 0/45/90,both sides; no midplane-crossing primary; area-weighted precision>=0.90; IoU>=0.50; centroid_error<=10 kpc; area_error<=0.25; volume_error<=0.30; secondary_area/primary_area<=0.10
+negative_controls,smooth background and one-sided ablations,smooth=zero sides; ablation=retained side only
+common_grid_recovery_equivalence,direct90 versus edge90 on third symmetric grid,map normalized_l1<=1e-8; same sides/topology; mask IoU>=0.99; area_error<=0.01; centroid_error<=1 kpc; volume_error<=0.05
+geometry_resolution,all expected primary validation components,>=3 distinct horizontal and vertical centres; full-rank covariance; minor semiaxis>one local cell width
+energy_convention,"resolved hybrid pV, 2.5pV, and 4pV rows",finite positive; exact multipliers at rel_tol=1e-12
+input_provenance,Goal 044 products and Goal 045 staged code,complete SHA-256 manifest

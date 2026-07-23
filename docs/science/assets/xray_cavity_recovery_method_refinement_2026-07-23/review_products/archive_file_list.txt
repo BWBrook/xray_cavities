@@ -1,0 +1,17 @@
+./archive_checksums.sha256
+./archive_manifest.tsv
+./code_provenance.csv
+./contracts/acceptance_criteria_goal045.csv
+./contracts/goal045_contract_metadata.json
+./validation/acceptance_criteria_goal045.csv
+./validation/background_stability.csv
+./validation/common_grid_recovery_equivalence.csv
+./validation/geometry_resolution.csv
+./validation/hybrid_energy_summary.csv
+./validation/input_provenance.csv
+./validation/local_asset_manifest.sha256
+./validation/negative_controls.csv
+./validation/synthetic_recovery.csv
+./validation/validation_pass_fail.csv
+./validation/xray_cavity_recovery_method_refinement_metadata.json
+./archive_file_list.txt

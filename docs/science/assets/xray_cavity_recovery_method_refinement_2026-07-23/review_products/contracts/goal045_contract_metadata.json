@@ -1,0 +1,12 @@
+{
+  "background_degree": 6,
+  "background_fit": "normalized Chebyshev basis; SVD least squares; fixed robust lower-outlier clipping",
+  "background_method": "fixture_informed_pipeline_validation_background",
+  "background_stability_check": "degrees 5/6/7; convergence, condition number, blocked spatial cross-validation, and degree-6 knife-edge test",
+  "decision_label": "XRAY_CAVITY_RECOVERY_METHOD_REFINEMENT_CONTRACT_FROZEN",
+  "negative_control_background": "independent radial background, not the fitted polynomial",
+  "scope_limit": "fixture-informed production-pipeline validation; not general observational or publication-method certification",
+  "seed_fraction_percent_per_hemisphere": 1.0,
+  "status": "predeclared_before_evaluation",
+  "support_threshold": "max(0, outer_annulus_median + 3 * 1.4826 * MAD) on the polynomial-background fractional deficit"
+}

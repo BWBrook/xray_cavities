@@ -1,0 +1,8 @@
+gate,status,observed,tolerance
+background_stability,pass,18/18 converged; max_condition=257.597,all converged; condition_number<1e6; finite blocked-CV RMSE; degree 6 not a numerical knife-edge
+synthetic_recovery,pass,12/12 side-angle rows pass,both sides; no midplane-crossing primary; area-weighted precision>=0.90; IoU>=0.50; centroid_error<=10 kpc; area_error<=0.25; volume_error<=0.30; secondary_area/primary_area<=0.10
+negative_controls,pass,18/18 controls pass,smooth=zero sides; ablation=retained side only
+common_grid_recovery_equivalence,pass,3/3 cases pass,map normalized_l1<=1e-8; same sides/topology; mask IoU>=0.99; area_error<=0.01; centroid_error<=1 kpc; volume_error<=0.05
+geometry_resolution,pass,24/24 expected components resolved,>=3 distinct horizontal and vertical centres; full-rank covariance; minor semiaxis>one local cell width
+energy_convention,pass,0 unresolved rows; 42/42 finite positive; 14/14 exact multiplier groups,finite positive; exact multipliers at rel_tol=1e-12
+input_provenance,pass,40 map inputs hashed; 9/9 code roles,complete SHA-256 manifest

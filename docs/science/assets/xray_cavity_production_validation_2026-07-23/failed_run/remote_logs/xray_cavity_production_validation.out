@@ -1,0 +1,35 @@
+job_id=775513.kunanyi-ohpc
+host=n001.kunanyi
+started_utc=2026-07-23T01:00:51Z
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation
+real_endpoint_preflight=passed shape=(1014, 960, 960) time_code=15330.069689399999
+synthetic_fixtures=created acceptance_criteria=predeclared
+xray_cli=passed scope=synthetic case=axisymmetric product=direct0
+xray_cli=passed scope=synthetic case=axisymmetric product=edge0
+xray_cli=passed scope=synthetic case=axisymmetric product=edge45
+xray_cli=passed scope=synthetic case=axisymmetric product=edge89p9
+xray_cli=passed scope=synthetic case=axisymmetric product=edge90
+xray_cli=passed scope=synthetic case=axisymmetric product=direct90
+xray_cli=passed scope=synthetic case=nonaxisymmetric product=direct0
+xray_cli=passed scope=synthetic case=nonaxisymmetric product=edge0
+xray_cli=passed scope=synthetic case=nonaxisymmetric product=edge45
+xray_cli=passed scope=synthetic case=nonaxisymmetric product=edge89p9
+xray_cli=passed scope=synthetic case=nonaxisymmetric product=edge90
+xray_cli=passed scope=synthetic case=nonaxisymmetric product=direct90
+xray_cli=passed scope=synthetic_repeat case=axisymmetric product=direct0
+xray_cli=passed scope=synthetic_repeat case=axisymmetric product=edge0
+xray_cli=passed scope=synthetic_repeat case=axisymmetric product=edge45
+xray_cli=passed scope=synthetic_repeat case=axisymmetric product=edge89p9
+xray_cli=passed scope=synthetic_repeat case=axisymmetric product=edge90
+xray_cli=passed scope=synthetic_repeat case=axisymmetric product=direct90
+xray_cli=passed scope=synthetic_repeat case=nonaxisymmetric product=direct0
+xray_cli=passed scope=synthetic_repeat case=nonaxisymmetric product=edge0
+xray_cli=passed scope=synthetic_repeat case=nonaxisymmetric product=edge45
+xray_cli=passed scope=synthetic_repeat case=nonaxisymmetric product=edge89p9
+xray_cli=passed scope=synthetic_repeat case=nonaxisymmetric product=edge90
+xray_cli=passed scope=synthetic_repeat case=nonaxisymmetric product=direct90
+xray_cli=passed scope=real case=C-HI product=direct0
+xray_cli=passed scope=real case=C-HI product=direct90
+xray_cli=passed scope=real case=C-HI product=edge90
+xray_cli=passed scope=real_repeat case=C-HI product=edge90
+validation_status=fail passed_gates=7/10

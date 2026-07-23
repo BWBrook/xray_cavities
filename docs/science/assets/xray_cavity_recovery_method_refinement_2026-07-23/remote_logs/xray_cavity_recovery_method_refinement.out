@@ -1,0 +1,9 @@
+job_id=775522.kunanyi-ohpc
+host=n001.kunanyi
+started_utc=2026-07-23T04:11:47Z
+source_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-recovery-method-refinement
+evaluation_only_existing_goal044_maps=1
+validation_status=pass passed_gates=7/7
+462199cc4537cf987556c04961dd807e5a0a465ede40f0af46c1c2f34a4675a1  /u/bwbrook/codex_kunanyi/goal045_xray_cavity_recovery_method_refinement/xray_cavity_recovery_method_refinement_2026-07-23.tar.gz
+finished_utc=2026-07-23T04:12:17Z

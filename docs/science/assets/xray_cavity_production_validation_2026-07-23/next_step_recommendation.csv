@@ -1,0 +1,5 @@
+priority,action,scope,authorization
+1,"Accept Goal 044 as a failed-closed validation result, not a green pipeline certification","Current retrieved evidence and report only","No further compute required"
+2,"Refine the tracer-blind recovery gate on existing synthetic and endpoint maps, including common-grid mask comparison and asymmetric-fixture sensitivity","Local method work plus existing remote products; no XRAiSE or PLUTO rerun by default","Barry-codex autonomous post-processing"
+3,"Run one evaluation-only replay after the revised criteria are frozen","Existing Goal 044 product directories only","Small PBS job if login-node policy requires it"
+4,"Keep Goal 042/043 X-ray-validation retention holds active","Raw endpoint HDF5 and required X-ray intermediates","No deletion until a later green or explicitly accepted caveated validation"

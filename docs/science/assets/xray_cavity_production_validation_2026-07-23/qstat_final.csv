@@ -1,0 +1,17 @@
+field,value
+job_id,775513.kunanyi-ohpc
+Job_Name,xcav_valid
+job_state,F
+queue,normal
+Exit_status,1
+Stageout_status,1
+resources_used.cpupercent,95
+resources_used.cput,00:25:23
+resources_used.mem,1303676kb
+resources_used.ncpus,1
+resources_used.vmem,1743228kb
+resources_used.walltime,00:32:35
+Resource_List.select,1:ncpus=1:mpiprocs=1:mem=96gb
+Resource_List.walltime,08:00:00
+ctime,Thu Jul 23 11:00:51 2026
+mtime,Thu Jul 23 11:33:27 2026

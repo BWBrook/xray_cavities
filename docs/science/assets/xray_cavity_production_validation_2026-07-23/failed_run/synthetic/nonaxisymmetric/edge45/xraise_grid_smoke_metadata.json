@@ -1,0 +1,58 @@
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 3904,
+    "max": 9953.878456401948,
+    "min": 33.38633312520335,
+    "positive_cells": 3904,
+    "positive_max": 9953.878456401948,
+    "positive_min": 33.38633312520335,
+    "positive_sum": 11942295.012724046,
+    "sum": 11942295.012724046
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 3904,
+    "max": 1.3837636033886318,
+    "min": 1.3318682403645663,
+    "positive_cells": 3904,
+    "positive_max": 1.3837636033886318,
+    "positive_min": 1.3318682403645663,
+    "positive_sum": 5269.253566335475,
+    "sum": 5269.253566335475
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    61,
+    45,
+    49
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation/fixtures/nonaxisymmetric.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "edge_overlap_uniform_cell_projection",
+    "requested_mode": "edge_overlap",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 64,
+    "sky_horizontal_max_kpc": 285.943784384996,
+    "sky_horizontal_min_kpc": -285.943784384996,
+    "view_angle_deg": 45.0
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 3904,
+    "max": 7444.332153193698,
+    "min": 24.12719415617319,
+    "positive_cells": 3904,
+    "positive_max": 7444.332153193698,
+    "positive_min": 24.12719415617319,
+    "positive_sum": 8903432.765071578,
+    "sum": 8903432.765071578
+  },
+  "redshift": 0.05,
+  "time_code": 15330.0696894,
+  "time_myr": 50.00000000000777,
+  "timestep": "Timestep_0",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}

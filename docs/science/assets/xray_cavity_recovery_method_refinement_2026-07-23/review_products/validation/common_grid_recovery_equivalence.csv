@@ -1,0 +1,4 @@
+case,common_cell_count,common_min_kpc,common_max_kpc,map_normalized_l1,direct_detected_sides,edge_detected_sides,same_side_topology,area_weighted_mask_iou,total_area_relative_error,max_primary_centroid_error_kpc,total_geometric_volume_relative_error,gate_pass
+axisymmetric,45,-200.7782731777778,200.7782731777778,8.041513227707225e-11,negative_z|positive_z,negative_z|positive_z,True,1.0,0.0,0.0,0.0,True
+nonaxisymmetric,45,-200.7782731777778,200.7782731777778,8.078474753759848e-11,negative_z|positive_z,negative_z|positive_z,True,1.0,0.0,0.0,0.0,True
+C-HI,960,-199.78813030421875,199.78813030421873,1.01176563906442e-10,negative_z|positive_z,negative_z|positive_z,True,1.0,0.0,0.0,0.0,True

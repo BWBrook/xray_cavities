@@ -1,0 +1,19 @@
+{
+  "decision_label": "XRAY_CAVITY_PRODUCTION_VALIDATION_FAILED_CLOSED_RECOVERY_METHOD_REFINEMENT_REQUIRED",
+  "exit_status": 1,
+  "job_id": "775513.kunanyi-ohpc",
+  "passed_gate_count": 7,
+  "pipeline_stage_status": {
+    "cavity_recovery": "failed",
+    "determinism": "passed",
+    "energy_summary": "failed_downstream_of_degenerate_recovery",
+    "projection": "passed",
+    "provenance": "passed",
+    "xraise_execution": "passed"
+  },
+  "rerun_submitted": false,
+  "synthetic_product_count": 24,
+  "real_product_count": 4,
+  "total_gate_count": 10,
+  "validation_status": "failed_closed"
+}

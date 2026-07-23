@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+#PBS -N xcav_valid
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=96gb
+#PBS -l walltime=08:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal044_xray_cavity_production_validation/xray_cavity_production_validation.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal044_xray_cavity_production_validation/xray_cavity_production_validation.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal044_xray_cavity_production_validation}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation}"
+INPUT_H5="${INPUT_H5:-/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0051.flt.h5}"
+TIMESTEP="${TIMESTEP:-Timestep_51}"
+XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+XRAISE_CLI="${XRAISE_CLI:-$STAGE_DIR/xraise_grid_smoke.py}"
+VALIDATOR="${VALIDATOR:-$STAGE_DIR/validate_xray_cavity_production.py}"
+RECOVERY="${RECOVERY:-$STAGE_DIR/three_case_cavity_recovery.py}"
+RECOVERY_BUILDER="${RECOVERY_BUILDER:-$STAGE_DIR/build_three_case_cavity_recovery.py}"
+PRESSURE_CONTEXT="${PRESSURE_CONTEXT:-$STAGE_DIR/tracer_shell_pressure_context.csv}"
+XRAISE_PY="${XRAISE_PY:-$XRAISE_RUNTIME/xraise.py}"
+APEC_TABLE="${APEC_TABLE:-$XRAISE_RUNTIME/apec_corrections.txt}"
+GAUNT_LUT="${GAUNT_LUT:-$XRAISE_RUNTIME/gaunt_lut_2d.npz}"
+ARCHIVE="${ARCHIVE:-$STAGE_DIR/xray_cavity_production_validation_2026-07-23.tar.gz}"
+ARCHIVE_PAYLOAD="${ARCHIVE_PAYLOAD:-$STAGE_DIR/archive_payload}"
+ARCHIVE_PAYLOAD_TMP="${ARCHIVE_PAYLOAD_TMP:-$STAGE_DIR/archive_payload.tmp}"
+Y_CHUNK="${Y_CHUNK:-8}"
+
+for path in "$INPUT_H5" "$XRAISE_CLI" "$VALIDATOR" "$RECOVERY" "$RECOVERY_BUILDER" "$PRESSURE_CONTEXT" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT"; do
+  test -r "$path" || { echo "missing required input: $path" >&2; exit 2; }
+done
+if [ -e "$ANALYSIS_ROOT" ] || [ -e "$ARCHIVE" ] || [ -e "$ARCHIVE_PAYLOAD" ] || [ -e "$ARCHIVE_PAYLOAD_TMP" ]; then
+  echo "refusing to overwrite an existing Goal 044 output" >&2
+  exit 2
+fi
+mkdir -p "$ANALYSIS_ROOT" "$ANALYSIS_ROOT/remote_logs"
+
+echo "job_id=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "analysis_root=$ANALYSIS_ROOT"
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+"$PYTHON" -m py_compile "$XRAISE_CLI" "$VALIDATOR" "$RECOVERY" "$RECOVERY_BUILDER"
+
+"$PYTHON" - "$INPUT_H5" "$TIMESTEP" <<'PY'
+import sys
+from pathlib import Path
+import h5py
+
+path, timestep = Path(sys.argv[1]), sys.argv[2]
+required = ("rho", "prs", "tr1", "vx1", "vx2", "vx3")
+with h5py.File(path, "r") as h5:
+    if timestep not in h5:
+        raise SystemExit(f"missing timestep {timestep}")
+    shapes = []
+    for name in required:
+        dataset = f"/{timestep}/vars/{name}"
+        if dataset not in h5:
+            raise SystemExit(f"missing {dataset}")
+        shapes.append(tuple(h5[dataset].shape))
+    if len(set(shapes)) != 1 or shapes[0] != (1014, 960, 960):
+        raise SystemExit(f"unexpected endpoint shapes: {shapes}")
+    time_code = float(h5[timestep].attrs["Time"])
+    if abs(time_code - 15330.0696894) > 1e-6:
+        raise SystemExit(f"unexpected endpoint time: {time_code}")
+print(f"real_endpoint_preflight=passed shape={shapes[0]} time_code={time_code:.17g}")
+PY
+
+PROVENANCE="$ANALYSIS_ROOT/provenance.csv"
+printf 'role,path,sha256,size_bytes\n' >"$PROVENANCE"
+for spec in \
+  "real_endpoint_hdf5|$INPUT_H5" \
+  "xraise_cli|$XRAISE_CLI" \
+  "validation_helper|$VALIDATOR" \
+  "cavity_recovery|$RECOVERY" \
+  "cavity_recovery|$RECOVERY_BUILDER" \
+  "pressure_context|$PRESSURE_CONTEXT" \
+  "xraise_runtime|$XRAISE_PY" \
+  "apec_table|$APEC_TABLE" \
+  "gaunt_lut|$GAUNT_LUT"; do
+  IFS='|' read -r role path <<<"$spec"
+  hash="$(sha256sum "$path" | awk '{print $1}')"
+  bytes="$(stat -c %s "$path")"
+  printf '%s,%s,%s,%s\n' "$role" "$path" "$hash" "$bytes" >>"$PROVENANCE"
+done
+
+"$PYTHON" "$VALIDATOR" make-fixtures --run-root "$ANALYSIS_ROOT"
+
+COMMANDS="$ANALYSIS_ROOT/run_command_manifest.csv"
+printf 'scope,case_id,product,view_angle_deg,projection_mode,projected_u_bins\n' >"$COMMANDS"
+
+run_xray() {
+  local scope="$1" case_id="$2" product="$3" input_h5="$4" timestep="$5"
+  local angle="$6" mode="$7" bins="$8" output_dir="$9"
+  test ! -e "$output_dir" || { echo "refusing to overwrite product: $output_dir" >&2; exit 2; }
+  mkdir -p "$output_dir"
+  printf '%s,%s,%s,%s,%s,%s\n' "$scope" "$case_id" "$product" "$angle" "$mode" "$bins" >>"$COMMANDS"
+  "$PYTHON" "$XRAISE_CLI" \
+    --input-h5 "$input_h5" \
+    --timestep "$timestep" \
+    --output-dir "$output_dir" \
+    --xraise-py "$XRAISE_PY" \
+    --apec-table "$APEC_TABLE" \
+    --gaunt-lut "$GAUNT_LUT" \
+    --redshift 0.05 \
+    --y-chunk "$Y_CHUNK" \
+    --view-angle-deg "$angle" \
+    --projection-mode "$mode" \
+    --projected-u-bins "$bins" >/dev/null
+  echo "xray_cli=passed scope=$scope case=$case_id product=$product"
+}
+
+for repeat_scope in synthetic synthetic_repeat; do
+  for case_id in axisymmetric nonaxisymmetric; do
+    fixture="$ANALYSIS_ROOT/fixtures/${case_id}.h5"
+    base="$ANALYSIS_ROOT/$repeat_scope/$case_id"
+    run_xray "$repeat_scope" "$case_id" direct0 "$fixture" Timestep_0 0 direct_axis 49 "$base/direct0"
+    run_xray "$repeat_scope" "$case_id" edge0 "$fixture" Timestep_0 0 edge_overlap 49 "$base/edge0"
+    run_xray "$repeat_scope" "$case_id" edge45 "$fixture" Timestep_0 45 edge_overlap 64 "$base/edge45"
+    run_xray "$repeat_scope" "$case_id" edge89p9 "$fixture" Timestep_0 89.9 edge_overlap 45 "$base/edge89p9"
+    run_xray "$repeat_scope" "$case_id" edge90 "$fixture" Timestep_0 90 edge_overlap 45 "$base/edge90"
+    run_xray "$repeat_scope" "$case_id" direct90 "$fixture" Timestep_0 90 direct_axis 45 "$base/direct90"
+  done
+done
+
+REAL_ROOT="$ANALYSIS_ROOT/real_c_hi"
+run_xray real C-HI direct0 "$INPUT_H5" "$TIMESTEP" 0 direct_axis 960 "$REAL_ROOT/direct0"
+run_xray real C-HI direct90 "$INPUT_H5" "$TIMESTEP" 90 direct_axis 960 "$REAL_ROOT/direct90"
+run_xray real C-HI edge90 "$INPUT_H5" "$TIMESTEP" 90 edge_overlap 960 "$REAL_ROOT/edge90"
+run_xray real_repeat C-HI edge90 "$INPUT_H5" "$TIMESTEP" 90 edge_overlap 960 "$REAL_ROOT/edge90_repeat"
+
+VALIDATION_OUTPUT="$ANALYSIS_ROOT/validation"
+set +e
+"$PYTHON" "$VALIDATOR" evaluate \
+  --run-root "$ANALYSIS_ROOT" \
+  --output-dir "$VALIDATION_OUTPUT" \
+  --pressure-context "$PRESSURE_CONTEXT" \
+  --provenance "$PROVENANCE"
+VALIDATION_EXIT_CODE=$?
+set -e
+
+rm -rf "$ARCHIVE_PAYLOAD_TMP"
+mkdir -p "$ARCHIVE_PAYLOAD_TMP/validation" "$ARCHIVE_PAYLOAD_TMP/contracts"
+cp -a "$VALIDATION_OUTPUT/." "$ARCHIVE_PAYLOAD_TMP/validation/"
+cp -a "$ANALYSIS_ROOT/contracts/." "$ARCHIVE_PAYLOAD_TMP/contracts/"
+cp "$PROVENANCE" "$COMMANDS" "$ARCHIVE_PAYLOAD_TMP/"
+find "$ANALYSIS_ROOT" -name xraise_grid_smoke_metadata.json -o -name xraise_grid_smoke_summary.csv | while read -r path; do
+  relative="${path#$ANALYSIS_ROOT/}"
+  mkdir -p "$ARCHIVE_PAYLOAD_TMP/product_metadata/$(dirname "$relative")"
+  cp "$path" "$ARCHIVE_PAYLOAD_TMP/product_metadata/$relative"
+done
+find "$ARCHIVE_PAYLOAD_TMP" -type f -printf '%P\t%s bytes\n' | sort >"$ARCHIVE_PAYLOAD_TMP/archive_manifest.tsv"
+(
+  cd "$ARCHIVE_PAYLOAD_TMP"
+  find . -type f ! -name archive_checksums.sha256 -exec sha256sum {} \; | sort >archive_checksums.sha256
+)
+rm -rf "$ARCHIVE_PAYLOAD"
+mv "$ARCHIVE_PAYLOAD_TMP" "$ARCHIVE_PAYLOAD"
+(
+  cd "$ARCHIVE_PAYLOAD"
+  find . -type f ! -name archive_file_list.txt -print | sort >archive_file_list.txt
+  printf './archive_file_list.txt\n' >>archive_file_list.txt
+)
+tar -czf "$ARCHIVE" -C "$ARCHIVE_PAYLOAD" --files-from "$ARCHIVE_PAYLOAD/archive_file_list.txt"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+if [ "$VALIDATION_EXIT_CODE" -ne 0 ]; then
+  echo "validation_failed_closed_archive_preserved=$ARCHIVE" >&2
+  exit "$VALIDATION_EXIT_CODE"
+fi

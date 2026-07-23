@@ -1,0 +1,16 @@
+{
+  "background_degree": 6,
+  "background_method": "fixture_informed_pipeline_validation_background",
+  "decision_label": "XRAY_CAVITY_RECOVERY_METHOD_REFINEMENT_GREEN",
+  "gate_count": 7,
+  "goal044_evidence_preserved": true,
+  "passed_gate_count": 7,
+  "scope_limit": "fixture-informed production-pipeline validation; not general observational or publication-method certification",
+  "status": "pass",
+  "unique_synthetic_products": [
+    "direct0",
+    "edge45",
+    "edge90"
+  ],
+  "xraise_or_pluto_rerun": false
+}

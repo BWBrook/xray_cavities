@@ -1,0 +1,58 @@
+{
+  "apec_table": "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt",
+  "corrected_stats_mjy_sr": {
+    "finite_cells": 2745,
+    "max": 8962.930286126399,
+    "min": 1671.0558304603014,
+    "positive_cells": 2745,
+    "positive_max": 8962.930286126399,
+    "positive_min": 1671.0558304603014,
+    "positive_sum": 11857871.913188972,
+    "sum": 11857871.913188972
+  },
+  "correction_ratio_stats": {
+    "finite_cells": 2745,
+    "max": 1.3719052473089652,
+    "min": 1.3320839492315504,
+    "positive_cells": 2745,
+    "positive_max": 1.3719052473089652,
+    "positive_min": 1.3320839492315504,
+    "positive_sum": 3691.4813389785973,
+    "sum": 3691.4813389785973
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "gaunt_lut": "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz",
+  "grid_shape_nz_ny_nx": [
+    61,
+    45,
+    49
+  ],
+  "input_h5": "/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation/fixtures/nonaxisymmetric.h5",
+  "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+  "projection": {
+    "line_of_sight": "rotated in simulation x-y plane from +y toward +x",
+    "projected_accumulation": "edge_overlap_uniform_cell_projection",
+    "requested_mode": "edge_overlap",
+    "sky_horizontal_axis": "u = x*cos(theta) - y*sin(theta)",
+    "sky_horizontal_bins": 45,
+    "sky_horizontal_max_kpc": 201.1285989084451,
+    "sky_horizontal_min_kpc": -201.1285989084451,
+    "view_angle_deg": 89.9
+  },
+  "raw_stats_mjy_sr": {
+    "finite_cells": 2745,
+    "max": 6714.059865695989,
+    "min": 1218.054842882283,
+    "positive_cells": 2745,
+    "positive_max": 6714.059865695989,
+    "positive_min": 1218.054842882283,
+    "positive_sum": 8840492.150245987,
+    "sum": 8840492.150245987
+  },
+  "redshift": 0.05,
+  "time_code": 15330.0696894,
+  "time_myr": 50.00000000000777,
+  "timestep": "Timestep_0",
+  "xraise_source": "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py",
+  "y_chunk": 8
+}

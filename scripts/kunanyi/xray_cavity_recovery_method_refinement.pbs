@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+#PBS -N xcav_refine
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=16gb
+#PBS -l walltime=01:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal045_xray_cavity_recovery_method_refinement/xray_cavity_recovery_method_refinement.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal045_xray_cavity_recovery_method_refinement/xray_cavity_recovery_method_refinement.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal045_xray_cavity_recovery_method_refinement}"
+SOURCE_ROOT="${SOURCE_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-production-validation}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-23-xray-cavity-recovery-method-refinement}"
+VALIDATOR="${VALIDATOR:-$STAGE_DIR/validate_xray_cavity_recovery_refinement.py}"
+GOAL044_VALIDATOR="${GOAL044_VALIDATOR:-$STAGE_DIR/validate_xray_cavity_production.py}"
+SEED_GROW="${SEED_GROW:-$STAGE_DIR/hemisphere_seed_grow_recovery.py}"
+RECOVERY="${RECOVERY:-$STAGE_DIR/three_case_cavity_recovery.py}"
+RECOVERY_BUILDER="${RECOVERY_BUILDER:-$STAGE_DIR/build_three_case_cavity_recovery.py}"
+PRESSURE_CONTEXT="${PRESSURE_CONTEXT:-$STAGE_DIR/tracer_shell_pressure_context.csv}"
+PROVENANCE="${PROVENANCE:-$SOURCE_ROOT/provenance.csv}"
+SYNTHETIC_FIXTURE_CONTRACT="${SYNTHETIC_FIXTURE_CONTRACT:-$SOURCE_ROOT/contracts/synthetic_fixture_contract.csv}"
+GOAL045_WRAPPER="${GOAL045_WRAPPER:-$STAGE_DIR/xray_cavity_recovery_method_refinement.pbs}"
+ARCHIVE="${ARCHIVE:-$STAGE_DIR/xray_cavity_recovery_method_refinement_2026-07-23.tar.gz}"
+ARCHIVE_PAYLOAD="${ARCHIVE_PAYLOAD:-$STAGE_DIR/archive_payload}"
+ARCHIVE_PAYLOAD_TMP="${ARCHIVE_PAYLOAD_TMP:-$STAGE_DIR/archive_payload.tmp}"
+
+for path in \
+  "$VALIDATOR" "$GOAL044_VALIDATOR" "$SEED_GROW" "$RECOVERY" \
+  "$RECOVERY_BUILDER" "$PRESSURE_CONTEXT" "$PROVENANCE" \
+  "$SYNTHETIC_FIXTURE_CONTRACT" "$GOAL045_WRAPPER"; do
+  test -r "$path" || { echo "missing required input: $path" >&2; exit 2; }
+done
+if [ -e "$ANALYSIS_ROOT" ] || [ -e "$ARCHIVE" ] || \
+   [ -e "$ARCHIVE_PAYLOAD" ] || [ -e "$ARCHIVE_PAYLOAD_TMP" ]; then
+  echo "refusing to overwrite an existing Goal 045 output" >&2
+  exit 2
+fi
+
+for case_id in axisymmetric nonaxisymmetric; do
+  for product in direct0 edge0 edge45 edge89p9 edge90 direct90; do
+    product_dir="$SOURCE_ROOT/synthetic/$case_id/$product"
+    for name in \
+      x_kpc.tsv z_kpc.tsv tracer_max_los.tsv \
+      xray_1kev_raw_mjy_sr.tsv \
+      xray_1kev_xraise_corrected_mjy_sr.tsv; do
+      test -r "$product_dir/$name" || {
+        echo "missing Goal 044 synthetic product: $product_dir/$name" >&2
+        exit 2
+      }
+    done
+  done
+done
+for product in direct0 direct90 edge90; do
+  product_dir="$SOURCE_ROOT/real_c_hi/$product"
+  for name in \
+    x_kpc.tsv z_kpc.tsv tracer_max_los.tsv \
+    xray_1kev_raw_mjy_sr.tsv \
+    xray_1kev_xraise_corrected_mjy_sr.tsv; do
+    test -r "$product_dir/$name" || {
+      echo "missing Goal 044 real product: $product_dir/$name" >&2
+      exit 2
+    }
+  done
+done
+
+mkdir -p "$ANALYSIS_ROOT/contracts" "$ANALYSIS_ROOT/remote_logs"
+echo "job_id=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "source_root=$SOURCE_ROOT"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "evaluation_only_existing_goal044_maps=1"
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+"$PYTHON" -m py_compile \
+  "$VALIDATOR" "$GOAL044_VALIDATOR" "$SEED_GROW" "$RECOVERY" \
+  "$RECOVERY_BUILDER"
+
+"$PYTHON" "$VALIDATOR" write-contract \
+  --output-dir "$ANALYSIS_ROOT/contracts"
+
+CODE_PROVENANCE="$ANALYSIS_ROOT/code_provenance.csv"
+printf 'role,path,sha256,size_bytes\n' >"$CODE_PROVENANCE"
+for spec in \
+  "goal045_validator|$VALIDATOR" \
+  "goal045_wrapper|$GOAL045_WRAPPER" \
+  "goal044_validator|$GOAL044_VALIDATOR" \
+  "seed_grow_recovery|$SEED_GROW" \
+  "cavity_recovery|$RECOVERY" \
+  "cavity_recovery_builder|$RECOVERY_BUILDER" \
+  "pressure_context|$PRESSURE_CONTEXT" \
+  "synthetic_fixture_contract|$SYNTHETIC_FIXTURE_CONTRACT" \
+  "goal044_provenance|$PROVENANCE"; do
+  IFS='|' read -r role path <<<"$spec"
+  hash="$(sha256sum "$path" | awk '{print $1}')"
+  bytes="$(stat -c %s "$path")"
+  printf '%s,%s,%s,%s\n' "$role" "$path" "$hash" "$bytes" >>"$CODE_PROVENANCE"
+done
+
+set +e
+"$PYTHON" "$VALIDATOR" evaluate \
+  --run-root "$SOURCE_ROOT" \
+  --output-dir "$ANALYSIS_ROOT/validation" \
+  --pressure-context "$PRESSURE_CONTEXT" \
+  --provenance "$CODE_PROVENANCE"
+VALIDATION_EXIT_CODE=$?
+set -e
+
+if [ ! -d "$ANALYSIS_ROOT/validation" ]; then
+  mkdir -p "$ANALYSIS_ROOT/validation"
+  printf 'status,exit_code,diagnostic\n' \
+    >"$ANALYSIS_ROOT/validation/evaluator_startup_failure.csv"
+  printf 'fail,%s,evaluator exited before creating its validation directory\n' \
+    "$VALIDATION_EXIT_CODE" \
+    >>"$ANALYSIS_ROOT/validation/evaluator_startup_failure.csv"
+fi
+
+rm -rf "$ARCHIVE_PAYLOAD_TMP"
+mkdir -p "$ARCHIVE_PAYLOAD_TMP"
+cp -a "$ANALYSIS_ROOT/contracts" "$ARCHIVE_PAYLOAD_TMP/"
+cp -a "$ANALYSIS_ROOT/validation" "$ARCHIVE_PAYLOAD_TMP/"
+cp "$CODE_PROVENANCE" "$ARCHIVE_PAYLOAD_TMP/"
+find "$ARCHIVE_PAYLOAD_TMP" -type f -printf '%P\t%s bytes\n' |
+  sort >"$ARCHIVE_PAYLOAD_TMP/archive_manifest.tsv"
+(
+  cd "$ARCHIVE_PAYLOAD_TMP"
+  find . -type f ! -name archive_checksums.sha256 -exec sha256sum {} \; |
+    sort >archive_checksums.sha256
+)
+rm -rf "$ARCHIVE_PAYLOAD"
+mv "$ARCHIVE_PAYLOAD_TMP" "$ARCHIVE_PAYLOAD"
+(
+  cd "$ARCHIVE_PAYLOAD"
+  find . -type f ! -name archive_file_list.txt -print |
+    sort >archive_file_list.txt
+  printf './archive_file_list.txt\n' >>archive_file_list.txt
+)
+tar -czf "$ARCHIVE" -C "$ARCHIVE_PAYLOAD" \
+  --files-from "$ARCHIVE_PAYLOAD/archive_file_list.txt"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+if [ "$VALIDATION_EXIT_CODE" -ne 0 ]; then
+  echo "validation_failed_closed_archive_preserved=$ARCHIVE" >&2
+  exit "$VALIDATION_EXIT_CODE"
+fi
