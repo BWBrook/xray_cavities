@@ -1,0 +1,560 @@
+#!/usr/bin/env bash
+#PBS -N tri_compact
+#PBS -q normal
+#PBS -l select=1:ncpus=8:mpiprocs=1:mem=64gb
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction.err
+
+set -euo pipefail
+
+readonly STAGE_DIR="/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction"
+readonly EVIDENCE_ROOT="/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution"
+readonly PACKET_DIR="$STAGE_DIR/authorization_packet"
+readonly COMPLETED_EVIDENCE_DIR="$STAGE_DIR/completed_run"
+readonly EXECUTOR="$STAGE_DIR/execute_three_case_lifecycle_compaction.py"
+readonly DRY_RUN_VALIDATOR="$STAGE_DIR/validate_three_case_lifecycle_dry_run.py"
+readonly INVENTORY_HELPER="$STAGE_DIR/inventory_three_case_lifecycle.py"
+readonly APPROVAL_RECEIPT="$STAGE_DIR/approval_receipt.json"
+readonly PACKET_MANIFEST="$PACKET_DIR/local_asset_manifest.sha256"
+readonly COMPLETED_EVIDENCE_MANIFEST="$STAGE_DIR/goal046_completed_evidence_manifest.sha256"
+readonly STAGED_INPUT_MANIFEST="$STAGE_DIR/goal047_staged_input_manifest.sha256"
+readonly APPROVED_LEDGER="$PACKET_DIR/payload_ledger.csv"
+readonly ROOT_CONTRACT="$PACKET_DIR/remote_root_allowlist.csv"
+readonly PROTECTED_CONTRACT="$PACKET_DIR/protected_path_contract.csv"
+readonly HOLD_REGISTER="$PACKET_DIR/active_hold_register.csv"
+readonly EXECUTION_CONTRACT="$PACKET_DIR/goal047_execution_contract.csv"
+
+readonly EXPECTED_LEDGER_SHA256="df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92"
+readonly EXPECTED_DELETE_ROWS="296"
+readonly EXPECTED_HDF5_ROWS="148"
+readonly EXPECTED_XMF_ROWS="148"
+readonly EXPECTED_ALLOCATED_BYTES="6845659111424"
+readonly CONFIRMATION_TOKEN="BARRY_APPROVED_GOAL047_df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92_DELETE_EXACT_296_ROWS_6845659111424_ALLOCATED_BYTES"
+
+readonly ARCHIVE="$STAGE_DIR/three_case_lifecycle_compaction_2026-07-24.tar.gz"
+readonly ARCHIVE_RESERVATION="$STAGE_DIR/three_case_lifecycle_compaction_2026-07-24.archive.reservation"
+readonly ARCHIVE_TMP="$ARCHIVE_RESERVATION/three_case_lifecycle_compaction_2026-07-24.tar.gz.tmp"
+readonly ARCHIVE_PAYLOAD_TMP="$ARCHIVE_RESERVATION/archive_payload.tmp"
+readonly ARCHIVE_PAYLOAD="$ARCHIVE_RESERVATION/archive_payload"
+readonly STAGE_TRANSCRIPT="$STAGE_DIR/three_case_lifecycle_compaction_transcript.jsonl"
+readonly EXECUTION_LOCK="$STAGE_DIR/three_case_lifecycle_compaction.lock"
+readonly WRAPPER_FAILURE_STATUS="$STAGE_DIR/wrapper_failure_status.json"
+readonly EXECUTION_STATUS="$EVIDENCE_ROOT/execution_status.json"
+readonly COMPACT_EVIDENCE_FILE_LIST="$EVIDENCE_ROOT/compact_evidence_file_list.txt"
+
+if [ -e "$WRAPPER_FAILURE_STATUS" ] || [ -L "$WRAPPER_FAILURE_STATUS" ]; then
+  echo "refusing existing wrapper failure receipt: $WRAPPER_FAILURE_STATUS" >&2
+  exit 2
+fi
+record_wrapper_exit() {
+  local exit_code="$1"
+  local line="$2"
+  local recorded_utc
+  if [ "$exit_code" -eq 0 ]; then
+    return
+  fi
+  recorded_utc="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  if [ ! -e "$WRAPPER_FAILURE_STATUS" ] && [ ! -L "$WRAPPER_FAILURE_STATUS" ]; then
+    (
+      set -o noclobber
+      umask 077
+      printf \
+        '{"status":"WRAPPER_FAILED_CLOSED","exit_code":%s,"line":%s,"pbs_job_id":"%s","recorded_utc":"%s"}\n' \
+        "$exit_code" "$line" "${PBS_JOBID:-}" "$recorded_utc" \
+        >"$WRAPPER_FAILURE_STATUS"
+    ) || true
+    sync "$WRAPPER_FAILURE_STATUS" 2>/dev/null || true
+  fi
+}
+trap 'record_wrapper_exit "$?" "$LINENO"' EXIT
+
+test -n "${PBS_JOBID:-}" || {
+  echo "PBS_JOBID is required for the active-job safety gate" >&2
+  exit 2
+}
+nofile_limit="$(ulimit -n)"
+if [ "$nofile_limit" != "unlimited" ] && [ "$nofile_limit" -lt 1024 ]; then
+  echo "open-file limit is too low for 296 held candidates: $nofile_limit" >&2
+  exit 2
+fi
+echo "open_file_limit=$nofile_limit"
+for path in \
+  "$EXECUTOR" \
+  "$DRY_RUN_VALIDATOR" \
+  "$INVENTORY_HELPER" \
+  "$APPROVAL_RECEIPT" \
+  "$PACKET_MANIFEST" \
+  "$COMPLETED_EVIDENCE_MANIFEST" \
+  "$STAGED_INPUT_MANIFEST" \
+  "$APPROVED_LEDGER" \
+  "$ROOT_CONTRACT" \
+  "$PROTECTED_CONTRACT" \
+  "$HOLD_REGISTER" \
+  "$EXECUTION_CONTRACT"; do
+  test -r "$path" || {
+    echo "missing required immutable input: $path" >&2
+    exit 2
+  }
+done
+test -d "$PACKET_DIR" || {
+  echo "missing authorization packet directory: $PACKET_DIR" >&2
+  exit 2
+}
+test -d "$COMPLETED_EVIDENCE_DIR" || {
+  echo "missing completed evidence directory: $COMPLETED_EVIDENCE_DIR" >&2
+  exit 2
+}
+
+for output in "$EVIDENCE_ROOT" "$ARCHIVE" \
+  "$ARCHIVE_RESERVATION" "$ARCHIVE_PAYLOAD" "$ARCHIVE_PAYLOAD_TMP" \
+  "$STAGE_TRANSCRIPT" "$EXECUTION_LOCK" "$EXECUTION_STATUS"; do
+  if [ -e "$output" ] || [ -L "$output" ]; then
+    echo "refusing existing Goal 047 output/reservation/lock: $output" >&2
+    exit 2
+  fi
+done
+
+echo "job_id=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "stage_dir=$STAGE_DIR"
+echo "evidence_root=$EVIDENCE_ROOT"
+echo "approved_ledger_sha256=$EXPECTED_LEDGER_SHA256"
+echo "approved_delete_rows=$EXPECTED_DELETE_ROWS"
+echo "approved_allocated_bytes=$EXPECTED_ALLOCATED_BYTES"
+
+module purge
+module load Anaconda3/2024.02-1
+readonly PYTHON="$(command -v python)"
+"$PYTHON" - <<'PY'
+import platform
+import sys
+
+import h5py
+
+print(f"python_version={platform.python_version()}")
+print(f"python_executable={sys.executable}")
+print(f"h5py_version={h5py.__version__}")
+PY
+"$PYTHON" -m py_compile "$EXECUTOR"
+"$PYTHON" -m py_compile "$DRY_RUN_VALIDATOR" "$INVENTORY_HELPER"
+
+(
+  cd "$STAGE_DIR"
+  sha256sum -c "$STAGED_INPUT_MANIFEST"
+)
+(
+  cd "$PACKET_DIR"
+  sha256sum -c "$PACKET_MANIFEST"
+)
+(
+  cd "$COMPLETED_EVIDENCE_DIR"
+  sha256sum -c "$COMPLETED_EVIDENCE_MANIFEST"
+)
+
+"$PYTHON" - \
+  "$STAGED_INPUT_MANIFEST" \
+  "$APPROVAL_RECEIPT" \
+  "$APPROVED_LEDGER" \
+  "$EXPECTED_LEDGER_SHA256" \
+  "$EXPECTED_DELETE_ROWS" \
+  "$EXPECTED_HDF5_ROWS" \
+  "$EXPECTED_XMF_ROWS" \
+  "$EXPECTED_ALLOCATED_BYTES" \
+  "$CONFIRMATION_TOKEN" <<'PY'
+import csv
+import hashlib
+import json
+import os
+import stat
+import sys
+from pathlib import Path, PurePosixPath
+
+(
+    staged_manifest,
+    approval_path,
+    ledger_path,
+    expected_digest,
+    expected_rows,
+    expected_hdf5,
+    expected_xmf,
+    expected_bytes,
+    expected_token,
+) = sys.argv[1:]
+staged_manifest = Path(staged_manifest)
+approval_path = Path(approval_path)
+ledger_path = Path(ledger_path)
+expected_rows = int(expected_rows)
+expected_hdf5 = int(expected_hdf5)
+expected_xmf = int(expected_xmf)
+expected_bytes = int(expected_bytes)
+
+symlinks = []
+for root, directories, files in os.walk(
+    staged_manifest.parent, topdown=True, followlinks=False
+):
+    for name in directories + files:
+        candidate = Path(root) / name
+        if stat.S_ISLNK(candidate.lstat().st_mode):
+            symlinks.append(str(candidate))
+if symlinks:
+    raise SystemExit(f"staged input tree contains symlinks: {symlinks[:10]}")
+print("staged_symlink_gate=passed symlink_count=0")
+
+required_stage_names = {
+    "three_case_lifecycle_compaction.pbs",
+    "execute_three_case_lifecycle_compaction.py",
+    "validate_three_case_lifecycle_dry_run.py",
+    "inventory_three_case_lifecycle.py",
+    "approval_receipt.json",
+    "authorization_packet/local_asset_manifest.sha256",
+    "goal046_completed_evidence_manifest.sha256",
+}
+manifest_names = set()
+for line in staged_manifest.read_text().splitlines():
+    if not line.strip():
+        continue
+    parts = line.split(maxsplit=1)
+    if len(parts) != 2 or len(parts[0]) != 64:
+        raise SystemExit(f"invalid staged-input manifest line: {line!r}")
+    relative = parts[1].lstrip("*")
+    pure = PurePosixPath(relative)
+    if pure.is_absolute() or ".." in pure.parts:
+        raise SystemExit(f"unsafe staged-input manifest path: {relative}")
+    manifest_names.add(relative)
+missing = sorted(required_stage_names - manifest_names)
+if missing:
+    raise SystemExit(f"staged-input manifest lacks required names: {missing}")
+
+actual_digest = hashlib.sha256(ledger_path.read_bytes()).hexdigest()
+if actual_digest != expected_digest:
+    raise SystemExit(
+        f"approved ledger digest mismatch: {actual_digest} != {expected_digest}"
+    )
+
+approval = json.loads(approval_path.read_text())
+required_approval = {
+    "approval_status": "approved",
+    "approved_payload_ledger_sha256": expected_digest,
+    "approved_row_count": expected_rows,
+    "approved_hdf5_count": expected_hdf5,
+    "approved_xmf_count": expected_xmf,
+    "approved_allocated_bytes": expected_bytes,
+    "confirmation_token": expected_token,
+}
+for key, expected in required_approval.items():
+    if approval.get(key) != expected:
+        raise SystemExit(
+            f"approval receipt mismatch for {key}: "
+            f"{approval.get(key)!r} != {expected!r}"
+        )
+
+with ledger_path.open(newline="") as handle:
+    reader = csv.DictReader(handle)
+    if not reader.fieldnames or len(reader.fieldnames) != len(set(reader.fieldnames)):
+        raise SystemExit("approved ledger has an invalid or duplicate header")
+    delete_rows = [
+        row
+        for row in reader
+        if row["action"]
+        in {"DELETE_PROPOSED_UNIQUE_RAW", "DELETE_PROPOSED_METADATA_ONLY"}
+    ]
+if len(delete_rows) != expected_rows:
+    raise SystemExit(
+        f"approved delete row count mismatch: {len(delete_rows)} != {expected_rows}"
+    )
+hdf5_rows = [
+    row for row in delete_rows if row["action"] == "DELETE_PROPOSED_UNIQUE_RAW"
+]
+xmf_rows = [
+    row for row in delete_rows if row["action"] == "DELETE_PROPOSED_METADATA_ONLY"
+]
+if len(hdf5_rows) != expected_hdf5 or len(xmf_rows) != expected_xmf:
+    raise SystemExit(
+        "approved action split mismatch: "
+        f"hdf5={len(hdf5_rows)} xmf={len(xmf_rows)}"
+    )
+allocated = sum(int(row["allocated_bytes"]) for row in delete_rows)
+if allocated != expected_bytes:
+    raise SystemExit(
+        f"approved allocated-byte mismatch: {allocated} != {expected_bytes}"
+    )
+for row in delete_rows:
+    if row["file_type"] != "regular":
+        raise SystemExit(f"non-regular approved row: {row['path']}")
+    if row["full_hash_required"].lower() != "true" or len(row["sha256"]) != 64:
+        raise SystemExit(f"unhashed approved row: {row['path']}")
+print(
+    "approval_preflight=passed "
+    f"digest={actual_digest} rows={len(delete_rows)} bytes={allocated}"
+)
+PY
+
+"$PYTHON" - "$ROOT_CONTRACT" \
+  "$STAGE_DIR" \
+  "$EVIDENCE_ROOT" \
+  "$ARCHIVE" \
+  "$ARCHIVE_RESERVATION" \
+  "$STAGE_TRANSCRIPT" \
+  "$EXECUTION_LOCK" <<'PY'
+import csv
+import sys
+from pathlib import Path
+
+contract = Path(sys.argv[1])
+outputs = [Path(value) for value in sys.argv[2:]]
+with contract.open(newline="") as handle:
+    roots = [
+        Path(row["root_path"]).expanduser().absolute().resolve()
+        for row in csv.DictReader(handle)
+    ]
+if len(roots) != 25:
+    raise SystemExit(f"expected 25 allowlisted roots, found {len(roots)}")
+for candidate in outputs:
+    resolved = candidate.expanduser().absolute().resolve(strict=False)
+    if any(resolved == root or root in resolved.parents for root in roots):
+        raise SystemExit(
+            f"refusing Goal 047 output inside an allowlisted root: {candidate}"
+        )
+print(f"output_location_gate=passed checked_outputs={len(outputs)}")
+PY
+
+mkdir "$EVIDENCE_ROOT"
+mkdir "$ARCHIVE_RESERVATION"
+
+"$PYTHON" "$EXECUTOR" \
+  --mode execute \
+  --packet-dir "$PACKET_DIR" \
+  --approved-ledger "$APPROVED_LEDGER" \
+  --expected-ledger-sha256 "$EXPECTED_LEDGER_SHA256" \
+  --confirmation-token "$CONFIRMATION_TOKEN" \
+  --approval-receipt "$APPROVAL_RECEIPT" \
+  --completed-evidence-dir "$COMPLETED_EVIDENCE_DIR" \
+  --evidence-root "$EVIDENCE_ROOT" \
+  --stage-transcript "$STAGE_TRANSCRIPT" \
+  --pbs-job-id "$PBS_JOBID" \
+  --lock-path "$EXECUTION_LOCK" \
+  --status-json "$EXECUTION_STATUS" \
+  --compact-evidence-file-list "$COMPACT_EVIDENCE_FILE_LIST" \
+  --max-workers 8
+
+test -s "$EXECUTION_STATUS" || {
+  echo "executor did not write a completion status" >&2
+  exit 3
+}
+test -s "$STAGE_TRANSCRIPT" || {
+  echo "executor did not preserve its authoritative stage transcript" >&2
+  exit 3
+}
+test -s "$COMPACT_EVIDENCE_FILE_LIST" || {
+  echo "executor did not write a compact evidence file list" >&2
+  exit 3
+}
+sha256sum "$STAGE_TRANSCRIPT"
+
+status="$(
+  "$PYTHON" - \
+    "$EXECUTION_STATUS" \
+    "$EXPECTED_LEDGER_SHA256" \
+    "$EXPECTED_DELETE_ROWS" \
+    "$EXPECTED_HDF5_ROWS" \
+    "$EXPECTED_XMF_ROWS" \
+    "$EXPECTED_ALLOCATED_BYTES" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+(
+    status_path,
+    expected_digest,
+    expected_rows,
+    expected_hdf5,
+    expected_xmf,
+    expected_bytes,
+) = sys.argv[1:]
+expected = {
+    "status": "DELETION_COMPLETE_POSTCHECK_GREEN",
+    "approved_payload_ledger_sha256": expected_digest,
+    "deleted_row_count": int(expected_rows),
+    "deleted_hdf5_count": int(expected_hdf5),
+    "deleted_xmf_count": int(expected_xmf),
+    "recovered_allocated_bytes": int(expected_bytes),
+}
+document = json.loads(Path(status_path).read_text())
+for key, value in expected.items():
+    if document.get(key) != value:
+        raise SystemExit(
+            f"executor status mismatch for {key}: "
+            f"{document.get(key)!r} != {value!r}"
+        )
+print(document["status"])
+PY
+)"
+if [ "$status" != "DELETION_COMPLETE_POSTCHECK_GREEN" ]; then
+  echo "executor did not return the required green status: $status" >&2
+  exit 3
+fi
+echo "GOAL047_EXECUTOR_STATUS=$status"
+
+mkdir "$ARCHIVE_PAYLOAD_TMP"
+"$PYTHON" - \
+  "$EVIDENCE_ROOT" \
+  "$COMPACT_EVIDENCE_FILE_LIST" \
+  "$ARCHIVE_PAYLOAD_TMP" \
+  "$STAGE_TRANSCRIPT" \
+  "$APPROVAL_RECEIPT" \
+  "$STAGED_INPUT_MANIFEST" \
+  "$COMPLETED_EVIDENCE_MANIFEST" \
+  "$PACKET_MANIFEST" <<'PY'
+import os
+import shutil
+import stat
+import sys
+from pathlib import Path, PurePosixPath
+
+(
+    evidence_root,
+    compact_list,
+    payload,
+    stage_transcript,
+    approval_receipt,
+    staged_manifest,
+    completed_manifest,
+    packet_manifest,
+) = map(Path, sys.argv[1:])
+evidence_root = evidence_root.resolve()
+payload = payload.resolve()
+lines = [
+    line.strip()
+    for line in compact_list.read_text().splitlines()
+    if line.strip()
+]
+if not lines or len(lines) != len(set(lines)):
+    raise SystemExit("compact evidence list is empty or contains duplicates")
+
+for relative_text in lines:
+    relative = PurePosixPath(relative_text)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise SystemExit(f"unsafe compact evidence path: {relative_text}")
+    source = evidence_root.joinpath(*relative.parts)
+    source_resolved = source.resolve(strict=True)
+    if evidence_root not in source_resolved.parents:
+        raise SystemExit(f"compact evidence escapes evidence root: {relative_text}")
+    metadata = source.lstat()
+    if source.is_symlink() or not stat.S_ISREG(metadata.st_mode):
+        raise SystemExit(f"compact evidence is not a regular file: {relative_text}")
+    name = source.name
+    if (
+        name.endswith((".h5", ".xmf", ".dbl", ".flt", ".tar", ".tar.gz"))
+        or name.startswith("data.")
+        or name.startswith("particles.")
+    ):
+        raise SystemExit(
+            f"raw HDF5/data/particle payload forbidden in compact archive: "
+            f"{relative_text}"
+        )
+    if metadata.st_size > 67_108_864:
+        raise SystemExit(f"non-compact evidence exceeds 64 MiB: {relative_text}")
+    destination = payload / "executor_evidence" / relative
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, destination, follow_symlinks=False)
+
+transcript_destination = payload / "stage_provenance" / "three_case_lifecycle_compaction_transcript.jsonl"
+transcript_destination.parent.mkdir(parents=True, exist_ok=True)
+shutil.copy2(stage_transcript, transcript_destination, follow_symlinks=False)
+
+input_destination = payload / "input_provenance"
+input_destination.mkdir(parents=True, exist_ok=True)
+for source, name in (
+    (approval_receipt, "approval_receipt.json"),
+    (staged_manifest, "goal047_staged_input_manifest.sha256"),
+    (completed_manifest, "goal046_completed_evidence_manifest.sha256"),
+    (packet_manifest, "goal046_authorization_packet_manifest.sha256"),
+):
+    if source.is_symlink() or not source.is_file():
+        raise SystemExit(f"invalid compact provenance input: {source}")
+    shutil.copy2(source, input_destination / name, follow_symlinks=False)
+
+for root, directories, files in os.walk(payload, followlinks=False):
+    if any((Path(root) / name).is_symlink() for name in directories + files):
+        raise SystemExit(f"archive payload contains a symlink under {root}")
+print(f"compact_archive_copy=passed executor_files={len(lines)}")
+PY
+
+mv "$ARCHIVE_PAYLOAD_TMP" "$ARCHIVE_PAYLOAD"
+"$PYTHON" - "$ARCHIVE_PAYLOAD" <<'PY'
+import hashlib
+import os
+import sys
+from pathlib import Path
+
+payload = Path(sys.argv[1])
+special = {
+    "archive_content_file_list.txt",
+    "archive_checksums.sha256",
+    "archive_manifest.tsv",
+    "archive_file_list.txt",
+}
+content = []
+for root, directories, files in os.walk(payload, followlinks=False):
+    directories.sort()
+    for name in sorted(files):
+        path = Path(root) / name
+        relative = path.relative_to(payload).as_posix()
+        if relative not in special:
+            content.append(relative)
+content = sorted(content)
+if not content:
+    raise SystemExit("archive payload has no compact evidence")
+
+content_list = payload / "archive_content_file_list.txt"
+checksums = payload / "archive_checksums.sha256"
+manifest = payload / "archive_manifest.tsv"
+archive_list = payload / "archive_file_list.txt"
+content_list.write_text("".join(f"./{name}\n" for name in content))
+archive_names = sorted(content + list(special))
+archive_list.write_text("".join(f"./{name}\n" for name in archive_names))
+
+checksum_names = sorted(
+    content + ["archive_content_file_list.txt", "archive_file_list.txt"]
+)
+with checksums.open("w") as handle:
+    for name in checksum_names:
+        digest = hashlib.sha256((payload / name).read_bytes()).hexdigest()
+        handle.write(f"{digest}  ./{name}\n")
+
+manifest_names = sorted(checksum_names + ["archive_checksums.sha256"])
+with manifest.open("w") as handle:
+    handle.write("relative_path\tbytes\tsha256\n")
+    for name in manifest_names:
+        path = payload / name
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        handle.write(f"./{name}\t{path.stat().st_size}\t{digest}\n")
+print(
+    "archive_payload_validation=passed "
+    f"content_files={len(content)} archive_files={len(archive_names)}"
+)
+PY
+
+tar -czf "$ARCHIVE_TMP" \
+  -C "$ARCHIVE_PAYLOAD" \
+  --files-from "$ARCHIVE_PAYLOAD/archive_file_list.txt"
+tar -tzf "$ARCHIVE_TMP" >/dev/null
+"$PYTHON" - "$ARCHIVE_TMP" "$ARCHIVE" <<'PY'
+import os
+import sys
+from pathlib import Path
+
+source, destination = map(Path, sys.argv[1:])
+try:
+    os.link(source, destination)
+except FileExistsError as exc:
+    raise SystemExit(f"refusing to overwrite published archive: {destination}") from exc
+PY
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "GOAL047_COMPACTION_COMPLETE=1"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

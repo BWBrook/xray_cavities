@@ -1,0 +1,28 @@
+{
+  "allocated_bytes_approved": 6845659111424,
+  "approval_date": "2026-07-24",
+  "approval_scope": "exact_goal046_production_rows_only",
+  "approval_status": "approved",
+  "approved_action_counts": {
+    "DELETE_PROPOSED_METADATA_ONLY": 148,
+    "DELETE_PROPOSED_UNIQUE_RAW": 148
+  },
+  "approved_allocated_bytes": 6845659111424,
+  "approved_by": "Barry W. Brook",
+  "approved_hdf5_count": 148,
+  "approved_payload_ledger_sha256": "df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92",
+  "approved_row_count": 296,
+  "approved_xmf_count": 148,
+  "confirmation_token": "BARRY_APPROVED_GOAL047_df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92_DELETE_EXACT_296_ROWS_6845659111424_ALLOCATED_BYTES",
+  "excluded_action_counts": {
+    "HOLD_AMBIGUOUS": 3,
+    "HOLD_RADIO_UNRESOLVED": 5501,
+    "HOLD_REGENERATION_UNPROVEN": 968,
+    "KEEP_PROTECTED": 65,
+    "KEEP_PROVENANCE": 10320
+  },
+  "ledger_sha256": "df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92",
+  "permanent_loss_acknowledged": true,
+  "schema_version": "1.0",
+  "source_commit": "1e9866bae48dec72347db1ffa9fa097147d93669"
+}

@@ -14,11 +14,52 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-046 three-case lifecycle compaction
-approved-execution handoff.
+This note should be treated as a Goal-047 three-case lifecycle compaction
+execution handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
+
+- Status: `prepared_for_remote_preflight`.
+- Authority: Barry approved permanent loss of exactly the `296` production
+  rows bound to Goal 046 ledger SHA-256
+  `df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92`.
+- Scope: `148` HDF5 files plus `148` XMF sidecars; forecast recovery
+  `6,845,659,111,424` allocated bytes.
+- Exclusions: the `968` lineage-unproven analysis rows, radio-held particles,
+  ambiguous symlinks, protected sources, and compact provenance remain held.
+- Source evidence: Goal 046 is committed and pushed at `1e9866b`; the
+  authorization packet itself remains unchanged.
+- Method: all rows and packet joins pass before mutation; candidates are held
+  by no-follow file descriptor from full hash through exact `unlinkat`;
+  HDF5/XMF pairs delete HDF5 first; the transcript is hash-chained and fsynced;
+  post-inventory must prove exact approved absence and all retained rows
+  unchanged.
+- Scheduler gate: zero active jobs before submission; inside PBS only the
+  current job may be active, checked at start and immediately before mutation.
+- Local gate: the full Goal 046/047 suite passed with `81 passed, 1 skipped`;
+  the skip is an unrelated macOS FIFO-creation limitation. The final focused
+  Goal 047 suite passed with `42 passed`; Python compilation, wrapper syntax,
+  manifest checks, and `git diff --check` passed.
+- Independent audit: final verdict `GO`, conditional on a recorded zero-symlink
+  staged tree, zero active Barry jobs immediately before `qsub`, and the
+  in-job self-only job gates. Audited executor SHA-256 is
+  `cf93d052e6d4860bb4e598fd84cc28063e615235a09cf96af2e9b1aadce5ae41`;
+  wrapper SHA-256 is
+  `ffbb9f2fcc96aa5a0075c4aada379de1d9955536471c74f08fb092dafcf3a3e7`.
+- Residuals: job gates cannot see an out-of-band writer; NFS unlink failure
+  semantics are tested synthetically but remain an operational residual; and
+  recovered bytes are the approved sum of `st_blocks`, not a promise of an
+  immediately identical quota report.
+- Current boundary: commit/push this exact packet, run one guarded remote
+  preflight, and submit only if every no-go gate remains green. No Goal 047
+  remote command or mutation has occurred yet.
+- Goal log:
+  `docs/goals/047-three-case-lifecycle-compaction-execution/Log.md`.
+- Science note:
+  `docs/science/three_case_lifecycle_compaction_execution_2026-07-24.md`.
 
 Latest Goal 046 three-case lifecycle compaction authorization on 2026-07-24:
 
