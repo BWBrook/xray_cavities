@@ -42,5 +42,8 @@
     "evidence_root": "/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1"
   },
   "approval_status": "unchanged_exact_scope_carries_forward",
-  "retry_status": "pending_final_staging_and_remote_gates"
+  "retry_status": "submitted_waiting_pbs_completion",
+  "retry_pbs_job_id": "775763.kunanyi-ohpc",
+  "retry_pbs_job_name": "tri_compact_r1",
+  "retry_verified_state": "Q"
 }

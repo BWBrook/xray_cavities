@@ -139,3 +139,42 @@ The retry staged-input manifest binds the repaired executor and retry wrapper.
 The frozen ledger digest, `296` rows, `6,845,659,111,424` allocated bytes,
 approval receipt, and protected/held scope remain unchanged. No retry has been
 staged or submitted at this checkpoint.
+
+## 2026-07-24 Retry 1 Submission
+
+Status: `submitted_waiting_pbs_completion`.
+
+Commit `920eb0d` was pushed before renewed remote action. Chrome/Open OnDemand
+opened the authorized SSH window. The fresh retry stage passed:
+
+```text
+retry no-clobber gate: passed
+recursive symlink count: 0
+staged manifest: 50/50
+authorization packet manifest: 15/15
+completed evidence manifest: 27/27
+remote syntax/compile/HDF5 gate: passed
+immediate active Barry jobs: 0
+```
+
+A first shell-side submission command stopped before `qsub` because its fresh
+login session exposed Python 2 to an f-string parser. Its transcript was
+preserved; no job, PBS log, execution evidence, or data mutation resulted.
+The corrected command explicitly loaded Anaconda Python 3 and repeated the
+no-clobber and zero-active-job gates.
+
+Exactly one retry was submitted:
+
+```text
+job_id=775763.kunanyi-ohpc
+job_name=tri_compact_r1
+queue=normal
+state=Q
+select=1:ncpus=8:mpiprocs=1:mem=64gb
+walltime=48:00:00
+qtime=Fri Jul 24 13:30:20 2026
+```
+
+The PBS stop rule was invoked immediately after the single queued-state
+verification. No polling, completion retrieval, additional submission,
+cleanup, or further remote command occurred.

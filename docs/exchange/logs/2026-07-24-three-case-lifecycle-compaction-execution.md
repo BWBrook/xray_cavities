@@ -1,6 +1,6 @@
 # 2026-07-24 Three-Case Lifecycle Compaction Execution
 
-Status: `repair_audited_retry1_prepared_local`.
+Status: `submitted_waiting_pbs_completion`.
 
 Barry's authority remains the exact Goal 046 ledger SHA-256
 `df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92`:
@@ -39,6 +39,11 @@ evidence=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle
 ```
 
 The retry manifest binds the repaired executor and wrapper. Attempt-1 paths
-are immutable and will not be cleaned or reused. Retry staging/submission is
-still pending fresh hashes, zero-symlink, zero-active-job, and in-job self-only
-gates.
+are immutable and were not cleaned or reused. Fresh staged hashes, packet and
+completed-evidence manifests, zero symlinks, no-clobber paths, remote
+syntax/compile/HDF5, and immediate zero-active-job gates passed.
+
+Retry PBS `775763.kunanyi-ohpc` / `tri_compact_r1` was submitted to `normal`
+and verified `Q`, requesting one node, eight CPUs, 64 GB, and `48:00:00`.
+The stop rule is active: no polling or retrieval until Barry reports the PBS
+completion email.

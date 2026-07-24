@@ -22,7 +22,7 @@ machine.
 
 Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
 
-- Status: `repair_audited_retry1_prepared_local`.
+- Status: `submitted_waiting_pbs_completion`.
 - Attempt 1: PBS `775752.kunanyi-ohpc` / `tri_compact` exited `1` after
   `00:00:12`. It failed closed at the first estate comparison, before
   candidate opening or mutation.
@@ -55,6 +55,11 @@ Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
   and
   `/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1`.
   Attempt-1 evidence and logs remain immutable.
+- Retry submission: all fresh remote manifests, hashes, zero-symlink,
+  no-clobber, syntax/compile/HDF5, and immediate zero-active-job gates passed.
+  PBS `775763.kunanyi-ohpc` / `tri_compact_r1` was verified `Q` on `normal`
+  at `Fri Jul 24 13:30:20 2026`, requesting one node, eight CPUs, 64 GB, and
+  `48:00:00`.
 - Authority: Barry approved permanent loss of exactly the `296` production
   rows bound to Goal 046 ledger SHA-256
   `df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92`.
@@ -65,10 +70,9 @@ Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
 - Source evidence: Goal 046 is committed and pushed at `1e9866b`; its
   authorization packet, approved deletion ledger, receipt, and protected/held
   contracts remain unchanged.
-- Current boundary: finish retry-namespace manifest/audit binding, commit and
-  push, then stage exactly one retry. Submit only after fresh local/remote
-  hashes, zero-symlink, wrapper, zero-active-job, and no-overwrite gates pass;
-  invoke the normal PBS queued/running stop rule.
+- Current boundary: PBS stop rule active. Do not poll or run another remote
+  command. Wait for Barry's completion email, then retrieve and validate the
+  compact retry archive/status/transcript and reconcile the exact deletion.
 - Residuals: job gates cannot see an out-of-band writer; NFS unlink failure
   semantics are tested synthetically but remain an operational residual; and
   recovered bytes are the approved sum of `st_blocks`, not a promise of an

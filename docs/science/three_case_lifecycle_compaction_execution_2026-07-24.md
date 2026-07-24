@@ -2,7 +2,7 @@
 
 ## Status
 
-`attempt1_failed_closed_no_mutation_repair_audited_retry1_preparation`
+`submitted_waiting_pbs_completion`
 
 Decision label:
 `GOAL047_ATTEMPT1_FAILED_CLOSED_NO_MUTATION_NAMESPACE_REPAIR_GREEN`.
@@ -96,6 +96,21 @@ job_name=tri_compact_r1
 The updated staged-input manifest binds the repaired executor and retry
 wrapper. All ledger rows, hashes, counts, byte totals, protected contracts,
 and the approval token are unchanged.
+
+After all fresh remote hashes, packet/completed manifests, zero-symlink,
+no-clobber, Python/HDF5, wrapper, and immediate zero-active-job gates passed,
+retry 1 was submitted:
+
+```text
+pbs_job_id=775763.kunanyi-ohpc
+job_name=tri_compact_r1
+queue=normal
+state=Q
+requested=1 node, 8 CPUs, 64 GB, 48:00:00
+```
+
+The PBS stop rule is active. No remote command or poll follows the queued-state
+proof; completion review waits for Barry's PBS email.
 
 ## Verification
 
