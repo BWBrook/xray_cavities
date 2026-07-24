@@ -178,3 +178,55 @@ qtime=Fri Jul 24 13:30:20 2026
 The PBS stop rule was invoked immediately after the single queued-state
 verification. No polling, completion retrieval, additional submission,
 cleanup, or further remote command occurred.
+
+## 2026-07-24 Retry 1 Completion
+
+Status: `complete_compaction_postcheck_green`.
+
+Barry reported PBS `775763.kunanyi-ohpc` / `tri_compact_r1` complete with
+`Exit_status=0`, walltime `02:56:45`, CPU time `07:10:07`, eight CPUs, and
+`250644kb` maximum reported memory. One final read-only qstat confirmed state
+`F`, `Exit_status=0`, and `Stageout_status=1`.
+
+The stage-root archive, stdout, empty stderr, transcript, final qstat, and
+compact executor evidence were present and retrieved directly. The stageout
+flag is therefore retained as a scheduler caveat rather than interpreted as
+missing evidence.
+
+Authoritative completion:
+
+```text
+executor_status=DELETION_COMPLETE_POSTCHECK_GREEN
+ledger_sha256=df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92
+deleted_rows=296
+deleted_hdf5=148
+deleted_xmf=148
+recovered_allocated_bytes=6845659111424
+retained_rows=16857
+protected_hdf5_validated=29
+restart_tuples_validated=7
+unexpected_nfs_rows=0
+```
+
+Local completion validation passed:
+
+- archive SHA-256
+  `94c930d15c3e9002c6eded7b92ae07b8369affef1791abc122544f6598b76ca9`
+  and all internal archive checksums;
+- all `602` transcript records and terminal hash
+  `4dcf872142be02329a41a4c8760fc5e69e6ffca1e5744bb733c533b7154f8a76`;
+- exact equality between the `296` approved ledger candidates and transcript
+  unlink path/hash/action/allocated-byte records;
+- exact post-delete path set equal to the original `17,153` rows minus those
+  `296`, with all retained frozen non-device fields unchanged;
+- both in-job qstat gates showing only the running retry job;
+- protected HDF5, restart tuple, scratch probe, and no-NFS-remnant gates.
+
+An independent final audit returned `GO`. It reproduced the ledger,
+transcript, exact candidate deletion, retained-estate, scheduler, archive, and
+safety checks, including all `65` protected paths retained. It found no
+material inconsistency and recommended no further computational work.
+
+Attempt 1 remains preserved as a separate `FAILED_CLOSED_NO_MUTATION` record.
+No raw payload was retrieved locally and no path outside the approved ledger
+was deleted by this Goal.

@@ -1,0 +1,9 @@
+{
+  "deleted_row_count": 296,
+  "protected_hdf5_validated": 29,
+  "recovered_allocated_bytes": 6845659111424,
+  "restart_tuples_validated": 7,
+  "retained_row_count": 16857,
+  "status": "passed",
+  "unexpected_nfs_rows": 0
+}

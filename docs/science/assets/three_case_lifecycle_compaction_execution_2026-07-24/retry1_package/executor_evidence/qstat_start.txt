@@ -1,0 +1,13 @@
+checked_utc=2026-07-24T03:30:41.217096Z
+host=n033.kunanyi
+command=qstat -u bwbrook
+exit_status=0
+--- stdout ---
+
+kunanyi-ohpc: 
+                                                            Req'd  Req'd   Elap
+Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
+--------------- -------- -------- ---------- ------ --- --- ------ ----- - -----
+775763.kunanyi- bwbrook  normal   tri_compac  25604   1   8   64gb 48:00 R 00:00
+
+--- stderr ---

@@ -1,0 +1,14 @@
+preflight_started_utc=2026-07-24T03:28:57Z
+host=<tpac-host>
+git_commit=920eb0d
+retry_no_clobber_gate=passed
+staged_symlink_gate=passed symlink_count=0
+staged_manifest_gate=passed rows=50
+packet_manifest_gate=passed rows=15
+completed_evidence_manifest_gate=passed rows=27
+python_version=3.11.7
+h5py_version=3.9.0
+remote_syntax_compile_gate=passed
+qstat_exit_status=0
+zero_active_job_gate=passed active_rows=0
+preflight_finished_utc=2026-07-24T03:28:59Z

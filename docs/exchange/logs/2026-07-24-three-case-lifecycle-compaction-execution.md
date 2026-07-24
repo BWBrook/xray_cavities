@@ -1,6 +1,6 @@
 # 2026-07-24 Three-Case Lifecycle Compaction Execution
 
-Status: `submitted_waiting_pbs_completion`.
+Status: `complete_compaction_postcheck_green`.
 
 Barry's authority remains the exact Goal 046 ledger SHA-256
 `df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92`:
@@ -45,5 +45,38 @@ syntax/compile/HDF5, and immediate zero-active-job gates passed.
 
 Retry PBS `775763.kunanyi-ohpc` / `tri_compact_r1` was submitted to `normal`
 and verified `Q`, requesting one node, eight CPUs, 64 GB, and `48:00:00`.
-The stop rule is active: no polling or retrieval until Barry reports the PBS
-completion email.
+After Barry reported completion, one final qstat confirmed `F`,
+`Exit_status=0`, walltime `02:56:45`, and `Stageout_status=1`.
+
+The directly retrieved compact evidence proves:
+
+```text
+executor_status=DELETION_COMPLETE_POSTCHECK_GREEN
+deleted_rows=296
+deleted_hdf5=148
+deleted_xmf=148
+recovered_allocated_bytes=6845659111424
+retained_rows=16857
+protected_hdf5_validated=29
+restart_tuples_validated=7
+unexpected_nfs_rows=0
+```
+
+Archive SHA-256
+`94c930d15c3e9002c6eded7b92ae07b8369affef1791abc122544f6598b76ca9`
+and all internal checksums passed. The `602`-record transcript chain is valid,
+and its exact unlink path/hash/action set equals the frozen approved ledger.
+The post-delete inventory equals the original `17,153` rows minus exactly the
+`296` approved candidates, with retained non-device frozen identity fields
+unchanged. Both in-job qstat gates, the protected/restart checks, scratch
+probe, and no-NFS-remnant gate passed.
+
+`Stageout_status=1` is retained as a scheduler caveat, but the archive,
+stdout, empty stderr, transcript, qstat, and executor evidence were all
+present and retrieved. Attempt 1 remains an immutable failed-closed,
+zero-mutation record.
+
+An independent final audit returned `GO`, reproducing the exact deletion,
+retained-estate, transcript, scheduler, archive, and safety checks and
+confirming all `65` protected paths remain. No further compaction compute is
+justified.

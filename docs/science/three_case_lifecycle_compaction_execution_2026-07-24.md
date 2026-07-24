@@ -2,10 +2,10 @@
 
 ## Status
 
-`submitted_waiting_pbs_completion`
+`complete_compaction_postcheck_green`
 
 Decision label:
-`GOAL047_ATTEMPT1_FAILED_CLOSED_NO_MUTATION_NAMESPACE_REPAIR_GREEN`.
+`THREE_CASE_LIFECYCLE_COMPACTION_COMPLETE_POSTCHECK_GREEN`.
 
 ## Authority
 
@@ -109,21 +109,66 @@ state=Q
 requested=1 node, 8 CPUs, 64 GB, 48:00:00
 ```
 
-The PBS stop rule is active. No remote command or poll follows the queued-state
-proof; completion review waits for Barry's PBS email.
+The PBS stop rule was active until Barry reported completion. No polling
+occurred between queued-state proof and that report.
+
+## Retry 1 Completion
+
+PBS job `775763.kunanyi-ohpc` (`tri_compact_r1`) finished with
+`Exit_status=0` after `02:56:45`. Scheduler `Stageout_status=1` remains a
+caveat, but the requested archive, stdout, empty stderr, transcript, final
+qstat, and compact executor evidence were all present at the stage root and
+retrieved directly.
+
+The executor's authoritative status is:
+
+```text
+status=DELETION_COMPLETE_POSTCHECK_GREEN
+ledger_sha256=df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92
+deleted_rows=296
+deleted_hdf5=148
+deleted_xmf=148
+recovered_allocated_bytes=6845659111424
+retained_rows=16857
+protected_hdf5_validated=29
+restart_tuples_validated=7
+unexpected_nfs_rows=0
+```
+
+The `602`-record transcript hash chain terminates at
+`4dcf872142be02329a41a4c8760fc5e69e6ffca1e5744bb733c533b7154f8a76`.
+Every unlink attempt matched the approved ledger path, action, full SHA-256,
+and allocated-byte value. Every unlink completion reported the original path
+absent, the held descriptor closed, and pre-close link count one.
+
+The post-delete inventory contains exactly the frozen `17,153`-row estate
+minus the `296` approved candidates. All retained rows match their frozen
+non-device identity fields, while the executor's stronger same-job pre/post
+comparison also included device. The recorded cross-client namespace mappings
+are `46 -> 45` for `16,582` retained rows and `47 -> 46` for `275`.
+
+The compact archive SHA-256 is
+`94c930d15c3e9002c6eded7b92ae07b8369affef1791abc122544f6598b76ca9`.
+All internal archive checksums passed. Attempt 1 remains preserved separately
+as the immutable failed-closed, zero-mutation record.
 
 ## Verification
 
-Root validation passed with `93 passed, 1 skipped`; the skip is the known
-macOS FIFO limitation. An independent audit passed eight focused
-positive/negative controls and its `84 passed, 1 skipped` Runbook suite.
-Python compilation, PBS syntax, manifest checks, and `git diff --check`
-passed.
+Root validation before submission passed with `93 passed, 1 skipped`; the skip
+is the known macOS FIFO limitation. An independent repair audit passed eight
+focused positive/negative controls and its `84 passed, 1 skipped` Runbook
+suite. Python compilation, PBS syntax, manifest checks, and
+`git diff --check` passed.
 
-The audit returned `GO` on the repair and confirmed that the original exact
-approval carries forward. Retry remains conditional on fresh staged-hash,
-zero-symlink, zero-active-job, and in-job self-only qstat gates.
+Completion validation then independently replayed the archive checksum
+manifest, the full transcript hash chain, the exact candidate path/hash/action
+set, the frozen-minus-candidates post-delete estate, both self-only in-job
+qstat gates, protected/restart counts, scratch probe, and no-NFS-remnant gate.
+An independent final audit returned `GO`, additionally confirming all `65`
+protected paths remained present and that no further computational work is
+justified.
 
-Residual uncertainty is unchanged: PBS cannot observe an out-of-band writer,
-real NFS unlink failure semantics remain partly synthetic, and recovered
-`st_blocks` need not immediately equal a quota-report delta.
+Residual limitations are narrow: PBS cannot observe an out-of-band writer,
+and recovered bytes are the exact approved sum of deleted `st_blocks`, not a
+promise of an immediately identical quota-report delta. These do not weaken
+the observed exact deletion and post-scan reconciliation.

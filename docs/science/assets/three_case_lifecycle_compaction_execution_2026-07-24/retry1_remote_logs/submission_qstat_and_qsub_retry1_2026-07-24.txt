@@ -1,0 +1,6 @@
+submission_started_utc=2026-07-24T03:29:34Z
+host=<tpac-host>
+  File "<stdin>", line 7
+    raise SystemExit(f"active Barry jobs block qsub: {jobs}")
+                                                           ^
+SyntaxError: invalid syntax

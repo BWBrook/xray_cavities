@@ -22,7 +22,7 @@ machine.
 
 Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
 
-- Status: `submitted_waiting_pbs_completion`.
+- Status: `complete_compaction_postcheck_green`.
 - Attempt 1: PBS `775752.kunanyi-ohpc` / `tri_compact` exited `1` after
   `00:00:12`. It failed closed at the first estate comparison, before
   candidate opening or mutation.
@@ -55,11 +55,28 @@ Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
   and
   `/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1`.
   Attempt-1 evidence and logs remain immutable.
-- Retry submission: all fresh remote manifests, hashes, zero-symlink,
-  no-clobber, syntax/compile/HDF5, and immediate zero-active-job gates passed.
-  PBS `775763.kunanyi-ohpc` / `tri_compact_r1` was verified `Q` on `normal`
-  at `Fri Jul 24 13:30:20 2026`, requesting one node, eight CPUs, 64 GB, and
-  `48:00:00`.
+- Retry completion: PBS `775763.kunanyi-ohpc` / `tri_compact_r1` ended `F`
+  with `Exit_status=0`, walltime `02:56:45`, CPU time `07:10:07`, eight CPUs,
+  and `250644kb` memory. `Stageout_status=1` is retained as a scheduler caveat,
+  but all requested compact stage-root evidence was present and retrieved.
+- Exact outcome: executor
+  `DELETION_COMPLETE_POSTCHECK_GREEN`; `296/296` approved rows removed,
+  comprising `148` HDF5 files and `148` XMF sidecars; recovered allocated
+  bytes exactly `6,845,659,111,424`.
+- Post-delete estate: exactly `16,857` retained rows, equal to the frozen
+  `17,153` rows minus the approved `296`. All retained frozen non-device
+  identity fields match; the executor also required exact same-job pre/post
+  equality across all 14 live fields including device.
+- Protected surface: `29` protected HDF5 files and `7` restart tuples
+  revalidated; all `65` protected paths remain; scratch probe passed; no
+  `.nfs` remnant was found.
+- Evidence integrity: compact archive SHA-256
+  `94c930d15c3e9002c6eded7b92ae07b8369affef1791abc122544f6598b76ca9`;
+  all internal checksums passed. The `602`-record transcript chain ends at
+  `4dcf872142be02329a41a4c8760fc5e69e6ffca1e5744bb733c533b7154f8a76`,
+  and its exact unlink path/hash/action/byte set equals the approved ledger.
+- Independent final audit: `GO`; no material inconsistency and no further
+  compaction compute justified.
 - Authority: Barry approved permanent loss of exactly the `296` production
   rows bound to Goal 046 ledger SHA-256
   `df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92`.
@@ -70,13 +87,12 @@ Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
 - Source evidence: Goal 046 is committed and pushed at `1e9866b`; its
   authorization packet, approved deletion ledger, receipt, and protected/held
   contracts remain unchanged.
-- Current boundary: PBS stop rule active. Do not poll or run another remote
-  command. Wait for Barry's completion email, then retrieve and validate the
-  compact retry archive/status/transcript and reconcile the exact deletion.
-- Residuals: job gates cannot see an out-of-band writer; NFS unlink failure
-  semantics are tested synthetically but remain an operational residual; and
-  recovered bytes are the approved sum of `st_blocks`, not a promise of an
-  immediately identical quota report.
+- Current boundary: lifecycle compaction is complete. No raw payload was
+  retrieved locally; attempt 1 remains preserved separately as
+  `FAILED_CLOSED_NO_MUTATION`.
+- Residuals: job gates cannot see an out-of-band writer, and recovered bytes
+  are the approved sum of deleted `st_blocks`, not a promise of an immediately
+  identical quota-report delta.
 - Goal log:
   `docs/goals/047-three-case-lifecycle-compaction-execution/Log.md`.
 - Science note:

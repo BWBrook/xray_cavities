@@ -1,0 +1,40 @@
+{
+  "archive_sha256": "94c930d15c3e9002c6eded7b92ae07b8369affef1791abc122544f6598b76ca9",
+  "decision_label": "THREE_CASE_LIFECYCLE_COMPACTION_COMPLETE_POSTCHECK_GREEN",
+  "deleted_hdf5_count": 148,
+  "deleted_row_count": 296,
+  "deleted_xmf_count": 148,
+  "device_namespace_mappings": [
+    {
+      "frozen_device": "46",
+      "live_device": "45",
+      "row_count": 16582
+    },
+    {
+      "frozen_device": "47",
+      "live_device": "46",
+      "row_count": 275
+    }
+  ],
+  "executor_status": "DELETION_COMPLETE_POSTCHECK_GREEN",
+  "frozen_inventory_row_count": 17153,
+  "independent_audit_verdict": "GO",
+  "job_id": "775763.kunanyi-ohpc",
+  "job_name": "tri_compact_r1",
+  "ledger_sha256": "df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92",
+  "protected_hdf5_validated": 29,
+  "protected_path_count": 65,
+  "qstat_exit_status": 0,
+  "qstat_final_state": "F",
+  "qstat_stageout_status": 1,
+  "recovered_allocated_bytes": 6845659111424,
+  "restart_tuples_validated": 7,
+  "retained_row_count": 16857,
+  "scratch_probe_status": "passed",
+  "status": "complete_compaction_postcheck_green",
+  "stderr_bytes": 0,
+  "transcript_final_sha256": "4dcf872142be02329a41a4c8760fc5e69e6ffca1e5744bb733c533b7154f8a76",
+  "transcript_record_count": 602,
+  "unexpected_nfs_rows": 0,
+  "validation_status": "passed"
+}
