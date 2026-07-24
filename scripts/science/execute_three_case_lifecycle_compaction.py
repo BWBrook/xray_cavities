@@ -44,11 +44,11 @@ CONFIRMATION_TOKEN = (
     "6845659111424_ALLOCATED_BYTES"
 )
 PRODUCTION_STAGE_ROOT = Path(
-    "/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction"
+    "/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1"
 )
 PRODUCTION_EVIDENCE_ROOT = Path(
     "/scratch/bwbrook/xray_cavities_analysis/"
-    "2026-07-24-three-case-lifecycle-compaction-execution"
+    "2026-07-24-three-case-lifecycle-compaction-execution-retry1"
 )
 PRODUCTION_PACKET_DIR = PRODUCTION_STAGE_ROOT / "authorization_packet"
 PRODUCTION_COMPLETED_EVIDENCE_DIR = PRODUCTION_STAGE_ROOT / "completed_run"
@@ -776,13 +776,46 @@ def _lstat_signature(st: os.stat_result) -> tuple[int, int, int, int, int, int]:
     )
 
 
-def _expected_signature(row: Mapping[str, str]) -> tuple[int, int, int, int, int]:
+def _cross_node_signature(st: os.stat_result) -> tuple[int, int, int, int]:
+    return (
+        st.st_ino,
+        st.st_size,
+        st.st_blocks * 512,
+        st.st_mtime_ns,
+    )
+
+
+def _expected_cross_node_signature(
+    row: Mapping[str, str],
+) -> tuple[int, int, int, int]:
+    return (
+        int(row["inode"]),
+        int(row["apparent_bytes"]),
+        int(row["allocated_bytes"]),
+        int(row["mtime_ns"]),
+    )
+
+
+def _expected_live_signature(
+    row: Mapping[str, str],
+) -> tuple[int, int, int, int, int, int]:
+    file_types = {
+        "regular": stat.S_IFREG,
+        "symlink": stat.S_IFLNK,
+    }
+    try:
+        file_type = file_types[row["file_type"]]
+    except KeyError as exc:
+        raise CompactionError(
+            f"unsupported live file type: {row.get('file_type', '')}"
+        ) from exc
     return (
         int(row["device"]),
         int(row["inode"]),
         int(row["apparent_bytes"]),
         int(row["allocated_bytes"]),
         int(row["mtime_ns"]),
+        file_type,
     )
 
 
@@ -889,7 +922,6 @@ def _snapshot_and_compare(
             "resolved_path",
             "file_type",
             "link_target",
-            "device",
             "inode",
             "apparent_bytes",
             "allocated_bytes",
@@ -907,11 +939,89 @@ def _snapshot_and_compare(
     return sorted(live, key=lambda row: row["path"])
 
 
-def _open_candidates(candidates: Sequence[dict[str, str]]) -> list[HeldCandidate]:
+def _device_namespace_mappings(
+    frozen_rows: Sequence[Mapping[str, str]],
+    live_rows: Sequence[Mapping[str, str]],
+) -> list[dict[str, str | int]]:
+    live_by_path = {row["path"]: row for row in live_rows}
+    counts: dict[tuple[str, str], int] = {}
+    for frozen in frozen_rows:
+        observed = live_by_path.get(frozen["path"])
+        if observed is None:
+            continue
+        key = (frozen["device"], observed["device"])
+        counts[key] = counts.get(key, 0) + 1
+    return [
+        {
+            "frozen_device": frozen_device,
+            "live_device": live_device,
+            "row_count": row_count,
+        }
+        for (frozen_device, live_device), row_count in sorted(counts.items())
+    ]
+
+
+def _compare_pre_and_post_live_rows(
+    pre_rows: Sequence[Mapping[str, str]],
+    post_rows: Sequence[Mapping[str, str]],
+    deleted_paths: set[str],
+) -> None:
+    pre_by_path = {row["path"]: row for row in pre_rows}
+    post_by_path = {row["path"]: row for row in post_rows}
+    expected_paths = set(pre_by_path) - deleted_paths
+    if set(post_by_path) != expected_paths:
+        missing = sorted(expected_paths - set(post_by_path))
+        added = sorted(set(post_by_path) - expected_paths)
+        raise CompactionError(
+            "pre/post live path-set mismatch: "
+            f"missing={missing[:5]}, added={added[:5]}",
+            "FAILED_CLOSED_POSTCHECK",
+        )
+    keys = (
+        "case_id",
+        "root_id",
+        "root_path",
+        "root_kind",
+        "path",
+        "relative_path",
+        "resolved_path",
+        "file_type",
+        "link_target",
+        "device",
+        "inode",
+        "apparent_bytes",
+        "allocated_bytes",
+        "mtime_ns",
+    )
+    for path in sorted(expected_paths):
+        before = pre_by_path[path]
+        after = post_by_path[path]
+        differences = {
+            key: (before[key], after[key])
+            for key in keys
+            if before[key] != after[key]
+        }
+        if differences:
+            raise CompactionError(
+                f"pre/post live identity mismatch: {path}: {differences}",
+                "FAILED_CLOSED_POSTCHECK",
+            )
+
+
+def _open_candidates(
+    candidates: Sequence[dict[str, str]],
+    pre_rows: Sequence[Mapping[str, str]],
+) -> list[HeldCandidate]:
     flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
+    pre_by_path = {row["path"]: row for row in pre_rows}
     held: list[HeldCandidate] = []
     try:
         for row in sorted(candidates, key=lambda item: item["path"]):
+            pre_row = pre_by_path.get(row["path"])
+            if pre_row is None:
+                raise CompactionError(
+                    f"candidate absent from predelete live snapshot: {row['path']}"
+                )
             try:
                 fd = os.open(row["path"], flags)
             except OSError as exc:
@@ -925,7 +1035,12 @@ def _open_candidates(candidates: Sequence[dict[str, str]]) -> list[HeldCandidate
                 raise CompactionError(
                     f"candidate hardlink count is not one: {row['path']}: {before.st_nlink}"
                 )
-            if _lstat_signature(before)[:5] != _expected_signature(row):
+            if _lstat_signature(before) != _expected_live_signature(pre_row):
+                os.close(fd)
+                raise CompactionError(
+                    f"candidate changed since predelete live snapshot: {row['path']}"
+                )
+            if _cross_node_signature(before) != _expected_cross_node_signature(row):
                 os.close(fd)
                 raise CompactionError(f"candidate descriptor identity mismatch: {row['path']}")
             held.append(HeldCandidate(row=row, fd=fd, before=before))
@@ -1756,11 +1871,16 @@ def execute_compaction(
                 "start",
                 transcript,
             )
-            _snapshot_and_compare(packet, paths.completed_evidence_dir, source)
+            pre_rows = _snapshot_and_compare(
+                packet, paths.completed_evidence_dir, source
+            )
             transcript.append(
                 "frozen_estate_snapshot_passed",
                 payload_rows=len(source),
                 candidate_rows=len(candidates),
+                device_namespace_mappings=_device_namespace_mappings(
+                    source, pre_rows
+                ),
             )
             protected_hdf5_preflight_count = _validate_protected_hdf5(
                 protected_rows, ledger
@@ -1773,7 +1893,7 @@ def execute_compaction(
                 protected_hdf5_validated=protected_hdf5_preflight_count,
                 restart_tuples_validated=restart_tuple_preflight_count,
             )
-            held = _open_candidates(candidates)
+            held = _open_candidates(candidates, pre_rows)
             _hash_candidates(held, policy.hash_workers)
             transcript.append(
                 "all_candidates_open_and_hashed",
@@ -1854,6 +1974,11 @@ def execute_compaction(
                     source,
                     after_delete_paths={row["path"] for row in deleted},
                 )
+                _compare_pre_and_post_live_rows(
+                    pre_rows,
+                    post_rows,
+                    {row["path"] for row in deleted},
+                )
             except CompactionError as exc:
                 raise CompactionError(
                     f"postdelete estate reconciliation failed: {exc}",
@@ -1904,6 +2029,9 @@ def execute_compaction(
                 protected_hdf5_validated=protected_hdf5_count,
                 restart_tuples_validated=restart_tuple_count,
                 recovered_allocated_bytes=recovered,
+                device_namespace_mappings=_device_namespace_mappings(
+                    source, post_rows
+                ),
             )
         phase = "evidence_finalization"
         _write_evidence_file_list(

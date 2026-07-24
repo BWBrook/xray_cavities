@@ -1,0 +1,46 @@
+{
+  "attempt": 1,
+  "decision_label": "GOAL047_ATTEMPT1_FAILED_CLOSED_NO_MUTATION_NAMESPACE_REPAIR_GREEN",
+  "pbs_job_id": "775752.kunanyi-ohpc",
+  "pbs_job_name": "tri_compact",
+  "pbs_exit_status": 1,
+  "executor_status": "FAILED_CLOSED_NO_MUTATION",
+  "deleted_row_count": 0,
+  "deleted_hdf5_count": 0,
+  "deleted_xmf_count": 0,
+  "recovered_allocated_bytes": 0,
+  "mutation_outcome_unknown": false,
+  "approved_payload_ledger_sha256": "df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92",
+  "approved_row_count": 296,
+  "approved_hdf5_count": 148,
+  "approved_xmf_count": 148,
+  "approved_allocated_bytes": 6845659111424,
+  "observed_first_mismatch": {
+    "field": "device",
+    "frozen_value": "46",
+    "compute_node_value": "44",
+    "later_login_node_value": "69",
+    "retained_action": "HOLD_REGENERATION_UNPROVEN"
+  },
+  "root_cause_inference": "st_dev is not stable across Kunanyi client mount namespaces",
+  "repair_contract": {
+    "cross_node_frozen_comparison_excludes": [
+      "device"
+    ],
+    "same_job_candidate_descriptor_comparison_includes_device": true,
+    "same_job_retained_pre_post_comparison_includes_device": true,
+    "full_candidate_sha256_required": true,
+    "immediate_preunlink_identity_check_retained": true,
+    "device_namespace_mapping_recorded": true
+  },
+  "retry_code_sha256": {
+    "executor": "2860640d44b6c1c1b9eb3614bbc80e096b44618f9b7af9f3375960301eac236a",
+    "wrapper": "09ffb5f8895c1065e8e906a67b09bbe23c847bcb443b49b5de267c0f0c6eeda0"
+  },
+  "retry_namespace": {
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1",
+    "evidence_root": "/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1"
+  },
+  "approval_status": "unchanged_exact_scope_carries_forward",
+  "retry_status": "pending_final_staging_and_remote_gates"
+}

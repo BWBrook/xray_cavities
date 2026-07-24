@@ -1,0 +1,10 @@
+source_commit=eb05fdfd0ca1edc0d82af68e85c9146388d77924
+host=<tpac-host>
+started_utc=2026-07-24T02:25:03Z
+stage=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction
+evidence=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution
+no_overwrite_gate=passed
+  File "<stdin>", line 13
+    raise SystemExit(f"staged symlinks: {links[:10]}")
+                                                    ^
+SyntaxError: invalid syntax

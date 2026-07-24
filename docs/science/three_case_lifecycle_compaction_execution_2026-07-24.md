@@ -2,12 +2,14 @@
 
 ## Status
 
-`prepared_for_remote_preflight`
+`attempt1_failed_closed_no_mutation_repair_audited_retry1_preparation`
 
-## Approved Scope
+Decision label:
+`GOAL047_ATTEMPT1_FAILED_CLOSED_NO_MUTATION_NAMESPACE_REPAIR_GREEN`.
 
-Goal 047 executes the exact Goal 046 production deletion ledger approved by
-Barry on 2026-07-24:
+## Authority
+
+The permanent-deletion authority is unchanged:
 
 ```text
 ledger_sha256=df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92
@@ -16,55 +18,97 @@ delete_xmf_rows=148
 allocated_bytes=6845659111424
 ```
 
-This is permanent lifecycle compaction after accepted post-processing and
-reduction. It knowingly removes unselected fine-cadence raw trajectory data;
-recovery would require rerunning PLUTO.
+Barry approved this exact list on 2026-07-24. The first attempt did not mutate
+it, so the approval remains valid for an exact retry. The `968` analysis rows
+held as `HOLD_REGENERATION_UNPROVEN`, radio-held rows, protected rows,
+ambiguous symlinks, compact provenance, and all paths outside the frozen
+allowlist remain excluded.
 
-## Retained Scope
+## Attempt 1 Outcome
 
-The execution does not include:
+PBS job `775752.kunanyi-ohpc` (`tri_compact`) exited `1` after `12` seconds.
+The executor passed packet, manifest, approval, lock, and first qstat gates,
+then failed before opening candidates or deleting data.
 
-- `968` analysis rows held as `HOLD_REGENERATION_UNPROVEN`;
-- `5,501` radio-held rows;
-- `3` ambiguous symlinks;
-- `65` protected rows;
-- `10,320` compact provenance rows; or
-- any directory, regenerated ledger row, or path outside the frozen allowlist.
-
-## Execution Method
-
-One audited PBS job will validate the complete immutable packet and all
-candidate identities/hashes before any mutation. It will hold no-follow file
-descriptors through exact path-entry deletion, stop on the first failure, and
-record every mutation in a hash-chained fsynced transcript. A full post-scan
-must prove that exactly the approved paths disappeared and all retained rows
-remained unchanged.
-
-The only material operational assumption is that no out-of-band writer is
-modifying Barry-owned roots outside PBS. The job mitigates this with an atomic
-lock and two active-job gates, including one immediately before mutation.
-
-## Local Verification And Audit
-
-The full Goal 046/047 suite passed with `81 passed, 1 skipped`; the skip is an
-unrelated macOS FIFO-creation limitation. The final focused Goal 047 suite
-passed with `42 passed`. Python compilation, PBS syntax, packet and evidence
-manifests, the 50-entry staged-input manifest, and `git diff --check` passed.
-
-Independent final audit returned `GO`, conditional on three remote gates:
-
-1. the staged input tree contains zero symlinks;
-2. no Barry-owned PBS job is active immediately before `qsub`; and
-3. inside PBS, only the Goal 047 job is active at both qstat gates.
-
-Audited code hashes:
+Authoritative evidence reports:
 
 ```text
-executor=cf93d052e6d4860bb4e598fd84cc28063e615235a09cf96af2e9b1aadce5ae41
-wrapper=ffbb9f2fcc96aa5a0075c4aada379de1d9955536471c74f08fb092dafcf3a3e7
+status=FAILED_CLOSED_NO_MUTATION
+deleted_row_count=0
+deleted_hdf5_count=0
+deleted_xmf_count=0
+recovered_allocated_bytes=0
+mutation_outcome_unknown=false
 ```
 
-The audit retains three practical residuals: PBS cannot detect an out-of-band
-writer, real NFS unlink failure semantics cannot be fully reproduced locally,
-and the approved recovery total is the exact sum of frozen `st_blocks` rather
-than a guarantee of an immediately identical quota change.
+The five-record transcript hash chain terminates at
+`terminal_failure`. The original scheduler record, stdout/stderr, transcript,
+failure receipt, staged manifest, and executor evidence are preserved under
+this note's asset bundle.
+
+## Diagnosis
+
+The first mismatch was a retained Goal 019 CSV, not a deletion candidate:
+
+```text
+frozen device=46
+compute-node device=44
+later login-node device=69
+inode=3298535258375
+size=180
+allocated=512
+sha256=d72f6af1535004f3c4ef81e8eaff239134bee8d6d440d16e2aaf4a49ed554c0f
+```
+
+The inode, size, allocation, mtime, and full hash agreed. Observation therefore
+supports the inference that Kunanyi presents different numeric `st_dev`
+identifiers for the same shared export in different client mount namespaces.
+Treating frozen `st_dev` as a cross-node invariant caused the safe false
+positive.
+
+## Repair
+
+The repaired executor excludes only `device` from frozen-to-live cross-node
+comparison. It still:
+
+- records frozen/live device namespace mappings;
+- compares every candidate descriptor against the same job's pre-delete live
+  snapshot using device, inode, size, allocation, mtime, and file type;
+- requires the frozen full SHA-256 for every candidate;
+- retains descriptor-stability and immediate pre-unlink path/descriptor
+  checks; and
+- requires every retained post-scan row to equal the same job's pre-delete
+  row across all 14 live fields, including device.
+
+Regression tests cover both permitted cross-node device drift and prohibited
+device drift within one job.
+
+## Retry Isolation
+
+Attempt 1 remains immutable. Retry 1 is rebound to:
+
+```text
+stage=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1
+evidence=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1
+job_name=tri_compact_r1
+```
+
+The updated staged-input manifest binds the repaired executor and retry
+wrapper. All ledger rows, hashes, counts, byte totals, protected contracts,
+and the approval token are unchanged.
+
+## Verification
+
+Root validation passed with `93 passed, 1 skipped`; the skip is the known
+macOS FIFO limitation. An independent audit passed eight focused
+positive/negative controls and its `84 passed, 1 skipped` Runbook suite.
+Python compilation, PBS syntax, manifest checks, and `git diff --check`
+passed.
+
+The audit returned `GO` on the repair and confirmed that the original exact
+approval carries forward. Retry remains conditional on fresh staged-hash,
+zero-symlink, zero-active-job, and in-job self-only qstat gates.
+
+Residual uncertainty is unchanged: PBS cannot observe an out-of-band writer,
+real NFS unlink failure semantics remain partly synthetic, and recovered
+`st_blocks` need not immediately equal a quota-report delta.

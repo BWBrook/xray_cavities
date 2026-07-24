@@ -22,7 +22,39 @@ machine.
 
 Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
 
-- Status: `prepared_for_remote_preflight`.
+- Status: `repair_audited_retry1_prepared_local`.
+- Attempt 1: PBS `775752.kunanyi-ohpc` / `tri_compact` exited `1` after
+  `00:00:12`. It failed closed at the first estate comparison, before
+  candidate opening or mutation.
+- Authoritative outcome: `FAILED_CLOSED_NO_MUTATION`; deleted rows/HDF5/XMF
+  are `0/0/0`, recovered allocated bytes are `0`, and
+  `mutation_outcome_unknown=false`.
+- Diagnosis: the first mismatch was a retained CSV with frozen/compute/login
+  device IDs `46/44/69`. Inode, size, allocation, mtime, and full SHA-256
+  agreed. Numeric `st_dev` is not a stable cross-client namespace identifier
+  on this Kunanyi shared export.
+- Repair: omit only frozen/live `device` across nodes; record the namespace
+  mapping; require candidate descriptors to equal the same-job pre-delete
+  snapshot including device and type; and require all retained post-scan rows
+  to equal their same-job pre-delete rows across all 14 live fields, including
+  device. Full SHA, descriptor, immediate pre-unlink, job, protected/restart,
+  pair, and post-delete gates remain active.
+- Validation: root Goal 047 suite `93 passed, 1 skipped`; independent audit
+  passed eight focused controls and `84 passed, 1 skipped`, plus Python
+  compilation, wrapper syntax, ledger/count/byte reconciliation, and
+  `git diff --check`.
+- Retry-bound hashes: executor
+  `2860640d44b6c1c1b9eb3614bbc80e096b44618f9b7af9f3375960301eac236a`;
+  wrapper
+  `09ffb5f8895c1065e8e906a67b09bbe23c847bcb443b49b5de267c0f0c6eeda0`.
+- Audit decision: repair `GO`; immediate reuse of attempt-1 paths `NO-GO`.
+  Barry's original approval carries forward unchanged because attempt 1
+  deleted zero rows and the ledger/path/hash/count/byte scope is unchanged.
+- Retry isolation:
+  `/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1`
+  and
+  `/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1`.
+  Attempt-1 evidence and logs remain immutable.
 - Authority: Barry approved permanent loss of exactly the `296` production
   rows bound to Goal 046 ledger SHA-256
   `df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92`.
@@ -30,32 +62,17 @@ Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
   `6,845,659,111,424` allocated bytes.
 - Exclusions: the `968` lineage-unproven analysis rows, radio-held particles,
   ambiguous symlinks, protected sources, and compact provenance remain held.
-- Source evidence: Goal 046 is committed and pushed at `1e9866b`; the
-  authorization packet itself remains unchanged.
-- Method: all rows and packet joins pass before mutation; candidates are held
-  by no-follow file descriptor from full hash through exact `unlinkat`;
-  HDF5/XMF pairs delete HDF5 first; the transcript is hash-chained and fsynced;
-  post-inventory must prove exact approved absence and all retained rows
-  unchanged.
-- Scheduler gate: zero active jobs before submission; inside PBS only the
-  current job may be active, checked at start and immediately before mutation.
-- Local gate: the full Goal 046/047 suite passed with `81 passed, 1 skipped`;
-  the skip is an unrelated macOS FIFO-creation limitation. The final focused
-  Goal 047 suite passed with `42 passed`; Python compilation, wrapper syntax,
-  manifest checks, and `git diff --check` passed.
-- Independent audit: final verdict `GO`, conditional on a recorded zero-symlink
-  staged tree, zero active Barry jobs immediately before `qsub`, and the
-  in-job self-only job gates. Audited executor SHA-256 is
-  `cf93d052e6d4860bb4e598fd84cc28063e615235a09cf96af2e9b1aadce5ae41`;
-  wrapper SHA-256 is
-  `ffbb9f2fcc96aa5a0075c4aada379de1d9955536471c74f08fb092dafcf3a3e7`.
+- Source evidence: Goal 046 is committed and pushed at `1e9866b`; its
+  authorization packet, approved deletion ledger, receipt, and protected/held
+  contracts remain unchanged.
+- Current boundary: finish retry-namespace manifest/audit binding, commit and
+  push, then stage exactly one retry. Submit only after fresh local/remote
+  hashes, zero-symlink, wrapper, zero-active-job, and no-overwrite gates pass;
+  invoke the normal PBS queued/running stop rule.
 - Residuals: job gates cannot see an out-of-band writer; NFS unlink failure
   semantics are tested synthetically but remain an operational residual; and
   recovered bytes are the approved sum of `st_blocks`, not a promise of an
   immediately identical quota report.
-- Current boundary: commit/push this exact packet, run one guarded remote
-  preflight, and submit only if every no-go gate remains green. No Goal 047
-  remote command or mutation has occurred yet.
 - Goal log:
   `docs/goals/047-three-case-lifecycle-compaction-execution/Log.md`.
 - Science note:

@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-#PBS -N tri_compact
+#PBS -N tri_compact_r1
 #PBS -q normal
 #PBS -l select=1:ncpus=8:mpiprocs=1:mem=64gb
 #PBS -l walltime=48:00:00
 #PBS -M barry.brook@utas.edu.au
 #PBS -m ae
-#PBS -o /u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction.out
-#PBS -e /u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction.err
+#PBS -o /u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1/three_case_lifecycle_compaction_retry1.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1/three_case_lifecycle_compaction_retry1.err
 
 set -euo pipefail
 
-readonly STAGE_DIR="/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction"
-readonly EVIDENCE_ROOT="/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution"
+readonly STAGE_DIR="/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1"
+readonly EVIDENCE_ROOT="/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1"
 readonly PACKET_DIR="$STAGE_DIR/authorization_packet"
 readonly COMPLETED_EVIDENCE_DIR="$STAGE_DIR/completed_run"
 readonly EXECUTOR="$STAGE_DIR/execute_three_case_lifecycle_compaction.py"
@@ -34,9 +34,9 @@ readonly EXPECTED_XMF_ROWS="148"
 readonly EXPECTED_ALLOCATED_BYTES="6845659111424"
 readonly CONFIRMATION_TOKEN="BARRY_APPROVED_GOAL047_df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92_DELETE_EXACT_296_ROWS_6845659111424_ALLOCATED_BYTES"
 
-readonly ARCHIVE="$STAGE_DIR/three_case_lifecycle_compaction_2026-07-24.tar.gz"
-readonly ARCHIVE_RESERVATION="$STAGE_DIR/three_case_lifecycle_compaction_2026-07-24.archive.reservation"
-readonly ARCHIVE_TMP="$ARCHIVE_RESERVATION/three_case_lifecycle_compaction_2026-07-24.tar.gz.tmp"
+readonly ARCHIVE="$STAGE_DIR/three_case_lifecycle_compaction_retry1_2026-07-24.tar.gz"
+readonly ARCHIVE_RESERVATION="$STAGE_DIR/three_case_lifecycle_compaction_retry1_2026-07-24.archive.reservation"
+readonly ARCHIVE_TMP="$ARCHIVE_RESERVATION/three_case_lifecycle_compaction_retry1_2026-07-24.tar.gz.tmp"
 readonly ARCHIVE_PAYLOAD_TMP="$ARCHIVE_RESERVATION/archive_payload.tmp"
 readonly ARCHIVE_PAYLOAD="$ARCHIVE_RESERVATION/archive_payload"
 readonly STAGE_TRANSCRIPT="$STAGE_DIR/three_case_lifecycle_compaction_transcript.jsonl"

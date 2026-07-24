@@ -16,26 +16,47 @@ def wrapper_text() -> str:
 
 def test_pbs_resource_and_stage_contract_is_exact() -> None:
     text = wrapper_text()
-    assert "#PBS -N tri_compact" in text
+    assert "#PBS -N tri_compact_r1" in text
     assert "#PBS -q normal" in text
     assert "#PBS -l select=1:ncpus=8:mpiprocs=1:mem=64gb" in text
     assert "#PBS -l walltime=48:00:00" in text
     assert "#PBS -m ae" in text
     assert (
-        "/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/"
-        "three_case_lifecycle_compaction.out"
+        "/u/bwbrook/codex_kunanyi/"
+        "goal047_three_case_lifecycle_compaction_retry1/"
+        "three_case_lifecycle_compaction_retry1.out"
     ) in text
     assert (
-        "/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/"
-        "three_case_lifecycle_compaction.err"
+        "/u/bwbrook/codex_kunanyi/"
+        "goal047_three_case_lifecycle_compaction_retry1/"
+        "three_case_lifecycle_compaction_retry1.err"
     ) in text
     assert (
         'readonly STAGE_DIR="/u/bwbrook/codex_kunanyi/'
-        'goal047_three_case_lifecycle_compaction"'
+        'goal047_three_case_lifecycle_compaction_retry1"'
     ) in text
     assert (
         'readonly EVIDENCE_ROOT="/scratch/bwbrook/xray_cavities_analysis/'
+        '2026-07-24-three-case-lifecycle-compaction-execution-retry1"'
+    ) in text
+
+
+def test_retry_namespace_cannot_clobber_attempt1_evidence() -> None:
+    text = wrapper_text()
+    attempt1_stage = (
+        'readonly STAGE_DIR="/u/bwbrook/codex_kunanyi/'
+        'goal047_three_case_lifecycle_compaction"'
+    )
+    attempt1_evidence = (
+        'readonly EVIDENCE_ROOT="/scratch/bwbrook/xray_cavities_analysis/'
         '2026-07-24-three-case-lifecycle-compaction-execution"'
+    )
+    assert attempt1_stage not in text
+    assert attempt1_evidence not in text
+    assert "three_case_lifecycle_compaction_retry1_2026-07-24.tar.gz" in text
+    assert (
+        'readonly STAGE_TRANSCRIPT="$STAGE_DIR/'
+        'three_case_lifecycle_compaction_transcript.jsonl"'
     ) in text
 
 

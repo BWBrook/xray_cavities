@@ -70,3 +70,72 @@ quota report.
 
 No remote command, browser action, PBS submission, or data mutation has
 occurred at this checkpoint.
+
+## 2026-07-24 Attempt 1 Failed Closed
+
+Status: `failed_closed_no_mutation`.
+
+After all local, staged-hash, zero-symlink, wrapper, approval, and zero-active-
+job gates passed, PBS job `775752.kunanyi-ohpc` (`tri_compact`) was submitted
+and verified queued. It completed with `Exit_status=1` after `00:00:12`.
+
+The executor passed the authorization packet, staged inputs, lock, and first
+self-only qstat gate. It then failed at the frozen/live estate comparison:
+
+```text
+status=FAILED_CLOSED_NO_MUTATION
+deleted_row_count=0
+deleted_hdf5_count=0
+deleted_xmf_count=0
+recovered_allocated_bytes=0
+mutation_outcome_unknown=false
+```
+
+The first mismatch was only `device=('46','44')` on a retained
+`HOLD_REGENERATION_UNPROVEN` CSV. No candidate was opened and no mutation was
+attempted. The five-record transcript, status, failure receipt, qstat,
+stdout/stderr, submission transcripts, and completion diagnostic were
+retrieved and preserved locally. No archive was created.
+
+## 2026-07-24 Namespace Repair And Retry Isolation
+
+Status: `repair_audited_retry1_prepared_local`.
+
+Diagnostic evidence showed the same retained file as `st_dev=46` in the frozen
+inventory, `44` on compute node `n196`, and `69` on the login node, while its
+inode, size, allocated bytes, mtime, and full SHA-256 agreed. The failure is
+therefore a cross-client mount-namespace false positive, not data drift.
+
+The repaired executor excludes only frozen `device` from cross-node
+comparison. It adds:
+
+- explicit frozen/live device namespace mappings;
+- full same-job candidate descriptor comparison against the pre-delete live
+  snapshot, including device and file type; and
+- exact pre/post equality for every retained live row across all 14 fields,
+  including device.
+
+Full candidate SHA-256, descriptor stability, immediate pre-unlink identity,
+active-job, pair, protected/restart, and post-delete gates remain unchanged.
+New regressions prove cross-node device drift is permitted while a same-job
+device change fails before mutation or at post-check.
+
+Root validation passed with `93 passed, 1 skipped`. The independent auditor
+passed eight focused controls and `84 passed, 1 skipped`, plus Python
+compilation, wrapper syntax, ledger/count/byte reconciliation, and
+`git diff --check`. The auditor returned `GO` on the repair and confirmed that
+Barry's exact-list approval carries forward because attempt 1 deleted zero
+rows.
+
+Attempt 1 remains immutable. Retry 1 uses fresh paths:
+
+```text
+stage=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1
+evidence=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1
+job_name=tri_compact_r1
+```
+
+The retry staged-input manifest binds the repaired executor and retry wrapper.
+The frozen ledger digest, `296` rows, `6,845,659,111,424` allocated bytes,
+approval receipt, and protected/held scope remain unchanged. No retry has been
+staged or submitted at this checkpoint.

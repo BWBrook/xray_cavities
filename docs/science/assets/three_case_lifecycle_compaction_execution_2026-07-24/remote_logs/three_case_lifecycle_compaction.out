@@ -1,0 +1,107 @@
+open_file_limit=65536
+job_id=775752.kunanyi-ohpc
+host=n196.kunanyi
+started_utc=2026-07-24T02:28:47Z
+stage_dir=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction
+evidence_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution
+approved_ledger_sha256=df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92
+approved_delete_rows=296
+approved_allocated_bytes=6845659111424
+python_version=3.11.7
+python_executable=/share/apps/software/Anaconda3/2024.02-1/bin/python
+h5py_version=3.9.0
+approval_receipt.json: OK
+authorization_packet/active_hold_register.csv: OK
+authorization_packet/active_job_gate.csv: OK
+authorization_packet/canonical_source_register.csv: OK
+authorization_packet/deletion_candidate_summary.csv: OK
+authorization_packet/duplicate_evidence.csv: OK
+authorization_packet/external_archive_manifest.csv: OK
+authorization_packet/goal047_execution_contract.csv: OK
+authorization_packet/inventory_metadata.json: OK
+authorization_packet/local_asset_manifest.sha256: OK
+authorization_packet/no_delete_conditions.csv: OK
+authorization_packet/payload_ledger.csv: OK
+authorization_packet/protected_path_contract.csv: OK
+authorization_packet/recovery_forecast.csv: OK
+authorization_packet/remote_root_allowlist.csv: OK
+authorization_packet/retention_summary.csv: OK
+authorization_packet/retrieved_archive_validation.csv: OK
+completed_run/catalogue_snapshot/catalogue_checksums.sha256: OK
+completed_run/catalogue_snapshot/production_C-HI_c_hi_fresh/dbl.h5.out: OK
+completed_run/catalogue_snapshot/production_C-HI_c_hi_fresh/flt.h5.out: OK
+completed_run/catalogue_snapshot/production_C-HI_c_hi_prod64/dbl.h5.out: OK
+completed_run/catalogue_snapshot/production_C-HI_c_hi_prod64/flt.h5.out: OK
+completed_run/catalogue_snapshot/production_C-LO_c_lo_final/dbl.h5.out: OK
+completed_run/catalogue_snapshot/production_C-LO_c_lo_final/flt.h5.out: OK
+completed_run/catalogue_snapshot/production_G-LO_g_lo_guarded/dbl.h5.out: OK
+completed_run/catalogue_snapshot/production_G-LO_g_lo_guarded/flt.h5.out: OK
+completed_run/catalogue_snapshot/production_G-LO_g_lo_production/dbl.h5.out: OK
+completed_run/catalogue_snapshot/production_G-LO_g_lo_production/flt.h5.out: OK
+completed_run/remote_logs/active_job_gate_2026-07-24.txt: OK
+completed_run/remote_logs/three_case_lifecycle_inventory_repair.err: OK
+completed_run/remote_logs/three_case_lifecycle_inventory_repair.out: OK
+completed_run/remote_logs/three_case_lifecycle_inventory_repair_2026-07-24.tar.gz: OK
+completed_run/review_inventory/archive_checksums.sha256: OK
+completed_run/review_inventory/archive_file_list.txt: OK
+completed_run/review_inventory/archive_manifest.tsv: OK
+completed_run/review_inventory/contract_metadata.json: OK
+completed_run/review_inventory/inventory/inventory_metadata.json: OK
+completed_run/review_inventory/inventory/inventory_summary.csv: OK
+completed_run/review_inventory/inventory/payload_inventory.csv: OK
+completed_run/review_inventory/inventory/remote_root_inventory.csv: OK
+completed_run/review_inventory/protected_path_contract.csv: OK
+completed_run/review_inventory/remote_root_allowlist.csv: OK
+completed_run/review_inventory/scanner.log: OK
+completed_run/review_inventory/validation_summary.csv: OK
+execute_three_case_lifecycle_compaction.py: OK
+execution_contract.csv: OK
+goal046_completed_evidence_manifest.sha256: OK
+inventory_three_case_lifecycle.py: OK
+three_case_lifecycle_compaction.pbs: OK
+validate_three_case_lifecycle_dry_run.py: OK
+active_hold_register.csv: OK
+active_job_gate.csv: OK
+canonical_source_register.csv: OK
+deletion_candidate_summary.csv: OK
+duplicate_evidence.csv: OK
+external_archive_manifest.csv: OK
+goal047_execution_contract.csv: OK
+inventory_metadata.json: OK
+no_delete_conditions.csv: OK
+payload_ledger.csv: OK
+protected_path_contract.csv: OK
+recovery_forecast.csv: OK
+remote_root_allowlist.csv: OK
+retention_summary.csv: OK
+retrieved_archive_validation.csv: OK
+./catalogue_snapshot/catalogue_checksums.sha256: OK
+./catalogue_snapshot/production_C-HI_c_hi_fresh/dbl.h5.out: OK
+./catalogue_snapshot/production_C-HI_c_hi_fresh/flt.h5.out: OK
+./catalogue_snapshot/production_C-HI_c_hi_prod64/dbl.h5.out: OK
+./catalogue_snapshot/production_C-HI_c_hi_prod64/flt.h5.out: OK
+./catalogue_snapshot/production_C-LO_c_lo_final/dbl.h5.out: OK
+./catalogue_snapshot/production_C-LO_c_lo_final/flt.h5.out: OK
+./catalogue_snapshot/production_G-LO_g_lo_guarded/dbl.h5.out: OK
+./catalogue_snapshot/production_G-LO_g_lo_guarded/flt.h5.out: OK
+./catalogue_snapshot/production_G-LO_g_lo_production/dbl.h5.out: OK
+./catalogue_snapshot/production_G-LO_g_lo_production/flt.h5.out: OK
+./remote_logs/active_job_gate_2026-07-24.txt: OK
+./remote_logs/three_case_lifecycle_inventory_repair.err: OK
+./remote_logs/three_case_lifecycle_inventory_repair.out: OK
+./remote_logs/three_case_lifecycle_inventory_repair_2026-07-24.tar.gz: OK
+./review_inventory/archive_checksums.sha256: OK
+./review_inventory/archive_file_list.txt: OK
+./review_inventory/archive_manifest.tsv: OK
+./review_inventory/contract_metadata.json: OK
+./review_inventory/inventory/inventory_metadata.json: OK
+./review_inventory/inventory/inventory_summary.csv: OK
+./review_inventory/inventory/payload_inventory.csv: OK
+./review_inventory/inventory/remote_root_inventory.csv: OK
+./review_inventory/protected_path_contract.csv: OK
+./review_inventory/remote_root_allowlist.csv: OK
+./review_inventory/scanner.log: OK
+./review_inventory/validation_summary.csv: OK
+staged_symlink_gate=passed symlink_count=0
+approval_preflight=passed digest=df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92 rows=296 bytes=6845659111424
+output_location_gate=passed checked_outputs=6

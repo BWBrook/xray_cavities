@@ -30,14 +30,18 @@ git diff --check
 
 ## Remote Paths
 
+Attempt 1 is immutable historical evidence at the unsuffixed stage and
+evidence paths. Do not stage, submit, retrieve, or clean through those paths.
+Retry 1 uses only:
+
 ```text
-stage=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction
-evidence=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution
-archive=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction_2026-07-24.tar.gz
-stdout=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction.out
-stderr=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction.err
-transcript=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction_transcript.jsonl
-wrapper_failure=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/wrapper_failure_status.json
+stage=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1
+evidence=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-compaction-execution-retry1
+archive=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1/three_case_lifecycle_compaction_retry1_2026-07-24.tar.gz
+stdout=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1/three_case_lifecycle_compaction_retry1.out
+stderr=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1/three_case_lifecycle_compaction_retry1.err
+transcript=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1/three_case_lifecycle_compaction_transcript.jsonl
+wrapper_failure=/u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1/wrapper_failure_status.json
 ```
 
 ## Pre-Submission Gate
@@ -76,8 +80,8 @@ After Barry reports the completion email:
 
 ```bash
 scripts/kunanyi/fetch_from_kunanyi.sh \
-  /u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction/three_case_lifecycle_compaction_2026-07-24.tar.gz \
-  docs/science/assets/three_case_lifecycle_compaction_execution_2026-07-24/remote_logs/three_case_lifecycle_compaction_2026-07-24.tar.gz
+  /u/bwbrook/codex_kunanyi/goal047_three_case_lifecycle_compaction_retry1/three_case_lifecycle_compaction_retry1_2026-07-24.tar.gz \
+  docs/science/assets/three_case_lifecycle_compaction_execution_2026-07-24/remote_logs/three_case_lifecycle_compaction_retry1_2026-07-24.tar.gz
 ```
 
 Retrieve stdout, stderr, final qstat, and the direct stage-root transcript

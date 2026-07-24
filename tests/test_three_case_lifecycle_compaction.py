@@ -760,6 +760,53 @@ def test_exact_success_removes_only_approved_rows(tmp_path: Path) -> None:
     assert h5_position < xmf_position
 
 
+def test_cross_node_device_drift_is_audited_without_weakening_identity(
+    tmp_path: Path,
+) -> None:
+    fx = make_fixture(tmp_path)
+    device_offset = 10_000
+
+    def shift_frozen_devices(rows: list[dict[str, str]]) -> None:
+        for row in rows:
+            row["device"] = str(int(row["device"]) + device_offset)
+
+    rewrite_ledger(fx, shift_frozen_devices)
+    frozen_inventory = (
+        fx.completed / "review_inventory/inventory/payload_inventory.csv"
+    )
+    with frozen_inventory.open(newline="") as handle:
+        reader = csv.DictReader(handle)
+        fields = reader.fieldnames
+        assert fields
+        rows = list(reader)
+    shift_frozen_devices(rows)
+    write_csv(frozen_inventory, fields, rows)
+    refresh_completed_manifest(fx)
+
+    result = run(fx)
+
+    assert result["status"] == "DELETION_COMPLETE_POSTCHECK_GREEN"
+    assert result["deleted_row_count"] == 2
+    assert fx.protected.read_bytes() == b"protected-content"
+    assert fx.held.read_bytes() == b"held-content"
+    records = [
+        json.loads(line)
+        for line in fx.paths.stage_transcript.read_text().splitlines()
+    ]
+    snapshot = next(
+        record
+        for record in records
+        if record["event"] == "frozen_estate_snapshot_passed"
+    )
+    assert snapshot["device_namespace_mappings"] == [
+        {
+            "frozen_device": str(os.lstat(fx.protected).st_dev + device_offset),
+            "live_device": str(os.lstat(fx.protected).st_dev),
+            "row_count": 4,
+        }
+    ]
+
+
 def test_injected_unlink_failure_stops_and_records_partial_state(tmp_path: Path) -> None:
     fx = make_fixture(tmp_path)
     calls = 0
@@ -877,6 +924,84 @@ def test_immediate_preunlink_identity_mismatch_is_no_mutation(
     assert status["status"] == "FAILED_CLOSED_NO_MUTATION"
     assert status["deleted_row_count"] == 0
     assert "DELETION_COMPLETE_POSTCHECK_GREEN" not in status
+
+
+def test_same_job_device_change_between_snapshots_fails_postcheck(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    fx = make_fixture(tmp_path)
+    real_snapshot = fx.module._snapshot_and_compare
+    calls = 0
+
+    def change_postscan_device(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        rows = real_snapshot(*args, **kwargs)
+        if calls == 2:
+            rows[0] = {
+                **rows[0],
+                "device": str(int(rows[0]["device"]) + 1),
+            }
+        return rows
+
+    monkeypatch.setattr(
+        fx.module,
+        "_snapshot_and_compare",
+        change_postscan_device,
+    )
+    with pytest.raises(
+        fx.module.CompactionError,
+        match="pre/post live identity mismatch",
+    ) as captured:
+        run(fx)
+
+    assert captured.value.status == "FAILED_CLOSED_POSTCHECK"
+    assert not fx.h5.exists()
+    assert not fx.xmf.exists()
+    status = json.loads(fx.paths.status_json.read_text())
+    assert status["status"] == "FAILED_CLOSED_POSTCHECK"
+    assert "DELETION_COMPLETE_POSTCHECK_GREEN" not in status
+
+
+def test_candidate_device_must_match_predelete_live_snapshot(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    fx = make_fixture(tmp_path)
+    real_snapshot = fx.module._snapshot_and_compare
+    calls = 0
+
+    def change_predelete_candidate_device(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        rows = real_snapshot(*args, **kwargs)
+        if calls == 1:
+            for index, row in enumerate(rows):
+                if row["path"] == str(fx.h5):
+                    rows[index] = {
+                        **row,
+                        "device": str(int(row["device"]) + 1),
+                    }
+                    break
+        return rows
+
+    monkeypatch.setattr(
+        fx.module,
+        "_snapshot_and_compare",
+        change_predelete_candidate_device,
+    )
+    with pytest.raises(
+        fx.module.CompactionError,
+        match="candidate changed since predelete live snapshot",
+    ) as captured:
+        run(fx)
+
+    assert captured.value.status == "FAILED_CLOSED_NO_MUTATION"
+    assert fx.candidates_exist()
+    status = json.loads(fx.paths.status_json.read_text())
+    assert status["status"] == "FAILED_CLOSED_NO_MUTATION"
+    assert status["deleted_row_count"] == 0
 
 
 @pytest.mark.parametrize(

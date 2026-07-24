@@ -1,0 +1,15 @@
+{
+  "approved_allocated_bytes": 6845659111424,
+  "approved_hdf5_count": 148,
+  "approved_payload_ledger_sha256": "df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92",
+  "approved_row_count": 296,
+  "approved_xmf_count": 148,
+  "deleted_hdf5_count": 0,
+  "deleted_row_count": 0,
+  "deleted_xmf_count": 0,
+  "error": "CompactionError: live/frozen identity mismatch: /scratch/bwbrook/xray_cavities_analysis/2026-06-30-c-hi-late-source-age-pilot/output0046_Timestep_46/xraise_grid_0deg/projection_empty_columns.csv: {'device': ('46', '44')}",
+  "recovered_allocated_bytes": 0,
+  "single_owner_assumption": "All allowlisted roots have one administrative owner; no process other than this PBS job will create, replace, relink, rename, or modify any allowlisted entry between the two qstat gates and the post-scan.",
+  "status": "FAILED_CLOSED_NO_MUTATION",
+  "transcript_final_sha256": "468f245701923ef1df5f79814f97def2d0c1581f023b83a2d95e4c7702b6b44f"
+}
