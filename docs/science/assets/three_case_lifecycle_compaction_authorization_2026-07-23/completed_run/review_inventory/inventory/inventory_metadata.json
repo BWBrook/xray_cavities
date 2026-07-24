@@ -1,0 +1,25 @@
+{
+  "contract_digest_sha256": "706155240b2cf59c57dd446ff929f5963e0c64ecb221e09e8cf8db110510ea3d",
+  "contract_metadata": "/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory_repair/contract_metadata.json",
+  "counts": {
+    "allocated_bytes": 8375466742272,
+    "apparent_bytes": 8375461988950,
+    "candidate_review_count": 1264,
+    "particle_hold_count": 5501,
+    "payload_count": 17153,
+    "protected_count": 65,
+    "regular_count": 17150,
+    "root_count": 25,
+    "symlink_count": 3
+  },
+  "deletion_capability": false,
+  "follow_symlinks": false,
+  "manifest_digest_sha256": "86d0bd1c53ab547c7eed84490ad93453cac637d1d980e47b5769ba976fedd8e7",
+  "max_workers": 8,
+  "protected_contract": "/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory_repair/protected_path_contract.csv",
+  "read_hdf5_metadata": true,
+  "read_only": true,
+  "root_contract": "/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory_repair/remote_root_allowlist.csv",
+  "schema_version": "1.0",
+  "verified_utc": "2026-07-23T22:16:41Z"
+}

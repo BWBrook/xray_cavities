@@ -1,0 +1,6 @@
+job_id=775619.kunanyi-ohpc
+host=n001.kunanyi
+started_utc=2026-07-23T06:54:11Z
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-23-three-case-lifecycle-inventory
+root_contract=/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory/remote_root_allowlist.csv
+protected_contract=/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory/protected_path_contract.csv

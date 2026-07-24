@@ -1,0 +1,4 @@
+step,mode,allowlist,required_gate,ledger_digest,mutation_allowed
+fresh_qstat_identity_hash,preflight,exact ledger paths,"fresh active-job transcript, stable identity, SHA-256",df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92,false
+exact_row_delete,future_explicit_approval_only,Barry-approved DELETE_PROPOSED rows only; nonrecursive,"digest, pair, contract, stop-on-first-mismatch",df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92,not_in_goal046
+post_delete_validation,future_validation,protected/held/provenance paths,"protected HDF5 reopen/metadata, restart tuples, existence, post-delete inventory, byte reconciliation, transcript",df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92,not_in_goal046

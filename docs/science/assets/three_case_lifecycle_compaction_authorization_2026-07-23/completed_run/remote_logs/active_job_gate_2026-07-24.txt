@@ -1,0 +1,7 @@
+checked_utc=2026-07-23T22:48:47Z
+host=<tpac-host>
+job_owner=bwbrook
+command=qstat -u bwbrook
+command_exit_status=0
+active_job_rows=0
+status=passed

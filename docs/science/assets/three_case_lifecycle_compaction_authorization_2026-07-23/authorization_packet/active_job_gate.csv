@@ -1,0 +1,2 @@
+checked_utc,host,job_owner,command,command_exit_status,active_job_rows,status,transcript_sha256,transcript_path
+2026-07-23T22:48:47Z,<tpac-host>,bwbrook,qstat -u bwbrook,0,0,passed,432996613cec241cc8532a4e564c2514d9590ba037a3263d85ea5cb8226b7899,completed_run/remote_logs/active_job_gate_2026-07-24.txt

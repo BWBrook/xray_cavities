@@ -1,0 +1,32 @@
+{
+  "active_hold_count": 2,
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-LO"
+  ],
+  "contract_digest_sha256": "706155240b2cf59c57dd446ff929f5963e0c64ecb221e09e8cf8db110510ea3d",
+  "contract_files": [
+    "remote_root_allowlist.csv",
+    "protected_path_contract.csv"
+  ],
+  "g_lo_restart_candidates": [
+    "source_restart",
+    "preceding_endpoint_restart",
+    "endpoint_restart"
+  ],
+  "goal": "046",
+  "manifest_digest_sha256": "706155240b2cf59c57dd446ff929f5963e0c64ecb221e09e8cf8db110510ea3d",
+  "protected_path_count": 65,
+  "publication_method_uncertainty_is_raw_data_hold": false,
+  "retired_hold_count": 3,
+  "root_count": 25,
+  "schema_version": "1.0",
+  "source_manifests": [
+    "docs/science/assets/three_case_common_age_evolution_2026-07-13/review_products/C-HI/compact/source_time_manifest_case.csv",
+    "docs/science/assets/three_case_common_age_evolution_2026-07-13/review_products/C-LO/compact/source_time_manifest_case.csv",
+    "docs/science/assets/three_case_common_age_evolution_2026-07-13/review_products/G-LO/compact/source_time_manifest_case.csv"
+  ],
+  "status": "goal046_contract_ready",
+  "topology_status": "conditional_general_method_caveat"
+}

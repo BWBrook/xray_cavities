@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-23
+Last updated: 2026-07-24
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,65 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-045 X-ray cavity recovery-refinement
-completion handoff.
+This note should be treated as a Goal-046 three-case lifecycle compaction
+approved-execution handoff.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 046 three-case lifecycle compaction authorization on 2026-07-24:
+
+- Status: `approved_for_goal047_execution`.
+- Scope: read-only allowlist inventory and exact approval packet only. No
+  deletion, move, truncation, overwrite, permission change, or broad scratch
+  scan occurred.
+- Contract: `25` roots, `65` protected paths, and `29` protected HDF5 files;
+  contract digest
+  `706155240b2cf59c57dd446ff929f5963e0c64ecb221e09e8cf8db110510ea3d`.
+- Initial PBS: `775619.kunanyi-ohpc` / `tri_lifeinv` failed closed with
+  `Exit_status=2` on unstable NFS directory-size identity; no report, archive,
+  deletion, or mutation was accepted.
+- Repair: directory snapshot identity excludes only `st_size`; it retains
+  device, inode, nanosecond mtime, and mode. File identities retain size, and
+  additions/removals/renames/type/file changes still fail closed.
+- Repaired PBS: `775729.kunanyi-ohpc` / `tri_liferep` ended `F` with
+  `Exit_status=0`, `Stageout_status=1`, walltime `07:32:33`, and empty stderr.
+  The requested compact evidence was present and retrieved directly.
+- Archive:
+  `4fc216392c9d32b6cc4d9b74ab4f58cdb3f5aa77a3a92516c18b99b962ea8ea0`;
+  `12` compact members. All substantive member hashes and all ten catalogue
+  snapshots passed. The original file-list byte count defect is recorded and
+  externally bound; no rerun was needed.
+- Inventory: `17,153` exact rows, `17,150` regular files, `3` symlinks, and
+  `8,375,466,742,272` allocated bytes.
+- Proposed deletion: exactly `148` full-hashed, readable, catalogued,
+  unprotected HDF5 files and `148` paired XMF sidecars. Forecast recovery is
+  `6,845,659,111,424` allocated bytes.
+- Holds/retention: `65` protected rows, `5,501` radio-held rows, `3` ambiguous
+  symlinks, `968` lineage-unproven analysis rows, and `10,320` compact
+  provenance rows.
+- Audit repair: a first ledger was rejected because it proposed the `968`
+  analysis rows without per-row regeneration lineage. Holding them sacrifices
+  only `0.0565%` of recovery and preserves `99.9435%` of practical value.
+- Required ledger SHA-256:
+  `df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92`.
+- Validator: mandatory approved digest; frozen source-inventory, contract,
+  hold, catalogue, normalized-path, transcript-freshness, archive, and complete
+  manifest checks; no execute/deletion surface.
+- Approval-time active-job gate: `qstat -u bwbrook` on
+  `<tpac-host>` at `2026-07-23T22:48:47Z` exited `0` with
+  zero active rows. Goal 047 must refresh this immediately before action.
+- Risk: the proposed raw files have no sanctioned rollback except rerunning
+  PLUTO; unselected fine-cadence trajectory information would be lost.
+- Barry approval: on 2026-07-24 Barry explicitly accepted permanent loss of
+  the raw production files bound to the exact digest above. Goal 047 is
+  authorized for only its `296` proposed production rows, subject to every
+  fresh active-job, exact identity/hash, stop-on-mismatch, transcript, and
+  post-delete gate. The `968` lineage-unproven analysis rows remain held.
+- Goal log:
+  `docs/goals/046-three-case-lifecycle-compaction-authorization/Log.md`.
+- Science note:
+  `docs/science/three_case_lifecycle_compaction_authorization_2026-07-23.md`.
 
 Latest Goal 045 X-ray cavity recovery method refinement on 2026-07-23:
 

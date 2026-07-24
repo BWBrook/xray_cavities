@@ -1,0 +1,42 @@
+{
+  "action_counts": {
+    "DELETE_PROPOSED_METADATA_ONLY": 148,
+    "DELETE_PROPOSED_UNIQUE_RAW": 148,
+    "HOLD_AMBIGUOUS": 3,
+    "HOLD_RADIO_UNRESOLVED": 5501,
+    "HOLD_REGENERATION_UNPROVEN": 968,
+    "KEEP_PROTECTED": 65,
+    "KEEP_PROVENANCE": 10320
+  },
+  "active_job_gate_sha256": "d5d1deb73b857b85d810e7b384de64cde420204ccbebba5ad2f6b5967fc07d26",
+  "active_job_gate_status": "passed",
+  "active_job_transcript_sha256": "432996613cec241cc8532a4e564c2514d9590ba037a3263d85ea5cb8226b7899",
+  "archive_listability": "passed",
+  "archive_member_count": 12,
+  "archive_sha256": "4fc216392c9d32b6cc4d9b74ab4f58cdb3f5aa77a3a92516c18b99b962ea8ea0",
+  "catalogue_membership_required": true,
+  "contract_digest_sha256": "706155240b2cf59c57dd446ff929f5963e0c64ecb221e09e8cf8db110510ea3d",
+  "deletion_capability": false,
+  "dry_run_only": true,
+  "external_archive_manifest_sha256": "d059a37e06a7c73a3dca95315f4aa2840beca78cbba4e7605ac840531974e0dd",
+  "freshness_threshold_hours": 48,
+  "known_archive_manifest_defect": "archive_file_list metadata byte count mismatch recorded; archive bytes and SHA externally bound",
+  "no_delete_without_barry_approval": true,
+  "payload_count": 17153,
+  "payload_ledger_sha256": "df05b1b2176cc326ab4297a4291ae0a303eb8a96bb478329e2f483df06a6ce92",
+  "read_only": true,
+  "schema_version": "1.0",
+  "source_inventory_counts": {
+    "allocated_bytes": 8375466742272,
+    "apparent_bytes": 8375461988950,
+    "candidate_review_count": 1264,
+    "particle_hold_count": 5501,
+    "payload_count": 17153,
+    "protected_count": 65,
+    "regular_count": 17150,
+    "root_count": 25,
+    "symlink_count": 3
+  },
+  "source_inventory_manifest_digest": "86d0bd1c53ab547c7eed84490ad93453cac637d1d980e47b5769ba976fedd8e7",
+  "status": "approval_packet_ready"
+}

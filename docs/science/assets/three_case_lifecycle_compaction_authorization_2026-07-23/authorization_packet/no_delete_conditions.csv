@@ -1,0 +1,7 @@
+condition,status,required_evidence
+Barry approval digest absent,active,exact packet digest and explicit approval
+active PBS job references any allowlisted root,active,read-only qstat evidence showing no active job
+path identity/hash changed,active,fresh inventory and full SHA-256
+symlink or incomplete pair,active,manual resolution and pair-complete inventory
+protected/held union overlap,active,anti-join clean
+archive provenance invalid,active,external archive/content manifest validation

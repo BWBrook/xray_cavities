@@ -1,0 +1,6 @@
+hold_id,status,dependency,rationale,source_evidence
+active_production,retired,active_production,No accepted production job remains an active lifecycle dependency.,docs/goals/046-three-case-lifecycle-compaction-authorization/Goal.md
+goal044_xray_validation,retired,xray_validation,Retired by Goal 045 method-refinement resolution; endpoint HDF5 remains protected.,docs/science/assets/xray_cavity_recovery_method_refinement_2026-07-23/review_products/contracts/goal045_contract_metadata.json
+level3_gravity,active,level3_gravity,Level 3 gravitational-energy convention remains unresolved; exact baselines/endpoints are protected.,docs/goals/046-three-case-lifecycle-compaction-authorization/Goal.md
+radio_particle_payloads,active,radio,All particle payloads remain held while radio/raytracing source retention is unresolved.,docs/goals/046-three-case-lifecycle-compaction-authorization/Goal.md
+three_case_comparison,retired,three_case_comparison,Retired after accepted Goal 041 three-case synthesis.,docs/goals/046-three-case-lifecycle-compaction-authorization/Goal.md

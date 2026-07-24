@@ -1,0 +1,2 @@
+path,duplicate_status,evidence,action_effect
+,none_required,No deletion proposal relies on duplicate bytes; identity and lifecycle rules are authoritative.,none

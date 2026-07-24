@@ -1,0 +1,12 @@
+./archive_checksums.sha256
+./archive_file_list.txt
+./archive_manifest.tsv
+./contract_metadata.json
+./inventory/inventory_metadata.json
+./inventory/inventory_summary.csv
+./inventory/payload_inventory.csv
+./inventory/remote_root_inventory.csv
+./protected_path_contract.csv
+./remote_root_allowlist.csv
+./scanner.log
+./validation_summary.csv

@@ -1,0 +1,10 @@
+metric,value
+root_count,25
+payload_count,17153
+regular_count,17150
+symlink_count,3
+particle_hold_count,5501
+candidate_review_count,1264
+protected_count,65
+apparent_bytes,8375461988950
+allocated_bytes,8375466742272

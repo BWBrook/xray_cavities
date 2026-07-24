@@ -1,0 +1,9 @@
+job_id=775729.kunanyi-ohpc
+host=n001.kunanyi
+started_utc=2026-07-23T14:44:12Z
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-inventory-repair
+root_contract=/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory_repair/remote_root_allowlist.csv
+protected_contract=/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory_repair/protected_path_contract.csv
+manifest_digest_sha256=86d0bd1c53ab547c7eed84490ad93453cac637d1d980e47b5769ba976fedd8e7
+4fc216392c9d32b6cc4d9b74ab4f58cdb3f5aa77a3a92516c18b99b962ea8ea0  /u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory_repair/three_case_lifecycle_inventory_repair_2026-07-24.tar.gz
+finished_utc=2026-07-23T22:16:45Z

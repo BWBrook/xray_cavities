@@ -1,0 +1,14 @@
+field,value
+job_id,775729.kunanyi-ohpc
+job_name,tri_liferep
+job_state_at_stop,Q
+queue,normal
+qtime,Fri Jul 24 00:44:12 2026
+select,1:ncpus=8:mpiprocs=1:mem=64gb
+walltime,48:00:00
+analysis_root,/scratch/bwbrook/xray_cavities_analysis/2026-07-24-three-case-lifecycle-inventory-repair
+archive,/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory_repair/three_case_lifecycle_inventory_repair_2026-07-24.tar.gz
+scanner_sha256,406cb85b27a18068a80fc1afef82dbb25200a2ab3a0b350013c8e2e9d046516c
+repair_wrapper_sha256,5250b1c68566ea49729feeaf60f207df44013f86d597c1a3b9ac1246989b9cc4
+contract_digest_sha256,706155240b2cf59c57dd446ff929f5963e0c64ecb221e09e8cf8db110510ea3d
+stop_rule_active,true

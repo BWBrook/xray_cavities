@@ -1,0 +1,5 @@
+artifact,status,rows
+remote_root_inventory.csv,passed,25
+payload_inventory.csv,passed,17153
+inventory_summary.csv,passed,9
+inventory_metadata.json,passed,1

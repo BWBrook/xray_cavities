@@ -1,0 +1,4 @@
+action,rows,recovery_mode,scientific_loss
+DELETE_PROPOSED_UNIQUE_RAW,148,rerun_PLUTO_only,fine-cadence trajectory reconstruction unavailable
+DELETE_PROPOSED_REGENERABLE,0,rerun_postprocessing_from_protected_inputs,none_if_contracts_remain_intact
+DELETE_PROPOSED_METADATA_ONLY,148,regenerate_sidecar_with_PLUTO,metadata must be regenerated

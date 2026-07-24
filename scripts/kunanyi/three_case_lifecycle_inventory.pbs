@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+#PBS -N tri_lifeinv
+#PBS -q normal
+#PBS -l select=1:ncpus=8:mpiprocs=1:mem=64gb
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory/three_case_lifecycle_inventory.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory/three_case_lifecycle_inventory.err
+
+set -euo pipefail
+
+STAGE_DIR="${STAGE_DIR:-/u/bwbrook/codex_kunanyi/goal046_three_case_lifecycle_inventory}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-23-three-case-lifecycle-inventory}"
+SCANNER="${SCANNER:-$STAGE_DIR/inventory_three_case_lifecycle.py}"
+ROOT_CONTRACT="${ROOT_CONTRACT:-$STAGE_DIR/remote_root_allowlist.csv}"
+PROTECTED_CONTRACT="${PROTECTED_CONTRACT:-$STAGE_DIR/protected_path_contract.csv}"
+CONTRACT_METADATA="${CONTRACT_METADATA:-$STAGE_DIR/contract_metadata.json}"
+INVENTORY_DIR="${INVENTORY_DIR:-$ANALYSIS_ROOT/inventory}"
+ARCHIVE="${ARCHIVE:-$STAGE_DIR/three_case_lifecycle_inventory_2026-07-23.tar.gz}"
+ARCHIVE_RESERVATION="${ARCHIVE_RESERVATION:-$ARCHIVE.reservation}"
+ARCHIVE_TMP="${ARCHIVE_TMP:-$ARCHIVE_RESERVATION/$(basename "$ARCHIVE").tmp}"
+ARCHIVE_PAYLOAD="${ARCHIVE_PAYLOAD:-$ANALYSIS_ROOT/archive_payload}"
+ARCHIVE_PAYLOAD_TMP="${ARCHIVE_PAYLOAD_TMP:-$ANALYSIS_ROOT/archive_payload.tmp}"
+
+for path in "$SCANNER" "$ROOT_CONTRACT" "$PROTECTED_CONTRACT" "$CONTRACT_METADATA"; do
+  test -r "$path" || { echo "missing required input: $path" >&2; exit 2; }
+done
+if [ -e "$ANALYSIS_ROOT" ] || [ -e "$ARCHIVE" ] || [ -e "$ARCHIVE_RESERVATION" ] || [ -e "$ARCHIVE_PAYLOAD" ] || [ -e "$ARCHIVE_PAYLOAD_TMP" ]; then
+  echo "refusing to overwrite an existing Goal 046 output" >&2
+  exit 2
+fi
+
+echo "job_id=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "root_contract=$ROOT_CONTRACT"
+echo "protected_contract=$PROTECTED_CONTRACT"
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+"$PYTHON" -m py_compile "$SCANNER"
+"$PYTHON" - "$ROOT_CONTRACT" "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_RESERVATION" <<'PY'
+import csv
+import sys
+from pathlib import Path
+
+contract, *outputs = map(Path, sys.argv[1:])
+with contract.open(newline="") as handle:
+    roots = [Path(row["root_path"]).expanduser().absolute().resolve() for row in csv.DictReader(handle)]
+for candidate in outputs:
+    resolved = candidate.expanduser().absolute().resolve(strict=False)
+    if any(resolved == root or root in resolved.parents for root in roots):
+        raise SystemExit(f"refusing output reservation inside allowlisted root: {candidate}")
+PY
+mkdir "$ANALYSIS_ROOT"
+mkdir "$ARCHIVE_RESERVATION"
+trap 'rmdir "$ARCHIVE_RESERVATION" 2>/dev/null || true' EXIT
+
+# The scanner is contract-driven and never follows symlinks or mutates an
+# inventoried root.  Its output directory is deliberately outside all roots.
+"$PYTHON" "$SCANNER" \
+  --root-contract "$ROOT_CONTRACT" \
+  --protected-contract "$PROTECTED_CONTRACT" \
+  --contract-metadata "$CONTRACT_METADATA" \
+  --output-dir "$INVENTORY_DIR" \
+  --read-hdf5-metadata \
+  --max-workers 8 | tee "$ANALYSIS_ROOT/scanner.log"
+
+VALIDATION="$ANALYSIS_ROOT/validation_summary.csv"
+"$PYTHON" - "$INVENTORY_DIR" "$VALIDATION" <<'PY'
+import csv
+import json
+import sys
+from pathlib import Path
+
+inventory, validation_path = map(Path, sys.argv[1:])
+required_csvs = (
+    "remote_root_inventory.csv",
+    "payload_inventory.csv",
+    "inventory_summary.csv",
+)
+rows = []
+for name in required_csvs:
+    path = inventory / name
+    if not path.is_file():
+        raise SystemExit(f"missing report: {path}")
+    with path.open(newline="") as handle:
+        reader = csv.DictReader(handle)
+        if not reader.fieldnames or len(reader.fieldnames) != len(set(reader.fieldnames)):
+            raise SystemExit(f"invalid report header: {path}")
+        data = list(reader)
+    if not data:
+        raise SystemExit(f"empty report: {path}")
+    rows.append((name, "passed", str(len(data))))
+metadata_path = inventory / "inventory_metadata.json"
+metadata = json.loads(metadata_path.read_text())
+for key, expected in (("read_only", True), ("follow_symlinks", False), ("deletion_capability", False)):
+    if metadata.get(key) is not expected:
+        raise SystemExit(f"metadata contract failed: {key}={metadata.get(key)!r}")
+rows.append((metadata_path.name, "passed", "1"))
+with validation_path.open("w", newline="") as handle:
+    writer = csv.writer(handle, lineterminator="\n")
+    writer.writerow(("artifact", "status", "rows"))
+    writer.writerows(rows)
+PY
+
+if [ -e "$ARCHIVE_PAYLOAD_TMP" ] || [ -e "$ARCHIVE_PAYLOAD" ] || [ -e "$ARCHIVE" ]; then
+  echo "refusing to overwrite archive output" >&2
+  exit 2
+fi
+mkdir "$ARCHIVE_PAYLOAD_TMP"
+mkdir "$ARCHIVE_PAYLOAD_TMP/inventory"
+cp "$INVENTORY_DIR/remote_root_inventory.csv" "$ARCHIVE_PAYLOAD_TMP/inventory/"
+cp "$INVENTORY_DIR/payload_inventory.csv" "$ARCHIVE_PAYLOAD_TMP/inventory/"
+cp "$INVENTORY_DIR/inventory_summary.csv" "$ARCHIVE_PAYLOAD_TMP/inventory/"
+cp "$INVENTORY_DIR/inventory_metadata.json" "$ARCHIVE_PAYLOAD_TMP/inventory/"
+cp "$VALIDATION" "$ARCHIVE_PAYLOAD_TMP/"
+cp "$ROOT_CONTRACT" "$PROTECTED_CONTRACT" "$CONTRACT_METADATA" "$ARCHIVE_PAYLOAD_TMP/"
+cp "$ANALYSIS_ROOT/scanner.log" "$ARCHIVE_PAYLOAD_TMP/"
+
+(
+  cd "$ARCHIVE_PAYLOAD_TMP"
+  find . -type f \
+    ! -name archive_checksums.sha256 \
+    ! -name archive_content_file_list.txt \
+    ! -name archive_file_list.txt \
+    ! -name archive_manifest.tsv \
+    -print | sort > archive_content_file_list.txt
+  sha256sum $(cat archive_content_file_list.txt) | sort > archive_checksums.sha256
+  # manifest_scope=content_files_plus_checksums_and_content_list
+  printf 'relative_path\tbytes\n' > archive_manifest.tsv
+  while IFS= read -r relative; do
+    printf '%s\t%s\n' "$relative" "$(stat -c %s "$relative")" >> archive_manifest.tsv
+  done < <(
+    {
+      cat archive_content_file_list.txt
+      printf './archive_checksums.sha256\n./archive_content_file_list.txt\n'
+    } | sort
+  )
+  {
+    cat archive_content_file_list.txt
+    printf './archive_checksums.sha256\n'
+    printf './archive_content_file_list.txt\n'
+    printf './archive_manifest.tsv\n./archive_file_list.txt\n'
+  } | sort > archive_file_list.txt
+  # archive_file_list.txt and archive_manifest.tsv are intentionally outside manifest byte coverage.
+)
+mv "$ARCHIVE_PAYLOAD_TMP" "$ARCHIVE_PAYLOAD"
+if [ -e "$ARCHIVE_TMP" ]; then
+  echo "refusing to overwrite temporary archive output" >&2
+  exit 2
+fi
+tar -czf "$ARCHIVE_TMP" -C "$ARCHIVE_PAYLOAD" --files-from "$ARCHIVE_PAYLOAD/archive_file_list.txt"
+tar -tzf "$ARCHIVE_TMP" >/dev/null
+"$PYTHON" - "$ARCHIVE_TMP" "$ARCHIVE" <<'PY'
+import os
+import sys
+from pathlib import Path
+
+source, destination = map(Path, sys.argv[1:])
+try:
+    os.link(source, destination)
+except FileExistsError as exc:
+    raise SystemExit(f"refusing to overwrite published archive: {destination}") from exc
+finally:
+    try:
+        source.unlink()
+    except FileNotFoundError:
+        pass
+PY
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
