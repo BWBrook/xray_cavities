@@ -1,0 +1,17 @@
+metric,value,source
+job_id,779693.kunanyi-ohpc,qstat -x
+job_name,g_lo_adrec,qstat -x
+job_state,F,qstat -x
+exit_status,3,qstat -x
+stageout_status,1,qstat -x
+walltime,00:41:46,qstat -x and Barry completion email
+cput,03:57:33,qstat -x and Barry completion email
+cpupercent,677,qstat -x and Barry completion email
+mem_kb,779380,qstat -x and Barry completion email
+vmem_kb,4935264,qstat -x and Barry completion email
+ncpus,1,qstat -x and Barry completion email
+archive_sha256,71f40e9510834acbc4475bfa59b4e22faddbba0a32dd343dcdef3b81956cf3f8,retrieved archive
+stdout_sha256,f67239d9ef161cece82b55f73efa5830de87dd9025b055b2ab58a13da4bfce48,retrieved stdout
+stderr_sha256,8ac1c21c25676001488912a65011252866c42e35282f7a5a7fd1f6c5310610f9,retrieved stderr
+infrastructure_status,passed,archive stdout stderr and summary present
+scheduler_decision,scientific_fail_exit_3,wrapper contract

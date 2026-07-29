@@ -1,0 +1,13 @@
+field,value
+job_id,777007.kunanyi-ohpc
+job_name,g_lo_prdiag
+state_at_stop,R
+queue,normal
+qtime,Sun Jul 26 22:32:27 2026
+select,1:ncpus=1:mpiprocs=1:mem=32gb
+walltime,02:00:00
+stage_root,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_history_diagnostic_777006
+analysis_root,/scratch/bwbrook/xray_cavities_analysis/2026-07-26-g-lo-pressure-history-diagnostic-777006
+cache_mode,read_only
+science_retry,false
+stop_rule,active

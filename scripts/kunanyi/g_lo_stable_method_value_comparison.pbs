@@ -1,0 +1,227 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_stmv
+#PBS -q normal
+#PBS -l select=1:ncpus=16:mpiprocs=1:mem=96gb
+#PBS -l walltime=12:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison/g_lo_stable_method_value_comparison.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison/g_lo_stable_method_value_comparison.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+SELECTION_CSV="${SELECTION_CSV:-$STAGE_ROOT/pressure_method_selection.csv}"
+EXPECTED_CACHE_SHA256="${EXPECTED_CACHE_SHA256:-f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30}"
+EXPECTED_SELECTION_SHA256="${EXPECTED_SELECTION_SHA256:-35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df}"
+EXPECTED_SELECTION_COUNT="${EXPECTED_SELECTION_COUNT:-4096}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison}"
+SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_stable_method_value.py"
+RECURRENCE_SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_full_loss_recurrence.py"
+ADIABATIC_SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_adiabatic_recovery.py"
+PRESSURE_SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_pressure_method_value.py"
+RUNNER="$STAGE_ROOT/scripts/science/run_g_lo_radio_history_value.py"
+METHOD_HELPER="$STAGE_ROOT/scripts/science/g_lo_radio_method_value.py"
+HISTORY_HELPER="$STAGE_ROOT/scripts/science/g_lo_particle_history.py"
+PYTHON_COMPAT="$STAGE_ROOT/scripts/kunanyi/python_compat"
+PLUTOKORE_SOURCE="$STAGE_ROOT/plutokore"
+PLUTOKORE_COMMIT_PROOF="$STAGE_ROOT/plutokore_commit.txt"
+EXPECTED_PLUTOKORE_COMMIT="e80252cf35ff5a06166240e2867d3d485aaf6956"
+STAGED_SHA256="$STAGE_ROOT/staged_inputs.sha256"
+ARCHIVE="$STAGE_ROOT/g_lo_stable_method_value_comparison_2026-07-29.tar.gz"
+ARCHIVE_PAYLOAD="$STAGE_ROOT/archive_payload"
+ARCHIVE_PAYLOAD_ROOT="$ARCHIVE_PAYLOAD/$(basename "$ANALYSIS_ROOT")"
+ARCHIVE_FILE_LIST="$ARCHIVE_PAYLOAD/archive_file_list.txt"
+RUN_LOCK="${RUN_LOCK:-$STAGE_ROOT/.g_lo_stable_method_value_comparison.lock}"
+OUTPUT_NAMES=(
+  stable_method_value_selection.csv
+  stable_method_value_unsmoothed_branches.npz
+  stable_method_value_log_savgol_branches.npz
+  stable_method_value_particle_comparison.csv
+  stable_method_value_ordering.csv
+  stable_method_value_cutoff_records.csv
+  stable_method_value_gate_summary.csv
+  stable_method_value_summary.json
+)
+
+lock_acquired=0
+release_run_lock() {
+  if [[ "$lock_acquired" -eq 1 ]]; then
+    rmdir "$RUN_LOCK" 2>/dev/null || true
+  fi
+}
+trap release_run_lock EXIT
+if ! mkdir "$RUN_LOCK"; then
+  echo "another Goal 051 run owns the stage lock: $RUN_LOCK" >&2
+  exit 2
+fi
+lock_acquired=1
+
+for path in \
+  "$SCRIPT" "$RECURRENCE_SCRIPT" "$ADIABATIC_SCRIPT" "$PRESSURE_SCRIPT" \
+  "$RUNNER" "$METHOD_HELPER" "$HISTORY_HELPER" "$PYTHON_COMPAT/hdf5plugin.py" \
+  "$PLUTOKORE_SOURCE/src/plutokore/radio/praise.py" \
+  "$PLUTOKORE_COMMIT_PROOF" "$STAGED_SHA256" "$CACHE" "$SELECTION_CSV"
+do
+  test -r "$path" || {
+    echo "missing required Goal 051 input: $path" >&2
+    exit 2
+  }
+done
+for path in "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_PAYLOAD"; do
+  test ! -e "$path" && test ! -L "$path" || {
+    echo "refusing to overwrite Goal 051 output: $path" >&2
+    exit 2
+  }
+done
+if grep -Eq '(/__pycache__/|\.(pyc|pyo)$)' "$STAGED_SHA256"; then
+  echo "staged manifest must not bind generated Python bytecode" >&2
+  exit 2
+fi
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+actual_plutokore_commit="$(tr -d '[:space:]' < "$PLUTOKORE_COMMIT_PROOF")"
+test "$actual_plutokore_commit" = "$EXPECTED_PLUTOKORE_COMMIT" || {
+  echo "pinned plutokore commit mismatch: $actual_plutokore_commit" >&2
+  exit 2
+}
+if command -v git >/dev/null 2>&1 \
+  && git -C "$PLUTOKORE_SOURCE" rev-parse --is-inside-work-tree >/dev/null 2>&1
+then
+  live_plutokore_commit="$(git -C "$PLUTOKORE_SOURCE" rev-parse HEAD)"
+  test "$live_plutokore_commit" = "$actual_plutokore_commit" || {
+    echo "live plutokore commit differs from staged proof" >&2
+    exit 2
+  }
+fi
+printf '%s  %s\n' "$EXPECTED_CACHE_SHA256" "$CACHE" | sha256sum --check -
+printf '%s  %s\n' "$EXPECTED_SELECTION_SHA256" "$SELECTION_CSV" | sha256sum --check -
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$PYTHON_COMPAT:$PLUTOKORE_SOURCE/src:$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=16
+export NUMBA_NUM_THREADS=16
+export GOAL051_VERIFIED_PLUTOKORE_COMMIT="$actual_plutokore_commit"
+
+"$PYTHON" - <<'PY'
+from scripts.science.diagnose_g_lo_stable_method_value import diagnose_stable_method_value
+from scripts.science.diagnose_g_lo_full_loss_recurrence import stable_full_loss_trajectory
+from scripts.science.diagnose_g_lo_adiabatic_recovery import stable_adiabatic_trajectory
+from scripts.science.diagnose_g_lo_pressure_method_value import construct_deterministic_sample
+from scripts.science.g_lo_radio_method_value import calculate_praise_pair
+
+for function in (
+    diagnose_stable_method_value,
+    stable_full_loss_trajectory,
+    stable_adiabatic_trajectory,
+    construct_deterministic_sample,
+    calculate_praise_pair,
+):
+    assert callable(function)
+print("runtime_import_preflight=passed")
+PY
+
+set +e
+"$PYTHON" "$SCRIPT" \
+  --cache "$CACHE" \
+  --selection-csv "$SELECTION_CSV" \
+  --output-dir "$ANALYSIS_ROOT" \
+  --expected-cache-sha256 "$EXPECTED_CACHE_SHA256" \
+  --expected-selection-sha256 "$EXPECTED_SELECTION_SHA256"
+diagnostic_rc=$?
+set -e
+
+mkdir -p "$ARCHIVE_PAYLOAD_ROOT"
+cp -p "$STAGED_SHA256" "$ARCHIVE_PAYLOAD_ROOT/staged_inputs.sha256"
+cp -p "$PLUTOKORE_COMMIT_PROOF" "$ARCHIVE_PAYLOAD_ROOT/plutokore_commit.txt"
+cp -p "$SELECTION_CSV" "$ARCHIVE_PAYLOAD_ROOT/selection_input.csv"
+if test -d "$ANALYSIS_ROOT"; then
+  for name in "${OUTPUT_NAMES[@]}"; do
+    if test -e "$ANALYSIS_ROOT/$name"; then
+      cp -p "$ANALYSIS_ROOT/$name" "$ARCHIVE_PAYLOAD_ROOT/$name"
+    fi
+  done
+else
+  printf 'diagnostic_rc=%s\n' "$diagnostic_rc" > "$ARCHIVE_PAYLOAD_ROOT/diagnostic_failure.txt"
+fi
+{
+  printf './%s/staged_inputs.sha256\n' "$(basename "$ANALYSIS_ROOT")"
+  printf './%s/plutokore_commit.txt\n' "$(basename "$ANALYSIS_ROOT")"
+  printf './%s/selection_input.csv\n' "$(basename "$ANALYSIS_ROOT")"
+  for name in "${OUTPUT_NAMES[@]}" diagnostic_failure.txt; do
+    if test -e "$ARCHIVE_PAYLOAD_ROOT/$name"; then
+      printf './%s/%s\n' "$(basename "$ANALYSIS_ROOT")" "$name"
+    fi
+  done
+  printf './archive_file_list.txt\n'
+} > "$ARCHIVE_FILE_LIST"
+archive_tmp="$ARCHIVE.tmp.${PBS_JOBID:-manual}"
+test ! -e "$archive_tmp" && test ! -L "$archive_tmp" || {
+  echo "refusing to overwrite Goal 051 archive temporary: $archive_tmp" >&2
+  exit 2
+}
+tar -C "$ARCHIVE_PAYLOAD" -czf "$archive_tmp" --files-from "$ARCHIVE_FILE_LIST"
+tar -tzf "$archive_tmp" >/dev/null
+mv "$archive_tmp" "$ARCHIVE"
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+SUMMARY_JSON="$ANALYSIS_ROOT/stable_method_value_summary.json"
+if ! [[ "$diagnostic_rc" =~ ^(0|3)$ ]] || ! test -s "$SUMMARY_JSON"; then
+  echo "stable_method_value_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if ! validation="$("$PYTHON" - "$SUMMARY_JSON" "$EXPECTED_SELECTION_COUNT" <<'PY'
+import json
+import sys
+from collections.abc import Mapping
+
+summary = json.loads(open(sys.argv[1]).read())
+expected = int(sys.argv[2])
+if summary.get("status") != "diagnostic_complete":
+    raise SystemExit("diagnostic status is not diagnostic_complete")
+selection_count = summary.get("selection_count")
+if selection_count is None:
+    selection_count = summary.get("selection", {}).get("sample_size_selected")
+if int(selection_count) != expected:
+    raise SystemExit(f"selection count mismatch: {selection_count!r} != {expected}")
+stable = summary.get("stable_gates", summary.get("gates"))
+infrastructure = summary.get(
+    "infrastructure_gates", summary.get("infrastructure")
+)
+if not isinstance(stable, Mapping) or not isinstance(infrastructure, Mapping):
+    raise SystemExit("declared stable/infrastructure gates are missing")
+if not all(isinstance(value, bool) for value in stable.values()):
+    raise SystemExit("stable gate values are not Boolean")
+if not all(isinstance(value, bool) for value in infrastructure.values()):
+    raise SystemExit("infrastructure gate values are not Boolean")
+decision = summary.get("decision")
+if decision not in {"PASS", "FAIL", "HOLD_FOR_CUTOFF_REVIEW"}:
+    raise SystemExit(f"invalid scientific decision: {decision!r}")
+print(decision)
+PY
+)"; then
+  echo "stable_method_value_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if { test "$diagnostic_rc" -eq 0 && [[ "$validation" != "PASS" ]]; } || \
+   { test "$diagnostic_rc" -eq 3 && [[ "$validation" == "PASS" ]]; }; then
+  echo "stable_method_value_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if [[ "$validation" == "HOLD_FOR_CUTOFF_REVIEW" ]]; then
+  echo "stable_method_value_science_gate=HOLD_FOR_CUTOFF_REVIEW evidence_archived=1" >&2
+  exit 3
+fi
+if [[ "$validation" != "PASS" ]]; then
+  echo "stable_method_value_science_gate=FAIL evidence_archived=1" >&2
+  exit 3
+fi
+echo "stable_method_value_science_gate=PASS evidence_archived=1"

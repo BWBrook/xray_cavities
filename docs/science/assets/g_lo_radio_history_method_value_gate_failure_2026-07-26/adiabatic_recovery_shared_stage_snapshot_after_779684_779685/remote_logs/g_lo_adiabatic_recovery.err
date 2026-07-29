@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery/scripts/science/diagnose_g_lo_adiabatic_recovery.py", line 882, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery/scripts/science/diagnose_g_lo_adiabatic_recovery.py", line 867, in main
+    summary = diagnose_recovery(
+              ^^^^^^^^^^^^^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery/scripts/science/diagnose_g_lo_adiabatic_recovery.py", line 772, in diagnose_recovery
+    raw = _read_treated_sample(h5, selected_rows, plan)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery/scripts/science/diagnose_g_lo_pressure_method_value.py", line 576, in _read_treated_sample
+    "physical_ids": np.asarray(h5["endpoint_ids"][rows], dtype=np.int64),
+                               ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/h5py/_hl/dataset.py", line 831, in __getitem__
+    selection = sel.select(self.shape, args, dataset=self)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/h5py/_hl/selections.py", line 82, in select
+    return selector.make_selection(args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "h5py/_selector.pyx", line 282, in h5py._selector.Selector.make_selection
+  File "h5py/_selector.pyx", line 215, in h5py._selector.Selector.apply_args
+TypeError: Indexing elements must be in increasing order
+adiabatic_recovery_infrastructure=FAIL evidence_archived=1

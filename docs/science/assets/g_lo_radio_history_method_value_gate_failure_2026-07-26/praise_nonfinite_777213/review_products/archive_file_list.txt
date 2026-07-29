@@ -1,0 +1,11 @@
+./2026-07-27-g-lo-praise-nonfinite-forensic/staged_inputs.sha256
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_selection.csv
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_selection_metadata.json
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_unsmoothed_checkpoint.json
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_unsmoothed_records.csv
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_log_savgol_checkpoint.json
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_log_savgol_records.csv
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_records.csv
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_summary.json
+./2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_decision.csv
+./archive_file_list.txt

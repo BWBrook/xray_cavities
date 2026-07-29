@@ -1,0 +1,189 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_pmvalue
+#PBS -q normal
+#PBS -l select=1:ncpus=16:mpiprocs=1:mem=96gb
+#PBS -l walltime=12:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5/g_lo_pressure_method_value_diagnostic.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5/g_lo_pressure_method_value_diagnostic.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+AFFECTED_ROWS="${AFFECTED_ROWS:-$STAGE_ROOT/pressure_smoothing_affected_rows.csv}"
+EXPECTED_CACHE_SHA256="${EXPECTED_CACHE_SHA256:-f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30}"
+EXPECTED_AFFECTED_ROWS_SHA256="${EXPECTED_AFFECTED_ROWS_SHA256:-85caef2184edd7786e4d791fd52e77e422269bb6a156a48047d3c7901e4d79f2}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5}"
+SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_pressure_method_value.py"
+RUNNER="$STAGE_ROOT/scripts/science/run_g_lo_radio_history_value.py"
+METHOD_HELPER="$STAGE_ROOT/scripts/science/g_lo_radio_method_value.py"
+HISTORY_HELPER="$STAGE_ROOT/scripts/science/g_lo_particle_history.py"
+PLUTOKORE_SOURCE="${PLUTOKORE_SOURCE:-$STAGE_ROOT/plutokore}"
+PYTHON_COMPAT="${PYTHON_COMPAT:-$STAGE_ROOT/scripts/kunanyi/python_compat}"
+STAGED_SHA256="$STAGE_ROOT/staged_inputs.sha256"
+ARCHIVE="$STAGE_ROOT/g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5_2026-07-28.tar.gz"
+ARCHIVE_PAYLOAD="$STAGE_ROOT/archive_payload"
+ARCHIVE_PAYLOAD_ROOT="$ARCHIVE_PAYLOAD/$(basename "$ANALYSIS_ROOT")"
+ARCHIVE_FILE_LIST="$ARCHIVE_PAYLOAD/archive_file_list.txt"
+
+for path in \
+  "$SCRIPT" "$RUNNER" "$METHOD_HELPER" "$HISTORY_HELPER" \
+  "$PLUTOKORE_SOURCE" "$PYTHON_COMPAT" "$STAGED_SHA256" "$CACHE" "$AFFECTED_ROWS"
+do
+  test -r "$path" || {
+    echo "missing required pressure-method diagnostic input: $path" >&2
+    exit 2
+  }
+done
+for path in "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_PAYLOAD"; do
+  test ! -e "$path" && test ! -L "$path" || {
+    echo "refusing to overwrite pressure-method diagnostic output: $path" >&2
+    exit 2
+  }
+done
+if grep -Eq '(/__pycache__/|\.(pyc|pyo)$)' "$STAGED_SHA256"; then
+  echo "staged manifest must not bind generated Python bytecode" >&2
+  exit 2
+fi
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+printf '%s  %s\n' "$EXPECTED_CACHE_SHA256" "$CACHE" | sha256sum --check -
+printf '%s  %s\n' "$EXPECTED_AFFECTED_ROWS_SHA256" "$AFFECTED_ROWS" | sha256sum --check -
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$PYTHON_COMPAT:$PLUTOKORE_SOURCE/src:$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=16
+export NUMBA_NUM_THREADS=16
+
+"$PYTHON" - <<'PY'
+from scripts.science.diagnose_g_lo_pressure_method_value import diagnose_pressure_method_value
+from scripts.science.g_lo_radio_method_value import PRESSURE_MODES, calculate_praise_pair
+from plutokore.radio.praise import calculate_praise_emissivity_numba
+
+assert PRESSURE_MODES == ("unsmoothed", "log_savgol")
+assert callable(diagnose_pressure_method_value)
+assert callable(calculate_praise_pair)
+assert callable(calculate_praise_emissivity_numba)
+print("runtime_import_preflight=passed")
+PY
+
+"$PYTHON" "$SCRIPT" \
+  --cache "$CACHE" \
+  --affected-rows-csv "$AFFECTED_ROWS" \
+  --output-dir "$ANALYSIS_ROOT" \
+  --sample-size 4096 \
+  --row-chunk 512 \
+  --expected-trim-rows 10030 \
+  --expected-no-positive-rows 2 \
+  --expected-single-record-rows 48 \
+  --expected-trim-single-record-overlap-rows 2
+
+for name in \
+  pressure_method_selection.csv \
+  pressure_method_unsmoothed_emissivity_checkpoint.npz \
+  pressure_method_log_savgol_emissivity_checkpoint.npz \
+  pressure_method_particle_comparison.csv \
+  pressure_method_full_reference_ordering.csv \
+  pressure_method_gamma_fallback_summary.csv \
+  pressure_method_gamma_fallback_records.csv \
+  pressure_method_nonfinite_emissivity_summary.csv \
+  pressure_method_nonfinite_emissivity_records.csv \
+  pressure_method_summary.csv \
+  pressure_method_summary.json
+do
+  test -s "$ANALYSIS_ROOT/$name"
+done
+"$PYTHON" - "$ANALYSIS_ROOT/pressure_method_summary.json" <<'PY'
+import json
+import sys
+
+with open(sys.argv[1]) as handle:
+    summary = json.load(handle)
+if summary.get("status") != "diagnostic_complete":
+    raise SystemExit("pressure-method diagnostic did not complete")
+if summary["selection"]["sample_size_selected"] != 4096:
+    raise SystemExit("pressure-method diagnostic did not select exactly 4096 rows")
+if summary["pressure_treatment_counts"] != {
+    "trim_rows": 10030,
+    "excluded_rows": 2,
+    "single_record_rows": 48,
+    "trim_single_record_overlap_rows": 2,
+}:
+    raise SystemExit("pressure-treatment aggregate contract mismatch")
+if summary["pressure_modes"]["primary"]["pressure_mode"] != "unsmoothed":
+    raise SystemExit("primary pressure mode mismatch")
+if summary["pressure_modes"]["comparator"]["pressure_mode"] != "log_savgol":
+    raise SystemExit("comparator pressure mode mismatch")
+for key in ("primary", "comparator"):
+    if summary["pressure_modes"][key]["loss_branches"] != [
+        "full", "adiabatic", "none"
+    ]:
+        raise SystemExit(f"{key} loss-branch contract mismatch")
+if summary["comparison"]["comparison_semantics"]["none_branch_is_upper_bound"]:
+    raise SystemExit("losses='none' must not be treated as a universal upper bound")
+print(f"pressure_method_value_validation=passed decision={summary['decision']}")
+PY
+
+mkdir -p "$ARCHIVE_PAYLOAD_ROOT"
+cp -p "$STAGED_SHA256" "$ARCHIVE_PAYLOAD_ROOT/staged_inputs.sha256"
+for name in \
+  pressure_method_selection.csv \
+  pressure_method_unsmoothed_emissivity_checkpoint.npz \
+  pressure_method_log_savgol_emissivity_checkpoint.npz \
+  pressure_method_particle_comparison.csv \
+  pressure_method_full_reference_ordering.csv \
+  pressure_method_gamma_fallback_summary.csv \
+  pressure_method_gamma_fallback_records.csv \
+  pressure_method_nonfinite_emissivity_summary.csv \
+  pressure_method_nonfinite_emissivity_records.csv \
+  pressure_method_summary.csv \
+  pressure_method_summary.json
+do
+  cp -p "$ANALYSIS_ROOT/$name" "$ARCHIVE_PAYLOAD_ROOT/$name"
+done
+{
+  printf './%s/staged_inputs.sha256\n' "$(basename "$ANALYSIS_ROOT")"
+  for name in \
+    pressure_method_selection.csv \
+    pressure_method_unsmoothed_emissivity_checkpoint.npz \
+    pressure_method_log_savgol_emissivity_checkpoint.npz \
+    pressure_method_particle_comparison.csv \
+    pressure_method_full_reference_ordering.csv \
+  pressure_method_gamma_fallback_summary.csv \
+  pressure_method_gamma_fallback_records.csv \
+  pressure_method_nonfinite_emissivity_summary.csv \
+  pressure_method_nonfinite_emissivity_records.csv \
+  pressure_method_summary.csv \
+    pressure_method_summary.json
+  do
+    printf './%s/%s\n' "$(basename "$ANALYSIS_ROOT")" "$name"
+  done
+  printf './archive_file_list.txt\n'
+} > "$ARCHIVE_FILE_LIST"
+archive_tmp="$ARCHIVE.tmp.${PBS_JOBID:-manual}"
+tar -C "$ARCHIVE_PAYLOAD" -czf "$archive_tmp" --files-from "$ARCHIVE_FILE_LIST"
+tar -tzf "$archive_tmp" >/dev/null
+mv "$archive_tmp" "$ARCHIVE"
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+scientific_decision="$("$PYTHON" - "$ANALYSIS_ROOT/pressure_method_summary.json" <<'PY'
+import json
+import sys
+
+with open(sys.argv[1]) as handle:
+    print(json.load(handle)["decision"])
+PY
+)"
+if [[ "$scientific_decision" != "PASS" ]]; then
+  echo "pressure_method_science_gate=FAIL evidence_archived=1" >&2
+  exit 3
+fi

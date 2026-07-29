@@ -1,0 +1,14 @@
+gate_id,criterion,requirement,status,passed,evidence_type,source_evidence,failure_reason
+full_history_C-HI,full_comparable_history,C-HI retains complete post-injection particle history,fail,false,observed,source_inventory.csv,accepted endpoint lineage is sparse and does not retain the complete history
+full_history_C-LO,full_comparable_history,C-LO retains complete post-injection particle history,fail,false,observed,source_inventory.csv,accepted endpoint lineage is sparse and does not retain the complete history
+full_history_G-LO,full_comparable_history,G-LO retains complete post-injection particle history,pending,false,inferred,source_inventory.csv,ID/time/schema/continuation-seam checks required
+full_history_all_cases,full_comparable_history,all three cases retain complete comparable post-injection histories,fail,false,inferred,source_inventory.csv,C-HI/C-LO are sparse and G-LO remains candidate_history_coverage pending ID/time/schema/seam checks
+runtime_semantics_resolved,runtime_semantics_resolved,current method has one verified semantic contract,pending,false,decision,runtime_semantics_audit.csv,legacy xraise ambiguity is rejected_not_blocking; current plutokore correctness and raytracing gates remain pending
+common_method,identical_method_across_cases,"same loss-aware method, frequencies, views, beam/grid/support",required,false,decision,Goal 048 protocol decision,execution is not authorized while source history or current method validation remains pending
+current_plutokore_correctness,current_plutokore_correctness,function-level correctness validation for current plutokore implementation,pending,false,decision,runtime_semantics_audit.csv,source review and hashes are provenance only; function-level validation has not run
+current_plutokore_raytracing,current_plutokore_raytracing,function-level raytracing validation for current plutokore implementation,pending,false,decision,runtime_semantics_audit.csv,candidate method is not production-validated
+frequencies,frequencies,150 MHz and 1.4 GHz,fixture_protocol,true,decision,Goal 048 protocol decision,
+views,view_angles,"0, 45, and 90 degrees",fixture_protocol,true,decision,Goal 048 protocol decision,
+numerical_fixtures,acceptance_reference_fixtures,"acceptance-reference LOS, normalized convolution, and symmetric rotation fixtures",acceptance_reference_fixture,true,decision,builder numerical helpers and focused tests,fixtures are mathematical acceptance references and do not validate a production raytracer
+mixed_method_rejection,mixed_method_rejection,reject loss-aware/lossless mixing,validated_local_gate,true,decision,evaluate_common_loss_aware_gate,
+overall,common_loss_aware_execution,all required gates pass,blocked,false,decision,method_acceptance_gate.csv,G-LO method/value gate and current plutokore validation remain pending

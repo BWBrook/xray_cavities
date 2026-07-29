@@ -1,0 +1,24 @@
+field,value
+job_id,779183.kunanyi-ohpc
+job_name,g_lo_pmvalue
+job_state,R
+queue,normal
+qtime,Tue Jul 28 11:39:59 2026
+requested_select,1:ncpus=16:mpiprocs=1:mem=96gb
+requested_walltime,12:00:00
+stage,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5
+analysis,/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5
+archive,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5/g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5_2026-07-28.tar.gz
+manifest_entries,120
+diagnostic_sha256,3ecdf589d9bc4a18d24219788c6b4a4e4002618ba1b2b2ec30dc76bee216d1dc
+adapter_sha256,b029fb0fb5ec1024d8948b60dc9209bd03c5b86976725a17b8c99dea0e04ba4c
+wrapper_sha256,967d0e280ba84824f7b5424f4ac2c62eb730c4f85192776046fb7272998a9d97
+cache_sha256,f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30
+affected_rows_sha256,85caef2184edd7786e4d791fd52e77e422269bb6a156a48047d3c7901e4d79f2
+runtime_import_preflight,passed
+remote_hash_preflight,passed
+wrapper_syntax_preflight,passed
+no_overwrite_preflight,passed
+local_focused_tests,107 passed in 6.11s
+independent_review,GO
+stop_rule,invoked_after_running_state_verification

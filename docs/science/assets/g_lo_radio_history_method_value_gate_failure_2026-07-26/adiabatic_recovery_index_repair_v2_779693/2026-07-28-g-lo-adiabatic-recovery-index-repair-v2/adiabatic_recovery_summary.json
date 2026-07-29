@@ -1,0 +1,97 @@
+{
+  "archived_failure_reproduction": {
+    "by_pressure_mode": {
+      "log_savgol": {
+        "expected_count": 2,
+        "missing_count": 0,
+        "missing_strata": [],
+        "reproduced_count": 2
+      },
+      "unsmoothed": {
+        "expected_count": 2,
+        "missing_count": 0,
+        "missing_strata": [],
+        "reproduced_count": 2
+      }
+    },
+    "expected_count": 4,
+    "gate_passed": true,
+    "missing_count": 0,
+    "reproduced_count": 4
+  },
+  "cache_sha256": "f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30",
+  "decision": "FAIL",
+  "frequencies_GHz": [
+    0.15,
+    1.4
+  ],
+  "full_a2_arr": {
+    "preshock_nonfinite_count": 4960,
+    "relevant_nonfinite_count": 22737
+  },
+  "full_ap_arr": {
+    "preshock_nonfinite_count": 0,
+    "relevant_nonfinite_count": 0
+  },
+  "gamma": {
+    "preshock_fallback_count": 9920,
+    "preshock_nonfinite_count": 9918,
+    "relevant_fallback_count": 45474,
+    "relevant_nonfinite_count": 45474
+  },
+  "gamma_inf": 1e+50,
+  "gates": {
+    "archived_failure_reproduction": true,
+    "finite_injection_gamma_emissivity": true,
+    "high_precision_agreement": true,
+    "stable_endpoint_trajectory": false,
+    "upstream_stable_well_conditioned_agreement": false,
+    "zero_relevant_full_dynamics_nonfinite": false,
+    "zero_relevant_silent_gamma_fallbacks": false
+  },
+  "high_precision": {
+    "max_abs_difference": 1.9339495338499546e-07,
+    "max_relative_difference": 9.994967978657982e-12,
+    "trace_count": 98
+  },
+  "nonfinite_records_sha256": "b20c8e0bf134b58f16d1c662de6872b0dc1f7586937feeb7f501d434faf3038b",
+  "original_pinned_adiabatic_nonfinite_count": {
+    "log_savgol": 4,
+    "unsmoothed": 8
+  },
+  "pressure_mode": "unsmoothed",
+  "pressure_modes_checked": [
+    "unsmoothed",
+    "log_savgol"
+  ],
+  "pressure_treatment_contract": {
+    "expected_no_positive_rows": 2,
+    "expected_single_record_rows": 48,
+    "expected_trim_rows": 10030,
+    "expected_trim_single_record_overlap_rows": 2,
+    "singleton_policy": "instantaneous_recent_shock; endpoint gamma is accepted as injection only under this explicit convention",
+    "units": "workflow.convert_code_cache_to_physical SI conversion"
+  },
+  "scientific_policy": "stable ratio/log-difference is diagnostic/reference only; pinned PRAiSE defaults unchanged; pre-shock anomalies are evidence, not endpoint failures",
+  "scope": "bounded archived-failure strata plus explicitly labelled finite controls; no claim that all 4096 trajectories were checked; no 4096-row full comparison or raytrace",
+  "selection_count": 4096,
+  "selection_sha256": "35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df",
+  "source_identity_sha256": "bfbc157e4a80e23c07c893d8929e4c74720cafd5352e56862c7091fafe81c44a",
+  "stable_forms": {
+    "algebraic_disagreement_count": 42,
+    "preshock_algebraic_disagreement_count": 10,
+    "preshock_nonpositive_time_count": 0,
+    "relevant_algebraic_disagreement_count": 32,
+    "relevant_nonpositive_time_count": 0
+  },
+  "status": "diagnostic_complete",
+  "tolerances": {
+    "high_precision_atol": 1e-12,
+    "high_precision_rtol": 1e-11,
+    "upstream_atol": 1e-12,
+    "upstream_rtol": 1e-10
+  },
+  "trace_count": 64,
+  "trace_limit": 64,
+  "trace_selection_rule": "one deterministic hash-minimum archived failure physical ID per pressure-mode/frequency stratum, then deterministic hash-ranked finite controls/extremes"
+}

@@ -1,0 +1,17 @@
+field,value
+job_id,778919.kunanyi-ohpc
+job_name,g_lo_pmvalue
+job_state,F
+queue,normal
+exit_status,2
+stageout_status,1
+walltime,01:27:35
+cput,33:43:30
+cpupercent,2464
+ncpus,16
+mem_kb,3286924
+vmem_kb,5674720
+requested_select,1:ncpus=16:mpiprocs=1:mem=96gb
+requested_walltime,12:00:00
+ctime,Tue Jul 28 09:35:49 2026
+mtime,Tue Jul 28 11:03:30 2026

@@ -1,0 +1,19 @@
+field,value
+job_id,778078.kunanyi-ohpc
+job_name,g_lo_pmvalue
+exit_status,2
+stageout_status,1
+walltime,00:04:25
+cput,00:03:57
+mem,411424kb
+stderr_bytes,0
+failure_stage,pressure_treatment_plan_before_praise
+first_failure,"pressure-treatment aggregate mismatch: trim=10030 expected=10030; no_positive=2 expected=2; single_record=46 expected=48"
+observed_effective_singletons,48
+observed_untrimmed_singletons,46
+observed_trim_to_singleton_overlap,2
+overlap_physical_ids,197519;197520
+root_cause,exclusive pressure-treatment category omitted trim-affected effective singletons from singleton provenance
+repair,effective singleton is an orthogonal post-treatment property with an explicit two-row overlap gate
+replacement_job_id,778079.kunanyi-ohpc
+replacement_state_at_stop,Q

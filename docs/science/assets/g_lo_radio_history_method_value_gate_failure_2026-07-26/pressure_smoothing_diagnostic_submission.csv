@@ -1,0 +1,21 @@
+field,value
+job_id,777065.kunanyi-ohpc
+job_name,g_lo_psdiag
+state_at_stop,Q
+queue,normal
+ctime,Mon Jul 27 14:18:49 2026
+qtime,Mon Jul 27 14:18:49 2026
+select,1:ncpus=1:mpiprocs=1:mem=64gb
+walltime,12:00:00
+stage,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_smoothing_diagnostic_777011
+analysis_root,/scratch/bwbrook/xray_cavities_analysis/2026-07-27-g-lo-pressure-smoothing-diagnostic-777011
+expected_archive,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_smoothing_diagnostic_777011/g_lo_pressure_smoothing_diagnostic_2026-07-27.tar.gz
+cache_shape,197568x5001
+cache_next_output,5001
+manifest_entries,83
+manifest_bytecode_entries,0
+diagnostic_sha256,e82609c1c1b835a54e6533fe0c34ed19fac8db8ba2a2a9672e937b8745befd49
+wrapper_sha256,e1b7d9dc65dac45aeef7bdc856013866ca507fa9ea3aada7441321b2a1206da7
+cache_mutation,false
+praise_execution,false
+stop_rule,active

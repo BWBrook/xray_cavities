@@ -1,0 +1,6 @@
+./2026-07-28-g-lo-adiabatic-recovery-index-repair-v2/staged_inputs.sha256
+./2026-07-28-g-lo-adiabatic-recovery-index-repair-v2/adiabatic_recovery_traces.csv
+./2026-07-28-g-lo-adiabatic-recovery-index-repair-v2/adiabatic_recovery_summary.csv
+./2026-07-28-g-lo-adiabatic-recovery-index-repair-v2/adiabatic_recovery_summary.json
+./2026-07-28-g-lo-adiabatic-recovery-index-repair-v2/pressure_method_nonfinite_emissivity_records.csv
+./archive_file_list.txt

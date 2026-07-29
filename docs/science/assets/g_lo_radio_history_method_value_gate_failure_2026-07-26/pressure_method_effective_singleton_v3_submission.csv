@@ -1,0 +1,21 @@
+field,value
+job_id,778079.kunanyi-ohpc
+job_name,g_lo_pmvalue
+state_at_stop,Q
+queue,normal
+qtime,Mon Jul 27 22:51:39 2026
+resources,select=1:ncpus=16:mpiprocs=1:mem=96gb
+walltime,12:00:00
+stage,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_effective_singleton_v3
+analysis,/scratch/bwbrook/xray_cavities_analysis/2026-07-27-g-lo-pressure-method-value-diagnostic-effective-singleton-v3
+archive,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_effective_singleton_v3/g_lo_pressure_method_value_diagnostic_effective_singleton_v3_2026-07-27.tar.gz
+manifest_entries,120
+manifest_bytecode_entries,0
+runner_sha256,16d9f49717dc87389520f9d34d3c357d2b708ea3c9f36675e9591a7f53a910a7
+diagnostic_sha256,2de55f52464397fb807738097f497a631cc18204deb02212c603f07854171d44
+wrapper_sha256,85047d3505aa605a804ffedb30bb1bc2c5e3b67f620c371b074ed52357f1f04a
+expected_trim_rows,10030
+expected_no_positive_rows,2
+expected_effective_singleton_rows,48
+expected_trim_singleton_overlap_rows,2
+stop_rule,active

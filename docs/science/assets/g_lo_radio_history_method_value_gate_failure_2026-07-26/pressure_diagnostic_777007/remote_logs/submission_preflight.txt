@@ -1,0 +1,15 @@
+scripts/science/diagnose_g_lo_pressure_history.py: OK
+scripts/science/g_lo_particle_history.py: OK
+scripts/kunanyi/g_lo_pressure_history_diagnostic.pbs: OK
+cache_shape=(197568, 5001) next_output=5001
+cache_bytes=33191119360
+remote_preflight=passed
+final_wrapper_repair_utc=2026-07-26T12:32:27Z
+scripts/science/diagnose_g_lo_pressure_history.py: OK
+scripts/science/g_lo_particle_history.py: OK
+scripts/kunanyi/g_lo_pressure_history_diagnostic.pbs: OK
+Queue: normal
+    queue_type = Execution
+    resources_max.walltime = 48:00:00
+    enabled = True
+    started = True

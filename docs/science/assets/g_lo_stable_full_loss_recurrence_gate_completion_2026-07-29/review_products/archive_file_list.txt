@@ -1,0 +1,10 @@
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/staged_inputs.sha256
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/plutokore_commit.txt
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/pressure_method_nonfinite_emissivity_records.csv
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/full_loss_panel_selection.csv
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/full_loss_interval_summary.csv
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/full_loss_gamma_summary.csv
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/full_loss_emissivity_summary.csv
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/full_loss_gate_summary.csv
+./2026-07-28-g-lo-stable-full-loss-recurrence-gate/full_loss_gate_summary.json
+./archive_file_list.txt

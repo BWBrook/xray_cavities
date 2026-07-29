@@ -1,0 +1,9 @@
+metric,frequency_GHz,value,threshold,passed
+aggregate_log_savgol_minus_unsmoothed_dex,0.15,,0.1,False
+aggregate_log_savgol_minus_unsmoothed_dex,1.4,,0.1,False
+full_loss_spectral_index_difference,,,0.1,False
+top_one_percent_absolute_discrepancy_fraction,,,0.5,False
+full_vs_lossless_direction_stability,,0,1,False
+full_not_above_adiabatic,,0,1,False
+gamma_fallback_free,,0,1,False
+actual_praise_dynamics_audit,,0,1,False

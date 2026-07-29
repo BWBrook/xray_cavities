@@ -1,0 +1,7 @@
+scripts/science/diagnose_g_lo_pressure_history.py: OK
+scripts/science/g_lo_particle_history.py: OK
+scripts/kunanyi/g_lo_pressure_history_diagnostic.pbs: OK
+status=diagnostic_complete
+affected_rows=10032 affected_outputs=5001
+diagnostic_validation=passed
+finished_utc=2026-07-26T12:34:02Z

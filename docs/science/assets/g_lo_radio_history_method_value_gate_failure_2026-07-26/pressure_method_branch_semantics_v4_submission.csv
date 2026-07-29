@@ -1,0 +1,16 @@
+field,value
+job_id,778919.kunanyi-ohpc
+job_name,g_lo_pmvalue
+job_state_at_stop,R
+queue,normal
+qtime,Tue Jul 28 09:35:49 2026
+select,1:ncpus=16:mpiprocs=1:mem=96gb
+walltime,12:00:00
+stage,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_branch_semantics_v4
+analysis,/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-branch-semantics-v4
+archive,/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_branch_semantics_v4/g_lo_pressure_method_value_diagnostic_branch_semantics_v4_2026-07-28.tar.gz
+manifest_entries,120
+diagnostic_sha256,ed84800330b6169863994b9e732f84f111f973171853c8de09eff3cebf579dd6
+method_adapter_sha256,8e326ef335c10e113bad40646d5b8063d6406dbb86f17d63e970acbac152ef69
+wrapper_sha256,81b8792b729da8071d752c9c7c95de1ceac532e4c1f100562a555312be84290c
+stop_rule_invoked,true

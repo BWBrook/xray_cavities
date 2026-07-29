@@ -1,0 +1,16 @@
+metric,value
+job_id,777213.kunanyi-ohpc
+job_name,g_lo_pnf
+job_state,F
+exit_status,0
+stageout_status,1
+walltime,03:34:28
+cput,88:45:02
+ncpus,16
+mem_kb,3469436
+vmem_kb,6003748
+stderr_bytes,0
+archive_sha256,03f94d5df0c70ddb7f0d1070186ca0f3df9946e00cf9df40debfc0bdf81564be
+archive_member_count,11
+forensic_validation,passed
+scientific_decision,PRAISE_NUMERICS_BLOCKED

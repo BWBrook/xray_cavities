@@ -1,0 +1,7 @@
+order,action,status,stop_condition
+1,validate core diagnostic and output schema,complete,missing core script or failed gate schema
+2,run focused tests,complete,any test failure
+3,run wrapper syntax and shellcheck gates,complete,remote shellcheck unavailable; identical wrapper passed local shellcheck
+4,parent review of scope hashes and exit contract,complete,scope or provenance disagreement
+5,submit exactly one PBS diagnostic,submitted_once_779913,do not submit a second job
+6,wait for PBS completion notification,submitted_waiting_pbs_completion,no polling or retrieval before Barry reports completion

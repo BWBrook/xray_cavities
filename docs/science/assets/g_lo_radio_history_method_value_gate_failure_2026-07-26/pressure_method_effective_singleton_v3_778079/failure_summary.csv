@@ -1,0 +1,19 @@
+field,value
+job_id,778079.kunanyi-ohpc
+job_name,g_lo_pmvalue
+job_state,F
+exit_status,2
+stageout_status,1
+walltime,01:54:04
+cput,44:50:50
+ncpus,16
+mem_kb,3457544
+vmem_kb,5830484
+stderr_bytes,0
+stdout_sha256,70a0e63a0fb9c992394125a4427f913340bb33d5d0bbba073650c34777beb9d9
+failure_stage,actual_praise_unsmoothed_full_vs_none_policy_gate
+first_failure,unsmoothed full-loss emissivity exceeds matched lossless emissivity
+actual_praise_compute_reached,true
+result_tables_written,0
+root_cause,invalid project-added monotonicity assumption because losses=none disables both adiabatic and radiative evolution
+decision,BRANCH_SEMANTICS_DIAGNOSTIC_REPAIR_REQUIRED

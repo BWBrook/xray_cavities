@@ -1,0 +1,95 @@
+{
+  "analytic_self_checks": {
+    "checks": [
+      {
+        "check": "constant_pressure_closed_form",
+        "log_reference": -12.051091000757372,
+        "log_value": -12.051091000757374,
+        "passed": true
+      },
+      {
+        "check": "a3_zero_limit",
+        "log_reference": -12.347220227254361,
+        "log_value": -12.347220227254365,
+        "passed": true
+      },
+      {
+        "check": "a4_zero_limit",
+        "log_reference": -12.423103279039006,
+        "log_value": -12.423103279039008,
+        "passed": true
+      },
+      {
+        "check": "overflow_scaled_loss",
+        "log_raw_a2": 249087.21770404442,
+        "log_value": 336.38527854448375,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "archived_nonfinite_record_count": 9103,
+  "cache_sha256": "f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30",
+  "decision": "PASS",
+  "decision_label": "G_LO_STABLE_FULL_LOSS_RECURRENCE_GREEN_4096_COMPARISON_JUSTIFIED",
+  "evidence_fingerprint_sha256": "25feb8c3cb443f05aabb8d17feb6b5eb8ee91e8648b89ab54855a249aa29c328",
+  "expected_frequency_specific_pinned_gamma_fallback_count": 45474,
+  "expected_relevant_nonfinite_a2_count": 22737,
+  "frequencies_GHz": [
+    0.15,
+    1.4
+  ],
+  "gate_names": [
+    "analytic_limits",
+    "finite_scaled_loss",
+    "high_precision_scaled_loss",
+    "high_precision_gamma",
+    "exact_state_classification",
+    "boundary_conditioning",
+    "zero_silent_fallbacks",
+    "no_subrelativistic_states",
+    "finite_or_explicit_cutoff_emissivity",
+    "deterministic_repeat",
+    "pinned_failure_reproduction"
+  ],
+  "gates": {
+    "analytic_limits": true,
+    "boundary_conditioning": true,
+    "deterministic_repeat": true,
+    "exact_state_classification": true,
+    "finite_or_explicit_cutoff_emissivity": true,
+    "finite_scaled_loss": true,
+    "high_precision_gamma": true,
+    "high_precision_scaled_loss": true,
+    "no_subrelativistic_states": true,
+    "pinned_failure_reproduction": true,
+    "zero_silent_fallbacks": true
+  },
+  "high_precision": {
+    "comparison_count": 96,
+    "max_relative_difference": 3.5644138821173953e-13
+  },
+  "nonfinite_records_sha256": "b20c8e0bf134b58f16d1c662de6872b0dc1f7586937feeb7f501d434faf3038b",
+  "original_relevant_nonfinite_a2_count": 22737,
+  "pinned_relevant_gamma_fallback_count": 45474,
+  "pressure_modes_checked": [
+    "unsmoothed",
+    "log_savgol"
+  ],
+  "relevant_subrelativistic_state_count": 0,
+  "selection_count": 4096,
+  "selection_sha256": "35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df",
+  "source_identity_sha256": "bfbc157e4a80e23c07c893d8929e4c74720cafd5352e56862c7091fafe81c44a",
+  "stable_silent_fallback_count": 0,
+  "state_counts": {
+    "finite": 431744,
+    "gamma_inf_cutoff": 0,
+    "physical_cutoff": 0,
+    "post_cutoff": 0,
+    "subrelativistic": 0
+  },
+  "status": "diagnostic_complete",
+  "trace_count": 64,
+  "window_classified_pinned_gamma_fallback_count": 45474,
+  "window_classified_relevant_nonfinite_a2_count": 22737
+}

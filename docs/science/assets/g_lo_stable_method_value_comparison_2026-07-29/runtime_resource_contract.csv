@@ -1,0 +1,11 @@
+resource,value,rationale
+queue,normal,standard diagnostic queue
+select,1 node,comparison is single-node and bounded
+ncpus,16,parallel branch evaluation
+mpiprocs,1,no MPI execution
+memory,96gb,room for cache and four branch matrices
+walltime,12:00:00,allowance based on prior 4096-row diagnostic
+OMP_NUM_THREADS,16,thread cap matches allocation
+NUMBA_NUM_THREADS,16,thread cap matches allocation
+raytrace,forbidden,not part of Goal 051
+production_history,forbidden,not part of Goal 051

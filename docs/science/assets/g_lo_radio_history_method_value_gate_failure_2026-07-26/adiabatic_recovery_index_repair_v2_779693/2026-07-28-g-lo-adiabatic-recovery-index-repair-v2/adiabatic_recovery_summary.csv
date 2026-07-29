@@ -1,0 +1,8 @@
+gate,passed,value
+high_precision_agreement,True,true
+stable_endpoint_trajectory,False,false
+finite_injection_gamma_emissivity,True,true
+zero_relevant_full_dynamics_nonfinite,False,false
+zero_relevant_silent_gamma_fallbacks,False,false
+upstream_stable_well_conditioned_agreement,False,false
+archived_failure_reproduction,True,true

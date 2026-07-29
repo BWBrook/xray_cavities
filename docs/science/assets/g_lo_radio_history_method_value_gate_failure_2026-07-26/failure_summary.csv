@@ -1,0 +1,18 @@
+field,value
+job_id,777006.kunanyi-ohpc
+job_name,g_lo_radhist
+job_state,F
+exit_status,2
+stageout_status,1
+walltime,00:08:16
+cput,00:04:33
+ncpus,16
+mem_kb,343588
+vmem_kb,735096
+first_failure,pressure history must be positive after injection
+failure_stage,first_emissivity_chunk_raw_pressure_validation
+cache_path,/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5
+cache_bytes,33191119360
+cache_shape,197568x5001
+cache_next_output,5001
+decision,G_LO_RADIO_METHOD_BLOCKED_PRESSURE_DIAGNOSTIC_REQUIRED

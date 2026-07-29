@@ -1,0 +1,78 @@
+{
+  "builder": "build_three_case_radio_source_method_gate.py",
+  "builder_version": "1.0",
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-LO"
+  ],
+  "files": [
+    "source_inventory.csv",
+    "source_ledger_extract.csv",
+    "runtime_semantics_audit.csv",
+    "method_acceptance_gate.csv",
+    "decision_matrix.csv",
+    "radio_source_method_gate_metadata.json"
+  ],
+  "gate_summary": {
+    "accepted": false,
+    "cases": [
+      "C-HI",
+      "C-LO",
+      "G-LO"
+    ],
+    "failed_requirements": [
+      "full_comparable_history",
+      "runtime_semantics_resolved"
+    ],
+    "methods": [
+      "loss_aware"
+    ]
+  },
+  "goal": "048",
+  "goal046_payload_inventory": "docs/science/assets/three_case_lifecycle_compaction_authorization_2026-07-23/completed_run/review_inventory/inventory/payload_inventory.csv",
+  "numerical_fixtures": {
+    "acceptance_reference_gaussian_normalized_convolution_flux": "periodic normalized kernel preserves discrete sum",
+    "acceptance_reference_symmetric_source_rotation_view_invariance": "uniform spherical source projected integral is pi*r^2",
+    "acceptance_reference_uniform_emissivity_los_integral": "analytic emissivity * path length",
+    "production_claim": false
+  },
+  "observed_vs_inferred_schema": {
+    "decision": "decision_status, status, and decision fields",
+    "inferred": "inferred_assessment",
+    "observed": "evidence_type=observed and observed_facts"
+  },
+  "overall_decision": "THREE_CASE_LOSS_AWARE_RADIO_BLOCKED_G_LO_METHOD_VALUE_GATE_REQUIRED",
+  "plutokore_source_review": {
+    "commit": "e80252cf35ff5a06166240e2867d3d485aaf6956",
+    "praise_py_sha256": "ce4b17cf40ecefabbd4ef4330b75fb63c39d40c2ef1a05a6e5ac87131145bf4",
+    "raytracing_py_sha256": "597bf9241fee0eabc1f57a9715a338ee588157787dd2ad1edd939e7c17426f38",
+    "status": "source_reviewed_candidate_not_production_validated"
+  },
+  "preliminary_history_feasibility": {
+    "endpoint_particles": 197568,
+    "multi_field_dense_path": ">100 GB plausible",
+    "one_float64_field_bytes_decimal": 7904300544,
+    "one_float64_field_gb_decimal": 7.904300544,
+    "required_plan": "chunking, field-selective reads, and restartable production plan required",
+    "status": "preliminary_estimate_only",
+    "time_points": 5001
+  },
+  "remote_xraise_sha256": "4bf17cb8e63e2d87a06615c170c7dd307788554a0cee83409762223123ec8da5",
+  "required_protocol": {
+    "common_beam_grid_support": true,
+    "complete_post_injection_histories": true,
+    "frequencies_mhz": [
+      150,
+      1400
+    ],
+    "mixed_loss_aware_lossless": "reject",
+    "single_method_only": true,
+    "view_angles_deg": [
+      0,
+      45,
+      90
+    ]
+  },
+  "source_evidence_is_local_summary": true
+}

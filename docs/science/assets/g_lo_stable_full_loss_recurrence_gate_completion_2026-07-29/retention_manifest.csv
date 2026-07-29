@@ -1,0 +1,11 @@
+archive_member,uncompressed_bytes,local_retention,reason
+staged_inputs.sha256,12419,archive_and_extracted,compact source and input provenance
+plutokore_commit.txt,41,archive_and_extracted,pinned source identity
+pressure_method_nonfinite_emissivity_records.csv,1665651,archive_only,canonical extracted copy already retained in Goal 049 evidence
+full_loss_panel_selection.csv,8011,archive_and_extracted,compact deterministic panel definition
+full_loss_interval_summary.csv,17175930,archive_only,validated row-level evidence retained losslessly in immutable archive
+full_loss_gamma_summary.csv,38295263,archive_only,validated row-level evidence retained losslessly in immutable archive
+full_loss_emissivity_summary.csv,21833,archive_and_extracted,compact endpoint reconstruction evidence
+full_loss_gate_summary.csv,406,archive_and_extracted,compact machine-readable gate result
+full_loss_gate_summary.json,3026,archive_and_extracted,authoritative decision summary
+archive_file_list.txt,751,archive_and_extracted,archive membership provenance

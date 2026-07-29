@@ -1,0 +1,19 @@
+evidence_class,measure,value,interpretation
+observation,pbs_job_id,777007.kunanyi-ohpc,Read-only pressure diagnostic completed successfully
+observation,pbs_exit_status,0,Diagnostic execution was green
+observation,cache_shape,197568x5001,All endpoint particles and canonical outputs were scanned
+observation,total_present_records,502174540,Pressure classification denominator
+observation,finite_positive_records,502164508,Valid pressure records
+observation,exact_zero_records,10032,All non-positive records were exact zero
+observation,negative_records,0,No negative pressure was found
+observation,nonfinite_records,0,No non-finite pressure was found
+observation,leading_zero_only_rows,10030,Each eligible history has one leading zero before positive pressure
+observation,internal_nonpositive_rows,0,No zero occurred after a positive pressure record
+observation,no_positive_rows,2,Two endpoint-injected histories have one zero record and no positive record
+observation,lifecycle_violation_rows,0,Presence histories satisfy the reviewed lifecycle contract
+observation,representative_source_matches,32/32,Bounded canonical raw-source values matched the cache
+inference,leading_zero_mechanism,injection_initialization,Exact joint-zero first records are consistent with particle initialization before fluid interpolation
+decision,primary_treatment,trim_10030_exclude_2,Trim only the joint-zero initialization record and exclude histories with no positive state
+decision,conservative_comparator,exclude_all_10032,Test materiality against whole-particle exclusion of every affected history
+decision,forbidden_repairs,pressure_floor_or_interpolation,Neither treatment is scientifically authorized
+decision,science_retry_job,777011.kunanyi-ohpc,Running from a bytecode-free immutable stage with mutually exclusive trim and no-positive classification before PRAiSE

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-07-24
+Last updated: 2026-07-29
 Primary checkpoint repo: `/Users/bwbrook/papers/xray_cavities` on MacBook/Mac Mini,
 or `/home/bwbrook/papers/xray_cavities` on Linux hosts.
 
@@ -14,11 +14,511 @@ cd /home/<user>/papers/xray_cavities
 git pull --ff-only
 ```
 
-This note should be treated as a Goal-047 three-case lifecycle compaction
-execution handoff.
+This note should be treated as a Goal-051 G-LO stable method-value comparison
+handoff, currently `submitted_waiting_pbs_completion`. Exactly one bounded
+diagnostic is running; Goal-050 completion evidence remains its prerequisite.
 Always pull the latest
 `origin/main` before relying on the exact file set or workflow bundle on any
 machine.
+
+Latest Goal 050 G-LO stable full-loss recurrence gate on 2026-07-29:
+
+- Status: `complete_science_gate_green`.
+- Decision label:
+  `G_LO_STABLE_FULL_LOSS_RECURRENCE_GREEN_4096_COMPARISON_JUSTIFIED`.
+- PBS `779729.kunanyi-ohpc` / `g_lo_flloss` finished with `Exit_status=0`
+  after `00:50:28`. `Stageout_status=1` is retained as a scheduler caveat,
+  but the archive, stdout, and empty stderr were present and retrieved.
+- Archive SHA-256:
+  `fee130640fb1573c82c38b46c6e212def3c1210cb9dd11ad9f9b5e498cf03d01`.
+- Every one of the 11 declared gates passed. The stable recurrence produced
+  `431,744` finite, reference-matched gamma states with zero silent fallbacks
+  and zero subrelativistic states.
+- The pinned raw-`a2` failure reproduced in exactly `22,737` relevant
+  intervals, yet every scaled coefficient was finite. The pinned
+  `45,474` frequency-specific retained-gamma fallbacks also reproduced
+  exactly.
+- The maximum relative high-precision difference was
+  `3.5644138821173953e-13`; all 256 emissivity values were finite and
+  non-negative.
+- An independent completion review returned GO for only the deterministic
+  4096-row method-value comparison. Production adoption, raytracing,
+  publication-facing interpretation, and pinned PRAiSE changes remain on hold.
+- Completion note:
+  `docs/science/g_lo_stable_full_loss_recurrence_gate_completion_2026-07-29.md`.
+- Completion assets:
+  `docs/science/assets/g_lo_stable_full_loss_recurrence_gate_completion_2026-07-29/`.
+
+## Goal 051 G-LO stable method-value comparison
+
+- Status: `submitted_waiting_pbs_completion`.
+- Scope is the authorized deterministic `4096`-row weighted comparison only:
+  stable full-loss recurrence, stable adiabatic recovery, and the actual
+  pinned `losses="none"` branch across both pressure modes and both
+  frequencies. Production history generation, raytracing, pinned-code
+  changes, and publication interpretation remain out of scope.
+- The execution packet is in
+  `scripts/kunanyi/g_lo_stable_method_value_comparison.pbs`; it binds the
+  immutable cache SHA-256
+  `f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30`, the
+  exact selection SHA-256
+  `35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df`, and
+  pinned plutokore commit `e80252cf35ff5a06166240e2867d3d485aaf6956`.
+- The output contract has eight files, including
+  `stable_method_value_cutoff_records.csv` for separate physical and
+  `gamma_inf` cutoff provenance.
+- The wrapper requests one `normal`-queue node with `16` CPUs and `96gb` for
+  `12:00:00`, uses a persistent stage lock and no-overwrite checks, and
+  archives evidence before returning scientific (`0`/`3`) or infrastructure
+  (`2`) status. A completed `PASS` or `HOLD_FOR_CUTOFF_REVIEW` requires all
+  eight outputs; an early scientific `FAIL` may archive partial evidence, while
+  a missing summary or malformed schema is infrastructure failure.
+- Exactly one job was submitted: PBS `779913.kunanyi-ohpc` / `g_lo_stmv`.
+  It was verified `R` on `normal` at the stop point, with queue time
+  `Wed Jul 29 11:30:17 2026`, allocation
+  `select=1:ncpus=16:mpiprocs=1:mem=96gb`, and walltime `12:00:00`.
+- Remote preflight passed fresh targets, the exact clean `41`-entry
+  bytecode-free manifest and hashes, pinned cache/selection hashes, the exact
+  `4096`-row selection, staged `bash -n`, runtime imports including
+  `g_lo_particle_history`, and the queue's `48h` maximum walltime. Remote
+  `shellcheck` was unavailable; the identical wrapper passed local
+  `shellcheck`.
+- Stage:
+  `/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison`
+- Analysis:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison`
+- Expected archive:
+  `/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison/g_lo_stable_method_value_comparison_2026-07-29.tar.gz`
+- Stdout/stderr:
+  `/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison/g_lo_stable_method_value_comparison.{out,err}`
+- Submission transcript:
+  `/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison/remote_logs/submission_preflight_2026-07-29.txt`
+- Cutoff handling is tri-state: zero verified cutoffs may pass; any verified
+  real cutoff returns `HOLD_FOR_CUTOFF_REVIEW` with scientific exit `3`; and
+  malformed, unstable, or reference-disagreeing evidence fails. Physical and
+  `gamma_inf` cutoff evidence are reported separately.
+- Goal record, science note, exchange log, and input/gate/resource assets are
+  under `docs/goals/051-g-lo-stable-method-value-comparison/` and
+  `docs/science/assets/g_lo_stable_method_value_comparison_2026-07-29/`.
+- The PBS stop rule was invoked immediately after running-state proof. Do not
+  poll, retrieve, resubmit, or infer a scientific result before Barry reports
+  completion.
+
+Latest Goal 049 G-LO radio history, actual-method, and value gate on
+2026-07-28:
+
+- Status:
+  `complete_adiabatic_recovery_full_loss_method_blocked`.
+- Decision label:
+  `ADIABATIC_RECOVERY_SUPPORTED_FULL_LOSS_METHOD_BLOCKED_A2`.
+- PBS `779693.kunanyi-ohpc` finished with deliberate scientific
+  `Exit_status=3` after `00:41:46`. The archive, stdout, stderr, and compact
+  summary were retrieved; the archive SHA-256 is
+  `71f40e9510834acbc4475bfa59b4e22faddbba0a32dd343dcdef3b81956cf3f8`.
+- The HDF5 row-order repair passed. All four archived failure strata
+  reproduced, all `431,744` retained stable gamma values were finite, stable
+  injection emissivity was finite, and all `98` high-precision checks passed
+  with maximum relative difference `9.994967978657982e-12`.
+- The remote `stable_endpoint_trajectory=false` label was composite and
+  therefore misleading. It folded full-loss fallbacks and upstream comparison
+  state into the stable-trajectory label. The local reporting implementation
+  now separates those checks; `17` focused tests pass.
+- The adiabatic recovery receives a conditional bounded-panel PASS. Overall
+  Goal 049 remains blocked: full-loss `a2` is non-finite in `22,737` relevant
+  intervals and pinned PRAiSE silently retains prior gamma in `45,474`
+  frequency-specific updates.
+- The next recommended goal is a stable full-loss `a2` and gamma recurrence
+  design and high-precision local gate. Do not run the `4096`-row comparison,
+  raytrace, or new C-HI/C-LO history production before it passes.
+- PBS `779684.kunanyi-ohpc` and `779685.kunanyi-ohpc` both finished with
+  `Exit_status=2`. Scheduler records show the same job name, queue time, start
+  time, stdout path, stderr path, stage, and analysis target. They were
+  duplicate concurrent submissions, not two attributable recovery
+  experiments.
+- The shared stage snapshot is preserved under
+  `adiabatic_recovery_shared_stage_snapshot_after_779684_779685/`. Its
+  surviving stdout, stderr, and archive timestamps match the later
+  `779685` completion. The individual `779684` log was overwritten or
+  otherwise unavailable, so no job-specific scientific inference is made
+  from that attempt.
+- The first recoverable failure is mechanical:
+  `h5py` rejected the non-monotonic trace-selection indices with
+  `TypeError: Indexing elements must be in increasing order`. No recovery
+  summary or scientific decision was produced.
+- The local repair reads sorted unique HDF5 indices and restores the exact
+  requested row order across all row-aligned fields. Trace selection,
+  physical IDs, treatment masks, and scientific gates are unchanged. A
+  regression covers unsorted and repeated requested rows; the existing
+  selection contract still rejects duplicate selected cache rows.
+- The wrapper now claims an atomic single-run stage lock. The replacement
+  submission also used a persistent atomic `qsub_once.lock`, preventing an
+  accidental repeated submission command from launching another job.
+- Local verification passed `50` focused tests in `6.52s`, Python
+  compilation, PBS syntax, `shellcheck`, and `git diff --check`.
+- A fresh no-overwrite stage passed a `123`-entry bytecode-free manifest,
+  exact immutable-input and source hashes, runtime import, wrapper syntax, and
+  queue checks. Exactly one corrected compact diagnostic,
+  PBS `779693.kunanyi-ohpc` / `g_lo_adrec`, was verified running on `normal`
+  at `Tue Jul 28 20:42:31 2026`, requesting one CPU, `32gb`, and `02:00:00`.
+  The PBS stop rule is active; do not poll before Barry reports completion.
+- PBS `779183.kunanyi-ohpc` / `g_lo_pmvalue` finished with deliberate
+  scientific `Exit_status=3` after `05:14:34`; the archive, stdout, and stderr
+  were retrieved and validated.
+- The v5 evidence contains exactly `9,103` non-finite cells, all NaN and all
+  confined to `losses="adiabatic"`: `4,643` under unsmoothed pressure and
+  `4,460` under log-Savitzky-Golay pressure. The matched full and no-loss
+  branches are finite for all selected cells.
+- Every non-finite record is replay-verified with finite dynamics inputs,
+  valid shock assignment, pinned no-emission state, and NaN injection gamma.
+  These are unresolved numerical failures, not values authorized for zero
+  replacement or exclusion.
+- Independent method review identifies the pinned separate absolute-time
+  powers as the unstable operation. The recovery diagnostic uses the
+  algebraically equivalent pressure-ratio recurrence on strictly positive-time
+  relevant intervals and compares it with an 80-digit original-form reference.
+- The compact gate selects four exact archived failure strata plus finite
+  controls. It now fails closed unless each selected original
+  pressure-mode/frequency failure is reproduced before testing the stable
+  reconstruction.
+- Local verification passed `48` focused tests, Python compilation, PBS
+  syntax, and `git diff --check`. A Sol Max audit returned GO after the
+  archived-stratum reproduction gate was added.
+- Remote staging passed exact cache, selection, non-finite-record, source,
+  script, manifest, import, syntax, and no-overwrite checks.
+- The original handoff recorded only PBS `779684.kunanyi-ohpc`, but the live
+  scheduler later showed both `779684` and `779685` submitted at the same
+  second to the same fixed paths. The duplicate-launch cause is not proven;
+  the replacement stage therefore records and enforces submit-once state.
+- PBS `778919.kunanyi-ohpc` / `g_lo_pmvalue` finished with `Exit_status=2`
+  after `01:27:35`. Its immutable-input and runtime gates passed, stderr is
+  empty, and the first failure was
+  `PRAiSE returned non-finite endpoint emissivities` during the unsmoothed
+  actual-PRAiSE calculation before the first emissivity checkpoint.
+- The deterministic `4096`-row selection is byte-identical to the preceding
+  forensic selection. The v4 guard did not identify mode, loss branch,
+  frequency, particle, or non-finite class. The newly added adiabatic branch
+  is the leading hypothesis, but that is an inference rather than an
+  observation.
+- The v5 diagnostic now preserves raw NaN, positive-infinity, and
+  negative-infinity cells exactly; checkpoints every mode/branch array;
+  writes branch-aware per-cell forensic records and summaries; reconciles
+  those records against the raw checkpoints; and archives the evidence before
+  returning a deliberate scientific failure. It does not replace, exclude,
+  clip, floor, or reinterpret any non-finite value.
+- Gamma/dynamics replay exceptions are recorded as audit failures rather than
+  escaping before the archive. Any non-finite cell, audit error, checkpoint
+  mismatch, or record mismatch keeps the method blocked and suppresses the
+  finite-only comparison.
+- Local verification passed `107` focused tests in `6.11s`, Python
+  compilation, wrapper `bash -n`, wrapper `shellcheck`, and
+  `git diff --check`. A final independent scientific/code review returned
+  `GO` for this single evidence-capture run.
+- The v5 remote stage passed exact changed-file hashes, a `120`-entry
+  bytecode-free manifest, runtime imports, immutable cache and affected-row
+  hashes, wrapper syntax, no-overwrite gates, and the enabled `normal` queue.
+- Exactly one evidence-capture diagnostic, PBS `779183.kunanyi-ohpc` /
+  `g_lo_pmvalue`, was verified running on `normal` at
+  `Tue Jul 28 11:39:59 2026`, requesting
+  `1:ncpus=16:mpiprocs=1:mem=96gb` and `12:00:00`.
+- PBS `778079.kunanyi-ohpc` / `g_lo_pmvalue` finished with `Exit_status=2`
+  after `01:54:04`. The actual unsmoothed PRAiSE calculation reached the
+  project-added comparison gate, then failed the assertion that full-loss
+  emissivity must not exceed `losses="none"` emissivity.
+- Independent code and method audits found that assertion invalid:
+  `losses="none"` disables both adiabatic pressure work and radiative
+  evolution. Full-versus-none is now descriptive; matched
+  full-versus-adiabatic is the radiative-suppression gate.
+- The repair also checkpoints all three compact branch arrays, uses
+  reference-relative plus per-cell ULP ordering tolerances, fails closed on
+  pinned PRAiSE intermediate-gamma fallback, and archives evidence before a
+  scientific `FAIL` returns nonzero.
+- Local verification passed `98` focused tests, Python compilation, four PBS
+  wrapper syntax checks, method-wrapper `shellcheck`, and `git diff --check`.
+- The fresh v4 remote stage passed exact hashes, a `120`-entry bytecode-free
+  manifest, runtime imports, immutable input hashes, and no-overwrite gates.
+- Exactly one replacement diagnostic, PBS `778919.kunanyi-ohpc` /
+  `g_lo_pmvalue`, was verified running on `normal` at
+  `Tue Jul 28 09:35:49 2026`, requesting
+  `1:ncpus=16:mpiprocs=1:mem=96gb` and `12:00:00`.
+- Attempt 1: PBS `776779.kunanyi-ohpc` / `g_lo_radhist` reached the 48-hour
+  queue limit and finished with `Exit_status=271` after `48:01:49`.
+- Attempt 2: PBS `777005.kunanyi-ohpc` / `g_lo_radhist` finished with
+  `Exit_status=1` after `00:23:15`, after completing the history cache.
+- Attempt 3: PBS `777006.kunanyi-ohpc` / `g_lo_radhist` finished with
+  `Exit_status=2` after `00:08:16`. The first emissivity chunk failed the
+  strict raw-pressure gate with
+  `pressure history must be positive after injection`; stderr was empty and
+  the compact failure archive was readable.
+- Diagnostic: PBS `777007.kunanyi-ohpc` / `g_lo_prdiag` finished green with
+  `Exit_status=0` after `00:01:35`.
+- Cache evidence: the HDF5 checkpoint is intact at `5001/5001`, shape
+  `197568 x 5001`, with no pending batch marker.
+- Diagnostic observation: among `502,174,540` present records, `502,164,508`
+  are finite positive and `10,032` are exact zero; negative and non-finite
+  counts are both zero.
+- Pressure topology: `10,030` histories have exactly one leading zero before a
+  positive suffix; none has a non-positive value after first positive; two
+  endpoint-injected histories have one zero record and no positive state;
+  lifecycle violations are zero.
+- Source evidence: all `32/32` bounded representative canonical-source checks
+  matched the cache. The queued resume additionally requires exact raw-source
+  pressure/density/tracer matches for the two exceptional histories.
+- Primary treatment: preserve injection time, trim only the joint-zero
+  initialization sample for the `10,030` eligible histories, and exclude the
+  two no-positive histories. No floor or interpolation is used.
+- Sensitivity gate: a conservative comparator excludes all `10,032` affected
+  histories. Full-loss/lossless luminosity, spectral index, normalized maps,
+  support, topology, and decision labels are compared at both frequencies and
+  all views. Decision instability keeps the method blocked.
+- Attempt 4: PBS `777008.kunanyi-ohpc` / `g_lo_radhist` finished immediately
+  with `Exit_status=1` and zero CPU, memory, and walltime usage. Its first
+  wrapper action found one checksum mismatch:
+  `scripts/kunanyi/python_compat/__pycache__/hdf5plugin.cpython-311.pyc`.
+  The v4 manifest had accidentally bound generated Python bytecode and
+  `py_compile` legitimately changed that file after manifest creation. No
+  diagnostic, PRAiSE, raytracing, history rebuild, or science output ran.
+- Attempt 5: PBS `777009.kunanyi-ohpc` / `g_lo_radhist` passed the immutable
+  manifest and embedded pressure diagnostic, then finished with
+  `Exit_status=2` after `00:07:52`. The pressure planner failed before PRAiSE
+  at `pressure-treatment trim reaches beyond the endpoint`.
+- Root cause: each of the two observed endpoint-injected exceptions has one
+  joint-zero record at output `5000` and no positive record. The old vectorized
+  predicate classified a one-record zero history as both trim-eligible and
+  no-positive, then attempted to trim to column `5001`.
+- Repair: trim now requires at least one later positive record; the
+  no-positive category remains excluded. A regression reproduces a sole
+  endpoint presence with joint-zero pressure/density/tracer. Categories are
+  checked as exactly one of trim, no-positive, or unchanged.
+- Attempt 6: PBS `777011.kunanyi-ohpc` / `g_lo_radhist` passed its immutable
+  manifest, runtime imports, repeated complete-cache pressure diagnostic, and
+  repaired pressure-treatment plan. It then finished with `Exit_status=2`
+  after `00:08:14`; stderr was empty and the compact archive is readable.
+- First new failure:
+  `ValueError: smoothed pressure history must be positive after injection`.
+  The treatment output was positive before smoothing. The current linear
+  five-point Savitzky-Golay operation therefore introduced non-positive
+  pressure through overshoot before the first PRAiSE emissivity chunk.
+- This is a smoothing-method failure, not a raw-history, cache, lifecycle, or
+  pressure-treatment failure. No PRAiSE emissivity or raytracing product
+  completed.
+- Smoothing diagnostic PBS `777065.kunanyi-ohpc` / `g_lo_psdiag` finished
+  with `Exit_status=1` after `00:13:51`. The calculation itself completed:
+  stdout records `status=diagnostic_complete`, `99108` affected rows, and
+  `smoothing_diagnostic_validation=passed`.
+- The scheduler failure is packaging-only. Stderr reports that the live
+  analysis directory changed while `tar` read it. Both completed diagnostic
+  outputs were retrieved directly and match their remote SHA-256 values.
+- Diagnostic result: linear Savitzky-Golay produces `216035` non-positive
+  values across `99108 / 197398` smoothed histories (`50.21%`). The invalid
+  values are sparse in time but widespread among particles. Linear smoothing
+  is blocked.
+- Log Savitzky-Golay and the triangular comparator produce no non-positive or
+  non-finite values. Log smoothing nevertheless changes endpoint pressure
+  from `-83.42%` to `+25.40%`; positivity does not establish equivalent
+  emissivity or scientific value.
+- Method decision: implement only explicit `unsmoothed` and `log_savgol`
+  modes. Do not clip, floor, censor overshoot histories, or retry linear
+  smoothing.
+- Required next evidence: a deterministic stratified sample of approximately
+  `4096` treated histories evaluated by the actual full/lossless PRAiSE
+  function under both modes. The gate compares population-weighted
+  emissivity at `150 MHz` and `1.4 GHz`, two-point spectral index,
+  full/lossless decision direction, and discrepancy concentration.
+- Predeclared limits: no more than `0.10 dex` aggregate method difference at
+  either frequency, no more than `0.10` spectral-index difference, stable
+  decision direction, and no top `1%` subset contributing more than `50%` of
+  the absolute integrated method discrepancy.
+- The actual-PRAiSE sensitivity implementation now exposes only explicit
+  `unsmoothed` and `log_savgol` pressure modes. Its deterministic
+  certainty-plus-stratified sample includes all short histories, global
+  log-SG extremes from the full active cache, and calibrated represented
+  population weights.
+- The top-`1%` dominance gate ranks unweighted per-particle discrepancy and
+  accumulates exactly `1%` of represented population mass, including a
+  fractional boundary row. The compact archive carries
+  `staged_inputs.sha256`.
+- Independent local verification passed `59` focused tests, Python
+  compilation, wrapper syntax, `shellcheck`, and `git diff --check`. A
+  targeted independent method review returned `GO`.
+- Remote preflight passed a `120`-entry bytecode-free immutable manifest,
+  exact staged hashes, runtime imports, cache metadata
+  (`197568 x 5001`, `next_output=5001`), no-overwrite gates, and the enabled
+  `normal` queue.
+- Exactly one compact diagnostic was submitted:
+  PBS `777074.kunanyi-ohpc` / `g_lo_pmvalue`, verified `Q` on `normal` at
+  `Mon Jul 27 15:06:53 2026`, requesting
+  `1:ncpus=16:mpiprocs=1:mem=96gb` and `12:00:00`.
+- PBS `777074.kunanyi-ohpc` finished with `Exit_status=2` after `01:01:06`.
+  The immutable manifest and runtime imports passed, stderr is empty, and the
+  first failure is `PRAiSE returned non-finite endpoint emissivities`. No
+  result table was written, so the old evidence cannot identify the affected
+  pressure mode, loss branch, frequency, or particle.
+- PRAiSE explicitly uses NaN for some no-emission states, but NaN alone is not
+  proof: unassigned shock states and numerical failures can produce the same
+  surface. Blanket zeroing, row deletion, clipping, and flooring remain
+  prohibited.
+- The opt-in forensic adapter replays the exact pinned PRAiSE internal
+  functions. Only a full-loss NaN with exact replay, finite inputs/dynamics,
+  a shock index visited by the backward loop, explicit no-emission state, and
+  a finite matched lossless cell can be labeled a cutoff candidate. It does
+  not alter emissivity.
+- Local forensic verification passed `32` focused tests, Python compilation,
+  PBS syntax, and `git diff --check`. Remote preflight passed a `121`-entry
+  bytecode-free manifest, exact hashes, immutable input hashes, runtime
+  imports, and no-overwrite gates.
+- Exactly one forensic job was submitted:
+  PBS `777213.kunanyi-ohpc` / `g_lo_pnf`, verified `Q` on `normal` at
+  `Mon Jul 27 17:11:21 2026`, requesting
+  `1:ncpus=16:mpiprocs=1:mem=96gb` and `12:00:00`.
+- PBS `777213.kunanyi-ohpc` completed with `Exit_status=0` after `03:34:28`.
+  The archive and empty stderr were retrieved directly; the archive SHA-256 is
+  `03f94d5df0c70ddb7f0d1070186ca0f3df9946e00cf9df40debfc0bdf81564be`.
+- Forensic observation: all `384 / 32768` non-finite cells come from the same
+  `48` physical IDs. Each affected history contains only output `5000`.
+  Unsmoothed/log-SG and full/lossless branches reproduce the same pattern;
+  inputs and replay dynamics are finite.
+- Diagnosis: the optimized zero-interval PRAiSE path never assigns injection
+  gamma. This is a singleton-boundary inconsistency, not a cooling cutoff or
+  pressure-mode effect.
+- Repair: an explicit fail-closed `instantaneous_recent_shock` policy uses
+  endpoint pressure and current gamma only for exact valid single-record
+  histories; full-loss must equal lossless. The singleton mask/count/IDs are
+  separately persisted, and exclusion remains a conservative comparator.
+- Local repair validation passed `75` focused tests, four PBS wrapper syntax
+  checks, and `git diff --check`.
+- Repaired method-value diagnostic PBS `778078.kunanyi-ohpc` /
+  `g_lo_pmvalue` was verified running on `normal` at
+  `Mon Jul 27 22:06:40 2026`, requesting
+  `1:ncpus=16:mpiprocs=1:mem=96gb` and `12:00:00`.
+- Current next action: wait for Barry's completion email for
+  `779183.kunanyi-ohpc`; then retrieve and review only its compact raw
+  checkpoint, per-cell non-finite, and replay evidence. Do not poll or start
+  the full raytrace meanwhile.
+- PBS `778078.kunanyi-ohpc` finished with `Exit_status=2` after `00:04:25`.
+  Its first failure was the pre-PRAiSE planner aggregate
+  `single_record=46 expected=48`; stderr was empty.
+- Exact cross-tab: the cache contains `46` untrimmed singleton histories and
+  two trim-affected histories that become singleton after the approved trim.
+  Singleton is therefore an orthogonal effective-history property.
+- The version-3 repair fails closed on `10030 / 2 / 48 / 2` trim,
+  no-positive, effective-singleton, and overlap counts; hashes the effective
+  singleton mask; propagates both provenance labels; checks PRAiSE-returned
+  singleton IDs; and constructs the conservative comparator from the union.
+- Local validation passed `76` focused tests and four wrapper syntax checks.
+  Remote preflight passed exact hashes, a `120`-entry bytecode-free manifest,
+  immutable-input hashes, no-overwrite gates, and queue checks.
+- Replacement diagnostic PBS `778079.kunanyi-ohpc` / `g_lo_pmvalue` was
+  verified `Q` on `normal` at `Mon Jul 27 22:51:39 2026`, requesting
+  `1:ncpus=16:mpiprocs=1:mem=96gb` and `12:00:00`.
+- Canonical lineage: initial outputs `0000..0999` plus guarded outputs
+  `1000..5000`; initial `1001..1499` is superseded alternate-trajectory
+  provenance.
+- Performance repair: source files remained sequentially parsed, while HDF5
+  history writes completed in contiguous output batches using a
+  pending-marker, data-flush, checkpoint-flush, marker-removal protocol.
+- Mixed-writer provenance: outputs `0..1874` use legacy helper SHA-256
+  `70a865778fbb279ad3f96a34c4f53810256824626fc21f7def1b0657bb76e654`;
+  outputs `1875..5000` use batched helper SHA-256
+  `19500d97e998aab0c40479cee3cffb3a09b5a60f927e821eb01611a203728ba6`.
+- Log-provenance repair: the resume wrapper uses a unique PBS-job analysis log
+  and refuses collisions, so attempt-1 evidence cannot be truncated.
+- Local validation: `33 passed`; Python compilation, wrapper syntax, lifecycle
+  boundary/material-absence/gap tests, cache migration and crash recovery, and
+  `git diff --check` passed.
+- Independent repair review: `GO`; the exact particle-164943 boundary,
+  bounded-memory lifecycle validation, rejection controls, and deterministic
+  portable archive path passed.
+- Remote resume preflight: the 82-entry immutable manifest, exact changed
+  hashes, ownership/non-symlink gates, completed cache/boundary smoke,
+  attempt-2 evidence checksums, archive/output no-overwrite gates, live tar
+  portability smoke, queue, and scratch capacity all passed.
+- Independent audit: `GO WITH TRACKED RESIDUALS`.
+  Particle-density/downsampling sensitivity, support-partition sensitivity,
+  and accepted X-ray/truth overlap are required before any green output can
+  support new multi-node production.
+- Decision discipline: this run may justify a later regeneration review; it
+  cannot itself authorize new C-HI/C-LO production or support a mixed-method
+  three-case claim.
+- Attempt evidence:
+  `/u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate/remote_logs/attempt1_776779/`
+  and
+  `/u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate_resume_batched_v2/remote_logs/attempt2_777005/`,
+  plus local attempt-3 through attempt-6 evidence under
+  `docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/`.
+- Goal log:
+  `docs/goals/049-g-lo-radio-history-method-value-gate/Log.md`.
+
+Latest Goal 048 three-case endpoint radio source and method gate on
+2026-07-24:
+
+- Status: `complete_source_method_gate_g_lo_method_value_gate_required`.
+- Decision label:
+  `THREE_CASE_LOSS_AWARE_RADIO_BLOCKED_G_LO_METHOD_VALUE_GATE_REQUIRED`.
+- Project alignment: radio boundaries, integrated luminosity, and
+  synchrotron-age estimates where supported are core Aim 4 deliverables; the
+  required three-case experiment still lacks a validated common radio stream.
+- Live source inventory: accepted C-HI retains particle outputs `4277` and
+  `5000`; accepted C-LO retains `1611` and `5003`; G-LO retains continuous
+  filenames `0000..5000` across initial and guarded roots. G-LO usable
+  ID/time/schema history and its `1499/1500` seam remain unverified.
+- C-HI caches: approximately `5` and `10 Myr` accepted early products plus a
+  `33.374 Myr` reduced-grid rehearsal cache. None supplies the accepted
+  full-grid `50 Myr` history. No C-LO dense history cache was found.
+- Source decision: common full-history PRAiSE fails closed because C-HI and
+  C-LO lack complete accepted-lineage post-injection histories. Do not mix
+  G-LO full-history emissivity with endpoint-only or sparse-window methods.
+- Runtime audit: legacy staged `xraise.py`
+  (`4bf17cb8e63e2d87a06615c170c7dd307788554a0cee83409762223123ec8da5`)
+  computes a loss term but attaches emissivity units, matching the inconsistent
+  semantics in existing callers. It is not accepted for the new product.
+- Candidate future method: current clean `plutokore` commit
+  `e80252cf35ff5a06166240e2867d3d485aaf6956`, using
+  `calculate_praise_emissivity_numba` plus
+  `raytrace_particles_multiple_freq`, subject to actual-function synthetic,
+  support, unit, convergence, determinism, and provenance validation.
+- Provisional observing protocol: nominal `50 Myr`; observed `150 MHz` and `1.4 GHz` at
+  `z=0.05`; views `0/45/90 deg`; common support/grid; `5 kpc` primary beam;
+  `0.05 mJy beam^-1` primary threshold; predeclared beam, threshold, and
+  convergence sensitivities. The physical emission parameters remain to be
+  frozen and justified.
+- Local gate: deterministic analytic line-of-sight, normalized-convolution
+  flux, symmetric-view invariance, method-consistency, and source-aggregation
+  tests are packaged. These fixtures define acceptance but do not yet certify
+  a production raytrace.
+- Evidence binding: `source_ledger_extract.csv` is derived from the exact Goal
+  046 lifecycle inventory and records five retained roots with counts, ranges,
+  file types, and interior gaps.
+- Recommendation: next run a G-LO recovery/method/value-of-information gate
+  from retained data. Validate history continuity and the actual candidate
+  functions, prove chunked/restartable feasibility, and quantify full-loss
+  versus endpoint-lossless effects on headline observables.
+- Feasibility warning: about `197,568 x 5,001` particle-time records imply
+  `7.904 GB` for one dense float64 field before overhead; a naive multi-field
+  workflow can exceed `100 GB`, so field-selective particle-ID chunking and
+  checkpointed aggregation are mandatory.
+- Production escalation: only if the G-LO gate shows material value and a
+  viable workflow should two endpoint-oriented C-HI/C-LO history-regeneration
+  runs be proposed to Stas/Patrick and Barry. Such runs would retain accepted
+  physics, use `64` Kunanyi nodes for up to `48 h`, and require explicit
+  regenerated-endpoint X-ray/truth comparability rules.
+- Fallback: a matched lossless endpoint raytraced reference is scientifically
+  coherent for morphology/projection/reference luminosity, but it cannot
+  support ageing or synchrotron age and must be labelled separately.
+- Supervisor escalation: draft production questions are held internally until
+  the G-LO gate supplies method viability, value, and resource evidence.
+- Lifecycle: retain the current G-LO history and protected C-HI/C-LO endpoint
+  particles. No further radio-related compaction is authorized.
+- Scope: read-only local/remote inspection and local method gate only. No PBS
+  job, radio map, new PLUTO run, remote mutation, raw deletion, commit, or push.
+- Validation: focused tests `3 passed`; deterministic builder, Python compile,
+  JSON/CSV schema and exact ledger assertions, payload guard, stale-label scan,
+  and `git diff --check` passed.
+- Goal log:
+  `docs/goals/048-three-case-endpoint-radio-source-method-gate/Log.md`.
+- Science note:
+  `docs/science/three_case_endpoint_radio_source_method_gate_2026-07-24.md`.
+- Internal decision thread:
+  `agent_comms/threads/2026-07-24-three-case-radio-history-decision.md`.
 
 Latest Goal 047 three-case lifecycle compaction execution on 2026-07-24:
 

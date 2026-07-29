@@ -1,0 +1,102 @@
+plutokore/.coveragerc: OK
+plutokore/.gitignore: OK
+plutokore/LICENSE: OK
+plutokore/Makefile: OK
+plutokore/README.md: OK
+plutokore/docs/old-code/nfw.py: OK
+plutokore/docs/old-code/thesis-plots.py: OK
+plutokore/examples/example-3D-simulation-analysis.ipynb: OK
+plutokore/examples/example-particle-analysis.ipynb: OK
+plutokore/examples/example-praise-emissivity.ipynb: OK
+plutokore/examples/example-processed-jet.ipynb: OK
+plutokore/examples/example-saving-analysis.ipynb: OK
+plutokore/pyproject.toml: OK
+plutokore/scripts/calc-dynamics.py: OK
+plutokore/scripts/calc-radio.py: OK
+plutokore/scripts/calculate-luminosity.py: OK
+plutokore/scripts/combine-hdf5.py: OK
+plutokore/scripts/diagnostic-plots.py: OK
+plutokore/scripts/generate-movie-plots.py: OK
+plutokore/scripts/generate-plots-for-marissa.py: OK
+plutokore/scripts/generate_pluto_input_data.py: OK
+plutokore/scripts/jet-info.py: OK
+plutokore/scripts/mach-200-analysis.py: OK
+plutokore/scripts/plot-jet-injection.py: OK
+plutokore/scripts/plot-sb.py: OK
+plutokore/scripts/plot-surface-brightness-3D.py: OK
+plutokore/scripts/plot-surface-brightness.py: OK
+plutokore/scripts/test-plutokore-config.py: OK
+plutokore/scripts/uncertainties.py: OK
+plutokore/src/plutokore/__init__.py: OK
+plutokore/src/plutokore/_version.py: OK
+plutokore/src/plutokore/analysis/__init__.py: OK
+plutokore/src/plutokore/analysis/dynamics.py: OK
+plutokore/src/plutokore/analysis/morphology.py: OK
+plutokore/src/plutokore/analysis/processed_jet_simulation.py: OK
+plutokore/src/plutokore/configuration.py: OK
+plutokore/src/plutokore/energy.py: OK
+plutokore/src/plutokore/environments/__init__.py: OK
+plutokore/src/plutokore/environments/king.py: OK
+plutokore/src/plutokore/environments/makino.py: OK
+plutokore/src/plutokore/environments/observationalking.py: OK
+plutokore/src/plutokore/eos.py: OK
+plutokore/src/plutokore/gadget.py: OK
+plutokore/src/plutokore/initial_conditions.py: OK
+plutokore/src/plutokore/io.py: OK
+plutokore/src/plutokore/jet.py: OK
+plutokore/src/plutokore/particles.py: OK
+plutokore/src/plutokore/plot.py: OK
+plutokore/src/plutokore/pluto_simulation.py: OK
+plutokore/src/plutokore/radio/__init__.py: OK
+plutokore/src/plutokore/radio/praise.py: OK
+plutokore/src/plutokore/radio/praise2.py: OK
+plutokore/src/plutokore/radio/radio.py: OK
+plutokore/src/plutokore/radio/raytracing.py: OK
+plutokore/src/plutokore/scripts.py: OK
+plutokore/src/plutokore/simulations.py: OK
+plutokore/src/plutokore/utilities.py: OK
+plutokore/tests/conftest.py: OK
+plutokore/tests/context.py: OK
+plutokore/tests/data/king-config-files/config.yaml: OK
+plutokore/tests/data/king-config-files/definitions.h: OK
+plutokore/tests/data/king-config-files/pluto.ini: OK
+plutokore/tests/data/makino-config-files/config.yaml: OK
+plutokore/tests/data/makino-config-files/definitions.h: OK
+plutokore/tests/data/makino-config-files/pluto.ini: OK
+plutokore/tests/test_configuration.py: OK
+plutokore/tests/test_energy.py: OK
+plutokore/tests/test_environments.py: OK
+plutokore/tests/test_io.py: OK
+plutokore/tests/test_jet.py: OK
+plutokore/tests/test_plot.py: OK
+plutokore/tests/test_radio.py: OK
+plutokore/tests/test_simulations.py: OK
+plutokore/tests/test_utilities.py: OK
+plutokore_commit.txt: OK
+scripts/kunanyi/g_lo_radio_history_method_value.pbs: OK
+scripts/kunanyi/python_compat/contextlib2.py: OK
+scripts/kunanyi/python_compat/hdf5plugin.py: OK
+scripts/kunanyi/python_compat/yt.py: OK
+scripts/science/diagnose_g_lo_pressure_history.py: OK
+scripts/science/g_lo_particle_history.py: OK
+scripts/science/g_lo_radio_method_value.py: OK
+scripts/science/run_g_lo_radio_history_value.py: OK
+job_id=777011.kunanyi-ohpc
+host=n002.kunanyi.UDEF
+started_utc=2026-07-26T13:37:45Z
+run_mode=resume
+analysis_root=/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate
+initial_count=1500
+guarded_count=4001
+endpoint_count=197568
+shock_thresholds=0.05,0.5,5.0
+selected_shock_threshold=5
+plutokore_commit=e80252cf35ff5a06166240e2867d3d485aaf6956
+runtime_import_preflight=passed
+status=diagnostic_complete
+affected_rows=10032 affected_outputs=5001
+pressure_diagnostic_validation=passed
+ValueError: smoothed pressure history must be positive after injection
+0049f76ebf915bdf5fc2f99c62b827a73b7e358326c746bc50bae56fff2012f2  /u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate_resume_pressure_v6/g_lo_radio_history_method_value_2026-07-24.tar.gz
+finished_utc=2026-07-26T13:45:58Z
+run_status=2

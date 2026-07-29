@@ -1,0 +1,53 @@
+{
+  "affected_rows_csv_sha256": "85caef2184edd7786e4d791fd52e77e422269bb6a156a48047d3c7901e4d79f2",
+  "cache_identity": {
+    "cache_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5",
+    "cache_sha256": "f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30",
+    "endpoint_count": 197568,
+    "endpoint_ids_sha256": "1751ec3efd851140d5fd45f30aeef652f9e9e3cd5ea5fe7d33bb273ffe51c43d",
+    "output_count": 5001,
+    "shock_component": 2,
+    "shock_threshold": 5.0,
+    "source_identity_sha256": "bfbc157e4a80e23c07c893d8929e4c74720cafd5352e56862c7091fafe81c44a",
+    "times_sha256": "86a80d12b4f8e84bdf06ef68beb5863a987e26a5a0c5139a232ad66d9d1ab7af"
+  },
+  "pressure_treatment_counts": {
+    "excluded_rows": 2,
+    "trim_rows": 10030
+  },
+  "pressure_treatment_identity_sha256": "c05d0df5682ca4cfd6d45bf81f50c13e5528968f812c07f06f1b5a25d3c3e6c8",
+  "replacement_policy": "no values are replaced by this diagnostic",
+  "selection": {
+    "active_population_size": 197566,
+    "affected_population_count": 99108,
+    "fixed_seed": "goal049-pressure-method-value-v1",
+    "log_savgol_extrema_universe": "all active treated cache rows",
+    "mandatory_selected_count": 200,
+    "mandatory_short_count": 168,
+    "ordering": "sha256(seed:cache_row:physical_id) within predeclared strata",
+    "sample_size_requested": 4096,
+    "sample_size_selected": 4096,
+    "scope": "sample evidence; not a full-population estimate without sampling assumptions",
+    "stratum_count": 100,
+    "weighting": "certainty rows weight 1; remaining rows use inverse within-stratum hash-sample fraction after certainty-row removal"
+  },
+  "status": "selection_complete",
+  "unit_provenance": {
+    "density_unit": "0.60364 u cm^-3",
+    "density_unit_kg_m3": 1.0023678021624239e-21,
+    "endpoint_velocity_representation": "dimensionless beta vector",
+    "history_dtype": "float64",
+    "length_unit": "1 kpc",
+    "length_unit_m": 3.085677581491367e+19,
+    "physical_ids": "unmodified raw PLUTO IDs",
+    "pressure_unit": "density_unit * c^2",
+    "pressure_unit_Pa": 9.008832531925203e-05,
+    "shock_component": 2,
+    "shock_component_semantics": "selected by g_lo_particle_history from PLUTO shk_thresh",
+    "shock_threshold": 5.0,
+    "speed_unit": "c",
+    "speed_unit_m_s": 299792458.0,
+    "time_unit": "kpc/c in seconds",
+    "time_unit_s": 102927125054.33899
+  }
+}

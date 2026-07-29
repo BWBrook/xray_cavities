@@ -1,0 +1,13 @@
+gate,definition,fail_condition,source
+exact_selection,selection is byte-bound and has 4096 rows,hash or count mismatch,diagnostic and wrapper
+branch_shape,all branch arrays have expected (4096,2) shape,missing or mismatched shape,diagnostic
+stable_full_finite,stable full-loss states and emissivities are finite,non-finite stable full state,diagnostic
+stable_adiabatic_finite,stable adiabatic states and emissivities are finite,non-finite stable adiabatic state,diagnostic
+none_finite,actual pinned no-loss values are finite where required,non-finite value or hidden coercion,diagnostic
+no_silent_fallback,no branch silently retains prior gamma or substitutes a value,any unrecorded fallback,diagnostic
+no_subrelativistic,no retained stable state is subrelativistic,subrelativistic state,diagnostic
+cutoff_policy,cutoff evidence is tri-state and physical/gamma_inf are separate,verified real cutoff => HOLD_FOR_CUTOFF_REVIEW; malformed unstable or reference-disagreeing evidence => FAIL,diagnostic
+cutoff_records_archived,cutoff provenance rows are written and archived,missing cutoff records output,diagnostic and wrapper
+boundary_state_agreement,stable endpoint and state checks agree,endpoint or state mismatch,diagnostic
+deterministic_repeat,repeated deterministic calculation agrees,non-reproducible output,diagnostic
+provenance,cache selection source and pinned commit are archived,missing provenance,wrapper

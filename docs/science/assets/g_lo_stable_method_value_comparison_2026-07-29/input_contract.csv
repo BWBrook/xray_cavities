@@ -1,0 +1,8 @@
+input,role,expected_sha256_or_value,required,notes
+g_lo_history.h5,immutable cache,f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30,yes,Goal 050 cache
+pressure_method_selection.csv,deterministic weighted selection,35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df,yes,exactly 4096 rows
+plutokore,method implementation commit,e80252cf35ff5a06166240e2867d3d485aaf6956,yes,staged proof and optional live git check
+selection_count,selection cardinality,4096,yes,fail closed on mismatch
+pressure_modes,pressure treatments,unsmoothed|log_savgol,yes,both required
+radio_frequencies,radio frequencies,configured pair,yes,both required
+cutoff_records,tri-state cutoff provenance output,stable_method_value_cutoff_records.csv,yes,physical and gamma_inf records retained separately

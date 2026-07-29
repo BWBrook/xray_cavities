@@ -1,0 +1,8 @@
+metric,value
+decision,PRAISE_NUMERICS_BLOCKED
+record_count,32768
+nonfinite_count,384
+proven_full_loss_cutoff_count,0
+unresolved_nonfinite_count,384
+lossless_nonfinite_count,192
+all_lossless_cells_finite,False

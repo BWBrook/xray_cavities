@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_prdiag
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=32gb
+#PBS -l walltime=02:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_history_diagnostic_777006/g_lo_pressure_history_diagnostic.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_history_diagnostic_777006/g_lo_pressure_history_diagnostic.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_history_diagnostic_777006}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+INITIAL_ROOT="${INITIAL_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs}"
+GUARDED_ROOT="${GUARDED_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-26-g-lo-pressure-history-diagnostic-777006}"
+SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_pressure_history.py"
+HISTORY_HELPER="$STAGE_ROOT/scripts/science/g_lo_particle_history.py"
+STAGED_SHA256="$STAGE_ROOT/staged_inputs.sha256"
+
+for path in "$SCRIPT" "$HISTORY_HELPER" "$STAGED_SHA256" "$CACHE" "$INITIAL_ROOT" "$GUARDED_ROOT"; do
+  test -r "$path" || { echo "missing required diagnostic input: $path" >&2; exit 2; }
+done
+test ! -e "$ANALYSIS_ROOT" && test ! -L "$ANALYSIS_ROOT" || {
+  echo "refusing to overwrite existing diagnostic output root" >&2
+  exit 2
+}
+case "$ANALYSIS_ROOT/" in
+  "$INITIAL_ROOT/"*|"$GUARDED_ROOT/"*) echo "output overlaps source root" >&2; exit 2;;
+esac
+
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+export PYTHONPATH="$STAGE_ROOT:${PYTHONPATH:-}"
+"$PYTHON" -m py_compile "$SCRIPT" "$HISTORY_HELPER"
+set +e
+"$PYTHON" "$SCRIPT" \
+  --cache "$CACHE" \
+  --output-dir "$ANALYSIS_ROOT" \
+  --initial-source-root "$INITIAL_ROOT" \
+  --guarded-source-root "$GUARDED_ROOT" \
+  --row-chunk 4096 \
+  --representative-limit 100 \
+  --source-crosscheck-limit 32
+status=$?
+set -e
+test "$status" -eq 0 || exit "$status"
+test -s "$ANALYSIS_ROOT/pressure_history_diagnostic.json"
+test -s "$ANALYSIS_ROOT/pressure_nonpositive_by_output.csv"
+test -s "$ANALYSIS_ROOT/representative_bad_records.csv"
+test -s "$ANALYSIS_ROOT/exceptional_pressure_rows.csv"
+echo "diagnostic_validation=passed"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

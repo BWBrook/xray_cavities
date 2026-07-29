@@ -1,0 +1,11 @@
+scope,check,passed,count,denominator,max_relative_difference,interpretation
+adiabatic_recovery,archived_failure_strata_reproduced,true,4,4,,Pinned original failure was reproduced before recovery assessment
+adiabatic_recovery,stable_relevant_gamma_finite,true,431744,431744,,Every retained stable gamma value was finite positive and below gamma_inf
+adiabatic_recovery,high_precision_agreement,true,98,98,9.994967978657982e-12,Pressure-ratio trajectory agrees with the 80-digit original-form reference
+adiabatic_recovery,finite_reconstructed_injection_emissivity,true,,,,"Selected stable injection states produced finite emissivity"
+diagnostic,pressure_time_stable_form_agreement,false,32,431744,1.6612874572382827e-11,Marginal floating-point discrepancies are recorded separately from stable trajectory validity
+diagnostic,pinned_upstream_finite_overlap_agreement,false,32,372496,6.71014976619398e-7,All material violations occur on physical ID 147678 next to upstream numerical breakdown
+full_loss_method,finite_relevant_a2,false,22737,215872,,Pinned full-loss a2 has non-finite relevant intervals
+full_loss_method,zero_relevant_gamma_fallbacks,false,45474,431744,,Pinned PRAiSE silently retains prior gamma for two frequencies at each non-finite a2 interval
+decision,adiabatic_numerical_recovery,true,,,,Conditional pass on the bounded 64-trace recovery panel
+decision,full_loss_method_readiness,false,,,,Overall Goal 049 radio method remains blocked

@@ -1,0 +1,12 @@
+evidence_class,method,status,rationale
+observation,treated_pressure,passed_positive_gate,"The repaired treatment completed for 197566 active rows before smoothing"
+observation,linear_savgol,failed_domain_gate,"A five-point order-three linear Savitzky-Golay pass created 216035 non-positive values across 99108 of 197398 smoothed histories"
+observation,pinned_upstream_default,unsmoothed,"calculate_praise_emissivity_numba defaults smooth_pressure to false"
+inference,linear_savgol,blocked_unchanged,"The observed overshoot is a method defect and not another raw-cache or treatment-category failure"
+observation,log_savgol,numerically_admissible,"Produces no non-positive or non-finite values but changes endpoint pressure by -83.42 to +25.40 percent"
+recommendation,unsmoothed,candidate_primary_pending_actual_praise_gate,"Matches the pinned upstream default and preserves measured positive treated pressure"
+recommendation,log_savgol,candidate_sensitivity_pending_actual_praise_gate,"Preserves positivity but requires actual-function emissivity materiality evidence"
+recommendation,triangular_positive_kernel,diagnostic_only,"Provides a positive weighted-average comparator but is not selected as the science method"
+prohibition,clipping_or_floor,forbidden,"Would invent pressure history and alter radiative-loss physics"
+prohibition,exclude_overshoot_rows,forbidden,"Would censor particles because of a numerical filter artifact"
+gate,science_retry,wait_for_actual_praise_sensitivity,"Run deterministic stratified actual-PRAiSE unsmoothed versus log_savgol comparison before a full science retry"

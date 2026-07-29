@@ -1,0 +1,7 @@
+pressure_mode,loss_branch,selected_particle_count,finite_value_count,nonfinite_value_count,nan_count,positive_inf_count,negative_inf_count,proven_full_loss_cutoff_count,unresolved_nonfinite_count
+unsmoothed,full,4096,8192,0,0,0,0,0,0
+unsmoothed,adiabatic,4096,3549,4643,4643,0,0,0,4643
+unsmoothed,none,4096,8192,0,0,0,0,0,0
+log_savgol,full,4096,8192,0,0,0,0,0,0
+log_savgol,adiabatic,4096,3732,4460,4460,0,0,0,4460
+log_savgol,none,4096,8192,0,0,0,0,0,0

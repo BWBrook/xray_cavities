@@ -1,0 +1,5 @@
+priority,action,status,rationale,hard_stop
+1,Design and locally prove a stable full-loss a2 and gamma recurrence,next,Directly addresses 22737 non-finite a2 intervals and 45474 silent fallbacks,Require independent high-precision agreement and zero relevant fallback
+2,Run the stable full-loss recurrence on the existing bounded trace panel,conditional,Mechanically verifies the candidate before larger use,Stop if any relevant interval is non-finite or materially disagrees
+3,Run the 4096-row method-value comparison,hold,Adiabatic recovery alone does not validate full-loss integration,Do not run until the stable full-loss gate passes
+4,Run raytracing or request new C-HI and C-LO histories,hold,The headline full-loss estimand remains method-blocked,Requires a green 4096-row comparison and later review

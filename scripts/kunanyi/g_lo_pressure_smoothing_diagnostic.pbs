@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_psdiag
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=64gb
+#PBS -l walltime=12:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_smoothing_diagnostic_777011/g_lo_pressure_smoothing_diagnostic.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_smoothing_diagnostic_777011/g_lo_pressure_smoothing_diagnostic.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_smoothing_diagnostic_777011}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-27-g-lo-pressure-smoothing-diagnostic-777011}"
+SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_pressure_smoothing.py"
+RUNNER="$STAGE_ROOT/scripts/science/run_g_lo_radio_history_value.py"
+METHOD_HELPER="$STAGE_ROOT/scripts/science/g_lo_radio_method_value.py"
+HISTORY_HELPER="$STAGE_ROOT/scripts/science/g_lo_particle_history.py"
+PLUTOKORE_SOURCE="${PLUTOKORE_SOURCE:-$STAGE_ROOT/plutokore}"
+PYTHON_COMPAT="${PYTHON_COMPAT:-$STAGE_ROOT/scripts/kunanyi/python_compat}"
+STAGED_SHA256="$STAGE_ROOT/staged_inputs.sha256"
+ARCHIVE="$STAGE_ROOT/g_lo_pressure_smoothing_diagnostic_2026-07-27.tar.gz"
+ARCHIVE_PAYLOAD="$STAGE_ROOT/archive_payload"
+ARCHIVE_PAYLOAD_ROOT="$ARCHIVE_PAYLOAD/$(basename "$ANALYSIS_ROOT")"
+ARCHIVE_FILE_LIST="$ARCHIVE_PAYLOAD/archive_file_list.txt"
+
+for path in \
+  "$SCRIPT" "$RUNNER" "$METHOD_HELPER" "$HISTORY_HELPER" \
+  "$PLUTOKORE_SOURCE" "$PYTHON_COMPAT" "$STAGED_SHA256" "$CACHE"
+do
+  test -r "$path" || {
+    echo "missing required smoothing-diagnostic input: $path" >&2
+    exit 2
+  }
+done
+test ! -e "$ANALYSIS_ROOT" && test ! -L "$ANALYSIS_ROOT" || {
+  echo "refusing to overwrite existing smoothing-diagnostic output root" >&2
+  exit 2
+}
+test ! -e "$ARCHIVE" && test ! -L "$ARCHIVE" || {
+  echo "refusing to overwrite existing smoothing-diagnostic archive" >&2
+  exit 2
+}
+test ! -e "$ARCHIVE_PAYLOAD" && test ! -L "$ARCHIVE_PAYLOAD" || {
+  echo "refusing to overwrite existing smoothing-diagnostic archive payload" >&2
+  exit 2
+}
+if grep -Eq '(/__pycache__/|\.(pyc|pyo)$)' "$STAGED_SHA256"; then
+  echo "staged smoothing-diagnostic manifest must not bind generated Python bytecode" >&2
+  exit 2
+fi
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$PYTHON_COMPAT:$PLUTOKORE_SOURCE/src:$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=1
+
+"$PYTHON" - <<'PY'
+from scripts.science.diagnose_g_lo_pressure_smoothing import diagnose_pressure_smoothing
+from scripts.science.run_g_lo_radio_history_value import build_pressure_treatment_plan
+from plutokore.radio.praise import calculate_praise_emissivity_numba
+
+assert callable(diagnose_pressure_smoothing)
+assert callable(build_pressure_treatment_plan)
+assert callable(calculate_praise_emissivity_numba)
+print("runtime_import_preflight=passed")
+PY
+
+"$PYTHON" "$SCRIPT" \
+  --cache "$CACHE" \
+  --output-dir "$ANALYSIS_ROOT" \
+  --row-chunk 4096 \
+  --expected-trim-rows 10030 \
+  --expected-no-positive-rows 2 \
+  --expected-single-record-rows 48
+
+test -s "$ANALYSIS_ROOT/pressure_smoothing_diagnostic.json"
+test -s "$ANALYSIS_ROOT/pressure_smoothing_affected_rows.csv"
+"$PYTHON" - "$ANALYSIS_ROOT/pressure_smoothing_diagnostic.json" <<'PY'
+import json
+import sys
+
+with open(sys.argv[1]) as handle:
+    summary = json.load(handle)
+if summary.get("status") != "diagnostic_complete":
+    raise SystemExit("smoothing diagnostic did not complete")
+counts = summary.get("counts", {})
+if counts.get("active_rows") != 197566 or counts.get("excluded_rows") != 2:
+    raise SystemExit("smoothing diagnostic active/excluded row contract mismatch")
+if counts.get("log_nonpositive_output_count") != 0:
+    raise SystemExit("log-pressure smoothing unexpectedly produced non-positive output")
+print("smoothing_diagnostic_validation=passed")
+PY
+
+archive_tmp="$ARCHIVE.tmp.${PBS_JOBID:-manual}"
+mkdir -p "$ARCHIVE_PAYLOAD_ROOT"
+cp -p "$ANALYSIS_ROOT/pressure_smoothing_diagnostic.json" "$ARCHIVE_PAYLOAD_ROOT/pressure_smoothing_diagnostic.json"
+cp -p "$ANALYSIS_ROOT/pressure_smoothing_affected_rows.csv" "$ARCHIVE_PAYLOAD_ROOT/pressure_smoothing_affected_rows.csv"
+{
+  printf './%s/pressure_smoothing_diagnostic.json\n' "$(basename "$ANALYSIS_ROOT")"
+  printf './%s/pressure_smoothing_affected_rows.csv\n' "$(basename "$ANALYSIS_ROOT")"
+  printf './archive_file_list.txt\n'
+} > "$ARCHIVE_FILE_LIST"
+tar -C "$ARCHIVE_PAYLOAD" -czf "$archive_tmp" --files-from "$ARCHIVE_FILE_LIST"
+tar -tzf "$archive_tmp" >/dev/null
+tar -tzf "$archive_tmp" | grep -Fxx "./$(basename "$ANALYSIS_ROOT")/pressure_smoothing_diagnostic.json" >/dev/null
+tar -tzf "$archive_tmp" | grep -Fxx "./$(basename "$ANALYSIS_ROOT")/pressure_smoothing_affected_rows.csv" >/dev/null
+mv "$archive_tmp" "$ARCHIVE"
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

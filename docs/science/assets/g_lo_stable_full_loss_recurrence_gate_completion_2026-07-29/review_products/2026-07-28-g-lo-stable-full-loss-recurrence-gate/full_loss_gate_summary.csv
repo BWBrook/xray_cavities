@@ -1,0 +1,12 @@
+gate,passed,value
+analytic_limits,True,true
+finite_scaled_loss,True,true
+high_precision_scaled_loss,True,true
+high_precision_gamma,True,true
+exact_state_classification,True,true
+boundary_conditioning,True,true
+zero_silent_fallbacks,True,true
+no_subrelativistic_states,True,true
+finite_or_explicit_cutoff_emissivity,True,true
+deterministic_repeat,True,true
+pinned_failure_reproduction,True,true

@@ -1,0 +1,13 @@
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/staged_inputs.sha256
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_selection.csv
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_unsmoothed_emissivity_checkpoint.npz
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_log_savgol_emissivity_checkpoint.npz
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_particle_comparison.csv
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_full_reference_ordering.csv
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_gamma_fallback_summary.csv
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_gamma_fallback_records.csv
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_nonfinite_emissivity_summary.csv
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_nonfinite_emissivity_records.csv
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_summary.csv
+./2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_summary.json
+./archive_file_list.txt

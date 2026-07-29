@@ -1,0 +1,17 @@
+field,value
+job_id,777074.kunanyi-ohpc
+job_name,g_lo_pmvalue
+job_state,F
+exit_status,2
+stageout_status,1
+walltime,01:01:06
+cput,22:21:14
+ncpus,16
+mem_kb,2957540
+vmem_kb,5417824
+first_failure,PRAiSE returned non-finite endpoint emissivities
+failure_stage,actual_praise_unsmoothed_or_log_savgol_endpoint_evaluation
+analysis_output_files,0
+runtime_import_preflight,passed
+stderr_bytes,0
+decision,INSTRUMENTED_NO_EMISSION_FORENSIC_REQUIRED

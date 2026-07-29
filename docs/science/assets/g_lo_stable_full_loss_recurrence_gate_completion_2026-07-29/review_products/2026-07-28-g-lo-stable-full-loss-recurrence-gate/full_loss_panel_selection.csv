@@ -1,0 +1,65 @@
+sample_index,cache_row,physical_id,trace_class,trace_mode,trace_frequency_GHz,trace_selection_rule
+3424,162514,54989,archived_nonfinite,unsmoothed,0.15,one deterministic hash-minimum archived failure ID per pressure-mode/frequency stratum
+3994,191438,87037,archived_nonfinite,unsmoothed,1.4,one deterministic hash-minimum archived failure ID per pressure-mode/frequency stratum
+1631,75679,178794,archived_nonfinite,log_savgol,0.15,one deterministic hash-minimum archived failure ID per pressure-mode/frequency stratum
+2052,95690,27105,archived_nonfinite,log_savgol,1.4,one deterministic hash-minimum archived failure ID per pressure-mode/frequency stratum
+2977,138001,196605,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2184,101779,5418,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+365,18789,5221,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+488,25339,6865,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2976,138000,196603,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1546,71546,196407,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1134,57176,196371,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+889,46336,4475,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1273,59756,196370,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1208,58607,3611,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1253,59025,3621,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3019,140234,196604,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1550,71892,3123,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2708,126424,4213,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+4007,192092,3772,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2657,125548,4726,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1132,57123,196703,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1210,58751,6445,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1485,69352,196507,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2764,127330,196752,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+369,18942,4163,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1539,71285,5317,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2396,111981,7370,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1271,59753,196380,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3221,151301,4165,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2775,127674,196412,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1269,59747,196418,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1133,57136,196637,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1518,70672,4321,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2773,127668,196442,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1272,59755,196378,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1484,69350,196527,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1219,58793,197542,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1991,93016,27495,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3213,150959,11136,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+545,28036,147678,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2711,126543,16,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2691,125727,197405,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3042,141583,193611,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3591,171205,99083,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+290,14270,167870,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+896,46802,21705,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1105,55713,190071,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2975,137985,196705,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+560,28653,144671,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+4009,192209,9212,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1199,58135,12292,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1126,56549,194377,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3412,161759,54473,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3972,190150,129282,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3005,139330,3642,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3313,156677,168752,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1122,56401,195405,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3006,139417,197484,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+361,18597,13965,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2789,128216,194864,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+1231,58805,197497,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+3004,139234,1896,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2686,125722,197425,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata
+2714,126646,197558,finite_control,both,both,deterministic hash-ranked finite control/extreme after archived-failure strata

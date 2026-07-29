@@ -1,0 +1,20 @@
+{
+  "status": "complete_diagnostic_closeout",
+  "decision": "FAIL",
+  "decision_label": "ADIABATIC_RECOVERY_SUPPORTED_FULL_LOSS_METHOD_BLOCKED_A2",
+  "job_id": "779693.kunanyi-ohpc",
+  "adiabatic_recovery_decision": "PASS",
+  "full_method_decision": "BLOCKED",
+  "archive_sha256": "71f40e9510834acbc4475bfa59b4e22faddbba0a32dd343dcdef3b81956cf3f8",
+  "archive_members": 6,
+  "retention_policy": {
+    "immutable_remote_archive_retained": true,
+    "compact_extracted_summaries_retained": true,
+    "redundant_extracted_trace_csv_retained": false,
+    "redundant_extracted_nonfinite_record_csv_retained": false,
+    "reason": "The checksum-verified archive preserves both large tables; local second copies were removed after compact reclassification."
+  },
+  "scientific_scope": "bounded 64-trace recovery panel; no 4096-row comparison or raytrace",
+  "pinned_defaults_changed": false,
+  "remote_rerun_after_closeout": false
+}

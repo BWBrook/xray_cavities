@@ -1,0 +1,141 @@
+./g_lo_pressure_method_value_diagnostic.pbs: OK
+./plutokore/.coveragerc: OK
+./plutokore/.git/FETCH_HEAD: OK
+./plutokore/.git/HEAD: OK
+./plutokore/.git/config: OK
+./plutokore/.git/description: OK
+./plutokore/.git/hooks/applypatch-msg.sample: OK
+./plutokore/.git/hooks/commit-msg.sample: OK
+./plutokore/.git/hooks/fsmonitor-watchman.sample: OK
+./plutokore/.git/hooks/post-update.sample: OK
+./plutokore/.git/hooks/pre-applypatch.sample: OK
+./plutokore/.git/hooks/pre-commit.sample: OK
+./plutokore/.git/hooks/pre-merge-commit.sample: OK
+./plutokore/.git/hooks/pre-push.sample: OK
+./plutokore/.git/hooks/pre-rebase.sample: OK
+./plutokore/.git/hooks/pre-receive.sample: OK
+./plutokore/.git/hooks/prepare-commit-msg.sample: OK
+./plutokore/.git/hooks/push-to-checkout.sample: OK
+./plutokore/.git/hooks/sendemail-validate.sample: OK
+./plutokore/.git/hooks/update.sample: OK
+./plutokore/.git/index: OK
+./plutokore/.git/info/exclude: OK
+./plutokore/.git/logs/HEAD: OK
+./plutokore/.git/logs/refs/heads/bwbrook/deep-server-bringup: OK
+./plutokore/.git/logs/refs/remotes/origin/HEAD: OK
+./plutokore/.git/logs/refs/remotes/upstream/HEAD: OK
+./plutokore/.git/logs/refs/remotes/upstream/master: OK
+./plutokore/.git/logs/refs/remotes/upstream/processor-improvement: OK
+./plutokore/.git/objects/info/commit-graphs/commit-graph-chain: OK
+./plutokore/.git/objects/info/commit-graphs/graph-0d24736c9b41d8813dd7da17eb0107b8835059a7.graph: OK
+./plutokore/.git/objects/pack/pack-8647efa43f842c99a1bfe8510de7c6a55118c03b.idx: OK
+./plutokore/.git/objects/pack/pack-8647efa43f842c99a1bfe8510de7c6a55118c03b.pack: OK
+./plutokore/.git/objects/pack/pack-8647efa43f842c99a1bfe8510de7c6a55118c03b.rev: OK
+./plutokore/.git/packed-refs: OK
+./plutokore/.git/refs/heads/bwbrook/deep-server-bringup: OK
+./plutokore/.git/refs/remotes/origin/HEAD: OK
+./plutokore/.git/refs/remotes/upstream/HEAD: OK
+./plutokore/.git/refs/remotes/upstream/master: OK
+./plutokore/.git/refs/remotes/upstream/processor-improvement: OK
+./plutokore/.gitignore: OK
+./plutokore/LICENSE: OK
+./plutokore/Makefile: OK
+./plutokore/README.md: OK
+./plutokore/docs/old-code/nfw.py: OK
+./plutokore/docs/old-code/thesis-plots.py: OK
+./plutokore/examples/example-3D-simulation-analysis.ipynb: OK
+./plutokore/examples/example-particle-analysis.ipynb: OK
+./plutokore/examples/example-praise-emissivity.ipynb: OK
+./plutokore/examples/example-processed-jet.ipynb: OK
+./plutokore/examples/example-saving-analysis.ipynb: OK
+./plutokore/pyproject.toml: OK
+./plutokore/scripts/calc-dynamics.py: OK
+./plutokore/scripts/calc-radio.py: OK
+./plutokore/scripts/calculate-luminosity.py: OK
+./plutokore/scripts/combine-hdf5.py: OK
+./plutokore/scripts/diagnostic-plots.py: OK
+./plutokore/scripts/generate-movie-plots.py: OK
+./plutokore/scripts/generate-plots-for-marissa.py: OK
+./plutokore/scripts/generate_pluto_input_data.py: OK
+./plutokore/scripts/jet-info.py: OK
+./plutokore/scripts/mach-200-analysis.py: OK
+./plutokore/scripts/plot-jet-injection.py: OK
+./plutokore/scripts/plot-sb.py: OK
+./plutokore/scripts/plot-surface-brightness-3D.py: OK
+./plutokore/scripts/plot-surface-brightness.py: OK
+./plutokore/scripts/test-plutokore-config.py: OK
+./plutokore/scripts/uncertainties.py: OK
+./plutokore/src/plutokore/__init__.py: OK
+./plutokore/src/plutokore/_version.py: OK
+./plutokore/src/plutokore/analysis/__init__.py: OK
+./plutokore/src/plutokore/analysis/dynamics.py: OK
+./plutokore/src/plutokore/analysis/morphology.py: OK
+./plutokore/src/plutokore/analysis/processed_jet_simulation.py: OK
+./plutokore/src/plutokore/configuration.py: OK
+./plutokore/src/plutokore/energy.py: OK
+./plutokore/src/plutokore/environments/__init__.py: OK
+./plutokore/src/plutokore/environments/king.py: OK
+./plutokore/src/plutokore/environments/makino.py: OK
+./plutokore/src/plutokore/environments/observationalking.py: OK
+./plutokore/src/plutokore/eos.py: OK
+./plutokore/src/plutokore/gadget.py: OK
+./plutokore/src/plutokore/initial_conditions.py: OK
+./plutokore/src/plutokore/io.py: OK
+./plutokore/src/plutokore/jet.py: OK
+./plutokore/src/plutokore/particles.py: OK
+./plutokore/src/plutokore/plot.py: OK
+./plutokore/src/plutokore/pluto_simulation.py: OK
+./plutokore/src/plutokore/radio/__init__.py: OK
+./plutokore/src/plutokore/radio/praise.py: OK
+./plutokore/src/plutokore/radio/praise2.py: OK
+./plutokore/src/plutokore/radio/radio.py: OK
+./plutokore/src/plutokore/radio/raytracing.py: OK
+./plutokore/src/plutokore/scripts.py: OK
+./plutokore/src/plutokore/simulations.py: OK
+./plutokore/src/plutokore/utilities.py: OK
+./plutokore/tests/conftest.py: OK
+./plutokore/tests/context.py: OK
+./plutokore/tests/data/king-config-files/config.yaml: OK
+./plutokore/tests/data/king-config-files/definitions.h: OK
+./plutokore/tests/data/king-config-files/pluto.ini: OK
+./plutokore/tests/data/makino-config-files/config.yaml: OK
+./plutokore/tests/data/makino-config-files/definitions.h: OK
+./plutokore/tests/data/makino-config-files/pluto.ini: OK
+./plutokore/tests/test_configuration.py: OK
+./plutokore/tests/test_energy.py: OK
+./plutokore/tests/test_environments.py: OK
+./plutokore/tests/test_io.py: OK
+./plutokore/tests/test_jet.py: OK
+./plutokore/tests/test_plot.py: OK
+./plutokore/tests/test_radio.py: OK
+./plutokore/tests/test_simulations.py: OK
+./plutokore/tests/test_utilities.py: OK
+./pressure_smoothing_affected_rows.csv: OK
+./scripts/kunanyi/python_compat/contextlib2.py: OK
+./scripts/kunanyi/python_compat/hdf5plugin.py: OK
+./scripts/kunanyi/python_compat/yt.py: OK
+./scripts/science/diagnose_g_lo_pressure_method_value.py: OK
+./scripts/science/g_lo_particle_history.py: OK
+./scripts/science/g_lo_radio_method_value.py: OK
+./scripts/science/run_g_lo_radio_history_value.py: OK
+/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5: OK
+/u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5/pressure_smoothing_affected_rows.csv: OK
+runtime_import_preflight=passed
+{
+  "decision": "FAIL",
+  "gamma_fallback_records_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_gamma_fallback_records.csv",
+  "gamma_fallback_summary_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_gamma_fallback_summary.csv",
+  "log_savgol_checkpoint": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_log_savgol_emissivity_checkpoint.npz",
+  "nonfinite_records_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_nonfinite_emissivity_records.csv",
+  "nonfinite_summary_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_nonfinite_emissivity_summary.csv",
+  "ordering_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_full_reference_ordering.csv",
+  "particle_comparison_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_particle_comparison.csv",
+  "selection_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_selection.csv",
+  "status": "diagnostic_complete",
+  "summary_csv": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_summary.csv",
+  "summary_json": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_summary.json",
+  "unsmoothed_checkpoint": "/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_unsmoothed_emissivity_checkpoint.npz"
+}
+pressure_method_value_validation=passed decision=FAIL
+c7c9d0a2001d3c23749483e42894593c28396e70b7ad5b29a224cdc0556e83f8  /u/bwbrook/codex_kunanyi/goal049_g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5/g_lo_pressure_method_value_diagnostic_nonfinite_evidence_v5_2026-07-28.tar.gz
+finished_utc=2026-07-28T06:54:32Z

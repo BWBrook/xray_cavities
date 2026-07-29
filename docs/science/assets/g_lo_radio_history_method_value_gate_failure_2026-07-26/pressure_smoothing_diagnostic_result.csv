@@ -1,0 +1,5 @@
+method,status,affected_histories,nonpositive_outputs,nonfinite_outputs,min_value,min_to_raw_ratio,endpoint_relative_difference_min,endpoint_relative_difference_max,interpretation
+unsmoothed,reference,0,0,0,,,,,"Positive treated history supplied to the candidate PRAiSE method without smoothing"
+linear_savgol,blocked,99108,216035,0,-1.1640654678160231e-07,-41779.69408300923,-0.25695063875644597,0.3012633908866409,"Creates unphysical non-positive pressure in 50.21 percent of smoothed histories"
+log_savgol,numerically_admissible_pending_praise_value_gate,0,0,0,2.3235854462627928e-14,0.05062254988990771,-0.8342387054059186,0.2540084516645189,"Preserves positivity but can materially change endpoint pressure and requires an actual-PRAiSE sensitivity test"
+triangular_positive_kernel,diagnostic_comparator_only,0,0,0,5.4590579460530775e-14,0.49894406998325513,-0.3332009986206841,0.4049372124999493,"Preserves positivity but is not selected as a science method"

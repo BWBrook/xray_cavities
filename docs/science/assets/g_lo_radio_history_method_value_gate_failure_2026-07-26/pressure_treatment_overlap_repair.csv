@@ -1,0 +1,36 @@
+field,value
+failed_job_id,777009.kunanyi-ohpc
+failed_exit_status,2
+failed_walltime,00:07:52
+failed_cput,00:06:14
+failed_mem,725600kb
+failure_stage,pressure_treatment_plan_before_praise
+first_failure,pressure-treatment trim reaches beyond the endpoint
+diagnostic_repeated,passed
+exceptional_rows,2
+exceptional_topology,one endpoint record with joint-zero pressure density and tracer and no positive record
+root_cause,one-record no-positive histories overlapped trim and no-positive predicates
+repair,require positive_count greater than zero for trim and enforce exactly one category
+pressure_floor,false
+pressure_interpolation,false
+regression_test,test_pressure_treatment_excludes_one_record_endpoint_history
+red_test,failed_with_remote_error
+green_test,passed
+focused_tests,55 passed
+independent_review,GO
+clean_stage,/u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate_resume_pressure_v6
+clean_manifest_entries,83
+clean_manifest_bytecode_entries,0
+post_compile_manifest_check,passed
+runner_sha256,fe86c6ff44fa0e137eaeaa70f7f4664e3177f3e84ae8f0977823c820eecc2b2c
+replacement_job_id,777011.kunanyi-ohpc
+replacement_job_name,g_lo_radhist
+replacement_state_at_stop,R
+replacement_queue,normal
+replacement_qtime,Sun Jul 26 23:37:44 2026
+replacement_resources,select=1:ncpus=16:mpiprocs=1:mem=128gb
+replacement_walltime,48:00:00
+replacement_archive,/u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate_resume_pressure_v6/g_lo_radio_history_method_value_2026-07-24.tar.gz
+replacement_stdout,/u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate_resume_pressure_v6/g_lo_radio_history_method_value.pressure5.out
+replacement_stderr,/u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate_resume_pressure_v6/g_lo_radio_history_method_value.pressure5.err
+stop_rule,active

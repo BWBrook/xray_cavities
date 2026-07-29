@@ -1,0 +1,448 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_radhist
+#PBS -q normal
+#PBS -l select=1:ncpus=16:mpiprocs=1:mem=128gb
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate/g_lo_radio_history_method_value.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate/g_lo_radio_history_method_value.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal049_g_lo_radio_history_method_value_gate}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate}"
+INITIAL_ROOT="${INITIAL_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs}"
+GUARDED_ROOT="${GUARDED_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs}"
+RUNNER="${RUNNER:-$STAGE_ROOT/scripts/science/run_g_lo_radio_history_value.py}"
+HISTORY_HELPER="${HISTORY_HELPER:-$STAGE_ROOT/scripts/science/g_lo_particle_history.py}"
+METHOD_HELPER="${METHOD_HELPER:-$STAGE_ROOT/scripts/science/g_lo_radio_method_value.py}"
+PRESSURE_DIAGNOSTIC="${PRESSURE_DIAGNOSTIC:-$STAGE_ROOT/scripts/science/diagnose_g_lo_pressure_history.py}"
+PYTHON_COMPAT="${PYTHON_COMPAT:-$STAGE_ROOT/scripts/kunanyi/python_compat}"
+PLUTOKORE_SOURCE="${PLUTOKORE_SOURCE:-$STAGE_ROOT/plutokore}"
+PLUTOKORE_COMMIT_PROOF="${PLUTOKORE_COMMIT_PROOF:-$STAGE_ROOT/plutokore_commit.txt}"
+STAGED_SHA256="${STAGED_SHA256:-$STAGE_ROOT/staged_inputs.sha256}"
+EXPECTED_PLUTOKORE_COMMIT="e80252cf35ff5a06166240e2867d3d485aaf6956"
+LEGACY_HISTORY_HELPER_SHA256="70a865778fbb279ad3f96a34c4f53810256824626fc21f7def1b0657bb76e654"
+RUN_MODE="${RUN_MODE:-fresh}"
+OWNER_MARKER="$ANALYSIS_ROOT/.goal049_owner.json"
+RUN_LOG="${RUN_LOG:-$ANALYSIS_ROOT/g_lo_radio_history_method_value.${PBS_JOBID:-manual}.log}"
+COMPACT_ROOT="$ANALYSIS_ROOT/compact"
+ARCHIVE="${ARCHIVE:-$STAGE_ROOT/g_lo_radio_history_method_value_2026-07-24.tar.gz}"
+ARCHIVE_RESERVATION="${ARCHIVE_RESERVATION:-$ARCHIVE.reservation}"
+ARCHIVE_TMP="${ARCHIVE_TMP:-$ARCHIVE_RESERVATION/$(basename "$ARCHIVE").tmp}"
+
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export NUMBA_NUM_THREADS=16
+export PYTHONHASHSEED=0
+export GOAL049_LEGACY_HISTORY_HELPER_SHA256="$LEGACY_HISTORY_HELPER_SHA256"
+
+for path in \
+  "$RUNNER" \
+  "$HISTORY_HELPER" \
+  "$METHOD_HELPER" \
+  "$PRESSURE_DIAGNOSTIC" \
+  "$PYTHON_COMPAT/hdf5plugin.py" \
+  "$PLUTOKORE_COMMIT_PROOF" \
+  "$PLUTOKORE_SOURCE/src/plutokore/radio/praise.py" \
+  "$PLUTOKORE_SOURCE/src/plutokore/radio/raytracing.py" \
+  "$STAGED_SHA256" \
+  "$INITIAL_ROOT/particles.0000.dbl" \
+  "$INITIAL_ROOT/particles.1000.dbl" \
+  "$INITIAL_ROOT/particles.1499.dbl" \
+  "$GUARDED_ROOT/particles.1000.dbl" \
+  "$GUARDED_ROOT/particles.1499.dbl" \
+  "$GUARDED_ROOT/particles.1500.dbl" \
+  "$GUARDED_ROOT/particles.5000.dbl"; do
+  test -r "$path" || { echo "missing required staged/source input: $path" >&2; exit 2; }
+done
+
+# The immutable stage manifest binds a locally generated commit proof and every
+# staged source file. Cross-check it with live Git when Kunanyi exposes Git.
+actual_plutokore_commit="$(tr -d '[:space:]' < "$PLUTOKORE_COMMIT_PROOF")"
+test "$actual_plutokore_commit" = "$EXPECTED_PLUTOKORE_COMMIT" || {
+  echo "pinned plutokore commit mismatch: $actual_plutokore_commit" >&2
+  exit 2
+}
+if grep -Eq '(/__pycache__/|\.(pyc|pyo)$)' "$STAGED_SHA256"; then
+  echo "staged manifest must not bind generated Python bytecode" >&2
+  exit 2
+fi
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+if command -v git >/dev/null 2>&1; then
+  live_plutokore_commit="$(git -C "$PLUTOKORE_SOURCE" rev-parse HEAD)"
+  test "$live_plutokore_commit" = "$actual_plutokore_commit" || {
+    echo "live plutokore commit differs from the staged commit proof" >&2
+    exit 2
+  }
+fi
+export GOAL049_VERIFIED_PLUTOKORE_COMMIT="$actual_plutokore_commit"
+
+initial_count="$(find "$INITIAL_ROOT" -maxdepth 1 -type f \( -name 'particles.*.dbl' -o -name 'particles.*.flt' \) -print | wc -l | tr -d ' ')"
+guarded_count="$(find "$GUARDED_ROOT" -maxdepth 1 -type f \( -name 'particles.*.dbl' -o -name 'particles.*.flt' \) -print | wc -l | tr -d ' ')"
+test "$initial_count" = "1500" || { echo "initial source count is $initial_count, expected 1500" >&2; exit 2; }
+test "$guarded_count" = "4001" || { echo "guarded source count is $guarded_count, expected 4001" >&2; exit 2; }
+
+case "$ANALYSIS_ROOT/" in
+  "$INITIAL_ROOT/"*|"$GUARDED_ROOT/"*)
+    echo "source/output path overlap: analysis root is inside a protected source" >&2
+    exit 2
+    ;;
+esac
+case "$ARCHIVE/" in
+  "$INITIAL_ROOT/"*|"$GUARDED_ROOT/"*)
+    echo "source/output path overlap: archive is inside a protected source" >&2
+    exit 2
+    ;;
+esac
+
+free_kib="$(df -Pk /scratch/bwbrook | awk 'NR==2 {print $4}')"
+test -n "$free_kib" || { echo "could not verify free scratch storage" >&2; exit 2; }
+minimum_free_kib="$((130 * 1024 * 1024))"
+test "$free_kib" -ge "$minimum_free_kib" || { echo "free scratch reserve is below 130 GB" >&2; exit 2; }
+
+if [ "$RUN_MODE" = "fresh" ]; then
+  if [ -e "$ANALYSIS_ROOT" ] || [ -L "$ANALYSIS_ROOT" ]; then
+    echo "refusing to overwrite an existing Goal 049 analysis root" >&2
+    exit 2
+  fi
+  mkdir "$ANALYSIS_ROOT"
+  printf '%s\n' \
+    '{"goal":"049","initial_count":1500,"guarded_count":4001,"endpoint_count":197568,"shock_thresholds":"0.05,0.5,5.0"}' \
+    > "$OWNER_MARKER.tmp"
+  mv "$OWNER_MARKER.tmp" "$OWNER_MARKER"
+elif [ "$RUN_MODE" = "resume" ]; then
+  test -d "$ANALYSIS_ROOT" || { echo "resume requires the existing Goal 049 analysis root" >&2; exit 2; }
+  test -f "$OWNER_MARKER" && test ! -L "$OWNER_MARKER" || {
+    echo "resume requires the Goal 049 owner marker" >&2
+    exit 2
+  }
+  grep -q '"goal":"049"' "$OWNER_MARKER" || { echo "resume owner marker mismatch" >&2; exit 2; }
+  grep -q '"endpoint_count":197568' "$OWNER_MARKER" || { echo "resume endpoint contract mismatch" >&2; exit 2; }
+else
+  echo "RUN_MODE must be fresh or resume" >&2
+  exit 2
+fi
+if [ -e "$ARCHIVE" ] || [ -L "$ARCHIVE" ] || [ -e "$ARCHIVE_RESERVATION" ] || [ -L "$ARCHIVE_RESERVATION" ]; then
+  echo "refusing to overwrite an existing Goal 049 archive or reservation" >&2
+  exit 2
+fi
+if [ -e "$RUN_LOG" ] || [ -L "$RUN_LOG" ]; then
+  echo "refusing to overwrite an existing Goal 049 per-job run log" >&2
+  exit 2
+fi
+
+echo "job_id=${PBS_JOBID:-not-set}"
+echo "host=$(hostname)"
+echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "run_mode=$RUN_MODE"
+echo "analysis_root=$ANALYSIS_ROOT"
+echo "initial_count=$initial_count"
+echo "guarded_count=$guarded_count"
+echo "endpoint_count=197568"
+echo "shock_thresholds=0.05,0.5,5.0"
+echo "selected_shock_threshold=5"
+echo "plutokore_commit=$actual_plutokore_commit"
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+export PYTHONPATH="$PYTHON_COMPAT:$PLUTOKORE_SOURCE/src:$STAGE_ROOT${PYTHONPATH:+:$PYTHONPATH}"
+
+"$PYTHON" -m py_compile \
+  "$RUNNER" \
+  "$HISTORY_HELPER" \
+  "$METHOD_HELPER" \
+  "$PRESSURE_DIAGNOSTIC" \
+  "$PYTHON_COMPAT/hdf5plugin.py"
+"$PYTHON" - "$PLUTOKORE_SOURCE" "$PYTHON_COMPAT" <<'PY'
+import importlib
+import sys
+from pathlib import Path
+
+source = Path(sys.argv[1]).resolve()
+compat = Path(sys.argv[2]).resolve()
+required = ("numpy", "scipy", "astropy", "numba", "h5py", "hdf5plugin")
+for name in required:
+    importlib.import_module(name)
+shim = Path(importlib.import_module("hdf5plugin").__file__).resolve()
+if shim.parent != compat:
+    raise SystemExit(f"hdf5plugin did not import from staged compatibility path: {shim}")
+from plutokore.radio.praise import calculate_praise_emissivity_numba
+from plutokore.radio.raytracing import raytrace_particles_multiple_freq
+for function in (calculate_praise_emissivity_numba, raytrace_particles_multiple_freq):
+    implementation = Path(sys.modules[function.__module__].__file__).resolve()
+    if source not in implementation.parents:
+        raise SystemExit(f"plutokore import escaped staged source: {implementation}")
+print("runtime_import_preflight=passed")
+PY
+
+METHOD_GATE="$ANALYSIS_ROOT/local_actual_function_gate"
+if [ "$RUN_MODE" = "fresh" ]; then
+  test ! -e "$METHOD_GATE" || { echo "refusing to overwrite method gate" >&2; exit 2; }
+  "$PYTHON" "$METHOD_HELPER" validate --output-dir "$METHOD_GATE"
+else
+  test -s "$METHOD_GATE/g_lo_radio_method_value.json" || {
+    echo "resume requires the completed actual-function method gate" >&2
+    exit 2
+  }
+fi
+
+PRESSURE_CACHE="$ANALYSIS_ROOT/cache/g_lo_history.h5"
+PRESSURE_DIAGNOSTIC_ROOT="$COMPACT_ROOT/pressure_history_diagnostic_${PBS_JOBID:-manual}"
+if [ "$RUN_MODE" = "resume" ]; then
+  test -s "$PRESSURE_CACHE" && test ! -L "$PRESSURE_CACHE" || {
+    echo "resume pressure treatment requires the completed regular history cache" >&2
+    exit 2
+  }
+  test ! -e "$PRESSURE_DIAGNOSTIC_ROOT" && test ! -L "$PRESSURE_DIAGNOSTIC_ROOT" || {
+    echo "refusing to overwrite per-job pressure diagnostic evidence" >&2
+    exit 2
+  }
+  mkdir -p "$COMPACT_ROOT"
+  "$PYTHON" "$PRESSURE_DIAGNOSTIC" \
+    --cache "$PRESSURE_CACHE" \
+    --output-dir "$PRESSURE_DIAGNOSTIC_ROOT" \
+    --initial-source-root "$INITIAL_ROOT" \
+    --guarded-source-root "$GUARDED_ROOT" \
+    --row-chunk 4096 \
+    --representative-limit 100 \
+    --source-crosscheck-limit 32
+  "$PYTHON" - \
+    "$PRESSURE_DIAGNOSTIC_ROOT/pressure_history_diagnostic.json" \
+    "$PRESSURE_DIAGNOSTIC_ROOT/exceptional_pressure_rows.csv" <<'PY'
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+summary_path, exceptional_path = map(Path, sys.argv[1:])
+summary = json.loads(summary_path.read_text())
+expected_counts = {
+    "finite_positive": 502164508,
+    "zero": 10032,
+    "negative": 0,
+    "nonfinite": 0,
+}
+expected_patterns = {
+    "leading_zero_only_prefix_rows": 10030,
+    "leading_zero_only_prefix_records": 10030,
+    "internal_nonpositive_after_positive_rows": 0,
+    "internal_nonpositive_after_positive_records": 0,
+    "no_positive_record_rows": 2,
+    "no_positive_record_records": 2,
+    "nonpositive_endpoint_rows": 2,
+    "nonpositive_endpoint_records": 2,
+}
+required_summary = {
+    "status": "diagnostic_complete",
+    "cache_shape": [197568, 5001],
+    "counts_over_present_suffix": expected_counts,
+    "total_present_records": 502174540,
+    "affected_row_count": 10032,
+    "affected_output_count": 5001,
+    "pattern_counts": expected_patterns,
+    "first_present_bad_records": 10032,
+    "later_bad_records": 0,
+    "lifecycle_violation_rows": 0,
+    "exceptional_row_count": 2,
+    "exceptional_source_crosscheck_request_count": 2,
+}
+for key, expected in required_summary.items():
+    if summary.get(key) != expected:
+        raise SystemExit(
+            f"pressure diagnostic contract mismatch for {key}: "
+            f"{summary.get(key)!r} != {expected!r}"
+        )
+crosscheck = summary.get("source_crosscheck", {})
+requested = int(crosscheck.get("requested", -1))
+statuses = crosscheck.get("status_counts", {})
+if requested < 2 or int(statuses.get("matched", -1)) != requested:
+    raise SystemExit(
+        "pressure diagnostic source cross-check did not match every requested record"
+    )
+if int(statuses.get("not_found", -1)) != 0 or int(
+    statuses.get("id_not_found", -1)
+) != 0:
+    raise SystemExit("pressure diagnostic source cross-check has missing canonical records")
+
+rows = list(csv.DictReader(exceptional_path.open(newline="")))
+if len(rows) != 2:
+    raise SystemExit(f"expected exactly two exceptional pressure histories, found {len(rows)}")
+
+
+def is_true(value: str) -> bool:
+    return value.strip().lower() == "true"
+
+
+for row in rows:
+    exact_counts = {
+        "present_count": 1,
+        "bad_count": 1,
+        "finite_positive_count": 0,
+        "zero_count": 1,
+        "negative_count": 0,
+        "nonfinite_count": 0,
+        "first_present_output_index": 5000,
+        "last_present_output_index": 5000,
+    }
+    for field, expected in exact_counts.items():
+        if int(row[field]) != expected:
+            raise SystemExit(
+                f"exceptional pressure row {row['endpoint_id']} has "
+                f"{field}={row[field]}, expected {expected}"
+            )
+    if not is_true(row["endpoint_bad"]):
+        raise SystemExit("exceptional pressure row is not endpoint-bad")
+    for field in (
+        "first_pressure",
+        "last_pressure",
+        "first_density",
+        "last_density",
+        "first_tracer",
+        "last_tracer",
+    ):
+        if float(row[field]) != 0.0:
+            raise SystemExit(
+                f"exceptional pressure row {row['endpoint_id']} has nonzero {field}"
+            )
+    for label in ("first", "last"):
+        if row[f"{label}_source_status"] != "matched":
+            raise SystemExit("exceptional pressure source row was not matched")
+        if not is_true(row[f"{label}_cache_source_all_match"]):
+            raise SystemExit("exceptional pressure cache/source values differ")
+        for field in ("source_pressure", "source_density", "source_tracer"):
+            if float(row[f"{label}_{field}"]) != 0.0:
+                raise SystemExit(
+                    "exceptional canonical source row is not an exact joint zero"
+                )
+    tinj = float(row["tinj"])
+    first_time = float(row["first_present_output_time"])
+    if not math.isfinite(tinj) or tinj > first_time:
+        raise SystemExit(
+            "exceptional pressure injection time is incompatible with first presence"
+        )
+print("pressure_diagnostic_validation=passed")
+PY
+else
+  echo "pressure_diagnostic_validation=deferred_until_completed_cache"
+fi
+
+set +e
+"$PYTHON" "$RUNNER" run \
+  --initial-root "$INITIAL_ROOT" \
+  --guarded-root "$GUARDED_ROOT" \
+  --work-root "$ANALYSIS_ROOT" \
+  --plutokore-source "$PLUTOKORE_SOURCE" \
+  --no-package \
+  --expected-endpoint-count 197568 \
+  --shock-threshold 5 \
+  --id-chunk-size 4096 \
+  --kd-jobs 16 \
+  --requested-memory-gb 128 \
+  --minimum-free-reserve-gb 130 \
+  --max-projected-free-fraction 0.70 \
+  2>&1 | tee "$RUN_LOG"
+run_status="${PIPESTATUS[0]}"
+set -e
+
+mkdir -p "$COMPACT_ROOT/logs"
+cp -p "$RUN_LOG" "$COMPACT_ROOT/logs/"
+cp -p "$OWNER_MARKER" "$COMPACT_ROOT/"
+cp -p "$METHOD_GATE/g_lo_radio_method_value.json" "$COMPACT_ROOT/"
+cp -p "$METHOD_GATE/g_lo_radio_method_value.csv" "$COMPACT_ROOT/"
+
+# Compact archive only: history.h5, particles.*.dbl/flt, PLUTO outputs, and
+# other raw products are excluded. No source overwrite or raw deletion occurs.
+mkdir "$ARCHIVE_RESERVATION"
+trap 'rmdir "$ARCHIVE_RESERVATION" 2>/dev/null || true' EXIT
+"$PYTHON" - "$COMPACT_ROOT" <<'PY'
+import os
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1]).resolve()
+excluded_names = {
+    "archive_content_file_list.txt",
+    "archive_checksums.sha256",
+    "archive_manifest.tsv",
+    "archive_file_list.txt",
+}
+rows = []
+for path in sorted(root.rglob("*")):
+    if path.is_symlink():
+        raise SystemExit(f"compact archive refuses symlink: {path}")
+    if not path.is_file() or path.name in excluded_names:
+        continue
+    relative = path.relative_to(root)
+    lower = path.name.lower()
+    if lower == "history.h5" or lower.endswith((".h5", ".hdf5", ".dbl", ".flt", ".xmf")):
+        raise SystemExit(f"forbidden raw/cache file reached compact root: {relative}")
+    if lower.startswith(("particles.", "data.")):
+        raise SystemExit(f"forbidden raw file reached compact root: {relative}")
+    size = path.stat().st_size
+    if size > 4 * 1024**3:
+        raise SystemExit(f"compact file exceeds 4 GiB ceiling: {relative}")
+    rows.append((relative.as_posix(), size))
+if not rows:
+    raise SystemExit("compact archive payload is empty")
+if sum(size for _, size in rows) > 8 * 1024**3:
+    raise SystemExit("compact archive exceeds 8 GiB ceiling")
+(root / "archive_content_file_list.txt").write_text("".join(f"{name}\n" for name, _ in rows))
+with (root / "archive_checksums.sha256").open("w") as handle:
+    import hashlib
+    for name, _ in rows:
+        digest = hashlib.sha256()
+        with (root / name).open("rb") as source:
+            for block in iter(lambda: source.read(8 * 1024 * 1024), b""):
+                digest.update(block)
+        handle.write(f"{digest.hexdigest()}  {name}\n")
+with (root / "archive_manifest.tsv").open("w") as handle:
+    handle.write("relative_path\tbytes\n")
+    for name, size in rows:
+        handle.write(f"{name}\t{size}\n")
+archive_names = sorted(
+    [name for name, _ in rows]
+    + ["archive_checksums.sha256", "archive_content_file_list.txt", "archive_manifest.tsv", "archive_file_list.txt"]
+)
+(root / "archive_file_list.txt").write_text("".join(f"{name}\n" for name in archive_names))
+PY
+
+test ! -e "$ARCHIVE_TMP" || { echo "refusing to overwrite temporary archive" >&2; exit 2; }
+(
+  cd "$COMPACT_ROOT"
+  # archive_file_list.txt is already sorted; avoid GNU-tar-version-specific
+  # ordering flags on Kunanyi.
+  tar --mtime='@0' --owner=0 --group=0 --numeric-owner \
+    -cf - --files-from "$COMPACT_ROOT/archive_file_list.txt" | gzip -n > "$ARCHIVE_TMP"
+)
+tar -tzf "$ARCHIVE_TMP" >/dev/null
+"$PYTHON" - "$ARCHIVE_TMP" "$ARCHIVE" <<'PY'
+import os
+import sys
+from pathlib import Path
+
+source, destination = map(Path, sys.argv[1:])
+try:
+    os.link(source, destination)
+except FileExistsError as exc:
+    raise SystemExit(f"refusing to overwrite published archive: {destination}") from exc
+finally:
+    try:
+        source.unlink()
+    except FileNotFoundError:
+        pass
+PY
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "run_status=$run_status"
+exit "$run_status"

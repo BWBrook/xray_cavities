@@ -1,0 +1,22 @@
+metric,value,source
+job_id,779729.kunanyi-ohpc,qstat -x -f
+job_name,g_lo_flloss,qstat -x -f
+job_state,F,qstat -x -f
+exit_status,0,qstat -x -f
+stageout_status,1,qstat -x -f
+resources_used_walltime,00:50:28,qstat -x -f
+resources_used_cput,02:51:50,qstat -x -f
+resources_used_cpupercent,501,qstat -x -f
+resources_used_mem,949788kb,qstat -x -f
+resources_used_ncpus,1,qstat -x -f
+resources_used_vmem,5109384kb,qstat -x -f
+requested_select,1:ncpus=1:mpiprocs=1:mem=64gb,qstat -x -f
+requested_walltime,12:00:00,qstat -x -f
+archive_sha256,fee130640fb1573c82c38b46c6e212def3c1210cb9dd11ad9f9b5e498cf03d01,remote and local sha256
+stdout_sha256,758be0c0cfdf068c8271b67c5ce11215081dd7eaee9a3e0ff4ba076fcae49396,remote and local sha256
+stderr_sha256,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,remote and local sha256
+stderr_bytes,0,remote and local wc
+archive_members,10,tar -tzf
+finished_utc,2026-07-28T14:00:16Z,remote stdout
+scientific_decision,PASS,full_loss_gate_summary.json
+decision_label,G_LO_STABLE_FULL_LOSS_RECURRENCE_GREEN_4096_COMPARISON_JUSTIFIED,full_loss_gate_summary.json

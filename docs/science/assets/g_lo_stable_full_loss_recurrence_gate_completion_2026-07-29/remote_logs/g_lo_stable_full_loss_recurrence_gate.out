@@ -1,0 +1,209 @@
+./plutokore/src/plutokore/__init__.py: OK
+./plutokore/src/plutokore/_version.py: OK
+./plutokore/src/plutokore/analysis/__init__.py: OK
+./plutokore/src/plutokore/analysis/dynamics.py: OK
+./plutokore/src/plutokore/analysis/morphology.py: OK
+./plutokore/src/plutokore/analysis/processed_jet_simulation.py: OK
+./plutokore/src/plutokore/configuration.py: OK
+./plutokore/src/plutokore/energy.py: OK
+./plutokore/src/plutokore/environments/__init__.py: OK
+./plutokore/src/plutokore/environments/king.py: OK
+./plutokore/src/plutokore/environments/makino.py: OK
+./plutokore/src/plutokore/environments/observationalking.py: OK
+./plutokore/src/plutokore/eos.py: OK
+./plutokore/src/plutokore/gadget.py: OK
+./plutokore/src/plutokore/initial_conditions.py: OK
+./plutokore/src/plutokore/io.py: OK
+./plutokore/src/plutokore/jet.py: OK
+./plutokore/src/plutokore/particles.py: OK
+./plutokore/src/plutokore/plot.py: OK
+./plutokore/src/plutokore/pluto_simulation.py: OK
+./plutokore/src/plutokore/radio/__init__.py: OK
+./plutokore/src/plutokore/radio/praise.py: OK
+./plutokore/src/plutokore/radio/praise2.py: OK
+./plutokore/src/plutokore/radio/radio.py: OK
+./plutokore/src/plutokore/radio/raytracing.py: OK
+./plutokore/src/plutokore/scripts.py: OK
+./plutokore/src/plutokore/simulations.py: OK
+./plutokore/src/plutokore/utilities.py: OK
+./plutokore_commit.txt: OK
+./pressure_method_nonfinite_emissivity_records.csv: OK
+./pressure_method_selection.csv: OK
+./scripts/kunanyi/g_lo_stable_full_loss_recurrence_gate.pbs: OK
+./scripts/kunanyi/python_compat/contextlib2.py: OK
+./scripts/kunanyi/python_compat/hdf5plugin.py: OK
+./scripts/kunanyi/python_compat/yt.py: OK
+./scripts/science/analyse_common_age_case.py: OK
+./scripts/science/build_aligned_smoke_comparison.py: OK
+./scripts/science/build_c_hi_run_config_audit.py: OK
+./scripts/science/build_conditional_endpoint_topology_application.py: OK
+./scripts/science/build_early_snapshot_series.py: OK
+./scripts/science/build_existing_asset_topology_application_design.py: OK
+./scripts/science/build_final_45deg_viewing_angle_broadening.py: OK
+./scripts/science/build_final_90deg_viewing_angle_broadening.py: OK
+./scripts/science/build_final_level3_ambient_energy.py: OK
+./scripts/science/build_final_level3_remote_extraction_closeout.py: OK
+./scripts/science/build_final_observational_product_readiness.py: OK
+./scripts/science/build_final_volume_coupled_comparison.py: OK
+./scripts/science/build_final_xray_cavity_alignment.py: OK
+./scripts/science/build_g_lo_guarded_continuation_completion.py: OK
+./scripts/science/build_g_lo_three_case_endpoint_comparison.py: OK
+./scripts/science/build_goal041_scratch_gate.py: OK
+./scripts/science/build_refined_projection_viewing_rerun.py: OK
+./scripts/science/build_refined_viewing_angle_consolidation.py: OK
+./scripts/science/build_residual_threshold_sensitivity_review.py: OK
+./scripts/science/build_source_age_sampling_plan.py: OK
+./scripts/science/build_three_case_cavity_recovery.py: OK
+./scripts/science/build_three_case_common_age_synthesis.py: OK
+./scripts/science/build_three_case_lifecycle_authorization.py: OK
+./scripts/science/build_three_case_lifecycle_contract.py: OK
+./scripts/science/build_three_case_radio_source_method_gate.py: OK
+./scripts/science/build_three_case_truth_alignment.py: OK
+./scripts/science/compare_particle_radio_determinism.py: OK
+./scripts/science/diagnose_90deg_xray_striping.py: OK
+./scripts/science/diagnose_g_lo_adiabatic_recovery.py: OK
+./scripts/science/diagnose_g_lo_full_loss_recurrence.py: OK
+./scripts/science/diagnose_g_lo_praise_nonfinite.py: OK
+./scripts/science/diagnose_g_lo_pressure_history.py: OK
+./scripts/science/diagnose_g_lo_pressure_method_value.py: OK
+./scripts/science/diagnose_g_lo_pressure_smoothing.py: OK
+./scripts/science/diagnose_projection_bin_refinement.py: OK
+./scripts/science/estimate_particle_hdf5_feasibility.py: OK
+./scripts/science/execute_three_case_lifecycle_compaction.py: OK
+./scripts/science/g_lo_particle_history.py: OK
+./scripts/science/g_lo_radio_method_value.py: OK
+./scripts/science/hemisphere_seed_grow_recovery.py: OK
+./scripts/science/hybrid_xray_cavity_topology.py: OK
+./scripts/science/inspect_tabulated_environment.py: OK
+./scripts/science/inventory_three_case_lifecycle.py: OK
+./scripts/science/plot_cavity_stub.py: OK
+./scripts/science/plot_observable_smoke.py: OK
+./scripts/science/plot_particle_radio_smoke.py: OK
+./scripts/science/plot_pluto_h5_quicklook.py: OK
+./scripts/science/plot_stewart_environment_gate.py: OK
+./scripts/science/plot_xraise_grid_smoke.py: OK
+./scripts/science/pluto_h5_cavity_stub_extract.c: OK
+./scripts/science/pluto_h5_level3_ambient_extract.py: OK
+./scripts/science/pluto_h5_observable_smoke_extract.c: OK
+./scripts/science/pluto_h5_quicklook_extract.c: OK
+./scripts/science/pluto_h5_truth_extract.c: OK
+./scripts/science/pluto_particle_endpoint_summary.py: OK
+./scripts/science/pluto_particle_sparse_window.py: OK
+./scripts/science/plutokore_particle_hdf5_smoke.py: OK
+./scripts/science/render_stewart_environment_gate_tests.py: OK
+./scripts/science/render_three_case_configs.py: OK
+./scripts/science/run_g_lo_radio_history_value.py: OK
+./scripts/science/select_common_age_hdf5.py: OK
+./scripts/science/sparse_particle_radio_bridge.py: OK
+./scripts/science/sparse_praise_loss_table.py: OK
+./scripts/science/three_case_cavity_recovery.py: OK
+./scripts/science/validate_common_age_endpoint_reuse.py: OK
+./scripts/science/validate_pluto_particle_restart_pair.py: OK
+./scripts/science/validate_three_case_lifecycle_dry_run.py: OK
+./scripts/science/validate_xray_cavity_production.py: OK
+./scripts/science/validate_xray_cavity_recovery_refinement.py: OK
+./scripts/science/xraise_grid_smoke.py: OK
+./scripts/science/xraise_particle_loss_smoke.py: OK
+./scripts/science/xraise_particle_radio_smoke.py: OK
+/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5: OK
+/u/bwbrook/codex_kunanyi/goal050_g_lo_stable_full_loss_recurrence_gate/pressure_method_selection.csv: OK
+/u/bwbrook/codex_kunanyi/goal050_g_lo_stable_full_loss_recurrence_gate/pressure_method_nonfinite_emissivity_records.csv: OK
+runtime_import_preflight=passed
+{
+  "analytic_self_checks": {
+    "checks": [
+      {
+        "check": "constant_pressure_closed_form",
+        "log_reference": -12.051091000757372,
+        "log_value": -12.051091000757374,
+        "passed": true
+      },
+      {
+        "check": "a3_zero_limit",
+        "log_reference": -12.347220227254361,
+        "log_value": -12.347220227254365,
+        "passed": true
+      },
+      {
+        "check": "a4_zero_limit",
+        "log_reference": -12.423103279039006,
+        "log_value": -12.423103279039008,
+        "passed": true
+      },
+      {
+        "check": "overflow_scaled_loss",
+        "log_raw_a2": 249087.21770404442,
+        "log_value": 336.38527854448375,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "archived_nonfinite_record_count": 9103,
+  "cache_sha256": "f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30",
+  "decision": "PASS",
+  "decision_label": "G_LO_STABLE_FULL_LOSS_RECURRENCE_GREEN_4096_COMPARISON_JUSTIFIED",
+  "evidence_fingerprint_sha256": "25feb8c3cb443f05aabb8d17feb6b5eb8ee91e8648b89ab54855a249aa29c328",
+  "expected_frequency_specific_pinned_gamma_fallback_count": 45474,
+  "expected_relevant_nonfinite_a2_count": 22737,
+  "frequencies_GHz": [
+    0.15,
+    1.4
+  ],
+  "gate_names": [
+    "analytic_limits",
+    "finite_scaled_loss",
+    "high_precision_scaled_loss",
+    "high_precision_gamma",
+    "exact_state_classification",
+    "boundary_conditioning",
+    "zero_silent_fallbacks",
+    "no_subrelativistic_states",
+    "finite_or_explicit_cutoff_emissivity",
+    "deterministic_repeat",
+    "pinned_failure_reproduction"
+  ],
+  "gates": {
+    "analytic_limits": true,
+    "boundary_conditioning": true,
+    "deterministic_repeat": true,
+    "exact_state_classification": true,
+    "finite_or_explicit_cutoff_emissivity": true,
+    "finite_scaled_loss": true,
+    "high_precision_gamma": true,
+    "high_precision_scaled_loss": true,
+    "no_subrelativistic_states": true,
+    "pinned_failure_reproduction": true,
+    "zero_silent_fallbacks": true
+  },
+  "high_precision": {
+    "comparison_count": 96,
+    "max_relative_difference": 3.5644138821173953e-13
+  },
+  "nonfinite_records_sha256": "b20c8e0bf134b58f16d1c662de6872b0dc1f7586937feeb7f501d434faf3038b",
+  "original_relevant_nonfinite_a2_count": 22737,
+  "pinned_relevant_gamma_fallback_count": 45474,
+  "pressure_modes_checked": [
+    "unsmoothed",
+    "log_savgol"
+  ],
+  "relevant_subrelativistic_state_count": 0,
+  "selection_count": 4096,
+  "selection_sha256": "35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df",
+  "source_identity_sha256": "bfbc157e4a80e23c07c893d8929e4c74720cafd5352e56862c7091fafe81c44a",
+  "stable_silent_fallback_count": 0,
+  "state_counts": {
+    "finite": 431744,
+    "gamma_inf_cutoff": 0,
+    "physical_cutoff": 0,
+    "post_cutoff": 0,
+    "subrelativistic": 0
+  },
+  "status": "diagnostic_complete",
+  "trace_count": 64,
+  "window_classified_pinned_gamma_fallback_count": 45474,
+  "window_classified_relevant_nonfinite_a2_count": 22737
+}
+fee130640fb1573c82c38b46c6e212def3c1210cb9dd11ad9f9b5e498cf03d01  /u/bwbrook/codex_kunanyi/goal050_g_lo_stable_full_loss_recurrence_gate/g_lo_stable_full_loss_recurrence_gate_2026-07-28.tar.gz
+finished_utc=2026-07-28T14:00:16Z
+stable_full_loss_science_gate=PASS evidence_archived=1

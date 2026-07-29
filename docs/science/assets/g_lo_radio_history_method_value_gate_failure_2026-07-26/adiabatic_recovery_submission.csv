@@ -1,0 +1,25 @@
+field,value
+job_id,779684.kunanyi-ohpc
+job_name,g_lo_adrec
+job_state,Q
+queue,normal
+qtime,Tue Jul 28 20:10:11 2026
+requested_select,1:ncpus=1:mpiprocs=1:mem=32gb
+requested_walltime,02:00:00
+stage,/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery
+analysis,/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-adiabatic-recovery-diagnostic
+archive,/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery/g_lo_adiabatic_recovery_diagnostic_2026-07-28.tar.gz
+diagnostic_sha256,d892300508d4db66d012fc987bbf1de487c69eaeb1ed0956094253fd698c9094
+wrapper_sha256,c19b19f0b93e027d137cfe049963e6565de69c09659919b52e4ae264401a2852
+cache_sha256,f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30
+selection_sha256,35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df
+nonfinite_records_sha256,b20c8e0bf134b58f16d1c662de6872b0dc1f7586937feeb7f501d434faf3038b
+plutokore_commit,e80252cf35ff5a06166240e2867d3d485aaf6956
+runtime_import_preflight,passed
+remote_hash_preflight,passed
+wrapper_syntax_preflight,passed
+no_overwrite_preflight,passed
+local_focused_tests,48 passed in 6.00s
+independent_review,GO after required archived-stratum reproduction gate
+scope,64-trace numerical recovery diagnostic only
+stop_rule,invoked_after_queued_state_verification

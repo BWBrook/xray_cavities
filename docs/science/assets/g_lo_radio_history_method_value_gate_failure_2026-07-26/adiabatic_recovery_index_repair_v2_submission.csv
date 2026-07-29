@@ -1,0 +1,30 @@
+field,value
+job_id,779693.kunanyi-ohpc
+job_name,g_lo_adrec
+job_state,R
+queue,normal
+qtime,Tue Jul 28 20:42:31 2026
+requested_select,1:ncpus=1:mpiprocs=1:mem=32gb
+requested_walltime,02:00:00
+stage,/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery_index_repair_v2
+analysis,/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-adiabatic-recovery-index-repair-v2
+archive,/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery_index_repair_v2/g_lo_adiabatic_recovery_index_repair_v2_2026-07-28.tar.gz
+diagnostic_sha256,81100336b639212b1eedde0e08ef474f09bf3b2b8c4aa975543838824c769b93
+wrapper_sha256,578be1f457c657fb1d50ee199effd22a87f0c74fe70d3b933b07c33701def15f
+cache_sha256,f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30
+selection_sha256,35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df
+nonfinite_records_sha256,b20c8e0bf134b58f16d1c662de6872b0dc1f7586937feeb7f501d434faf3038b
+plutokore_commit,e80252cf35ff5a06166240e2867d3d485aaf6956
+remote_manifest_entries,123
+runtime_import_preflight,passed
+remote_hash_preflight,passed
+wrapper_syntax_preflight,passed
+no_overwrite_preflight,passed
+atomic_runtime_lock,enabled
+atomic_submit_once_guard,claimed and persisted with job id
+local_focused_tests,50 passed in 6.52s
+local_python_compile,passed
+local_shellcheck,passed
+local_git_diff_check,passed
+scope,64-trace numerical recovery diagnostic only
+stop_rule,invoked_after_running_state_verification

@@ -1,0 +1,165 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_adrec
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=32gb
+#PBS -l walltime=02:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery_index_repair_v2/g_lo_adiabatic_recovery_index_repair_v2.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery_index_repair_v2/g_lo_adiabatic_recovery_index_repair_v2.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal049_g_lo_adiabatic_recovery_index_repair_v2}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+SELECTION_CSV="${SELECTION_CSV:-$STAGE_ROOT/pressure_method_selection.csv}"
+NONFINITE_RECORDS_CSV="${NONFINITE_RECORDS_CSV:-$STAGE_ROOT/pressure_method_nonfinite_emissivity_records.csv}"
+EXPECTED_CACHE_SHA256="${EXPECTED_CACHE_SHA256:-f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30}"
+EXPECTED_SELECTION_SHA256="${EXPECTED_SELECTION_SHA256:-35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df}"
+EXPECTED_NONFINITE_RECORDS_SHA256="${EXPECTED_NONFINITE_RECORDS_SHA256:-b20c8e0bf134b58f16d1c662de6872b0dc1f7586937feeb7f501d434faf3038b}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-28-g-lo-adiabatic-recovery-index-repair-v2}"
+SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_adiabatic_recovery.py"
+PYTHON_COMPAT="$STAGE_ROOT/scripts/kunanyi/python_compat"
+PLUTOKORE_SOURCE="$STAGE_ROOT/plutokore"
+PLUTOKORE_COMMIT_PROOF="$STAGE_ROOT/plutokore_commit.txt"
+EXPECTED_PLUTOKORE_COMMIT="e80252cf35ff5a06166240e2867d3d485aaf6956"
+STAGED_SHA256="$STAGE_ROOT/staged_inputs.sha256"
+ARCHIVE="$STAGE_ROOT/g_lo_adiabatic_recovery_index_repair_v2_2026-07-28.tar.gz"
+ARCHIVE_PAYLOAD="$STAGE_ROOT/archive_payload"
+ARCHIVE_PAYLOAD_ROOT="$ARCHIVE_PAYLOAD/$(basename "$ANALYSIS_ROOT")"
+ARCHIVE_FILE_LIST="$ARCHIVE_PAYLOAD/archive_file_list.txt"
+RUN_LOCK="${RUN_LOCK:-$STAGE_ROOT/.g_lo_adiabatic_recovery_run.lock}"
+OUTPUT_NAMES=(
+  adiabatic_recovery_traces.csv
+  adiabatic_recovery_summary.csv
+  adiabatic_recovery_summary.json
+)
+
+lock_acquired=0
+release_run_lock() {
+  if [[ "$lock_acquired" -eq 1 ]]; then
+    rmdir "$RUN_LOCK" 2>/dev/null || true
+  fi
+}
+trap release_run_lock EXIT
+if ! mkdir "$RUN_LOCK"; then
+  echo "another adiabatic-recovery diagnostic already owns the stage lock: $RUN_LOCK" >&2
+  exit 2
+fi
+lock_acquired=1
+
+for path in "$SCRIPT" "$PYTHON_COMPAT/hdf5plugin.py" "$PLUTOKORE_SOURCE/src/plutokore/radio/praise.py" "$PLUTOKORE_COMMIT_PROOF" "$STAGED_SHA256" "$CACHE" "$SELECTION_CSV" "$NONFINITE_RECORDS_CSV"; do
+  test -r "$path" || { echo "missing required adiabatic-recovery input: $path" >&2; exit 2; }
+done
+for path in "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_PAYLOAD"; do
+  test ! -e "$path" && test ! -L "$path" || {
+    echo "refusing to overwrite adiabatic-recovery output: $path" >&2
+    exit 2
+  }
+done
+if grep -Eq '(/__pycache__/|\.(pyc|pyo)$)' "$STAGED_SHA256"; then
+  echo "staged manifest must not bind generated Python bytecode" >&2
+  exit 2
+fi
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+actual_plutokore_commit="$(tr -d '[:space:]' < "$PLUTOKORE_COMMIT_PROOF")"
+test "$actual_plutokore_commit" = "$EXPECTED_PLUTOKORE_COMMIT" || {
+  echo "pinned plutokore commit mismatch: $actual_plutokore_commit" >&2
+  exit 2
+}
+if command -v git >/dev/null 2>&1; then
+  live_plutokore_commit="$(git -C "$PLUTOKORE_SOURCE" rev-parse HEAD)"
+  test "$live_plutokore_commit" = "$actual_plutokore_commit" || {
+    echo "live plutokore commit differs from staged proof" >&2
+    exit 2
+  }
+fi
+printf '%s  %s\n' "$EXPECTED_CACHE_SHA256" "$CACHE" | sha256sum --check -
+printf '%s  %s\n' "$EXPECTED_SELECTION_SHA256" "$SELECTION_CSV" | sha256sum --check -
+test -n "$EXPECTED_NONFINITE_RECORDS_SHA256" || { echo "missing immutable nonfinite-record SHA-256" >&2; exit 2; }
+printf '%s  %s\n' "$EXPECTED_NONFINITE_RECORDS_SHA256" "$NONFINITE_RECORDS_CSV" | sha256sum --check -
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$PYTHON_COMPAT:$PLUTOKORE_SOURCE/src:$STAGE_ROOT:${PYTHONPATH:-}"
+export GOAL049_VERIFIED_PLUTOKORE_COMMIT="$actual_plutokore_commit"
+
+"$PYTHON" - <<'PY'
+from scripts.science.diagnose_g_lo_adiabatic_recovery import (
+    diagnose_recovery, high_precision_ratio_power, stable_pressure_ratio,
+    stable_ratio_power,
+)
+assert callable(diagnose_recovery)
+assert callable(stable_pressure_ratio)
+assert callable(stable_ratio_power)
+assert high_precision_ratio_power(2.0, 1.0, 2.0, 1.0) == 1.0
+print("runtime_import_preflight=passed")
+PY
+
+set +e
+"$PYTHON" "$SCRIPT" \
+  --cache "$CACHE" \
+  --selection-csv "$SELECTION_CSV" \
+  --nonfinite-records-csv "$NONFINITE_RECORDS_CSV" \
+  --output-dir "$ANALYSIS_ROOT" \
+  --trace-limit "${TRACE_LIMIT:-64}" \
+  --expected-cache-sha256 "$EXPECTED_CACHE_SHA256" \
+  --expected-selection-sha256 "$EXPECTED_SELECTION_SHA256" \
+  --expected-nonfinite-records-sha256 "$EXPECTED_NONFINITE_RECORDS_SHA256"
+diagnostic_rc=$?
+set -e
+
+mkdir -p "$ARCHIVE_PAYLOAD_ROOT"
+cp -p "$STAGED_SHA256" "$ARCHIVE_PAYLOAD_ROOT/staged_inputs.sha256"
+cp -p "$NONFINITE_RECORDS_CSV" "$ARCHIVE_PAYLOAD_ROOT/pressure_method_nonfinite_emissivity_records.csv"
+if test -d "$ANALYSIS_ROOT"; then
+  for name in "${OUTPUT_NAMES[@]}"; do
+    test -e "$ANALYSIS_ROOT/$name" && cp -p "$ANALYSIS_ROOT/$name" "$ARCHIVE_PAYLOAD_ROOT/$name" || true
+  done
+else
+  printf 'diagnostic_rc=%s\n' "$diagnostic_rc" > "$ARCHIVE_PAYLOAD_ROOT/diagnostic_failure.txt"
+fi
+{
+  printf './%s/staged_inputs.sha256\n' "$(basename "$ANALYSIS_ROOT")"
+  for name in "${OUTPUT_NAMES[@]}" pressure_method_nonfinite_emissivity_records.csv diagnostic_failure.txt; do
+    test -e "$ARCHIVE_PAYLOAD_ROOT/$name" && printf './%s/%s\n' "$(basename "$ANALYSIS_ROOT")" "$name" || true
+  done
+  printf './archive_file_list.txt\n'
+} > "$ARCHIVE_FILE_LIST"
+archive_tmp="$ARCHIVE.tmp.${PBS_JOBID:-manual}"
+tar -C "$ARCHIVE_PAYLOAD" -czf "$archive_tmp" --files-from "$ARCHIVE_FILE_LIST"
+tar -tzf "$archive_tmp" >/dev/null
+mv "$archive_tmp" "$ARCHIVE"
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+if ! [[ "$diagnostic_rc" =~ ^(0|3)$ ]] || ! test -s "$ANALYSIS_ROOT/adiabatic_recovery_summary.json"; then
+  echo "adiabatic_recovery_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if ! scientific_decision="$("$PYTHON" - "$ANALYSIS_ROOT/adiabatic_recovery_summary.json" <<'PY'
+import json
+import sys
+with open(sys.argv[1]) as handle:
+    print(json.load(handle)["decision"])
+PY
+ )"; then
+  echo "adiabatic_recovery_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if { test "$diagnostic_rc" -eq 0 && [[ "$scientific_decision" != "PASS" ]]; } || \
+   { test "$diagnostic_rc" -eq 3 && [[ "$scientific_decision" != "FAIL" ]]; }; then
+  echo "adiabatic_recovery_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if [[ "$scientific_decision" != "PASS" ]]; then
+  echo "adiabatic_recovery_science_gate=FAIL evidence_archived=1" >&2
+  exit 3
+fi
+echo "adiabatic_recovery_science_gate=PASS evidence_archived=1"

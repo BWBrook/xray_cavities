@@ -1,0 +1,266 @@
+{
+  "affected_output_count": 5001,
+  "affected_row_count": 10032,
+  "cache_attrs": {
+    "batched_writer_sha256": "755c3c61d1809c3a97abe361af822efd4bd9e66f12f29c0d34ef184cd93c2b89",
+    "batched_writer_start_output": 1875,
+    "cache_contract_sha256": "90ee77709e01e3ea5898ec19dd8ef9253ed3868d201e1a35a1965f5d71e53b69",
+    "cache_writer_current": "sequential_chunk_batched_v2",
+    "dtype": "float64",
+    "legacy_writer_sha256": "70a865778fbb279ad3f96a34c4f53810256824626fc21f7def1b0657bb76e654",
+    "next_output": 5001,
+    "shock_component": 2,
+    "shock_threshold": 5.0,
+    "source_identity_sha256": "bfbc157e4a80e23c07c893d8929e4c74720cafd5352e56862c7091fafe81c44a",
+    "unit_state": "PLUTO code units; convert only at PRAiSE/raytrace boundary"
+  },
+  "cache_identity": {
+    "bytes": 33191119360,
+    "mtime_ns": 1785067119985755955,
+    "path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5",
+    "sha256_head_1MiB": "ce338cbdbf54156d5601522b0e3c5f7e1592d4634a7717f55b9a6358935d32c4"
+  },
+  "cache_shape": [
+    197568,
+    5001
+  ],
+  "counts_over_present_suffix": {
+    "finite_positive": 502164508,
+    "negative": 0,
+    "nonfinite": 0,
+    "zero": 10032
+  },
+  "first_present_bad_records": 10032,
+  "later_bad_records": 0,
+  "lifecycle_violation_rows": 0,
+  "min_finite_pressure": 0.0,
+  "min_positive_pressure": 4.884051022171834e-14,
+  "pattern_counts": {
+    "internal_nonpositive_after_positive_records": 0,
+    "internal_nonpositive_after_positive_rows": 0,
+    "leading_zero_only_prefix_records": 10030,
+    "leading_zero_only_prefix_rows": 10030,
+    "no_positive_record_records": 2,
+    "no_positive_record_rows": 2,
+    "nonpositive_endpoint_records": 2,
+    "nonpositive_endpoint_rows": 2
+  },
+  "representative_bad_record_count": 100,
+  "representative_limit": 100,
+  "row_chunk": 4096,
+  "source_crosscheck": {
+    "file_identities": [
+      {
+        "bytes": 16697349,
+        "mtime_ns": 1783728986660637806,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3485.dbl",
+        "sha256_head_1MiB": "bf3dda40d6a10fc2e259b3057cff328433441506f788b72cdcb6773a01ceeafa"
+      },
+      {
+        "bytes": 17613189,
+        "mtime_ns": 1783734039579606477,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3682.dbl",
+        "sha256_head_1MiB": "3dd1dfb357329299883762f97e2c9ba45ac4d54ab60e23fd7429f281784d3662"
+      },
+      {
+        "bytes": 4209186,
+        "mtime_ns": 1783417783163200719,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/particles.0817.dbl",
+        "sha256_head_1MiB": "4a5291973f929ce97f9b94eb0bf84c01c08044a78caa0060839e508b121d493c"
+      },
+      {
+        "bytes": 18012549,
+        "mtime_ns": 1783736593261318174,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3768.dbl",
+        "sha256_head_1MiB": "c6942d19a79a59c952c2267a0c10863d5e96ac68d1e0ce2da42a0e84e4253cd9"
+      },
+      {
+        "bytes": 20616549,
+        "mtime_ns": 1783753197802585066,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.4330.dbl",
+        "sha256_head_1MiB": "352042969825498b273c54142c097254cd240f3e2750d5825076bb025404f954"
+      },
+      {
+        "bytes": 11819587,
+        "mtime_ns": 1783702198487712458,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2446.dbl",
+        "sha256_head_1MiB": "7b40893fc1eb6b050a7569c21e93e04ff6c1cb5d0ff065adcc9bd4220e5be7a6"
+      },
+      {
+        "bytes": 18763749,
+        "mtime_ns": 1783741153499566044,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3930.dbl",
+        "sha256_head_1MiB": "9045783f4fe8690f6258d887d697a8657e6e9d00c5cad505eddd45202609ec1f"
+      },
+      {
+        "bytes": 18058629,
+        "mtime_ns": 1783736860676839943,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3778.dbl",
+        "sha256_head_1MiB": "ca810557233820ef8c8185332116e488e06665472dafb647a52403e55bdbce41"
+      },
+      {
+        "bytes": 13381509,
+        "mtime_ns": 1783710722986355504,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2777.dbl",
+        "sha256_head_1MiB": "fe2de827e3ff63ef54e591f542911d3ce2a448ea6d4fc21d04619eb3beb3b33f"
+      },
+      {
+        "bytes": 14845509,
+        "mtime_ns": 1783718864326404268,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3089.dbl",
+        "sha256_head_1MiB": "4d8742ee9fdea9211793e25c1fe079eb37bc4bfe4c5ee41a8d29e2a72fbd8051"
+      },
+      {
+        "bytes": 9423427,
+        "mtime_ns": 1783689263461216240,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.1940.dbl",
+        "sha256_head_1MiB": "3f32f3da6ce14e3f4e34755595df659a06e4b64f6bc51c11a07bd2ed860b547b"
+      },
+      {
+        "bytes": 13338789,
+        "mtime_ns": 1783710503286042602,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2768.dbl",
+        "sha256_head_1MiB": "2ffecb9506283a09841eab619752c09ceb75ab9b1c715e70a54f21f7360d09d2"
+      },
+      {
+        "bytes": 14473989,
+        "mtime_ns": 1783716734129129271,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3010.dbl",
+        "sha256_head_1MiB": "8c429e475aedc970d61f4fa7e67364ae78b454daf94594b19948766fa7ed5123"
+      },
+      {
+        "bytes": 12776709,
+        "mtime_ns": 1783707496063658046,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2649.dbl",
+        "sha256_head_1MiB": "f76faf83f5f53038504d3d4664daf66577008578825faf901e514c85e8ffe6a6"
+      },
+      {
+        "bytes": 10446787,
+        "mtime_ns": 1783694740593501974,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2156.dbl",
+        "sha256_head_1MiB": "b28cafe601bfe08b9570ba2f87edc0b1a9fa104e8a924c4358b989aee78c2125"
+      },
+      {
+        "bytes": 3721506,
+        "mtime_ns": 1783415365369468930,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/particles.0713.dbl",
+        "sha256_head_1MiB": "6df0bc4b8e7deb152c9e7cd7dc4281e1720952af839ddb39d2024106256bcef7"
+      },
+      {
+        "bytes": 16263429,
+        "mtime_ns": 1783726484068088369,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3392.dbl",
+        "sha256_head_1MiB": "0962c9fcfe8186fe2891b9a34e8601b809db2914af910f53e256f50dcfdb9b82"
+      },
+      {
+        "bytes": 5663587,
+        "mtime_ns": 1783668423174366874,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.1136.dbl",
+        "sha256_head_1MiB": "d3c299200bfbf0c922842eea2a84f36fd113448b3d1ec04fc8a37e5652f6a814"
+      },
+      {
+        "bytes": 15806469,
+        "mtime_ns": 1783723987788918688,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3294.dbl",
+        "sha256_head_1MiB": "2ff294f25ffac9b3dbbe49ea5e44fa51af43c99735357a42380c0c5dc149753f"
+      },
+      {
+        "bytes": 7350307,
+        "mtime_ns": 1783677330064712423,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.1499.dbl",
+        "sha256_head_1MiB": "3466bd4aeb1f9594f0bc60ab5d9ed382951994a4f456dd5f8e2a4e163c2cb8cd"
+      },
+      {
+        "bytes": 17060229,
+        "mtime_ns": 1783731063033193719,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3563.dbl",
+        "sha256_head_1MiB": "cb62c25461d03a890a1b5c2926332cc278e61f74bace8b4e7d9cf45b9a89c017"
+      },
+      {
+        "bytes": 16585509,
+        "mtime_ns": 1783728316509823063,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3461.dbl",
+        "sha256_head_1MiB": "148b6f5f1fe2a2656c1e2e2cad3ea80d088457cfc9291c3c10446af7cf5848e5"
+      },
+      {
+        "bytes": 18300069,
+        "mtime_ns": 1783738307391322930,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3830.dbl",
+        "sha256_head_1MiB": "d43b2df1f22f1e99d42ab902dd05b55ff45541e5e56ed0a1364324cb10b8adbd"
+      },
+      {
+        "bytes": 10399267,
+        "mtime_ns": 1783694503786751714,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2146.dbl",
+        "sha256_head_1MiB": "14515e4443654507868e0b82e6341955557ed623c311ad047a7441491dc834eb"
+      },
+      {
+        "bytes": 17362149,
+        "mtime_ns": 1783732617210863379,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3628.dbl",
+        "sha256_head_1MiB": "43654c6a89ed8fafff75ba8ea02de31c01e391b7422693fb5509ce0edf4553d4"
+      },
+      {
+        "bytes": 3904866,
+        "mtime_ns": 1783416207426497004,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/particles.0751.dbl",
+        "sha256_head_1MiB": "17306165089c534f0ada53133d1c4dda9e7001d2808b9fbced0f297ba68e21fb"
+      },
+      {
+        "bytes": 14062149,
+        "mtime_ns": 1783714364799551752,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2922.dbl",
+        "sha256_head_1MiB": "106d8baa73ffcc4d274f27da822385a01bcdd6a4ff67a966f5bf0740c4b9a8b6"
+      },
+      {
+        "bytes": 10361827,
+        "mtime_ns": 1783694327074741856,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2138.dbl",
+        "sha256_head_1MiB": "9cb98f037b1861393b3d3405e50d825735f2f056ad74a3684644074a2e514a92"
+      },
+      {
+        "bytes": 12070149,
+        "mtime_ns": 1783703492848417535,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.2499.dbl",
+        "sha256_head_1MiB": "bf7b8cffc1b9639175a3c361aa922dc07be642cfaaae0547c9c189257603c6ea"
+      },
+      {
+        "bytes": 15019749,
+        "mtime_ns": 1783719750162933220,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.3126.dbl",
+        "sha256_head_1MiB": "d67424395372a5d44940a0ec70e5779b801191a9f749e29d4b7b8afa822eae01"
+      },
+      {
+        "bytes": 8842627,
+        "mtime_ns": 1783686032731110999,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.1818.dbl",
+        "sha256_head_1MiB": "109fbbe1a3113fb82d8c7e83b3a99a403a07a125a7fd46cbfce466980ae762f2"
+      },
+      {
+        "bytes": 5818627,
+        "mtime_ns": 1783669292342108408,
+        "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/particles.1170.dbl",
+        "sha256_head_1MiB": "7247620591a61dff000fe1811415f0a4a838b9961ddadfd32aee660c5e90bc2f"
+      }
+    ],
+    "requested": 32,
+    "status_counts": {
+      "id_not_found": 0,
+      "matched": 32,
+      "not_found": 0
+    }
+  },
+  "source_crosscheck_limit": 32,
+  "source_roots": [
+    {
+      "exists": true,
+      "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs"
+    },
+    {
+      "exists": true,
+      "path": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs"
+    }
+  ],
+  "status": "diagnostic_complete",
+  "total_present_records": 502174540
+}

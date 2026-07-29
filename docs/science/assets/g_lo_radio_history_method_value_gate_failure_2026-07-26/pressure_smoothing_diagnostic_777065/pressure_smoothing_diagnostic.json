@@ -1,0 +1,161 @@
+{
+  "active_cache_rows": 197566,
+  "adiabatic_pressure_rate_proxy": {
+    "methods": {
+      "linear_sg": {
+        "finite_pair_count": 501649691,
+        "lower_tail_difference": 0.0008697788769876091,
+        "q01": -0.03156069092622346,
+        "q01_minus_unsmoothed": 0.0008697788769876091,
+        "q05": -0.008832161155680095,
+        "q05_minus_unsmoothed": 9.107835326333663e-05,
+        "q50": -0.00031192690594491156,
+        "q50_minus_unsmoothed": 1.650591022340402e-06,
+        "q95": 0.009944955506608082,
+        "q95_minus_unsmoothed": 2.508024813377592e-05,
+        "q99": 0.036749473954050614,
+        "q99_minus_unsmoothed": -0.0015055216496233162,
+        "quantile_method": "deterministic evenly spaced chunk sample",
+        "sample_cap": 100000,
+        "sample_count": 100000,
+        "upper_tail_difference": -0.0015055216496233162
+      },
+      "log_sg": {
+        "finite_pair_count": 501966702,
+        "lower_tail_difference": 0.0006969372669891269,
+        "q01": -0.031733532536221944,
+        "q01_minus_unsmoothed": 0.0006969372669891269,
+        "q05": -0.00884168660517933,
+        "q05_minus_unsmoothed": 8.155290376410211e-05,
+        "q50": -0.0003113101009572585,
+        "q50_minus_unsmoothed": 2.267396009993485e-06,
+        "q95": 0.010030916851867605,
+        "q95_minus_unsmoothed": 0.000111041593393299,
+        "q99": 0.03783703815467648,
+        "q99_minus_unsmoothed": -0.0004179574489974469,
+        "quantile_method": "deterministic evenly spaced chunk sample",
+        "sample_cap": 100000,
+        "sample_count": 100000,
+        "upper_tail_difference": -0.0004179574489974469
+      },
+      "triangular": {
+        "finite_pair_count": 501966702,
+        "lower_tail_difference": 0.00461210327824706,
+        "q01": -0.02781836652496401,
+        "q01_minus_unsmoothed": 0.00461210327824706,
+        "q05": -0.008235794425156914,
+        "q05_minus_unsmoothed": 0.0006874450837865177,
+        "q50": -0.00028301183437740257,
+        "q50_minus_unsmoothed": 3.056566258984939e-05,
+        "q95": 0.009463898117069557,
+        "q95_minus_unsmoothed": -0.0004559771414047488,
+        "q99": 0.034970680912732297,
+        "q99_minus_unsmoothed": -0.0032843146909416338,
+        "quantile_method": "deterministic evenly spaced chunk sample",
+        "sample_cap": 100000,
+        "sample_count": 100000,
+        "upper_tail_difference": -0.0032843146909416338
+      },
+      "unsmoothed": {
+        "finite_pair_count": 501966702,
+        "q01": -0.03243046980321107,
+        "q05": -0.008923239508943432,
+        "q50": -0.00031357749696725196,
+        "q95": 0.009919875258474306,
+        "q99": 0.03825499560367393,
+        "quantile_method": "deterministic evenly spaced chunk sample",
+        "sample_cap": 100000,
+        "sample_count": 100000
+      }
+    },
+    "quantile_definition": "a_p = log(p[t+1]/p[t]) / dt"
+  },
+  "affected_row_count": 99108,
+  "cache_identity": {
+    "cache_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5",
+    "cache_sha256": "f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30",
+    "endpoint_count": 197568,
+    "endpoint_ids_sha256": "1751ec3efd851140d5fd45f30aeef652f9e9e3cd5ea5fe7d33bb273ffe51c43d",
+    "output_count": 5001,
+    "shock_component": 2,
+    "shock_threshold": 5.0,
+    "source_identity_sha256": "bfbc157e4a80e23c07c893d8929e4c74720cafd5352e56862c7091fafe81c44a",
+    "times_sha256": "86a80d12b4f8e84bdf06ef68beb5863a987e26a5a0c5139a232ad66d9d1ab7af"
+  },
+  "cache_shape": [
+    197568,
+    5001
+  ],
+  "counts": {
+    "active_rows": 197566,
+    "cache_rows": 197568,
+    "excluded_rows": 2,
+    "linear_nonfinite_output_count": 0,
+    "linear_nonpositive_output_count": 216035,
+    "log_nonfinite_output_count": 0,
+    "log_nonpositive_output_count": 0,
+    "short_rows": 168,
+    "smoothed_rows": 197398
+  },
+  "endpoint_relative_difference": {
+    "linear": {
+      "count": 197398,
+      "max": 0.3012633908866409,
+      "max_abs": 0.3012633908866409,
+      "mean": 6.716731530543266e-05,
+      "min": -0.25695063875644597
+    },
+    "log": {
+      "count": 197398,
+      "max": 0.2540084516645189,
+      "max_abs": 0.8342387054059186,
+      "mean": 1.0303047902995706e-05,
+      "min": -0.8342387054059186
+    }
+  },
+  "excluded_cache_rows": [
+    125697,
+    126644
+  ],
+  "linear_min_smoothed_to_raw_ratio": -41779.69408300923,
+  "linear_min_value": -1.1640654678160231e-07,
+  "log_min_smoothed_to_raw_ratio": 0.05062254988990771,
+  "log_min_value": 2.3235854462627928e-14,
+  "output_csv": "pressure_smoothing_affected_rows.csv",
+  "row_chunk": 4096,
+  "short_smoothing_rows": 168,
+  "smoothed_rows": 197398,
+  "smoothing_contract": {
+    "algorithm": "Savitzky-Golay",
+    "interpolation": false,
+    "linear_domain": "raw treated positive pressure",
+    "log_domain": "natural_log(raw treated positive pressure)",
+    "mode": "nearest",
+    "polyorder": 3,
+    "pressure_floor": false,
+    "window": 5
+  },
+  "status": "diagnostic_complete",
+  "treatment_identity_sha256": "c05d0df5682ca4cfd6d45bf81f50c13e5528968f812c07f06f1b5a25d3c3e6c8",
+  "triangular_smoothing": {
+    "endpoint_relative_difference": {
+      "count": 197398,
+      "max": 0.4049372124999493,
+      "max_abs": 0.4049372124999493,
+      "mean": 0.0003866248342548612,
+      "min": -0.3332009986206841
+    },
+    "kernel": [
+      1,
+      2,
+      3,
+      2,
+      1
+    ],
+    "min_smoothed_to_raw_ratio": 0.49894406998325513,
+    "min_value": 5.4590579460530775e-14,
+    "nonfinite_output_count": 0,
+    "nonpositive_output_count": 0,
+    "normalization": 9
+  }
+}

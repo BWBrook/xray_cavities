@@ -1,0 +1,22 @@
+field,value
+failed_job_id,777011.kunanyi-ohpc
+failed_job_name,g_lo_radhist
+failed_exit_status,2
+failed_walltime,00:08:14
+failed_cput,00:06:56
+failed_mem,776964kb
+failed_vmem,1050340kb
+failure_stage,linear_pressure_smoothing_before_first_praise_emissivity_chunk
+first_failure,smoothed pressure history must be positive after injection
+immutable_manifest,passed
+runtime_import_preflight,passed
+repeated_pressure_diagnostic,passed
+pressure_treatment_plan,passed
+active_rows,197566
+trimmed_initialization_rows,10030
+excluded_no_positive_rows,2
+stderr_bytes,0
+archive_bytes,1561049
+archive_sha256,0049f76ebf915bdf5fc2f99c62b827a73b7e358326c746bc50bae56fff2012f2
+praise_emissivity_chunk_completed,false
+raytrace_completed,false
