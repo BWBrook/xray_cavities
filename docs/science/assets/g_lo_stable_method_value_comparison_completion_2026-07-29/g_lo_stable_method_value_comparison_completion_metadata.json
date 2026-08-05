@@ -1,0 +1,43 @@
+{
+  "status": "complete_comparison_gate_fail_discrepancy_concentration",
+  "decision_label": "G_LO_STABLE_METHOD_VALUE_FAIL",
+  "interpretive_label": "STABLE_METHOD_COMPARISON_NUMERICALLY_GREEN_LOCALIZED_SENSITIVITY_REQUIRES_STRATUM_CENSUS",
+  "original_job": {
+    "job_id": "779913.kunanyi-ohpc",
+    "exit_status": 3,
+    "structured_decision": "FAIL",
+    "archive_sha256": "4f7b689fb30bc44f1d35557fbbfd32272f895acd41a7f730a3be8eeb907ec27c"
+  },
+  "root_cause": {
+    "classification": "goal051_gate_contract_mismatch",
+    "observation": "The primary stable adiabatic endpoint gate passed with zero relevant non-finite, fallback, and nonpositive-time records.",
+    "defect": "Goal 051 incorrectly required the diagnostic algebraic-disagreement count to be zero.",
+    "repair": "Retain and report algebraic disagreements without making them a fatal gate."
+  },
+  "retry_job": {
+    "job_id": "780137.kunanyi-ohpc",
+    "job_name": "g_lo_stmv_r1",
+    "job_state": "F",
+    "exit_status": 3,
+    "stageout_status": 1,
+    "walltime": "09:54:05",
+    "cput": "96:55:00",
+    "archive_sha256": "abd34c707197f6b984d5ea9e34c07731abcb7565223e8fc01f2c6900ddc5ca62",
+    "stage_root": "/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison_r1",
+    "analysis_root": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1"
+  },
+  "retry_result": {
+    "declared_outputs_present": 8,
+    "declared_outputs_expected": 8,
+    "all_infrastructure_and_numerical_gates_passed": true,
+    "cutoff_count": 0,
+    "sole_failed_gate": "comparison_discrepancy_concentration",
+    "top_one_percent_discrepancy_fraction": 0.951162697227638,
+    "predeclared_maximum": 0.5,
+    "top_two_weighted_discrepancy_fraction": 0.8339063192288018,
+    "top_two_unweighted_discrepancy_fraction": 0.8039975607832786,
+    "recommended_next_analysis": "Complete 262-row critical-stratum census from the existing immutable cache."
+  },
+  "goal052_relationship": "PRAiSE2 promotion remains on hold independently of the Goal 051 retry.",
+  "stop_rule": "Goal 051 repair ladder closed; no further retry or production application is justified."
+}

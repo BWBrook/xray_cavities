@@ -1,0 +1,8 @@
+quantity,comparison,rtol,atol,policy
+provenance_and_order,hashes IDs rows labels shapes units and endpoint indices,0,0,exact
+effective_SI_inputs,praise2 adapter versus declared contract,5e-15,0,numerical_equivalence
+gamma_state_and_coefficients,only where equations are claimed identical,1e-10,0,numerical_equivalence
+endpoint_emissivity,high-level versus lower-level ordinary non-singleton rows,1e-9,0,numerical_equivalence
+nonfinite_and_zero_classes,finite NaN +Inf -Inf and exact-zero masks,0,0,exact
+deterministic_repeat,canonical output fingerprints,0,0,exact
+

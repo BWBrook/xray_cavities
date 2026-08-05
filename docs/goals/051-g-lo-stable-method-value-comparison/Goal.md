@@ -1,7 +1,7 @@
 # Goal 051 — G-LO stable method-value comparison
 
 Date opened: 2026-07-29
-Status: `submitted_waiting_pbs_completion`
+Status: `complete_comparison_gate_fail_discrepancy_concentration`
 
 ## Objective
 
@@ -90,6 +90,60 @@ bytecode-free manifest and hashes, pinned cache/selection hashes, exact
 `g_lo_particle_history`, and the queue walltime limit. Remote `shellcheck` was
 unavailable; the identical wrapper passed local `shellcheck`.
 
-The PBS stop rule was invoked immediately after the running-state proof. Do
-not poll, retrieve, resubmit, or infer a scientific result until Barry reports
-completion.
+PBS `779913.kunanyi-ohpc` completed with `Exit_status=3`. Its retrieved
+structured decision was `FAIL`: the primary adiabatic endpoint gate passed,
+but the Goal 051 orchestrator incorrectly treated eight finite
+algebraic-form diagnostic differences in the first history group as fatal.
+Every infrastructure gate passed, and no non-finite state, fallback, or
+nonpositive relevant time was observed.
+
+The shared adiabatic contract and accepted Goal 049 evidence make those
+pressure-primary versus time-diagnostic differences reportable numerical
+diagnostics rather than a scientific failure. The Goal 051 gate was repaired
+to preserve the count while excluding it from the fatal criteria. A regression
+reproduced the false negative before the change and passed afterward.
+
+Exactly one fresh no-overwrite retry was submitted:
+
+- PBS: `780137.kunanyi-ohpc`
+- job name: `g_lo_stmv_r1`
+- state at stop: `Q` on `normal`
+- queue time: `Thu Jul 30 00:02:12 2026`
+- allocation: `select=1:ncpus=16:mpiprocs=1:mem=96gb`
+- walltime: `12:00:00`
+- stage:
+  `/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison_r1`
+- analysis:
+  `/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1`
+
+The cache, selection, plutokore commit, and wrapper remain unchanged. The
+repaired diagnostic script SHA-256 is
+`4d8d093d95fef7681d1f778e999bf0ef255bc6264881321f449ca24bc3d177e1`.
+
+PBS `780137.kunanyi-ohpc` completed with `Exit_status=3` after `09:54:05`.
+The retry archive is readable, has SHA-256
+`abd34c707197f6b984d5ea9e34c07731abcb7565223e8fc01f2c6900ddc5ca62`,
+and contains all eight declared outputs. The repaired numerical contract is
+green: all infrastructure, reconstruction, conditioning, determinism, cutoff,
+and branch-ordering gates passed. There were no cutoffs.
+
+The formal comparison result remains `G_LO_STABLE_METHOD_VALUE_FAIL` because
+the sole failed gate is `comparison_discrepancy_concentration`. The top `1%`
+of represented population weight accounts for
+`0.951162697227638` of total absolute pressure-method discrepancy, exceeding
+the predeclared maximum `0.5`.
+
+This concentration is not created by weighting. Two selected histories
+contribute `0.8339063192288018` of weighted discrepancy and
+`0.8039975607832786` before weighting. Both are affected by linear smoothing,
+have history length `8`, and are immediately post-shock. They are two of four
+ordinary sampled histories representing a 249-row component of the dominant
+262-row stratum. Removing the two as an influence diagnostic reduces the
+aggregate log-Savitzky-Golay versus unsmoothed shift from about `4.4%` to
+about `0.6%`; this deletion is diagnostic only, not an alternative estimate.
+
+Do not weaken the predeclared gate or submit another Goal 051 retry. The
+highest-value next analysis is a complete evaluation of the 262-row critical
+stratum from the existing immutable cache, which can distinguish a real
+young-particle regime from a high-leverage sample extrapolation before any
+production-method decision.

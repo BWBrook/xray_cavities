@@ -1,0 +1,4 @@
+metric,value
+census_count,262
+oracle_count,17
+target_stratum,affected=1|trim=0|length_q=0|injection_q=0|range_q=1|shock=post_injection_recent

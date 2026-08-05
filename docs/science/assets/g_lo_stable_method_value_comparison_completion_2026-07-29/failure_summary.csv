@@ -1,0 +1,14 @@
+scope,metric,value,interpretation
+scheduler,exit_status,3,declared scientific stop after evidence archival
+archive,sha256,4f7b689fb30bc44f1d35557fbbfd32272f895acd41a7f730a3be8eeb907ec27c,remote and local archive identity
+diagnostic,status,diagnostic_complete,structured diagnostic completed
+diagnostic,decision,FAIL,false-negative under the original Goal 051 gate contract
+selection,selection_count,4096,exact deterministic weighted selection retained
+infrastructure,all_declared_gates_passed,true,cache selection source runtime and treatment contracts passed
+adiabatic,endpoint_gate_passed,true,primary pressure-ratio trajectory remained valid
+adiabatic,relevant_nonfinite_count,0,no relevant non-finite state
+adiabatic,relevant_fallback_count,0,no relevant fallback
+adiabatic,relevant_nonpositive_time_count,0,no relevant nonpositive time
+adiabatic,relevant_algebraic_disagreement_count,8,diagnostic-form differences in first aborted group only
+outputs,declared_output_count,8,full comparison contract
+outputs,archived_output_count,4,early false-negative stop before branch and comparison outputs

@@ -1,0 +1,6 @@
+decision,hybrid_top_1pct,census_top_1pct,meaning
+CENSUS_RESOLVES_SAMPLE_LEVERAGE,at_or_below_0.50,any,Goal 051 concentration was mainly sample leverage
+CENSUS_SUPPORTS_LOCALIZED_REGIME,above_0.50,at_or_below_0.50,evidence is consistent with distributed localized sensitivity but does not prove target-stratum attribution
+CENSUS_FINDS_RARE_HISTORY_SENSITIVITY,above_0.50,above_0.50,sensitivity is real but remains concentrated in very few histories
+HOLD_FOR_CUTOFF_REVIEW,any,any,verified stable recurrence cutoff needs review
+FAIL_NUMERICAL_OR_PROVENANCE,any,any,inherited numerical scientific or provenance gate failed

@@ -32,6 +32,7 @@ EMPTY_COLUMN_FRACTION_MAX="${EMPTY_COLUMN_FRACTION_MAX:-0.05}"
 ARCHIVE_SNAPSHOT_ROOT="${ARCHIVE_SNAPSHOT_ROOT:-$ANALYSIS_ROOT/archive_snapshot}"
 ARCHIVE_PAYLOAD_DIR="$ARCHIVE_SNAPSHOT_ROOT/$(basename "$ANALYSIS_ROOT")"
 ARCHIVE_FILE_LIST="$ARCHIVE_SNAPSHOT_ROOT/archive_file_list.txt"
+ARCHIVE_HELPER="${ARCHIVE_HELPER:-$STAGE_DIR/archive_file_list_payload.sh}"
 
 VIEWS=(
   "0|0deg|direct_y_axis_sum"
@@ -52,7 +53,7 @@ echo "timestep=$TIMESTEP"
 echo "views=${VIEWS[*]}"
 echo "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-for path in "$XRAISE_SCRIPT" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT" "$C_HI_REFERENCE" "$C_LO_REFERENCE"; do
+for path in "$XRAISE_SCRIPT" "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT" "$C_HI_REFERENCE" "$C_LO_REFERENCE" "$ARCHIVE_HELPER"; do
   test -r "$path" || { echo "missing runtime input: $path" >&2; exit 2; }
   sha256sum "$path"
 done
@@ -283,7 +284,7 @@ with (root / "g_lo_endpoint_first_products_caveats.csv").open("w", newline="") a
 print("product_tables=written three_case_rows=9")
 PY
 
-rm -rf "$ARCHIVE_SNAPSHOT_ROOT"
+test ! -e "$ARCHIVE_SNAPSHOT_ROOT" || { echo "archive snapshot already exists: $ARCHIVE_SNAPSHOT_ROOT" >&2; exit 3; }
 mkdir -p "$ARCHIVE_PAYLOAD_DIR/remote_logs"
 for view in "${VIEWS[@]}"; do
   IFS="|" read -r angle label expected_accumulator <<<"$view"
@@ -296,16 +297,5 @@ for table in g_lo_endpoint_preflight.csv g_lo_endpoint_projection_metrics.csv th
 done
 cp -p "$INNER_STDOUT" "$ARCHIVE_PAYLOAD_DIR/remote_logs/g_lo_endpoint_first_products.stdout.log"
 cp -p "$INNER_STDERR" "$ARCHIVE_PAYLOAD_DIR/remote_logs/g_lo_endpoint_first_products.stderr.log"
-(
-  cd "$ARCHIVE_PAYLOAD_DIR"
-  find . -type f ! -name archive_manifest.tsv ! -name archive_checksums.sha256 -printf "%P\t%s bytes\n" | sort > archive_manifest.tsv
-  find . -type f ! -name archive_manifest.tsv ! -name archive_checksums.sha256 -print | sort | while IFS= read -r path; do sha256sum "$path"; done > archive_checksums.sha256
-)
-(
-  cd "$ARCHIVE_SNAPSHOT_ROOT"
-  find "$(basename "$ARCHIVE_PAYLOAD_DIR")" -type f | sort > "$ARCHIVE_FILE_LIST"
-)
-rm -f "$SUMMARY_ARCHIVE"
-tar -czf "$SUMMARY_ARCHIVE" -C "$ARCHIVE_SNAPSHOT_ROOT" --files-from "$ARCHIVE_FILE_LIST"
-sha256sum "$SUMMARY_ARCHIVE"
+bash "$ARCHIVE_HELPER" "$ARCHIVE_SNAPSHOT_ROOT" "$ARCHIVE_PAYLOAD_DIR" "$ARCHIVE_FILE_LIST" "$SUMMARY_ARCHIVE"
 echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

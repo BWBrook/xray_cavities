@@ -1,0 +1,13 @@
+metric,value,interpretation
+job_id,780137.kunanyi-ohpc,repaired no-overwrite Goal 051 retry
+job_name,g_lo_stmv_r1,stable method-value comparison retry
+job_state,F,final scheduler state
+exit_status,3,declared scientific FAIL after evidence archival
+stageout_status,1,scheduler caveat; requested stage-root evidence was present and retrieved
+walltime,09:54:05,elapsed runtime
+cput,96:55:00,reported CPU time
+ncpus,16,allocated CPUs
+mem_kb,3583696,peak reported memory
+vmem_kb,6062712,peak reported virtual memory
+requested_select,1:ncpus=16:mpiprocs=1:mem=96gb,requested resource selection
+requested_walltime,12:00:00,requested walltime

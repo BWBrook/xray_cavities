@@ -1,0 +1,79 @@
+{
+  "census_count": 262,
+  "census_top_one_percent_discrepancy_fraction": 0.07069644733314163,
+  "decision": "CENSUS_SUPPORTS_LOCALIZED_REGIME",
+  "decision_label": "CENSUS_SUPPORTS_LOCALIZED_REGIME",
+  "finalization": {
+    "cache_recomputed": false,
+    "mode": "no_recompute_from_preserved_arrays",
+    "source_partial_directory": "docs/science/assets/g_lo_critical_stratum_census_failure_2026-07-30",
+    "stable_branch_recomputed": false
+  },
+  "hybrid_top_one_percent_discrepancy_fraction": 0.883220701841804,
+  "oracle_count": 17,
+  "oracle_metadata": {
+    "oracle_cache_rows": [
+      57123,
+      57136,
+      57176,
+      57936,
+      58855,
+      59753,
+      59756,
+      69350,
+      69352,
+      71546,
+      127330,
+      127674,
+      137985,
+      138000,
+      138001,
+      140234,
+      161136
+    ],
+    "oracle_count": 17,
+    "oracle_represented_weight": 262.0
+  },
+  "oracle_replay_tolerance": {
+    "oracle_cell_count": 204,
+    "oracle_count": 17,
+    "stable_branch_replay_exact_mismatch_count": 36,
+    "stable_branch_replay_max_abs_difference": 9.15421913206577e-50,
+    "stable_branch_replay_max_relative_difference": 9.1601327385061e-12,
+    "stable_branch_replay_max_tolerance_fraction": 0.09160043107217158,
+    "stable_branch_replay_tolerance": {
+      "formula": "abs(diff) <= abs(original) * relative_tolerance + ulp_multiplier * max(abs(spacing(original)), abs(spacing(census)))",
+      "relative_tolerance": 1e-10,
+      "ulp_multiplier": 8.0
+    },
+    "stable_branch_replay_within_tolerance": true
+  },
+  "original_row_identity": {
+    "identity_fields": [
+      "sample_index",
+      "cache_row",
+      "physical_id"
+    ],
+    "identity_order": "selection and comparison rows are exactly aligned",
+    "row_count": 4096
+  },
+  "pbs_failure_evidence": {
+    "cause": "obsolete exact oracle replay gate",
+    "exit_status": 2,
+    "job_id": "780326.kunanyi-ohpc",
+    "preserved": true
+  },
+  "predeclared_threshold": 0.5,
+  "replacement_audit": {
+    "census_target_represented_weight": 262.0,
+    "census_target_row_count": 262,
+    "hybrid_row_count": 4341,
+    "hybrid_total_represented_weight": 197566.0,
+    "original_row_count": 4096,
+    "original_target_represented_weight": 262.0,
+    "original_target_row_count": 17,
+    "original_total_represented_weight": 197566.0
+  },
+  "status": "diagnostic_complete",
+  "target_stratum": "affected=1|trim=0|length_q=0|injection_q=0|range_q=1|shock=post_injection_recent"
+}

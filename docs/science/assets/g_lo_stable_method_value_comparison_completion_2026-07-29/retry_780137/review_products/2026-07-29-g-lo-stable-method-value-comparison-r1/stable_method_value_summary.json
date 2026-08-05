@@ -1,0 +1,527 @@
+{
+  "branch_output_fingerprint_sha256": "493ccd4360390ada65e77ea8038c6b8d3d787e881139e0df049cce45c8818aef",
+  "cache_sha256": "f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30",
+  "cache_validation": {
+    "endpoint_count": 197568,
+    "injection_boundary_roundoff_records": 10048,
+    "injection_boundary_tolerance": "max(half float32 ULP at tinj, 8 float64 epsilon-scaled units)",
+    "max_injection_boundary_tolerance": 0.00048828125,
+    "max_injection_boundary_tolerance_cadence_fraction": 0.00015647167244195993,
+    "missing_post_injection_records": 0,
+    "output_count": 5001,
+    "pre_injection_absence_records": 485863028,
+    "presence_contract": "single contiguous suffix per endpoint particle"
+  },
+  "comparison": {
+    "aggregate_log_savgol_minus_unsmoothed_dex": [
+      0.018642967197065374,
+      0.019111428268669937
+    ],
+    "comparison_semantics": {
+      "full_above_none_interpretation": "possible net adiabatic-compression enhancement; not by itself a numerical or radiative-loss failure",
+      "none_branch": "losses='none' disables both adiabatic and radiative evolution",
+      "none_branch_is_upper_bound": false,
+      "radiative_discriminator": "losses='adiabatic' retains pressure-work evolution while disabling radiative losses"
+    },
+    "decision": "FAIL",
+    "discrepancy_definition": "rows ranked by sum_frequency(abs(log_savgol_full - unsmoothed_full)); represented-weighted discrepancy accumulated through exactly 1% of total represented population weight with a fractional boundary row",
+    "frequencies_GHz": [
+      0.15,
+      1.4
+    ],
+    "full_loss_spectral_index_difference": -0.0004829312484786463,
+    "full_vs_adiabatic_ordering": {
+      "log_savgol": [
+        {
+          "adiabatic_only_positive_count": 0,
+          "aggregate_direction": "full_below_adiabatic",
+          "aggregate_full_over_adiabatic_ratio": 0.9904134311889151,
+          "aggregate_log10_full_over_adiabatic": -0.00418347873219713,
+          "both_positive_count": 4096,
+          "both_zero_count": 0,
+          "comparison_absolute_tolerance_max": 2.7723258274402716e-47,
+          "comparison_relative_tolerance": 1e-10,
+          "comparison_ulp_multiplier": 8.0,
+          "equivalent_count": 48,
+          "frequency_GHz": 0.15,
+          "full_above_adiabatic_count": 0,
+          "full_above_adiabatic_represented_weight_fraction": 0.0,
+          "full_below_adiabatic_count": 4048,
+          "full_below_adiabatic_represented_weight_fraction": 0.999757043215938,
+          "full_only_positive_count": 0,
+          "maximum_absolute_difference": 6.291979250596119e-41,
+          "positive_ratio_max": 1.0,
+          "positive_ratio_min": 0.9357762530271834,
+          "positive_ratio_q50": 0.9822283528719629,
+          "positive_ratio_q95": 0.999984847932144,
+          "positive_ratio_q99": 1.0,
+          "weighted_adiabatic_emissivity": 1.4168796765030632e-34,
+          "weighted_full_emissivity": 1.403296661987239e-34
+        },
+        {
+          "adiabatic_only_positive_count": 0,
+          "aggregate_direction": "full_below_adiabatic",
+          "aggregate_full_over_adiabatic_ratio": 0.9663666738408171,
+          "aggregate_log10_full_over_adiabatic": -0.014858055561310372,
+          "both_positive_count": 4096,
+          "both_zero_count": 0,
+          "comparison_absolute_tolerance_max": 7.258083646696069e-48,
+          "comparison_relative_tolerance": 1e-10,
+          "comparison_ulp_multiplier": 8.0,
+          "equivalent_count": 48,
+          "frequency_GHz": 1.4,
+          "full_above_adiabatic_count": 0,
+          "full_above_adiabatic_represented_weight_fraction": 0.0,
+          "full_below_adiabatic_count": 4048,
+          "full_below_adiabatic_represented_weight_fraction": 0.999757043215938,
+          "full_only_positive_count": 0,
+          "maximum_absolute_difference": 6.455904332885145e-41,
+          "positive_ratio_max": 1.0,
+          "positive_ratio_min": 0.672099360228221,
+          "positive_ratio_q50": 0.9410500859644934,
+          "positive_ratio_q95": 0.9999537067849116,
+          "positive_ratio_q99": 1.0,
+          "weighted_adiabatic_emissivity": 3.7094618156873044e-35,
+          "weighted_full_emissivity": 3.5847002765652584e-35
+        }
+      ],
+      "unsmoothed": [
+        {
+          "adiabatic_only_positive_count": 0,
+          "aggregate_direction": "full_below_adiabatic",
+          "aggregate_full_over_adiabatic_ratio": 0.9900026066263912,
+          "aggregate_log10_full_over_adiabatic": -0.004363661925714973,
+          "both_positive_count": 4096,
+          "both_zero_count": 0,
+          "comparison_absolute_tolerance_max": 2.7723258274402716e-47,
+          "comparison_relative_tolerance": 1e-10,
+          "comparison_ulp_multiplier": 8.0,
+          "equivalent_count": 48,
+          "frequency_GHz": 0.15,
+          "full_above_adiabatic_count": 0,
+          "full_above_adiabatic_represented_weight_fraction": 0.0,
+          "full_below_adiabatic_count": 4048,
+          "full_below_adiabatic_represented_weight_fraction": 0.999757043215938,
+          "full_only_positive_count": 0,
+          "maximum_absolute_difference": 6.290580811447162e-41,
+          "positive_ratio_max": 1.0,
+          "positive_ratio_min": 0.9358642135291074,
+          "positive_ratio_q50": 0.9822217611215964,
+          "positive_ratio_q95": 0.9999863857801448,
+          "positive_ratio_q99": 1.0,
+          "weighted_adiabatic_emissivity": 1.3579074995740447e-34,
+          "weighted_full_emissivity": 1.3443319641358295e-34
+        },
+        {
+          "adiabatic_only_positive_count": 0,
+          "aggregate_direction": "full_below_adiabatic",
+          "aggregate_full_over_adiabatic_ratio": 0.9649244258783837,
+          "aggregate_log10_full_over_adiabatic": -0.015506699826432475,
+          "both_positive_count": 4096,
+          "both_zero_count": 0,
+          "comparison_absolute_tolerance_max": 7.258083646696069e-48,
+          "comparison_relative_tolerance": 1e-10,
+          "comparison_ulp_multiplier": 8.0,
+          "equivalent_count": 48,
+          "frequency_GHz": 1.4,
+          "full_above_adiabatic_count": 0,
+          "full_above_adiabatic_represented_weight_fraction": 0.0,
+          "full_below_adiabatic_count": 4048,
+          "full_below_adiabatic_represented_weight_fraction": 0.999757043215938,
+          "full_only_positive_count": 0,
+          "maximum_absolute_difference": 6.446967542488275e-41,
+          "positive_ratio_max": 1.0,
+          "positive_ratio_min": 0.673106385694845,
+          "positive_ratio_q50": 0.9410261836621547,
+          "positive_ratio_q95": 0.9999584055437427,
+          "positive_ratio_q99": 1.0,
+          "weighted_adiabatic_emissivity": 3.5550697087682116e-35,
+          "weighted_full_emissivity": 3.430373597690799e-35
+        }
+      ]
+    },
+    "full_vs_lossless_direction": {
+      "log_savgol": [
+        "full_below_lossless",
+        "full_below_lossless"
+      ],
+      "unsmoothed": [
+        "full_below_lossless",
+        "full_below_lossless"
+      ]
+    },
+    "full_vs_none_ordering": {
+      "log_savgol": [
+        {
+          "aggregate_direction": "full_below_none",
+          "aggregate_full_over_none_ratio": 0.9643147933759324,
+          "aggregate_log10_full_over_none": -0.015781170755670804,
+          "both_positive_count": 4096,
+          "both_zero_count": 0,
+          "comparison_absolute_tolerance_max": 2.8186595175768425e-47,
+          "comparison_relative_tolerance": 1e-10,
+          "comparison_ulp_multiplier": 8.0,
+          "equivalent_count": 48,
+          "frequency_GHz": 0.15,
+          "full_above_none_count": 227,
+          "full_above_none_represented_weight_fraction": 0.04112183515443639,
+          "full_below_none_count": 3821,
+          "full_below_none_represented_weight_fraction": 0.9586352080615016,
+          "full_only_positive_count": 0,
+          "maximum_absolute_difference": 6.720049610494778e-39,
+          "none_only_positive_count": 0,
+          "positive_ratio_max": 1.1970271436136155,
+          "positive_ratio_min": 0.7629020288532465,
+          "positive_ratio_q50": 0.946122457903823,
+          "positive_ratio_q95": 1.0016893227308716,
+          "positive_ratio_q99": 1.0729447724347991,
+          "weighted_full_emissivity": 1.403296661987239e-34,
+          "weighted_none_emissivity": 1.4552267284778364e-34
+        },
+        {
+          "aggregate_direction": "full_below_none",
+          "aggregate_full_over_none_ratio": 0.940901698285273,
+          "aggregate_log10_full_over_none": -0.026455747584784025,
+          "both_positive_count": 4096,
+          "both_zero_count": 0,
+          "comparison_absolute_tolerance_max": 7.379387563458917e-48,
+          "comparison_relative_tolerance": 1e-10,
+          "comparison_ulp_multiplier": 8.0,
+          "equivalent_count": 48,
+          "frequency_GHz": 1.4,
+          "full_above_none_count": 162,
+          "full_above_none_represented_weight_fraction": 0.02454802070578393,
+          "full_below_none_count": 3886,
+          "full_below_none_represented_weight_fraction": 0.9752090225101542,
+          "full_only_positive_count": 0,
+          "maximum_absolute_difference": 1.7587034089523225e-39,
+          "none_only_positive_count": 0,
+          "positive_ratio_max": 1.197008926160274,
+          "positive_ratio_min": 0.6051582381316011,
+          "positive_ratio_q50": 0.9036026282296488,
+          "positive_ratio_q95": 1.0,
+          "positive_ratio_q99": 1.07292844066975,
+          "weighted_full_emissivity": 3.5847002765652584e-35,
+          "weighted_none_emissivity": 3.8098563145311796e-35
+        }
+      ],
+      "unsmoothed": [
+        {
+          "aggregate_direction": "full_below_none",
+          "aggregate_full_over_none_ratio": 0.9623362350001804,
+          "aggregate_log10_full_over_none": -0.016673161338422237,
+          "both_positive_count": 4096,
+          "both_zero_count": 0,
+          "comparison_absolute_tolerance_max": 2.8186595175768425e-47,
+          "comparison_relative_tolerance": 1e-10,
+          "comparison_ulp_multiplier": 8.0,
+          "equivalent_count": 48,
+          "frequency_GHz": 0.15,
+          "full_above_none_count": 232,
+          "full_above_none_represented_weight_fraction": 0.04240945755237868,
+          "full_below_none_count": 3816,
+          "full_below_none_represented_weight_fraction": 0.9573475856635593,
+          "full_only_positive_count": 0,
+          "maximum_absolute_difference": 6.720049610494778e-39,
+          "none_only_positive_count": 0,
+          "positive_ratio_max": 1.3480145793472096,
+          "positive_ratio_min": 0.7651874819868694,
+          "positive_ratio_q50": 0.9461497680891633,
+          "positive_ratio_q95": 1.001854870594863,
+          "positive_ratio_q99": 1.0729447724347991,
+          "weighted_full_emissivity": 1.3443319641358295e-34,
+          "weighted_none_emissivity": 1.3969462182161076e-34
+        },
+        {
+          "aggregate_direction": "full_below_none",
+          "aggregate_full_over_none_ratio": 0.9379588829809455,
+          "aggregate_log10_full_over_none": -0.027816199239139777,
+          "both_positive_count": 4096,
+          "both_zero_count": 0,
+          "comparison_absolute_tolerance_max": 7.379387563458917e-48,
+          "comparison_relative_tolerance": 1e-10,
+          "comparison_ulp_multiplier": 8.0,
+          "equivalent_count": 48,
+          "frequency_GHz": 1.4,
+          "full_above_none_count": 165,
+          "full_above_none_represented_weight_fraction": 0.025317057449654644,
+          "full_below_none_count": 3883,
+          "full_below_none_represented_weight_fraction": 0.9744399857662833,
+          "full_only_positive_count": 0,
+          "maximum_absolute_difference": 1.7587034089523225e-39,
+          "none_only_positive_count": 0,
+          "positive_ratio_max": 1.3480038520826976,
+          "positive_ratio_min": 0.60613482094376,
+          "positive_ratio_q50": 0.9038215981125128,
+          "positive_ratio_q95": 1.0,
+          "positive_ratio_q99": 1.07292844066975,
+          "weighted_full_emissivity": 3.430373597690799e-35,
+          "weighted_none_emissivity": 3.657275025519948e-35
+        }
+      ]
+    },
+    "gate_results": {
+      "aggregate_difference": true,
+      "discrepancy_concentration": false,
+      "full_vs_lossless_direction": true,
+      "radiative_suppression": true,
+      "spectral_index_difference": true
+    },
+    "gates": {
+      "max_abs_aggregate_difference_dex": 0.1,
+      "max_abs_spectral_index_difference": 0.1,
+      "max_top_one_percent_discrepancy_fraction": 0.5,
+      "require_full_not_above_adiabatic": true,
+      "require_same_full_vs_lossless_direction": true
+    },
+    "inference_scope": "deterministic weighted sample evidence; not proof of full-population equivalence",
+    "top_one_percent_absolute_discrepancy_fraction": 0.951162697227638,
+    "top_one_percent_represented_population": {
+      "boundary_behavior": "fractional boundary-row analysis weight is used to reach exactly the target represented-population mass",
+      "denominator": 7.981414981573116e-36,
+      "fraction": 0.951162697227638,
+      "fractional_boundary_row_index": 2789,
+      "fractional_boundary_row_weight_fraction": 0.44554130714028595,
+      "fully_included_rows": 39,
+      "numerator": 7.591624201566164e-36,
+      "population_fraction": 0.01,
+      "ranking": "descending unweighted per-particle absolute method discrepancy",
+      "represented_population_weight": 197566.0,
+      "target_population_weight": 1975.66
+    },
+    "weighted_aggregate": {
+      "log_savgol": {
+        "adiabatic": {
+          "spectral_index": 0.6000000000000016,
+          "weighted_emissivity": [
+            1.416879676503066e-34,
+            3.7094618156872985e-35
+          ]
+        },
+        "full": {
+          "spectral_index": 0.6110043011629728,
+          "weighted_emissivity": [
+            1.4032966619872396e-34,
+            3.5847002765652546e-35
+          ]
+        },
+        "none": {
+          "spectral_index": 0.6000000000000016,
+          "weighted_emissivity": [
+            1.455226728477839e-34,
+            3.809856314531173e-35
+          ]
+        }
+      },
+      "unsmoothed": {
+        "adiabatic": {
+          "spectral_index": 0.6000000000000004,
+          "weighted_emissivity": [
+            1.3579074995740465e-34,
+            3.555069708768214e-35
+          ]
+        },
+        "full": {
+          "spectral_index": 0.6114872324114514,
+          "weighted_emissivity": [
+            1.3443319641358288e-34,
+            3.43037359769079e-35
+          ]
+        },
+        "none": {
+          "spectral_index": 0.6000000000000018,
+          "weighted_emissivity": [
+            1.3969462182161112e-34,
+            3.6572750255199435e-35
+          ]
+        }
+      }
+    }
+  },
+  "cutoff_count": 0,
+  "cutoff_counts_by_class": {
+    "gamma_inf_cutoff": 0,
+    "physical_cutoff": 0
+  },
+  "decision": "FAIL",
+  "decision_label": "G_LO_STABLE_METHOD_VALUE_FAIL",
+  "decision_semantics": {
+    "FAIL": "at least one reconstruction, cutoff-audit, or comparison gate fails",
+    "HOLD_FOR_CUTOFF_REVIEW": "all gates pass but at least one fully audited cutoff requires scientific prevalence/interpretation review",
+    "PASS": "all stable reconstruction and method-value gates pass with zero cutoffs"
+  },
+  "endpoint_ids_sha256": "1751ec3efd851140d5fd45f30aeef652f9e9e3cd5ea5fe7d33bb273ffe51c43d",
+  "frequencies_GHz": [
+    0.15,
+    1.4
+  ],
+  "infrastructure_gates": {
+    "completed_cache": true,
+    "exact_selection_identity_and_order": true,
+    "immutable_input_hashes_recorded": true,
+    "pressure_treatment_contract": true,
+    "runtime_provenance_recorded": true,
+    "source_identity_recorded": true,
+    "treated_sample_conversion": true
+  },
+  "mode_summaries": {
+    "log_savgol": {
+      "branch_contract_passed": true,
+      "branch_fingerprint_sha256": "9c9b95e0050469b575ca2ded77722e7a81f3ea1d24d88e4409e58c76d0c3157e",
+      "cutoff_review_required": false,
+      "group_count": 2732,
+      "grouped_provenance_complete": true,
+      "particle_count": 4096,
+      "pressure_mode": "log_savgol",
+      "singleton_particle_count": 48,
+      "stable_adiabatic": {
+        "deterministic_repeat": true,
+        "gate_passed": true,
+        "relevant_algebraic_disagreement_count": 2,
+        "relevant_fallback_count": 0,
+        "relevant_nonfinite_count": 0,
+        "relevant_nonpositive_time_count": 0
+      },
+      "stable_full": {
+        "conditioning": {
+          "audit_policy": "track every relevant log-loss-fraction margin; run one-ULP classification checks only for every conditioning candidate and every cutoff; run 80-digit state checks only for cutoffs",
+          "boundary_audit_count": 0,
+          "cutoff_audit_count": 0,
+          "cutoff_audit_passed": true,
+          "goal050_reference_policy": "all-row high-precision recurrence validation is inherited from Goal 050 and is not repeated here",
+          "instability_count": 0,
+          "minimum_absolute_log_loss_fraction_margin": 4.3392871449171775,
+          "near_boundary_candidate_count": 0,
+          "relevant_interval_frequency_count": 17983060
+        },
+        "deterministic_repeat": true,
+        "silent_fallback_count": 0,
+        "state_counts": {
+          "finite": 17991252,
+          "gamma_inf_cutoff": 0,
+          "physical_cutoff": 0,
+          "post_cutoff": 0,
+          "subrelativistic": 0
+        },
+        "subrelativistic_count": 0
+      }
+    },
+    "unsmoothed": {
+      "branch_contract_passed": true,
+      "branch_fingerprint_sha256": "a887dd674bb04782701bfa078a46e5805079f55f0f10c9fd7179bd956684b6a1",
+      "cutoff_review_required": false,
+      "group_count": 2732,
+      "grouped_provenance_complete": true,
+      "particle_count": 4096,
+      "pressure_mode": "unsmoothed",
+      "singleton_particle_count": 48,
+      "stable_adiabatic": {
+        "deterministic_repeat": true,
+        "gate_passed": true,
+        "relevant_algebraic_disagreement_count": 30,
+        "relevant_fallback_count": 0,
+        "relevant_nonfinite_count": 0,
+        "relevant_nonpositive_time_count": 0
+      },
+      "stable_full": {
+        "conditioning": {
+          "audit_policy": "track every relevant log-loss-fraction margin; run one-ULP classification checks only for every conditioning candidate and every cutoff; run 80-digit state checks only for cutoffs",
+          "boundary_audit_count": 0,
+          "cutoff_audit_count": 0,
+          "cutoff_audit_passed": true,
+          "goal050_reference_policy": "all-row high-precision recurrence validation is inherited from Goal 050 and is not repeated here",
+          "instability_count": 0,
+          "minimum_absolute_log_loss_fraction_margin": 4.33740435940995,
+          "near_boundary_candidate_count": 0,
+          "relevant_interval_frequency_count": 17983060
+        },
+        "deterministic_repeat": true,
+        "silent_fallback_count": 0,
+        "state_counts": {
+          "finite": 17991252,
+          "gamma_inf_cutoff": 0,
+          "physical_cutoff": 0,
+          "post_cutoff": 0,
+          "subrelativistic": 0
+        },
+        "subrelativistic_count": 0
+      }
+    }
+  },
+  "output_contract": {
+    "cutoff_policy": "nonzero audited cutoff count yields HOLD_FOR_CUTOFF_REVIEW; no prevalence threshold is asserted",
+    "full_vs_adiabatic": "directional radiative-suppression comparison",
+    "full_vs_none": "descriptive lossless comparison; not an upper-bound assertion"
+  },
+  "pinned_branch_policy": {
+    "adiabatic": "not calculated; stable adiabatic recurrence uses full_info.ap_arr",
+    "full": "ignored; replaced by stable full-loss recurrence",
+    "none": "actual lossless comparator after exact branch validation"
+  },
+  "pressure_modes": [
+    "unsmoothed",
+    "log_savgol"
+  ],
+  "pressure_treatment_counts": {
+    "excluded_rows": 2,
+    "single_record_rows": 48,
+    "trim_rows": 10030,
+    "trim_single_record_overlap_rows": 2
+  },
+  "pressure_treatment_identity_sha256": "06f07bccd743a3f4bb93915d88fe263b085f05a2c82a31f4195b5f5f8b856925",
+  "runtime_provenance": {
+    "commit_verification": "wrapper_export",
+    "expected_plutokore_commit": "e80252cf35ff5a06166240e2867d3d485aaf6956",
+    "goal050_validation_dependency": "Goal 050 exhaustive stable-full recurrence/high-precision gate; Goal 051 repeats the float recurrence and bounds high precision to observed cutoffs",
+    "verified_commit_environment_variable": "GOAL051_VERIFIED_PLUTOKORE_COMMIT",
+    "verified_plutokore_commit": "e80252cf35ff5a06166240e2867d3d485aaf6956"
+  },
+  "selection_count": 4096,
+  "selection_order": "source CSV sample_index order 0..4095",
+  "selection_sha256": "35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df",
+  "singleton_policy": "instantaneous_recent_shock",
+  "source_identity_sha256": "bfbc157e4a80e23c07c893d8929e4c74720cafd5352e56862c7091fafe81c44a",
+  "stable_gates": {
+    "comparison_aggregate_difference": true,
+    "comparison_discrepancy_concentration": false,
+    "comparison_full_vs_lossless_direction": true,
+    "comparison_radiative_suppression": true,
+    "comparison_spectral_index_difference": true,
+    "log_savgol_boundary_conditioning": true,
+    "log_savgol_branch_contract": true,
+    "log_savgol_cutoff_audit": true,
+    "log_savgol_grouped_provenance": true,
+    "log_savgol_no_subrelativistic_states": true,
+    "log_savgol_stable_adiabatic": true,
+    "log_savgol_stable_full_repeat": true,
+    "log_savgol_zero_silent_fallbacks": true,
+    "unsmoothed_boundary_conditioning": true,
+    "unsmoothed_branch_contract": true,
+    "unsmoothed_cutoff_audit": true,
+    "unsmoothed_grouped_provenance": true,
+    "unsmoothed_no_subrelativistic_states": true,
+    "unsmoothed_stable_adiabatic": true,
+    "unsmoothed_stable_full_repeat": true,
+    "unsmoothed_zero_silent_fallbacks": true
+  },
+  "status": "diagnostic_complete",
+  "times_sha256": "86a80d12b4f8e84bdf06ef68beb5863a987e26a5a0c5139a232ad66d9d1ab7af",
+  "unit_provenance": {
+    "density_unit": "0.60364 u cm^-3",
+    "density_unit_kg_m3": 1.0023678021624239e-21,
+    "endpoint_velocity_representation": "dimensionless beta vector",
+    "history_dtype": "float64",
+    "length_unit": "1 kpc",
+    "length_unit_m": 3.085677581491367e+19,
+    "physical_ids": "unmodified raw PLUTO IDs",
+    "pressure_unit": "density_unit * c^2",
+    "pressure_unit_Pa": 9.008832531925203e-05,
+    "shock_component": 2,
+    "shock_component_semantics": "selected by g_lo_particle_history from PLUTO shk_thresh",
+    "shock_threshold": 5.0,
+    "speed_unit": "c",
+    "speed_unit_m_s": 299792458.0,
+    "time_unit": "kpc/c in seconds",
+    "time_unit_s": 102927125054.33899
+  }
+}

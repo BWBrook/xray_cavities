@@ -813,7 +813,6 @@ def reconstruct_stable_mode(
                 for key in (
                     "relevant_nonfinite_count",
                     "relevant_fallback_count",
-                    "relevant_algebraic_disagreement_count",
                     "relevant_nonpositive_time_count",
                 )
             )
@@ -966,7 +965,14 @@ def reconstruct_stable_mode(
             "deterministic_repeat": adiabatic_repeat_passed,
             "gate_passed": bool(
                 adiabatic_repeat_passed
-                and all(value == 0 for value in adiabatic_counts.values())
+                and all(
+                    adiabatic_counts[key] == 0
+                    for key in (
+                        "relevant_nonfinite_count",
+                        "relevant_fallback_count",
+                        "relevant_nonpositive_time_count",
+                    )
+                )
             ),
         },
         "cutoff_review_required": bool(cutoff_records),

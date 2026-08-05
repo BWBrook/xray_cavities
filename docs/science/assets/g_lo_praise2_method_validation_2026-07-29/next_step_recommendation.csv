@@ -1,0 +1,6 @@
+priority,action,rationale,authorization
+1,retrieve Goal 051 archive and summary,exit 3 does not distinguish FAIL from HOLD,Barry completion authorizes retrieval once Chrome authentication is restored
+2,retain PRAiSE2 no-promotion hold,current public interface fails required state and cutoff observability,no additional authorization
+3,seek reviewed PRAiSE2 state instrumentation or distinct-method validation scope,only this can reopen the method gate,Patrick/Stas method decision before production default
+4,run fresh 4096-row PRAiSE2 comparison only after gate reopens,Goal 050 cannot transfer by relabelling,explicit authorization after auditable-state design
+

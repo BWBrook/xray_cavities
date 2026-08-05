@@ -1,0 +1,25 @@
+scope,gate,passed,value
+unsmoothed,grouped_provenance_complete,True,true
+unsmoothed,branch_contract,True,true
+unsmoothed,stable_full_deterministic_repeat,True,true
+unsmoothed,stable_full_zero_silent_fallbacks,True,true
+unsmoothed,stable_full_no_subrelativistic_states,True,true
+unsmoothed,stable_full_boundary_conditioning,True,true
+unsmoothed,stable_full_cutoff_audit,True,true
+unsmoothed,stable_adiabatic_gate,True,true
+log_savgol,grouped_provenance_complete,True,true
+log_savgol,branch_contract,True,true
+log_savgol,stable_full_deterministic_repeat,True,true
+log_savgol,stable_full_zero_silent_fallbacks,True,true
+log_savgol,stable_full_no_subrelativistic_states,True,true
+log_savgol,stable_full_boundary_conditioning,True,true
+log_savgol,stable_full_cutoff_audit,True,true
+log_savgol,stable_adiabatic_gate,True,true
+comparison,aggregate_difference,True,true
+comparison,spectral_index_difference,True,true
+comparison,full_vs_lossless_direction,True,true
+comparison,radiative_suppression,True,true
+comparison,discrepancy_concentration,True,true
+decision,no_cutoffs_requiring_review,True,0
+oracle,goal051_branch_replay,True,"{""oracle_cell_count"": 204, ""oracle_count"": 17, ""stable_branch_replay_exact_mismatch_count"": 36, ""stable_branch_replay_max_abs_difference"": 9.15421913206577e-50, ""stable_branch_replay_max_relative_difference"": 9.1601327385061e-12, ""stable_branch_replay_max_tolerance_fraction"": 0.09160043107217158, ""stable_branch_replay_tolerance"": {""formula"": ""abs(diff) <= abs(original) * relative_tolerance + ulp_multiplier * max(abs(spacing(original)), abs(spacing(census)))"", ""relative_tolerance"": 1e-10, ""ulp_multiplier"": 8.0}, ""stable_branch_replay_within_tolerance"": true}"
+decision,census_classification_complete,True,CENSUS_SUPPORTS_LOCALIZED_REGIME

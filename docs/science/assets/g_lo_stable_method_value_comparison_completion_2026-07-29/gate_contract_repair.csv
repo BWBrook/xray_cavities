@@ -1,0 +1,5 @@
+item,original_behavior,repaired_behavior,verification
+group_gate,required zero algebraic disagreements,records algebraic disagreements but does not fail on them,regression test plus accepted pressure-primary endpoint gate
+summary_gate,required every adiabatic counter to be zero,requires zero nonfinite fallback and nonpositive-time counts while retaining algebraic count,regression test plus related suites
+scientific_policy,treated finite representation-level differences as failure,uses pressure-ratio primary trajectory and keeps time-ratio difference diagnostic,independent Goal 049 trace review and high-precision reference
+retry_boundary,no repeat after unclassified exit,one fresh no-overwrite retry after root-cause repair,distinct stage analysis paths hashes and qsub lock

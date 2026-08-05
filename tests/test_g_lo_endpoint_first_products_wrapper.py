@@ -30,6 +30,7 @@ def test_generates_all_refined_views_and_three_case_comparison():
 
 def test_is_postprocessing_only_with_stable_archive():
     text = WRAPPER.read_text().lower()
+    helper = Path("scripts/kunanyi/archive_file_list_payload.sh").read_text().lower()
     assert "#pbs -l select=1:ncpus=1:mpiprocs=1:mem=96gb" in text
     assert "#pbs -l walltime=04:00:00" in text
     assert "xraise_grid_smoke.py" in text
@@ -37,9 +38,13 @@ def test_is_postprocessing_only_with_stable_archive():
     assert "mpiexec" not in text
     assert "pluto " not in text
     assert "praise" not in text
-    assert "--files-from" in text
-    assert "archive_manifest.tsv" in text
-    assert "archive_checksums.sha256" in text
+    assert "--files-from" in helper
+    assert "archive_manifest.tsv" in helper
+    assert "archive_checksums.sha256" in helper
+    assert "archive_file_list_payload.sh" in text
+    assert 'bash "$archive_helper"' in text
+    assert 'rm -rf "$archive_snapshot_root"' not in text
+    assert 'rm -f "$summary_archive"' not in text
 
 
 def test_fails_closed_on_endpoint_and_projection_support():

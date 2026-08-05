@@ -1,0 +1,77 @@
+{
+  "ablations_are_not_alternative_estimates": true,
+  "branches": [
+    "full",
+    "adiabatic",
+    "none"
+  ],
+  "concentration_fractions": [
+    0.001,
+    0.0025,
+    0.005,
+    0.01,
+    0.02,
+    0.05,
+    0.1,
+    0.2
+  ],
+  "decision_label": "LOCALIZED_REGIME_SYNTHESIZED_NO_FURTHER_CENSUS",
+  "decision_metrics": {
+    "additional_single_stratum_census_decision_relevant": false,
+    "both_strata_zeroed_top_one_percent_concentration": 0.47664633967348985,
+    "census_top_one_percent_concentration": 0.07069644733314163,
+    "hybrid_top_one_percent_concentration": 0.883220701841804,
+    "max_hybrid_full_branch_shift_dex": 0.00838080865565028,
+    "minimum_uncensused_stratum_zeroed_top_one_percent_concentration": 0.8600740749004894,
+    "most_decision_favourable_uncensused_stratum": "affected=1|trim=1|length_q=0|injection_q=0|range_q=3|shock=post_injection_recent",
+    "secondary_stratum_hybrid_discrepancy_fraction": 0.18313213411722135,
+    "secondary_stratum_zeroed_top_one_percent_concentration": 0.8600740749004894,
+    "target_stratum_hybrid_discrepancy_fraction": 0.6004622375293894,
+    "target_stratum_zeroed_top_one_percent_concentration": 0.7103564868216525,
+    "uncensused_strata_tested": 99
+  },
+  "frequencies_GHz": [
+    0.15,
+    1.4
+  ],
+  "generated_files": [
+    "branch_frequency_comparison.csv",
+    "discrepancy_concentration_curve.csv",
+    "g_lo_pressure_method_synthesis.png",
+    "g_lo_pressure_method_synthesis_metadata.json",
+    "influential_history_sensitivity.csv",
+    "next_step_recommendation.csv",
+    "stratum_attribution.csv",
+    "stratum_zeroing_sensitivity.csv",
+    "top_hybrid_contributors.csv"
+  ],
+  "influential_id": 196136,
+  "input_paths": {
+    "census_csv": "docs/science/assets/g_lo_critical_stratum_census_repair_2026-07-30/critical_stratum_particle_comparison.csv",
+    "original_csv": "docs/science/assets/g_lo_critical_stratum_census_repair_2026-07-30/original_particle_comparison.csv",
+    "summary_json": "docs/science/assets/g_lo_critical_stratum_census_repair_2026-07-30/critical_stratum_census_summary.json"
+  },
+  "input_sha256": {
+    "census_csv": "ebaef821c9bdde030ad238825e8c4d627338a783fe853ca5ab4cc8c0d4e0127d",
+    "original_csv": "5fa466a1db5450921cd4b95785c0b949a499fd4457cc62da18333061dee8ebeb",
+    "summary_json": "13df95c3c207049c6faa49c84975e6e76e20fd513a8e382e73e6f9ed326da2da"
+  },
+  "remote_compute_performed": false,
+  "scientific_scope": "descriptive local synthesis; no physical-uncertainty inference",
+  "scope_represented_weights": {
+    "critical_stratum_census": 262.0,
+    "hybrid_population": 197566.0,
+    "original_sample": 197566.0,
+    "original_weighted_target_stratum": 262.0
+  },
+  "scope_row_counts": {
+    "critical_stratum_census": 262,
+    "hybrid_population": 4341,
+    "original_sample": 4096,
+    "original_weighted_target_stratum": 17
+  },
+  "secondary_stratum": "affected=1|trim=1|length_q=0|injection_q=0|range_q=3|shock=post_injection_recent",
+  "status": "complete_local_synthesis",
+  "target_stratum": "affected=1|trim=0|length_q=0|injection_q=0|range_q=1|shock=post_injection_recent",
+  "threshold": 0.5
+}

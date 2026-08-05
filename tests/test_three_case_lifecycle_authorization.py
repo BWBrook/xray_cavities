@@ -1,5 +1,5 @@
 from __future__ import annotations
-import csv, importlib.util, json, sys, subprocess
+import csv, datetime, importlib.util, json, sys, subprocess
 from pathlib import Path
 import pytest
 
@@ -11,13 +11,21 @@ def load(path, name):
     spec = importlib.util.spec_from_file_location(name, path); assert spec and spec.loader
     mod = importlib.util.module_from_spec(spec); sys.modules[name] = mod; spec.loader.exec_module(mod); return mod
 
+def _fresh_validation_now(packet: Path) -> datetime.datetime:
+    with (packet / "active_job_gate.csv").open(newline="") as handle:
+        checked = next(csv.DictReader(handle))["checked_utc"]
+    return datetime.datetime.fromisoformat(checked.replace("Z", "+00:00")) + datetime.timedelta(hours=1)
+
+def _validate(v, packet: Path, expected_digest: str, completed: Path = COMPLETED):
+    return v.validate(packet, expected_digest, completed, now=_fresh_validation_now(packet))
+
 def test_real_packet_is_exhaustive_and_dry_run(tmp_path):
     b = load(BUILD, "goal046_build")
     v = load(VALIDATE, "goal046_validate")
     completed = COMPLETED
     packet = tmp_path / "packet"
     meta = b.build_packet(completed, packet)
-    result = v.validate(packet, meta["payload_ledger_sha256"], completed)
+    result = _validate(v, packet, meta["payload_ledger_sha256"], completed)
     assert result["status"] == "validated_dry_run_only"
     assert result["payload_count"] == 17153
     assert result["action_counts"]["DELETE_PROPOSED_UNIQUE_RAW"] == 148
@@ -38,7 +46,7 @@ def test_generation_is_deterministic(tmp_path):
 def test_validator_rejects_digest_mismatch(tmp_path):
     b = load(BUILD, "goal046_build_mismatch"); v = load(VALIDATE, "goal046_validate_mismatch")
     completed = COMPLETED; packet = tmp_path / "p"; b.build_packet(completed, packet)
-    with pytest.raises(ValueError, match="expected digest mismatch"): v.validate(packet, "0" * 64, completed)
+    with pytest.raises(ValueError, match="expected digest mismatch"): _validate(v, packet, "0" * 64, completed)
 
 def _packet(tmp_path, name="packet"):
     b = load(BUILD, f"goal046_build_{name}")
@@ -59,7 +67,7 @@ def _digest(packet):
 def test_validator_rejects_outside_allowlist(tmp_path):
     v = load(VALIDATE, "goal046_validate_allowlist"); packet = _packet(tmp_path, "allowlist")
     _mutate_ledger(packet, lambda data: data.__setitem__(0, {**data[0], "path": "/outside/forbidden.h5"}))
-    with pytest.raises(ValueError, match="outside allowlist"): v.validate(packet, _digest(packet), COMPLETED)
+    with pytest.raises(ValueError, match="outside allowlist"): _validate(v, packet, _digest(packet))
 
 def test_validator_rejects_protected_deletion_and_pair_mismatch(tmp_path):
     v = load(VALIDATE, "goal046_validate_pair"); packet = _packet(tmp_path, "pair")
@@ -67,12 +75,12 @@ def test_validator_rejects_protected_deletion_and_pair_mismatch(tmp_path):
         row = next(r for r in data if r["action"] == "DELETE_PROPOSED_UNIQUE_RAW")
         row["contract_protection"] = "PROTECTED"
     _mutate_ledger(packet, mutate)
-    with pytest.raises(ValueError, match="protected deletion"): v.validate(packet, _digest(packet), COMPLETED)
+    with pytest.raises(ValueError, match="protected deletion"): _validate(v, packet, _digest(packet))
 
 def test_validator_rejects_parent_traversal(tmp_path):
     v = load(VALIDATE, "goal046_validate_traversal"); packet = _packet(tmp_path, "traversal")
     _mutate_ledger(packet, lambda data: next(r for r in data if r["action"] == "DELETE_PROPOSED_UNIQUE_RAW").update(path="/scratch/bwbrook/../outside.h5"))
-    with pytest.raises(ValueError, match="outside allowlist"): v.validate(packet, _digest(packet), COMPLETED)
+    with pytest.raises(ValueError, match="outside allowlist"): _validate(v, packet, _digest(packet))
 
 def test_coherent_ledger_rehash_still_fails_frozen_source(tmp_path):
     v = load(VALIDATE, "goal046_validate_coherent"); packet = _packet(tmp_path, "coherent")
@@ -80,7 +88,7 @@ def test_coherent_ledger_rehash_still_fails_frozen_source(tmp_path):
     import hashlib
     digest = hashlib.sha256((packet / "payload_ledger.csv").read_bytes()).hexdigest()
     metadata = json.loads((packet / "inventory_metadata.json").read_text()); metadata["payload_ledger_sha256"] = digest; (packet / "inventory_metadata.json").write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n")
-    with pytest.raises(ValueError, match="ledger source inventory mismatch"): v.validate(packet, digest, COMPLETED)
+    with pytest.raises(ValueError, match="ledger source inventory mismatch"): _validate(v, packet, digest)
 
 def test_validator_rejects_stale_active_job_gate(tmp_path):
     v = load(VALIDATE, "goal046_validate_stale"); packet = _packet(tmp_path, "stale")
@@ -93,12 +101,12 @@ def test_validator_rejects_stale_active_job_gate(tmp_path):
 def test_validator_rejects_manifest_tamper(tmp_path):
     v = load(VALIDATE, "goal046_validate_manifest"); packet = _packet(tmp_path, "manifest")
     (packet / "active_job_gate.csv").write_text((packet / "active_job_gate.csv").read_text().replace(",0,passed", ",1,passed"))
-    with pytest.raises(ValueError, match="active-job gate failed"): v.validate(packet, _digest(packet), COMPLETED)
+    with pytest.raises(ValueError, match="active-job gate failed"): _validate(v, packet, _digest(packet))
 
 def test_validator_rejects_omitted_manifest_entry(tmp_path):
     v = load(VALIDATE, "goal046_validate_omitted"); packet = _packet(tmp_path, "omitted")
     manifest = packet / "local_asset_manifest.sha256"; lines = manifest.read_text().splitlines(); manifest.write_text("\n".join(lines[:-1]) + "\n")
-    with pytest.raises(ValueError, match="local asset manifest name set mismatch"): v.validate(packet, _digest(packet), COMPLETED)
+    with pytest.raises(ValueError, match="local asset manifest name set mismatch"): _validate(v, packet, _digest(packet))
 
 def test_cli_requires_expected_digest_and_completed():
     result = subprocess.run(["uv", "run", "python", str(VALIDATE), "--packet", "."], capture_output=True, text=True)

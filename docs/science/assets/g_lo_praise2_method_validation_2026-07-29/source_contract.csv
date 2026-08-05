@@ -1,0 +1,12 @@
+item,observation,evidence,gate,status
+callable,plutokore.radio.praise2.praise,praise2.py:411-432,exact,pass
+source_commit,e80252cf35ff5a06166240e2867d3d485aaf6956,live git rev-parse,exact,pass
+source_sha256,ad664648040c4330ce124fdde7b739b7cd701759a52569863fc79460895f9668,local SHA-256,exact,pass
+cache_sha256,f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30,Goal 051 immutable input,exact,preserved_not_read
+selection_sha256,35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df,Goal 051 immutable input,exact,preserved_not_read
+selection_count,4096,Goal 051 contract,exact,preserved_not_read
+loss_codes,0=lossless;1=adiabatic;4=full,praise2.py:433-448,exact,pass
+frequencies_Hz,150000000;140000000,local adapter contract,rtol=5e-15,pass
+pressure_modes,unsmoothed;external pressure-only log_savgol,local adapter contract,exact,pass
+internal_smoothing,window_width=0,local adapter contract,exact,pass
+state_return,emissivity and part_output metadata only,praise2.py:407-408 and 630-697,required observable,fail

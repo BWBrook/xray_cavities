@@ -1,0 +1,14 @@
+metric,value,interpretation
+stratum,affected=1|trim=0|length_q=0|injection_q=0|range_q=1|shock=post_injection_recent,dominant discrepancy stratum
+represented_population_rows,262,13 certainty-selected plus 249 ordinary eligible histories
+represented_population_fraction,0.0013261391130052742,262 of total represented population 197566
+selected_rows,17,13 certainty-selected plus four ordinary hash-sampled histories
+certainty_selected_rows,13,extreme absolute log-endpoint perturbation records with weight one
+ordinary_population_rows,249,inferred exactly from four selected rows at inclusion probability 4/249
+ordinary_hash_sampled_rows,4,deterministic stratified sample
+dominant_hash_sampled_rows,2,two of four ordinary sampled histories dominate the comparison discrepancy
+weighted_discrepancy_fraction,0.8340044575351778,whole-stratum contribution to total weighted discrepancy
+dominant_two_weighted_discrepancy_fraction,0.8339063192288018,physical IDs 197253 and 197269
+dominant_two_unweighted_discrepancy_fraction,0.8039975607832786,concentration persists before applying analysis weights
+dominant_history_length,8,both leading histories
+dominant_shock_age,0.11363471249933355,both leading histories are immediately post-shock

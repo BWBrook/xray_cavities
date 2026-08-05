@@ -1,0 +1,23 @@
+relative_path,role,retention
+remote_logs/g_lo_stable_method_value_comparison_2026-07-29.tar.gz,immutable retrieved archive,retain byte-for-byte
+remote_logs/g_lo_stable_method_value_comparison.out,remote stdout,retain byte-for-byte
+remote_logs/g_lo_stable_method_value_comparison.err,remote stderr,retain byte-for-byte
+review_products/2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_summary.json,structured original decision,retain
+review_products/2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_gate_summary.csv,failed-gate summary,retain
+review_products/2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_cutoff_records.csv,empty early-stop cutoff schema,retain
+review_products/2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_selection.csv,exact selected rows,retain
+review_products/2026-07-29-g-lo-stable-method-value-comparison/selection_input.csv,immutable selection provenance,retain
+review_products/2026-07-29-g-lo-stable-method-value-comparison/staged_inputs.sha256,staged source manifest,retain
+review_products/2026-07-29-g-lo-stable-method-value-comparison/plutokore_commit.txt,pinned source proof,retain
+review_products/archive_file_list.txt,archive inventory,retain
+retry_780137/remote_logs/g_lo_stable_method_value_comparison_2026-07-29.tar.gz,immutable retrieved retry archive,retain byte-for-byte
+retry_780137/remote_logs/g_lo_stable_method_value_comparison_r1.out,retry remote stdout,retain byte-for-byte
+retry_780137/remote_logs/g_lo_stable_method_value_comparison_r1.err,retry remote stderr,retain byte-for-byte
+retry_780137/review_products/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_summary.json,structured retry decision,retain
+retry_780137/review_products/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_particle_comparison.csv,exact per-particle comparison surface,retain
+retry_780137/review_products/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_unsmoothed_branches.npz,finite unsmoothed stable branch values,retain
+retry_780137/review_products/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_log_savgol_branches.npz,finite log-Savitzky-Golay stable branch values,retain
+retry_780137/retry_completion_metadata.json,local completion interpretation,retain
+retry_780137/concentration_sensitivity.csv,represented-population concentration sensitivity,retain
+retry_780137/concentration_top_contributors.csv,top discrepancy contributors,retain
+retry_780137/critical_stratum_summary.csv,dominant-stratum design leverage summary,retain

@@ -1,0 +1,15 @@
+field,value
+job_id,780137.kunanyi-ohpc
+job_name,g_lo_stmv_r1
+job_state_at_stop,Q
+queue,normal
+qtime,Thu Jul 30 00:02:12 2026
+resource_list_select,1:ncpus=16:mpiprocs=1:mem=96gb
+resource_list_walltime,12:00:00
+stage_root,/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison_r1
+analysis_root,/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1
+diagnostic_script_sha256,4d8d093d95fef7681d1f778e999bf0ef255bc6264881321f449ca24bc3d177e1
+wrapper_sha256,7c92b7eda897d82c824cb0cb8422953e4262096a2fc632e911a18f7ccb9d0021
+cache_sha256,f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30
+selection_sha256,35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df
+plutokore_commit,e80252cf35ff5a06166240e2867d3d485aaf6956

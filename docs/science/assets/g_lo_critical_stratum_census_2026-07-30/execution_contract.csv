@@ -1,0 +1,19 @@
+item,value
+target_stratum,affected=1|trim=0|length_q=0|injection_q=0|range_q=1|shock=post_injection_recent
+expected_census_count,262
+expected_oracle_count,17
+expected_certainty_count,13
+expected_ordinary_count,249
+frequencies_GHz,0.15 and 1.4
+pressure_modes,unsmoothed and log_savgol
+resources,1 node 16 CPUs 96 GB 12 hours
+scope,existing immutable cache post-processing only
+pbs_job_id,780326.kunanyi-ohpc
+pbs_job_name,g_lo_strcen
+pbs_state_at_stop,R
+pbs_queue,normal
+pbs_qtime,Thu Jul 30 23:10:51 2026
+stage_root,/u/bwbrook/codex_kunanyi/goal053_g_lo_critical_stratum_census
+analysis_root,/scratch/bwbrook/xray_cavities_analysis/2026-07-30-g-lo-critical-stratum-census
+staged_code_archive_sha256,10c6be6aeae5a46fa65ba31f5fded4718424232dc468150af976b1d8776e12bf
+stop_rule,active_wait_for_barry_completion_email_or_explicit_recheck

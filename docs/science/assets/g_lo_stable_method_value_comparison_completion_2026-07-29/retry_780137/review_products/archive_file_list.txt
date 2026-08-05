@@ -1,0 +1,12 @@
+./2026-07-29-g-lo-stable-method-value-comparison-r1/staged_inputs.sha256
+./2026-07-29-g-lo-stable-method-value-comparison-r1/plutokore_commit.txt
+./2026-07-29-g-lo-stable-method-value-comparison-r1/selection_input.csv
+./2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_selection.csv
+./2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_unsmoothed_branches.npz
+./2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_log_savgol_branches.npz
+./2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_particle_comparison.csv
+./2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_ordering.csv
+./2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_cutoff_records.csv
+./2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_gate_summary.csv
+./2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_summary.json
+./archive_file_list.txt

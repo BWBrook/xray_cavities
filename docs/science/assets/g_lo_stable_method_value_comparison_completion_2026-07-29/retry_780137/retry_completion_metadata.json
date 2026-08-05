@@ -1,0 +1,44 @@
+{
+  "status": "complete_comparison_gate_fail_discrepancy_concentration",
+  "decision": "FAIL",
+  "decision_label": "G_LO_STABLE_METHOD_VALUE_FAIL",
+  "interpretive_label": "STABLE_METHOD_COMPARISON_NUMERICALLY_GREEN_LOCALIZED_SENSITIVITY_REQUIRES_STRATUM_CENSUS",
+  "job": {
+    "job_id": "780137.kunanyi-ohpc",
+    "job_name": "g_lo_stmv_r1",
+    "job_state": "F",
+    "exit_status": 3,
+    "stageout_status": 1,
+    "walltime": "09:54:05",
+    "cput": "96:55:00",
+    "ncpus": 16
+  },
+  "archive": {
+    "sha256": "abd34c707197f6b984d5ea9e34c07731abcb7565223e8fc01f2c6900ddc5ca62",
+    "member_count": 12,
+    "declared_outputs_present": 8,
+    "declared_outputs_expected": 8
+  },
+  "method_state": {
+    "infrastructure_gates_passed": true,
+    "reconstruction_gates_passed": true,
+    "repeatability_gates_passed": true,
+    "cutoff_count": 0,
+    "sole_failed_gate": "comparison_discrepancy_concentration"
+  },
+  "concentration": {
+    "predeclared_max_top_one_percent_discrepancy_fraction": 0.5,
+    "observed_top_one_percent_discrepancy_fraction": 0.951162697227638,
+    "top_two_weighted_discrepancy_fraction": 0.8339063192288018,
+    "top_two_unweighted_discrepancy_fraction": 0.8039975607832786,
+    "dominant_physical_ids": [
+      197253,
+      197269
+    ],
+    "weighting_interpretation": "Analysis weights modestly amplify but do not create the concentration.",
+    "scientific_interpretation": "The discrepancy is localized to influential recent-shock lowest-history-quantile pressure records and is not population-general evidence."
+  },
+  "next_step": "Run a complete 262-row census of the critical stratum from the existing immutable cache before any production-method decision.",
+  "goal052_relationship": "PRAiSE2 promotion remains on hold independently of the Goal 051 numerical repair.",
+  "stop_rule": "No further Goal 051 retry or production job is justified by this completion."
+}

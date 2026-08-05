@@ -1,0 +1,7 @@
+difference,observation,inference,materiality,status
+larmor_gamma,"PRAiSE2 divides the frequency term by 3; lower-level code does not","same-input gamma ratio is 1/sqrt(3), not numerical roundoff",material,not_equivalent
+radiative_coefficient,"PRAiSE2 effective Myr coefficient / lower-level converted coefficient = 0.7500000023105955","radiative-loss scaling differs by about 25 percent",material,not_equivalent
+full_loss_recurrence,"PRAiSE2 uses the original power-form recurrence","Goal 050 stable scaled/log-domain recurrence is not exercised by PRAiSE2",material,not_equivalent
+invalid_gamma_handling,"PRAiSE2 assigns zero when gamma is not greater than zero","NaN and physical cutoff are indistinguishable in the public result",material,fail_closed
+state_visibility,"public praise returns emissivity and output-index metadata but no internal state","direct gamma/cutoff/fallback agreement cannot be verified",blocking,fail_closed
+singleton_histories,"48 selected histories have one record","lossy PRAiSE2 values require an externally imposed instantaneous convention",material,not_directly_validated

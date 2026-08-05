@@ -1,0 +1,233 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_strcen
+#PBS -q normal
+#PBS -l select=1:ncpus=16:mpiprocs=1:mem=96gb
+#PBS -l walltime=12:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal053_g_lo_critical_stratum_census/g_lo_critical_stratum_census.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal053_g_lo_critical_stratum_census/g_lo_critical_stratum_census.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal053_g_lo_critical_stratum_census}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+AFFECTED_ROWS_CSV="${AFFECTED_ROWS_CSV:-$STAGE_ROOT/pressure_smoothing_affected_rows.csv}"
+ORIGINAL_SELECTION_CSV="${ORIGINAL_SELECTION_CSV:-$STAGE_ROOT/original_selection.csv}"
+ORIGINAL_COMPARISON_CSV="${ORIGINAL_COMPARISON_CSV:-$STAGE_ROOT/original_particle_comparison.csv}"
+EXPECTED_CACHE_SHA256="${EXPECTED_CACHE_SHA256:-f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30}"
+EXPECTED_AFFECTED_ROWS_SHA256="${EXPECTED_AFFECTED_ROWS_SHA256:-85caef2184edd7786e4d791fd52e77e422269bb6a156a48047d3c7901e4d79f2}"
+EXPECTED_ORIGINAL_SELECTION_SHA256="${EXPECTED_ORIGINAL_SELECTION_SHA256:-35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df}"
+EXPECTED_ORIGINAL_COMPARISON_SHA256="${EXPECTED_ORIGINAL_COMPARISON_SHA256:-5fa466a1db5450921cd4b95785c0b949a499fd4457cc62da18333061dee8ebeb}"
+EXPECTED_CENSUS_COUNT="${EXPECTED_CENSUS_COUNT:-262}"
+EXPECTED_ORACLE_COUNT="${EXPECTED_ORACLE_COUNT:-17}"
+EXPECTED_CERTAINTY_COUNT="${EXPECTED_CERTAINTY_COUNT:-13}"
+EXPECTED_ORDINARY_COUNT="${EXPECTED_ORDINARY_COUNT:-249}"
+TARGET_STRATUM="${TARGET_STRATUM:-affected=1|trim=0|length_q=0|injection_q=0|range_q=1|shock=post_injection_recent}"
+# frequency contract: 0.15, 1.4 GHz; both pressure branches are repeated at each.
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-07-30-g-lo-critical-stratum-census}"
+SCRIPT="$STAGE_ROOT/scripts/science/diagnose_g_lo_critical_stratum_census.py"
+PYTHON_COMPAT="${PYTHON_COMPAT:-$STAGE_ROOT/scripts/kunanyi/python_compat}"
+PLUTOKORE_SOURCE="$STAGE_ROOT/plutokore"
+PLUTOKORE_COMMIT_PROOF="$STAGE_ROOT/plutokore_commit.txt"
+EXPECTED_PLUTOKORE_COMMIT="e80252cf35ff5a06166240e2867d3d485aaf6956"
+STAGED_SHA256="$STAGE_ROOT/staged_inputs.sha256"
+ARCHIVE="$STAGE_ROOT/g_lo_critical_stratum_census_2026-07-30.tar.gz"
+ARCHIVE_PAYLOAD="$STAGE_ROOT/archive_payload"
+ARCHIVE_PAYLOAD_ROOT="$ARCHIVE_PAYLOAD/$(basename "$ANALYSIS_ROOT")"
+ARCHIVE_FILE_LIST="$ARCHIVE_PAYLOAD/archive_file_list.txt"
+RUN_LOCK="${RUN_LOCK:-$STAGE_ROOT/.g_lo_critical_stratum_census.lock}"
+OUTPUT_NAMES=(
+  critical_stratum_census_selection.csv
+  critical_stratum_membership_summary.csv
+  sampling_extrapolation_audit.csv
+  census_concentration_summary.csv
+  hybrid_population_gate_summary.csv
+  critical_stratum_unsmoothed_branches.npz
+  critical_stratum_log_savgol_branches.npz
+  critical_stratum_particle_comparison.csv
+  critical_stratum_ordering.csv
+  census_cutoff_records.csv
+  census_gate_summary.csv
+  critical_stratum_census_summary.json
+)
+
+lock_acquired=0
+release_run_lock() {
+  if [[ "$lock_acquired" -eq 1 ]]; then
+    rmdir "$RUN_LOCK" 2>/dev/null || true
+  fi
+}
+trap release_run_lock EXIT
+if ! mkdir "$RUN_LOCK"; then
+  echo "another Goal 053 run owns the stage lock: $RUN_LOCK" >&2
+  exit 2
+fi
+lock_acquired=1
+
+for path in "$SCRIPT" "$PLUTOKORE_COMMIT_PROOF" "$STAGED_SHA256" "$CACHE" "$AFFECTED_ROWS_CSV" "$ORIGINAL_SELECTION_CSV" "$ORIGINAL_COMPARISON_CSV"; do
+  test ! -L "$path" || { echo "Goal 053 input must not be a symlink: $path" >&2; exit 2; }
+  test -r "$path" || { echo "missing required Goal 053 input: $path" >&2; exit 2; }
+done
+for path in "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_PAYLOAD"; do
+  test ! -e "$path" && test ! -L "$path" || {
+    echo "refusing to overwrite Goal 053 output: $path" >&2
+    exit 2
+  }
+done
+if grep -Eq '(/__pycache__/|\.(pyc|pyo)$)' "$STAGED_SHA256"; then
+  echo "staged manifest must not bind generated Python bytecode" >&2
+  exit 2
+fi
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+actual_plutokore_commit="$(tr -d '[:space:]' < "$PLUTOKORE_COMMIT_PROOF")"
+test "$actual_plutokore_commit" = "$EXPECTED_PLUTOKORE_COMMIT" || {
+  echo "pinned plutokore commit mismatch: $actual_plutokore_commit" >&2
+  exit 2
+}
+printf '%s  %s\n' "$EXPECTED_CACHE_SHA256" "$CACHE" | sha256sum --check -
+printf '%s  %s\n' "$EXPECTED_AFFECTED_ROWS_SHA256" "$AFFECTED_ROWS_CSV" | sha256sum --check -
+printf '%s  %s\n' "$EXPECTED_ORIGINAL_SELECTION_SHA256" "$ORIGINAL_SELECTION_CSV" | sha256sum --check -
+printf '%s  %s\n' "$EXPECTED_ORIGINAL_COMPARISON_SHA256" "$ORIGINAL_COMPARISON_CSV" | sha256sum --check -
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$PYTHON_COMPAT:$PLUTOKORE_SOURCE/src:$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=16
+export NUMBA_NUM_THREADS=16
+export GOAL053_VERIFIED_PLUTOKORE_COMMIT="$actual_plutokore_commit"
+
+"$PYTHON" - <<'PY'
+from scripts.science.diagnose_g_lo_critical_stratum_census import diagnose_critical_stratum_census
+assert callable(diagnose_critical_stratum_census)
+print("runtime_import_preflight=passed")
+PY
+
+set +e
+"$PYTHON" "$SCRIPT" \
+  --cache "$CACHE" \
+  --affected-rows-csv "$AFFECTED_ROWS_CSV" \
+  --original-selection-csv "$ORIGINAL_SELECTION_CSV" \
+  --original-comparison-csv "$ORIGINAL_COMPARISON_CSV" \
+  --output-dir "$ANALYSIS_ROOT" \
+  --expected-cache-sha256 "$EXPECTED_CACHE_SHA256" \
+  --expected-affected-rows-sha256 "$EXPECTED_AFFECTED_ROWS_SHA256" \
+  --expected-original-selection-sha256 "$EXPECTED_ORIGINAL_SELECTION_SHA256" \
+  --expected-original-comparison-sha256 "$EXPECTED_ORIGINAL_COMPARISON_SHA256" \
+  --expected-census-count "$EXPECTED_CENSUS_COUNT" \
+  --expected-oracle-count "$EXPECTED_ORACLE_COUNT" \
+  --expected-certainty-count "$EXPECTED_CERTAINTY_COUNT" \
+  --expected-ordinary-count "$EXPECTED_ORDINARY_COUNT" \
+  --target-stratum "$TARGET_STRATUM"
+diagnostic_rc=$?
+set -e
+
+mkdir -p "$ARCHIVE_PAYLOAD_ROOT"
+cp -p "$STAGED_SHA256" "$ARCHIVE_PAYLOAD_ROOT/staged_inputs.sha256"
+cp -p "$PLUTOKORE_COMMIT_PROOF" "$ARCHIVE_PAYLOAD_ROOT/plutokore_commit.txt"
+cp -p "$ORIGINAL_SELECTION_CSV" "$ARCHIVE_PAYLOAD_ROOT/original_selection.csv"
+cp -p "$ORIGINAL_COMPARISON_CSV" "$ARCHIVE_PAYLOAD_ROOT/original_particle_comparison.csv"
+if test -d "$ANALYSIS_ROOT"; then
+  for name in "${OUTPUT_NAMES[@]}"; do
+    if test -e "$ANALYSIS_ROOT/$name"; then
+      cp -p "$ANALYSIS_ROOT/$name" "$ARCHIVE_PAYLOAD_ROOT/$name"
+    fi
+  done
+else
+  printf 'diagnostic_rc=%s\n' "$diagnostic_rc" > "$ARCHIVE_PAYLOAD_ROOT/diagnostic_failure.txt"
+fi
+{
+  for name in staged_inputs.sha256 plutokore_commit.txt original_selection.csv original_particle_comparison.csv; do
+    printf './%s/%s\n' "$(basename "$ANALYSIS_ROOT")" "$name"
+  done
+  for name in "${OUTPUT_NAMES[@]}" diagnostic_failure.txt; do
+    if test -e "$ARCHIVE_PAYLOAD_ROOT/$name"; then
+      printf './%s/%s\n' "$(basename "$ANALYSIS_ROOT")" "$name"
+    fi
+  done
+  printf './archive_file_list.txt\n'
+} > "$ARCHIVE_FILE_LIST"
+archive_tmp="$ARCHIVE.tmp.${PBS_JOBID:-manual}"
+test ! -e "$archive_tmp" && test ! -L "$archive_tmp" || {
+  echo "refusing to overwrite Goal 053 archive temporary: $archive_tmp" >&2
+  exit 2
+}
+tar -C "$ARCHIVE_PAYLOAD" -czf "$archive_tmp" --files-from "$ARCHIVE_FILE_LIST"
+tar -tzf "$archive_tmp" >/dev/null
+mv "$archive_tmp" "$ARCHIVE"
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+SUMMARY_JSON="$ANALYSIS_ROOT/critical_stratum_census_summary.json"
+if ! [[ "$diagnostic_rc" =~ ^(0|3)$ ]] || ! test -s "$SUMMARY_JSON"; then
+  echo "critical_stratum_census_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if ! validation="$($PYTHON - "$SUMMARY_JSON" "$EXPECTED_CENSUS_COUNT" "$EXPECTED_ORACLE_COUNT" "$EXPECTED_CERTAINTY_COUNT" "$EXPECTED_ORDINARY_COUNT" <<'PY'
+import json
+import sys
+from pathlib import Path
+import numpy as np
+
+summary = json.loads(Path(sys.argv[1]).read_text())
+expected = [int(value) for value in sys.argv[2:6]]
+if summary.get("status") != "diagnostic_complete":
+    raise SystemExit("diagnostic status is not diagnostic_complete")
+for key, value in zip(("census_count", "oracle_count", "certainty_count", "ordinary_count"), expected):
+    if int(summary.get(key, -1)) != value:
+        raise SystemExit(f"{key} mismatch")
+if summary.get("target_stratum") != "affected=1|trim=0|length_q=0|injection_q=0|range_q=1|shock=post_injection_recent":
+    raise SystemExit("target stratum mismatch")
+decision = summary.get("decision")
+allowed_decisions = {
+    "CENSUS_RESOLVES_SAMPLE_LEVERAGE",
+    "CENSUS_SUPPORTS_LOCALIZED_REGIME",
+    "CENSUS_FINDS_RARE_HISTORY_SENSITIVITY",
+    "HOLD_FOR_CUTOFF_REVIEW",
+    "FAIL_NUMERICAL_OR_PROVENANCE",
+}
+if decision not in allowed_decisions:
+    raise SystemExit(f"invalid census decision: {decision!r}")
+if decision == "FAIL_NUMERICAL_OR_PROVENANCE":
+    for filename in ("census_cutoff_records.csv", "census_gate_summary.csv"):
+        path = Path(sys.argv[1]).parent / filename
+        if not path.is_file():
+            raise SystemExit(f"missing partial-failure evidence: {filename}")
+    print(decision)
+    raise SystemExit(0)
+for filename in ("critical_stratum_unsmoothed_branches.npz", "critical_stratum_log_savgol_branches.npz"):
+    path = Path(sys.argv[1]).parent / filename
+    arrays = np.load(path, allow_pickle=False)
+    required = {"physical_ids", "frequencies", "full", "adiabatic", "none", "input_fingerprint"}
+    if set(arrays.files) != required:
+        raise SystemExit(f"invalid branch-array keys: {filename}:{sorted(arrays.files)!r}")
+    physical_ids = arrays["physical_ids"]
+    if physical_ids.shape != (expected[0],) or len(np.unique(physical_ids)) != expected[0]:
+        raise SystemExit(f"invalid physical_ids shape or uniqueness: {filename}")
+    frequencies = arrays["frequencies"]
+    if frequencies.shape != (2,) or not np.allclose(frequencies, [0.15, 1.4], rtol=0, atol=1e-12):
+        raise SystemExit(f"invalid frequency contract: {filename}")
+    for name in ("full", "adiabatic", "none"):
+        array = arrays[name]
+        if array.shape != (expected[0], 2) or not np.isfinite(array).all() or (array < 0).any():
+            raise SystemExit(f"invalid nonnegative branch array: {filename}:{name}")
+    fingerprint = arrays["input_fingerprint"]
+    if fingerprint.shape != () or len(str(fingerprint.item())) != 64:
+        raise SystemExit(f"invalid input fingerprint: {filename}")
+print(decision)
+PY
+)"; then
+  echo "critical_stratum_census_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if test "$diagnostic_rc" -eq 3 || [[ "$validation" =~ ^(HOLD_FOR_CUTOFF_REVIEW|FAIL_NUMERICAL_OR_PROVENANCE)$ ]]; then
+  echo "critical_stratum_census_science_gate=HOLD_OR_FAIL evidence_archived=1" >&2
+  exit 3
+fi
+echo "critical_stratum_census_science_gate=$validation evidence_archived=1"

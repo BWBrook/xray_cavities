@@ -1,0 +1,7 @@
+gate,passed,value
+aggregate_difference,True,true
+spectral_index_difference,True,true
+full_vs_lossless_direction,True,true
+radiative_suppression,True,true
+discrepancy_concentration,False,false
+top_one_percent_absolute_discrepancy_fraction,False,0.883220701841804

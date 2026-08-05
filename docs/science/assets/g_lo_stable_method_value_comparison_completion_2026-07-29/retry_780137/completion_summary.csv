@@ -1,0 +1,19 @@
+scope,metric,value,interpretation
+archive,sha256,abd34c707197f6b984d5ea9e34c07731abcb7565223e8fc01f2c6900ddc5ca62,remote and local retry archive identity
+archive,member_count,12,eight declared outputs plus three provenance inputs and archive list
+diagnostic,status,diagnostic_complete,full output contract completed
+diagnostic,decision,FAIL,formal result under the predeclared gate
+diagnostic,decision_label,G_LO_STABLE_METHOD_VALUE_FAIL,structured remote decision label
+selection,selection_count,4096,exact deterministic weighted selection retained
+infrastructure,all_declared_gates_passed,true,cache selection source runtime treatment reconstruction and repeatability contracts passed
+outputs,declared_output_count,8,full Goal 051 comparison contract
+outputs,archived_output_count,8,all declared outputs retrieved and validated
+cutoffs,cutoff_count,0,no physical or gamma_inf cutoff hold
+comparison,sole_failed_gate,comparison_discrepancy_concentration,all other comparison gates passed
+comparison,top_one_percent_discrepancy_fraction,0.951162697227638,exceeds predeclared maximum 0.5
+comparison,top_two_discrepancy_fraction_weighted,0.8339063192288018,two histories dominate the represented-weighted discrepancy
+comparison,top_two_discrepancy_fraction_unweighted,0.8039975607832786,concentration persists without analysis weights
+comparison,aggregate_log_savgol_minus_unsmoothed_dex_0p15,0.018642967197065374,weighted full-loss aggregate shift
+comparison,aggregate_log_savgol_minus_unsmoothed_dex_1p4,0.01911142826866994,weighted full-loss aggregate shift
+interpretation,numerical_method_state,numerically_green,stable branches are finite deterministic and reconstruction-valid
+interpretation,scientific_state,localized_sensitivity_requires_stratum_census,comparison is not population-general evidence

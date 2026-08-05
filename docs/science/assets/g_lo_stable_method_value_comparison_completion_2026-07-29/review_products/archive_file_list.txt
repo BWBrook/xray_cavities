@@ -1,0 +1,8 @@
+./2026-07-29-g-lo-stable-method-value-comparison/staged_inputs.sha256
+./2026-07-29-g-lo-stable-method-value-comparison/plutokore_commit.txt
+./2026-07-29-g-lo-stable-method-value-comparison/selection_input.csv
+./2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_selection.csv
+./2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_cutoff_records.csv
+./2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_gate_summary.csv
+./2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_summary.json
+./archive_file_list.txt

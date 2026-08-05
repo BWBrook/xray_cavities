@@ -303,6 +303,108 @@ def _hash_order(seed: str, row: int, physical_id: int) -> str:
     return hashlib.sha256(f"{seed}:{row}:{physical_id}".encode()).hexdigest()
 
 
+def _certainty_selection_reasons(
+    features: Mapping[str, np.ndarray],
+    *,
+    extreme_count_per_tail: int,
+) -> dict[int, set[str]]:
+    """Return the predeclared certainty-row reasons used by Goal 049."""
+    if extreme_count_per_tail <= 0:
+        raise PressureMethodDiagnosticError(
+            "extreme count per tail must be positive"
+        )
+    active_rows = np.flatnonzero(features["active"])
+    reasons: dict[int, set[str]] = defaultdict(set)
+    for row in np.flatnonzero(features["short"]):
+        reasons[int(row)].add("all_short_histories")
+    by_endpoint = sorted(
+        active_rows,
+        key=lambda row: (-abs(features["log_endpoint"][row]), int(row)),
+    )[:extreme_count_per_tail]
+    by_ratio = sorted(
+        active_rows,
+        key=lambda row: (features["min_log_ratio"][row], int(row)),
+    )[:extreme_count_per_tail]
+    for row in by_endpoint:
+        reasons[int(row)].add("extreme_abs_log_endpoint_perturbation")
+    for row in by_ratio:
+        reasons[int(row)].add("extreme_min_log_raw_ratio")
+    return reasons
+
+
+def assign_pressure_strata(
+    features: Mapping[str, np.ndarray],
+) -> tuple[np.ndarray, dict[int, str], dict[str, list[int]], dict[str, Any]]:
+    """Assign the exact Goal 049 quartile/shock strata to all active rows."""
+    active_rows = np.flatnonzero(features["active"])
+    if active_rows.size == 0:
+        raise PressureMethodDiagnosticError("pressure strata require active rows")
+    length_bin = _quantile_bin(features["history_length"][active_rows])
+    injection_bin = _quantile_bin(features["injection_age"][active_rows])
+    range_bin = _quantile_bin(features["dynamic_range"][active_rows])
+    post_shock = (
+        features["shock_age"][active_rows]
+        < features["injection_age"][active_rows]
+    )
+    post_shock_age = features["shock_age"][active_rows][post_shock]
+    shock_cut = float(np.median(post_shock_age)) if post_shock_age.size else 0.0
+    strata: dict[int, str] = {}
+    groups: dict[str, list[int]] = defaultdict(list)
+    for index, row_value in enumerate(active_rows):
+        row = int(row_value)
+        if not post_shock[index]:
+            shock_state = "pre_or_at_injection"
+        elif features["shock_age"][row] <= shock_cut:
+            shock_state = "post_injection_recent"
+        else:
+            shock_state = "post_injection_older"
+        stratum = (
+            f"affected={int(features['affected'][row])}"
+            f"|trim={int(features['trim'][row])}"
+            f"|length_q={int(length_bin[index])}"
+            f"|injection_q={int(injection_bin[index])}"
+            f"|range_q={int(range_bin[index])}"
+            f"|shock={shock_state}"
+        )
+        strata[row] = stratum
+        groups[stratum].append(row)
+    return active_rows, strata, groups, {
+        "shock_cut": shock_cut,
+        "stratum_count": int(len(groups)),
+    }
+
+
+def _selection_record(
+    features: Mapping[str, np.ndarray],
+    *,
+    sample_index: int,
+    row: int,
+    stratum: str,
+    reasons: set[str],
+    inclusion_probability: float,
+    analysis_weight: float,
+) -> dict[str, Any]:
+    return {
+        "sample_index": sample_index,
+        "cache_row": row,
+        "physical_id": int(features["physical_id"][row]),
+        "selection_reason": ";".join(sorted(reasons)),
+        "stratum": stratum,
+        "inclusion_probability": inclusion_probability,
+        "analysis_weight": analysis_weight,
+        "affected_linear_sg": bool(features["affected"][row]),
+        "trim_affected": bool(features["trim"][row]),
+        "short_history": bool(features["short"][row]),
+        "history_length": int(features["history_length"][row]),
+        "injection_age": float(features["injection_age"][row]),
+        "pressure_dynamic_range_log10": float(features["dynamic_range"][row]),
+        "shock_age": float(features["shock_age"][row]),
+        "shock_relative_state": stratum.rsplit("shock=", 1)[1],
+        "log_endpoint_relative_difference": float(features["log_endpoint"][row]),
+        "min_log_to_raw_ratio": float(features["min_log_ratio"][row]),
+    }
+
+
 def _feature_table(
     h5: h5py.File,
     plan: Mapping[str, Any],
@@ -421,52 +523,19 @@ def construct_deterministic_sample(
     features = _feature_table(h5, plan, affected_rows, row_chunk=row_chunk)
     active_rows = np.flatnonzero(features["active"])
     target = min(sample_size, len(active_rows))
-    reasons: dict[int, set[str]] = defaultdict(set)
-    for row in np.flatnonzero(features["short"]):
-        reasons[int(row)].add("all_short_histories")
     affected = np.flatnonzero(features["affected"])
-    extrema_universe = active_rows
-    by_endpoint = sorted(
-        extrema_universe,
-        key=lambda row: (-abs(features["log_endpoint"][row]), int(row)),
-    )[:extreme_count_per_tail]
-    by_ratio = sorted(
-        extrema_universe,
-        key=lambda row: (features["min_log_ratio"][row], int(row)),
-    )[:extreme_count_per_tail]
-    for row in by_endpoint:
-        reasons[int(row)].add("extreme_abs_log_endpoint_perturbation")
-    for row in by_ratio:
-        reasons[int(row)].add("extreme_min_log_raw_ratio")
+    reasons = _certainty_selection_reasons(
+        features,
+        extreme_count_per_tail=extreme_count_per_tail,
+    )
     if len(reasons) > target:
         raise PressureMethodDiagnosticError(
             "mandatory short/extreme rows exceed the requested sample size"
         )
 
-    selected_features = active_rows
-    length_bin = _quantile_bin(features["history_length"][selected_features])
-    injection_bin = _quantile_bin(features["injection_age"][selected_features])
-    range_bin = _quantile_bin(features["dynamic_range"][selected_features])
-    post_shock = features["shock_age"][selected_features] < features["injection_age"][selected_features]
-    post_shock_age = features["shock_age"][selected_features][post_shock]
-    shock_cut = float(np.median(post_shock_age)) if post_shock_age.size else 0.0
-    strata: dict[int, str] = {}
-    groups: dict[str, list[int]] = defaultdict(list)
-    for index, row_value in enumerate(selected_features):
-        row = int(row_value)
-        if not post_shock[index]:
-            shock_state = "pre_or_at_injection"
-        elif features["shock_age"][row] <= shock_cut:
-            shock_state = "post_injection_recent"
-        else:
-            shock_state = "post_injection_older"
-        stratum = (
-            f"affected={int(features['affected'][row])}|trim={int(features['trim'][row])}"
-            f"|length_q={int(length_bin[index])}|injection_q={int(injection_bin[index])}"
-            f"|range_q={int(range_bin[index])}|shock={shock_state}"
-        )
-        strata[row] = stratum
-        groups[stratum].append(row)
+    selected_features, strata, groups, _stratum_metadata = (
+        assign_pressure_strata(features)
+    )
 
     mandatory = set(reasons)
     remaining_capacity = target - len(mandatory)
@@ -528,25 +597,15 @@ def construct_deterministic_sample(
                 raise PressureMethodDiagnosticError("invalid stratum allocation")
             probability = selected_count / eligible_count
             weight = 1.0 / probability
-        records.append({
-            "sample_index": sample_index,
-            "cache_row": row,
-            "physical_id": int(features["physical_id"][row]),
-            "selection_reason": ";".join(sorted(reasons[row])),
-            "stratum": stratum,
-            "inclusion_probability": probability,
-            "analysis_weight": weight,
-            "affected_linear_sg": bool(features["affected"][row]),
-            "trim_affected": bool(features["trim"][row]),
-            "short_history": bool(features["short"][row]),
-            "history_length": int(features["history_length"][row]),
-            "injection_age": float(features["injection_age"][row]),
-            "pressure_dynamic_range_log10": float(features["dynamic_range"][row]),
-            "shock_age": float(features["shock_age"][row]),
-            "shock_relative_state": stratum.rsplit("shock=", 1)[1],
-            "log_endpoint_relative_difference": float(features["log_endpoint"][row]),
-            "min_log_to_raw_ratio": float(features["min_log_ratio"][row]),
-        })
+        records.append(_selection_record(
+            features,
+            sample_index=sample_index,
+            row=row,
+            stratum=stratum,
+            reasons=reasons[row],
+            inclusion_probability=probability,
+            analysis_weight=weight,
+        ))
     metadata = {
         "sample_size_requested": int(sample_size),
         "sample_size_selected": int(target),
@@ -565,6 +624,89 @@ def construct_deterministic_sample(
         "scope": "sample evidence; not a full-population estimate without sampling assumptions",
     }
     return np.asarray(sorted(selected), dtype=np.int64), records, metadata
+
+
+def construct_stratum_census(
+    h5: h5py.File,
+    plan: Mapping[str, Any],
+    affected_rows: Mapping[int, Mapping[str, Any]],
+    *,
+    target_stratum: str,
+    expected_count: int,
+    expected_certainty_count: int,
+    expected_ordinary_count: int,
+    row_chunk: int = 512,
+    extreme_count_per_tail: int = EXTREME_COUNT_PER_TAIL,
+) -> tuple[np.ndarray, list[dict[str, Any]], dict[str, Any]]:
+    """Enumerate one Goal 049 stratum exactly with unit census weights."""
+    if not target_stratum:
+        raise PressureMethodDiagnosticError("target stratum must be non-empty")
+    if min(
+        expected_count,
+        expected_certainty_count,
+        expected_ordinary_count,
+    ) < 0 or expected_count <= 0:
+        raise PressureMethodDiagnosticError(
+            "expected census counts must be nonnegative and total positive"
+        )
+    if expected_certainty_count + expected_ordinary_count != expected_count:
+        raise PressureMethodDiagnosticError(
+            "expected certainty and ordinary counts must sum to census count"
+        )
+    features = _feature_table(h5, plan, affected_rows, row_chunk=row_chunk)
+    _active, strata, groups, stratum_metadata = assign_pressure_strata(features)
+    selected = np.asarray(
+        sorted(groups.get(target_stratum, [])),
+        dtype=np.int64,
+    )
+    if len(selected) != expected_count:
+        raise PressureMethodDiagnosticError(
+            f"target stratum contains {len(selected)} rows, expected "
+            f"{expected_count}"
+        )
+    reasons = _certainty_selection_reasons(
+        features,
+        extreme_count_per_tail=extreme_count_per_tail,
+    )
+    certainty = [int(row) for row in selected if int(row) in reasons]
+    ordinary = [int(row) for row in selected if int(row) not in reasons]
+    if (
+        len(certainty) != expected_certainty_count
+        or len(ordinary) != expected_ordinary_count
+    ):
+        raise PressureMethodDiagnosticError(
+            "target stratum certainty/ordinary composition differs from "
+            "the declared contract"
+        )
+    records: list[dict[str, Any]] = []
+    for sample_index, row_value in enumerate(selected):
+        row = int(row_value)
+        row_reasons = set(reasons.get(row, ()))
+        row_reasons.add("critical_stratum_census")
+        records.append(_selection_record(
+            features,
+            sample_index=sample_index,
+            row=row,
+            stratum=target_stratum,
+            reasons=row_reasons,
+            inclusion_probability=1.0,
+            analysis_weight=1.0,
+        ))
+    physical_ids = [record["physical_id"] for record in records]
+    if len(set(physical_ids)) != expected_count:
+        raise PressureMethodDiagnosticError(
+            "target stratum census physical IDs are not unique"
+        )
+    return selected, records, {
+        "target_stratum": target_stratum,
+        "census_count": int(len(selected)),
+        "certainty_count": int(len(certainty)),
+        "ordinary_count": int(len(ordinary)),
+        "selection_order": "ascending cache_row",
+        "weighting": "exact census; every row has analysis weight one",
+        "scope": "exact census of the declared stratum",
+        **stratum_metadata,
+    }
 
 
 def _read_treated_sample(
@@ -1308,18 +1450,93 @@ def _ordering_csv_rows(comparison: Mapping[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
-def diagnose_pressure_method_value(
+def _run_pressure_modes(
+    physical: Mapping[str, Any],
+    output_dir: Path,
+) -> dict[str, Any]:
+    """Run both pressure treatments and persist raw evidence checkpoints."""
+    kwargs = {
+        "frequencies": FREQUENCIES_GHZ,
+        "z": workflow.PRIMARY_CONTRACT["redshift"],
+        "s": workflow.PRIMARY_CONTRACT["s"],
+        "eta": workflow.PRIMARY_CONTRACT["eta"],
+        "gmin": workflow.PRIMARY_CONTRACT["gmin"],
+        "gmax": workflow.PRIMARY_CONTRACT["gmax"],
+        "lst_index": 0,
+        "diagnostic": True,
+        "include_adiabatic": True,
+    }
+    unsmoothed = calculate_praise_pair(
+        physical,
+        pressure_mode="unsmoothed",
+        singleton_policy="instantaneous_recent_shock",
+        **kwargs,
+    )
+    unsmoothed_checkpoint = (
+        output_dir / "pressure_method_unsmoothed_emissivity_checkpoint.npz"
+    )
+    _write_emissivity_checkpoint(unsmoothed_checkpoint, unsmoothed)
+
+    log_savgol = calculate_praise_pair(
+        physical,
+        pressure_mode="log_savgol",
+        singleton_policy="instantaneous_recent_shock",
+        **kwargs,
+    )
+    log_savgol_checkpoint = (
+        output_dir / "pressure_method_log_savgol_emissivity_checkpoint.npz"
+    )
+    _write_emissivity_checkpoint(log_savgol_checkpoint, log_savgol)
+
+    # Persist raw branch values and reconcile forensic coverage before any
+    # secondary audit can fail. This guarantees non-finite evidence survives
+    # an audit exception and can be archived by the PBS wrapper.
+    nonfinite_summary_rows, nonfinite_records, nonfinite_summary = (
+        _nonfinite_evidence({
+            "unsmoothed": unsmoothed,
+            "log_savgol": log_savgol,
+        })
+    )
+    nonfinite_summary_path = (
+        output_dir / "pressure_method_nonfinite_emissivity_summary.csv"
+    )
+    nonfinite_records_path = (
+        output_dir / "pressure_method_nonfinite_emissivity_records.csv"
+    )
+    _write_csv(
+        nonfinite_summary_path,
+        NONFINITE_SUMMARY_FIELDS,
+        nonfinite_summary_rows,
+    )
+    _write_csv(
+        nonfinite_records_path,
+        NONFINITE_RECORD_FIELDS,
+        nonfinite_records,
+    )
+    return {
+        "unsmoothed": unsmoothed,
+        "log_savgol": log_savgol,
+        "unsmoothed_checkpoint": unsmoothed_checkpoint,
+        "log_savgol_checkpoint": log_savgol_checkpoint,
+        "nonfinite_summary": nonfinite_summary,
+        "nonfinite_summary_path": nonfinite_summary_path,
+        "nonfinite_records_path": nonfinite_records_path,
+    }
+
+
+def _prepare_diagnostic_inputs(
     cache: Path,
     affected_rows_csv: Path,
     output_dir: Path,
     *,
-    sample_size: int = SAMPLE_SIZE,
-    row_chunk: int = 512,
-    expected_trim_rows: int = workflow.PRESSURE_TREATMENT_CONTRACT["expected_trim_rows"],
-    expected_no_positive_rows: int = workflow.PRESSURE_TREATMENT_CONTRACT["expected_no_positive_rows"],
-    expected_single_record_rows: int = workflow.PRESSURE_TREATMENT_CONTRACT["expected_single_record_rows"],
-    expected_trim_single_record_overlap_rows: int | None = None,
+    sample_size: int,
+    row_chunk: int,
+    expected_trim_rows: int,
+    expected_no_positive_rows: int,
+    expected_single_record_rows: int,
+    expected_trim_single_record_overlap_rows: int | None,
 ) -> dict[str, Any]:
+    """Validate inputs and materialise the selected physical sample."""
     cache = Path(cache).resolve()
     affected_rows_csv = Path(affected_rows_csv).resolve()
     output_dir = Path(output_dir).resolve()
@@ -1363,58 +1580,61 @@ def diagnose_pressure_method_value(
             shock_component=int(h5.attrs["shock_component"]),
         )
         cache_identity = workflow._cache_identity(cache)
+    return {
+        "affected_rows_csv": affected_rows_csv,
+        "output_dir": output_dir,
+        "plan": plan,
+        "selection": selection,
+        "selection_metadata": selection_metadata,
+        "physical": physical,
+        "units": units,
+        "cache_identity": cache_identity,
+    }
+
+
+def diagnose_pressure_method_value(
+    cache: Path,
+    affected_rows_csv: Path,
+    output_dir: Path,
+    *,
+    sample_size: int = SAMPLE_SIZE,
+    row_chunk: int = 512,
+    expected_trim_rows: int = workflow.PRESSURE_TREATMENT_CONTRACT["expected_trim_rows"],
+    expected_no_positive_rows: int = workflow.PRESSURE_TREATMENT_CONTRACT["expected_no_positive_rows"],
+    expected_single_record_rows: int = workflow.PRESSURE_TREATMENT_CONTRACT["expected_single_record_rows"],
+    expected_trim_single_record_overlap_rows: int | None = None,
+) -> dict[str, Any]:
+    prepared = _prepare_diagnostic_inputs(
+        cache,
+        affected_rows_csv,
+        output_dir,
+        sample_size=sample_size,
+        row_chunk=row_chunk,
+        expected_trim_rows=expected_trim_rows,
+        expected_no_positive_rows=expected_no_positive_rows,
+        expected_single_record_rows=expected_single_record_rows,
+        expected_trim_single_record_overlap_rows=(
+            expected_trim_single_record_overlap_rows
+        ),
+    )
+    affected_rows_csv = prepared["affected_rows_csv"]
+    output_dir = prepared["output_dir"]
+    plan = prepared["plan"]
+    selection = prepared["selection"]
+    selection_metadata = prepared["selection_metadata"]
+    physical = prepared["physical"]
+    units = prepared["units"]
+    cache_identity = prepared["cache_identity"]
     selection_path = output_dir / "pressure_method_selection.csv"
     _write_csv(selection_path, SELECTION_FIELDS, selection)
-    kwargs = {
-        "frequencies": FREQUENCIES_GHZ,
-        "z": workflow.PRIMARY_CONTRACT["redshift"],
-        "s": workflow.PRIMARY_CONTRACT["s"],
-        "eta": workflow.PRIMARY_CONTRACT["eta"],
-        "gmin": workflow.PRIMARY_CONTRACT["gmin"],
-        "gmax": workflow.PRIMARY_CONTRACT["gmax"],
-        "lst_index": 0,
-        "diagnostic": True,
-        "include_adiabatic": True,
-    }
-    unsmoothed = calculate_praise_pair(
-        physical, pressure_mode="unsmoothed", singleton_policy="instantaneous_recent_shock", **kwargs
-    )
-    unsmoothed_checkpoint = (
-        output_dir / "pressure_method_unsmoothed_emissivity_checkpoint.npz"
-    )
-    _write_emissivity_checkpoint(unsmoothed_checkpoint, unsmoothed)
-    log_savgol = calculate_praise_pair(
-        physical, pressure_mode="log_savgol", singleton_policy="instantaneous_recent_shock", **kwargs
-    )
-    log_savgol_checkpoint = (
-        output_dir / "pressure_method_log_savgol_emissivity_checkpoint.npz"
-    )
-    _write_emissivity_checkpoint(log_savgol_checkpoint, log_savgol)
-    # Persist raw branch values and reconcile forensic coverage before any
-    # secondary audit can fail. This guarantees non-finite evidence survives
-    # an audit exception and can be archived by the PBS wrapper.
-    nonfinite_summary_rows, nonfinite_records, nonfinite_summary = (
-        _nonfinite_evidence({
-            "unsmoothed": unsmoothed,
-            "log_savgol": log_savgol,
-        })
-    )
-    nonfinite_summary_path = (
-        output_dir / "pressure_method_nonfinite_emissivity_summary.csv"
-    )
-    nonfinite_records_path = (
-        output_dir / "pressure_method_nonfinite_emissivity_records.csv"
-    )
-    _write_csv(
-        nonfinite_summary_path,
-        NONFINITE_SUMMARY_FIELDS,
-        nonfinite_summary_rows,
-    )
-    _write_csv(
-        nonfinite_records_path,
-        NONFINITE_RECORD_FIELDS,
-        nonfinite_records,
-    )
+    pressure_modes = _run_pressure_modes(physical, output_dir)
+    unsmoothed = pressure_modes["unsmoothed"]
+    log_savgol = pressure_modes["log_savgol"]
+    unsmoothed_checkpoint = pressure_modes["unsmoothed_checkpoint"]
+    log_savgol_checkpoint = pressure_modes["log_savgol_checkpoint"]
+    nonfinite_summary = pressure_modes["nonfinite_summary"]
+    nonfinite_summary_path = pressure_modes["nonfinite_summary_path"]
+    nonfinite_records_path = pressure_modes["nonfinite_records_path"]
     def _fallback_audit(mode: str, result: Mapping[str, Any]):
         try:
             return summarise_gamma_fallbacks(

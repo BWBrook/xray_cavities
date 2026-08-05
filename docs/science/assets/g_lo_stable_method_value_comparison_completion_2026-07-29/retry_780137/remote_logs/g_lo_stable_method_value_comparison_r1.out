@@ -1,0 +1,60 @@
+./plutokore/src/plutokore/__init__.py: OK
+./plutokore/src/plutokore/_version.py: OK
+./plutokore/src/plutokore/analysis/__init__.py: OK
+./plutokore/src/plutokore/analysis/dynamics.py: OK
+./plutokore/src/plutokore/analysis/morphology.py: OK
+./plutokore/src/plutokore/analysis/processed_jet_simulation.py: OK
+./plutokore/src/plutokore/configuration.py: OK
+./plutokore/src/plutokore/energy.py: OK
+./plutokore/src/plutokore/environments/__init__.py: OK
+./plutokore/src/plutokore/environments/king.py: OK
+./plutokore/src/plutokore/environments/makino.py: OK
+./plutokore/src/plutokore/environments/observationalking.py: OK
+./plutokore/src/plutokore/eos.py: OK
+./plutokore/src/plutokore/gadget.py: OK
+./plutokore/src/plutokore/initial_conditions.py: OK
+./plutokore/src/plutokore/io.py: OK
+./plutokore/src/plutokore/jet.py: OK
+./plutokore/src/plutokore/particles.py: OK
+./plutokore/src/plutokore/plot.py: OK
+./plutokore/src/plutokore/pluto_simulation.py: OK
+./plutokore/src/plutokore/radio/__init__.py: OK
+./plutokore/src/plutokore/radio/praise.py: OK
+./plutokore/src/plutokore/radio/praise2.py: OK
+./plutokore/src/plutokore/radio/radio.py: OK
+./plutokore/src/plutokore/radio/raytracing.py: OK
+./plutokore/src/plutokore/scripts.py: OK
+./plutokore/src/plutokore/simulations.py: OK
+./plutokore/src/plutokore/utilities.py: OK
+./plutokore_commit.txt: OK
+./pressure_method_selection.csv: OK
+./scripts/kunanyi/g_lo_stable_method_value_comparison.pbs: OK
+./scripts/kunanyi/python_compat/contextlib2.py: OK
+./scripts/kunanyi/python_compat/hdf5plugin.py: OK
+./scripts/kunanyi/python_compat/yt.py: OK
+./scripts/science/diagnose_g_lo_adiabatic_recovery.py: OK
+./scripts/science/diagnose_g_lo_full_loss_recurrence.py: OK
+./scripts/science/diagnose_g_lo_pressure_method_value.py: OK
+./scripts/science/diagnose_g_lo_stable_method_value.py: OK
+./scripts/science/g_lo_particle_history.py: OK
+./scripts/science/g_lo_radio_method_value.py: OK
+./scripts/science/run_g_lo_radio_history_value.py: OK
+/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5: OK
+/u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison_r1/pressure_method_selection.csv: OK
+runtime_import_preflight=passed
+{
+  "branch_output_fingerprint_sha256": "493ccd4360390ada65e77ea8038c6b8d3d787e881139e0df049cce45c8818aef",
+  "cutoff_records_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_cutoff_records.csv",
+  "decision": "FAIL",
+  "decision_label": "G_LO_STABLE_METHOD_VALUE_FAIL",
+  "log_savgol_checkpoint": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_log_savgol_branches.npz",
+  "ordering_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_ordering.csv",
+  "particle_comparison_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_particle_comparison.csv",
+  "selection_path": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_selection.csv",
+  "status": "diagnostic_complete",
+  "summary_csv": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_gate_summary.csv",
+  "summary_json": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_summary.json",
+  "unsmoothed_checkpoint": "/scratch/bwbrook/xray_cavities_analysis/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_unsmoothed_branches.npz"
+}
+abd34c707197f6b984d5ea9e34c07731abcb7565223e8fc01f2c6900ddc5ca62  /u/bwbrook/codex_kunanyi/goal051_g_lo_stable_method_value_comparison_r1/g_lo_stable_method_value_comparison_2026-07-29.tar.gz
+finished_utc=2026-07-29T23:56:17Z

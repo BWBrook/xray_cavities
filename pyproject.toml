@@ -6,27 +6,10 @@ readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "astropy",
-    "breathe",
-    "colorful",
-    "contextlib2",
-    "future",
     "h5py",
-    "hdf5plugin",
-    "ipykernel",
-    "ipython",
-    "jupyterlab",
     "matplotlib",
-    "numba",
     "numpy",
-    "pykdtree",
-    "pytest",
-    "pytest-datafiles",
-    "pyyaml",
     "scipy<1.14",
-    "sphinx<7",
-    "sphinx-multiversion @ git+https://github.com/Holzhaus/sphinx-multiversion.git",
-    "tabulate",
-    "yt",
     "plutokore",
 ]
 
@@ -38,6 +21,18 @@ build-backend = "hatchling.build"
 # /home/bwbrook/git/utas-agn.
 [tool.uv.sources]
 plutokore = { path = "../../git/utas-agn/plutokore", editable = true }
+
+[dependency-groups]
+dev = [
+    "breathe",
+    "ipykernel",
+    "ipython",
+    "jupyterlab",
+    "pytest",
+    "pytest-datafiles",
+    "sphinx<7",
+    "sphinx-multiversion @ git+https://github.com/Holzhaus/sphinx-multiversion.git",
+]
 
 [tool.uv]
 package = false

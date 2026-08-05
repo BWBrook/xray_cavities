@@ -1,0 +1,25 @@
+{
+  "archive_sha256": "dbacf66aaf88aed8cfba1bd901299683eec9334e1788ea58a55c9b09bc2f5bf8",
+  "classification": "obsolete_exact_oracle_replay_gate",
+  "exit_status": 2,
+  "first_failure": "Goal 051 oracle stable branches were not reproduced exactly",
+  "job_id": "780326.kunanyi-ohpc",
+  "job_name": "g_lo_strcen",
+  "oracle_cell_count": 204,
+  "oracle_exact_mismatch_count": 36,
+  "oracle_history_count": 17,
+  "oracle_mismatch_physical_ids": [
+    196752,
+    197253,
+    197269
+  ],
+  "oracle_replay_max_abs_difference": 9.15421913206577e-50,
+  "oracle_replay_max_relative_difference": 9.1601327385061e-12,
+  "oracle_replay_max_tolerance_fraction": 0.09160043107217158,
+  "oracle_replay_within_project_tolerance": true,
+  "stageout_status": 1,
+  "stable_core_gate_count": 22,
+  "stable_core_gates_passed": 22,
+  "status": "failed_diagnostic_retrieved",
+  "walltime": "00:34:56"
+}

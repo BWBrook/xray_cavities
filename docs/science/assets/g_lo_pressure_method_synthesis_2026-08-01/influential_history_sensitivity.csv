@@ -1,0 +1,6 @@
+scenario,zeroed_row_count,remaining_row_count,total_discrepancy,relative_to_baseline,top_one_percent_concentration,threshold,threshold_status,is_alternative_estimate,interpretation_scope
+baseline_hybrid,0,4341,3.316030257842135e-36,1.0,0.883220701841804,0.5,above_threshold,false,reference hybrid population
+zero_id_196136,1,4341,2.7149307189418038e-36,0.8187291755017069,0.858156950278228,0.5,above_threshold,false,diagnostic ablation only
+zero_secondary_stratum,14,4341,2.7087585599262252e-36,0.8168678658827787,0.8600740749004894,0.5,above_threshold,false,diagnostic ablation only
+zero_exact_target_stratum,262,4341,1.3248793095030886e-36,0.3995377624706106,0.7103564868216525,0.5,above_threshold,false,diagnostic ablation only
+zero_both_strata,276,4341,7.176076115871787e-37,0.21640562835338928,0.47664633967348985,0.5,passes,false,diagnostic ablation only

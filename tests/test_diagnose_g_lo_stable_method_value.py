@@ -312,6 +312,37 @@ def test_adiabatic_relevant_fallback_fails_scientifically(
         )
 
 
+def test_adiabatic_algebraic_disagreement_is_diagnostic_only(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    selection = _selection(101)
+    group = _group([0])
+    original = adiabatic.stable_adiabatic_trajectory
+
+    def disagreement(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        value = original(*args, **kwargs)
+        value["relevant_algebraic_disagreement_count"] = 1
+        return value
+
+    monkeypatch.setattr(
+        diagnostic.adiabatic,
+        "stable_adiabatic_trajectory",
+        disagreement,
+    )
+
+    _branches, summary, _records = diagnostic.reconstruct_stable_mode(
+        _result([101], [group]),
+        {"tracer": np.full((1, 3), 0.8)},
+        selection,
+        pressure_mode="unsmoothed",
+    )
+
+    assert summary["stable_adiabatic"][
+        "relevant_algebraic_disagreement_count"
+    ] == 1
+    assert summary["stable_adiabatic"]["gate_passed"] is True
+
+
 @pytest.mark.parametrize(
     ("result_ids", "group_rows", "message"),
     [

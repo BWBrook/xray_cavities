@@ -1,0 +1,25 @@
+{
+  "date": "2026-07-29",
+  "status": "complete_local_fail_closed_gate",
+  "decision": "HOLD",
+  "decision_label": "PRAISE2_HIGH_LEVEL_VALIDATION_HOLD_NO_PROMOTION",
+  "praise2": {
+    "callable": "plutokore.radio.praise2.praise",
+    "commit": "e80252cf35ff5a06166240e2867d3d485aaf6956",
+    "source_sha256": "ad664648040c4330ce124fdde7b739b7cd701759a52569863fc79460895f9668"
+  },
+  "goal051": {
+    "job_id": "779913.kunanyi-ohpc",
+    "job_name": "g_lo_stmv",
+    "reported_exit_status": 3,
+    "reported_walltime": "05:12:08",
+    "exact_scientific_decision": "not_retrieved",
+    "retrieval_blocker": "TPAC Open OnDemand Microsoft sign-in required in Chrome"
+  },
+  "promotion": false,
+  "goal050_transfer": "not_valid",
+  "implemented_lower_comparator": "goal049_raw_lower_level_only",
+  "goal051_stable_comparator": "not_implemented_requires_retrieved_goal051_outputs",
+  "actual_cache_comparison_run": false,
+  "reason_for_stopping": "public PRAiSE2 state and cutoff evidence is not observable and structural method differences already fail the predeclared gate"
+}

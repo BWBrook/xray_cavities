@@ -1,0 +1,11 @@
+gate,requirement,evidence,status,consequence
+callable_identity,exact callable source commit and hash,live source inspection and hash,pass,continue
+adapter_units_order,exact SI inputs row order branch labels and shapes,local adapter tests,pass,continue
+pressure_treatment,external pressure-only log_savgol and no internal linear smoothing,local adapter tests,pass,continue
+state_trajectory,direct gamma trajectory observable from executed method,public result lacks state,fail,no_promotion
+cutoff_classification,physical and numerical cutoffs separately observable,public result silently maps invalid gamma to zero,fail,no_promotion
+structural_equivalence,high-level method matches Goal 050 stable method,pinned source differs in gamma coefficient and recurrence,fail,no_transfer
+goal049_raw_endpoint_comparison,same 4096 rows modes branches and frequencies,scaffold implemented but not run after earlier material gates failed,not_run,unnecessary_compute_avoided
+goal051_stable_branch_comparison,retrieved stable full and stable adiabatic branches aligned exactly to PRAiSE2 inputs,Goal 051 archive not retrieved and driver does not ingest those branches,not_implemented,no_transfer_claim
+actual_deterministic_repeat,two identical cache executions with exact fingerprints,not run after earlier material gates failed,not_run,required_if_future_gate_reopens
+promotion,all preceding gates green,three material gates failed,hold,retain_existing_hold

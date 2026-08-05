@@ -1,0 +1,12 @@
+{
+  "date": "2026-07-30",
+  "decision_status": "submitted_waiting_pbs_completion",
+  "expected_census_count": 262,
+  "expected_certainty_count": 13,
+  "expected_oracle_count": 17,
+  "expected_ordinary_count": 249,
+  "goal": 53,
+  "inference_scope": "exact target-stratum census plus hybrid sampled-population estimate",
+  "production_compute": false,
+  "target_stratum": "affected=1|trim=0|length_q=0|injection_q=0|range_q=1|shock=post_injection_recent"
+}

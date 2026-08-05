@@ -1,0 +1,132 @@
+Job Id: 780326.kunanyi-ohpc
+    Job_Name = g_lo_strcen
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 662
+    resources_used.cput = 01:59:37
+    resources_used.mem = 616452kb
+    resources_used.ncpus = 16
+    resources_used.vmem = 3927500kb
+    resources_used.walltime = 00:34:56
+    job_state = F
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Thu Jul 30 23:10:51 2026
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal053_g_lo_c
+	ritical_stratum_census/g_lo_critical_stratum_census.err
+    exec_host = n008/0*16
+    exec_vnode = (n008:ncpus=16:mem=100663296kb)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = ae
+    Mail_Users = barry.brook@utas.edu.au
+    mtime = Thu Jul 30 23:45:47 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal053_g_lo_
+	critical_stratum_census/g_lo_critical_stratum_census.out
+    Priority = 0
+    qtime = Thu Jul 30 23:10:51 2026
+    Rerunable = True
+    Resource_List.mem = 96gb
+    Resource_List.mpiprocs = 1
+    Resource_List.ncpus = 16
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=16:mpiprocs=1:mem=96gb
+    Resource_List.walltime = 12:00:00
+    stime = Thu Jul 30 23:10:51 2026
+    session_id = 644
+    jobdir = /u/bwbrook
+    substate = 93
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=C.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/softwa
+	re/Anaconda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bi
+	n:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/goal053_g_lo_critical_stratum_c
+	ensus,PBS_O_SYSTEM=Linux,
+	MANPATH=/share/apps/software/Anaconda3/2024.02-1/share/man:/share/apps
+	/software/Anaconda3/2024.02-1/man:/usr/local/share/man:/usr/share/man/o
+	verrides:/usr/share/man/en:/usr/share/man:/opt/pbs/share/man,
+	XDG_SESSION_ID=41701,HOSTNAME=<tpac-host>,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,
+	EBDEVELANACONDA3=/share/apps/software/Anaconda3/2024.02-1/easybuild/An
+	aconda3-2024.02-1-easybuild-devel,SHELL=/bin/bash,TERM=dumb,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:1;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,HISTSIZE=1000,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,SSH_CLIENT=<private-ip> 44532 22,
+	LMOD_PKG=/opt/ohpc/admin/lmod/lmod,OLDPWD=/u/bwbrook,LMOD_QUIET=yes,
+	LMOD_VERSION=8.1.18,SSH_TTY=/dev/pts/2,
+	__LMOD_REF_COUNT_LOADEDMODULES=Anaconda3/2024.02-1:1,LC_ALL=C,
+	QT_GRAPHICSSYSTEM_CHECKED=1,
+	EBROOTANACONDA3=/share/apps/software/Anaconda3/2024.02-1,USER=bwbrook,
+	HISTFILESIZE=2000,LS_COLORS=,
+	__LMOD_REF_COUNT__LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.0
+	2-1.lua:1,EBVERSIONANACONDA3=2024.02-1,LMOD_PREPEND_BLOCK=normal,
+	PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/software/Ana
+	conda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bin:/usr
+	/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXt9LG1UPXtBbmFjb25kYTM9e1siZm4iXT0iL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw
+	vQW5hY29uZGEzLzIwMjQuMDItMS5sdWEiLFsiZnVsbE5hbWUiXT0iQW5hY29uZGEzLzIwMj
+	QuMDItMSIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzd
+	GF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IkFuYWNvbmRhMy8yMDI0LjAyLTEiLH0s
+	fSxtcGF0aEE9eyIvb3B0L29ocGMvcHViL21vZHVsZWRlcHMvZ251OCIsIi9vcHQvb2hwYy9
+	wdWIvbW9kdWxlZmlsZXMiLCIvc2hhcmUv,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/goal053_g_lo_critical_stratum_census,
+	_LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.02-1.lua,
+	LANG=C.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,LOADEDMODULES=Anaconda3/2024.02-1,_ModuleTable_Sz_=2,
+	LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=2,
+	__LMOD_REF_COUNT_PATH=/share/apps/software/Anaconda3/2024.02-1:1;/shar
+	e/apps/software/Anaconda3/2024.02-1/sbin:1;/share/apps/software/Anacond
+	a3/2024.02-1/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/s
+	bin:1;/opt/pbs/bin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=YXBwcy9tb2R1bGVzIiwiL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hb
+	GwiLCIvc2hhcmUvYXBwcy9tb2R1bGVkZXBzL3Jvc2FsaW5kL0NvcmUiLH0sWyJzeXN0ZW1C
+	YXNlTVBBVEgiXT0iL29wdC9vaHBjL3B1Yi9tb2R1bGVkZXBzL2dudTg6L29wdC9vaHBjL3B
+	1Yi9tb2R1bGVmaWxlczovc2hhcmUvYXBwcy9tb2R1bGVzOi9zaGFyZS9hcHBzL2ViLW1vZH
+	VsZXMvYWxsOi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQvQ29yZSIsfQ==,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	LC_CTYPE=C.UTF-8,SSH_CONNECTION=<private-ip> 44532 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.02-1/lib/pkgconfig
+	,LESSOPEN=||/usr/bin/lesspipe.sh %s,LMOD_SETTARG_FULL_SUPPORT=no,
+	PROMPT_COMMAND=history -a,LMOD_FULL_SETTARG_SUPPORT=no,
+	__LMOD_REF_COUNT_PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.0
+	2-1/lib/pkgconfig:1,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	__LMOD_REF_COUNT_MANPATH=/share/apps/software/Anaconda3/2024.02-1/shar
+	e/man:1;/share/apps/software/Anaconda3/2024.02-1/man:1;/usr/local/share
+	/man:1;/usr/share/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1;
+	/opt/pbs/share/man:1,LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=normal,
+	PBS_O_HOST=<tpac-host>
+    comment = Job run at Thu Jul 30 at 23:10 on (n008:ncpus=16:mem=100663296kb)
+	 and failed
+    etime = Thu Jul 30 23:10:51 2026
+    run_count = 1
+    Stageout_status = 1
+    Exit_status = 2
+    Submit_arguments = scripts/kunanyi/g_lo_critical_stratum_census.pbs
+    history_timestamp = 1785419147
+    project = _pbs_project_default
+

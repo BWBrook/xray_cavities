@@ -1,0 +1,4 @@
+analysis_surface,log10_ratio_0p15,log10_ratio_1p4,linear_ratio_0p15,linear_ratio_1p4,interpretation
+all_rows,0.018642967197065374,0.01911142826866994,1.0438617093281084,1.0449883006849026,reported weighted log_savgol over unsmoothed aggregate
+exclude_top_two,0.0025068841571495859,0.0025823479862857059,1.0057890059966137,1.0059637889781252,influence diagnostic only; aggregate shift falls below 0.6 percent
+exclude_top_41_ranked_rows,0.00020331856742764138,0.00020292529249528156,1.0004682679056891,1.0004673619330631,influence diagnostic only; approximate top one percent sample-row removal
