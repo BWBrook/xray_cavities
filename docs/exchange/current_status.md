@@ -36,6 +36,28 @@ current instruction without checking its goal status.
 
 ## Active Checkpoint
 
+### Goal 055: G-LO pressure-history production-default decision
+
+- Status: `complete_local_method_decision`.
+- Decision:
+  `UNSMOOTHED_PRIMARY_LOG_SG_REQUIRED_SENSITIVITY_NO_FINAL_FREEZE`.
+- Stable unsmoothed pressure is the provisional project-analysis primary;
+  positivity-preserving log-SG is required sensitivity analysis.
+- Published-style linear Savitzky-Golay smoothing is inadmissible for the
+  current G-LO cache because it creates `216035` non-positive pressure values
+  across `99108/197398` eligible histories.
+- In the census-replaced population, log-SG shifts the no-loss amplitude by
+  `1.80646%` and the full-loss amplitudes by `1.89273-1.94849%`; the full-loss
+  spectral-index shift is only `-0.00024496`.
+- This is a provisional internal convention, not a physical uncertainty
+  interval or final publication-method freeze.
+- Before new C-HI/C-LO history production or publication-facing radio use,
+  request one focused Patrick/Stas review of this method contract.
+- Science note/assets:
+  `docs/science/g_lo_pressure_history_production_default_decision_2026-08-05.md`
+  and
+  `docs/science/assets/g_lo_pressure_history_production_default_decision_2026-08-05/`.
+
 ### Goal 054: G-LO pressure-method synthesis
 
 - Status: `complete_local_synthesis`.
@@ -48,9 +70,7 @@ current instruction without checking its goal status.
   `0.50` concentration gate.
 - This is a diagnostic synthesis, not a physical uncertainty estimate,
   causal attribution, or production-default change.
-- Highest-value next decision: interpret the pressure-method evidence and
-  decide whether a scientific default should change. Escalate only if a
-  default, final method convention, or publication-facing claim is proposed.
+- Goal 055 has now interpreted this evidence. No further census is warranted.
 - Science note/assets:
   `docs/science/g_lo_pressure_method_synthesis_2026-08-01.md` and
   `docs/science/assets/g_lo_pressure_method_synthesis_2026-08-01/`.
@@ -90,8 +110,9 @@ current instruction without checking its goal status.
 
 ## Holds and Caveats
 
-- Pressure-method default remains unchanged pending interpretation and, if
-  needed, supervisor review.
+- The project pressure-method primary remains unsmoothed, with log-SG required
+  as sensitivity. Supervisor review is still required before new production
+  commitments or publication-facing method claims.
 - PRAiSE2 is not promoted; radio/raytracing products remain diagnostic rather
   than validated observables.
 - X-ray cavity topology remains conditional rather than frozen.

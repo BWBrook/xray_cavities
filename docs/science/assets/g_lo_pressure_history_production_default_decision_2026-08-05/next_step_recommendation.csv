@@ -1,0 +1,5 @@
+rank,next_step,decision,trigger,rationale
+1,focused_supervisor_method_review,recommended_before_production,"Before new C-HI/C-LO history production or publication-facing radio interpretation","The project choice differs from published PRAiSE preprocessing and is therefore a material method convention"
+2,matched_three_case_radio_products,conditional_after_review,"Patrick/Stas accept the provisional primary and sensitivity contract","This resumes core Aim 4 with common methods and two or more frequencies"
+3,further_g_lo_census,not_recommended,"Only if a later decision needs a direct secondary-stratum estimate","Goal 054 shows another single census cannot resolve the present gate"
+4,praise2_promotion,hold,"Auditable gamma cutoff and fallback state becomes available under a newly reviewed method contract","Goal 052 fail-closed state remains active"

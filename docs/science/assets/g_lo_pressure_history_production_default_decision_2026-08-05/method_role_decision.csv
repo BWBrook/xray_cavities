@@ -1,0 +1,6 @@
+method,project_role,decision,rationale,restriction
+stable_unsmoothed,provisional_primary,retain,"Direct positive treated PLUTO pressure; numerically stable recurrence; no unvalidated preprocessing","Not asserted to be noise-free physical truth or a final publication method"
+stable_log_savgol,required_sensitivity,retain,"Positivity-preserving test of the published smoothing motivation with modest integrated effect","Project adaptation; do not label as published PRAiSE or physical uncertainty"
+linear_savgol,none,reject_for_current_cache,"Creates non-positive pressure across 99108 eligible histories","Do not clip floor or exclude affected particles"
+praise2,none,hold_no_promotion,"Public result lacks auditable state cutoff and fallback evidence and differs materially from the stable method","Requires a new explicit method validation before use"
+additional_stratum_census,none,stop,"Goal 054 shows no single additional census can change the concentration decision","Reopen only for a later question requiring that stratum's direct magnitude"
