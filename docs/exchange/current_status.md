@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-08-05
+Last updated: 2026-08-11
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 three-case project.
@@ -36,13 +36,74 @@ current instruction without checking its goal status.
 
 ## Active Checkpoint
 
+### Goal 056: G-LO last-shock PRAiSE comparison
+
+- Status: `complete_diagnostic_review_requested`.
+- Patrick's review supersedes the provisional Goal 055 unsmoothed-primary
+  convention: pinned `plutokore.radio.praise2.praise(...)` is the intended
+  reference, pending this interval-aware validation.
+- Goal 056 compares PRAiSE1, native PRAiSE2, controlled-common-input PRAiSE2,
+  and Goal 050 on the exact deterministic 4096-particle panel, using only the
+  latest-shock-to-evaluation interval for scientific classification.
+- First attempt PBS `784909.kunanyi-ohpc` (`g_lo_lstcmp`) is immutable failed
+  provenance (`Exit_status=1`). Its inputs/imports passed, but the diagnostic
+  incorrectly required every irregular source timestep to survive PRAiSE2's
+  0.01 Myr resampling; evidence archiving also invoked a non-executable helper
+  directly. No Goal 056 science decision was produced.
+- The repair now reproduces pinned PRAiSE2's order: uniform resampling,
+  backfilling, then optional native linear Savitzky-Golay smoothing. Local and
+  Kunanyi-side irregular-history replay checks passed, including omitted
+  source-index provenance. Archiving now invokes the helper through `bash`.
+- Retry PBS `784931.kunanyi-ohpc` (`g_lo_lstcmp_r1`) is immutable failed
+  provenance (`Exit_status=2`). It cleared the earlier PRAiSE2 gates and failed
+  only when the contextual Goal 050 detailed comparator assumed every
+  frequency had finite endpoint and injection gamma. No science decision was
+  produced; its compact failure archive was retrieved successfully.
+- The state-aware repair retains Goal 050 cutoffs as zero, reconstructs finite
+  states, and records non-finite/subrelativistic states as unavailable. It
+  leaves all PRAiSE2 gates unchanged. Local and Kunanyi-side focused tests
+  passed.
+- Final PBS `784939.kunanyi-ohpc` (`g_lo_lstcmp_r2`) completed the diagnostic
+  and archive, then returned the intentional science-hold exit `3`. Native
+  retained pressures stayed positive and no native numerical failure occurred.
+- The only hold was two native/common checks of one width-one representative
+  history. The detailed path bypassed the approved population singleton
+  convention; all `62/62` applicable direct full-loss replays matched exactly.
+  The local diagnostic contract is repaired and tested; no fourth remote run
+  is warranted.
+- Common-input PRAiSE2 still differs materially from PRAiSE1 for `17.96%` of
+  weight at `0.15 GHz`, `27.17%` at `1.4 GHz`, and `12.79%` by spectral index.
+  Native smoothing alone is material for `0.756%` of weight and `0%` by
+  spectral index. The difference is therefore principally method recurrence,
+  coefficients, and cutoff handling rather than smoothing.
+- Review decision:
+  `PRAISE2_USABLE_METHOD_DIFFERENCE_PERSISTS_PATRICK_CONFIRMATION_REQUIRED`.
+  Matched history production remains held for Patrick's concise confirmation.
+- No matched C-HI/C-LO/G-LO radio production should start until Patrick
+  confirms that the persistent common-input PRAiSE1/PRAiSE2 differences are
+  the intended distinct-method behaviour.
+- Goal/log:
+  `docs/goals/056-g-lo-praise-last-shock-comparison/` and
+  `docs/exchange/logs/2026-08-10-g-lo-praise-last-shock-comparison.md`.
+- First-attempt failure note/logs:
+  `docs/science/g_lo_praise_last_shock_comparison_failure_2026-08-11.md` and
+  `docs/science/assets/g_lo_praise_last_shock_comparison_failure_2026-08-11/`.
+- Retry failure note/logs:
+  `docs/science/g_lo_praise_last_shock_comparison_retry_failure_2026-08-11.md`
+  and
+  `docs/science/assets/g_lo_praise_last_shock_comparison_retry_failure_2026-08-11/`.
+- Completion/review note and assets:
+  `docs/science/g_lo_praise_last_shock_comparison_review_2026-08-11.md` and
+  `docs/science/assets/g_lo_praise_last_shock_comparison_hold_2026-08-11/`.
+
 ### Goal 055: G-LO pressure-history production-default decision
 
 - Status: `complete_local_method_decision`.
 - Decision:
   `UNSMOOTHED_PRIMARY_LOG_SG_REQUIRED_SENSITIVITY_NO_FINAL_FREEZE`.
-- Stable unsmoothed pressure is the provisional project-analysis primary;
-  positivity-preserving log-SG is required sensitivity analysis.
+- Its unsmoothed-primary/log-SG-sensitivity recommendation is retained as
+  historical project evidence but is superseded operationally by Patrick's
+  request to treat pinned PRAiSE2 as the intended reference.
 - Published-style linear Savitzky-Golay smoothing is inadmissible for the
   current G-LO cache because it creates `216035` non-positive pressure values
   across `99108/197398` eligible histories.
@@ -110,13 +171,16 @@ current instruction without checking its goal status.
 
 ## Holds and Caveats
 
-- The project pressure-method primary remains unsmoothed, with log-SG required
-  as sensitivity. Supervisor review is still required before new production
-  commitments or publication-facing method claims.
-- PRAiSE2 is not promoted; radio/raytracing products remain diagnostic rather
-  than validated observables.
+- Goal 056 establishes pinned PRAiSE2's post-shock numerical usability and
+  scientific interpretability. Matched radio production remains held only for
+  Patrick's confirmation of the persistent distinct-method behaviour;
+  radio/raytracing products remain diagnostic.
 - X-ray cavity topology remains conditional rather than frozen.
-- Level 3 gravitational energy remains `blocked_missing_potential`.
+- The Level 3 gravitational-energy method is now defined by Stas: construct
+  the initial-atmosphere potential from `tabulated_cosmo_002003.csv` and apply
+  the cellwise mass-change convention with tracer-weighted gas/lobe reporting.
+  The component remains not computed, but is no longer blocked by a missing
+  potential convention.
 - `pV`, adopted `2.5pV`, and `4pV` conventions remain carried-forward
   conventions, not a new physical default.
 - No new production run, broad source-age sweep, comparison expansion, or

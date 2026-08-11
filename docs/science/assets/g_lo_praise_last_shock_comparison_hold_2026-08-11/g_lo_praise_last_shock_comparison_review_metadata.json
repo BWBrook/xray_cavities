@@ -1,0 +1,44 @@
+{
+  "date": "2026-08-11",
+  "goal": 56,
+  "decision_label": "PRAISE2_USABLE_METHOD_DIFFERENCE_PERSISTS_PATRICK_CONFIRMATION_REQUIRED",
+  "scheduler": {
+    "job_id": "784939.kunanyi-ohpc",
+    "job_name": "g_lo_lstcmp_r2",
+    "exit_status": 3,
+    "walltime": "02:16:15"
+  },
+  "retrieval": {
+    "archive_sha256": "17f829a509822960dabd6f6ae799dd9cc9636d46331436fc359023989ca644b4",
+    "archive_member_count": 31,
+    "stdout_sha256": "1e2afef2b52db84e9d1b744a07fd9157eeeb877d2dc5c2e579bf2375a16ec113",
+    "stderr_sha256": "b9df076e62c5ce54b1342d608ebd14180a372f610ad2549971e502da5e2f4df9",
+    "run_log_sha256": "0c0f3775848c9709877852ae41a71d6f66aab4bf242f62c5a78e7a6d676ac984"
+  },
+  "observations": {
+    "selection_count": 4096,
+    "representative_count": 14,
+    "retained_native_pressure_positive": true,
+    "native_numerical_failures": 0,
+    "replay_checks_total": 64,
+    "direct_full_loss_replay_checks": 62,
+    "direct_full_loss_replay_failures": 0,
+    "singleton_convention_mismatches": 2,
+    "singleton_population_count": 48,
+    "singleton_weight_fraction": 0.00024295678406203495
+  },
+  "inference": {
+    "singleton_hold_is_diagnostic_contract_artifact": true,
+    "native_smoothing_is_not_primary_source_of_praise1_praise2_difference": true,
+    "praise1_praise2_difference_persists_on_common_raw_input": true,
+    "matched_history_production_requires_patrick_confirmation": true
+  },
+  "sources": [
+    "review_products/last_shock_comparison_summary.json",
+    "review_products/population_particle_comparison.csv",
+    "review_products/population_summary.csv",
+    "review_products/replay_validation.csv",
+    "review_products/particle_spectra.csv.gz",
+    "remote_logs/g_lo_praise_last_shock_comparison_2026-08-11.tar.gz"
+  ]
+}

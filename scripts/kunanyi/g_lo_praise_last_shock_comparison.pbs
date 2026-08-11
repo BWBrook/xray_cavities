@@ -1,0 +1,175 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_lstcmp
+#PBS -q normal
+#PBS -l select=1:ncpus=16:mpiprocs=1:mem=96gb
+#PBS -l walltime=24:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal056_g_lo_praise_last_shock_comparison/g_lo_praise_last_shock_comparison.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal056_g_lo_praise_last_shock_comparison/g_lo_praise_last_shock_comparison.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal056_g_lo_praise_last_shock_comparison}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+SELECTION_CSV="${SELECTION_CSV:-$STAGE_ROOT/stable_method_value_selection.csv}"
+COMPARATOR_CSV="${COMPARATOR_CSV:-$STAGE_ROOT/stable_method_value_particle_comparison.csv}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-08-10-g-lo-praise-last-shock-comparison}"
+SCRIPT="$STAGE_ROOT/scripts/science/diagnose_praise_last_shock_comparison.py"
+PRAISE2_SOURCE="$STAGE_ROOT/plutokore/src/plutokore/radio/praise2.py"
+PLUTOKORE_COMMIT_PROOF="$STAGE_ROOT/plutokore_commit.txt"
+PYTHON_COMPAT="$STAGE_ROOT/scripts/kunanyi/python_compat"
+ARCHIVE_HELPER="$STAGE_ROOT/scripts/kunanyi/archive_file_list_payload.sh"
+STAGED_SHA256="$STAGE_ROOT/staged_inputs.sha256"
+ARCHIVE_SNAPSHOT_ROOT="$STAGE_ROOT/archive_snapshot"
+ARCHIVE_PAYLOAD="$ARCHIVE_SNAPSHOT_ROOT/$(basename "$ANALYSIS_ROOT")"
+ARCHIVE_FILE_LIST="$ARCHIVE_SNAPSHOT_ROOT/archive_file_list.txt"
+ARCHIVE="$STAGE_ROOT/g_lo_praise_last_shock_comparison_2026-08-10.tar.gz"
+RUN_LOG="$STAGE_ROOT/g_lo_praise_last_shock_comparison.run.log"
+RUN_LOCK="$STAGE_ROOT/.g_lo_praise_last_shock_comparison.lock"
+
+EXPECTED_CACHE_SHA256="f161d55eb860102f2e052b81053c94c0232926e5259cc07e2b4bc57f276ddc30"
+EXPECTED_SELECTION_SHA256="35072ea875621015da4454de8ce01d2e5ac957f3ab1984cc6243ad8d954707df"
+EXPECTED_COMPARATOR_SHA256="5fa466a1db5450921cd4b95785c0b949a499fd4457cc62da18333061dee8ebeb"
+EXPECTED_PLUTOKORE_COMMIT="e80252cf35ff5a06166240e2867d3d485aaf6956"
+
+lock_acquired=0
+release_lock() {
+  if [[ "$lock_acquired" -eq 1 ]]; then
+    rmdir "$RUN_LOCK" 2>/dev/null || true
+  fi
+}
+trap release_lock EXIT
+if ! mkdir "$RUN_LOCK"; then
+  echo "another Goal 056 run owns the stage lock: $RUN_LOCK" >&2
+  exit 2
+fi
+lock_acquired=1
+
+required=(
+  "$SCRIPT"
+  "$STAGE_ROOT/scripts/science/diagnose_g_lo_adiabatic_recovery.py"
+  "$STAGE_ROOT/scripts/science/diagnose_g_lo_full_loss_recurrence.py"
+  "$STAGE_ROOT/scripts/science/diagnose_g_lo_pressure_method_value.py"
+  "$STAGE_ROOT/scripts/science/diagnose_g_lo_stable_method_value.py"
+  "$STAGE_ROOT/scripts/science/diagnose_praise2_method_validation.py"
+  "$STAGE_ROOT/scripts/science/g_lo_particle_history.py"
+  "$STAGE_ROOT/scripts/science/g_lo_radio_method_value.py"
+  "$STAGE_ROOT/scripts/science/praise2_method_validation.py"
+  "$STAGE_ROOT/scripts/science/run_g_lo_radio_history_value.py"
+  "$PYTHON_COMPAT/contextlib2.py"
+  "$PYTHON_COMPAT/hdf5plugin.py"
+  "$PYTHON_COMPAT/yt.py"
+  "$PRAISE2_SOURCE"
+  "$PLUTOKORE_COMMIT_PROOF"
+  "$ARCHIVE_HELPER"
+  "$STAGED_SHA256"
+  "$CACHE"
+  "$SELECTION_CSV"
+  "$COMPARATOR_CSV"
+)
+for path in "${required[@]}"; do
+  test -r "$path" || { echo "missing required Goal 056 input: $path" >&2; exit 2; }
+done
+for path in "$ANALYSIS_ROOT" "$ARCHIVE_SNAPSHOT_ROOT" "$ARCHIVE" "$RUN_LOG"; do
+  test ! -e "$path" && test ! -L "$path" || {
+    echo "refusing to overwrite Goal 056 output: $path" >&2
+    exit 2
+  }
+done
+if grep -Eq '(/__pycache__/|\.(pyc|pyo)$)' "$STAGED_SHA256"; then
+  echo "staged manifest must not bind generated Python bytecode" >&2
+  exit 2
+fi
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+printf '%s  %s\n' "$EXPECTED_CACHE_SHA256" "$CACHE" | sha256sum --check -
+printf '%s  %s\n' "$EXPECTED_SELECTION_SHA256" "$SELECTION_CSV" | sha256sum --check -
+printf '%s  %s\n' "$EXPECTED_COMPARATOR_SHA256" "$COMPARATOR_CSV" | sha256sum --check -
+actual_commit="$(tr -d '[:space:]' < "$PLUTOKORE_COMMIT_PROOF")"
+test "$actual_commit" = "$EXPECTED_PLUTOKORE_COMMIT" || {
+  echo "pinned plutokore commit mismatch" >&2
+  exit 2
+}
+
+module purge
+module load Anaconda3/2024.02-1
+PYTHON="$(command -v python)"
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$PYTHON_COMPAT:$STAGE_ROOT/plutokore/src:$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=16
+export NUMBA_NUM_THREADS=16
+
+"$PYTHON" - <<'PY'
+from scripts.science.diagnose_praise_last_shock_comparison import diagnose
+from scripts.science.praise2_method_validation import resolve_praise2_provenance
+
+assert callable(diagnose)
+assert callable(resolve_praise2_provenance)
+print("runtime_import_preflight=passed")
+PY
+
+set +e
+"$PYTHON" "$SCRIPT" \
+  --cache "$CACHE" \
+  --selection-csv "$SELECTION_CSV" \
+  --comparator-csv "$COMPARATOR_CSV" \
+  --output-dir "$ANALYSIS_ROOT" \
+  --praise2-source "$PRAISE2_SOURCE" \
+  --commit-proof "$PLUTOKORE_COMMIT_PROOF" \
+  >"$RUN_LOG" 2>&1
+diagnostic_rc=$?
+set -e
+
+mkdir -p "$ARCHIVE_PAYLOAD"
+if test -d "$ANALYSIS_ROOT"; then
+  cp -a "$ANALYSIS_ROOT/." "$ARCHIVE_PAYLOAD/"
+fi
+cp -p "$RUN_LOG" "$ARCHIVE_PAYLOAD/diagnostic_run.log"
+cp -p "$PLUTOKORE_COMMIT_PROOF" "$ARCHIVE_PAYLOAD/plutokore_commit.txt"
+cp -p "$STAGED_SHA256" "$ARCHIVE_PAYLOAD/staged_inputs.sha256"
+cp -p "$SELECTION_CSV" "$ARCHIVE_PAYLOAD/selection_input.csv"
+cp -p "$COMPARATOR_CSV" "$ARCHIVE_PAYLOAD/goal050_comparator_input.csv"
+printf 'diagnostic_rc=%s\n' "$diagnostic_rc" >"$ARCHIVE_PAYLOAD/diagnostic_exit_status.txt"
+bash "$ARCHIVE_HELPER" \
+  "$ARCHIVE_SNAPSHOT_ROOT" \
+  "$ARCHIVE_PAYLOAD" \
+  "$ARCHIVE_FILE_LIST" \
+  "$ARCHIVE"
+
+SUMMARY="$ANALYSIS_ROOT/last_shock_comparison_summary.json"
+if ! [[ "$diagnostic_rc" =~ ^(0|3)$ ]] || ! test -s "$SUMMARY"; then
+  echo "goal056_infrastructure=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+decision="$($PYTHON - "$SUMMARY" <<'PY'
+import json
+import sys
+
+summary = json.load(open(sys.argv[1]))
+if summary.get("status") != "complete_diagnostic":
+    raise SystemExit("unexpected diagnostic status")
+if int(summary.get("selection_count", -1)) != 4096:
+    raise SystemExit("unexpected selection count")
+gates = summary.get("gates")
+if not isinstance(gates, dict) or not all(isinstance(value, bool) for value in gates.values()):
+    raise SystemExit("missing Boolean decision gates")
+decision = summary.get("decision")
+if decision not in {"PASS", "HOLD"}:
+    raise SystemExit("invalid decision")
+print(decision)
+PY
+)"
+if [[ "$decision" == "PASS" && "$diagnostic_rc" -ne 0 ]]; then
+  echo "goal056_status_mismatch=FAIL evidence_archived=1" >&2
+  exit 2
+fi
+if [[ "$decision" == "HOLD" ]]; then
+  echo "goal056_science_gate=HOLD evidence_archived=1" >&2
+  exit 3
+fi
+echo "goal056_science_gate=PASS evidence_archived=1"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

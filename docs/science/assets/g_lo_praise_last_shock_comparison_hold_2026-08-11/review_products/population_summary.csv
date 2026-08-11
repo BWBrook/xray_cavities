@@ -1,0 +1,9 @@
+category,particle_count,particle_fraction,represented_weight,represented_weight_fraction
+pressure_difference_only_before_latest_shock,0,0.0,0,0.0
+smoothing_stencil_enters_retained_interval,4048,0.98828125,197518.00000000044,0.999757043215938
+retained_nonpositive_native_pressure,0,0.0,0,0.0
+native_numerical_failure,0,0.0,0,0.0
+native_cutoff_or_zero_change,632,0.154296875,32057.956852582192,0.16226454376047558
+native_material_emissivity_change,1192,0.291015625,54071.50681905451,0.27368832096137186
+native_material_spectral_index_change,512,0.125,25416.357063372358,0.1286474244726942
+native_difference_after_both_methods_zero,0,0.0,0,0.0

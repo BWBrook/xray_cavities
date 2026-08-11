@@ -151,7 +151,46 @@ def test_praise2_time_facade_is_myr_scaled_for_uniform_resampler():
     assert kwargs["particle_spacing"].unit.is_equivalent(u.Myr)
 
 
-def test_uniform_index_gate_is_exact_and_rejects_omitted_indices(tmp_path, monkeypatch):
+def test_uniform_resampler_accepts_native_omissions_and_bounds_endpoint_lag(monkeypatch):
+    m = load_module()
+    raw = {
+        "physical_ids": np.array([1]),
+        "time": np.array([0.0, 1.0, 5.0, 10.0]),
+        "pressure": np.ones((1, 4)),
+        "density": np.ones((1, 4)),
+        "tracer": np.ones((1, 4)),
+        "last_shock_time": np.ones((1, 4)),
+    }
+    contract = m._cache_to_contract(raw, "unsmoothed")
+    exact = m._praise2_uniform_indices(contract, 0.01 * u.Myr)
+    assert exact.tolist() == [0, 2, 3]
+
+    class FakePraise2:
+        @staticmethod
+        def praise(**_kwargs):
+            values = np.ones((1, 2, 1)) * (u.W / (u.Hz * u.m**3 * u.sr))
+            return {
+                name: [{"emis": values, "part_output": 3}]
+                for name in ("lossless", "adiabatic", "full")
+            }
+
+    _, provenance = m._group_high_level_outputs(
+        raw, mode="unsmoothed", praise2=FakePraise2
+    )
+    group = provenance["groups"][0]
+    assert group["uniform_width"] == 3
+    assert group["omitted_source_count"] == 1
+    assert group["endpoint_source_index"] == 3
+    assert group["endpoint_lag_Myr"] == pytest.approx(0.0)
+
+    monkeypatch.setattr(
+        m, "_praise2_uniform_indices", lambda *_args: np.array([0], dtype=np.int64)
+    )
+    with pytest.raises(m.Praise2DiagnosticError, match="endpoint lag"):
+        m._group_high_level_outputs(raw, mode="unsmoothed", praise2=FakePraise2)
+
+
+def test_group_driver_passes_native_smoothing_window(monkeypatch):
     m = load_module()
     raw = {
         "physical_ids": np.array([1]),
@@ -161,11 +200,26 @@ def test_uniform_index_gate_is_exact_and_rejects_omitted_indices(tmp_path, monke
         "tracer": np.ones((1, 2)),
         "last_shock_time": np.ones((1, 2)),
     }
-    contract = m._cache_to_contract(raw, "unsmoothed")
-    exact = m._praise2_uniform_indices(contract, 0.01 * u.Myr)
-    assert exact.tolist() == [0, 1]
-    original = m._praise2_uniform_indices
-    monkeypatch.setattr(m, "_praise2_uniform_indices", lambda *_args: np.array([0], dtype=np.int64))
-    with pytest.raises(m.Praise2DiagnosticError, match="omitted"):
-        m._group_high_level_outputs(raw, mode="unsmoothed", praise2=SimpleNamespace())
-    monkeypatch.setattr(m, "_praise2_uniform_indices", original)
+    seen = []
+
+    class FakePraise2:
+        @staticmethod
+        def praise(**kwargs):
+            seen.append(kwargs["window_width"])
+            values = np.ones((1, 2, 1)) * (u.W / (u.Hz * u.m**3 * u.sr))
+            return {
+                name: [{"emis": values, "part_output": 1}]
+                for name in ("lossless", "adiabatic", "full")
+            }
+
+    monkeypatch.setattr(m, "_praise2_uniform_indices", lambda *_args: np.array([0, 1]))
+    result, provenance = m._group_high_level_outputs(
+        raw, mode="unsmoothed", praise2=FakePraise2, window_width=5
+    )
+    assert seen == [5]
+    assert result["branches"]["full"]["values"].shape == (1, 2, 1)
+    assert provenance["groups"][0]["window_width"] == 5
+    with pytest.raises(m.Praise2DiagnosticError, match="window"):
+        m._group_high_level_outputs(
+            raw, mode="unsmoothed", praise2=FakePraise2, window_width=3
+        )

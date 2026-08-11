@@ -126,6 +126,7 @@ def _group_high_level_outputs(
     *,
     mode: str,
     praise2: Any,
+    window_width: int = 0,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Run PRAiSE2 on identically sliced post-injection groups.
 
@@ -135,6 +136,8 @@ def _group_high_level_outputs(
     Singleton groups use only the public lossless branch and carry the
     approved instantaneous convention as an external tag.
     """
+    if window_width not in (0, 5):
+        raise Praise2DiagnosticError("PRAiSE2 diagnostic window must be 0 or 5")
     pressure = np.asarray(raw["pressure"])
     n = pressure.shape[0]
     starts = np.argmax(np.isfinite(pressure), axis=1)
@@ -183,12 +186,42 @@ def _group_high_level_outputs(
         uniform_indices = _praise2_uniform_indices(
             contract, 0.01 * u.Myr
         )
-        if not np.array_equal(uniform_indices, np.arange(width, dtype=np.int64)):
+        if uniform_indices.size == 0 or int(uniform_indices[0]) != 0:
             raise Praise2DiagnosticError(
-                "PRAiSE2 uniform resampler omitted one or more declared history indices"
+                "PRAiSE2 uniform resampler does not cover the group start"
             )
+        endpoint_source_index = int(uniform_indices[-1])
+        source_times_myr = (
+            np.asarray(contract["part_times"], dtype=float)
+            * contract["sim"].unit_values.time
+        ).to_value(u.Myr)
+        endpoint_lag_myr = float(source_times_myr[-1] - source_times_myr[endpoint_source_index])
+        spacing_myr = 0.01
+        final_source_step_myr = (
+            float(source_times_myr[-1] - source_times_myr[-2]) if width > 1 else 0.0
+        )
+        endpoint_lag_limit_myr = max(spacing_myr, final_source_step_myr)
+        lag_tolerance = np.finfo(float).eps * max(1.0, abs(endpoint_myr)) * 32
+        if (
+            endpoint_lag_myr < -lag_tolerance
+            or endpoint_lag_myr > endpoint_lag_limit_myr + lag_tolerance
+        ):
+            raise Praise2DiagnosticError(
+                "PRAiSE2 uniform resampler endpoint lag exceeds one source interval"
+            )
+        resampling_provenance = {
+            "source_width": int(width),
+            "uniform_width": int(uniform_indices.size),
+            "omitted_source_count": int(width - uniform_indices.size),
+            "endpoint_source_index": endpoint_source_index,
+            "endpoint_lag_Myr": endpoint_lag_myr,
+            "endpoint_lag_limit_Myr": endpoint_lag_limit_myr,
+            "final_source_step_Myr": final_source_step_myr,
+            "particle_spacing_Myr": spacing_myr,
+        }
         if width == 1:
             kwargs = build_praise2_call_kwargs(contract, frequencies=FREQUENCIES_GHZ, losses=(0,), particle_spacing=0.01 * u.Myr)
+            kwargs["window_width"] = window_width
             result = praise2.praise(**kwargs)
             raw_loss = result.get("lossless", [{}])[-1].get("emis")
             if raw_loss is None:
@@ -199,14 +232,15 @@ def _group_high_level_outputs(
             for name in high_values:
                 high_values[name][rows] = values
             provenance["singleton_rows"].extend(rows.astype(int).tolist())
-            provenance["groups"].append({"start": int(start), "rows": rows.astype(int).tolist(), "width": 1, "branch_policy": "external_approved_singleton_convention", "state_validation_scope": "none"})
+            provenance["groups"].append({"start": int(start), "rows": rows.astype(int).tolist(), "width": 1, "branch_policy": "external_approved_singleton_convention", "state_validation_scope": "none", "window_width": int(window_width), **resampling_provenance})
             continue
         kwargs = build_praise2_call_kwargs(contract, frequencies=FREQUENCIES_GHZ, losses=(0, 1, 4), particle_spacing=0.01 * u.Myr)
+        kwargs["window_width"] = window_width
         result = praise2.praise(**kwargs)
-        audit = extract_praise2_outputs(result, expected_rows=len(rows), expected_frequencies=2, expected_part_output=width - 1)
+        audit = extract_praise2_outputs(result, expected_rows=len(rows), expected_frequencies=2, expected_part_output=endpoint_source_index)
         for name in high_values:
             high_values[name][rows] = audit["branches"][name]["values"]
-        provenance["groups"].append({"start": int(start), "rows": rows.astype(int).tolist(), "width": int(width), "branch_policy": "direct_high_level_loss_codes_0_1_4", "state_validation_scope": "none"})
+        provenance["groups"].append({"start": int(start), "rows": rows.astype(int).tolist(), "width": int(width), "branch_policy": "direct_high_level_loss_codes_0_1_4", "state_validation_scope": "none", "window_width": int(window_width), **resampling_provenance})
     return {"branches": {name: {"values": values, "nonfinite_count": int(np.count_nonzero(~np.isfinite(values)))} for name, values in high_values.items()}}, provenance
 
 

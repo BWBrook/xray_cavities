@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/u/bwbrook/codex_kunanyi/goal056_g_lo_praise_last_shock_comparison/scripts/science/diagnose_praise_last_shock_comparison.py", line 918, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal056_g_lo_praise_last_shock_comparison/scripts/science/diagnose_praise_last_shock_comparison.py", line 910, in main
+    result = diagnose(**vars(args))
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal056_g_lo_praise_last_shock_comparison/scripts/science/diagnose_praise_last_shock_comparison.py", line 843, in diagnose
+    p2_native, native_provenance = _run_praise2_endpoint(raw, praise2, window_width=5)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal056_g_lo_praise_last_shock_comparison/scripts/science/diagnose_praise_last_shock_comparison.py", line 240, in _run_praise2_endpoint
+    result, provenance = praise2_driver._group_high_level_outputs(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal056_g_lo_praise_last_shock_comparison/scripts/science/diagnose_praise2_method_validation.py", line 190, in _group_high_level_outputs
+    raise Praise2DiagnosticError(
+scripts.science.diagnose_praise2_method_validation.Praise2DiagnosticError: PRAiSE2 uniform resampler omitted one or more declared history indices
