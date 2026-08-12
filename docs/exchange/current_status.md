@@ -49,6 +49,22 @@ current instruction without checking its goal status.
   waiting, but do not submit the history-regeneration runs until the TPAC quota
   increase is confirmed.
 
+## Per-Snapshot Science Analysis Contract
+
+- Apply the supervisor directive in
+  `agent_comms/threads/2026-08-12-snapshot-science-analysis-contract.md` to
+  every available `G-LO` snapshot now and later to the complete four-case set.
+- Required surfaces include lossless/full-loss radio luminosity at
+  `0.15/0.5/1.4/4.5/15 GHz`, X-ray cavity energies, cell-wise ambient/lobe
+  thermal-kinetic-gravitational accounting, direct/residual cocoon energy with
+  closure, shock speed and Mach number, spectral age, and two families of
+  inferred jet power.
+- The primary science tests are cavity-energy bias versus shock strength and
+  inferred versus known bipolar jet power. Preserve `2.5pV` as the adopted
+  non-relativistic interpretation and `4pV` as the literature comparator.
+- The open PRAiSE decision governs final full-loss radio production but does
+  not block the other `G-LO` analysis components or pipeline preparation.
+
 ## Active Checkpoint
 
 ### Goal 056: G-LO last-shock PRAiSE comparison
