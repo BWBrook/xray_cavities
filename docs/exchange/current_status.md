@@ -1,9 +1,9 @@
 # Current Status
 
-Last updated: 2026-08-11
+Last updated: 2026-08-12
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
-three-case project.
+simulation project.
 
 ## Read This First
 
@@ -21,8 +21,9 @@ current instruction without checking its goal status.
 
 ## Project Contract
 
-- Cases: `C-HI`, `C-LO`, and `G-LO`, with endpoint-first comparison as the
-  current scientific surface.
+- Existing completed cases: `C-HI`, `C-LO`, and `G-LO`.
+- Intended factorial set: cluster/group environments crossed with low/high jet
+  power, adding planned `G-HI` as the missing fourth case.
 - Preferred endpoint viewing surface: `0/45/90 deg`; nonzero views use
   `edge_overlap_uniform_cell_projection`.
 - Products are compact prove-out evidence unless a science note explicitly
@@ -33,6 +34,20 @@ current instruction without checking its goal status.
 - Raw HDF5, particle, and other bulky production files stay remote while an
   active analysis depends on them. Local bundles should contain compact
   products, manifests, checksums, and review logs.
+
+## Supervisor Priority And Execution Order
+
+- Scientific analysis may proceed now on `G-LO`, which has the complete
+  retained particle-history sequence. The open PRAiSE review is a
+  radio-method decision, not a blanket hold on other `G-LO` science.
+- Once TPAC increases the storage quota, rerun the simulations lacking full
+  retained particle histories: `C-HI` and `C-LO`. These reruns are the top
+  compute priority.
+- After the full-history reruns, run `G-HI` to complete the 2 x 2
+  environment-by-jet-power factorial set.
+- Run specifications and storage/retention estimates may be prepared while
+  waiting, but do not submit the history-regeneration runs until the TPAC quota
+  increase is confirmed.
 
 ## Active Checkpoint
 
