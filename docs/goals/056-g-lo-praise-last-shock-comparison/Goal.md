@@ -1,7 +1,7 @@
 # Goal 056 - G-LO last-shock PRAiSE comparison
 
 Date opened: 2026-08-10
-Status: `submitted_waiting_pbs_completion`
+Status: `complete_reference_accepted_coefficient_followup_required`
 
 ## Objective
 
@@ -30,6 +30,12 @@ Predeclared gates require:
 
 PRAiSE2 is the intended reference implementation. This goal records method
 differences; it does not alter PRAiSE2 to reproduce PRAiSE1 or Goal 050.
+
+Patrick accepted the interval-aware validation on 2026-08-13. PRAiSE2 is the
+published-method reference, with one required correction: restore the
+published equation (3) `4/3` multiplier in its radiative-loss coefficient.
+The coefficient-only impact study and corrected implementation are tracked as
+follow-up `Q-027`; they do not invalidate Goal 056's numerical-usability result.
 
 ## Remote Job
 

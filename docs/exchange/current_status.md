@@ -69,10 +69,11 @@ current instruction without checking its goal status.
 
 ### Goal 056: G-LO last-shock PRAiSE comparison
 
-- Status: `complete_diagnostic_review_requested`.
+- Status: `complete_reference_accepted_coefficient_followup_required`.
 - Patrick's review supersedes the provisional Goal 055 unsmoothed-primary
-  convention: pinned `plutokore.radio.praise2.praise(...)` is the intended
-  reference, pending this interval-aware validation.
+  convention: corrected `plutokore.radio.praise2.praise(...)`, following the
+  published equation (3), is the intended reference. The interval-aware
+  validation is accepted; only the coefficient correction remains pending.
 - Goal 056 compares PRAiSE1, native PRAiSE2, controlled-common-input PRAiSE2,
   and Goal 050 on the exact deterministic 4096-particle panel, using only the
   latest-shock-to-evaluation interval for scientific classification.
@@ -107,12 +108,15 @@ current instruction without checking its goal status.
   Native smoothing alone is material for `0.756%` of weight and `0%` by
   spectral index. The difference is therefore principally method recurrence,
   coefficients, and cutoff handling rather than smoothing.
-- Review decision:
-  `PRAISE2_USABLE_METHOD_DIFFERENCE_PERSISTS_PATRICK_CONFIRMATION_REQUIRED`.
-  Matched history production remains held for Patrick's concise confirmation.
-- No matched C-HI/C-LO/G-LO radio production should start until Patrick
-  confirms that the persistent common-input PRAiSE1/PRAiSE2 differences are
-  the intended distinct-method behaviour.
+- Patrick accepted Goal 056's interval-aware validation and selected PRAiSE2
+  as the published-method reference. Its recurrence, cutoff, and smoothing
+  differences from PRAiSE1/Goal 050 are retained as distinct-method behaviour.
+- The pinned PRAiSE2 radiative coefficient is `0.7500000023105955` of the
+  published equation (3) value. `Q-027` requires restoring the missing `4/3`
+  multiplier and isolating its effects before matched radio production.
+- After the coefficient-only tests pass, corrected
+  `pk.radio.praise2.praise(...)` is the production method. Preserve the
+  uncorrected Goal 056 products as baseline provenance.
 - Goal/log:
   `docs/goals/056-g-lo-praise-last-shock-comparison/` and
   `docs/exchange/logs/2026-08-10-g-lo-praise-last-shock-comparison.md`.
@@ -202,10 +206,11 @@ current instruction without checking its goal status.
 
 ## Holds and Caveats
 
-- Goal 056 establishes pinned PRAiSE2's post-shock numerical usability and
-  scientific interpretability. Matched radio production remains held only for
-  Patrick's confirmation of the persistent distinct-method behaviour;
-  radio/raytracing products remain diagnostic.
+- Goal 056 establishes PRAiSE2's post-shock numerical usability and scientific
+  interpretability. Patrick has accepted the distinct-method behaviour.
+  Matched radio production is now held only for `Q-027`: restore and validate
+  the published equation (3) `4/3` radiative coefficient. Radio/raytracing
+  products remain diagnostic until that correction is verified.
 - X-ray cavity topology remains conditional rather than frozen.
 - The Level 3 gravitational-energy method is now defined by Stas: construct
   the initial-atmosphere potential from `tabulated_cosmo_002003.csv` and apply

@@ -104,3 +104,19 @@ Status: `repair2_submitted_waiting_pbs_completion`.
   Request Patrick's confirmation before matched history production.
 
 Status: `complete_diagnostic_review_requested`.
+
+## 2026-08-13 - Patrick accepted Goal 056; coefficient follow-up opened
+
+- Patrick accepted the latest-shock-only validation and selected PRAiSE2 as
+  the published-method reference.
+- The current pinned PRAiSE2 result remains immutable baseline provenance.
+- The published equation (3) radiative term contains `4 sigma_T/(3 m_e c)`,
+  while the pinned PRAiSE2 coefficient is `0.7500000023105955` of that value.
+- Opened `Q-027` to restore the missing `4/3` multiplier, isolate its effects
+  on particle spectra, emissivity, luminosity, surface brightness, spectral
+  index, and cutoff state, and validate the corrected implementation.
+- Corrected PRAiSE2 becomes the production radio method after that bounded
+  coefficient validation passes; matched production must not use the
+  uncorrected coefficient.
+
+Status: `complete_reference_accepted_coefficient_followup_required`.

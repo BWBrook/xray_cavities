@@ -62,6 +62,15 @@ PRAiSE1/Goal 050 as PRAiSE2, or turn method differences into physical
 uncertainty. Future production must still report luminosity versus time, as
 requested by Stas.
 
+## Patrick decision - 2026-08-13
+
+Patrick accepted this interval-aware validation and selected PRAiSE2 as the
+published-method reference. The current pinned implementation remains the
+uncorrected provenance baseline. Before production use, restore the published
+equation (3) `4/3` multiplier in the radiative-loss coefficient and complete
+the coefficient-only validation specified by `Q-027` in
+`agent_comms/threads/2026-08-05-g-lo-pressure-history-method-review.md`.
+
 ## Evidence
 
 - Machine-readable synthesis: `method_effect_summary.csv`,
