@@ -43,9 +43,10 @@ display statistic to finite positive ratios; no remote rerun is warranted.
 
 ## Provenance
 
-- Corrected plutokore source revision:
+- Corrected plutokore source revisions: tested commit
   `a190f0d96610c781a7ff71860333a0aae3cdfe92` on
-  `bwbrook/deep-server-bringup`.
+  `bwbrook/deep-server-bringup`, integrated independently into `master` as
+  `73210e15d4c60e77ffb317b3ee2b9209c049edd4`.
 - Retrieved archive SHA-256:
   `2752dd195d6678d81200052ab2c9393725c0eada87d6919418f19c964a10ecbb`.
 - The archive has 12 members and its internal manifest/checksum surfaces are

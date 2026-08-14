@@ -78,9 +78,9 @@ Status: `coefficient_complete_compression_readability_finalizer_waiting`.
   `16-20 TiB` request remains appropriate for source/copy overlap and headroom.
 - No source or pilot file was deleted. Deletion remains a separate per-file
   lifecycle action after copy, compact-product, checksum, and provenance gates.
-- Corrected plutokore source/test are published on
-  `bwbrook/deep-server-bringup` as commit
-  `a190f0d96610c781a7ff71860333a0aae3cdfe92`; future production staging uses
-  that corrected revision.
+- Corrected plutokore source/test are integrated into `master` as commit
+  `73210e15d4c60e77ffb317b3ee2b9209c049edd4` from tested source commit
+  `a190f0d96610c781a7ff71860333a0aae3cdfe92`; future production staging pins
+  the canonical revision.
 
 Status: `complete_preproduction_readiness_quota_hold`.

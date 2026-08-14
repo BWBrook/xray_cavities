@@ -87,10 +87,10 @@ current instruction without checking its goal status.
   green; corrected PRAiSE2 is the production method. Its 50 Myr integrated
   effect ranges from `-0.096%` at 0.15 GHz to `-2.694%` at 15 GHz, with zero
   added non-finite values.
-- The corrected plutokore source and regression test are published on
-  `bwbrook/deep-server-bringup` as commit
-  `a190f0d96610c781a7ff71860333a0aae3cdfe92`; future production staging uses
-  this corrected radio method.
+- The corrected plutokore source and regression test are integrated into
+  `master` as commit `73210e15d4c60e77ffb317b3ee2b9209c049edd4` from
+  tested source commit `a190f0d96610c781a7ff71860333a0aae3cdfe92`; future
+  production staging pins the canonical `master` revision.
 - PBS `785272.kunanyi-ohpc` / `h5_revpil` produced bitwise-valid reversible
   float and double copies with `72.45%` and `55.58%` file-size reductions, then
   failed only because the fresh XRAiSE process lacked `HDF5_PLUGIN_PATH`.
@@ -166,9 +166,9 @@ current instruction without checking its goal status.
   luminosities, endpoint maps, finite-value gates, and regression tests pass.
 - Corrected `pk.radio.praise2.praise(...)` is the production method. Preserve
   the uncorrected Goal 056 products as baseline provenance. The tested source
-  correction is published as plutokore commit
-  `a190f0d96610c781a7ff71860333a0aae3cdfe92` on
-  `bwbrook/deep-server-bringup`.
+  correction is integrated into plutokore `master` as commit
+  `73210e15d4c60e77ffb317b3ee2b9209c049edd4`; its original validation commit
+  is `a190f0d96610c781a7ff71860333a0aae3cdfe92`.
 - Goal/log:
   `docs/goals/056-g-lo-praise-last-shock-comparison/` and
   `docs/exchange/logs/2026-08-10-g-lo-praise-last-shock-comparison.md`.
