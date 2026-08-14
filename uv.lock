@@ -1823,6 +1823,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "astropy" },
     { name = "h5py" },
+    { name = "hdf5plugin" },
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "plutokore" },
@@ -1845,6 +1846,7 @@ dev = [
 requires-dist = [
     { name = "astropy" },
     { name = "h5py" },
+    { name = "hdf5plugin" },
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "plutokore", editable = "../../git/utas-agn/plutokore" },

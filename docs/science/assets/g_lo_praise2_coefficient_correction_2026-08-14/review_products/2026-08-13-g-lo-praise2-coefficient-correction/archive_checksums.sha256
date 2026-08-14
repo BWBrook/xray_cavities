@@ -1,0 +1,10 @@
+41084d10df15c859b0552e2ce979e415f52f6910a839cf66dae5ee4f855a9316  ./2026-08-13-g-lo-praise2-coefficient-correction/coefficient_inputs.sha256
+6524dbe42ba9426f8daf292a893be77441d00dea2a138e82976c49d15edb4854  ./2026-08-13-g-lo-praise2-coefficient-correction/diagnostic_exit_status.txt
+9f4515bbdd77fb7491e34ca6eab92a3f5fc89e04f55fb0f7db0d89dad15fa235  ./2026-08-13-g-lo-praise2-coefficient-correction/diagnostic_run.log
+9fa92014d8d8e9959a2892d3c9111fa911a4b6a1e5e446863167c554c6e66cae  ./2026-08-13-g-lo-praise2-coefficient-correction/endpoint_map_arrays.npz
+f0ba1091eeddae90ac12797b9eac004137c2fb013867a41bb1c7927cd7e4d5c1  ./2026-08-13-g-lo-praise2-coefficient-correction/endpoint_map_summary.csv
+c33d45067d2e418b3451dc32d30009f38a55b2ea7f4e9a2545fc082ca25a603e  ./2026-08-13-g-lo-praise2-coefficient-correction/endpoint_particle_comparison.csv.gz
+b9c76c20b5d1ff60ce3d147a84ec880857555dc889c7ed057a9aa8717f2df6d4  ./2026-08-13-g-lo-praise2-coefficient-correction/praise2_coefficient_correction.png
+cea88c9793a5f62e34b2d2100763139a1de872257353e58fdecedfd00e8dca75  ./2026-08-13-g-lo-praise2-coefficient-correction/praise2_coefficient_correction_metadata.json
+9939dbff054ad5f7bb6c9f08c08240f3b7634b54810c4aee42ec4c4294327907  ./2026-08-13-g-lo-praise2-coefficient-correction/representative_lorentz_histories.csv.gz
+7f92897c70fd8729f1c10e4cda593f36cea006388048e5aac2673e12b5f97885  ./2026-08-13-g-lo-praise2-coefficient-correction/weighted_emissivity_timepoints.csv

@@ -1,0 +1,18 @@
+{
+  "case_count": 4,
+  "compression_forecast_status": "pending_live_reversible_pilot",
+  "decision_label": "FOUR_CASE_CONTRACT_READY_QUOTA_AND_PILOT_GATES_PENDING",
+  "g_lo_snapshot_count": 6,
+  "gates": {
+    "factorial_complete_on_plan": true,
+    "g_lo_rerun_conditional_not_default": true,
+    "matched_cadence_declared": true,
+    "protected_g_lo_snapshot_surface_explicit": true,
+    "uncompressed_ceiling_below_quota_floor": true
+  },
+  "quota_floor_TiB": 16,
+  "quota_preferred_TiB": 20,
+  "status": "complete_preproduction_readiness_contract",
+  "submission_hold": "C-HI/C-LO/G-HI production waits for confirmed quota increase",
+  "uncompressed_four_case_TiB": 11.276708086632425
+}

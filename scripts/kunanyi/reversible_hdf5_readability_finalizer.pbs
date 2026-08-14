@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+#PBS -N h5_readfin
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=32gb
+#PBS -l walltime=04:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/reversible_hdf5_readability_finalizer.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/reversible_hdf5_readability_finalizer.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal057_preproduction_readiness}"
+SOURCE_ROOT="${SOURCE_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-08-13-reversible-hdf5-compression-pilot}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-08-14-reversible-hdf5-readability-finalizer}"
+FLOAT_COPY="$SOURCE_ROOT/data.0050.flt.reversible.h5"
+XRAISE_SCRIPT="$STAGE_ROOT/xraise_grid_smoke.py"
+HDF5PLUGIN_WHEEL="$STAGE_ROOT/hdf5plugin-5.1.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+HDF5PLUGIN_RUNTIME="$STAGE_ROOT/hdf5plugin_runtime"
+XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+ARCHIVE_HELPER="$STAGE_ROOT/scripts/kunanyi/archive_file_list_payload.sh"
+SNAPSHOT_ROOT="$STAGE_ROOT/readability_finalizer_archive_snapshot"
+PAYLOAD="$SNAPSHOT_ROOT/$(basename "$ANALYSIS_ROOT")"
+FILE_LIST="$SNAPSHOT_ROOT/archive_file_list.txt"
+ARCHIVE="$STAGE_ROOT/reversible_hdf5_readability_finalizer_2026-08-14.tar.gz"
+
+for path in "$FLOAT_COPY" "$XRAISE_SCRIPT" "$HDF5PLUGIN_WHEEL" "$ARCHIVE_HELPER" \
+  "$XRAISE_RUNTIME/xraise.py" "$XRAISE_RUNTIME/apec_corrections.txt" \
+  "$XRAISE_RUNTIME/gaunt_lut_2d.npz"; do
+  test -r "$path" || { echo "missing readability-finalizer input: $path" >&2; exit 2; }
+done
+for path in "$ANALYSIS_ROOT" "$SNAPSHOT_ROOT" "$ARCHIVE"; do
+  test ! -e "$path" && test ! -L "$path" || { echo "refusing to overwrite: $path" >&2; exit 2; }
+done
+
+module purge
+module load Anaconda3/2024.02-1
+if ! test -d "$HDF5PLUGIN_RUNTIME"; then
+  python -m pip install --no-deps --target "$HDF5PLUGIN_RUNTIME" "$HDF5PLUGIN_WHEEL"
+fi
+export PYTHONPATH="$HDF5PLUGIN_RUNTIME:${PYTHONPATH:-}"
+export HDF5_PLUGIN_PATH="$(python - <<'PY'
+import hdf5plugin
+print(hdf5plugin.PLUGINS_PATH)
+PY
+)"
+
+python - "$FLOAT_COPY" <<'PY'
+import os, sys
+import h5py, hdf5plugin
+
+path = sys.argv[1]
+assert os.environ["HDF5_PLUGIN_PATH"] == hdf5plugin.PLUGINS_PATH
+with h5py.File(path, "r") as handle:
+    assert handle["/cell_coords/X"][0, 0, :8].shape == (8,)
+    assert handle["/Timestep_50/vars/rho"][0, 0, :8].shape == (8,)
+print("fresh_process_zfp_readability=passed")
+PY
+
+mkdir -p "$ANALYSIS_ROOT"
+python "$XRAISE_SCRIPT" \
+  --input-h5 "$FLOAT_COPY" \
+  --timestep Timestep_50 \
+  --output-dir "$ANALYSIS_ROOT/xraise_readability" \
+  --xraise-py "$XRAISE_RUNTIME/xraise.py" \
+  --apec-table "$XRAISE_RUNTIME/apec_corrections.txt" \
+  --gaunt-lut "$XRAISE_RUNTIME/gaunt_lut_2d.npz" \
+  --redshift 0.05 \
+  --y-chunk 8 \
+  --view-angle-deg 0 \
+  --projected-u-bins 960
+
+python - "$ANALYSIS_ROOT" "$SOURCE_ROOT" <<'PY'
+import csv, json, sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+source = Path(sys.argv[2])
+summary = root / "xraise_readability/xraise_grid_smoke_summary.csv"
+metadata = root / "xraise_readability/xraise_grid_smoke_metadata.json"
+if not summary.is_file() or not metadata.is_file():
+    raise SystemExit("compressed float failed XRAiSE readability")
+rows = []
+for kind in ("float", "double"):
+    report = json.load(open(source / f"{kind}_compression_report.json"))
+    rows.append({
+        "kind": kind,
+        "source_bytes": report["source_bytes"],
+        "compressed_bytes": report["compressed_bytes"],
+        "source_over_compressed_ratio": report["source_over_compressed_ratio"],
+        "space_reduction_fraction": report["space_reduction_fraction"],
+        "bitwise_values_preserved": report["gates"]["bitwise_values_preserved"],
+        "fresh_process_xraise_readability": kind == "float",
+    })
+with (root / "readability_finalizer_summary.csv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+    writer.writeheader(); writer.writerows(rows)
+print("readability_finalizer_validation=passed")
+PY
+
+mkdir -p "$PAYLOAD/xraise_readability"
+cp -p "$ANALYSIS_ROOT/readability_finalizer_summary.csv" "$PAYLOAD/"
+cp -p "$ANALYSIS_ROOT/xraise_readability/xraise_grid_smoke_summary.csv" "$PAYLOAD/xraise_readability/"
+cp -p "$ANALYSIS_ROOT/xraise_readability/xraise_grid_smoke_metadata.json" "$PAYLOAD/xraise_readability/"
+cp -p "$SOURCE_ROOT/float_compression_report.json" "$PAYLOAD/"
+cp -p "$SOURCE_ROOT/double_compression_report.json" "$PAYLOAD/"
+bash "$ARCHIVE_HELPER" "$SNAPSHOT_ROOT" "$PAYLOAD" "$FILE_LIST" "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

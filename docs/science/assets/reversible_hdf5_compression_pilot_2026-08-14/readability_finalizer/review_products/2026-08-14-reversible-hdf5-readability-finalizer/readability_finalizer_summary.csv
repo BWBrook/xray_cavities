@@ -1,0 +1,3 @@
+kind,source_bytes,compressed_bytes,source_over_compressed_ratio,space_reduction_fraction,bitwise_values_preserved,fresh_process_xraise_readability
+float,44890581676,12367920700,3.6295981163592033,0.7244874038553102,True,True
+double,67318639276,29900580774,2.2514157763295626,0.5558350392168434,True,False

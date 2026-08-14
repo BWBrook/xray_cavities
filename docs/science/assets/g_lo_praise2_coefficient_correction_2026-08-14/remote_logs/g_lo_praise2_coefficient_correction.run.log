@@ -1,0 +1,3 @@
+/u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/scripts/science/diagnose_praise2_coefficient_correction.py:220: RuntimeWarning: divide by zero encountered in log10
+  "max_abs_log10_ratio": float(np.max(np.abs(np.log10(ratio[finite])))) if np.any(finite) else None,
+decision_label=PRAISE2_PUBLISHED_COEFFICIENT_VALIDATED_FOR_PRODUCTION

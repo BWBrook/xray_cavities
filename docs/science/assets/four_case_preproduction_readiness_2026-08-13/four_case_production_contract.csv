@@ -1,0 +1,5 @@
+case,environment_family,environment_id,jet_power_erg_s_one_sided,jet_speed_c,production_action,execution_order,reason
+C-HI,cluster,002_003,1e45,0.1,rerun_full_history_after_quota,1,existing particle retention cannot reconstruct complete radiative histories
+C-LO,cluster,002_003,1e43,0.1,rerun_full_history_after_quota,2,existing particle retention cannot reconstruct complete radiative histories
+G-LO,group,002_031,1e43,0.1,analyse_existing_conditional_rerun_only,0,complete retained particle-history evidence is adequate; fluid cadence is sparse
+G-HI,group,002_031,1e45,0.1,new_full_history_after_cluster_reruns,3,missing cell of the environment-by-power factorial design

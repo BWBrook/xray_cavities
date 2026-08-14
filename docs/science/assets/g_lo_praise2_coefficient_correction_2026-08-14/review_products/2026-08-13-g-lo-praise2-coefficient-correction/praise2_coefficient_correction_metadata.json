@@ -1,0 +1,34 @@
+{
+  "baseline_source_sha256": "ad664648040c4330ce124fdde7b739b7cd701759a52569863fc79460895f9668",
+  "coefficient_probe_corrected": 1.4067203728790296e-07,
+  "coefficient_probe_ratio": 1.3333333292256078,
+  "coefficient_probe_uncorrected": 1.0550402829096341e-07,
+  "corrected_nonfinite_count": 0,
+  "corrected_source_sha256": "eeee367581829b4dd779992c6b582a1676b796fc792b0bb70b8e9c13ee193895",
+  "decision_label": "PRAISE2_PUBLISHED_COEFFICIENT_VALIDATED_FOR_PRODUCTION",
+  "frequencies_GHz": [
+    0.15,
+    0.5,
+    1.4,
+    4.5,
+    15.0
+  ],
+  "gates": {
+    "corrected_nonfinite_not_increased": true,
+    "endpoint_maps_complete": true,
+    "exact_missing_factor_isolated": true,
+    "five_frequency_population_comparison_complete": true,
+    "representative_histories_complete": true
+  },
+  "representative_count": 12,
+  "requested_timepoints_Myr": [
+    10.0,
+    20.0,
+    30.0,
+    40.0,
+    50.0
+  ],
+  "selection_count": 4096,
+  "status": "complete_diagnostic",
+  "uncorrected_nonfinite_count": 0
+}

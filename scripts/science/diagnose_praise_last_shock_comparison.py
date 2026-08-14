@@ -235,10 +235,15 @@ def _method_difference(left: float, right: float) -> str:
 
 
 def _run_praise2_endpoint(
-    raw: Mapping[str, Any], praise2: Any, *, window_width: int
+    raw: Mapping[str, Any], praise2: Any, *, window_width: int,
+    frequencies_ghz: Sequence[float] = PROJECT_FREQUENCIES_GHZ,
 ) -> tuple[np.ndarray, dict[str, Any]]:
     result, provenance = praise2_driver._group_high_level_outputs(
-        raw, mode="unsmoothed", praise2=praise2, window_width=window_width
+        raw,
+        mode="unsmoothed",
+        praise2=praise2,
+        window_width=window_width,
+        frequencies=frequencies_ghz,
     )
     values = np.asarray(result["branches"]["full"]["values"], dtype=float)[:, :, 0]
     return values, provenance

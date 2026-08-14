@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_c1cmp
+#PBS -q normal
+#PBS -l select=1:ncpus=16:mpiprocs=1:mem=96gb
+#PBS -l walltime=24:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/g_lo_praise2_coefficient_correction.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/g_lo_praise2_coefficient_correction.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal057_preproduction_readiness}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-08-13-g-lo-praise2-coefficient-correction}"
+SCRIPT="$STAGE_ROOT/scripts/science/diagnose_praise2_coefficient_correction.py"
+BASELINE_SOURCE="$STAGE_ROOT/praise2_uncorrected.py"
+CORRECTED_SOURCE="$STAGE_ROOT/praise2_corrected.py"
+SELECTION_CSV="$STAGE_ROOT/stable_method_value_selection.csv"
+COMPARATOR_CSV="$STAGE_ROOT/stable_method_value_particle_comparison.csv"
+PYTHON_COMPAT="$STAGE_ROOT/scripts/kunanyi/python_compat"
+ARCHIVE_HELPER="$STAGE_ROOT/scripts/kunanyi/archive_file_list_payload.sh"
+STAGED_SHA256="$STAGE_ROOT/coefficient_inputs.sha256"
+SNAPSHOT_ROOT="$STAGE_ROOT/coefficient_archive_snapshot"
+PAYLOAD="$SNAPSHOT_ROOT/$(basename "$ANALYSIS_ROOT")"
+FILE_LIST="$SNAPSHOT_ROOT/archive_file_list.txt"
+ARCHIVE="$STAGE_ROOT/g_lo_praise2_coefficient_correction_2026-08-13.tar.gz"
+RUN_LOG="$STAGE_ROOT/g_lo_praise2_coefficient_correction.run.log"
+
+required=(
+  "$SCRIPT" "$BASELINE_SOURCE" "$CORRECTED_SOURCE" "$SELECTION_CSV"
+  "$COMPARATOR_CSV" "$ARCHIVE_HELPER" "$STAGED_SHA256" "$CACHE"
+  "$STAGE_ROOT/scripts/science/diagnose_g_lo_adiabatic_recovery.py"
+  "$STAGE_ROOT/scripts/science/diagnose_g_lo_full_loss_recurrence.py"
+  "$STAGE_ROOT/scripts/science/diagnose_g_lo_pressure_method_value.py"
+  "$STAGE_ROOT/scripts/science/diagnose_g_lo_stable_method_value.py"
+  "$STAGE_ROOT/scripts/science/diagnose_praise2_method_validation.py"
+  "$STAGE_ROOT/scripts/science/diagnose_praise_last_shock_comparison.py"
+  "$STAGE_ROOT/scripts/science/g_lo_particle_history.py"
+  "$STAGE_ROOT/scripts/science/g_lo_radio_method_value.py"
+  "$STAGE_ROOT/scripts/science/praise2_method_validation.py"
+  "$STAGE_ROOT/scripts/science/run_g_lo_radio_history_value.py"
+  "$PYTHON_COMPAT/contextlib2.py" "$PYTHON_COMPAT/hdf5plugin.py" "$PYTHON_COMPAT/yt.py"
+)
+for path in "${required[@]}"; do
+  test -r "$path" || { echo "missing coefficient input: $path" >&2; exit 2; }
+done
+for path in "$ANALYSIS_ROOT" "$SNAPSHOT_ROOT" "$ARCHIVE" "$RUN_LOG"; do
+  test ! -e "$path" && test ! -L "$path" || { echo "refusing to overwrite: $path" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$PYTHON_COMPAT:$STAGE_ROOT/plutokore/src:$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=16
+export NUMBA_NUM_THREADS=16
+
+set +e
+python "$SCRIPT" \
+  --cache "$CACHE" \
+  --selection-csv "$SELECTION_CSV" \
+  --comparator-csv "$COMPARATOR_CSV" \
+  --baseline-source "$BASELINE_SOURCE" \
+  --corrected-source "$CORRECTED_SOURCE" \
+  --output-dir "$ANALYSIS_ROOT" \
+  >"$RUN_LOG" 2>&1
+diagnostic_rc=$?
+set -e
+
+mkdir -p "$PAYLOAD"
+test -d "$ANALYSIS_ROOT" && cp -a "$ANALYSIS_ROOT/." "$PAYLOAD/"
+cp -p "$RUN_LOG" "$PAYLOAD/diagnostic_run.log"
+cp -p "$STAGED_SHA256" "$PAYLOAD/coefficient_inputs.sha256"
+printf 'diagnostic_rc=%s\n' "$diagnostic_rc" >"$PAYLOAD/diagnostic_exit_status.txt"
+bash "$ARCHIVE_HELPER" "$SNAPSHOT_ROOT" "$PAYLOAD" "$FILE_LIST" "$ARCHIVE"
+
+test "$diagnostic_rc" -eq 0 || exit "$diagnostic_rc"
+python - "$ANALYSIS_ROOT/praise2_coefficient_correction_metadata.json" <<'PY'
+import json, sys
+summary = json.load(open(sys.argv[1]))
+if summary.get("decision_label") != "PRAISE2_PUBLISHED_COEFFICIENT_VALIDATED_FOR_PRODUCTION":
+    raise SystemExit("coefficient decision did not pass")
+if not all(summary.get("gates", {}).values()):
+    raise SystemExit("coefficient decision gates did not all pass")
+print("coefficient_validation=passed")
+PY
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

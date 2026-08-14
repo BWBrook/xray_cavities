@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/xraise_grid_smoke.py", line 520, in <module>
+    main()
+  File "/u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/xraise_grid_smoke.py", line 515, in main
+    metadata = run(args)
+               ^^^^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/xraise_grid_smoke.py", line 340, in run
+    x, y, z = read_coords(h5)
+              ^^^^^^^^^^^^^^^
+  File "/u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/xraise_grid_smoke.py", line 291, in read_coords
+    x = h5["/cell_coords/X"][0, 0, :].astype(float)
+        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/h5py/_hl/dataset.py", line 758, in __getitem__
+    return self._fast_reader.read(args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "h5py/_selector.pyx", line 376, in h5py._selector.Reader.read
+OSError: Can't read data (can't open directory: /share/apps/software/Anaconda3/2024.02-1/lib/hdf5/plugin)

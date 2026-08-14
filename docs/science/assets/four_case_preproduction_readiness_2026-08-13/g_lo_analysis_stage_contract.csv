@@ -1,0 +1,6 @@
+stage,name,primary_inputs,primary_outputs,current_gate,stop_condition
+1,source_truth_manifest,protected fluid HDF5; exact catalogue times; initial atmosphere,snapshot identity and baseline contract,ready,any path/timestep/time/dataset mismatch
+2,energy_gravity_shock,rho;prs;tr1;vx1;vx2;vx3;Stewart g(r),ambient/lobe thermal kinetic gravitational energies; closure; shocks; Mach,method_contract_available,gravity-column inconsistency or material closure failure
+3,xray_cavity,fluid HDF5; accepted XRAiSE projection; initial atmosphere,0/45/90 X-ray maps; observational cavity geometry; pV/2.5pV/4pV,accepted_methods_reusable,topology remains threshold-ambiguous for scientific comparison
+4,radio_spectral_age,matched particle histories; corrected PRAiSE2; five frequencies,lossless/full-loss luminosities; spectra; spectral ages,pending_coefficient_comparison,coefficient comparison hold or future-particle leakage
+5,inferred_power_synthesis,stages 2-4; known bipolar power,Q estimates; bias versus time and Mach; four-case-ready tables,blocked_by_upstream_stages,missing decision-critical upstream quantity

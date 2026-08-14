@@ -1,0 +1,6 @@
+surface,cadence,count_expectation,retention,gate
+particles,0.01 Myr,0..5000 inclusive,full_project,never cull before compact radio cache and provenance are validated
+flt.h5,1 Myr,51 including t=0 and endpoint,full_project,reversible compression only after bitwise and analysis-readability validation
+dbl.h5,5 Myr,11 including t=0 and endpoint,full_project,keep active restart source uncompressed until a newer restart or completed-run gate exists
+catalogues_config_logs,complete,all,full_project,small provenance surface; retain without compaction
+compressed_fluid,post-run,all validated flt/dbl candidates,preferred_archive,no source deletion in the pilot; later deletion needs explicit lifecycle authorization

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 from pathlib import Path
+import subprocess
 
 import numpy as np
 import pytest
@@ -129,13 +130,30 @@ def test_deterministic_repeat_handles_nested_array_audits():
     assert counter["n"] == 2
 
 
-def test_provenance_resolver_has_pinned_identity():
+def test_provenance_resolver_has_pinned_identity(tmp_path):
     m = load_module()
-    source = Path("/Users/bwbrook/git/utas-agn/plutokore/src/plutokore/radio/praise2.py")
-    provenance = m.resolve_praise2_provenance(source)
+    checkout = Path("/Users/bwbrook/git/utas-agn/plutokore")
+    source = tmp_path / "praise2.py"
+    source.write_bytes(
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(checkout),
+                "show",
+                f"{m.EXPECTED_PRAISE2_COMMIT}:src/plutokore/radio/praise2.py",
+            ],
+            check=True,
+            capture_output=True,
+        ).stdout
+    )
+    proof = tmp_path / "plutokore_commit.txt"
+    proof.write_text(m.EXPECTED_PRAISE2_COMMIT + "\n")
+    provenance = m.resolve_praise2_provenance(source, commit_proof_path=proof)
     assert provenance["commit"] == m.EXPECTED_PRAISE2_COMMIT
     assert provenance["source_sha256"] == m.EXPECTED_PRAISE2_SOURCE_SHA256
     assert provenance["callable"] == "plutokore.radio.praise2.praise"
+    assert provenance["commit_verification"] == "staged_commit_proof"
 
 
 def test_provenance_accepts_non_git_staged_source_with_exact_commit_proof(tmp_path):

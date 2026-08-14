@@ -7,6 +7,7 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
     "astropy",
     "h5py",
+    "hdf5plugin",
     "matplotlib",
     "numpy",
     "scipy<1.14",

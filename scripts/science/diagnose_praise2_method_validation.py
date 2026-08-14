@@ -127,6 +127,7 @@ def _group_high_level_outputs(
     mode: str,
     praise2: Any,
     window_width: int = 0,
+    frequencies: Sequence[float] = FREQUENCIES_GHZ,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Run PRAiSE2 on identically sliced post-injection groups.
 
@@ -138,12 +139,18 @@ def _group_high_level_outputs(
     """
     if window_width not in (0, 5):
         raise Praise2DiagnosticError("PRAiSE2 diagnostic window must be 0 or 5")
+    frequencies = np.asarray(frequencies, dtype=float)
+    if frequencies.ndim != 1 or frequencies.size == 0 or np.any(frequencies <= 0):
+        raise Praise2DiagnosticError("PRAiSE2 frequencies must be a positive one-dimensional array")
     pressure = np.asarray(raw["pressure"])
     n = pressure.shape[0]
     starts = np.argmax(np.isfinite(pressure), axis=1)
     if np.any(~np.isfinite(pressure[np.arange(n), -1])):
         raise Praise2DiagnosticError("selected pressure endpoint is non-finite")
-    high_values = {name: np.full((n, 2, 1), np.nan, dtype=float) for name in ("lossless", "adiabatic", "full")}
+    high_values = {
+        name: np.full((n, frequencies.size, 1), np.nan, dtype=float)
+        for name in ("lossless", "adiabatic", "full")
+    }
     provenance: dict[str, Any] = {"groups": [], "singleton_rows": []}
     for start in sorted(np.unique(starts).tolist()):
         rows = np.flatnonzero(starts == start)
@@ -220,24 +227,29 @@ def _group_high_level_outputs(
             "particle_spacing_Myr": spacing_myr,
         }
         if width == 1:
-            kwargs = build_praise2_call_kwargs(contract, frequencies=FREQUENCIES_GHZ, losses=(0,), particle_spacing=0.01 * u.Myr)
+            kwargs = build_praise2_call_kwargs(contract, frequencies=frequencies, losses=(0,), particle_spacing=0.01 * u.Myr)
             kwargs["window_width"] = window_width
             result = praise2.praise(**kwargs)
             raw_loss = result.get("lossless", [{}])[-1].get("emis")
             if raw_loss is None:
                 raise Praise2DiagnosticError("PRAiSE2 singleton lossless output is missing")
             values = np.asarray(raw_loss.to_value(EMISSIVITY_UNIT) if hasattr(raw_loss, "to_value") else raw_loss, dtype=float)
-            if values.shape != (len(rows), 2, 1):
+            if values.shape != (len(rows), frequencies.size, 1):
                 raise Praise2DiagnosticError("PRAiSE2 singleton output shape mismatch")
             for name in high_values:
                 high_values[name][rows] = values
             provenance["singleton_rows"].extend(rows.astype(int).tolist())
             provenance["groups"].append({"start": int(start), "rows": rows.astype(int).tolist(), "width": 1, "branch_policy": "external_approved_singleton_convention", "state_validation_scope": "none", "window_width": int(window_width), **resampling_provenance})
             continue
-        kwargs = build_praise2_call_kwargs(contract, frequencies=FREQUENCIES_GHZ, losses=(0, 1, 4), particle_spacing=0.01 * u.Myr)
+        kwargs = build_praise2_call_kwargs(contract, frequencies=frequencies, losses=(0, 1, 4), particle_spacing=0.01 * u.Myr)
         kwargs["window_width"] = window_width
         result = praise2.praise(**kwargs)
-        audit = extract_praise2_outputs(result, expected_rows=len(rows), expected_frequencies=2, expected_part_output=endpoint_source_index)
+        audit = extract_praise2_outputs(
+            result,
+            expected_rows=len(rows),
+            expected_frequencies=frequencies.size,
+            expected_part_output=endpoint_source_index,
+        )
         for name in high_values:
             high_values[name][rows] = audit["branches"][name]["values"]
         provenance["groups"].append({"start": int(start), "rows": rows.astype(int).tolist(), "width": int(width), "branch_policy": "direct_high_level_loss_codes_0_1_4", "state_validation_scope": "none", "window_width": int(window_width), **resampling_provenance})

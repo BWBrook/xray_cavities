@@ -1,0 +1,15 @@
+field,value
+pbs_job_id,785271.kunanyi-ohpc
+job_name,g_lo_c1cmp
+job_state,F
+exit_status,0
+stageout_status,1
+walltime,01:12:41
+archive_sha256,2752dd195d6678d81200052ab2c9393725c0eada87d6919418f19c964a10ecbb
+selection_count,4096
+representative_count,12
+frequency_count,5
+timepoint_count,5
+uncorrected_nonfinite_count,0
+corrected_nonfinite_count,0
+decision_label,PRAISE2_PUBLISHED_COEFFICIENT_VALIDATED_FOR_PRODUCTION

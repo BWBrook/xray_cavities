@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+#PBS -N h5_revpil
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=32gb
+#PBS -l walltime=24:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/reversible_hdf5_compression_pilot.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal057_preproduction_readiness/reversible_hdf5_compression_pilot.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal057_preproduction_readiness}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-08-13-reversible-hdf5-compression-pilot}"
+OUTPUTS="/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs"
+FLOAT_SOURCE="${FLOAT_SOURCE:-$OUTPUTS/data.0050.flt.h5}"
+DOUBLE_SOURCE="${DOUBLE_SOURCE:-$OUTPUTS/data.0010.dbl.h5}"
+COMPRESSOR="$STAGE_ROOT/scripts/science/reversible_hdf5_compression.py"
+XRAISE_SCRIPT="$STAGE_ROOT/xraise_grid_smoke.py"
+HDF5PLUGIN_WHEEL="$STAGE_ROOT/hdf5plugin-5.1.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+HDF5PLUGIN_RUNTIME="$STAGE_ROOT/hdf5plugin_runtime"
+XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+ARCHIVE_HELPER="$STAGE_ROOT/scripts/kunanyi/archive_file_list_payload.sh"
+STAGED_SHA256="$STAGE_ROOT/compression_inputs.sha256"
+SNAPSHOT_ROOT="$STAGE_ROOT/compression_archive_snapshot"
+PAYLOAD="$SNAPSHOT_ROOT/$(basename "$ANALYSIS_ROOT")"
+FILE_LIST="$SNAPSHOT_ROOT/archive_file_list.txt"
+ARCHIVE="$STAGE_ROOT/reversible_hdf5_compression_pilot_2026-08-13.tar.gz"
+
+for path in "$COMPRESSOR" "$XRAISE_SCRIPT" "$HDF5PLUGIN_WHEEL" "$ARCHIVE_HELPER" "$STAGED_SHA256" \
+  "$FLOAT_SOURCE" "$DOUBLE_SOURCE" "$XRAISE_RUNTIME/xraise.py" \
+  "$XRAISE_RUNTIME/apec_corrections.txt" "$XRAISE_RUNTIME/gaunt_lut_2d.npz"; do
+  test -r "$path" || { echo "missing compression-pilot input: $path" >&2; exit 2; }
+done
+for path in "$ANALYSIS_ROOT" "$SNAPSHOT_ROOT" "$ARCHIVE"; do
+  test ! -e "$path" && test ! -L "$path" || { echo "refusing to overwrite: $path" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_SHA256")"
+)
+
+module purge
+module load Anaconda3/2024.02-1
+test ! -e "$HDF5PLUGIN_RUNTIME" || { echo "refusing existing private plugin runtime" >&2; exit 2; }
+python -m pip install --no-deps --target "$HDF5PLUGIN_RUNTIME" "$HDF5PLUGIN_WHEEL"
+export PYTHONPATH="$HDF5PLUGIN_RUNTIME:${PYTHONPATH:-}"
+export HDF5_PLUGIN_PATH="$(python - <<'PY'
+import hdf5plugin
+print(hdf5plugin.PLUGINS_PATH)
+PY
+)"
+python - <<'PY'
+import h5py, hdf5plugin
+assert hdf5plugin.Zfp(reversible=True)
+from importlib.metadata import version
+import os
+assert os.environ["HDF5_PLUGIN_PATH"] == hdf5plugin.PLUGINS_PATH
+print("hdf5plugin_zfp_preflight=passed", h5py.__version__, version("hdf5plugin"))
+PY
+
+mkdir -p "$ANALYSIS_ROOT"
+FLOAT_COPY="$ANALYSIS_ROOT/data.0050.flt.reversible.h5"
+DOUBLE_COPY="$ANALYSIS_ROOT/data.0010.dbl.reversible.h5"
+python "$COMPRESSOR" "$FLOAT_SOURCE" "$FLOAT_COPY" --report "$ANALYSIS_ROOT/float_compression_report.json"
+python "$COMPRESSOR" "$DOUBLE_SOURCE" "$DOUBLE_COPY" --report "$ANALYSIS_ROOT/double_compression_report.json"
+
+python "$XRAISE_SCRIPT" \
+  --input-h5 "$FLOAT_COPY" \
+  --timestep Timestep_50 \
+  --output-dir "$ANALYSIS_ROOT/xraise_readability" \
+  --xraise-py "$XRAISE_RUNTIME/xraise.py" \
+  --apec-table "$XRAISE_RUNTIME/apec_corrections.txt" \
+  --gaunt-lut "$XRAISE_RUNTIME/gaunt_lut_2d.npz" \
+  --redshift 0.05 \
+  --y-chunk 8 \
+  --view-angle-deg 0 \
+  --projected-u-bins 960
+
+python - "$ANALYSIS_ROOT" <<'PY'
+import csv, json, sys
+from pathlib import Path
+root = Path(sys.argv[1])
+rows = []
+for kind in ("float", "double"):
+    report = json.load(open(root / f"{kind}_compression_report.json"))
+    if not all(report["gates"].values()):
+        raise SystemExit(f"{kind} validation gate failed")
+    rows.append({
+        "kind": kind,
+        "source_bytes": report["source_bytes"],
+        "compressed_bytes": report["compressed_bytes"],
+        "source_over_compressed_ratio": report["source_over_compressed_ratio"],
+        "space_reduction_fraction": report["space_reduction_fraction"],
+        "elapsed_seconds": report["elapsed_seconds"],
+        "dataset_count": report["dataset_count"],
+        "bitwise_values_preserved": report["gates"]["bitwise_values_preserved"],
+    })
+with (root / "compression_pilot_summary.csv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+    writer.writeheader(); writer.writerows(rows)
+summary = root / "xraise_readability/xraise_grid_smoke_summary.csv"
+metadata = root / "xraise_readability/xraise_grid_smoke_metadata.json"
+if not summary.is_file() or not metadata.is_file():
+    raise SystemExit("compressed float failed X-ray analysis readability")
+print("compression_pilot_validation=passed")
+PY
+
+mkdir -p "$PAYLOAD/xraise_readability"
+cp -p "$ANALYSIS_ROOT/float_compression_report.json" "$PAYLOAD/"
+cp -p "$ANALYSIS_ROOT/double_compression_report.json" "$PAYLOAD/"
+cp -p "$ANALYSIS_ROOT/compression_pilot_summary.csv" "$PAYLOAD/"
+cp -p "$ANALYSIS_ROOT/xraise_readability/xraise_grid_smoke_summary.csv" "$PAYLOAD/xraise_readability/"
+cp -p "$ANALYSIS_ROOT/xraise_readability/xraise_grid_smoke_metadata.json" "$PAYLOAD/xraise_readability/"
+cp -p "$STAGED_SHA256" "$PAYLOAD/compression_inputs.sha256"
+bash "$ARCHIVE_HELPER" "$SNAPSHOT_ROOT" "$PAYLOAD" "$FILE_LIST" "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

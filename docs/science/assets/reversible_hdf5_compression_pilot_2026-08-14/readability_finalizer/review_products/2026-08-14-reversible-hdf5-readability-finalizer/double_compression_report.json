@@ -1,0 +1,167 @@
+{
+  "compressed_bytes": 29900580774,
+  "compression_counts": {
+    "zfp_reversible": 12
+  },
+  "dataset_count": 12,
+  "elapsed_seconds": 4555.983111378737,
+  "gates": {
+    "bitwise_values_preserved": true,
+    "dtype_and_shape_preserved": true,
+    "hierarchy_and_metadata_preserved": true,
+    "no_overwrite": true,
+    "reopen_with_hdf5plugin": true
+  },
+  "output": "/scratch/bwbrook/xray_cavities_analysis/2026-08-13-reversible-hdf5-compression-pilot/data.0010.dbl.reversible.h5",
+  "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/data.0010.dbl.h5",
+  "source_bytes": 67318639276,
+  "source_over_compressed_ratio": 2.2514157763295626,
+  "space_reduction_fraction": 0.5558350392168434,
+  "status": "complete_reversible_copy",
+  "validation": [
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "Timestep_10/vars/prs",
+      "dtype": "float64",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "4de574d06cf065fc6ed6e586fb670d6e758f0a441f840110a51ed8759a2fbe62"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "Timestep_10/vars/rho",
+      "dtype": "float64",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "2ebf90d36c694473e757da1564ad303f38cbed666b920a9c628bbd924fbf7823"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "Timestep_10/vars/tr1",
+      "dtype": "float64",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "29ed790ca05594be043a4335d3225c3c16628882d0cfeae2b4c08ad395a67bc3"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "Timestep_10/vars/vx1",
+      "dtype": "float64",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "a2bf9b0a3609bf1c91d716cc49356271ae432effabbd46c91519b8b128c8d7f1"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "Timestep_10/vars/vx2",
+      "dtype": "float64",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "d24deb6bb91e31c3d95ae2507f64eb15186de23e85ff738b70283a1673e3d7f1"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "Timestep_10/vars/vx3",
+      "dtype": "float64",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "996c0d1cf5959df15cc860f556098016d9d00d3428ab8392367c0be1b5945aa8"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "cell_coords/X",
+      "dtype": "float32",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "53772f65ee662c89b9a693b29946adee25e7dd264f0f4ab9e70606e6f6259b80"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "cell_coords/Y",
+      "dtype": "float32",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "a5c43b5c635ba359eb5f07dbb3f2c77388619097fdcc4cb48f08d0f2ea483cf0"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "cell_coords/Z",
+      "dtype": "float32",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "value_sha256": "80656ca1dbd5ceefc7945fee18546bbecd75e39f251dee5141f676985b0a9e1b"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "node_coords/X",
+      "dtype": "float32",
+      "shape": [
+        1015,
+        961,
+        961
+      ],
+      "value_sha256": "72a08b202f282fb822f0d6f2f148cf4e6cec661ea07a4e4dcb2d8054bc910285"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "node_coords/Y",
+      "dtype": "float32",
+      "shape": [
+        1015,
+        961,
+        961
+      ],
+      "value_sha256": "bd3e127c55cd7bcfd30d9c2c10176588a82ed5b3fdd4b864f2d33ec345ccc488"
+    },
+    {
+      "bitwise_identical": true,
+      "compression_kind": "zfp_reversible",
+      "dataset": "node_coords/Z",
+      "dtype": "float32",
+      "shape": [
+        1015,
+        961,
+        961
+      ],
+      "value_sha256": "58936ef30646de163be157f9cd3312d2d58f163ab2ee20cc981a9ad5ecf32a00"
+    }
+  ]
+}

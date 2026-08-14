@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-08-12
+Last updated: 2026-08-14
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -38,8 +38,9 @@ current instruction without checking its goal status.
 ## Supervisor Priority And Execution Order
 
 - Scientific analysis may proceed now on `G-LO`, which has the complete
-  retained particle-history sequence. The open PRAiSE review is a
-  radio-method decision, not a blanket hold on other `G-LO` science.
+  retained particle-history sequence. The PRAiSE coefficient science gate is
+  green; corrected PRAiSE2 is the production method once its tested source
+  change is published to the fork-backed working branch.
 - Once TPAC increases the storage quota, rerun the simulations lacking full
   retained particle histories: `C-HI` and `C-LO`. These reruns are the top
   compute priority.
@@ -62,18 +63,66 @@ current instruction without checking its goal status.
 - The primary science tests are cavity-energy bias versus shock strength and
   inferred versus known bipolar jet power. Preserve `2.5pV` as the adopted
   non-relativistic interpretation and `4pV` as the literature comparator.
-- The open PRAiSE decision governs final full-loss radio production but does
-  not block the other `G-LO` analysis components or pipeline preparation.
+- Corrected PRAiSE2 governs final full-loss radio production. This does not
+  block the other `G-LO` analysis components or pipeline preparation.
 
 ## Active Checkpoint
 
+### Goal 057: four-case pre-production readiness
+
+- Status: `complete_preproduction_readiness_quota_hold`.
+- Decision:
+  `FOUR_CASE_CONTRACT_AND_METHOD_GATES_GREEN_QUOTA_APPROVAL_PENDING`.
+- The matched production contract is `C-HI` full-history rerun, `C-LO`
+  full-history rerun, then new `G-HI`; existing full-history `G-LO` is analysed
+  now and rerun only if a specific missing surface is demonstrated.
+- Conservative uncompressed storage is `2.819 TiB` per case and `11.277 TiB`
+  for four matched cases. The validated pilot ratios project about `0.936 TiB`
+  retained per case and `3.745 TiB` across four cases, but this excludes
+  source/copy overlap and safety margin. Keep the quota request at least
+  `16 TiB`, preferably `20 TiB`; no production submission occurs before
+  approval.
+- The approved PRAiSE2 equation (3) coefficient is implemented locally in the
+  `plutokore` working tree. PBS `785271.kunanyi-ohpc` / `g_lo_c1cmp` completed
+  green; corrected PRAiSE2 is the production method. Its 50 Myr integrated
+  effect ranges from `-0.096%` at 0.15 GHz to `-2.694%` at 15 GHz, with zero
+  added non-finite values.
+- The corrected plutokore source and regression test are published on
+  `bwbrook/deep-server-bringup` as commit
+  `a190f0d96610c781a7ff71860333a0aae3cdfe92`; future production staging uses
+  this corrected radio method.
+- PBS `785272.kunanyi-ohpc` / `h5_revpil` produced bitwise-valid reversible
+  float and double copies with `72.45%` and `55.58%` file-size reductions, then
+  failed only because the fresh XRAiSE process lacked `HDF5_PLUGIN_PATH`.
+- Future compression now discovers the plugin path and routes integers plus
+  real `cell_coords`/`node_coords` arrays through gzip+shuffle. No original was
+  changed or deleted and the pilot copies were not recompressed.
+- Readability-only finalizer PBS `785371.kunanyi-ohpc` / `h5_readfin` completed
+  green. Fresh-process ZFP reads and real XRAiSE analysis passed; reversible
+  HDF5 compression is technically validated for future completed copies.
+- No original may be deleted from the compression pilot. Any later source
+  deletion requires an explicit lifecycle decision after validation.
+- A reusable five-stage `G-LO` snapshot-analysis contract now covers source
+  truth, energy/gravity/shocks, X-ray/cavity, radio/spectral age, and inferred
+  jet-power synthesis at `0/10/20/30/40/50 Myr`.
+- Science note/assets:
+  `docs/science/four_case_preproduction_readiness_2026-08-13.md` and
+  `docs/science/assets/four_case_preproduction_readiness_2026-08-13/`.
+- Pilot completion notes/assets:
+  `docs/science/g_lo_praise2_coefficient_correction_2026-08-14.md`,
+  `docs/science/reversible_hdf5_compression_pilot_2026-08-14.md`, and their
+  matching dated asset directories.
+- Goal/log: `docs/goals/057-four-case-preproduction-readiness/` and
+  `docs/exchange/logs/2026-08-13-four-case-preproduction-readiness.md`.
+
 ### Goal 056: G-LO last-shock PRAiSE comparison
 
-- Status: `complete_reference_accepted_coefficient_followup_required`.
+- Status: `complete_reference_accepted_coefficient_followup_resolved_by_goal057`.
 - Patrick's review supersedes the provisional Goal 055 unsmoothed-primary
   convention: corrected `plutokore.radio.praise2.praise(...)`, following the
   published equation (3), is the intended reference. The interval-aware
-  validation is accepted; only the coefficient correction remains pending.
+  validation is accepted; Goal 057 has now completed the coefficient-only
+  correction and validation.
 - Goal 056 compares PRAiSE1, native PRAiSE2, controlled-common-input PRAiSE2,
   and Goal 050 on the exact deterministic 4096-particle panel, using only the
   latest-shock-to-evaluation interval for scientific classification.
@@ -111,12 +160,15 @@ current instruction without checking its goal status.
 - Patrick accepted Goal 056's interval-aware validation and selected PRAiSE2
   as the published-method reference. Its recurrence, cutoff, and smoothing
   differences from PRAiSE1/Goal 050 are retained as distinct-method behaviour.
-- The pinned PRAiSE2 radiative coefficient is `0.7500000023105955` of the
-  published equation (3) value. `Q-027` requires restoring the missing `4/3`
-  multiplier and isolating its effects before matched radio production.
-- After the coefficient-only tests pass, corrected
-  `pk.radio.praise2.praise(...)` is the production method. Preserve the
-  uncorrected Goal 056 products as baseline provenance.
+- The pinned PRAiSE2 radiative coefficient was `0.7500000023105955` of the
+  published equation (3) value. Goal 057 restored and isolated the missing
+  `4/3` multiplier; the coefficient probe, particle histories, weighted
+  luminosities, endpoint maps, finite-value gates, and regression tests pass.
+- Corrected `pk.radio.praise2.praise(...)` is the production method. Preserve
+  the uncorrected Goal 056 products as baseline provenance. The tested source
+  correction is published as plutokore commit
+  `a190f0d96610c781a7ff71860333a0aae3cdfe92` on
+  `bwbrook/deep-server-bringup`.
 - Goal/log:
   `docs/goals/056-g-lo-praise-last-shock-comparison/` and
   `docs/exchange/logs/2026-08-10-g-lo-praise-last-shock-comparison.md`.
@@ -207,10 +259,11 @@ current instruction without checking its goal status.
 ## Holds and Caveats
 
 - Goal 056 establishes PRAiSE2's post-shock numerical usability and scientific
-  interpretability. Patrick has accepted the distinct-method behaviour.
-  Matched radio production is now held only for `Q-027`: restore and validate
-  the published equation (3) `4/3` radiative coefficient. Radio/raytracing
-  products remain diagnostic until that correction is verified.
+  interpretability. Patrick has accepted the distinct-method behaviour. The
+  equation (3) `4/3` coefficient is implemented locally; matched radio
+  production remains held until Goal 057's coefficient-only remote comparison
+  verifies its scientific effect. Radio/raytracing products remain diagnostic
+  until then.
 - X-ray cavity topology remains conditional rather than frozen.
 - The Level 3 gravitational-energy method is now defined by Stas: construct
   the initial-atmosphere potential from `tabulated_cosmo_002003.csv` and apply
