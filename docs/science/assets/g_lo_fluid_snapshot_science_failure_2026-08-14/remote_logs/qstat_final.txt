@@ -1,0 +1,184 @@
+spawn ssh -tt -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 tpac-jumpbox-via-deep
+bwbrook@<tpac-host>'s password: 
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+System & service status for eResearch HPC Clusters is available here:
+
+  https://utas1.service-now.com/selfservice?id=services_status
+
+============================================================================================
+
+
+JUMPBOX - this host provides secure access to various HPC clusters
+          note jumpbox is accessible from anywhere on the Internet.
+
+The login nodes of the clusters that you can ssh to are as follows:
+
+  - cluster name OS          - login node name - Purpose
+  - kunanyi OHPC Centos 7.4  -  kunanyi        - General purpose
+  - Rosalind OHPC Centos 7.7 -  rosalind       - Genomics
+
+
+If you need access to X11 based applications then remember to add -X or -Y to your ssh command.
+ssh -Y is a good choice if using Matlab with the graphical user interface.
+
+It is recommended you use 'screen' on the login node of the cluster to preserve your session
+as this jumpbox will automatically reboot for security update patches.
+This will happen on a regular basis.
+
+============================================================================================
+
+*** You cannot submit jobs from jumpbox.  You must connect to one of the cluster login
+*** nodes listed above to submit jobs to the cluster.
+
+============================================================================================
+Last login: Fri Aug 14 13:11:02 2026 from <campus-ip>
+bwbrook@jumpbox-1:~$ ssh -tt kunanyi
+Last login: Fri Aug 14 13:11:02 2026 from <tpac-host>
+bwbrook@kunanyi-00:~$ printf %s cXN0YXQgLXggLWYgNzg1NDgzLmt1bmFueWktb2hwYw== <f %s cXN0YXQgLXggLWYgNzg1NDgzLmt1bmFueWktb2hwYw== |                          base64 -d | bash; echo _<DgzLmt1bmFueWktb2hwYw== | base64 -d | bash; echo __                         CODEX_STATUS__=$?
+Job Id: 785483.kunanyi-ohpc
+    Job_Name = g_lo_fluid
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 0
+    resources_used.cput = 00:00:00
+    resources_used.mem = 40336kb
+    resources_used.ncpus = 1
+    resources_used.vmem = 314172kb
+    resources_used.walltime = 00:00:13
+    job_state = F
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Fri Aug 14 12:57:06 2026
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal058_g_lo_s
+	napshot_science/g_lo_fluid_snapshot_science.err
+    exec_host = n020/2
+    exec_vnode = (n020:ncpus=1:mem=67108864kb)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = ae
+    Mail_Users = barry.brook@utas.edu.au
+    mtime = Fri Aug 14 12:57:19 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal058_g_lo_
+	snapshot_science/g_lo_fluid_snapshot_science.out
+    Priority = 0
+    qtime = Fri Aug 14 12:57:06 2026
+    Rerunable = True
+    Resource_List.mem = 64gb
+    Resource_List.mpiprocs = 1
+    Resource_List.ncpus = 1
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=1:mpiprocs=1:mem=64gb
+    Resource_List.walltime = 48:00:00
+    stime = Fri Aug 14 12:57:06 2026
+    session_id = 21518
+    jobdir = /u/bwbrook
+    substate = 93
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=C.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/pr
+	un/1.3:/opt/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/
+	bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science,
+	PBS_O_SYSTEM=Linux,LMOD_FAMILY_COMPILER_VERSION=8.3.0,
+	MANPATH=/opt/ohpc/pub/compiler/gcc/8.3.0/share/man:/opt/ohpc/pub/utils
+	/autotools/share/man:/usr/local/share/man:/usr/share/man/overrides:/usr
+	/share/man/en:/usr/share/man:/opt/pbs/share/man,XDG_SESSION_ID=52425,
+	HOSTNAME=<tpac-host>,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,SHELL=/bin/bash,TERM=dumb,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:2;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,HISTSIZE=1000,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,SSH_CLIENT=<private-ip> 49434 22,
+	LMOD_PKG=/opt/ohpc/admin/lmod/lmod,OLDPWD=/u/bwbrook,LMOD_QUIET=yes,
+	LMOD_VERSION=8.1.18,SSH_TTY=/dev/pts/12,LC_ALL=C,
+	__LMOD_REF_COUNT_LOADEDMODULES=autotools:1;prun/1.3:1;gnu8/8.3.0:1;ohp
+	c:1,QT_GRAPHICSSYSTEM_CHECKED=1,USER=bwbrook,HISTFILESIZE=2000,LS_COLORS=,
+	LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib64,
+	__LMOD_REF_COUNT__LMFILES_=/opt/ohpc/pub/modulefiles/autotools:1;/opt/
+	ohpc/pub/modulefiles/prun/1.3:1;/opt/ohpc/pub/modulefiles/gnu8/8.3.0:1;
+	/opt/ohpc/pub/modulefiles/ohpc:1,LMOD_PREPEND_BLOCK=normal,
+	PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/prun/1.3
+	:/opt/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/bin:/u
+	sr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXtbImNvbXBpbGVyIl09ImdudTgiLH0sbVQ9e2F1dG90b29scz17WyJmbiJdPSIvb3B0L29
+	ocGMvcHViL21vZHVsZWZpbGVzL2F1dG90b29scyIsWyJmdWxsTmFtZSJdPSJhdXRvdG9vbH
+	MiLFsibG9hZE9yZGVyIl09MSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzI
+	l09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJhdXRvdG9vbHMiLH0sZ251OD17WyJmbiJdPSIv
+	b3B0L29ocGMvcHViL21vZHVsZWZpbGVzL2dudTgvOC4zLjAiLFsiZnVsbE5hbWUiXT0iZ25
+	1OC84LjMuMCIsWyJsb2FkT3JkZXIiXT0z,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science,
+	_LMFILES_=/opt/ohpc/pub/modulefiles/autotools:/opt/ohpc/pub/modulefile
+	s/prun/1.3:/opt/ohpc/pub/modulefiles/gnu8/8.3.0:/opt/ohpc/pub/modulefil
+	es/ohpc,LANG=C.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,LOADEDMODULES=autotools:prun/1.3:gnu8/8.3.0:ohpc,
+	_ModuleTable_Sz_=3,LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=2,
+	__LMOD_REF_COUNT_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:1;/opt/ohpc
+	/pub/utils/prun/1.3:1;/opt/ohpc/pub/utils/autotools/bin:1;/share/apps/b
+	in:1;/opt/ohpc/pub/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;
+	/usr/sbin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iY
+	WN0aXZlIixbInVzZXJOYW1lIl09ImdudTgiLH0sb2hwYz17WyJmbiJdPSIvb3B0L29ocGMv
+	cHViL21vZHVsZWZpbGVzL29ocGMiLFsiZnVsbE5hbWUiXT0ib2hwYyIsWyJsb2FkT3JkZXI
+	iXT00LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbIn
+	VzZXJOYW1lIl09Im9ocGMiLH0scHJ1bj17WyJmbiJdPSIvb3B0L29ocGMvcHViL21vZHVsZ
+	WZpbGVzL3BydW4vMS4zIixbImZ1bGxOYW1lIl09InBydW4vMS4zIixbImxvYWRPcmRlciJd
+	PTIscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXN
+	lck5hbWUiXT0icHJ1biIsfSx9LG1wYXRo,
+	__LMOD_REF_COUNT_INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include:1,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	LC_CTYPE=C.UTF-8,SSH_CONNECTION=<private-ip> 49434 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	LESSOPEN=||/usr/bin/lesspipe.sh %s,LMOD_SETTARG_FULL_SUPPORT=no,
+	__LMOD_REF_COUNT_LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib6
+	4:1,PROMPT_COMMAND=history -a,LMOD_FULL_SETTARG_SUPPORT=no,
+	LMOD_FAMILY_COMPILER=gnu8,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include,
+	LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	__LMOD_REF_COUNT_MANPATH=/opt/ohpc/pub/compiler/gcc/8.3.0/share/man:1;
+	/opt/ohpc/pub/utils/autotools/share/man:1;/usr/local/share/man:1;/usr/s
+	hare/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1,
+	LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=normal,
+	PBS_O_HOST=<tpac-host>
+    comment = Job run at Fri Aug 14 at 12:57 on (n020:ncpus=1:mem=67108864kb) a
+	nd failed
+    etime = Fri Aug 14 12:57:06 2026
+    run_count = 1
+    Stageout_status = 1
+    Exit_status = 1
+    Submit_arguments = g_lo_fluid_snapshot_science.pbs
+    history_timestamp = 1786676239
+    project = _pbs_project_default
+
+__CODEX_STATUS__=0
+bwbrook@kunanyi-00:~$ exit
+logout
+Connection to kunanyi closed.
+bwbrook@jumpbox-1:~$ exit
+logout
+Connection to <tpac-host> closed.

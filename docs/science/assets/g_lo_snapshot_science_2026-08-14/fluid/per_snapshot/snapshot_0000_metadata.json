@@ -1,0 +1,17 @@
+{
+  "identity": {
+    "environment_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+    "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/data.0000.flt.h5",
+    "input_size_bytes": 44890581676,
+    "method_version": 1,
+    "output_index": 0,
+    "shape": [
+      1014,
+      960,
+      960
+    ],
+    "time_code": 0.0,
+    "timestep": "Timestep_0"
+  },
+  "status": "complete"
+}

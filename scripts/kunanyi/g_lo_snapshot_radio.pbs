@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_radio
+#PBS -q normal
+#PBS -l select=1:ncpus=16:mpiprocs=1:mem=96gb
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science/g_lo_snapshot_radio.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science/g_lo_snapshot_radio.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-08-14-g-lo-snapshot-radio}"
+FLUID_ROOT="${FLUID_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-08-14-g-lo-fluid-snapshot-science}"
+CACHE="${CACHE:-/scratch/bwbrook/xray_cavities_analysis/2026-07-24-g-lo-radio-history-method-value-gate/cache/g_lo_history.h5}"
+INITIAL_ROOT="${INITIAL_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs}"
+GUARDED_ROOT="${GUARDED_ROOT:-/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs}"
+SCRIPT="$STAGE_ROOT/scripts/science/g_lo_snapshot_radio.py"
+PRAISE2_SOURCE="$STAGE_ROOT/plutokore/src/plutokore/radio/praise2.py"
+PRAISE2_COMMIT_PROOF="$STAGE_ROOT/praise2_commit.txt"
+PYTHON_COMPAT="$STAGE_ROOT/python_compat"
+STAGED_HASHES="$STAGE_ROOT/g_lo_radio_inputs.sha256"
+ARCHIVE="$STAGE_ROOT/g_lo_snapshot_radio_2026-08-14.tar.gz"
+ARCHIVE_LIST="$STAGE_ROOT/g_lo_snapshot_radio_archive_file_list.txt"
+RESUME="${RESUME:-0}"
+
+for path in \
+  "$SCRIPT" "$PRAISE2_SOURCE" "$PRAISE2_COMMIT_PROOF" "$STAGED_HASHES" \
+  "$STAGE_ROOT/scripts/science/g_lo_particle_history.py" \
+  "$STAGE_ROOT/scripts/science/g_lo_radio_method_value.py" \
+  "$STAGE_ROOT/scripts/science/praise2_method_validation.py" \
+  "$STAGE_ROOT/scripts/science/run_g_lo_radio_history_value.py" \
+  "$PYTHON_COMPAT/contextlib2.py" "$PYTHON_COMPAT/hdf5plugin.py" "$PYTHON_COMPAT/yt.py" \
+  "$CACHE" "$FLUID_ROOT/snapshot_manifest.csv" \
+  "$INITIAL_ROOT/particles.0999.dbl" "$GUARDED_ROOT/particles.1000.dbl" \
+  "$GUARDED_ROOT/particles.5000.dbl"; do
+  test -r "$path" || { echo "missing Goal 058 radio input: $path" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_HASHES")"
+)
+if [ "$RESUME" = "0" ]; then
+  test ! -e "$ANALYSIS_ROOT" && test ! -L "$ANALYSIS_ROOT" \
+    || { echo "refusing to overwrite radio analysis root: $ANALYSIS_ROOT" >&2; exit 2; }
+elif [ "$RESUME" != "1" ]; then
+  echo "RESUME must be 0 or 1" >&2
+  exit 2
+fi
+for path in "$ARCHIVE" "$ARCHIVE_LIST"; do
+  test ! -e "$path" && test ! -L "$path" \
+    || { echo "refusing to overwrite radio archive surface: $path" >&2; exit 2; }
+done
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$PYTHON_COMPAT:$STAGE_ROOT/plutokore/src:$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=16
+export NUMBA_NUM_THREADS=16
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export HDF5_USE_FILE_LOCKING=FALSE
+
+if [ "$RESUME" = "1" ]; then
+  set -- --resume
+else
+  set --
+fi
+python "$SCRIPT" \
+  --cache "$CACHE" \
+  --fluid-manifest "$FLUID_ROOT/snapshot_manifest.csv" \
+  --initial-particle-root "$INITIAL_ROOT" \
+  --guarded-particle-root "$GUARDED_ROOT" \
+  --praise2-source "$PRAISE2_SOURCE" \
+  --praise2-commit-proof "$PRAISE2_COMMIT_PROOF" \
+  --output-root "$ANALYSIS_ROOT" \
+  --kd-jobs 16 \
+  "$@"
+
+python - "$ANALYSIS_ROOT" <<'PY'
+import csv, json, math, sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+primary = list(csv.DictReader((root / "radio_luminosity_timeseries.csv").open(newline="")))
+views = list(csv.DictReader((root / "radio_view_luminosity.csv").open(newline="")))
+metadata = json.loads((root / "g_lo_snapshot_radio_metadata.json").read_text())
+if len(primary) != 50 or len(views) != 150:
+    raise SystemExit("radio table surface is incomplete")
+if {row["view"] for row in primary} != {"45deg"}:
+    raise SystemExit("primary radio view changed")
+if any(float(row["particle_time_myr"]) > float(row["fluid_time_myr"]) + 1e-8 for row in views):
+    raise SystemExit("future particle state entered the radio surface")
+if any(float(row["luminosity_w_hz"]) <= 0 or not math.isfinite(float(row["effective_magnetic_field_ug"])) for row in views):
+    raise SystemExit("radio luminosity or effective field validation failed")
+if metadata.get("status") != "complete_corrected_praise2_snapshot_radio":
+    raise SystemExit("radio metadata completion gate failed")
+print("radio_validation=passed primary_rows=50 view_rows=150")
+PY
+
+(
+  cd "$ANALYSIS_ROOT"
+  find . -type f ! -path './.work/*' -print | sort > "$ARCHIVE_LIST"
+)
+tar -czf "$ARCHIVE" -C "$ANALYSIS_ROOT" --files-from "$ARCHIVE_LIST"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

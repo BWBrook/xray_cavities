@@ -68,6 +68,57 @@ current instruction without checking its goal status.
 
 ## Active Checkpoint
 
+### Goal 058: G-LO snapshot science
+
+- Status: `complete_single_case_snapshot_science_product`.
+- Decision:
+  `G_LO_SINGLE_CASE_PIPELINE_GREEN_RECOVERY_BIASES_EXPOSED_NO_CROSS_CASE_CLAIM`.
+- A reusable single-case analysis core now covers retained-snapshot provenance,
+  fractional-primary plus binary-sensitivity tracer partitions, ambient/lobe
+  thermal-kinetic-gravitational accounting, explicit unresolved boundary flux,
+  two-sided shock dynamics, corrected-PRAiSE2 radio/spectral-age inference, and
+  the final compact synthesis surface.
+- Live Kunanyi preflight confirmed that compaction retained six G-LO float
+  snapshots at `0/10/20/30/40/50 Myr`, exactly matching Goal 057. The draft
+  51-snapshot assumption was corrected before submission; no missing ages were
+  invented or substituted.
+- PBS `785483.kunanyi-ohpc` / `g_lo_fluid` ended with `Exit_status=1`, zero CPU
+  time, and `00:00:13` walltime. All locked-input and six-snapshot HDF5
+  preflights passed; analysis did not begin. Kunanyi Bash rejected expansion
+  of an empty optional-argument array under `set -u`. The wrapper now uses
+  portable positional arguments and carries a regression guard.
+- Repaired PBS `785485.kunanyi-ohpc` / `g_lo_fluid` completed green with
+  `Exit_status=0`, `00:26:13` walltime, all six snapshot markers, and zero-byte
+  stderr. The retrieved archive SHA-256 is
+  `44312bac8f208fcf599e6d86995ccce1768acb094ec04a50fd23eef3260449ed`.
+- Fluid results detect both shock sides at later ages with kinematic Mach
+  numbers about `2.15-2.86`. The unmeasured-boundary closure fraction changes
+  from about `-0.227` at 10 Myr to `-0.577` at 50 Myr; this residual remains
+  unattributed and is not promoted to cocoon energy.
+- Corrected-PRAiSE2 PBS `785488.kunanyi-ohpc` / `g_lo_radio` completed with
+  `Exit_status=0`, `04:58:58` walltime, `radio_validation=passed`, and
+  zero-byte stderr. The retrieved archive SHA-256 is
+  `c648d22e2059b3ec3464537b6a1992896bf1f20b0b0e37e952d7614d9dc1ce8b`.
+- The final radio surface has exactly `50` primary `45deg` rows and `150`
+  unique age/view/loss/frequency rows. Its corrected PRAiSE2 commit and source
+  hash match the staged contract, and all particle states are causal.
+- The real local assembler produced `13` scientific tables and `7` diagnostic
+  figures. Its direct executable entry point is now regression-tested; `35`
+  focused tests pass.
+- All fitted continuous-injection breaks remain above the `15 GHz` observed
+  band. Spectral ages are therefore upper limits. Central empirical
+  radio-power relations recover `3.09-7.12x` known power, while valid `45deg`
+  spectral-cavity treatments recover `0.074-0.541x` and remain conditional
+  lower bounds.
+- The setup-first note preserves the negative zero-boundary closure as
+  unresolved, the weak Rankine-Hugoniot corroboration, and 10/30 Myr X-ray
+  topology exclusions. No cross-case claim is made.
+- Science note/product:
+  `docs/science/g_lo_snapshot_science_2026-08-14.md` and
+  `docs/science/assets/g_lo_snapshot_science_2026-08-14/`.
+- Goal/log: `docs/goals/058-g-lo-snapshot-science/` and
+  `docs/exchange/logs/2026-08-14-g-lo-snapshot-science.md`.
+
 ### Goal 057: four-case pre-production readiness
 
 - Status: `complete_preproduction_readiness_quota_hold`.

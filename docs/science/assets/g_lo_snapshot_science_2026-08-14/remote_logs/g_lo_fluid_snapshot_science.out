@@ -1,0 +1,18 @@
+g_lo_snapshot_science.py: OK
+snapshot_energy.py: OK
+snapshot_shocks.py: OK
+pluto_h5_level3_ambient_extract.py: OK
+select_common_age_hdf5.py: OK
+g_lo_fluid_snapshot_science.pbs: OK
+tabulated_cosmo_002031.csv: OK
+fluid_preflight=passed snapshot_count=6 first=0 last=50 environment_sha256=1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a
+snapshot_complete=0 time_myr=0
+snapshot_complete=10 time_myr=9.99974157591
+snapshot_complete=20 time_myr=19.9997843732
+snapshot_complete=30 time_myr=29.999643622
+snapshot_complete=40 time_myr=39.9999861735
+snapshot_complete=50 time_myr=50
+status=complete_fluid_snapshot_science snapshot_count=6
+fluid_validation=passed snapshot_count=6 energy_rows=72 shock_rows=36
+44312bac8f208fcf599e6d86995ccce1768acb094ec04a50fd23eef3260449ed  /u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science/g_lo_fluid_snapshot_science_2026-08-14.tar.gz
+finished_utc=2026-08-14T03:39:45Z

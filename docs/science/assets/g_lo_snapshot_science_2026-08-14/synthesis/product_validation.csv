@@ -1,0 +1,16 @@
+surface,row_count,status
+simulation_setup.csv,25,passed
+snapshot_manifest.csv,6,passed
+source_truth.csv,6,passed
+energy_partition_primary.csv,6,passed
+shock_dynamics_primary.csv,12,passed
+radio_luminosity_timeseries.csv,50,passed
+radio_view_luminosity.csv,150,passed
+xray_cavity_surface.csv,45,passed
+cavity_energy_recovery.csv,45,passed
+cavity_recovery_vs_shock.csv,90,passed
+radio_power_inference.csv,20,passed
+spectral_fits.csv,5,passed
+spectral_cavity_power.csv,90,passed
+generated_figures,7,passed
+cross_case_claims,0,prohibited_and_absent

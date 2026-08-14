@@ -1,0 +1,90 @@
+{
+  "boundary_flux": "unmeasured_from_retained_snapshots",
+  "case": "G-LO",
+  "cross_case_claims": false,
+  "decision_scope": "single-case method and recovery surface; no cross-case claims",
+  "generated_figures": [
+    "energy_budget.png",
+    "radio_luminosity_evolution.png",
+    "cavity_energy_recovery.png",
+    "cavity_recovery_vs_shock.png",
+    "jet_power_recovery.png",
+    "spectral_age_recovery.png",
+    "radio_spectra_ci_fits.png"
+  ],
+  "method_contract": {
+    "cavity_energy_models": [
+      "2.5pV",
+      "4pV"
+    ],
+    "cross_case_claims": false,
+    "equipartition_assumptions": {
+      "filling_factor": 1.0,
+      "gamma_max": 100000.0,
+      "gamma_min": 500.0,
+      "mean_pitch_sine": 0.7853981633974483,
+      "non_radiating_energy_ratio": 0.0
+    },
+    "equipartition_method": "minimum particle-plus-field energy under isotropic delta-kernel power-law electrons",
+    "known_power_convention": "bipolar 2e+43 erg/s",
+    "radio_control": "corrected PRAiSE2 lossless",
+    "radio_frequencies_ghz": [
+      0.15,
+      0.5,
+      1.4,
+      4.5,
+      15.0
+    ],
+    "radio_primary": "corrected PRAiSE2 full-loss",
+    "radio_snapshot_indices": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "snapshot_indices": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "spectral_model": "continuous_injection_delta_kernel",
+    "xray_primary_depth": "geometric_depth"
+  },
+  "radio_snapshot_indices": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "residual_cocoon_interpretation": "not promoted because closure cannot exclude boundary flux",
+  "snapshot_indices": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "status": "complete_single_case_snapshot_science_product",
+  "table_row_counts": {
+    "cavity_energy_recovery.csv": 45,
+    "cavity_recovery_vs_shock.csv": 90,
+    "energy_partition_primary.csv": 6,
+    "radio_luminosity_timeseries.csv": 50,
+    "radio_power_inference.csv": 20,
+    "radio_view_luminosity.csv": 150,
+    "shock_dynamics_primary.csv": 12,
+    "simulation_setup.csv": 25,
+    "snapshot_manifest.csv": 6,
+    "source_truth.csv": 6,
+    "spectral_cavity_power.csv": 90,
+    "spectral_fits.csv": 5,
+    "xray_cavity_surface.csv": 45
+  },
+  "xray_map_policy": "reuse accepted map context; do not duplicate bulky arrays"
+}

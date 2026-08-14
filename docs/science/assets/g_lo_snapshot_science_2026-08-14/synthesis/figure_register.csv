@@ -1,0 +1,9 @@
+figure,role,status,source,note
+energy_budget.png,generated_goal058_single_case_diagnostic,complete,docs/science/assets/g_lo_snapshot_science_2026-08-14/synthesis/energy_budget.png,G-LO only; no cross-case claim
+radio_luminosity_evolution.png,generated_goal058_single_case_diagnostic,complete,docs/science/assets/g_lo_snapshot_science_2026-08-14/synthesis/radio_luminosity_evolution.png,G-LO only; no cross-case claim
+cavity_energy_recovery.png,generated_goal058_single_case_diagnostic,complete,docs/science/assets/g_lo_snapshot_science_2026-08-14/synthesis/cavity_energy_recovery.png,G-LO only; no cross-case claim
+cavity_recovery_vs_shock.png,generated_goal058_single_case_diagnostic,complete,docs/science/assets/g_lo_snapshot_science_2026-08-14/synthesis/cavity_recovery_vs_shock.png,G-LO only; no cross-case claim
+jet_power_recovery.png,generated_goal058_single_case_diagnostic,complete,docs/science/assets/g_lo_snapshot_science_2026-08-14/synthesis/jet_power_recovery.png,G-LO only; no cross-case claim
+spectral_age_recovery.png,generated_goal058_single_case_diagnostic,complete,docs/science/assets/g_lo_snapshot_science_2026-08-14/synthesis/spectral_age_recovery.png,G-LO only; no cross-case claim
+radio_spectra_ci_fits.png,generated_goal058_single_case_diagnostic,complete,docs/science/assets/g_lo_snapshot_science_2026-08-14/synthesis/radio_spectra_ci_fits.png,G-LO only; no cross-case claim
+observer_hybrid_evolution.png,accepted_xray_cavity_and_truth_map_context,referenced_not_duplicated,/Users/bwbrook/papers/xray_cavities/docs/science/assets/three_case_common_age_evolution_2026-07-13/synthesis/observer_hybrid_evolution.png,Accepted Goal 041/three-case synthesis figure; quantitative topology gates remain active

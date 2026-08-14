@@ -1,0 +1,17 @@
+{
+  "identity": {
+    "environment_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+    "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/data.0040.flt.h5",
+    "input_size_bytes": 44890581676,
+    "method_version": 1,
+    "output_index": 40,
+    "shape": [
+      1014,
+      960,
+      960
+    ],
+    "time_code": 12264.051512293445,
+    "timestep": "Timestep_40"
+  },
+  "status": "complete"
+}

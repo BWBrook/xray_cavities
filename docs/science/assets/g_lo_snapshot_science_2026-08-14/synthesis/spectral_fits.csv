@@ -1,0 +1,6 @@
+case,snapshot_index,actual_time_myr,spectral_model,alpha_injection,amplitude,fitted_break_ghz,reported_break_ghz,break_status,spectral_age_limit_direction,log_rms
+G-LO,10,9.999741575908963,continuous_injection_delta_kernel,0.5999999999999982,4.092429317211508e+25,682.3854542929438,15.0,break_above_observed_band,spectral_age_upper_limit,2.701869765255403e-05
+G-LO,20,19.999784373238473,continuous_injection_delta_kernel,0.5999999999999905,2.7851111160950877e+25,139.12677586147768,15.0,break_above_observed_band,spectral_age_upper_limit,0.0001008934978433984
+G-LO,30,29.999643622014947,continuous_injection_delta_kernel,0.5999999999999982,2.1191216040168757e+25,63.248288006454274,15.0,break_above_observed_band,spectral_age_upper_limit,0.0003198175061999261
+G-LO,40,39.99998617349845,continuous_injection_delta_kernel,0.5999999999999905,1.520727143004508e+25,31.55328784016246,15.0,break_above_observed_band,spectral_age_upper_limit,0.0018646971096431067
+G-LO,50,50.00000000000777,continuous_injection_delta_kernel,0.5999999999999982,1.2015431004174795e+25,20.009379939341144,15.0,break_above_observed_band,spectral_age_upper_limit,0.0030674421604457228

@@ -1,0 +1,26 @@
+section,item,value,unit,provenance
+case,case_id,G-LO,,locked simulation identity
+environment,Stewart atmosphere,group 002_031,,tabulated initial static environment
+grid,geometry,3D Cartesian; stewart_stretched_250; 960x960x1014,,accepted production grid
+grid,jet-axis extent,-250 to 250,kpc,accepted production grid
+time,retained fluid snapshots index:time,0:0;10:9.99974157591;20:19.9997843732;30:29.999643622;40:39.9999861735;50:50,Myr,actual HDF5 times
+time,fluid source paths,/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/data.0000.flt.h5;/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs/data.0010.flt.h5;/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/data.0020.flt.h5;/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/data.0030.flt.h5;/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/data.0040.flt.h5;/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs/data.0050.flt.h5,,six retained immutable HDF5 sources
+jet,power one-sided,1e+43,erg s^-1,JET_PWR convention
+jet,power bipolar,2e+43,erg s^-1,two jets
+jet,speed,0.1,c,accepted production configuration
+jet,opening angles primary/secondary,15/15,deg,accepted production configuration
+jet,initial radius,0.1,kpc,accepted production configuration
+jet,injection height,0.75,kpc,accepted production configuration
+jet,start/active/end,0/50/50,Myr,active integrated source
+particles,output and injection cadence,0.01,Myr,retained 0..5000 histories
+particles,particles per injection,32,,accepted production configuration
+energy,primary tracer partition,"clip(tr1,0,1)",,fractional operational partition
+energy,binary tracer sensitivities,1e-3;5e-3;1e-2,,secondary only
+energy,gravitational potential,centre-zero integral of matched group gravity columns,,fixed initial atmosphere
+shock,method,2 kpc axial tube; 5% p/rho disturbance; 3-snapshot fit,,baseline-noise velocity cut
+radio,frequencies,0.15;0.5;1.4;4.5;15,GHz,lossless and full-loss
+radio,PRAiSE2 source,73210e15d4c60e77ffb317b3ee2b9209c049edd4,git commit,corrected implementation
+radio,assumptions,z=0.05;eta=0.03;s=2.2;gmin=500;gmax=1e5,,locked radio contract
+xray,diagnostic,1 keV XRAiSE-corrected surface brightness,,supplied APEC and Gaunt tables
+xray,views,0;45;90,deg,edge-overlap projection for nonzero views
+cavity,energy conventions,pV;2.5pV;4pV,erg,2.5pV adopted; 4pV literature comparator

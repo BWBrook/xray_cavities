@@ -1,0 +1,151 @@
+#!/usr/bin/env bash
+#PBS -N g_lo_fluid
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=64gb
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science/g_lo_fluid_snapshot_science.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science/g_lo_fluid_snapshot_science.err
+
+set -euo pipefail
+umask 077
+
+STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal058_g_lo_snapshot_science}"
+ANALYSIS_ROOT="${ANALYSIS_ROOT:-/scratch/bwbrook/xray_cavities_analysis/2026-08-14-g-lo-fluid-snapshot-science}"
+INITIAL_OUTPUTS="${INITIAL_OUTPUTS:-/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production/G-LO/particles/problem/outputs}"
+GUARDED_OUTPUTS="${GUARDED_OUTPUTS:-/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation/G-LO/particles/problem/outputs}"
+ENVIRONMENT_TABLE="${ENVIRONMENT_TABLE:-$STAGE_ROOT/tabulated_cosmo_002031.csv}"
+SNAPSHOT_SCRIPT="$STAGE_ROOT/g_lo_snapshot_science.py"
+ENERGY_MODULE="$STAGE_ROOT/snapshot_energy.py"
+SHOCK_MODULE="$STAGE_ROOT/snapshot_shocks.py"
+LEVEL3_HELPER="$STAGE_ROOT/pluto_h5_level3_ambient_extract.py"
+SELECTOR_HELPER="$STAGE_ROOT/select_common_age_hdf5.py"
+STAGED_HASHES="$STAGE_ROOT/g_lo_fluid_inputs.sha256"
+ARCHIVE="$STAGE_ROOT/g_lo_fluid_snapshot_science_2026-08-14.tar.gz"
+ARCHIVE_LIST="$STAGE_ROOT/g_lo_fluid_archive_file_list.txt"
+RESUME="${RESUME:-0}"
+
+for path in \
+  "$ENVIRONMENT_TABLE" "$SNAPSHOT_SCRIPT" "$ENERGY_MODULE" "$SHOCK_MODULE" "$LEVEL3_HELPER" \
+  "$SELECTOR_HELPER" "$STAGED_HASHES" "$INITIAL_OUTPUTS" "$GUARDED_OUTPUTS"; do
+  test -r "$path" || { echo "missing Goal 058 input: $path" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_HASHES")"
+)
+if [ "$RESUME" = "0" ]; then
+  test ! -e "$ANALYSIS_ROOT" && test ! -L "$ANALYSIS_ROOT" \
+    || { echo "refusing to overwrite analysis root: $ANALYSIS_ROOT" >&2; exit 2; }
+elif [ "$RESUME" != "1" ]; then
+  echo "RESUME must be 0 or 1" >&2
+  exit 2
+fi
+for path in "$ARCHIVE" "$ARCHIVE_LIST"; do
+  test ! -e "$path" && test ! -L "$path" \
+    || { echo "refusing to overwrite archive surface: $path" >&2; exit 2; }
+done
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export HDF5_USE_FILE_LOCKING=FALSE
+
+python - "$INITIAL_OUTPUTS" "$GUARDED_OUTPUTS" "$ENVIRONMENT_TABLE" <<'PY'
+import sys
+from pathlib import Path
+
+from g_lo_snapshot_science import canonical_snapshot_chain, load_environment
+
+initial, guarded, environment = map(Path, sys.argv[1:4])
+snapshots = canonical_snapshot_chain([initial, guarded])
+indices = [snapshot.output_index for snapshot in snapshots]
+expected_indices = [0, 10, 20, 30, 40, 50]
+if indices != expected_indices:
+    raise SystemExit(f"G-LO retained float chain must be outputs {expected_indices}, got {indices}")
+if abs(snapshots[0].actual_time_myr) > 1e-6 or abs(snapshots[-1].actual_time_myr - 50.0) > 0.05:
+    raise SystemExit("G-LO canonical float chain does not span 0..50 Myr")
+if {snapshot.shape for snapshot in snapshots} != {(1014, 960, 960)}:
+    raise SystemExit("G-LO canonical float chain grid shape changed")
+profile = load_environment(environment)
+print(
+    "fluid_preflight=passed "
+    f"snapshot_count={len(snapshots)} first={snapshots[0].actual_time_myr:.12g} "
+    f"last={snapshots[-1].actual_time_myr:.12g} environment_sha256={profile.source_sha256}"
+)
+PY
+
+if [ "$RESUME" = "1" ]; then
+  set -- --resume
+else
+  set --
+fi
+python "$SNAPSHOT_SCRIPT" \
+  --case G-LO \
+  --outputs-dir "$INITIAL_OUTPUTS" \
+  --outputs-dir "$GUARDED_OUTPUTS" \
+  --environment-table "$ENVIRONMENT_TABLE" \
+  --output-root "$ANALYSIS_ROOT" \
+  --jet-power-one-sided-erg-s 1e43 \
+  --jet-start-myr 0 \
+  --jet-active-myr 50 \
+  --tube-radius-kpc 2 \
+  --velocity-floor-code 1e-4 \
+  --velocity-noise-multiplier 5 \
+  --disturbance-fraction 0.05 \
+  --min-contiguous-cells 2 \
+  --remove-geometry-cache-on-success \
+  "$@"
+
+python - "$ANALYSIS_ROOT" <<'PY'
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+manifest = list(csv.DictReader((root / "snapshot_manifest.csv").open(newline="")))
+energy = list(csv.DictReader((root / "energy_partition_timeseries.csv").open(newline="")))
+shocks = list(csv.DictReader((root / "shock_dynamics.csv").open(newline="")))
+source = list(csv.DictReader((root / "source_truth.csv").open(newline="")))
+metadata = json.loads((root / "g_lo_fluid_snapshot_science_metadata.json").read_text())
+expected_indices = [0, 10, 20, 30, 40, 50]
+if len(manifest) != 6 or [int(row["snapshot_index"]) for row in manifest] != expected_indices:
+    raise SystemExit("final snapshot manifest is incomplete")
+if len(energy) != 6 * 4 * 3 or len(shocks) != 6 * 3 * 2 or len(source) != 6:
+    raise SystemExit("final Goal 058 fluid table row counts are incomplete")
+primary = [row for row in energy if row["partition_method"] == "fractional"]
+if len(primary) != 6 * 3:
+    raise SystemExit("fractional primary energy surface is incomplete")
+finite_fields = (
+    "gas_thermal_delta_erg", "gas_kinetic_delta_erg",
+    "gas_gravitational_delta_erg", "gas_total_delta_erg",
+    "lobe_thermal_erg", "lobe_kinetic_erg", "lobe_gravitational_erg",
+    "lobe_total_erg", "unattributed_residual_erg",
+)
+for row in energy:
+    if row["boundary_status"] != "unmeasured_from_retained_snapshots":
+        raise SystemExit("boundary status was silently promoted")
+    if row["residual_interpretation"] != "not_promoted_to_cocoon_boundary_unresolved":
+        raise SystemExit("unattributed residual was silently promoted to cocoon")
+    if not all(math.isfinite(float(row[field])) for field in finite_fields):
+        raise SystemExit("non-finite energy value")
+if metadata.get("status") != "complete_fluid_snapshot_science" or metadata.get("snapshot_count") != 6:
+    raise SystemExit("fluid metadata completion gate failed")
+print("fluid_validation=passed snapshot_count=6 energy_rows=72 shock_rows=36")
+PY
+
+(
+  cd "$ANALYSIS_ROOT"
+  find . -type f ! -path './cache/*' -print | sort > "$ARCHIVE_LIST"
+)
+tar -czf "$ARCHIVE" -C "$ANALYSIS_ROOT" --files-from "$ARCHIVE_LIST"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
