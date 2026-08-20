@@ -1,0 +1,15 @@
+case_id=C-HI
+case_variant=particles
+case_config_dir=/u/bwbrook/codex_kunanyi/goal059_cluster_full_history_production/rendered_cluster_configs/C-HI/particles
+
+repo=/scratch/bwbrook/git/utas-agn/pluto
+realpath=/scratch/bwbrook/git/utas-agn/pluto
+git_metadata=unavailable
+
+repo=/scratch/bwbrook/git/utas-agn/jet-setup
+realpath=/scratch/bwbrook/git/utas-agn/jet-setup
+git_metadata=unavailable
+
+5ce550ad7081746c9b2f16546a099a1d66e27bfde1e03c7482accb8e777e215d  /u/bwbrook/codex_kunanyi/goal059_cluster_full_history_production/rendered_cluster_configs/C-HI/particles/case_manifest.json
+71fc6f195966fc8e954ee2446d583e34676b140aace13e9ebd52747630f6c96d  /u/bwbrook/codex_kunanyi/goal059_cluster_full_history_production/rendered_cluster_configs/C-HI/particles/pluto.ini
+3b49690db1185c70742400925fb19f3f51abead2967f0e46a732b9734c86630b  /u/bwbrook/codex_kunanyi/goal059_cluster_full_history_production/rendered_cluster_configs/C-HI/particles/environment.ini

@@ -1,0 +1,11 @@
+evidence_kind,metric,value,status,interpretation
+observed,pbs_exit_status,0,passed,scheduler completion green
+observed,mpi_exit_code,0,passed,PLUTO command completed green
+observed,done_marker,present,passed,production template completion marker exists
+observed,failed_marker,absent,passed,no production failure marker exists
+observed,endpoint_time_code,15330.069689399999,passed,configured 50 Myr endpoint reached exactly
+observed,output_directory_size,2.9 TiB,passed,consistent with conservative Goal 057 raw forecast
+observed,particle_index_continuity,0..5000,passed,complete 0.01 Myr particle-history surface
+observed,stageout_status,1,caveat,stage-root logs remained directly retrievable
+observed,stderr,git command unavailable,caveat,nonfatal source-metadata warning only
+inferred,decision,MATCHED_CLUSTER_FULL_HISTORY_PAIR_GREEN_G_HI_READY,passed,C-LO is bankable and the matched cluster pair is complete

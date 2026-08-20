@@ -1,0 +1,5 @@
+evidence_kind,metric,value,units,status,source,interpretation
+observed,allocation,20,TiB,pass,TPAC_Open_OnDemand_dashboard,approved Kunanyi storage allocation
+observed,occupied,8,TiB,pass,TPAC_Open_OnDemand_dashboard,reported occupied storage before launch
+inferred,headroom,12,TiB,pass,allocation_minus_occupied,approximate available storage before launch
+planned,conservative_raw_requirement,5.638,TiB,pass,Goal_057_two_cases_at_2.819_TiB_each,C-HI plus C-LO raw-output forecast before retention

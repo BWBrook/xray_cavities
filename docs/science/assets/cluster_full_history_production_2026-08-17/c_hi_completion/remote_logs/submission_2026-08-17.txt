@@ -1,0 +1,19 @@
+SUBMISSION_UTC=2026-08-17T05:23:18Z
+C_HI_JOB_ID=785822.kunanyi-ohpc
+C_LO_JOB_ID=785823.kunanyi-ohpc
+Job Id: 785822.kunanyi-ohpc
+    Job_Name = c_hi_hist
+    job_state = R
+    queue = normal
+    ctime = Mon Aug 17 15:23:18 2026
+    qtime = Mon Aug 17 15:23:18 2026
+    Resource_List.select = 64:ncpus=28:mpiprocs=28
+    Resource_List.walltime = 48:00:00
+Job Id: 785823.kunanyi-ohpc
+    Job_Name = c_lo_hist
+    job_state = Q
+    queue = normal
+    ctime = Mon Aug 17 15:23:18 2026
+    qtime = Mon Aug 17 15:23:18 2026
+    Resource_List.select = 64:ncpus=28:mpiprocs=28
+    Resource_List.walltime = 48:00:00

@@ -1,0 +1,3 @@
+case_id,environment_id,one_sided_jet_power_erg_s,jet_speed_c,target_myr,fluid_float_cadence_myr,fluid_double_cadence_myr,particle_cadence_myr,nodes,ncpus,walltime,job_id,state_at_stop,run_root
+C-HI,Stewart_cluster_002_003,1e45,0.1,50,1,5,0.01,64,1792,48:00:00,785822.kunanyi-ohpc,R,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun
+C-LO,Stewart_cluster_002_003,1e43,0.1,50,1,5,0.01,64,1792,48:00:00,785823.kunanyi-ohpc,Q,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun

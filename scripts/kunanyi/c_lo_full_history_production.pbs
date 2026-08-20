@@ -1,0 +1,50 @@
+#!/bin/bash
+#PBS -N c_lo_hist
+#PBS -q normal
+#PBS -l select=64:ncpus=28:mpiprocs=28
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal059_cluster_full_history_production/c_lo_full_history_production.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal059_cluster_full_history_production/c_lo_full_history_production.err
+
+set -euo pipefail
+
+# Fresh, history-complete C-LO production under the locked four-case contract.
+readonly CASE_ID="C-LO"
+readonly CASE_VARIANT="particles"
+readonly STAGE_ROOT="/u/bwbrook/codex_kunanyi/goal059_cluster_full_history_production"
+readonly CASE_CONFIG_DIR="${STAGE_ROOT}/rendered_cluster_configs/C-LO/particles"
+readonly RUN_ROOT="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun"
+readonly WORK_ROOT="${RUN_ROOT}/${CASE_ID}/${CASE_VARIANT}"
+readonly PLUTO_MAXTIME_HOURS="47.5"
+readonly RESTART_POLICY="fresh"
+readonly ALLOW_DONE_RERUN="0"
+readonly BUILD_JOBS="28"
+readonly FORCE_REBUILD="0"
+readonly KUNANYI_MODULE_STACK="agn_intel_impi"
+readonly MPI_FLAVOR="intelmpi"
+readonly HDF5_USE_FILE_LOCKING="FALSE"
+readonly I_MPI_JOB_SIGNAL_PROPAGATION="1"
+readonly WATCHDOG_TIMEOUT_SECONDS="5400"
+readonly WATCHDOG_POLL_SECONDS="60"
+readonly WATCHDOG_TERM_GRACE_SECONDS="120"
+
+if [ -e "$WORK_ROOT" ]; then
+  echo "[error] no-overwrite gate failed: ${WORK_ROOT}" >&2
+  exit 2
+fi
+
+export CASE_ID CASE_VARIANT CASE_CONFIG_DIR RUN_ROOT PLUTO_MAXTIME_HOURS
+export RESTART_POLICY ALLOW_DONE_RERUN BUILD_JOBS FORCE_REBUILD
+export KUNANYI_MODULE_STACK MPI_FLAVOR HDF5_USE_FILE_LOCKING
+export I_MPI_JOB_SIGNAL_PROPAGATION
+export PROGRESS_WATCHDOG_SCRIPT="${STAGE_ROOT}/run_with_progress_watchdog.sh"
+export PROGRESS_WATCHDOG_TIMEOUT_SECONDS="$WATCHDOG_TIMEOUT_SECONDS"
+export PROGRESS_WATCHDOG_POLL_SECONDS="$WATCHDOG_POLL_SECONDS"
+export PROGRESS_WATCHDOG_TERM_GRACE_SECONDS="$WATCHDOG_TERM_GRACE_SECONDS"
+export PROGRESS_WATCHDOG_STATUS_LOG="${WORK_ROOT}/job_logs/progress_watchdog.${PBS_JOBID:-manual}.tsv"
+export PROGRESS_WATCHDOG_TRIGGER_FILE="${WORK_ROOT}/markers/progress_watchdog.${PBS_JOBID:-manual}.triggered"
+
+readonly BASE_SCRIPT="${STAGE_ROOT}/jet_setup_production_template_latest.pbs"
+exec bash "$BASE_SCRIPT"

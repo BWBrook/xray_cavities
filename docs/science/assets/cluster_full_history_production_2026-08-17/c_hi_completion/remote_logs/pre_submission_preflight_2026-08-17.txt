@@ -1,0 +1,27 @@
+PREFLIGHT_START=2026-08-17T05:21:40Z
+HOST=<tpac-host>
+staged_hash_gate=passed
+remote_syntax_gate=passed
+config_asset_gate=passed
+no_overwrite_gate=passed
+source_repo=/scratch/bwbrook/git/utas-agn/pluto
+source_repo=/scratch/bwbrook/git/utas-agn/jet-setup
+source_gate=passed
+
+Currently Loaded Modules:
+  1) intel/18.0.1.163   2) impi/2018.1.163   3) hdf5/1.12.1p   4) zfp/0.5.5
+
+ 
+
+/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin_ohpc/mpicc
+/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpirun
+module_gate=passed
+set queue normal queue_type = Execution
+set queue normal max_queued_res.ncpus = [u:PBS_GENERIC=7000]
+set queue normal resources_max.mem = 128gb
+set queue normal resources_max.walltime = 48:00:00
+set queue normal enabled = True
+set queue normal started = True
+queue_gate=passed
+PREFLIGHT_END=2026-08-17T05:21:42Z
+PREFLIGHT_STATUS=pass

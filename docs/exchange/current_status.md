@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-08-14
+Last updated: 2026-08-20
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -41,14 +41,16 @@ current instruction without checking its goal status.
   retained particle-history sequence. The PRAiSE coefficient science gate is
   green; corrected PRAiSE2 is the production method once its tested source
   change is published to the fork-backed working branch.
-- Once TPAC increases the storage quota, rerun the simulations lacking full
-  retained particle histories: `C-HI` and `C-LO`. These reruns are the top
-  compute priority.
-- After the full-history reruns, run `G-HI` to complete the 2 x 2
-  environment-by-jet-power factorial set.
-- Run specifications and storage/retention estimates may be prepared while
-  waiting, but do not submit the history-regeneration runs until the TPAC quota
-  increase is confirmed.
+- TPAC has approved the storage increase. The authenticated dashboard reports
+  `20 TiB` allocated and `8 TiB` occupied, approximately `12 TiB` headroom
+  before the new runs.
+- Full-history `C-HI` and `C-LO` completed green under Goal 059 and are banked
+  as a matched pair. Each retains the exact 50 Myr endpoint, `51/11` fluid
+  surfaces, `5001` particle histories, and approximately `2.9 TiB` of raw
+  evidence.
+- Fresh `G-HI` is the next production case needed to complete the 2 x 2
+  environment-by-jet-power factorial set. Existing full-history `G-LO` remains
+  accepted and should not be rerun without a demonstrated missing surface.
 
 ## Per-Snapshot Science Analysis Contract
 
@@ -67,6 +69,33 @@ current instruction without checking its goal status.
   block the other `G-LO` analysis components or pipeline preparation.
 
 ## Active Checkpoint
+
+### Goal 059: cluster full-history production
+
+- Status: `complete_matched_cluster_full_history_production`.
+- Decision: `MATCHED_CLUSTER_FULL_HISTORY_PAIR_GREEN_G_HI_READY`.
+- Quota gate: TPAC reports `20 TiB` allocated and `8 TiB` occupied. Goal 057's
+  conservative forecast for these two raw cases is `5.638 TiB`.
+- The matched contract is fresh `C-HI` and `C-LO`, Stewart cluster `002_003`,
+  `50 Myr`, float HDF5 every `1 Myr`, double HDF5 every `5 Myr`, and complete
+  particle histories every `0.01 Myr`.
+- PBS `785822.kunanyi-ohpc` / `c_hi_hist` completed with `Exit_status=0` in
+  `32:30:03`. The exact 50 Myr endpoint, all `51/11` float/double HDF5
+  checkpoints, and the continuous `0..5000` particle history passed. The
+  banked run occupies approximately `2.9 TiB`.
+- PBS `785823.kunanyi-ohpc` / `c_lo_hist` completed with `Exit_status=0` in
+  `31:49:01`. Its exact 50 Myr endpoint, all `51/11` float/double HDF5
+  checkpoints, and the continuous `0..5000` particle history passed. The
+  banked run also occupies approximately `2.9 TiB`.
+- The paired cluster tranche is complete at approximately `5.8 TiB` combined.
+  No raw payload was copied or changed. Do not compact/delete source files or
+  submit `G-HI` by implication; the next production launch remains a separate
+  consequential decision.
+- Science note/assets:
+  `docs/science/cluster_full_history_production_2026-08-17.md` and
+  `docs/science/assets/cluster_full_history_production_2026-08-17/`.
+- Goal/log: `docs/goals/059-cluster-full-history-production/` and
+  `docs/exchange/logs/2026-08-17-cluster-full-history-production.md`.
 
 ### Goal 058: G-LO snapshot science
 
@@ -121,12 +150,14 @@ current instruction without checking its goal status.
 
 ### Goal 057: four-case pre-production readiness
 
-- Status: `complete_preproduction_readiness_quota_hold`.
+- Status: `complete_preproduction_readiness_quota_hold_superseded_by_goal059`.
 - Decision:
   `FOUR_CASE_CONTRACT_AND_METHOD_GATES_GREEN_QUOTA_APPROVAL_PENDING`.
 - The matched production contract is `C-HI` full-history rerun, `C-LO`
   full-history rerun, then new `G-HI`; existing full-history `G-LO` is analysed
   now and rerun only if a specific missing surface is demonstrated.
+- TPAC approved the requested increase on 2026-08-17. Goal 059 has submitted
+  the two cluster reruns; the historical quota hold no longer applies.
 - Conservative uncompressed storage is `2.819 TiB` per case and `11.277 TiB`
   for four matched cases. The validated pilot ratios project about `0.936 TiB`
   retained per case and `3.745 TiB` across four cases, but this excludes
