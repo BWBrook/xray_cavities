@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "job_id": "786326.kunanyi-ohpc",
+  "endpoint_target_code_time": 15330.0696894,
+  "endpoint_hdf5": {
+    "path": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/data.0050.flt.h5",
+    "timestep": "Timestep_50",
+    "time_code": 15330.0696894,
+    "time_delta": 0.0,
+    "file_size_bytes": 44890581676,
+    "required_dataset_shapes": {
+      "rho": [
+        1014,
+        960,
+        960
+      ],
+      "prs": [
+        1014,
+        960,
+        960
+      ],
+      "tr1": [
+        1014,
+        960,
+        960
+      ],
+      "vx1": [
+        1014,
+        960,
+        960
+      ],
+      "vx2": [
+        1014,
+        960,
+        960
+      ],
+      "vx3": [
+        1014,
+        960,
+        960
+      ]
+    }
+  },
+  "endpoint_particle": {
+    "path": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.5000.dbl",
+    "time_code": 15330.0696894,
+    "time_delta": 0.0,
+    "step_number": 49156,
+    "nparticles": 193741,
+    "id_counter": 196340,
+    "file_size_bytes": 23249469,
+    "payload_bytes": 23249469
+  },
+  "canonical_sequence": [
+    {
+      "surface": "double_hdf5",
+      "expected_count": "11",
+      "scratch_selected_count": "3",
+      "home_selected_count": "8",
+      "missing_count": "0",
+      "empty_count": "0",
+      "first_index": "0",
+      "last_index": "10",
+      "selection_rule": "scratch_0_2_then_home_3_10",
+      "status": "passed"
+    },
+    {
+      "surface": "float_hdf5",
+      "expected_count": "51",
+      "scratch_selected_count": "11",
+      "home_selected_count": "40",
+      "missing_count": "0",
+      "empty_count": "0",
+      "first_index": "0",
+      "last_index": "50",
+      "selection_rule": "scratch_0_10_then_home_11_50",
+      "status": "passed"
+    },
+    {
+      "surface": "particle_history",
+      "expected_count": "5001",
+      "scratch_selected_count": "1001",
+      "home_selected_count": "4000",
+      "missing_count": "0",
+      "empty_count": "0",
+      "first_index": "0",
+      "last_index": "5000",
+      "selection_rule": "scratch_0_1000_then_home_1001_5000",
+      "status": "passed"
+    }
+  ]
+}

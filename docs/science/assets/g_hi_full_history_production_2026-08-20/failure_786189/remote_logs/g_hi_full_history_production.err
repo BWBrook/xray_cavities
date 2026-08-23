@@ -1,0 +1,2 @@
+/scratch/bwbrook/git/utas-agn/jet-setup/tools/setup-problem: line 11: git: command not found
+[1]+  Terminated              ( trap - TERM INT; exec "$@" ) > "$command_log" 2>&1

@@ -1,0 +1,2 @@
+case,environment_family,environment_id,jet_power_erg_s_one_sided,jet_speed_c,target_age_Myr,float_hdf5_cadence_Myr,double_hdf5_cadence_Myr,particle_history_cadence_Myr,particle_history_expected,resources,walltime,run_root,status
+G-HI,group,002_031,1e45,0.1,50,1,5,0.01,0..5000 inclusive,64x28=1792 ranks,48:00:00,/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production,submitted

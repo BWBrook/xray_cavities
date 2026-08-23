@@ -41,3 +41,4 @@ docs/science/assets/g_lo_fluid_snapshot_science_failure_2026-08-14/** -text -dif
 docs/science/assets/g_lo_snapshot_science_2026-08-14/** -text -diff
 docs/science/assets/cluster_full_history_production_2026-08-17/c_hi_completion/remote_logs/** -text -diff
 docs/science/assets/cluster_full_history_production_2026-08-17/c_lo_completion/remote_logs/** -text -diff
+docs/science/assets/g_hi_full_history_production_2026-08-20/**/remote_logs/** -text -diff

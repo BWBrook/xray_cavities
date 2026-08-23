@@ -1,0 +1,6 @@
+surface,status,index_or_range,age_Myr_or_range,size_bytes_or_count,evidence,decision
+float_hdf5,complete,0..14,0..14,15,flt.h5.out,candidate science surfaces after later endpoint completion
+double_hdf5,complete,0..2,0;5;10,3,dbl.h5.out,restart index 2 selected
+particle_history,complete,0..1499,0..14.99,1500,remote file inventory,preserve as early-time provenance
+double_hdf5,incomplete,3,15,44627737880,uncatalogued file stat,exclude from all restart and science use
+output_tree,partial_run,,,863 GiB,remote du,retain unchanged pending recovery

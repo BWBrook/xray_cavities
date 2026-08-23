@@ -1,0 +1,6 @@
+surface,index,time_code,step,size_bytes,shape_or_records,status,notes
+restart_record,2,3065.7857363005746,10011,384,3 records,passed,fluid slot 2 and float companion slot 3 index 10
+fluid_hdf5,2,3065.7857363005746,10011,67318639276,1014x960x960,passed,Timestep_2 with rho;prs;tr1;vx1;vx2;vx3
+fluid_catalogue,2,3065.786,10011,229,unique row,passed,time delta 0.000263699425431696 code units
+particle_restart,1000,3065.785736301,10011,4772227,39764 records,passed,39764 unique IDs and expected 13-field schema
+fluid_particle_pair,2+1000,3065.7857363005746,10011,,time delta 4.2518877307884395e-10,passed,selected 10 Myr recovery anchor

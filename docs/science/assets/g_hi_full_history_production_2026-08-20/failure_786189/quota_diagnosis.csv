@@ -1,0 +1,11 @@
+evidence,observed_value,status,interpretation
+Open OnDemand quota panel,"21990232555520 8796093022208",clarified,"site values are quotas: 20 TiB for /u/bwbrook and 8 TiB for /scratch/bwbrook"
+Goal 060 run destination,/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production,wrong_quota_domain,heavy production output was directed to scratch rather than the enlarged home filesystem
+home directory usage,"2636233412 bytes (about 2.5 GiB)",green,home has ample capacity under the 20 TiB quota
+scratch directory usage,"8796423717628 bytes (about 8.0 TiB)",at_boundary,scratch has reached its unchanged 8 TiB quota
+home_write_probe,"16 MiB write plus fsync plus checksum: passed; probe removed",green,the enlarged home filesystem is writable and ready for a no-overwrite continuation
+quota_status.sh,"exit 1 with no output because /u/bwbrook/.tpac-quota is absent",degraded,the site helper cannot report Barry's quotas until TPAC restores its account metadata file
+global scratch filesystem,"5.6 PiB total; 2.8 PiB used; 2.8 PiB available; 50%",green,global filesystem capacity is not exhausted
+xray_cavities_runs usage,7.9 TiB,at_boundary,project run tree is near the apparent enforced 8 TiB boundary
+post_failure_write_probe,"1 MiB write plus fsync: Disk quota exceeded",failed,live user or project quota prevents recovery
+failure_telemetry,"watchdog trigger and FAILED marker are zero bytes",degraded,quota exhaustion also prevented complete scratch-resident failure records

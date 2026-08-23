@@ -1,0 +1,15 @@
+case_id=G-HI
+case_variant=particles
+case_config_dir=/u/bwbrook/codex_kunanyi/goal060_g_hi_full_history_home_continuation/rendered_g_hi_config/G-HI/particles
+
+repo=/scratch/bwbrook/git/utas-agn/pluto
+realpath=/scratch/bwbrook/git/utas-agn/pluto
+git_metadata=unavailable
+
+repo=/scratch/bwbrook/git/utas-agn/jet-setup
+realpath=/scratch/bwbrook/git/utas-agn/jet-setup
+git_metadata=unavailable
+
+ca519eda5e29c38af1c82276ff8e486e4dd8d25b30bfa6f872ee26cf55bd878c  /u/bwbrook/codex_kunanyi/goal060_g_hi_full_history_home_continuation/rendered_g_hi_config/G-HI/particles/case_manifest.json
+71fc6f195966fc8e954ee2446d583e34676b140aace13e9ebd52747630f6c96d  /u/bwbrook/codex_kunanyi/goal060_g_hi_full_history_home_continuation/rendered_g_hi_config/G-HI/particles/pluto.ini
+b222f3a4ec1b4a78fa3b99d4db0c66c44b63146b00424e9ff451bdf3c141fce5  /u/bwbrook/codex_kunanyi/goal060_g_hi_full_history_home_continuation/rendered_g_hi_config/G-HI/particles/environment.ini

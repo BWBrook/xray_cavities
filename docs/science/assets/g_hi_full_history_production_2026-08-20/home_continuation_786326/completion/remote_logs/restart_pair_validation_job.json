@@ -1,0 +1,134 @@
+{
+  "fluid_catalogue": {
+    "dt": 0.3133624,
+    "index": 2,
+    "path": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/dbl.h5.out",
+    "step": 10011,
+    "time": 3065.786,
+    "time_delta": 0.000263699425431696
+  },
+  "fluid_hdf5": {
+    "datasets": [
+      "rho",
+      "prs",
+      "tr1",
+      "vx1",
+      "vx2",
+      "vx3"
+    ],
+    "path": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/data.0002.dbl.h5",
+    "scalar_samples_first_last": {
+      "prs": [
+        9.99471678203311e-11,
+        9.99471678203311e-11
+      ],
+      "rho": [
+        0.00015379669839612553,
+        0.00015379669839612553
+      ],
+      "tr1": [
+        0.0,
+        0.0
+      ],
+      "vx1": [
+        3.2085423701098636e-06,
+        -3.2085423701098636e-06
+      ],
+      "vx2": [
+        3.2085423701098636e-06,
+        -3.2085423701098636e-06
+      ],
+      "vx3": [
+        4.09033927402522e-06,
+        -4.09033927402522e-06
+      ]
+    },
+    "shape": [
+      1014,
+      960,
+      960
+    ],
+    "size_bytes": 67318639276,
+    "time": 3065.7857363005746,
+    "time_delta": 0.0,
+    "timestep": "Timestep_2"
+  },
+  "fluid_restart": {
+    "companion_output_indices": {
+      "3": 10
+    },
+    "dt": 0.3133624286774998,
+    "index": 2,
+    "nstep": 10011,
+    "output_slot": 2,
+    "record_index": 2,
+    "time": 3065.7857363005746
+  },
+  "input_sha256": {
+    "fluid_catalogue": "9f8985da2f04ea66b5f9cf706a62b60403fe6401aa8d2abfc484f810fa93ae0b",
+    "fluid_hdf5": "f5ae8b83ca6a862f0f251575434f1133fe8cb90cfac0cc00b7acea1d8e0387b8",
+    "particle_restart": "42c59108127af8f70c9a7dda11bff27a75fe83e65173ef7586304d7c41a3510d",
+    "restart_out": "d3f457bd30409df36b928c4ac227848dc9d5aa040f8178848db15a3f32e09435"
+  },
+  "particle_restart": {
+    "PLUTO_version": "4.4-patch3",
+    "content": {
+      "id_max": 39764,
+      "id_min": 1,
+      "records_scanned": 39764,
+      "unique_ids": 39764
+    },
+    "dimensions": 3,
+    "dt_particles": 1e+38,
+    "endianity": "little",
+    "field_dim": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      3,
+      1,
+      1
+    ],
+    "field_names": [
+      "id",
+      "x1",
+      "x2",
+      "x3",
+      "vx1",
+      "vx2",
+      "vx3",
+      "tinj",
+      "color",
+      "tracer",
+      "last_shock_time",
+      "density",
+      "pressure"
+    ],
+    "header_offset": 547,
+    "idCounter": 39764,
+    "index": 1000,
+    "nelem": 15,
+    "nfields": 13,
+    "nflux": 5,
+    "nparticles": 39764,
+    "output_slot": 8,
+    "particletype": 1,
+    "path": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.1000.dbl",
+    "precision": "double",
+    "size_bytes": 4772227,
+    "stepNumber": 10011,
+    "time": 3065.785736301
+  },
+  "restart_out": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/restart.out",
+  "restart_record_count": 3,
+  "status": "ok",
+  "time_atol": 0.005,
+  "time_delta": 4.2518877307884395e-10
+}

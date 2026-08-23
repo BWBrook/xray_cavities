@@ -1,0 +1,4 @@
+surface,expected_count,scratch_selected_count,home_selected_count,missing_count,empty_count,first_index,last_index,selection_rule,status
+double_hdf5,11,3,8,0,0,0,10,scratch_0_2_then_home_3_10,passed
+float_hdf5,51,11,40,0,0,0,50,scratch_0_10_then_home_11_50,passed
+particle_history,5001,1001,4000,0,0,0,5000,scratch_0_1000_then_home_1001_5000,passed

@@ -1,0 +1,37 @@
+PREFLIGHT_START=2026-08-20T01:01:07Z
+HOST=<tpac-host>
+g_hi_full_history_production.pbs: OK
+jet_setup_production_template_latest.pbs: OK
+run_with_progress_watchdog.sh: OK
+rendered_g_hi_config/G-HI/particles/case_manifest.json: OK
+rendered_g_hi_config/G-HI/particles/definitions_overrides.json: OK
+rendered_g_hi_config/G-HI/particles/environment.ini: OK
+rendered_g_hi_config/G-HI/particles/pluto.ini: OK
+rendered_g_hi_config/G-HI/particles/render_validation.json: OK
+rendered_g_hi_config/G-HI/particles/run_definition.json: OK
+rendered_g_hi_config/G-HI/particles/tabulated_cosmo_002031.csv: OK
+rendered_g_hi_config/README.md: OK
+staged_hash_gate=passed
+remote_syntax_gate=passed
+config_asset_gate=passed
+asset_rows=4000 asset_columns=6 asset_radius_monotonic=1
+no_overwrite_gate=passed
+source_gate=passed
+
+Currently Loaded Modules:
+  1) intel/18.0.1.163   2) impi/2018.1.163   3) hdf5/1.12.1p   4) zfp/0.5.5
+
+ 
+
+/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin_ohpc/mpicc
+/share/apps/intel/xe_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpirun
+module_gate=passed
+    queue_type = Execution
+    max_queued_res.ncpus = [u:PBS_GENERIC=7000]
+    resources_max.mem = 128gb
+    resources_max.walltime = 48:00:00
+    enabled = True
+    started = True
+queue_gate=passed
+PREFLIGHT_END=2026-08-20T01:01:13Z
+PREFLIGHT_STATUS=pass

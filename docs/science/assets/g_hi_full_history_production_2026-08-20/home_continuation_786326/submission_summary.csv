@@ -1,0 +1,13 @@
+field,value,status
+pbs_job_id,786326.kunanyi-ohpc,submitted
+job_name,g_hi_hist_r1,submitted
+initial_state,Q,verified
+queue,normal,verified
+resources,64 nodes / 1792 CPUs,verified
+walltime,48:00:00,verified
+source_restart,/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem/outputs/data.0002.dbl.h5,validated
+target_root,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles,home_resident
+home_write_probe,16 MiB write plus fsync plus cleanup passed,verified
+excluded_partial,data.0003.dbl.h5 absent from target,verified
+wrapper_sha256,8e8675ab7bae0d846cbe6b6e809b502319c339324d27b31c47c7b367b335ba08,verified
+submitted_utc,2026-08-21T01:35:44Z,recorded

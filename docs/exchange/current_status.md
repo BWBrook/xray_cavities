@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-08-20
+Last updated: 2026-08-23
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -21,9 +21,8 @@ current instruction without checking its goal status.
 
 ## Project Contract
 
-- Existing completed cases: `C-HI`, `C-LO`, and `G-LO`.
-- Intended factorial set: cluster/group environments crossed with low/high jet
-  power, adding planned `G-HI` as the missing fourth case.
+- Completed factorial: cluster/group environments crossed with low/high jet
+  power (`C-HI`, `C-LO`, `G-HI`, and `G-LO`).
 - Preferred endpoint viewing surface: `0/45/90 deg`; nonzero views use
   `edge_overlap_uniform_cell_projection`.
 - Products are compact prove-out evidence unless a science note explicitly
@@ -37,20 +36,26 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
-- Scientific analysis may proceed now on `G-LO`, which has the complete
-  retained particle-history sequence. The PRAiSE coefficient science gate is
-  green; corrected PRAiSE2 is the production method once its tested source
-  change is published to the fork-backed working branch.
-- TPAC has approved the storage increase. The authenticated dashboard reports
-  `20 TiB` allocated and `8 TiB` occupied, approximately `12 TiB` headroom
-  before the new runs.
+- Production is complete. The next priority is to lock the G-HI split-root
+  canonical input surface and extend the validated per-snapshot science
+  workflow across all four cases, not launch another PLUTO production run.
+- The PRAiSE coefficient science gate is green; corrected PRAiSE2 is the
+  production radio method once its tested source change is published to the
+  fork-backed working branch.
+- TPAC applied the storage increase to home, not scratch. Live quotas are
+  `/u/bwbrook=20 TiB` and `/scratch/bwbrook=8 TiB`; Goal 060 mistakenly wrote
+  heavy output to scratch. The recovered home continuation now occupies about
+  `2.2 TiB`; future production output must use home.
 - Full-history `C-HI` and `C-LO` completed green under Goal 059 and are banked
   as a matched pair. Each retains the exact 50 Myr endpoint, `51/11` fluid
   surfaces, `5001` particle histories, and approximately `2.9 TiB` of raw
   evidence.
-- Fresh `G-HI` is the next production case needed to complete the 2 x 2
-  environment-by-jet-power factorial set. Existing full-history `G-LO` remains
-  accepted and should not be rerun without a demonstrated missing surface.
+- Goal 060 G-HI is now complete. A scratch-quota stop at 15 Myr was recovered
+  from the validated 10 Myr tuple into home; PBS `786326` reached the exact
+  50 Myr endpoint. Its canonical raw sequence uses scratch through 10 Myr and
+  home thereafter, with complete `51/11/5001` float/double/particle surfaces.
+- Existing full-history `G-LO` remains accepted. The locked four-case raw
+  factorial is complete; no further production rerun is currently justified.
 
 ## Per-Snapshot Science Analysis Contract
 
@@ -70,12 +75,49 @@ current instruction without checking its goal status.
 
 ## Active Checkpoint
 
+### Goal 060: G-HI full-history production
+
+- Status: `complete_full_history_endpoint_split_root_canonical_sequence_green`.
+- Decision:
+  `G_HI_FULL_HISTORY_ENDPOINT_GREEN_FOUR_CASE_RAW_FACTORIAL_COMPLETE`.
+- PBS `786189.kunanyi-ohpc` / `g_hi_hist` ended `F` with `Exit_status=124`
+  after `11:06:32`; stage stdout records the distinct
+  `no_progress_watchdog_timeout` failure.
+- Contract: fresh group `002_031`, one-sided jet power `1e45 erg s^-1`, speed
+  `0.1c`, exact `50 Myr` target, float/double HDF5 every `1/5 Myr`, and
+  particle histories every `0.01 Myr` (`0..5000` inclusive).
+- The run completed float surfaces `0..14` and particle histories `0..1499`,
+  then left an uncatalogued partial `data.0003.dbl.h5` during the `15 Myr`
+  write. The partial root occupies approximately `863 GiB` and is preserved.
+- The validated safe restart is double HDF5 index `2` plus particle index
+  `1000` at `10 Myr`, step `10011`; HDF5 structure/time/datasets and all
+  `39,764` particle records passed.
+- A post-failure scratch probe failed at about `8.0 TiB`, matching the unchanged
+  scratch quota. Home is the enlarged `20 TiB` destination and passed a
+  disposable `16 MiB` write-and-fsync probe.
+- Recovery PBS `786326.kunanyi-ohpc` / `g_hi_hist_r1` completed with
+  `Exit_status=0` in `28:08:03`. The target has `DONE`, no `FAILED`, empty
+  stderr, and occupies approximately `2.2 TiB` under the home run root.
+- Endpoint HDF5 and particle evidence both match code time `15330.0696894`.
+  The HDF5 fields have shape `1014 x 960 x 960`; particle index `5000` has
+  `193,741` records.
+- Canonical split-root selection is green: double HDF5 scratch `0..2` then
+  home `3..10`; float HDF5 scratch `0..10` then home `11..50`; particles
+  scratch `0..1000` then home `1001..5000`. Preserve both roots until the
+  selected scratch segment is reduced or moved.
+- Science note/assets:
+  `docs/science/g_hi_full_history_production_2026-08-20.md` and
+  `docs/science/assets/g_hi_full_history_production_2026-08-20/`.
+- Goal/log: `docs/goals/060-g-hi-full-history-production/` and
+  `docs/exchange/logs/2026-08-20-g-hi-full-history-production.md`.
+
 ### Goal 059: cluster full-history production
 
 - Status: `complete_matched_cluster_full_history_production`.
 - Decision: `MATCHED_CLUSTER_FULL_HISTORY_PAIR_GREEN_G_HI_READY`.
-- Quota gate: TPAC reports `20 TiB` allocated and `8 TiB` occupied. Goal 057's
-  conservative forecast for these two raw cases is `5.638 TiB`.
+- Historical storage note: these two raw cases were written to the 8 TiB
+  scratch filesystem. The later quota increase applies to 20 TiB home storage,
+  not to scratch.
 - The matched contract is fresh `C-HI` and `C-LO`, Stewart cluster `002_003`,
   `50 Myr`, float HDF5 every `1 Myr`, double HDF5 every `5 Myr`, and complete
   particle histories every `0.01 Myr`.

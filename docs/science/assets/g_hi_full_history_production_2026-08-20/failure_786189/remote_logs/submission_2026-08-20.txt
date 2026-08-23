@@ -1,0 +1,10 @@
+SUBMISSION_UTC=2026-08-20T01:01:26Z
+G_HI_JOB_ID=786189.kunanyi-ohpc
+Job Id: 786189.kunanyi-ohpc
+    Job_Name = g_hi_hist
+    job_state = Q
+    queue = normal
+    ctime = Thu Aug 20 11:01:26 2026
+    qtime = Thu Aug 20 11:01:26 2026
+    Resource_List.select = 64:ncpus=28:mpiprocs=28
+    Resource_List.walltime = 48:00:00

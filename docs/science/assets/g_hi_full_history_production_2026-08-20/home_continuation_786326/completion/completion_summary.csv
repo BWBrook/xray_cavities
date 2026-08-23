@@ -1,0 +1,15 @@
+evidence_kind,metric,value,status,interpretation
+observed,pbs_exit_status,0,passed,scheduler completion green
+observed,mpi_exit_code,0,passed,PLUTO continuation completed green
+observed,done_marker,present,passed,production completion marker exists
+observed,failed_marker,absent,passed,no production failure marker exists
+observed,stageout_status,1,caveat,stage-root compact evidence remained directly retrievable
+observed,stderr,empty,passed,no runtime error output
+observed,endpoint_hdf5_time_code,15330.0696894,passed,configured 50 Myr endpoint reached exactly
+observed,endpoint_particle_time_code,15330.0696894,passed,particle endpoint matches the fluid endpoint exactly
+observed,endpoint_particle_records,193741,passed,final particle history is structurally readable
+observed,home_continuation_size,2.2 TiB,passed,home-resident continuation fits the enlarged quota
+observed,canonical_double_hdf5_count,11,passed,split-root indices 0 through 10 are complete and nonempty
+observed,canonical_float_hdf5_count,51,passed,split-root indices 0 through 50 are complete and nonempty
+observed,canonical_particle_history_count,5001,passed,split-root indices 0 through 5000 are complete and nonempty
+inferred,decision,G_HI_FULL_HISTORY_ENDPOINT_GREEN_FOUR_CASE_RAW_FACTORIAL_COMPLETE,passed,G-HI completes the locked four-case production surface
