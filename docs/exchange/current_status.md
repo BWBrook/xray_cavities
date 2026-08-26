@@ -38,11 +38,12 @@ current instruction without checking its goal status.
 ## Supervisor Priority And Execution Order
 
 - Production is complete. Goal 062 applied the common fluid, gravity, tracer,
-  and shock workflow to all `204` annual snapshots; Goal 063 then confirmed
-  that the large `C-LO` normalized budget is background dominated and locked
-  the valid shock-age windows. Goal 064 now implements the common-age
-  four-case X-ray/cavity and corrected-PRAiSE2 surface; no further PLUTO
-  production is planned.
+  and shock workflow to all `204` annual snapshots; Goal 063 confirmed that
+  the large `C-LO` normalized budget is background dominated and locked the
+  valid shock-age windows; Goal 064 completed the common-age four-case
+  X-ray/cavity and corrected-PRAiSE2 surface. Goal 065 now joins those products
+  into the prespecified paper tests. No further PLUTO production or observable
+  recomputation is needed before supervisor interpretation.
 - The PRAiSE coefficient science gate is green; corrected PRAiSE2 is the
   production radio method once its tested source change is published to the
   fork-backed working branch.
@@ -80,6 +81,36 @@ current instruction without checking its goal status.
   block the other `G-LO` analysis components or pipeline preparation.
 
 ## Active Checkpoint
+
+### Goal 065: four-case scientific synthesis
+
+- Status: `complete_local_scientific_synthesis`.
+- Decision:
+  `FOUR_CASE_SYNTHESIS_COMPLETE_SUPERVISOR_INTERPRETATION_READY`.
+- The joined surface covers `C-HI`, `C-LO`, `G-HI`, and `G-LO` at
+  `10/20/30/40/50 Myr`, using accepted Goal 062/063/064 compact products only.
+- The topology, pressure, background, and shock-validity gates remain
+  fail-closed. There are `39/60` quantitative cavity views and `37` rows in
+  the primary valid-shock Mach test.
+- Test 1: pooled within-view cavity-bias/Mach Spearman rho spans `-0.888` to
+  `-0.868`, but the case/view-adjusted slope is only `-0.0402 dex/Mach`, Mach
+  adds `0.0031` R-squared, and leave-one-case-out slopes change sign. This is
+  a strong pooled pattern, not a case-robust independent Mach effect.
+- Test 2: median matched-field `(2.5pV / t_spec) / known power` is `0.0494`,
+  `1.55`, `0.00650`, and `0.0877` for `C-HI`, `C-LO`, `G-HI`, and `G-LO`.
+  The estimator is not universal; `40/60` spectral breaks are censored above
+  the observed band.
+- Test 3: median full-loss 150 MHz power recovery is `0.937`, `7.34`, `0.523`,
+  and `4.03`; the corresponding 1.4 GHz values are `5.10`, `15.85`, `2.37`,
+  and `7.02`. Standard radio scalings are structured by power and environment.
+- The next consequential step is supervisor interpretation: whether Mach is
+  retained as a descriptive covariate, which radio relation anchors the paper,
+  and how censored spectral ages and tracer-shell pressure are framed.
+- Science note/assets:
+  `docs/science/four_case_scientific_synthesis_2026-08-26.md` and
+  `docs/science/assets/four_case_scientific_synthesis_2026-08-26/`.
+- Goal/log: `docs/goals/065-four-case-scientific-synthesis/` and
+  `docs/exchange/logs/2026-08-26-four-case-scientific-synthesis.md`.
 
 ### Goal 064: four-case selected-age observables
 

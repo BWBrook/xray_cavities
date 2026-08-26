@@ -1,0 +1,13 @@
+analysis_scope,response,view,excluded_case,n_case_age_view_rows,cases_represented,spearman_rho,mach_slope_dex_per_unit,model_r2,incremental_mach_r2,inference_scope
+within_view_pooled_cases,cavity_to_injected_ratio,0deg,,12,C-HI;C-LO;G-HI;G-LO,-0.8881118881118882,-0.3067986939198086,0.7272031376863693,,descriptive_nonindependent_case_age_surface_no_p_value
+within_view_pooled_cases,cavity_to_injected_ratio,45deg,,12,C-HI;C-LO;G-HI;G-LO,-0.8811188811188813,-0.17479328922081472,0.737217738513597,,descriptive_nonindependent_case_age_surface_no_p_value
+within_view_pooled_cases,cavity_to_injected_ratio,90deg,,13,C-HI;C-LO;G-HI;G-LO,-0.8681318681318682,-0.23206793668674225,0.6682485439486013,,descriptive_nonindependent_case_age_surface_no_p_value
+case_and_view_fixed_effect_descriptive,cavity_to_injected_ratio,all,,37,C-HI;C-LO;G-HI;G-LO,,-0.040154146629631314,0.8864524961233005,0.0030695379484620977,descriptive_fixed_effect_sensitivity_no_replicate_inference
+within_view_pooled_cases,cavity_to_direct_lobe_total_ratio,0deg,,12,C-HI;C-LO;G-HI;G-LO,-0.9090909090909092,-0.3548157019564469,0.7601985299069012,,descriptive_nonindependent_case_age_surface_no_p_value
+within_view_pooled_cases,cavity_to_direct_lobe_total_ratio,45deg,,12,C-HI;C-LO;G-HI;G-LO,-0.8811188811188813,-0.19941102450130113,0.7270462807246302,,descriptive_nonindependent_case_age_surface_no_p_value
+within_view_pooled_cases,cavity_to_direct_lobe_total_ratio,90deg,,13,C-HI;C-LO;G-HI;G-LO,-0.8846153846153846,-0.2789252758953137,0.729073962539335,,descriptive_nonindependent_case_age_surface_no_p_value
+case_and_view_fixed_effect_descriptive,cavity_to_direct_lobe_total_ratio,all,,37,C-HI;C-LO;G-HI;G-LO,,-0.04019255639774591,0.9320173634061579,0.0023801496832085434,descriptive_fixed_effect_sensitivity_no_replicate_inference
+leave_one_case_out_fixed_effect_sensitivity,cavity_to_injected_ratio,all,C-HI,26,C-LO;G-HI;G-LO,,-0.09755462484196856,0.9314155201993363,0.01878220816819287,descriptive_leave_one_factorial_cell_out_no_p_value
+leave_one_case_out_fixed_effect_sensitivity,cavity_to_injected_ratio,all,C-LO,27,C-HI;G-HI;G-LO,,-0.035815578455483714,0.7430139813008796,0.006028911807310688,descriptive_leave_one_factorial_cell_out_no_p_value
+leave_one_case_out_fixed_effect_sensitivity,cavity_to_injected_ratio,all,G-HI,31,C-HI;C-LO;G-LO,,0.11423009429399093,0.8732844764341388,0.00994476096849417,descriptive_leave_one_factorial_cell_out_no_p_value
+leave_one_case_out_fixed_effect_sensitivity,cavity_to_injected_ratio,all,G-LO,27,C-HI;C-LO;G-HI,,-0.039262483985580535,0.9096705939801636,0.0030074555912557033,descriptive_leave_one_factorial_cell_out_no_p_value

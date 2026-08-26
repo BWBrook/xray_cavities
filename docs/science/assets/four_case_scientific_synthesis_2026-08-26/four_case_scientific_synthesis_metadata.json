@@ -1,0 +1,50 @@
+{
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-HI",
+    "G-LO"
+  ],
+  "decision_label": "FOUR_CASE_SYNTHESIS_COMPLETE_SUPERVISOR_INTERPRETATION_READY",
+  "figure": "four_case_scientific_synthesis.png",
+  "input_count": 30,
+  "known_bipolar_power_erg_s": {
+    "C-HI": 2e+45,
+    "C-LO": 2e+43,
+    "G-HI": 2e+45,
+    "G-LO": 2e+43
+  },
+  "method_gates": {
+    "C-LO_ambient_energy": "whole-domain background dominated; inside 100 kpc is an upper bound",
+    "cavity": "exactly two non-crossing opposite-side X-ray components",
+    "inference": "descriptive deterministic 2x2 factorial; no replicate p-values",
+    "pressure": "tracer-shell midpoint proxy, not X-ray fitted",
+    "radio": "corrected PRAiSE2 full-loss primary; lossless comparator",
+    "shock": "Goal 063 centred-kinematic validity; G-HI 50 Myr excluded"
+  },
+  "primary_tests": {
+    "T1": "strong_pooled_negative_pattern_not_case_robust",
+    "T2": "cavity_spectral_power_not_universal_recovery_estimator",
+    "T3": "radio_scalings_power_and_environment_dependent"
+  },
+  "row_counts": {
+    "case_age_physics.csv": 20,
+    "cavity_age_power_inference.csv": 720,
+    "cavity_energy_recovery.csv": 180,
+    "factorial_effects.csv": 150,
+    "jet_power_recovery_summary.csv": 72,
+    "radio_power_inference.csv": 240,
+    "scientific_decision_summary.csv": 3,
+    "shock_cavity_test_summary.csv": 12,
+    "spectral_cavity_power_inference.csv": 540,
+    "spectral_fits.csv": 60
+  },
+  "selected_snapshot_indices": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "status": "complete_local_scientific_synthesis"
+}
