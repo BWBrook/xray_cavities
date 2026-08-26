@@ -1,0 +1,152 @@
+{
+  "double_endpoint": {
+    "path": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0010.dbl.h5",
+    "scalar_samples_first_last": {
+      "prs": [
+        1.0565128112694919e-10,
+        1.0565128112695099e-10
+      ],
+      "rho": [
+        0.00015900455940406064,
+        0.0001590045594040561
+      ],
+      "tr1": [
+        0.0,
+        0.0
+      ],
+      "vx1": [
+        1.3640207273249933e-05,
+        -1.3640207273259596e-05
+      ],
+      "vx2": [
+        1.3640207273250484e-05,
+        -1.3640207273261681e-05
+      ],
+      "vx3": [
+        1.7304577473134116e-05,
+        -1.730457747314372e-05
+      ]
+    },
+    "shapes": {
+      "prs": [
+        1014,
+        960,
+        960
+      ],
+      "rho": [
+        1014,
+        960,
+        960
+      ],
+      "tr1": [
+        1014,
+        960,
+        960
+      ],
+      "vx1": [
+        1014,
+        960,
+        960
+      ],
+      "vx2": [
+        1014,
+        960,
+        960
+      ],
+      "vx3": [
+        1014,
+        960,
+        960
+      ]
+    },
+    "size_bytes": 67318639276,
+    "time": 15330.0696894,
+    "timestep": "Timestep_10"
+  },
+  "expected_endpoint_time": 15330.0696894,
+  "float_endpoint": {
+    "path": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0050.flt.h5",
+    "scalar_samples_first_last": {
+      "prs": [
+        1.0565127939177188e-10,
+        1.0565127939177188e-10
+      ],
+      "rho": [
+        0.00015900455764494836,
+        0.00015900455764494836
+      ],
+      "tr1": [
+        0.0,
+        0.0
+      ],
+      "vx1": [
+        1.364020772598451e-05,
+        -1.364020772598451e-05
+      ],
+      "vx2": [
+        1.364020772598451e-05,
+        -1.364020772598451e-05
+      ],
+      "vx3": [
+        1.7304577340837568e-05,
+        -1.7304577340837568e-05
+      ]
+    },
+    "shapes": {
+      "prs": [
+        1014,
+        960,
+        960
+      ],
+      "rho": [
+        1014,
+        960,
+        960
+      ],
+      "tr1": [
+        1014,
+        960,
+        960
+      ],
+      "vx1": [
+        1014,
+        960,
+        960
+      ],
+      "vx2": [
+        1014,
+        960,
+        960
+      ],
+      "vx3": [
+        1014,
+        960,
+        960
+      ]
+    },
+    "size_bytes": 44890581676,
+    "time": 15330.0696894,
+    "timestep": "Timestep_50"
+  },
+  "series": {
+    "double_hdf5": {
+      "all_nonempty": true,
+      "count": 11,
+      "first_index": 0,
+      "last_index": 10
+    },
+    "float_hdf5": {
+      "all_nonempty": true,
+      "count": 51,
+      "first_index": 0,
+      "last_index": 50
+    },
+    "particles": {
+      "all_nonempty": true,
+      "count": 5001,
+      "first_index": 0,
+      "last_index": 5000
+    }
+  },
+  "status": "passed"
+}

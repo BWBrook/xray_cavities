@@ -1,0 +1,28 @@
+{
+  "case": "C-HI",
+  "environment_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+  "maximum_reference_relative_error": 1.8914341921908047e-13,
+  "method_version": 1,
+  "outer_control_interpretation": "far-field diagnostic; scientific control status requires shock and tracer checks",
+  "outer_control_min_radius_kpc": 100.0,
+  "reference_energy_path": "/u/bwbrook/xray_cavities_analysis/2026-08-25-four-case-fluid-snapshot-census/C-HI/energy_partition_timeseries.csv",
+  "shell_edges_kpc": [
+    0.0,
+    50.0,
+    100.0,
+    150.0,
+    200.0,
+    "inf"
+  ],
+  "snapshot_indices": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    30,
+    40,
+    50
+  ],
+  "status": "complete_cluster_background_energy_diagnostic"
+}

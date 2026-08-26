@@ -1,0 +1,45 @@
+{
+  "cases": ["C-HI", "C-LO", "G-HI", "G-LO"],
+  "analysis_root": "/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables",
+  "decision_label": "FOUR_CASE_RADIO_DEPENDENCY_REPAIR_RESUBMITTED",
+  "failed_attempt_1": {
+    "failure_archive_sha256": "266c29b736e6e0d88b991f87daa4b29fbc7f584d918e543cba5462fbe99246ef",
+    "failure_class": "scratch_analysis_root_quota_exhausted",
+    "jobs": {
+      "xray_cavity": "787293.kunanyi-ohpc",
+      "radio": {
+        "C-HI": "787294.kunanyi-ohpc",
+        "C-LO": "787295.kunanyi-ohpc",
+        "G-HI": "787296.kunanyi-ohpc",
+        "G-LO": "787297.kunanyi-ohpc"
+      }
+    },
+    "science_compute_started": false
+  },
+  "jobs": {
+    "xray_cavity": "787301.kunanyi-ohpc",
+    "radio": {
+      "C-HI": "787310.kunanyi-ohpc",
+      "C-LO": "787329.kunanyi-ohpc",
+      "G-HI": "787311.kunanyi-ohpc",
+      "G-LO": "787312.kunanyi-ohpc"
+    }
+  },
+  "nominal_ages_myr": [10, 20, 30, 40, 50],
+  "praise2_commit": "73210e15d4c60e77ffb317b3ee2b9209c049edd4",
+  "radio_frequencies_ghz": [0.15, 0.5, 1.4, 4.5, 15.0],
+  "radio_r1_dependency_failure": {
+    "failure_class": "missing_staged_plutokore_radio_support_modules",
+      "failed_jobs": {
+        "C-HI": "787302.kunanyi-ohpc",
+        "C-LO": "787303.kunanyi-ohpc",
+        "G-HI": "787304.kunanyi-ohpc",
+      "G-LO": "787305.kunanyi-ohpc"
+    },
+    "history_caches_complete_and_reusable": true,
+    "repair_stage_root": "/u/bwbrook/codex_kunanyi/goal064_four_case_selected_age_observables_radio_r2"
+  },
+  "status": "submitted_waiting_pbs_completion",
+  "views_deg": [0, 45, 90],
+  "xray_quantitative_energy_gate": "exactly_two_non_crossing_opposite_side_components"
+}

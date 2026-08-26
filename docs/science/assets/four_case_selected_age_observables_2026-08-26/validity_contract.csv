@@ -1,0 +1,6 @@
+surface,case,last_valid_snapshot,endpoint_usable,rule
+shock_position,G-HI,47,false,two_sided_front_with_two_full_outer_cells
+shock_speed_and_mach,G-HI,46,false,centred_three_snapshot_fit_all_positions_valid
+shock_position_speed_mach,C-HI/C-LO/G-LO,50,true,accepted_Goal063_domain_margin
+xray_cavity_radio,G-HI,50,true,nonshock_observables_not_invalidated_by_shock_boundary
+xray_cavity_radio,C-HI/C-LO/G-LO,50,true,canonical_common_age_surface

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-08-23
+Last updated: 2026-08-26
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -21,8 +21,9 @@ current instruction without checking its goal status.
 
 ## Project Contract
 
-- Completed factorial: cluster/group environments crossed with low/high jet
-  power (`C-HI`, `C-LO`, `G-HI`, and `G-LO`).
+- Completed matched-cadence factorial: cluster/group environments crossed with
+  low/high jet power (`C-HI`, `C-LO`, `G-HI`, and `G-LO`), each with the
+  intended `51/11/5001` float/double/particle temporal surface.
 - Preferred endpoint viewing surface: `0/45/90 deg`; nonzero views use
   `edge_overlap_uniform_cell_projection`.
 - Products are compact prove-out evidence unless a science note explicitly
@@ -36,9 +37,12 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
-- Production is complete. The next priority is to lock the G-HI split-root
-  canonical input surface and extend the validated per-snapshot science
-  workflow across all four cases, not launch another PLUTO production run.
+- Production is complete. Goal 062 applied the common fluid, gravity, tracer,
+  and shock workflow to all `204` annual snapshots; Goal 063 then confirmed
+  that the large `C-LO` normalized budget is background dominated and locked
+  the valid shock-age windows. Goal 064 now implements the common-age
+  four-case X-ray/cavity and corrected-PRAiSE2 surface; no further PLUTO
+  production is planned.
 - The PRAiSE coefficient science gate is green; corrected PRAiSE2 is the
   production radio method once its tested source change is published to the
   fork-backed working branch.
@@ -54,8 +58,10 @@ current instruction without checking its goal status.
   from the validated 10 Myr tuple into home; PBS `786326` reached the exact
   50 Myr endpoint. Its canonical raw sequence uses scratch through 10 Myr and
   home thereafter, with complete `51/11/5001` float/double/particle surfaces.
-- Existing full-history `G-LO` remains accepted. The locked four-case raw
-  factorial is complete; no further production rerun is currently justified.
+- Goal 061 `G-LO` is the canonical matched source: exact 50 Myr endpoint,
+  continuous `51/11/5001` outputs, and approximately `2.9 TiB` on home
+  storage. The older six-age compacted roots remain protected historical
+  provenance, not the default science input.
 
 ## Per-Snapshot Science Analysis Contract
 
@@ -75,11 +81,165 @@ current instruction without checking its goal status.
 
 ## Active Checkpoint
 
+### Goal 064: four-case selected-age observables
+
+- Status: `submitted_waiting_pbs_completion`.
+- Decision:
+  `FOUR_CASE_RADIO_DEPENDENCY_REPAIR_RESUBMITTED`.
+- Common ages: snapshots `10/20/30/40/50` for `C-HI`, `C-LO`, `G-HI`, and
+  `G-LO`, retaining actual HDF5 times.
+- X-ray/cavity surface: `0/45/90 deg`, X-ray-only one-percent projected-area
+  deficit mask, tracer post-hoc only, and quantitative cavity energy only for
+  exactly two non-crossing opposite-side components.
+- Radio surface: corrected PRAiSE2 lossless/full-loss luminosity at
+  `0.15/0.5/1.4/4.5/15 GHz` and `0/45/90 deg`, with complete case-specific
+  histories and causal particle-state matching.
+- Validity gate: `G-HI` endpoint remains available for non-shock observables;
+  shock positions stop at snapshot `47`, centred speed/Mach at `46`.
+- Execution is one four-core X-ray job plus four independent 16-core radio
+  jobs. This is the complete prespecified surface, split only at genuine
+  restart/failure boundaries.
+- The first five jobs (`787293`-`787297`) failed during launch because their
+  transient analysis roots targeted the full scratch allocation. Radio logs
+  directly report `Errno 122`; the X-ray common cause is inferred from its
+  simultaneous launch failure and empty case outputs. No science calculation
+  started. Failure evidence is preserved; no raw input was changed.
+- The repair moved transient analysis/history-cache products to the enlarged
+  home allocation only. Scientific defaults and the prespecified surface are
+  unchanged, and regression tests now enforce the storage placement.
+- The next authorized evidence found all four radio replacements (`787302`-
+  `787305`) failed after completing their full history caches: the staged
+  runtime omitted `plutokore.radio.praise` and `raytracing`. The complete
+  caches were retained and validated; this is an execution packaging defect,
+  not a particle-history or scientific-method failure.
+- A separate repair stage now contains the complete reviewed radio dependency
+  surface and fails fast on its imports before cache work. Resume jobs `787310`
+  (`C-HI`), `787329` (`C-LO`), `787311` (`G-HI`), and `787312` (`G-LO`) were
+  verified running once. X-ray `787301` remained running at the last
+  authorized snapshot.
+- Next: wait for Barry's PBS completion emails. Retrieve and validate each
+  compact product independently; do not poll or start synthesis before the
+  relevant completion evidence arrives.
+- Science note/assets:
+  `docs/science/four_case_selected_age_observables_2026-08-26.md` and
+  `docs/science/assets/four_case_selected_age_observables_2026-08-26/`.
+- Goal/log: `docs/goals/064-four-case-selected-age-observables/` and
+  `docs/exchange/logs/2026-08-26-four-case-selected-age-observables.md`.
+
+### Goal 063: cluster background and age validity
+
+- Status: `complete_product`.
+- Decision:
+  `C_LO_LARGE_NORMALIZED_BUDGET_BACKGROUND_DOMINATED_SHOCK_WINDOWS_LOCKED`.
+- Scope: use existing `C-HI` and `C-LO` HDF5 outputs at eight anchor ages to
+  separate full-fluid energy changes into five radial shells, with `r >= 100
+  kpc` as the early far-field control.
+- Shell sums must reconstruct Goal 062 at every non-baseline age; raw HDF5
+  inputs remain read-only and no PLUTO production is involved.
+- Existing Goal 062 evidence locks `G-HI` front-position validity through
+  snapshot `47` and centred three-snapshot shock kinematics through snapshot
+  `46`. Other cases remain domain-valid through snapshot `50`.
+- The paired cluster design can diagnose a common far-field term but is not an
+  unforced no-jet control; causal interpretation will remain qualified.
+- Remote preflight passed for both canonical chains, all selected HDF5
+  contracts, both Goal 062 references, staged hashes, wrapper syntax, and
+  no-overwrite targets.
+- PBS `787276.kunanyi-ohpc` / `cl_bgdiag` completed with `Exit_status=0` in
+  `00:30:57`. Both cases, `16` snapshots, and `80` shell rows validated;
+  stderr is empty. The directly retrieved `11`-member archive SHA-256 is
+  `5633df0a8be47b3142336c39ab2bb2dad8a7220ac1176a567430b828494d7a15`.
+- Through `20 Myr`, absolute far-field `C-HI` and `C-LO` energy terms agree
+  within `0.024%`, confirming a common atmosphere-evolution term.
+- At the `C-LO` endpoint, `94.61%` of the accounted change lies beyond
+  `100 kpc`, with zero tracer and no shock arrival. The uncorrected
+  `23.9673`-times-injected whole-domain value is background dominated.
+- The inside-`100 kpc` remainder is `1.2908` times injected energy and is an
+  upper bound, not a background-corrected coupling efficiency.
+- Next: lock common paper-analysis ages and run selected-age four-case
+  X-ray/cavity plus corrected-PRAiSE2 products, capping `G-HI` shock-kinematic
+  use at snapshot `46`.
+- Science note/assets:
+  `docs/science/cluster_background_and_age_validity_2026-08-26.md` and
+  `docs/science/assets/cluster_background_and_age_validity_2026-08-26/`.
+- Goal/log: `docs/goals/063-cluster-background-and-age-validity/` and
+  `docs/exchange/logs/2026-08-26-cluster-background-and-age-validity.md`.
+
+### Goal 062: four-case fluid snapshot census
+
+- Status: `complete_product`.
+- Decision:
+  `FOUR_CASE_FLUID_CENSUS_GREEN_C_LO_ENERGY_BASELINE_AND_G_HI_BOUNDARY_GATES_EXPOSED`.
+- Scope: apply the accepted energy, centre-zero gravity, tracer-partition, and
+  axial-shock methods to float outputs `0..50` for all four cases. Radio and
+  projected X-ray cavity work remain deliberately separate.
+- PBS `786969.kunanyi-ohpc` / `four_fluid` completed with `Exit_status=0` in
+  `04:18:49`. All four case processes exited `0`; the wrapper validated `51`
+  snapshots, `612` energy rows, `306` shock rows, and `51` source rows per
+  case. Remote stderr is empty.
+- `Stageout_status=1` remains a scheduler caveat, but the stage archive and
+  logs were directly retrieved. The `646`-member archive SHA-256 is
+  `b4dfb65a9231a53caec776f435ab819ce0b67c61fa9fd7f4aa866a5d7d83ece6`.
+- The first descriptive synthesis contains `204` primary energy rows, `408`
+  primary shock-side rows, endpoint summaries, factorial contrasts, and one
+  figure. It makes no replicate-based inferential claim.
+- Material gate 1: `C-LO` ambient total change reaches `23.91` times injected
+  energy with residual `-22.97`; its low-power energy comparison requires a
+  background/common-atmosphere diagnosis before promotion.
+- Material gate 2: the late `G-HI` front reaches `248.95 kpc` in a roughly
+  `250 kpc` half-domain; endpoint shock kinematics are boundary-limited.
+- No raw HDF5 or particle payload was copied or changed. The next tranche is a
+  targeted existing-output background and valid-age diagnostic before broad
+  radio/X-ray processing.
+- Science note/assets:
+  `docs/science/four_case_fluid_snapshot_census_2026-08-25.md` and
+  `docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/`.
+- Goal/log: `docs/goals/062-four-case-fluid-snapshot-census/` and
+  `docs/exchange/logs/2026-08-25-four-case-fluid-snapshot-census.md`.
+
+### Goal 061: G-LO matched full-history production
+
+- Status: `complete_matched_full_history_endpoint_green`.
+- Decision:
+  `G_LO_MATCHED_FULL_HISTORY_ENDPOINT_GREEN_FOUR_CASE_MATCHED_RAW_FACTORIAL_COMPLETE`.
+- Rationale: historical `G-LO` retains particles `0..5000` but only six fluid
+  ages at `0/10/20/30/40/50 Myr`; the other three treatments retain the
+  matched `51` float, `11` double, and `5001` particle surfaces.
+- Contract: fresh group `002_031`, one-sided jet power `1e43 erg s^-1`, speed
+  `0.1c`, exact `50 Myr` target, float/double HDF5 every `1/5 Myr`, and
+  particle histories every `0.01 Myr`.
+- Storage gate: home use was `2,394,234,566,848` bytes against the `20 TiB`
+  quota; more than the required `4 TiB` headroom remained. A disposable
+  `16 MiB` write-and-fsync probe passed and was removed.
+- PBS `786516.kunanyi-ohpc` / `g_lo_hist2` completed with `Exit_status=0`,
+  `30:01:35` walltime, and `1792` CPUs. `Stageout_status=1` remains a
+  scheduler caveat, but all required evidence was directly retrievable.
+- The run has `DONE`, no `FAILED`, `RUN_KIND=fresh`, `MPI_EXIT_CODE=0`, and
+  only the known nonfatal 93-byte missing-`git` warning in stderr.
+- Continuous non-empty sequences passed: float HDF5 `0..50`, double HDF5
+  `0..10`, and particles `0..5000`.
+- Both fluid endpoints have exact code time `15330.0696894`, all six required
+  fields, and shape `1014 x 960 x 960`. Particle endpoint `5000` contains
+  `197,568` unique valid records at the same step and time.
+- Run root:
+  `/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production`.
+  This home-resident run is now canonical for matched analysis. Historical
+  compacted G-LO roots remain untouched as provenance.
+- No post-processing, compaction, deletion, or follow-on submission occurred
+  during completion review. Approximately `124 KiB` of remote evidence was
+  retrieved; the complete compact local bundle is approximately `160 KiB`.
+- Science note/assets:
+  `docs/science/g_lo_matched_full_history_production_2026-08-23.md` and
+  `docs/science/assets/g_lo_matched_full_history_production_2026-08-23/`.
+- Goal/log: `docs/goals/061-g-lo-matched-full-history-production/` and
+  `docs/exchange/logs/2026-08-23-g-lo-matched-full-history-production.md`.
+
 ### Goal 060: G-HI full-history production
 
 - Status: `complete_full_history_endpoint_split_root_canonical_sequence_green`.
-- Decision:
+- Historical decision:
   `G_HI_FULL_HISTORY_ENDPOINT_GREEN_FOUR_CASE_RAW_FACTORIAL_COMPLETE`.
+  Goal 061 supersedes only the claim that raw temporal cadence was fully
+  matched; the G-HI endpoint and canonical split-root evidence remain green.
 - PBS `786189.kunanyi-ohpc` / `g_hi_hist` ended `F` with `Exit_status=124`
   after `11:06:32`; stage stdout records the distinct
   `no_progress_watchdog_timeout` failure.

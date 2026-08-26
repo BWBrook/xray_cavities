@@ -1,0 +1,9 @@
+snapshot_complete=0 time_myr=0
+snapshot_complete=5 time_myr=4.99996003852
+snapshot_complete=10 time_myr=9.9998896033
+snapshot_complete=15 time_myr=14.9996936168
+snapshot_complete=20 time_myr=19.9991113162
+snapshot_complete=30 time_myr=29.9999943978
+snapshot_complete=40 time_myr=39.9998536379
+snapshot_complete=50 time_myr=50
+status=complete_cluster_background_energy_diagnostic case=C-HI

@@ -434,6 +434,29 @@ def test_pressure_treatment_gate_rejects_wrong_aggregate_and_late_tinj(tmp_path:
             )
 
 
+def test_pressure_treatment_accepts_case_specific_aggregate_counts(tmp_path: Path) -> None:
+    cache = tmp_path / "case_specific.h5"
+    _write_treatment_cache(cache)
+    with h5py.File(cache, "r") as h5:
+        plan = workflow.build_pressure_treatment_plan(
+            h5,
+            expected_trim_rows=99,
+            expected_no_positive_rows=99,
+            expected_single_record_rows=99,
+            enforce_expected_counts=False,
+        )
+
+    assert plan["trim_rows"].tolist() == [1, 2]
+    assert plan["excluded_rows"].tolist() == [3]
+    assert plan["contract"]["expected_trim_rows"] is None
+    assert plan["contract"]["expected_no_positive_rows"] is None
+    assert plan["contract"]["expected_single_record_rows"] is None
+    assert (
+        plan["contract"]["aggregate_count_gate"]
+        == "case_specific_counts_recorded_after_structural_validation"
+    )
+
+
 def test_pressure_treatment_excludes_exactly_two_no_positive_rows(tmp_path: Path) -> None:
     cache = tmp_path / "two_excluded.h5"
     _write_treatment_cache(cache)

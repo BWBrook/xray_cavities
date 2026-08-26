@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the corrected-PRAiSE2 G-LO snapshot radio surface.
+"""Build a corrected-PRAiSE2 selected-age radio surface for one case.
 
 The retained history cache is grouped by effective injection column so each
 history is evaluated once for all requested ages.  Ray tracing uses particle
@@ -44,7 +44,6 @@ from scripts.science.run_g_lo_radio_history_value import (
 )
 
 
-CASE = "G-LO"
 SNAPSHOT_INDICES = (10, 20, 30, 40, 50)
 PARTICLE_OUTPUTS = (1000, 2000, 3000, 4000, 5000)
 FREQUENCIES_GHZ = np.asarray((0.15, 0.5, 1.4, 4.5, 15.0), dtype=float)
@@ -128,18 +127,21 @@ def load_praise2(source: Path, commit_proof: Path) -> tuple[Any, dict[str, Any]]
     }
 
 
-def load_fluid_times(path: Path) -> dict[int, float]:
+def load_fluid_times(path: Path, *, case: str) -> dict[int, float]:
     with Path(path).open(newline="") as handle:
         rows = list(csv.DictReader(handle))
     times = {
         int(row["snapshot_index"]): float(row["actual_time_myr"])
         for row in rows
-        if int(row["snapshot_index"]) in SNAPSHOT_INDICES
+        if row.get("case") == case
+        and int(row["snapshot_index"]) in SNAPSHOT_INDICES
     }
     if set(times) != set(SNAPSHOT_INDICES) or any(
         not math.isfinite(value) for value in times.values()
     ):
-        raise SnapshotRadioError("fluid manifest lacks the five radio snapshots")
+        raise SnapshotRadioError(
+            f"fluid manifest lacks the five selected radio snapshots for {case}"
+        )
     return times
 
 
@@ -378,6 +380,7 @@ def build_emissivity_store(
             expected_trim_single_record_overlap_rows=PRESSURE_TREATMENT_CONTRACT[
                 "expected_trim_single_record_overlap_rows"
             ],
+            enforce_expected_counts=False,
         )
         starts = effective_start_columns(plan, len(output_indices))
         active_plan = np.asarray(plan["active_mask"], dtype=bool)
@@ -465,13 +468,25 @@ def align_particle_ids(parsed_ids: np.ndarray, desired_ids: np.ndarray) -> np.nd
     return order[positions]
 
 
-def particle_file(root: Path, output_index: int) -> Path:
-    matches = sorted(Path(root).glob(f"particles.{output_index:04d}.*"))
-    if len(matches) != 1:
-        raise SnapshotRadioError(
-            f"expected one particle source for output {output_index}, found {len(matches)}"
-        )
-    return matches[0]
+def load_particle_paths(path: Path) -> dict[int, Path]:
+    values = json.loads(Path(path).read_text())
+    if not isinstance(values, list) or len(values) != 5001:
+        raise SnapshotRadioError("particle-path manifest must contain outputs 0..5000")
+    result: dict[int, Path] = {}
+    for expected_index, value in enumerate(values):
+        source = Path(value)
+        parts = source.name.split(".")
+        if (
+            len(parts) != 3
+            or parts[0] != "particles"
+            or parts[1] != f"{expected_index:04d}"
+            or parts[2] != "dbl"
+        ):
+            raise SnapshotRadioError("particle-path manifest order or filename drifted")
+        if not source.is_file():
+            raise SnapshotRadioError(f"particle source is missing: {source}")
+        result[expected_index] = source
+    return result
 
 
 def load_particle_states(
@@ -479,8 +494,7 @@ def load_particle_states(
     cache: h5py.File,
     active_rows: np.ndarray,
     source_columns: np.ndarray,
-    initial_root: Path,
-    guarded_root: Path,
+    particle_paths: Mapping[int, Path],
 ) -> tuple[np.ndarray, np.ndarray, dict[str, Any]]:
     ids = np.asarray(cache["endpoint_ids"][active_rows], dtype=np.int64)
     positions = np.empty((len(active_rows), 3), dtype=np.float64)
@@ -492,8 +506,7 @@ def load_particle_states(
     for column in sorted(np.unique(source_columns).tolist()):
         select = source_columns == column
         output_index = int(output_indices[column])
-        root = initial_root if output_index < 1000 else guarded_root
-        path = particle_file(root, output_index)
+        path = particle_paths[output_index]
         parsed = parse_particle_file(
             path,
             fields=("x1", "x2", "x3", "vx1", "vx2", "vx3"),
@@ -547,10 +560,10 @@ def raytrace_snapshot(
     cache: h5py.File,
     store: h5py.File,
     target_index: int,
-    initial_root: Path,
-    guarded_root: Path,
+    particle_paths: Mapping[int, Path],
     view_deg: float,
     kd_jobs: int,
+    case: str,
 ) -> dict[str, Any]:
     active = np.asarray(store["active"][target_index], dtype=bool)
     rows = np.flatnonzero(active)
@@ -559,8 +572,7 @@ def raytrace_snapshot(
         cache=cache,
         active_rows=rows,
         source_columns=source_columns,
-        initial_root=initial_root,
-        guarded_root=guarded_root,
+        particle_paths=particle_paths,
     )
     lossless = np.asarray(store["lossless"][target_index, rows, :], dtype=np.float64)
     full = np.asarray(store["full"][target_index, rows, :], dtype=np.float64)
@@ -589,6 +601,7 @@ def raytrace_snapshot(
     particle_time_min = source["source_time_code_min"] * TIME_UNIT_S / (1.0 * u.Myr).to_value(u.s)
     if particle_time_max > fluid_time_myr + 1.0e-8:
         raise SnapshotRadioError("ray trace uses particle state later than the fluid snapshot")
+    source_output_indices = [int(item["output_index"]) for item in source["source_files"]]
     rows_out: list[dict[str, Any]] = []
     for loss_model, offset, effective_field in (
         ("lossless", 0, lossless_field),
@@ -597,11 +610,11 @@ def raytrace_snapshot(
         for frequency_index, frequency in enumerate(FREQUENCIES_GHZ):
             rows_out.append(
                 {
-                    "case": CASE,
+                    "case": case,
                     "snapshot_index": snapshot_index,
                     "fluid_time_myr": fluid_time_myr,
-                    "particle_output_index": int(max(source_columns)),
-                    "particle_output_index_min": int(min(source_columns)),
+                    "particle_output_index": max(source_output_indices),
+                    "particle_output_index_min": min(source_output_indices),
                     "particle_time_myr": particle_time_max,
                     "particle_time_myr_min": particle_time_min,
                     "particle_time_offset_myr": fluid_time_myr - particle_time_max,
@@ -645,7 +658,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     checkpoint_root = work_root / "raytrace_checkpoints"
     checkpoint_root.mkdir(parents=True, exist_ok=True)
     praise2, praise2_provenance = load_praise2(args.praise2_source, args.praise2_commit_proof)
-    fluid_times = load_fluid_times(args.fluid_manifest)
+    fluid_times = load_fluid_times(args.fluid_manifest, case=args.case)
+    particle_paths = load_particle_paths(args.particle_paths_json)
     store_path = work_root / "corrected_praise2_emissivity.h5"
     emissivity = build_emissivity_store(
         args.cache, store_path, praise2, resume=args.resume
@@ -669,10 +683,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                         cache=cache,
                         store=store,
                         target_index=target_index,
-                        initial_root=args.initial_particle_root,
-                        guarded_root=args.guarded_particle_root,
+                        particle_paths=particle_paths,
                         view_deg=view,
                         kd_jobs=args.kd_jobs,
+                        case=args.case,
                     )
                     write_json(checkpoint, record)
                 view_rows.extend(record["rows"])
@@ -700,7 +714,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     metadata = {
         "status": "complete_corrected_praise2_snapshot_radio",
-        "case": CASE,
+        "case": args.case,
         "snapshots": list(SNAPSHOT_INDICES),
         "frequencies_ghz": FREQUENCIES_GHZ,
         "loss_models": ["lossless", "full_loss"],
@@ -717,7 +731,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "ray_step_kpc": RAY_STEP_KPC,
             "component_partition": "original-coordinate z sign, deterministic support partition only",
             "full_maps_retained": False,
-            "reason": "scalar luminosity and field products answer Goal 058; transient maps avoid bulky duplicate evidence",
+            "reason": "selected-age scalar luminosity and field products answer Goal 064; transient maps avoid bulky duplicate evidence",
         },
         "emissivity": emissivity,
     }
@@ -727,10 +741,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--case", required=True, choices=("C-HI", "C-LO", "G-HI", "G-LO"))
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--fluid-manifest", type=Path, required=True)
-    parser.add_argument("--initial-particle-root", type=Path, required=True)
-    parser.add_argument("--guarded-particle-root", type=Path, required=True)
+    parser.add_argument("--particle-paths-json", type=Path, required=True)
     parser.add_argument("--praise2-source", type=Path, required=True)
     parser.add_argument("--praise2-commit-proof", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)

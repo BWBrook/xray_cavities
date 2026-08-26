@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/u/bwbrook/codex_kunanyi/goal064_four_case_selected_age_observables/scripts/science/g_lo_snapshot_radio.py", line 26, in <module>
+    from scripts.science.g_lo_radio_method_value import derive_support_bound
+  File "/u/bwbrook/codex_kunanyi/goal064_four_case_selected_age_observables/scripts/science/g_lo_radio_method_value.py", line 24, in <module>
+    from plutokore.radio.praise import (
+ModuleNotFoundError: No module named 'plutokore.radio.praise'

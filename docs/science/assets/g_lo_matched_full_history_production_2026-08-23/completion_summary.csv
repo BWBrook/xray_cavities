@@ -1,0 +1,16 @@
+evidence,status,value,notes
+pbs_final_state,passed,F,job 786516.kunanyi-ohpc
+pbs_exit_status,passed,0,walltime 30:01:35 on 1792 CPUs
+pbs_stageout_status,caveat,1,required stage files were present and retrieved directly
+mpi_exit_status,passed,0,stdout marker
+done_marker,passed,present,112 bytes
+failed_marker,passed,absent,no failed run marker
+stderr,caveat,93 bytes,known nonfatal setup-problem git command not found warning
+float_hdf5_sequence,passed,51,continuous nonempty indices 0..50
+double_hdf5_sequence,passed,11,continuous nonempty indices 0..10
+particle_sequence,passed,5001,continuous nonempty indices 0..5000
+float_endpoint,passed,Timestep_50 at 15330.0696894,required six fields shape 1014x960x960
+double_endpoint,passed,Timestep_10 at 15330.0696894,required six fields shape 1014x960x960
+particle_endpoint,passed,197568 records,unique IDs 1..197568 at step 49462 and code time 15330.0696894
+remote_output_size,info,2.9T,raw data retained on Kunanyi home storage
+decision,passed,G_LO_MATCHED_FULL_HISTORY_ENDPOINT_GREEN_FOUR_CASE_MATCHED_RAW_FACTORIAL_COMPLETE,new G-LO is canonical for matched analysis

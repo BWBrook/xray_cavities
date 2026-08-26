@@ -1,0 +1,45 @@
+{
+  "goal": "062",
+  "status": "complete_product",
+  "decision": "FOUR_CASE_FLUID_CENSUS_GREEN_C_LO_ENERGY_BASELINE_AND_G_HI_BOUNDARY_GATES_EXPOSED",
+  "date": "2026-08-25",
+  "case_count": 4,
+  "expected_snapshots_per_case": 51,
+  "expected_total_snapshots": 204,
+  "pbs_job": {
+    "job_id": "786969.kunanyi-ohpc",
+    "job_name": "four_fluid",
+    "state_at_stop": "Q",
+    "final_state": "F",
+    "exit_status": 0,
+    "stageout_status": 1,
+    "resources_used_walltime": "04:18:49",
+    "resources_used_cput": "15:25:30",
+    "resources_used_mem": "27105160kb",
+    "queue": "normal",
+    "resources": "select=1:ncpus=4:mpiprocs=1:mem=96gb",
+    "walltime": "12:00:00",
+    "qtime": "Tue Aug 25 15:50:47 2026"
+  },
+  "scientific_surfaces": [
+    "ambient_and_lobe_thermal_kinetic_gravitational_energy",
+    "energy_closure_residual_with_unmeasured_boundary",
+    "two_sided_shock_position_speed_and_mach"
+  ],
+  "completion": {
+    "validated_cases": 4,
+    "validated_snapshots": 204,
+    "archive_sha256": "b4dfb65a9231a53caec776f435ab819ce0b67c61fa9fd7f4aa866a5d7d83ece6",
+    "archive_members": 646,
+    "remote_stderr_bytes": 0
+  },
+  "material_gates_exposed": [
+    "C-LO absolute energy accounting is dominated by a large ambient/background term relative to its low injected energy",
+    "G-HI late shock position reaches the axial domain edge and late kinematics are boundary-limited"
+  ],
+  "deferred_surfaces": [
+    "radio_particle_processing",
+    "projected_xray_cavity_recovery",
+    "cross_case_inferred_jet_power_synthesis_pending_background_and_age_validity_gates"
+  ]
+}

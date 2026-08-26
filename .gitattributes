@@ -42,3 +42,7 @@ docs/science/assets/g_lo_snapshot_science_2026-08-14/** -text -diff
 docs/science/assets/cluster_full_history_production_2026-08-17/c_hi_completion/remote_logs/** -text -diff
 docs/science/assets/cluster_full_history_production_2026-08-17/c_lo_completion/remote_logs/** -text -diff
 docs/science/assets/g_hi_full_history_production_2026-08-20/**/remote_logs/** -text -diff
+docs/science/assets/g_lo_matched_full_history_production_2026-08-23/remote_logs/** -text -diff
+docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/remote_logs/** -text -diff
+docs/science/assets/cluster_background_and_age_validity_2026-08-26/remote_logs/** -text -diff
+docs/science/assets/four_case_selected_age_observables_2026-08-26/**/remote_logs/** -text -diff

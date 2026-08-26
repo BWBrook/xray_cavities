@@ -1,0 +1,2 @@
+case_id,environment_family,environment_id,jet_power_erg_s_one_sided,jet_speed_c,target_age_myr,float_hdf5_cadence_myr,double_hdf5_cadence_myr,particle_history_cadence_myr,expected_float_indices,expected_double_indices,expected_particle_indices,nodes,ncpus,walltime,run_root
+G-LO,group,002_031,1e43,0.1,50,1,5,0.01,0..50,0..10,0..5000,64,1792,48:00:00,/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production

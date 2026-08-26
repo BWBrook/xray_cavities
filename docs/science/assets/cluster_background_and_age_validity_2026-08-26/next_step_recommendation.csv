@@ -1,0 +1,4 @@
+priority,action,rationale,boundary
+1,"lock common paper-analysis ages and observable contracts","Goal 063 now supplies the technical age ceiling and removes the false C-LO efficiency interpretation","local design first"
+2,"run four-case X-ray/cavity and corrected-PRAiSE2 products at selected ages","tests cavity-energy bias versus shock strength and inferred versus known jet power","use G-HI shock kinematics only through snapshot 46"
+3,"retain raw matched histories until selected-age products and provenance are verified","particle histories remain necessary for corrected radio evolution","no compaction by implication"

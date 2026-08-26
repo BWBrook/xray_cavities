@@ -1,0 +1,14 @@
+item,value,status
+pbs_exit_status,0,passed
+case_exit_statuses,C-HI=0;C-LO=0;G-HI=0;G-LO=0,passed
+validated_cases,4,passed
+validated_snapshots,204,passed
+snapshot_count_per_case,51,passed
+energy_rows_per_case,612,passed
+shock_rows_per_case,306,passed
+source_rows_per_case,51,passed
+archive_members,646,passed
+archive_sha256,b4dfb65a9231a53caec776f435ab819ce0b67c61fa9fd7f4aa866a5d7d83ece6,passed
+remote_stderr_bytes,0,passed
+stageout_status,1,caveat_required_stage_files_directly_retrieved
+raw_payload_retrieval,none,passed

@@ -1,0 +1,14 @@
+g_lo_snapshot_science.py: OK
+snapshot_energy.py: OK
+snapshot_shocks.py: OK
+pluto_h5_level3_ambient_extract.py: OK
+select_common_age_hdf5.py: OK
+four_case_fluid_snapshot_census.pbs: OK
+case_preflight=passed case=C-HI snapshots=51 first=0 last=50 environment_sha256=30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa
+case_preflight=passed case=C-LO snapshots=51 first=0 last=50 environment_sha256=30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa
+case_preflight=passed case=G-HI snapshots=51 first=0 last=50 environment_sha256=1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a
+case_preflight=passed case=G-LO snapshots=51 first=0 last=50 environment_sha256=1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a
+four_case_preflight=passed
+four_case_validation=passed cases=4 snapshots=204
+b4dfb65a9231a53caec776f435ab819ce0b67c61fa9fd7f4aa866a5d7d83ece6  /u/bwbrook/codex_kunanyi/goal062_four_case_fluid_snapshot_census/four_case_fluid_snapshot_census_2026-08-25.tar.gz
+finished_utc=2026-08-25T10:09:36Z

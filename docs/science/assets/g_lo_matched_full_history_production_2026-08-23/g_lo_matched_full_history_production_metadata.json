@@ -1,0 +1,33 @@
+{
+  "case_id": "G-LO",
+  "decision_label": "G_LO_MATCHED_FULL_HISTORY_ENDPOINT_GREEN_FOUR_CASE_MATCHED_RAW_FACTORIAL_COMPLETE",
+  "goal": 61,
+  "job": {
+    "id": "786516.kunanyi-ohpc",
+    "name": "g_lo_hist2",
+    "queue": "normal",
+    "state_at_stop": "Q"
+  },
+  "completion": {
+    "double_hdf5_count": 11,
+    "endpoint_code_time": 15330.0696894,
+    "endpoint_particle_records": 197568,
+    "exit_status": 0,
+    "float_hdf5_count": 51,
+    "particle_history_count": 5001,
+    "remote_output_size": "2.9T",
+    "walltime": "30:01:35"
+  },
+  "reason": "Replace the compacted six-age G-LO fluid surface with the same 51/11/5001 cadence used by the other factorial cases.",
+  "run_root": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production",
+  "stage_root": "/u/bwbrook/codex_kunanyi/goal061_g_lo_matched_full_history_production",
+  "status": "complete_matched_full_history_endpoint_green",
+  "storage": {
+    "destination": "/u/bwbrook",
+    "observed_used_bytes": 2394234566848,
+    "quota_bytes": 21990232555520,
+    "required_headroom_tib": 4,
+    "write_fsync_probe_bytes": 16777216,
+    "write_fsync_probe_status": "passed"
+  }
+}

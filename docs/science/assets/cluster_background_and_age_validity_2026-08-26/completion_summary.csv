@@ -1,0 +1,14 @@
+metric,value,interpretation
+pbs_exit_status,0,remote diagnostic completed green
+validated_cases,2,C-HI and C-LO
+validated_snapshots,16,eight anchor ages per cluster case
+validated_shell_rows,80,five radial shells per case and age
+maximum_early_far_field_fractional_difference,0.00023511350990805977,all four absolute energy terms agree within 0.024 percent through 20 Myr
+c_lo_endpoint_global_fraction_of_injected,23.967319529755315,whole-domain accounted energy is not a coupling efficiency
+c_lo_endpoint_far_field_fraction_of_injected,22.67651691011697,far-field common-atmosphere term dominates the normalized budget
+c_lo_endpoint_far_field_fraction_of_global,0.9461432214797396,94.6 percent of accounted endpoint change lies beyond 100 kpc
+c_lo_endpoint_inside_100_kpc_fraction_of_injected,1.2908026196383442,upper bound on jet-affected energy because inner background drift is not removed
+c_lo_far_field_tracer_volume_fraction,0.0,no tracer contamination at the endpoint
+g_hi_last_position_valid_snapshot,47,front position supported through 46.99915 Myr
+g_hi_last_kinematics_valid_snapshot,46,three-snapshot speed and Mach supported through 45.99958 Myr
+decision_label,C_LO_LARGE_NORMALIZED_BUDGET_BACKGROUND_DOMINATED_SHOCK_WINDOWS_LOCKED,Goal 062 interpretation gates resolved

@@ -1,0 +1,2 @@
+job_id,job_name,state_at_stop,queue,qtime,resources,walltime,stage_root,analysis_root
+786969.kunanyi-ohpc,four_fluid,Q,normal,Tue Aug 25 15:50:47 2026,select=1:ncpus=4:mpiprocs=1:mem=96gb,12:00:00,/u/bwbrook/codex_kunanyi/goal062_four_case_fluid_snapshot_census,/u/bwbrook/xray_cavities_analysis/2026-08-25-four-case-fluid-snapshot-census

@@ -1,0 +1,9 @@
+check,status,evidence
+stage_no_overwrite,passed,/u/bwbrook/codex_kunanyi/goal063_cluster_background_age_validity absent before staging
+analysis_no_overwrite,passed,/u/bwbrook/xray_cavities_analysis/2026-08-26-cluster-background-age-validity absent
+staged_sha256,passed,all five source/wrapper hashes matched local manifest
+remote_wrapper_syntax,passed,bash -n cluster_background_and_age_validity.pbs
+cluster_environment_pair,passed,both tables SHA-256 30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa
+canonical_float_counts,passed,C-HI=51; C-LO=51
+selected_hdf5_contract,passed,16 selected files; required six variables; shared shape 1014x960x960
+goal062_reference_contract,passed,C-HI=51 primary rows; C-LO=51 primary rows

@@ -1,0 +1,13 @@
+item,value,status
+analysis_kind,fluid_energy_gravity_shock_census,locked
+case_parallelism,4_single_threaded_processes,locked
+resources,select=1:ncpus=4:mpiprocs=1:mem=96gb,locked
+walltime,12:00:00,locked
+expected_case_count,4,locked
+expected_total_snapshots,204,locked
+raw_input_policy,read_only,locked
+analysis_output_policy,no_overwrite,locked
+boundary_flux,unmeasured,locked
+residual_interpretation,not_promoted_to_cocoon_boundary_unresolved,locked
+radio_scope,not_in_goal_062,locked
+xray_projection_scope,not_in_goal_062,locked

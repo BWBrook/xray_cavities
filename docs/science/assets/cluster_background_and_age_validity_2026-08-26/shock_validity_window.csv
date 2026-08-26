@@ -1,0 +1,5 @@
+case,last_position_valid_snapshot,last_position_valid_time_myr,last_kinematics_valid_snapshot,last_kinematics_valid_time_myr
+C-HI,50,50.00000000000777,50,50.00000000000777
+C-LO,50,50.00000000000777,50,50.00000000000777
+G-HI,47,46.99914999860678,46,45.99958358613507
+G-LO,50,50.00000000000777,50,50.00000000000777

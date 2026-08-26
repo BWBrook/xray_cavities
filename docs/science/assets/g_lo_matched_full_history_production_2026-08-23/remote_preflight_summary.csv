@@ -1,0 +1,10 @@
+gate,observed,status,interpretation
+target_no_overwrite,/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles absent,passed,fresh target
+home_usage,2394234566848 bytes observed of 21990232555520 byte quota,passed,more than 4 TiB required headroom
+home_write_fsync,16 MiB disposable probe written synced and removed,passed,home destination writable
+staged_sha256,all staged inputs matched local hashes,passed,staging identity verified
+wrapper_syntax,wrapper and production template parsed remotely,passed,shell contract valid
+rendered_contract,G-LO group 002_031 1e43 erg/s 0.1c 50 Myr cadence 1/5/0.01 Myr,passed,science inputs matched
+environment_asset,4000 rows 6 columns monotonic radius,passed,trusted group profile
+source_and_modules,PLUTO jet-setup setup-problem Intel IMPI HDF5 ZFP mpicc and mpirun present,passed,production runtime available
+queue,normal enabled and started with 48:00:00 maximum walltime,passed,requested job admitted

@@ -1,0 +1,8 @@
+contract_id,rule,status,scientific_use
+front_geometry,"both sides detected and each front has at least two complete axial cells between its detected centre and the 250 kpc domain edge",locked,"front position and local jump metrics"
+local_jump,"pressure and density jump ratios finite on both sides",locked,"local jump-ratio comparison"
+kinematic_window,"all three snapshots used by the local speed fit pass the front-geometry and local-jump rules",locked,"shock speed and kinematic Mach comparison"
+g_hi_position_window,"snapshots 1-47; final accepted age 46.99914999860678 Myr",observed_from_goal062,"snapshot 48 reaches the outermost negative-z cell"
+g_hi_kinematic_window,"snapshots 1-46; final accepted age 45.99958358613507 Myr",observed_from_goal062,"the speed at snapshot 47 uses boundary-limited snapshot 48"
+other_case_domain_window,"C-HI; C-LO; G-LO through snapshot 50",observed_from_goal062,"their detected fronts retain the required domain margin at the endpoint"
+interpretation_limit,"technical domain validity does not prove that every weak late feature is a strong physical shock",active,"retain detected status and jump metrics rather than imposing a new post-hoc strength threshold"

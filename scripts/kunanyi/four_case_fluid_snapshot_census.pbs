@@ -1,0 +1,243 @@
+#!/usr/bin/env bash
+#PBS -N four_fluid
+#PBS -q normal
+#PBS -l select=1:ncpus=4:mpiprocs=1:mem=96gb
+#PBS -l walltime=12:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal062_four_case_fluid_snapshot_census/four_case_fluid_snapshot_census.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal062_four_case_fluid_snapshot_census/four_case_fluid_snapshot_census.err
+
+set -euo pipefail
+umask 077
+
+readonly STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal062_four_case_fluid_snapshot_census}"
+readonly ANALYSIS_ROOT="${ANALYSIS_ROOT:-/u/bwbrook/xray_cavities_analysis/2026-08-25-four-case-fluid-snapshot-census}"
+readonly SNAPSHOT_SCRIPT="$STAGE_ROOT/g_lo_snapshot_science.py"
+readonly ENERGY_MODULE="$STAGE_ROOT/snapshot_energy.py"
+readonly SHOCK_MODULE="$STAGE_ROOT/snapshot_shocks.py"
+readonly LEVEL3_HELPER="$STAGE_ROOT/pluto_h5_level3_ambient_extract.py"
+readonly SELECTOR_HELPER="$STAGE_ROOT/select_common_age_hdf5.py"
+readonly STAGED_HASHES="$STAGE_ROOT/four_case_fluid_inputs.sha256"
+readonly ARCHIVE="$STAGE_ROOT/four_case_fluid_snapshot_census_2026-08-25.tar.gz"
+readonly ARCHIVE_LIST="$STAGE_ROOT/four_case_fluid_archive_file_list.txt"
+
+readonly C_HI_ROOT="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem"
+readonly C_LO_ROOT="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem"
+readonly G_HI_EARLY_ROOT="/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem"
+readonly G_HI_LATE_ROOT="/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem"
+readonly G_LO_ROOT="/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem"
+
+readonly C_HI_OUTPUTS="$C_HI_ROOT/outputs"
+readonly C_LO_OUTPUTS="$C_LO_ROOT/outputs"
+readonly G_HI_EARLY_OUTPUTS="$G_HI_EARLY_ROOT/outputs"
+readonly G_HI_LATE_OUTPUTS="$G_HI_LATE_ROOT/outputs"
+readonly G_LO_OUTPUTS="$G_LO_ROOT/outputs"
+readonly C_HI_ENV="$C_HI_ROOT/tabulated_cosmo_002003.csv"
+readonly C_LO_ENV="$C_LO_ROOT/tabulated_cosmo_002003.csv"
+readonly G_HI_ENV="$G_HI_LATE_ROOT/tabulated_cosmo_002031.csv"
+readonly G_LO_ENV="$G_LO_ROOT/tabulated_cosmo_002031.csv"
+
+for path in \
+  "$SNAPSHOT_SCRIPT" "$ENERGY_MODULE" "$SHOCK_MODULE" "$LEVEL3_HELPER" \
+  "$SELECTOR_HELPER" "$STAGED_HASHES" "$C_HI_OUTPUTS" "$C_LO_OUTPUTS" \
+  "$G_HI_EARLY_OUTPUTS" "$G_HI_LATE_OUTPUTS" "$G_LO_OUTPUTS" \
+  "$C_HI_ENV" "$C_LO_ENV" "$G_HI_ENV" "$G_LO_ENV"; do
+  test -r "$path" || { echo "missing Goal 062 input: $path" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_HASHES")"
+)
+for path in "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_LIST"; do
+  test ! -e "$path" && test ! -L "$path" \
+    || { echo "refusing to overwrite Goal 062 surface: $path" >&2; exit 2; }
+done
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export HDF5_USE_FILE_LOCKING=FALSE
+
+python - \
+  "$C_HI_OUTPUTS" "$C_HI_ENV" \
+  "$C_LO_OUTPUTS" "$C_LO_ENV" \
+  "$G_HI_EARLY_OUTPUTS" "$G_HI_LATE_OUTPUTS" "$G_HI_ENV" \
+  "$G_LO_OUTPUTS" "$G_LO_ENV" <<'PY'
+import sys
+from pathlib import Path
+
+from g_lo_snapshot_science import canonical_snapshot_chain, load_environment
+
+args = [Path(value) for value in sys.argv[1:]]
+specs = [
+    ("C-HI", [args[0]], args[1]),
+    ("C-LO", [args[2]], args[3]),
+    ("G-HI", [args[4], args[5]], args[6]),
+    ("G-LO", [args[7]], args[8]),
+]
+environment_hashes = {}
+for case, output_roots, environment_path in specs:
+    snapshots = canonical_snapshot_chain(output_roots)
+    indices = [snapshot.output_index for snapshot in snapshots]
+    if indices != list(range(51)):
+        raise SystemExit(f"{case} float chain must be 0..50, got {indices}")
+    if abs(snapshots[0].actual_time_myr) > 1e-6:
+        raise SystemExit(f"{case} baseline is not time zero")
+    if abs(snapshots[-1].actual_time_myr - 50.0) > 0.05:
+        raise SystemExit(f"{case} endpoint is not 50 Myr")
+    if {snapshot.shape for snapshot in snapshots} != {(1014, 960, 960)}:
+        raise SystemExit(f"{case} grid shape changed")
+    environment = load_environment(environment_path)
+    environment_hashes[case] = environment.source_sha256
+    print(
+        f"case_preflight=passed case={case} snapshots=51 "
+        f"first={snapshots[0].actual_time_myr:.12g} "
+        f"last={snapshots[-1].actual_time_myr:.12g} "
+        f"environment_sha256={environment.source_sha256}",
+        flush=True,
+    )
+if environment_hashes["C-HI"] != environment_hashes["C-LO"]:
+    raise SystemExit("cluster environment tables differ between C-HI and C-LO")
+if environment_hashes["G-HI"] != environment_hashes["G-LO"]:
+    raise SystemExit("group environment tables differ between G-HI and G-LO")
+print("four_case_preflight=passed", flush=True)
+PY
+
+mkdir -p "$ANALYSIS_ROOT/logs"
+
+run_case() {
+  local case_id="$1"
+  local power="$2"
+  local environment="$3"
+  shift 3
+  local output_root="$ANALYSIS_ROOT/$case_id"
+  local -a command=(
+    python "$SNAPSHOT_SCRIPT"
+    --case "$case_id"
+    --environment-table "$environment"
+    --output-root "$output_root"
+    --jet-power-one-sided-erg-s "$power"
+    --jet-start-myr 0
+    --jet-active-myr 50
+    --tube-radius-kpc 2
+    --velocity-floor-code 1e-4
+    --velocity-noise-multiplier 5
+    --disturbance-fraction 0.05
+    --min-contiguous-cells 2
+    --remove-geometry-cache-on-success
+  )
+  local outputs
+  for outputs in "$@"; do
+    command+=(--outputs-dir "$outputs")
+  done
+  "${command[@]}"
+}
+
+cases=(C-HI C-LO G-HI G-LO)
+pids=()
+run_case C-HI 1e45 "$C_HI_ENV" "$C_HI_OUTPUTS" \
+  >"$ANALYSIS_ROOT/logs/C-HI.out" 2>"$ANALYSIS_ROOT/logs/C-HI.err" &
+pids+=("$!")
+run_case C-LO 1e43 "$C_LO_ENV" "$C_LO_OUTPUTS" \
+  >"$ANALYSIS_ROOT/logs/C-LO.out" 2>"$ANALYSIS_ROOT/logs/C-LO.err" &
+pids+=("$!")
+run_case G-HI 1e45 "$G_HI_ENV" "$G_HI_EARLY_OUTPUTS" "$G_HI_LATE_OUTPUTS" \
+  >"$ANALYSIS_ROOT/logs/G-HI.out" 2>"$ANALYSIS_ROOT/logs/G-HI.err" &
+pids+=("$!")
+run_case G-LO 1e43 "$G_LO_ENV" "$G_LO_OUTPUTS" \
+  >"$ANALYSIS_ROOT/logs/G-LO.out" 2>"$ANALYSIS_ROOT/logs/G-LO.err" &
+pids+=("$!")
+
+status_file="$ANALYSIS_ROOT/case_exit_status.tsv"
+printf 'case\texit_status\n' > "$status_file"
+failed=0
+for index in "${!pids[@]}"; do
+  if wait "${pids[$index]}"; then
+    status=0
+  else
+    status=$?
+    failed=1
+  fi
+  printf '%s\t%s\n' "${cases[$index]}" "$status" >> "$status_file"
+done
+if [ "$failed" -ne 0 ]; then
+  echo "one or more Goal 062 case analyses failed" >&2
+  exit 1
+fi
+
+python - "$ANALYSIS_ROOT" <<'PY'
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+expected_powers = {"C-HI": 1.0e45, "C-LO": 1.0e43, "G-HI": 1.0e45, "G-LO": 1.0e43}
+summary = []
+for case, expected_power in expected_powers.items():
+    case_root = root / case
+    manifest = list(csv.DictReader((case_root / "snapshot_manifest.csv").open(newline="")))
+    energy = list(csv.DictReader((case_root / "energy_partition_timeseries.csv").open(newline="")))
+    shocks = list(csv.DictReader((case_root / "shock_dynamics.csv").open(newline="")))
+    source = list(csv.DictReader((case_root / "source_truth.csv").open(newline="")))
+    metadata = json.loads((case_root / "g_lo_fluid_snapshot_science_metadata.json").read_text())
+    indices = [int(row["snapshot_index"]) for row in manifest]
+    if len(manifest) != 51 or indices != list(range(51)):
+        raise SystemExit(f"{case} final snapshot manifest is incomplete")
+    if len(energy) != 51 * 4 * 3 or len(shocks) != 51 * 3 * 2 or len(source) != 51:
+        raise SystemExit(f"{case} final table row counts are incomplete")
+    primary = [row for row in energy if row["partition_method"] == "fractional"]
+    if len(primary) != 51 * 3:
+        raise SystemExit(f"{case} fractional energy surface is incomplete")
+    finite_fields = (
+        "gas_thermal_delta_erg", "gas_kinetic_delta_erg", "gas_gravitational_delta_erg",
+        "gas_total_delta_erg", "lobe_thermal_erg", "lobe_kinetic_erg",
+        "lobe_gravitational_erg", "lobe_total_erg", "unattributed_residual_erg",
+    )
+    for row in energy:
+        if row["boundary_status"] != "unmeasured_from_retained_snapshots":
+            raise SystemExit(f"{case} boundary status was silently promoted")
+        if row["residual_interpretation"] != "not_promoted_to_cocoon_boundary_unresolved":
+            raise SystemExit(f"{case} residual was silently promoted to cocoon")
+        if not all(math.isfinite(float(row[field])) for field in finite_fields):
+            raise SystemExit(f"{case} contains non-finite energy values")
+    powers = {float(row["jet_power_one_sided_erg_s"]) for row in source}
+    if powers != {expected_power}:
+        raise SystemExit(f"{case} source-power contract drifted: {powers}")
+    if metadata.get("status") != "complete_fluid_snapshot_science":
+        raise SystemExit(f"{case} completion status failed")
+    if metadata.get("case") != case or metadata.get("snapshot_count") != 51:
+        raise SystemExit(f"{case} metadata identity failed")
+    summary.append({
+        "case": case,
+        "snapshot_count": len(manifest),
+        "energy_rows": len(energy),
+        "shock_rows": len(shocks),
+        "source_rows": len(source),
+        "first_time_myr": manifest[0]["actual_time_myr"],
+        "last_time_myr": manifest[-1]["actual_time_myr"],
+        "jet_power_one_sided_erg_s": f"{expected_power:.1e}",
+        "environment_sha256": metadata["environment_sha256"],
+        "status": "passed",
+    })
+with (root / "four_case_fluid_census_validation.csv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=list(summary[0]))
+    writer.writeheader()
+    writer.writerows(summary)
+print("four_case_validation=passed cases=4 snapshots=204", flush=True)
+PY
+
+(
+  cd "$ANALYSIS_ROOT"
+  find . -type f ! -path '*/cache/*' -print | sort > "$ARCHIVE_LIST"
+)
+tar -czf "$ARCHIVE" -C "$ANALYSIS_ROOT" --files-from "$ARCHIVE_LIST"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

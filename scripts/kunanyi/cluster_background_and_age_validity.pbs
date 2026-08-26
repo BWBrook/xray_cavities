@@ -1,0 +1,145 @@
+#!/usr/bin/env bash
+#PBS -N cl_bgdiag
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mpiprocs=1:mem=96gb
+#PBS -l walltime=04:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal063_cluster_background_age_validity/cluster_background_and_age_validity.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal063_cluster_background_age_validity/cluster_background_and_age_validity.err
+
+set -euo pipefail
+umask 077
+
+readonly STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal063_cluster_background_age_validity}"
+readonly ANALYSIS_ROOT="${ANALYSIS_ROOT:-/u/bwbrook/xray_cavities_analysis/2026-08-26-cluster-background-age-validity}"
+readonly DIAGNOSTIC="$STAGE_ROOT/cluster_background_energy_diagnostic.py"
+readonly ENERGY_MODULE="$STAGE_ROOT/snapshot_energy.py"
+readonly LEVEL3_HELPER="$STAGE_ROOT/pluto_h5_level3_ambient_extract.py"
+readonly SELECTOR_HELPER="$STAGE_ROOT/select_common_age_hdf5.py"
+readonly STAGED_HASHES="$STAGE_ROOT/cluster_background_age_validity_inputs.sha256"
+readonly ARCHIVE="$STAGE_ROOT/cluster_background_and_age_validity_2026-08-26.tar.gz"
+readonly ARCHIVE_LIST="$STAGE_ROOT/cluster_background_age_validity_archive_file_list.txt"
+
+readonly C_HI_ROOT="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem"
+readonly C_LO_ROOT="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem"
+readonly GOAL062_ROOT="/u/bwbrook/xray_cavities_analysis/2026-08-25-four-case-fluid-snapshot-census"
+readonly C_HI_OUTPUTS="$C_HI_ROOT/outputs"
+readonly C_LO_OUTPUTS="$C_LO_ROOT/outputs"
+readonly C_HI_ENV="$C_HI_ROOT/tabulated_cosmo_002003.csv"
+readonly C_LO_ENV="$C_LO_ROOT/tabulated_cosmo_002003.csv"
+readonly C_HI_REFERENCE="$GOAL062_ROOT/C-HI/energy_partition_timeseries.csv"
+readonly C_LO_REFERENCE="$GOAL062_ROOT/C-LO/energy_partition_timeseries.csv"
+
+for path in \
+  "$DIAGNOSTIC" "$ENERGY_MODULE" "$LEVEL3_HELPER" "$SELECTOR_HELPER" \
+  "$STAGED_HASHES" "$C_HI_OUTPUTS" "$C_LO_OUTPUTS" "$C_HI_ENV" \
+  "$C_LO_ENV" "$C_HI_REFERENCE" "$C_LO_REFERENCE"; do
+  test -r "$path" || { echo "missing Goal 063 input: $path" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_HASHES")"
+)
+for path in "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_LIST"; do
+  test ! -e "$path" && test ! -L "$path" \
+    || { echo "refusing to overwrite Goal 063 surface: $path" >&2; exit 2; }
+done
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export HDF5_USE_FILE_LOCKING=FALSE
+
+mkdir -p "$ANALYSIS_ROOT/logs"
+indices=(0 5 10 15 20 30 40 50)
+index_args=()
+for index in "${indices[@]}"; do
+  index_args+=(--snapshot-index "$index")
+done
+
+python "$DIAGNOSTIC" \
+  --case C-HI \
+  --outputs-dir "$C_HI_OUTPUTS" \
+  --environment-table "$C_HI_ENV" \
+  --reference-energy "$C_HI_REFERENCE" \
+  --output-root "$ANALYSIS_ROOT/C-HI" \
+  --jet-power-one-sided-erg-s 1e45 \
+  "${index_args[@]}" \
+  >"$ANALYSIS_ROOT/logs/C-HI.out" 2>"$ANALYSIS_ROOT/logs/C-HI.err" &
+c_hi_pid=$!
+
+python "$DIAGNOSTIC" \
+  --case C-LO \
+  --outputs-dir "$C_LO_OUTPUTS" \
+  --environment-table "$C_LO_ENV" \
+  --reference-energy "$C_LO_REFERENCE" \
+  --output-root "$ANALYSIS_ROOT/C-LO" \
+  --jet-power-one-sided-erg-s 1e43 \
+  "${index_args[@]}" \
+  >"$ANALYSIS_ROOT/logs/C-LO.out" 2>"$ANALYSIS_ROOT/logs/C-LO.err" &
+c_lo_pid=$!
+
+failed=0
+wait "$c_hi_pid" || failed=1
+wait "$c_lo_pid" || failed=1
+test "$failed" -eq 0 || { echo "one or more Goal 063 diagnostics failed" >&2; exit 1; }
+
+python - "$ANALYSIS_ROOT" <<'PY'
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+expected_indices = [0, 5, 10, 15, 20, 30, 40, 50]
+summary = []
+for case in ("C-HI", "C-LO"):
+    case_root = root / case
+    with (case_root / "shell_energy_diagnostic.csv").open(newline="") as handle:
+        shell_rows = list(csv.DictReader(handle))
+    with (case_root / "background_summary.csv").open(newline="") as handle:
+        summary_rows = list(csv.DictReader(handle))
+    metadata = json.loads((case_root / "cluster_background_energy_diagnostic_metadata.json").read_text())
+    indices = [int(row["snapshot_index"]) for row in summary_rows]
+    if len(shell_rows) != 40 or indices != expected_indices:
+        raise SystemExit(f"{case} Goal 063 surface is incomplete")
+    if metadata.get("status") != "complete_cluster_background_energy_diagnostic":
+        raise SystemExit(f"{case} Goal 063 metadata status failed")
+    reconstruction_errors = [
+        float(row["reference_relative_error"])
+        for row in summary_rows
+        if row["reference_relative_error"]
+    ]
+    if len(reconstruction_errors) != len(expected_indices) - 1:
+        raise SystemExit(f"{case} reconstruction gate did not isolate baseline cancellation")
+    max_error = max(reconstruction_errors)
+    if not math.isfinite(max_error) or max_error > 1.0e-8:
+        raise SystemExit(f"{case} shell reconstruction failed: {max_error}")
+    summary.append({
+        "case": case,
+        "snapshot_count": len(summary_rows),
+        "shell_row_count": len(shell_rows),
+        "maximum_reference_relative_error": max_error,
+        "status": "passed",
+    })
+with (root / "cluster_background_validation.csv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=list(summary[0]))
+    writer.writeheader()
+    writer.writerows(summary)
+print("cluster_background_validation=passed cases=2 snapshots=16 shell_rows=80", flush=True)
+PY
+
+(
+  cd "$ANALYSIS_ROOT"
+  find . -type f -print | sort > "$ARCHIVE_LIST"
+)
+tar -czf "$ARCHIVE" -C "$ANALYSIS_ROOT" --files-from "$ARCHIVE_LIST"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

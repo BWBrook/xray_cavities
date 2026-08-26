@@ -1,0 +1,8 @@
+gate,observed,status
+staged_hashes,all six staged source/wrapper hashes matched,passed
+remote_wrapper_syntax,bash -n produced no output,passed
+analysis_no_overwrite,/u/bwbrook/xray_cavities_analysis/2026-08-25-four-case-fluid-snapshot-census absent,passed
+case_float_counts,"C-HI=51; C-LO=51; G-HI union=51; G-LO=51",passed
+cluster_environment_sha256,30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa,passed
+group_environment_sha256,1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a,passed
+normal_queue,"enabled=True; started=True; resources_max.walltime=48:00:00",passed

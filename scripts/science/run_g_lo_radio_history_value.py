@@ -393,6 +393,7 @@ def build_pressure_treatment_plan(
     ],
     expected_trim_single_record_overlap_rows: int | None = None,
     row_chunk: int = 512,
+    enforce_expected_counts: bool = True,
 ) -> dict[str, Any]:
     """Classify the immutable cache and fail closed before PRAiSE is called."""
     if (
@@ -610,7 +611,7 @@ def build_pressure_treatment_plan(
             and len(trim_single_record_overlap_rows)
             != expected_trim_single_record_overlap_rows
         )
-    ):
+    ) and enforce_expected_counts:
         raise WorkflowError(
             "pressure-treatment aggregate mismatch: "
             f"trim={len(trim_rows)} expected={expected_trim_rows}; "
@@ -626,11 +627,24 @@ def build_pressure_treatment_plan(
     identity = {
         "contract": {
             **PRESSURE_TREATMENT_CONTRACT,
-            "expected_trim_rows": expected_trim_rows,
-            "expected_no_positive_rows": expected_no_positive_rows,
-            "expected_single_record_rows": expected_single_record_rows,
+            "expected_trim_rows": (
+                expected_trim_rows if enforce_expected_counts else None
+            ),
+            "expected_no_positive_rows": (
+                expected_no_positive_rows if enforce_expected_counts else None
+            ),
+            "expected_single_record_rows": (
+                expected_single_record_rows if enforce_expected_counts else None
+            ),
             "expected_trim_single_record_overlap_rows": (
                 expected_trim_single_record_overlap_rows
+                if enforce_expected_counts
+                else None
+            ),
+            "aggregate_count_gate": (
+                "predeclared_exact_counts"
+                if enforce_expected_counts
+                else "case_specific_counts_recorded_after_structural_validation"
             ),
         },
         "endpoint_ids_sha256": hashlib.sha256(ids.tobytes()).hexdigest(),

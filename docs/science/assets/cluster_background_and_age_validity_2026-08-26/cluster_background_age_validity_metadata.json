@@ -1,0 +1,16 @@
+{
+  "c_lo_endpoint_far_field_fraction_of_global": 0.9461432214797396,
+  "c_lo_endpoint_far_field_fraction_of_injected": 22.67651691011697,
+  "c_lo_endpoint_global_fraction_of_injected": 23.967319529755315,
+  "c_lo_endpoint_inside_100_kpc_fraction_of_injected": 1.2908026196383442,
+  "decision_label": "C_LO_LARGE_NORMALIZED_BUDGET_BACKGROUND_DOMINATED_SHOCK_WINDOWS_LOCKED",
+  "g_hi_last_kinematics_valid_snapshot": 46,
+  "g_hi_last_position_valid_snapshot": 47,
+  "maximum_early_far_field_fractional_difference": 0.00023511350990805977,
+  "scientific_limits": [
+    "paired jet simulations are not an unforced no-jet control",
+    "inside-100-kpc remainder is an upper bound, not a background-corrected jet efficiency",
+    "technical shock-domain validity does not impose a new physical shock-strength threshold"
+  ],
+  "status": "complete_cluster_background_age_validity_synthesis"
+}

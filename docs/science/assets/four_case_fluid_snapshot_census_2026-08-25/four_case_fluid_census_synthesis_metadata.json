@@ -1,0 +1,19 @@
+{
+  "case_count": 4,
+  "contrast_row_count": 32,
+  "decision_label": "FOUR_CASE_FLUID_CENSUS_GREEN_C_LO_ENERGY_BASELINE_AND_G_HI_BOUNDARY_GATES_EXPOSED",
+  "endpoint_row_count": 4,
+  "interpretation_limits": [
+    "factorial contrasts are descriptive because there is one deterministic simulation per cell",
+    "boundary energy flux is unmeasured and the closure residual is not cocoon energy",
+    "C-LO absolute energy comparison needs a background-evolution diagnosis before scientific promotion",
+    "late G-HI shock kinematics are limited by proximity to the axial domain edge"
+  ],
+  "observations": {
+    "c_lo_endpoint_absolute_residual_fraction": 22.9673195297566,
+    "g_hi_endpoint_minimum_domain_margin_kpc": 1.0519256591796875
+  },
+  "primary_shock_row_count": 408,
+  "snapshot_count": 204,
+  "status": "complete_four_case_fluid_census_synthesis"
+}

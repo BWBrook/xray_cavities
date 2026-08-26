@@ -1,0 +1,180 @@
+Job Id: 786516.kunanyi-ohpc
+    Job_Name = g_lo_hist2
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 2820
+    resources_used.cput = 838:17:26
+    resources_used.mem = 8492668kb
+    resources_used.ncpus = 1792
+    resources_used.vmem = 26375780kb
+    resources_used.walltime = 30:01:35
+    job_state = F
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sun Aug 23 15:23:08 2026
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal061_g_lo_m
+	atched_full_history_production/g_lo_matched_full_history_production.err
+	
+    exec_host = n009/0*28+n013/0*28+n026/0*28+n151/0*28+n167/0*28+n168/0*28+n15
+	4/0*28+n172/0*28+n177/0*28+n179/0*28+n184/0*28+n038/0*28+n083/0*28+n085
+	/0*28+n121/0*28+n125/0*28+n126/0*28+n122/0*28+n127/0*28+n067/0*28+n123/
+	0*28+n105/0*28+n093/0*28+n103/0*28+n042/0*28+n091/0*28+n087/0*28+n043/0
+	*28+n102/0*28+n088/0*28+n094/0*28+n092/0*28+n044/0*28+n210/0*28+n048/0*
+	28+n211/0*28+n212/0*28+n078/0*28+n213/0*28+n222/0*28+n109/0*28+n223/0*2
+	8+n224/0*28+n049/0*28+n225/0*28+n226/0*28+n227/0*28+n056/0*28+n228/0*28
+	+n058/0*28+n229/0*28+n062/0*28+n231/0*28+n232/0*28+n233/0*28+n112/0*28+
+	n234/0*28+n235/0*28+n059/0*28+n236/0*28+n237/0*28+n064/0*28+n238/0*28+n
+	063/0*28
+    exec_vnode = (n009:ncpus=28)+(n013:ncpus=28)+(n026:ncpus=28)+(n151:ncpus=28
+	)+(n167:ncpus=28)+(n168:ncpus=28)+(n154:ncpus=28)+(n172:ncpus=28)+(n177
+	:ncpus=28)+(n179:ncpus=28)+(n184:ncpus=28)+(n038:ncpus=28)+(n083:ncpus=
+	28)+(n085:ncpus=28)+(n121:ncpus=28)+(n125:ncpus=28)+(n126:ncpus=28)+(n1
+	22:ncpus=28)+(n127:ncpus=28)+(n067:ncpus=28)+(n123:ncpus=28)+(n105:ncpu
+	s=28)+(n093:ncpus=28)+(n103:ncpus=28)+(n042:ncpus=28)+(n091:ncpus=28)+(
+	n087:ncpus=28)+(n043:ncpus=28)+(n102:ncpus=28)+(n088:ncpus=28)+(n094:nc
+	pus=28)+(n092:ncpus=28)+(n044:ncpus=28)+(n210:ncpus=28)+(n048:ncpus=28)
+	+(n211:ncpus=28)+(n212:ncpus=28)+(n078:ncpus=28)+(n213:ncpus=28)+(n222:
+	ncpus=28)+(n109:ncpus=28)+(n223:ncpus=28)+(n224:ncpus=28)+(n049:ncpus=2
+	8)+(n225:ncpus=28)+(n226:ncpus=28)+(n227:ncpus=28)+(n056:ncpus=28)+(n22
+	8:ncpus=28)+(n058:ncpus=28)+(n229:ncpus=28)+(n062:ncpus=28)+(n231:ncpus
+	=28)+(n232:ncpus=28)+(n233:ncpus=28)+(n112:ncpus=28)+(n234:ncpus=28)+(n
+	235:ncpus=28)+(n059:ncpus=28)+(n236:ncpus=28)+(n237:ncpus=28)+(n064:ncp
+	us=28)+(n238:ncpus=28)+(n063:ncpus=28)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = ae
+    Mail_Users = barry.brook@utas.edu.au
+    mtime = Tue Aug 25 05:25:29 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/goal061_g_lo_
+	matched_full_history_production/g_lo_matched_full_history_production.ou
+	t
+    Priority = 0
+    qtime = Sun Aug 23 15:23:08 2026
+    Rerunable = True
+    Resource_List.mem = 128gb
+    Resource_List.mpiprocs = 1792
+    Resource_List.ncpus = 1792
+    Resource_List.nodect = 64
+    Resource_List.place = scatter
+    Resource_List.select = 64:ncpus=28:mpiprocs=28
+    Resource_List.walltime = 48:00:00
+    stime = Sun Aug 23 23:23:54 2026
+    session_id = 14448
+    jobdir = /u/bwbrook
+    substate = 92
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=C.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/pr
+	un/1.3:/opt/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/
+	bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/goal061_g_lo_matched_full_histo
+	ry_production,PBS_O_SYSTEM=Linux,LMOD_FAMILY_COMPILER_VERSION=8.3.0,
+	MANPATH=/opt/ohpc/pub/compiler/gcc/8.3.0/share/man:/opt/ohpc/pub/utils
+	/autotools/share/man:/usr/local/share/man:/usr/share/man/overrides:/usr
+	/share/man/en:/usr/share/man:/opt/pbs/share/man,XDG_SESSION_ID=58569,
+	HOSTNAME=<tpac-host>,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,SHELL=/bin/bash,TERM=dumb,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:2;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,HISTSIZE=1000,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,SSH_CLIENT=<private-ip> 48698 22,
+	LMOD_PKG=/opt/ohpc/admin/lmod/lmod,OLDPWD=/u/bwbrook,LMOD_QUIET=yes,
+	LMOD_VERSION=8.1.18,SSH_TTY=/dev/pts/12,LC_ALL=C,
+	__LMOD_REF_COUNT_LOADEDMODULES=autotools:1;prun/1.3:1;gnu8/8.3.0:1;ohp
+	c:1,QT_GRAPHICSSYSTEM_CHECKED=1,USER=bwbrook,HISTFILESIZE=2000,LS_COLORS=,
+	LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib64,
+	__LMOD_REF_COUNT__LMFILES_=/opt/ohpc/pub/modulefiles/autotools:1;/opt/
+	ohpc/pub/modulefiles/prun/1.3:1;/opt/ohpc/pub/modulefiles/gnu8/8.3.0:1;
+	/opt/ohpc/pub/modulefiles/ohpc:1,LMOD_PREPEND_BLOCK=normal,
+	PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/prun/1.3
+	:/opt/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/bin:/u
+	sr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXtbImNvbXBpbGVyIl09ImdudTgiLH0sbVQ9e2F1dG90b29scz17WyJmbiJdPSIvb3B0L29
+	ocGMvcHViL21vZHVsZWZpbGVzL2F1dG90b29scyIsWyJmdWxsTmFtZSJdPSJhdXRvdG9vbH
+	MiLFsibG9hZE9yZGVyIl09MSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzI
+	l09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJhdXRvdG9vbHMiLH0sZ251OD17WyJmbiJdPSIv
+	b3B0L29ocGMvcHViL21vZHVsZWZpbGVzL2dudTgvOC4zLjAiLFsiZnVsbE5hbWUiXT0iZ25
+	1OC84LjMuMCIsWyJsb2FkT3JkZXIiXT0z,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/goal061_g_lo_matched_full_history_product
+	ion,
+	_LMFILES_=/opt/ohpc/pub/modulefiles/autotools:/opt/ohpc/pub/modulefile
+	s/prun/1.3:/opt/ohpc/pub/modulefiles/gnu8/8.3.0:/opt/ohpc/pub/modulefil
+	es/ohpc,LANG=C.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,LOADEDMODULES=autotools:prun/1.3:gnu8/8.3.0:ohpc,
+	_ModuleTable_Sz_=3,LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=2,
+	__LMOD_REF_COUNT_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:1;/opt/ohpc
+	/pub/utils/prun/1.3:1;/opt/ohpc/pub/utils/autotools/bin:1;/share/apps/b
+	in:1;/opt/ohpc/pub/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;
+	/usr/sbin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iY
+	WN0aXZlIixbInVzZXJOYW1lIl09ImdudTgiLH0sb2hwYz17WyJmbiJdPSIvb3B0L29ocGMv
+	cHViL21vZHVsZWZpbGVzL29ocGMiLFsiZnVsbE5hbWUiXT0ib2hwYyIsWyJsb2FkT3JkZXI
+	iXT00LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbIn
+	VzZXJOYW1lIl09Im9ocGMiLH0scHJ1bj17WyJmbiJdPSIvb3B0L29ocGMvcHViL21vZHVsZ
+	WZpbGVzL3BydW4vMS4zIixbImZ1bGxOYW1lIl09InBydW4vMS4zIixbImxvYWRPcmRlciJd
+	PTIscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXN
+	lck5hbWUiXT0icHJ1biIsfSx9LG1wYXRo,
+	__LMOD_REF_COUNT_INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include:1,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	LC_CTYPE=C.UTF-8,SSH_CONNECTION=<private-ip> 48698 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	LESSOPEN=||/usr/bin/lesspipe.sh %s,LMOD_SETTARG_FULL_SUPPORT=no,
+	__LMOD_REF_COUNT_LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib6
+	4:1,PROMPT_COMMAND=history -a,LMOD_FULL_SETTARG_SUPPORT=no,
+	LMOD_FAMILY_COMPILER=gnu8,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include,
+	LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	__LMOD_REF_COUNT_MANPATH=/opt/ohpc/pub/compiler/gcc/8.3.0/share/man:1;
+	/opt/ohpc/pub/utils/autotools/share/man:1;/usr/local/share/man:1;/usr/s
+	hare/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1,
+	LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=normal,
+	PBS_O_HOST=<tpac-host>
+    comment = Job run at Sun Aug 23 at 23:23 on (n009:ncpus=28)+(n013:ncpus=28)
+	+(n026:ncpus=28)+(n151:ncpus=28)+(n167:ncpus=28)+(n168:ncpus=28)+(n154:
+	ncpus=28)+(n172:ncpus=28)+(n177:ncpus=28)+(n179:ncpus=28)+(n184:ncpus=2
+	8)+(n038:ncpus=28)+(n083:ncpus=28)+(n085:ncpu... and finished
+    etime = Sun Aug 23 15:23:08 2026
+    run_count = 1
+    Stageout_status = 1
+    Exit_status = 0
+    Submit_arguments = g_lo_matched_full_history_production.pbs
+    estimated.exec_vnode = (n009:ncpus=28)+(n013:ncpus=28)+(n018:ncpus=28)+(n02
+	2:ncpus=28)+(n026:ncpus=28)+(n151:ncpus=28)+(n167:ncpus=28)+(n168:ncpus
+	=28)+(n154:ncpus=28)+(n172:ncpus=28)+(n177:ncpus=28)+(n179:ncpus=28)+(n
+	184:ncpus=28)+(n038:ncpus=28)+(n083:ncpus=28)+(n085:ncpus=28)+(n121:ncp
+	us=28)+(n125:ncpus=28)+(n126:ncpus=28)+(n122:ncpus=28)+(n127:ncpus=28)+
+	(n067:ncpus=28)+(n123:ncpus=28)+(n105:ncpus=28)+(n093:ncpus=28)+(n103:n
+	cpus=28)+(n042:ncpus=28)+(n091:ncpus=28)+(n087:ncpus=28)+(n043:ncpus=28
+	)+(n102:ncpus=28)+(n088:ncpus=28)+(n094:ncpus=28)+(n092:ncpus=28)+(n044
+	:ncpus=28)+(n210:ncpus=28)+(n048:ncpus=28)+(n211:ncpus=28)+(n212:ncpus=
+	28)+(n078:ncpus=28)+(n213:ncpus=28)+(n222:ncpus=28)+(n109:ncpus=28)+(n2
+	23:ncpus=28)+(n224:ncpus=28)+(n049:ncpus=28)+(n225:ncpus=28)+(n226:ncpu
+	s=28)+(n227:ncpus=28)+(n056:ncpus=28)+(n228:ncpus=28)+(n058:ncpus=28)+(
+	n229:ncpus=28)+(n062:ncpus=28)+(n231:ncpus=28)+(n232:ncpus=28)+(n233:nc
+	pus=28)+(n236:ncpus=28)+(n237:ncpus=28)+(n064:ncpus=28)+(n238:ncpus=28)
+	+(n063:ncpus=28)+(n239:ncpus=28)+(n072:ncpus=28)
+    estimated.start_time = Sat Jul 11 19:26:53 2026
+    history_timestamp = 1787599529
+    project = _pbs_project_default
+

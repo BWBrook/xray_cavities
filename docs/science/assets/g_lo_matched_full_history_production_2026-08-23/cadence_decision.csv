@@ -1,0 +1,5 @@
+case_id,environment_family,jet_power_erg_s_one_sided,accepted_float_indices,accepted_double_indices,accepted_particle_indices,fluid_surface_status,decision
+C-HI,cluster,1e45,0..50,0..10,0..5000,matched,retain
+C-LO,cluster,1e43,0..50,0..10,0..5000,matched,retain
+G-HI,group,1e45,0..50,0..10,0..5000,matched_split_root,retain
+G-LO,group,1e43,"0,10,20,30,40,50","2,9,10",0..5000,under_sampled_fluid,rerun_to_matched_cadence

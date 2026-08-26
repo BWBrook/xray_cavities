@@ -1,0 +1,12 @@
+field,value
+job_id,787276.kunanyi-ohpc
+job_name,cl_bgdiag
+verified_state,Q
+queue,normal
+qtime,Wed Aug 26 08:29:15 2026
+select,1:ncpus=2:mpiprocs=1:mem=96gb
+walltime,04:00:00
+stage_root,/u/bwbrook/codex_kunanyi/goal063_cluster_background_age_validity
+analysis_root,/u/bwbrook/xray_cavities_analysis/2026-08-26-cluster-background-age-validity
+archive,/u/bwbrook/codex_kunanyi/goal063_cluster_background_age_validity/cluster_background_and_age_validity_2026-08-26.tar.gz
+stop_rule,invoked_after_queued_verification

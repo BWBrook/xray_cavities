@@ -1,0 +1,9 @@
+snapshot_complete=0 time_myr=0
+snapshot_complete=5 time_myr=4.99940734787
+snapshot_complete=10 time_myr=9.99917420114
+snapshot_complete=15 time_myr=14.9997914358
+snapshot_complete=20 time_myr=19.9998914773
+snapshot_complete=30 time_myr=29.999166294
+snapshot_complete=40 time_myr=39.9991512419
+snapshot_complete=50 time_myr=50
+status=complete_cluster_background_energy_diagnostic case=C-LO

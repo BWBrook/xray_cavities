@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<stdin>", line 32, in <module>
+  File "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/pathlib.py", line 1078, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+OSError: [Errno 122] Disk quota exceeded

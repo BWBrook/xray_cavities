@@ -1,0 +1,11 @@
+contract_id,value,status,rationale
+cases,C-HI and C-LO,locked,"same Stewart cluster atmosphere; jet power differs by 100"
+snapshot_indices,"0;5;10;15;20;30;40;50",locked,"resolves early control period and later propagation without rereading all 102 files"
+radial_shells_kpc,"0-50;50-100;100-150;150-200;200-inf",locked,"separates the driven inner atmosphere from progressively more distant gas"
+far_field_control,r>=100 kpc,locked,"both cluster axial fronts remain inside 100 kpc through 20 Myr"
+energy_terms,"thermal;kinetic;centre-zero gravitational",locked,"same full-fluid energy convention as Goal 062"
+baseline,case-specific snapshot 0,locked,"measures evolution relative to each simulation's initial atmosphere"
+tracer_use,"volume fraction and maximum only",locked,"diagnoses jet-material contamination without redefining the full-fluid energy sum"
+reconstruction_gate,relative error <=1e-8 for non-baseline snapshots,locked,"shell totals must reproduce the accepted Goal 062 accounted-energy surface"
+baseline_reconstruction_gate,absolute difference recorded; relative gate omitted,locked,"relative error is undefined for cancellation residues around a zero baseline delta"
+scientific_limit,no no-jet control,active,"paired jet runs can diagnose common far-field evolution but cannot uniquely identify unforced atmosphere drift"

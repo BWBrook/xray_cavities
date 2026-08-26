@@ -1,0 +1,17 @@
+field,value
+job_id,787276.kunanyi-ohpc
+job_name,cl_bgdiag
+job_state,F
+queue,normal
+exit_status,0
+stageout_status,1
+resources_used_cpupercent,193
+resources_used_cput,00:53:32
+resources_used_mem,376760kb
+resources_used_ncpus,2
+resources_used_vmem,892560kb
+resources_used_walltime,00:30:57
+resource_list_select,1:ncpus=2:mpiprocs=1:mem=96gb
+resource_list_walltime,04:00:00
+qtime,Wed Aug 26 08:29:15 2026
+mtime,Wed Aug 26 09:00:13 2026

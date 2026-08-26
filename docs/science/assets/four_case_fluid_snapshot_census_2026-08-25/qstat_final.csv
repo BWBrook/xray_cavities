@@ -1,0 +1,17 @@
+field,value
+job_id,786969.kunanyi-ohpc
+job_name,four_fluid
+job_state,F
+queue,normal
+exit_status,0
+stageout_status,1
+resources_used_cpupercent,397
+resources_used_cput,15:25:30
+resources_used_mem,27105160kb
+resources_used_ncpus,4
+resources_used_vmem,31076028kb
+resources_used_walltime,04:18:49
+resource_list_select,select=1:ncpus=4:mpiprocs=1:mem=96gb
+resource_list_walltime,12:00:00
+ctime,Tue Aug 25 15:50:47 2026
+mtime,Tue Aug 25 20:09:36 2026

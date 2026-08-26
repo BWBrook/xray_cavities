@@ -1,0 +1,6 @@
+job_role,case_scope,ncpus,memory_gb,walltime,expected_primary_rows,restart_boundary
+xray_cavity,C-HI/C-LO/G-HI/G-LO,4,128,12:00:00,60,case_process
+radio,C-HI,16,128,48:00:00,50,case_history
+radio,C-LO,16,128,48:00:00,50,case_history
+radio,G-HI,16,128,48:00:00,50,case_history
+radio,G-LO,16,128,48:00:00,50,case_history

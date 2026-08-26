@@ -1,0 +1,5 @@
+case,environment_family,environment_id,jet_power_one_sided_erg_s,float_indices,expected_snapshot_count,canonical_input_surface
+C-HI,cluster,002_003,1e45,0..50,51,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs
+C-LO,cluster,002_003,1e43,0..50,51,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs
+G-HI,group,002_031,1e45,0..50,51,scratch outputs 0..10 followed by home outputs 11..50
+G-LO,group,002_031,1e43,0..50,51,/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs

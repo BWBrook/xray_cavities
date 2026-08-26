@@ -1,0 +1,2 @@
+job_id,job_name,state_at_stop,queue,qtime_local,resources,walltime,stage_root,run_root
+786516.kunanyi-ohpc,g_lo_hist2,Q,normal,Sun Aug 23 15:23:08 2026,64x28=1792 ranks,48:00:00,/u/bwbrook/codex_kunanyi/goal061_g_lo_matched_full_history_production,/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production
