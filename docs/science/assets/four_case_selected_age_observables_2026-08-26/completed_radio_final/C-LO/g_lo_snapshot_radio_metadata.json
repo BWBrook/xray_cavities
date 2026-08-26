@@ -1,0 +1,115 @@
+{
+  "case": "C-LO",
+  "causal_matching": "exact PRAiSE2-selected source output coordinates; all source times not later than fluid snapshot",
+  "emissivity": {
+    "active_particle_counts": [
+      46058,
+      91802,
+      137266,
+      182594,
+      227832
+    ],
+    "identity": {
+      "cache_path": "/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables/radio/c_lo.work/history_cache.h5",
+      "cache_sha256": "5f3e382632158ee86671bcb7e3733e69a3552da71a9d128b4517eea7822c9fb7",
+      "endpoint_ids_sha256": "dcf59427ef2c36e2131e2bc7cbc2fe1ddc245c7c7104668058d3a5fcdab8ac3e",
+      "frequencies_ghz": [
+        0.15,
+        0.5,
+        1.4,
+        4.5,
+        15.0
+      ],
+      "praise2_commit": "73210e15d4c60e77ffb317b3ee2b9209c049edd4",
+      "praise2_window_width": 5,
+      "target_columns": [
+        1000,
+        2000,
+        3000,
+        4000,
+        5000
+      ]
+    },
+    "singleton_external_counts": [
+      44,
+      48,
+      44,
+      44,
+      46
+    ],
+    "source_column_ranges": [
+      [
+        1000,
+        1000
+      ],
+      [
+        2000,
+        2000
+      ],
+      [
+        3000,
+        3000
+      ],
+      [
+        4000,
+        4000
+      ],
+      [
+        5000,
+        5000
+      ]
+    ],
+    "status": "complete_corrected_praise2_emissivity",
+    "store_path": "/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables/radio/c_lo/.work/corrected_praise2_emissivity.h5",
+    "target_columns": [
+      1000,
+      2000,
+      3000,
+      4000,
+      5000
+    ]
+  },
+  "frequencies_ghz": [
+    0.15,
+    0.5,
+    1.4,
+    4.5,
+    15.0
+  ],
+  "loss_models": [
+    "lossless",
+    "full_loss"
+  ],
+  "praise2": {
+    "callable": "plutokore.radio.praise2.praise",
+    "commit": "73210e15d4c60e77ffb317b3ee2b9209c049edd4",
+    "commit_verification": "staged_commit_proof",
+    "source": "/u/bwbrook/codex_kunanyi/goal064_four_case_selected_age_observables_radio_r2/plutokore/src/plutokore/radio/praise2.py",
+    "source_sha256": "eeee367581829b4dd779992c6b582a1676b796fc792b0bb70b8e9c13ee193895"
+  },
+  "praise2_pressure_preparation": "approved joint-initialization-zero trim, then native published linear Savitzky-Golay window 5",
+  "praise2_window_width": 5,
+  "primary_integrated_view_deg": 45.0,
+  "primary_view_rationale": "predeclared middle orientation; 0 and 90 degrees retained as sensitivity",
+  "raytrace": {
+    "component_partition": "original-coordinate z sign, deterministic support partition only",
+    "full_maps_retained": false,
+    "pixel_size_kpc": 1.8,
+    "ray_step_kpc": 0.1,
+    "reason": "selected-age scalar luminosity and field products answer Goal 064; transient maps avoid bulky duplicate evidence"
+  },
+  "singleton_policy": "instantaneous recent shock: full-loss equals lossless at the first effective record",
+  "snapshots": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "status": "complete_corrected_praise2_snapshot_radio",
+  "views_deg": [
+    0.0,
+    45.0,
+    90.0
+  ]
+}

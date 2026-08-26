@@ -1,0 +1,16 @@
+snapshot_index,view,output_index,cache_column,time_code,path,file_size_bytes,selected_particle_count
+10,0deg,1000,1000,3065.980090097,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.1000.dbl,4854787,40450
+10,45deg,1000,1000,3065.980090097,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.1000.dbl,4854787,40450
+10,90deg,1000,1000,3065.980090097,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.1000.dbl,4854787,40450
+20,0deg,2000,2000,6131.755404068,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.2000.dbl,9544867,79534
+20,45deg,2000,2000,6131.755404068,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.2000.dbl,9544867,79534
+20,90deg,2000,2000,6131.755404068,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.2000.dbl,9544867,79534
+30,0deg,3000,3000,9198.040095996,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.3000.dbl,14233509,118606
+30,45deg,3000,3000,9198.040095996,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.3000.dbl,14233509,118606
+30,90deg,3000,3000,9198.040095996,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.3000.dbl,14233509,118606
+40,0deg,4000,4000,12264.01087671,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.4000.dbl,18921669,157674
+40,45deg,4000,4000,12264.01087671,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.4000.dbl,18921669,157674
+40,90deg,4000,4000,12264.01087671,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.4000.dbl,18921669,157674
+50,0deg,5000,5000,15330.0696894,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.5000.dbl,23608389,196730
+50,45deg,5000,5000,15330.0696894,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.5000.dbl,23608389,196730
+50,90deg,5000,5000,15330.0696894,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.5000.dbl,23608389,196730

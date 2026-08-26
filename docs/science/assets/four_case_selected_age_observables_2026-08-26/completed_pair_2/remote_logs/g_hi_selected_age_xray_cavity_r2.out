@@ -1,0 +1,14 @@
+scripts/kunanyi/four_case_selected_age_xray_cavity.pbs: OK
+scripts/science/xraise_grid_smoke.py: OK
+scripts/science/pluto_h5_truth_extract.c: OK
+scripts/science/pluto_h5_cavity_stub_extract.c: OK
+scripts/science/analyse_common_age_case.py: OK
+scripts/science/build_three_case_cavity_recovery.py: OK
+scripts/science/three_case_cavity_recovery.py: OK
+scripts/science/build_selected_age_xray_cavity.py: OK
+/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py: OK
+/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt: OK
+/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz: OK
+selected_case_xray_validation=passed cases=1 case_age_views=15
+0a1ee4e549db62e5a285430ef1fb37fdeb25981d04ea0b01c08b38fa3a8b1e10  /u/bwbrook/codex_kunanyi/goal064_xray_g_hi_repair/g_hi_selected_age_xray_cavity_r2_2026-08-26.tar.gz
+finished_utc=2026-08-26T07:22:52Z

@@ -1,0 +1,13 @@
+Job Id: 787329.kunanyi-ohpc
+    Job_Name = c_lo_selr2
+    resources_used.cput = 05:57:31
+    resources_used.mem = 619028kb
+    resources_used.ncpus = 16
+    resources_used.vmem = 3818736kb
+    resources_used.walltime = 05:40:55
+    job_state = F
+    queue = normal
+    Resource_List.select = 1:ncpus=16:mpiprocs=1:mem=128gb
+    Resource_List.walltime = 48:00:00
+    Stageout_status = 1
+    Exit_status = 0

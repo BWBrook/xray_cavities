@@ -1,0 +1,7 @@
+case,output_index,path,time_code,particle_count,file_size_bytes,status
+C-HI,0,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.0000.dbl,0.0,32,4377,sample_header_validated
+C-HI,1000,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.1000.dbl,3065.980090097,40452,4854787,sample_header_validated
+C-HI,2000,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.2000.dbl,6131.755404068,79536,9544867,sample_header_validated
+C-HI,3000,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.3000.dbl,9198.040095996,118608,14233509,sample_header_validated
+C-HI,4000,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.4000.dbl,12264.01087671,157676,18921669,sample_header_validated
+C-HI,5000,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/particles.5000.dbl,15330.0696894,196732,23608389,sample_header_validated

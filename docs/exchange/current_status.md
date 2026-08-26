@@ -83,9 +83,9 @@ current instruction without checking its goal status.
 
 ### Goal 064: four-case selected-age observables
 
-- Status: `submitted_waiting_pbs_completion`.
+- Status: `complete_product`.
 - Decision:
-  `FOUR_CASE_RADIO_DEPENDENCY_REPAIR_RESUBMITTED`.
+  `FOUR_CASE_SELECTED_AGE_OBSERVABLE_SURFACE_COMPLETE_SYNTHESIS_READY`.
 - Common ages: snapshots `10/20/30/40/50` for `C-HI`, `C-LO`, `G-HI`, and
   `G-LO`, retaining actual HDF5 times.
 - X-ray/cavity surface: `0/45/90 deg`, X-ray-only one-percent projected-area
@@ -115,11 +115,35 @@ current instruction without checking its goal status.
 - A separate repair stage now contains the complete reviewed radio dependency
   surface and fails fast on its imports before cache work. Resume jobs `787310`
   (`C-HI`), `787329` (`C-LO`), `787311` (`G-HI`), and `787312` (`G-LO`) were
-  verified running once. X-ray `787301` remained running at the last
-  authorized snapshot.
-- Next: wait for Barry's PBS completion emails. Retrieve and validate each
-  compact product independently; do not poll or start synthesis before the
-  relevant completion evidence arrives.
+  verified running once.
+- X-ray `787301` subsequently finished with `Exit_status=1` after using
+  `126641000kb` of its `128gb` request. C-HI, C-LO, and G-LO completed; only
+  G-HI exited `137` after manifest preflight. This is an aggregate-memory
+  concurrency failure, and the three completed products remain reusable.
+- The wrapper now supports an isolated case without changing its four-case
+  default. G-HI-only repair `787415` was staged separately and verified
+  running once with one CPU and the full `128gb` node memory.
+- C-HI radio `787310` and G-HI radio `787311` then completed with
+  `Exit_status=0`. Their compact products were retrieved and passed the full
+  row-count, finite-value, causal-source, corrected-PRAiSE2 provenance, and
+  empty-stderr contract. Each contributes `50` primary and `150` view rows.
+- G-LO radio `787312` and G-HI X-ray repair `787415` then completed with
+  `Exit_status=0` and empty stderr. G-LO passed the same corrected-PRAiSE2,
+  row-count, finite-value, and causal-source contract as C-HI and G-HI.
+- The G-HI repair passed all `15` case-age-view projection checks. Its compact
+  output was combined without recomputation with the successful C-HI, C-LO,
+  and G-LO products retained from `787301`. The resulting four-case X-ray
+  package covers `60` case-age views, has SHA-256
+  `359b9e2fd4d6b87309177adefcab86b34c22a9645fb1c1da8f1deb192a343d3e`,
+  and preserves nonquantitative zero-energy rows where no significant cavity
+  component was recovered.
+- C-LO radio `787329` completed with `Exit_status=0` in `05:40:55`, empty
+  stderr, and the same corrected-PRAiSE2 contract. The full radio surface now
+  contains `200` primary rows and `600` viewing rows across all four cases.
+- Goal 064 is complete. Next: synthesize the accepted Goal 062/063 fluid,
+  gravity, and shock evidence with the complete Goal 064 X-ray/cavity and
+  radio surface. No further production or observable recomputation is needed
+  before that analysis.
 - Science note/assets:
   `docs/science/four_case_selected_age_observables_2026-08-26.md` and
   `docs/science/assets/four_case_selected_age_observables_2026-08-26/`.

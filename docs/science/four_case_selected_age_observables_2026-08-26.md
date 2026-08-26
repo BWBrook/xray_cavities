@@ -148,3 +148,86 @@ repair stage. The PBS stop rule applies to all four resume jobs; the X-ray job
 remained running at the last authorized scheduler snapshot.
 
 Status: `submitted_waiting_pbs_completion`.
+
+## X-ray concurrency repair
+
+The four-case X-ray replacement, `787301.kunanyi-ohpc`, reached the science
+calculation but exhausted its shared memory envelope. It used
+`126641000kb` of the requested `128gb`. C-HI, C-LO, and G-LO nevertheless
+completed successfully; only G-HI failed (`137`, signal 9) after its manifest
+preflight. These three products are retained for final packaging.
+
+The execution wrapper now permits one explicitly selected case while retaining
+the four-case default. A separate G-HI-only job, `787415.kunanyi-ohpc`, was
+verified running with the full `128gb` node available to that case. This
+repair changes execution concurrency only: inputs, ages, views, cavity method,
+and scientific gates are unchanged. The PBS stop rule remains active.
+
+## Partial radio completion
+
+C-HI and G-HI are the first complete Goal 064 radio products. Jobs `787310`
+and `787311` both exited `0`, produced empty stderr, and passed their remote
+`radio_validation` contracts. Local review confirmed the prespecified five
+ages, five frequencies, two loss models, three viewing angles, corrected
+PRAiSE2 provenance, finite positive luminosities, and causal particle-source
+selection.
+
+These products are accepted as partial-green inputs but are not yet a
+factorial result. C-LO and G-LO were still running at the authorized snapshot;
+cross-case synthesis waits for those completion records. The compact C-HI and
+G-HI products and immutable retrieval evidence are under
+`completed_radio_pair_1/`.
+
+## G-LO radio and four-case X-ray completion
+
+G-LO radio job `787312.kunanyi-ohpc` and the isolated G-HI X-ray repair
+`787415.kunanyi-ohpc` both finished with `Exit_status=0` and empty stderr.
+The retrieved G-LO radio product passed the complete local contract: `50`
+primary rows, `150` viewing rows, `15` source rows, `6` particle-summary
+rows, finite positive luminosities and magnetic fields, exact selected
+ages/frequencies/loss models/views, causal particle-source matching, and the
+reviewed corrected-PRAiSE2 commit.
+
+The G-HI repair passed all `15` selected age/view projection checks with no
+empty projected columns and finite positive corrected X-ray summaries. The
+successful C-HI, C-LO, and G-LO compact products from the original X-ray job
+were combined with the repaired G-HI output using a stable file-list archive;
+no HDF5 or XRAiSE calculation was rerun. The complete four-case archive has
+SHA-256
+`359b9e2fd4d6b87309177adefcab86b34c22a9645fb1c1da8f1deb192a343d3e`,
+`68` members, and `60` case-age-view projection rows.
+
+The cavity validity gate remains fail-closed. In particular, early 90-degree
+C-LO and G-LO rows with no significant recovered component retain zero energy
+and `quantitative_energy_valid=False`; they are not promoted into synthetic
+cavity measurements.
+
+Goal 064 is not yet a factorial result. C-HI, G-HI, and G-LO radio plus the
+complete four-case X-ray/cavity surface are green; C-LO radio `787329` was
+still running at the one authorized scheduler snapshot. No cross-case
+synthesis has begun.
+
+Status: `submitted_waiting_pbs_completion`.
+
+## Final C-LO radio completion
+
+C-LO radio job `787329.kunanyi-ohpc` finished with `Exit_status=0` in
+`05:40:55`; stderr is empty. Its compact archive has SHA-256
+`118227510131c1b728fcbf3e9d11b53a9c378a4634c48a52feb582456c345678`.
+Local review passed the same prespecified contract as the other cases:
+`50` primary rows, `150` viewing rows, `15` source rows, `6` particle-summary
+rows, finite positive luminosities and magnetic fields, exact selected
+ages/frequencies/loss models/views, causal particle-source matching within
+numerical tolerance, and corrected-PRAiSE2 commit
+`73210e15d4c60e77ffb317b3ee2b9209c049edd4`.
+
+The complete Goal 064 radio surface therefore contains `200` primary rows,
+`600` viewing rows, and `60` source rows across C-HI, C-LO, G-HI, and G-LO.
+Together with the validated `60` case-age-view X-ray/cavity surface, this
+completes the prespecified selected-age observable tranche. No cross-case
+interpretation is claimed here; the package is now the verified input for the
+next synthesis with Goal 062/063 fluid, gravity, background, and shock data.
+
+Decision: `FOUR_CASE_SELECTED_AGE_OBSERVABLE_SURFACE_COMPLETE_SYNTHESIS_READY`.
+
+Status: `complete_product`.

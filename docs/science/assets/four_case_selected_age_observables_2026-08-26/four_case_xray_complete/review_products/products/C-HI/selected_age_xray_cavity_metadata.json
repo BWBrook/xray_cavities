@@ -1,0 +1,32 @@
+{
+  "case": "C-HI",
+  "observer_mask": "X-ray-only 1 percent projected-physical-area deficit tail",
+  "pressure_caveat": "ambient pressure is the tracer-shell midpoint proxy, not X-ray-fitted pressure",
+  "quantitative_energy_gate": "exactly two non-crossing opposite-side X-ray components",
+  "snapshot_indices": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "status": "complete_selected_age_xray_cavity_product",
+  "table_row_counts": {
+    "cavity_shell_context.csv": 10,
+    "level1_truth.csv": 45,
+    "level2_truth.csv": 45,
+    "projected_tracer_alignment.csv": 45,
+    "projection_validation.csv": 15,
+    "source_manifest.csv": 5,
+    "xray_cavity_energy.csv": 333,
+    "xray_component_summary.csv": 37,
+    "xray_method_sensitivity.csv": 225,
+    "xray_recovery_summary.csv": 15
+  },
+  "tracer_role": "post_hoc truth comparison only",
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ]
+}

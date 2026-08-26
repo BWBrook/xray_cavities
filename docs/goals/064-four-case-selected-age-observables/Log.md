@@ -107,3 +107,99 @@ Status: `submitted_waiting_pbs_completion`.
   the running-state proof.
 
 Status: `submitted_waiting_pbs_completion`.
+
+## 2026-08-26 - X-ray concurrency failure and isolated G-HI repair
+
+- Barry reported `four_xcav_r1` job `787301` returned `Exit_status=1`.
+- Final scheduler evidence recorded peak memory `126641000kb` against the
+  `128gb` request. Per-case exits were `C-HI=0`, `C-LO=0`, `G-HI=137`, and
+  `G-LO=0`; the three zero-exit case logs each reached
+  `complete_selected_age_xray_cavity_product`.
+- G-HI passed its five-snapshot manifest preflight and was then killed by
+  signal 9 while launching the truth extractor. This is an aggregate-memory
+  failure from four concurrent full-grid cases, not a data or method failure.
+- Preserved the qstat, stage logs, per-case exits, and case logs in a compact
+  archive with SHA-256
+  `ed501ae06c2f27a52595c742674a0a26218c3467418444c584b532bfbfa96250`.
+- Added a default-preserving `CASE_ONLY` execution control plus overridable
+  no-overwrite archive/build paths. Focused wrapper tests and shell syntax
+  passed.
+- Staged a separate G-HI-only repair under
+  `/u/bwbrook/codex_kunanyi/goal064_xray_g_hi_repair`; remote hashes and
+  wrapper syntax passed. Submitted `787415.kunanyi-ohpc` (`g_hi_xcavr2`) with
+  one CPU, `128gb`, and `06:00:00`; verified it running once and invoked the
+  PBS stop rule.
+- The successful C-HI, C-LO, and G-LO outputs remain available and were not
+  recomputed or overwritten.
+
+Status: `submitted_waiting_pbs_completion`.
+
+## 2026-08-26 - first two radio products green and retrieved
+
+- Barry reported two Goal 064 completion emails with `Exit_status=0`. One
+  authorized scheduler snapshot identified them as `C-HI` job `787310` and
+  `G-HI` job `787311`; C-LO, G-LO, and the isolated G-HI X-ray repair remained
+  running.
+- Retrieved the two compact radio archives plus stdout, empty stderr, and
+  final qstat records in one byte-preserved bundle with SHA-256
+  `5fa6f428d63665a1345f5f7eeaab7dd9d0ae7a35d856b574cd27acb3291c17b5`.
+- Individual archive SHA-256 values are
+  `66aade99d5241347adc6c3ba54445d81d774e25b42a85f79b56f227ed5b73e3f`
+  for C-HI and
+  `cd886801d726be3bc0ae361888fa7806feccf1c92eb95aa0c90a233aea67bde9`
+  for G-HI.
+- Both products passed the complete local contract: `50` primary rows, `150`
+  view rows, `15` source rows, `6` particle-summary rows, finite positive
+  luminosity and magnetic-field values, exact selected ages/frequencies/loss
+  models/views, causal particle-source matching within numerical tolerance,
+  and corrected PRAiSE2 commit
+  `73210e15d4c60e77ffb317b3ee2b9209c049edd4`.
+- No synthesis was started. The remaining three jobs stay under the PBS stop
+  rule.
+
+Status: `submitted_waiting_pbs_completion`.
+
+## 2026-08-26 - G-LO radio and four-case X-ray surface green
+
+- One authorized scheduler snapshot found G-LO radio `787312` and G-HI X-ray
+  repair `787415` finished with `Exit_status=0`; C-LO radio `787329` remained
+  running.
+- Retrieved both compact archives, stdout, empty stderr, and final scheduler
+  records in a byte-preserved bundle with SHA-256
+  `8983410bc29a47989efee5d1e4d98690ac5c6c8b538b177b00f53ab6c5c8daba`.
+- G-LO radio passed the full local contract: `50/150/15/6` primary/view/source/
+  particle-summary rows, finite positive values, causal source matching, and
+  corrected-PRAiSE2 provenance.
+- G-HI passed all `15` age/view projection checks with zero empty-column
+  fraction and finite positive corrected X-ray summaries.
+- Built a no-rerun four-case X-ray compact archive from the retained C-HI,
+  C-LO, and G-LO products from `787301` plus repaired G-HI from `787415`.
+  Remote and local validation passed for four cases and `60` case-age views;
+  archive SHA-256 is
+  `359b9e2fd4d6b87309177adefcab86b34c22a9645fb1c1da8f1deb192a343d3e`.
+- Preserved the quantitative cavity gate. Zero-energy no-component rows remain
+  explicitly nonquantitative rather than being coerced into measurements.
+- Did not poll C-LO or begin factorial synthesis.
+
+Status: `submitted_waiting_pbs_completion`.
+
+## 2026-08-26 - C-LO radio green and Goal 064 complete
+
+- Barry reported C-LO radio `787329.kunanyi-ohpc` had landed. The final
+  scheduler record is `F`, `Exit_status=0`, `Stageout_status=1`, walltime
+  `05:40:55`, and CPU time `05:57:31`.
+- Retrieved the compact archive, stdout, empty stderr, and final scheduler
+  record. Archive SHA-256 is
+  `118227510131c1b728fcbf3e9d11b53a9c378a4634c48a52feb582456c345678`.
+- C-LO passed the full local corrected-PRAiSE2 contract: `50/150/15/6`
+  primary/view/source/particle-summary rows, finite positive outputs, causal
+  particle-source matching, exact selected coordinates, and reviewed source
+  provenance.
+- Revalidated all four accepted radio cases together: `200` primary rows,
+  `600` viewing rows, `60` source rows, and no scientific-contract failures.
+- Goal 064 now has complete four-case X-ray/cavity and radio surfaces. No
+  synthesis, production, or raw-data change was performed in this closeout.
+
+Decision: `FOUR_CASE_SELECTED_AGE_OBSERVABLE_SURFACE_COMPLETE_SYNTHESIS_READY`.
+
+Status: `complete_product`.

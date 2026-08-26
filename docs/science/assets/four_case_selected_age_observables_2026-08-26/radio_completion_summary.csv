@@ -1,0 +1,5 @@
+case,job_id,job_name,job_state,exit_status,stageout_status,walltime,cput,mem,ncpus,archive_sha256,archive_members,stderr_bytes,primary_rows,view_rows,source_rows,particle_summary_rows,status
+C-HI,787310.kunanyi-ohpc,c_hi_selr2,F,0,1,04:03:08,04:18:50,946656kb,16,66aade99d5241347adc6c3ba54445d81d774e25b42a85f79b56f227ed5b73e3f,6,0,50,150,15,6,complete_corrected_praise2_snapshot_radio
+C-LO,787329.kunanyi-ohpc,c_lo_selr2,F,0,1,05:40:55,05:57:31,619028kb,16,118227510131c1b728fcbf3e9d11b53a9c378a4634c48a52feb582456c345678,6,0,50,150,15,6,complete_corrected_praise2_snapshot_radio
+G-HI,787311.kunanyi-ohpc,g_hi_selr2,F,0,1,03:37:38,03:53:55,779784kb,16,cd886801d726be3bc0ae361888fa7806feccf1c92eb95aa0c90a233aea67bde9,6,0,50,150,15,6,complete_corrected_praise2_snapshot_radio
+G-LO,787312.kunanyi-ohpc,g_lo_selr2,F,0,1,04:27:45,04:41:30,710980kb,16,e23b4a7cc33bf4f5897f3e7a6b83bd6a1f545cede7629adaa78e041fd948641f,6,0,50,150,15,6,complete_corrected_praise2_snapshot_radio

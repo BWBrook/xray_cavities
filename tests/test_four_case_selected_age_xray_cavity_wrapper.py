@@ -41,3 +41,12 @@ def test_wrapper_archives_compact_products_only() -> None:
     assert "data.*.h5" not in archive_section
     assert "xraise_grid_0deg" not in archive_section
     assert 'tar -tzf "$ARCHIVE"' in text
+
+
+def test_wrapper_can_isolate_one_failed_case_without_recomputing_others() -> None:
+    text = WRAPPER.read_text()
+    assert 'readonly CASE_ONLY="${CASE_ONLY:-ALL}"' in text
+    assert 'C-HI|C-LO|G-HI|G-LO) cases=("$CASE_ONLY")' in text
+    assert 'for case_id in "${cases[@]}"' in text
+    assert 'python - "$ANALYSIS_ROOT" "${cases[@]}"' in text
+    assert 'case_age_views={15 * len(cases)}' in text

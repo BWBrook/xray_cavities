@@ -13,15 +13,16 @@ umask 077
 
 readonly STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal064_four_case_selected_age_observables}"
 readonly ANALYSIS_ROOT="${ANALYSIS_ROOT:-/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables/xray_cavity}"
+readonly CASE_ONLY="${CASE_ONLY:-ALL}"
 readonly XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
 readonly XRAISE_SCRIPT="$STAGE_ROOT/scripts/science/xraise_grid_smoke.py"
 readonly TRUTH_SOURCE="$STAGE_ROOT/scripts/science/pluto_h5_truth_extract.c"
 readonly CAVITY_SOURCE="$STAGE_ROOT/scripts/science/pluto_h5_cavity_stub_extract.c"
 readonly BUILDER="$STAGE_ROOT/scripts/science/build_selected_age_xray_cavity.py"
 readonly STAGED_HASHES="$STAGE_ROOT/selected_age_xray_inputs.sha256"
-readonly ARCHIVE="$STAGE_ROOT/four_case_selected_age_xray_cavity_2026-08-26.tar.gz"
-readonly ARCHIVE_LIST="$STAGE_ROOT/four_case_selected_age_xray_cavity_archive_file_list.txt"
-readonly BUILD_ROOT="$STAGE_ROOT/build_selected_age_xray"
+readonly ARCHIVE="${ARCHIVE:-$STAGE_ROOT/four_case_selected_age_xray_cavity_2026-08-26.tar.gz}"
+readonly ARCHIVE_LIST="${ARCHIVE_LIST:-$STAGE_ROOT/four_case_selected_age_xray_cavity_archive_file_list.txt}"
+readonly BUILD_ROOT="${BUILD_ROOT:-$STAGE_ROOT/build_selected_age_xray}"
 readonly TRUTH_EXE="$BUILD_ROOT/truth_extract"
 readonly CAVITY_EXE="$BUILD_ROOT/cavity_extract"
 
@@ -81,6 +82,12 @@ export MKL_NUM_THREADS=1
 export HDF5_USE_FILE_LOCKING=FALSE
 
 mkdir -p "$ANALYSIS_ROOT/logs"
+
+case "$CASE_ONLY" in
+  ALL) cases=(C-HI C-LO G-HI G-LO) ;;
+  C-HI|C-LO|G-HI|G-LO) cases=("$CASE_ONLY") ;;
+  *) echo "invalid CASE_ONLY: $CASE_ONLY" >&2; exit 2 ;;
+esac
 
 write_manifest() {
   local case_id="$1" power="$2" root_a="$3" root_b="$4" manifest="$5"
@@ -170,12 +177,16 @@ run_case() {
     --output-root "$case_root/compact"
 }
 
-cases=(C-HI C-LO G-HI G-LO)
 pids=()
-run_case C-HI 1e45 "$C_HI_OUTPUTS" "" >"$ANALYSIS_ROOT/logs/C-HI.out" 2>"$ANALYSIS_ROOT/logs/C-HI.err" & pids+=("$!")
-run_case C-LO 1e43 "$C_LO_OUTPUTS" "" >"$ANALYSIS_ROOT/logs/C-LO.out" 2>"$ANALYSIS_ROOT/logs/C-LO.err" & pids+=("$!")
-run_case G-HI 1e45 "$G_HI_EARLY_OUTPUTS" "$G_HI_LATE_OUTPUTS" >"$ANALYSIS_ROOT/logs/G-HI.out" 2>"$ANALYSIS_ROOT/logs/G-HI.err" & pids+=("$!")
-run_case G-LO 1e43 "$G_LO_OUTPUTS" "" >"$ANALYSIS_ROOT/logs/G-LO.out" 2>"$ANALYSIS_ROOT/logs/G-LO.err" & pids+=("$!")
+for case_id in "${cases[@]}"; do
+  case "$case_id" in
+    C-HI) run_case C-HI 1e45 "$C_HI_OUTPUTS" "" ;;
+    C-LO) run_case C-LO 1e43 "$C_LO_OUTPUTS" "" ;;
+    G-HI) run_case G-HI 1e45 "$G_HI_EARLY_OUTPUTS" "$G_HI_LATE_OUTPUTS" ;;
+    G-LO) run_case G-LO 1e43 "$G_LO_OUTPUTS" "" ;;
+  esac >"$ANALYSIS_ROOT/logs/$case_id.out" 2>"$ANALYSIS_ROOT/logs/$case_id.err" &
+  pids+=("$!")
+done
 
 printf 'case\texit_status\n' > "$ANALYSIS_ROOT/case_exit_status.tsv"
 failed=0
@@ -188,14 +199,15 @@ if [ "$failed" -ne 0 ]; then
   exit 1
 fi
 
-python - "$ANALYSIS_ROOT" <<'PY'
+python - "$ANALYSIS_ROOT" "${cases[@]}" <<'PY'
 import csv
 import json
 import sys
 from pathlib import Path
 
 root = Path(sys.argv[1])
-for case in ("c_hi", "c_lo", "g_hi", "g_lo"):
+cases = [value.lower().replace("-", "_") for value in sys.argv[2:]]
+for case in cases:
     compact = root / case / "compact"
     metadata = json.loads((compact / "selected_age_xray_cavity_metadata.json").read_text())
     summaries = list(csv.DictReader((compact / "xray_recovery_summary.csv").open(newline="")))
@@ -204,7 +216,7 @@ for case in ("c_hi", "c_lo", "g_hi", "g_lo"):
         raise SystemExit(f"{case}: X-ray completion gate failed")
     if len(summaries) != 15 or not energies:
         raise SystemExit(f"{case}: compact X-ray surface is incomplete")
-print("four_case_xray_validation=passed cases=4 case_age_views=60")
+print(f"selected_case_xray_validation=passed cases={len(cases)} case_age_views={15 * len(cases)}")
 PY
 
 (

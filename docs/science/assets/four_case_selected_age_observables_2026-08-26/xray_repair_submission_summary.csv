@@ -1,0 +1,2 @@
+case,job_id,job_name,state_at_stop,queue,state_verified_at,ncpus,mem,walltime,case_only,stage_root,analysis_root,wrapper_sha256
+G-HI,787415.kunanyi-ohpc,g_hi_xcavr2,R,normal,2026-08-26T15:24:09+10:00,1,128gb,06:00:00,G-HI,/u/bwbrook/codex_kunanyi/goal064_xray_g_hi_repair,/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables/xray_cavity_g_hi_r2,71a11d8e2bd848a961ff7ed9b68792e317c2283da4764b432f599390daa1f8a3

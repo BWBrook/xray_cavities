@@ -1,0 +1,6 @@
+case,snapshot_index,actual_time_myr,actual_time_code,input_h5,timestep,file_size_bytes,shape_nz_ny_nx,jet_power_one_sided_erg_s,selection_rule
+C-LO,10,9.999174201142063,3065.760746798691,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0010.flt.h5,Timestep_10,44890581676,1014x960x960,1e43,canonical matched run exact annual output
+C-LO,20,19.999891477337624,6131.994602559504,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0020.flt.h5,Timestep_20,44890581676,1014x960x960,1e43,canonical matched run exact annual output
+C-LO,30,29.99916629402413,9197.786198224358,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0030.flt.h5,Timestep_30,44890581676,1014x960x960,1e43,canonical matched run exact annual output
+C-LO,40,39.99915124190092,12263.795521101925,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0040.flt.h5,Timestep_40,44890581676,1014x960x960,1e43,canonical matched run exact annual output
+C-LO,50,50.00000000000777,15330.0696894,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0050.flt.h5,Timestep_50,44890581676,1014x960x960,1e43,canonical matched run exact annual output

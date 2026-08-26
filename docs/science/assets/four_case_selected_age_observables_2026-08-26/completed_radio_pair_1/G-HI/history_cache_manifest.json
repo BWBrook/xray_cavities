@@ -1,0 +1,31 @@
+{
+  "batched_writer_start_output": 0,
+  "cache": "/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables/radio/g_hi.work/history_cache.h5",
+  "checkpoint_commit_order": "pending marker; data flush; next_output flush; pending marker removal",
+  "chunks": [
+    4096,
+    32
+  ],
+  "dtype": "float64",
+  "endpoint_count": 193741,
+  "injection_boundary_roundoff_records": 9759,
+  "injection_boundary_tolerance": "max(half float32 ULP at tinj, 8 float64 epsilon-scaled units)",
+  "max_injection_boundary_tolerance": 0.00048828125,
+  "max_injection_boundary_tolerance_cadence_fraction": 0.00015581997242806406,
+  "missing_post_injection_records": 0,
+  "outputs": 5001,
+  "pre_injection_absence_records": 479543962,
+  "presence_contract": "single contiguous suffix per endpoint particle",
+  "processed_outputs": 5001,
+  "shock_component": 2,
+  "shock_threshold": 5.0,
+  "write_batch_outputs": 32,
+  "writer_segments": [
+    {
+      "helper_sha256": "755c3c61d1809c3a97abe361af822efd4bd9e66f12f29c0d34ef184cd93c2b89",
+      "start_output_inclusive": 0,
+      "stop_output_exclusive": 5001,
+      "writer": "sequential_chunk_batched_v2"
+    }
+  ]
+}

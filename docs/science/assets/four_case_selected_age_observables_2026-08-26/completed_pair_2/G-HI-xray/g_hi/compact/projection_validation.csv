@@ -1,0 +1,16 @@
+case,view,actual_time_myr,projection_accumulator,empty_column_fraction,corrected_xray_max,corrected_xray_sum,status,snapshot_index
+G-HI,0deg,9.999255705996216,direct_y_axis_sum,0.0,2797317.441960369,241074341.4283731,validated,10
+G-HI,45deg,9.999255705996216,edge_overlap_uniform_cell_projection,0.0,317614.7815273298,71456423.65376508,validated,10
+G-HI,90deg,9.999255705996216,edge_overlap_uniform_cell_projection,0.0,446933.1152375573,101054643.4498321,validated,10
+G-HI,0deg,19.999614294878622,direct_y_axis_sum,0.0,2797083.024232824,223345085.7754388,validated,20
+G-HI,45deg,19.999614294878622,edge_overlap_uniform_cell_projection,0.0,317281.9464507998,71775324.70910498,validated,20
+G-HI,90deg,19.999614294878622,edge_overlap_uniform_cell_projection,0.0,446710.1622335573,101505637.6473488,validated,20
+G-HI,0deg,29.999366625762217,direct_y_axis_sum,0.0,2796944.284390302,207754351.0012615,validated,30
+G-HI,45deg,29.999366625762217,edge_overlap_uniform_cell_projection,0.0,317155.4419272792,71069502.25312737,validated,30
+G-HI,90deg,29.999366625762217,edge_overlap_uniform_cell_projection,0.0,446569.4608660023,100507453.9574778,validated,30
+G-HI,0deg,39.99911895666531,direct_y_axis_sum,0.0,2796966.014670851,201248187.2656284,validated,40
+G-HI,45deg,39.99911895666531,edge_overlap_uniform_cell_projection,0.0,317134.7300927202,72065957.46120098,validated,40
+G-HI,90deg,39.99911895666531,edge_overlap_uniform_cell_projection,0.0,446594.2735500506,101916654.4270329,validated,40
+G-HI,0deg,50.00000000000777,direct_y_axis_sum,0.0,2796904.146992597,194437488.7449521,validated,50
+G-HI,45deg,50.00000000000777,edge_overlap_uniform_cell_projection,0.0,317097.814943802,73153169.48929393,validated,50
+G-HI,90deg,50.00000000000777,edge_overlap_uniform_cell_projection,0.0,446537.6155748515,103454204.4223371,validated,50

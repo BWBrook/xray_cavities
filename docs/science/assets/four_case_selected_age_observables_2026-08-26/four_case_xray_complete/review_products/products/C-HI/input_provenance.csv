@@ -1,0 +1,6 @@
+case,snapshot_index,actual_time_myr,source_h5,source_size_bytes,source_hash_status
+C-HI,10,9.999889603297177,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0010.flt.h5,44890581676,canonical_goal061_059_060_not_rehashed
+C-HI,20,19.99911131620285,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0020.flt.h5,44890581676,canonical_goal061_059_060_not_rehashed
+C-HI,30,29.999994397799835,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0030.flt.h5,44890581676,canonical_goal061_059_060_not_rehashed
+C-HI,40,39.99985363794803,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0040.flt.h5,44890581676,canonical_goal061_059_060_not_rehashed
+C-HI,50,50.00000000000777,/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0050.flt.h5,44890581676,canonical_goal061_059_060_not_rehashed

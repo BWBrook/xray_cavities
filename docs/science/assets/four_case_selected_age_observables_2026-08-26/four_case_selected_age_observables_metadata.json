@@ -1,7 +1,7 @@
 {
   "cases": ["C-HI", "C-LO", "G-HI", "G-LO"],
   "analysis_root": "/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables",
-  "decision_label": "FOUR_CASE_RADIO_DEPENDENCY_REPAIR_RESUBMITTED",
+  "decision_label": "FOUR_CASE_SELECTED_AGE_OBSERVABLE_SURFACE_COMPLETE_SYNTHESIS_READY",
   "failed_attempt_1": {
     "failure_archive_sha256": "266c29b736e6e0d88b991f87daa4b29fbc7f584d918e543cba5462fbe99246ef",
     "failure_class": "scratch_analysis_root_quota_exhausted",
@@ -18,6 +18,7 @@
   },
   "jobs": {
     "xray_cavity": "787301.kunanyi-ohpc",
+    "xray_cavity_repair": "787415.kunanyi-ohpc",
     "radio": {
       "C-HI": "787310.kunanyi-ohpc",
       "C-LO": "787329.kunanyi-ohpc",
@@ -39,7 +40,54 @@
     "history_caches_complete_and_reusable": true,
     "repair_stage_root": "/u/bwbrook/codex_kunanyi/goal064_four_case_selected_age_observables_radio_r2"
   },
-  "status": "submitted_waiting_pbs_completion",
+  "radio_completion": {
+    "completed_cases": ["C-HI", "C-LO", "G-HI", "G-LO"],
+    "completed_jobs": {
+      "C-HI": "787310.kunanyi-ohpc",
+      "C-LO": "787329.kunanyi-ohpc",
+      "G-HI": "787311.kunanyi-ohpc",
+      "G-LO": "787312.kunanyi-ohpc"
+    },
+    "archive_sha256_by_case": {
+      "C-HI": "66aade99d5241347adc6c3ba54445d81d774e25b42a85f79b56f227ed5b73e3f",
+      "C-LO": "118227510131c1b728fcbf3e9d11b53a9c378a4634c48a52feb582456c345678",
+      "G-HI": "cd886801d726be3bc0ae361888fa7806feccf1c92eb95aa0c90a233aea67bde9",
+      "G-LO": "e23b4a7cc33bf4f5897f3e7a6b83bd6a1f545cede7629adaa78e041fd948641f"
+    },
+    "primary_rows_per_case": 50,
+    "view_rows_per_case": 150,
+    "primary_rows_total": 200,
+    "view_rows_total": 600,
+    "source_rows_total": 60,
+    "stderr_empty": true,
+    "status": "complete_four_case_corrected_praise2_snapshot_radio"
+  },
+  "xray_completion": {
+    "source_jobs": ["787301.kunanyi-ohpc", "787415.kunanyi-ohpc"],
+    "original_completed_cases": ["C-HI", "C-LO", "G-LO"],
+    "repaired_case": "G-HI",
+    "archive_sha256": "359b9e2fd4d6b87309177adefcab86b34c22a9645fb1c1da8f1deb192a343d3e",
+    "archive_members": 68,
+    "manifest_entries": 67,
+    "case_age_views": 60,
+    "stderr_empty": true,
+    "status": "complete_four_case_selected_age_xray_cavity_product"
+  },
+  "xray_r1_failure": {
+    "failure_archive_sha256": "ed501ae06c2f27a52595c742674a0a26218c3467418444c584b532bfbfa96250",
+    "failure_class": "aggregate_memory_exhaustion_concurrent_four_case",
+    "job": "787301.kunanyi-ohpc",
+    "case_exit_status": {
+      "C-HI": 0,
+      "C-LO": 0,
+      "G-HI": 137,
+      "G-LO": 0
+    },
+    "successful_case_products_retained": true,
+    "repair_job": "787415.kunanyi-ohpc",
+    "repair_scope": "G-HI only"
+  },
+  "status": "complete_product",
   "views_deg": [0, 45, 90],
   "xray_quantitative_energy_gate": "exactly_two_non_crossing_opposite_side_components"
 }

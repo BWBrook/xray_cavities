@@ -1,0 +1,16 @@
+snapshot_index,view,output_index,cache_column,time_code,path,file_size_bytes,selected_particle_count
+10,0deg,1000,1000,3065.785736301,/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem/outputs/particles.1000.dbl,4772227,39743
+10,45deg,1000,1000,3065.785736301,/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem/outputs/particles.1000.dbl,4772227,39743
+10,90deg,1000,1000,3065.785736301,/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem/outputs/particles.1000.dbl,4772227,39743
+20,0deg,2000,2000,6131.909618031,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.2000.dbl,9474787,78918
+20,45deg,2000,2000,6131.909618031,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.2000.dbl,9474787,78918
+20,90deg,2000,2000,6131.909618031,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.2000.dbl,9474787,78918
+30,0deg,3000,3000,9197.847620214,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.3000.dbl,14171109,118019
+30,45deg,3000,3000,9197.847620214,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.3000.dbl,14171109,118019
+30,90deg,3000,3000,9197.847620214,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.3000.dbl,14171109,118019
+40,0deg,4000,4000,12263.7856224,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.4000.dbl,18867429,155066
+40,45deg,4000,4000,12263.7856224,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.4000.dbl,18867429,155066
+40,90deg,4000,4000,12263.7856224,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.4000.dbl,18867429,155066
+50,0deg,5000,5000,15330.0696894,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.5000.dbl,23249469,193741
+50,45deg,5000,5000,15330.0696894,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.5000.dbl,23249469,193741
+50,90deg,5000,5000,15330.0696894,/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/particles.5000.dbl,23249469,193741

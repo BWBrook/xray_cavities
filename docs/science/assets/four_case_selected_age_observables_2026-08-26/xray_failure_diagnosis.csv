@@ -1,0 +1,5 @@
+job_id,job_name,job_state,exit_status,stageout_status,walltime,cput,requested_mem,peak_mem,case,case_exit_status,case_outcome,failure_class,evidence
+787301.kunanyi-ohpc,four_xcav_r1,F,1,1,02:18:33,04:54:46,128gb,126641000kb,C-HI,0,complete_selected_age_xray_cavity_product,aggregate_memory_exhaustion_concurrent_four_case,case log completed
+787301.kunanyi-ohpc,four_xcav_r1,F,1,1,02:18:33,04:54:46,128gb,126641000kb,C-LO,0,complete_selected_age_xray_cavity_product,aggregate_memory_exhaustion_concurrent_four_case,case log completed
+787301.kunanyi-ohpc,four_xcav_r1,F,1,1,02:18:33,04:54:46,128gb,126641000kb,G-HI,137,killed after manifest preflight,aggregate_memory_exhaustion_concurrent_four_case,signal 9 at truth extractor launch
+787301.kunanyi-ohpc,four_xcav_r1,F,1,1,02:18:33,04:54:46,128gb,126641000kb,G-LO,0,complete_selected_age_xray_cavity_product,aggregate_memory_exhaustion_concurrent_four_case,case log completed

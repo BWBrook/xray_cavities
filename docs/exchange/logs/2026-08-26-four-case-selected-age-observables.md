@@ -79,3 +79,77 @@ job remained running at the last authorized snapshot; all four radio resumes
 are now under the PBS stop rule.
 
 Status: `submitted_waiting_pbs_completion`.
+
+## X-ray isolated-case repair
+
+PBS `787301.kunanyi-ohpc` / `four_xcav_r1` finished with `Exit_status=1` after
+using `126641000kb` of its `128gb` request. The per-case contract makes the
+failure boundary explicit: C-HI, C-LO, and G-LO each exited `0` and completed
+their selected-age product; G-HI exited `137` after manifest preflight when
+the truth extractor was killed. The observed pattern supports aggregate
+memory exhaustion from four concurrent full-grid cases, rather than a
+scientific-method or source-data failure.
+
+The compact failure archive SHA-256 is
+`ed501ae06c2f27a52595c742674a0a26218c3467418444c584b532bfbfa96250`.
+The wrapper now supports a default-preserving single-case execution mode.
+G-HI-only repair job `787415.kunanyi-ohpc` / `g_hi_xcavr2` was submitted from
+a separate no-overwrite stage, verified running once, and left under the PBS
+stop rule. The three completed case products remain untouched.
+
+Status: `submitted_waiting_pbs_completion`.
+
+## First radio completions
+
+C-HI `787310.kunanyi-ohpc` and G-HI `787311.kunanyi-ohpc` finished with
+`Exit_status=0`. Their corrected-PRAiSE2 products were retrieved and validated
+independently. Each contains `50` primary luminosity rows, `150` view rows,
+`15` source rows, and `6` particle-source summary rows; luminosity and
+effective magnetic field values are finite and positive, particle sources are
+causal within numerical tolerance, and stderr is empty.
+
+The byte-preserved retrieval bundle SHA-256 is
+`5fa6f428d63665a1345f5f7eeaab7dd9d0ae7a35d856b574cd27acb3291c17b5`.
+C-LO, G-LO, and the isolated G-HI X-ray repair remained running at the one
+authorized scheduler snapshot. No cross-case synthesis has begun.
+
+Status: `submitted_waiting_pbs_completion`.
+
+## G-LO radio and four-case X-ray completion
+
+G-LO radio `787312.kunanyi-ohpc` and G-HI X-ray repair
+`787415.kunanyi-ohpc` finished with `Exit_status=0` and empty stderr. G-LO
+passed the same `50/150/15/6` corrected-PRAiSE2 row and scientific-validity
+contract as the earlier C-HI and G-HI products.
+
+The repaired G-HI X-ray product passed all `15` selected age/view projection
+checks. It was combined without recomputation with the retained successful
+C-HI, C-LO, and G-LO products from `787301`. The resulting four-case archive
+contains `68` members, covers `60` case-age views, and has SHA-256
+`359b9e2fd4d6b87309177adefcab86b34c22a9645fb1c1da8f1deb192a343d3e`.
+All projection rows are finite and support-complete. No-component energy rows
+remain explicitly nonquantitative.
+
+C-LO radio `787329` remained running at the single authorized scheduler
+snapshot and is now the only incomplete Goal 064 product. No polling or
+factorial synthesis occurred.
+
+Status: `submitted_waiting_pbs_completion`.
+
+## Final C-LO radio completion
+
+C-LO radio `787329.kunanyi-ohpc` finished with `Exit_status=0`, walltime
+`05:40:55`, and empty stderr. Its archive SHA-256 is
+`118227510131c1b728fcbf3e9d11b53a9c378a4634c48a52feb582456c345678`.
+The product passed the same `50/150/15/6` row, finite-value, causal-source,
+selected-coordinate, and corrected-PRAiSE2 provenance contract as the other
+three cases.
+
+The complete radio surface contains `200` primary and `600` viewing rows;
+the complete X-ray/cavity surface contains `60` case-age-view rows. Goal 064
+is now complete and ready for synthesis with Goal 062/063. This closeout did
+not start that synthesis or alter raw data.
+
+Decision: `FOUR_CASE_SELECTED_AGE_OBSERVABLE_SURFACE_COMPLETE_SYNTHESIS_READY`.
+
+Status: `complete_product`.
