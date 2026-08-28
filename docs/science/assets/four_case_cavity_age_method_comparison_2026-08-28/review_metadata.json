@@ -1,0 +1,142 @@
+{
+  "age_methods": [
+    "true_source_age",
+    "sound_crossing_age",
+    "buoyant_rise_age",
+    "refill_age",
+    "shock_kinematic_age",
+    "spectral_age_mean_pressure",
+    "spectral_age_emissivity_weighted"
+  ],
+  "atmosphere_contract": {
+    "central_exclusion_reason": "exclude the nozzle-regularised injection region",
+    "gamma": 1.6666666666666667,
+    "gravity": "-(1/rho0) dp0/dr from the accepted initial axial profile",
+    "group_tabulated_profile_validation": {
+      "gravity_max_relative_difference": 0.0017779899410641337,
+      "gravity_median_relative_difference": 0.0009022871353165996,
+      "sound_speed_max_relative_difference": 0.00010443173735299598
+    },
+    "minimum_profile_radius_kpc": 1.0,
+    "sound_speed": "sqrt(gamma p0/rho0)",
+    "state": "initial static atmosphere"
+  },
+  "buoyant_to_sound_age_ratio": {
+    "maximum": 2.3638403812003763,
+    "median": 1.5661072237702784,
+    "minimum": 1.2048569183875646
+  },
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-HI",
+    "G-LO"
+  ],
+  "energy_models": {
+    "2.5pV": 2.5,
+    "4pV": 4.0
+  },
+  "excluded_science_case_ages": [
+    {
+      "case": "G-HI",
+      "reason": "boundary_contaminated",
+      "snapshot_index": 50
+    }
+  ],
+  "geometry_contract": {
+    "buoyant_cross_section": "pi times projected minor semiaxis times geometric line-of-sight depth",
+    "distance": "projected distance from origin to X-ray component centroid",
+    "pressure": "accepted side-specific tracer-shell pressure proxy",
+    "refill_radius": "volume-equivalent spherical radius",
+    "volume": "geometric-depth X-ray component ellipsoid"
+  },
+  "input_provenance": [
+    {
+      "path": "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/remote_logs/four_case_fluid_snapshot_census_2026-08-25.tar.gz",
+      "sha256": "b4dfb65a9231a53caec776f435ab819ce0b67c61fa9fd7f4aa866a5d7d83ece6"
+    },
+    {
+      "path": "docs/science/assets/g_lo_hdf5_stall_guarded_continuation_completion_2026-07-12/remote_stage/rendered_g_lo_config/G-LO/particles/tabulated_cosmo_002031.csv",
+      "sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+    },
+    {
+      "path": "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/primary_shock_timeseries.csv",
+      "sha256": "4d027d1719d3a79448eb0004d00e08ccaea7fb1b0989af1316cd071871a7a6f1"
+    },
+    {
+      "path": "docs/science/assets/four_case_boundary_spectral_field_review_2026-08-28/spectral_age_field_comparison.csv",
+      "sha256": "e3fc7e88bfd60dcde53778581ea05c9b0e8cffbc0749e29e7ab0e7e49e762cb2"
+    },
+    {
+      "path": "docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/C-HI/xray_cavity_energy.csv",
+      "sha256": "f0f29ab32452a32e5faa2f0318a2285a93c0e9831b2fcc857e38793be2892d3e"
+    },
+    {
+      "path": "docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/C-HI/xray_component_summary.csv",
+      "sha256": "a5ba9d56f3fac23e0e1a82a04c8d73a4ccc797ff0dad2c06fd8b45b81308f6f7"
+    },
+    {
+      "path": "docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/C-LO/xray_cavity_energy.csv",
+      "sha256": "94f4cf8d63baba75bec1bde7750d47037e6be9335d5fed58f06af2e197761555"
+    },
+    {
+      "path": "docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/C-LO/xray_component_summary.csv",
+      "sha256": "f1d72205e6e35ac95c161ce7e61632859b7b0fee813904282d8ba704b4dcf6cb"
+    },
+    {
+      "path": "docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/G-HI/xray_cavity_energy.csv",
+      "sha256": "a9b531f0d84d3927669204643a6d0d78d3ae9a0e3c52b3b36152210ed55b2f1b"
+    },
+    {
+      "path": "docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/G-HI/xray_component_summary.csv",
+      "sha256": "6fa205604db387e1e68a1ed0769b3fa587bdcd76cf2e8701ba7c320c66b69b64"
+    },
+    {
+      "path": "docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/G-LO/xray_cavity_energy.csv",
+      "sha256": "fbbbe6957422f5ef458377b93e8d889387e6d9908881bae4135c649d3269e7e6"
+    },
+    {
+      "path": "docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/G-LO/xray_component_summary.csv",
+      "sha256": "6672e4ce27959a5d562134912f0d1c21d0b0a8648de42b87ad179106479370bb"
+    }
+  ],
+  "row_counts": {
+    "age_method_comparison": 259,
+    "age_power_method_summary": 56,
+    "cavity_power_method_comparison": 518,
+    "quantitative_cavity_views": 37,
+    "xray_cavity_age_geometry": 74
+  },
+  "selected_ages_myr": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "shock_age_rows": {
+    "excluded": 10,
+    "quantitative": 27
+  },
+  "shock_contract": {
+    "age": "instantaneous shock distance divided by centred shock speed",
+    "validity": "both sides detected with positive speed and kinematic Mach greater than one"
+  },
+  "spectral_age_rows": {
+    "total": 74,
+    "upper_limits": 40
+  },
+  "spectral_contract": {
+    "breaks_above_15_GHz": "spectral-age upper limits and cavity-power lower limits",
+    "field_treatments": [
+      "tracer_lobe_mean_pressure",
+      "emissivity_weighted_1p4ghz"
+    ]
+  },
+  "status": "complete_four_case_cavity_age_method_comparison",
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ]
+}

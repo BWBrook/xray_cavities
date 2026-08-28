@@ -43,8 +43,10 @@ current instruction without checking its goal status.
   completed the selected-age X-ray/cavity and corrected-PRAiSE2 surface.
   The 2026-08-28 boundary review now drops `G-HI/50` from all science and
   replaces the single emissivity-weighted spectral-age field with primary
-  mean-pressure plus emissivity-weighted sensitivity treatments. No PLUTO,
-  X-ray, or PRAiSE rerun is required, but Goal 065 downstream synthesis must be
+  mean-pressure plus emissivity-weighted sensitivity treatments. A new
+  seven-method cavity-age comparison now adds sound, buoyant, refill, shock,
+  true, and both spectral clocks with explicit censoring. No PLUTO, X-ray, or
+  PRAiSE rerun is required, but Goal 065 downstream synthesis must be
   regenerated before supervisor interpretation.
 - The PRAiSE coefficient science gate is green; corrected PRAiSE2 is the
   production radio method once its tested source change is published to the
@@ -83,6 +85,29 @@ current instruction without checking its goal status.
   block the other `G-LO` analysis components or pipeline preparation.
 
 ## Active Checkpoint
+
+### 2026-08-28 cavity-age and inferred-power comparison
+
+- Status: `complete_method_surface_pending_goal065_integration`.
+- The retained quantitative surface contains `37` X-ray cavity views and `74`
+  side components after excluding `G-HI/50` and failing closed on non-bipolar
+  X-ray topologies.
+- Seven age treatments are now available: true, sound crossing, buoyant rise,
+  refill, bilateral supersonic shock, mean-pressure spectral, and
+  emissivity-weighted spectral age. Spectral breaks above 15 GHz remain age
+  upper limits and inferred-power lower limits.
+- Sound speed and gravity are evaluated in the initial static atmosphere.
+  The group reconstruction agrees with its independent tabulated environment
+  to maximum relative differences of `1.04e-4` in sound speed and `1.78e-3`
+  in gravity.
+- `t_buoy/t_cs` spans `1.20--2.36` with median `1.57`; do not replace the
+  calculation with a fixed factor of two.
+- With true age, median `2.5pV` power recovery is `0.0081`, `0.628`, `0.00437`,
+  and `0.0731` for `C-HI`, `C-LO`, `G-HI`, and `G-LO`. The high-power deficit
+  is therefore dominated by X-ray cavity-energy recovery, not only age bias.
+- Science note/assets:
+  `docs/science/four_case_cavity_age_method_comparison_2026-08-28.md` and
+  `docs/science/assets/four_case_cavity_age_method_comparison_2026-08-28/`.
 
 ### 2026-08-28 boundary and spectral-field correction
 
@@ -127,7 +152,8 @@ current instruction without checking its goal status.
   and `7.02`. Recalculate the `G-HI` medians without the endpoint before using
   them scientifically.
 - The next consequential step is to regenerate Goal 065 from the corrected
-  science gate, then return it for supervisor interpretation.
+  science gate and the completed seven-method cavity-age surface, then return
+  it for supervisor interpretation.
 - Science note/assets:
   `docs/science/four_case_scientific_synthesis_2026-08-26.md` and
   `docs/science/assets/four_case_scientific_synthesis_2026-08-26/`.
