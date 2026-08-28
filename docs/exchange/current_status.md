@@ -86,6 +86,26 @@ current instruction without checking its goal status.
 
 ## Active Checkpoint
 
+### 2026-08-28 dual-space energetics audit decision
+
+- Status: `method_locked_pending_implementation`.
+- Every cavity/lobe and total-outburst comparison must retain two independent
+  paths: native-grid truth using fractional tracer and cell-wise initial-state
+  subtraction, and observer-like X-ray cavity enthalpy using X-ray-only
+  geometry and pressure inference. Shock subcomponents remain native-grid
+  truth unless a separately validated observable shock model is added.
+- Native-grid and X-ray products are joined only after both are complete.
+  Tracer may assess X-ray recovery post hoc but may not define or repair the
+  observed cavity.
+- The matched audit separates volume bias, pressure bias, lobe-enthalpy bias,
+  and missing shock/outburst energy. It reports `H_X/H_lobe,grid`,
+  `H_X/E_retained`, and `H_X/E_injected` as distinct questions.
+- X-ray midpoint pressure and volume-averaged pressure over the inferred
+  ellipsoid must both be retained. `2.5pV` remains primary and `4pV` remains
+  the literature comparator.
+- Science design:
+  `docs/science/four_case_dual_space_energetics_audit_design_2026-08-28.md`.
+
 ### 2026-08-28 cavity-age and inferred-power comparison
 
 - Status: `complete_method_surface_pending_goal065_integration`.
