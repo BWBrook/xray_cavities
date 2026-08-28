@@ -1,5 +1,14 @@
 # Four-case scientific synthesis
 
+> **Superseding correction (2026-08-28):** `G-HI` at 50 Myr has been
+> dropped from all science because its lobe/shock reaches the X3 boundary and
+> contaminates the edge pressure. The matched PRAiSE effective field used
+> below is emissivity weighted, not a global mean cocoon field. Test 2 and all
+> case summaries that included `G-HI/50` are provisional until rebuilt with
+> that point excluded and with both mean-pressure and emissivity-weighted
+> fields. See
+> `docs/science/four_case_boundary_spectral_field_review_2026-08-28.md`.
+
 ## Purpose
 
 Goal 065 joins the accepted Goal 062 fluid, gravitational, tracer, and shock

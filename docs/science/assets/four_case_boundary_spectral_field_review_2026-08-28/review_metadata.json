@@ -1,0 +1,93 @@
+{
+  "boundary_contaminated_case_ages": [
+    [
+      "G-HI",
+      50
+    ]
+  ],
+  "boundary_contract": {
+    "domain_half_widths_kpc": {
+      "x": 200.0,
+      "y": 200.0,
+      "z": 250.0
+    },
+    "edge_pressure_contamination_ratio": 2.0,
+    "evidence": "3D tracer extents, axial shock positions, and axial edge pressure/velocity profiles",
+    "tracer_threshold": 0.001
+  },
+  "break_frequency_contract": "refitted from the five-frequency full-loss SED; independent of magnetic-field treatment",
+  "cases": [
+    "C-HI",
+    "C-LO",
+    "G-HI",
+    "G-LO"
+  ],
+  "excluded_science_case_ages": [
+    {
+      "case": "G-HI",
+      "reason": "z_boundary_contact_pressure_contaminated",
+      "snapshot_index": 50
+    }
+  ],
+  "field_contract": {
+    "emissivity_weighted": "existing ray-traced 1.4 GHz full-loss effective field",
+    "eta": 0.03,
+    "gamma_gas": 1.6666666666666667,
+    "mean_pressure": "fractional-tracer thermal energy divided by fractional-tracer volume"
+  },
+  "first_annual_axial_boundary_contact_snapshot": {
+    "C-HI": null,
+    "C-LO": null,
+    "G-HI": 48,
+    "G-LO": null
+  },
+  "maximum_relative_difference_from_accepted_break_surface": 1.6491092071477186e-07,
+  "row_counts": {
+    "annual_axial_boundary_audit": 204,
+    "boundary_audit": 20,
+    "spectral_age_field_comparison": 114,
+    "spectral_break_frequencies": 57
+  },
+  "selected_ages_myr": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "selected_science_ages_by_case": {
+    "C-HI": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "C-LO": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "G-HI": [
+      10,
+      20,
+      30,
+      40
+    ],
+    "G-LO": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ]
+  },
+  "status": "complete_boundary_and_spectral_field_review",
+  "views": [
+    "0deg",
+    "45deg",
+    "90deg"
+  ]
+}

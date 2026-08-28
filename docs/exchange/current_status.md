@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-08-26
+Last updated: 2026-08-28
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -39,11 +39,13 @@ current instruction without checking its goal status.
 
 - Production is complete. Goal 062 applied the common fluid, gravity, tracer,
   and shock workflow to all `204` annual snapshots; Goal 063 confirmed that
-  the large `C-LO` normalized budget is background dominated and locked the
-  valid shock-age windows; Goal 064 completed the common-age four-case
-  X-ray/cavity and corrected-PRAiSE2 surface. Goal 065 now joins those products
-  into the prespecified paper tests. No further PLUTO production or observable
-  recomputation is needed before supervisor interpretation.
+  the large `C-LO` normalized budget is background dominated; and Goal 064
+  completed the selected-age X-ray/cavity and corrected-PRAiSE2 surface.
+  The 2026-08-28 boundary review now drops `G-HI/50` from all science and
+  replaces the single emissivity-weighted spectral-age field with primary
+  mean-pressure plus emissivity-weighted sensitivity treatments. No PLUTO,
+  X-ray, or PRAiSE rerun is required, but Goal 065 downstream synthesis must be
+  regenerated before supervisor interpretation.
 - The PRAiSE coefficient science gate is green; corrected PRAiSE2 is the
   production radio method once its tested source change is published to the
   fork-backed working branch.
@@ -82,11 +84,30 @@ current instruction without checking its goal status.
 
 ## Active Checkpoint
 
+### 2026-08-28 boundary and spectral-field correction
+
+- Status: `complete_method_correction_pending_downstream_synthesis_refresh`.
+- Decision: `DROP_G_HI_50_FROM_ALL_SCIENCE`.
+- The annual axial audit finds boundary contamination only in `G-HI`, first at
+  snapshot 48 and persisting through 50. At 50 Myr its lobe/shock is only
+  `1.052 kpc` from the X3 face and edge pressure is up to `315.31` times the
+  initial atmosphere. `C-HI`, `C-LO`, and `G-LO` retain their 50 Myr points.
+- Recalculated break frequencies are independent of magnetic-field choice.
+  Spectral ages are now reported with a global fractional-tracer mean-pressure
+  field as primary and the existing 1.4 GHz emissivity-weighted field as a
+  sensitivity. `G-HI` science ages are `10/20/30/40 Myr` only.
+- Barry-Codex must filter `G-HI/50` from every downstream cavity, radio,
+  spectral-age, and inferred-power product and rebuild Goal 065 case medians
+  and row counts. Existing raw/compact endpoint files remain archival evidence.
+- Science note/assets:
+  `docs/science/four_case_boundary_spectral_field_review_2026-08-28.md` and
+  `docs/science/assets/four_case_boundary_spectral_field_review_2026-08-28/`.
+
 ### Goal 065: four-case scientific synthesis
 
-- Status: `complete_local_scientific_synthesis`.
-- Decision:
-  `FOUR_CASE_SYNTHESIS_COMPLETE_SUPERVISOR_INTERPRETATION_READY`.
+- Status: `requires_revision_after_boundary_and_field_review`.
+- Previous decision is superseded in part by
+  `DROP_G_HI_50_FROM_ALL_SCIENCE`.
 - The joined surface covers `C-HI`, `C-LO`, `G-HI`, and `G-LO` at
   `10/20/30/40/50 Myr`, using accepted Goal 062/063/064 compact products only.
 - The topology, pressure, background, and shock-validity gates remain
@@ -96,16 +117,17 @@ current instruction without checking its goal status.
   `-0.868`, but the case/view-adjusted slope is only `-0.0402 dex/Mach`, Mach
   adds `0.0031` R-squared, and leave-one-case-out slopes change sign. This is
   a strong pooled pattern, not a case-robust independent Mach effect.
-- Test 2: median matched-field `(2.5pV / t_spec) / known power` is `0.0494`,
+- Historical Test 2: median matched-field `(2.5pV / t_spec) / known power` was `0.0494`,
   `1.55`, `0.00650`, and `0.0877` for `C-HI`, `C-LO`, `G-HI`, and `G-LO`.
-  The estimator is not universal; `40/60` spectral breaks are censored above
-  the observed band.
-- Test 3: median full-loss 150 MHz power recovery is `0.937`, `7.34`, `0.523`,
+  These values are provisional because they use the emissivity-weighted field
+  alone and include `G-HI/50`; the corrected primary/sensitivity surface must
+  replace them.
+- Historical Test 3: median full-loss 150 MHz power recovery was `0.937`, `7.34`, `0.523`,
   and `4.03`; the corresponding 1.4 GHz values are `5.10`, `15.85`, `2.37`,
-  and `7.02`. Standard radio scalings are structured by power and environment.
-- The next consequential step is supervisor interpretation: whether Mach is
-  retained as a descriptive covariate, which radio relation anchors the paper,
-  and how censored spectral ages and tracer-shell pressure are framed.
+  and `7.02`. Recalculate the `G-HI` medians without the endpoint before using
+  them scientifically.
+- The next consequential step is to regenerate Goal 065 from the corrected
+  science gate, then return it for supervisor interpretation.
 - Science note/assets:
   `docs/science/four_case_scientific_synthesis_2026-08-26.md` and
   `docs/science/assets/four_case_scientific_synthesis_2026-08-26/`.
@@ -117,16 +139,18 @@ current instruction without checking its goal status.
 - Status: `complete_product`.
 - Decision:
   `FOUR_CASE_SELECTED_AGE_OBSERVABLE_SURFACE_COMPLETE_SYNTHESIS_READY`.
-- Common ages: snapshots `10/20/30/40/50` for `C-HI`, `C-LO`, `G-HI`, and
-  `G-LO`, retaining actual HDF5 times.
+- Produced ages: snapshots `10/20/30/40/50` for all four cases, retaining
+  actual HDF5 times. The `G-HI/50` products are now archival only and must be
+  excluded from all science; the other three cases retain all five ages.
 - X-ray/cavity surface: `0/45/90 deg`, X-ray-only one-percent projected-area
   deficit mask, tracer post-hoc only, and quantitative cavity energy only for
   exactly two non-crossing opposite-side components.
 - Radio surface: corrected PRAiSE2 lossless/full-loss luminosity at
   `0.15/0.5/1.4/4.5/15 GHz` and `0/45/90 deg`, with complete case-specific
   histories and causal particle-state matching.
-- Validity gate: `G-HI` endpoint remains available for non-shock observables;
-  shock positions stop at snapshot `47`, centred speed/Mach at `46`.
+- Superseding validity gate: `G-HI/50` is excluded from every observable and
+  inference. Its annual boundary contamination begins at snapshot `48`; shock
+  positions still stop at `47` and centred speed/Mach at `46`.
 - Execution is one four-core X-ray job plus four independent 16-core radio
   jobs. This is the complete prespecified surface, split only at genuine
   restart/failure boundaries.
@@ -171,10 +195,9 @@ current instruction without checking its goal status.
 - C-LO radio `787329` completed with `Exit_status=0` in `05:40:55`, empty
   stderr, and the same corrected-PRAiSE2 contract. The full radio surface now
   contains `200` primary rows and `600` viewing rows across all four cases.
-- Goal 064 is complete. Next: synthesize the accepted Goal 062/063 fluid,
-  gravity, and shock evidence with the complete Goal 064 X-ray/cavity and
-  radio surface. No further production or observable recomputation is needed
-  before that analysis.
+- Goal 064 remains a complete provenance product. Downstream analysis must
+  apply the 2026-08-28 `G-HI/50` exclusion; no production recomputation is
+  required.
 - Science note/assets:
   `docs/science/four_case_selected_age_observables_2026-08-26.md` and
   `docs/science/assets/four_case_selected_age_observables_2026-08-26/`.
