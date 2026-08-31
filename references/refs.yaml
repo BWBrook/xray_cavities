@@ -1,0 +1,47 @@
+---
+references:
+  - id: yatesJones2023Cosmodragon
+    citation-key: yatesJones2023Cosmodragon
+    type: article-journal
+    title: CosmoDRAGoN simulations - I. Dynamics and observable signatures of radio jets in cosmological environments
+    author:
+      - family: Yates-Jones
+        given: Patrick M.
+      - family: Shabala
+        given: Stanislav S.
+      - family: Power
+        given: Chris
+      - family: Krause
+        given: Martin G. H.
+      - family: Hardcastle
+        given: Martin J.
+      - family: Mohd Noh Velastin
+        given: Elena A. N.
+      - family: Stewart
+        given: Georgia S. C.
+    issued:
+      - year: 2023
+    container-title: Publications of the Astronomical Society of Australia
+    volume: '40'
+    page: e014
+    DOI: 10.1017/pasa.2023.10
+
+  - id: mendygral2011SyntheticCavities
+    citation-key: mendygral2011SyntheticCavities
+    type: article-journal
+    title: 'Synthetic observations of simulated active galactic nucleus jets: X-ray cavities'
+    author:
+      - family: Mendygral
+        given: P. J.
+      - family: O'Neill
+        given: S. M.
+      - family: Jones
+        given: T. W.
+    issued:
+      - year: 2011
+    container-title: The Astrophysical Journal
+    volume: '730'
+    issue: '2'
+    page: '100'
+    DOI: 10.1088/0004-637X/730/2/100
+...

@@ -30,6 +30,22 @@ uv run ipython
 uv run jupyter lab
 ```
 
+## Manuscript
+
+The PASA manuscript sources and build configuration live in this repository.
+The external `makedoc` engine is invoked through repo-local targets without
+copying sources out of `xray_cavities`:
+
+```bash
+make manuscript-validate
+make manuscript-draft
+make manuscript-submission
+make manuscript-check
+```
+
+See [manuscript/README.md](manuscript/README.md) for the source layout,
+authorship gate, PASA conventions, and output locations.
+
 Check docs tooling:
 
 ```bash

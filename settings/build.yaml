@@ -1,0 +1,66 @@
+default_profile: draft
+
+profiles:
+  draft:
+    description: Working PASA manuscript for rapid local review.
+    manuscript_sources:
+      - ../manuscript/text/main.md
+      - ../manuscript/text/figures.md
+    lint_sources:
+      - ../manuscript/text/main.md
+      - ../manuscript/text/figures.md
+    bibliography: ../references/refs.yaml
+    csl: ../csl/cambridge-university-press-author-date.csl
+    journal: Publications of the Astronomical Society of Australia
+    csl_search_dirs:
+      - ../csl
+    output_dir: ../build/manuscript/draft
+    output_stem: xray_cavities_draft
+    page_numbers: lower_right
+    line_spacing: 1.25
+    line_numbering: continuous
+    review_markup:
+      enabled: false
+    figures:
+      placement: inline
+      caption_position: bottom
+      placeholder_id: figures
+    margins:
+      unit: cm
+      paper_size: a4
+      top: 2.0
+      right: 2.5
+      bottom: 2.0
+      left: 2.5
+
+  submission:
+    description: Strict PASA-oriented review and submission profile.
+    manuscript_sources:
+      - ../manuscript/text/main.md
+      - ../manuscript/text/figures.md
+    lint_sources:
+      - ../manuscript/text/main.md
+      - ../manuscript/text/figures.md
+    bibliography: ../references/refs.yaml
+    csl: ../csl/cambridge-university-press-author-date.csl
+    journal: Publications of the Astronomical Society of Australia
+    csl_search_dirs:
+      - ../csl
+    output_dir: ../build/manuscript/submission
+    output_stem: xray_cavities_submission
+    page_numbers: lower_right
+    line_spacing: 2
+    line_numbering: continuous
+    review_markup:
+      enabled: false
+    figures:
+      placement: captions_page
+      caption_position: top
+      placeholder_id: figures
+    margins:
+      unit: cm
+      paper_size: a4
+      top: 2.0
+      right: 2.5
+      bottom: 2.0
+      left: 2.5

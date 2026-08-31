@@ -1,0 +1,8 @@
+title_note: Provisional template only; confirm author list and order before enabling author injection.
+authors:
+  - name: First Author
+    affiliations: [aff1]
+    corresponding: true
+    email: first.author@example.org
+affiliations:
+  aff1: School of Natural Sciences, University of Tasmania, Hobart, Tasmania, Australia
