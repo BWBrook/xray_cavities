@@ -1,0 +1,33 @@
+{
+  "case_worker_exit_status": {
+    "C-HI": 0,
+    "C-LO": 0,
+    "G-HI": 0,
+    "G-LO": 0
+  },
+  "control_role": "environment-matched dimensionless-noise calibration; not cellwise subtraction",
+  "decision_label": "SELECTED_AGE_NATIVE_SHOCK_PARTITION_GREEN_C_LO_LATE_FAIL_CLOSED",
+  "figure": "selected_age_native_shock_partition.png",
+  "goal066_matched_join_count": 464,
+  "goal066_native_join_count": 19,
+  "hdf5_recompute_performed": false,
+  "outputs": [
+    "native_shock_energy_selected_age.csv",
+    "primary_shock_partition.csv",
+    "threshold_sensitivity.csv",
+    "case_summary.csv",
+    "control_calibration_summary.csv",
+    "goal066_native_shock_context.csv",
+    "goal066_matched_xray_shock_context.csv",
+    "scientific_decision_summary.csv"
+  ],
+  "prespecified_row_count": 171,
+  "primary_case_age_count": 19,
+  "quantitative_primary_count": 15,
+  "scheduler_exit_status": 1,
+  "scheduler_failure_stage": "post_analysis_schema_validation",
+  "scheduler_job": "789813.kunanyi-ohpc",
+  "status": "complete_product_recovered_no_hdf5_rerun",
+  "threshold_sensitivity_row_count": 57,
+  "unresolved_primary_count": 4
+}

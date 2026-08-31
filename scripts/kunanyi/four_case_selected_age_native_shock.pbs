@@ -1,0 +1,285 @@
+#!/usr/bin/env bash
+#PBS -N shock_energy
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mpiprocs=1:mem=128gb
+#PBS -l walltime=48:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal067_selected_age_native_shock_r1/four_case_selected_age_native_shock_r1.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal067_selected_age_native_shock_r1/four_case_selected_age_native_shock_r1.err
+
+set -euo pipefail
+umask 077
+
+readonly STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal067_selected_age_native_shock_r1}"
+readonly ANALYSIS_ROOT="${ANALYSIS_ROOT:-/u/bwbrook/xray_cavities_analysis/2026-08-31-selected-age-native-shock-r1}"
+readonly SCRIPT_ROOT="$STAGE_ROOT/scripts/science"
+readonly INPUT_ROOT="$STAGE_ROOT/inputs"
+readonly BUILDER="$SCRIPT_ROOT/build_selected_age_native_shock.py"
+readonly STAGED_HASHES="$STAGE_ROOT/selected_age_native_shock_inputs.sha256"
+readonly ARCHIVE="${ARCHIVE:-$STAGE_ROOT/four_case_selected_age_native_shock_r1_2026-08-31.tar.gz}"
+readonly ARCHIVE_LIST="${ARCHIVE_LIST:-$STAGE_ROOT/four_case_selected_age_native_shock_r1_archive_file_list.txt}"
+
+readonly C_HI_OUTPUTS="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs"
+readonly C_LO_OUTPUTS="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs"
+readonly G_HI_EARLY_OUTPUTS="/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem/outputs"
+readonly G_HI_LATE_OUTPUTS="/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs"
+readonly G_LO_OUTPUTS="/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs"
+
+readonly CLUSTER_CONTROL_ROOT="/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem"
+readonly GROUP_CONTROL_ROOT="/scratch/bwbrook/xray_cavities_gates/2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs"
+readonly CLUSTER_ENV="$INPUT_ROOT/environments/tabulated_cosmo_002003.csv"
+readonly GROUP_ENV="$INPUT_ROOT/environments/tabulated_cosmo_002031.csv"
+
+for path in \
+  "$BUILDER" "$SCRIPT_ROOT/snapshot_shock_energy.py" \
+  "$SCRIPT_ROOT/snapshot_energy.py" "$SCRIPT_ROOT/pluto_h5_level3_ambient_extract.py" \
+  "$SCRIPT_ROOT/select_common_age_hdf5.py" "$STAGED_HASHES" \
+  "$CLUSTER_ENV" "$GROUP_ENV" \
+  "$C_HI_OUTPUTS" "$C_LO_OUTPUTS" "$G_HI_EARLY_OUTPUTS" \
+  "$G_HI_LATE_OUTPUTS" "$G_LO_OUTPUTS" \
+  "$CLUSTER_CONTROL_ROOT" "$GROUP_CONTROL_ROOT"; do
+  test -r "$path" || { echo "missing Goal 067 input: $path" >&2; exit 2; }
+done
+for case_id in C-HI C-LO G-HI G-LO; do
+  test -r "$INPUT_ROOT/shock_dynamics/$case_id.csv" \
+    || { echo "missing accepted shock dynamics: $case_id" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_HASHES")"
+)
+for path in "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_LIST"; do
+  test ! -e "$path" && test ! -L "$path" \
+    || { echo "refusing to overwrite Goal 067 surface: $path" >&2; exit 2; }
+done
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$SCRIPT_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export HDF5_USE_FILE_LOCKING=FALSE
+mkdir -p "$ANALYSIS_ROOT/logs" "$ANALYSIS_ROOT/calibration"
+
+mapfile -t CLUSTER_CONTROLS < <(
+  find "$CLUSTER_CONTROL_ROOT" -type f -name 'data.*.dbl.h5' -print | sort
+)
+mapfile -t GROUP_CONTROLS < <(
+  find "$GROUP_CONTROL_ROOT" -type f -name 'data.*.dbl.h5' -print | sort
+)
+[ "${#CLUSTER_CONTROLS[@]}" -eq 6 ] \
+  || { echo "CLUSTER no-jet control count is ${#CLUSTER_CONTROLS[@]}, expected 6" >&2; exit 2; }
+[ "${#GROUP_CONTROLS[@]}" -eq 6 ] \
+  || { echo "GROUP no-jet control count is ${#GROUP_CONTROLS[@]}, expected 6" >&2; exit 2; }
+
+calibrate_control() {
+  local environment="$1" output_csv="$2"
+  shift 2
+  local args=()
+  local path
+  for path in "$@"; do
+    args+=(--control-file "$path")
+  done
+  python "$BUILDER" calibrate \
+    --environment "$environment" \
+    "${args[@]}" \
+    --sample-stride 4 \
+    --output-csv "$output_csv"
+}
+
+calibrate_control cluster_002003 \
+  "$ANALYSIS_ROOT/calibration/cluster_control_thresholds.csv" \
+  "${CLUSTER_CONTROLS[@]}" \
+  >"$ANALYSIS_ROOT/logs/cluster_control.out" \
+  2>"$ANALYSIS_ROOT/logs/cluster_control.err" &
+cluster_pid=$!
+calibrate_control group_002031 \
+  "$ANALYSIS_ROOT/calibration/group_control_thresholds.csv" \
+  "${GROUP_CONTROLS[@]}" \
+  >"$ANALYSIS_ROOT/logs/group_control.out" \
+  2>"$ANALYSIS_ROOT/logs/group_control.err" &
+group_pid=$!
+wait "$cluster_pid"
+wait "$group_pid"
+
+write_manifest() {
+  local case_id="$1" power="$2" root_a="$3" root_b="$4" manifest="$5"
+  shift 5
+  python - "$case_id" "$power" "$root_a" "$root_b" "$manifest" "$@" <<'PY'
+import csv
+import sys
+from pathlib import Path
+
+import h5py
+
+CODE_TIME_PER_MYR = 306.6013937879523
+case, power, root_a_text, root_b_text, output, *indices = sys.argv[1:]
+root_a = Path(root_a_text)
+root_b = Path(root_b_text) if root_b_text else None
+baseline = root_a / "data.0000.flt.h5"
+rows = []
+with h5py.File(baseline, "r") as h5:
+    baseline_group = h5["Timestep_0"]
+    baseline_shapes = [
+        tuple(baseline_group[f"vars/{name}"].shape)
+        for name in ("rho", "prs", "tr1", "vx1", "vx2", "vx3")
+    ]
+if len(set(baseline_shapes)) != 1 or baseline_shapes[0] != (1014, 960, 960):
+    raise SystemExit(f"{case}: baseline grid shape drifted: {baseline_shapes}")
+for index_text in indices:
+    index = int(index_text)
+    root = root_a if root_b is None or index <= 10 else root_b
+    path = root / f"data.{index:04d}.flt.h5"
+    timestep = f"Timestep_{index}"
+    with h5py.File(path, "r") as h5:
+        group = h5[timestep]
+        actual_code = float(group.attrs["Time"])
+        actual_myr = actual_code / CODE_TIME_PER_MYR
+        shapes = [
+            tuple(group[f"vars/{name}"].shape)
+            for name in ("rho", "prs", "tr1", "vx1", "vx2", "vx3")
+        ]
+    if len(set(shapes)) != 1 or shapes[0] != baseline_shapes[0]:
+        raise SystemExit(f"{case}/{index}: grid shape drifted: {shapes}")
+    if abs(actual_myr - index) > 0.05:
+        raise SystemExit(f"{case}/{index}: actual age {actual_myr} exceeds tolerance")
+    rows.append({
+        "case": case,
+        "snapshot_index": index,
+        "actual_time_myr": actual_myr,
+        "actual_time_code": actual_code,
+        "input_h5": str(path),
+        "timestep": timestep,
+        "baseline_h5": str(baseline),
+        "baseline_timestep": "Timestep_0",
+        "shape_nz_ny_nx": "x".join(map(str, shapes[0])),
+        "jet_power_one_sided_erg_s": power,
+        "selection_rule": "accepted selected age; G-HI/50 excluded",
+    })
+with Path(output).open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+    writer.writeheader()
+    writer.writerows(rows)
+print(f"goal067_manifest_preflight=passed case={case} snapshots={len(rows)}")
+PY
+}
+
+run_case() {
+  local case_id="$1" power="$2" root_a="$3" root_b="$4" environment="$5" calibration="$6"
+  shift 6
+  local case_root="$ANALYSIS_ROOT/$case_id"
+  local manifest="$ANALYSIS_ROOT/${case_id}_source_manifest.csv"
+  write_manifest "$case_id" "$power" "$root_a" "$root_b" "$manifest" "$@"
+  python "$BUILDER" analyze \
+    --case "$case_id" \
+    --source-manifest "$manifest" \
+    --shock-dynamics "$INPUT_ROOT/shock_dynamics/$case_id.csv" \
+    --environment-table "$environment" \
+    --control-calibration "$calibration" \
+    --output-root "$case_root"
+}
+
+run_pair() {
+  local first="$1" second="$2"
+  local first_pid second_pid first_status second_status
+  case "$first" in
+    C-HI)
+      run_case C-HI 1e45 "$C_HI_OUTPUTS" "" "$CLUSTER_ENV" \
+        "$ANALYSIS_ROOT/calibration/cluster_control_thresholds.csv" 10 20 30 40 50
+      ;;
+    G-HI)
+      run_case G-HI 1e45 "$G_HI_EARLY_OUTPUTS" "$G_HI_LATE_OUTPUTS" "$GROUP_ENV" \
+        "$ANALYSIS_ROOT/calibration/group_control_thresholds.csv" 10 20 30 40
+      ;;
+  esac >"$ANALYSIS_ROOT/logs/$first.out" 2>"$ANALYSIS_ROOT/logs/$first.err" &
+  first_pid=$!
+  case "$second" in
+    C-LO)
+      run_case C-LO 1e43 "$C_LO_OUTPUTS" "" "$CLUSTER_ENV" \
+        "$ANALYSIS_ROOT/calibration/cluster_control_thresholds.csv" 10 20 30 40 50
+      ;;
+    G-LO)
+      run_case G-LO 1e43 "$G_LO_OUTPUTS" "" "$GROUP_ENV" \
+        "$ANALYSIS_ROOT/calibration/group_control_thresholds.csv" 10 20 30 40 50
+      ;;
+  esac >"$ANALYSIS_ROOT/logs/$second.out" 2>"$ANALYSIS_ROOT/logs/$second.err" &
+  second_pid=$!
+  if wait "$first_pid"; then first_status=0; else first_status=$?; fi
+  if wait "$second_pid"; then second_status=0; else second_status=$?; fi
+  printf '%s\t%s\n%s\t%s\n' "$first" "$first_status" "$second" "$second_status" \
+    >> "$ANALYSIS_ROOT/case_exit_status.tsv"
+  [ "$first_status" -eq 0 ] && [ "$second_status" -eq 0 ] \
+    || { echo "Goal 067 case pair failed: $first/$second" >&2; exit 1; }
+}
+
+printf 'case\texit_status\n' > "$ANALYSIS_ROOT/case_exit_status.tsv"
+run_pair C-HI C-LO
+run_pair G-HI G-LO
+
+python - "$ANALYSIS_ROOT" <<'PY'
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+expected = {"C-HI": 45, "C-LO": 45, "G-HI": 36, "G-LO": 45}
+allowed = {
+    "quantitative_seeded_component",
+    "quantitative_bilateral",
+    "unresolved_bilateral_gate",
+    "unresolved_no_accepted_front",
+    "unresolved_non_supersonic_front",
+    "unresolved_no_seeded_component",
+    "unresolved_too_small",
+    "unresolved_boundary_touch",
+    "unresolved_front_extent_mismatch",
+}
+primary_bipolar_rows = 0
+for case, expected_rows in expected.items():
+    case_root = root / case
+    metadata = json.loads((case_root / "selected_age_native_shock_metadata.json").read_text())
+    rows = list(csv.DictReader((case_root / "native_shock_energy_selected_age.csv").open(newline="")))
+    if metadata.get("status") != "complete_selected_age_native_shock_partition":
+        raise SystemExit(f"{case}: completion gate failed")
+    if len(rows) != expected_rows or any(row["status"] not in allowed for row in rows):
+        raise SystemExit(f"{case}: row coverage or status gate failed")
+    for row in rows:
+        quantitative = row["status"].startswith("quantitative_")
+        energy_fields = (
+            "thermal_delta_erg", "kinetic_delta_erg", "gravitational_delta_erg",
+            "total_delta_erg", "irreversible_heating_erg", "mask_volume_kpc3",
+            "mass_delta_g", "selected_cell_count",
+        )
+        if quantitative:
+            values = [float(row[field]) for field in energy_fields]
+            if any(not math.isfinite(value) for value in values):
+                raise SystemExit(f"{case}: non-finite quantitative energy row")
+            if float(row["mask_volume_kpc3"]) <= 0.0 or float(row["selected_cell_count"]) < 100:
+                raise SystemExit(f"{case}: invalid quantitative mask support")
+        elif any(row[field] for field in energy_fields):
+            raise SystemExit(f"{case}: unresolved row contains quantitative energy")
+        if row["threshold_factor"] == "1.0" and row["side"] == "bipolar_total":
+            primary_bipolar_rows += 1
+if primary_bipolar_rows != 19:
+    raise SystemExit(f"primary bipolar coverage is {primary_bipolar_rows}, expected 19")
+for calibration in ("cluster_control_thresholds.csv", "group_control_thresholds.csv"):
+    rows = list(csv.DictReader((root / "calibration" / calibration).open(newline="")))
+    if len(rows) != 1 or float(rows[0]["control_joint_exceedance_fraction"]) > 1e-6:
+        raise SystemExit(f"{calibration}: no-jet false-positive gate failed")
+print("selected_age_native_shock_validation=passed case_age_rows=171 primary_bipolar_rows=19")
+PY
+
+(
+  cd "$ANALYSIS_ROOT"
+  find ./C-HI ./C-LO ./G-HI ./G-LO ./calibration ./logs -type f -print | sort > "$ARCHIVE_LIST"
+  printf '%s\n' ./case_exit_status.tsv >> "$ARCHIVE_LIST"
+)
+tar -czf "$ARCHIVE" -C "$ANALYSIS_ROOT" --files-from "$ARCHIVE_LIST"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

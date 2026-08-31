@@ -47,41 +47,54 @@ def test_synthesis_has_exact_joined_surfaces_and_validity_gates(
     physics = read_rows(output / "case_age_physics.csv")
     cavity = read_rows(output / "cavity_energy_recovery.csv")
 
-    assert metadata["status"] == "complete_local_scientific_synthesis"
-    assert metadata["decision_label"] == "FOUR_CASE_SYNTHESIS_COMPLETE_SUPERVISOR_INTERPRETATION_READY"
+    assert metadata["status"] == "complete_corrected_local_scientific_synthesis"
+    assert metadata["decision_label"] == "FOUR_CASE_SYNTHESIS_CORRECTED_DUAL_SPACE_AUDIT_NEXT"
     assert metadata["row_counts"] == {
-        "case_age_physics.csv": 20,
-        "cavity_age_power_inference.csv": 720,
-        "cavity_energy_recovery.csv": 180,
+        "age_method_comparison.csv": 259,
+        "age_power_method_summary.csv": 56,
+        "case_age_physics.csv": 19,
+        "cavity_energy_recovery.csv": 171,
+        "cavity_power_method_comparison.csv": 518,
         "factorial_effects.csv": 150,
-        "jet_power_recovery_summary.csv": 72,
-        "radio_power_inference.csv": 240,
+        "radio_power_inference.csv": 228,
+        "radio_power_recovery_summary.csv": 16,
         "scientific_decision_summary.csv": 3,
         "shock_cavity_test_summary.csv": 12,
-        "spectral_cavity_power_inference.csv": 540,
-        "spectral_fits.csv": 60,
+        "spectral_fits.csv": 57,
+        "xray_cavity_age_geometry.csv": 74,
     }
     assert {(row["case"], int(row["snapshot_index"])) for row in physics} == {
         (case, age)
         for case in ("C-HI", "C-LO", "G-HI", "G-LO")
         for age in (10, 20, 30, 40, 50)
+        if not (case == "G-HI" and age == 50)
     }
 
     endpoints = {row["case"]: row for row in physics if row["snapshot_index"] == "50"}
-    assert endpoints["G-HI"]["shock_kinematics_valid"] == "false"
-    assert endpoints["G-HI"]["mean_mach_kinematic"] == ""
-    assert all(endpoints[case]["shock_kinematics_valid"] == "true" for case in ("C-HI", "C-LO", "G-LO"))
+    assert set(endpoints) == {"C-HI", "C-LO", "G-LO"}
+    assert all(endpoints[case]["shock_kinematics_valid"] == "true" for case in endpoints)
     assert endpoints["C-LO"]["ambient_energy_interpretation"] == "whole_domain_background_dominated_inside100_upper_bound_only"
     assert float(endpoints["C-LO"]["c_lo_far_field_fraction_of_injected"]) > 20.0
 
-    assert len(cavity) == 4 * 5 * 3 * 3
-    assert sum(row["quantitative_energy_valid"] == "True" for row in cavity) == 39 * 3
+    assert len(cavity) == (4 * 5 - 1) * 3 * 3
+    assert sum(row["quantitative_energy_valid"] == "True" for row in cavity) == 37 * 3
     invalid = [row for row in cavity if row["quantitative_energy_valid"] == "False"]
     assert invalid
     assert all(row["cavity_to_injected_ratio"] == "" for row in invalid)
-    g_hi_endpoint = [row for row in cavity if row["case"] == "G-HI" and row["snapshot_index"] == "50"]
-    assert any(row["quantitative_energy_valid"] == "True" for row in g_hi_endpoint)
-    assert all(row["scientific_test_status"] != "quantitative_with_valid_shock" for row in g_hi_endpoint)
+    assert not [row for row in cavity if row["case"] == "G-HI" and row["snapshot_index"] == "50"]
+
+    for name in (
+        "radio_power_inference.csv",
+        "spectral_fits.csv",
+        "xray_cavity_age_geometry.csv",
+        "age_method_comparison.csv",
+        "cavity_power_method_comparison.csv",
+    ):
+        assert not [
+            row
+            for row in read_rows(output / name)
+            if row["case"] == "G-HI" and row["snapshot_index"] == "50"
+        ], name
 
 
 def test_primary_science_decisions_distinguish_pattern_from_identification(
@@ -116,7 +129,7 @@ def test_primary_science_decisions_distinguish_pattern_from_identification(
     assert all(row["inference_scope"].endswith("no_p_value") or "no_replicate" in row["inference_scope"] for row in shock)
 
     assert decisions["T1"]["decision"] == "strong_pooled_negative_pattern_not_case_robust"
-    assert decisions["T2"]["decision"] == "cavity_spectral_power_not_universal_recovery_estimator"
+    assert decisions["T2"]["decision"] == "age_method_bias_modulates_not_explains_cavity_energy_deficit"
     assert decisions["T3"]["decision"] == "radio_scalings_power_and_environment_dependent"
 
 
@@ -124,21 +137,44 @@ def test_radio_power_results_and_local_manifest_are_reproducible(
     synthesis: tuple[object, Path],
 ) -> None:
     _module, output = synthesis
-    summary = read_rows(output / "jet_power_recovery_summary.csv")
+    summary = read_rows(output / "radio_power_recovery_summary.csv")
     spectral = read_rows(output / "spectral_fits.csv")
+    age_summary = read_rows(output / "age_power_method_summary.csv")
 
     radio150 = {
         row["case"]: float(row["median_inferred_to_known"])
         for row in summary
-        if row["estimator_family"] == "radio_luminosity_scaling"
-        and row["method"] == "kokotanekov_2017_150mhz_approx"
+        if row["method"] == "kokotanekov_2017_150mhz_approx"
         and row["comparator"] == "full_loss"
     }
     assert 0.8 < radio150["C-HI"] < 1.2
     assert radio150["C-LO"] > 7.0
     assert radio150["G-HI"] < 0.6
     assert radio150["G-LO"] > 4.0
-    assert sum(row["spectral_age_limit_direction"] != "none" for row in spectral) == 40
+    assert sum(row["spectral_age_limit_direction"] != "none" for row in spectral) == 37
+
+    assert {row["age_method"] for row in age_summary} == {
+        "true_source_age",
+        "sound_crossing_age",
+        "buoyant_rise_age",
+        "refill_age",
+        "shock_kinematic_age",
+        "spectral_age_mean_pressure",
+        "spectral_age_emissivity_weighted",
+    }
+    primary_spectral = [
+        row
+        for row in age_summary
+        if row["cavity_energy_model"] == "2.5pV"
+        and row["age_method"] == "spectral_age_mean_pressure"
+    ]
+    assert sum(int(row["power_lower_limit_rows"]) for row in primary_spectral) == 20
+    assert all(
+        row["median_exact_inferred_to_known_power_ratio"] == ""
+        and row["median_lower_limit_inferred_to_known_power_ratio"] != ""
+        for row in primary_spectral
+        if row["case"] in {"G-HI", "G-LO"}
+    )
 
     manifest = output / "local_asset_manifest.sha256"
     for line in manifest.read_text().splitlines():

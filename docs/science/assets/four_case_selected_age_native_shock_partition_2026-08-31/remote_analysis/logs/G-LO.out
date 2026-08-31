@@ -1,0 +1,26 @@
+goal067_manifest_preflight=passed case=G-LO snapshots=5
+native_shock_snapshot_complete=G-LO/10
+native_shock_snapshot_complete=G-LO/20
+native_shock_snapshot_complete=G-LO/30
+native_shock_snapshot_complete=G-LO/40
+native_shock_snapshot_complete=G-LO/50
+{
+  "boundary_status": "selected mask fails closed if it touches a physical domain face",
+  "case": "G-LO",
+  "control_role": "coarse no-jet dimensionless noise calibration; not cellwise subtraction",
+  "energy_reference": "same production-grid cell at t=0",
+  "front_validation": "accepted outward axial shock position and Mach > 1",
+  "g_hi_50_status": "excluded",
+  "irreversible_heating": "p - p0*(rho/rho0)^gamma within selected ambient mask",
+  "potential_convention": "centre-zero integral of initial static-atmosphere gravity",
+  "primary_threshold_factor": 1.0,
+  "row_count": 45,
+  "selected_age_count": 5,
+  "shock_processed_mask": "ambient entropy-excess component connected to compressed axial-front seed",
+  "status": "complete_selected_age_native_shock_partition",
+  "threshold_factors": [
+    0.5,
+    1.0,
+    2.0
+  ]
+}

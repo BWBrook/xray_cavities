@@ -1,0 +1,12 @@
+scripts/science/xraise_grid_smoke.py: OK
+scripts/science/xray_pressure_deprojection.py: OK
+scripts/science/build_selected_age_xray_pressure.py: OK
+scripts/science/build_three_case_cavity_recovery.py: OK
+scripts/science/three_case_cavity_recovery.py: OK
+scripts/kunanyi/four_case_selected_age_dual_space_energetics.pbs: OK
+/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py: OK
+/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt: OK
+/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz: OK
+selected_age_xray_pressure_validation=passed case_age_views=57
+1bb57358da88c328c0b34bbdd88aeb8c31f7b9a2f5899c5249bcbb0305730a9f  /u/bwbrook/codex_kunanyi/goal066_selected_age_dual_space_energetics/four_case_selected_age_dual_space_energetics_2026-08-31.tar.gz
+finished_utc=2026-08-31T08:31:22Z

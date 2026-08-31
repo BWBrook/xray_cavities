@@ -1,0 +1,8 @@
+scripts/science/build_selected_age_xray_pressure.py: OK
+scripts/science/xray_pressure_deprojection.py: OK
+scripts/science/build_three_case_cavity_recovery.py: OK
+scripts/science/three_case_cavity_recovery.py: OK
+scripts/kunanyi/four_case_selected_age_pressure_repair.pbs: OK
+selected_age_pressure_repair_validation=passed case_age_views=57 maximum_residual=0.0001651000166245975 maximum_interpolated_shells=1
+1f540882174ab2a705a07fe830c450ca54e7b497f7e16ae75498c5cce640cf59  /u/bwbrook/codex_kunanyi/goal066_selected_age_pressure_repair/four_case_selected_age_pressure_repair_2026-08-31.tar.gz
+finished_utc=2026-08-31T09:37:08Z

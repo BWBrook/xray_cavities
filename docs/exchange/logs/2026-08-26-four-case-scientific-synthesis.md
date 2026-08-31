@@ -35,3 +35,34 @@ Status: `complete_local_scientific_synthesis`.
 
 The next high-value step is supervisor interpretation of the paper framing,
 not another engineering pass or another simulation/observable run.
+
+## 2026-08-31 correction after supervisor review
+
+Stas's new method directives materially supersede the original Test 2 and the
+use of `G-HI/50`. The synthesis has therefore been rebuilt rather than merely
+annotated.
+
+- `G-HI/50` is absent from every downstream scientific table and summary.
+- The retained cavity surface has `37` quantitative case-age-view rows and
+  `74` side components.
+- Seven cavity ages remain separate; no fixed `t_buoy=2t_cs` approximation is
+  used.
+- Mean-pressure spectral age is primary and emissivity-weighted spectral age
+  is the sensitivity. Above-band breaks remain censored limits.
+- True-age median `2.5pV` power recovery is `0.00810`, `0.628`, `0.00437`, and
+  `0.0731` for `C-HI`, `C-LO`, `G-HI`, and `G-LO`.
+- Mean-pressure spectral recovery is `0.0124` and `1.05` for the two cluster
+  cases, while the group cases yield median lower bounds `>0.00321` and
+  `>0.0871`.
+- Corrected full-loss radio medians are `0.937/5.10`, `7.34/15.85`,
+  `0.520/2.36`, and `4.03/7.02` at 150 MHz/1.4 GHz.
+
+The scientific interpretation is now sharper: age bias modulates inferred
+power but cannot explain the high-power cavity-energy deficit. The next
+decision-relevant analysis is the independently calculated native-grid versus
+observer-like X-ray energetics audit specified by Stas.
+
+Decision:
+`FOUR_CASE_SYNTHESIS_CORRECTED_DUAL_SPACE_AUDIT_NEXT`.
+
+Status: `complete_corrected_local_scientific_synthesis`.

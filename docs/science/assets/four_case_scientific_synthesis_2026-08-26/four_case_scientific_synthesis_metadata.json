@@ -5,7 +5,7 @@
     "G-HI",
     "G-LO"
   ],
-  "decision_label": "FOUR_CASE_SYNTHESIS_COMPLETE_SUPERVISOR_INTERPRETATION_READY",
+  "decision_label": "FOUR_CASE_SYNTHESIS_CORRECTED_DUAL_SPACE_AUDIT_NEXT",
   "figure": "four_case_scientific_synthesis.png",
   "input_count": 30,
   "known_bipolar_power_erg_s": {
@@ -16,35 +16,62 @@
   },
   "method_gates": {
     "C-LO_ambient_energy": "whole-domain background dominated; inside 100 kpc is an upper bound",
+    "boundary": "G-HI 50 Myr excluded from every science product",
     "cavity": "exactly two non-crossing opposite-side X-ray components",
+    "cavity_age": "true, sound, buoyant, refill, shock, and both spectral clocks retained separately",
     "inference": "descriptive deterministic 2x2 factorial; no replicate p-values",
     "pressure": "tracer-shell midpoint proxy, not X-ray fitted",
     "radio": "corrected PRAiSE2 full-loss primary; lossless comparator",
-    "shock": "Goal 063 centred-kinematic validity; G-HI 50 Myr excluded"
+    "shock": "bilateral positive-speed supersonic gate; Goal 063 centred kinematics",
+    "spectral_age": "mean-pressure primary; emissivity-weighted sensitivity; censored rows excluded from ordinary medians"
   },
   "primary_tests": {
     "T1": "strong_pooled_negative_pattern_not_case_robust",
-    "T2": "cavity_spectral_power_not_universal_recovery_estimator",
+    "T2": "age_method_bias_modulates_not_explains_cavity_energy_deficit",
     "T3": "radio_scalings_power_and_environment_dependent"
   },
   "row_counts": {
-    "case_age_physics.csv": 20,
-    "cavity_age_power_inference.csv": 720,
-    "cavity_energy_recovery.csv": 180,
+    "age_method_comparison.csv": 259,
+    "age_power_method_summary.csv": 56,
+    "case_age_physics.csv": 19,
+    "cavity_energy_recovery.csv": 171,
+    "cavity_power_method_comparison.csv": 518,
     "factorial_effects.csv": 150,
-    "jet_power_recovery_summary.csv": 72,
-    "radio_power_inference.csv": 240,
+    "radio_power_inference.csv": 228,
+    "radio_power_recovery_summary.csv": 16,
     "scientific_decision_summary.csv": 3,
     "shock_cavity_test_summary.csv": 12,
-    "spectral_cavity_power_inference.csv": 540,
-    "spectral_fits.csv": 60
+    "spectral_fits.csv": 57,
+    "xray_cavity_age_geometry.csv": 74
   },
-  "selected_snapshot_indices": [
-    10,
-    20,
-    30,
-    40,
-    50
-  ],
-  "status": "complete_local_scientific_synthesis"
+  "selected_snapshot_indices_by_case": {
+    "C-HI": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "C-LO": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "G-HI": [
+      10,
+      20,
+      30,
+      40
+    ],
+    "G-LO": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ]
+  },
+  "status": "complete_corrected_local_scientific_synthesis"
 }

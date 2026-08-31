@@ -31,11 +31,6 @@ from scripts.science.build_snapshot_science import (
     write_json,
     write_rows,
 )
-from scripts.science.snapshot_inference import (
-    equipartition_field_ug_delta,
-    maximum_age_field_ug,
-    spectral_age_myr,
-)
 from scripts.science.snapshot_synthesis import (
     build_radio_power_surface,
     fit_spectral_surface,
@@ -54,6 +49,7 @@ RADIO_ROOTS = {
     "G-HI": OBS_ROOT / "completed_radio_pair_1/G-HI",
     "G-LO": OBS_ROOT / "completed_pair_2/G-LO-radio",
 }
+AGE_METHOD_ROOT = ASSETS / "four_case_cavity_age_method_comparison_2026-08-28"
 DEFAULT_OUTPUT = ASSETS / "four_case_scientific_synthesis_2026-08-26"
 
 CASES = ("C-HI", "C-LO", "G-HI", "G-LO")
@@ -61,13 +57,15 @@ AGES = (10, 20, 30, 40, 50)
 FLUID_AGES = (0, *AGES)
 VIEWS = ("0deg", "45deg", "90deg")
 ENERGY_MODELS = ("pV", "2.5pV", "4pV")
-FIELD_TREATMENTS = (
-    "observer_delta_equipartition",
-    "matched_praise_effective",
-    "maximum_age",
+AGE_METHODS = (
+    "true_source_age",
+    "sound_crossing_age",
+    "buoyant_rise_age",
+    "refill_age",
+    "shock_kinematic_age",
+    "spectral_age_mean_pressure",
+    "spectral_age_emissivity_weighted",
 )
-AGE_ESTIMATORS = ("true_source_age", "sound_age", "buoyancy_age", "refill_age")
-SECONDS_PER_MYR = 3.15576e13
 CASE_CONTRACT = {
     "C-HI": {"environment": "cluster", "power_class": "high", "known_power": 2.0e45},
     "C-LO": {"environment": "cluster", "power_class": "low", "known_power": 2.0e43},
@@ -78,6 +76,12 @@ CASE_CONTRACT = {
 
 class SynthesisError(ValueError):
     """Raised when an accepted input cannot support the synthesis contract."""
+
+
+def science_age_allowed(case: str, age: int) -> bool:
+    """Return whether a selected snapshot is physically valid for science."""
+
+    return case != "G-HI" or age != 50
 
 
 def _float(value: Any, label: str) -> float:
@@ -178,6 +182,8 @@ def build_physics_surface(
             for row in fluid[case]["shock"]
         }
         for age in AGES:
+            if not science_age_allowed(case, age):
+                continue
             row = energy[age]
             shock_rows = [shocks[(age, side)] for side in ("negative_z", "positive_z")]
             kinematics_valid = _bool(
@@ -243,6 +249,8 @@ def build_cavity_surface(
         recovered = build_energy_recovery_rows(energy_rows=fluid[case]["energy"], cavity_rows=selected)
         for row in recovered:
             age = int(row["snapshot_index"])
+            if not science_age_allowed(case, age):
+                continue
             context = physics[(case, age)]
             quantitative = bool(row["quantitative_energy_valid"])
             output.append(
@@ -385,16 +393,9 @@ def build_shock_test_summary(cavity_rows: Sequence[Mapping[str, Any]]) -> list[d
     return output
 
 
-def build_radio_and_spectral_surfaces(
-    cavity_rows: Sequence[Mapping[str, Any]],
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], list[Path]]:
-    cavity = {
-        (row["case"], int(row["snapshot_index"]), row["view"], row["cavity_energy_model"]): row
-        for row in cavity_rows
-    }
+def build_radio_surfaces() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[Path]]:
     radio_power: list[dict[str, Any]] = []
     spectral_fits: list[dict[str, Any]] = []
-    spectral_power: list[dict[str, Any]] = []
     paths: list[Path] = []
     for case in CASES:
         path = RADIO_ROOTS[case] / "radio_view_luminosity.csv"
@@ -411,167 +412,62 @@ def build_radio_and_spectral_surfaces(
                     radio,
                     known_bipolar_power_erg_s=CASE_CONTRACT[case]["known_power"],
                 )
+                if science_age_allowed(case, int(row["snapshot_index"]))
             )
             fits = fit_spectral_surface(radio)
-            spectral_fits.extend(dict(row) | {"view": view} for row in fits)
-            radio_by_key = {
-                (int(row["snapshot_index"]), row["loss_model"], float(row["frequency_ghz"])): row
-                for row in radio
-            }
-            for fit in fits:
-                age = int(fit["snapshot_index"])
-                radio_1p4 = radio_by_key[(age, "full_loss", 1.4)]
-                for model in ENERGY_MODELS:
-                    cav = cavity[(case, age, view, model)]
-                    valid = bool(cav["quantitative_energy_valid"]) and _float(cav["cavity_energy_erg"], "cavity energy") > 0.0
-                    fields: dict[str, float | None]
-                    if valid:
-                        fields = {
-                            "observer_delta_equipartition": equipartition_field_ug_delta(
-                                _float(radio_1p4["luminosity_w_hz"], "radio luminosity"),
-                                frequency_ghz=1.4,
-                                volume_kpc3=_float(cav["cavity_volume_kpc3"], "cavity volume"),
-                                alpha_injection=_float(fit["alpha_injection"], "injection index"),
-                            ),
-                            "matched_praise_effective": _float(
-                                radio_1p4["effective_magnetic_field_ug"], "PRAiSE effective field"
-                            ),
-                            "maximum_age": maximum_age_field_ug(0.05),
-                        }
-                    else:
-                        fields = {name: None for name in FIELD_TREATMENTS}
-                    for treatment, field in fields.items():
-                        if field is None:
-                            age_spec: float | str = ""
-                            power: float | str = ""
-                            power_ratio: float | str = ""
-                            age_ratio: float | str = ""
-                            status = "excluded_by_xray_topology_gate"
-                        else:
-                            age_spec = spectral_age_myr(
-                                _float(fit["reported_break_ghz"], "reported break"),
-                                field,
-                                redshift=0.05,
-                            )
-                            power = _float(cav["cavity_energy_erg"], "cavity energy") / (age_spec * SECONDS_PER_MYR)
-                            power_ratio = power / CASE_CONTRACT[case]["known_power"]
-                            age_ratio = age_spec / _float(cav["actual_time_myr"], "actual time")
-                            status = (
-                                "quantitative_censored_break"
-                                if fit["spectral_age_limit_direction"] != "none"
-                                else "quantitative_in_band_break"
-                            )
-                        spectral_power.append(
-                            {
-                                "case": case,
-                                "environment": CASE_CONTRACT[case]["environment"],
-                                "power_class": CASE_CONTRACT[case]["power_class"],
-                                "snapshot_index": age,
-                                "actual_time_myr": cav["actual_time_myr"],
-                                "view": view,
-                                "cavity_energy_model": model,
-                                "cavity_energy_erg": cav["cavity_energy_erg"],
-                                "quantitative_energy_valid": str(bool(cav["quantitative_energy_valid"])).lower(),
-                                "break_status": fit["break_status"],
-                                "spectral_age_limit_direction": fit["spectral_age_limit_direction"],
-                                "reported_break_ghz": fit["reported_break_ghz"],
-                                "field_treatment": treatment,
-                                "magnetic_field_ug": field if field is not None else "",
-                                "spectral_age_myr": age_spec,
-                                "spectral_to_true_age_ratio": age_ratio,
-                                "inferred_cavity_power_erg_s": power,
-                                "known_bipolar_power_erg_s": CASE_CONTRACT[case]["known_power"],
-                                "inferred_to_known_ratio": power_ratio,
-                                "status": status,
-                            }
-                        )
-    return radio_power, spectral_fits, spectral_power, paths
-
-
-def build_cavity_age_power_surface(
-    cavity_rows: Sequence[Mapping[str, Any]],
-    xray_rows: Mapping[str, Sequence[Mapping[str, Any]]],
-) -> tuple[list[dict[str, Any]], list[Path]]:
-    shells: dict[tuple[str, int, str], dict[str, str]] = {}
-    paths: list[Path] = []
-    side_energy: dict[tuple[str, int, str, str, str], dict[str, Any]] = {}
-    for case in CASES:
-        path = XRAY_ROOT / case / "cavity_shell_context.csv"
-        paths.append(path)
-        for row in read_rows(path):
-            shells[(case, int(row["nominal_age_myr"]), row["side"])] = row
-        for row in xray_rows[case]:
-            if (
-                row["side"] in {"negative_z", "positive_z"}
-                and row["volume_depth_assumption"] == "geometric_depth"
-                and row["energy_model"] in ENERGY_MODELS
-            ):
-                side_energy[(case, int(row["snapshot_index"]), row["view"], row["energy_model"], row["side"])] = row
-    output: list[dict[str, Any]] = []
-    for cavity in cavity_rows:
-        case = cavity["case"]
-        age = int(cavity["snapshot_index"])
-        view = cavity["view"]
-        model = cavity["cavity_energy_model"]
-        valid = bool(cavity["quantitative_energy_valid"])
-        for estimator in AGE_ESTIMATORS:
-            if not valid:
-                inferred: float | str = ""
-                inferred_ratio: float | str = ""
-                negative_age: float | str = ""
-                positive_age: float | str = ""
-                status = "excluded_by_xray_topology_gate"
-            elif estimator == "true_source_age":
-                negative_age = positive_age = cavity["actual_time_myr"]
-                inferred = _float(cavity["cavity_energy_erg"], "cavity energy") / (
-                    _float(cavity["actual_time_myr"], "actual time") * SECONDS_PER_MYR
-                )
-                inferred_ratio = inferred / CASE_CONTRACT[case]["known_power"]
-                status = "quantitative_truth_age_diagnostic"
-            else:
-                field = {
-                    "sound_age": "sound_age_myr",
-                    "buoyancy_age": "buoyancy_age_myr",
-                    "refill_age": "refill_age_myr",
-                }[estimator]
-                ages = {
-                    side: _float(shells[(case, age, side)][field], field)
-                    for side in ("negative_z", "positive_z")
-                }
-                energies = {
-                    side: _float(side_energy[(case, age, view, model, side)]["energy_erg"], "side cavity energy")
-                    for side in ("negative_z", "positive_z")
-                }
-                negative_age = ages["negative_z"]
-                positive_age = ages["positive_z"]
-                inferred = sum(energies[side] / (ages[side] * SECONDS_PER_MYR) for side in ages)
-                inferred_ratio = inferred / CASE_CONTRACT[case]["known_power"]
-                status = "quantitative_tracer_geometry_age_proxy"
-            output.append(
-                {
-                    "case": case,
-                    "environment": CASE_CONTRACT[case]["environment"],
-                    "power_class": CASE_CONTRACT[case]["power_class"],
-                    "snapshot_index": age,
-                    "actual_time_myr": cavity["actual_time_myr"],
-                    "view": view,
-                    "cavity_energy_model": model,
-                    "quantitative_energy_valid": str(valid).lower(),
-                    "age_estimator": estimator,
-                    "negative_side_age_myr": negative_age,
-                    "positive_side_age_myr": positive_age,
-                    "inferred_cavity_power_erg_s": inferred,
-                    "known_bipolar_power_erg_s": CASE_CONTRACT[case]["known_power"],
-                    "inferred_to_known_ratio": inferred_ratio,
-                    "status": status,
-                    "age_role": (
-                        "simulation_truth_age_diagnostic"
-                        if estimator == "true_source_age"
-                        else "tracer_geometry_context_not_xray_fitted"
-                    ),
-                }
+            spectral_fits.extend(
+                dict(row) | {"view": view}
+                for row in fits
+                if science_age_allowed(case, int(row["snapshot_index"]))
             )
-    return output, paths
+    return radio_power, spectral_fits, paths
+
+
+def load_cavity_age_surfaces() -> tuple[
+    list[dict[str, str]],
+    list[dict[str, str]],
+    list[dict[str, str]],
+    list[dict[str, Any]],
+    list[Path],
+]:
+    paths = [
+        AGE_METHOD_ROOT / "xray_cavity_age_geometry.csv",
+        AGE_METHOD_ROOT / "age_method_comparison.csv",
+        AGE_METHOD_ROOT / "cavity_power_method_comparison.csv",
+        AGE_METHOD_ROOT / "age_power_method_summary.csv",
+    ]
+    geometry, ages, powers, source_summary = (read_rows(path) for path in paths)
+    for name, rows in (("geometry", geometry), ("ages", ages), ("powers", powers)):
+        if any(not science_age_allowed(row["case"], int(row["snapshot_index"])) for row in rows):
+            raise SynthesisError(f"{name} surface contains excluded G-HI/50 science rows")
+    if len(geometry) != 74 or len(ages) != 259 or len(powers) != 518:
+        raise SynthesisError("cavity-age method surface does not match the accepted 37-view contract")
+    if {row["age_method"] for row in ages} != set(AGE_METHODS):
+        raise SynthesisError("cavity-age method surface does not contain the seven accepted clocks")
+
+    enriched_summary: list[dict[str, Any]] = []
+    for row in source_summary:
+        matching = [
+            power
+            for power in powers
+            if power["case"] == row["case"]
+            and power["age_method"] == row["age_method"]
+            and power["cavity_energy_model"] == row["cavity_energy_model"]
+        ]
+        lower_limits = [
+            _float(power["inferred_to_known_power_ratio"], "power lower limit")
+            for power in matching
+            if power["power_limit_direction"] == "lower_limit"
+        ]
+        enriched_summary.append(
+            dict(row)
+            | {
+                "median_lower_limit_inferred_to_known_power_ratio": (
+                    float(np.median(lower_limits)) if lower_limits else ""
+                )
+            }
+        )
+    return geometry, ages, powers, enriched_summary, paths
 
 
 def _quantiles(values: Sequence[float]) -> tuple[float, float, float, float, float]:
@@ -585,16 +481,13 @@ def _quantiles(values: Sequence[float]) -> tuple[float, float, float, float, flo
     )
 
 
-def build_jet_power_summary(
+def build_radio_power_summary(
     radio_power: Sequence[Mapping[str, Any]],
-    spectral_power: Sequence[Mapping[str, Any]],
-    cavity_age_power: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
     output: list[dict[str, Any]] = []
 
     def append_summary(
         *,
-        family: str,
         case: str,
         method: str,
         comparator: str,
@@ -610,7 +503,7 @@ def build_jet_power_summary(
             within = sum(1.0 / factor <= value <= factor for value in values) / len(values)
         output.append(
             {
-                "estimator_family": family,
+                "estimator_family": "radio_luminosity_scaling",
                 "case": case,
                 "environment": CASE_CONTRACT[case]["environment"],
                 "power_class": CASE_CONTRACT[case]["power_class"],
@@ -639,45 +532,11 @@ def build_jet_power_summary(
                     and row["loss_model"] == loss_model
                 ]
                 append_summary(
-                    family="radio_luminosity_scaling",
                     case=case,
                     method=relation,
                     comparator=loss_model,
                     rows=rows,
                     scatter_dex=rows[0]["intrinsic_scatter_dex"],
-                )
-        for model in ("2.5pV", "4pV"):
-            for field in FIELD_TREATMENTS:
-                rows = [
-                    row
-                    for row in spectral_power
-                    if row["case"] == case
-                    and row["cavity_energy_model"] == model
-                    and row["field_treatment"] == field
-                    and row["inferred_to_known_ratio"] != ""
-                ]
-                append_summary(
-                    family="cavity_energy_over_spectral_age",
-                    case=case,
-                    method=model,
-                    comparator=field,
-                    rows=rows,
-                )
-            for estimator in AGE_ESTIMATORS:
-                rows = [
-                    row
-                    for row in cavity_age_power
-                    if row["case"] == case
-                    and row["cavity_energy_model"] == model
-                    and row["age_estimator"] == estimator
-                    and row["inferred_to_known_ratio"] != ""
-                ]
-                append_summary(
-                    family="cavity_energy_over_age_proxy",
-                    case=case,
-                    method=model,
-                    comparator=estimator,
-                    rows=rows,
                 )
     return output
 
@@ -697,6 +556,8 @@ def build_factorial_effects(
             values[(case, age, "mean_valid_shock_mach")] = _float(row["mean_mach_kinematic"], "Mach")
     for case in CASES:
         for age in AGES:
+            if not science_age_allowed(case, age):
+                continue
             selected = [
                 row
                 for row in cavity_rows
@@ -722,9 +583,10 @@ def build_factorial_effects(
                     and row["relation"] == relation
                     and row["loss_model"] == "full_loss"
                 ]
-                values[(case, age, metric)] = float(
-                    np.median([_float(row["inferred_to_known_ratio"], "radio power ratio") for row in rows])
-                )
+                if rows:
+                    values[(case, age, metric)] = float(
+                        np.median([_float(row["inferred_to_known_ratio"], "radio power ratio") for row in rows])
+                    )
     metrics = sorted({key[2] for key in values})
     comparisons = (
         ("power_effect_cluster", "C-HI", "C-LO"),
@@ -781,8 +643,8 @@ def build_factorial_effects(
 
 def build_decision_summary(
     shock_summary: Sequence[Mapping[str, Any]],
-    jet_summary: Sequence[Mapping[str, Any]],
-    spectral_fits: Sequence[Mapping[str, Any]],
+    radio_summary: Sequence[Mapping[str, Any]],
+    age_summary: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
     raw = [
         row
@@ -811,19 +673,43 @@ def build_decision_summary(
         else "pattern_requires_review"
     )
 
-    def medians(family: str, method: str, comparator: str) -> dict[str, float]:
+    def radio_medians(method: str) -> dict[str, float]:
         return {
             row["case"]: _float(row["median_inferred_to_known"], "median power ratio")
-            for row in jet_summary
-            if row["estimator_family"] == family
-            and row["method"] == method
-            and row["comparator"] == comparator
+            for row in radio_summary
+            if row["method"] == method and row["comparator"] == "full_loss"
         }
 
-    cavity = medians("cavity_energy_over_spectral_age", "2.5pV", "matched_praise_effective")
-    radio150 = medians("radio_luminosity_scaling", "kokotanekov_2017_150mhz_approx", "full_loss")
-    radio14 = medians("radio_luminosity_scaling", "cavagnolo_2010_1p4ghz", "full_loss")
-    censored = sum(row["spectral_age_limit_direction"] != "none" for row in spectral_fits)
+    age_lookup = {
+        (row["case"], row["age_method"]): row
+        for row in age_summary
+        if row["cavity_energy_model"] == "2.5pV"
+    }
+    true_power = {
+        case: _float(
+            age_lookup[(case, "true_source_age")]["median_exact_inferred_to_known_power_ratio"],
+            "true-age median power ratio",
+        )
+        for case in CASES
+    }
+    mean_pressure_parts: list[str] = []
+    for case in CASES:
+        row = age_lookup[(case, "spectral_age_mean_pressure")]
+        exact = row["median_exact_inferred_to_known_power_ratio"]
+        if exact != "":
+            mean_pressure_parts.append(f"{case} exact median={float(exact):.3g}")
+        else:
+            lower = _float(
+                row["median_lower_limit_inferred_to_known_power_ratio"],
+                "spectral power lower limit",
+            )
+            mean_pressure_parts.append(f"{case} median lower bound>{lower:.3g}")
+    primary_censored = sum(
+        int(age_lookup[(case, "spectral_age_mean_pressure")]["power_lower_limit_rows"])
+        for case in CASES
+    )
+    radio150 = radio_medians("kokotanekov_2017_150mhz_approx")
+    radio14 = radio_medians("cavagnolo_2010_1p4ghz")
     return [
         {
             "test_id": "T1",
@@ -835,16 +721,25 @@ def build_decision_summary(
             "inference": "The pooled anticorrelation is clear, but case/power/environment and age jointly carry much of it.",
             "decision": t1_decision,
             "material_uncertainty": "Leave-one-case-out slopes change sign; four deterministic factorial cells provide no replicate inference.",
-            "supervisor_input": "Required before framing Mach as an independent explanatory effect.",
+            "supervisor_input": "The paired native-grid/X-ray audit is required before framing Mach as an independent explanatory effect.",
         },
         {
             "test_id": "T2",
-            "question": "Does 2.5pV divided by an integrated spectral age recover known bipolar jet power?",
-            "observation": "; ".join(f"{case} median={cavity[case]:.3g}" for case in CASES),
-            "inference": "The estimator is case dependent: roughly order-unity only for C-LO and strongly low for the high-power and G-LO cases.",
-            "decision": "cavity_spectral_power_not_universal_recovery_estimator",
-            "material_uncertainty": f"{censored}/60 integrated spectra have an out-of-band censored break; pressure is a tracer-shell proxy.",
-            "supervisor_input": "Required for publication interpretation of censored spectral ages and the pressure proxy.",
+            "question": "How do seven distinct cavity-age estimators alter recovery of known bipolar jet power?",
+            "observation": (
+                "True-age 2.5pV medians: "
+                + "; ".join(f"{case}={true_power[case]:.3g}" for case in CASES)
+                + ". Mean-pressure spectral: "
+                + "; ".join(mean_pressure_parts)
+                + "."
+            ),
+            "inference": "Age choice changes inferred power by factors of a few, but cannot explain the very large high-power cavity-energy deficit.",
+            "decision": "age_method_bias_modulates_not_explains_cavity_energy_deficit",
+            "material_uncertainty": (
+                f"{primary_censored}/37 mean-pressure spectral rows are lower limits; "
+                "pressure remains a tracer-shell proxy and age methods must remain separate."
+            ),
+            "supervisor_input": "Stas method directive applied; dual-space volume and pressure decomposition is next.",
         },
         {
             "test_id": "T3",
@@ -859,7 +754,7 @@ def build_decision_summary(
             "inference": "The relations show systematic jet-power and environment dependence, not a common unbiased recovery.",
             "decision": "radio_scalings_power_and_environment_dependent",
             "material_uncertainty": "Published intrinsic scatter is carried, but the four simulations are controlled examples rather than a sampled population.",
-            "supervisor_input": "Required to choose the strongest defensible paper framing and literature comparison.",
+            "supervisor_input": "Use with the corrected G-HI boundary gate; final framing follows the dual-space energetics audit.",
         },
     ]
 
@@ -868,7 +763,7 @@ def plot_synthesis(
     physics: Sequence[Mapping[str, Any]],
     cavity: Sequence[Mapping[str, Any]],
     radio_power: Sequence[Mapping[str, Any]],
-    spectral_power: Sequence[Mapping[str, Any]],
+    age_summary: Sequence[Mapping[str, Any]],
     output: Path,
 ) -> None:
     colors = {"C-HI": "#0072B2", "C-LO": "#56B4E9", "G-HI": "#D55E00", "G-LO": "#E69F00"}
@@ -931,44 +826,67 @@ def plot_synthesis(
             and row["relation"] == "kokotanekov_2017_150mhz_approx"
             and row["loss_model"] == "full_loss"
         ]
-        by_age = {
-            age: np.median([_float(row["inferred_to_known_ratio"], "radio ratio") for row in rows if int(row["snapshot_index"]) == age])
-            for age in AGES
-        }
-        axes[1, 0].plot(AGES, [by_age[age] for age in AGES], marker="o", color=colors[case], label=case)
+        points = []
+        for age in AGES:
+            values = [
+                _float(row["inferred_to_known_ratio"], "radio ratio")
+                for row in rows
+                if int(row["snapshot_index"]) == age
+            ]
+            if values:
+                points.append((age, float(np.median(values))))
+        axes[1, 0].plot(
+            [point[0] for point in points],
+            [point[1] for point in points],
+            marker="o",
+            color=colors[case],
+            label=case,
+        )
     axes[1, 0].axhline(1.0, color="black", linestyle=":", linewidth=1)
     axes[1, 0].set(xlabel="Source age (Myr)", ylabel="150 MHz inferred / known power", title="Radio-scaling power recovery")
     axes[1, 0].set_yscale("log")
 
-    for case in CASES:
-        rows = [
-            row
-            for row in spectral_power
-            if row["case"] == case
-            and row["cavity_energy_model"] == "2.5pV"
-            and row["field_treatment"] == "matched_praise_effective"
-            and row["inferred_to_known_ratio"] != ""
-        ]
-        points = []
-        for age in AGES:
-            values = [_float(row["inferred_to_known_ratio"], "spectral power ratio") for row in rows if int(row["snapshot_index"]) == age]
-            if values:
-                points.append((age, float(np.median(values))))
-        if points:
-            axes[1, 1].plot(
-                [point[0] for point in points],
-                [point[1] for point in points],
-                marker="o",
-                color=colors[case],
-                label=case,
-            )
-    axes[1, 1].axhline(1.0, color="black", linestyle=":", linewidth=1)
-    axes[1, 1].set(
-        xlabel="Source age (Myr)",
-        ylabel="Inferred (2.5pV / spectral age) / known power",
-        title="Cavity-spectral power recovery",
-    )
-    axes[1, 1].set_yscale("log")
+    method_labels = {
+        "true_source_age": "True",
+        "sound_crossing_age": "Sound",
+        "buoyant_rise_age": "Buoyant",
+        "refill_age": "Refill",
+        "shock_kinematic_age": "Shock",
+        "spectral_age_mean_pressure": "Spec mean",
+        "spectral_age_emissivity_weighted": "Spec emiss",
+    }
+    lookup = {
+        (row["case"], row["age_method"]): row
+        for row in age_summary
+        if row["cavity_energy_model"] == "2.5pV"
+    }
+    matrix = np.full((len(CASES), len(AGE_METHODS)), np.nan)
+    annotations: list[list[str]] = [["--"] * len(AGE_METHODS) for _ in CASES]
+    for case_index, case in enumerate(CASES):
+        for method_index, method in enumerate(AGE_METHODS):
+            row = lookup[(case, method)]
+            exact = row["median_exact_inferred_to_known_power_ratio"]
+            lower = row["median_lower_limit_inferred_to_known_power_ratio"]
+            if exact != "":
+                value = _float(exact, "exact median cavity power")
+                annotations[case_index][method_index] = f"{value:.2g}"
+            elif lower != "":
+                value = _float(lower, "median cavity power lower limit")
+                annotations[case_index][method_index] = f">{value:.2g}"
+            else:
+                continue
+            matrix[case_index, method_index] = math.log10(value)
+    image = axes[1, 1].imshow(matrix, aspect="auto", cmap="viridis", vmin=-3.2, vmax=0.3)
+    axes[1, 1].set_xticks(range(len(AGE_METHODS)), [method_labels[method] for method in AGE_METHODS], rotation=35, ha="right")
+    axes[1, 1].set_yticks(range(len(CASES)), CASES)
+    axes[1, 1].set_title("Median 2.5pV power recovery by age method")
+    for row_index, labels in enumerate(annotations):
+        for column_index, label in enumerate(labels):
+            cell = matrix[row_index, column_index]
+            text_color = "black" if np.isnan(cell) or cell > -0.4 else "white"
+            axes[1, 1].text(column_index, row_index, label, ha="center", va="center", fontsize=7, color=text_color)
+    colorbar = fig.colorbar(image, ax=axes[1, 1], fraction=0.046, pad=0.04)
+    colorbar.set_label("log10(inferred / known power)")
 
     axes[0, 0].legend(fontsize=8, ncol=2)
     axes[1, 0].legend(fontsize=8, ncol=2)
@@ -997,13 +915,13 @@ def build_synthesis(output_root: Path) -> dict[str, Any]:
     physics = build_physics_surface(fluid, validity, background)
     cavity = build_cavity_surface(fluid, xray, physics)
     shock_summary = build_shock_test_summary(cavity)
-    radio_power, spectral_fits, spectral_power, radio_paths = build_radio_and_spectral_surfaces(cavity)
+    radio_power, spectral_fits, radio_paths = build_radio_surfaces()
     provenance_paths.extend(radio_paths)
-    cavity_age_power, shell_paths = build_cavity_age_power_surface(cavity, xray)
-    provenance_paths.extend(shell_paths)
-    jet_summary = build_jet_power_summary(radio_power, spectral_power, cavity_age_power)
+    geometry, age_methods, cavity_powers, age_summary, age_paths = load_cavity_age_surfaces()
+    provenance_paths.extend(age_paths)
+    radio_summary = build_radio_power_summary(radio_power)
     factorial = build_factorial_effects(physics, cavity, radio_power)
-    decisions = build_decision_summary(shock_summary, jet_summary, spectral_fits)
+    decisions = build_decision_summary(shock_summary, radio_summary, age_summary)
 
     tables = {
         "case_age_physics.csv": physics,
@@ -1011,9 +929,11 @@ def build_synthesis(output_root: Path) -> dict[str, Any]:
         "shock_cavity_test_summary.csv": shock_summary,
         "radio_power_inference.csv": radio_power,
         "spectral_fits.csv": spectral_fits,
-        "spectral_cavity_power_inference.csv": spectral_power,
-        "cavity_age_power_inference.csv": cavity_age_power,
-        "jet_power_recovery_summary.csv": jet_summary,
+        "xray_cavity_age_geometry.csv": geometry,
+        "age_method_comparison.csv": age_methods,
+        "cavity_power_method_comparison.csv": cavity_powers,
+        "age_power_method_summary.csv": age_summary,
+        "radio_power_recovery_summary.csv": radio_summary,
         "factorial_effects.csv": factorial,
         "scientific_decision_summary.csv": decisions,
     }
@@ -1024,7 +944,7 @@ def build_synthesis(output_root: Path) -> dict[str, Any]:
         {
             "path": str(path.relative_to(ROOT)),
             "sha256": _sha256(path),
-            "role": "accepted_Goal062_063_064_compact_input",
+            "role": "accepted_compact_science_input",
         }
         for path in sorted(set(provenance_paths))
     ]
@@ -1033,15 +953,18 @@ def build_synthesis(output_root: Path) -> dict[str, Any]:
         physics,
         cavity,
         radio_power,
-        spectral_power,
+        age_summary,
         output_root / "four_case_scientific_synthesis.png",
     )
 
     metadata = {
-        "status": "complete_local_scientific_synthesis",
-        "decision_label": "FOUR_CASE_SYNTHESIS_COMPLETE_SUPERVISOR_INTERPRETATION_READY",
+        "status": "complete_corrected_local_scientific_synthesis",
+        "decision_label": "FOUR_CASE_SYNTHESIS_CORRECTED_DUAL_SPACE_AUDIT_NEXT",
         "cases": list(CASES),
-        "selected_snapshot_indices": list(AGES),
+        "selected_snapshot_indices_by_case": {
+            case: [age for age in AGES if science_age_allowed(case, age)]
+            for case in CASES
+        },
         "known_bipolar_power_erg_s": {
             case: CASE_CONTRACT[case]["known_power"] for case in CASES
         },
@@ -1050,10 +973,13 @@ def build_synthesis(output_root: Path) -> dict[str, Any]:
         },
         "method_gates": {
             "cavity": "exactly two non-crossing opposite-side X-ray components",
-            "shock": "Goal 063 centred-kinematic validity; G-HI 50 Myr excluded",
+            "boundary": "G-HI 50 Myr excluded from every science product",
+            "shock": "bilateral positive-speed supersonic gate; Goal 063 centred kinematics",
             "pressure": "tracer-shell midpoint proxy, not X-ray fitted",
             "C-LO_ambient_energy": "whole-domain background dominated; inside 100 kpc is an upper bound",
             "radio": "corrected PRAiSE2 full-loss primary; lossless comparator",
+            "spectral_age": "mean-pressure primary; emissivity-weighted sensitivity; censored rows excluded from ordinary medians",
+            "cavity_age": "true, sound, buoyant, refill, shock, and both spectral clocks retained separately",
             "inference": "descriptive deterministic 2x2 factorial; no replicate p-values",
         },
         "row_counts": {name: len(rows) for name, rows in tables.items()},

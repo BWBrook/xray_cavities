@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-08-28
+Last updated: 2026-08-31
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -45,9 +45,11 @@ current instruction without checking its goal status.
   replaces the single emissivity-weighted spectral-age field with primary
   mean-pressure plus emissivity-weighted sensitivity treatments. A new
   seven-method cavity-age comparison now adds sound, buoyant, refill, shock,
-  true, and both spectral clocks with explicit censoring. No PLUTO, X-ray, or
-  PRAiSE rerun is required, but Goal 065 downstream synthesis must be
-  regenerated before supervisor interpretation.
+  true, and both spectral clocks with explicit censoring. Goal 065 has been
+  regenerated under those corrected gates, Goal 066 completed the selected-
+  age dual-space proof, and Goal 067 completed the native 3D shock-energy
+  partition. No PLUTO, X-ray, or PRAiSE rerun is required. The next high-value
+  step is local synthesis/manuscript integration, not cadence expansion.
 - The PRAiSE coefficient science gate is green; corrected PRAiSE2 is the
   production radio method once its tested source change is published to the
   fork-backed working branch.
@@ -86,9 +88,101 @@ current instruction without checking its goal status.
 
 ## Active Checkpoint
 
+### Goal 067: selected-age native 3D shock-energy partition
+
+- Status: `complete_product_recovered_no_hdf5_rerun`.
+- Decision:
+  `SELECTED_AGE_NATIVE_SHOCK_PARTITION_GREEN_C_LO_LATE_FAIL_CLOSED`.
+- The method is frozen before result inspection. It reports native thermal,
+  kinetic, gravitational, total, and irreversible-heating terms in the
+  connected shocked ambient region at the accepted selected ages.
+- Energy changes use the exact same-grid production `t=0` snapshot. The fixed
+  initial gravitational potential uses Stas's centre-zero convention.
+- Coarser cluster/group no-jet controls calibrate dimensionless false-positive
+  thresholds only; they are not called resolution-matched and are not
+  subtracted cell by cell.
+- The 3D mask is an ambient entropy-excess component connected to a compressed
+  axial-front seed. Missing or non-supersonic fronts, unsupported components,
+  boundary contact, and front-extent mismatches fail closed.
+- The full prespecified surface is complete: `171` total rows and `19` primary
+  bipolar case-age rows, of which `15` are quantitative. `C-LO/20--50` fail
+  closed because one accepted side is non-supersonic; no values are imputed.
+- PBS `789812.kunanyi-ohpc` / `shock_energy` failed immediately as `F/2` with
+  zero resource use: Kunanyi's Bash `4.2.46` rejected the wrapper's single
+  `declare -n` nameref before calibration or science analysis began.
+- The wrapper now uses explicit portable array-count checks, covered by a
+  regression test. Original failure evidence is preserved and the repair uses
+  fresh `r1` stage, analysis, archive, stdout, and stderr paths.
+- PBS `789813.kunanyi-ohpc` completed all four science workers but ended `F/1`
+  because the final wrapper validator requested `volume_kpc3` instead of the
+  actual `mask_volume_kpc3` field. The validator is repaired. Existing compact
+  outputs were validated and archived without reopening HDF5 inputs; recovered
+  archive SHA-256 is
+  `1287c74a2a9c2891ba2feb6d641128460f9a546828e2380daed901c40b73182d`.
+- Net selected shock-region energy is typically `0.58--0.87` of injected
+  energy in the three fully quantitative series. Joining this result to Goal
+  066 shows that X-ray cavity enthalpy is much smaller than the native shock-
+  region reservoir where both are quantitative, while the lobe-recovery bias
+  remains dominated by X-ray geometry/topology.
+- Method note:
+  `docs/science/four_case_selected_age_native_shock_partition_method_2026-08-31.md`.
+- Result note:
+  `docs/science/four_case_selected_age_native_shock_partition_2026-08-31.md`.
+- Goal/log:
+  `docs/goals/067-selected-age-native-shock-partition/` and
+  `docs/exchange/logs/2026-08-31-selected-age-native-shock-partition.md`.
+
+### Goal 066: selected-age dual-space energetics audit
+
+- Status: `complete_selected_age_proof`.
+- Decision:
+  `SELECTED_AGE_DUAL_SPACE_PROOF_GREEN_VOLUME_TOPOLOGY_BIAS_DOMINATES`.
+- Decision scope: prove the independent native-grid/X-ray join on all `57`
+  accepted selected-age views before deciding whether annual cadence and the
+  native 3D shock-energy mask materially change the paper analysis.
+- Native lobe `pV`, mean pressure, retained energy, and injected energy reuse
+  the accepted fractional-tracer cell ledger. No redundant HDF5 reread is
+  required for those exact quantities.
+- The observer route now derives density and temperature from synthetic X-ray
+  projection inputs, masks cavities using X-rays alone, and retains midpoint
+  and ellipsoid-volume-averaged pressure across three line-of-sight depths.
+  Tracer is not loaded or used in the observer builder.
+- The accepted join factorizes cavity-to-lobe enthalpy bias into volume and
+  pressure terms and separately reports recovery relative to lobe, retained,
+  and injected energy. Goal 067 now adds the prespecified selected-age native
+  shock context without changing Goal 066 validity flags.
+- Full job `789776.kunanyi-ohpc` / `dual_energy` completed `F/0` in `04:02:12`.
+  Its retrieved archive contains all `57` views, has SHA-256
+  `1bb57358da88c328c0b34bbdd88aeb8c31f7b9a2f5899c5249bcbb0305730a9f`,
+  and has empty remote stderr.
+- Scientific review rejected the first joined pressure surface: the original
+  `0.03` deprojection penalty over-smoothed high-contrast `G-HI` temperature
+  numerators, with residuals near `0.47` and false near-zero pressures. These
+  tables are diagnostic evidence only, not a result.
+- The all-view sensitivity gate supports regularization `1e-6` plus explicit
+  interpolation only where numerator/emissivity support is below `1e-12` of
+  its fitted maximum. Pressure-only repair `789809.kunanyi-ohpc` /
+  `dual_enfix` completed `F/0`; all `57` views passed with maximum residual
+  `1.651e-4` and at most one interpolated shell per view.
+- Of `57` selected views, `37` pass the observer topology gate. Pressure
+  recovery lies within a factor of two in `36/37`; volume and native lobe-
+  enthalpy recovery do so in only `5/37`. Case-median lobe recovery is
+  `0.1076`, `6.762`, `0.0363`, and `0.4559` for `C-HI`, `C-LO`, `G-HI`, and
+  `G-LO`. Geometry/topology is therefore the dominant selected-age bias.
+- Goal 067 materially updates the whole-outburst context: the selected shocked
+  region contains far more energy than X-ray cavity enthalpy where both are
+  quantitative. Boundary flux remains pending, and `C-LO` remains background
+  dominated without matched no-jet subtraction. Annual observer extension is
+  not justified by default.
+- Science note:
+  `docs/science/four_case_selected_age_dual_space_energetics_2026-08-31.md`.
+- Goal/log:
+  `docs/goals/066-selected-age-dual-space-energetics-audit/` and
+  `docs/exchange/logs/2026-08-31-selected-age-dual-space-energetics-audit.md`.
+
 ### 2026-08-28 dual-space energetics audit decision
 
-- Status: `method_locked_pending_implementation`.
+- Status: `selected_age_proof_complete_shock_partition_pending`.
 - Every cavity/lobe and total-outburst comparison must retain two independent
   paths: native-grid truth using fractional tracer and cell-wise initial-state
   subtraction, and observer-like X-ray cavity enthalpy using X-ray-only
@@ -108,7 +202,7 @@ current instruction without checking its goal status.
 
 ### 2026-08-28 cavity-age and inferred-power comparison
 
-- Status: `complete_method_surface_pending_goal065_integration`.
+- Status: `complete_method_surface_integrated_into_goal065`.
 - The retained quantitative surface contains `37` X-ray cavity views and `74`
   side components after excluding `G-HI/50` and failing closed on non-bipolar
   X-ray topologies.
@@ -131,7 +225,7 @@ current instruction without checking its goal status.
 
 ### 2026-08-28 boundary and spectral-field correction
 
-- Status: `complete_method_correction_pending_downstream_synthesis_refresh`.
+- Status: `complete_method_correction_integrated_into_goal065`.
 - Decision: `DROP_G_HI_50_FROM_ALL_SCIENCE`.
 - The annual axial audit finds boundary contamination only in `G-HI`, first at
   snapshot 48 and persisting through 50. At 50 Myr its lobe/shock is only
@@ -141,8 +235,8 @@ current instruction without checking its goal status.
   Spectral ages are now reported with a global fractional-tracer mean-pressure
   field as primary and the existing 1.4 GHz emissivity-weighted field as a
   sensitivity. `G-HI` science ages are `10/20/30/40 Myr` only.
-- Barry-Codex must filter `G-HI/50` from every downstream cavity, radio,
-  spectral-age, and inferred-power product and rebuild Goal 065 case medians
+- Goal 065 now filters `G-HI/50` from every downstream cavity, radio,
+  spectral-age, and inferred-power product and has rebuilt all case medians
   and row counts. Existing raw/compact endpoint files remain archival evidence.
 - Science note/assets:
   `docs/science/four_case_boundary_spectral_field_review_2026-08-28.md` and
@@ -150,30 +244,28 @@ current instruction without checking its goal status.
 
 ### Goal 065: four-case scientific synthesis
 
-- Status: `requires_revision_after_boundary_and_field_review`.
-- Previous decision is superseded in part by
-  `DROP_G_HI_50_FROM_ALL_SCIENCE`.
-- The joined surface covers `C-HI`, `C-LO`, `G-HI`, and `G-LO` at
-  `10/20/30/40/50 Myr`, using accepted Goal 062/063/064 compact products only.
-- The topology, pressure, background, and shock-validity gates remain
-  fail-closed. There are `39/60` quantitative cavity views and `37` rows in
-  the primary valid-shock Mach test.
+- Status: `complete_corrected_local_scientific_synthesis`.
+- Decision: `FOUR_CASE_SYNTHESIS_CORRECTED_DUAL_SPACE_AUDIT_NEXT`.
+- The joined surface covers `C-HI`, `C-LO`, and `G-LO` at
+  `10/20/30/40/50 Myr`, and `G-HI` at `10/20/30/40 Myr`, using accepted
+  compact products only. `G-HI/50` is absent from every scientific output.
+- The topology, pressure, background, censoring, and shock-validity gates
+  remain fail-closed. There are `37` quantitative cavity views and `74` side
+  components.
 - Test 1: pooled within-view cavity-bias/Mach Spearman rho spans `-0.888` to
   `-0.868`, but the case/view-adjusted slope is only `-0.0402 dex/Mach`, Mach
   adds `0.0031` R-squared, and leave-one-case-out slopes change sign. This is
   a strong pooled pattern, not a case-robust independent Mach effect.
-- Historical Test 2: median matched-field `(2.5pV / t_spec) / known power` was `0.0494`,
-  `1.55`, `0.00650`, and `0.0877` for `C-HI`, `C-LO`, `G-HI`, and `G-LO`.
-  These values are provisional because they use the emissivity-weighted field
-  alone and include `G-HI/50`; the corrected primary/sensitivity surface must
-  replace them.
-- Historical Test 3: median full-loss 150 MHz power recovery was `0.937`, `7.34`, `0.523`,
-  and `4.03`; the corresponding 1.4 GHz values are `5.10`, `15.85`, `2.37`,
-  and `7.02`. Recalculate the `G-HI` medians without the endpoint before using
-  them scientifically.
-- The next consequential step is to regenerate Goal 065 from the corrected
-  science gate and the completed seven-method cavity-age surface, then return
-  it for supervisor interpretation.
+- Test 2: true-age median `2.5pV` power recovery is `0.00810`, `0.628`,
+  `0.00437`, and `0.0731`. Mean-pressure spectral recovery is `0.0124` and
+  `1.05` for the cluster cases, with median lower bounds `>0.00321` and
+  `>0.0871` for the group cases. Age choice modulates but does not explain the
+  high-power cavity-energy deficit.
+- Test 3: corrected median full-loss 150 MHz power recovery is `0.937`, `7.34`,
+  `0.520`, and `4.03`; the corresponding 1.4 GHz values are `5.10`, `15.85`,
+  `2.36`, and `7.02`.
+- Goals 066 and 067 now provide the selected-age dual-space and native-shock
+  evidence needed for local synthesis and manuscript integration.
 - Science note/assets:
   `docs/science/four_case_scientific_synthesis_2026-08-26.md` and
   `docs/science/assets/four_case_scientific_synthesis_2026-08-26/`.

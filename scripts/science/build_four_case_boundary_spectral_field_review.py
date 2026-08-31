@@ -131,6 +131,8 @@ def recalculate_breaks() -> tuple[list[dict[str, Any]], float]:
         key = (row["case"], int(row["snapshot_index"]), row["view"])
         reference = accepted.get(key)
         if reference is None:
+            if (key[0], key[1]) in EXCLUDED_SCIENCE_CASE_AGES:
+                continue
             raise ReviewError(f"accepted spectral surface lacks {key}")
         for field in ("fitted_break_ghz", "reported_break_ghz"):
             value = float(row[field])

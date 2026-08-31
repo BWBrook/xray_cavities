@@ -37,3 +37,29 @@ Status: `complete_local_scientific_synthesis`.
 
 No remote command, PBS job, raw-data access, observable recomputation,
 scientific-default change, or accepted-asset overwrite occurred.
+
+## 2026-08-31 - corrected synthesis after supervisor method review
+
+- Applied Stas's boundary directive by excluding `G-HI/50` from every
+  scientific surface while retaining its source files as archival evidence.
+- Replaced the former single spectral-age power surface with seven separate
+  clocks: true, sound crossing, buoyant rise, refill, bilateral supersonic
+  shock, mean-pressure spectral, and emissivity-weighted spectral age.
+- Made mean-pressure spectral age primary, emissivity-weighted spectral age a
+  sensitivity, and above-15-GHz breaks explicit age upper limits/power lower
+  limits excluded from ordinary medians.
+- Rebuilt all case medians, row counts, radio summaries, factorial contrasts,
+  provenance, metadata, and the synthesis figure.
+- Confirmed that clock choice changes inferred power by factors of a few but
+  does not explain the severe high-power X-ray cavity-energy deficit.
+- Locked the next scientific question as a dual-space energetics audit that
+  independently computes native-grid truth and observer-like X-ray recovery
+  before decomposing volume, pressure, enthalpy, and missing-outburst biases.
+
+Decision:
+`FOUR_CASE_SYNTHESIS_CORRECTED_DUAL_SPACE_AUDIT_NEXT`.
+
+Status: `complete_corrected_local_scientific_synthesis`.
+
+No remote compute, raw HDF5 access, observable rerun, PLUTO production, or
+scientific-default change occurred.

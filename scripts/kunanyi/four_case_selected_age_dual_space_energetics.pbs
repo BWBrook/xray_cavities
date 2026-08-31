@@ -1,0 +1,206 @@
+#!/usr/bin/env bash
+#PBS -N dual_energy
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mpiprocs=1:mem=128gb
+#PBS -l walltime=08:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal066_selected_age_dual_space_energetics/four_case_selected_age_dual_space_energetics.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal066_selected_age_dual_space_energetics/four_case_selected_age_dual_space_energetics.err
+
+set -euo pipefail
+umask 077
+
+readonly STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal066_selected_age_dual_space_energetics}"
+readonly ANALYSIS_ROOT="${ANALYSIS_ROOT:-/u/bwbrook/xray_cavities_analysis/2026-08-31-selected-age-dual-space-energetics}"
+readonly XRAISE_RUNTIME="${XRAISE_RUNTIME:-/u/bwbrook/codex_kunanyi/xraise_runtime}"
+readonly XRAISE_SCRIPT="$STAGE_ROOT/scripts/science/xraise_grid_smoke.py"
+readonly PRESSURE_MODULE="$STAGE_ROOT/scripts/science/xray_pressure_deprojection.py"
+readonly PRESSURE_BUILDER="$STAGE_ROOT/scripts/science/build_selected_age_xray_pressure.py"
+readonly STAGED_HASHES="$STAGE_ROOT/selected_age_dual_space_inputs.sha256"
+readonly ARCHIVE="${ARCHIVE:-$STAGE_ROOT/four_case_selected_age_dual_space_energetics_2026-08-31.tar.gz}"
+readonly ARCHIVE_LIST="${ARCHIVE_LIST:-$STAGE_ROOT/four_case_selected_age_dual_space_archive_file_list.txt}"
+
+readonly C_HI_OUTPUTS="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs"
+readonly C_LO_OUTPUTS="/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs"
+readonly G_HI_EARLY_OUTPUTS="/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem/outputs"
+readonly G_HI_LATE_OUTPUTS="/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs"
+readonly G_LO_OUTPUTS="/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs"
+
+readonly XRAISE_PY="$XRAISE_RUNTIME/xraise.py"
+readonly APEC_TABLE="$XRAISE_RUNTIME/apec_corrections.txt"
+readonly GAUNT_LUT="$XRAISE_RUNTIME/gaunt_lut_2d.npz"
+
+for path in \
+  "$XRAISE_SCRIPT" "$PRESSURE_MODULE" "$PRESSURE_BUILDER" "$STAGED_HASHES" \
+  "$STAGE_ROOT/scripts/science/build_three_case_cavity_recovery.py" \
+  "$STAGE_ROOT/scripts/science/three_case_cavity_recovery.py" \
+  "$XRAISE_PY" "$APEC_TABLE" "$GAUNT_LUT" \
+  "$C_HI_OUTPUTS" "$C_LO_OUTPUTS" "$G_HI_EARLY_OUTPUTS" \
+  "$G_HI_LATE_OUTPUTS" "$G_LO_OUTPUTS"; do
+  test -r "$path" || { echo "missing Goal 066 input: $path" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$STAGED_HASHES")"
+)
+printf '%s  %s\n' \
+  4bf17cb8e63e2d87a06615c170c7dd307788554a0cee83409762223123ec8da5 "$XRAISE_PY" \
+  e0f53a9f276a956f347af0e4fe627ee152762abc8b5116fc458070ee5f0925e3 "$APEC_TABLE" \
+  64df88d39896f14064bb799fd5b70c6f68d20bcbdc5a15d19e2e4fd15b22f747 "$GAUNT_LUT" \
+  | sha256sum --check
+for path in "$ANALYSIS_ROOT" "$ARCHIVE" "$ARCHIVE_LIST"; do
+  test ! -e "$path" && test ! -L "$path" \
+    || { echo "refusing to overwrite Goal 066 surface: $path" >&2; exit 2; }
+done
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export HDF5_USE_FILE_LOCKING=FALSE
+mkdir -p "$ANALYSIS_ROOT/logs"
+
+write_manifest() {
+  local case_id="$1" power="$2" root_a="$3" root_b="$4" manifest="$5"
+  shift 5
+  python - "$case_id" "$power" "$root_a" "$root_b" "$manifest" "$@" <<'PY'
+import csv
+import sys
+from pathlib import Path
+import h5py
+
+CODE_TIME_PER_MYR = 306.6013937879523
+case, power, root_a, root_b, output, *indices = sys.argv[1:]
+root_a = Path(root_a)
+root_b = Path(root_b) if root_b else None
+rows = []
+for index_text in indices:
+    index = int(index_text)
+    root = root_a if root_b is None or index <= 10 else root_b
+    path = root / f"data.{index:04d}.flt.h5"
+    timestep = f"Timestep_{index}"
+    with h5py.File(path, "r") as h5:
+        group = h5[timestep]
+        actual_code = float(group.attrs["Time"])
+        actual_myr = actual_code / CODE_TIME_PER_MYR
+        shapes = [tuple(group[f"vars/{name}"].shape) for name in ("rho", "prs", "tr1", "vx1", "vx2", "vx3")]
+        if len(set(shapes)) != 1 or shapes[0] != (1014, 960, 960):
+            raise SystemExit(f"{case}/{index}: grid shape drifted: {shapes}")
+        if abs(actual_myr - index) > 0.05:
+            raise SystemExit(f"{case}/{index}: actual age {actual_myr} exceeds tolerance")
+    rows.append({
+        "case": case,
+        "snapshot_index": index,
+        "actual_time_myr": actual_myr,
+        "actual_time_code": actual_code,
+        "input_h5": str(path),
+        "timestep": timestep,
+        "file_size_bytes": path.stat().st_size,
+        "shape_nz_ny_nx": "x".join(map(str, shapes[0])),
+        "jet_power_one_sided_erg_s": power,
+        "selection_rule": "accepted selected age; G-HI/50 excluded",
+    })
+with Path(output).open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+    writer.writeheader()
+    writer.writerows(rows)
+print(f"goal066_manifest_preflight=passed case={case} snapshots={len(rows)}")
+PY
+}
+
+run_case() {
+  local case_id="$1" power="$2" root_a="$3" root_b="$4"
+  shift 4
+  local slug="${case_id,,}"
+  slug="${slug//-/_}"
+  local case_root="$ANALYSIS_ROOT/$case_id"
+  local manifest="$case_root/source_manifest.csv"
+  mkdir -p "$case_root"
+  write_manifest "$case_id" "$power" "$root_a" "$root_b" "$manifest" "$@"
+  while IFS=, read -r row_case index actual_myr actual_code input_h5 timestep file_size shape row_power selection_rule; do
+    [ "$row_case" = "$case_id" ] || continue
+    local age_root="$case_root/age_$(printf '%02d' "$index")"
+    mkdir -p "$age_root"
+    for view in 0 45 90; do
+      local label="${view}deg"
+      python "$XRAISE_SCRIPT" \
+        --input-h5 "$input_h5" \
+        --timestep "$timestep" \
+        --output-dir "$age_root/xraise_grid_$label" \
+        --xraise-py "$XRAISE_PY" \
+        --apec-table "$APEC_TABLE" \
+        --gaunt-lut "$GAUNT_LUT" \
+        --redshift 0.05 \
+        --y-chunk 8 \
+        --view-angle-deg "$view" \
+        --projected-u-bins 960
+    done
+  done < <(tail -n +2 "$manifest")
+  python "$PRESSURE_BUILDER" \
+    --case "$case_id" \
+    --source-manifest "$manifest" \
+    --analysis-root "$case_root" \
+    --output-root "$case_root/compact"
+}
+
+run_pair() {
+  local first="$1" second="$2"
+  local first_pid second_pid first_status second_status
+  case "$first" in
+    C-HI) run_case C-HI 1e45 "$C_HI_OUTPUTS" "" 10 20 30 40 50 ;;
+    G-HI) run_case G-HI 1e45 "$G_HI_EARLY_OUTPUTS" "$G_HI_LATE_OUTPUTS" 10 20 30 40 ;;
+  esac >"$ANALYSIS_ROOT/logs/$first.out" 2>"$ANALYSIS_ROOT/logs/$first.err" &
+  first_pid=$!
+  case "$second" in
+    C-LO) run_case C-LO 1e43 "$C_LO_OUTPUTS" "" 10 20 30 40 50 ;;
+    G-LO) run_case G-LO 1e43 "$G_LO_OUTPUTS" "" 10 20 30 40 50 ;;
+  esac >"$ANALYSIS_ROOT/logs/$second.out" 2>"$ANALYSIS_ROOT/logs/$second.err" &
+  second_pid=$!
+  if wait "$first_pid"; then first_status=0; else first_status=$?; fi
+  if wait "$second_pid"; then second_status=0; else second_status=$?; fi
+  printf '%s\t%s\n%s\t%s\n' "$first" "$first_status" "$second" "$second_status" \
+    >> "$ANALYSIS_ROOT/case_exit_status.tsv"
+  [ "$first_status" -eq 0 ] && [ "$second_status" -eq 0 ] \
+    || { echo "Goal 066 case pair failed: $first/$second" >&2; exit 1; }
+}
+
+printf 'case\texit_status\n' > "$ANALYSIS_ROOT/case_exit_status.tsv"
+run_pair C-HI C-LO
+run_pair G-HI G-LO
+
+python - "$ANALYSIS_ROOT" <<'PY'
+import csv
+import json
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+expected = {"C-HI": 15, "C-LO": 15, "G-HI": 12, "G-LO": 15}
+for case, view_count in expected.items():
+    compact = root / case / "compact"
+    metadata = json.loads((compact / "selected_age_xray_pressure_metadata.json").read_text())
+    topology = list(csv.DictReader((compact / "xray_topology_summary.csv").open(newline="")))
+    profiles = list(csv.DictReader((compact / "xray_pressure_profiles.csv").open(newline="")))
+    if metadata.get("status") != "complete_selected_age_xray_pressure_product":
+        raise SystemExit(f"{case}: completion gate failed")
+    if len(topology) != view_count or len(profiles) != 36 * view_count:
+        raise SystemExit(f"{case}: selected-age observer coverage is incomplete")
+    if any(row.get("tracer_loaded_or_used", "").lower() != "false" for row in topology):
+        raise SystemExit(f"{case}: tracer independence gate failed")
+print("selected_age_xray_pressure_validation=passed case_age_views=57")
+PY
+
+(
+  cd "$ANALYSIS_ROOT"
+  find . -path '*/compact/*' -type f -print | sort > "$ARCHIVE_LIST"
+  printf '%s\n' ./case_exit_status.tsv >> "$ARCHIVE_LIST"
+  find ./logs -type f -print | sort >> "$ARCHIVE_LIST"
+)
+tar -czf "$ARCHIVE" -C "$ANALYSIS_ROOT" --files-from "$ARCHIVE_LIST"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

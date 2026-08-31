@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+#PBS -N dual_enfix
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mpiprocs=1:mem=16gb
+#PBS -l walltime=01:00:00
+#PBS -M barry.brook@utas.edu.au
+#PBS -m ae
+#PBS -o /u/bwbrook/codex_kunanyi/goal066_selected_age_pressure_repair/four_case_selected_age_pressure_repair.out
+#PBS -e /u/bwbrook/codex_kunanyi/goal066_selected_age_pressure_repair/four_case_selected_age_pressure_repair.err
+
+set -euo pipefail
+umask 077
+
+readonly STAGE_ROOT="${STAGE_ROOT:-/u/bwbrook/codex_kunanyi/goal066_selected_age_pressure_repair}"
+readonly SOURCE_ROOT="${SOURCE_ROOT:-/u/bwbrook/xray_cavities_analysis/2026-08-31-selected-age-dual-space-energetics}"
+readonly REPAIR_ROOT="${REPAIR_ROOT:-/u/bwbrook/xray_cavities_analysis/2026-08-31-selected-age-pressure-repair}"
+readonly BUILDER="$STAGE_ROOT/scripts/science/build_selected_age_xray_pressure.py"
+readonly ARCHIVE="$STAGE_ROOT/four_case_selected_age_pressure_repair_2026-08-31.tar.gz"
+readonly ARCHIVE_LIST="$STAGE_ROOT/four_case_selected_age_pressure_repair_file_list.txt"
+readonly HASHES="$STAGE_ROOT/selected_age_pressure_repair_inputs.sha256"
+
+for path in \
+  "$BUILDER" \
+  "$STAGE_ROOT/scripts/science/xray_pressure_deprojection.py" \
+  "$STAGE_ROOT/scripts/science/build_three_case_cavity_recovery.py" \
+  "$STAGE_ROOT/scripts/science/three_case_cavity_recovery.py" \
+  "$HASHES" "$SOURCE_ROOT"; do
+  test -r "$path" || { echo "missing pressure-repair input: $path" >&2; exit 2; }
+done
+(
+  cd "$STAGE_ROOT"
+  sha256sum --check "$(basename "$HASHES")"
+)
+for path in "$REPAIR_ROOT" "$ARCHIVE" "$ARCHIVE_LIST"; do
+  test ! -e "$path" && test ! -L "$path" \
+    || { echo "refusing to overwrite pressure-repair surface: $path" >&2; exit 2; }
+done
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$STAGE_ROOT:${PYTHONPATH:-}"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+mkdir -p "$REPAIR_ROOT/logs"
+
+for case_id in C-HI C-LO G-HI G-LO; do
+  python "$BUILDER" \
+    --case "$case_id" \
+    --source-manifest "$SOURCE_ROOT/$case_id/source_manifest.csv" \
+    --analysis-root "$SOURCE_ROOT/$case_id" \
+    --output-root "$REPAIR_ROOT/$case_id" \
+    >"$REPAIR_ROOT/logs/$case_id.out" \
+    2>"$REPAIR_ROOT/logs/$case_id.err"
+done
+
+python - "$REPAIR_ROOT" <<'PY'
+import csv
+import json
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+expected = {"C-HI": 15, "C-LO": 15, "G-HI": 12, "G-LO": 15}
+view_count = 0
+maximum_residual = 0.0
+maximum_interpolated = 0
+for case, count in expected.items():
+    case_root = root / case
+    metadata = json.loads((case_root / "selected_age_xray_pressure_metadata.json").read_text())
+    topology = list(csv.DictReader((case_root / "xray_topology_summary.csv").open(newline="")))
+    if metadata.get("deprojection_regularization") != 1.0e-6 or len(topology) != count:
+        raise SystemExit(f"{case}: repaired method or view coverage is invalid")
+    for row in topology:
+        maximum_residual = max(
+            maximum_residual,
+            float(row["emission_measure_fit_relative_residual"]),
+            float(row["corrected_xray_fit_relative_residual"]),
+            float(row["temperature_numerator_fit_relative_residual"]),
+        )
+        maximum_interpolated = max(
+            maximum_interpolated,
+            int(row["temperature_interpolated_shell_count"]),
+        )
+    view_count += len(topology)
+if view_count != 57 or maximum_residual > 0.01 or maximum_interpolated > 2:
+    raise SystemExit(
+        f"pressure-repair gate failed: views={view_count} residual={maximum_residual} "
+        f"interpolated={maximum_interpolated}"
+    )
+print(
+    "selected_age_pressure_repair_validation=passed "
+    f"case_age_views={view_count} maximum_residual={maximum_residual:.16g} "
+    f"maximum_interpolated_shells={maximum_interpolated}"
+)
+PY
+
+(
+  cd "$REPAIR_ROOT"
+  find . -type f -print | sort > "$ARCHIVE_LIST"
+)
+tar -czf "$ARCHIVE" -C "$REPAIR_ROOT" --files-from "$ARCHIVE_LIST"
+tar -tzf "$ARCHIVE" >/dev/null
+sha256sum "$ARCHIVE"
+echo "finished_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"

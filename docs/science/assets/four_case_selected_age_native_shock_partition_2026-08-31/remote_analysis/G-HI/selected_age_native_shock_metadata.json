@@ -1,0 +1,20 @@
+{
+  "boundary_status": "selected mask fails closed if it touches a physical domain face",
+  "case": "G-HI",
+  "control_role": "coarse no-jet dimensionless noise calibration; not cellwise subtraction",
+  "energy_reference": "same production-grid cell at t=0",
+  "front_validation": "accepted outward axial shock position and Mach > 1",
+  "g_hi_50_status": "excluded",
+  "irreversible_heating": "p - p0*(rho/rho0)^gamma within selected ambient mask",
+  "potential_convention": "centre-zero integral of initial static-atmosphere gravity",
+  "primary_threshold_factor": 1.0,
+  "row_count": 36,
+  "selected_age_count": 4,
+  "shock_processed_mask": "ambient entropy-excess component connected to compressed axial-front seed",
+  "status": "complete_selected_age_native_shock_partition",
+  "threshold_factors": [
+    0.5,
+    1.0,
+    2.0
+  ]
+}

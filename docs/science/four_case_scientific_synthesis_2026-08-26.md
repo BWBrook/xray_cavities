@@ -1,69 +1,68 @@
-# Four-case scientific synthesis
+# Corrected four-case scientific synthesis
 
-> **Superseding correction (2026-08-28):** `G-HI` at 50 Myr has been
-> dropped from all science because its lobe/shock reaches the X3 boundary and
-> contaminates the edge pressure. The matched PRAiSE effective field used
-> below is emissivity weighted, not a global mean cocoon field. Test 2 and all
-> case summaries that included `G-HI/50` are provisional until rebuilt with
-> that point excluded and with both mean-pressure and emissivity-weighted
-> fields. See
-> `docs/science/four_case_boundary_spectral_field_review_2026-08-28.md`.
+## Simulation and analysis contract
+
+| Element | Prespecified setup |
+| --- | --- |
+| Factorial | Cluster/group environments crossed with high/low jet power: `C-HI`, `C-LO`, `G-HI`, `G-LO` |
+| Environments | Stewart cluster `002003` and group `002031` atmospheres |
+| Grid/domain | Cartesian `960 x 960 x 1014`; X1/X2 `-200..200 kpc`, X3 `-250..250 kpc`; central `0.05 kpc` cells with stretched outer zones |
+| Jet power | One-sided `1e45 erg/s` for `*-HI` and `1e43 erg/s` for `*-LO`; known bipolar powers `2e45` and `2e43 erg/s` |
+| Jet geometry | Speed `0.1c`; two `15 deg` cones; initial radius `0.1 kpc`; injection height `0.75 kpc`; centred launch |
+| Particles | `32` particles per injection event; injection and output cadence approximately `0.01 Myr` |
+| Simulation time | Jets active for the 50 Myr runs; exact 50 Myr fluid endpoints retained |
+| Fluid cadence | Float output approximately every `1 Myr`; double restart output approximately every `5 Myr` |
+| Tracer | Fractional jet tracer; accepted thresholds and side definitions retained from Goals 062--064 |
+| X-ray | Thermal X-ray surface at `1 keV` and `z=0.05`, using the supplied APEC/Gaunt correction tables; no abundance parameter was varied separately |
+| Radio | Corrected PRAiSE2 continuous-injection model; `z=0.05`, `eta=0.03`, electron index `s=2.2`, Lorentz-factor range `500..1e5`, and `0.15/0.5/1.4/4.5/15 GHz` |
+| Views | `0/45/90 deg`; nonzero views use `edge_overlap_uniform_cell_projection` |
+| Science ages | `10/20/30/40/50 Myr`, except boundary-contaminated `G-HI/50`, which is excluded from every scientific surface |
 
 ## Purpose
 
 Goal 065 joins the accepted Goal 062 fluid, gravitational, tracer, and shock
-surface; the Goal 063 background and shock-validity gates; and the Goal 064
-X-ray/cavity and corrected-PRAiSE2 products. It answers the three prespecified
-paper tests at common source ages `10/20/30/40/50 Myr` for the matched
-`C-HI`, `C-LO`, `G-HI`, and `G-LO` factorial.
+surface; Goal 063 background and validity gates; Goal 064 selected-age X-ray,
+cavity, and corrected-PRAiSE2 products; and the 2026-08-28 boundary,
+spectral-field, and seven-method cavity-age corrections. It answers three
+prespecified paper tests using one deterministic simulation per factorial
+cell. The analysis is descriptive: ages and views are repeated measurements,
+not independent replicates, and no population-level p-values are claimed.
 
-This is a descriptive synthesis of one deterministic simulation per factorial
-cell. It does not use replicate p-values or claim population-level effects.
-Observations and interpretations are kept separate throughout the compact
-tables.
+## Consequential gates
 
-## Analysis contract
-
-- Known bipolar jet power is `2e45 erg/s` for `C-HI` and `G-HI`, and
-  `2e43 erg/s` for `C-LO` and `G-LO`.
-- Cavity energy is quantitative only for exactly two non-crossing,
-  opposite-side X-ray components. This leaves `39/60` selected age-view rows.
-- The primary cavity convention is `2.5pV`; `pV` and `4pV` remain explicit
-  sensitivity surfaces.
-- Ambient pressure is the tracer-shell midpoint proxy, not an X-ray-fitted
-  pressure.
-- Corrected PRAiSE2 full-loss radio luminosity is primary; lossless values are
-  retained as a comparator.
-- Goal 063 shock validity is fail-closed. The `G-HI` 50 Myr endpoint is valid
-  for non-shock observables but excluded from shock-kinematic analysis. This
-  leaves `37` quantitative age-view rows in the primary Mach test.
-- The `C-LO` whole-domain ambient-energy change is background dominated. Its
-  inside-100-kpc value remains an upper bound rather than a corrected coupling
-  efficiency.
+- `G-HI/50` is archival only. Its lobe/shock reaches the X3 boundary and
+  contaminates the edge pressure; it is absent from every table and summary.
+- Cavity quantities are quantitative only for exactly two non-crossing,
+  opposite-side X-ray components. The retained surface has `37` case-age-view
+  rows and `74` side components.
+- Cavity enthalpy retains `2.5pV` as the primary non-relativistic convention
+  and `4pV` as the literature comparator.
+- The current ambient pressure is a tracer-shell midpoint proxy, not an
+  X-ray-inferred pressure. This limitation motivates the next dual-space
+  audit.
+- Corrected PRAiSE2 full-loss luminosity is primary; lossless luminosity is a
+  comparator.
+- Spectral breaks above `15 GHz` are age upper limits and inferred-power lower
+  limits. Censored rows are excluded from ordinary medians and counted
+  explicitly.
+- The seven clocks remain separate: true source age, sound crossing, buoyant
+  rise, refill, bilateral supersonic shock, mean-pressure spectral, and
+  emissivity-weighted spectral age. The calculated buoyant age is not replaced
+  by a fixed multiple of sound-crossing age.
+- The `C-LO` whole-domain ambient-energy change remains background dominated;
+  its inside-100-kpc value is an upper bound, not a corrected efficiency.
 
 ## Physical context
 
-Direct tracer-defined lobe energy declines as a fraction of injected energy
-across the selected late-time surface. At 50 Myr the retained fractions are:
-
-| Case | Direct lobe energy / injected energy |
-| --- | ---: |
-| `C-HI` | `0.1676` |
-| `C-LO` | `0.06047` |
-| `G-HI` | `0.1982` |
-| `G-LO` | `0.1281` |
-
-These values are simulation-truth diagnostics, not observer-recovered cavity
-energies. The apparently extreme `C-LO` whole-domain ambient value remains
-excluded from coupling-efficiency interpretation because Goal 063 showed that
-`94.61%` of its accounted endpoint change lies beyond 100 kpc and is dominated
-by common atmosphere evolution.
+The last valid direct tracer-defined lobe-energy fractions of injected energy
+are `0.1676` for `C-HI` at 50 Myr, `0.06047` for `C-LO` at 50 Myr, `0.1987`
+for `G-HI` at 40 Myr, and `0.1281` for `G-LO` at 50 Myr. These are native-grid
+truth diagnostics, not observer-recovered cavity energies.
 
 ## Test 1: cavity bias versus shock strength
 
-**Observation.** Within each viewing angle, pooled cases show a strong
-negative association between `2.5pV / injected energy` and valid kinematic
-shock Mach:
+**Observation.** Within each viewing angle, the pooled association between
+`2.5pV / injected energy` and valid kinematic shock Mach is strongly negative:
 
 | View | Spearman rho | Raw slope (dex per Mach) |
 | --- | ---: | ---: |
@@ -71,37 +70,36 @@ shock Mach:
 | `45deg` | `-0.881` | `-0.175` |
 | `90deg` | `-0.868` | `-0.232` |
 
-A descriptive model with case and view fixed effects gives a much smaller Mach
-slope of `-0.0402 dex per Mach`; Mach adds only `0.0031` to model R-squared.
-Leave-one-case-out slopes are `-0.0976`, `-0.0358`, `+0.1142`, and `-0.0393`
-when omitting `C-HI`, `C-LO`, `G-HI`, and `G-LO`, respectively.
+A descriptive model with case and view fixed effects gives a much smaller
+Mach slope of `-0.0402 dex per Mach`; Mach adds only `0.0031` to model
+R-squared. Leave-one-case-out slopes change sign.
 
-**Inference.** The pooled anticorrelation is real on this simulation surface,
-but it is not a case-robust independent Mach effect. Power, environment, age,
-and morphology jointly structure the relationship. The defensible current
-claim is `strong_pooled_negative_pattern_not_case_robust`.
+**Inference.** The pooled anticorrelation is clear on this simulation surface,
+but it is not a case-robust independent Mach effect. Jet power, environment,
+age, and morphology jointly structure the relationship. Decision:
+`strong_pooled_negative_pattern_not_case_robust`.
 
-## Test 2: cavity energy divided by spectral age
+## Test 2: seven cavity-age estimators
 
-For the adopted `2.5pV` convention and the matched PRAiSE effective-field
-treatment, median inferred-to-known bipolar power ratios are:
+For the primary `2.5pV` convention, true-age median inferred-to-known bipolar
+power ratios are:
 
-| Case | Quantitative rows | Median inferred / known power |
-| --- | ---: | ---: |
-| `C-HI` | `11` | `0.0494` |
-| `C-LO` | `10` | `1.55` |
-| `G-HI` | `8` | `0.00650` |
-| `G-LO` | `10` | `0.0877` |
+| Case | Quantitative rows | True-age median recovery | Mean-pressure spectral recovery |
+| --- | ---: | ---: | ---: |
+| `C-HI` | `11` | `0.00810` | `0.0124` exact median |
+| `C-LO` | `10` | `0.628` | `1.05` exact median |
+| `G-HI` | `6` | `0.00437` | `>0.00321` median lower bound |
+| `G-LO` | `10` | `0.0731` | `>0.0871` median lower bound |
 
-**Observation.** The estimator is approximately order unity only for `C-LO`.
-It substantially under-recovers known power in both high-power cases and in
-`G-LO`. Alternative magnetic-field and `4pV` treatments remain available in
-the machine-readable sensitivity surface.
+The mean-pressure spectral method has `20/37` censored rows. Both group cases
+contain only lower limits for that method, so ordinary medians would be
+scientifically invalid. Emissivity-weighted spectral ages are retained only as
+the prespecified sensitivity surface.
 
-**Inference.** `2.5pV / t_spec` is not a universal recovery estimator in this
-factorial. This interpretation is conditional because `40/60` integrated
-spectra have a break above the observed band and are therefore censored, and
-because the pressure surface is a tracer-shell proxy.
+**Inference.** Clock choice changes inferred power by factors of a few, but it
+cannot explain the much larger high-power cavity-energy deficit. The primary
+problem is therefore not simply choosing the wrong age estimator. Decision:
+`age_method_bias_modulates_not_explains_cavity_energy_deficit`.
 
 ## Test 3: radio-luminosity power relations
 
@@ -111,62 +109,62 @@ Median full-loss inferred-to-known power ratios are:
 | --- | ---: | ---: |
 | `C-HI` | `0.937` | `5.10` |
 | `C-LO` | `7.34` | `15.85` |
-| `G-HI` | `0.523` | `2.37` |
+| `G-HI` | `0.520` | `2.36` |
 | `G-LO` | `4.03` | `7.02` |
 
-**Observation.** The low-power cases are strongly overestimated, especially
-by the 1.4 GHz relation. The 150 MHz relation is closest to the known power for
-the high-power cases, while the group environment lowers the median recovery
-relative to the corresponding cluster case at both power levels.
+**Inference.** The standard radio scalings have structured jet-power and
+environment dependence rather than a common unbiased recovery. The 150 MHz
+relation is closest for the high-power simulations, while both relations
+substantially overestimate the low-power simulations. Published scatter is
+retained, but four controlled simulations are not a sampled population.
+Decision: `radio_scalings_power_and_environment_dependent`.
 
-**Inference.** The standard radio scalings show structured jet-power and
-environment dependence rather than a common unbiased recovery. Published
-intrinsic scatter is recorded, but these four controlled simulations are not
-a sampled population.
+## Decision and residual uncertainty
 
-## Decision
+Decision label: `FOUR_CASE_SYNTHESIS_CORRECTED_DUAL_SPACE_AUDIT_NEXT`.
 
-Decision label:
-`FOUR_CASE_SYNTHESIS_COMPLETE_SUPERVISOR_INTERPRETATION_READY`.
+The corrected synthesis supports three stable conclusions:
 
-The matched factorial now supports the paper-level conclusion that inferred
-jet energetics depend materially on age, viewing geometry, jet power, and
-environment. It does not support presenting shock Mach as an independently
-identified causal driver, nor either cavity-spectral or radio scaling as a
-universal unbiased estimator.
+1. The pooled Mach association is descriptive, not independently identified.
+2. Age-estimator bias modulates inferred cavity power but does not explain the
+   severe high-power deficit.
+3. Radio power recovery depends materially on jet power and environment.
 
-No additional PLUTO production or observable recomputation is needed before
-supervisor interpretation. The next consequential decision is scientific
-framing: whether Mach remains a descriptive covariate, which radio relation is
-primary, and how censored spectral ages and tracer-shell pressure are presented
-in the paper.
+The decision-relevant uncertainty is now the origin of the cavity-energy
+deficit. Stas's method directive requires two independent paths: native-grid
+truth using fractional tracer and cell-wise initial-state subtraction, and an
+observer-like X-ray path using X-ray-only geometry and pressure. They must be
+joined only after each is complete, with volume bias, pressure bias, lobe
+enthalpy bias, and missing shock/outburst energy reported separately. Existing
+selected ages are sufficient for a proof-of-method audit before annual
+extension; no new PLUTO or observable production is required.
 
 ## Outputs
 
-- Figure:
-  `docs/science/assets/four_case_scientific_synthesis_2026-08-26/four_case_scientific_synthesis.png`
-- Joined physics surface: `case_age_physics.csv`
-- Cavity recovery and Mach tests: `cavity_energy_recovery.csv` and
+- Figure: `four_case_scientific_synthesis.png`
+- Native physical surface: `case_age_physics.csv`
+- X-ray cavity recovery and Mach tests: `cavity_energy_recovery.csv` and
   `shock_cavity_test_summary.csv`
+- Seven-age-method surface: `xray_cavity_age_geometry.csv`,
+  `age_method_comparison.csv`, `cavity_power_method_comparison.csv`, and
+  `age_power_method_summary.csv`
 - Radio and spectral inference: `radio_power_inference.csv`,
-  `spectral_fits.csv`, and `spectral_cavity_power_inference.csv`
-- Cavity age-proxy inference: `cavity_age_power_inference.csv`
-- Compact recovery summaries: `jet_power_recovery_summary.csv`
+  `radio_power_recovery_summary.csv`, and `spectral_fits.csv`
 - Descriptive factorial contrasts: `factorial_effects.csv`
-- Decision table: `scientific_decision_summary.csv`
-- Provenance and metadata: `input_provenance.csv`,
-  `four_case_scientific_synthesis_metadata.json`, and
+- Decisions, provenance, and metadata: `scientific_decision_summary.csv`,
+  `input_provenance.csv`, `four_case_scientific_synthesis_metadata.json`, and
   `local_asset_manifest.sha256`
+
+All assets are under
+`docs/science/assets/four_case_scientific_synthesis_2026-08-26/`.
 
 ## Validation
 
-- `uv run pytest tests/test_four_case_scientific_synthesis.py tests/test_snapshot_synthesis.py tests/test_snapshot_inference.py -q`
-  passed with `16` tests.
-- The builder regenerated the complete output bundle from accepted compact
-  Goal 062/063/064 inputs.
-- JSON and CSV schema checks, finite-value gates, exact case-age coverage,
-  cavity topology gates, shock-validity exclusions, and radio/spectral row
-  counts are covered by the focused tests.
-- The synthesis figure was inspected after generation; one focused repair
-  added an explicit case/view legend and clarified the spectral-power label.
-- No raw HDF5, particle history, or remote science payload was read or changed.
+- The corrected builder regenerates the bundle from accepted compact inputs.
+- Focused tests enforce exact case-age coverage, complete removal of
+  `G-HI/50`, fail-closed topology and shock gates, seven distinct age methods,
+  censor-aware summaries, and corrected radio row counts.
+- JSON/CSV schemas, finite-value requirements, asset checksums, and the
+  synthesis figure are checked in the final validation pass.
+- No remote compute, raw HDF5, particle-history access, or observable rerun is
+  required for this correction.

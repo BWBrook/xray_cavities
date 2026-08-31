@@ -25,6 +25,8 @@ KPC_M = 3.0856775814913673e19
 UNIT_DENSITY_SI = 1.0023678e-21
 UNIT_PRESSURE_SI = UNIT_DENSITY_SI * 2.99792458e8 * 2.99792458e8
 DEFAULT_FREQ_HZ = 2.417990504024e17
+BOLTZMANN_J_K = 1.380649e-23
+PROTON_MASS_KG = 1.67262192369e-27
 
 
 def load_module(path: Path):
@@ -114,6 +116,13 @@ def direct_x_axis_projection(
     corrected_path = np.sum(corrected * weights, axis=2)[:, ::-1]
     tracer_max = np.nanmax(tracer, axis=2)[:, ::-1]
     return raw_path, corrected_path, tracer_max
+
+
+def direct_x_axis_scalar_projection(values: np.ndarray, x_width_m: np.ndarray) -> np.ndarray:
+    """Integrate one scalar field along native x cells in increasing ``u=-y`` order."""
+
+    weights = np.asarray(x_width_m, dtype=float)[np.newaxis, np.newaxis, :]
+    return np.sum(np.asarray(values, dtype=float) * weights, axis=2)[:, ::-1]
 
 
 def projected_overlap_contributions(
@@ -253,6 +262,64 @@ def accumulate_projected_chunk(
         tracer_max[z_index] = np.maximum(tracer_max[z_index], tracer_by_bin)
 
 
+def accumulate_scalar_projected_chunk(
+    *,
+    target: np.ndarray,
+    values: np.ndarray,
+    x: np.ndarray,
+    y_chunk: np.ndarray,
+    u_edges: np.ndarray,
+    view_angle_deg: float,
+    x_edges: np.ndarray | None = None,
+    y_edges_chunk: np.ndarray | None = None,
+) -> None:
+    """Accumulate one scalar field using the accepted edge-overlap projection."""
+
+    if x_edges is None:
+        x_edges = centres_to_edges(x)
+    if y_edges_chunk is None:
+        y_edges_chunk = centres_to_edges(y_chunk)
+    flat_cells, flat_bins, flat_weights = projected_overlap_contributions(
+        x_edges=x_edges,
+        y_edges_chunk=y_edges_chunk,
+        u_edges=u_edges,
+        view_angle_deg=view_angle_deg,
+    )
+    if flat_cells.size == 0:
+        return
+    n_u = len(u_edges) - 1
+    for z_index in range(values.shape[0]):
+        weighted = values[z_index].ravel()[flat_cells] * flat_weights
+        target[z_index] += np.bincount(flat_bins, weights=weighted, minlength=n_u)
+
+
+def infer_mean_molecular_weight(
+    rho_kg_m3: np.ndarray,
+    pressure_pa: np.ndarray,
+    temperature_k: np.ndarray,
+) -> float:
+    """Infer the XRAiSE temperature convention's effective molecular weight."""
+
+    rho = np.asarray(rho_kg_m3, dtype=float)
+    pressure = np.asarray(pressure_pa, dtype=float)
+    temperature = np.asarray(temperature_k, dtype=float)
+    valid = (
+        np.isfinite(rho)
+        & np.isfinite(pressure)
+        & np.isfinite(temperature)
+        & (rho > 0.0)
+        & (pressure > 0.0)
+        & (temperature > 0.0)
+    )
+    if not np.any(valid):
+        raise ValueError("cannot infer mean molecular weight from empty positive sample")
+    mu = rho[valid] * BOLTZMANN_J_K * temperature[valid] / (pressure[valid] * PROTON_MASS_KG)
+    mu = mu[np.isfinite(mu) & (mu > 0.0)]
+    if mu.size == 0:
+        raise ValueError("mean molecular weight sample is non-finite")
+    return float(np.median(mu))
+
+
 def write_vector(path: Path, values: np.ndarray) -> None:
     np.savetxt(path, values, fmt="%.10g")
 
@@ -366,7 +433,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             n_sky = len(sky_x)
         xray_raw = np.zeros((nz, n_sky), dtype=np.float64)
         xray_corrected = np.zeros((nz, n_sky), dtype=np.float64)
+        emission_measure_rho2 = np.zeros((nz, n_sky), dtype=np.float64)
+        corrected_temperature_numerator = np.zeros((nz, n_sky), dtype=np.float64)
         tracer_max = np.zeros((nz, n_sky), dtype=np.float64)
+        molecular_weight_samples: list[float] = []
 
         for start in range(0, ny, args.y_chunk):
             stop = min(start + args.y_chunk, ny)
@@ -390,11 +460,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             freq_grid = np.full_like(temp_k, args.frequency_hz, dtype=float)
             gaunt = gaunt_interp(np.stack([temp_k, freq_grid], axis=-1))
             corrected = np.nan_to_num(raw * apec * gaunt, nan=0.0, posinf=0.0, neginf=0.0)
+            rho2 = np.square(rho)
+            corrected_temperature = corrected * temp_k
+            sample = (slice(None, None, 16), slice(None, None, 2), slice(None, None, 16))
+            molecular_weight_samples.append(
+                infer_mean_molecular_weight(rho[sample], prs[sample], temp_k[sample])
+            )
 
             if projection_method == "direct_y_axis_sum":
                 path_m = y_width_m[start:stop][np.newaxis, :, np.newaxis]
                 xray_raw += np.sum(raw * path_m, axis=1) / 1.0e-29
                 xray_corrected += np.sum(corrected * path_m, axis=1) / 1.0e-29
+                emission_measure_rho2 += np.sum(rho2 * path_m, axis=1)
+                corrected_temperature_numerator += (
+                    np.sum(corrected_temperature * path_m, axis=1) / 1.0e-29
+                )
                 tracer_max = np.maximum(tracer_max, np.nanmax(trc, axis=1))
             elif projection_method == "direct_x_axis_sum":
                 raw_path, corrected_path, tracer_path = direct_x_axis_projection(
@@ -406,6 +486,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 target = slice(ny - stop, ny - start)
                 xray_raw[:, target] = raw_path / 1.0e-29
                 xray_corrected[:, target] = corrected_path / 1.0e-29
+                emission_measure_rho2[:, target] = direct_x_axis_scalar_projection(
+                    rho2, x_width_kpc * KPC_M
+                )
+                corrected_temperature_numerator[:, target] = (
+                    direct_x_axis_scalar_projection(corrected_temperature, x_width_kpc * KPC_M)
+                    / 1.0e-29
+                )
                 tracer_max[:, target] = tracer_path
             else:
                 raw_path = np.zeros_like(xray_raw)
@@ -428,6 +515,24 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 )
                 xray_raw += raw_path * KPC_M / 1.0e-29
                 xray_corrected += corrected_path * KPC_M / 1.0e-29
+                rho2_path = np.zeros_like(emission_measure_rho2)
+                temperature_path = np.zeros_like(corrected_temperature_numerator)
+                for target, values in (
+                    (rho2_path, rho2),
+                    (temperature_path, corrected_temperature),
+                ):
+                    accumulate_scalar_projected_chunk(
+                        target=target,
+                        values=values,
+                        x=x,
+                        y_chunk=y[start:stop],
+                        u_edges=sky_edges,
+                        view_angle_deg=args.view_angle_deg,
+                        x_edges=x_edges,
+                        y_edges_chunk=y_edges[start : stop + 1],
+                    )
+                emission_measure_rho2 += rho2_path * KPC_M
+                corrected_temperature_numerator += temperature_path * KPC_M / 1.0e-29
 
     ratio = np.divide(
         xray_corrected,
@@ -435,6 +540,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         out=np.zeros_like(xray_corrected),
         where=xray_raw > 0,
     )
+    emission_weighted_temperature = np.divide(
+        corrected_temperature_numerator,
+        xray_corrected,
+        out=np.zeros_like(corrected_temperature_numerator),
+        where=xray_corrected > 0,
+    )
+    effective_mean_molecular_weight = float(np.median(molecular_weight_samples))
 
     write_vector(out_dir / "x_kpc.tsv", sky_x)
     if abs(args.view_angle_deg) > 1.0e-12:
@@ -443,6 +555,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     write_matrix(out_dir / "xray_1kev_raw_mjy_sr.tsv", xray_raw)
     write_matrix(out_dir / "xray_1kev_xraise_corrected_mjy_sr.tsv", xray_corrected)
     write_matrix(out_dir / "xray_1kev_correction_ratio.tsv", ratio)
+    write_matrix(out_dir / "xray_emission_measure_rho2_kg2_m5.tsv", emission_measure_rho2)
+    write_matrix(
+        out_dir / "xray_corrected_temperature_numerator_mjy_k_sr.tsv",
+        corrected_temperature_numerator,
+    )
+    write_matrix(out_dir / "xray_emission_weighted_temperature_k.tsv", emission_weighted_temperature)
     write_matrix(out_dir / "tracer_max_los.tsv", tracer_max)
 
     metadata: dict[str, Any] = {
@@ -468,9 +586,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "apec_table": str(args.apec_table),
         "gaunt_lut": str(args.gaunt_lut),
         "method": "xraise.grid_bremsstrahlung plus supplied APEC and Gaunt corrections",
+        "pressure_deprojection_inputs": {
+            "emission_measure": "line-of-sight integral of mass_density_squared",
+            "temperature": "corrected-X-ray-emissivity-weighted temperature",
+            "effective_mean_molecular_weight": effective_mean_molecular_weight,
+            "tracer_used": False,
+        },
         "raw_stats_mjy_sr": stats(xray_raw),
         "corrected_stats_mjy_sr": stats(xray_corrected),
         "correction_ratio_stats": stats(ratio[ratio > 0]),
+        "emission_measure_rho2_stats_kg2_m5": stats(emission_measure_rho2),
+        "emission_weighted_temperature_stats_k": stats(emission_weighted_temperature),
     }
     (out_dir / "xraise_grid_smoke_metadata.json").write_text(
         json.dumps(metadata, indent=2, sort_keys=True) + "\n"
@@ -488,6 +614,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         writer.writerow(["corrected_xray_sum", f"{metadata['corrected_stats_mjy_sr']['sum']:.16g}", "mJy sr^-1 pixels"])
         writer.writerow(["correction_ratio_positive_max", f"{metadata['correction_ratio_stats'].get('positive_max', 0.0):.16g}", "dimensionless"])
         writer.writerow(["correction_ratio_positive_sum", f"{metadata['correction_ratio_stats'].get('positive_sum', 0.0):.16g}", "dimensionless pixels"])
+        writer.writerow(["effective_mean_molecular_weight", f"{effective_mean_molecular_weight:.16g}", "dimensionless"])
+        writer.writerow(["emission_measure_rho2_sum", f"{metadata['emission_measure_rho2_stats_kg2_m5']['sum']:.16g}", "kg^2 m^-5 pixels"])
+        writer.writerow(["emission_weighted_temperature_positive_median", f"{np.median(emission_weighted_temperature[emission_weighted_temperature > 0]):.16g}", "K"])
 
     return metadata
 

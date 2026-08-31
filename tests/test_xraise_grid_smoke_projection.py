@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import math
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
+import h5py
 import numpy as np
 import pytest
 
@@ -100,6 +103,9 @@ def test_direct_x_projection_uses_increasing_negative_y_sky_axis() -> None:
     np.testing.assert_allclose(corrected_path, expected * 2.0)
     np.testing.assert_allclose(tracer_max, np.max(tracer, axis=2)[:, ::-1])
 
+    scalar_path = module.direct_x_axis_scalar_projection(raw, x_width_m)
+    np.testing.assert_allclose(scalar_path, expected)
+
 
 def test_projected_accumulation_matches_y_projection_at_zero_degrees() -> None:
     module = load_script_module()
@@ -164,6 +170,17 @@ def test_projected_accumulation_conserves_integrated_path_weight() -> None:
     assert np.all(raw_path[0] > 0.0)
     assert float(np.sum(raw_path[0] * projected_widths)) == pytest.approx(4.0)
 
+    scalar_path = np.zeros_like(raw_path)
+    module.accumulate_scalar_projected_chunk(
+        target=scalar_path,
+        values=raw * 3.0,
+        x=x,
+        y_chunk=y,
+        u_edges=u_edges,
+        view_angle_deg=45.0,
+    )
+    assert float(np.sum(scalar_path[0] * projected_widths)) == pytest.approx(12.0)
+
 
 def test_projected_overlap_accumulation_removes_90_degree_center_bin_empty_stripes() -> None:
     module = load_script_module()
@@ -207,3 +224,79 @@ def test_projected_overlap_accumulation_removes_90_degree_center_bin_empty_strip
     assert float(np.sum(raw_path[0] * projected_widths)) == pytest.approx(source_area)
     assert float(np.sum(corrected_path[0] * projected_widths)) == pytest.approx(2.0 * source_area)
     assert np.all(tracer_max[0] > 0.0)
+
+
+def test_effective_mean_molecular_weight_matches_pressure_temperature_convention() -> None:
+    module = load_script_module()
+    mu = 0.62
+    rho = np.array([1.0e-24, 2.0e-24, 3.0e-24])
+    temperature = np.array([1.0e7, 2.0e7, 3.0e7])
+    pressure = rho * module.BOLTZMANN_J_K * temperature / (mu * module.PROTON_MASS_KG)
+
+    inferred = module.infer_mean_molecular_weight(rho, pressure, temperature)
+
+    assert inferred == pytest.approx(mu)
+
+
+def test_run_writes_pressure_deprojection_inputs_without_using_tracer(tmp_path: Path) -> None:
+    module = load_script_module()
+    input_h5 = tmp_path / "small.h5"
+    shape = (3, 4, 5)
+    with h5py.File(input_h5, "w") as h5:
+        coords = h5.create_group("cell_coords")
+        coords.create_dataset("X", data=np.broadcast_to(np.arange(5.0)[None, None, :], shape))
+        coords.create_dataset("Y", data=np.broadcast_to(np.arange(4.0)[None, :, None], shape))
+        coords.create_dataset("Z", data=np.broadcast_to(np.arange(3.0)[:, None, None], shape))
+        group = h5.create_group("Timestep_1")
+        group.attrs["Time"] = module.CODE_TIME_PER_MYR
+        variables = group.create_group("vars")
+        variables.create_dataset("rho", data=np.ones(shape))
+        variables.create_dataset("prs", data=np.full(shape, 2.0))
+        variables.create_dataset("tr1", data=np.linspace(0.0, 1.0, np.prod(shape)).reshape(shape))
+
+    mu = 0.62
+
+    class FakeXraise:
+        @staticmethod
+        def grid_bremsstrahlung(rho, pressure, *, frequencies, redshifts):
+            temperature = pressure * mu * module.PROTON_MASS_KG / (rho * module.BOLTZMANN_J_K)
+            emission = np.square(rho)[..., None, None]
+            return emission, temperature
+
+    class OnesInterpolator:
+        def __call__(self, points):
+            return np.ones(points.shape[:-1])
+
+    module.load_module = lambda _path: FakeXraise
+    module.make_interpolators = lambda _apec, _gaunt: (OnesInterpolator(), OnesInterpolator())
+    output = tmp_path / "output"
+    args = SimpleNamespace(
+        input_h5=input_h5,
+        timestep="Timestep_1",
+        output_dir=output,
+        xraise_py=tmp_path / "xraise.py",
+        apec_table=tmp_path / "apec.csv",
+        gaunt_lut=tmp_path / "gaunt.npz",
+        frequency_hz=module.DEFAULT_FREQ_HZ,
+        redshift=0.05,
+        y_chunk=2,
+        view_angle_deg=45.0,
+        projected_u_bins=5,
+        projection_mode="auto",
+    )
+
+    metadata = module.run(args)
+
+    for name in (
+        "xray_emission_measure_rho2_kg2_m5.tsv",
+        "xray_corrected_temperature_numerator_mjy_k_sr.tsv",
+        "xray_emission_weighted_temperature_k.tsv",
+    ):
+        values = np.loadtxt(output / name, delimiter="\t")
+        assert values.shape == (3, 5)
+        assert np.all(np.isfinite(values))
+        assert np.all(values > 0.0)
+    assert metadata["pressure_deprojection_inputs"]["tracer_used"] is False
+    assert metadata["pressure_deprojection_inputs"]["effective_mean_molecular_weight"] == pytest.approx(mu)
+    saved = json.loads((output / "xraise_grid_smoke_metadata.json").read_text())
+    assert saved["pressure_deprojection_inputs"]["tracer_used"] is False
