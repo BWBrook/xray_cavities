@@ -1,4 +1,4 @@
-# Environmental and jet-power effects on observational estimates of radio-galaxy feedback
+# How well do X-ray cavities measure jet energetics?
 
 <div id="authors"></div>
 
@@ -36,7 +36,33 @@ Numerical jet experiments embedded in realistic cosmological environments provid
 
 ## Results
 
-<!-- Present morphology, cavity recovery, energetics, and radio comparisons in decision order. -->
+### Does cavity enthalpy capture the injected jet energy?
+
+<!-- First test the physical assumptions using native simulation quantities and
+the true simulation age. Compare native 2.5pV (4pV for literature comparison)
+with injected energy and the cell-wise thermal, kinetic, and gravitational
+energy changes in cocoon and ambient material. Establish when enthalpy is a
+good proxy and what shocks, ambient motion, and heating contribute. Keep
+enthalpy separate from the additive energy ledger to avoid double counting.
+Use the strict binary tr1 > 1e-3 cocoon mask and its complementary ambient mask
+after the Q-029 recalculation; retain closure and boundary limitations. -->
+
+### How accurately do X-ray observations recover cavity enthalpy?
+
+<!-- Next compare synthetic X-ray estimates with the native quantities already
+tested above. Quantify recovery of volume, pressure, and enthalpy, including
+projection, geometry, and cavity-topology failures. Hold age at the true
+simulation value so these comparisons isolate observational energy recovery.
+Use morphology and maps to explain these physical and measurement results. -->
+
+### How do uncertain ages affect inferred jet power?
+
+<!-- Finally convert energy to power. Begin with X-ray enthalpy divided by the
+true age, then substitute sound-crossing, buoyant-rise, refill, shock, and
+spectral ages to measure the additional timescale error. Compare with known
+bipolar jet power, retain limits and failed estimates, and include empirical
+radio-luminosity power estimates as a separate comparator. Carry the cluster/
+group and high/low-power contrasts through all three Results subsections. -->
 
 <div id="figures"></div>
 

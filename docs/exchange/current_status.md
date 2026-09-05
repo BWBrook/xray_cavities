@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-08-31
+Last updated: 2026-09-05
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -37,6 +37,20 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
+- Stas approves the overall paper plan for iteration. Preferred working
+  title: "How well do X-ray cavities measure jet energetics?" Results must
+  first test native enthalpy against actual jet energetics, then assess
+  X-ray recovery of volume/pressure/enthalpy and geometry, then quantify the
+  added age uncertainty in inferred power. The title and Results scaffold
+  are updated in `manuscript/text/main.md`; prose and figure integration are
+  tracked as `Q-030` in
+  `agent_comms/threads/2026-09-05-paper-plan-review.md`.
+- Before promoting revised energetics conclusions, complete `Q-029`: use
+  strict binary `tr1 > 1e-3` for native cocoon cells at full weight, with the
+  exact complementary ambient mask. Refresh native/X-ray comparisons and
+  the shocked-ambient partition. The original Goal 066/067 results below
+  retain their historical provenance but need this update for the primary
+  interpretation.
 - Production is complete. Goal 062 applied the common fluid, gravity, tracer,
   and shock workflow to all `204` annual snapshots; Goal 063 confirmed that
   the large `C-LO` normalized budget is background dominated; and Goal 064
@@ -48,8 +62,8 @@ current instruction without checking its goal status.
   true, and both spectral clocks with explicit censoring. Goal 065 has been
   regenerated under those corrected gates, Goal 066 completed the selected-
   age dual-space proof, and Goal 067 completed the native 3D shock-energy
-  partition. No PLUTO, X-ray, or PRAiSE rerun is required. The next high-value
-  step is local synthesis/manuscript integration, not cadence expansion.
+  partition. No PLUTO, X-ray, or PRAiSE rerun is required. The next steps are
+  the `Q-029` native energetics refresh and `Q-030` manuscript integration.
 - The PRAiSE coefficient science gate is green; corrected PRAiSE2 is the
   production radio method once its tested source change is published to the
   fork-backed working branch.
