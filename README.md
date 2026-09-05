@@ -4,6 +4,9 @@ Local project shell for UTAS AGN analysis, verification, and documentation workf
 
 This repo is intentionally lightweight. The simulation source lives in the separate GitLab checkout under `/home/bwbrook/git/utas-agn`; this repo provides the reproducible Python/docs environment and the handoff notes needed to work against that source tree confidently.
 
+New project agents should start with [HANDOFF.md](HANDOFF.md), which records
+the current scientific decision boundary and the shortest route forward.
+
 ## What lives here
 
 - a repo-local `uv` environment in `.venv`
