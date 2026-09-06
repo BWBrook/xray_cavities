@@ -16,17 +16,25 @@ import h5py
 import numpy as np
 
 from pluto_h5_level3_ambient_extract import (
+    GAMMA_GAS,
+    UNIT_DENSITY_CGS,
     UNIT_ENERGY_ERG,
+    UNIT_LENGTH_CM,
     derive_widths,
     read_and_validate_axes,
     read_axis,
     require_datasets,
 )
 from snapshot_energy import (
+    ENERGY_FIELDS,
     Geometry,
+    add_energy,
     build_geometry,
+    empty_energy_totals,
     injected_energy,
     load_environment,
+    slice_energy,
+    tracer_partitions,
     write_json,
     write_rows,
 )
@@ -210,8 +218,11 @@ def _create_ratio_cache(
             rho = np.asarray(target_vars["rho"][iz], dtype=np.float64)
             pressure = np.asarray(target_vars["prs"][iz], dtype=np.float64)
             tracer = np.asarray(target_vars["tr1"][iz], dtype=np.float64)
-            if np.any(rho <= 0.0) or np.any(rho0 <= 0.0) or np.any(pressure <= 0.0) or np.any(pressure0 <= 0.0):
-                raise ValueError(f"non-positive density/pressure at z index {iz}")
+            if not np.all(np.isfinite(tracer)):
+                raise ValueError(f"non-finite tracer at z index {iz}")
+            if any(not np.all(np.isfinite(field)) or np.any(field <= 0.0)
+                   for field in (rho, rho0, pressure, pressure0)):
+                raise ValueError(f"non-finite or non-positive density/pressure at z index {iz}")
             rho_ratio = rho / rho0
             pressure_ratio = pressure / pressure0
             arrays["pressure_ratio"][iz] = pressure_ratio
@@ -331,12 +342,28 @@ def _integrate_masks(
     target_timestep: str,
     geometry: Geometry,
     masks: Mapping[float, np.ndarray],
-) -> dict[tuple[float, str], dict[str, float]]:
+) -> tuple[dict, dict, dict[str, Any]]:
     totals = {(factor, side): empty_shock_energy() for factor in THRESHOLD_FACTORS for side in SIDES}
+    partitions = tracer_partitions(np.zeros(1))
+    native = {
+        (mode, side): {component: empty_energy_totals() for component in (
+            "lobe", "ambient", "masked_initial_lobe", "initial", "current",
+            "lobe_region_delta", "ambient_region_delta", "retained_delta"
+        )}
+        for mode, _, _ in partitions for side in (*SIDES, "bipolar_total")
+    }
+    precision: dict[str, Any] = {
+        "tracer_min": math.inf, "tracer_max": -math.inf, "tracer_outside_unit_interval_count": 0,
+    }
+    equality_totals = {kind: empty_energy_totals() for kind in ("exact_double", "raw_dtype_quantized")}
     potential = np.load(geometry.potential_path, mmap_mode="r")
     with h5py.File(baseline_h5_path, "r") as baseline_h5, h5py.File(target_h5_path, "r") as target_h5:
         baseline_vars = baseline_h5[f"/{baseline_timestep}/vars"]
         target_vars = target_h5[f"/{target_timestep}/vars"]
+        raw_dtype = target_vars["tr1"].dtype
+        quantized_threshold = float(raw_dtype.type(1.0e-3))
+        precision.update({"raw_tracer_dtype": str(raw_dtype), "primary_threshold_float64": 1.0e-3,
+                          "raw_dtype_quantized_threshold": quantized_threshold})
         for iz, z_value in enumerate(geometry.z_kpc):
             rho0 = np.asarray(baseline_vars["rho"][iz], dtype=np.float64)
             pressure0 = np.asarray(baseline_vars["prs"][iz], dtype=np.float64)
@@ -346,11 +373,50 @@ def _integrate_masks(
             rho = np.asarray(target_vars["rho"][iz], dtype=np.float64)
             pressure = np.asarray(target_vars["prs"][iz], dtype=np.float64)
             tracer = np.asarray(target_vars["tr1"][iz], dtype=np.float64)
+            if not np.all(np.isfinite(tracer)):
+                raise ValueError(f"non-finite tracer at z index {iz}")
             v1 = np.asarray(target_vars["vx1"][iz], dtype=np.float64)
             v2 = np.asarray(target_vars["vx2"][iz], dtype=np.float64)
             v3 = np.asarray(target_vars["vx3"][iz], dtype=np.float64)
+            if any(not np.all(np.isfinite(field)) or np.any(field <= 0.0)
+                   for field in (rho, rho0, pressure, pressure0)):
+                raise ValueError(f"non-finite or non-positive density/pressure at z index {iz}")
+            if any(not np.all(np.isfinite(field)) for field in (v1, v2, v3, v10, v20, v30)):
+                raise ValueError(f"non-finite velocity at z index {iz}")
             volume = geometry.volume_xy_kpc2 * geometry.dz_kpc[iz]
             side = "negative_z" if z_value < 0.0 else "positive_z"
+            precision["tracer_min"] = min(precision["tracer_min"], float(np.min(tracer)))
+            precision["tracer_max"] = max(precision["tracer_max"], float(np.max(tracer)))
+            precision["tracer_outside_unit_interval_count"] += int(np.count_nonzero((tracer < 0) | (tracer > 1)))
+            current_fields = dict(rho=rho, pressure=pressure, velocity_squared=v1**2 + v2**2 + v3**2,
+                                  volume_kpc3=volume, potential_cm2_s2=potential[iz])
+            initial_fields = dict(rho=rho0, pressure=pressure0, velocity_squared=v10**2 + v20**2 + v30**2,
+                                  volume_kpc3=volume, potential_cm2_s2=potential[iz])
+            whole_current = slice_energy(**current_fields, weight=np.ones_like(tracer))
+            whole_initial = slice_energy(**initial_fields, weight=np.ones_like(tracer))
+            # Subtract the retained t0 fields before summation: background
+            # cancellation can otherwise erase small fixed-region changes.
+            delta_cells = {
+                "thermal_erg": (pressure - pressure0) * volume * UNIT_ENERGY_ERG / (GAMMA_GAS - 1.0),
+                "kinetic_erg": 0.5 * (rho * current_fields["velocity_squared"] - rho0 * initial_fields["velocity_squared"]) * volume * UNIT_ENERGY_ERG,
+                "gravitational_erg": (rho - rho0) * volume * UNIT_DENSITY_CGS * UNIT_LENGTH_CM**3 * potential[iz],
+            }
+            retained_delta = empty_energy_totals() | {field: float(np.sum(array)) for field, array in delta_cells.items()}
+            for mode, _, weight in tracer_partitions(tracer):
+                values = {
+                    "lobe": slice_energy(**current_fields, weight=weight),
+                    "ambient": slice_energy(**current_fields, weight=1.0 - weight),
+                    "masked_initial_lobe": slice_energy(**initial_fields, weight=weight),
+                    "initial": whole_initial, "current": whole_current,
+                    "lobe_region_delta": empty_energy_totals() | {field: float(np.sum(weight * array)) for field, array in delta_cells.items()},
+                    "ambient_region_delta": empty_energy_totals() | {field: float(np.sum((1.0 - weight) * array)) for field, array in delta_cells.items()},
+                    "retained_delta": retained_delta,
+                }
+                for target_side in (side, "bipolar_total"):
+                    for component, value in values.items():
+                        add_energy(native[(mode, target_side)][component], value)
+            for kind, threshold in (("exact_double", 1.0e-3), ("raw_dtype_quantized", quantized_threshold)):
+                add_energy(equality_totals[kind], slice_energy(**current_fields, weight=(tracer == threshold)))
             for factor, mask in masks.items():
                 if not np.any(mask[iz]):
                     continue
@@ -367,7 +433,66 @@ def _integrate_masks(
                     mask=mask[iz],
                 )
                 add_shock_energy(totals[(factor, side)], values)
-    return totals
+    for kind, values in equality_totals.items():
+        precision.update({f"{kind}_equality_{field}": value for field, value in values.items()})
+        precision[f"{kind}_equality_cell_count"] = int(values["cell_equivalent"])
+        precision[f"{kind}_equality_pressure_volume_erg"] = (GAMMA_GAS - 1.0) * values["thermal_erg"]
+    return totals, native, precision
+
+
+def _native_energy_rows(case: str, source: Mapping[str, Any], native: dict,
+                        one_sided: float, bipolar: float) -> list[dict[str, Any]]:
+    """Keep absolute-lobe allocation and label fixed-region changes separately."""
+    rows = []
+    labels = {mode: label for mode, label, _ in tracer_partitions(np.zeros(1))}
+    for (mode, side), values in native.items():
+        injected = bipolar if side == "bipolar_total" else one_sided
+        lobe, ambient, initial = values["lobe"], values["ambient"], values["initial"]
+        row = {"case": case, "snapshot_index": int(source["snapshot_index"]),
+               "actual_time_code": float(source["actual_time_code"]),
+               "actual_time_myr": float(source["actual_time_myr"]), "side": side,
+               "partition_method": mode, "tracer_threshold": labels[mode]}
+        for field in ENERGY_FIELDS:
+            row[f"lobe_{field}"] = lobe[field]
+            row[f"gas_{field}"] = ambient[field]
+            row[f"masked_initial_lobe_{field}"] = values["masked_initial_lobe"][field]
+            row[f"initial_{field}"] = initial[field]
+            row[f"current_{field}"] = values["current"][field]
+        for component in ("thermal", "kinetic", "gravitational"):
+            field = f"{component}_erg"
+            lobe_delta = values["lobe_region_delta"][field]
+            ambient_delta = values["ambient_region_delta"][field]
+            gas_allocation = ambient_delta - values["masked_initial_lobe"][field]
+            retained = values["retained_delta"][field]
+            row[f"gas_{component}_delta_erg"] = gas_allocation
+            row[f"lobe_region_{component}_delta_erg"] = lobe_delta
+            row[f"ambient_region_{component}_delta_erg"] = ambient_delta
+            row[f"retained_{component}_delta_erg"] = retained
+            row[f"allocation_{component}_invariant_residual_erg"] = lobe[field] + gas_allocation - retained
+            row[f"region_{component}_invariant_residual_erg"] = lobe_delta + ambient_delta - retained
+        for prefix, fields in (
+            ("gas_total_delta_erg", [f"gas_{c}_delta_erg" for c in ("thermal", "kinetic", "gravitational")]),
+            ("lobe_total_erg", [f"lobe_{c}_erg" for c in ("thermal", "kinetic", "gravitational")]),
+            ("masked_initial_lobe_total_erg", [f"masked_initial_lobe_{c}_erg" for c in ("thermal", "kinetic", "gravitational")]),
+            ("lobe_region_total_delta_erg", [f"lobe_region_{c}_delta_erg" for c in ("thermal", "kinetic", "gravitational")]),
+            ("ambient_region_total_delta_erg", [f"ambient_region_{c}_delta_erg" for c in ("thermal", "kinetic", "gravitational")]),
+            ("retained_energy_erg", [f"retained_{c}_delta_erg" for c in ("thermal", "kinetic", "gravitational")]),
+        ):
+            row[prefix] = sum(row[field] for field in fields)
+        pv = (GAMMA_GAS - 1.0) * lobe["thermal_erg"]
+        residual = injected - row["retained_energy_erg"]
+        row.update({"lobe_pressure_volume_erg": pv,
+                    "lobe_mean_pressure_dyn_cm2": pv / (lobe["volume_kpc3"] * UNIT_LENGTH_CM**3) if lobe["volume_kpc3"] else "",
+                    "lobe_enthalpy_2p5pv_erg": 2.5 * pv, "lobe_enthalpy_4pv_erg": 4.0 * pv,
+                    "injected_energy_erg": injected, "unattributed_residual_erg": residual,
+                    "closure_fraction_of_injected": residual / injected if injected else "",
+                    "boundary_energy_erg": "", "boundary_status": "unmeasured_from_retained_snapshots",
+                    "residual_interpretation": "not_promoted_to_cocoon_boundary_unresolved",
+                    "baseline_allocation": "all_t0_energy_subtracted_from_ambient_allocation",
+                    "region_delta_reference": "same_t0_cells_under_current_partition_weights"})
+        row["threshold_comparison"] = "fractional_clipped" if mode == "fractional" else "float64_stored_value_strict_gt"
+        rows.append(row)
+    return rows
 
 
 def _energy_columns(values: Mapping[str, float], injected: float) -> dict[str, Any]:
@@ -411,6 +536,8 @@ def analyze_case(
         cache_path=geometry_cache,
     )
     rows: list[dict[str, Any]] = []
+    native_rows: list[dict[str, Any]] = []
+    precision_rows: list[dict[str, Any]] = []
     for source in manifest:
         snapshot_index = int(source["snapshot_index"])
         shape = tuple(int(value) for value in source["shape_nz_ny_nx"].split("x"))
@@ -433,7 +560,7 @@ def analyze_case(
             front_rows=accepted_fronts,
             cache_root=snapshot_cache,
         )
-        totals = _integrate_masks(
+        totals, native, precision = _integrate_masks(
             baseline_h5_path=baseline_path,
             baseline_timestep=baseline_timestep,
             target_h5_path=Path(source["input_h5"]),
@@ -447,6 +574,10 @@ def analyze_case(
             jet_start_myr=0.0,
             jet_active_myr=50.0,
         )
+        native_rows.extend(_native_energy_rows(case, source, native, one_sided, bipolar))
+        precision_rows.append({"case": case, "snapshot_index": snapshot_index,
+                               "actual_time_myr": float(source["actual_time_myr"]),
+                               "input_h5": source["input_h5"], "timestep": source["timestep"], **precision})
         for factor in THRESHOLD_FACTORS:
             side_rows: list[dict[str, Any]] = []
             p_cut, rho_cut, entropy_cut = thresholds.scaled(factor)
@@ -466,6 +597,7 @@ def analyze_case(
                     "density_excess_threshold": rho_cut,
                     "entropy_excess_threshold": entropy_cut,
                     "ambient_tracer_max": AMBIENT_TRACER_MAX,
+                    "ambient_energy_weighting": "binary_full_cell",
                     "component_count": diagnostic.get("component_count", ""),
                     "selected_component_count": diagnostic.get("selected_component_count", ""),
                     "front_seed_cell_count": diagnostic.get("front_seed_cell_count", ""),
@@ -516,6 +648,8 @@ def analyze_case(
         shutil.rmtree(snapshot_cache)
         print(f"native_shock_snapshot_complete={case}/{snapshot_index}", flush=True)
     write_rows(output_root / "native_shock_energy_selected_age.csv", rows)
+    write_rows(output_root / "native_energy_selected_age.csv", native_rows)
+    write_rows(output_root / "tracer_threshold_precision.csv", precision_rows)
     shutil.copy2(source_manifest, output_root / "source_manifest.csv")
     shutil.copy2(shock_dynamics, output_root / "accepted_axial_shock_dynamics.csv")
     shutil.copy2(control_calibration, output_root / "control_threshold_calibration.csv")
@@ -524,6 +658,18 @@ def analyze_case(
         "case": case,
         "selected_age_count": len(manifest),
         "row_count": len(rows),
+        "native_energy_row_count": len(native_rows),
+        "tracer_precision_row_count": len(precision_rows),
+        "primary_native_partition": "binary_threshold_1e-3",
+        "ambient_tracer_max": AMBIENT_TRACER_MAX,
+        "ambient_energy_weighting": "binary_full_cell",
+        "threshold_comparison": "float64_stored_value_strict_gt",
+        "native_membership": "float64(clip(tr1,0,1)) > float64(0.001); full-cell terms",
+        "native_sensitivities": ["fractional", "binary_threshold_5e-3", "binary_threshold_1e-2"],
+        "native_allocation": "absolute lobe plus complementary ambient minus full t0 baseline",
+        "native_region_diagnostics": "current-mask lobe and ambient changes relative to same t0 cells; includes nonzero initial nozzle",
+        "shock_accounting": "shock is a subset of ambient-region change, never added to the entire ambient ledger",
+        "precision_diagnostics": "exact float64 threshold and raw-dtype-quantized threshold equality cohorts",
         "primary_threshold_factor": 1.0,
         "threshold_factors": list(THRESHOLD_FACTORS),
         "shock_processed_mask": "ambient entropy-excess component connected to compressed axial-front seed",

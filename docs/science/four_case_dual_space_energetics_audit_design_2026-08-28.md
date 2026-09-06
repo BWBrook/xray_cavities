@@ -62,9 +62,12 @@ Delta E_ambient,q(t)
   = sum_i {[(1-f_i(t)) q_i(t) - q_i(0)] V_i}.
 ```
 
-The initial atmosphere has `f_i(0)=0`, so the first expression reduces to the
-current tracer-weighted lobe energy while retaining the explicit cell-wise
-`t=0` convention.
+The design assumed `f_i(0)=0`. The Q-029 audit on 2026-09-06 found that the
+retained t=0 files contain a nonzero nozzle/tracer region, so this reduction
+must not be used for those files. The implementation's absolute current lobe
+energy is distinct from a lobe energy change. The corrected binary allocation
+and complementary current-region changes are defined in
+`q029_binary_native_refresh_2026-09-06.md`; neither assumes zero initial tracer.
 
 When matched no-jet controls are available, subtract their cell-wise evolution
 from the second expression. One cluster and one group control are sufficient

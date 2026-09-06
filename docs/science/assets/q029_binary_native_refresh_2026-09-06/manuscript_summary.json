@@ -1,0 +1,529 @@
+{
+  "age_method_counts_note": "Finite and censored counts and medians are from the accepted Q029 power refresh; censored limits are retained separately and are not included in exact medians.",
+  "age_methods_2p5pv": {
+    "buoyant_rise_age": {
+      "C-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 11,
+        "age_median_t_est_over_t_true": 2.6808057202960343,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 11,
+        "power_median_q_est_over_q_true": 0.0045993893255084455
+      },
+      "C-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 3.1231141322818132,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.1679453314839937
+      },
+      "G-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 6,
+        "age_median_t_est_over_t_true": 3.997249329923048,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 6,
+        "power_median_q_est_over_q_true": 0.0007316921250761952
+      },
+      "G-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 2.4117758097101243,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.030324706166821234
+      }
+    },
+    "refill_age": {
+      "C-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 11,
+        "age_median_t_est_over_t_true": 3.133966572931876,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 11,
+        "power_median_q_est_over_q_true": 0.0038614035256803185
+      },
+      "C-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 2.123059902094944,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.24209385072705525
+      },
+      "G-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 6,
+        "age_median_t_est_over_t_true": 5.334099647343555,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 6,
+        "power_median_q_est_over_q_true": 0.0005468355007022299
+      },
+      "G-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 2.661622133112994,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.02721561886180051
+      }
+    },
+    "shock_kinematic_age": {
+      "C-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 11,
+        "age_median_t_est_over_t_true": 1.3231104401238465,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 11,
+        "power_median_q_est_over_q_true": 0.012460805955886644
+      },
+      "C-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 0,
+        "age_median_t_est_over_t_true": null,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 0,
+        "power_median_q_est_over_q_true": null
+      },
+      "G-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 6,
+        "age_median_t_est_over_t_true": 1.4558159018193115,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 6,
+        "power_median_q_est_over_q_true": 0.002005265874632345
+      },
+      "G-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 2.159294982426889,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.03778353104697239
+      }
+    },
+    "sound_crossing_age": {
+      "C-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 11,
+        "age_median_t_est_over_t_true": 1.3852393726236392,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 11,
+        "power_median_q_est_over_q_true": 0.009277816923954761
+      },
+      "C-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 1.6689697489634487,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.3103869525526388
+      },
+      "G-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 6,
+        "age_median_t_est_over_t_true": 2.8498394786069907,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 6,
+        "power_median_q_est_over_q_true": 0.0010244593732072179
+      },
+      "G-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 1.5894513004068849,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.04633241108804187
+      }
+    },
+    "spectral_age_emissivity_weighted": {
+      "C-HI": {
+        "age_censored_bound_median_t_est_over_t_true": 0.433420611033785,
+        "age_censored_upper_limit_count": 1,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 0.4024948859683989,
+        "power_censored_bound_median_q_est_over_q_true": 0.19993870711464468,
+        "power_censored_lower_limit_count": 1,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.05048767648230451
+      },
+      "C-LO": {
+        "age_censored_bound_median_t_est_over_t_true": 0.7266186751758434,
+        "age_censored_upper_limit_count": 3,
+        "age_finite_count": 7,
+        "age_median_t_est_over_t_true": 0.4969622463419833,
+        "power_censored_bound_median_q_est_over_q_true": 1.768136802571241,
+        "power_censored_lower_limit_count": 3,
+        "power_finite_count": 7,
+        "power_median_q_est_over_q_true": 1.2092709481826205
+      },
+      "G-HI": {
+        "age_censored_bound_median_t_est_over_t_true": 0.7137163662440156,
+        "age_censored_upper_limit_count": 6,
+        "age_finite_count": 0,
+        "age_median_t_est_over_t_true": null,
+        "power_censored_bound_median_q_est_over_q_true": 0.004084322512835268,
+        "power_censored_lower_limit_count": 6,
+        "power_finite_count": 0,
+        "power_median_q_est_over_q_true": null
+      },
+      "G-LO": {
+        "age_censored_bound_median_t_est_over_t_true": 0.8351035314864943,
+        "age_censored_upper_limit_count": 10,
+        "age_finite_count": 0,
+        "age_median_t_est_over_t_true": null,
+        "power_censored_bound_median_q_est_over_q_true": 0.08688872592579605,
+        "power_censored_lower_limit_count": 10,
+        "power_finite_count": 0,
+        "power_median_q_est_over_q_true": null
+      }
+    },
+    "spectral_age_mean_pressure": {
+      "C-HI": {
+        "age_censored_bound_median_t_est_over_t_true": 0.9661704995229576,
+        "age_censored_upper_limit_count": 1,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 0.5662509889335136,
+        "power_censored_bound_median_q_est_over_q_true": 0.08969178488654027,
+        "power_censored_lower_limit_count": 1,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.018067315719208506
+      },
+      "C-LO": {
+        "age_censored_bound_median_t_est_over_t_true": 0.9097111924160535,
+        "age_censored_upper_limit_count": 3,
+        "age_finite_count": 7,
+        "age_median_t_est_over_t_true": 0.5411987326346963,
+        "power_censored_bound_median_q_est_over_q_true": 1.5257293677664883,
+        "power_censored_lower_limit_count": 3,
+        "power_finite_count": 7,
+        "power_median_q_est_over_q_true": 0.8561578462132466
+      },
+      "G-HI": {
+        "age_censored_bound_median_t_est_over_t_true": 1.3629227491044598,
+        "age_censored_upper_limit_count": 6,
+        "age_finite_count": 0,
+        "age_median_t_est_over_t_true": null,
+        "power_censored_bound_median_q_est_over_q_true": 0.0021419527674213885,
+        "power_censored_lower_limit_count": 6,
+        "power_finite_count": 0,
+        "power_median_q_est_over_q_true": null
+      },
+      "G-LO": {
+        "age_censored_bound_median_t_est_over_t_true": 0.8397024319165108,
+        "age_censored_upper_limit_count": 10,
+        "age_finite_count": 0,
+        "age_median_t_est_over_t_true": null,
+        "power_censored_bound_median_q_est_over_q_true": 0.08628340877197897,
+        "power_censored_lower_limit_count": 10,
+        "power_finite_count": 0,
+        "power_median_q_est_over_q_true": null
+      }
+    },
+    "true_source_age": {
+      "C-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 11,
+        "age_median_t_est_over_t_true": 1.0,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 11,
+        "power_median_q_est_over_q_true": 0.012177860768481673
+      },
+      "C-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 1.0,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.5139954448748258
+      },
+      "G-HI": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 6,
+        "age_median_t_est_over_t_true": 1.0,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 6,
+        "power_median_q_est_over_q_true": 0.0029193161542258646
+      },
+      "G-LO": {
+        "age_censored_bound_median_t_est_over_t_true": null,
+        "age_censored_upper_limit_count": 0,
+        "age_finite_count": 10,
+        "age_median_t_est_over_t_true": 1.0,
+        "power_censored_bound_median_q_est_over_q_true": null,
+        "power_censored_lower_limit_count": 0,
+        "power_finite_count": 10,
+        "power_median_q_est_over_q_true": 0.07245238817987715
+      }
+    }
+  },
+  "cases": {
+    "C-HI": {
+      "accepted_ages_myr": [
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "native_h_over_einj": {
+        "2.5pV": {
+          "max": 0.5587142221382805,
+          "min": 0.524922409249707
+        },
+        "4pV": {
+          "max": 0.8939427554212488,
+          "min": 0.8398758547995312
+        }
+      },
+      "native_lobe_current_region_delta_over_einj": {
+        "max": 0.4259525091851461,
+        "min": 0.1319186102222089
+      },
+      "observer_recovery": {
+        "2.5pV": {
+          "factor_two_count": 0,
+          "finite_count": 11,
+          "median": 0.022238608555856666
+        },
+        "pressure": {
+          "factor_two_count": 11,
+          "finite_count": 11,
+          "median": 1.156713133606511
+        },
+        "volume": {
+          "factor_two_count": 0,
+          "finite_count": 11,
+          "median": 0.019789354858993764
+        }
+      },
+      "shock_selected_total_over_einj": {
+        "quantitative_ages_myr": [
+          10,
+          20,
+          30,
+          40,
+          50
+        ],
+        "quantitative_range": {
+          "max": 0.7645661444272546,
+          "min": 0.6655171105670011
+        },
+        "unresolved_ages_myr": []
+      }
+    },
+    "C-LO": {
+      "accepted_ages_myr": [
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "native_h_over_einj": {
+        "2.5pV": {
+          "max": 1.107520751723283,
+          "min": 0.6309474905084563
+        },
+        "4pV": {
+          "max": 1.7720332027572527,
+          "min": 1.00951598481353
+        }
+      },
+      "native_lobe_current_region_delta_over_einj": {
+        "max": 0.1374944074781611,
+        "min": -0.1599953633297097
+      },
+      "observer_recovery": {
+        "2.5pV": {
+          "factor_two_count": 5,
+          "finite_count": 10,
+          "median": 0.4937992960633978
+        },
+        "pressure": {
+          "factor_two_count": 10,
+          "finite_count": 10,
+          "median": 1.008727420984251
+        },
+        "volume": {
+          "factor_two_count": 4,
+          "finite_count": 10,
+          "median": 0.48534508359279077
+        }
+      },
+      "shock_selected_total_over_einj": {
+        "quantitative_ages_myr": [
+          10
+        ],
+        "quantitative_range": {
+          "max": 0.22284141736523913,
+          "min": 0.22284141736523913
+        },
+        "unresolved_ages_myr": [
+          20,
+          30,
+          40,
+          50
+        ]
+      }
+    },
+    "G-HI": {
+      "accepted_ages_myr": [
+        10,
+        20,
+        30,
+        40
+      ],
+      "native_h_over_einj": {
+        "2.5pV": {
+          "max": 0.4983158476228323,
+          "min": 0.4682324602996427
+        },
+        "4pV": {
+          "max": 0.7973053561965318,
+          "min": 0.7491719364794283
+        }
+      },
+      "native_lobe_current_region_delta_over_einj": {
+        "max": 0.571122565026621,
+        "min": 0.42467582831015765
+      },
+      "observer_recovery": {
+        "2.5pV": {
+          "factor_two_count": 0,
+          "finite_count": 6,
+          "median": 0.006034403135219231
+        },
+        "pressure": {
+          "factor_two_count": 5,
+          "finite_count": 6,
+          "median": 0.5635354797161103
+        },
+        "volume": {
+          "factor_two_count": 0,
+          "finite_count": 6,
+          "median": 0.010709271318549918
+        }
+      },
+      "shock_selected_total_over_einj": {
+        "quantitative_ages_myr": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "quantitative_range": {
+          "max": 0.6546352480019231,
+          "min": 0.5050605523159949
+        },
+        "unresolved_ages_myr": []
+      }
+    },
+    "G-LO": {
+      "accepted_ages_myr": [
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "native_h_over_einj": {
+        "2.5pV": {
+          "max": 0.784921375253569,
+          "min": 0.6147062585580219
+        },
+        "4pV": {
+          "max": 1.2558742004057104,
+          "min": 0.9835300136928349
+        }
+      },
+      "native_lobe_current_region_delta_over_einj": {
+        "max": 0.29801318304124624,
+        "min": 0.012913915362314756
+      },
+      "observer_recovery": {
+        "2.5pV": {
+          "factor_two_count": 0,
+          "finite_count": 10,
+          "median": 0.09289671336520418
+        },
+        "pressure": {
+          "factor_two_count": 10,
+          "finite_count": 10,
+          "median": 1.0185413993676486
+        },
+        "volume": {
+          "factor_two_count": 0,
+          "finite_count": 10,
+          "median": 0.0903034958886035
+        }
+      },
+      "shock_selected_total_over_einj": {
+        "quantitative_ages_myr": [
+          10,
+          20,
+          30,
+          40,
+          50
+        ],
+        "quantitative_range": {
+          "max": 0.8544855179832431,
+          "min": 0.5798337830577597
+        },
+        "unresolved_ages_myr": []
+      }
+    }
+  },
+  "native_partition": "binary_tr1_gt_1e-3_full_cell_initial_state_subtraction_proven_ge_equivalent",
+  "native_rows": 19,
+  "observer_rows": 37,
+  "observer_selection": {
+    "energy_model": "2.5pV",
+    "pressure_method": "ellipsoid_volume_average",
+    "quantitative_rows": 37,
+    "topology_censored_rows": 20,
+    "volume_depth_assumption": "geometric_depth"
+  },
+  "power_refresh_convention": "Age summary uses arithmetic mean of side ages divided by true age; power uses sum(H_side/t_side) and therefore its effective age can differ from the plotted age summary.",
+  "shock_rows": 19,
+  "status": "q029_first_q030_manuscript_figure_iteration"
+}

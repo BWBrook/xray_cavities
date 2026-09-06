@@ -48,7 +48,7 @@ ENERGY_FIELDS = (
     "shock_fraction_of_injected",
     "irreversible_fraction_of_injected",
 )
-DECISION_LABEL = "SELECTED_AGE_NATIVE_SHOCK_PARTITION_GREEN_C_LO_LATE_FAIL_CLOSED"
+SURFACE_ROLES = ("primary", "historical_sensitivity")
 
 
 class ProductError(ValueError):
@@ -111,12 +111,16 @@ def optional_summary(values: Sequence[float]) -> tuple[Any, Any, Any]:
     return statistics.median(values), min(values), max(values)
 
 
-def load_shock_surface(shock_root: Path) -> tuple[
+def load_shock_surface(shock_root: Path, *, surface_role: str = "primary") -> tuple[
     list[dict[str, str]],
     list[dict[str, str]],
     list[dict[str, Any]],
     list[dict[str, str]],
 ]:
+    if surface_role not in SURFACE_ROLES:
+        raise ProductError(f"unsupported surface role: {surface_role}")
+    expected_ceiling = 0.001 if surface_role == "primary" else 0.01
+    expected_weighting = "binary_full_cell" if surface_role == "primary" else "fractional_1_minus_clipped_tracer"
     combined: list[dict[str, str]] = []
     primary: list[dict[str, str]] = []
     sensitivity: list[dict[str, Any]] = []
@@ -126,6 +130,12 @@ def load_shock_surface(shock_root: Path) -> tuple[
         metadata = json.loads((case_root / "selected_age_native_shock_metadata.json").read_text())
         if metadata.get("status") != "complete_selected_age_native_shock_partition":
             raise ProductError(f"{case}: completion metadata failed")
+        if surface_role == "primary" or "ambient_tracer_max" in metadata:
+            if metadata.get("ambient_tracer_max") != expected_ceiling:
+                raise ProductError(f"{case}: metadata ambient tracer ceiling does not match {surface_role}")
+        if surface_role == "primary" or "ambient_energy_weighting" in metadata:
+            if metadata.get("ambient_energy_weighting") != expected_weighting:
+                raise ProductError(f"{case}: metadata ambient weighting does not match {surface_role}")
         rows = read_rows(case_root / "native_shock_energy_selected_age.csv")
         expected_keys = {
             (case, age, side, factor)
@@ -139,7 +149,17 @@ def load_shock_surface(shock_root: Path) -> tuple[
         }
         if observed_keys != expected_keys or len(rows) != len(expected_keys):
             raise ProductError(f"{case}: selected-age coverage failed")
+        if metadata.get("row_count") != len(rows) or metadata.get("selected_age_count") != len(EXPECTED_AGES[case]):
+            raise ProductError(f"{case}: completion metadata counts do not match rows")
         for row in rows:
+            if finite(row["ambient_tracer_max"], context="ambient tracer ceiling") != expected_ceiling:
+                raise ProductError(f"{case}: row ambient tracer ceiling does not match {surface_role}")
+            if surface_role == "primary" or "ambient_energy_weighting" in row:
+                if row.get("ambient_energy_weighting") != expected_weighting:
+                    raise ProductError(f"{case}: row ambient weighting does not match {surface_role}")
+            row["ambient_energy_weighting"] = expected_weighting
+            row["surface_role"] = surface_role
+            row["weighting_evidence"] = "explicit_source_metadata_and_rows" if surface_role == "primary" else "historical_goal067_implementation_convention"
             if row["status"] not in ALLOWED_STATUSES:
                 raise ProductError(f"{case}: unexpected status {row['status']}")
             quantitative = row["status"].startswith("quantitative_")
@@ -150,8 +170,20 @@ def load_shock_surface(shock_root: Path) -> tuple[
                     raise ProductError(f"{case}: invalid mask volume")
                 if finite(row["selected_cell_count"], context="selected cells") < 100:
                     raise ProductError(f"{case}: insufficient selected-cell support")
+                if surface_role == "primary" and not math.isclose(
+                    float(row["mask_volume_kpc3"]), float(row["ambient_weighted_volume_kpc3"]), rel_tol=1e-12
+                ):
+                    raise ProductError(f"{case}: full-cell ambient volume differs from mask volume")
             elif any(row[field] for field in ENERGY_FIELDS):
                 raise ProductError(f"{case}: unresolved row contains quantitative values")
+        by_side = {(int(row["snapshot_index"]), float(row["threshold_factor"]), row["side"]): row for row in rows}
+        for age in EXPECTED_AGES[case]:
+            for factor in THRESHOLD_FACTORS:
+                sides = [by_side[(age, factor, side)] for side in SIDES[:2]]
+                bipolar_row = by_side[(age, factor, "bipolar_total")]
+                bilateral = all(row["status"] == "quantitative_seeded_component" for row in sides)
+                if (bipolar_row["status"] == "quantitative_bilateral") != bilateral:
+                    raise ProductError(f"{case}/{age}: bipolar validity disagrees with side gates")
         combined.extend(rows)
         bipolar = [row for row in rows if row["side"] == "bipolar_total"]
         by_key = {
@@ -168,6 +200,9 @@ def load_shock_surface(shock_root: Path) -> tuple[
                     "actual_time_myr": row["actual_time_myr"],
                     "threshold_factor": factor,
                     "status": row["status"],
+                    "surface_role": surface_role,
+                    "ambient_tracer_max": expected_ceiling,
+                    "ambient_energy_weighting": expected_weighting,
                     "shock_fraction_of_injected": row["shock_fraction_of_injected"],
                     "irreversible_fraction_of_injected": row[
                         "irreversible_fraction_of_injected"
@@ -190,7 +225,7 @@ def load_shock_surface(shock_root: Path) -> tuple[
                         ("mask_volume_kpc3", "relative_volume_to_primary"),
                     ):
                         denominator = finite(primary_row[source], context=f"primary {source}")
-                        output[target] = finite(row[source], context=source) / denominator
+                        output[target] = finite(row[source], context=source) / denominator if denominator else ""
                 sensitivity.append(output)
     controls = [
         read_rows(shock_root / "calibration" / f"{environment}_control_thresholds.csv")[0]
@@ -260,10 +295,11 @@ def case_summaries(
                 "double_threshold_ratio_min": double_min,
                 "double_threshold_ratio_max": double_max,
                 "interpretation_status": (
-                    "late_age_fail_closed_non_supersonic_front"
-                    if case == "C-LO"
-                    else "quantitative_all_selected_ages"
+                    "quantitative_all_selected_ages" if len(quantitative) == len(rows)
+                    else "all_selected_ages_unresolved" if not quantitative
+                    else "quantitative_subset_with_unresolved_ages"
                 ),
+                "surface_role": rows[0]["surface_role"],
             }
         )
     return output
@@ -273,6 +309,9 @@ def shock_additions(row: Mapping[str, str]) -> dict[str, Any]:
     quantitative = row["status"] == "quantitative_bilateral"
     return {
         "native_shock_threshold_factor": 1.0,
+        "native_shock_surface_role": row["surface_role"],
+        "native_shock_ambient_tracer_max": row["ambient_tracer_max"],
+        "native_shock_ambient_energy_weighting": row["ambient_energy_weighting"],
         "native_shock_status": row["status"],
         "native_shock_thermal_delta_erg": row["thermal_delta_erg"] if quantitative else "",
         "native_shock_kinetic_delta_erg": row["kinetic_delta_erg"] if quantitative else "",
@@ -326,15 +365,12 @@ def join_goal066(
             dict(row)
             | addition
             | {
-                "native_shock_to_ambient_total": ratio,
+                "native_shock_to_ambient_allocation": ratio,
+                "native_shock_ambient_ratio_definition": "shock_region_change_divided_by_ambient_allocation_not_spatial_fraction",
                 "native_shock_interpretation": (
-                    "descriptive_background_dominated"
-                    if row["case"] == "C-LO"
-                    else (
-                        "quantitative_selected_region_partition"
-                        if addition["native_shock_total_delta_erg"] != ""
-                        else "fail_closed_unresolved"
-                    )
+                    "fail_closed_unresolved" if addition["native_shock_total_delta_erg"] == ""
+                    else "descriptive_background_dominated" if row["case"] == "C-LO"
+                    else "quantitative_selected_region_partition"
                 ),
             }
         )
@@ -347,9 +383,9 @@ def join_goal066(
         addition = shock_additions(shock_by_key[key])
         observer_to_shock: Any = ""
         if row["observer_enthalpy_erg"] and addition["native_shock_total_delta_erg"] != "":
-            observer_to_shock = finite(
-                row["observer_enthalpy_erg"], context="observer enthalpy"
-            ) / finite(addition["native_shock_total_delta_erg"], context="shock total", positive=True)
+            denominator = finite(addition["native_shock_total_delta_erg"], context="shock total")
+            if denominator:
+                observer_to_shock = finite(row["observer_enthalpy_erg"], context="observer enthalpy") / denominator
         matched_output.append(
             dict(row)
             | addition
@@ -370,8 +406,7 @@ def make_figure(
             (row for row in primary if row["case"] == case),
             key=lambda row: int(row["snapshot_index"]),
         )
-        quantitative = [row for row in rows if row["status"] == "quantitative_bilateral"]
-        ages = [int(row["snapshot_index"]) for row in quantitative]
+        ages = [int(row["snapshot_index"]) for row in rows]
         for axis, field, ylabel in (
             (axes[0], "shock_fraction_of_injected", "Shock-region energy / injected energy"),
             (
@@ -380,10 +415,10 @@ def make_figure(
                 "Irreversible heating / injected energy",
             ),
         ):
-            values = [float(row[field]) for row in quantitative]
+            values = [float(row[field]) if row["status"] == "quantitative_bilateral" else math.nan for row in rows]
             axis.plot(ages, values, marker="o", color=colours[case], label=case)
             lower, upper = [], []
-            for age in ages:
+            for age, primary_row in zip(ages, rows):
                 candidates = [
                     float(row[field])
                     for row in sensitivity
@@ -391,8 +426,9 @@ def make_figure(
                     and int(row["snapshot_index"]) == age
                     and row[field] != ""
                 ]
-                lower.append(min(candidates))
-                upper.append(max(candidates))
+                valid = primary_row["status"] == "quantitative_bilateral"
+                lower.append(min(candidates) if candidates and valid else math.nan)
+                upper.append(max(candidates) if candidates and valid else math.nan)
             axis.fill_between(ages, lower, upper, color=colours[case], alpha=0.14)
             axis.set_ylabel(ylabel)
         unresolved = [int(row["snapshot_index"]) for row in rows if row["status"] != "quantitative_bilateral"]
@@ -406,7 +442,7 @@ def make_figure(
     axes[1].text(
         0.98,
         0.04,
-        "Shading: 0.5–2× threshold range\n×: prespecified fail-closed row",
+        "Shading: 0.5–2× threshold range\n×: unresolved by validity gates",
         transform=axes[1].transAxes,
         ha="right",
         va="bottom",
@@ -423,11 +459,16 @@ def build_product(
     goal066_native: Path,
     goal066_matched: Path,
     output_root: Path,
+    surface_role: str = "primary",
 ) -> dict[str, Any]:
     if output_root.exists():
         raise ProductError(f"refusing to overwrite output: {output_root}")
-    output_root.mkdir(parents=True)
-    combined, primary, sensitivity, controls = load_shock_surface(shock_root)
+    combined, primary, sensitivity, controls = load_shock_surface(shock_root, surface_role=surface_role)
+    if surface_role == "primary":
+        for path in (goal066_native, goal066_matched):
+            if any("binary_tr1_gt_1e-3_full_cell" not in row.get("native_partition_method", "")
+                   for row in read_rows(path)):
+                raise ProductError("primary shock closeout requires strict binary full-cell native context")
     summaries = case_summaries(primary, sensitivity)
     native_join, matched_join = join_goal066(
         primary=primary,
@@ -440,18 +481,19 @@ def build_product(
         for row in primary
         if row["status"] != "quantitative_bilateral"
     ]
+    decision_label = "VALIDATED_STRICT_FULL_CELL_SHOCK_SURFACE" if surface_role == "primary" else "VALIDATED_HISTORICAL_SHOCK_SENSITIVITY"
+    output_root.mkdir(parents=True)
     decision = [{
-        "decision_label": DECISION_LABEL,
+        "decision_label": decision_label,
+        "surface_role": surface_role,
         "prespecified_case_age_count": len(primary),
         "quantitative_primary_count": quantitative_count,
         "unresolved_primary_count": len(primary) - quantitative_count,
         "unresolved_primary_rows": ";".join(unresolved),
         "threshold_factor_surface": "0.5/1.0/2.0; primary=1.0",
-        "control_status": "cluster_and_group_environment_matched_noise_controls_zero_joint_exceedance",
-        "scheduler_status": "789813_F_Exit1_postvalidation_schema_typo",
-        "science_worker_status": "all_four_case_workers_exit_0",
-        "recovery_status": "compact_outputs_validated_and_packaged_without_hdf5_rerun",
-        "interpretation": "quantitative_where_bilateral; late_C-LO_censored_by_non_supersonic_front",
+        "control_status": "environment_matched_noise_controls_pass_joint_exceedance_gate",
+        "maximum_control_joint_exceedance_fraction": max(float(row["control_joint_exceedance_fraction"]) for row in controls),
+        "interpretation": "quantitative_only_where_bilateral_gates_pass; unresolved_rows_preserved",
     }]
     outputs = {
         "native_shock_energy_selected_age.csv": combined,
@@ -468,12 +510,11 @@ def build_product(
     figure_name = "selected_age_native_shock_partition.png"
     make_figure(primary, sensitivity, output_root / figure_name)
     metadata = {
-        "status": "complete_product_recovered_no_hdf5_rerun",
-        "decision_label": DECISION_LABEL,
-        "scheduler_job": "789813.kunanyi-ohpc",
-        "scheduler_exit_status": 1,
-        "scheduler_failure_stage": "post_analysis_schema_validation",
-        "case_worker_exit_status": {case: 0 for case in CASES},
+        "status": "complete_validated_selected_age_shock_closeout",
+        "decision_label": decision_label,
+        "surface_role": surface_role,
+        "ambient_tracer_max": float(primary[0]["ambient_tracer_max"]),
+        "ambient_energy_weighting": primary[0]["ambient_energy_weighting"],
         "prespecified_row_count": len(combined),
         "primary_case_age_count": len(primary),
         "quantitative_primary_count": quantitative_count,
@@ -482,7 +523,13 @@ def build_product(
         "goal066_native_join_count": len(native_join),
         "goal066_matched_join_count": len(matched_join),
         "control_role": "environment-matched dimensionless-noise calibration; not cellwise subtraction",
-        "hdf5_recompute_performed": False,
+        "closeout_reads": "compact source tables; upstream computation history is not inferred",
+        "sources": {
+            "shock_root": str(shock_root),
+            "native_path": str(goal066_native), "native_sha256": sha256_file(goal066_native),
+            "matched_path": str(goal066_matched), "matched_sha256": sha256_file(goal066_matched),
+            "case_manifest_sha256": {case: sha256_file(shock_root / case / "local_asset_manifest.sha256") for case in CASES},
+        },
         "figure": figure_name,
         "outputs": list(outputs),
     }
@@ -506,6 +553,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--goal066-native", required=True, type=Path)
     parser.add_argument("--goal066-matched", required=True, type=Path)
     parser.add_argument("--output-root", required=True, type=Path)
+    parser.add_argument("--surface-role", choices=SURFACE_ROLES, default="primary")
     return parser
 
 
@@ -516,6 +564,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         goal066_native=args.goal066_native,
         goal066_matched=args.goal066_matched,
         output_root=args.output_root,
+        surface_role=args.surface_role,
     )
     print(json.dumps(metadata, indent=2, sort_keys=True))
     return 0

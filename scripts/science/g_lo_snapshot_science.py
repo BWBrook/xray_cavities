@@ -164,9 +164,11 @@ def run_chain(args: argparse.Namespace) -> dict[str, Any]:
         "case": args.case,
         "snapshot_count": len(snapshots),
         "snapshot_indices": [snapshot.output_index for snapshot in snapshots],
-        "partition_primary": "fractional tracer clip(tr1,0,1)",
-        "partition_sensitivities": [f"binary tr1 >= {value:.0e}" for value in TRACER_THRESHOLDS],
-        "pressure_partition_note": "mixed-cell pressure energy is split operationally by tracer fraction",
+        "partition_primary": "binary float64(tr1) > 1e-3 at full cell weight",
+        "partition_sensitivities": ["fractional tracer clip(tr1,0,1)"] + [
+            f"binary float64(tr1) > {value:.0e}" for value in TRACER_THRESHOLDS[1:]
+        ],
+        "pressure_partition_note": "primary cocoon and complementary ambient cells use full pressure and volume",
         "potential_convention": "centre-zero integral of mean absolute matched gravity columns",
         "boundary_status": "unmeasured_from_retained_snapshots",
         "residual_status": "not_promoted_to_cocoon_boundary_unresolved",

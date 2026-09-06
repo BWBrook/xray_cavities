@@ -1,0 +1,5 @@
+case,actual_time_myr,source_partition,lobe_volume_kpc3,lobe_enthalpy_2p5pv_erg,volume_ratio_to_fractional,enthalpy_ratio_to_fractional,source_csv
+C-HI,9.999889603297177,binary_threshold_1e-3_ge,40186.27008723593,3.4916133768544695e+59,5.929142892802275,6.105943281055626,docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/C-HI/energy_partition_timeseries.csv
+C-LO,9.999174201142063,binary_threshold_1e-3_ge,1137.9835003994503,3.981908852559026e+57,3.858808323012931,3.7548659764006334,docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/C-LO/energy_partition_timeseries.csv
+G-HI,9.999255705996216,binary_threshold_1e-3_ge,110230.2107482525,3.144896348415803e+59,5.363847876203133,6.1467846604613445,docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/G-HI/energy_partition_timeseries.csv
+G-LO,9.999741575908963,binary_threshold_1e-3_ge,5120.0589956243475,3.8796305834224175e+57,4.51024915671295,3.9970894290506673,docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/G-LO/energy_partition_timeseries.csv

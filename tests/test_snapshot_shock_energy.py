@@ -90,14 +90,15 @@ def test_seeded_component_selection_excludes_unconnected_entropy_island() -> Non
     assert not np.any(selected[5:7, 5:7, 5:7])
 
 
-def test_shock_energy_slice_uses_cellwise_baseline_and_stas_potential_convention() -> None:
+@pytest.mark.parametrize("tracer", [0.0, 5.0e-4, 1.0e-3])
+def test_shock_energy_slice_uses_full_cells_and_cellwise_baseline(tracer: float) -> None:
     module = load_module()
     shape = (1, 1)
     values = module.shock_energy_slice(
         rho=np.full(shape, 2.0),
         pressure=np.full(shape, 4.0),
         velocity_squared=np.full(shape, 4.0),
-        tracer=np.zeros(shape),
+        tracer=np.full(shape, tracer),
         baseline_rho=np.ones(shape),
         baseline_pressure=np.ones(shape),
         baseline_velocity_squared=np.zeros(shape),
@@ -123,3 +124,20 @@ def test_shock_energy_slice_uses_cellwise_baseline_and_stas_potential_convention
         + values["kinetic_delta_erg"]
         + values["gravitational_delta_erg"]
     )
+    assert values["ambient_weighted_volume_kpc3"] == values["mask_volume_kpc3"] == 1.0
+    assert values["ambient_weighted_mass_g"] == pytest.approx(
+        2.0 * module.UNIT_DENSITY_CGS * module.UNIT_LENGTH_CM**3
+    )
+
+
+@pytest.mark.parametrize("tracer", [np.nextafter(1.0e-3, np.inf), np.nan, np.inf])
+def test_shock_energy_rejects_cocoon_overlap_and_nonfinite_tracer(tracer: float) -> None:
+    module = load_module()
+    one = np.ones((1, 1))
+    with pytest.raises(ValueError, match="cocoon|tracer must be finite"):
+        module.shock_energy_slice(
+            rho=one, pressure=one, velocity_squared=one,
+            tracer=np.full_like(one, tracer), baseline_rho=one,
+            baseline_pressure=one, baseline_velocity_squared=one,
+            volume_kpc3=one, potential_cm2_s2=one, mask=one.astype(bool),
+        )

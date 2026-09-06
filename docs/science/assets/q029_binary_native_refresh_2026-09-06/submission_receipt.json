@@ -1,0 +1,31 @@
+{
+  "job_id": "790871.kunanyi-ohpc",
+  "job_name": "q029_native",
+  "observed_state": "Q",
+  "submitted_utc": "2026-09-05T14:50:19Z",
+  "submitted_hobart": "2026-09-06T00:50:19+10:00",
+  "queue": "normal",
+  "resource_select": "1:ncpus=2:mpiprocs=1:mem=128gb",
+  "walltime": "12:00:00",
+  "stage_root": "/u/bwbrook/codex_kunanyi/q029_binary_native_refresh_2026-09-06",
+  "analysis_root": "/u/bwbrook/xray_cavities_analysis/2026-09-06-q029-binary-native-refresh",
+  "archive_basename": "q029_binary_native_refresh_2026-09-06.tar.gz",
+  "source_base": "aec8117",
+  "source_worktree_state": "uncommitted Q-029 implementation",
+  "upload_sha256": "9a27511948cd3a829e9d1784f6e76a5a794b35132a60fd8a9eab2057f085e7bb",
+  "staged_file_count": 31,
+  "staged_manifest_sha256": "77c477dcdaf544c1f4fd777fc6c2d95b8cacb05a2358722e58f5ed851fce77e5",
+  "local_focused_tests_passed": 74,
+  "remote_runtime_imports": "passed",
+  "remote_staged_hashes": "all passed",
+  "runtime": {
+    "module": "Anaconda3/2024.02-1",
+    "python": "3.11.7",
+    "numpy": "1.26.4",
+    "scipy": "1.11.4",
+    "h5py": "3.9.0",
+    "pytest": "7.4.0"
+  },
+  "observation_boundary": "single qstat -f directly after qsub; no follow-up checks",
+  "pending": "PBS completion, allocation-side tests, production acceptance, threshold precision review and scientific synthesis"
+}

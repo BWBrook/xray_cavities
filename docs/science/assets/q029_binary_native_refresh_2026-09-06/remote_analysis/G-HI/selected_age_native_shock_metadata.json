@@ -1,0 +1,36 @@
+{
+  "ambient_energy_weighting": "binary_full_cell",
+  "ambient_tracer_max": 0.001,
+  "boundary_status": "selected mask fails closed if it touches a physical domain face",
+  "case": "G-HI",
+  "control_role": "coarse no-jet dimensionless noise calibration; not cellwise subtraction",
+  "energy_reference": "same production-grid cell at t=0",
+  "front_validation": "accepted outward axial shock position and Mach > 1",
+  "g_hi_50_status": "excluded",
+  "irreversible_heating": "p - p0*(rho/rho0)^gamma within selected ambient mask",
+  "native_allocation": "absolute lobe plus complementary ambient minus full t0 baseline",
+  "native_energy_row_count": 48,
+  "native_membership": "float64(clip(tr1,0,1)) > float64(0.001); full-cell terms",
+  "native_region_diagnostics": "current-mask lobe and ambient changes relative to same t0 cells; includes nonzero initial nozzle",
+  "native_sensitivities": [
+    "fractional",
+    "binary_threshold_5e-3",
+    "binary_threshold_1e-2"
+  ],
+  "potential_convention": "centre-zero integral of initial static-atmosphere gravity",
+  "precision_diagnostics": "exact float64 threshold and raw-dtype-quantized threshold equality cohorts",
+  "primary_native_partition": "binary_threshold_1e-3",
+  "primary_threshold_factor": 1.0,
+  "row_count": 36,
+  "selected_age_count": 4,
+  "shock_accounting": "shock is a subset of ambient-region change, never added to the entire ambient ledger",
+  "shock_processed_mask": "ambient entropy-excess component connected to compressed axial-front seed",
+  "status": "complete_selected_age_native_shock_partition",
+  "threshold_comparison": "float64_stored_value_strict_gt",
+  "threshold_factors": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "tracer_precision_row_count": 4
+}

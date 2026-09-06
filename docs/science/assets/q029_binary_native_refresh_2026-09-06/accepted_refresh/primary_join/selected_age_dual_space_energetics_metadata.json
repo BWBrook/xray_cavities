@@ -1,0 +1,14 @@
+{
+  "accepted_case_age_count": 19,
+  "decision_scope": "selected-age proof before annual extension",
+  "g_hi_50_status": "excluded",
+  "matched_row_count": 464,
+  "native_observer_independence": "joined only after independent products completed",
+  "native_partition_methods": [
+    "binary_tr1_gt_1e-3_full_cell_initial_state_subtraction_proven_ge_equivalent"
+  ],
+  "observer_case_age_view_count": 57,
+  "primary_observer_method": "geometric LOS depth, ellipsoid-volume-averaged X-ray-deprojected pressure, 2.5pV",
+  "shock_extension_status": "pending native 3D shock mask; no shock fraction claimed",
+  "status": "complete_selected_age_dual_space_energetics_audit"
+}

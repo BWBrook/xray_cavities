@@ -98,20 +98,21 @@ def test_environment_builds_centre_zero_potential_and_rejects_column_drift(tmp_p
         module.load_environment(bad)
 
 
-def test_fractional_energy_partition_is_complementary() -> None:
+@pytest.mark.parametrize("partition_index", range(4))
+def test_energy_partition_is_complementary(partition_index: int) -> None:
     module = load_module()
-    rho = np.asarray([[2.0, 2.0]])
-    pressure = np.asarray([[3.0, 3.0]])
-    velocity_squared = np.asarray([[4.0, 4.0]])
-    volume = np.asarray([[1.0, 1.0]])
-    potential = np.asarray([[5.0, 5.0]])
-    tracer = np.asarray([[0.25, 0.75]])
-    fractional = module.tracer_partitions(tracer)[0][2]
+    rho = np.asarray([[2.0, 4.0, 1.0, 3.0]])
+    pressure = np.asarray([[3.0, 2.0, 5.0, 1.0]])
+    velocity_squared = np.asarray([[4.0, 2.0, 0.0, 3.0]])
+    volume = np.asarray([[1.0, 2.0, 3.0, 0.5]])
+    potential = np.asarray([[0.0, 3.0, 5.0, 2.0]])
+    tracer = np.asarray([[1.0e-3, 5.0e-3, 1.0e-2, 0.75]])
+    lobe_weight = module.tracer_partitions(tracer)[partition_index][2]
     gas = module.slice_energy(
         rho=rho,
         pressure=pressure,
         velocity_squared=velocity_squared,
-        weight=1.0 - fractional,
+        weight=1.0 - lobe_weight,
         volume_kpc3=volume,
         potential_cm2_s2=potential,
     )
@@ -119,7 +120,7 @@ def test_fractional_energy_partition_is_complementary() -> None:
         rho=rho,
         pressure=pressure,
         velocity_squared=velocity_squared,
-        weight=fractional,
+        weight=lobe_weight,
         volume_kpc3=volume,
         potential_cm2_s2=potential,
     )
@@ -133,6 +134,38 @@ def test_fractional_energy_partition_is_complementary() -> None:
     )
     for field in module.ENERGY_FIELDS:
         assert gas[field] + lobe[field] == pytest.approx(total[field])
+
+
+@pytest.mark.parametrize("threshold", (1.0e-3, 5.0e-3, 1.0e-2))
+def test_binary_threshold_is_strict_and_selects_full_cells(threshold: float) -> None:
+    module = load_module()
+    tracer = np.asarray([
+        np.nextafter(threshold, -np.inf), threshold,
+        np.nextafter(threshold, np.inf), 0.5,
+    ])
+    partitions = module.tracer_partitions(tracer)
+    lobe = next(weight for _, label, weight in partitions if label and float(label) == threshold)
+    np.testing.assert_array_equal(lobe, [0.0, 0.0, 1.0, 1.0])
+    np.testing.assert_array_equal(1.0 - lobe, tracer <= threshold)
+    np.testing.assert_array_equal(partitions[0][2], tracer)
+
+
+@pytest.mark.parametrize("threshold", (1.0e-3, 5.0e-3, 1.0e-2))
+def test_float32_source_promoted_before_comparison_has_no_threshold_equality(threshold: float) -> None:
+    module = load_module()
+    rounded = np.float32(threshold)
+    # Adjacent float32 values bracket the float64 threshold; none equals it.
+    tracer32 = np.asarray([
+        np.nextafter(rounded, np.float32(-np.inf)), rounded,
+        np.nextafter(rounded, np.float32(np.inf)),
+    ], dtype=np.float32)
+    promoted = tracer32.astype(np.float64)
+    assert not np.any(promoted == threshold)
+    lobe = next(
+        weight for _, label, weight in module.tracer_partitions(tracer32)
+        if label and float(label) == threshold
+    )
+    np.testing.assert_array_equal(lobe, promoted >= threshold)
 
 
 def test_injected_energy_uses_bipolar_power_and_active_time_cap() -> None:
@@ -206,6 +239,8 @@ def test_run_chain_produces_resumable_fluid_science_surface(tmp_path: Path) -> N
     write_snapshot(first / "data.0000.flt.h5", index=0, time_code=0.0)
     tracer = np.zeros((6, 2, 2))
     tracer[2:4] = 0.5
+    tracer[0, 0, 0] = 1.0e-3  # Equality stays ambient in the primary mask.
+    tracer[0, 0, 1] = np.nextafter(1.0e-3, np.inf)
     pressure = np.full((6, 2, 2), 1.2)
     write_snapshot(
         first / "data.0001.flt.h5",
@@ -260,4 +295,25 @@ def test_run_chain_produces_resumable_fluid_science_surface(tmp_path: Path) -> N
     assert len(primary) == 1
     assert primary[0]["boundary_status"] == "unmeasured_from_retained_snapshots"
     assert primary[0]["residual_interpretation"] == "not_promoted_to_cocoon_boundary_unresolved"
+    current = [row for row in energy if row["snapshot_index"] == "1"]
+    binary = next(
+        row for row in current
+        if row["side"] == "bipolar_total" and row["partition_method"] == "binary_threshold_1e-3"
+    )
+    # Eight central cells have width 1.5; only the strictly-above-threshold
+    # outer cell adds its full unit volume, regardless of its tracer fraction.
+    assert float(binary["lobe_volume_kpc3"]) == pytest.approx(13.0)
+    for side in ("negative_z", "positive_z", "bipolar_total"):
+        variants = [row for row in current if row["side"] == side]
+        reference = variants[0]
+        retained = float(reference["gas_total_delta_erg"]) + float(reference["lobe_total_erg"])
+        total_volume = float(reference["gas_volume_kpc3"]) + float(reference["lobe_volume_kpc3"])
+        for row in variants:
+            assert float(row["gas_total_delta_erg"]) + float(row["lobe_total_erg"]) == pytest.approx(
+                retained, rel=1.0e-12
+            )
+            assert float(row["gas_volume_kpc3"]) + float(row["lobe_volume_kpc3"]) == pytest.approx(total_volume)
+            assert float(row["closure_fraction_of_injected"]) == pytest.approx(
+                float(reference["closure_fraction_of_injected"]), rel=1.0e-12
+            )
     assert not (output / "cache").exists()

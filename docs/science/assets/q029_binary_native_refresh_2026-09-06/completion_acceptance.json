@@ -1,0 +1,51 @@
+{
+  "decision": "GO_Q029_accepted_first_Q030_iteration_ready_for_review",
+  "job_id": "790871.kunanyi-ohpc",
+  "exit_status": 0,
+  "walltime": "02:40:26",
+  "cput": "04:27:01",
+  "peak_mem_kb": 41205920,
+  "finished_utc": "2026-09-05T17:30:45Z",
+  "retrieved_archive_sha256": "08e646b98a2cfd4306a4c50e86a5b35bce8346b00768a55d1ddf6d75f461dfcf",
+  "native_rows": 228,
+  "precision_rows": 19,
+  "shock_rows": 171,
+  "quantitative_shock_case_ages": 15,
+  "unresolved_shock_case_ages": 4,
+  "remote_synthetic_tests_passed": 51,
+  "local_census_validation": "passed",
+  "max_component_partition_residual_fraction_of_injected": 2.2967196435352687e-14,
+  "max_nominal_threshold_cell_count": 2.0,
+  "max_nominal_threshold_volume_fraction": 2.386820420589026e-07,
+  "max_nominal_threshold_enthalpy_fraction": 2.573237297634289e-07,
+  "threshold_materiality": "negligible_on_selected_native_surface",
+  "scientific_limits": [
+    "retained energy is not closed physical conservation",
+    "shock energy is not wholly irreversible heat",
+    "late C-LO shock unresolved",
+    "G-HI/50 excluded",
+    "observer topology-censored views not imputed"
+  ],
+  "inputs_sha256": {
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/accepted_native_strict_equivalence.json": "3af0cf92dc513db4375512ef88bc01a6f1cd197480c41f63c116eb89c9a62edb",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/shock_closeout/primary_shock_partition.csv": "423056dd2355c2466e014897cf8a29000544ccb307bcd7d15a408d0e1fbeb1e4",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/accepted_refresh/primary_join/matched_native_xray_energetics.csv": "eaf43d1a9ef3e9817b674101a63b71e5dfee7d22f8c361a3802a471e7e8a07c7"
+  },
+  "focused_review_repairs": [
+    "joint shock-mask threshold wording",
+    "ambient-allocation ratio explicit non-spatial label",
+    "refreshed accepted observer enthalpy power numerator and exact effective-age factorization"
+  ],
+  "closeout_label_tests_passed": 10,
+  "power_refresh_tests_passed": 4,
+  "manuscript_validation": "configuration, citation audit, lint and submission-profile check passed",
+  "review_artifacts": {
+    "manuscript/text/main.md": "a51b3ff5cdf4f17d2504b1cc4da64e0dac95875b127794520cbbdd517b2e4189",
+    "manuscript/text/figures.md": "7c77b5c0491088e4f25c692996c588897863f6835cb87702e130f01d7f7f3104",
+    "manuscript/figures/q029_age_power.png": "fb18c0337c31b9568c86a9f039aab832f71d81c04d7f0b6234efb739a47b743b",
+    "manuscript/figures/q029_native_energetics.png": "17d080e196f3f1a25d1a268568e02450f253ab89cd1cbc8b64247712cd8facf4",
+    "manuscript/figures/q029_observer_recovery.png": "654ae910efb5c2fd893715853b04b5edee3178e84445abca60734ee8bf9ab184",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/xray_cavities_q030_first_iteration.pdf": "b621e0587dbfb8b521bfefa96d22f86c1a1a93e679da33640b4675a4d3dc9851"
+  },
+  "render_git_metadata_note": "external makedoc build manifest Git block identifies build-engine repository; xray source base and artifact hashes recorded here"
+}

@@ -1,0 +1,280 @@
+{
+  "primary_threshold": 0.001,
+  "strict_equivalent": true,
+  "comparison_dtype": "float64",
+  "proof_method": "float32_threshold_not_representable_after_float64_promotion",
+  "covered_case_ages": [
+    {
+      "case": "C-HI",
+      "snapshot_index": 10,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0010.flt.h5",
+      "timestep": "Timestep_10",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 3065.980090096568
+    },
+    {
+      "case": "C-HI",
+      "snapshot_index": 20,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0020.flt.h5",
+      "timestep": "Timestep_20",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 6131.7554040682035
+    },
+    {
+      "case": "C-HI",
+      "snapshot_index": 30,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0030.flt.h5",
+      "timestep": "Timestep_30",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 9198.04009599619
+    },
+    {
+      "case": "C-HI",
+      "snapshot_index": 40,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0040.flt.h5",
+      "timestep": "Timestep_40",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 12264.01087670896
+    },
+    {
+      "case": "C-HI",
+      "snapshot_index": 50,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0050.flt.h5",
+      "timestep": "Timestep_50",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 15330.0696894
+    },
+    {
+      "case": "C-LO",
+      "snapshot_index": 10,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0010.flt.h5",
+      "timestep": "Timestep_10",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 3065.760746798691
+    },
+    {
+      "case": "C-LO",
+      "snapshot_index": 20,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0020.flt.h5",
+      "timestep": "Timestep_20",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 6131.994602559504
+    },
+    {
+      "case": "C-LO",
+      "snapshot_index": 30,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0030.flt.h5",
+      "timestep": "Timestep_30",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 9197.786198224358
+    },
+    {
+      "case": "C-LO",
+      "snapshot_index": 40,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0040.flt.h5",
+      "timestep": "Timestep_40",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 12263.795521101925
+    },
+    {
+      "case": "C-LO",
+      "snapshot_index": 50,
+      "input_h5": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem/outputs/data.0050.flt.h5",
+      "timestep": "Timestep_50",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 15330.0696894
+    },
+    {
+      "case": "G-HI",
+      "snapshot_index": 10,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/data.0010.flt.h5",
+      "timestep": "Timestep_10",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 3065.7857363005746
+    },
+    {
+      "case": "G-HI",
+      "snapshot_index": 20,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/data.0020.flt.h5",
+      "timestep": "Timestep_20",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 6131.909618031241
+    },
+    {
+      "case": "G-HI",
+      "snapshot_index": 30,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/data.0030.flt.h5",
+      "timestep": "Timestep_30",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 9197.847620214476
+    },
+    {
+      "case": "G-HI",
+      "snapshot_index": 40,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem/outputs/data.0040.flt.h5",
+      "timestep": "Timestep_40",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 12263.78562240369
+    },
+    {
+      "case": "G-LO",
+      "snapshot_index": 10,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0010.flt.h5",
+      "timestep": "Timestep_10",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 3065.934704693023
+    },
+    {
+      "case": "G-LO",
+      "snapshot_index": 20,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0020.flt.h5",
+      "timestep": "Timestep_20",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 6131.961764293424
+    },
+    {
+      "case": "G-LO",
+      "snapshot_index": 30,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0030.flt.h5",
+      "timestep": "Timestep_30",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 9197.932547651637
+    },
+    {
+      "case": "G-LO",
+      "snapshot_index": 40,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0040.flt.h5",
+      "timestep": "Timestep_40",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 12264.051512293445
+    },
+    {
+      "case": "G-LO",
+      "snapshot_index": 50,
+      "input_h5": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0050.flt.h5",
+      "timestep": "Timestep_50",
+      "tracer_dtype": "<f4",
+      "tracer_shape": [
+        1014,
+        960,
+        960
+      ],
+      "file_size_bytes": 44890581676,
+      "actual_time_code": 15330.0696894
+    }
+  ],
+  "verified_utc": "2026-09-05T14:38:30.468638+00:00",
+  "quantized_float32_threshold": 0.0010000000474974513,
+  "scope": "stored-value comparison only; source-quantized equality energy sensitivity pending combined native/shock pass",
+  "native_source_code_sha256": "eadc395b39446af78c44d4028a8bece21b1c7f3144e8f745a21f7e1e9ce7117f",
+  "native_source_code_ref": "aec8117:scripts/science/snapshot_energy.py",
+  "acceptance_status": "preliminary_native_reuse; combined native/shock and quantized-threshold sensitivity pending"
+}

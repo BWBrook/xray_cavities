@@ -1,8 +1,25 @@
 # X-ray Cavities successor handoff
 
-Last verified: 2026-09-05  
-Verified shared base before this note: `8d8740c` on `main` and `origin/main`  
-Operating state: `supervisor direction received; native energetics refresh next`
+Last verified: 2026-09-06
+
+Verified shared base before this tranche: `aec8117` on `main` and `origin/main`
+
+Operating state: `Q-029 accepted; Q-030 first Results and figure iteration ready for review`
+
+PBS `790871.kunanyi-ohpc` completed `F/0` in 02:40:26. Its compact output has
+been retrieved and revalidated locally: 228 native rows, 19 precision rows,
+171 shock rows and 15/19 quantitative primary shock ages. Threshold precision
+is negligible. The C-LO median X-ray/native enthalpy ratio is now 0.494,
+replacing fractional-mask over-recovery; the main geometry-driven conclusion
+survives. Read `docs/science/q029_binary_native_refresh_2026-09-06.md` for the
+accepted accounting, limits and products. No remote job is awaiting a check.
+The source changes and manuscript iteration are included in the published
+Q-029/Q-030 tranche, following Barry's 2026-09-06 commit/push instruction.
+Review the tracked PDF
+`docs/science/assets/q029_binary_native_refresh_2026-09-06/xray_cavities_q030_first_iteration.pdf`
+and the three figures
+in `manuscript/figures/`. The power tables now use accepted X-ray pressures;
+old Goal 065 power summaries are not the current manuscript evidence.
 
 This is the cold-start note for a new project agent. It records the current
 scientific position and the shortest route forward. It is deliberately not a
@@ -24,7 +41,8 @@ do not replay old goal logs as active instructions.
    - `docs/science/four_case_selected_age_dual_space_energetics_2026-08-31.md`;
    - `docs/science/four_case_selected_age_native_shock_partition_2026-08-31.md`.
 5. Inspect `agent_comms/requests/open_questions.md` for feedback newer than
-   this note. At this snapshot, `Q-029` and `Q-030` are open.
+   this note. Q-029 is analytically accepted and the first Q-030 iteration
+   is ready; Q-029 is answered and Q-030 is in review in the request registry.
 
 Do not read every historical goal or exchange log to orient yourself. Consult
 one only when a current claim or implementation path points to it.
@@ -109,10 +127,11 @@ the lobe itself. The old shock numbers are now a sensitivity surface because
 their ambient mask allowed `tr1 <= 1e-2`; `Q-029` requires the exact
 complementary `tr1 <= 1e-3` mask.
 
-## Active next tranche: Q-029
+## Accepted analysis tranche: Q-029
 
-Stas has changed the primary native cocoon definition. This is the next
-scientific task and must precede updated quantitative manuscript claims.
+The strict binary native cocoon definition and combined native/shock refresh
+pass numerical acceptance. The requirements below record the completed scope;
+use the September 6 accepted products for the manuscript iteration.
 
 1. Define a cocoon cell by strict `tr1 > 1e-3` and count its full cell volume,
    pressure, mass, thermal, kinetic, and gravitational terms.
@@ -276,4 +295,3 @@ scientific convention, calls for substantial new production compute, exposes
 data-integrity loss, or creates a publication/ownership decision. Otherwise,
 carry the approved method through Q-029 and into the first Q-030 manuscript
 iteration without approval ping-pong.
-

@@ -81,7 +81,10 @@ def native_selected_rows(native_case_age_path: Path) -> list[dict[str, Any]]:
                 "case": row["case"],
                 "snapshot_index": int(row["snapshot_index"]),
                 "actual_time_myr": finite(row["actual_time_myr"], context="actual time", positive=True),
-                "native_partition_method": "fractional_tracer_cellwise_initial_state_subtraction",
+                "native_partition_method": row.get(
+                    "native_partition_method", "fractional_tracer_cellwise_initial_state_subtraction"
+                ),
+                "lobe_mass_g": row.get("direct_lobe_mass_g", ""),
                 "lobe_volume_kpc3": lobe_volume,
                 "lobe_pressure_volume_erg": lobe_pv,
                 "lobe_mean_pressure_dyn_cm2": lobe_pressure,
@@ -103,6 +106,7 @@ def native_selected_rows(native_case_age_path: Path) -> list[dict[str, Any]]:
                     row["ambient_gravitational_delta_erg"], context="ambient gravitational"
                 ),
                 "ambient_total_delta_erg": finite(row["ambient_total_delta_erg"], context="ambient total"),
+                "ambient_energy_definition": "complement_weighted_current_energy_minus_full_initial_cell_energy",
                 "retained_energy_erg": retained,
                 "injected_energy_erg": injected,
                 "boundary_status": row["boundary_status"],
@@ -164,7 +168,10 @@ def build_product(
     observer_enthalpy: list[dict[str, str]] = []
     pressure_profiles: list[dict[str, str]] = []
     for case in CASES:
-        case_root = observer_root / case
+        # Accepted observer bundles may already contain all four cases.
+        case_root = observer_root / case if (observer_root / case).is_dir() else observer_root
+        if case_root == observer_root and case != CASES[0]:
+            continue
         topology.extend(read_rows(case_root / "xray_topology_summary.csv"))
         observer_enthalpy.extend(read_rows(case_root / "xray_cavity_enthalpy_selected_age.csv"))
         pressure_profiles.extend(read_rows(case_root / "xray_pressure_profiles.csv"))
@@ -191,6 +198,7 @@ def build_product(
             "alpha": "",
             "observer_volume_kpc3": "",
             "native_lobe_volume_kpc3": native_row["lobe_volume_kpc3"],
+            "native_partition_method": native_row["native_partition_method"],
             "volume_recovery": "",
             "observer_effective_pressure_dyn_cm2": "",
             "native_lobe_mean_pressure_dyn_cm2": native_row["lobe_mean_pressure_dyn_cm2"],
@@ -208,6 +216,7 @@ def build_product(
             "shock_fraction_status": native_row["shock_fraction_status"],
             "boundary_status": native_row["boundary_status"],
             "ambient_energy_interpretation": native_row["ambient_energy_interpretation"],
+            "ambient_energy_definition": native_row["ambient_energy_definition"],
             "total_outburst_ratio_status": (
                 "unresolved_background_dominated" if case == "C-LO" else "descriptive_boundary_unresolved"
             ),
@@ -317,6 +326,7 @@ def build_product(
         "observer_case_age_view_count": len(topology),
         "matched_row_count": len(matched),
         "native_observer_independence": "joined only after independent products completed",
+        "native_partition_methods": sorted({row["native_partition_method"] for row in native}),
         "shock_extension_status": "pending native 3D shock mask; no shock fraction claimed",
         "g_hi_50_status": "excluded",
         "primary_observer_method": "geometric LOS depth, ellipsoid-volume-averaged X-ray-deprojected pressure, 2.5pV",

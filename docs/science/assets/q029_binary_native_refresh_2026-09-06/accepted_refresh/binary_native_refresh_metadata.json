@@ -1,0 +1,27 @@
+{
+  "accepted_case_age_count": 19,
+  "closure_tolerance_fraction_of_injected": 1e-09,
+  "g_hi_50_status": "excluded",
+  "initial_state_convention": "gas delta = complement-weighted current energy minus full initial cell energy; retained = gas delta + full-weight lobe energy",
+  "observer_recovery_row_count": 228,
+  "primary": "tr1 > 0.001 at full cell weight; ambient exact complement tr1 <= 0.001",
+  "reuse_basis": "retained >= census equivalent to strict > under source-bound float32-to-float64 proof",
+  "sensitivity_masks": "fractional clip(tr1,0,1), binary >=0.005, binary >=0.01",
+  "sensitivity_native_row_count": 76,
+  "shock_status": "separate strict-ambient refresh required",
+  "sources_sha256": {
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/C-HI/energy_partition_timeseries.csv": "59bd5c3b436169dc9eecfcf6f97cf5e253e6dd7259211b4e2c68d20ed401ecd0",
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/C-HI/snapshot_manifest.csv": "37efc6cf1831f33fab54a3c2f2564ecdcfcf8bbdada7e82b19754f29ef7447ed",
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/C-LO/energy_partition_timeseries.csv": "71a7910246e91d6ad2b6cf2cf5a29a65ceb91b6b4869014a0a7df8647cfe0c27",
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/C-LO/snapshot_manifest.csv": "c3f3ae42d79c68e1fb3f16d13f1336cc2f305321116ca1f23cb74a86c5c4e10d",
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/G-HI/energy_partition_timeseries.csv": "8cc575c1c46117ea8020addd63d071b8c7bec126267f557293447ee92cf1f862",
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/G-HI/snapshot_manifest.csv": "242da730454dd3af7adabe93f22b2ed08a6fdd6fe74cbd71d7ce1119332f4519",
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/G-LO/energy_partition_timeseries.csv": "7f0efa157e67d667a82762f347e320f664b57f9f0017503efe1464b50a55ce65",
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/review_products/G-LO/snapshot_manifest.csv": "bb43a42036fb758eff09bd340662d99d11ca1cee5683760f2741d3e677a2f14c",
+    "docs/science/assets/four_case_scientific_synthesis_2026-08-26/case_age_physics.csv": "0c1db5867e104511f9b38eae81ff6355d5b2cb931981220ca5304769c5b28592",
+    "docs/science/assets/four_case_selected_age_dual_space_energetics_2026-08-31/audit_products/xray_cavity_enthalpy_selected_age.csv": "81360132f3631a36764d8a4c57b637ba281d8d34f232b792d51743fd94bdd706",
+    "docs/science/assets/four_case_selected_age_dual_space_energetics_2026-08-31/audit_products/xray_pressure_profiles.csv": "3ee48aa9732a2f3216a65aa3b52f4c520bfe35507998bab917567f97be71d881",
+    "docs/science/assets/four_case_selected_age_dual_space_energetics_2026-08-31/audit_products/xray_topology_summary.csv": "0d270b372a85d2d23a445dc984daa8542e42be5f838080cf6994a880b3978e4a",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/accepted_native_strict_equivalence.json": "3af0cf92dc513db4375512ef88bc01a6f1cd197480c41f63c116eb89c9a62edb"
+  }
+}

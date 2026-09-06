@@ -30,7 +30,7 @@ from pluto_h5_level3_ambient_extract import (
 from select_common_age_hdf5 import CODE_TIME_PER_MYR, Snapshot, inspect_outputs
 
 
-METHOD_VERSION = 1
+METHOD_VERSION = 2
 SECONDS_PER_MYR = 3.15576e13
 SIDES = ("negative_z", "positive_z", "bipolar_total")
 TRACER_THRESHOLDS = (1.0e-3, 5.0e-3, 1.0e-2)
@@ -209,11 +209,19 @@ def injected_energy(
 
 
 def tracer_partitions(tracer: np.ndarray) -> list[tuple[str, str, np.ndarray]]:
-    clipped = np.clip(np.asarray(tracer, dtype=float), 0.0, 1.0)
+    """Return the mixing sensitivity and strict, full-cell material masks.
+
+    Compare in float64, as in the snapshot reader. A cell exactly equal to a
+    binary threshold belongs to the complementary ambient mask, ``1-weight``.
+    """
+    values = np.asarray(tracer, dtype=float)
+    if not np.all(np.isfinite(values)):
+        raise ValueError("non-finite tracer values cannot define complementary material masks")
+    clipped = np.clip(values, 0.0, 1.0)
     partitions = [("fractional", "", clipped)]
     for threshold in TRACER_THRESHOLDS:
         label = f"{threshold:.0e}".replace("e-0", "e-")
-        partitions.append((f"binary_threshold_{label}", label, (clipped >= threshold).astype(float)))
+        partitions.append((f"binary_threshold_{label}", label, (clipped > threshold).astype(float)))
     return partitions
 
 

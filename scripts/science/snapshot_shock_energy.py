@@ -24,7 +24,7 @@ CONTROL_MULTIPLIER = 5.0
 PRESSURE_EXCESS_FLOOR = 0.05
 DENSITY_EXCESS_FLOOR = 0.03
 ENTROPY_EXCESS_FLOOR = 0.02
-AMBIENT_TRACER_MAX = 0.01
+AMBIENT_TRACER_MAX = 0.001
 MIN_SELECTED_CELLS = 100
 
 
@@ -238,17 +238,23 @@ def shock_energy_slice(
     rho_now, pressure_now, v2_now, tracer_now, rho0, pressure0, v20, volume, potential = arrays
     if np.any(rho_now <= 0.0) or np.any(rho0 <= 0.0) or np.any(pressure_now <= 0.0) or np.any(pressure0 <= 0.0):
         raise ValueError("shock-energy density and pressure must be positive")
-    ambient = 1.0 - np.clip(tracer_now, 0.0, 1.0)
+    if np.any(~np.isfinite(tracer_now)):
+        raise ValueError("shock-energy tracer must be finite")
+    ambient_mask = np.clip(tracer_now, 0.0, 1.0) <= AMBIENT_TRACER_MAX
+    if np.any(selected & ~ambient_mask):
+        raise ValueError("shock mask overlaps the strict native cocoon")
+    # Membership is binary: selected ambient cells contribute their full
+    # current and initial energies, with no residual (1-tr1) weighting.
     selected_float = selected.astype(np.float64)
     thermal_delta = np.sum(
-        selected_float * (ambient * pressure_now - pressure0) * volume
+        selected_float * (pressure_now - pressure0) * volume
     ) / (GAMMA_GAS - 1.0) * UNIT_ENERGY_ERG
     kinetic_delta = np.sum(
-        0.5 * selected_float * (ambient * rho_now * v2_now - rho0 * v20) * volume
+        0.5 * selected_float * (rho_now * v2_now - rho0 * v20) * volume
     ) * UNIT_ENERGY_ERG
     mass_delta_g = (
         selected_float
-        * (ambient * rho_now - rho0)
+        * (rho_now - rho0)
         * volume
         * UNIT_DENSITY_CGS
         * UNIT_LENGTH_CM**3
@@ -256,7 +262,6 @@ def shock_energy_slice(
     gravitational_delta = np.sum(mass_delta_g * potential)
     irreversible = np.sum(
         selected_float
-        * ambient
         * (pressure_now - pressure0 * (rho_now / rho0) ** GAMMA_GAS)
         * volume
     ) / (GAMMA_GAS - 1.0) * UNIT_ENERGY_ERG
@@ -267,9 +272,9 @@ def shock_energy_slice(
         "total_delta_erg": float(thermal_delta + kinetic_delta + gravitational_delta),
         "irreversible_heating_erg": float(irreversible),
         "mask_volume_kpc3": float(np.sum(selected_float * volume)),
-        "ambient_weighted_volume_kpc3": float(np.sum(selected_float * ambient * volume)),
+        "ambient_weighted_volume_kpc3": float(np.sum(selected_float * volume)),
         "ambient_weighted_mass_g": float(
-            np.sum(selected_float * ambient * rho_now * volume)
+            np.sum(selected_float * rho_now * volume)
             * UNIT_DENSITY_CGS
             * UNIT_LENGTH_CM**3
         ),

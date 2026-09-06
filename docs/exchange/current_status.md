@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-09-05
+Last updated: 2026-09-06
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -37,6 +37,17 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
+- Q-029 completed on 2026-09-06. PBS `790871.kunanyi-ohpc` finished `F/0` in
+  02:40:26; 51 allocation-side tests passed. Retrieved only compact outputs
+  and revalidated 228 native rows against the census, 19 precision records
+  and 171 shock rows. The same 15/19 primary shock ages are quantitative.
+  Threshold precision is negligible. C-LO's median X-ray/native enthalpy
+  ratio changes from 6.76 to 0.494; the main geometry-dominated interpretation
+  survives. Q-030's first Results/figure iteration is ready for review, including
+  power estimates refreshed with the accepted X-ray pressure numerator.
+  Details: `docs/science/q029_binary_native_refresh_2026-09-06.md`.
+  The published tranche includes the compact review PDF under the Q-029 assets;
+  Q-029 is answered and Q-030 is in review. No active remote job.
 - Stas approves the overall paper plan for iteration. Preferred working
   title: "How well do X-ray cavities measure jet energetics?" Results must
   first test native enthalpy against actual jet energetics, then assess
@@ -45,12 +56,12 @@ current instruction without checking its goal status.
   are updated in `manuscript/text/main.md`; prose and figure integration are
   tracked as `Q-030` in
   `agent_comms/threads/2026-09-05-paper-plan-review.md`.
-- Before promoting revised energetics conclusions, complete `Q-029`: use
+- The completed `Q-029` refresh uses
   strict binary `tr1 > 1e-3` for native cocoon cells at full weight, with the
-  exact complementary ambient mask. Refresh native/X-ray comparisons and
-  the shocked-ambient partition. The original Goal 066/067 results below
-  retain their historical provenance but need this update for the primary
-  interpretation.
+  exact complementary ambient mask. The native/X-ray comparisons and
+  shocked-ambient partition are refreshed. The original Goal 066/067 results
+  below retain their historical provenance; September 6 products now support
+  the primary interpretation.
 - Production is complete. Goal 062 applied the common fluid, gravity, tracer,
   and shock workflow to all `204` annual snapshots; Goal 063 confirmed that
   the large `C-LO` normalized budget is background dominated; and Goal 064
@@ -63,7 +74,7 @@ current instruction without checking its goal status.
   regenerated under those corrected gates, Goal 066 completed the selected-
   age dual-space proof, and Goal 067 completed the native 3D shock-energy
   partition. No PLUTO, X-ray, or PRAiSE rerun is required. The next steps are
-  the `Q-029` native energetics refresh and `Q-030` manuscript integration.
+  scientific review of `Q-029` and the first `Q-030` manuscript iteration.
 - The PRAiSE coefficient science gate is green; corrected PRAiSE2 is the
   production radio method once its tested source change is published to the
   fork-backed working branch.

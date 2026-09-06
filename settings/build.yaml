@@ -22,8 +22,8 @@ profiles:
     review_markup:
       enabled: false
     figures:
-      placement: inline
-      caption_position: bottom
+      placement: captions_page
+      caption_position: top
       placeholder_id: figures
     margins:
       unit: cm
