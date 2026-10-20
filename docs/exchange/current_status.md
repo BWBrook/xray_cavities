@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-09-06
+Last updated: 2026-10-21
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -37,6 +37,25 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
+- New supervisor priority `Q-031` (2026-10-21): compare full-grid thermal,
+  kinetic and gravitational `E(t)-E(0)` with bipolar injected energy first;
+  then partition the same changes using full-cell `tr1 > 1e-3` and its
+  ambient complement. Include C-LO regardless of shock detectability. Stas
+  expects sound waves at late times there; smooth-wave damping is numerical
+  in the inviscid setup. A successful numerical partition identity is not
+  agreement with injection. Reuse existing native ledgers to expose and
+  investigate the reported whole-grid excess; shock selection, boundary-flux
+  measurement and no-jet controls are not prerequisites for the initial
+  comparison. Inspect actual initial energy components, including gravity
+  and the nozzle. Canonical direction:
+  `docs/science/whole_grid_energy_closure_and_partition_2026-10-21.md`.
+  Stas-agent's direct comparison of 19 existing Q-029 records confirms
+  `Delta E_grid/E_inj` of 1.144--1.278 (C-HI), 6.021--23.967 (C-LO),
+  1.077--1.083 (G-HI), and 1.227--1.577 (G-LO), independent of shock
+  selection. The note includes tables, component plots and compact-data
+  consistency checks. No raw HDF5 was reread. Q-031 remains open to diagnose
+  the discrepancies and review annual coverage; Q-030 should present this
+  baseline before enthalpy/shock interpretation.
 - Q-029 completed on 2026-09-06. PBS `790871.kunanyi-ohpc` finished `F/0` in
   02:40:26; 51 allocation-side tests passed. Retrieved only compact outputs
   and revalidated 228 native rows against the census, 19 precision records

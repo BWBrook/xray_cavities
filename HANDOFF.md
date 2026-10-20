@@ -1,10 +1,27 @@
 # X-ray Cavities successor handoff
 
-Last verified: 2026-09-06
+Last reviewed: 2026-10-21 (repository and supervisor direction; remote state
+was last reported on 2026-09-06).
 
 Verified shared base before this tranche: `aec8117` on `main` and `origin/main`
 
-Operating state: `Q-029 accepted; Q-030 first Results and figure iteration ready for review`
+Operating state: `Q-029 accepted; Q-031 whole-grid closure audit requested; Q-030 revision pending`
+
+Stas's 2026-10-21 feedback takes priority over the older next-step language
+below. First display and audit full-grid thermal/kinetic/gravitational
+`E(t)-E(0)` against injection, then the complementary binary tracer split.
+Neither calculation depends on shock detection. Retain late C-LO, where Stas
+expects sound waves; no explicit viscosity means smooth-wave damping is
+numerical. Clarify that numerical partition agreement is not physical closure.
+Read `docs/science/whole_grid_energy_closure_and_partition_2026-10-21.md` and
+the latest message in the snapshot-science thread. Q-031 is open to Barry;
+reuse existing native ledgers and update the next Q-030 manuscript iteration.
+A compact-table comparison of the 19 accepted ages now accompanies the
+direction: grid changes exceed nominal injection by 14--28% (C-HI), about
+8% (G-HI), 23--58% (G-LO), and a factor of 6--24 (C-LO). Absolute sums,
+cell-wise differences and partitions agree numerically. See the new note and
+its figures; physical discrepancy diagnosis remains open. No raw HDF5 reread
+or remote job check was made.
 
 PBS `790871.kunanyi-ohpc` completed `F/0` in 02:40:26. Its compact output has
 been retrieved and revalidated locally: 228 native rows, 19 precision rows,

@@ -1,0 +1,137 @@
+{
+  "status": "compact_table_comparison_complete_physical_closure_unresolved",
+  "source_commit": "c730e4e",
+  "sources": {
+    "C-HI": {
+      "path": "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-HI/native_energy_selected_age.csv",
+      "sha256": "8d8691c6183601e47836a08b859e0d151bc609f6fc96900be74aa7afd62c17b5"
+    },
+    "C-LO": {
+      "path": "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/native_energy_selected_age.csv",
+      "sha256": "a035de60355570ca2ee602706d31403e2e6fc17b8d566126718cf7f7f9bb7451"
+    },
+    "G-HI": {
+      "path": "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-HI/native_energy_selected_age.csv",
+      "sha256": "b98bfaf343b81790ac286ada258e12670526020ea0e50402b0e9cae5305abf1a"
+    },
+    "G-LO": {
+      "path": "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/native_energy_selected_age.csv",
+      "sha256": "6254800d84ca5748f91c7d4aebb18282fb0de4b24ad15e7a23d6af19e617a16a"
+    }
+  },
+  "snapshot_count": 19,
+  "checks_max_normalized_difference": {
+    "injection_vs_bipolar_power_time": 0.0,
+    "absolute_sums_vs_cellwise_change": 6.119808344577904e-12,
+    "region_partition_vs_cellwise_change": 2.2967196435352687e-14,
+    "initial_state_constancy": 0.0,
+    "components_vs_recorded_total": 0.0,
+    "reported_closure_residual": 0.0,
+    "whole_grid_independent_of_tracer_partition": 0.0,
+    "hemispheres_vs_whole_grid": 1.236695192672837e-14
+  },
+  "numerical_check_tolerance": 1e-09,
+  "scope": "19 existing selected ages; no HDF5 reread, no shock or cavity selection",
+  "cases": {
+    "C-HI": {
+      "ratio_min": 1.1443951816345859,
+      "ratio_max": 1.27848112952256,
+      "points": [
+        {
+          "snapshot_index": 10,
+          "ratio": 1.1443951816345859
+        },
+        {
+          "snapshot_index": 20,
+          "ratio": 1.1871943833135528
+        },
+        {
+          "snapshot_index": 30,
+          "ratio": 1.2203908682947864
+        },
+        {
+          "snapshot_index": 40,
+          "ratio": 1.2498363545488145
+        },
+        {
+          "snapshot_index": 50,
+          "ratio": 1.27848112952256
+        }
+      ]
+    },
+    "C-LO": {
+      "ratio_min": 6.021076418847768,
+      "ratio_max": 23.9673195297542,
+      "points": [
+        {
+          "snapshot_index": 10,
+          "ratio": 6.021076418847768
+        },
+        {
+          "snapshot_index": 20,
+          "ratio": 10.457671768405342
+        },
+        {
+          "snapshot_index": 30,
+          "ratio": 14.90098914433734
+        },
+        {
+          "snapshot_index": 40,
+          "ratio": 19.393662146298507
+        },
+        {
+          "snapshot_index": 50,
+          "ratio": 23.9673195297542
+        }
+      ]
+    },
+    "G-HI": {
+      "ratio_min": 1.0766427550993898,
+      "ratio_max": 1.0827799107756657,
+      "points": [
+        {
+          "snapshot_index": 10,
+          "ratio": 1.0772221770228374
+        },
+        {
+          "snapshot_index": 20,
+          "ratio": 1.0766427550993898
+        },
+        {
+          "snapshot_index": 30,
+          "ratio": 1.0819532188596075
+        },
+        {
+          "snapshot_index": 40,
+          "ratio": 1.0827799107756657
+        }
+      ]
+    },
+    "G-LO": {
+      "ratio_min": 1.227016380464388,
+      "ratio_max": 1.5770874366688794,
+      "points": [
+        {
+          "snapshot_index": 10,
+          "ratio": 1.227016380464388
+        },
+        {
+          "snapshot_index": 20,
+          "ratio": 1.3199140359169241
+        },
+        {
+          "snapshot_index": 30,
+          "ratio": 1.416734813720344
+        },
+        {
+          "snapshot_index": 40,
+          "ratio": 1.500717836198778
+        },
+        {
+          "snapshot_index": 50,
+          "ratio": 1.5770874366688794
+        }
+      ]
+    }
+  }
+}
