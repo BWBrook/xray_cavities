@@ -37,6 +37,18 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
+- Q-031 follow-up (2026-10-21): audit existing cluster/group no-jet runs to
+  50 Myr for component/total energy drift and maximum 3D speed with coordinates
+  and boundary distances. Then check outer (`r > 100 kpc`) motions and enclosed
+  10/30/80/100-kpc gravity changes in the low-power jet runs. The saved profiles
+  show inward outer axial tube means of 45.35 km/s (C-LO), 14.09 km/s (G-LO),
+  not full-grid maxima. C-LO central-100 gravity is `0.078626 E_inj`, while
+  99.314% of its net gravity increase lies outside 100 kpc. The G-LO enclosed
+  value is missing. Stas accepts 10--20% jet-closure differences as a working
+  tolerance, but larger discrepancies need diagnosis. Existing controls are
+  on a different grid; no new PLUTO run is authorized here. Full request and
+  reproducible compact-data check:
+  `docs/science/nojet_stability_audit_request_2026-10-21.md`.
 - New supervisor priority `Q-031` (2026-10-21): compare full-grid thermal,
   kinetic and gravitational `E(t)-E(0)` with bipolar injected energy first;
   then partition the same changes using full-cell `tr1 > 1e-3` and its

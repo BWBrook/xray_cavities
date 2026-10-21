@@ -1,0 +1,206 @@
+{
+  "scope": "Saved compact products only; no raw HDF5 reread or remote job",
+  "injected_bipolar_energy_50myr_erg": 3.1557600000000003e+58,
+  "sources_sha256": {
+    "docs/science/assets/four_case_fluid_snapshot_census_2026-08-25/remote_logs/four_case_fluid_snapshot_census_2026-08-25.tar.gz": "b4dfb65a9231a53caec776f435ab819ce0b67c61fa9fd7f4aa866a5d7d83ece6",
+    "docs/science/assets/cluster_background_and_age_validity_2026-08-26/review_products/C-LO/shell_energy_diagnostic.csv": "2b83080cb59e5deb37659fbfd47bdc8c8f6db81af30eb6f9e6841d9d22064abf",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/native_energy_selected_age.csv": "a035de60355570ca2ee602706d31403e2e6fc17b8d566126718cf7f7f9bb7451"
+  },
+  "outer_motion_measure": "max_z abs(unweighted tube-mean vz), |z| > 100 kpc, tube radius 2 kpc; not a 3D maximum speed",
+  "outer_axial_profiles": {
+    "C-LO": {
+      "archive_member": "./C-LO/per_snapshot/snapshot_0050_axial_profile.csv",
+      "outer_profile_row_count": 216,
+      "max_abs_tube_mean_vz_km_s": 45.34840520108515,
+      "max_abs_initial_tube_mean_vz_km_s": 0.0,
+      "maxima": [
+        {
+          "z_kpc": -248.9480743408203,
+          "tube_mean_vz_km_s": 45.34840520108515,
+          "tube_mean_density_ratio": 1.062104165400857,
+          "tube_mean_pressure_ratio": 1.1056331373268073
+        },
+        {
+          "z_kpc": 248.9480743408203,
+          "tube_mean_vz_km_s": -45.34840520108515,
+          "tube_mean_density_ratio": 1.062104165400857,
+          "tube_mean_pressure_ratio": 1.1056331373268073
+        }
+      ],
+      "representative_samples": [
+        {
+          "z_kpc": -248.9480743408203,
+          "tube_mean_vz_km_s": 45.34840520108515,
+          "tube_mean_density_ratio": 1.062104165400857,
+          "tube_mean_pressure_ratio": 1.1056331373268073
+        },
+        {
+          "z_kpc": -199.78219604492188,
+          "tube_mean_vz_km_s": 0.027236763189386264,
+          "tube_mean_density_ratio": 1.000048844002915,
+          "tube_mean_pressure_ratio": 1.000079452922512
+        },
+        {
+          "z_kpc": -149.67613220214844,
+          "tube_mean_vz_km_s": 0.0010507753500883568,
+          "tube_mean_density_ratio": 0.9999980693250384,
+          "tube_mean_pressure_ratio": 0.9999939305115066
+        },
+        {
+          "z_kpc": -101.01299285888672,
+          "tube_mean_vz_km_s": 0.0003030962180313959,
+          "tube_mean_density_ratio": 0.999992766798617,
+          "tube_mean_pressure_ratio": 0.9999857584506883
+        },
+        {
+          "z_kpc": 101.01299285888672,
+          "tube_mean_vz_km_s": -0.0003019916124866041,
+          "tube_mean_density_ratio": 0.999992768224601,
+          "tube_mean_pressure_ratio": 0.9999857609332319
+        },
+        {
+          "z_kpc": 149.67613220214844,
+          "tube_mean_vz_km_s": -0.0010507753501148565,
+          "tube_mean_density_ratio": 0.9999980693250384,
+          "tube_mean_pressure_ratio": 0.9999939305115066
+        },
+        {
+          "z_kpc": 199.78219604492188,
+          "tube_mean_vz_km_s": -0.027236763189386264,
+          "tube_mean_density_ratio": 1.000048844002915,
+          "tube_mean_pressure_ratio": 1.000079452922512
+        },
+        {
+          "z_kpc": 248.9480743408203,
+          "tube_mean_vz_km_s": -45.34840520108515,
+          "tube_mean_density_ratio": 1.062104165400857,
+          "tube_mean_pressure_ratio": 1.1056331373268073
+        }
+      ]
+    },
+    "G-LO": {
+      "archive_member": "./G-LO/per_snapshot/snapshot_0050_axial_profile.csv",
+      "outer_profile_row_count": 216,
+      "max_abs_tube_mean_vz_km_s": 14.094643030610634,
+      "max_abs_initial_tube_mean_vz_km_s": 0.0,
+      "maxima": [
+        {
+          "z_kpc": -248.9480743408203,
+          "tube_mean_vz_km_s": 14.094643030610634,
+          "tube_mean_density_ratio": 1.0367006541889534,
+          "tube_mean_pressure_ratio": 1.0619112503511297
+        },
+        {
+          "z_kpc": 248.9480743408203,
+          "tube_mean_vz_km_s": -14.094643030610634,
+          "tube_mean_density_ratio": 1.0367006541889534,
+          "tube_mean_pressure_ratio": 1.0619112503511297
+        }
+      ],
+      "representative_samples": [
+        {
+          "z_kpc": -248.9480743408203,
+          "tube_mean_vz_km_s": 14.094643030610634,
+          "tube_mean_density_ratio": 1.0367006541889534,
+          "tube_mean_pressure_ratio": 1.0619112503511297
+        },
+        {
+          "z_kpc": -199.78219604492188,
+          "tube_mean_vz_km_s": 0.0003896549768671119,
+          "tube_mean_density_ratio": 1.0000035099448747,
+          "tube_mean_pressure_ratio": 1.0000041517701195
+        },
+        {
+          "z_kpc": -149.67613220214844,
+          "tube_mean_vz_km_s": 0.0005319594396345665,
+          "tube_mean_density_ratio": 1.0000030384902994,
+          "tube_mean_pressure_ratio": 1.0000029374870507
+        },
+        {
+          "z_kpc": -101.01299285888672,
+          "tube_mean_vz_km_s": 0.0008532256242309993,
+          "tube_mean_density_ratio": 0.9999990375678582,
+          "tube_mean_pressure_ratio": 0.9999959758746731
+        },
+        {
+          "z_kpc": 101.01299285888672,
+          "tube_mean_vz_km_s": -0.0008532256243104986,
+          "tube_mean_density_ratio": 0.9999990375678582,
+          "tube_mean_pressure_ratio": 0.9999959758746731
+        },
+        {
+          "z_kpc": 149.67613220214844,
+          "tube_mean_vz_km_s": -0.0005319594396213166,
+          "tube_mean_density_ratio": 1.0000030384902994,
+          "tube_mean_pressure_ratio": 1.0000029374870507
+        },
+        {
+          "z_kpc": 199.78219604492188,
+          "tube_mean_vz_km_s": -0.0003896549768671119,
+          "tube_mean_density_ratio": 1.0000035099448747,
+          "tube_mean_pressure_ratio": 1.0000041517701195
+        },
+        {
+          "z_kpc": 248.9480743408203,
+          "tube_mean_vz_km_s": -14.094643030610634,
+          "tube_mean_density_ratio": 1.0367006541889534,
+          "tube_mean_pressure_ratio": 1.0619112503511297
+        }
+      ]
+    }
+  },
+  "C-LO_radial_energy_changes": {
+    "inside_50_kpc": {
+      "delta_thermal_erg": 4.5899804548946155e+57,
+      "delta_kinetic_erg": 1.775576914021342e+57,
+      "delta_gravitational_erg": -6.701454537661179e+56,
+      "delta_total_erg": 5.6954119151498394e+57,
+      "delta_thermal_over_injected": 0.1454477037193771,
+      "delta_kinetic_over_injected": 0.05626463717207081,
+      "delta_gravitational_over_injected": -0.02123562798711302,
+      "delta_total_over_injected": 0.1804767129043349
+    },
+    "inside_100_kpc": {
+      "delta_thermal_erg": 3.4111205860397523e+58,
+      "delta_kinetic_erg": 4.1421792310188486e+57,
+      "delta_gravitational_erg": 2.4812476580826607e+57,
+      "delta_total_erg": 4.0734632749499035e+58,
+      "delta_thermal_over_injected": 1.0809188867466957,
+      "delta_kinetic_over_injected": 0.13125773921397219,
+      "delta_gravitational_over_injected": 0.07862599367767703,
+      "delta_total_over_injected": 1.2908026196383449
+    },
+    "outside_100_kpc": {
+      "delta_thermal_erg": 3.518814166712759e+59,
+      "delta_kinetic_erg": 4.3512073095611664e+57,
+      "delta_gravitational_erg": 3.593838260618703e+59,
+      "delta_total_erg": 7.156164500427074e+59,
+      "delta_thermal_over_injected": 11.1504492316043,
+      "delta_kinetic_over_injected": 0.1378814393224189,
+      "delta_gravitational_over_injected": 11.38818623919025,
+      "delta_total_over_injected": 22.67651691011697
+    },
+    "whole_grid": {
+      "delta_thermal_erg": 3.859926225316734e+59,
+      "delta_kinetic_erg": 8.493386540580015e+57,
+      "delta_gravitational_erg": 3.6186507371995292e+59,
+      "delta_total_erg": 7.563510827922064e+59,
+      "delta_thermal_over_injected": 12.231368118350996,
+      "delta_kinetic_over_injected": 0.2691391785363911,
+      "delta_gravitational_over_injected": 11.466812232867927,
+      "delta_total_over_injected": 23.967319529755315
+    }
+  },
+  "C-LO_fraction_net_gravity_change_outside_100_kpc": 0.993143168992311,
+  "radial_vs_native_checks": {
+    "thermal_difference_over_injection": 4.946675805185259e-13,
+    "kinetic_difference_over_injection": 4.4166748260582675e-17,
+    "gravitational_difference_over_injection": 6.204544795646655e-13
+  },
+  "missing": [
+    "G-LO central-100-kpc gravitational change",
+    "10/30/80-kpc enclosed changes",
+    "full-3D outer-region maximum speeds and positions",
+    "no-jet integrated energy drift"
+  ]
+}

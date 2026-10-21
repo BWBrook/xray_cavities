@@ -23,6 +23,16 @@ cell-wise differences and partitions agree numerically. See the new note and
 its figures; physical discrepancy diagnosis remains open. No raw HDF5 reread
 or remote job check was made.
 
+The latest Q-031 follow-up now requests an energy and maximum-velocity audit
+of the existing 50 Myr no-jet controls, followed by full-3D outer motions and
+10/30/80/100-kpc gravity integrals for C-LO/G-LO. See
+`docs/science/nojet_stability_audit_request_2026-10-21.md`. Saved profiles show
+inward boundary-tube means of 45.35/14.09 km/s; C-LO central-100 gravity is
+only 7.8626% of injection, with 99.314% of the net gravity increase outside
+100 kpc. This localizes the excess, not its cause. No no-jet integrated-energy
+result was found and no new remote job has run. Stas's working jet-closure
+tolerance is 10--20%; larger low-power differences need investigation.
+
 PBS `790871.kunanyi-ohpc` completed `F/0` in 02:40:26. Its compact output has
 been retrieved and revalidated locally: 228 native rows, 19 precision rows,
 171 shock rows and 15/19 quantitative primary shock ages. Threshold precision
