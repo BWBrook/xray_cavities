@@ -33,6 +33,13 @@ only 7.8626% of injection, with 99.314% of the net gravity increase outside
 result was found and no new remote job has run. Stas's working jet-closure
 tolerance is 10--20%; larger low-power differences need investigation.
 
+Stas also explicitly requires atmospheric stability in unreached regions of
+the jet simulations themselves. Check density, pressure, velocity and energy
+changes there, distinguishing jet/cocoon extent from shock and sound-wave
+arrival. No tracer does not necessarily mean no jet-driven disturbance.
+Investigate unexplained outer drift; do not count it as jet coupling or hide
+it by changing the raw energy budget. This is part of Q-031, not a new run.
+
 PBS `790871.kunanyi-ohpc` completed `F/0` in 02:40:26. Its compact output has
 been retrieved and revalidated locally: 228 native rows, 19 precision rows,
 171 shock rows and 15/19 quantitative primary shock ages. Threshold precision

@@ -49,6 +49,12 @@ current instruction without checking its goal status.
   on a different grid; no new PLUTO run is authorized here. Full request and
   reproducible compact-data check:
   `docs/science/nojet_stability_audit_request_2026-10-21.md`.
+  Stas additionally requires stability in regions of the jet runs not yet
+  reached by the jet or its shocks/sound waves. Check density, pressure,
+  velocity and component-energy drift against the same initial cells;
+  zero tracer alone does not establish isolation. Diagnose unexplained
+  far-field drift rather than attributing it to jet coupling or removing it
+  from the raw budget to force closure.
 - New supervisor priority `Q-031` (2026-10-21): compare full-grid thermal,
   kinetic and gravitational `E(t)-E(0)` with bipolar injected energy first;
   then partition the same changes using full-cell `tr1 > 1e-3` and its

@@ -68,6 +68,37 @@ production discrepancy, propose a matched-grid no-jet control with identical
 boundaries, gravity, units and numerical settings; do not silently commission
 a new production run. Preserve the uncorrected jet-run budgets.
 
+## Additional requirement: stability in unreached regions of jet runs
+
+Stas explicitly requires stability checks within the jet simulations
+themselves, not only in separate no-jet controls. Regions the jet has not
+reached should retain the initial atmospheric equilibrium to numerical
+accuracy, provided no jet-driven shock or sound wave has reached them either.
+The presence of a jet elsewhere is not an explanation for unrelated outer-grid
+motion or energy drift.
+
+- Apply this check wherever an undisturbed region remains in each jet case,
+  prioritizing C-LO/G-LO and the proposed `r > 100 kpc` diagnostic region.
+  Establish the region's validity at each age rather than assuming that a
+  fixed radius is always beyond the disturbance.
+- Distinguish the extent of jet/cocoon material from that of shocks and sound
+  waves. Zero tracer or absence of a supersonic shock alone does not establish
+  an undisturbed atmosphere. Use time-resolved pressure, density and velocity
+  profiles/slices and propagation times to justify the region selection;
+  flag uncertain disturbance arrival rather than asserting isolation.
+- Within the justified region, report changes from the same initial cells
+  in density, pressure, mass and each energy component, plus maximum 3D speed,
+  its location and boundary distance. Retain the fixed initial potential.
+  Distinguish boundary-adjacent drift from any outward-propagating jet signal,
+  and compare with the existing no-jet results while stating the grid mismatch.
+- Unexplained motion or energy change in an otherwise unreached region is
+  an atmosphere/boundary/numerics stability concern to investigate, not energy
+  to attribute to jet coupling. Preserve the full-grid raw budget and report
+  the regional contribution separately; do not remove it just to force closure.
+
+This extends Q-031's post-processing request. It neither reports a completed
+stability test nor authorizes a new simulation.
+
 ## Evidence already available for jet runs
 
 The Goal 062 archive contains axial profiles averaged, without cell-volume
