@@ -2,7 +2,23 @@
 
 Status: Q-031 selected-age compact comparison complete; physical discrepancy
 diagnosis and annual-snapshot review remain open to Barry-codex.
-This note clarifies the first energy test for the next Q-030 manuscript iteration.
+This note preserves the earlier whole-grid test and its measured results.
+
+## Latest supervisor refinement
+
+Stas subsequently approved primary jet-energy comparisons within two spheres
+defined by the furthest cells with total speed >=100 and >=300 km/s, not the
+entire box. Include all enclosed cells and subtract the same initial cells
+within the same current radius. Retain fixed initial gravity, the full-cell
+tracer split and injection normalization; check disturbance coverage and
+energy transport across the spheres. Background motions below 5% of local
+sound speed are provisionally acceptable, subject to local verification.
+
+The approved request is in
+`docs/science/nojet_stability_audit_request_2026-10-21.md`. It supersedes the
+whole-grid-first primary-aperture instruction below, but does not change or
+invalidate the recorded whole-grid arithmetic. Preserve these results as
+diagnostic evidence. The spherical budgets are not yet calculated here.
 
 ## Scope and setup
 

@@ -21,7 +21,58 @@ but no new raw-data read, no-jet energy audit or simulation has run here.
   jet-disable settings, build provenance and grids into the audit's setup
   block. Those details have not been independently rechecked in this note.
 
-## Supervisor request to Barry-codex
+## Latest approved refinement: spherical jet-energy budgets
+
+Stas requests the following refinement to Q-031:
+
+1. **Tolerance for background velocities.** Spurious motions below 5% of
+   the local sound speed are provisionally acceptable as numerical effects:
+
+   $$|\mathbf v|/c_s<0.05,\qquad c_s=\sqrt{\gamma p/\rho}.$$
+
+   Stas's current interpretation is that C-LO and G-LO are acceptable in
+   this respect. Verify this using local three-dimensional speeds and sound
+   speeds, not just axial tube averages. This velocity tolerance does not
+   by itself demonstrate negligible accumulated energy drift.
+
+2. **Restrict the primary energy comparison to a sphere enclosing the
+   jet-affected gas**, rather than including the entire computational
+   domain. At each snapshot, calculate two proxy radii:
+
+   $$R_{100}=\max_{|\mathbf v_i|\ge100\,{\rm km\,s^{-1}}}r_i,\qquad
+   R_{300}=\max_{|\mathbf v_i|\ge300\,{\rm km\,s^{-1}}}r_i.$$
+
+   Use total speed, not just axial velocity. Document any minimal cell-width
+   padding needed to enclose the qualifying cells.
+
+3. **Calculate both spherical budgets independently.** Include every cell
+   inside each sphere, including slow-moving cells. For thermal, kinetic
+   and gravitational energy, subtract the initial state cell by cell:
+
+   $$\Delta E_a(<R,t)=
+   \sum_{r_i<R(t)}[e_{a,i}(t)-e_{a,i}(0)]V_i.$$
+
+   Crucially, use the **same current radius and same cells for both times**,
+   and retain the fixed initial gravitational potential.
+
+4. **Report radii, component energies and their sum versus injected bipolar
+   jet energy** for both thresholds. Then split each budget into cocoon and
+   ambient contributions using full-cell `tr1 > 1e-3` membership and its
+   complement.
+
+5. **Validate the radius proxies.** Check that they encompass the cocoon
+   and relevant disturbed ambient gas. Flag isolated boundary artefacts or
+   weak waves that make a velocity threshold misleading. Interpret any
+   residual with possible energy transport across the spherical boundary
+   in mind; do not force agreement by adjusting the aperture.
+
+This approved refinement supersedes the earlier whole-grid-first choice
+for the primary jet-energy comparison. Preserve existing full-grid results
+as diagnostic evidence, not as the requested regional measurement. The
+no-jet stability audit and other regional diagnostic requests remain open.
+No new spherical budgets or local-Mach checks have been calculated here.
+
+## Existing no-jet and regional diagnostic requests
 
 Audit the existing no-jet runs first, before proposing any new PLUTO run.
 Stas accepts approximately 10--20% jet-versus-grid discrepancies as a working

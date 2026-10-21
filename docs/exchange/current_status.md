@@ -37,6 +37,22 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
+- Latest approved Q-031 refinement (2026-10-21): the primary jet-energy
+  comparison now uses two spherical apertures, each just enclosing the
+  furthest cells with total speed >=100 or >=300 km/s. Include all cells
+  inside each sphere, including slow gas; subtract the same initial cells
+  within the same current radius using fixed initial gravity. Report radii,
+  thermal/kinetic/gravitational changes, total/injection ratios, then the
+  full-cell `tr1 > 1e-3` cocoon/ambient split. Check cocoon/disturbance
+  coverage, weak waves, isolated boundary artefacts and energy transport
+  across the aperture; do not tune radii to force closure. Background speeds
+  below 5% of local sound speed are provisionally acceptable numerical
+  motions. Stas regards C-LO/G-LO as acceptable in this respect, subject to
+  local 3D speed/sound-speed verification, not a tube-mean inference. This
+  replaces the earlier whole-grid-first primary comparison below; retain
+  those measured results as diagnostic evidence. The no-jet audit remains
+  requested, and small Mach numbers do not establish negligible energy drift.
+  Approved summary: `docs/science/nojet_stability_audit_request_2026-10-21.md`.
 - Q-031 follow-up (2026-10-21): audit existing cluster/group no-jet runs to
   50 Myr for component/total energy drift and maximum 3D speed with coordinates
   and boundary distances. Then check outer (`r > 100 kpc`) motions and enclosed
@@ -55,7 +71,7 @@ current instruction without checking its goal status.
   zero tracer alone does not establish isolation. Diagnose unexplained
   far-field drift rather than attributing it to jet coupling or removing it
   from the raw budget to force closure.
-- New supervisor priority `Q-031` (2026-10-21): compare full-grid thermal,
+- Earlier Q-031 baseline (primary aperture superseded above): compare full-grid thermal,
   kinetic and gravitational `E(t)-E(0)` with bipolar injected energy first;
   then partition the same changes using full-cell `tr1 > 1e-3` and its
   ambient complement. Include C-LO regardless of shock detectability. Stas
@@ -72,8 +88,9 @@ current instruction without checking its goal status.
   1.077--1.083 (G-HI), and 1.227--1.577 (G-LO), independent of shock
   selection. The note includes tables, component plots and compact-data
   consistency checks. No raw HDF5 was reread. Q-031 remains open to diagnose
-  the discrepancies and review annual coverage; Q-030 should present this
-  baseline before enthalpy/shock interpretation.
+  the discrepancies and review annual coverage; Q-030 should present the
+  approved spherical budgets before enthalpy/shock interpretation, retaining
+  this whole-grid baseline as diagnostic context.
 - Q-029 completed on 2026-09-06. PBS `790871.kunanyi-ohpc` finished `F/0` in
   02:40:26; 51 allocation-side tests passed. Retrieved only compact outputs
   and revalidated 228 native rows against the census, 19 precision records

@@ -5,11 +5,24 @@ was last reported on 2026-09-06).
 
 Verified shared base before this tranche: `aec8117` on `main` and `origin/main`
 
-Operating state: `Q-029 accepted; Q-031 whole-grid closure audit requested; Q-030 revision pending`
+Operating state: `Q-029 accepted; Q-031 spherical energy budgets and stability audit requested; Q-030 revision pending`
 
-Stas's 2026-10-21 feedback takes priority over the older next-step language
-below. First display and audit full-grid thermal/kinetic/gravitational
-`E(t)-E(0)` against injection, then the complementary binary tracer split.
+Latest approved Q-031 direction: make the primary jet-energy comparison
+inside two spheres defined by the furthest cells with total speed >=100 and
+>=300 km/s. Include every enclosed cell, using the same current aperture at
+both t and t=0 and fixed initial gravity, then split with `tr1 > 1e-3`.
+Validate disturbance/cocoon coverage and consider energy transport across
+the spheres; report both radii and budgets, not a closure-tuned aperture.
+Spurious speeds below 5% of local sound speed are provisionally acceptable.
+Stas regards C-LO/G-LO as acceptable on that basis, pending local 3D speed
+and sound-speed checks; this is not an energy-drift validation. The no-jet
+audit remains requested. Read the latest approved refinement in
+`docs/science/nojet_stability_audit_request_2026-10-21.md`.
+
+The following earlier whole-grid comparison remains diagnostic evidence;
+its primary-aperture instruction is superseded above. It audits full-grid
+thermal/kinetic/gravitational `E(t)-E(0)` against injection, then the
+complementary binary tracer split.
 Neither calculation depends on shock detection. Retain late C-LO, where Stas
 expects sound waves; no explicit viscosity means smooth-wave damping is
 numerical. Clarify that numerical partition agreement is not physical closure.
