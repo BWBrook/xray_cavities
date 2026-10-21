@@ -5,7 +5,17 @@ was last reported on 2026-09-06).
 
 Verified shared base before this tranche: `aec8117` on `main` and `origin/main`
 
-Operating state: `Q-029 accepted; Q-031 spherical energy budgets and stability audit requested; Q-030 revision pending`
+Operating state: `Q-029 native accounting accepted; Q-032 X-ray recovery review/action open; Q-031 spherical energy and stability audit requested; Q-030 revision pending`
+
+Stas requests Patrick-agent check/action Q-032, with Barry-codex notified:
+the selected-age X-ray path uses the 1%-area seed mask directly as geometry,
+unlike Goal 045's seed-and-growth method. Verify the staged source, fixed
+120-kpc aperture and background; coordinate a validated correction and
+before/after overlays and volume comparisons. Affected observer/enthalpy/
+power manuscript conclusions are provisional, not established intrinsic
+observational biases. Native tracer accounting remains intact. Details:
+`docs/science/xray_cavity_selection_issue_2026-10-21.md`. No science code
+or threshold was changed and no new simulation was authorized here.
 
 Latest approved Q-031 direction: make the primary jet-energy comparison
 inside two spheres defined by the furthest cells with total speed >=100 and

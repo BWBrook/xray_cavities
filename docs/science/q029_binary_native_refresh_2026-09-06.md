@@ -3,6 +3,14 @@
 Status: Q-029 accepted after focused scientific review and repairs; the first
 Q-030 Results and figure iteration is ready for supervisor review.
 
+Current caveat (2026-10-21): Q-032 requests Patrick-agent review/action of
+the reused X-ray measurements' direct 1%-area mask versus Goal 045's
+seed-and-growth geometry. Barry-codex is notified to coordinate corrections.
+The native accounting remains accepted, but affected observer-recovery and
+downstream interpretations below are provisional pending that review. See
+`docs/science/xray_cavity_selection_issue_2026-10-21.md`. Historical numerical
+products and acceptance records are preserved, not silently recomputed.
+
 ## Scope and acceptance
 
 Barry authorised Q-029 on 2026-09-06. Apply Stas's strict cocoon definition

@@ -37,6 +37,17 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
+- Q-032 X-ray method issue (2026-10-21): Stas asks Patrick-agent to check/action
+  the selected-age direct 1%-area cavity mask versus Goal 045's validated
+  seed-and-growth geometry, with Barry-codex informed and coordinating fixes.
+  The fixed 120-kpc aperture assigns about 452 kpc^2 before filtering; merely
+  raising the fraction can merge background structures. Review source binding,
+  background and aperture coverage; validate the actual production path and
+  return before/after outlines and volumes. Treat affected observer-volume,
+  enthalpy, power and manuscript claims as provisional. Preserve native
+  accounting and historical products; reuse maps, with no new PLUTO run or
+  deletion authorized. Full issue:
+  `docs/science/xray_cavity_selection_issue_2026-10-21.md`.
 - Latest approved Q-031 refinement (2026-10-21): the primary jet-energy
   comparison now uses two spherical apertures, each just enclosing the
   furthest cells with total speed >=100 or >=300 km/s. Include all cells
