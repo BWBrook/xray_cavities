@@ -1,11 +1,21 @@
 # X-ray Cavities successor handoff
 
-Last reviewed: 2026-10-21 (repository and supervisor direction; remote state
+Last reviewed: 2026-10-30 (repository and supervisor direction; remote state
 was last reported on 2026-09-06).
 
 Verified shared base before this tranche: `aec8117` on `main` and `origin/main`
 
 Operating state: `Q-029 native accounting accepted; Q-032 X-ray recovery review/action open; Q-031 spherical energy and stability audit requested; Q-030 revision pending`
+
+On 30 October Stas endorsed Patrick's 29 October cavity recommendations:
+the approach is correct and the issue needs resolution. Barry should
+prioritise corrective work with Patrick: compare and validate recovery
+methods, check aperture coverage and topology assumptions, and generate
+routine cavity and shocked-ambient mask overlays. Return validated
+before/after outlines and volumes, then update dependent science and writing.
+Observer conclusions remain provisional; this is not approval of an untested
+algorithm. Reuse existing outputs; Q-031 remains requested and no new PLUTO
+run or deletion is authorised. See the latest Q-032 thread message.
 
 Stas requests Patrick-agent check/action Q-032, with Barry-codex notified:
 the selected-age X-ray path uses the 1%-area seed mask directly as geometry,

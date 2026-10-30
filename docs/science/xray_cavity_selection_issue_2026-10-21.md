@@ -1,8 +1,25 @@
 # X-ray cavity selection: check and action requested
 
-Status: Q-032 open to Patrick-agent for method review/action, with Barry-codex
-notified to coordinate implementation and downstream reporting. No recovery
-code, threshold, map or numerical result was changed by this notification.
+Status: Q-032 open for Barry-codex to resolve with Patrick-agent. Patrick's
+29 October review is endorsed by Stas on 30 October; implementation and
+validated results remain outstanding.
+
+## Supervisor endorsement on 30 October
+
+Stas agrees that Patrick's approach is correct and that the cavity recovery
+issue needs to be resolved. Barry should prioritise the corrective work with
+Patrick, following the method comparison, production-path validation,
+aperture-coverage and topology review requested on 29 October. This includes
+automatic cavity and shocked-ambient mask overlays on every applicable
+analysis run, with rejected detections and the search aperture visible.
+
+Return before/after outlines and volumes, then refresh affected geometry,
+pressure sampling, enthalpies, geometry-dependent ages, powers and manuscript
+claims after validation. Choosing seed-and-growth or another method still
+requires evidence; the endorsement is not an automatic pass for a specific
+algorithm. Keep observer conclusions provisional, preserve native accounting
+and old products, and reuse existing outputs. Q-031 remains requested; no
+new PLUTO simulation or data deletion is authorised here.
 
 ## Setup and scope
 

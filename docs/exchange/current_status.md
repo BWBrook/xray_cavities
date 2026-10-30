@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-10-21
+Last updated: 2026-10-30
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -37,6 +37,17 @@ current instruction without checking its goal status.
 
 ## Supervisor Priority And Execution Order
 
+- Q-032 endorsement (2026-10-30): Stas agrees with Patrick's 29 October
+  recommendations and asks Barry to prioritise resolving the recovery issue
+  with Patrick. Compare defensible methods, validate the production path,
+  aperture coverage and topology assumptions, and generate cavity and
+  shocked-ambient overlays on every applicable run, including rejected cases.
+  Return validated before/after outlines and volumes; refresh dependent
+  numerical products and writing afterwards. Observer conclusions remain
+  provisional, not an accepted intrinsic bias. No specific untested algorithm
+  is approved. Existing-output post-processing and Q-031 continue; no new
+  PLUTO simulation or deletion is authorised. See the latest message in
+  `agent_comms/threads/2026-07-17-xray-cavity-production-validation.md`.
 - Q-032 X-ray method issue (2026-10-21): Stas asks Patrick-agent to check/action
   the selected-age direct 1%-area cavity mask versus Goal 045's validated
   seed-and-growth geometry, with Barry-codex informed and coordinating fixes.
