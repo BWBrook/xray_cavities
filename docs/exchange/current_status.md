@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-10-31 20:59 AEDT (Q-032 r2 review and retained-view launch)
+Last updated: 2026-10-31 21:49 AEDT (access diagnosis and native design review)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -109,6 +109,17 @@ Migration `870323` was still running at 09:51 UTC after six hours; full flux
 path-length/emissivity design is proposed in
 `docs/science/q031_native_path_length_design_2026-10-31.md`; no native extraction
 has been submitted.
+
+Claude's message 2712 has been reviewed. The native design now includes
+case-specific initial emissivity through current masks, signed regional
+brightness/mass changes, explicit filling metrics, table-domain accounting and
+independent geometry checks. C-HI/G-HI at 40 Myr are the fixed pilot before
+inspection of the new retained detector results. No native job was submitted.
+Actual APEC/Gaunt ranges and hashes were read through the portal. Mini SSH
+aliases are password-only by configuration; the observed BatchMode failure
+reaches jumpbox authentication and does not demonstrate a rejected key.
+Claude has the working portal-shell route and interactive SSH instructions.
+See `docs/exchange/logs/2026-10-31-tpac-access-and-native-design-review.md`.
 
 The live home analysis trees contain all 60 selected-age X-ray map bundles
 (360 required files; 1,987,422,150 bytes), including repaired G-HI/50. All 20

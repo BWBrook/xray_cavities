@@ -1,6 +1,6 @@
 # Native path lengths and shell emission: extraction design
 
-Status: proposed for Claude's methodological review. No native-grid extraction
+Status: revised after Claude's message 2712 and independent review. No native-grid extraction
 has been implemented or submitted by this note. This follows Correspondence
 discussion 29, messages 2688 and 2696–2699, and the corrected Q-032 synthetic
 shell experiments.
@@ -9,9 +9,10 @@ shell experiments.
 
 Measure whether simulated shocked ambient gas fills the projected cocoon's
 X-ray deficit, and separate this effect from background estimation and cavity
-selection. Start with one quantitatively accepted cluster snapshot and one
-accepted group snapshot at the same age, selected from the existing native
-manifest before inspecting method performance. Extend only after geometry,
+selection. Start with C-HI and G-HI at 40 Myr, the latest common high-power age
+accepted as quantitative bilateral in the retained Q-029 closeout. This choice
+was fixed on 31 October before inspecting the new 60-view detector results.
+Bind the exact case-specific source manifest rows in staging. Extend only after geometry,
 mask and brightness checks pass. Use retained outputs; no new PLUTO simulation.
 
 The synthetic hot-shell ordering and overlapping mass-matched shell arms are
@@ -58,14 +59,82 @@ cellwise emissivity. Keep current-state values distinct from changes relative
 to initial fields. Avoid calling an initial-state comparison an evolved no-jet
 counterfactual.
 
+## Initial-state decomposition and declared metrics
+
+Project both current emissivity and case-specific initial emissivity through
+each current region mask. Retained output zero is already nozzle-initialized;
+do not reuse one atmosphere's baseline across HI/LO unless the relevant fields
+are proved identical. Cache each required baseline once. The resulting
+partition is Eulerian: it compares the same cells, not the histories of the
+same gas parcels. For valid complete regional partitions, require per pixel
+
+`B_t - B_0 = delta_B_cocoon + delta_B_shocked + delta_B_unshocked`.
+
+The summed initial regional maps provide a matched-axis `t0_baseline`, not an
+evolved no-jet control. No sign is imposed on any regional change. Tracer-selected
+gas can brighten, and shocked ambient can dim in the chosen band. The unshocked
+term includes uplift, waves, rarefaction and sub-threshold shocks as well as
+boundary/numerical evolution; it supplies no upper or lower bound on a no-jet
+counterfactual.
+
+Before examining detector results, declare these budgets for each side/view,
+on (a) the projected cocoon footprint and (b) that footprint intersected with
+the 120 kpc candidate aperture. Report the full aperture separately to expose
+off-footprint rims. Integrals include pixel area. Preserve signed net change
+and positive/negative parts of every regional map. Define cocoon loss
+`D_coc = integral max(-delta_B_cocoon, 0) dA`, cocoon brightening analogously,
+and shell brightening `E_sh = integral max(delta_B_shocked, 0) dA`.
+Report `E_sh / D_coc` and `integral delta_B_shocked dA / D_coc` only when
+`D_coc > 0`; otherwise mark undefined. These aggregate filling diagnostics
+can exceed one and do not assert pixel-by-pixel cancellation. Also retain the
+spatial change maps and unshocked-region budget on the same support.
+
+Report initial/current mass differences through these same masks, including
+positive, negative and net terms, with whole-domain partition closure. They
+are signed regional mass changes, not proof that cocoon-displaced material
+entered the shell. Preserve regional per-pixel emission-weighted temperature;
+mark undefined when the emissivity denominator is non-positive and retain
+negative/nonfinite-emissivity diagnostics.
+
+## Emissivity-table coverage
+
+Direct inspection of the retained runtime tables on 31 October verified:
+
+| Table coordinate | Minimum | Maximum |
+| --- | ---: | ---: |
+| APEC temperature (keV) | 0.01 | 10 |
+| APEC redshift | 0.01 | 10 |
+| Gaunt temperature (K) | 1e5 | 1e13 |
+| Gaunt frequency (Hz) | 1e16 | 1e19 |
+
+The exact table hashes and inspection evidence are in
+`docs/exchange/logs/2026-10-31-tpac-access-and-native-design-review.md`.
+The accepted renderer linearly extrapolates outside these ranges and preserves
+finite negative corrected emissivity. Preserve that convention for reproduction.
+For initial and current fields separately, report per-region out-of-range cell
+counts, volume fractions, signed brightness contributions and fractions of
+absolute brightness, plus negative and nonfinite values before sanitization.
+Check all interpolation coordinates, not only temperature. A separately
+labelled clamp-to-edge sensitivity must not replace the retained convention.
+
 ## Acceptance before extension
 
 1. Reproduce accepted native region volumes and mask statuses without changing
    the Q-029 reference; verify zero cocoon/shocked-ambient overlap.
 2. Check pixelwise cocoon plus total-ambient path length against the full-domain
    projection. Where shock classification is valid, check the ambient split.
+   Reproject the native tracer maximum alongside path length; compare strict
+   support with the retained TSV mask, recording mismatch count/area and maxima
+   near the cutoff. Unexplained mismatches stop quantitative use; threshold
+   serialization differences must be separately demonstrated and bounded.
 3. Integrate path length times pixel area and recover native regional volume,
    allowing only a declared, measured clipping contribution and numerical error.
+   Independently compare the three ellipse depths and both half-plane revolution
+   estimates on the native footprint. Each half uses `2*pi*integral |u| dA`;
+   their mean is the symmetrized full-footprint estimate `pi*integral |u| dA`.
+   Use exact pixel-edge moments, especially across u=0, and show sensitivity to
+   partial-pixel support/bin refinement. These are shape estimators, not assumed
+   true volumes for asymmetric cocoons.
 4. Require the sum of component brightness maps to reproduce an independently
    rendered whole-fluid brightness map; compare that to the retained map and
    explain any source or renderer difference before using it quantitatively.
