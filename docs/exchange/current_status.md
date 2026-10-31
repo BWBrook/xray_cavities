@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-10-31 22:07 AEDT (pre-pilot emissivity extrapolation check)
+Last updated: 2026-10-31 22:03 AEDT (pre-pilot emissivity extrapolation check)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
