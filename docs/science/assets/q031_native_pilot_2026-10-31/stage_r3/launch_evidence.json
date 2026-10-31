@@ -1,5 +1,5 @@
 {
-  "status": "target_smoke_submitted_native_not_submitted",
+  "status": "target_smoke_failed_cache_cleanup",
   "source_commit": "61fb74515d6f1674b1fe42c384bf2972c271f47d",
   "stage_root": "/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r3",
   "stage_archive_sha256": "d190b526f16f5471b3c8843e0cb766aef00a571abeec62a2dc97b8d3547def75",
@@ -19,5 +19,12 @@
     "870323.kunanyi-ohpc",
     "870374.kunanyi-ohpc"
   ],
-  "access_blocker": "Mac locked during attempt to inspect870705; native submission awaits verified target smoke; no SSH configuration or credential changes"
+  "exit_status": 1,
+  "target_tests_passed": 79,
+  "target_tests_failed": 2,
+  "target_test_seconds": 125.66,
+  "maximum_resident_set_kib": 232584,
+  "measured_wall_seconds": 127.804587,
+  "pbs_walltime": "00:02:08",
+  "failure": "OSError39 Directory not empty ratios_and_masks at cache cleanup; both full synthetic and real kernel CLI; native not submitted"
 }

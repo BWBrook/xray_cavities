@@ -1608,6 +1608,15 @@ def npz_payload(bundle: Mapping[str, Any], geometry: snapshot_energy.Geometry) -
     return payload
 
 
+def close_memmap_mapping(mapping: Mapping[Any, np.ndarray]) -> None:
+    closed: set[int] = set()
+    for array in mapping.values():
+        mmap = getattr(array, "_mmap", None)
+        if mmap is not None and id(mmap) not in closed:
+            mmap.close()
+            closed.add(id(mmap))
+
+
 def run_case(args: argparse.Namespace) -> dict[str, Any]:
     if args.case not in {"C-HI", "G-HI"}:
         raise ValueError("the authorised pilot contains only C-HI and G-HI")
@@ -2045,6 +2054,8 @@ def run_case(args: argparse.Namespace) -> dict[str, Any]:
     ]
     manifest = "".join(f"{sha256_file(path)}  {path.name}\n" for path in exact_outputs)
     (args.output_dir / "manifest.sha256").write_text(manifest)
+    close_memmap_mapping(ratio_cache)
+    close_memmap_mapping(masks)
     if not args.keep_cache:
         shutil.rmtree(args.cache_dir)
     return summary

@@ -336,9 +336,37 @@ def build_synthetic_fixture(
     )
 
 
-def test_full_cli_fixture_closes_partitions_and_refuses_overwrite(tmp_path: Path) -> None:
+def test_full_cli_fixture_closes_partitions_and_refuses_overwrite(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     module = load_module()
     args = build_synthetic_fixture(tmp_path / "fixture")
+    memmaps: list[np.memmap] = []
+    create_ratio_cache = module.native_shock._create_ratio_cache
+    build_masks = module.native_shock._build_masks
+    rmtree = module.shutil.rmtree
+    cleanup_observed = False
+
+    def capture_ratio_cache(**kwargs):
+        mapping = create_ratio_cache(**kwargs)
+        memmaps.extend(mapping.values())
+        return mapping
+
+    def capture_masks(**kwargs):
+        mapping, diagnostics = build_masks(**kwargs)
+        memmaps.extend(mapping.values())
+        return mapping, diagnostics
+
+    def assert_closed_before_cleanup(path):
+        nonlocal cleanup_observed
+        assert Path(path) == args.cache_dir
+        assert memmaps and all(array._mmap.closed for array in memmaps)
+        cleanup_observed = True
+        rmtree(path)
+
+    monkeypatch.setattr(module.native_shock, "_create_ratio_cache", capture_ratio_cache)
+    monkeypatch.setattr(module.native_shock, "_build_masks", capture_masks)
+    monkeypatch.setattr(module, "shutil", SimpleNamespace(rmtree=assert_closed_before_cleanup))
     result = module.run_case(args)
     assert result["status"] == "validated"
     assert "not physical emissivity acceptance" in result["validation_scope"]
@@ -346,6 +374,8 @@ def test_full_cli_fixture_closes_partitions_and_refuses_overwrite(tmp_path: Path
     assert result["views"] == [0, 45, 90]
     assert result["conventions"] == ["retained_linear", "clamp_each_coordinate"]
     assert len(result["density_temperature_distributions"]) == 12
+    assert cleanup_observed
+    assert memmaps and all(array._mmap.closed for array in memmaps)
     assert not args.cache_dir.exists()
     assert {path.name for path in args.output_dir.iterdir()} == {
         "native_emission_0deg.npz",
@@ -383,6 +413,44 @@ def test_full_cli_fixture_closes_partitions_and_refuses_overwrite(tmp_path: Path
         assert np.isnan(maps["temperature_cocoon_current_retained_linear_k"]).any()
     with pytest.raises(ValueError, match="refusing to overwrite output"):
         module.run_case(args)
+
+
+def test_keep_cache_retains_closed_memmap_files(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    module = load_module()
+    args = build_synthetic_fixture(tmp_path / "keep-cache")
+    args.keep_cache = True
+    memmaps: list[np.memmap] = []
+    create_ratio_cache = module.native_shock._create_ratio_cache
+    build_masks = module.native_shock._build_masks
+
+    def capture_ratio_cache(**kwargs):
+        mapping = create_ratio_cache(**kwargs)
+        memmaps.extend(mapping.values())
+        return mapping
+
+    def capture_masks(**kwargs):
+        mapping, diagnostics = build_masks(**kwargs)
+        memmaps.extend(mapping.values())
+        return mapping, diagnostics
+
+    monkeypatch.setattr(module.native_shock, "_create_ratio_cache", capture_ratio_cache)
+    monkeypatch.setattr(module.native_shock, "_build_masks", capture_masks)
+
+    module.run_case(args)
+
+    assert memmaps and all(array._mmap.closed for array in memmaps)
+    assert args.cache_dir.is_dir()
+    assert sorted(path.name for path in (args.cache_dir / "ratios_and_masks").iterdir()) == [
+        "ambient.npy",
+        "density_ratio.npy",
+        "entropy.npy",
+        "pressure_ratio.npy",
+        "selected_mask_0.5.npy",
+        "selected_mask_1.npy",
+        "selected_mask_2.npy",
+    ]
+    provenance = json.loads((args.output_dir / "provenance.json").read_text())
+    assert provenance["cache_removed_after_manifest"] is False
 
 
 def test_real_kernel_cli_smoke(tmp_path: Path) -> None:

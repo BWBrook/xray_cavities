@@ -8,7 +8,7 @@
 
 set -euo pipefail
 umask 077
-readonly STAGE=/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r3
+readonly STAGE=/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r4
 readonly MODE="${Q031_NATIVE_MODE:?set smoke or pilot}"
 readonly RUNTIME=/u/bwbrook/codex_kunanyi/xraise_runtime
 readonly MIGRATION=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16

@@ -103,3 +103,14 @@ wrapper receipt gates. No scheduled monitoring was created.
 Post-run scientific review must inspect table-domain occupancy, nonfinite
 sanitization, finite-negative linear emission and linear-versus-clamp
 sensitivity before using brightness or shell-budget conclusions.
+
+## Resumed after unlock
+
+Barry unlocked the Mac. Target smoke `870705` finished `F/1`, with 79 tests
+passed and two failed. Both failures were at `shutil.rmtree(args.cache_dir)`
+after science outputs and their manifest had been written: `OSError 39`,
+`ratios_and_masks` directory not empty. Cache mappings were still open, which
+prevents normal unlink-and-remove cleanup on NFS. The stage remains preserved.
+Measured child peak RSS was 232,584 KiB and elapsed time 127.804587 seconds;
+PBS reported 2:08 walltime. Native submission remains held pending the narrowly
+repaired target smoke. No native HDF5 data have been read by these smoke jobs.
