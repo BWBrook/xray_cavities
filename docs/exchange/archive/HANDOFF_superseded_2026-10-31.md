@@ -1,3 +1,5 @@
+> **Archived 2026-10-31.** Superseded; kept for history only. Barry, in Claude chat on 31 October 2026: "that HANDOFF is an artefact of the past, and can be archived. It was for a fresh session catching up on old work, and has now been superseded." Its rule "Commit and push only when Barry has authorized publication of the tranche" was overridden in the same message. Current state lives in `docs/exchange/current_status.md` and the correspondence board project `xray-cavities`.
+
 # X-ray Cavities successor handoff
 
 Last reviewed: 2026-10-31 (retained flux jobs, reviewed migration resume,
