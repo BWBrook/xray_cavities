@@ -77,3 +77,29 @@ The failure occurred while binding source hashes, before any native reads.
 The revised staging builder recursively collects local science imports,
 including imports inside functions. The r3 package adds that closure and is
 tested in isolation before upload. No scientific algorithm or tolerance changed.
+
+## r3 launch handoff
+
+The isolated r3 stage passed all 81 tests locally in 8.37 seconds, including
+the actual emission-kernel CLI. One local Astropy warning reported an ignored
+nonexistent `XDG_CONFIG_HOME`; no test failed. The stage contains 40 files and
+is bound to source commit `61fb74515d6f1674b1fe42c384bf2972c271f47d`.
+Its archive SHA-256 is
+`d190b526f16f5471b3c8843e0cb766aef00a571abeec62a2dc97b8d3547def75`.
+The remote archive hash and all static/runtime checksums matched.
+
+Target smoke `870705.kunanyi-ohpc` was submitted. At 11:47 UTC the Mac was
+locked, preventing inspection through the authenticated portal. Barry has been
+asked to unlock it; Claude has the same handoff on discussion 29. The native
+job has not been submitted and target-smoke completion is not claimed.
+
+Resume through the existing portal shell. Check `qstat -xf 870705`,
+`run_smoke/run.out`, `run_smoke/resources.txt` and `run_smoke/completion.json`
+in the r3 stage. Only after successful target smoke, submit the native mode
+with explicit `afterok` dependencies on `870705`, `870323` and `870374`,
+then verify the resulting job's hold/dependency state. Keep the existing
+wrapper receipt gates. No scheduled monitoring was created.
+
+Post-run scientific review must inspect table-domain occupancy, nonfinite
+sanitization, finite-negative linear emission and linear-versus-clamp
+sensitivity before using brightness or shell-budget conclusions.

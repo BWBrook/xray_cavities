@@ -1,0 +1,23 @@
+{
+  "status": "target_smoke_submitted_native_not_submitted",
+  "source_commit": "61fb74515d6f1674b1fe42c384bf2972c271f47d",
+  "stage_root": "/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r3",
+  "stage_archive_sha256": "d190b526f16f5471b3c8843e0cb766aef00a571abeec62a2dc97b8d3547def75",
+  "stage_archive_bytes": 231049,
+  "stage_files": 40,
+  "remote_archive_hash_verified": true,
+  "remote_static_runtime_checksums_verified": true,
+  "smoke_job": "870705.kunanyi-ohpc",
+  "native_job": null,
+  "local_stage_validation": {
+    "tests_passed": 81,
+    "test_seconds": 8.37,
+    "warning": "Astropy ignored nonexistent local XDG_CONFIG_HOME"
+  },
+  "native_dependencies": [
+    "successful target smoke",
+    "870323.kunanyi-ohpc",
+    "870374.kunanyi-ohpc"
+  ],
+  "access_blocker": "Mac locked during attempt to inspect870705; native submission awaits verified target smoke; no SSH configuration or credential changes"
+}

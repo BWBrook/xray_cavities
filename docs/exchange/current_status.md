@@ -1,9 +1,32 @@
 # Current Status
 
-Last updated: 2026-10-31 22:03 AEDT (pre-pilot emissivity extrapolation check)
+Last updated: 2026-10-31 22:47 AEDT (native pilot staged; target smoke pending inspection)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Authorised Q-031 native pilot — staged, not yet submitted
+
+The fixed C-HI/G-HI 40 Myr pilot with retained-linear and coordinate-clamp
+emissivity is implemented and independently reviewed. Source is pushed through
+`61fb745`. The complete r3 deployment stage passed all 81 tests locally,
+including the real-kernel subprocess CLI. It is checksum-verified on Kunanyi at
+`/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r3`.
+
+Target smoke `870705.kunanyi-ohpc` has been submitted (2 CPUs, 8 GB, 1 hour).
+Its outcome has not yet been observed: the Mac locked during the inspection
+attempt, blocking the authenticated portal UI. Barry has been asked to unlock
+it. The native pilot is **not submitted**. Resume by checking the target smoke
+receipt and resources, then submit with `afterok` dependencies on the successful
+smoke, migration `870323` and flux `870374`. The wrapper independently verifies
+migration/flux receipts and source identity before reading native files.
+
+Earlier smoke stages remain intact: `870703` failed before tests because the
+compute node lacks `/usr/bin/time`; `870704` passed 78 tests and failed three
+because the stage omitted geometry-helper dependencies. Both problems are
+corrected in r3. No native scientific outputs have been produced by this pilot.
+See `docs/exchange/logs/2026-10-31-q031-native-pilot.md` and
+`docs/science/assets/q031_native_pilot_2026-10-31/` for checksums and evidence.
 
 ## Storage migration — checked 2026-10-31
 

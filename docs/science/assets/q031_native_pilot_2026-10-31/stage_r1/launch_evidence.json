@@ -1,0 +1,26 @@
+{
+  "status": "target_smoke_failed_before_tests",
+  "source_commit": "df42e230775b30137f11e24e31f1c0289a6524e0",
+  "stage_root": "/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r1",
+  "stage_archive_sha256": "e896073c60d8e4c93ec130a1e979829d1b62cb0c4317d0d869c65ffa05d91c8f",
+  "stage_archive_bytes": 210558,
+  "stage_files": 35,
+  "remote_archive_hash_verified": true,
+  "remote_static_runtime_checksums_verified": true,
+  "smoke_job": "870703.kunanyi-ohpc",
+  "native_job": null,
+  "method": "authenticated Open OnDemand shell; scheduler state is not completion",
+  "local_validation": "79 passed, then narrow finite-negative correction: 2 impacted tests passed; final target suite pending",
+  "dependencies": [
+    "870323.kunanyi-ohpc",
+    "870374.kunanyi-ohpc"
+  ],
+  "dependency_observation": {
+    "utc": "2026-10-31T11:32:35Z",
+    "migration_state": "R",
+    "migration_elapsed": "07:42:51",
+    "flux_state": "H"
+  },
+  "exit_status": 1,
+  "failure": "/usr/bin/time absent on n002; no pytest or native reads"
+}

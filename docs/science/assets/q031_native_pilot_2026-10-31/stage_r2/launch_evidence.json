@@ -1,0 +1,29 @@
+{
+  "status": "target_smoke_failed_missing_geometry_dependencies",
+  "source_commit": "5afe4edd4b680c960331b4842ddbf1c88a37e9df",
+  "stage_root": "/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r2",
+  "stage_archive_sha256": "58aa284b7e8acc3a0b6ab367d439bb0e4bb1375a730e477254097827cfd12cf1",
+  "stage_archive_bytes": 211463,
+  "stage_files": 36,
+  "remote_archive_hash_verified": true,
+  "remote_static_runtime_checksums_verified": true,
+  "smoke_job": "870704.kunanyi-ohpc",
+  "native_job": null,
+  "method": "authenticated Open OnDemand shell; scheduler state is not completion",
+  "local_validation": "79 passed, then narrow finite-negative correction: 2 impacted tests passed; final target suite pending",
+  "dependencies": [
+    "870323.kunanyi-ohpc",
+    "870374.kunanyi-ohpc"
+  ],
+  "dependency_observation": {
+    "utc": "2026-10-31T11:32:35Z",
+    "migration_state": "R",
+    "migration_elapsed": "07:42:51",
+    "flux_state": "H"
+  },
+  "exit_status": 1,
+  "failure": "three tests fail because stage omits xray_cavity_method_ladder.py and local dependencies",
+  "target_test_passes": 78,
+  "target_test_failures": 3,
+  "target_test_seconds": 147.87
+}
