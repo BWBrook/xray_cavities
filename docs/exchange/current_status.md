@@ -1,9 +1,65 @@
 # Current Status
 
-Last updated: 2026-10-30
+Last updated: 2026-10-31 (Claude coordination, boundary audit and live storage check)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Storage migration — checked 2026-10-31
+
+Barry authorized migrating the retained X-ray scratch trees into home on
+2026-10-16, followed by removal of verified scratch duplicates. The scope is
+35,865 regular files (8,796,208,343,281 bytes) in ten units; other projects are
+excluded. The intended archive is
+`/u/bwbrook/xray_cavities_scratch_archive_2026-10-16`; old scratch paths will
+remain as compatibility symlinks. Preserve all scientific payloads and existing
+checksum-bound manifests. This is not Q-028 compression or new science work.
+
+PBS `820961.kunanyi-ohpc` finished `F/271` on 18 October at 22:54 AEDT:
+`migration.err` confirms the 48-hour walltime limit. Eight units have durable
+`complete` states, expected compatibility links, live destinations and no
+tombstones, representing 2,606,334,382,194 logical payload bytes. The main
+C-HI rerun is `copied`, with its original scratch directory retained and
+verification unfinished. The main C-LO rerun has not started; its scratch
+directory remains and its archive destination is absent. No resume was submitted
+during this handoff check. Full migration completion and scratch quota recovery
+are not established; this check did not rehash the large payloads.
+
+Remote acceptance `820960` previously passed 20 tests and filesystem durability
+probes. The remote frozen-checksum file still matches the retained local copy.
+Resume the same frozen plan/state after checking active jobs and receipt
+signatures; never remove an unfinished source or tombstone manually. See
+`docs/exchange/logs/2026-10-16-scratch-home-migration.md` and the frozen plan in
+`docs/science/assets/scratch_home_migration_2026-10-16/`.
+Barry declined scheduled checks; no monitoring automation was created.
+
+## Claude coordination and available inputs — 2026-10-31
+
+Codex confirmed Claude's Q-032 script/test ownership and retains Q-031/native
+analysis, Kunanyi staging and these shared handovers. Reciprocal method review
+continues on Correspondence discussion 29; substantive findings return to Barry
+in chat. The initial Q-032 comparison is legacy 1%, seed-and-growth and a
+null-calibrated deficit threshold. No replacement algorithm is validated yet.
+
+The live home analysis trees contain all 60 selected-age X-ray map bundles
+(360 required files; 1,987,422,150 bytes), including repaired G-HI/50. All 20
+manifest-bound native input paths exist. These analysis maps are already in
+the separate home analysis root, independent of the unfinished C-HI/C-LO
+migration. No `age_00` map directories exist in those four case roots.
+The inventory checks metadata and hashes small coordinate/metadata files;
+it does not validate pixel values or newly hash native HDF5. Exact locations
+and evidence: `docs/exchange/logs/2026-10-31-claude-handoff-and-storage-check.md`.
+
+The independent Q-031 compact-data audit reproduces the boundary enthalpy plus
+potential scale, supporting boundary inflow as the leading explanation of
+C-LO's excess. It does **not** establish measured flux closure: the 50 Myr
+face-weighting scenarios span 0.893–1.543 times nominal injection, and paired
+HI–LO mass gain is not independently identified as injected jet mass. The
+analytic continuum nozzle prediction is close to the configured power; discrete
+nozzle delivery remains unmeasured. See
+`docs/science/q031_boundary_hypothesis_2026-10-31.md`. The approved spherical
+aperture and existing no-jet/stability audits below remain in force. No new
+PLUTO run, scientific rewriting or production-analysis replacement occurred.
 
 ## Read This First
 

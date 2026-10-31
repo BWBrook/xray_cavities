@@ -1,0 +1,9 @@
+environment,face_family,weighting_scenario,fixed_coordinate_kpc,transverse_extent_a_kpc,transverse_extent_b_kpc,specific_enthalpy_plus_potential_erg_g,quadrature_midpoints_per_axis,status
+C,x_y,area,200.0,200.0,250.0,1.4661734899440586e+16,1000,scenario_not_measured_mass_flux_weighting
+C,x_y,density,200.0,200.0,250.0,1.4567100356055138e+16,1000,scenario_not_measured_mass_flux_weighting
+C,z,area,250.0,200.0,200.0,1.49888723073409e+16,1000,scenario_not_measured_mass_flux_weighting
+C,z,density,250.0,200.0,200.0,1.4952215786894938e+16,1000,scenario_not_measured_mass_flux_weighting
+G,x_y,area,200.0,200.0,250.0,5304458090317809.0,1000,scenario_not_measured_mass_flux_weighting
+G,x_y,density,200.0,200.0,250.0,5286144040352161.0,1000,scenario_not_measured_mass_flux_weighting
+G,z,area,250.0,200.0,200.0,5363829249001720.0,1000,scenario_not_measured_mass_flux_weighting
+G,z,density,250.0,200.0,200.0,5356996288329111.0,1000,scenario_not_measured_mass_flux_weighting

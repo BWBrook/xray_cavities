@@ -1,11 +1,26 @@
 # X-ray Cavities successor handoff
 
-Last reviewed: 2026-10-30 (repository and supervisor direction; remote state
-was last reported on 2026-09-06).
+Last reviewed: 2026-10-31 (repository, Claude handoff, compact boundary audit,
+live migration receipts and retained-map metadata).
 
-Verified shared base before this tranche: `aec8117` on `main` and `origin/main`
+Verified shared base before this tranche: `8ea3294` on `main` and `origin/main`
 
 Operating state: `Q-029 native accounting accepted; Q-032 X-ray recovery review/action open; Q-031 spherical energy and stability audit requested; Q-030 revision pending`
+
+On 31 October Codex confirmed the work split with Claude: Claude leads Q-032
+recovery scripts/tests; Codex leads Q-031/native analysis, remote staging and
+the shared handovers. All 60 selected-age X-ray map bundles and all 20 native
+input paths exist remotely; no t=0 map directory was found in those case roots.
+See `docs/exchange/logs/2026-10-31-claude-handoff-and-storage-check.md` for exact
+paths, ownership and the metadata-only verification boundary.
+
+The new compact-data audit strongly supports boundary-carried energy as the
+explanation for C-LO's large grid-energy gain, but rejects a claim of demonstrated
+20% closure for every run. The boundary correction uses unmeasured weighting
+scenarios, and the paired HI–LO mass difference does not independently measure
+jet injection. Details and reproducible tables:
+`docs/science/q031_boundary_hypothesis_2026-10-31.md`. The approved spherical
+budgets and existing no-jet/stability audits remain outstanding.
 
 On 30 October Stas endorsed Patrick's 29 October cavity recommendations:
 the approach is correct and the issue needs resolution. Barry should
@@ -79,7 +94,7 @@ been retrieved and revalidated locally: 228 native rows, 19 precision rows,
 is negligible. The C-LO median X-ray/native enthalpy ratio is now 0.494,
 replacing fractional-mask over-recovery; the main geometry-driven conclusion
 survives. Read `docs/science/q029_binary_native_refresh_2026-09-06.md` for the
-accepted accounting, limits and products. No remote job is awaiting a check.
+accepted accounting, limits and products. No Q-029 job is awaiting a check.
 The source changes and manuscript iteration are included in the published
 Q-029/Q-030 tranche, following Barry's 2026-09-06 commit/push instruction.
 Review the tracked PDF
@@ -92,6 +107,20 @@ This is the cold-start note for a new project agent. It records the current
 scientific position and the shortest route forward. It is deliberately not a
 history of all numbered goals. Use Git and the dated notes for provenance;
 do not replay old goal logs as active instructions.
+
+## Storage work authorized on 2026-10-16
+
+Migrate the ten X-ray scratch units to the dated home archive and remove only
+verified duplicates, retaining compatibility links at the original paths.
+The 31 October check found PBS `820961.kunanyi-ohpc` stopped at the 48-hour
+walltime limit on 18 October. Eight units are complete with expected links and
+no tombstones; C-HI is copied but not fully verified; C-LO has not started.
+Original scratch trees remain for those unfinished units. No resume was
+submitted in this handoff tranche, and no fresh quota or full-payload rehash
+was performed. Read the storage section of
+`docs/exchange/current_status.md` and
+`docs/exchange/logs/2026-10-16-scratch-home-migration.md` before submitting or
+resuming any storage job. Subsequent scientific responses are summarized above.
 
 ## Bootstrap in ten minutes
 

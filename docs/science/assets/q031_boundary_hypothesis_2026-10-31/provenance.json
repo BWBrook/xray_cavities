@@ -1,0 +1,46 @@
+{
+  "input_sha256": {
+    "docs/science/assets/c_hi_fullgrid_startup_2026-05-19/config/definitions_overrides.json": "a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c",
+    "docs/science/assets/g_hi_full_history_production_2026-08-20/rendered_config/G-HI/particles/definitions_overrides.json": "a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c",
+    "docs/science/assets/g_lo_hdf5_stall_guarded_continuation_completion_2026-07-12/remote_stage/completion_evidence/run_logs/pluto.0.log": "efea6d3f77cd85d8e348305316315a86194f1286ec5ad675992d70f20fe5f11b",
+    "docs/science/assets/g_lo_hdf5_stall_guarded_continuation_completion_2026-07-12/remote_stage/rendered_g_lo_config/G-LO/particles/definitions_overrides.json": "a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-HI/native_energy_selected_age.csv": "8d8691c6183601e47836a08b859e0d151bc609f6fc96900be74aa7afd62c17b5",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/native_energy_selected_age.csv": "a035de60355570ca2ee602706d31403e2e6fc17b8d566126718cf7f7f9bb7451",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-HI/native_energy_selected_age.csv": "b98bfaf343b81790ac286ada258e12670526020ea0e50402b0e9cae5305abf1a",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/native_energy_selected_age.csv": "6254800d84ca5748f91c7d4aebb18282fb0de4b24ad15e7a23d6af19e617a16a",
+    "docs/science/assets/stewart_cluster_asset_restore_c_lo_preflight_2026-07-03/rendered_c_lo_config/C-LO/particles/definitions_overrides.json": "a65fbd272dd4d4f49d02efc7b54b8cf26f2356e6dd5bcfcaf402cf00cc48660c",
+    "docs/science/assets/whole_grid_energy_closure_2026-10-21/whole_grid_energy_comparison.csv": "15b534933e0708e9affa485c5cbcdff0074b2d4c68160ef733c69626bae0ed1a",
+    "env/extracted/environments/tabulated/tabulated_cosmo_002003.csv": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+    "env/extracted/environments/tabulated/tabulated_cosmo_002031.csv": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+  },
+  "interpretation_limits": [
+    "face area and density weightings are scenarios, not uncertainty bounds or measured mass-flux weights",
+    "endpoint mass does not identify the time-integrated outer-boundary energy flux",
+    "HI-minus-LO global mass difference does not independently identify jet mass",
+    "configured power times age is a nominal source target, not a measured numerical source accumulator",
+    "local source repositories are contextual evidence and are not asserted to be the exact production binary"
+  ],
+  "local_source_repositories": {
+    "jet_setup": {
+      "commit": "e17ac8f8640017900abfe635737bd3199d607363",
+      "dirty": false,
+      "path": "/Users/bwbrook/git/utas-agn/jet-setup",
+      "status_short_branch": "## bwbrook/deep-server-bringup...origin/bwbrook/deep-server-bringup"
+    },
+    "pluto": {
+      "commit": "2674fc38b152f96605cb24e2840e92b64ebd5b81",
+      "dirty": true,
+      "path": "/Users/bwbrook/git/utas-agn/pluto",
+      "status_short_branch": "## bwbrook/deep-server-bringup...origin/bwbrook/deep-server-bringup\n M .DS_Store"
+    }
+  },
+  "methods": {
+    "boundary_correction": "endpoint inferred boundary mass times one of four face/weighting scenarios",
+    "boundary_specific_energy": "gamma/(gamma-1)*p/rho + phi evaluated on continuous rectangular face quadrature",
+    "nozzle": "continuum DENSITY_LENGTH_SCALE source prediction; discrete Cartesian nozzle flux unmeasured",
+    "potential": "centre-zero trapezoidal integral of absolute tabulated gravity"
+  },
+  "scope": "19 retained selected-age whole-grid rows; no raw HDF5 reread and no remote work",
+  "script_sha256": "47963188014f7cb37b62c5efc7355ac147c0eafe73f42749fb3613bb75dadcf7",
+  "status": "compact_hypothesis_audit_complete_solver_flux_unmeasured"
+}
