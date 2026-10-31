@@ -10,6 +10,11 @@ status, including views that production rejects.
 Map directories follow the retained layout
 ``<root>/age_<AA>/xraise_grid_<view>/``. Tracer data are used only after
 recovery, as an evaluation reference.
+
+Optional ``--baseline ENVIRONMENT:VIEW:DIRECTORY`` supplies a t=0 render of
+the initial atmosphere on the same axes. It adds a t0-baseline rung and a
+threshold calibrated on that map. A t0 map is the initial-state reference,
+not the evolved no-jet counterfactual, and rows label it so.
 """
 
 from __future__ import annotations
@@ -39,6 +44,8 @@ AGES = (10, 20, 30, 40, 50)
 VIEWS = ("0deg", "45deg", "90deg")
 OBSERVER_THRESHOLDS = (0.05, 0.10, 0.20)
 TRACER_THRESHOLD = 1.0e-3
+CASE_ENVIRONMENT = {"C-HI": "cluster", "C-LO": "cluster", "G-HI": "group", "G-LO": "group"}
+BASELINE_THRESHOLDS = (0.05, 0.10)
 CASE_ROOTS = {
     "C-HI": "xray_cavity/c_hi",
     "C-LO": "xray_cavity/c_lo",
@@ -61,7 +68,16 @@ def load_view(directory: Path, case: str, view: str) -> recovery.LoadedMap:
     return recovery.load_accepted_map(spec)
 
 
-def ladder_runs(loaded: recovery.LoadedMap) -> list[ladder.Recovery]:
+def load_baseline(directory: Path, view: str, loaded: recovery.LoadedMap) -> np.ndarray:
+    image = np.loadtxt(directory / recovery.CORRECTED_XRAY_NAME)
+    horizontal = np.loadtxt(directory / ("x_kpc.tsv" if view == "0deg" else "u_kpc.tsv"))
+    vertical = np.loadtxt(directory / recovery.VERTICAL_AXIS_NAME)
+    if not (np.allclose(horizontal, loaded.horizontal_axis) and np.allclose(vertical, loaded.z_axis)):
+        raise ValueError(f"baseline axes in {directory} do not match the analysed view")
+    return image
+
+
+def ladder_runs(loaded: recovery.LoadedMap, baseline: np.ndarray | None = None) -> list[ladder.Recovery]:
     image, h, z = loaded.corrected_xray, loaded.horizontal_axis, loaded.z_axis
     radial = ladder.observer_radial_background(image, h, z)
     runs = [ladder.legacy_area_fraction(image, h, z), ladder.seed_grow(image, h, z)]
@@ -69,22 +85,35 @@ def ladder_runs(loaded: recovery.LoadedMap) -> list[ladder.Recovery]:
         ladder.deficit_threshold(image, h, z, background=radial, background_label="observer_radial", threshold=t)
         for t in OBSERVER_THRESHOLDS
     ]
+    if baseline is not None:
+        runs.append(ladder.seed_grow(image, h, z, background=baseline, background_label="t0_baseline"))
+        runs += [
+            ladder.deficit_threshold(image, h, z, background=baseline, background_label="t0_baseline", threshold=t)
+            for t in BASELINE_THRESHOLDS
+        ]
+        runs.append(ladder.deficit_threshold(
+            image, h, z, background=radial, background_label="observer_radial_t0_calibrated",
+            threshold=ladder.null_calibrated_threshold(baseline, h, z),
+        ))
     return runs
 
 
 def run_label(result: ladder.Recovery) -> str:
-    if result.method == ladder.THRESHOLD:
-        return f"{result.method}_{result.threshold:.2f}"
-    return result.method
+    label = result.method if result.background == ladder.OBSERVER else f"{result.method}_{result.background}"
+    if result.method == ladder.THRESHOLD and result.background != "observer_radial_t0_calibrated":
+        return f"{label}_{result.threshold:.2f}"
+    return label
 
 
-def analyse_view(loaded: recovery.LoadedMap, *, case: str, age: int, output: Path) -> list[dict[str, Any]]:
+def analyse_view(
+    loaded: recovery.LoadedMap, *, case: str, age: int, output: Path, baseline: np.ndarray | None = None,
+) -> list[dict[str, Any]]:
     h, z = loaded.horizontal_axis, loaded.z_axis
     area = recovery._cell_area_grid(h, z)
     _, aperture = ladder._rois(h, z)
     tracer = loaded.tracer_max_los >= TRACER_THRESHOLD
     halves = ladder._split(tracer, z)
-    results = ladder_runs(loaded)
+    results = ladder_runs(loaded, baseline)
     rows: list[dict[str, Any]] = []
     for result in results:
         for row in ladder.score_rows(result, h, z):
@@ -118,7 +147,7 @@ def analyse_view(loaded: recovery.LoadedMap, *, case: str, age: int, output: Pat
     return rows
 
 
-STAMP_COLOURS = ("#d62728", "#1f77b4", "#ff7f0e", "#9467bd", "#8c564b")
+STAMP_COLOURS = ("#d62728", "#1f77b4", "#ff7f0e", "#9467bd", "#8c564b", "#17becf", "#e377c2", "#bcbd22", "#2ca02c")
 
 
 def stamp(loaded, results, tracer, path: Path, *, title: str) -> None:
@@ -132,7 +161,7 @@ def stamp(loaded, results, tracer, path: Path, *, title: str) -> None:
     )
     if np.any(tracer):
         axis.contour(h, z, tracer.astype(float), levels=[0.5], colors="white", linewidths=1.0, linestyles="--")
-    for result, colour in zip(results, STAMP_COLOURS, strict=True):
+    for result, colour in zip(results, STAMP_COLOURS[: len(results)], strict=True):
         if np.any(result.mask):
             axis.contour(h, z, result.mask.astype(float), levels=[0.5], colors=colour, linewidths=0.9)
     circle = np.linspace(0, 2 * np.pi, 200)
@@ -142,14 +171,19 @@ def stamp(loaded, results, tracer, path: Path, *, title: str) -> None:
     axis.set_aspect("equal")
     axis.set_title(f"{title}\nproduction topology: {results[0].topology_class}", fontsize=8)
     handles = [plt.Line2D([], [], color="white", ls="--", label=f"tracer >= {TRACER_THRESHOLD:g} (evaluation only)")]
-    handles += [plt.Line2D([], [], color=c, label=run_label(r)) for r, c in zip(results, STAMP_COLOURS, strict=True)]
+    handles += [plt.Line2D([], [], color=c, label=run_label(r)) for r, c in zip(results, STAMP_COLOURS[: len(results)], strict=True)]
     axis.legend(handles=handles, loc="lower left", fontsize=6, facecolor="0.85")
     figure.tight_layout()
     figure.savefig(path, dpi=110)
     plt.close(figure)
 
 
-def run(view_dirs: Sequence[tuple[str, int, str, Path]], output: Path) -> dict[str, Any]:
+def run(
+    view_dirs: Sequence[tuple[str, int, str, Path]],
+    output: Path,
+    baselines: dict[tuple[str, str], Path] | None = None,
+) -> dict[str, Any]:
+    baselines = baselines or {}
     if output.exists():
         raise SystemExit(f"refusing to overwrite {output}")
     (output / "masks").mkdir(parents=True)
@@ -158,7 +192,9 @@ def run(view_dirs: Sequence[tuple[str, int, str, Path]], output: Path) -> dict[s
     sources: list[dict[str, Any]] = []
     for case, age, view, directory in view_dirs:
         loaded = load_view(directory, case, view)
-        rows.extend(analyse_view(loaded, case=case, age=age, output=output))
+        baseline_dir = baselines.get((CASE_ENVIRONMENT[case], view))
+        baseline = load_baseline(baseline_dir, view, loaded) if baseline_dir else None
+        rows.extend(analyse_view(loaded, case=case, age=age, output=output, baseline=baseline))
         source = directory / recovery.CORRECTED_XRAY_NAME
         sources.append({
             "case": case, "snapshot_index": age, "view": view, "path": str(source),
@@ -168,7 +204,7 @@ def run(view_dirs: Sequence[tuple[str, int, str, Path]], output: Path) -> dict[s
         print(f"{case} {age} {view}", flush=True)
     for name, table in (("method_ladder_rows.csv", rows), ("source_maps.csv", sources)):
         with (output / name).open("w", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(table[0]))
+            writer = csv.DictWriter(handle, fieldnames=list(table[0]), lineterminator="\n")
             writer.writeheader()
             writer.writerows(table)
     metadata = {
@@ -176,6 +212,8 @@ def run(view_dirs: Sequence[tuple[str, int, str, Path]], output: Path) -> dict[s
         "views_analysed": len(view_dirs),
         "runs": sorted({row["run"] for row in rows}),
         "observer_thresholds": list(OBSERVER_THRESHOLDS),
+        "baselines": {f"{env}:{view}": str(path) for (env, view), path in sorted(baselines.items())},
+        "baseline_role": "t=0 initial-atmosphere reference, not an evolved no-jet counterfactual",
         "tracer_role": f"evaluation only, tr1 max along line of sight >= {TRACER_THRESHOLD:g}",
         "mask_encoding": "numpy packbits of row-major boolean arrays; unpack with np.unpackbits(...)[:prod(shape)].reshape(shape)",
     }
@@ -206,7 +244,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--view-dir", action="append", default=[],
         help="CASE:AGE:VIEW:DIRECTORY, repeatable; overrides --base",
     )
+    parser.add_argument(
+        "--baseline", action="append", default=[],
+        help="ENVIRONMENT:VIEW:DIRECTORY t=0 map for cluster or group, repeatable",
+    )
     args = parser.parse_args(argv)
+    baselines = {}
+    for item in args.baseline:
+        environment, view, directory = item.split(":", 2)
+        baselines[(environment, view)] = Path(directory)
     if args.view_dir:
         view_dirs = []
         for item in args.view_dir:
@@ -216,7 +262,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         view_dirs = retained_view_dirs(args.base)
     else:
         parser.error("give --base or --view-dir")
-    print(json.dumps(run(view_dirs, args.output), indent=2))
+    print(json.dumps(run(view_dirs, args.output, baselines), indent=2))
     return 0
 
 
