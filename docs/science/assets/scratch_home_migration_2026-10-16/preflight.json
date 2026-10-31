@@ -1,0 +1,174 @@
+{
+  "timestamp": 1792149615.092762,
+  "units": [
+    {
+      "source": "/scratch/bwbrook/xray_cavities_gates",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates",
+      "files": 424,
+      "bytes": 69206921306,
+      "allocated_bytes": 69207026176,
+      "dirs": 16,
+      "links": [
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/restart.out",
+          "target": "../restart.out"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/data.0003.dbl.h5",
+          "target": "../data.0003.dbl.h5"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/data.0000.dbl.h5",
+          "target": "../data.0000.dbl.h5"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/grid.out",
+          "target": "../grid.out"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/dbl.h5.out",
+          "target": "../dbl.h5.out"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/data.0001.dbl.h5",
+          "target": "../data.0001.dbl.h5"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/data.0002.dbl.h5",
+          "target": "../data.0002.dbl.h5"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/data.0002.dbl.xmf",
+          "target": "../data.0002.dbl.xmf"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/data.0001.dbl.xmf",
+          "target": "../data.0001.dbl.xmf"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/outputs/data.0000.dbl.xmf",
+          "target": "../data.0000.dbl.xmf"
+        }
+      ],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_analysis",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_analysis",
+      "files": 2061,
+      "bytes": 86299870447,
+      "allocated_bytes": 86300449280,
+      "dirs": 487,
+      "links": [],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+      "files": 3498,
+      "bytes": 163150591795,
+      "allocated_bytes": 163151579648,
+      "dirs": 10,
+      "links": [],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh",
+      "files": 2458,
+      "bytes": 292829367757,
+      "allocated_bytes": 292830216192,
+      "dirs": 11,
+      "links": [],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64",
+      "files": 1821,
+      "bytes": 291953724634,
+      "allocated_bytes": 291954147328,
+      "dirs": 8,
+      "links": [
+        {
+          "path": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0009.dbl.h5",
+          "target": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0009.dbl.h5"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/data.0009.dbl.xmf",
+          "target": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/data.0009.dbl.xmf"
+        },
+        {
+          "path": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64/C-HI/particles/problem/outputs/particles.4277.dbl",
+          "target": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh/C-HI/particles/problem/outputs/particles.4277.dbl"
+        }
+      ],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+      "files": 5823,
+      "bytes": 372564214428,
+      "allocated_bytes": 372565669376,
+      "dirs": 8,
+      "links": [],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+      "files": 2011,
+      "bytes": 404712026079,
+      "allocated_bytes": 404712649216,
+      "dirs": 10,
+      "links": [],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-20-g-hi-full-history-production",
+      "files": 3531,
+      "bytes": 925617665748,
+      "allocated_bytes": 925618573312,
+      "dirs": 10,
+      "links": [],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun",
+      "files": 7119,
+      "bytes": 3090276948775,
+      "allocated_bytes": 3090279104000,
+      "dirs": 10,
+      "links": [],
+      "hardlinks": [],
+      "special": []
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun",
+      "files": 7119,
+      "bytes": 3099597012312,
+      "allocated_bytes": 3099598796800,
+      "dirs": 10,
+      "links": [],
+      "hardlinks": [],
+      "special": []
+    }
+  ],
+  "home_site_usage_bytes": 5716776206277,
+  "scratch_site_usage_bytes": 8796423717628,
+  "total_bytes": 8796208343281,
+  "projected_home_bytes": 14512984549558,
+  "recorded_home_limit_bytes": 21990232555520
+}

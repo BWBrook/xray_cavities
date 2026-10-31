@@ -1,0 +1,54 @@
+Job Id: 820960.kunanyi-ohpc
+    Job_Name = xray_move_tests
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 10
+    resources_used.cput = 00:00:03
+    resources_used.mem = 41256kb
+    resources_used.ncpus = 1
+    resources_used.vmem = 112436kb
+    resources_used.walltime = 00:00:19
+    job_state = F
+    queue = copy
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Fri Oct 16 22:51:24 2026
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/scratch_home_m
+	igration_2026-10-16/migration.err
+    exec_host = n001/4
+    exec_vnode = (n001:ncpus=1:mem=4194304kb)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = n
+    mtime = Fri Oct 16 22:51:43 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/scratch_home_
+	migration_2026-10-16/migration.out
+    Priority = 0
+    qtime = Fri Oct 16 22:51:24 2026
+    Rerunable = False
+    Resource_List.mem = 4gb
+    Resource_List.ncpus = 1
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=1:mem=4gb
+    Resource_List.walltime = 00:05:00
+    stime = Fri Oct 16 22:51:24 2026
+    session_id = 2535
+    jobdir = /u/bwbrook
+    substate = 92
+    Variable_List = [environment omitted; full PBS receipt retained on Kunanyi]
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=copy,PBS_O_HOST=<tpac-host>
+    comment = Job run at Fri Oct 16 at 22:51 on (n001:ncpus=1:mem=4194304kb) an
+	d finished
+    etime = Fri Oct 16 22:51:24 2026
+    run_count = 1
+    Stageout_status = 1
+    Exit_status = 0
+    Submit_arguments = -N xray_move_tests -l walltime=00:05:00 -v MIGRATION_TES
+	T_ONLY=1 scripts/kunanyi/xray_scratch_home_migration.pbs
+    history_timestamp = 1792151503
+    project = _pbs_project_default
+

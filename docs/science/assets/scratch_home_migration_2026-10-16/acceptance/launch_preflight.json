@@ -1,0 +1,12 @@
+{
+  "uid": 145812,
+  "euid": 145812,
+  "gid": 1003,
+  "egid": 1003,
+  "home_accounted_bytes": 5717812516834,
+  "scratch_accounted_bytes": 8796423717628,
+  "acceptance_job": "820960.kunanyi-ohpc",
+  "acceptance_exit_status": 0,
+  "acceptance_tests": 20,
+  "metadata_policy": "private_archive"
+}

@@ -1,0 +1,47 @@
+{
+  "archive_root": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16",
+  "authority": "Barry approved migration of X-ray scratch data to home and appropriate verified scratch cleanup on 2026-10-16. Preserve all payloads; no compression or scientific selection. Leave original paths usable via symlinks. Other projects excluded.",
+  "units": [
+    {
+      "source": "/scratch/bwbrook/xray_cavities_gates",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_analysis",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_analysis"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-20-g-hi-full-history-production"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun"
+    },
+    {
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun"
+    }
+  ],
+  "metadata_policy": "private_archive"
+}

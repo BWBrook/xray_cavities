@@ -1,0 +1,48 @@
+#!/bin/bash
+#PBS -N xray_home_move
+#PBS -q copy
+#PBS -l select=1:ncpus=1:mem=4gb
+#PBS -l walltime=48:00:00
+#PBS -r n
+#PBS -m n
+#PBS -o /u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16/migration.out
+#PBS -e /u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16/migration.err
+
+set -euo pipefail
+module purge
+module load Anaconda3/2024.02-1
+readonly STAGE=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16
+cd "$STAGE"
+exec >> "$STAGE/migration.live.out" 2>&1
+export TMPDIR="$STAGE/test_tmp"
+mkdir -p "$TMPDIR"
+sha256sum --check stage_checksums.sha256
+python -m unittest discover -s tests -p test_migrate_xray_scratch_to_home.py -v >tests.out 2>&1
+python - <<'PY'
+import os, tempfile
+with tempfile.TemporaryDirectory() as root:
+    name = os.path.join(root, 'durability-probe')
+    with open(name, 'xb') as handle:
+        handle.write(b'home durability probe\n')
+        handle.flush()
+        os.fsync(handle.fileno())
+    with open(name, 'rb') as handle:
+        os.fsync(handle.fileno())
+    fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+print('HOME_FILE_AND_DIRECTORY_FSYNC_OK', flush=True)
+PY
+if [ "${MIGRATION_TEST_ONLY:-0}" = 1 ]; then
+  echo MIGRATION_TESTS_COMPLETE
+  exit 0
+fi
+readonly ARCHIVE=/u/bwbrook/xray_cavities_scratch_archive_2026-10-16
+test ! -L "$ARCHIVE"
+if [ ! -e "$ARCHIVE" ]; then
+  mkdir -m 700 "$ARCHIVE"
+fi
+python -u scripts/kunanyi/migrate_xray_scratch_to_home.py \
+  --plan migration_plan.json --state-dir "$STAGE/state" --execute
