@@ -70,3 +70,10 @@ The r2 wrapper instead uses `run_q031_measured.py`, based on Python's
 measured peak RSS, elapsed/CPU time and nonzero failures without requiring an
 external timing executable. Successful/failing-child and no-overwrite checks
 pass; the packaging suite passes 20 tests. A fresh target smoke is required.
+
+Smoke `870704` in r2 ran 81 tests: 78 passed and three failed because the
+stage omitted `xray_cavity_method_ladder.py` and its local import dependencies.
+The failure occurred while binding source hashes, before any native reads.
+The revised staging builder recursively collects local science imports,
+including imports inside functions. The r3 package adds that closure and is
+tested in isolation before upload. No scientific algorithm or tolerance changed.
