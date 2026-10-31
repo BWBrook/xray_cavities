@@ -1,11 +1,18 @@
 # X-ray Cavities successor handoff
 
-Last reviewed: 2026-10-31 (repository, Claude handoff, compact boundary audit,
-live migration receipts and retained-map metadata).
+Last reviewed: 2026-10-31 (retained flux jobs, reviewed migration resume,
+Claude coordination and retained-map metadata).
 
-Verified shared base before this tranche: `8ea3294` on `main` and `origin/main`
+Verified shared base before this tranche: `bdf3085` on `main` and `origin/main`
 
 Operating state: `Q-029 native accounting accepted; Q-032 X-ray recovery review/action open; Q-031 spherical energy and stability audit requested; Q-030 revision pending`
+
+Active 31 October tranche: migration resume `870323` is running with a reviewed,
+receipt-bound repair for C-HI's NFS device-number transition; corrected flux
+smoke `870352` is running; four-case flux job `870353` is queued behind both
+success conditions. No completed migration or measured closure is claimed.
+Read `docs/exchange/logs/2026-10-31-flux-and-migration-resume.md` before touching
+these jobs or the frozen migration state. No scheduled monitoring was created.
 
 On 31 October Codex confirmed the work split with Claude: Claude leads Q-032
 recovery scripts/tests; Codex leads Q-031/native analysis, remote staging and
@@ -115,9 +122,10 @@ verified duplicates, retaining compatibility links at the original paths.
 The 31 October check found PBS `820961.kunanyi-ohpc` stopped at the 48-hour
 walltime limit on 18 October. Eight units are complete with expected links and
 no tombstones; C-HI is copied but not fully verified; C-LO has not started.
-Original scratch trees remain for those unfinished units. No resume was
-submitted in this handoff tranche, and no fresh quota or full-payload rehash
-was performed. Read the storage section of
+Original scratch trees remained for those unfinished units at preflight.
+Barry authorised safe resumption on 31 October; `870323` is now rehashing C-HI
+source/archive files in a fresh receipt epoch before removal. Full completion
+and fresh quota recovery remain unverified. Read the storage section of
 `docs/exchange/current_status.md` and
 `docs/exchange/logs/2026-10-16-scratch-home-migration.md` before submitting or
 resuming any storage job. Subsequent scientific responses are summarized above.

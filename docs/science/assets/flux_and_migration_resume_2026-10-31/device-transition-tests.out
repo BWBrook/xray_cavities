@@ -1,0 +1,97 @@
+test_advertised_unsupported_nfs_acl_is_recorded_not_restored (test_migrate_xray_scratch_to_home.MigrationTests.test_advertised_unsupported_nfs_acl_is_recorded_not_restored) ... ok
+test_completed_unit_missing_payload_fails_resume (test_migrate_xray_scratch_to_home.MigrationTests.test_completed_unit_missing_payload_fails_resume) ... ok
+test_descriptor_chmod_path_is_portable_when_path_chmod_is_unavailable (test_migrate_xray_scratch_to_home.MigrationTests.test_descriptor_chmod_path_is_portable_when_path_chmod_is_unavailable) ... unit=0 inventory flushed
+unit=0 copy-start flushed
+unit=0 copied flushed
+unit=0 verified flushed
+unit=0 renamed flushed
+unit=0 promoted flushed
+unit=0 cleaning flushed
+unit=0 cleaned flushed
+unit=0 complete flushed
+ok
+test_destination_collision_fails_before_copy (test_migrate_xray_scratch_to_home.MigrationTests.test_destination_collision_fails_before_copy) ... ok
+test_destination_content_corruption_fails_closed (test_migrate_xray_scratch_to_home.MigrationTests.test_destination_content_corruption_fails_closed) ... unit=0 inventory flushed
+unit=0 copy-start flushed
+unit=0 copied flushed
+ok
+test_directory_recursive_accounting_change_is_not_payload_mutation (test_migrate_xray_scratch_to_home.MigrationTests.test_directory_recursive_accounting_change_is_not_payload_mutation) ... ok
+test_metadata_policy_key_is_required (test_migrate_xray_scratch_to_home.MigrationTests.test_metadata_policy_key_is_required) ... ok
+test_nested_mapped_link_preserves_parent_metadata (test_migrate_xray_scratch_to_home.MigrationTests.test_nested_mapped_link_preserves_parent_metadata) ... ok
+test_private_archive_normalizes_modes_gid_and_receipts (test_migrate_xray_scratch_to_home.MigrationTests.test_private_archive_normalizes_modes_gid_and_receipts) ... ok
+test_private_archive_policy_is_required_and_archive_is_private (test_migrate_xray_scratch_to_home.MigrationTests.test_private_archive_policy_is_required_and_archive_is_private) ... ok
+test_relative_link_escaping_planned_unit_fails_context_check (test_migrate_xray_scratch_to_home.MigrationTests.test_relative_link_escaping_planned_unit_fails_context_check) ... ok
+test_resume_after_rename_before_symlink (test_migrate_xray_scratch_to_home.MigrationTests.test_resume_after_rename_before_symlink) ... unit=0 inventory flushed
+unit=0 copy-start flushed
+unit=0 copied flushed
+unit=0 verified flushed
+unit=0 renamed flushed
+ok
+test_resume_after_root_rmdir_before_ledger (test_migrate_xray_scratch_to_home.MigrationTests.test_resume_after_root_rmdir_before_ledger) ... unit=0 inventory flushed
+unit=0 copy-start flushed
+unit=0 copied flushed
+unit=0 verified flushed
+unit=0 renamed flushed
+unit=0 promoted flushed
+unit=0 cleaning flushed
+ok
+test_resume_partial_cleanup_uses_deleted_ledger (test_migrate_xray_scratch_to_home.MigrationTests.test_resume_partial_cleanup_uses_deleted_ledger) ... unit=0 inventory flushed
+unit=0 copy-start flushed
+unit=0 copied flushed
+unit=0 verified flushed
+unit=0 renamed flushed
+unit=0 promoted flushed
+unit=0 cleaning flushed
+ok
+test_source_mutation_fails_before_promotion (test_migrate_xray_scratch_to_home.MigrationTests.test_source_mutation_fails_before_promotion) ... unit=0 inventory flushed
+unit=0 copy-start flushed
+unit=0 copied flushed
+ok
+test_source_policy_rejects_non_owner_readable_file (test_migrate_xray_scratch_to_home.MigrationTests.test_source_policy_rejects_non_owner_readable_file) ... ok
+test_source_policy_rejects_readable_acl_security_xattr (test_migrate_xray_scratch_to_home.MigrationTests.test_source_policy_rejects_readable_acl_security_xattr) ... ok
+test_special_file_is_rejected (test_migrate_xray_scratch_to_home.MigrationTests.test_special_file_is_rejected) ... ok
+test_success_maps_cross_unit_absolute_link_and_preserves_relative_link (test_migrate_xray_scratch_to_home.MigrationTests.test_success_maps_cross_unit_absolute_link_and_preserves_relative_link) ... ok
+test_unknown_tombstone_file_stops_cleanup (test_migrate_xray_scratch_to_home.MigrationTests.test_unknown_tombstone_file_stops_cleanup) ... unit=0 inventory flushed
+unit=0 copy-start flushed
+unit=0 copied flushed
+unit=0 verified flushed
+unit=0 renamed flushed
+unit=0 promoted flushed
+unit=0 cleaning flushed
+ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 9.905s
+
+OK
+test_findmnt_raw_parser_requires_one_four_field_record (test_xray_migration_device_transition.DeviceTransitionTests.test_findmnt_raw_parser_requires_one_four_field_record) ... ok
+test_interrupted_after_root_rename_revalidates_tombstone_and_resumes (test_xray_migration_device_transition.DeviceTransitionTests.test_interrupted_after_root_rename_revalidates_tombstone_and_resumes) ... unit=8 copy-start flushed
+unit=8 copied flushed
+unit=8 verified flushed
+unit=8 renamed flushed
+unit=8 promoted flushed
+unit=8 cleaning flushed
+unit=8 cleaned flushed
+unit=8 complete flushed
+ok
+test_interrupted_cleanup_resumes_with_partial_tombstone (test_xray_migration_device_transition.DeviceTransitionTests.test_interrupted_cleanup_resumes_with_partial_tombstone) ... unit=8 copy-start flushed
+unit=8 copied flushed
+unit=8 verified flushed
+unit=8 renamed flushed
+unit=8 promoted flushed
+unit=8 cleaning flushed
+unit=8 cleaned flushed
+unit=8 complete flushed
+ok
+test_new_epoch_receipts_resume_without_using_original_epoch (test_xray_migration_device_transition.DeviceTransitionTests.test_new_epoch_receipts_resume_without_using_original_epoch) ... ok
+test_receipt_core_tampering_fails_closed (test_xray_migration_device_transition.DeviceTransitionTests.test_receipt_core_tampering_fails_closed) ... ok
+test_receipt_labels_old_device_as_manifest_evidence (test_xray_migration_device_transition.DeviceTransitionTests.test_receipt_labels_old_device_as_manifest_evidence) ... ok
+test_source_tampering_after_receipt_stops_before_hash (test_xray_migration_device_transition.DeviceTransitionTests.test_source_tampering_after_receipt_stops_before_hash) ... ok
+test_symlinked_inspection_and_evidence_directory_fail_closed (test_xray_migration_device_transition.DeviceTransitionTests.test_symlinked_inspection_and_evidence_directory_fail_closed) ... ok
+test_transition_rejects_every_non_device_change (test_xray_migration_device_transition.DeviceTransitionTests.test_transition_rejects_every_non_device_change) ... ok
+test_uniform_device_rebind_forces_hash_and_ignores_old_receipts (test_xray_migration_device_transition.DeviceTransitionTests.test_uniform_device_rebind_forces_hash_and_ignores_old_receipts) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 3.882s
+
+OK

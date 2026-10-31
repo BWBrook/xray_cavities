@@ -1,0 +1,14 @@
+scripts/kunanyi/migrate_xray_scratch_to_home.py: OK
+scripts/kunanyi/xray_scratch_home_migration.pbs: OK
+tests/test_migrate_xray_scratch_to_home.py: OK
+migration_plan.json: OK
+scripts/kunanyi/migrate_xray_scratch_to_home.py: OK
+scripts/kunanyi/xray_scratch_home_migration.pbs: OK
+tests/test_migrate_xray_scratch_to_home.py: OK
+migration_plan.json: OK
+scripts/kunanyi/resume_xray_migration_device_transition.py: OK
+scripts/kunanyi/xray_migration_resume_device_transition.pbs: OK
+tests/test_xray_migration_device_transition.py: OK
+source_signature_inspection_n001_20261031.json: OK
+HOME_FILE_AND_DIRECTORY_FSYNC_OK
+DEVICE_TRANSITION_TESTS_COMPLETE

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-10-31 (Claude coordination, boundary audit and live storage check)
+Last updated: 2026-10-31 (retained flux jobs and receipt-gated migration resume)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -21,8 +21,8 @@ PBS `820961.kunanyi-ohpc` finished `F/271` on 18 October at 22:54 AEDT:
 tombstones, representing 2,606,334,382,194 logical payload bytes. The main
 C-HI rerun is `copied`, with its original scratch directory retained and
 verification unfinished. The main C-LO rerun has not started; its scratch
-directory remains and its archive destination is absent. No resume was submitted
-during this handoff check. Full migration completion and scratch quota recovery
+directory remained and its archive destination was absent at the pre-resume
+check. Full migration completion and scratch quota recovery
 are not established; this check did not rehash the large payloads.
 
 Remote acceptance `820960` previously passed 20 tests and filesystem durability
@@ -32,6 +32,36 @@ signatures; never remove an unfinished source or tombstone manually. See
 `docs/exchange/logs/2026-10-16-scratch-home-migration.md` and the frozen plan in
 `docs/science/assets/scratch_home_migration_2026-10-16/`.
 Barry declined scheduled checks; no monitoring automation was created.
+
+Barry explicitly authorised safe resumption on 31 October. PBS `870323` is
+running on copy node `n001` with 72 hours and has entered C-HI verification.
+All 7,129 C-HI entries matched the frozen checkpoint except an NFS device-number
+transition, `46 -> 45`. A separately reviewed adapter binds the exact NFS
+exports and this one unit, preserves the original manifest, and requires fresh
+source/archive hashes in a new receipt-bound epoch before promotion/removal.
+The original code/plan remain frozen. Thirty migration tests and ten subtests
+passed locally; both suites and fsync probes passed on the copy node.
+Pre-resume state/logs were archived and downloaded with matching SHA-256.
+Details: `docs/exchange/logs/2026-10-31-flux-and-migration-resume.md`.
+
+## Retained boundary and nozzle measurements — in execution
+
+The new Q-031 diagnostic uses exact HDF5 node geometry, six signed boundary
+fluxes, three source-enclosing control volumes (1/2/4-cell padding), storage
+changes and spatial/temporal quadrature sensitivities. Independent review and
+15 analytic/provenance/cache tests pass. The first real snapshot took 433 seconds;
+a reviewed streaming face cache removes repeated strided reads while preserving
+numerical results exactly. Superseded flux jobs 870321 and 870334 were cancelled;
+their stage is preserved. Replacement smoke 870352 is running and passed all
+15 remote tests; full job 870353 is held behind both smoke and migration
+success. The replacement uses a fresh r4 stage with a 48-hour full allocation.
+Full execution also checks all ten complete states,
+archive links and absence of tombstones.
+
+These are retained-output reconstructions, not solver-integrated numerical
+fluxes. No closure result is established yet. Numerical interpretation and the
+remaining spherical-aperture/no-jet audits remain open. Method and limitations:
+`docs/science/q031_retained_flux_measurements_2026-10-31.md`.
 
 ## Claude coordination and available inputs — 2026-10-31
 

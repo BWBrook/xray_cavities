@@ -1,0 +1,761 @@
+Sat Oct 31 04:05:29 UTC 2026
+Job Id: 870352.kunanyi-ohpc
+    Job_Name = q031_flux_smoke
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 27
+    resources_used.cput = 00:00:48
+    resources_used.mem = 370148kb
+    resources_used.ncpus = 2
+    resources_used.vmem = 1700620kb
+    resources_used.walltime = 00:01:50
+    job_state = R
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sat Oct 31 15:03:04 2026
+    depend = beforeok:870353.kunanyi-ohpc@kunanyi-ohpc
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q031_flux_meas
+	urements_2026-10-31_r4/smoke.pbs.err
+    exec_host = n001/7*2
+    exec_vnode = (n001:ncpus=2:mem=8388608kb)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = n
+    mtime = Sat Oct 31 15:04:55 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q031_flux_mea
+	surements_2026-10-31_r4/smoke.pbs.out
+    Priority = 0
+    qtime = Sat Oct 31 15:03:04 2026
+    Rerunable = False
+    Resource_List.mem = 8gb
+    Resource_List.ncpus = 2
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=2:mem=8gb
+    Resource_List.walltime = 04:00:00
+    stime = Sat Oct 31 15:03:05 2026
+    session_id = 7904
+    jobdir = /u/bwbrook
+    substate = 42
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=en_US.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/softwa
+	re/Anaconda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bi
+	n:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-
+	31_r4,PBS_O_SYSTEM=Linux,Q031_MODE=smoke,
+	MANPATH=/share/apps/software/Anaconda3/2024.02-1/share/man:/share/apps
+	/software/Anaconda3/2024.02-1/man:/usr/local/share/man:/usr/share/man/o
+	verrides:/usr/share/man/en:/usr/share/man:/opt/pbs/share/man,
+	XDG_SESSION_ID=106162,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,HOSTNAME=<tpac-host>,
+	EBDEVELANACONDA3=/share/apps/software/Anaconda3/2024.02-1/easybuild/An
+	aconda3-2024.02-1-easybuild-devel,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:1;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,SHELL=/bin/bash,TERM=xterm-16color,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,HISTSIZE=1000,
+	SSH_CLIENT=<private-ip> 42814 22,LMOD_PKG=/opt/ohpc/admin/lmod/lmod,
+	OLDPWD=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r3,
+	LMOD_VERSION=8.1.18,LMOD_QUIET=yes,SSH_TTY=/dev/pts/27,
+	__LMOD_REF_COUNT_LOADEDMODULES=Anaconda3/2024.02-1:1,
+	QT_GRAPHICSSYSTEM_CHECKED=1,
+	EBROOTANACONDA3=/share/apps/software/Anaconda3/2024.02-1,
+	HISTFILESIZE=2000,USER=bwbrook,
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=4
+	0;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=
+	34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31
+	:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;
+	31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:
+	*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.b
+	z2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.r
+	pm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.
+	alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.
+	cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:
+	*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35
+	:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01
+	;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm
+	=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.q
+	t=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.f
+	lc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xc
+	f=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.a
+	nx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.
+	mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:
+	*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36
+	:,
+	__LMOD_REF_COUNT__LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.0
+	2-1.lua:1,EBVERSIONANACONDA3=2024.02-1,LMOD_PREPEND_BLOCK=normal,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXt9LG1UPXtBbmFjb25kYTM9e1siZm4iXT0iL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw
+	vQW5hY29uZGEzLzIwMjQuMDItMS5sdWEiLFsiZnVsbE5hbWUiXT0iQW5hY29uZGEzLzIwMj
+	QuMDItMSIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzd
+	GF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IkFuYWNvbmRhMy8yMDI0LjAyLTEiLH0s
+	fSxtcGF0aEE9eyIvb3B0L29ocGMvcHViL21vZHVsZWRlcHMvZ251OCIsIi9vcHQvb2hwYy9
+	wdWIvbW9kdWxlZmlsZXMiLCIvc2hhcmUv,
+	PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/software/Ana
+	conda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bin:/usr
+	/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4,
+	_LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.02-1.lua,
+	LANG=en_US.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,LOADEDMODULES=Anaconda3/2024.02-1,_ModuleTable_Sz_=2,
+	LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=1,
+	__LMOD_REF_COUNT_PATH=/share/apps/software/Anaconda3/2024.02-1:1;/shar
+	e/apps/software/Anaconda3/2024.02-1/sbin:1;/share/apps/software/Anacond
+	a3/2024.02-1/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/s
+	bin:1;/opt/pbs/bin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=YXBwcy9tb2R1bGVzIiwiL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hb
+	GwiLCIvc2hhcmUvYXBwcy9tb2R1bGVkZXBzL3Jvc2FsaW5kL0NvcmUiLH0sWyJzeXN0ZW1C
+	YXNlTVBBVEgiXT0iL29wdC9vaHBjL3B1Yi9tb2R1bGVkZXBzL2dudTg6L29wdC9vaHBjL3B
+	1Yi9tb2R1bGVmaWxlczovc2hhcmUvYXBwcy9tb2R1bGVzOi9zaGFyZS9hcHBzL2ViLW1vZH
+	VsZXMvYWxsOi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQvQ29yZSIsfQ==,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	SSH_CONNECTION=<private-ip> 42814 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.02-1/lib/pkgconfig
+	,LMOD_SETTARG_FULL_SUPPORT=no,LESSOPEN=||/usr/bin/lesspipe.sh %s,
+	PROMPT_COMMAND=history -a,LMOD_FULL_SETTARG_SUPPORT=no,
+	__LMOD_REF_COUNT_PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.0
+	2-1/lib/pkgconfig:1,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	__LMOD_REF_COUNT_MANPATH=/share/apps/software/Anaconda3/2024.02-1/shar
+	e/man:1;/share/apps/software/Anaconda3/2024.02-1/man:1;/usr/local/share
+	/man:1;/usr/share/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1;
+	/opt/pbs/share/man:1,LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=normal,
+	PBS_O_HOST=<tpac-host>
+    comment = Job run at Sat Oct 31 at 15:03 on (n001:ncpus=2:mem=8388608kb)
+    etime = Sat Oct 31 15:03:04 2026
+    run_count = 1
+    Submit_arguments = -N q031_flux_smoke -l walltime=04:00:00 -v Q031_MODE=smo
+	ke -o /u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4/smo
+	ke.pbs.out -e /u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-3
+	1_r4/smoke.pbs.err scripts/kunanyi/q031_flux_measurements.pbs
+    project = _pbs_project_default
+
+Job Id: 870353.kunanyi-ohpc
+    Job_Name = q031_flux_full
+    Job_Owner = bwbrook@<tpac-host>
+    job_state = H
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sat Oct 31 15:03:32 2026
+    depend = afterok:870352.kunanyi-ohpc@kunanyi-ohpc:870323.kunanyi-ohpc@kunan
+	yi-ohpc
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q031_flux_meas
+	urements_2026-10-31_r4/production.pbs.err
+    Hold_Types = s
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = n
+    mtime = Sat Oct 31 15:03:32 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q031_flux_mea
+	surements_2026-10-31_r4/production.pbs.out
+    Priority = 0
+    qtime = Sat Oct 31 15:03:32 2026
+    Rerunable = False
+    Resource_List.mem = 8gb
+    Resource_List.ncpus = 2
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=2:mem=8gb
+    Resource_List.walltime = 48:00:00
+    substate = 22
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=en_US.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/softwa
+	re/Anaconda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bi
+	n:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-
+	31_r4,PBS_O_SYSTEM=Linux,Q031_MODE=production,
+	MANPATH=/share/apps/software/Anaconda3/2024.02-1/share/man:/share/apps
+	/software/Anaconda3/2024.02-1/man:/usr/local/share/man:/usr/share/man/o
+	verrides:/usr/share/man/en:/usr/share/man:/opt/pbs/share/man,
+	XDG_SESSION_ID=106162,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,HOSTNAME=<tpac-host>,
+	EBDEVELANACONDA3=/share/apps/software/Anaconda3/2024.02-1/easybuild/An
+	aconda3-2024.02-1-easybuild-devel,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:1;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,SHELL=/bin/bash,TERM=xterm-16color,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,HISTSIZE=1000,
+	SSH_CLIENT=<private-ip> 42814 22,LMOD_PKG=/opt/ohpc/admin/lmod/lmod,
+	OLDPWD=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r3,
+	LMOD_VERSION=8.1.18,LMOD_QUIET=yes,SSH_TTY=/dev/pts/27,
+	__LMOD_REF_COUNT_LOADEDMODULES=Anaconda3/2024.02-1:1,
+	QT_GRAPHICSSYSTEM_CHECKED=1,
+	EBROOTANACONDA3=/share/apps/software/Anaconda3/2024.02-1,
+	HISTFILESIZE=2000,USER=bwbrook,
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=4
+	0;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=
+	34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31
+	:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;
+	31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:
+	*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.b
+	z2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.r
+	pm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.
+	alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.
+	cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:
+	*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35
+	:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01
+	;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm
+	=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.q
+	t=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.f
+	lc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xc
+	f=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.a
+	nx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.
+	mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:
+	*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36
+	:,
+	__LMOD_REF_COUNT__LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.0
+	2-1.lua:1,EBVERSIONANACONDA3=2024.02-1,LMOD_PREPEND_BLOCK=normal,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXt9LG1UPXtBbmFjb25kYTM9e1siZm4iXT0iL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw
+	vQW5hY29uZGEzLzIwMjQuMDItMS5sdWEiLFsiZnVsbE5hbWUiXT0iQW5hY29uZGEzLzIwMj
+	QuMDItMSIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzd
+	GF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IkFuYWNvbmRhMy8yMDI0LjAyLTEiLH0s
+	fSxtcGF0aEE9eyIvb3B0L29ocGMvcHViL21vZHVsZWRlcHMvZ251OCIsIi9vcHQvb2hwYy9
+	wdWIvbW9kdWxlZmlsZXMiLCIvc2hhcmUv,
+	PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/software/Ana
+	conda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bin:/usr
+	/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4,
+	_LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.02-1.lua,
+	LANG=en_US.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,LOADEDMODULES=Anaconda3/2024.02-1,_ModuleTable_Sz_=2,
+	LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=1,
+	__LMOD_REF_COUNT_PATH=/share/apps/software/Anaconda3/2024.02-1:1;/shar
+	e/apps/software/Anaconda3/2024.02-1/sbin:1;/share/apps/software/Anacond
+	a3/2024.02-1/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/s
+	bin:1;/opt/pbs/bin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=YXBwcy9tb2R1bGVzIiwiL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hb
+	GwiLCIvc2hhcmUvYXBwcy9tb2R1bGVkZXBzL3Jvc2FsaW5kL0NvcmUiLH0sWyJzeXN0ZW1C
+	YXNlTVBBVEgiXT0iL29wdC9vaHBjL3B1Yi9tb2R1bGVkZXBzL2dudTg6L29wdC9vaHBjL3B
+	1Yi9tb2R1bGVmaWxlczovc2hhcmUvYXBwcy9tb2R1bGVzOi9zaGFyZS9hcHBzL2ViLW1vZH
+	VsZXMvYWxsOi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQvQ29yZSIsfQ==,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	SSH_CONNECTION=<private-ip> 42814 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.02-1/lib/pkgconfig
+	,LMOD_SETTARG_FULL_SUPPORT=no,LESSOPEN=||/usr/bin/lesspipe.sh %s,
+	PROMPT_COMMAND=history -a,LMOD_FULL_SETTARG_SUPPORT=no,
+	__LMOD_REF_COUNT_PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.0
+	2-1/lib/pkgconfig:1,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	__LMOD_REF_COUNT_MANPATH=/share/apps/software/Anaconda3/2024.02-1/shar
+	e/man:1;/share/apps/software/Anaconda3/2024.02-1/man:1;/usr/local/share
+	/man:1;/usr/share/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1;
+	/opt/pbs/share/man:1,LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=normal,
+	PBS_O_HOST=<tpac-host>
+    Submit_arguments = -N q031_flux_full -W depend=afterok:870352.kunanyi-ohpc:
+	870323.kunanyi-ohpc -v Q031_MODE=production -o /u/bwbrook/codex_kunanyi
+	/q031_flux_measurements_2026-10-31_r4/production.pbs.out -e /u/bwbrook/
+	codex_kunanyi/q031_flux_measurements_2026-10-31_r4/production.pbs.err s
+	cripts/kunanyi/q031_flux_measurements.pbs
+    project = _pbs_project_default
+
+Job Id: 870323.kunanyi-ohpc
+    Job_Name = xray_home_devfix
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 33
+    resources_used.cput = 00:05:38
+    resources_used.mem = 56828kb
+    resources_used.ncpus = 1
+    resources_used.vmem = 510560kb
+    resources_used.walltime = 00:15:19
+    job_state = R
+    queue = copy
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sat Oct 31 14:49:36 2026
+    depend = beforeok:870334.kunanyi-ohpc@kunanyi-ohpc
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/scratch_home_m
+	igration_2026-10-16/migration.device-transition.err
+    exec_host = n001/4
+    exec_vnode = (n001:ncpus=1:mem=4194304kb)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = n
+    mtime = Sat Oct 31 15:04:55 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/scratch_home_
+	migration_2026-10-16/migration.device-transition.out
+    Priority = 0
+    qtime = Sat Oct 31 14:49:36 2026
+    Rerunable = False
+    Resource_List.mem = 4gb
+    Resource_List.ncpus = 1
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=1:mem=4gb
+    Resource_List.walltime = 72:00:00
+    stime = Sat Oct 31 14:49:36 2026
+    session_id = 1427
+    jobdir = /u/bwbrook
+    substate = 42
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=en_US.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/softwa
+	re/Anaconda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bi
+	n:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-
+	16,PBS_O_SYSTEM=Linux,
+	MANPATH=/share/apps/software/Anaconda3/2024.02-1/share/man:/share/apps
+	/software/Anaconda3/2024.02-1/man:/usr/local/share/man:/usr/share/man/o
+	verrides:/usr/share/man/en:/usr/share/man:/opt/pbs/share/man,
+	XDG_SESSION_ID=106162,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,HOSTNAME=<tpac-host>,
+	EBDEVELANACONDA3=/share/apps/software/Anaconda3/2024.02-1/easybuild/An
+	aconda3-2024.02-1-easybuild-devel,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:1;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,SHELL=/bin/bash,TERM=xterm-16color,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,HISTSIZE=1000,
+	SSH_CLIENT=<private-ip> 42814 22,LMOD_PKG=/opt/ohpc/admin/lmod/lmod,
+	LMOD_VERSION=8.1.18,LMOD_QUIET=yes,SSH_TTY=/dev/pts/27,
+	__LMOD_REF_COUNT_LOADEDMODULES=Anaconda3/2024.02-1:1,
+	QT_GRAPHICSSYSTEM_CHECKED=1,
+	EBROOTANACONDA3=/share/apps/software/Anaconda3/2024.02-1,
+	HISTFILESIZE=2000,USER=bwbrook,
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=4
+	0;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=
+	34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31
+	:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;
+	31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:
+	*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.b
+	z2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.r
+	pm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.
+	alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.
+	cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:
+	*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35
+	:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01
+	;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm
+	=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.q
+	t=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.f
+	lc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xc
+	f=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.a
+	nx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.
+	mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:
+	*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36
+	:,
+	__LMOD_REF_COUNT__LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.0
+	2-1.lua:1,EBVERSIONANACONDA3=2024.02-1,LMOD_PREPEND_BLOCK=normal,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXt9LG1UPXtBbmFjb25kYTM9e1siZm4iXT0iL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw
+	vQW5hY29uZGEzLzIwMjQuMDItMS5sdWEiLFsiZnVsbE5hbWUiXT0iQW5hY29uZGEzLzIwMj
+	QuMDItMSIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzd
+	GF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IkFuYWNvbmRhMy8yMDI0LjAyLTEiLH0s
+	fSxtcGF0aEE9eyIvb3B0L29ocGMvcHViL21vZHVsZWRlcHMvZ251OCIsIi9vcHQvb2hwYy9
+	wdWIvbW9kdWxlZmlsZXMiLCIvc2hhcmUv,
+	PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/software/Ana
+	conda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bin:/usr
+	/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16,
+	_LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.02-1.lua,
+	LANG=en_US.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,LOADEDMODULES=Anaconda3/2024.02-1,_ModuleTable_Sz_=2,
+	LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=1,
+	__LMOD_REF_COUNT_PATH=/share/apps/software/Anaconda3/2024.02-1:1;/shar
+	e/apps/software/Anaconda3/2024.02-1/sbin:1;/share/apps/software/Anacond
+	a3/2024.02-1/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/s
+	bin:1;/opt/pbs/bin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=YXBwcy9tb2R1bGVzIiwiL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hb
+	GwiLCIvc2hhcmUvYXBwcy9tb2R1bGVkZXBzL3Jvc2FsaW5kL0NvcmUiLH0sWyJzeXN0ZW1C
+	YXNlTVBBVEgiXT0iL29wdC9vaHBjL3B1Yi9tb2R1bGVkZXBzL2dudTg6L29wdC9vaHBjL3B
+	1Yi9tb2R1bGVmaWxlczovc2hhcmUvYXBwcy9tb2R1bGVzOi9zaGFyZS9hcHBzL2ViLW1vZH
+	VsZXMvYWxsOi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQvQ29yZSIsfQ==,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	SSH_CONNECTION=<private-ip> 42814 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.02-1/lib/pkgconfig
+	,LMOD_SETTARG_FULL_SUPPORT=no,LESSOPEN=||/usr/bin/lesspipe.sh %s,
+	PROMPT_COMMAND=history -a,LMOD_FULL_SETTARG_SUPPORT=no,
+	__LMOD_REF_COUNT_PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.0
+	2-1/lib/pkgconfig:1,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	__LMOD_REF_COUNT_MANPATH=/share/apps/software/Anaconda3/2024.02-1/shar
+	e/man:1;/share/apps/software/Anaconda3/2024.02-1/man:1;/usr/local/share
+	/man:1;/usr/share/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1;
+	/opt/pbs/share/man:1,LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=copy,PBS_O_HOST=<tpac-host>
+    comment = Job run at Sat Oct 31 at 14:49 on (n001:ncpus=1:mem=4194304kb)
+    etime = Sat Oct 31 14:49:36 2026
+    run_count = 1
+    Submit_arguments = scripts/kunanyi/xray_migration_resume_device_transition.
+	pbs
+    project = _pbs_project_default
+
+Job Id: 870321.kunanyi-ohpc
+    Job_Name = q031_flux
+    Job_Owner = bwbrook@n001.kunanyi
+    resources_used.cpupercent = 59
+    resources_used.cput = 00:04:31
+    resources_used.mem = 227192kb
+    resources_used.ncpus = 2
+    resources_used.vmem = 1251244kb
+    resources_used.walltime = 00:12:37
+    job_state = F
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sat Oct 31 14:48:31 2026
+    depend = beforeok:870334.kunanyi-ohpc@kunanyi-ohpc
+    Error_Path = n001.kunanyi:/u/bwbrook/codex_kunanyi/q031_flux_measurements_2
+	026-10-31_r3/smoke.pbs.err
+    exec_host = n001/7*2
+    exec_vnode = (n001:ncpus=2:mem=8388608kb)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = n
+    mtime = Sat Oct 31 15:01:09 2026
+    Output_Path = n001.kunanyi:/u/bwbrook/codex_kunanyi/q031_flux_measurements_
+	2026-10-31_r3/smoke.pbs.out
+    Priority = 0
+    qtime = Sat Oct 31 14:48:31 2026
+    Rerunable = False
+    Resource_List.mem = 8gb
+    Resource_List.ncpus = 2
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=2:mem=8gb
+    Resource_List.walltime = 04:00:00
+    stime = Sat Oct 31 14:48:31 2026
+    session_id = 31323
+    jobdir = /u/bwbrook
+    substate = 91
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=en_US.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/softwa
+	re/Anaconda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bi
+	n:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-
+	31_r3,PBS_O_SYSTEM=Linux,Q031_MODE=smoke,
+	MANPATH=/share/apps/software/Anaconda3/2024.02-1/share/man:/share/apps
+	/software/Anaconda3/2024.02-1/man:/usr/local/share/man:/usr/share/man/o
+	verrides:/usr/share/man/en:/usr/share/man:/opt/pbs/share/man,
+	XDG_SESSION_ID=106162,HOSTNAME=n001.kunanyi,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,
+	EBDEVELANACONDA3=/share/apps/software/Anaconda3/2024.02-1/easybuild/An
+	aconda3-2024.02-1-easybuild-devel,TERM=xterm-16color,SHELL=/bin/bash,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:1;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,HISTSIZE=1000,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,
+	TMPDIR=/var/tmp/pbs.870297.kunanyi-ohpc,PBS_JOBNAME=xray_preflight,
+	SSH_CLIENT=<private-ip> 42814 22,PBS_ENVIRONMENT=PBS_INTERACTIVE,
+	LMOD_PKG=/opt/ohpc/admin/lmod/lmod,
+	OLDPWD=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16,
+	LMOD_QUIET=yes,LMOD_VERSION=8.1.18,SSH_TTY=/dev/pts/27,
+	__LMOD_REF_COUNT_LOADEDMODULES=Anaconda3/2024.02-1:1,NCPUS=1,
+	QT_GRAPHICSSYSTEM_CHECKED=1,
+	EBROOTANACONDA3=/share/apps/software/Anaconda3/2024.02-1,
+	PBS_TASKNUM=1,USER=bwbrook,HISTFILESIZE=2000,
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=4
+	0;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=
+	34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31
+	:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;
+	31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:
+	*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.b
+	z2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.r
+	pm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.
+	alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.
+	cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:
+	*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35
+	:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01
+	;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm
+	=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.q
+	t=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.f
+	lc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xc
+	f=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.a
+	nx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.
+	mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:
+	*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36
+	:,
+	__LMOD_REF_COUNT__LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.0
+	2-1.lua:1,PBS_MOMPORT=15003,EBVERSIONANACONDA3=2024.02-1,
+	LMOD_PREPEND_BLOCK=normal,MAIL=/var/spool/mail/bwbrook,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXt9LG1UPXtBbmFjb25kYTM9e1siZm4iXT0iL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw
+	vQW5hY29uZGEzLzIwMjQuMDItMS5sdWEiLFsiZnVsbE5hbWUiXT0iQW5hY29uZGEzLzIwMj
+	QuMDItMSIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzd
+	GF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IkFuYWNvbmRhMy8yMDI0LjAyLTEiLH0s
+	fSxtcGF0aEE9eyIvb3B0L29ocGMvcHViL21vZHVsZWRlcHMvZ251OCIsIi9vcHQvb2hwYy9
+	wdWIvbW9kdWxlZmlsZXMiLCIvc2hhcmUv,
+	PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/software/Ana
+	conda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bin:/usr
+	/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_JOBCOOKIE=51862D7E4C8F0FC3216D4D331F146165,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r3,
+	_LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.02-1.lua,
+	PBS_NODENUM=0,LANG=en_US.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,LOADEDMODULES=Anaconda3/2024.02-1,PBS_JOBDIR=/u/bwbrook,
+	_ModuleTable_Sz_=2,LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	PBS_JOBID=870297.kunanyi-ohpc,HISTCONTROL=ignoreboth,SHLVL=2,
+	HOME=/u/bwbrook,
+	__LMOD_REF_COUNT_PATH=/share/apps/software/Anaconda3/2024.02-1:1;/shar
+	e/apps/software/Anaconda3/2024.02-1/sbin:1;/share/apps/software/Anacond
+	a3/2024.02-1/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/s
+	bin:1;/opt/pbs/bin:2,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=YXBwcy9tb2R1bGVzIiwiL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hb
+	GwiLCIvc2hhcmUvYXBwcy9tb2R1bGVkZXBzL3Jvc2FsaW5kL0NvcmUiLH0sWyJzeXN0ZW1C
+	YXNlTVBBVEgiXT0iL29wdC9vaHBjL3B1Yi9tb2R1bGVkZXBzL2dudTg6L29wdC9vaHBjL3B
+	1Yi9tb2R1bGVmaWxlczovc2hhcmUvYXBwcy9tb2R1bGVzOi9zaGFyZS9hcHBzL2ViLW1vZH
+	VsZXMvYWxsOi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQvQ29yZSIsfQ==,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	PBS_QUEUE=copy,SSH_CONNECTION=<private-ip> 42814 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.02-1/lib/pkgconfig
+	,OMP_NUM_THREADS=1,LESSOPEN=||/usr/bin/lesspipe.sh %s,
+	LMOD_SETTARG_FULL_SUPPORT=no,PROMPT_COMMAND=history -a,
+	LMOD_FULL_SETTARG_SUPPORT=no,
+	__LMOD_REF_COUNT_PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.0
+	2-1/lib/pkgconfig:1,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	__LMOD_REF_COUNT_MANPATH=/share/apps/software/Anaconda3/2024.02-1/shar
+	e/man:1;/share/apps/software/Anaconda3/2024.02-1/man:1;/usr/local/share
+	/man:1;/usr/share/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1;
+	/opt/pbs/share/man:2,
+	PBS_NODEFILE=/var/spool/pbs/aux/870297.kunanyi-ohpc,LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,PBS_O_QUEUE=normal,PBS_O_HOST=n001.kunanyi
+    comment = Job run at Sat Oct 31 at 14:48 on (n001:ncpus=2:mem=8388608kb) an
+	d terminated by bwbrook@<tpac-host>
+    etime = Sat Oct 31 14:48:31 2026
+    run_count = 1
+    Stageout_status = 1
+    Exit_status = 143
+    Submit_arguments = -v Q031_MODE=smoke -l walltime=04:00:00 -o smoke.pbs.out
+	 -e smoke.pbs.err scripts/kunanyi/q031_flux_measurements.pbs
+    history_timestamp = 1793419269
+    project = _pbs_project_default
+
+Job Id: 870334.kunanyi-ohpc
+    Job_Name = q031_flux
+    Job_Owner = bwbrook@<tpac-host>
+    job_state = F
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sat Oct 31 14:52:32 2026
+    depend = afterok:870321.kunanyi-ohpc@kunanyi-ohpc:870323.kunanyi-ohpc@kunan
+	yi-ohpc
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q031_flux_meas
+	urements_2026-10-31_r3/production.pbs.err
+    Hold_Types = s
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = n
+    mtime = Sat Oct 31 15:01:09 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q031_flux_mea
+	surements_2026-10-31_r3/production.pbs.out
+    Priority = 0
+    qtime = Sat Oct 31 14:52:32 2026
+    Rerunable = False
+    Resource_List.mem = 8gb
+    Resource_List.ncpus = 2
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=2:mem=8gb
+    Resource_List.walltime = 48:00:00
+    substate = 91
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=en_US.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/softwa
+	re/Anaconda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bi
+	n:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-
+	31_r3,PBS_O_SYSTEM=Linux,Q031_MODE=production,
+	MANPATH=/share/apps/software/Anaconda3/2024.02-1/share/man:/share/apps
+	/software/Anaconda3/2024.02-1/man:/usr/local/share/man:/usr/share/man/o
+	verrides:/usr/share/man/en:/usr/share/man:/opt/pbs/share/man,
+	XDG_SESSION_ID=106162,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,HOSTNAME=<tpac-host>,
+	EBDEVELANACONDA3=/share/apps/software/Anaconda3/2024.02-1/easybuild/An
+	aconda3-2024.02-1-easybuild-devel,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:1;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,SHELL=/bin/bash,TERM=xterm-16color,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,HISTSIZE=1000,
+	SSH_CLIENT=<private-ip> 42814 22,LMOD_PKG=/opt/ohpc/admin/lmod/lmod,
+	LMOD_VERSION=8.1.18,LMOD_QUIET=yes,SSH_TTY=/dev/pts/27,
+	__LMOD_REF_COUNT_LOADEDMODULES=Anaconda3/2024.02-1:1,
+	QT_GRAPHICSSYSTEM_CHECKED=1,
+	EBROOTANACONDA3=/share/apps/software/Anaconda3/2024.02-1,
+	HISTFILESIZE=2000,USER=bwbrook,
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=4
+	0;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=
+	34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31
+	:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;
+	31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:
+	*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.b
+	z2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.r
+	pm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.
+	alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.
+	cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:
+	*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35
+	:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01
+	;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm
+	=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.q
+	t=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.f
+	lc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xc
+	f=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.a
+	nx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.
+	mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:
+	*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36
+	:,
+	__LMOD_REF_COUNT__LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.0
+	2-1.lua:1,EBVERSIONANACONDA3=2024.02-1,LMOD_PREPEND_BLOCK=normal,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXt9LG1UPXtBbmFjb25kYTM9e1siZm4iXT0iL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw
+	vQW5hY29uZGEzLzIwMjQuMDItMS5sdWEiLFsiZnVsbE5hbWUiXT0iQW5hY29uZGEzLzIwMj
+	QuMDItMSIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzd
+	GF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IkFuYWNvbmRhMy8yMDI0LjAyLTEiLH0s
+	fSxtcGF0aEE9eyIvb3B0L29ocGMvcHViL21vZHVsZWRlcHMvZ251OCIsIi9vcHQvb2hwYy9
+	wdWIvbW9kdWxlZmlsZXMiLCIvc2hhcmUv,
+	PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/software/Ana
+	conda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bin:/usr
+	/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r3,
+	_LMFILES_=/share/apps/eb-modules/all/Anaconda3/2024.02-1.lua,
+	LANG=en_US.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,LOADEDMODULES=Anaconda3/2024.02-1,_ModuleTable_Sz_=2,
+	LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=1,
+	__LMOD_REF_COUNT_PATH=/share/apps/software/Anaconda3/2024.02-1:1;/shar
+	e/apps/software/Anaconda3/2024.02-1/sbin:1;/share/apps/software/Anacond
+	a3/2024.02-1/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/s
+	bin:1;/opt/pbs/bin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=YXBwcy9tb2R1bGVzIiwiL3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hb
+	GwiLCIvc2hhcmUvYXBwcy9tb2R1bGVkZXBzL3Jvc2FsaW5kL0NvcmUiLH0sWyJzeXN0ZW1C
+	YXNlTVBBVEgiXT0iL29wdC9vaHBjL3B1Yi9tb2R1bGVkZXBzL2dudTg6L29wdC9vaHBjL3B
+	1Yi9tb2R1bGVmaWxlczovc2hhcmUvYXBwcy9tb2R1bGVzOi9zaGFyZS9hcHBzL2ViLW1vZH
+	VsZXMvYWxsOi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQvQ29yZSIsfQ==,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	SSH_CONNECTION=<private-ip> 42814 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.02-1/lib/pkgconfig
+	,LMOD_SETTARG_FULL_SUPPORT=no,LESSOPEN=||/usr/bin/lesspipe.sh %s,
+	PROMPT_COMMAND=history -a,LMOD_FULL_SETTARG_SUPPORT=no,
+	__LMOD_REF_COUNT_PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.0
+	2-1/lib/pkgconfig:1,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	__LMOD_REF_COUNT_MANPATH=/share/apps/software/Anaconda3/2024.02-1/shar
+	e/man:1;/share/apps/software/Anaconda3/2024.02-1/man:1;/usr/local/share
+	/man:1;/usr/share/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1;
+	/opt/pbs/share/man:1,LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,
+	LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,
+	OLDPWD=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16,
+	PBS_O_QUEUE=normal,PBS_O_HOST=<tpac-host>
+    Submit_arguments = -v Q031_MODE=production -l walltime=48:00:00 -W depend=a
+	fterok:870321.kunanyi-ohpc:870323.kunanyi-ohpc -o production.pbs.out -e
+	 production.pbs.err scripts/kunanyi/q031_flux_measurements.pbs
+    history_timestamp = 1793419251
+    project = _pbs_project_default
+
+...............                                                          [100%]
+15 passed in 4.01s
+{'python': '3.11.7', 'numpy': '1.26.4', 'h5py': '3.9.0'}
+[q031-flux] case=G-LO snapshots=2 shape=(1014, 960, 960) edge_source=hdf5_node_coords control_padding=[1, 2, 4] signature=36b2a862d18af611b4c0643f948118b70732f922cb973dd17a06e945e68d6991
+.............                                                            [100%]
+13 passed in 2.27s
+{'python': '3.11.7', 'numpy': '1.26.4', 'h5py': '3.9.0'}
+[q031-flux] case=G-LO snapshots=2 shape=(1014, 960, 960) edge_source=hdf5_node_coords control_padding=[1, 2, 4] signature=0c67b623856419b3a914fd688d07d3f6633c5c2e5bc4ad60ec50da7c0f5008a7
+[q031-flux] computed snapshot 1/2 index=0 time_myr=0 elapsed_s=433.087
+333d8edfad3849be50b2b0a3da481b5c273a442a012b2368e6eaf9b225546953  scripts/science/measure_q031_fluxes.py
+f19859379463462a75ea7e8445d18cd2f6fa9ef05203aa71e507df5f67ebac21  scripts/science/snapshot_energy.py
+00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de  scripts/science/pluto_h5_level3_ambient_extract.py
+c38c9d781b681ff9682950020bade8caf62746ba9e112d28db315787efec451d  scripts/science/select_common_age_hdf5.py
+712ad01ed13a3bdee46582ee1f3d2cbb49f1caf87feb4166a50084bb73178436  tests/test_q031_fluxes.py
+5cf6a4e4a2333c53a0d3923b4d660b3988951dac2800a93e1b7bd7b5fdab5e73  scripts/kunanyi/q031_flux_measurements.pbs
+HOME_FILE_AND_DIRECTORY_FSYNC_OK
+unit=8 copy-start flushed
+unit=8 copied flushed

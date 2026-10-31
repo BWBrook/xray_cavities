@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+#PBS -N q031_flux
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mem=8gb
+#PBS -l walltime=48:00:00
+#PBS -r n
+#PBS -m n
+
+set -euo pipefail
+umask 077
+readonly STAGE=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4
+readonly MODE="${Q031_MODE:-production}"
+readonly MIGRATION=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16
+readonly ARCHIVE=/u/bwbrook/xray_cavities_scratch_archive_2026-10-16
+readonly HOME_RUNS=/u/bwbrook/xray_cavities_runs
+readonly RESULT="$STAGE/results_$MODE"
+cd "$STAGE"
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$STAGE/scripts/science"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+sha256sum --check stage_checksums.sha256
+test "$MODE" = smoke || test "$MODE" = production
+test ! -e "$RESULT" && test ! -L "$RESULT"
+mkdir "$RESULT"
+exec > >(tee -a "$RESULT/run.out") 2> >(tee -a "$RESULT/run.err" >&2)
+python -m pytest -q -p no:cacheprovider --basetemp "$RESULT/synthetic_checks" tests/test_q031_fluxes.py
+python - <<'PY'
+import h5py, numpy, platform
+print({'python': platform.python_version(), 'numpy': numpy.__version__, 'h5py': h5py.__version__}, flush=True)
+PY
+
+measure() {
+  local case_id="$1" problem="$2" environment="$3"
+  shift 3
+  python -u scripts/science/measure_q031_fluxes.py \
+    --case "$case_id" --environment "$problem/$environment" \
+    --pluto-ini "$problem/pluto.ini" --problem-source-dir "$problem/src" \
+    --output-dir "$RESULT/$case_id" "$@"
+}
+
+readonly G_LO="$HOME_RUNS/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem"
+if [ "$MODE" = smoke ]; then
+  mkdir "$RESULT/smoke_inputs"
+  for index in 0000 0001; do
+    test -r "$G_LO/outputs/data.$index.flt.h5"
+    ln -s "$G_LO/outputs/data.$index.flt.h5" "$RESULT/smoke_inputs/data.$index.flt.h5"
+  done
+  measure G-LO "$G_LO" tabulated_cosmo_002031.csv --outputs-dir "$RESULT/smoke_inputs"
+else
+  python - "$MIGRATION" <<'PY'
+import json, os, sys
+from pathlib import Path
+stage = Path(sys.argv[1])
+plan = json.loads((stage / 'migration_plan.json').read_text())
+binding = json.loads((stage / 'state/plan-binding.json').read_text())
+assert binding['plan_hash'] == '698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900'
+assert binding['plan'] == plan
+complete = json.loads((stage / 'state/verified-manifest.json').read_text())
+assert complete['plan_hash'] == binding['plan_hash'] and len(complete['units']) == 10
+for unit, expected in zip(complete['units'], plan['units'], strict=True):
+    assert unit['stage'] == 'complete'
+    assert unit['source'] == expected['source'] and unit['destination'] == expected['destination']
+    source, destination = Path(unit['source']), Path(unit['destination'])
+    assert source.is_symlink() and os.readlink(source) == str(destination)
+    assert destination.is_dir()
+    status = json.loads((stage / 'state' / ('unit-' + unit['unit_id']) / 'status.json').read_text())
+    assert status['stage'] == 'complete' and status['plan_hash'] == binding['plan_hash']
+    assert not os.path.lexists(status['tombstone'])
+events = [json.loads(line) for line in (stage / 'state/events.jsonl').read_text().splitlines()]
+assert events[-1]['event'] == 'device-transition-execute-complete'
+print('MIGRATION_COMPLETE_GATE_OK', flush=True)
+PY
+  readonly C_HI="$ARCHIVE/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem"
+  readonly C_LO="$ARCHIVE/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem"
+  readonly G_HI_EARLY="$ARCHIVE/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem"
+  readonly G_HI_LATE="$HOME_RUNS/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem"
+  python - "$C_HI" "$C_LO" "$G_LO" "$G_HI_EARLY" "$G_HI_LATE" "$RESULT" <<'PY'
+import hashlib, json, sys
+from pathlib import Path
+from snapshot_energy import canonical_snapshot_chain
+from measure_q031_fluxes import parse_pluto_parameters
+roots = [Path(value) for value in sys.argv[1:6]]
+chains = {}
+for case, segments in [('C-HI', roots[:1]), ('C-LO', roots[1:2]), ('G-LO', roots[2:3]), ('G-HI', roots[3:])]:
+    chain = canonical_snapshot_chain([root / 'outputs' for root in segments])
+    assert [item.output_index for item in chain] == list(range(51)), case
+    assert all(abs(item.actual_time_myr - index) < 0.05 for index, item in enumerate(chain)), case
+    if case == 'G-HI':
+        assert all(item.input_h5.parent == roots[3 if item.output_index < 10 else 4] / 'outputs' for item in chain)
+    chains[case] = [{'index': item.output_index, 'time_myr': item.actual_time_myr, 'path': str(item.input_h5)} for item in chain]
+early, late = roots[3:]
+assert parse_pluto_parameters(early / 'pluto.ini') == parse_pluto_parameters(late / 'pluto.ini')
+def source_hashes(root):
+    return {str(path.relative_to(root / 'src')): hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in sorted((root / 'src').rglob('*')) if path.is_file() and path.suffix in {'.c', '.h'}}
+assert source_hashes(early) == source_hashes(late), 'G-HI early/late C and H sources differ'
+assert hashlib.sha256((early / 'tabulated_cosmo_002031.csv').read_bytes()).digest() == hashlib.sha256((late / 'tabulated_cosmo_002031.csv').read_bytes()).digest()
+with (Path(sys.argv[6]) / 'canonical_input_chains.json').open('x') as handle:
+    json.dump({'chains': chains, 'g_hi_lineage': 'accepted 10 Myr continuation; early overlap >=10 excluded',
+               'g_hi_source_hashes': source_hashes(late), 'native_payload_rehashed': False}, handle, indent=2)
+print('CANONICAL_CADENCE_AND_G_HI_SOURCE_GATES_OK', flush=True)
+PY
+  measure C-LO "$C_LO" tabulated_cosmo_002003.csv --outputs-dir "$C_LO/outputs"
+  measure C-HI "$C_HI" tabulated_cosmo_002003.csv --outputs-dir "$C_HI/outputs"
+  measure G-LO "$G_LO" tabulated_cosmo_002031.csv --outputs-dir "$G_LO/outputs"
+  measure G-HI "$G_HI_LATE" tabulated_cosmo_002031.csv --outputs-dir "$G_HI_EARLY/outputs" --outputs-dir "$G_HI_LATE/outputs"
+fi
+python - "$RESULT" <<'PY'
+import csv, hashlib, json, sys
+from pathlib import Path
+root = Path(sys.argv[1])
+cases = []
+for manifest in sorted(root.glob('*/manifest.sha256.csv')):
+    for row in csv.DictReader(manifest.open()):
+        path = manifest.parent / row['filename']
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == row['sha256'], path
+    cases.append(manifest.parent.name)
+assert len(cases) == (1 if root.name == 'results_smoke' else 4), cases
+with (root / 'completion.json').open('x') as handle:
+    json.dump({'cases': cases, 'status': 'complete', 'payload': 'retained-output diagnostic; scientific interpretation pending'}, handle, indent=2)
+print('Q031_FLUX_MEASUREMENTS_COMPLETE', cases, flush=True)
+PY
+tar -czf "$STAGE/compact_$MODE.tar.gz" --exclude=synthetic_checks --exclude=smoke_inputs -C "$STAGE" "results_$MODE"
+sha256sum "$STAGE/compact_$MODE.tar.gz"

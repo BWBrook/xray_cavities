@@ -1,0 +1,50 @@
+#!/bin/bash
+#PBS -N xray_home_devfix
+#PBS -q copy
+#PBS -l select=1:ncpus=1:mem=4gb
+#PBS -l walltime=72:00:00
+#PBS -r n
+#PBS -m n
+#PBS -o /u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16/migration.device-transition.out
+#PBS -e /u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16/migration.device-transition.err
+
+set -euo pipefail
+umask 077
+module purge
+module load Anaconda3/2024.02-1
+readonly STAGE=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16
+cd "$STAGE"
+exec >> "$STAGE/migration.device-transition.live.out" 2>&1
+export TMPDIR="$STAGE/device_transition_test_tmp"
+export PYTHONDONTWRITEBYTECODE=1
+mkdir -p "$TMPDIR"
+sha256sum --check stage_checksums.sha256
+sha256sum --check device_transition_checksums.sha256
+python -m unittest discover -s tests -p test_migrate_xray_scratch_to_home.py -v \
+  >device-transition-tests.out 2>&1
+python -m unittest discover -s tests -p test_xray_migration_device_transition.py -v \
+  >>device-transition-tests.out 2>&1
+python - <<'PY'
+import os
+import tempfile
+
+with tempfile.TemporaryDirectory() as root:
+    name = os.path.join(root, "durability-probe")
+    with open(name, "xb") as handle:
+        handle.write(b"device transition durability probe\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    with open(name, "rb") as handle:
+        os.fsync(handle.fileno())
+    descriptor = os.open(root, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+print("HOME_FILE_AND_DIRECTORY_FSYNC_OK", flush=True)
+PY
+if [ "${MIGRATION_TEST_ONLY:-0}" = 1 ]; then
+  echo DEVICE_TRANSITION_TESTS_COMPLETE
+  exit 0
+fi
+python -u scripts/kunanyi/resume_xray_migration_device_transition.py
