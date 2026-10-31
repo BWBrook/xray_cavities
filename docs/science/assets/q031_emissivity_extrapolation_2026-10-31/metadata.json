@@ -1,0 +1,22 @@
+{
+  "redshift": 0.05,
+  "frequency_hz": 2.417990504024e+17,
+  "kev_per_kelvin": 8.617333262e-08,
+  "table_sha256": {
+    "apec": "e0f53a9f276a956f347af0e4fe627ee152762abc8b5116fc458070ee5f0925e3",
+    "gaunt": "64df88d39896f14064bb799fd5b70c6f68d20bcbdc5a15d19e2e4fd15b22f747"
+  },
+  "table_paths": {
+    "apec": "/Users/bwbrook/Downloads/apec_corrections.txt",
+    "gaunt": "/Users/bwbrook/Downloads/gaunt_lut_2d.npz"
+  },
+  "renderer_sha256": "63b4db4672e3b95abe0a0b32297dc87a21e1bea4c0ee38ffa7a5c40ad8f07019",
+  "script_sha256": "69dde9d3da00239974088fc62e16d54d09cffc77e7c8e36a0310b14b768842e5",
+  "zero_crossings_kev": [
+    544.7098840529491
+  ],
+  "sample_count": 10122,
+  "native_fields_read": false,
+  "minimum_product_5_to_20_kev": 1.5460956210294705,
+  "numpy_version": "2.2.6"
+}

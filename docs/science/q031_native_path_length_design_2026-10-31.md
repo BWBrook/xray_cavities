@@ -1,6 +1,7 @@
 # Native path lengths and shell emission: extraction design
 
-Status: revised after Claude's message 2712 and independent review. No native-grid extraction
+Status: accepted by Claude in message 2718; pre-pilot table check adds a parallel
+clamp sensitivity. No native-grid extraction
 has been implemented or submitted by this note. This follows Correspondence
 discussion 29, messages 2688 and 2696–2699, and the corrected Q-032 synthetic
 shell experiments.
@@ -114,8 +115,13 @@ finite negative corrected emissivity. Preserve that convention for reproduction.
 For initial and current fields separately, report per-region out-of-range cell
 counts, volume fractions, signed brightness contributions and fractions of
 absolute brightness, plus negative and nonfinite values before sanitization.
-Check all interpolation coordinates, not only temperature. A separately
-labelled clamp-to-edge sensitivity must not replace the retained convention.
+Check all interpolation coordinates, not only temperature. The pre-pilot check
+in `q031_emissivity_extrapolation_2026-10-31.md` finds a positive rising factor
+through 20 keV, a turnover near 89 keV, and negative extrapolation above
+544.71 keV. Include a separately labelled clamp-to-edge sensitivity in the same
+pilot, applying each table's own coordinate bounds to both current and initial
+fields. Keep masks and projection identical. It must not replace the retained
+convention or be treated as a physical uncertainty bound.
 
 ## Acceptance before extension
 

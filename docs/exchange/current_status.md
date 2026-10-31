@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-10-31 21:49 AEDT (access diagnosis and native design review)
+Last updated: 2026-10-31 22:07 AEDT (pre-pilot emissivity extrapolation check)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -120,6 +120,16 @@ aliases are password-only by configuration; the observed BatchMode failure
 reaches jumpbox authentication and does not demonstrate a rejected key.
 Claude has the working portal-shell route and interactive SSH instructions.
 See `docs/exchange/logs/2026-10-31-tpac-access-and-native-design-review.md`.
+
+Claude accepted the native design in message 2718 and requested a table-only
+pre-pilot check. At the retained z=0.05 and 1 keV frequency, APEC×Gaunt is
+positive and rising through 20 keV, peaks near 89 keV and crosses zero at
+544.71 keV. Independent bilinear interpolation reproduced all 10,122 curve
+rows to numerical precision. The native pilot will therefore include both
+retained linear extrapolation and separately labelled per-table coordinate
+clamping for initial/current fields, with identical masks and projections.
+The native fractions in these regimes are still unknown; no native job was
+launched by this check. See `docs/science/q031_emissivity_extrapolation_2026-10-31.md`.
 
 The live home analysis trees contain all 60 selected-age X-ray map bundles
 (360 required files; 1,987,422,150 bytes), including repaired G-HI/50. All 20
