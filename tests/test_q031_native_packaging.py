@@ -5,6 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+import subprocess
 import tarfile
 
 import pytest
@@ -14,6 +15,24 @@ sys.path.insert(0, str(ROOT / "scripts/kunanyi"))
 SPEC = importlib.util.spec_from_file_location("native_package", ROOT / "scripts/kunanyi/package_q031_native_pilot.py")
 package = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(package)
+
+
+@pytest.mark.parametrize("exit_code", [0, 7])
+def test_measured_child_exit_and_memory(tmp_path, exit_code):
+    output = tmp_path / "resources.txt"
+    command = [sys.executable, str(ROOT / "scripts/kunanyi/run_q031_measured.py"),
+               str(output), sys.executable, "-c",
+               f"import sys; payload=bytearray(8*1024*1024); sys.exit({exit_code})"]
+    result = subprocess.run(command, check=False)
+    assert result.returncode == exit_code
+    if exit_code == 0:
+        assert package.measured_peak_kib(output) > 0
+    else:
+        with pytest.raises(ValueError, match="Missing successful"):
+            package.measured_peak_kib(output)
+    original = output.read_bytes()
+    assert subprocess.run(command, check=False, capture_output=True).returncode != 0
+    assert output.read_bytes() == original
 
 
 @pytest.fixture(autouse=True)

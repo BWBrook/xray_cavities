@@ -55,3 +55,18 @@ the dependency hold.
 
 At 11:32 UTC, migration was running (7:42:51 elapsed) and flux was held behind
 recovery/migration. Native scientific results are pending.
+
+## Target smoke and runtime repair
+
+Revision `df42e23` was staged as `q031_native_emission_2026-10-31_r1`.
+The uploaded archive SHA-256 was
+`e896073c60d8e4c93ec130a1e979829d1b62cb0c4317d0d869c65ffa05d91c8f`;
+all source/reference/runtime checksums matched on Kunanyi.
+Smoke job `870703.kunanyi-ohpc` stopped with exit 1 before pytest or native reads:
+compute node `n002` lacks `/usr/bin/time`. The failed stage and logs remain intact.
+
+The r2 wrapper instead uses `run_q031_measured.py`, based on Python's
+`resource.getrusage(RUSAGE_CHILDREN)` and subprocess exit status. It preserves
+measured peak RSS, elapsed/CPU time and nonzero failures without requiring an
+external timing executable. Successful/failing-child and no-overwrite checks
+pass; the packaging suite passes 20 tests. A fresh target smoke is required.

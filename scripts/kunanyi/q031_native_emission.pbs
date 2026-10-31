@@ -8,7 +8,7 @@
 
 set -euo pipefail
 umask 077
-readonly STAGE=/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r1
+readonly STAGE=/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r2
 readonly MODE="${Q031_NATIVE_MODE:?set smoke or pilot}"
 readonly RUNTIME=/u/bwbrook/codex_kunanyi/xraise_runtime
 readonly MIGRATION=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16
@@ -35,7 +35,7 @@ export NUMBA_CACHE_DIR="$RUN/numba"
 
 if [ "$MODE" = smoke ]; then
   export Q031_REAL_RUNTIME="$RUNTIME"
-  /usr/bin/time -v -o "$RUN/resources.txt" \
+  python scripts/kunanyi/run_q031_measured.py "$RUN/resources.txt" \
     python -m pytest -q -p no:cacheprovider --basetemp "$RUN/pytest_tmp" \
     --junitxml "$RUN/tests.xml" \
     tests/test_q031_native_emission.py tests/test_q031_native_dependencies.py \
@@ -62,7 +62,7 @@ for case_id in C-HI G-HI; do
     retained="$MAPS/xray_cavity_g_hi_r2/g_hi/age_40"
   fi
   reference="$STAGE/inputs/$case_id"
-  /usr/bin/time -v -o "$RUN/$case_id.resources.txt" \
+  python scripts/kunanyi/run_q031_measured.py "$RUN/$case_id.resources.txt" \
     python -u scripts/science/build_q031_native_emission.py \
     --case "$case_id" --snapshot-index 40 \
     --source-manifest "$reference/source_manifest.csv" \
