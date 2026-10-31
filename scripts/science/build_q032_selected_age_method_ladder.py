@@ -111,7 +111,7 @@ def analyse_view(
     h, z = loaded.horizontal_axis, loaded.z_axis
     area = recovery._cell_area_grid(h, z)
     _, aperture = ladder._rois(h, z)
-    tracer = loaded.tracer_max_los >= TRACER_THRESHOLD
+    tracer = loaded.tracer_max_los > TRACER_THRESHOLD
     halves = ladder._split(tracer, z)
     results = ladder_runs(loaded, baseline)
     rows: list[dict[str, Any]] = []
@@ -214,7 +214,7 @@ def run(
         "observer_thresholds": list(OBSERVER_THRESHOLDS),
         "baselines": {f"{env}:{view}": str(path) for (env, view), path in sorted(baselines.items())},
         "baseline_role": "t=0 initial-atmosphere reference, not an evolved no-jet counterfactual",
-        "tracer_role": f"evaluation only, tr1 max along line of sight >= {TRACER_THRESHOLD:g}",
+        "tracer_role": f"evaluation only, tr1 max along line of sight > {TRACER_THRESHOLD:g}",
         "mask_encoding": "numpy packbits of row-major boolean arrays; unpack with np.unpackbits(...)[:prod(shape)].reshape(shape)",
     }
     (output / "method_ladder_metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")

@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+#PBS -N q032_ladder
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mem=8gb
+#PBS -l walltime=04:00:00
+#PBS -r n
+#PBS -m n
+
+set -euo pipefail
+umask 077
+
+readonly STAGE=/u/bwbrook/codex_kunanyi/q032_retained_method_ladder_2026-10-31_r1
+readonly BASE=/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables
+readonly SOURCE_COMMIT=7da6ed5
+readonly RESULT="$STAGE/results"
+readonly BEFORE="$STAGE/input_binding_before.json"
+readonly AFTER="$STAGE/input_binding_after.json"
+readonly VALIDATION="$STAGE/output_validation.json"
+readonly ARCHIVE="$STAGE/q032_retained_method_ladder.tar.gz"
+readonly RECEIPT="$STAGE/q032_retained_method_ladder_receipt.json"
+readonly TEST_TMP="$STAGE/pytest_tmp"
+readonly RUNTIME_CACHE="$STAGE/runtime_cache"
+readonly RUN_OUT="$STAGE/run.out"
+readonly RUN_ERR="$STAGE/run.err"
+
+cd "$STAGE"
+sha256sum --check stage_checksums.sha256
+for path in \
+  "$RESULT" "$BEFORE" "$AFTER" "$VALIDATION" "$ARCHIVE" "$RECEIPT" \
+  "$TEST_TMP" "$RUNTIME_CACHE" "$RUN_OUT" "$RUN_ERR"; do
+  test ! -e "$path" && test ! -L "$path" || {
+    echo "refusing to overwrite Q-032 surface: $path" >&2
+    exit 2
+  }
+done
+test -d "$BASE" && test ! -L "$BASE"
+
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$STAGE/scripts/science"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export MPLCONFIGDIR="$RUNTIME_CACHE/matplotlib"
+export XDG_CACHE_HOME="$RUNTIME_CACHE/xdg"
+mkdir "$RUNTIME_CACHE"
+exec > >(tee "$RUN_OUT") 2> >(tee "$RUN_ERR" >&2)
+
+python -m pytest -q -p no:cacheprovider --basetemp "$TEST_TMP" \
+  tests/test_q032_selected_age_method_ladder.py \
+  tests/test_xray_cavity_synthetic.py \
+  tests/test_xray_cavity_method_ladder.py
+
+python scripts/kunanyi/validate_q032_retained_method_ladder.py bind-inputs \
+  --base "$BASE" --output "$BEFORE"
+
+python -u scripts/science/build_q032_selected_age_method_ladder.py \
+  --base "$BASE" --output "$RESULT"
+
+python scripts/kunanyi/validate_q032_retained_method_ladder.py bind-inputs \
+  --base "$BASE" --output "$AFTER" --compare "$BEFORE"
+
+python scripts/kunanyi/validate_q032_retained_method_ladder.py validate-package \
+  --base "$BASE" --result "$RESULT" --before "$BEFORE" --after "$AFTER" \
+  --validation "$VALIDATION" --archive "$ARCHIVE" --receipt "$RECEIPT" \
+  --stage-root "$STAGE" --stage-checksums "$STAGE/stage_checksums.sha256" \
+  --source-commit "$SOURCE_COMMIT"

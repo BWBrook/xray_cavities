@@ -35,8 +35,14 @@ def test_runner_rows_and_packed_masks_round_trip(tmp_path: Path) -> None:
     rendered = rendered_group(
         horizontal, vertical, synthetic.bipolar_pair(semiaxis_along_jet_kpc=40.0, semiaxis_across_jet_kpc=24.0),
     )
+    tracer_input = rendered.cavity_mask.astype(float)
+    tracer_input[0, :3] = [
+        np.nextafter(runner.TRACER_THRESHOLD, 0.0),
+        runner.TRACER_THRESHOLD,
+        np.nextafter(runner.TRACER_THRESHOLD, 1.0),
+    ]
     directory = write_view(
-        tmp_path / "age_30" / "xraise_grid_45deg", rendered.surface_brightness, rendered.cavity_mask, horizontal, vertical,
+        tmp_path / "age_30" / "xraise_grid_45deg", rendered.surface_brightness, tracer_input, horizontal, vertical,
     )
 
     runner.run([("G-LO", 30, "45deg", directory)], tmp_path / "out")
@@ -49,7 +55,9 @@ def test_runner_rows_and_packed_masks_round_trip(tmp_path: Path) -> None:
     packed = np.load(tmp_path / "out" / "masks" / "G-LO_age30_45deg.npz")
     shape = tuple(packed["shape"])
     tracer = np.unpackbits(packed["tracer"])[: np.prod(shape)].reshape(shape).astype(bool)
-    np.testing.assert_array_equal(tracer, rendered.cavity_mask)
+    expected_tracer = rendered.cavity_mask.copy()
+    expected_tracer[0, :3] = [False, False, True]
+    np.testing.assert_array_equal(tracer, expected_tracer)
     assert (tmp_path / "out" / "stamps" / "G-LO_age30_45deg.png").is_file()
 
 

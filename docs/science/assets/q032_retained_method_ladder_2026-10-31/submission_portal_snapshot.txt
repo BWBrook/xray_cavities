@@ -1,0 +1,77 @@
+- navigation:
+  - list:
+    - listitem: "Host: <tpac-host>"
+  - list:
+    - listitem: "Initial directory: /u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r5"
+  - list:
+    - text: "Themes:"
+    - combobox "Themes:":
+      - option "Default" [selected]
+      - option "CLRS"
+      - option "Github"
+      - option "Solarized Light"
+      - option "Tomorrow"
+      - option "Cobalt2"
+      - option "idleToes"
+      - option "Monokai Remastered"
+      - option "Pastel Dark"
+      - option "Red Alert"
+      - option "Tomorrow Night Blue"
+      - option "Tomorrow Night Bright"
+      - option "Tomorrow Night Eighties"
+      - option "Tomorrow Night"
+- paragraph
+- paragraph
+- iframe [active]:
+  - button "Page up"
+  - log [active]:
+    - generic: (set -euo pipefail; cd /u/bwbrook/codex_kunanyi; echo '01e87948e62ac9ac933ab9c509400221afe67777f2b107773d107a463458c407 q032_retained_method_ladder_2026-10-31_r1.tar.gz' | sha256sum -c -; mkdir q032_retained_method_ladder_2026-10-31_r1; tar -xzf q032_retained_method_ladder_2026-10-31_r1.tar.gz -C q032_retained_method_ladder_2026-10-31_r1; cd q032_retained_method_ladder_2026-10-31_r1; sha256sum -c stage_checksums.sha256; bash -n scripts/kunanyi/q032_retained_method_ladder.pbs; echo Q032_PREFLIGHT_OK)
+    - generic: resources_used.mem = 56828kb
+    - generic: resources_used.walltime = 06:00:23
+    - generic: job_state = R
+    - generic: depend = beforeok:870334.kunanyi-ohpc@kunanyi-ohpc
+    - generic: "Job Id: 870374.kunanyi-ohpc"
+    - generic: job_state = H
+    - generic: depend = afterok:870373.kunanyi-ohpc@kunanyi-ohpc:870323.kunanyi-ohpc@kunan
+    - generic: RETAINED_MAP_ROOT_PRESENT
+    - generic: bwbrook@kunanyi-00:~/codex_kunanyi/q031_flux_measurements_2026-10-31_r5$
+    - generic: bwbrook@kunanyi-00:~/codex_kunanyi/q031_flux_measurements_2026-10-31_r5$ (set -euo pipefail; cd /u/bwbrook/codex_kunanyi; echo '01e87948e62ac9ac933ab9c509400221afe67777f2b107773d1
+    - generic: 07a463458c407 q032_retained_method_ladder_2026-10-31_r1.tar.gz' | sha256sum -c -; mkdir q032_retained_method_ladder_2026-10-31_r1; tar -xzf q032_retained_method_ladder_2026-10-31
+    - generic: _r1.tar.gz -C q032_retained_method_ladder_2026-10-31_r1; cd q032_retained_method_ladder_2026-10-31_r1; sha256sum -c stage_checksums.sha256; bash -n scripts/kunanyi/q032_retained_m
+    - generic: ethod_ladder.pbs; echo Q032_PREFLIGHT_OK)
+    - generic: "q032_retained_method_ladder_2026-10-31_r1.tar.gz: OK"
+    - generic: "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_0deg/x_kpc.tsv: OK"
+    - generic: "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_0deg/z_kpc.tsv: OK"
+    - generic: "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_45deg/u_kpc.tsv: OK"
+    - generic: "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_45deg/z_kpc.tsv: OK"
+    - generic: "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_90deg/u_kpc.tsv: OK"
+    - generic: "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products/xraise_grid_90deg/z_kpc.tsv: OK"
+    - generic: "docs/science/assets/q032_synthetic_harness_2026-10-31/inputs/tabulated_cosmo_002003.csv: OK"
+    - generic: "docs/science/assets/q032_synthetic_harness_2026-10-31/inputs/tabulated_cosmo_002031.csv: OK"
+    - generic: "scripts/kunanyi/q032_retained_method_ladder.pbs: OK"
+    - generic: "scripts/kunanyi/validate_q032_retained_method_ladder.py: OK"
+    - generic: "scripts/science/build_q032_selected_age_method_ladder.py: OK"
+    - generic: "scripts/science/build_three_case_cavity_recovery.py: OK"
+    - generic: "scripts/science/hemisphere_seed_grow_recovery.py: OK"
+    - generic: "scripts/science/three_case_cavity_recovery.py: OK"
+    - generic: "scripts/science/xray_cavity_method_ladder.py: OK"
+    - generic: "scripts/science/xray_cavity_synthetic.py: OK"
+    - generic: "tests/test_q032_selected_age_method_ladder.py: OK"
+    - generic: "tests/test_xray_cavity_method_ladder.py: OK"
+    - generic: "tests/test_xray_cavity_synthetic.py: OK"
+    - generic: Q032_PREFLIGHT_OK
+    - generic: bwbrook@kunanyi-00:~/codex_kunanyi/q031_flux_measurements_2026-10-31_r5$ (set -euo pipefail; set -C; cd /u/bwbrook/codex_kunanyi/q032_retained_method_ladder_2026-10-31_r1; qsub -o
+    - generic: $PWD/pbs.out -e $PWD/pbs.err scripts/kunanyi/q032_retained_method_ladder.pbs > submission_job_id.txt; cat submission_job_id.txt; qstat -f $(cat submission_job_id.txt) > submissio
+    - generic: n_qstat.txt; date -u; egrep 'Job Id:|job_state|Resource_List.mem|Resource_List.ncpus|Resource_List.walltime' submission_qstat.txt)
+    - generic: 870640.kunanyi-ohpc
+    - generic: Sat Oct 31 09:58:30 UTC 2026
+    - generic: "Job Id: 870640.kunanyi-ohpc"
+    - generic: job_state = Q
+    - generic: Resource_List.mem = 8gb
+    - generic: Resource_List.ncpus = 2
+    - generic: Resource_List.walltime = 04:00:00
+    - generic: bwbrook@kunanyi-00:~/codex_kunanyi/q031_flux_measurements_2026-10-31_r5$
+    - textbox
+  - button "Page down" [disabled]
+  - button "Options"
+  - generic "(73, 44)"

@@ -1,0 +1,24 @@
+{
+  "status": "submitted_not_complete",
+  "job_id": "870640.kunanyi-ohpc",
+  "observed_utc": "2026-10-31T09:58:30Z",
+  "observed_state": "Q",
+  "stage": "/u/bwbrook/codex_kunanyi/q032_retained_method_ladder_2026-10-31_r1",
+  "source_base_commit": "7da6ed5",
+  "changes_from_base": "new wrapper/validator plus strict > tracer evaluation and regression test",
+  "upload_sha256": "01e87948e62ac9ac933ab9c509400221afe67777f2b107773d107a463458c407",
+  "upload_bytes": 496330,
+  "stage_files_verified": 19,
+  "resources": {
+    "cpus": 2,
+    "memory_gb": 8,
+    "walltime": "04:00:00"
+  },
+  "scope": "60 retained views, five rungs, no t0 baseline, diagnostic only",
+  "evidence": "submission_portal_snapshot.txt",
+  "local_focused_tests": "21 passed in 25.67s",
+  "production_adoption": false,
+  "latest_observed_utc": "2026-10-31T10:00:48Z",
+  "latest_observed_state": "R",
+  "allocation_tests": "21 passed in 114.32s"
+}

@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-10-31 15:34 AEDT (live migration, recovered flux smoke and Q-032 review)
+Last updated: 2026-10-31 20:59 AEDT (Q-032 r2 review and retained-view launch)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -87,17 +87,28 @@ continues on Correspondence discussion 29; substantive findings return to Barry
 in chat. The initial Q-032 comparison is legacy 1%, seed-and-growth and a
 null-calibrated deficit threshold. No replacement algorithm is validated yet.
 
-Claude merged the synthetic harness in 331aed9 and archived the superseded
-HANDOFF in fa175db; this file is the live handover. Independent review confirms
-legacy false detections on all eight null sides, but found pressure-matched
-half-temperature rims described as isothermal, inconsistent radial-method
-summary statistics, and CSV hashes invalidated by newline normalization.
-Topology compatibility and the distinction between synthetic oracle, initial
-reference and evolved no-jet background also remain unresolved. Findings were
-sent to Claude in board messages 2680/2681 for correction; they are not accepted
-production changes. The retained-map ladder is suitable for exploratory
-comparisons only. Review: `docs/science/q032_independent_review_2026-10-31.md`.
+Claude's corrected r2 package is merged in `7da6ed5`. Independent review
+verified all three manifests, 1,984 rows / 124 scenarios, rim thermodynamics,
+summary medians and stratified mass quadrature. Claude withdrew the original
+cluster–group contrast. The mass-matched touching shells overlap and add
+emissivity perturbations; treat them as controlled sensitivities, not a
+self-consistent physical shell. Bright rims can also bias the observer radial
+background into off-cavity detections. Findings returned on discussion 29.
 
+The 60-view diagnostic PBS `870640` was queued at 09:58:30 UTC and running at
+09:59:03 UTC (2 CPUs / 8 GB / 4 h). It compares the existing five observer
+rungs, preserves topology labels and G-HI/50's scientific exclusion, and uses
+no t0 baseline. The tracer evaluation boundary now correctly uses strict
+`> 1e-3`; observer selection is unchanged. Local and allocation tests: 21 passed. Input/output
+binding and packaging passed independent review. Completion and scientific
+review are pending; no replacement method is adopted. See
+`docs/exchange/logs/2026-10-31-q032-r2-review-and-retained-launch.md`.
+
+Migration `870323` was still running at 09:51 UTC after six hours; full flux
+`870374` remained held behind recovery/migration success. The native shell
+path-length/emissivity design is proposed in
+`docs/science/q031_native_path_length_design_2026-10-31.md`; no native extraction
+has been submitted.
 
 The live home analysis trees contain all 60 selected-age X-ray map bundles
 (360 required files; 1,987,422,150 bytes), including repaired G-HI/50. All 20
