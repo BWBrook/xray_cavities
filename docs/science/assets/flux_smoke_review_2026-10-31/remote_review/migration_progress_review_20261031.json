@@ -1,0 +1,140 @@
+{
+  "captured_utc": "2026-10-31T04:34:26.294187+00:00",
+  "units": [
+    {
+      "index": 0,
+      "stage": "complete",
+      "source": "/scratch/bwbrook/xray_cavities_gates",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates",
+      "source_is_symlink": true,
+      "link_matches": true,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 1,
+      "stage": "complete",
+      "source": "/scratch/bwbrook/xray_cavities_analysis",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_analysis",
+      "source_is_symlink": true,
+      "link_matches": true,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 2,
+      "stage": "complete",
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+      "source_is_symlink": true,
+      "link_matches": true,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 3,
+      "stage": "complete",
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh",
+      "source_is_symlink": true,
+      "link_matches": true,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 4,
+      "stage": "complete",
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64",
+      "source_is_symlink": true,
+      "link_matches": true,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 5,
+      "stage": "complete",
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+      "source_is_symlink": true,
+      "link_matches": true,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 6,
+      "stage": "complete",
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+      "source_is_symlink": true,
+      "link_matches": true,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 7,
+      "stage": "complete",
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-20-g-hi-full-history-production",
+      "source_is_symlink": true,
+      "link_matches": true,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 8,
+      "stage": "copied",
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun",
+      "source_is_symlink": false,
+      "link_matches": false,
+      "destination_exists": true,
+      "tombstone_exists": false
+    },
+    {
+      "index": 9,
+      "stage": "unstarted",
+      "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun",
+      "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun",
+      "source_is_symlink": false,
+      "link_matches": false,
+      "destination_exists": false,
+      "tombstone_exists": null
+    }
+  ],
+  "c_hi_verified_files": 13,
+  "c_hi_verified_bytes": 112210521648,
+  "c_hi_total_bytes": 3090276948775,
+  "latest_verification": {
+    "destination_signature": {
+      "ctime_ns": 1792301033232241647,
+      "dev": 47,
+      "gid": 1003,
+      "ino": 2199279953893,
+      "mode": 33152,
+      "mtime_ns": 1786944376394716626,
+      "size": 3005,
+      "uid": 145812
+    },
+    "event": "file_verified",
+    "path": "C-HI/particles/problem/outputs/data.0000.flt.xmf",
+    "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+    "schema": 2,
+    "sha256": "05e23cd748f0ea69108428961ab4336ec212d931a45096497dab3d115b656410",
+    "source_signature": {
+      "ctime_ns": 1786944376394716626,
+      "dev": 45,
+      "gid": 1001,
+      "ino": 3298732106240,
+      "mode": 33188,
+      "mtime_ns": 1786944376394716626,
+      "size": 3005,
+      "uid": 145812
+    },
+    "time": 1793420871.1113298,
+    "transition_receipt_sha256": "afe1251e5f5155ce3213d71051364ff8e8fca6f085a265286bba86e6140cb4c4",
+    "unit_id": "e9730c61823192c5937f",
+    "verification_epoch": "c-hi-device-rebind-20261031"
+  },
+  "scope": "existing durable receipts and link metadata; no new payload rehash or quota accounting"
+}

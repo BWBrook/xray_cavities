@@ -8,8 +8,9 @@
 
 set -euo pipefail
 umask 077
-readonly STAGE=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4
+readonly STAGE=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r5
 readonly MODE="${Q031_MODE:-production}"
+readonly R4_SMOKE=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4/results_smoke
 readonly MIGRATION=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16
 readonly ARCHIVE=/u/bwbrook/xray_cavities_scratch_archive_2026-10-16
 readonly HOME_RUNS=/u/bwbrook/xray_cavities_runs
@@ -21,11 +22,22 @@ export PYTHONDONTWRITEBYTECODE=1
 export PYTHONPATH="$STAGE/scripts/science"
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 sha256sum --check stage_checksums.sha256
-test "$MODE" = smoke || test "$MODE" = production
+test "$MODE" = smoke || test "$MODE" = production || test "$MODE" = recover-smoke
+if [ "$MODE" = recover-smoke ]; then
+  python -m pytest -q -p no:cacheprovider \
+    --basetemp "$STAGE/recovery_packaging_checks" tests/test_q031_flux_packaging.py
+  python scripts/kunanyi/package_q031_flux_results.py \
+    --validate-existing-smoke "$R4_SMOKE" \
+    --science-dir "$STAGE/scripts/science" \
+    --archive "$STAGE/compact_smoke.tar.gz" \
+    --receipt "$STAGE/compact_smoke.receipt.json"
+  exit 0
+fi
 test ! -e "$RESULT" && test ! -L "$RESULT"
 mkdir "$RESULT"
 exec > >(tee -a "$RESULT/run.out") 2> >(tee -a "$RESULT/run.err" >&2)
-python -m pytest -q -p no:cacheprovider --basetemp "$RESULT/synthetic_checks" tests/test_q031_fluxes.py
+python -m pytest -q -p no:cacheprovider --basetemp "$RESULT/synthetic_checks" \
+  tests/test_q031_fluxes.py tests/test_q031_flux_packaging.py
 python - <<'PY'
 import h5py, numpy, platform
 print({'python': platform.python_version(), 'numpy': numpy.__version__, 'h5py': h5py.__version__}, flush=True)
@@ -122,5 +134,8 @@ with (root / 'completion.json').open('x') as handle:
     json.dump({'cases': cases, 'status': 'complete', 'payload': 'retained-output diagnostic; scientific interpretation pending'}, handle, indent=2)
 print('Q031_FLUX_MEASUREMENTS_COMPLETE', cases, flush=True)
 PY
-tar -czf "$STAGE/compact_$MODE.tar.gz" --exclude=synthetic_checks --exclude=smoke_inputs -C "$STAGE" "results_$MODE"
-sha256sum "$STAGE/compact_$MODE.tar.gz"
+python scripts/kunanyi/package_q031_flux_results.py \
+  --results-dir "$RESULT" --mode "$MODE" \
+  --science-dir "$STAGE/scripts/science" \
+  --archive "$STAGE/compact_$MODE.tar.gz" \
+  --receipt "$STAGE/compact_$MODE.receipt.json"

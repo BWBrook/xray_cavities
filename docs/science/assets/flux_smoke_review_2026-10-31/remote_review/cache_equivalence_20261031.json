@@ -1,0 +1,9 @@
+{
+  "comparison": {
+    "flux_rows": true,
+    "storage_rows": true
+  },
+  "excluded_field": "input_h5 stage-local symlink path only",
+  "r3_checkpoint": "/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r3/results_smoke/G-LO/checkpoints/0000-0000.json",
+  "r4_checkpoint": "/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4/results_smoke/G-LO/checkpoints/0000-0000.json"
+}

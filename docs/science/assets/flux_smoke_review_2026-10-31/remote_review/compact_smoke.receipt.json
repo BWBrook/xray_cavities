@@ -1,0 +1,51 @@
+{
+  "analysis_implementation_hashes": {
+    "measure_q031_fluxes.py": "333d8edfad3849be50b2b0a3da481b5c273a442a012b2368e6eaf9b225546953",
+    "pluto_h5_level3_ambient_extract.py": "00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de",
+    "select_common_age_hdf5.py": "c38c9d781b681ff9682950020bade8caf62746ba9e112d28db315787efec451d",
+    "snapshot_energy.py": "f19859379463462a75ea7e8445d18cd2f6fa9ef05203aa71e507df5f67ebac21"
+  },
+  "archive": "/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r5/compact_smoke.tar.gz",
+  "archive_sha256": "9b77439162feaad2550afac06e750c3925c69f34b7a4332f8b6964a178a09e61",
+  "cases": [
+    "G-LO"
+  ],
+  "members": [
+    {
+      "path": "results_smoke/G-LO/instantaneous_surface_fluxes.csv",
+      "sha256": "88db4368d38f0dc5835e8c811ac90361823e4b8ca08552af513e692d96476b65",
+      "size_bytes": 39875
+    },
+    {
+      "path": "results_smoke/G-LO/integrated_control_balances.csv",
+      "sha256": "716d49123ce5f1a91745c14b40faa170e5743c4b8441d322d66a4f78e82c2529",
+      "size_bytes": 10359
+    },
+    {
+      "path": "results_smoke/G-LO/manifest.sha256.csv",
+      "sha256": "c225e3a42474ecb2782aef27b53b0a93c4ac77be1c52017e5d55d36354da4d31",
+      "size_bytes": 381
+    },
+    {
+      "path": "results_smoke/G-LO/provenance.json",
+      "sha256": "a7125609e815cc9c774a12f6461f6b77cb305148c5238d1bd2440fe2bcc49daa",
+      "size_bytes": 12196
+    },
+    {
+      "path": "results_smoke/G-LO/region_storage.csv",
+      "sha256": "7925893558fba1a6137edb461f1f575fb2c294fc163bd882f4e49a2db0d5883c",
+      "size_bytes": 11701
+    },
+    {
+      "path": "results_smoke/completion.json",
+      "sha256": "3c30d31bb90bbaa9342349c2eb00b076cbd1f05f0257efc6e67962a0bca4df2d",
+      "size_bytes": 133
+    }
+  ],
+  "mode": "smoke",
+  "recovered_existing_smoke": true,
+  "schema_version": 1,
+  "snapshot_count_per_case": 2,
+  "source_results_dir": "/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4/results_smoke",
+  "status": "verified"
+}

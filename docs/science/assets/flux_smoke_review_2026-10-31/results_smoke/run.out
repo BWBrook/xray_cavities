@@ -1,0 +1,7 @@
+...............                                                          [100%]
+15 passed in 4.01s
+{'python': '3.11.7', 'numpy': '1.26.4', 'h5py': '3.9.0'}
+[q031-flux] case=G-LO snapshots=2 shape=(1014, 960, 960) edge_source=hdf5_node_coords control_padding=[1, 2, 4] signature=36b2a862d18af611b4c0643f948118b70732f922cb973dd17a06e945e68d6991
+[q031-flux] computed snapshot 1/2 index=0 time_myr=0 elapsed_s=208.667
+[q031-flux] computed snapshot 2/2 index=1 time_myr=0.999659684 elapsed_s=296.194
+Q031_FLUX_MEASUREMENTS_COMPLETE ['G-LO']

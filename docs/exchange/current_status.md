@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-10-31 (retained flux jobs and receipt-gated migration resume)
+Last updated: 2026-10-31 15:34 AEDT (live migration, recovered flux smoke and Q-032 review)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -44,24 +44,40 @@ passed locally; both suites and fsync probes passed on the copy node.
 Pre-resume state/logs were archived and downloaded with matching SHA-256.
 Details: `docs/exchange/logs/2026-10-31-flux-and-migration-resume.md`.
 
-## Retained boundary and nozzle measurements — in execution
+At 04:34 UTC (15:34 AEDT), migration 870323 was still running after about
+44 minutes. The eight completed units retain exact archive links, live
+destinations and no tombstones. C-HI has 13 fresh-epoch file receipts covering
+112,210,521,648 bytes of 3,090,276,948,775 bytes (3.63%); its source is still
+present and its durable stage remains `copied` while hashing continues. C-LO
+is unstarted, with no destination. This is receipt progress, not a new payload
+rehash by the reviewer or proof of recovered quota.
 
-The new Q-031 diagnostic uses exact HDF5 node geometry, six signed boundary
-fluxes, three source-enclosing control volumes (1/2/4-cell padding), storage
-changes and spatial/temporal quadrature sensitivities. Independent review and
-15 analytic/provenance/cache tests pass. The first real snapshot took 433 seconds;
-a reviewed streaming face cache removes repeated strided reads while preserving
-numerical results exactly. Superseded flux jobs 870321 and 870334 were cancelled;
-their stage is preserved. Replacement smoke 870352 is running and passed all
-15 remote tests; full job 870353 is held behind both smoke and migration
-success. The replacement uses a fresh r4 stage with a 48-hour full allocation.
-Full execution also checks all ten complete states,
-archive links and absence of tombstones.
+## Retained boundary and nozzle measurements — smoke reviewed, full run waiting
 
-These are retained-output reconstructions, not solver-integrated numerical
-fluxes. No closure result is established yet. Numerical interpretation and the
-remaining spherical-aperture/no-jet audits remain open. Method and limitations:
-`docs/science/q031_retained_flux_measurements_2026-10-31.md`.
+The r4 G-LO smoke completed both numerical snapshots and all 15 tests, then
+PBS 870352 exited 1 during recursive tar packaging. That cancelled dependent
+870353 before the full run began. All four downloaded scientific outputs
+match their manifest. An independent recomputation reproduced 144 balance
+values, and the first real snapshot agrees exactly with the earlier direct-read
+implementation. The cache reduced that snapshot's observed runtime from 433
+to 209 seconds; this was not a controlled I/O benchmark.
+
+The packaging-only r5 repair excludes live logs, checks exact archive members
+against validation-bound hashes and never overwrites outputs. Eighteen combined
+flux/packaging tests pass. Recovery PBS 870373 completed exit 0 in 19 seconds,
+revalidating and repackaging the existing smoke without numerical recomputation.
+Replacement full job 870374 is held behind successful recovery and migration
+870323, with 2 CPUs / 8 GB / 48 h. The ten-unit completion/link/no-tombstone gates
+remain. All superseded stages and receipts are preserved.
+
+Over G-LO's first 0.99966 Myr, whole-grid energy change is 1.09242 times nominal
+injection; the preferred boundary trapezoid reduces inferred source to 1.08219.
+Nozzle trapezoids give 0.535–0.558, but left/right choices span 0.012–1.088
+because the initial saved padded-surface flux is zero. This is unresolved
+startup sampling, not evidence of half-power delivery. Four-case closure,
+spherical-aperture and no-jet audits remain open. See
+`docs/science/q031_flux_smoke_review_2026-10-31.md` and
+`docs/exchange/logs/2026-10-31-flux-smoke-review-and-recovery.md`.
 
 ## Claude coordination and available inputs — 2026-10-31
 
@@ -70,6 +86,18 @@ analysis, Kunanyi staging and these shared handovers. Reciprocal method review
 continues on Correspondence discussion 29; substantive findings return to Barry
 in chat. The initial Q-032 comparison is legacy 1%, seed-and-growth and a
 null-calibrated deficit threshold. No replacement algorithm is validated yet.
+
+Claude merged the synthetic harness in 331aed9 and archived the superseded
+HANDOFF in fa175db; this file is the live handover. Independent review confirms
+legacy false detections on all eight null sides, but found pressure-matched
+half-temperature rims described as isothermal, inconsistent radial-method
+summary statistics, and CSV hashes invalidated by newline normalization.
+Topology compatibility and the distinction between synthetic oracle, initial
+reference and evolved no-jet background also remain unresolved. Findings were
+sent to Claude in board messages 2680/2681 for correction; they are not accepted
+production changes. The retained-map ladder is suitable for exploratory
+comparisons only. Review: `docs/science/q032_independent_review_2026-10-31.md`.
+
 
 The live home analysis trees contain all 60 selected-age X-ray map bundles
 (360 required files; 1,987,422,150 bytes), including repaired G-HI/50. All 20

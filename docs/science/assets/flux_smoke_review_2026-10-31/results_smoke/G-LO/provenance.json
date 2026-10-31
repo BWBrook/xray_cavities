@@ -1,0 +1,281 @@
+{
+  "absent_nonadvective_overrides": {
+    "THERMAL_CONDUCTION": "explicitly_disabled",
+    "VISCOSITY": "explicitly_disabled"
+  },
+  "analysis_implementation_hashes": {
+    "measure_q031_fluxes.py": "333d8edfad3849be50b2b0a3da481b5c273a442a012b2368e6eaf9b225546953",
+    "pluto_h5_level3_ambient_extract.py": "00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de",
+    "select_common_age_hdf5.py": "c38c9d781b681ff9682950020bade8caf62746ba9e112d28db315787efec451d",
+    "snapshot_energy.py": "f19859379463462a75ea7e8445d18cd2f6fa9ef05203aa71e507df5f67ebac21"
+  },
+  "analysis_signature": "36b2a862d18af611b4c0643f948118b70732f922cb973dd17a06e945e68d6991",
+  "boundary_layer_definition": "cumulative union of the first and last n exact grid-cell layers on all six domain faces; overlapping edges and corners are counted once",
+  "canonical_overlap_audit": [],
+  "canonical_overlap_policy": "for matching output indices, later supplied segments win only after time and shape agree; candidate metadata are reported but payload identity is not asserted",
+  "case": "G-LO",
+  "control_box_edges_kpc": {
+    "1": {
+      "x": [
+        -0.800000011920929,
+        0.800000011920929
+      ],
+      "y": [
+        -0.800000011920929,
+        0.800000011920929
+      ],
+      "z": [
+        -0.800000011920929,
+        0.800000011920929
+      ]
+    },
+    "2": {
+      "x": [
+        -0.8500000238418579,
+        0.8500000238418579
+      ],
+      "y": [
+        -0.8500000238418579,
+        0.8500000238418579
+      ],
+      "z": [
+        -0.8500000238418579,
+        0.8500000238418579
+      ]
+    },
+    "4": {
+      "x": [
+        -0.949999988079071,
+        0.949999988079071
+      ],
+      "y": [
+        -0.949999988079071,
+        0.949999988079071
+      ],
+      "z": [
+        -0.949999988079071,
+        0.949999988079071
+      ]
+    }
+  },
+  "control_boxes": {
+    "1": {
+      "i0": 464,
+      "i1": 495,
+      "j0": 464,
+      "j1": 495,
+      "k0": 491,
+      "k1": 522,
+      "padding_cells": 1,
+      "source_cell_count": 14328,
+      "source_i0": 465,
+      "source_i1": 494,
+      "source_j0": 465,
+      "source_j1": 494,
+      "source_k0": 492,
+      "source_k1": 521
+    },
+    "2": {
+      "i0": 463,
+      "i1": 496,
+      "j0": 463,
+      "j1": 496,
+      "k0": 490,
+      "k1": 523,
+      "padding_cells": 2,
+      "source_cell_count": 14328,
+      "source_i0": 465,
+      "source_i1": 494,
+      "source_j0": 465,
+      "source_j1": 494,
+      "source_k0": 492,
+      "source_k1": 521
+    },
+    "4": {
+      "i0": 461,
+      "i1": 498,
+      "j0": 461,
+      "j1": 498,
+      "k0": 488,
+      "k1": 525,
+      "padding_cells": 4,
+      "source_cell_count": 14328,
+      "source_i0": 465,
+      "source_i1": 494,
+      "source_j0": 465,
+      "source_j1": 494,
+      "source_k0": 492,
+      "source_k1": 521
+    }
+  },
+  "control_padding_cells": [
+    1,
+    2,
+    4
+  ],
+  "core_definitions": {
+    "BODY_FORCE": "VECTOR",
+    "COOLING": "NO",
+    "DIMENSIONS": "3",
+    "EOS": "IDEAL",
+    "GEOMETRY": "CARTESIAN",
+    "PHYSICS": "HD"
+  },
+  "domain_edges_kpc": {
+    "x": [
+      -200.0,
+      200.0
+    ],
+    "y": [
+      -200.0,
+      200.0
+    ],
+    "z": [
+      -250.0,
+      250.0
+    ]
+  },
+  "energy_definition": "internal + kinetic + fixed centre-zero gravitational potential",
+  "environment_path": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/tabulated_cosmo_002031.csv",
+  "environment_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+  "grid_geometry": {
+    "edge_source": "hdf5_node_coords",
+    "grid_file": null,
+    "grid_file_sha256": null,
+    "max_cell_center_edge_midpoint_residual_kpc": 7.62939453125e-06
+  },
+  "initial_state_note": "the retained t=0 snapshot is already nozzle-initialized; inferred cumulative source excludes the initial overwrite and measures post-baseline delivery",
+  "method_version": 1,
+  "moving_injection_region": "MOVING_INJECTION_NONE",
+  "native_input_identity_scope": "resolved path, device, inode, size, ctime and mtime before/after each read and at finalization; native payloads are not rehashed",
+  "outputs": {
+    "instantaneous_surface_fluxes.csv": "88db4368d38f0dc5835e8c811ac90361823e4b8ca08552af513e692d96476b65",
+    "integrated_control_balances.csv": "716d49123ce5f1a91745c14b40faa170e5743c4b8441d322d66a4f78e82c2529",
+    "region_storage.csv": "7925893558fba1a6137edb461f1f575fb2c294fc163bd882f4e49a2db0d5883c"
+  },
+  "pluto_ini_path": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/pluto.ini",
+  "pluto_ini_sha256": "3c6b127b716f3c8d112a5cccd37f42d13aee10962e869a6d1ac0e8b5e3485341",
+  "pluto_parameters": {
+    "JET_ACTIVE_TIME": 50.0,
+    "JET_END_TIME": 50.0,
+    "JET_EPISODES": 1.0,
+    "JET_INITIAL_RADIUS": 0.1,
+    "JET_INJECTION_HEIGHT": 0.75,
+    "JET_PWR": 1e+43,
+    "JET_ROTATION_ANGLE": 0.0,
+    "JET_SPD": 0.1,
+    "JET_START_TIME": 0.0,
+    "JET_X1O": 0.0,
+    "JET_X2O": 0.0,
+    "JET_X3O": 0.0
+  },
+  "problem_source_dir": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/src",
+  "problem_source_hashes": {
+    "Particles/._particles.h": "c3cebf5308f2c3299e28c4e355a83ee5edbd36d0d9aea611a6b2283f6cf7e877",
+    "Particles/._particles_lp_tools.c": "b3dc62075de78f06279ad2be19d52a196b590eb1a5ff3040b7773e1788f37c76",
+    "Particles/particles.h": "0e19620ca7786d39f59e540c9803d08ceffd53c8c51e3bfd4a985f924371d83a",
+    "Particles/particles_boundary.c": "250a55a9afcdc72821e9dddc36909fbf4a3bf0bda6a2698b6ba79e8bd1b97ff8",
+    "Particles/particles_cr_feedback.c": "4a99dbb4baeeaf03e067d0705a9cc3f722ce85a75f8489873d000093c137f865",
+    "Particles/particles_cr_force.c": "00692e9b8ab4344fc72725c7a7ae1c888156c752259732fb6b9f2090ca655d2c",
+    "Particles/particles_cr_update.c": "35abbdc80df21efc96afee25873b09f898b9fdfdd6ec2fb5f6f1ced246961f65",
+    "Particles/particles_cr_update_test.c": "aafb1fccb382b4e02af947b2e42a176d0d73e4a7ef011765fca63a66aef5ddad",
+    "Particles/particles_deposit.c": "d200414159439e6c99afb79bb387656fa15e32e1c77a734288b03aba7eb8e95f",
+    "Particles/particles_distrib_regular.c": "9e2a3833b3468f0983e8d417cc57dedeb24187791998052d7a4b76b4e16d2990",
+    "Particles/particles_init.c": "d4163da49ec97f039dfbe37f216854971b49bbcf1b06bb12c02ff55e3b64e840",
+    "Particles/particles_jet_tools.c": "efdbdec4db96190804f4f384edbc575e10e0b74c41f9a743e81d1df52ec40305",
+    "Particles/particles_load.c": "3f51f457801c623b6caff0928a425adc2099a33a3fe681c697044ca1b8e3bbd7",
+    "Particles/particles_lp_tools.c": "08742cd3d6c8a20dc5d60c9a5b3fca4ba553bdaca702fbe33ec7c385b20762da",
+    "Particles/particles_lp_update.c": "a28a0b27268294577e4a1833c1ab1f04ab185216eaca5da9ca7ae03a7353a3dd",
+    "Particles/particles_mpi_datatype.c": "60d7c77db0602f41f97c880fc33e59a7128b689c668871fbe58b60b400e10588",
+    "Particles/particles_restart.c": "e010e4ec2f2c1f130d5085f11c89c8d7cad537444f92c926f52cd0123a0ccf3e",
+    "Particles/particles_set.c": "816c1e84c4356fe459b36f02205c6c076d26e240c1fbdedef1d78caf12370a53",
+    "Particles/particles_set_output.c": "48475fc46b5642201f21bf65119ab31375a3ed3862650134029d2a7455b7fb61",
+    "Particles/particles_tools.c": "76cf308544c94ef41962d43595229c5bf9449bea19cce2fbcf72e845822c3264",
+    "Particles/particles_write_bin.c": "6fa33cb8feeb41829f3a0f13d447fb387a97a892fcceb4584b5cffae6d7f75dc",
+    "Particles/particles_write_data.c": "b95e91f554c4660bef5a8755a1cd3cd2f9a2a2585b1627179d107b57ed23d550",
+    "Particles/particles_write_trajectory.c": "8ae9b960b3415d21274772bd842e1c927ea6e37c2a70d0e9ad55e307f002bb16",
+    "Particles/particles_write_vtk.c": "02ea5a29c6b2441ad403a69bb3473b12ddc16a7cc3718dcd3acd7e2e4fac709d",
+    "Particles/plist_tools.c": "ab5cb6cc7ee43ff76f2e19618f60ebfa0aff5492ff9a6e3d411a8a48434d13ab",
+    "coordinates.c": "e4105b8ad90b92e85d6f079d7fd3221eb08ac37676dbdeb04e71c519cee8272b",
+    "coordinates.h": "f391e6942984073fd2535e96cdd311442a75a0b8fd249805e50300a40e18e85f",
+    "definitions.h": "a540e34a2370efc48f2d1ac5a08a6b68b1e53314c0adce4d06179770d3085502",
+    "definitions_usr.h": "d5f8636da773c09f29ae8a3a3d0e4e2550bc594aecf72533dbdeb902a508da0f",
+    "environment.c": "a0e2f63e0d95c864ca576decba00f67159219de3222c383a48dc7dea9c0504d4",
+    "environment.h": "3158fee857b5b28fc3f89eba1520b62534823b13f9278163f1becceeaaa98665",
+    "environment_utilities.c": "43e90d28dedf378dc18f7a859ff24f28b0fdde898aee63d0e164a32b7df0bc64",
+    "environment_utilities.h": "e727918367cf4c3954b04d843ce18a0ac929b979c2b74034e1301eaeed4d5451",
+    "galaxy.c": "d9def2350e398655de8f18a5d1699341ecb1987c9c36f7ecbf7a9e34712aa327",
+    "galaxy.h": "6707e467ae978a54283f5dac6fb6b298732a34718487acd74365ebb88bd0a066",
+    "hdf5_io.c": "2bdcb211840615ba201eef5fcb8fba34bc8c9c8b041b308d9fca000da16958d7",
+    "init.c": "320100a6d68c2e58858ac34278bf232570b7596932f0a815156340a19cea11d6",
+    "jet.c": "ff1e18451c19c80cd408e25d4ec5d15a19d6f4d78d9d49a5466186bb884ac7e4",
+    "jet.h": "90b38c14b3eced4aecd8fe6883d5a63904f151dd20ef4a2595ef4eb44ac98c1f",
+    "jet_domain.c": "8a49eb54d91c95d5bbae077d75dc715040e34f03212d58ef748851b265983473",
+    "mean_mol_weight.c": "937e1c925c2f87510b36b2b4c18a1bb0fc0b497a605e6c261c9b820a39a46461",
+    "pluto_usr.h": "fbc051f4654bc223a7179aaaa520066ffbefe73d1fa699c64c99e6d882dec7fd",
+    "read_external_pressure.c": "5f2cd546a0315fb285e3e671337fd36257f98dc41a633263cb86b3f00be6cce9",
+    "read_external_pressure.h": "5400324e42f8e4db96011ab24f41fd160699c78581e02600ba33d84775efa09b",
+    "structs_usr.h": "16c7b99eba720483fdfef263aa1b510d26ce81c74cf7f43ba8650da6be41fb62",
+    "tools_usr.c": "60026f76aedab4e1e97caf034e9ee0389378680e5ade141d820d227e3eee0494",
+    "tools_usr.h": "5d71d9987b54cf69fc6fe3363ce3541c8e39a43347578a718b3bcd107324f5cb",
+    "units.c": "e900aa4665dca2fa217f91c043d73eb52ba24467144115dc348cbead4b7dc5a5",
+    "units.h": "590014cb2d9b1026e2ef0ecdafe23a701e10fe9a145aa0b444cc2ba9e076b013",
+    "userdef_output.c": "30e78cd3a480be6585487af8dfff111432e092698a20d54d95de11039d7cdd92"
+  },
+  "scientific_status": "cell-centred snapshot reconstruction, not PLUTO numerical Riemann flux",
+  "sensitivity_note": "padding, centered/donor, linear boundary and temporal quadrature variants are reconstruction scenarios, not confidence bounds",
+  "shell_layers": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "sign_convention": "outward surface flux is positive; inward flux is negative",
+  "snapshots": [
+    {
+      "ctime_ns": 1787491641495149419,
+      "device": 47,
+      "inode": 2199183613132,
+      "mtime_ns": 1787491641495149419,
+      "output_index": 0,
+      "path": "/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4/results_smoke/smoke_inputs/data.0000.flt.h5",
+      "resolved_path": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0000.flt.h5",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "size_bytes": 44890581676,
+      "time_code": 0.0,
+      "timestep": "Timestep_0"
+    },
+    {
+      "ctime_ns": 1787493807738654095,
+      "device": 47,
+      "inode": 2199183613820,
+      "mtime_ns": 1787493807738654095,
+      "output_index": 1,
+      "path": "/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4/results_smoke/smoke_inputs/data.0001.flt.h5",
+      "resolved_path": "/u/bwbrook/xray_cavities_runs/2026-08-23-g-lo-matched-full-history-production/G-LO/particles/problem/outputs/data.0001.flt.h5",
+      "shape": [
+        1014,
+        960,
+        960
+      ],
+      "size_bytes": 44890581676,
+      "time_code": 306.4970525630718,
+      "timestep": "Timestep_1"
+    }
+  ],
+  "source_definitions": {
+    "DENSITY_PROFILE": "ENV_TABULATED",
+    "JET_DENSITY_CALCULATION": "DENSITY_LENGTH_SCALE",
+    "JET_INJECTION_CAP": "YES",
+    "JET_INJECTION_ROTATED": "NO",
+    "JET_INJECTION_ZONE": "SPHERICAL_INJECTION_ZONE",
+    "JET_RELATIVISTIC_DENSITY": "NO",
+    "STELLAR_MASS_LOSS": "NO",
+    "SUPERNOVAE_ENERGY_INPUT": "NO"
+  },
+  "storage_geometry_note": "control balances use exact_fv_nodes; legacy_midpoint_centres is emitted only to reconcile earlier compact ledgers"
+}

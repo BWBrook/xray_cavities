@@ -1,0 +1,153 @@
+{
+  "scope": "G-LO t=0 and 0.9996596844404672 Myr only; retained-output reconstruction",
+  "independently_recomputed_balance_values": 144,
+  "manifest_files_verified": 4,
+  "nominal_bipolar_energy_erg": 6.309372091539697e+56,
+  "domain_storage_to_nominal": 1.0924161607822984,
+  "balance_ratios": [
+    {
+      "surface": "domain_boundary",
+      "reconstruction": "linear_to_boundary_face",
+      "temporal_quadrature": "left_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.0924161607822984"
+    },
+    {
+      "surface": "domain_boundary",
+      "reconstruction": "linear_to_boundary_face",
+      "temporal_quadrature": "trapezoid",
+      "cumulative_source_to_nominal_energy_ratio": "1.07600043280372"
+    },
+    {
+      "surface": "domain_boundary",
+      "reconstruction": "linear_to_boundary_face",
+      "temporal_quadrature": "right_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.0595847048251419"
+    },
+    {
+      "surface": "domain_boundary",
+      "reconstruction": "outer_active_cell",
+      "temporal_quadrature": "left_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.0924161607822984"
+    },
+    {
+      "surface": "domain_boundary",
+      "reconstruction": "outer_active_cell",
+      "temporal_quadrature": "trapezoid",
+      "cumulative_source_to_nominal_energy_ratio": "1.082192107768763"
+    },
+    {
+      "surface": "domain_boundary",
+      "reconstruction": "outer_active_cell",
+      "temporal_quadrature": "right_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.071968054755228"
+    },
+    {
+      "surface": "nozzle_control_p1",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "left_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "0.011590731042927679"
+    },
+    {
+      "surface": "nozzle_control_p1",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "trapezoid",
+      "cumulative_source_to_nominal_energy_ratio": "0.5348152605508752"
+    },
+    {
+      "surface": "nozzle_control_p1",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "right_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.0580397900588228"
+    },
+    {
+      "surface": "nozzle_control_p1",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "left_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "0.011590731042927679"
+    },
+    {
+      "surface": "nozzle_control_p1",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "trapezoid",
+      "cumulative_source_to_nominal_energy_ratio": "0.5389989424437606"
+    },
+    {
+      "surface": "nozzle_control_p1",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "right_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.0664071538445934"
+    },
+    {
+      "surface": "nozzle_control_p2",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "left_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "0.01675795631938747"
+    },
+    {
+      "surface": "nozzle_control_p2",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "trapezoid",
+      "cumulative_source_to_nominal_energy_ratio": "0.5403548119792091"
+    },
+    {
+      "surface": "nozzle_control_p2",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "right_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.0639516676390306"
+    },
+    {
+      "surface": "nozzle_control_p2",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "left_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "0.01675795631938747"
+    },
+    {
+      "surface": "nozzle_control_p2",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "trapezoid",
+      "cumulative_source_to_nominal_energy_ratio": "0.5411419031865018"
+    },
+    {
+      "surface": "nozzle_control_p2",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "right_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.065525850053616"
+    },
+    {
+      "surface": "nozzle_control_p4",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "left_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "0.028074303098547745"
+    },
+    {
+      "surface": "nozzle_control_p4",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "trapezoid",
+      "cumulative_source_to_nominal_energy_ratio": "0.5531629990486356"
+    },
+    {
+      "surface": "nozzle_control_p4",
+      "reconstruction": "centered_primitives",
+      "temporal_quadrature": "right_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.0782516949987235"
+    },
+    {
+      "surface": "nozzle_control_p4",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "left_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "0.028074303098547745"
+    },
+    {
+      "surface": "nozzle_control_p4",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "trapezoid",
+      "cumulative_source_to_nominal_energy_ratio": "0.5579323577629357"
+    },
+    {
+      "surface": "nozzle_control_p4",
+      "reconstruction": "donor_cell_primitives",
+      "temporal_quadrature": "right_rectangle",
+      "cumulative_source_to_nominal_energy_ratio": "1.0877904124273237"
+    }
+  ]
+}
