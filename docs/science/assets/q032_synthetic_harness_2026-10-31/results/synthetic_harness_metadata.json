@@ -1,0 +1,42 @@
+{
+  "status": "complete_q032_synthetic_harness",
+  "stride": 2,
+  "environments": [
+    "cluster",
+    "group"
+  ],
+  "views": [
+    "0deg",
+    "45deg"
+  ],
+  "semiaxes_along_jet_kpc": [
+    10.0,
+    20.0,
+    40.0,
+    60.0,
+    90.0
+  ],
+  "aspect_across_over_along": 0.6,
+  "variants": {
+    "evacuated": {
+      "density_factor": 0.01
+    },
+    "partly_filled": {
+      "density_factor": 0.3
+    },
+    "evacuated_rim": {
+      "density_factor": 0.01,
+      "rim_fraction": 0.15,
+      "rim_density_factor": 2.0
+    }
+  },
+  "oracle_thresholds": [
+    0.05,
+    0.1,
+    0.2
+  ],
+  "null_threshold_rule": "max(0.05, 99.5th percentile of |observer radial deficit| on the null map in the 120 kpc aperture)",
+  "emissivity": "n^2 T^-1/2 exp(-1 keV/kT), pressure-matched cavities and isothermal rims",
+  "git_commit": "134e31b082ab596b31d792f1154814d8a3b54982",
+  "row_count": 1024
+}
