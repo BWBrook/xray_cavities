@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+#PBS -N q031_native
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mem=128gb
+#PBS -l walltime=24:00:00
+#PBS -r n
+#PBS -m n
+
+set -euo pipefail
+umask 077
+readonly STAGE=/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r1
+readonly MODE="${Q031_NATIVE_MODE:?set smoke or pilot}"
+readonly RUNTIME=/u/bwbrook/codex_kunanyi/xraise_runtime
+readonly MIGRATION=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16
+readonly FLUX=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r5
+readonly MAPS=/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables
+cd "$STAGE"
+test "$MODE" = smoke || test "$MODE" = pilot
+sha256sum --check stage_checksums.sha256
+sha256sum --check runtime_checksums.sha256
+test ! -e "$STAGE/run_$MODE" && test ! -L "$STAGE/run_$MODE"
+mkdir "$STAGE/run_$MODE"
+readonly RUN="$STAGE/run_$MODE"
+exec > >(tee "$RUN/run.out") 2> >(tee "$RUN/run.err" >&2)
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONNOUSERSITE=1
+export PYTHONPATH="$STAGE/scripts/science:$STAGE/scripts/kunanyi"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export NUMBA_NUM_THREADS=2
+export MPLCONFIGDIR="$RUN/matplotlib"
+export XDG_CACHE_HOME="$RUN/xdg"
+export NUMBA_CACHE_DIR="$RUN/numba"
+
+if [ "$MODE" = smoke ]; then
+  export Q031_REAL_RUNTIME="$RUNTIME"
+  /usr/bin/time -v -o "$RUN/resources.txt" \
+    python -m pytest -q -p no:cacheprovider --basetemp "$RUN/pytest_tmp" \
+    --junitxml "$RUN/tests.xml" \
+    tests/test_q031_native_emission.py tests/test_q031_native_dependencies.py \
+    tests/test_q031_native_packaging.py tests/test_xraise_grid_smoke_projection.py \
+    tests/test_selected_age_native_shock.py tests/test_snapshot_shock_energy.py
+  python scripts/kunanyi/package_q031_native_pilot.py smoke-receipt --stage-root "$STAGE"
+  exit 0
+fi
+
+python scripts/kunanyi/package_q031_native_pilot.py check-smoke --stage-root "$STAGE"
+python scripts/kunanyi/validate_q031_native_dependencies.py \
+  --migration-root "$MIGRATION" --flux-stage "$FLUX" \
+  --source-manifest "$STAGE/inputs/C-HI/source_manifest.csv" \
+  --source-manifest "$STAGE/inputs/G-HI/source_manifest.csv" \
+  --science-dir "$STAGE/scripts/science" --output "$RUN/dependencies_before.json"
+test ! -e "$STAGE/results" && test ! -L "$STAGE/results"
+test ! -e "$STAGE/native_cache" && test ! -L "$STAGE/native_cache"
+mkdir "$STAGE/results" "$STAGE/native_cache"
+
+for case_id in C-HI G-HI; do
+  if [ "$case_id" = C-HI ]; then
+    retained="$MAPS/xray_cavity/c_hi/age_40"
+  else
+    retained="$MAPS/xray_cavity_g_hi_r2/g_hi/age_40"
+  fi
+  reference="$STAGE/inputs/$case_id"
+  /usr/bin/time -v -o "$RUN/$case_id.resources.txt" \
+    python -u scripts/science/build_q031_native_emission.py \
+    --case "$case_id" --snapshot-index 40 \
+    --source-manifest "$reference/source_manifest.csv" \
+    --shock-dynamics "$reference/accepted_axial_shock_dynamics.csv" \
+    --control-calibration "$reference/control_threshold_calibration.csv" \
+    --native-energy-reference "$reference/native_energy_selected_age.csv" \
+    --native-shock-reference "$reference/native_shock_energy_selected_age.csv" \
+    --tracer-precision-reference "$reference/tracer_threshold_precision.csv" \
+    --retained-views-root "$retained" \
+    --xraise-py "$RUNTIME/xraise.py" --apec-table "$RUNTIME/apec_corrections.txt" \
+    --gaunt-lut "$RUNTIME/gaunt_lut_2d.npz" --projected-u-bins 960 --y-chunk 8 \
+    --output-dir "$STAGE/results/$case_id" --cache-dir "$STAGE/native_cache/$case_id" --keep-cache
+done
+
+python scripts/kunanyi/validate_q031_native_dependencies.py \
+  --migration-root "$MIGRATION" --flux-stage "$FLUX" \
+  --source-manifest "$STAGE/inputs/C-HI/source_manifest.csv" \
+  --source-manifest "$STAGE/inputs/G-HI/source_manifest.csv" \
+  --science-dir "$STAGE/scripts/science" --output "$RUN/dependencies_after.json"
+sha256sum --check stage_checksums.sha256
+sha256sum --check runtime_checksums.sha256
+python scripts/kunanyi/package_q031_native_pilot.py package --stage-root "$STAGE"
