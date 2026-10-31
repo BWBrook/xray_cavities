@@ -1,0 +1,75 @@
+{
+  "maximum_resident_set_kib": 231160,
+  "native_payload_read": false,
+  "python_environment": {
+    "modules": {
+      "astropy": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/astropy/__init__.py",
+        "sha256": "71779147f5095cc4c83cc8183eb3bd7bcf8fb82361a0cd77ed2ef581878fffbe",
+        "version": "5.3.4"
+      },
+      "h5py": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/h5py/__init__.py",
+        "sha256": "c4315419b6bca7364b97a425177e107597d99a0e647114588d848a34ac9c326f",
+        "version": "3.9.0"
+      },
+      "h5py.h5": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/h5py/h5.cpython-311-x86_64-linux-gnu.so",
+        "sha256": "edf1008d41602cd3c6f014ecbe5211d5d480a0c9c101bb98f09f2d7efe550e03",
+        "version": null
+      },
+      "numba": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/numba/__init__.py",
+        "sha256": "95cfc2592a5e1de37013281abbc825a546f5af3a449b2502b39988c6f514c9db",
+        "version": "0.59.0"
+      },
+      "numpy": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/numpy/__init__.py",
+        "sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e",
+        "version": "1.26.4"
+      },
+      "numpy.core._multiarray_umath": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/numpy/core/_multiarray_umath.cpython-311-x86_64-linux-gnu.so",
+        "sha256": "1cd451f9b7515d62cba9f36d4dd15e8e422d276ea500199c7c5a540c2b4471b0",
+        "version": "3.1"
+      },
+      "scipy": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/scipy/__init__.py",
+        "sha256": "5df3106bce68233cec43e84208135d8f18fb6e07d2770fbc157fce32bab28c50",
+        "version": "1.11.4"
+      },
+      "scipy.ndimage._nd_image": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/scipy/ndimage/_nd_image.cpython-311-x86_64-linux-gnu.so",
+        "sha256": "a5856de3c40047148841b41fe5a827bb5298da39946de78d6f2f579717356801",
+        "version": null
+      },
+      "scipy.sparse._sparsetools": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/scipy/sparse/_sparsetools.cpython-311-x86_64-linux-gnu.so",
+        "sha256": "e062e4a33c415181e33336dcffc379c84a134dae77bb941acbef7de82630316f",
+        "version": null
+      },
+      "scipy.special._ufuncs": {
+        "path": "/share/apps/software/Anaconda3/2024.02-1/lib/python3.11/site-packages/scipy/special/_ufuncs.cpython-311-x86_64-linux-gnu.so",
+        "sha256": "e5a11792a52fca1431692cfb111242d9c01fc9b3eec3024126f9c5eeeadab7fa",
+        "version": null
+      }
+    },
+    "python_executable": "/share/apps/software/Anaconda3/2024.02-1/bin/python3.11",
+    "python_executable_sha256": "0b645caeaa6d602fcf07ceacb5c032e305bf9d6e49ea38c52f03dd0cb1d447be",
+    "python_version": "3.11.7 (main, Dec 15 2023, 18:12:31) [GCC 11.2.0]",
+    "user_site_disabled": true
+  },
+  "real_kernel_cli_smoke": "passed",
+  "resources_sha256": "13c75ae4d97c8c9e2fe4fbaf0432f2a56ae45ba1ec4a28c69269e16e4688b574",
+  "runtime_checksums_sha256": "7fa81c76f87b43c95b1a6f8028c6df906380b8b7179e7b07b10f2eac9ce2900b",
+  "runtime_hashes": {
+    "/u/bwbrook/codex_kunanyi/xraise_runtime/apec_corrections.txt": "e0f53a9f276a956f347af0e4fe627ee152762abc8b5116fc458070ee5f0925e3",
+    "/u/bwbrook/codex_kunanyi/xraise_runtime/gaunt_lut_2d.npz": "64df88d39896f14064bb799fd5b70c6f68d20bcbdc5a15d19e2e4fd15b22f747",
+    "/u/bwbrook/codex_kunanyi/xraise_runtime/xraise.py": "4bf17cb8e63e2d87a06615c170c7dd307788554a0cee83409762223123ec8da5"
+  },
+  "skipped_test_count": 0,
+  "stage_checksums_sha256": "317385f005b7ddf7d3460dc1ecd4a609dfc1b2b0ca8da8b1044f88999e572fd2",
+  "status": "passed",
+  "test_count": 82,
+  "tests_xml_sha256": "112d6561777510f0903f3cdd52609765788b00da598d95f56962feaf55088dcc"
+}

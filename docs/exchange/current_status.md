@@ -1,30 +1,35 @@
 # Current Status
 
-Last updated: 2026-10-31 22:47 AEDT (native pilot staged; target smoke pending inspection)
+Last updated: 2026-10-31 23:02 AEDT (native pilot submitted with verified dependencies)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
 
-## Authorised Q-031 native pilot — staged, not yet submitted
+## Authorised Q-031 native pilot — submitted, dependency-held
 
 The fixed C-HI/G-HI 40 Myr pilot with retained-linear and coordinate-clamp
 emissivity is implemented and independently reviewed. Source is pushed through
-`61fb745`. The complete r3 deployment stage passed all 81 tests locally,
-including the real-kernel subprocess CLI. It is checksum-verified on Kunanyi at
-`/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r3`.
+`fe0c0cb`. The complete r4 stage passed all 82 tests both locally and on Kunanyi,
+including the real-kernel subprocess CLI. It is checksum-verified at
+`/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r4`.
 
-Target smoke `870705.kunanyi-ohpc` has been submitted (2 CPUs, 8 GB, 1 hour).
-Its outcome has not yet been observed: the Mac locked during the inspection
-attempt, blocking the authenticated portal UI. Barry has been asked to unlock
-it. The native pilot is **not submitted**. Resume by checking the target smoke
-receipt and resources, then submit with `afterok` dependencies on the successful
-smoke, migration `870323` and flux `870374`. The wrapper independently verifies
-migration/flux receipts and source identity before reading native files.
+Target smoke `870712.kunanyi-ohpc` finished `F/0`: 82 passed, zero skipped,
+110.63 seconds pytest time, 1:55 PBS walltime, measured peak 231,160 KiB.
+Its source/runtime-bound receipt passed revalidation before submission.
+Native pilot **`870719.kunanyi-ohpc` is submitted and held (`H`, system hold)**
+with verified `afterok` dependencies on smoke `870712`, migration `870323` and
+flux `870374`. It requests 2 CPUs, 128 GB and 24 hours for the two sequential
+cases. At 12:00 UTC migration was running and flux was held. The wrapper also
+verifies migration/flux receipts and source identity before native reads.
+Native results remain pending; queue acceptance is not scientific completion.
 
 Earlier smoke stages remain intact: `870703` failed before tests because the
 compute node lacks `/usr/bin/time`; `870704` passed 78 tests and failed three
-because the stage omitted geometry-helper dependencies. Both problems are
-corrected in r3. No native scientific outputs have been produced by this pilot.
+because the stage omitted geometry-helper dependencies. Smoke `870705` passed
+79 tests and failed two during NFS cache cleanup with open memory mappings.
+All three issues are corrected in r4; the NFS fix closes mappings before
+deletion and preserves `--keep-cache` behavior. No native scientific outputs
+have yet been produced by this pilot. Do not submit a duplicate native job.
 See `docs/exchange/logs/2026-10-31-q031-native-pilot.md` and
 `docs/science/assets/q031_native_pilot_2026-10-31/` for checksums and evidence.
 

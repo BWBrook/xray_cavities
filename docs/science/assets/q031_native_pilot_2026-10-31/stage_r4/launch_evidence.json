@@ -1,0 +1,43 @@
+{
+  "status": "native_submitted_held_on_dependencies",
+  "source_commit": "fe0c0cbef43db2d58e1018b483e2f4d82336f168",
+  "stage_root": "/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r4",
+  "stage_archive_sha256": "d6dbc8cfae9b41acaf7175ae3885006e195f783f7ac5dee22ecb1ac5575dedff",
+  "stage_archive_bytes": 231720,
+  "stage_files": 40,
+  "remote_archive_hash_verified": true,
+  "remote_static_runtime_checksums_verified": true,
+  "smoke_job": "870712.kunanyi-ohpc",
+  "native_job": "870719.kunanyi-ohpc",
+  "local_stage_validation": {
+    "tests_passed": 82,
+    "test_seconds": 8.61,
+    "warning": "Astropy ignored nonexistent local XDG_CONFIG_HOME"
+  },
+  "native_dependencies": [
+    "870712.kunanyi-ohpc",
+    "870323.kunanyi-ohpc",
+    "870374.kunanyi-ohpc"
+  ],
+  "smoke_exit_status": 0,
+  "target_tests_passed": 82,
+  "target_tests_failed": 0,
+  "target_test_seconds": 110.63,
+  "pbs_smoke_walltime": "00:01:55",
+  "native_state": "H",
+  "native_hold_type": "s",
+  "native_resources": {
+    "cpus": 2,
+    "memory": "128gb",
+    "walltime": "24:00:00"
+  },
+  "observed_utc": "2026-10-31T12:00:35Z",
+  "smoke_receipt_revalidated": true,
+  "maximum_resident_set_kib": 231160,
+  "measured_smoke_wall_seconds": 112.57767,
+  "evidence_archive_sha256": "8fecfa13460a7e5c53b390066b2338137db0a63bb0afd4318a49f1856dca0b18",
+  "downloaded_evidence_validated": true,
+  "migration_state": "R",
+  "flux_state": "H",
+  "native_scientific_results": "not yet produced"
+}

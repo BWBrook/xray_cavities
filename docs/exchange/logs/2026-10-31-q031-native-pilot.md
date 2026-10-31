@@ -114,3 +114,38 @@ prevents normal unlink-and-remove cleanup on NFS. The stage remains preserved.
 Measured child peak RSS was 232,584 KiB and elapsed time 127.804587 seconds;
 PBS reported 2:08 walltime. Native submission remains held pending the narrowly
 repaired target smoke. No native HDF5 data have been read by these smoke jobs.
+
+## Successful target smoke and dependent native submission
+
+The narrow mapping-lifetime repair is source commit `fe0c0cb`. Independent
+review confirmed all seven cache mappings close after their final use and
+before cleanup. The regression asserts closure at the deletion boundary;
+`--keep-cache` retains flushed files while closing handles. The isolated r4
+stage passed 82 tests locally, including the actual kernel CLI.
+
+The r4 archive contains 40 files (231,720 bytes), SHA-256
+`d6dbc8cfae9b41acaf7175ae3885006e195f783f7ac5dee22ecb1ac5575dedff`.
+All archive, source, reference and runtime hashes matched on Kunanyi.
+Target smoke `870712.kunanyi-ohpc` finished `F/0` with **82 passed, zero
+skipped**, pytest time 110.63 seconds, measured wall time 112.577670 seconds,
+peak RSS 231,160 KiB and PBS walltime 1:55. The receipt was independently
+rechecked against staged files and imported runtime identities before launch.
+
+Native pilot **`870719.kunanyi-ohpc`** was submitted at 23:00 AEDT and verified
+as `H`, system hold, with exact `afterok` dependencies on `870712`, `870323`
+and `870374`. Resources are 2 CPUs, 128 GB and 24 hours. At 12:00:35 UTC the
+migration remained running and flux remained held. This records successful
+launch preparation and a dependency-held submission, not native results.
+
+The downloaded six-file smoke/launch evidence archive has SHA-256
+`8fecfa13460a7e5c53b390066b2338137db0a63bb0afd4318a49f1856dca0b18`.
+Its member set, archive hash, JUnit count/no failures/no skips, receipt hashes,
+stage/runtime manifests and native dependency/resource fields were checked
+locally. Extracted evidence is under
+`docs/science/assets/q031_native_pilot_2026-10-31/stage_r4/remote_evidence/`.
+The staging builder, local JUnit and launch record are retained alongside it.
+
+Next check: inspect existing job `870719` and its prerequisites, then review
+its packaged results if successful. Do not submit a duplicate or weaken the
+receipt gates. Claude receives this launch evidence on discussion 29. No
+scheduled monitoring or new simulation was created.
