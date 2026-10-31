@@ -63,9 +63,9 @@ Topology censoring at 90 degrees cannot come from foreshortening.
 
 | File | Role |
 | --- | --- |
-| `scripts/science/xray_cavity_synthetic.py` | Projects the tabulated cluster (002003) and group (002031) atmospheres through the production box on the production pixel axes, with pressure-matched spheroidal cavities on the jet axis and optional isothermal compressed rims. Emissivity is n² T^-1/2 exp(-1 keV/kT). Cavity and rim chords are integrated analytically. |
+| `scripts/science/xray_cavity_synthetic.py` | Projects the tabulated cluster (002003) and group (002031) atmospheres through the production box on the production pixel axes, with pressure-matched spheroidal cavities on the jet axis and optional compressed rims whose density and temperature factors are explicit (isobaric when the temperature factor is absent). Emissivity is n² T^-1/2 exp(-1 keV/kT). Cavity and rim chords are integrated analytically. |
 | `scripts/science/xray_cavity_method_ladder.py` | `legacy_area_1pct` (bit-identical to the production observer mask, tested), `seed_grow_goal045` and `deficit_threshold`, each against its observer background or a supplied one. Returns per-side masks split at z = 0, production topology class, and per-side volumes: minor/geometric/major ellipse depths, plus the Pappus revolution volume π Σ\|u\| dA. |
-| `scripts/science/build_q032_synthetic_harness.py` | Runs the ladder on 64 scenarios: 2 atmospheres × 2 views × (null + 5 sizes × 3 variants). |
+| `scripts/science/build_q032_synthetic_harness.py` | Runs the ladder on 124 scenarios (r2): 2 atmospheres × 2 views × (null + 5 sizes × 6 variants: evacuated, partly filled and four rim arms). r1 ran 64 scenarios with 3 variants. |
 | `scripts/science/build_q032_selected_age_method_ladder.py` | Runs the ladder beside retained maps and returns compact rows, packed masks and one postage stamp per view, including rejected views. |
 | `tests/test_xray_cavity_production_caller.py` | Drives `build_product` on a synthetic C-HI tree; pins that production binds the legacy method; strict xfail on recovering a large cavity within 30%. |
 
@@ -170,10 +170,13 @@ What changes from r1:
   cluster. Every hot or isothermal arm removes that contrast.
 - **Shock-heated rims hide more of the cavity in the group, not less.** Heating
   group gas towards and past 1 keV raises its 1 keV emissivity steeply.
-- **The physical limit holds in both environments, and is stronger than r1
-  said.** Against a perfect background, a mass-conserving Mach 1.5 shell
+- **Shell sensitivity holds in both environments, and is stronger than r1
+  said.** Against a perfect background, a mass-matched Mach 1.5 shell
   leaves only 0.23–0.31 (cluster) and 0.02–0.12 (group) of the cavity volume
-  as a measurable deficit.
+  as a measurable deficit. The arm is additive per-lobe bookkeeping: the
+  touching lobes' grown rims overlap each other and intrude into the opposite
+  cavity by about 5–6% of each outer spheroid (Codex, board 2697), so it is
+  a controlled sensitivity, not a self-consistent shocked shell.
 - **Recovery depends on the shell prescription by up to an order of
   magnitude.** No deficit-defined volume from a shocked case can be read as a
   cavity volume until the simulated shells are measured directly.
