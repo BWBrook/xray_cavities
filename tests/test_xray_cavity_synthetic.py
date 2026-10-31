@@ -86,3 +86,29 @@ def test_cavities_must_fit_inside_the_production_box() -> None:
     horizontal, vertical = axes("0deg")
     with pytest.raises(ValueError, match="z boundary"):
         synthetic.render_map(cluster(), horizontal, vertical, (synthetic.Spheroid(200.0, 60.0, 30.0),))
+
+
+def test_rim_temperature_convention_is_explicit() -> None:
+    radius = np.array([5.0, 50.0, 150.0])
+    ambient = cluster().emissivity(radius)
+    np.testing.assert_allclose(cluster().emissivity(radius, 2.0, 1.0), 4.0 * ambient, rtol=1.0e-12)
+    np.testing.assert_allclose(cluster().emissivity(radius, 2.0), cluster().emissivity(radius, 2.0, 0.5), rtol=1.0e-12)
+
+
+def test_rankine_hugoniot_limits() -> None:
+    assert synthetic.rankine_hugoniot(1.0) == pytest.approx((1.0, 1.0))
+    density, temperature = synthetic.rankine_hugoniot(1.5)
+    assert density == pytest.approx(12.0 / 7.0)
+    assert density * temperature == pytest.approx((5.0 * 2.25 - 1.0) / 4.0)
+    assert synthetic.rankine_hugoniot(1.0e4)[0] == pytest.approx(4.0, rel=1.0e-6)
+
+
+def test_rim_mass_budget_matches_uniform_geometry_and_mass_matching() -> None:
+    atmosphere = cluster()
+    uniform = synthetic.Atmosphere(atmosphere.radius_kpc, np.ones_like(atmosphere.density_g_cm3), atmosphere.temperature_k)
+    cavity = synthetic.Spheroid(40.0, 40.0, 24.0, 0.01, 6.0, 2.0)
+    assert synthetic.rim_mass_budget(uniform, cavity)["rim_over_displaced"] == pytest.approx(0.796875 / 0.99, rel=1.0e-6)
+    shock = synthetic.Spheroid(40.0, 40.0, 24.0, 0.01, 0.0, *synthetic.rankine_hugoniot(1.5))
+    width = synthetic.mass_matched_rim_width(atmosphere, shock)
+    matched = synthetic.Spheroid(**{**shock.__dict__, "rim_width_kpc": width})
+    assert synthetic.rim_mass_budget(atmosphere, matched)["rim_over_displaced"] == pytest.approx(1.0, abs=1.0e-3)

@@ -205,6 +205,18 @@ def observer_radial_background(image: np.ndarray, horizontal: np.ndarray, vertic
     )
 
 
+def null_calibrated_threshold(
+    null: np.ndarray, horizontal: np.ndarray, vertical: np.ndarray, *, quantile: float = 99.5, floor: float = 0.05,
+) -> float:
+    """Deficit threshold set by the observer radial background's error on a cavity-free map."""
+
+    background = observer_radial_background(null, horizontal, vertical)
+    deficit = recovery.compute_fractional_deficit(null, background)
+    _, candidate_roi = _rois(horizontal, vertical)
+    values = np.abs(deficit[candidate_roi & np.isfinite(deficit)])
+    return max(floor, float(np.percentile(values, quantile)))
+
+
 def side_volumes(mask: np.ndarray, horizontal: np.ndarray, vertical: np.ndarray) -> dict[str, float]:
     """Per-side volumes: production ellipse depths summed over components,
     and the Pappus solid of revolution about the jet axis (u = 0)."""

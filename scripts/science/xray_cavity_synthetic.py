@@ -42,15 +42,23 @@ class Atmosphere:
     density_g_cm3: np.ndarray
     temperature_k: np.ndarray
 
-    def emissivity(self, radius_kpc: np.ndarray, density_factor: float = 1.0) -> np.ndarray:
+    def density(self, radius_kpc: np.ndarray) -> np.ndarray:
+        return np.interp(radius_kpc, self.radius_kpc, self.density_g_cm3)
+
+    def emissivity(
+        self, radius_kpc: np.ndarray, density_factor: float = 1.0, temperature_factor: float | None = None,
+    ) -> np.ndarray:
         """Narrow-band free-free emissivity at 1 keV, normalised to the centre.
 
-        A region at ``density_factor`` times ambient density keeps ambient
-        pressure, so its temperature scales by the inverse factor.
+        Temperature is ambient times ``temperature_factor``. The default
+        (None) keeps ambient pressure, so temperature scales as
+        1/``density_factor``.
         """
 
-        density = np.interp(radius_kpc, self.radius_kpc, self.density_g_cm3) / self.density_g_cm3[0] * density_factor
-        temperature = np.interp(radius_kpc, self.radius_kpc, self.temperature_k) / density_factor
+        if temperature_factor is None:
+            temperature_factor = 1.0 / density_factor
+        density = self.density(radius_kpc) / self.density_g_cm3[0] * density_factor
+        temperature = np.interp(radius_kpc, self.radius_kpc, self.temperature_k) * temperature_factor
         kt = BOLTZMANN_KEV_PER_K * temperature
         return density**2 * kt**-0.5 * np.exp(-BAND_ENERGY_KEV / kt)
 
@@ -62,7 +70,11 @@ def load_atmosphere(environment: str) -> Atmosphere:
 
 @dataclass(frozen=True)
 class Spheroid:
-    """Cavity spheroid on the jet axis with an optional compressed rim."""
+    """Cavity spheroid on the jet axis with an optional compressed rim.
+
+    ``rim_temperature_factor`` None makes the rim pressure-matched (isobaric,
+    temperature ambient/``rim_density_factor``); 1.0 makes it isothermal.
+    """
 
     center_z_kpc: float
     semiaxis_along_jet_kpc: float
@@ -70,6 +82,7 @@ class Spheroid:
     density_factor: float = 0.01
     rim_width_kpc: float = 0.0
     rim_density_factor: float = 1.0
+    rim_temperature_factor: float | None = None
 
     @property
     def side(self) -> str:
@@ -131,13 +144,14 @@ def _segment_integral(
     stop: np.ndarray,
     density_factor: float,
     samples: int,
+    temperature_factor: float | None = None,
 ) -> np.ndarray:
     nodes, weights = np.polynomial.legendre.leggauss(samples)
     half = 0.5 * (stop - start)
     middle = 0.5 * (stop + start)
     s = middle[..., None] + half[..., None] * nodes
     radius = np.sqrt(u[..., None] ** 2 + z[..., None] ** 2 + s**2)
-    return half * np.sum(weights * atmosphere.emissivity(radius, density_factor), axis=-1)
+    return half * np.sum(weights * atmosphere.emissivity(radius, density_factor, temperature_factor), axis=-1)
 
 
 def render_map(
@@ -189,7 +203,7 @@ def render_map(
                 excess = 2.0 * (
                     _segment_integral(
                         atmosphere, u[shell], z[shell], chord[shell], outer[shell],
-                        cavity.rim_density_factor, CHORD_SAMPLES,
+                        cavity.rim_density_factor, CHORD_SAMPLES, cavity.rim_temperature_factor,
                     )
                     - _segment_integral(
                         atmosphere, u[shell], z[shell], chord[shell], outer[shell],
@@ -212,6 +226,7 @@ def bipolar_pair(
     density_factor: float = 0.01,
     rim_width_kpc: float = 0.0,
     rim_density_factor: float = 1.0,
+    rim_temperature_factor: float | None = None,
 ) -> tuple[Spheroid, Spheroid]:
     """Two mirror-image cavities; by default each touches the nucleus."""
 
@@ -224,6 +239,58 @@ def bipolar_pair(
             density_factor,
             rim_width_kpc,
             rim_density_factor,
+            rim_temperature_factor,
         )
         for sign in (-1.0, 1.0)
     )  # type: ignore[return-value]
+
+
+def rankine_hugoniot(mach: float, gamma: float = 5.0 / 3.0) -> tuple[float, float]:
+    """Post-shock density and temperature ratios for a hydrodynamic shock."""
+
+    m2 = mach**2
+    density = (gamma + 1.0) * m2 / ((gamma - 1.0) * m2 + 2.0)
+    pressure = (2.0 * gamma * m2 - (gamma - 1.0)) / (gamma + 1.0)
+    return density, pressure / density
+
+
+def _spheroid_mass(atmosphere: Atmosphere, cavity: Spheroid, grow_kpc: float, samples: int = 256) -> float:
+    """Ambient gas mass (g) inside the spheroid grown by ``grow_kpc``."""
+
+    a = cavity.semiaxis_along_jet_kpc + grow_kpc
+    b = cavity.semiaxis_across_jet_kpc + grow_kpc
+    nodes, weights = np.polynomial.legendre.leggauss(samples)
+    z = cavity.center_z_kpc + a * nodes
+    outer = b * np.sqrt(np.clip(1.0 - nodes**2, 0.0, None))
+    radius = 0.5 * outer[:, None] * (nodes[None, :] + 1.0)
+    integrand = 2.0 * np.pi * radius * atmosphere.density(np.sqrt(radius**2 + z[:, None] ** 2))
+    per_z = 0.5 * outer * np.sum(weights[None, :] * integrand, axis=1)
+    return float(a * np.sum(weights * per_z) * KPC_CM**3)
+
+
+def rim_mass_budget(atmosphere: Atmosphere, cavity: Spheroid) -> dict[str, float]:
+    """Displaced cavity mass against the excess mass held in the rim."""
+
+    inner = _spheroid_mass(atmosphere, cavity, 0.0)
+    displaced = (1.0 - cavity.density_factor) * inner
+    rim_excess = (cavity.rim_density_factor - 1.0) * (_spheroid_mass(atmosphere, cavity, cavity.rim_width_kpc) - inner)
+    return {
+        "displaced_mass_g": displaced,
+        "rim_excess_mass_g": rim_excess,
+        "rim_over_displaced": rim_excess / displaced if displaced else float("nan"),
+    }
+
+
+def mass_matched_rim_width(atmosphere: Atmosphere, cavity: Spheroid) -> float:
+    """Rim width (kpc) whose excess mass equals the displaced cavity mass."""
+
+    from scipy.optimize import brentq
+
+    if cavity.rim_density_factor <= 1.0:
+        raise ValueError("a mass-matched rim needs rim_density_factor > 1")
+
+    def imbalance(width: float) -> float:
+        trial = Spheroid(**{**cavity.__dict__, "rim_width_kpc": width})
+        return rim_mass_budget(atmosphere, trial)["rim_over_displaced"] - 1.0
+
+    return float(brentq(imbalance, 1.0e-6, 4.0 * cavity.semiaxis_along_jet_kpc, xtol=1.0e-4))
