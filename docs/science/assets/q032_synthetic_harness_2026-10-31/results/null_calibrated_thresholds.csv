@@ -1,0 +1,5 @@
+environment,view,null_calibrated_threshold
+cluster,0deg,0.05
+cluster,45deg,0.0941776332639814
+group,0deg,0.05
+group,45deg,0.05
