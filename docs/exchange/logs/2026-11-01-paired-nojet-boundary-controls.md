@@ -15,3 +15,17 @@ skip; all 77 pass in the exported stage. Full serial compile/link passes.
 Independent review required and obtained true gross conversion-energy changes
 and zero-failure gates before interpreting repair magnitude. Remote MPI/HDF5
 build, four full-grid smokes, paired identity and closure remain required.
+
+Implementation committed and pushed as `493e724`. The final r1 stage passes
+77/77 tests and is frozen locally; its checksum-bound manifests, patch receipt,
+and test XML are retained under the paired-experiment assets. The archive is
+`/private/tmp/paired_nojet_boundary_2026-11-01_r1.tar.gz`, SHA-256
+`0aa334e3a5ec933a749867b2c708cd51ab4884982a2e3780b961672b2fd08973`.
+
+Launch stopped at an access blocker: the Mac mini locked before upload, and
+`kunanyi-via-nectar` could not authenticate at TPAC's jumpbox. Barry was asked
+to unlock mini. No upload or new build/smoke/simulation submission occurred.
+Resume via the existing portal after unlock; verify archive/source hashes,
+run the common target build and all four smokes, then inspect measured resource
+use and paired closure before launching the four fresh full coarse controls.
+No Claude contact or scheduled monitoring was initiated.

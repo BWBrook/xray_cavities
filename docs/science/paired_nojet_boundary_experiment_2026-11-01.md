@@ -1,7 +1,9 @@
 # Paired coarse-grid boundary experiment
 
 Status: authorised; implementation, local serial compile and local checks pass.
-Target MPI/HDF5 build and smoke gates are next; no new control is submitted yet.
+Target MPI/HDF5 build and smoke gates are next. Launch is blocked because
+the Mac portal is locked and configured TPAC SSH authentication fails. Barry
+has been asked to unlock the Mac; no new job is submitted and no stage uploaded.
 
 Barry authorised on 1 November 2026: “Go ahead with the cheap paired
 reflective/outflow controls, keeping everything else identical. Hold off on
@@ -133,3 +135,11 @@ addressed with cellwise signed/gross totals and strict failure counters.
 Local compile evidence is retained under
 `assets/paired_nojet_boundary_experiment_2026-11-01/local_checks/`.
 These checks do not substitute for target MPI execution and native-cell closure.
+
+Final target stage: `paired_nojet_boundary_2026-11-01_r1`, frozen from project
+commit `493e724`, with 77/77 tests passing. Archive SHA-256:
+`0aa334e3a5ec933a749867b2c708cd51ab4884982a2e3780b961672b2fd08973`
+(4,786,674 bytes). Its manifests, patch receipt and test XML are retained
+under `assets/paired_nojet_boundary_experiment_2026-11-01/stage_r1/`.
+The frozen plan inside the archive describes the pre-launch state; this live
+note records later access status without mutating that stage.

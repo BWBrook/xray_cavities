@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "locally_frozen_target_upload_pending",
+  "created_utc": "2026-11-01T09:13:08.023498+00:00",
+  "project_commit": "493e724",
+  "local_stage": "/private/tmp/paired_nojet_boundary_2026-11-01_r1",
+  "local_archive": "/private/tmp/paired_nojet_boundary_2026-11-01_r1.tar.gz",
+  "archive_sha256": "0aa334e3a5ec933a749867b2c708cd51ab4884982a2e3780b961672b2fd08973",
+  "archive_bytes": 4786674,
+  "stage_checksums_sha256": "bfae5669f67bf0af1755d4b52f75f74e95c73976358bf7b9c5f0789737eaa896",
+  "local_stage_tests": "77 passed, 0 skipped",
+  "remote_stage_planned": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1",
+  "access_blocker": "Mac locked; TPAC jumpbox refuses configured noninteractive SSH authentication; user asked to unlock mini"
+}

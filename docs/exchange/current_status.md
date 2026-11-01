@@ -19,7 +19,18 @@ exported stage. The independent audit's conversion-energy cancellation concern
 is addressed by recording cellwise positive/negative/gross changes and failing
 on conversion errors. Exact compiled unit constants and independent initial
 atmosphere checks are included. Target build and four 28-rank 0.25-Myr smokes
-must pass before fresh 50-Myr runs. No new control is submitted yet.
+must pass before fresh 50-Myr runs. Implementation is committed/pushed as
+`493e724`. The final stage passes 77/77 tests and is frozen locally at
+`/private/tmp/paired_nojet_boundary_2026-11-01_r1.tar.gz` (4,786,674 bytes;
+SHA-256 `0aa334e3a5ec933a749867b2c708cd51ab4884982a2e3780b961672b2fd08973`).
+
+**Launch is blocked by access:** the Mac mini is locked, and the configured
+SSH route fails authentication at the TPAC jumpbox. Barry has been asked to
+unlock the Mac. No new control/build/smoke job has been submitted, and no
+stage has been uploaded. Resume through the existing portal, verify the
+archive hash, extract into a fresh remote directory, and complete the build
+and smoke gates before full runs. Stage manifests and local test evidence
+are preserved under `docs/science/assets/paired_nojet_boundary_experiment_2026-11-01/stage_r1/`.
 
 See `docs/science/paired_nojet_boundary_experiment_2026-11-01.md` for the
 predeclared contrast, closure checks, resource estimate and scope limits.
