@@ -1,9 +1,26 @@
 # Current Status
 
-Last updated: 2026-10-31 23:02 AEDT (native pilot submitted with verified dependencies)
+Last updated: 2026-11-01 15:57 AEDT (migration stocktake and Q-032 delivery)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Latest stocktake — 1 November
+
+At 04:53 UTC migration 870323 remains running. **Nine units are complete**, with
+5.697 TB of logical payload covered by receipts and live archive links; C-HI
+completed at 01:03 UTC. C-LO is copying its 3.100 TB and has no verification
+receipts yet. Flux 870374 and native 870719 remain held. A raw-versus-normalized
+migration-plan hashing defect in the native gate was discovered during review;
+a narrow repair is in progress, without changing frozen migration evidence.
+
+Q-032 870640 finished F/0 (11:25). The complete 60-view package, masks, stamps,
+manifest and source-bound receipts are now local and independently checked.
+Claude retains interpretation ownership. G-HI/50 remains scientifically excluded,
+as recorded in the external receipt. Existing May-8 no-jet configurations are
+confirmed to use reflective boundaries, unlike production outflow boundaries;
+a signed energy/mass/motion audit is being prepared from their retained outputs.
+See `docs/exchange/logs/2026-11-01-migration-analysis-stocktake.md` for evidence.
 
 ## Authorised Q-031 native pilot — submitted, dependency-held
 

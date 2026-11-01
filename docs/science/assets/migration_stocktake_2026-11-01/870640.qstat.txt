@@ -1,0 +1,159 @@
+Job Id: 870640.kunanyi-ohpc
+    Job_Name = q032_ladder
+    Job_Owner = bwbrook@<tpac-host>
+    resources_used.cpupercent = 85
+    resources_used.cput = 00:09:53
+    resources_used.mem = 2634908kb
+    resources_used.ncpus = 2
+    resources_used.vmem = 3746288kb
+    resources_used.walltime = 00:11:25
+    job_state = F
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sat Oct 31 20:58:30 2026
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q032_retained_
+	method_ladder_2026-10-31_r1/pbs.err
+    exec_host = n007/1*2
+    exec_vnode = (n007:ncpus=2:mem=8388608kb)
+    Hold_Types = n
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = n
+    mtime = Sat Oct 31 21:09:55 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q032_retained
+	_method_ladder_2026-10-31_r1/pbs.out
+    Priority = 0
+    qtime = Sat Oct 31 20:58:30 2026
+    Rerunable = False
+    Resource_List.mem = 8gb
+    Resource_List.ncpus = 2
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=2:mem=8gb
+    Resource_List.walltime = 04:00:00
+    stime = Sat Oct 31 20:58:30 2026
+    session_id = 5202
+    jobdir = /u/bwbrook
+    substate = 92
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=en_US.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/pr
+	un/1.3:/opt/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/
+	bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/q032_retained_method_ladder_202
+	6-10-31_r1,PBS_O_SYSTEM=Linux,LMOD_FAMILY_COMPILER_VERSION=8.3.0,
+	MANPATH=/opt/ohpc/pub/compiler/gcc/8.3.0/share/man:/opt/ohpc/pub/utils
+	/autotools/share/man:/usr/local/share/man:/usr/share/man/overrides:/usr
+	/share/man/en:/usr/share/man:/opt/pbs/share/man,XDG_SESSION_ID=106338,
+	_ModuleTable003_=QT17Ii9vcHQvb2hwYy9wdWIvbW9kdWxlZGVwcy9nbnU4IiwiL29wd
+	C9vaHBjL3B1Yi9tb2R1bGVmaWxlcyIsIi9zaGFyZS9hcHBzL21vZHVsZXMiLCIvc2hhcmUv
+	YXBwcy9lYi1tb2R1bGVzL2FsbCIsIi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQ
+	vQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvb3B0L29ocGMvcHViL21vZHVsZWRlcH
+	MvZ251ODovb3B0L29ocGMvcHViL21vZHVsZWZpbGVzOi9zaGFyZS9hcHBzL21vZHVsZXM6L
+	3NoYXJlL2FwcHMvZWItbW9kdWxlcy9hbGw6L3NoYXJlL2FwcHMvbW9kdWxlZGVwcy9yb3Nh
+	bGluZC9Db3JlIix9,HOSTNAME=<tpac-host>,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:2;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,SHELL=/bin/bash,TERM=xterm-16color,
+	LMOD_ROOT=/opt/ohpc/admin/lmod,HISTSIZE=1000,
+	SSH_CLIENT=<private-ip> 47210 22,LMOD_PKG=/opt/ohpc/admin/lmod/lmod,
+	LMOD_VERSION=8.1.18,LMOD_QUIET=yes,SSH_TTY=/dev/pts/1,
+	__LMOD_REF_COUNT_LOADEDMODULES=autotools:1;prun/1.3:1;gnu8/8.3.0:1;ohp
+	c:1,QT_GRAPHICSSYSTEM_CHECKED=1,HISTFILESIZE=2000,USER=bwbrook,
+	LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib64,
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=4
+	0;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=
+	34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31
+	:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;
+	31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:
+	*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.b
+	z2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.r
+	pm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.
+	alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.
+	cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:
+	*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35
+	:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01
+	;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm
+	=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.q
+	t=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.f
+	lc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xc
+	f=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.a
+	nx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.
+	mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:
+	*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36
+	:,
+	__LMOD_REF_COUNT__LMFILES_=/opt/ohpc/pub/modulefiles/autotools:1;/opt/
+	ohpc/pub/modulefiles/prun/1.3:1;/opt/ohpc/pub/modulefiles/gnu8/8.3.0:1;
+	/opt/ohpc/pub/modulefiles/ohpc:1,LMOD_PREPEND_BLOCK=normal,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXtbImNvbXBpbGVyIl09ImdudTgiLH0sbVQ9e2F1dG90b29scz17WyJmbiJdPSIvb3B0L29
+	ocGMvcHViL21vZHVsZWZpbGVzL2F1dG90b29scyIsWyJmdWxsTmFtZSJdPSJhdXRvdG9vbH
+	MiLFsibG9hZE9yZGVyIl09MSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzI
+	l09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJhdXRvdG9vbHMiLH0sZ251OD17WyJmbiJdPSIv
+	b3B0L29ocGMvcHViL21vZHVsZWZpbGVzL2dudTgvOC4zLjAiLFsiZnVsbE5hbWUiXT0iZ25
+	1OC84LjMuMCIsWyJsb2FkT3JkZXIiXT0z,
+	PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/prun/1.3
+	:/opt/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/bin:/u
+	sr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/q032_retained_method_ladder_2026-10-31_r1
+	,
+	_LMFILES_=/opt/ohpc/pub/modulefiles/autotools:/opt/ohpc/pub/modulefile
+	s/prun/1.3:/opt/ohpc/pub/modulefiles/gnu8/8.3.0:/opt/ohpc/pub/modulefil
+	es/ohpc,LANG=en_US.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,_ModuleTable_Sz_=3,
+	LOADEDMODULES=autotools:prun/1.3:gnu8/8.3.0:ohpc,
+	LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=1,
+	__LMOD_REF_COUNT_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/bin:1;/opt/ohpc
+	/pub/utils/prun/1.3:1;/opt/ohpc/pub/utils/autotools/bin:1;/share/apps/b
+	in:1;/opt/ohpc/pub/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;
+	/usr/sbin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iY
+	WN0aXZlIixbInVzZXJOYW1lIl09ImdudTgiLH0sb2hwYz17WyJmbiJdPSIvb3B0L29ocGMv
+	cHViL21vZHVsZWZpbGVzL29ocGMiLFsiZnVsbE5hbWUiXT0ib2hwYyIsWyJsb2FkT3JkZXI
+	iXT00LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbIn
+	VzZXJOYW1lIl09Im9ocGMiLH0scHJ1bj17WyJmbiJdPSIvb3B0L29ocGMvcHViL21vZHVsZ
+	WZpbGVzL3BydW4vMS4zIixbImZ1bGxOYW1lIl09InBydW4vMS4zIixbImxvYWRPcmRlciJd
+	PTIscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXN
+	lck5hbWUiXT0icHJ1biIsfSx9LG1wYXRo,
+	__LMOD_REF_COUNT_INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include:1,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	SSH_CONNECTION=<private-ip> 47210 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	__LMOD_REF_COUNT_LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib6
+	4:1,LMOD_SETTARG_FULL_SUPPORT=no,LESSOPEN=||/usr/bin/lesspipe.sh %s,
+	PROMPT_COMMAND=history -a,LMOD_FAMILY_COMPILER=gnu8,
+	LMOD_FULL_SETTARG_SUPPORT=no,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	__LMOD_REF_COUNT_MANPATH=/opt/ohpc/pub/compiler/gcc/8.3.0/share/man:1;
+	/opt/ohpc/pub/utils/autotools/share/man:1;/usr/local/share/man:1;/usr/s
+	hare/man/overrides:1;/usr/share/man/en:1;/usr/share/man:1,
+	INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include,
+	LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/opt/pbs/bin/qsub,
+	OLDPWD=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r5,
+	PBS_O_QUEUE=normal,PBS_O_HOST=<tpac-host>
+    comment = Job run at Sat Oct 31 at 20:58 on (n007:ncpus=2:mem=8388608kb) an
+	d finished
+    etime = Sat Oct 31 20:58:30 2026
+    run_count = 1
+    Stageout_status = 1
+    Exit_status = 0
+    Submit_arguments = -o /u/bwbrook/codex_kunanyi/q032_retained_method_ladder_
+	2026-10-31_r1/pbs.out -e /u/bwbrook/codex_kunanyi/q032_retained_method_
+	ladder_2026-10-31_r1/pbs.err scripts/kunanyi/q032_retained_method_ladde
+	r.pbs
+    history_timestamp = 1793441395
+    project = _pbs_project_default
+

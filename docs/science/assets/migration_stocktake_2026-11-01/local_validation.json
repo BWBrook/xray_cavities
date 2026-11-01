@@ -1,0 +1,99 @@
+{
+  "archive_sha256": "0aca0f64d206617d69ea0e6c67cf5b0d379226b120e0d0016c780b8c0b975fad",
+  "normalized_plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+  "capture_plan_hash_field": "raw input JSON hash; frozen receipts bind normalized schema2 plan instead",
+  "units": [
+    {
+      "index": 0,
+      "stage": "complete",
+      "manifest_file_count": 424,
+      "receipt_file_count": 424,
+      "receipt_bytes": 69206921306,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 1,
+      "stage": "complete",
+      "manifest_file_count": 2061,
+      "receipt_file_count": 2061,
+      "receipt_bytes": 86299870447,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 2,
+      "stage": "complete",
+      "manifest_file_count": 3498,
+      "receipt_file_count": 3498,
+      "receipt_bytes": 163150591795,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 3,
+      "stage": "complete",
+      "manifest_file_count": 2458,
+      "receipt_file_count": 2458,
+      "receipt_bytes": 292829367757,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 4,
+      "stage": "complete",
+      "manifest_file_count": 1821,
+      "receipt_file_count": 1821,
+      "receipt_bytes": 291953724634,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 5,
+      "stage": "complete",
+      "manifest_file_count": 5823,
+      "receipt_file_count": 5823,
+      "receipt_bytes": 372564214428,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 6,
+      "stage": "complete",
+      "manifest_file_count": 2011,
+      "receipt_file_count": 2011,
+      "receipt_bytes": 404712026079,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 7,
+      "stage": "complete",
+      "manifest_file_count": 3531,
+      "receipt_file_count": 3531,
+      "receipt_bytes": 925617665748,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 8,
+      "stage": "complete",
+      "manifest_file_count": 7119,
+      "receipt_file_count": 7119,
+      "receipt_bytes": 3090276948775,
+      "plan_bound": true,
+      "completed_receipts_complete": true
+    },
+    {
+      "index": 9,
+      "stage": "copy-start",
+      "manifest_file_count": 7119,
+      "receipt_file_count": 0,
+      "receipt_bytes": 0,
+      "plan_bound": true,
+      "completed_receipts_complete": false
+    }
+  ],
+  "payload_rehash_performed": false,
+  "scope": "receipt completeness, manifest size/plan binding, live links/tombstones from captured read-only remote observations; no fresh payload hashing"
+}

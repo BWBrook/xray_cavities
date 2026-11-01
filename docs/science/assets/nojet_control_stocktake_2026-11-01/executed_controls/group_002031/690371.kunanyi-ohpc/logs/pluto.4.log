@@ -1,0 +1,497 @@
+
+   ___  __   __  ____________   
+  / _ \/ /  / / / /_  __/ __ \ 
+ / ___/ /__/ /_/ / / / / /_/ /  
+/_/  /____/\____/ /_/  \____/   
+=============================    v. 4.4-patch3 (Sep 2024)  
+
+> System:
+
+  sysconf.out file not found... 
+
+  - Basic data type size (Bytes):
+    o sizeof (char)     = 1
+    o sizeof (uchar)    = 1
+    o sizeof (uint16_t) = 2
+    o sizeof (short)    = 2
+    o sizeof (ushort)   = 2
+    o sizeof (int)      = 4
+    o sizeof (long)     = 8
+    o sizeof (*int)     = 8
+    o sizeof (float)    = 4
+    o sizeof (double)   = 8
+    o sizeof (*double)  = 8
+
+  - Structure data type (Bytes):
+    o sizeof (cmdLine)    = 168
+    o sizeof (Data)       = 288
+    o sizeof (Grid)       = 1024
+    o sizeof (Float_Vect) = 12
+    o sizeof (Image)      = 856
+    o sizeof (Output)     = 1768
+    o sizeof (RGB)        = 3
+    o sizeof (Runtime)    = 47016
+    o sizeof (Restart)    = 128
+    o sizeof (timeStep)   = 176
+    o sizeof (RBox)       = 112
+    o sizeof (State)      = 128
+    o sizeof (Sweep)      = 568
+
+> Local time:       Fri May  8 21:20:18 2026
+
+
+> Process ID: 5016
+> Cmd line args:    -i pluto.ini -e environment.ini -maxtime 0.75 
+
+> Header configuration:
+
+  PHYSICS:          HD
+  DIMENSIONS:       3
+  GEOMETRY:         Cartesian
+  BODY_FORCE:       EXPLICIT
+  RECONSTRUCTION:   Linear  (Primitive lim)
+  TIME STEPPING:    Runge-Kutta II
+  TRACERS:          1
+  VARIABLES:        7
+  ENTROPY_SWITCH:   ENABLED
+  LOADED MODULES:
+
+  ROTATION:         NO
+  EOS:              Ideal
+
+> Runtime configuration (pluto.ini):
+
+  +----------------------------------------------------------
+  | [Grid]
+  | 
+  | X1-grid 1 -200 400 u 200
+  | X2-grid 1 -200 400 u 200
+  | X3-grid 1 -250 500 u 250
+  | 
+  | [Chombo Refinement]
+  | 
+  | Levels           4
+  | Ref_ratio        2 2 2 2 2
+  | Regrid_interval  2 2 2 2
+  | Refine_thresh    0.3
+  | Tag_buffer_size  3
+  | Block_factor     8
+  | Max_grid_size    64
+  | Fill_ratio       0.75
+  | 
+  | [Time]
+  | 
+  | CFL              0.33
+  | CFL_max_var      1.1
+  | tstop            15330.06968940
+  | first_dt         3.06601394
+  | 
+  | [Solver]
+  | 
+  | Solver           hllc
+  | 
+  | [Boundary]
+  | 
+  | X1-beg           reflective
+  | X1-end           reflective
+  | X2-beg           reflective
+  | X2-end           reflective
+  | X3-beg           reflective
+  | X3-end           reflective
+  | 
+  | [Static Grid Output]
+  | 
+  | log_dir          ./outputs/logs
+  | output_dir       ./outputs
+  | uservar          0
+  | dbl              -1.0  -1   single_file
+  | flt              -1.0  -1   single_file
+  | dbl.h5           3066.01393788  -1
+  | flt.h5           -1.0  -1
+  | vtk              -1.0  -1   single_file
+  | tab              -1.0  -1
+  | ppm              -1.0  -1
+  | log              10
+  | analysis         -1.0  -1
+  | 
+  | [Chombo HDF5 output]
+  | 
+  | Checkpoint_interval  -1.0  0
+  | Plot_interval        -1.0  0
+  | 
+  | [Particles]
+  | 
+  | Nparticles          -1    -1
+  | particles_dbl       -1.0  -1
+  | particles_flt       -1.0  -1
+  | particles_vtk       -1.0  -1
+  | particles_tab       -1.0  -1
+  | 
+  | [Parameters]
+  | 
+  | JET_PWR                     1e45
+  | JET_SPD                     0.1
+  | JET_CHI                     1.0
+  | JET_OA_PRIMARY              15.0
+  | JET_OA_SECONDARY            15.0
+  | JET_INJECTION_HEIGHT        0.75
+  | JET_INITIAL_RADIUS          0.1
+  | JET_X1O                     0.0
+  | JET_X2O                     0.0
+  | JET_X3O                     0.0
+  | JET_ROTATION_ANGLE          0.0
+  | JET_START_TIME              0.0
+  | JET_END_TIME                0.0
+  | JET_ACTIVE_TIME             0.0
+  | JET_EPISODES                1.0
+  | ENV_RHO_0                   2.4e-27
+  | ENV_R_SCALING               144.0
+  | ENV_DELTA_NFW               0.0
+  | ENV_B_EXPONENT              0.38
+  | ENV_TEMP                    3.462e7
+  | ENV_X1O                     0.0
+  | ENV_X2O                     0.0
+  | ENV_X3O                     0.0
+  | PART_INJECT_FREQUENCY       0.01
+  | STELLAR_MASS                0.0
+  +---------------------------------------------------------
+
+> Generating grid...
+
+  Global grid:
+  X1: [ -200.0000, 200.0000],    400 point(s), 3 ghosts
+  X2: [ -200.0000, 200.0000],    400 point(s), 3 ghosts
+  X3: [ -250.0000, 250.0000],    500 point(s), 3 ghosts
+
+  Local grid:
+  X1: [ -200.0000,   0.0000],    200 point(s); 3 ghosts; Active zones = [3, 202]
+  X2: [ -200.0000,   0.0000],    200 point(s); 3 ghosts; Active zones = [3, 202]
+  X3: [  37.0000, 108.0000],     71 point(s); 3 ghosts; Active zones = [3, 73]
+
+> Memory allocation
+> Assigning initial conditions (Startup) ...
+> RandomSeed(): seeding sequence  [PRNG_DEFAULT; seed = 26144, offset = 0]
+> Calculated normalisations 
+
+Code-to-CGS Normalisations:
+
+length                  =     3.085678e+21 
+density                 =     1.002368e-24 
+velocity                =     2.997925e+10 
+temperature             =     1.000000e+00 
+time                    =     1.029271e+11 
+area                    =     9.521406e+42 
+pressure                =     9.008831e-04 
+power                   =     2.571522e+50 
+energy_flux             =     2.700780e+07 
+energy                  =     2.646794e+61 
+gravitational_potential =     8.987552e+20 
+acceleration            =     2.912667e-01 
+number_density          =     3.403677e-65 
+mass                    =     2.944955e+40 
+
+
+
+
+Environment properties:
+
+data file            = ./tabulated_cosmo_002031.csv
+> Initializing hot halo distribution from tablecentral_density      =     4.141424e-03 [    4.151229e-27 g/cm^3] 
+central_pressure      =     6.674237e-09 [    6.012708e-12 barye] 
+central_temperature  =     1.051566e+07 [    1.051566e+07 K] 
+central_sound_speed  =     1.638892e-03 [    4.913275e+02 km/s] 
+gx  =     0.000000e+00 [    0.000000e+00 km/s^2] at (x,y,z)=(0,0,0.01) |     0.000000e+00 [    0.000000e+00 km/s^2] at (x,y,z)=(0,0,1)  
+gy  =     0.000000e+00 [    0.000000e+00 km/s^2] at (x,y,z)=(0,0,0.01) |     0.000000e+00 [    0.000000e+00 km/s^2] at (x,y,z)=(0,0,1)  
+gz  =    -1.278674e-10 [   -3.724352e-16 km/s^2] at (x,y,z)=(0,0,0.01) |    -1.732215e-09 [   -5.045366e-15 km/s^2] at (x,y,z)=(0,0,1)  
+X1 offset            =     0.000000e+00 [    0.000000e+00 kpc] 
+X2 offset            =     0.000000e+00 [    0.000000e+00 kpc] 
+X3 offset            =     0.000000e+00 [    0.000000e+00 kpc] 
+
+
+> Loaded jet intermittency properties
+
+
+Jet intermittency properties:
+
+delta_t           =     1.531948e+01 [0.05 Myr] 
+episodes          =                1 
+start_time        =     0.000000e+00 [0.00 Myr] 
+end_time          =     0.000000e+00 [0.00 Myr] 
+total_active_time =     0.000000e+00 [0.00 Myr] 
+active_time       =     0.000000e+00 [0.00 Myr] 
+quiet_time        =     0.000000e+00 [0.00 Myr] 
+duty_cycle_time   =     0.000000e+00 [0.00 Myr] 
+
+
+> Using a spherical injection zone
+> Setting density with jet power (non-relativistic case)
+  WARNING: Over-pressure factor is taken to be the CHI parameter
+> Loaded jet 0 injection region properties
+
+
+Jet 0 injection region properties:
+
+initial_width            =     1.000000e-01 [    1.000000e-01 kpc] 
+half_opening_angle       =     2.617994e-01 
+power                    =     3.888748e-06 [    1.000000e+45 erg/s] 
+speed                    =     1.000000e-01 [    1.000000e-01 c] 
+lorentz factor           =     0.000000e+00 
+chi                      =     1.000000e+00 
+density                  =     6.458208e-02 [    6.473499e-26 g/cm^3] 
+pressure                 =     6.674237e-09 [    6.012707e-12 barye] 
+specific enthalpy        =     0.000000e+00 [    0.000000e+00 erg/g] 
+proper density contrast  =     1.559417e+01 
+enthalpy contrast        =     1.559417e+01 
+energy density contrast  =     1.559417e+01 
+L1                       =     2.740785e+00 [    2.740785e+00 kpc] 
+L1b                      =     2.961709e+00 [    2.961709e+00 kpc] 
+collimated               =                0 
+solid_angle              =     2.140943e-01 [    2.140943e-01 kpc^2] 
+area                     =     1.204281e-01 [    1.204281e-01 kpc^2] 
+injection_rotation_angle =     0.000000e+00 
+injection_region_radius  =     7.500000e-01 [    7.500000e-01 kpc] 
+injection_cone_height    =     0.000000e+00 [    0.000000e+00 kpc] 
+injection_cone_offset    =     0.000000e+00 [    0.000000e+00 kpc] 
+X1 offset                =     0.000000e+00 [    0.000000e+00 kpc] 
+X2 offset                =     0.000000e+00 [    0.000000e+00 kpc] 
+X3 offset                =     0.000000e+00 [    0.000000e+00 kpc] 
+Pressure factor          =     1.000000e+00 
+
+
+> Using a spherical injection zone
+> Setting density with jet power (non-relativistic case)
+  WARNING: Over-pressure factor is taken to be the CHI parameter
+> Loaded jet 1 injection region properties
+
+
+Jet 1 injection region properties:
+
+initial_width            =     1.000000e-01 [    1.000000e-01 kpc] 
+half_opening_angle       =     2.617994e-01 
+power                    =     3.888748e-06 [    1.000000e+45 erg/s] 
+speed                    =     1.000000e-01 [    1.000000e-01 c] 
+lorentz factor           =     0.000000e+00 
+chi                      =     1.000000e+00 
+density                  =     6.458208e-02 [    6.473499e-26 g/cm^3] 
+pressure                 =     6.674237e-09 [    6.012707e-12 barye] 
+specific enthalpy        =     0.000000e+00 [    0.000000e+00 erg/g] 
+proper density contrast  =     1.559417e+01 
+enthalpy contrast        =     1.559417e+01 
+energy density contrast  =     1.559417e+01 
+L1                       =     2.740785e+00 [    2.740785e+00 kpc] 
+L1b                      =     2.961709e+00 [    2.961709e+00 kpc] 
+collimated               =                0 
+solid_angle              =     2.140943e-01 [    2.140943e-01 kpc^2] 
+area                     =     1.204281e-01 [    1.204281e-01 kpc^2] 
+injection_rotation_angle =     0.000000e+00 
+injection_region_radius  =     7.500000e-01 [    7.500000e-01 kpc] 
+injection_cone_height    =     0.000000e+00 [    0.000000e+00 kpc] 
+injection_cone_offset    =     0.000000e+00 [    0.000000e+00 kpc] 
+X1 offset                =     0.000000e+00 [    0.000000e+00 kpc] 
+X2 offset                =     0.000000e+00 [    0.000000e+00 kpc] 
+X3 offset                =     0.000000e+00 [    0.000000e+00 kpc] 
+Pressure factor          =     1.000000e+00 
+
+
+Supernovae feedback properties (at r=0.1): 
+
+Effective radius      =              nan kpc
+Alpha                 =     4.700000e-20 s^-1 [    4.837575e-09 code units]
+T0                    =     2.458723e+08
+cV                    =     2.051159e+08
+Stellar density       =              nan g cm^-3 [             nan code units]
+Energy injection rate =              nan erg cm^-3 s^-1 [             nan code units]
+Density loss rate     =              nan g cm^-3 s^-1 [             nan code units]
+
+Gravitational acceleration properties (at r=0.1): 
+
+NFW accel  =    -4.190479e-08
+hern_accel =             -nan
+Gravitational acceleration properties (at r=10): 
+
+NFW accel  =    -3.516903e-08
+hern_accel =             -nan
+> Beginning domain initialization...
+> Finished domain initialization...
+> Normalization Units:
+
+  [Density]:      1.002e-24 (gr/cm^3), 5.993e-01 (1/cm^3)
+  [Pressure]:     9.009e-04 (dyne/cm^2)
+  [Velocity]:     2.998e+10 (cm/s)
+  [Length]:       3.086e+21 (cm)
+  [Temperature]:  1.081e+13 X (p/rho*mu) (K)
+  [Time]:         1.029e+11 (sec), 3.264e+03 (yrs) 
+ 
+> Number of processors: 28
+> Proc size:            200 X 200 X 71
+> Parallel Directions:  X1/X2/X3
+> Writing file #0 (dbl.h5) to disk...
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Starting computation... 
+
+step:0; t = 0.0000e+00; dt = 3.0660e+00; 0.0 %
+        [Mach = 0.000015]
+        [clock (total)         = 8.790000 (s)]
+        [clock (AdvanceStep()) = 0.000000 (s)]
+        [clock (int boundary)  = 1.110000 (s)]
+        [clock (bnd exchange)  = 0.190000 (s)]
+        [dt(hyp)          = cfl x 6.4544e+02]
+step:10; t = 4.8864e+01; dt = 7.9525e+00; 0.3 %
+         [Mach = 0.000265]
+         [clock (total)         = 8.390000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.110000 (s)]
+         [clock (bnd exchange)  = 0.160000 (s)]
+         [dt(hyp)          = cfl x 6.4544e+02]
+step:20; t = 1.7561e+02; dt = 2.0627e+01; 1.1 %
+         [Mach = 0.000816]
+         [clock (total)         = 8.400000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.110000 (s)]
+         [clock (bnd exchange)  = 0.150000 (s)]
+         [dt(hyp)          = cfl x 6.4544e+02]
+step:30; t = 5.0434e+02; dt = 5.3500e+01; 3.3 %
+         [Mach = 0.001769]
+         [clock (total)         = 8.410000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.110000 (s)]
+         [clock (bnd exchange)  = 0.160000 (s)]
+         [dt(hyp)          = cfl x 6.4544e+02]
+step:40; t = 1.3570e+03; dt = 1.3877e+02; 8.9 %
+         [Mach = 0.002737]
+         [clock (total)         = 8.450000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.100000 (s)]
+         [clock (bnd exchange)  = 0.150000 (s)]
+         [dt(hyp)          = cfl x 6.4544e+02]
+> Writing file #1 (dbl.h5) to disk...
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+step:50; t = 3.2092e+03; dt = 2.0136e+02; 20.9 %
+         [Mach = 0.002819]
+         [clock (total)         = 8.550000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.110000 (s)]
+         [clock (bnd exchange)  = 0.150000 (s)]
+         [dt(hyp)          = cfl x 6.4544e+02]
+step:60; t = 5.2228e+03; dt = 2.0136e+02; 34.1 %
+         [Mach = 0.002769]
+         [clock (total)         = 8.250000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.120000 (s)]
+         [clock (bnd exchange)  = 0.110000 (s)]
+         [dt(hyp)          = cfl x 6.4543e+02]
+> Writing file #2 (dbl.h5) to disk...
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+step:70; t = 7.2363e+03; dt = 2.0135e+02; 47.2 %
+         [Mach = 0.002762]
+         [clock (total)         = 8.370000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.110000 (s)]
+         [clock (bnd exchange)  = 0.160000 (s)]
+         [dt(hyp)          = cfl x 6.4543e+02]
+> Writing file #3 (dbl.h5) to disk...
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+step:80; t = 9.2498e+03; dt = 2.0135e+02; 60.3 %
+         [Mach = 0.002762]
+         [clock (total)         = 8.340000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.110000 (s)]
+         [clock (bnd exchange)  = 0.140000 (s)]
+         [dt(hyp)          = cfl x 6.4542e+02]
+step:90; t = 1.1263e+04; dt = 2.0134e+02; 73.5 %
+         [Mach = 0.002762]
+         [clock (total)         = 8.320000 (s)]
+         [clock (AdvanceStep()) = 0.000000 (s)]
+         [clock (int boundary)  = 1.110000 (s)]
+         [clock (bnd exchange)  = 0.150000 (s)]
+         [dt(hyp)          = cfl x 6.4542e+02]
+> Writing file #4 (dbl.h5) to disk...
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+step:100; t = 1.3277e+04; dt = 2.0134e+02; 86.6 %
+          [Mach = 0.002762]
+          [clock (total)         = 8.310000 (s)]
+          [clock (AdvanceStep()) = 0.000000 (s)]
+          [clock (int boundary)  = 1.110000 (s)]
+          [clock (bnd exchange)  = 0.160000 (s)]
+          [dt(hyp)          = cfl x 6.4541e+02]
+step:110; t = 1.5290e+04; dt = 3.9917e+01; 99.7 %
+          [Mach = 0.002762]
+          [clock (total)         = 8.340000 (s)]
+          [clock (AdvanceStep()) = 0.000000 (s)]
+          [clock (int boundary)  = 1.110000 (s)]
+          [clock (bnd exchange)  = 0.160000 (s)]
+          [dt(hyp)          = cfl x 6.4540e+02]
+> Writing file #5 (dbl.h5) to disk...
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+> Set up dataset property list
+
+> Total allocated memory  677.02 Mb (proc #4)
+> Elapsed time              0d:0h:44m:50s
+> Average time/step         2.42e+01  (sec)  
+> Local time                Fri May  8 22:05:08 2026
+> Done

@@ -1,0 +1,2 @@
+ARCH         = Kunanyi.defs
+PLUTO_DIR    = /scratch/bwbrook/git/utas-agn/pluto

@@ -1,0 +1,3731 @@
+{
+  "base": "/u/bwbrook/xray_cavities_analysis/2026-08-26-four-case-selected-age-observables",
+  "baselines": {},
+  "file_count": 300,
+  "full_hdf5_included": false,
+  "schema_version": 1,
+  "status": "complete_q032_retained_input_binding",
+  "view_count": 60,
+  "views": [
+    {
+      "age_myr": 10,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787707535894384650,
+          "device": 47,
+          "inode": 2199183977909,
+          "mode": 384,
+          "mtime_ns": 1787707535894384650,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "ff72725f001cb6b7177d1dcc3f8492cb0a78bd5fef111022095b2a8489a792ea",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707537301722949,
+          "device": 47,
+          "inode": 2199183977911,
+          "mode": 384,
+          "mtime_ns": 1787707537301722949,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "00a288331848dbba144f3126e808f11ec099d3e17585d5afe991607c00523298",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707534641329666,
+          "device": 47,
+          "inode": 2199183977906,
+          "mode": 384,
+          "mtime_ns": 1787707534641329666,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787707534645866050,
+          "device": 47,
+          "inode": 2199183977907,
+          "mode": 384,
+          "mtime_ns": 1787707534645866050,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787707537715407940,
+          "device": 47,
+          "inode": 2199183977912,
+          "mode": 384,
+          "mtime_ns": 1787707537715407940,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "2441f7b0f52bb9965012f113d583982b61fa091c70fbaa3df5812e2990b59b91",
+          "size_bytes": 1974
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787707895170779150,
+          "device": 47,
+          "inode": 2199183978219,
+          "mode": 384,
+          "mtime_ns": 1787707895170779150,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "481f1106388613f0888cef41b48be1f98d50b6fa64c435de4feac8e8932e17f3",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707896846123782,
+          "device": 47,
+          "inode": 2199183978223,
+          "mode": 384,
+          "mtime_ns": 1787707896846123782,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "7870c106e265b0dc738302bf2f54a5a94d4182d753074d7c0ae910971a8ba90d",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707893911691705,
+          "device": 47,
+          "inode": 2199183978212,
+          "mode": 384,
+          "mtime_ns": 1787707893911691705,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787707893916135963,
+          "device": 47,
+          "inode": 2199183978213,
+          "mode": 384,
+          "mtime_ns": 1787707893916135963,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787707897053913651,
+          "device": 47,
+          "inode": 2199183978225,
+          "mode": 384,
+          "mtime_ns": 1787707897053913651,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "0bf58f1b4636e0ba5b79ea0a27acea0cbd436d7aae3dd3ccdf5e47b96c5368f0",
+          "size_bytes": 2004
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787708252440671369,
+          "device": 47,
+          "inode": 2199183978296,
+          "mode": 384,
+          "mtime_ns": 1787708252440671369,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "e04b6ac24228bf00013a35b9748fa18ede5014e9e43c7edda8c26bd05409e1f8",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787708253699529318,
+          "device": 47,
+          "inode": 2199183978298,
+          "mode": 384,
+          "mtime_ns": 1787708253699529318,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "2f5f1abfa67168c3d5a6da7a7611fa4046d5f9ada248c6af60d8b06429c2bf97",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787708251250422138,
+          "device": 47,
+          "inode": 2199183978293,
+          "mode": 384,
+          "mtime_ns": 1787708251250422138,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787708251255840571,
+          "device": 47,
+          "inode": 2199183978294,
+          "mode": 384,
+          "mtime_ns": 1787708251255840571,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787708253850423993,
+          "device": 47,
+          "inode": 2199183978299,
+          "mode": 384,
+          "mtime_ns": 1787708253850423993,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_10/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "80cacb1217d205099b295e6b0360077514bd0e391c9bbd7eee1927305c28f31b",
+          "size_bytes": 2004
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787709127971915648,
+          "device": 47,
+          "inode": 2199183978639,
+          "mode": 384,
+          "mtime_ns": 1787709127971915648,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "2eac40732d07e4f32fb0aa1db5be9c1c55caafada0a8db2da1226110439423a6",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709130037947214,
+          "device": 47,
+          "inode": 2199183978642,
+          "mode": 384,
+          "mtime_ns": 1787709130037947214,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "5f1de3a6dc323b621c9d4ce692f56311fbcfd863e3b584c6f4f9415d15c20ec8",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709126556850029,
+          "device": 47,
+          "inode": 2199183978636,
+          "mode": 384,
+          "mtime_ns": 1787709126556850029,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787709126688137225,
+          "device": 47,
+          "inode": 2199183978637,
+          "mode": 384,
+          "mtime_ns": 1787709126688137225,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709130292452688,
+          "device": 47,
+          "inode": 2199183978643,
+          "mode": 384,
+          "mtime_ns": 1787709130292452688,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "d604b562039db064ac11df13810854e3f81718b081ed0df26f5b4b0f4e7fc218",
+          "size_bytes": 1981
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787709487612907890,
+          "device": 47,
+          "inode": 2199183978781,
+          "mode": 384,
+          "mtime_ns": 1787709487612907890,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "2945178c3867644157b915adf941eeb3ee39c488e61ddbfc66935c598b63053b",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709489091593886,
+          "device": 47,
+          "inode": 2199183978783,
+          "mode": 384,
+          "mtime_ns": 1787709489091593886,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "dd74ea686fe646b73ca7d6fd6c6fc45bf87802ce0f9dd1e0979c0edb88339c78",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709486302894745,
+          "device": 47,
+          "inode": 2199183978778,
+          "mode": 384,
+          "mtime_ns": 1787709486302894745,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787709486306938200,
+          "device": 47,
+          "inode": 2199183978779,
+          "mode": 384,
+          "mtime_ns": 1787709486306938200,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709489345254501,
+          "device": 47,
+          "inode": 2199183978784,
+          "mode": 384,
+          "mtime_ns": 1787709489345254501,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "dada43573f22d3ab24f71578be52c369d518b19399cc6bc48928c9f9200415df",
+          "size_bytes": 1991
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787709857641669390,
+          "device": 47,
+          "inode": 2199183978871,
+          "mode": 384,
+          "mtime_ns": 1787709857641669390,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "c453edd8dc5b41cdae6689d77c8714fe02146c7f457c0941240917ca6a4ef0fe",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709859167269164,
+          "device": 47,
+          "inode": 2199183978873,
+          "mode": 384,
+          "mtime_ns": 1787709859167269164,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "b08858a729a1f3a7140dbd7a79c38756e629b72cd7d274ff864b7ed94eb2fecc",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709856445056837,
+          "device": 47,
+          "inode": 2199183978868,
+          "mode": 384,
+          "mtime_ns": 1787709856445056837,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787709856449541858,
+          "device": 47,
+          "inode": 2199183978869,
+          "mode": 384,
+          "mtime_ns": 1787709856449541858,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709859539164540,
+          "device": 47,
+          "inode": 2199183978874,
+          "mode": 384,
+          "mtime_ns": 1787709859539164540,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_20/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "dbef9a3e9f02e9d9e102d9dee777d7fba28939b8df3487837a7566ff3ff1a100",
+          "size_bytes": 2003
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787710753106557628,
+          "device": 47,
+          "inode": 2199183979087,
+          "mode": 384,
+          "mtime_ns": 1787710753106557628,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "1e975ed5190c7d3b4f113db05decd587b552901229bad8cf4476e5d523a5b235",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787710754721247559,
+          "device": 47,
+          "inode": 2199183979089,
+          "mode": 384,
+          "mtime_ns": 1787710754721247559,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "863eb3cb799e88847d651d97d3d1fd418167c5647a36c1b18df710579b5835e1",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787710751590004143,
+          "device": 47,
+          "inode": 2199183979084,
+          "mode": 384,
+          "mtime_ns": 1787710751590004143,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787710751594560215,
+          "device": 47,
+          "inode": 2199183979085,
+          "mode": 384,
+          "mtime_ns": 1787710751594560215,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787710754937367730,
+          "device": 47,
+          "inode": 2199183979090,
+          "mode": 384,
+          "mtime_ns": 1787710754937367730,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "1ac884817df73d7a8fd155fd9f609062e6a3d638e3818223c540413d6b3e295c",
+          "size_bytes": 1976
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787711116291872751,
+          "device": 47,
+          "inode": 2199183979168,
+          "mode": 384,
+          "mtime_ns": 1787711116291872751,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "916c82c27b22d30477b9ef2ef3624c8447809dbacee44b3a41dc68dbccc04dc0",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711117919750107,
+          "device": 47,
+          "inode": 2199183979170,
+          "mode": 384,
+          "mtime_ns": 1787711117919750107,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "8adb57ebe5f0919e5667bedaa319658b5992b990db961e91c9e4677e1b51e143",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711114971742140,
+          "device": 47,
+          "inode": 2199183979163,
+          "mode": 384,
+          "mtime_ns": 1787711114971742140,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787711114977375984,
+          "device": 47,
+          "inode": 2199183979164,
+          "mode": 384,
+          "mtime_ns": 1787711114977375984,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787711118350091636,
+          "device": 47,
+          "inode": 2199183979171,
+          "mode": 384,
+          "mtime_ns": 1787711118350091636,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "b3577c936d65ee0bf8416da05c43388b7fe76e7eaf88948f7dafeed9ac689622",
+          "size_bytes": 2002
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787711487838023200,
+          "device": 47,
+          "inode": 2199183979301,
+          "mode": 384,
+          "mtime_ns": 1787711487838023200,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "d5043ac84bb71d55b525f04bdd04dcc1ea9ee1525a989655cf7fe23c49c4d3cf",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711489702007674,
+          "device": 47,
+          "inode": 2199183979303,
+          "mode": 384,
+          "mtime_ns": 1787711489702007674,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "8be415258d4628a362b90ba72d2b9869d846f90e2473b25cd1edecbbe13e7dd6",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711486228866027,
+          "device": 47,
+          "inode": 2199183979298,
+          "mode": 384,
+          "mtime_ns": 1787711486228866027,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787711486233243089,
+          "device": 47,
+          "inode": 2199183979299,
+          "mode": 384,
+          "mtime_ns": 1787711486233243089,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787711490015148798,
+          "device": 47,
+          "inode": 2199183979304,
+          "mode": 384,
+          "mtime_ns": 1787711490015148798,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_30/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "e4ad49c324cdbefd8fe6dc6b7bad6467512138f55fc95f4c8eee16e13cf1549b",
+          "size_bytes": 1998
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787712428521338789,
+          "device": 47,
+          "inode": 2199183979901,
+          "mode": 384,
+          "mtime_ns": 1787712428521338789,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "b512d1f198ea36ea8e3d03b146927e7b05fec3c9c73ea3b7bbc5cf816b33f22c",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712430051180306,
+          "device": 47,
+          "inode": 2199183979903,
+          "mode": 384,
+          "mtime_ns": 1787712430051180306,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "561a8876a96192c8c1ff1cf5a2ed140c5315b138b060ea003111c3923c0fc08e",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712427157106532,
+          "device": 47,
+          "inode": 2199183979898,
+          "mode": 384,
+          "mtime_ns": 1787712427157106532,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787712427226028085,
+          "device": 47,
+          "inode": 2199183979899,
+          "mode": 384,
+          "mtime_ns": 1787712427226028085,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787712430358529681,
+          "device": 47,
+          "inode": 2199183979904,
+          "mode": 384,
+          "mtime_ns": 1787712430358529681,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "9d6177d6b278eacd33eebe5ab81c16533f88cb837c0909e50cedf2cfa0a9b2ae",
+          "size_bytes": 1984
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787712790252668581,
+          "device": 47,
+          "inode": 2199183980033,
+          "mode": 384,
+          "mtime_ns": 1787712790252668581,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "4cf2385180b36f44bbc51cf6931c49a974c0a33ef887ba1813e08e11657250cc",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712791957756228,
+          "device": 47,
+          "inode": 2199183980036,
+          "mode": 384,
+          "mtime_ns": 1787712791957756228,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "a57c8555ba069730d9740cdd754a58ef779330ce55e3de7eaa4e30f09446b579",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712788765945848,
+          "device": 47,
+          "inode": 2199183980029,
+          "mode": 384,
+          "mtime_ns": 1787712788765945848,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787712788984899303,
+          "device": 47,
+          "inode": 2199183980031,
+          "mode": 384,
+          "mtime_ns": 1787712788984899303,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787712792162895117,
+          "device": 47,
+          "inode": 2199183980037,
+          "mode": 384,
+          "mtime_ns": 1787712792162895117,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "affa9aa5fa3a32d8ed082cff8dead85d921ae3c726e6ba044325b8172aeaf2b4",
+          "size_bytes": 2000
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787713160415757143,
+          "device": 47,
+          "inode": 2199183980200,
+          "mode": 384,
+          "mtime_ns": 1787713160415757143,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "9cbf6fbfe922285b2bcdbdf5961867f2953ef0d30b2e98c03fdc0463cdc1c806",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787713162218086941,
+          "device": 47,
+          "inode": 2199183980202,
+          "mode": 384,
+          "mtime_ns": 1787713162218086941,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "b7a6262d81bb88fff16e38b34769b4595e43eed59df456bcafb9c67ed3bb3947",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787713159037142604,
+          "device": 47,
+          "inode": 2199183980197,
+          "mode": 384,
+          "mtime_ns": 1787713159037142604,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787713159044149263,
+          "device": 47,
+          "inode": 2199183980198,
+          "mode": 384,
+          "mtime_ns": 1787713159044149263,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787713162649907628,
+          "device": 47,
+          "inode": 2199183980203,
+          "mode": 384,
+          "mtime_ns": 1787713162649907628,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_40/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "1a6f94750feea68daca7bfd9a50f4849a3d0010acb0947b17c15326a6333a69b",
+          "size_bytes": 2004
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787714078987404295,
+          "device": 47,
+          "inode": 2199183980529,
+          "mode": 384,
+          "mtime_ns": 1787714078987404295,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "2d2704bfad30e99f479c4f58ec0ff0a2e5a2552a52794c978d73635721d8fffc",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714080798718492,
+          "device": 47,
+          "inode": 2199183980531,
+          "mode": 384,
+          "mtime_ns": 1787714080798718492,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "07cdbf0b6074baacacaddc083b884a67eff648db2358293a9f5014310f544e6a",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714077771630600,
+          "device": 47,
+          "inode": 2199183980526,
+          "mode": 384,
+          "mtime_ns": 1787714077771630600,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787714077803014718,
+          "device": 47,
+          "inode": 2199183980527,
+          "mode": 384,
+          "mtime_ns": 1787714077803014718,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714081230501623,
+          "device": 47,
+          "inode": 2199183980532,
+          "mode": 384,
+          "mtime_ns": 1787714081230501623,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "3a8e05fa48ba199db8a049f73ba78f3eb5b2e28c9b87a362553d35dcb0068bc4",
+          "size_bytes": 1974
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787714440556460932,
+          "device": 47,
+          "inode": 2199183980700,
+          "mode": 384,
+          "mtime_ns": 1787714440556460932,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "93b49200a4cd37be573269687b73fe74aeefb7a11263570749f43802b01f548e",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714441962788982,
+          "device": 47,
+          "inode": 2199183980702,
+          "mode": 384,
+          "mtime_ns": 1787714441962788982,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "6926735e00e3f57e00f5c88992a48572c9f7a6ceeb63d40cb8e0ba2943932545",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714439367294944,
+          "device": 47,
+          "inode": 2199183980697,
+          "mode": 384,
+          "mtime_ns": 1787714439367294944,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787714439371518051,
+          "device": 47,
+          "inode": 2199183980698,
+          "mode": 384,
+          "mtime_ns": 1787714439371518051,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714442211519318,
+          "device": 47,
+          "inode": 2199183980703,
+          "mode": 384,
+          "mtime_ns": 1787714442211519318,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "dbb55c18e8cf4b62ab501277be0bdca366cf5d66a2da54f0e67943f0764a67d5",
+          "size_bytes": 1994
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "C-HI",
+      "files": [
+        {
+          "ctime_ns": 1787714804164011896,
+          "device": 47,
+          "inode": 2199183980846,
+          "mode": 384,
+          "mtime_ns": 1787714804164011896,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "9ca9fd0edcef99408ef6370f20271c168c0545d89afabfc981b1774da02a18d1",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714805461502086,
+          "device": 47,
+          "inode": 2199183980852,
+          "mode": 384,
+          "mtime_ns": 1787714805461502086,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "d59174b370a7cf3fea3a3a69786ed9031e077b15434e5620a23fb0517b66a0ce",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714802768534502,
+          "device": 47,
+          "inode": 2199183980842,
+          "mode": 384,
+          "mtime_ns": 1787714802768534502,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787714802772997196,
+          "device": 47,
+          "inode": 2199183980843,
+          "mode": 384,
+          "mtime_ns": 1787714802772997196,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714805622463871,
+          "device": 47,
+          "inode": 2199183980853,
+          "mode": 384,
+          "mtime_ns": 1787714805622463871,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_hi/age_50/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "3eab0ee7ccc14b7453603854b6d80da47690212abe56ceef75504c70567a8a98",
+          "size_bytes": 1996
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787707529832220334,
+          "device": 47,
+          "inode": 2199183977900,
+          "mode": 384,
+          "mtime_ns": 1787707529832220334,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "688dbfbe15f04e26ea1c238ece701cea775777ccdf1d54f31a939685e34c6c1a",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707531512997606,
+          "device": 47,
+          "inode": 2199183977902,
+          "mode": 384,
+          "mtime_ns": 1787707531512997606,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "b9f19adc48165a47f08152915b38451cde0c555c72a5f8cfa2bb2636c5cc942e",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707528423613001,
+          "device": 47,
+          "inode": 2199183977897,
+          "mode": 384,
+          "mtime_ns": 1787707528423613001,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787707528428043453,
+          "device": 47,
+          "inode": 2199183977898,
+          "mode": 384,
+          "mtime_ns": 1787707528428043453,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787707531717474329,
+          "device": 47,
+          "inode": 2199183977903,
+          "mode": 384,
+          "mtime_ns": 1787707531717474329,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "08e51e8e88a103a4ed4857926a2790b42d98d857244c80bf3840e9a005f61f82",
+          "size_bytes": 1976
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787707882191824451,
+          "device": 47,
+          "inode": 2199183978204,
+          "mode": 384,
+          "mtime_ns": 1787707882191824451,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "d864db7bb1eec4c67a54ae8d90fce5d1c124ef92a2bc098bd932e6b941040e7d",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707883520044941,
+          "device": 47,
+          "inode": 2199183978206,
+          "mode": 384,
+          "mtime_ns": 1787707883520044941,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "ab5a27be1812ea14b4ab612d317352d10ac50d652e5a4b2b39da33d5dbfef1e6",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707880626449154,
+          "device": 47,
+          "inode": 2199183978201,
+          "mode": 384,
+          "mtime_ns": 1787707880626449154,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787707880858627279,
+          "device": 47,
+          "inode": 2199183978202,
+          "mode": 384,
+          "mtime_ns": 1787707880858627279,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787707883844133401,
+          "device": 47,
+          "inode": 2199183978207,
+          "mode": 384,
+          "mtime_ns": 1787707883844133401,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "9383ea9ca3159d70f28f155790e874ea88bc1d63a8e8fd8db210fb28b5b9711d",
+          "size_bytes": 2004
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787708242447853031,
+          "device": 47,
+          "inode": 2199183978284,
+          "mode": 384,
+          "mtime_ns": 1787708242447853031,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "dc1d03a32dd9a0890c8373c82254534c4227b2f8fd009f465b02ef583040edb1",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787708243709018581,
+          "device": 47,
+          "inode": 2199183978286,
+          "mode": 384,
+          "mtime_ns": 1787708243709018581,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "981744d360b515f01c8261b0ea97fae873394c579cd884574194b8eaef12f2f8",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787708241176062440,
+          "device": 47,
+          "inode": 2199183978281,
+          "mode": 384,
+          "mtime_ns": 1787708241176062440,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787708241217525563,
+          "device": 47,
+          "inode": 2199183978282,
+          "mode": 384,
+          "mtime_ns": 1787708241217525563,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787708243905490760,
+          "device": 47,
+          "inode": 2199183978287,
+          "mode": 384,
+          "mtime_ns": 1787708243905490760,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_10/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "e6fa4b7a4635893b436f6ea112cc00209d87ebf90ab25aabcede4dce05709eff",
+          "size_bytes": 1996
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787709105115155050,
+          "device": 47,
+          "inode": 2199183978618,
+          "mode": 384,
+          "mtime_ns": 1787709105115155050,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "a773fcb2921c4a130ae00cde80513dfd13ddbefe5e93936523759d2e08b36a66",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709106465030945,
+          "device": 47,
+          "inode": 2199183978620,
+          "mode": 384,
+          "mtime_ns": 1787709106465030945,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "8cb1abf7de8faac6cdf3a66d49691f814a4c0b01c1ba0335eb206b3ee546f695",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709103953288609,
+          "device": 47,
+          "inode": 2199183978615,
+          "mode": 384,
+          "mtime_ns": 1787709103953288609,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787709103959269533,
+          "device": 47,
+          "inode": 2199183978616,
+          "mode": 384,
+          "mtime_ns": 1787709103959269533,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709106853545265,
+          "device": 47,
+          "inode": 2199183978621,
+          "mode": 384,
+          "mtime_ns": 1787709106853545265,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "8e0d496401d8555895b3ac4103d0e728dddca60324fcce7c8b4f2f33a3e1e7be",
+          "size_bytes": 1977
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787709457836118606,
+          "device": 47,
+          "inode": 2199183978748,
+          "mode": 384,
+          "mtime_ns": 1787709457836118606,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "cdc54af244f14219c8b5eef7b3ee4458d043241a5c7d7a0a0cde02e7ae970b25",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709459066149293,
+          "device": 47,
+          "inode": 2199183978750,
+          "mode": 384,
+          "mtime_ns": 1787709459066149293,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "4d8eee394b8d63e30f05319be52b40ee9c5a158f35f2a6a55685b19b47057c22",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709456474501595,
+          "device": 47,
+          "inode": 2199183978745,
+          "mode": 384,
+          "mtime_ns": 1787709456474501595,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787709456479005818,
+          "device": 47,
+          "inode": 2199183978746,
+          "mode": 384,
+          "mtime_ns": 1787709456479005818,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709459154366945,
+          "device": 47,
+          "inode": 2199183978751,
+          "mode": 384,
+          "mtime_ns": 1787709459154366945,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "1f6b1c4d4dda3645e9f5770342ddd93e180c47fb0a3713a61036fafebee6df63",
+          "size_bytes": 2003
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787709817367198007,
+          "device": 47,
+          "inode": 2199183978844,
+          "mode": 384,
+          "mtime_ns": 1787709817367198007,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "44ec7b06fd4d96526281af523ab49c489eb5ee48d5cef2c359539a70d32f905c",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709819370340562,
+          "device": 47,
+          "inode": 2199183978846,
+          "mode": 384,
+          "mtime_ns": 1787709819370340562,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "0f5510529af37e1ff9c1379e714c2980bcd8c74622f369aad3cc9cfe217014d6",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709816053294135,
+          "device": 47,
+          "inode": 2199183978841,
+          "mode": 384,
+          "mtime_ns": 1787709816053294135,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787709816057506948,
+          "device": 47,
+          "inode": 2199183978842,
+          "mode": 384,
+          "mtime_ns": 1787709816057506948,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709819780250162,
+          "device": 47,
+          "inode": 2199183978847,
+          "mode": 384,
+          "mtime_ns": 1787709819780250162,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_20/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "db3746c7d1adfd844383cc1496aaef774e64b824d580dfbc281929176dfa5243",
+          "size_bytes": 2001
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787710727187837263,
+          "device": 47,
+          "inode": 2199183979072,
+          "mode": 384,
+          "mtime_ns": 1787710727187837263,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "da99e2d544ebae49cb75b62abad301b92e0db2c9f0c7f0ac1c816997850e88a0",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787710728552568580,
+          "device": 47,
+          "inode": 2199183979076,
+          "mode": 384,
+          "mtime_ns": 1787710728552568580,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "321babc7cc47676715cc9a6bc787215fde6f283f01a658c413e3cd3b606062ab",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787710725834083752,
+          "device": 47,
+          "inode": 2199183979068,
+          "mode": 384,
+          "mtime_ns": 1787710725834083752,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787710725838578097,
+          "device": 47,
+          "inode": 2199183979069,
+          "mode": 384,
+          "mtime_ns": 1787710725838578097,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787710729020185313,
+          "device": 47,
+          "inode": 2199183979079,
+          "mode": 384,
+          "mtime_ns": 1787710729020185313,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "6a86cebb356e2eab3d2acfdae7bc6072dc9fbeaacb6b1895288066dcd2d89a5a",
+          "size_bytes": 1974
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787711080379171184,
+          "device": 47,
+          "inode": 2199183979144,
+          "mode": 384,
+          "mtime_ns": 1787711080379171184,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "a61ab281a125ac941365a6b032b116b9fd7b9e84d8a46dd6914abc64832f7a66",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711082147089953,
+          "device": 47,
+          "inode": 2199183979146,
+          "mode": 384,
+          "mtime_ns": 1787711082147089953,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "72544bb40bdc2dcd9739e66b561632fba242303b8979c88f024ece0b667d4258",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711078916514710,
+          "device": 47,
+          "inode": 2199183979141,
+          "mode": 384,
+          "mtime_ns": 1787711078916514710,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787711078921907075,
+          "device": 47,
+          "inode": 2199183979142,
+          "mode": 384,
+          "mtime_ns": 1787711078921907075,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787711082433675258,
+          "device": 47,
+          "inode": 2199183979147,
+          "mode": 384,
+          "mtime_ns": 1787711082433675258,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "38dc9d2c0d881cf67bc9d27d4794ff490d7d5a203e6e36601b4e9e36f41ea77b",
+          "size_bytes": 1996
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787711437808328896,
+          "device": 47,
+          "inode": 2199183979261,
+          "mode": 384,
+          "mtime_ns": 1787711437808328896,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "558f27c2ccef45ffd4ad9ab8f37bc1e1eaecba434c3160bd5bf5183702b666d6",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711439267715374,
+          "device": 47,
+          "inode": 2199183979263,
+          "mode": 384,
+          "mtime_ns": 1787711439267715374,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "7221a7529ae0bd22303365b2244fb708d0c5bff303a691f28e34d470efd0474f",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711436597883724,
+          "device": 47,
+          "inode": 2199183979258,
+          "mode": 384,
+          "mtime_ns": 1787711436597883724,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787711436602198468,
+          "device": 47,
+          "inode": 2199183979259,
+          "mode": 384,
+          "mtime_ns": 1787711436602198468,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787711439560313234,
+          "device": 47,
+          "inode": 2199183979264,
+          "mode": 384,
+          "mtime_ns": 1787711439560313234,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_30/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "7f5d0310472799d389b5ac7df0b073c572fcd936d77a96d6247b6d30cad31b78",
+          "size_bytes": 2000
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787712371305898726,
+          "device": 47,
+          "inode": 2199183979851,
+          "mode": 384,
+          "mtime_ns": 1787712371305898726,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "310786d9249d68589ae0aecb661668deda09dae5a9c6c02ca4635d9fcc0c784a",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712372626575344,
+          "device": 47,
+          "inode": 2199183979859,
+          "mode": 384,
+          "mtime_ns": 1787712372626575344,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "962399a3031856afeb3a0c010b70dcc9c8b65a42aa25662e384d5322c4fbdac1",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712369982213581,
+          "device": 47,
+          "inode": 2199183979846,
+          "mode": 384,
+          "mtime_ns": 1787712369982213581,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787712369986511702,
+          "device": 47,
+          "inode": 2199183979847,
+          "mode": 384,
+          "mtime_ns": 1787712369986511702,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787712372974792521,
+          "device": 47,
+          "inode": 2199183979862,
+          "mode": 384,
+          "mtime_ns": 1787712372974792521,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "e22c87ec3d4ae04cbdaa3edd5c61c40de0cb28a30c9eea0d11034662f2928776",
+          "size_bytes": 1973
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787712723853943979,
+          "device": 47,
+          "inode": 2199183980001,
+          "mode": 384,
+          "mtime_ns": 1787712723853943979,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "0f8b42362cd36d2af3d2818922c8605aff6163cbd3120013e8087508c8cbddd5",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712725227066737,
+          "device": 47,
+          "inode": 2199183980003,
+          "mode": 384,
+          "mtime_ns": 1787712725227066737,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "53c7feab53b5a538b80694ff4366b81a1f2cfe2f82fedef667aa26534c5e0190",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712722481204632,
+          "device": 47,
+          "inode": 2199183979998,
+          "mode": 384,
+          "mtime_ns": 1787712722481204632,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787712722485768770,
+          "device": 47,
+          "inode": 2199183979999,
+          "mode": 384,
+          "mtime_ns": 1787712722485768770,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787712725331983063,
+          "device": 47,
+          "inode": 2199183980004,
+          "mode": 384,
+          "mtime_ns": 1787712725331983063,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "4b155a841ce9a5b5cf7c068cf63df7580f7e51b7a6ddb48850db690d5b999626",
+          "size_bytes": 2001
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787713079787698309,
+          "device": 47,
+          "inode": 2199183980097,
+          "mode": 384,
+          "mtime_ns": 1787713079787698309,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "ff37afd0115b4e03a15c179887e3ed76031c2e28bd41fa63b10ce08e77372189",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787713081362533212,
+          "device": 47,
+          "inode": 2199183980099,
+          "mode": 384,
+          "mtime_ns": 1787713081362533212,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "c6d23c67b94447929fbba14eb2ef5afb3278b5ed32a3e5839c80f9f8dc37527c",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787713078277208917,
+          "device": 47,
+          "inode": 2199183980094,
+          "mode": 384,
+          "mtime_ns": 1787713078277208917,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787713078281303551,
+          "device": 47,
+          "inode": 2199183980095,
+          "mode": 384,
+          "mtime_ns": 1787713078281303551,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787713081583072565,
+          "device": 47,
+          "inode": 2199183980100,
+          "mode": 384,
+          "mtime_ns": 1787713081583072565,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_40/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "7b5303362d21859e56dbf271471427e7b31ed6d320d39ca04570d3a599a346ef",
+          "size_bytes": 2001
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787714014278098113,
+          "device": 47,
+          "inode": 2199183980506,
+          "mode": 384,
+          "mtime_ns": 1787714014278098113,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "2301249f0c7eebf78b270a2938633ac54c394f94fb13fe189e1a36100642110b",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714015510886635,
+          "device": 47,
+          "inode": 2199183980510,
+          "mode": 384,
+          "mtime_ns": 1787714015510886635,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "a846a2b0a02506cb55e5f85aa3054f5e853ec107d3454038b2a2833343ef9df6",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714013038175723,
+          "device": 47,
+          "inode": 2199183980503,
+          "mode": 384,
+          "mtime_ns": 1787714013038175723,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787714013047416251,
+          "device": 47,
+          "inode": 2199183980504,
+          "mode": 384,
+          "mtime_ns": 1787714013047416251,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714015746548482,
+          "device": 47,
+          "inode": 2199183980511,
+          "mode": 384,
+          "mtime_ns": 1787714015746548482,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "78b864a47fe1d90076930e8a8b04e2507672a8954a309d7875ed4544bd9d7be9",
+          "size_bytes": 1968
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787714366793888890,
+          "device": 47,
+          "inode": 2199183980654,
+          "mode": 384,
+          "mtime_ns": 1787714366793888890,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "16d5d38f1808503e164f76e861fd8c2726be6954341a60b7c49ed037def86791",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714368174838037,
+          "device": 47,
+          "inode": 2199183980656,
+          "mode": 384,
+          "mtime_ns": 1787714368174838037,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "344e8eb1e2ee1dd8c21e2feec68e0d8f53d4f685c56c71248382e9eba7d3e2fb",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714365353416012,
+          "device": 47,
+          "inode": 2199183980651,
+          "mode": 384,
+          "mtime_ns": 1787714365353416012,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787714365358054671,
+          "device": 47,
+          "inode": 2199183980652,
+          "mode": 384,
+          "mtime_ns": 1787714365358054671,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714368435146059,
+          "device": 47,
+          "inode": 2199183980657,
+          "mode": 384,
+          "mtime_ns": 1787714368435146059,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "d7e39045ab5cfdf5942c62ee7269292c055fd7c1e7d79e23c1df82db390179fa",
+          "size_bytes": 1996
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "C-LO",
+      "files": [
+        {
+          "ctime_ns": 1787714723712600501,
+          "device": 47,
+          "inode": 2199183980756,
+          "mode": 384,
+          "mtime_ns": 1787714723712600501,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "0d8500305f4db1ea8d1f1ee20064ee3b1f885ece00a9ae1e43ca71883d6ecd29",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714725163156167,
+          "device": 47,
+          "inode": 2199183980759,
+          "mode": 384,
+          "mtime_ns": 1787714725163156167,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "720cb86e70cf14f96dca7dcb18c2711692a245faa0de8592e5d4ec7c0e1fd1ef",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714722440608292,
+          "device": 47,
+          "inode": 2199183980751,
+          "mode": 384,
+          "mtime_ns": 1787714722440608292,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787714722445159935,
+          "device": 47,
+          "inode": 2199183980752,
+          "mode": 384,
+          "mtime_ns": 1787714722445159935,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714725433684345,
+          "device": 47,
+          "inode": 2199183980762,
+          "mode": 384,
+          "mtime_ns": 1787714725433684345,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/c_lo/age_50/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "0777d7ec952561531f71de76cec29819d5ac20efcd7f3f110e0288ae8a098aaf",
+          "size_bytes": 1996
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787722564956261073,
+          "device": 47,
+          "inode": 2199183993405,
+          "mode": 384,
+          "mtime_ns": 1787722564956261073,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "3249cdb249532e79396ab2db976714af608d05a9c2c469f1dbf799c9c17da589",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787722566794893702,
+          "device": 47,
+          "inode": 2199183993408,
+          "mode": 384,
+          "mtime_ns": 1787722566794893702,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "d44a679b2facb96d2a985bd52933b1c45f5476ba438e937705ba6915eb2107cf",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787722563546416540,
+          "device": 47,
+          "inode": 2199183993402,
+          "mode": 384,
+          "mtime_ns": 1787722563546416540,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787722563556266899,
+          "device": 47,
+          "inode": 2199183993403,
+          "mode": 384,
+          "mtime_ns": 1787722563556266899,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787722566953648205,
+          "device": 47,
+          "inode": 2199183993410,
+          "mode": 384,
+          "mtime_ns": 1787722566953648205,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "850817c0f4c601931cb423f39defef6e348e121fa7709088ef8896bcd763dd9a",
+          "size_bytes": 1986
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787722918942500250,
+          "device": 47,
+          "inode": 2199183993619,
+          "mode": 384,
+          "mtime_ns": 1787722918942500250,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "934df418f5454eefc2d58ae70a14099843c49d0920c76590c1dbe618e901966f",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787722920139829025,
+          "device": 47,
+          "inode": 2199183993621,
+          "mode": 384,
+          "mtime_ns": 1787722920139829025,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "52466a52337fc7def925f29f8953d1a05432027a63b2d73dda72f397edd73a5a",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787722917465005597,
+          "device": 47,
+          "inode": 2199183993615,
+          "mode": 384,
+          "mtime_ns": 1787722917465005597,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787722917470658416,
+          "device": 47,
+          "inode": 2199183993616,
+          "mode": 384,
+          "mtime_ns": 1787722917470658416,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787722920291332837,
+          "device": 47,
+          "inode": 2199183993622,
+          "mode": 384,
+          "mtime_ns": 1787722920291332837,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "bdeca00c5bdc9925b1e47c25a6908f25968606ef1bfb091d1a1d826d61fbac73",
+          "size_bytes": 2016
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787723274942453545,
+          "device": 47,
+          "inode": 2199183993746,
+          "mode": 384,
+          "mtime_ns": 1787723274942453545,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "972990f27930061d58d435aafec57833e97a81d444e7fd51afeb72757b366586",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787723276495145443,
+          "device": 47,
+          "inode": 2199183993749,
+          "mode": 384,
+          "mtime_ns": 1787723276495145443,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "b8f390f8dd6158120496df2195d53d2601fbe680ede07c5fcf0f44bcb886c452",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787723273711982299,
+          "device": 47,
+          "inode": 2199183993743,
+          "mode": 384,
+          "mtime_ns": 1787723273711982299,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787723273716340404,
+          "device": 47,
+          "inode": 2199183993744,
+          "mode": 384,
+          "mtime_ns": 1787723273716340404,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787723276759699618,
+          "device": 47,
+          "inode": 2199183993750,
+          "mode": 384,
+          "mtime_ns": 1787723276759699618,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_10/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "b20f62fbf97c6c57fb1a2050c6a5f59d745af503d47fa15f99743e86296fa097",
+          "size_bytes": 2008
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787723941047915131,
+          "device": 47,
+          "inode": 2199183993952,
+          "mode": 384,
+          "mtime_ns": 1787723941047915131,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "664f4857c845542d0fa799f1b98b90c2902cf1a980620ec33532c110bb15e5b0",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787723942356019258,
+          "device": 47,
+          "inode": 2199183993955,
+          "mode": 384,
+          "mtime_ns": 1787723942356019258,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "8ac6e9ad90ca544188ed22ac8c0f5b3571a555a9a911b7bf858edb49099f83fa",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787723939751597638,
+          "device": 47,
+          "inode": 2199183993949,
+          "mode": 384,
+          "mtime_ns": 1787723939751597638,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787723939755748549,
+          "device": 47,
+          "inode": 2199183993950,
+          "mode": 384,
+          "mtime_ns": 1787723939755748549,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787723942571624999,
+          "device": 47,
+          "inode": 2199183993956,
+          "mode": 384,
+          "mtime_ns": 1787723942571624999,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "28a7cc14b80d9211a1731eaaff8754a1b19970f5e0e1749fadf7c19996629b1b",
+          "size_bytes": 1991
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787724296944344617,
+          "device": 47,
+          "inode": 2199183994139,
+          "mode": 384,
+          "mtime_ns": 1787724296944344617,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "39a7345977e6c740785ccff0e41e89da99c80e48a8e9b79f6cc88516e3291dde",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787724298442424612,
+          "device": 47,
+          "inode": 2199183994141,
+          "mode": 384,
+          "mtime_ns": 1787724298442424612,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "21ec082c16d902a0abbd9cefe9453c852fb31d23fd3f5b60cfc915049746feea",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787724295756026283,
+          "device": 47,
+          "inode": 2199183994135,
+          "mode": 384,
+          "mtime_ns": 1787724295756026283,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787724295760208002,
+          "device": 47,
+          "inode": 2199183994136,
+          "mode": 384,
+          "mtime_ns": 1787724295760208002,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787724298586902001,
+          "device": 47,
+          "inode": 2199183994142,
+          "mode": 384,
+          "mtime_ns": 1787724298586902001,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "4432aa7e69e7d9dc13bf921d9bf3c5524de12f735c104c4c6893e2540a1a656b",
+          "size_bytes": 2011
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787724655097014334,
+          "device": 47,
+          "inode": 2199183994328,
+          "mode": 384,
+          "mtime_ns": 1787724655097014334,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "ca040e7975c50bf926ca8c1f5bfe62fbfa31f42e5d8f1e620dbf0c0c4b26b6e3",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787724656713267072,
+          "device": 47,
+          "inode": 2199183994330,
+          "mode": 384,
+          "mtime_ns": 1787724656713267072,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "f141136e74ce9a70bb737025726f99acb689c320f504138e09b1c1f4bc7e2410",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787724653178369651,
+          "device": 47,
+          "inode": 2199183994325,
+          "mode": 384,
+          "mtime_ns": 1787724653178369651,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787724653182578773,
+          "device": 47,
+          "inode": 2199183994326,
+          "mode": 384,
+          "mtime_ns": 1787724653182578773,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787724657226853895,
+          "device": 47,
+          "inode": 2199183994331,
+          "mode": 384,
+          "mtime_ns": 1787724657226853895,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_20/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "1595fa8857bbaa8ba4dfb49a501381e06ea50bae7839692f4b9d4e11fe25b191",
+          "size_bytes": 2007
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787725328626411992,
+          "device": 47,
+          "inode": 2199183994667,
+          "mode": 384,
+          "mtime_ns": 1787725328626411992,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "2856b48a031c39cfbcded5f41d8961819286ccfa79fb945b8415b124b47e0f8d",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787725330095915775,
+          "device": 47,
+          "inode": 2199183994669,
+          "mode": 384,
+          "mtime_ns": 1787725330095915775,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "525bf1e4e79359ee278b2fae8510b7b0166135340d2eae82a8b6a9f6125a2d2c",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787725327379551356,
+          "device": 47,
+          "inode": 2199183994664,
+          "mode": 384,
+          "mtime_ns": 1787725327379551356,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787725327384123018,
+          "device": 47,
+          "inode": 2199183994665,
+          "mode": 384,
+          "mtime_ns": 1787725327384123018,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787725330254932248,
+          "device": 47,
+          "inode": 2199183994670,
+          "mode": 384,
+          "mtime_ns": 1787725330254932248,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "1881d5eb776e77a7081d27957d78e28cfe9d7020ad26fb29f267727f66e12027",
+          "size_bytes": 1983
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787725684333279929,
+          "device": 47,
+          "inode": 2199183994797,
+          "mode": 384,
+          "mtime_ns": 1787725684333279929,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "153aacc253207802478567b7a2b2968530458a4195fde204207426ca145193a7",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787725685874707287,
+          "device": 47,
+          "inode": 2199183994800,
+          "mode": 384,
+          "mtime_ns": 1787725685874707287,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "02a0a2de85fdd4d82bb214fc866edc4dbb518125fbc57b3444a30d1609e5ad26",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787725683100880804,
+          "device": 47,
+          "inode": 2199183994794,
+          "mode": 384,
+          "mtime_ns": 1787725683100880804,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787725683105137937,
+          "device": 47,
+          "inode": 2199183994795,
+          "mode": 384,
+          "mtime_ns": 1787725683105137937,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787725686042670723,
+          "device": 47,
+          "inode": 2199183994801,
+          "mode": 384,
+          "mtime_ns": 1787725686042670723,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "1d0b74a8991e500a4a19c7e992bcf3f40c7fe15e7fa7b390f5dd2e30022fd325",
+          "size_bytes": 2011
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787726046663537874,
+          "device": 47,
+          "inode": 2199183994897,
+          "mode": 384,
+          "mtime_ns": 1787726046663537874,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "32538bccbef4f47b40f71a2cfbcc0507bdd271a180acdf5df1d41f78e98832be",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787726048178923184,
+          "device": 47,
+          "inode": 2199183994901,
+          "mode": 384,
+          "mtime_ns": 1787726048178923184,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "67442b0e6483c806c271832a83e786a2ce34299d64ebd65bbee60fd9ea4323e7",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787726045344293230,
+          "device": 47,
+          "inode": 2199183994894,
+          "mode": 384,
+          "mtime_ns": 1787726045344293230,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787726045378133891,
+          "device": 47,
+          "inode": 2199183994895,
+          "mode": 384,
+          "mtime_ns": 1787726045378133891,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787726048442346174,
+          "device": 47,
+          "inode": 2199183994902,
+          "mode": 384,
+          "mtime_ns": 1787726048442346174,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_30/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "0313fcd26afca8a3c2c2809f8fbce3749815cf84dc355bcef1cf7d42d81b2df1",
+          "size_bytes": 2003
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787726746113266047,
+          "device": 47,
+          "inode": 2199183995127,
+          "mode": 384,
+          "mtime_ns": 1787726746113266047,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "387b0d773ca9008e25deffaa7ff7d6ef96a56e53906deda626d5ce935f6b0a95",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787726747651483482,
+          "device": 47,
+          "inode": 2199183995130,
+          "mode": 384,
+          "mtime_ns": 1787726747651483482,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "94356c9373a508af5580ca367b36c6cf0c3463d7e2112b0888ee563558ad79fb",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787726744863615377,
+          "device": 47,
+          "inode": 2199183995124,
+          "mode": 384,
+          "mtime_ns": 1787726744863615377,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787726744897991878,
+          "device": 47,
+          "inode": 2199183995125,
+          "mode": 384,
+          "mtime_ns": 1787726744897991878,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787726747803816061,
+          "device": 47,
+          "inode": 2199183995131,
+          "mode": 384,
+          "mtime_ns": 1787726747803816061,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "b4a380206817c0a3d621f347e17559acdde3ad0ae1f65ccebe9d56f019a39b44",
+          "size_bytes": 1984
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787727106044212475,
+          "device": 47,
+          "inode": 2199183995296,
+          "mode": 384,
+          "mtime_ns": 1787727106044212475,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "13d75655c0e339daaab014cab8902fcac33430fe88fddbe09c1b8ea8a3fe3368",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787727107402155154,
+          "device": 47,
+          "inode": 2199183995298,
+          "mode": 384,
+          "mtime_ns": 1787727107402155154,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "4999332ca093e6d2f8687933204503ade75d0be7bd4e4152458c1c4a75b7d339",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787727104835724712,
+          "device": 47,
+          "inode": 2199183995292,
+          "mode": 384,
+          "mtime_ns": 1787727104835724712,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787727104839845085,
+          "device": 47,
+          "inode": 2199183995293,
+          "mode": 384,
+          "mtime_ns": 1787727104839845085,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787727107578027143,
+          "device": 47,
+          "inode": 2199183995299,
+          "mode": 384,
+          "mtime_ns": 1787727107578027143,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "e660d2ca274cda8f165131c4ac5facb36ae8e2fd711a8ae8b152ee758c463a3b",
+          "size_bytes": 2016
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787727468566090109,
+          "device": 47,
+          "inode": 2199183995389,
+          "mode": 384,
+          "mtime_ns": 1787727468566090109,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "45792ebee639e1d928fd619f9b6ab10cc1f9eeb356f54e3e9069a941ba9c0e05",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787727469931512385,
+          "device": 47,
+          "inode": 2199183995392,
+          "mode": 384,
+          "mtime_ns": 1787727469931512385,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "c8e65531335fd358c49343e1d6cf8a296b247a2bbeb55a91caf51d64819bc420",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787727467422685443,
+          "device": 47,
+          "inode": 2199183995386,
+          "mode": 384,
+          "mtime_ns": 1787727467422685443,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787727467426991489,
+          "device": 47,
+          "inode": 2199183995387,
+          "mode": 384,
+          "mtime_ns": 1787727467426991489,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787727470070159361,
+          "device": 47,
+          "inode": 2199183995395,
+          "mode": 384,
+          "mtime_ns": 1787727470070159361,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_40/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "6b7425d162eed9aab2be2d8627c1f7ae28b532474225c3fc90792dab76860675",
+          "size_bytes": 2008
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787728178486523215,
+          "device": 47,
+          "inode": 2199183995638,
+          "mode": 384,
+          "mtime_ns": 1787728178486523215,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "8f111d541553b9cecfb335e1afb240c69db9dccb259b6f97ea2ede94ca4e8e4e",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787728180055423202,
+          "device": 47,
+          "inode": 2199183995640,
+          "mode": 384,
+          "mtime_ns": 1787728180055423202,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "cc2dbc1dfa88326078ed0be9476544c313cd33717bbd996d16476bd27ef10e60",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787728176447310862,
+          "device": 47,
+          "inode": 2199183995635,
+          "mode": 384,
+          "mtime_ns": 1787728176447310862,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787728176493812905,
+          "device": 47,
+          "inode": 2199183995636,
+          "mode": 384,
+          "mtime_ns": 1787728176493812905,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787728180389799964,
+          "device": 47,
+          "inode": 2199183995641,
+          "mode": 384,
+          "mtime_ns": 1787728180389799964,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "c4726190f17e7ce1934e0bfec6d2968d09c1fc616e4464ec8310790a75e30fda",
+          "size_bytes": 1984
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787728538544593168,
+          "device": 47,
+          "inode": 2199183995729,
+          "mode": 384,
+          "mtime_ns": 1787728538544593168,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "6cba88cad60a1f637f6e0ade5794d239443a6fbd670d796b87a8d0a9254a95bd",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787728539889307464,
+          "device": 47,
+          "inode": 2199183995731,
+          "mode": 384,
+          "mtime_ns": 1787728539889307464,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "94edf32ecc4febf464c57fe4a152fa26cec0d5883ed46eb57a5dd45a9418be1c",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787728537143615060,
+          "device": 47,
+          "inode": 2199183995726,
+          "mode": 384,
+          "mtime_ns": 1787728537143615060,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787728537147539099,
+          "device": 47,
+          "inode": 2199183995727,
+          "mode": 384,
+          "mtime_ns": 1787728537147539099,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787728540470207012,
+          "device": 47,
+          "inode": 2199183995732,
+          "mode": 384,
+          "mtime_ns": 1787728540470207012,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "1cc893587afc35a7663c2a87c83b6f502105f05161e8e4034aa3aa6e6fbc7be4",
+          "size_bytes": 2006
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "G-HI",
+      "files": [
+        {
+          "ctime_ns": 1787728900274937356,
+          "device": 47,
+          "inode": 2199183995818,
+          "mode": 384,
+          "mtime_ns": 1787728900274937356,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "b25d8de0b3ab5bb252bba255a40495db68409a90358f27e28f3b2aae153c7a00",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787728901595793522,
+          "device": 47,
+          "inode": 2199183995820,
+          "mode": 384,
+          "mtime_ns": 1787728901595793522,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "25c09be4d6b535300f758923d631f3d958b913e63c068757f2235fc703a2c6c3",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787728899101242552,
+          "device": 47,
+          "inode": 2199183995815,
+          "mode": 384,
+          "mtime_ns": 1787728899101242552,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787728899147175843,
+          "device": 47,
+          "inode": 2199183995816,
+          "mode": 384,
+          "mtime_ns": 1787728899147175843,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787728901695604685,
+          "device": 47,
+          "inode": 2199183995821,
+          "mode": 384,
+          "mtime_ns": 1787728901695604685,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity_g_hi_r2/g_hi/age_50/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "cec73640ea0e14afe523787926b6511e551424006fe3f9d96919f2fc94ff5ee0",
+          "size_bytes": 2002
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787707539968308446,
+          "device": 47,
+          "inode": 2199183977918,
+          "mode": 384,
+          "mtime_ns": 1787707539968308446,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "a676069aaa880dc741b5c9bcd5d44267ba141f6fc242132e64e948e93f3f842e",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707541339902254,
+          "device": 47,
+          "inode": 2199183977920,
+          "mode": 384,
+          "mtime_ns": 1787707541339902254,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "5b53a936d82181c24a2b7c0eba2ab9a881d92feb72b1580f40daf0105e6f1818",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707538742808034,
+          "device": 47,
+          "inode": 2199183977915,
+          "mode": 384,
+          "mtime_ns": 1787707538742808034,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787707538747789495,
+          "device": 47,
+          "inode": 2199183977916,
+          "mode": 384,
+          "mtime_ns": 1787707538747789495,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787707541558667592,
+          "device": 47,
+          "inode": 2199183977921,
+          "mode": 384,
+          "mtime_ns": 1787707541558667592,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "e036a312447ed87bd5d8016421e67668f07c1f100ca229e0536dcc4c41dbab97",
+          "size_bytes": 1983
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787707895543671645,
+          "device": 47,
+          "inode": 2199183978220,
+          "mode": 384,
+          "mtime_ns": 1787707895543671645,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "8676f8d0a4081ef90b25e57c8cebaf4a3325d689f27e748f2480fc864b23e196",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707897033717453,
+          "device": 47,
+          "inode": 2199183978224,
+          "mode": 384,
+          "mtime_ns": 1787707897033717453,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "636412fbfd949493fb7cb355878eecc6154fe3688adc2cad0e92cd86fcf37ef4",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787707894253092324,
+          "device": 47,
+          "inode": 2199183978216,
+          "mode": 384,
+          "mtime_ns": 1787707894253092324,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787707894257105402,
+          "device": 47,
+          "inode": 2199183978217,
+          "mode": 384,
+          "mtime_ns": 1787707894257105402,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787707897149182919,
+          "device": 47,
+          "inode": 2199183978227,
+          "mode": 384,
+          "mtime_ns": 1787707897149182919,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "48c4f748547416718e7c115f0a1043a3db87bc47b973c08c9457b76ada8f066f",
+          "size_bytes": 2011
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 10,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787708255795449475,
+          "device": 47,
+          "inode": 2199183978308,
+          "mode": 384,
+          "mtime_ns": 1787708255795449475,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "f3cdb0e081707430e6cf397f700a5adf483a0f37ffef4ea1f865f2c09bfc6b2d",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787708257196301659,
+          "device": 47,
+          "inode": 2199183978310,
+          "mode": 384,
+          "mtime_ns": 1787708257196301659,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "35025ae8d82cec0f38ff02212328290d00a7eabc1b855006786525c09e97fa4b",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787708254395001281,
+          "device": 47,
+          "inode": 2199183978305,
+          "mode": 384,
+          "mtime_ns": 1787708254395001281,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787708254478225013,
+          "device": 47,
+          "inode": 2199183978306,
+          "mode": 384,
+          "mtime_ns": 1787708254478225013,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787708257337031278,
+          "device": 47,
+          "inode": 2199183978311,
+          "mode": 384,
+          "mtime_ns": 1787708257337031278,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_10/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "615b6212b8352c5d89f2acb2ce10532af752c031f965fe72f151744771283d06",
+          "size_bytes": 1999
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787709110192073632,
+          "device": 47,
+          "inode": 2199183978627,
+          "mode": 384,
+          "mtime_ns": 1787709110192073632,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "18984c42080111b2828c9d481a178220a83d326da0b60cb58f46ccccde9333f3",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709112164805904,
+          "device": 47,
+          "inode": 2199183978629,
+          "mode": 384,
+          "mtime_ns": 1787709112164805904,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "420a73cac77638eaeb21d236dbf2614327eca37bde0bec953f76b0b053ae71b7",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709108416727941,
+          "device": 47,
+          "inode": 2199183978624,
+          "mode": 384,
+          "mtime_ns": 1787709108416727941,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787709108451106132,
+          "device": 47,
+          "inode": 2199183978625,
+          "mode": 384,
+          "mtime_ns": 1787709108451106132,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709112340639193,
+          "device": 47,
+          "inode": 2199183978631,
+          "mode": 384,
+          "mtime_ns": 1787709112340639193,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "fe484de7d864c84847a8db9c43b6088a07e7524db2ec545a91d16341b95644ac",
+          "size_bytes": 1982
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787709470810327581,
+          "device": 47,
+          "inode": 2199183978761,
+          "mode": 384,
+          "mtime_ns": 1787709470810327581,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "4ef0f6d4c293d25e89174c242b7520df785369b96f4616be8e903c2c0def23f1",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709472162635174,
+          "device": 47,
+          "inode": 2199183978764,
+          "mode": 384,
+          "mtime_ns": 1787709472162635174,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "f924b7de068d07ca71e3189cd74e7b5d69c51b540de0449b251af513e5420fdf",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709469279578104,
+          "device": 47,
+          "inode": 2199183978758,
+          "mode": 384,
+          "mtime_ns": 1787709469279578104,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787709469283695561,
+          "device": 47,
+          "inode": 2199183978759,
+          "mode": 384,
+          "mtime_ns": 1787709469283695561,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709472387101365,
+          "device": 47,
+          "inode": 2199183978765,
+          "mode": 384,
+          "mtime_ns": 1787709472387101365,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "881797b3dcb4ff14496ba7f730f5ce7cb440289d0e485ab662dc447c75cd797e",
+          "size_bytes": 2016
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 20,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787709829005573852,
+          "device": 47,
+          "inode": 2199183978858,
+          "mode": 384,
+          "mtime_ns": 1787709829005573852,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "d9dbd20660f566758a9061978c08e8e5ebe52b943170b834967a69eba809e073",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709830278819886,
+          "device": 47,
+          "inode": 2199183978860,
+          "mode": 384,
+          "mtime_ns": 1787709830278819886,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "8071db41bb415c9ea1c237a1b92bcef64262550394c369e7fd9e50201fdd6124",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787709827459642679,
+          "device": 47,
+          "inode": 2199183978855,
+          "mode": 384,
+          "mtime_ns": 1787709827459642679,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787709827464878730,
+          "device": 47,
+          "inode": 2199183978856,
+          "mode": 384,
+          "mtime_ns": 1787709827464878730,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787709830744723360,
+          "device": 47,
+          "inode": 2199183978861,
+          "mode": 384,
+          "mtime_ns": 1787709830744723360,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_20/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "d327a3bb1c3e2671d7d8ae0449bc4f04c8ee3543de497e039e041f23a2589930",
+          "size_bytes": 2004
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787710727161656036,
+          "device": 47,
+          "inode": 2199183979071,
+          "mode": 384,
+          "mtime_ns": 1787710727161656036,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "c257a7d92ed7a318d9a770556520969fc7c7a05564362248bb40273fae758dcc",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787710728518923956,
+          "device": 47,
+          "inode": 2199183979075,
+          "mode": 384,
+          "mtime_ns": 1787710728518923956,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "9c782c87c21386e112d7700a425cc832bb3a964239bbe0c2d6cde60232f359d8",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787710725755752296,
+          "device": 47,
+          "inode": 2199183979065,
+          "mode": 384,
+          "mtime_ns": 1787710725755752296,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787710725760387589,
+          "device": 47,
+          "inode": 2199183979066,
+          "mode": 384,
+          "mtime_ns": 1787710725760387589,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787710728773008975,
+          "device": 47,
+          "inode": 2199183979077,
+          "mode": 384,
+          "mtime_ns": 1787710728773008975,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "eeaf36cbbc0c95592e7e817b9e95d2a832b0b2b1ea28a5fa2f1ba9de9b86fdc1",
+          "size_bytes": 1986
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787711093323702163,
+          "device": 47,
+          "inode": 2199183979155,
+          "mode": 384,
+          "mtime_ns": 1787711093323702163,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "fad7202e9ca185b9824b14b9a2dd7f8f69b2ee5133b64218e0e0269f6e75a88b",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711095390944054,
+          "device": 47,
+          "inode": 2199183979158,
+          "mode": 384,
+          "mtime_ns": 1787711095390944054,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "eea8e3787291894b2c56dc6cb32544c2afc32a2bdbfd94b65cd8c0179d9edec5",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711091994002857,
+          "device": 47,
+          "inode": 2199183979152,
+          "mode": 384,
+          "mtime_ns": 1787711091994002857,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787711092057422920,
+          "device": 47,
+          "inode": 2199183979153,
+          "mode": 384,
+          "mtime_ns": 1787711092057422920,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787711095709928851,
+          "device": 47,
+          "inode": 2199183979159,
+          "mode": 384,
+          "mtime_ns": 1787711095709928851,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "72f0faae1ce089c522eec3b154cec364c887cc98fa55c10336a948f227c3241d",
+          "size_bytes": 2008
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 30,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787711455543761720,
+          "device": 47,
+          "inode": 2199183979274,
+          "mode": 384,
+          "mtime_ns": 1787711455543761720,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "73e3fbef7844de289856d7e525855553ee37aa9fd8607dbc90f70aadc39fddd3",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711456702980630,
+          "device": 47,
+          "inode": 2199183979276,
+          "mode": 384,
+          "mtime_ns": 1787711456702980630,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "55b9afd4c8a5c8d83bfb074aa6c49ae1eedff4c6920126b7e1694d58be242de6",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787711454250027675,
+          "device": 47,
+          "inode": 2199183979271,
+          "mode": 384,
+          "mtime_ns": 1787711454250027675,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787711454254248710,
+          "device": 47,
+          "inode": 2199183979272,
+          "mode": 384,
+          "mtime_ns": 1787711454254248710,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787711457284182376,
+          "device": 47,
+          "inode": 2199183979277,
+          "mode": 384,
+          "mtime_ns": 1787711457284182376,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_30/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "122dda1d2541886c48be64ec2b4080c5960b7e8be252eef4dc2a86185910b106",
+          "size_bytes": 2008
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787712372163169073,
+          "device": 47,
+          "inode": 2199183979857,
+          "mode": 384,
+          "mtime_ns": 1787712372163169073,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "e980f11907517e51839064d7aeba800e21a6c96b1acf5f609cf12e74d2646feb",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712373583852597,
+          "device": 47,
+          "inode": 2199183979865,
+          "mode": 384,
+          "mtime_ns": 1787712373583852597,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "3aab4aa02b0b193a636b9c815636cf2e201ba7b710bec0db56817542789b0b41",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712370846665839,
+          "device": 47,
+          "inode": 2199183979852,
+          "mode": 384,
+          "mtime_ns": 1787712370846665839,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787712370851024666,
+          "device": 47,
+          "inode": 2199183979853,
+          "mode": 384,
+          "mtime_ns": 1787712370851024666,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787712373808976894,
+          "device": 47,
+          "inode": 2199183979866,
+          "mode": 384,
+          "mtime_ns": 1787712373808976894,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "43f13ed01c9be3e13a1773dd7ff88242c64857efa020da86e6bb54f36ba565ae",
+          "size_bytes": 1982
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787712732245006844,
+          "device": 47,
+          "inode": 2199183980011,
+          "mode": 384,
+          "mtime_ns": 1787712732245006844,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "1791f67b013bfda72797f115561276e3a15a6e058ae53c148ccbbd5efc906977",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712733797110147,
+          "device": 47,
+          "inode": 2199183980013,
+          "mode": 384,
+          "mtime_ns": 1787712733797110147,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "b14b803821f4683bd406c9b71de64b9b7e9fc8d1f6946ff73326f3fed2ba67bd",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787712731002486897,
+          "device": 47,
+          "inode": 2199183980008,
+          "mode": 384,
+          "mtime_ns": 1787712731002486897,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787712731006845874,
+          "device": 47,
+          "inode": 2199183980009,
+          "mode": 384,
+          "mtime_ns": 1787712731006845874,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787712734008944150,
+          "device": 47,
+          "inode": 2199183980014,
+          "mode": 384,
+          "mtime_ns": 1787712734008944150,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "8686e1ce58735fb1da1a6c240ec2183b8b4aa0b93ec80e4bbe442650ec0316a8",
+          "size_bytes": 2014
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 40,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787713095096504187,
+          "device": 47,
+          "inode": 2199183980109,
+          "mode": 384,
+          "mtime_ns": 1787713095096504187,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "a5705cc3c68dc97d1208d3fe933c4164a3827a5e5e1d902ac3d4da4feef29db0",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787713096380439677,
+          "device": 47,
+          "inode": 2199183980111,
+          "mode": 384,
+          "mtime_ns": 1787713096380439677,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "5f1d185385666ef1f9a3119500a2da71390bfc8bc497e99d065ccfb30b4ac11a",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787713093853564661,
+          "device": 47,
+          "inode": 2199183980106,
+          "mode": 384,
+          "mtime_ns": 1787713093853564661,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787713093857803880,
+          "device": 47,
+          "inode": 2199183980107,
+          "mode": 384,
+          "mtime_ns": 1787713093857803880,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787713096581685465,
+          "device": 47,
+          "inode": 2199183980112,
+          "mode": 384,
+          "mtime_ns": 1787713096581685465,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_40/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "ff6471d77f04c1b8aa2e30fa108e740c499d9a0ad91ec680f391c9b2e3d0481f",
+          "size_bytes": 2000
+        }
+      ],
+      "view": "90deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787714020097444686,
+          "device": 47,
+          "inode": 2199183980517,
+          "mode": 384,
+          "mtime_ns": 1787714020097444686,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_0deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "0050169c9895d20210e8a6336f132774d733b0190ec98449f86fd89560f4eef1",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714021400779027,
+          "device": 47,
+          "inode": 2199183980519,
+          "mode": 384,
+          "mtime_ns": 1787714021400779027,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_0deg/tracer_max_los.tsv",
+          "sha256": "b58dc08cd20094f34dd9331ebb8e54d1c7430799e82b145ca75c155793c259d1",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714018856924077,
+          "device": 47,
+          "inode": 2199183980514,
+          "mode": 384,
+          "mtime_ns": 1787714018856924077,
+          "name": "x_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_0deg/x_kpc.tsv",
+          "sha256": "0a43912a0a8734741e6b1c8de1cd9f483a61179c1bcbb09c98206522410e0bbb",
+          "size_bytes": 11798
+        },
+        {
+          "ctime_ns": 1787714018861699266,
+          "device": 47,
+          "inode": 2199183980515,
+          "mode": 384,
+          "mtime_ns": 1787714018861699266,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_0deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714021553866940,
+          "device": 47,
+          "inode": 2199183980520,
+          "mode": 384,
+          "mtime_ns": 1787714021553866940,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_0deg/xraise_grid_smoke_metadata.json",
+          "sha256": "570d956b277adebd522275ad4b9f6bf41f8402adf15eb0136ad169008f556c30",
+          "size_bytes": 1979
+        }
+      ],
+      "view": "0deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787714381110367323,
+          "device": 47,
+          "inode": 2199183980664,
+          "mode": 384,
+          "mtime_ns": 1787714381110367323,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_45deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "46742fe7f9213f339d43197ac6b1b63b2a5718f43764a0dfedf1baf6d4393459",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714382648973337,
+          "device": 47,
+          "inode": 2199183980666,
+          "mode": 384,
+          "mtime_ns": 1787714382648973337,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_45deg/tracer_max_los.tsv",
+          "sha256": "b765f1e63e86a433da0213a4a85152a528e0b84ac558cc1da5e34d7136264dac",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714379324482486,
+          "device": 47,
+          "inode": 2199183980661,
+          "mode": 384,
+          "mtime_ns": 1787714379324482486,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_45deg/u_kpc.tsv",
+          "sha256": "36c0daded36bb6d2b39e8fb8d61a565598fa2888e03a0a449635bc4b70abd6a6",
+          "size_bytes": 11906
+        },
+        {
+          "ctime_ns": 1787714379693611836,
+          "device": 47,
+          "inode": 2199183980662,
+          "mode": 384,
+          "mtime_ns": 1787714379693611836,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_45deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714382974854183,
+          "device": 47,
+          "inode": 2199183980667,
+          "mode": 384,
+          "mtime_ns": 1787714382974854183,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_45deg/xraise_grid_smoke_metadata.json",
+          "sha256": "4b8ccd2e463213cad50ae0ff34590b6f338ed3b24abfb553b8fe0eb74d526e52",
+          "size_bytes": 2005
+        }
+      ],
+      "view": "45deg"
+    },
+    {
+      "age_myr": 50,
+      "case": "G-LO",
+      "files": [
+        {
+          "ctime_ns": 1787714744511322725,
+          "device": 47,
+          "inode": 2199183980773,
+          "mode": 384,
+          "mtime_ns": 1787714744511322725,
+          "name": "xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_90deg/xray_1kev_xraise_corrected_mjy_sr.tsv",
+          "sha256": "05f06044af37836e9032d112a826ed634de33cf891f8a45fd6650dcab5948d57",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714745828732829,
+          "device": 47,
+          "inode": 2199183980775,
+          "mode": 384,
+          "mtime_ns": 1787714745828732829,
+          "name": "tracer_max_los.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_90deg/tracer_max_los.tsv",
+          "sha256": "d0976ce5e250fa6dc98fe530010ced27d55f0f23ffb6e02d620121528785659c",
+          "size_bytes": 16548480
+        },
+        {
+          "ctime_ns": 1787714743248269770,
+          "device": 47,
+          "inode": 2199183980770,
+          "mode": 384,
+          "mtime_ns": 1787714743248269770,
+          "name": "u_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_90deg/u_kpc.tsv",
+          "sha256": "161875f8bae42f4d2c568cddaeb73b2c2a7e140d4fc1e6d2484be862f0de68ac",
+          "size_bytes": 11898
+        },
+        {
+          "ctime_ns": 1787714743252895335,
+          "device": 47,
+          "inode": 2199183980771,
+          "mode": 384,
+          "mtime_ns": 1787714743252895335,
+          "name": "z_kpc.tsv",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_90deg/z_kpc.tsv",
+          "sha256": "32c419e82609f34f2cf7fe0ca06ab0e439d7b04ba0df051144559093570d91f5",
+          "size_bytes": 12437
+        },
+        {
+          "ctime_ns": 1787714746245995394,
+          "device": 47,
+          "inode": 2199183980777,
+          "mode": 384,
+          "mtime_ns": 1787714746245995394,
+          "name": "xraise_grid_smoke_metadata.json",
+          "path_relative_to_base": "xray_cavity/g_lo/age_50/xraise_grid_90deg/xraise_grid_smoke_metadata.json",
+          "sha256": "e6e88c73d7e4b4cf65605128fa56373f97e52b92d0c36159e1590025f45c048c",
+          "size_bytes": 2003
+        }
+      ],
+      "view": "90deg"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+.....................                                                    [100%]
+21 passed in 114.32s (0:01:54)
+Q032_INPUT_BINDING_COMPLETE 60 300
+C-HI 10 0deg
+C-HI 10 45deg
+C-HI 10 90deg
+C-HI 20 0deg
+C-HI 20 45deg
+C-HI 20 90deg
+C-HI 30 0deg
+C-HI 30 45deg
+C-HI 30 90deg
+C-HI 40 0deg
+C-HI 40 45deg
+C-HI 40 90deg
+C-HI 50 0deg
+C-HI 50 45deg
+C-HI 50 90deg
+C-LO 10 0deg
+C-LO 10 45deg
+C-LO 10 90deg
+C-LO 20 0deg
+C-LO 20 45deg
+C-LO 20 90deg
+C-LO 30 0deg
+C-LO 30 45deg
+C-LO 30 90deg
+C-LO 40 0deg
+C-LO 40 45deg
+C-LO 40 90deg
+C-LO 50 0deg
+C-LO 50 45deg
+C-LO 50 90deg
+G-HI 10 0deg
+G-HI 10 45deg
+G-HI 10 90deg
+G-HI 20 0deg
+G-HI 20 45deg
+G-HI 20 90deg
+G-HI 30 0deg
+G-HI 30 45deg
+G-HI 30 90deg
+G-HI 40 0deg
+G-HI 40 45deg
+G-HI 40 90deg
+G-HI 50 0deg
+G-HI 50 45deg
+G-HI 50 90deg
+G-LO 10 0deg
+G-LO 10 45deg
+G-LO 10 90deg
+G-LO 20 0deg
+G-LO 20 45deg
+G-LO 20 90deg
+G-LO 30 0deg
+G-LO 30 45deg
+G-LO 30 90deg
+G-LO 40 0deg
+G-LO 40 45deg
+G-LO 40 90deg
+G-LO 50 0deg
+G-LO 50 45deg
+G-LO 50 90deg
+{
+  "status": "complete_q032_selected_age_method_ladder",
+  "views_analysed": 60,
+  "runs": [
+    "deficit_threshold_observer_radial_0.05",
+    "deficit_threshold_observer_radial_0.10",
+    "deficit_threshold_observer_radial_0.20",
+    "legacy_area_1pct",
+    "seed_grow_goal045"
+  ],
+  "observer_thresholds": [
+    0.05,
+    0.1,
+    0.2
+  ],
+  "baselines": {},
+  "baseline_role": "t=0 initial-atmosphere reference, not an evolved no-jet counterfactual",
+  "tracer_role": "evaluation only, tr1 max along line of sight > 0.001",
+  "mask_encoding": "numpy packbits of row-major boolean arrays; unpack with np.unpackbits(...)[:prod(shape)].reshape(shape)"
+}
+Q032_INPUT_BINDING_COMPLETE 60 300
+Q032_RETAINED_METHOD_LADDER_COMPLETE f968ee66dfb7da4257a018ef5e983f720bf327c770aa9511f5167d72a7ca039f 124

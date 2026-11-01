@@ -1,0 +1,224 @@
+{
+  "status": "passed_payload_integrity_and_internal_arithmetic_diagnostic_only",
+  "results_root": "/private/tmp/q032-download/results",
+  "packaging_receipt": "/private/tmp/xray-stocktake/stocktake_2026-11-01_0453_r2/q032_retained_method_ladder_receipt.json",
+  "packaging_receipt_sha256": "80a3505b27d5408c3d547d8bad506b5d4c3191ca57352cc5ceb879e5efae82ea",
+  "archive_sha256_from_packaging_receipt": "f968ee66dfb7da4257a018ef5e983f720bf327c770aa9511f5167d72a7ca039f",
+  "payload_integrity": {
+    "inner_manifest_payload_count": 123,
+    "all_inner_hashes_match": true,
+    "missing_or_extra_payloads": [],
+    "external_receipt_member_count": 124,
+    "all_external_receipt_sizes_and_hashes_match": true
+  },
+  "coverage": {
+    "case_age_view_count": 60,
+    "unique_method_side_rows": 600,
+    "npz_mask_files": 60,
+    "png_stamp_files": 60,
+    "missing_or_duplicate_combinations": []
+  },
+  "independent_arithmetic": {
+    "npz_files_unpacked": 60,
+    "method_side_rows_checked": 600,
+    "numerical_comparisons": 3600,
+    "failures": 0,
+    "quantities": [
+      "recovered_area_kpc2",
+      "tracer_projected_area_kpc2",
+      "tracer_completeness",
+      "tracer_purity",
+      "volume_revolution_kpc3",
+      "tracer_revolution_volume_kpc3"
+    ],
+    "method": "Unpack row-major masks; derive cell widths independently from midpoint axis edges; sum areas and overlap; compute pi*sum(abs(horizontal)*cell_area) for recovered/tracer masks. No production scoring functions called. Also check shape, increasing axes, hemisphere membership and detected flag.",
+    "rtol": 1e-12,
+    "atol": 1e-10
+  },
+  "scope": {
+    "excluded_case_age": [
+      "G-HI",
+      50
+    ],
+    "eligible_views": 57,
+    "eligible_sides_per_method": 114,
+    "summary_condition": "Quantiles condition on detected sides; no topology acceptance filter. Ratios compare two projected masks under identical revolution reconstruction, not native 3D truth.",
+    "corrected_qualification": "Inner CSV/metadata omit G-HI50 exclusion flags, but the external packaging receipt explicitly preserves the scientific exclusion, topology policy and production_adoption=false. Overall packaged artifact is gated correctly when accompanied by its receipt.",
+    "external_gates": {
+      "existing_scientific_exclusions": [
+        {
+          "age_myr": 50,
+          "case": "G-HI",
+          "evaluation_processing": "included in all method-ladder rows and artefacts",
+          "scientific_interpretation": "excluded from existing production scientific inference"
+        }
+      ],
+      "production_adoption": false,
+      "topology_policy": "all method rows retained, including production-rejected topology"
+    },
+    "baseline_runs": 0,
+    "source_maps_remotely_reread": false
+  },
+  "methods": {
+    "deficit_threshold_observer_radial_0.05": {
+      "eligible_sides": 114,
+      "detected_sides": 99,
+      "aperture_touching_sides": 6,
+      "view_topology_counts": {
+        "multiple_or_one_sided_components": 3,
+        "two_separate_components": 23,
+        "connected_cross_midplane_component": 24,
+        "no_significant_component": 7
+      },
+      "detected_side_completeness": {
+        "min": 0.07987148948676086,
+        "q25": 0.3778057885794319,
+        "median": 0.44989253088210046,
+        "q75": 0.529891241173606,
+        "max": 0.6046386375600891
+      },
+      "detected_side_purity": {
+        "min": 0.24880261605137285,
+        "q25": 0.7553071668654986,
+        "median": 0.9985505983098751,
+        "q75": 1.0,
+        "max": 1.0
+      },
+      "detected_side_projected_revolution_volume_ratio": {
+        "min": 0.04434410527458594,
+        "q25": 0.346546528768348,
+        "median": 0.5282829497756685,
+        "q75": 0.9912845529850063,
+        "max": 13.56056463134529
+      }
+    },
+    "deficit_threshold_observer_radial_0.10": {
+      "eligible_sides": 114,
+      "detected_sides": 86,
+      "aperture_touching_sides": 2,
+      "view_topology_counts": {
+        "no_significant_component": 14,
+        "multiple_or_one_sided_components": 7,
+        "two_separate_components": 23,
+        "connected_cross_midplane_component": 13
+      },
+      "detected_side_completeness": {
+        "min": 0.056254331954792194,
+        "q25": 0.26413744522154003,
+        "median": 0.3396341660573696,
+        "q75": 0.40126351097551666,
+        "max": 0.5471077791239726
+      },
+      "detected_side_purity": {
+        "min": 0.7924188054755215,
+        "q25": 0.9473321654846206,
+        "median": 1.0,
+        "q75": 1.0,
+        "max": 1.0
+      },
+      "detected_side_projected_revolution_volume_ratio": {
+        "min": 0.01745340834246868,
+        "q25": 0.2156578987562333,
+        "median": 0.29251847029787337,
+        "q75": 0.3720084507264457,
+        "max": 0.628047821013259
+      }
+    },
+    "deficit_threshold_observer_radial_0.20": {
+      "eligible_sides": 114,
+      "detected_sides": 60,
+      "aperture_touching_sides": 1,
+      "view_topology_counts": {
+        "no_significant_component": 27,
+        "two_separate_components": 23,
+        "multiple_or_one_sided_components": 4,
+        "connected_cross_midplane_component": 3
+      },
+      "detected_side_completeness": {
+        "min": 0.028017546275388005,
+        "q25": 0.12742984523008766,
+        "median": 0.20948602319528825,
+        "q75": 0.26296227503647557,
+        "max": 0.39118711064388106
+      },
+      "detected_side_purity": {
+        "min": 0.9526853444375525,
+        "q25": 1.0,
+        "median": 1.0,
+        "q75": 1.0,
+        "max": 1.0
+      },
+      "detected_side_projected_revolution_volume_ratio": {
+        "min": 0.005164698750457698,
+        "q25": 0.07406151265211681,
+        "median": 0.1168995080729483,
+        "q75": 0.22043052625070025,
+        "max": 0.34851271491187036
+      }
+    },
+    "legacy_area_1pct": {
+      "eligible_sides": 114,
+      "detected_sides": 110,
+      "aperture_touching_sides": 8,
+      "view_topology_counts": {
+        "multiple_or_one_sided_components": 12,
+        "two_separate_components": 37,
+        "connected_cross_midplane_component": 6,
+        "no_significant_component": 2
+      },
+      "detected_side_completeness": {
+        "min": 0.0,
+        "q25": 0.027043759619342078,
+        "median": 0.09251634102775819,
+        "q75": 0.2615942011893071,
+        "max": 0.6237343469209844
+      },
+      "detected_side_purity": {
+        "min": 0.0,
+        "q25": 1.0,
+        "median": 1.0,
+        "q75": 1.0,
+        "max": 1.0
+      },
+      "detected_side_projected_revolution_volume_ratio": {
+        "min": 0.002531642110451117,
+        "q25": 0.013696254849939778,
+        "median": 0.06967380220622371,
+        "q75": 0.270130860444984,
+        "max": 99.45829934206994
+      }
+    },
+    "seed_grow_goal045": {
+      "eligible_sides": 114,
+      "detected_sides": 83,
+      "aperture_touching_sides": 11,
+      "view_topology_counts": {
+        "multiple_or_one_sided_components": 7,
+        "no_significant_component": 15,
+        "two_separate_components": 29,
+        "connected_cross_midplane_component": 6
+      },
+      "detected_side_completeness": {
+        "min": 0.003489971505531413,
+        "q25": 0.20514329558190875,
+        "median": 0.39854187289934423,
+        "q75": 0.5188012311283754,
+        "max": 0.6912187242831053
+      },
+      "detected_side_purity": {
+        "min": 0.8645653550675678,
+        "q25": 1.0,
+        "median": 1.0,
+        "q75": 1.0,
+        "max": 1.0
+      },
+      "detected_side_projected_revolution_volume_ratio": {
+        "min": 0.0008077678983042316,
+        "q25": 0.11738675818052427,
+        "median": 0.3292430586563131,
+        "q75": 0.4924292669203437,
+        "max": 0.7344620296457338
+      }
+    }
+  }
+}

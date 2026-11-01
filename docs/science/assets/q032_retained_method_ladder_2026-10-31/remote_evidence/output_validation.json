@@ -1,0 +1,13 @@
+{
+  "baselines": {},
+  "packed_masks": 60,
+  "production_adoption": false,
+  "rows": 600,
+  "runs_per_view": 5,
+  "schema_version": 1,
+  "sides_per_run": 2,
+  "stamps": 60,
+  "status": "validated_q032_retained_method_ladder_exploratory",
+  "topology_policy": "all method rows retained, including production-rejected topology",
+  "views": 60
+}

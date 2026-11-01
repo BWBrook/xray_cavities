@@ -1,0 +1,15 @@
+JOB_START=2026-05-08T11:19:57Z
+HOST=n033.kunanyi
+PBS_JOBID=690371.kunanyi-ohpc
+PBS_QUEUE=normal
+PBS_NODEFILE=/var/spool/pbs/aux/690371.kunanyi-ohpc
+GATE_CASE=group_002031
+CONFIG_DIR=/u/bwbrook/codex_kunanyi/stage_2026-05-08/kunanyi_gate/group_002031
+WORKDIR=/scratch/bwbrook/xray_cavities_gates/2026-05-08/group_002031/690371.kunanyi-ohpc
+NRANKS=28
+MODULES=GCCcore/12.3.0:zlib/1.2.13-GCCcore-12.3.0:binutils/2.40-GCCcore-12.3.0:GCC/12.3.0:numactl/2.0.16-GCCcore-12.3.0:XZ/5.4.2-GCCcore-12.3.0:libxml2/2.11.4-GCCcore-12.3.0:libpciaccess/0.17-GCCcore-12.3.0:hwloc/2.9.1-GCCcore-12.3.0:OpenSSL/1.1:libevent/2.1.12-GCCcore-12.3.0:UCX/1.14.1-GCCcore-12.3.0:libfabric/1.18.0-GCCcore-12.3.0:PMIx/4.2.4-GCCcore-12.3.0:UCC/1.2.0-GCCcore-12.3.0:OpenMPI/4.1.5-GCC-12.3.0:gompi/2023a:Szip/2.1.1-GCCcore-12.3.0:HDF5/1.14.0-gompi-2023a
+HDF5_DIR=/share/apps/software/HDF5/1.14.0-gompi-2023a
+PLUTO_MAXTIME_HOURS=0.75
+mpicc=/share/apps/software/OpenMPI/4.1.5-GCC-12.3.0/bin/mpicc
+mpirun=/share/apps/software/OpenMPI/4.1.5-GCC-12.3.0/bin/mpirun
+python3=/usr/bin/python3
