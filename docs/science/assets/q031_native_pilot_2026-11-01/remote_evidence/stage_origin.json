@@ -1,0 +1,17 @@
+{
+  "repository_head": "374e51de51218561365de59c7c68b31405345778",
+  "scope": "C-HI and G-HI, retained snapshot40, 0/45/90 degrees, retained linear and clamp sensitivity",
+  "authority": "Barry: Go ahead with the C-HI and G-HI 40 Myr native pilot, including the clamp sensitivity. Keep coordinating with Claude and respect the migration and flux job dependencies.",
+  "authority_date": "2026-10-31",
+  "native_dependencies": [
+    "870323.kunanyi-ohpc",
+    "870374.kunanyi-ohpc",
+    "successful same-stage real-kernel synthetic smoke"
+  ],
+  "planned_resources": {
+    "smoke": "2 CPUs / 8 GB / 1 h",
+    "pilot": "2 CPUs / 128 GB / 24 h"
+  },
+  "resource_rationale": "Kunanyi holds the native payloads; avoid TB-scale transfers. Historical Q029 mask peak about41GB, chunked emissivity and sequential cases. Target synthetic smoke measures implementation runtime before dependent native submission; pilot records each case peak RSS.",
+  "native_payloads_staged": false
+}

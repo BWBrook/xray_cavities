@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-11-01 15:57 AEDT (migration stocktake and Q-032 delivery)
+Last updated: 2026-11-01 16:12 AEDT (native repair and retained-control audit launch)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -10,35 +10,35 @@ simulation project.
 At 04:53 UTC migration 870323 remains running. **Nine units are complete**, with
 5.697 TB of logical payload covered by receipts and live archive links; C-HI
 completed at 01:03 UTC. C-LO is copying its 3.100 TB and has no verification
-receipts yet. Flux 870374 and native 870719 remain held. A raw-versus-normalized
-migration-plan hashing defect in the native gate was discovered during review;
-a narrow repair is in progress, without changing frozen migration evidence.
+receipts yet. Flux 870374 and replacement native 871717 remain held. The native migration
+gate now normalizes the frozen plan before hashing it; 104 tests passed on
+Kunanyi in fresh smoke 871683. Frozen migration evidence is unchanged.
 
 Q-032 870640 finished F/0 (11:25). The complete 60-view package, masks, stamps,
 manifest and source-bound receipts are now local and independently checked.
 Claude retains interpretation ownership. G-HI/50 remains scientifically excluded,
 as recorded in the external receipt. Existing May-8 no-jet configurations are
 confirmed to use reflective boundaries, unlike production outflow boundaries;
-a signed energy/mass/motion audit is being prepared from their retained outputs.
+signed energy/mass/motion audit 871750 is submitted against their retained
+outputs (2 CPUs, 8 GB, 2 hours), after independent review and 21 local tests.
 See `docs/exchange/logs/2026-11-01-migration-analysis-stocktake.md` for evidence.
 
 ## Authorised Q-031 native pilot — submitted, dependency-held
 
 The fixed C-HI/G-HI 40 Myr pilot with retained-linear and coordinate-clamp
-emissivity is implemented and independently reviewed. Source is pushed through
-`fe0c0cb`. The complete r4 stage passed all 82 tests both locally and on Kunanyi,
-including the real-kernel subprocess CLI. It is checksum-verified at
-`/u/bwbrook/codex_kunanyi/q031_native_emission_2026-10-31_r4`.
+emissivity is implemented and independently reviewed. The normalized migration
+plan repair is committed as `374e51d`; the fresh immutable stage is
+`/u/bwbrook/codex_kunanyi/q031_native_emission_2026-11-01_r1`.
 
-Target smoke `870712.kunanyi-ohpc` finished `F/0`: 82 passed, zero skipped,
-110.63 seconds pytest time, 1:55 PBS walltime, measured peak 231,160 KiB.
-Its source/runtime-bound receipt passed revalidation before submission.
-Native pilot **`870719.kunanyi-ohpc` is submitted and held (`H`, system hold)**
-with verified `afterok` dependencies on smoke `870712`, migration `870323` and
-flux `870374`. It requests 2 CPUs, 128 GB and 24 hours for the two sequential
-cases. At 12:00 UTC migration was running and flux was held. The wrapper also
-verifies migration/flux receipts and source identity before native reads.
-Native results remain pending; queue acceptance is not scientific completion.
+Target smoke `871683.kunanyi-ohpc` finished `F/0`: 104 passed, zero skipped,
+191.58 seconds pytest time and 3:38 PBS walltime. Its source/runtime-bound
+receipt passed revalidation under the recorded Python environment.
+Superseded held job `870719` was cancelled before replacement
+**`871717.kunanyi-ohpc`** was submitted and observed `H` with `afterok`
+dependencies on smoke `871683`, migration `870323` and flux `870374`.
+Resources remain 2 CPUs, 128 GB and 24 hours for the two sequential cases.
+The wrapper also verifies migration/flux receipts and source identity before
+native reads. No native scientific results are available yet.
 
 Earlier smoke stages remain intact: `870703` failed before tests because the
 compute node lacks `/usr/bin/time`; `870704` passed 78 tests and failed three

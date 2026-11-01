@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "9bb868b4115173a2bb8f3cccecc4283ee8b7e805bae73c7861220c539456e571",
+  "all_member_hashes_verified": true,
+  "tests_passed": 104,
+  "tests_skipped": 0,
+  "pilot": "871717.kunanyi-ohpc",
+  "migration_and_flux_dependencies_verified": true,
+  "peak_RSS_KiB": 227564,
+  "native_results_available": false
+}

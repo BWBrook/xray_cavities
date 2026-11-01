@@ -33,7 +33,7 @@ normalizes it with schema 2, matching frozen receipt hash
 
 This exposed a defect in the native launch gate: it hashes the raw plan rather
 than the frozen migration's normalized representation. A narrowly scoped
-repair and regression are in progress. The frozen migration code, plan and
+repair and regression passed independent review and are committed as `374e51d`. The frozen migration code, plan and
 receipts are unchanged. Native scientific extraction has not begun.
 
 ## Q-032 completed diagnostic delivered
@@ -83,3 +83,49 @@ case is being prepared and independently reviewed. The archived inputs are
 already in the completed gates migration unit, so that audit need not wait
 for C-LO migration. It will run on Kunanyi to avoid transferring about 69 GB
 of native fields, and will not modify them.
+
+## Corrected native submission and retained-control audit
+
+Fresh native stage `q031_native_emission_2026-11-01_r1` (archive SHA-256
+`cb22c0e1ee43d8ae549b5b4576dbf8703e70fa2eedfa5c8a08485800f23f6e2e`)
+passed target smoke 871683: 104 tests, no failures/skips, F/0, 3:38 PBS walltime.
+The same-stage smoke receipt was revalidated with user-site Python disabled,
+as recorded in the smoke; a login-shell check without that flag correctly
+refused the runtime mismatch before any job cancellation or native read.
+Held 870719 was then cancelled; replacement 871717 was observed H with
+smoke/migration/flux afterok dependencies (871683, 870323, 870374).
+
+The signed no-jet audit passed 21 tests and independent numerical/provenance
+review. Source is pushed as `9eb85c1`; stage archive SHA-256 is
+`c2d8912105db026d578a161996c40a3feeb182d19cf61256608c619cd056f23e`.
+Job 871750 was submitted at about 05:12 UTC, initially Q, requesting
+2 CPUs, 8 GB and 2 hours. It runs tests on the target and checks completed
+migration-unit receipts before reading any fields. It computes signed
+mass/thermal/kinetic/potential changes and full three-dimensional gas motion
+at all six times, with nested boundary regions and a final maximum-motion slice.
+These are analyses of existing fields; no PLUTO simulation was launched.
+
+Cost/recommendation: `docs/science/matched_nojet_control_recommendation_2026-11-01.md`.
+The independently reproduced cell-step extrapolation is 5,337 core-hours for
+cluster and 4,946 for group, subject to a matched-grid benchmark. Six double
+snapshots need about 404 GB per atmosphere; full fluid cadence about 3.03 TB.
+The current recommendation is to defer a full matched run until this control
+audit and the existing flux/native work are interpreted, then prioritize
+cluster if production-background drift remains material. Claude has the
+package/recommendation on board discussion 29; no new response yet.
+
+Native launch evidence was downloaded and verified as an exact 14-member
+archive (including its capture manifest), SHA-256
+`9bb868b4115173a2bb8f3cccecc4283ee8b7e805bae73c7861220c539456e571`.
+All member sizes/hashes, JUnit outcomes, smoke-receipt bindings and all three
+PBS dependencies agree. Measured smoke peak RSS was 227,564 KiB. Local evidence:
+`docs/science/assets/q031_native_pilot_2026-11-01/remote_evidence/`.
+No-jet audit 871750 subsequently started, passed all 21 target tests, and
+completed its cluster zero-time snapshot without errors by the 1:52 walltime
+check. Outcomes remain pending until both cases and their package complete.
+
+Claude's latest established recommendation (board 2644) is also to defer,
+superseding his earlier preference for an immediate matched control. The
+remaining difference concerns his analytical energy-closure claim, which is
+not adopted pending the actual full-history measurements. Board 2790 corrects
+the attribution and preserves this distinction.

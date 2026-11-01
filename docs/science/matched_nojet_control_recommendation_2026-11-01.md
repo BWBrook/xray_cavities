@@ -106,8 +106,14 @@ a stated scientific purpose.
 - `docs/science/q031_boundary_hypothesis_2026-10-31.md`:
   reconstructed-boundary and nozzle limitations.
 
-Claude previously favoured a cluster matched-grid control (discussion 29,
-message 2639). Codex requested an updated recommendation after these findings
-(message 2781) and shared the confirmed boundary mismatch and completed
-Q-032 package. A fresh Claude response remains pending at this checkpoint;
-no agreement beyond the existing correspondence is implied.
+Claude revised his earlier preference for a cluster matched-grid control to
+**defer** in discussion 29, message 2644, pending radial mass and face-flux
+measurements. That sequencing agrees with the recommendation here. His
+stronger claim that the existing analytical correction already establishes
+whole-grid closure is not adopted: the retained G-LO smoke still shows an
+8.22% first-interval excess under the outer-active trapezoid convention and
+large startup-quadrature ambiguity at the nozzle. Four-case measurements
+remain pending. Codex requested his response to the newly confirmed reflective
+boundary mismatch and delivered Q-032 results (messages 2781–2789); that fresh
+response has not yet arrived. Agreement on sequencing is not validation of
+the boundary mechanism or control adequacy.

@@ -1,0 +1,69 @@
+{
+  "members": [
+    {
+      "path": "stage_checksums.sha256",
+      "sha256": "8aa798a0418febf0ef4a97e1639cc56a521af572f27117735413a5514c14bf0e",
+      "size_bytes": 4488
+    },
+    {
+      "path": "runtime_checksums.sha256",
+      "sha256": "7fa81c76f87b43c95b1a6f8028c6df906380b8b7179e7b07b10f2eac9ce2900b",
+      "size_bytes": 366
+    },
+    {
+      "path": "stage_origin.json",
+      "sha256": "5affc7a27a36a213adbcc49b57085b6ea7ade6e36f26ffce641f35665874b86a",
+      "size_bytes": 973
+    },
+    {
+      "path": "smoke_qstat.txt",
+      "sha256": "c94c7332a692f1ea06de5135222b8d8c23fa99350add6e898ed9b99c03eadec6",
+      "size_bytes": 10026
+    },
+    {
+      "path": "pilot_submission_qstat.txt",
+      "sha256": "a7ec61c532ea4579e04d7de96170b1e22d8301d9aaa55d9504061aa097e487cc",
+      "size_bytes": 9660
+    },
+    {
+      "path": "superseded_870719_qstat.txt",
+      "sha256": "95057c61446221befa38c30a5a0a714f99d7363b8e8cc6efc205e11c243cf869",
+      "size_bytes": 7781
+    },
+    {
+      "path": "pilot_job.txt",
+      "sha256": "12d3783cb6919076a5ad830574f0bbd8d8897aa813064883150e95f8fe3e1a80",
+      "size_bytes": 20
+    },
+    {
+      "path": "smoke_job.txt",
+      "sha256": "0a9c50c8bba2a87a73af736395578b214d41d34cab32fb51b04356bc165e8aa5",
+      "size_bytes": 20
+    },
+    {
+      "path": "run_smoke/completion.json",
+      "sha256": "bd07a532e1347ff7848bce1f9b22e4db341802dbeeba22d04b75210b06566590",
+      "size_bytes": 4026
+    },
+    {
+      "path": "run_smoke/tests.xml",
+      "sha256": "4b77ce2f512ae5dec8590242be86abc5ef062f71499919e18cf8793b4c9c6be1",
+      "size_bytes": 15331
+    },
+    {
+      "path": "run_smoke/resources.txt",
+      "sha256": "3948950b276f6f91c312e70214bad69aac02d8122db76cb4525da5bfc4532c63",
+      "size_bytes": 225
+    },
+    {
+      "path": "run_smoke/run.out",
+      "sha256": "37ab362de99296e95ddd1628511f87d94452c555c4a9ee7ff0b2806f481c40ae",
+      "size_bytes": 329
+    },
+    {
+      "path": "run_smoke/run.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  ]
+}
