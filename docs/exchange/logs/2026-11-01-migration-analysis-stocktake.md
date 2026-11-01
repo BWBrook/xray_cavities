@@ -129,3 +129,18 @@ superseding his earlier preference for an immediate matched control. The
 remaining difference concerns his analytical energy-closure claim, which is
 not adopted pending the actual full-history measurements. Board 2790 corrects
 the attribution and preserves this distinction.
+
+## Cluster control result; group retrieval pending
+
+Cluster output-only review passed 6,198 checks, including source identity to
+migration-receipt linkage, signed budget algebra and geometry. Whole-grid
+energy drift is +2.74828e53 erg (4.36e-9 of initial), with compensating
+inner/outer 100-kpc changes of about -/+1.72e56 erg. Maximum speed is
+1.54821 km/s, Mach 0.00222435, 0.5 kpc inside a reflective face; the inward
+cell-centred velocity is not evidence of wall transport. Full-grid maximum
+absolute density/pressure changes are 0.008711%/0.015628% at 50 Myr.
+
+The authenticated portal became inaccessible when the Mac locked. Group
+retrieval and final PBS accounting are pending; no job cancellation or
+resubmission was attempted. Cluster evidence and the qualified interpretation
+are preserved in `docs/science/nojet_control_audit_2026-11-01.md` and its assets.

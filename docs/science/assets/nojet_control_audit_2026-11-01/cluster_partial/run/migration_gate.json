@@ -1,0 +1,12 @@
+{
+  "bytes": 69206921306,
+  "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates",
+  "entries": 449,
+  "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+  "schema": 2,
+  "source": "/scratch/bwbrook/xray_cavities_gates",
+  "stage": "complete",
+  "tombstone": "/scratch/bwbrook/.xray_cavities_gates.xray-migration-fc40cdd22f95cd549194.tombstone",
+  "unit_id": "fc40cdd22f95cd549194",
+  "updated_at": 1792153574.5755303
+}

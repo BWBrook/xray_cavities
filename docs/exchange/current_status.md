@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-11-01 16:12 AEDT (native repair and retained-control audit launch)
+Last updated: 2026-11-01 (cluster control reviewed; group retrieval pending)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -22,6 +22,15 @@ confirmed to use reflective boundaries, unlike production outflow boundaries;
 signed energy/mass/motion audit 871750 is submitted against their retained
 outputs (2 CPUs, 8 GB, 2 hours), after independent review and 21 local tests.
 See `docs/exchange/logs/2026-11-01-migration-analysis-stocktake.md` for evidence.
+
+The cluster half of audit 871750 is now downloaded and independently reviewed:
+6,198 output/provenance checks pass. Final whole-grid energy drift is
+4.36e-9 of initial energy, but inner/outer 100-kpc changes compensate and
+maximum speed is 1.55 km/s (Mach 0.00222), in a cell beside a reflective wall.
+This is not measured wall inflow or validation of production boundaries.
+Group retrieval and final PBS accounting remain pending because the Mac is
+locked; Barry has been asked to unlock it. No final two-case result is claimed.
+See `docs/science/nojet_control_audit_2026-11-01.md`.
 
 ## Authorised Q-031 native pilot — submitted, dependency-held
 

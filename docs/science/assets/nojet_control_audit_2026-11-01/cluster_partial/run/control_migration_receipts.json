@@ -1,0 +1,138 @@
+{
+  "unit_id": "fc40cdd22f95cd549194",
+  "inputs": [
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0000.dbl.h5",
+      "migration_relative_path": "2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0000.dbl.h5",
+      "sha256_from_completed_migration": "cd071aaedb53335d1e21797c33c05e0de69d4a91a7452c363de566de959ff968",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778236234568243227,
+        "ctime_ns": 1792152258355714735,
+        "ino": 2199271853574
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0001.dbl.h5",
+      "migration_relative_path": "2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0001.dbl.h5",
+      "sha256_from_completed_migration": "154c2c841e6f1103fdf078def9924a4c53ee940fca2f06955a625d87d4ba24b0",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778237037938282203,
+        "ctime_ns": 1792152258359357652,
+        "ino": 2199271853788
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0002.dbl.h5",
+      "migration_relative_path": "2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0002.dbl.h5",
+      "sha256_from_completed_migration": "9447addbfa5d5885e0ca3c60a5d394d72da175234a38a2a302376a33cc824494",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778237521739658163,
+        "ctime_ns": 1792152258363479430,
+        "ino": 2199271854574
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0003.dbl.h5",
+      "migration_relative_path": "2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0003.dbl.h5",
+      "sha256_from_completed_migration": "9ce79c3e451e832ec0f4467c285eea351653f775fd7331a73f4fbb27be45817a",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778237915201254386,
+        "ctime_ns": 1792152258367457064,
+        "ino": 2199271855359
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0004.dbl.h5",
+      "migration_relative_path": "2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0004.dbl.h5",
+      "sha256_from_completed_migration": "5d3932ce136dbac74a85b0a34865bd6006049c44b55c3ea0807404e3a727457e",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778238440176061795,
+        "ctime_ns": 1792152258371660608,
+        "ino": 2199271855771
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0005.dbl.h5",
+      "migration_relative_path": "2026-05-08/cluster_002003/690366.kunanyi-ohpc/problem/data.0005.dbl.h5",
+      "sha256_from_completed_migration": "ad146cd5ea89ddd044e14e3e7736b840b9b4e87cd0a56346dbab5c06a718787e",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778238905541734038,
+        "ctime_ns": 1792152258375620909,
+        "ino": 2199271855936
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0000.dbl.h5",
+      "migration_relative_path": "2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0000.dbl.h5",
+      "sha256_from_completed_migration": "662e99b9ad87f98cf3cac0bdadc40967e17b176e3d4ae3e1cfe7a7e9f61cd62b",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778239456990685288,
+        "ctime_ns": 1792152258031439901,
+        "ino": 2199271856479
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0001.dbl.h5",
+      "migration_relative_path": "2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0001.dbl.h5",
+      "sha256_from_completed_migration": "cf8cf313158c7e0953c499670b0b5dca70deb30ccd05baf6ec5470ef6cda8843",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778240158565810372,
+        "ctime_ns": 1792152258035487749,
+        "ino": 2199271856736
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0002.dbl.h5",
+      "migration_relative_path": "2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0002.dbl.h5",
+      "sha256_from_completed_migration": "2cbf8e5a97b3c3b1c0915a9897558f88e5548a76bcb1837b26f452e46322459c",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778240636268972390,
+        "ctime_ns": 1792152258039784190,
+        "ino": 2199271856909
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0003.dbl.h5",
+      "migration_relative_path": "2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0003.dbl.h5",
+      "sha256_from_completed_migration": "d61476a9fce1b02e5b64997e4d3db93159b8c7842981ca4009ef93d0574fbd07",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778240993119888820,
+        "ctime_ns": 1792152258043629191,
+        "ino": 2199271857314
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0004.dbl.h5",
+      "migration_relative_path": "2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0004.dbl.h5",
+      "sha256_from_completed_migration": "3172e3f837ea348da8f208122b38ac90b913e8866283f6815a0469a565f1d793",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778241561138566381,
+        "ctime_ns": 1792152258047460296,
+        "ino": 2199271857810
+      }
+    },
+    {
+      "archive_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0005.dbl.h5",
+      "migration_relative_path": "2026-05-08/group_002031/690371.kunanyi-ohpc/problem/outputs/data.0005.dbl.h5",
+      "sha256_from_completed_migration": "9ec5926e15d1f05f47ca67e650de45f9a50add7efb1adcda819455ad0db5d5a7",
+      "live_stat_checked": {
+        "size": 5766745108,
+        "mtime_ns": 1778241908002038972,
+        "ctime_ns": 1792152258051691743,
+        "ino": 2199271858005
+      }
+    }
+  ],
+  "payload_rehashed": false
+}

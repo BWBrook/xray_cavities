@@ -1,0 +1,6 @@
+{
+  "repository_head": "9eb85c1a7b183276e2eb50f150e4c648074b6713",
+  "scope": "Read-only audit of existing six snapshots each for cluster and group May-8 reflective coarse controls",
+  "review": "Independent numerical/provenance review passed; 21 local tests passed",
+  "resources": "2 CPUs 8 GB 2 hours"
+}
