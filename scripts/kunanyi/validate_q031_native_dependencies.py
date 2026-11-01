@@ -99,6 +99,55 @@ def _unit_id(unit: dict[str, str]) -> str:
     return hashlib.sha256(f"{source}\0{destination}".encode()).hexdigest()[:20]
 
 
+def _migration_path(value: Any, label: str) -> Path:
+    if not isinstance(value, str) or not value or "\0" in value:
+        raise DependencyGateError(f"{label} must be a non-empty path string")
+    path = Path(value).expanduser()
+    if not path.is_absolute():
+        raise DependencyGateError(f"{label} must be absolute")
+    return Path(os.path.normpath(str(path)))
+
+
+def _normalize_migration_plan(raw: dict[str, Any]) -> dict[str, Any]:
+    """Reconstruct the frozen migrator's schema-2 plan from its raw input."""
+
+    if set(raw) != {"archive_root", "authority", "metadata_policy", "units"}:
+        raise DependencyGateError("migration plan has an unexpected raw schema")
+    if raw["metadata_policy"] != "private_archive":
+        raise DependencyGateError("migration metadata_policy must be private_archive")
+    if not isinstance(raw["authority"], str) or not raw["authority"].strip():
+        raise DependencyGateError("migration authority must be a non-empty string")
+    archive_root = _migration_path(raw["archive_root"], "archive_root")
+    if not isinstance(raw["units"], list) or len(raw["units"]) != EXPECTED_UNIT_COUNT:
+        raise DependencyGateError(f"migration plan must contain exactly {EXPECTED_UNIT_COUNT} units")
+    units = []
+    sources: list[Path] = []
+    destinations: list[Path] = []
+    for index, unit in enumerate(raw["units"]):
+        if not isinstance(unit, dict) or set(unit) != {"source", "destination"}:
+            raise DependencyGateError(f"migration unit {index} has an unexpected schema")
+        source = _migration_path(unit["source"], f"unit {index} source")
+        destination = _migration_path(unit["destination"], f"unit {index} destination")
+        if destination == archive_root or archive_root not in destination.parents:
+            raise DependencyGateError(f"migration destination {index} must be below archive_root")
+        if source == destination or source in destination.parents or destination in source.parents:
+            raise DependencyGateError(f"migration source and destination overlap in unit {index}")
+        if any(source == other or source in other.parents or other in source.parents for other in sources):
+            raise DependencyGateError(f"migration source units overlap at unit {index}")
+        if any(destination == other or destination in other.parents or other in destination.parents for other in destinations):
+            raise DependencyGateError(f"migration destination units overlap at unit {index}")
+        sources.append(source)
+        destinations.append(destination)
+        units.append({"source": str(source), "destination": str(destination)})
+    return {
+        "schema": 2,
+        "archive_root": str(archive_root),
+        "authority": raw["authority"],
+        "metadata_policy": "private_archive",
+        "units": units,
+    }
+
+
 def _migration_small_file_hashes(root: Path, status_paths: list[Path]) -> dict[str, str]:
     paths = [
         root / "migration_plan.json",
@@ -123,23 +172,20 @@ def validate_migration_dependencies(
     root = Path(migration_root)
     _require_directory(root, "migration root")
     plan_path = root / "migration_plan.json"
-    plan = _read_object(plan_path, "migration plan")
+    plan = _normalize_migration_plan(_read_object(plan_path, "migration plan"))
     observed_hash = canonical_sha256(plan)
     if observed_hash != expected_plan_hash:
         raise DependencyGateError(
             f"migration plan hash mismatch: expected {expected_plan_hash}, observed {observed_hash}"
         )
-    units = plan.get("units")
-    if not isinstance(units, list) or len(units) != EXPECTED_UNIT_COUNT:
-        raise DependencyGateError(f"migration plan must contain exactly {EXPECTED_UNIT_COUNT} units")
-    if any(not isinstance(unit, dict) for unit in units):
-        raise DependencyGateError("migration plan contains a non-object unit")
+    units = plan["units"]
 
     state = root / "state"
     _require_directory(state, "migration state directory")
     binding_path = state / "plan-binding.json"
     binding = _read_object(binding_path, "plan binding")
-    if binding.get("plan") != plan or binding.get("plan_hash") != observed_hash:
+    expected_binding = {"schema": 2, "plan_hash": observed_hash, "plan": plan}
+    if canonical_json(binding) != canonical_json(expected_binding):
         raise DependencyGateError("plan-binding.json does not match migration plan/hash")
 
     verified_path = state / "verified-manifest.json"

@@ -37,15 +37,16 @@ def write_migration_fixture(tmp_path: Path) -> tuple[Path, str]:
         source_target = str(destination)
         source.symlink_to(source_target)
         units.append({"source": str(source), "destination": source_target})
-    plan = {
-        "schema": 2,
+    (root / "archive").chmod(0o700)
+    raw_plan = {
         "archive_root": str(root / "archive"),
         "authority": "synthetic-test",
         "metadata_policy": "private_archive",
         "units": units,
     }
+    plan = {"schema": 2, **raw_plan}
     plan_hash = gate.canonical_sha256(plan)
-    (root / "migration_plan.json").write_text(json.dumps(plan) + "\n", encoding="utf-8")
+    (root / "migration_plan.json").write_text(json.dumps(raw_plan) + "\n", encoding="utf-8")
     (state / "plan-binding.json").write_text(
         json.dumps({"schema": 2, "plan_hash": plan_hash, "plan": plan}) + "\n", encoding="utf-8"
     )
@@ -181,10 +182,103 @@ def write_flux_fixture(tmp_path: Path) -> tuple[Path, Path, list[Path]]:
 
 def test_valid_migration_gate_is_parameterized_for_synthetic_plan(tmp_path: Path) -> None:
     root, plan_hash = write_migration_fixture(tmp_path)
+    raw_plan = json.loads((root / "migration_plan.json").read_text())
+    binding = json.loads((root / "state" / "plan-binding.json").read_text())
+    assert "schema" not in raw_plan
+    assert binding["plan"]["schema"] == 2
+    assert gate.canonical_sha256(raw_plan) != plan_hash
     result = gate.validate_migration_dependencies(root, expected_plan_hash=plan_hash)
     assert result["plan_hash"] == plan_hash
     assert result["unit_count"] == 10
     assert result["input_small_file_hashes"]
+
+
+def test_normalization_matches_frozen_migrator(tmp_path: Path) -> None:
+    root, plan_hash = write_migration_fixture(tmp_path)
+    raw = json.loads((root / "migration_plan.json").read_text())
+    spec = importlib.util.spec_from_file_location(
+        "frozen_migration_for_dependency_test", ROOT / "scripts/kunanyi/migrate_xray_scratch_to_home.py"
+    )
+    assert spec and spec.loader
+    frozen = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = frozen
+    spec.loader.exec_module(frozen)
+    normalized = gate._normalize_migration_plan(raw)
+    assert normalized == frozen._validate_plan(raw)
+    assert gate.canonical_json(normalized) == frozen._canonical(normalized)
+    assert gate.canonical_sha256(normalized) == frozen._plan_hash(normalized) == plan_hash
+
+
+def test_frozen_production_raw_plan_reproduces_immutable_hash() -> None:
+    path = ROOT / "docs/science/assets/scratch_home_migration_2026-10-16/migration_plan.json"
+    raw = json.loads(path.read_text())
+    assert "schema" not in raw
+    assert gate.canonical_sha256(raw) != gate.KNOWN_PLAN_HASH
+    assert gate.canonical_sha256(gate._normalize_migration_plan(raw)) == gate.KNOWN_PLAN_HASH
+
+
+@pytest.mark.parametrize("mutation", [
+    "schema", "extra_key", "missing_key", "policy", "authority", "unit_count", "unit_schema",
+    "relative_source", "nonstring_source", "null_source", "relative_archive",
+    "outside_destination", "overlapping_sources", "overlapping_destinations",
+])
+def test_migration_gate_rejects_malformed_raw_plan(tmp_path: Path, mutation: str) -> None:
+    root, plan_hash = write_migration_fixture(tmp_path)
+    path = root / "migration_plan.json"
+    raw = json.loads(path.read_text())
+    if mutation == "schema":
+        raw["schema"] = 2
+    elif mutation == "extra_key":
+        raw["unexpected"] = True
+    elif mutation == "missing_key":
+        raw.pop("authority")
+    elif mutation == "policy":
+        raw["metadata_policy"] = "public"
+    elif mutation == "authority":
+        raw["authority"] = " "
+    elif mutation == "unit_count":
+        raw["units"].pop()
+    elif mutation == "unit_schema":
+        raw["units"][0]["unexpected"] = True
+    elif mutation == "relative_source":
+        raw["units"][0]["source"] = "scratch"
+    elif mutation == "nonstring_source":
+        raw["units"][0]["source"] = None
+    elif mutation == "null_source":
+        raw["units"][0]["source"] += "\0"
+    elif mutation == "relative_archive":
+        raw["archive_root"] = "archive"
+    elif mutation == "outside_destination":
+        raw["units"][0]["destination"] = str(root / "elsewhere")
+    elif mutation == "overlapping_sources":
+        raw["units"][1]["source"] = raw["units"][0]["source"] + "/nested"
+    elif mutation == "overlapping_destinations":
+        raw["units"][1]["destination"] = raw["units"][0]["destination"]
+    path.write_text(json.dumps(raw))
+    with pytest.raises(gate.DependencyGateError):
+        gate.validate_migration_dependencies(root, expected_plan_hash=plan_hash)
+
+
+@pytest.mark.parametrize("mutation", ["missing_schema", "extra_key", "raw_plan", "hash", "schema_type", "plan_schema"])
+def test_migration_gate_rejects_malformed_binding(tmp_path: Path, mutation: str) -> None:
+    root, plan_hash = write_migration_fixture(tmp_path)
+    path = root / "state" / "plan-binding.json"
+    binding = json.loads(path.read_text())
+    if mutation == "missing_schema":
+        binding.pop("schema")
+    elif mutation == "extra_key":
+        binding["unexpected"] = True
+    elif mutation == "raw_plan":
+        binding["plan"].pop("schema")
+    elif mutation == "hash":
+        binding["plan_hash"] = "0" * 64
+    elif mutation == "schema_type":
+        binding["schema"] = 2.0
+    elif mutation == "plan_schema":
+        binding["plan"]["schema"] = 2.0
+    path.write_text(json.dumps(binding))
+    with pytest.raises(gate.DependencyGateError, match="plan-binding"):
+        gate.validate_migration_dependencies(root, expected_plan_hash=plan_hash)
 
 
 def test_migration_gate_rejects_unfinished_unit(tmp_path: Path) -> None:
