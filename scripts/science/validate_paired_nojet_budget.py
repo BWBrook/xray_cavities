@@ -102,7 +102,7 @@ def check_rows(rows: list[dict[str, str]], boundary: str, mode: str) -> dict:
                 values = {part: row[f"actual_{quantity}_{part}_{unit}"] for part in PARTS}
                 if values["positive"] < 0 or values["negative"] > 0:
                     raise ValueError("ingress/egress signs are invalid")
-                close(values["net"], values["positive"] + values["negative"], 0, "signed actual flux does not sum")
+                close(values["net"], values["positive"] + values["negative"], values["positive"] - values["negative"], "signed actual flux does not sum")
                 if not index and any(values.values()):
                     raise ValueError("zero-time state contains already accumulated transport")
                 for part in PARTS:

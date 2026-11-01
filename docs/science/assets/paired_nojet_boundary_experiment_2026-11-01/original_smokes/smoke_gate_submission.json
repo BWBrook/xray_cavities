@@ -1,0 +1,26 @@
+{
+  "job_id": "872619.kunanyi-ohpc",
+  "command": [
+    "qsub",
+    "-N",
+    "paired_smoke_gate",
+    "-l",
+    "select=1:ncpus=2:mpiprocs=2:mem=8gb",
+    "-l",
+    "walltime=00:15:00",
+    "-v",
+    "PAIRED_STAGE=/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1,PAIRED_MODE=smoke-gate",
+    "-o",
+    "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/logs/smoke_gate.pbs.out",
+    "-W",
+    "depend=afterok:872581.kunanyi-ohpc:872582.kunanyi-ohpc:872583.kunanyi-ohpc:872584.kunanyi-ohpc",
+    "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/kunanyi/paired_nojet_control.pbs"
+  ],
+  "created_utc": "2026-11-01T10:01:49.218676Z",
+  "dependencies": [
+    "872581.kunanyi-ohpc",
+    "872582.kunanyi-ohpc",
+    "872583.kunanyi-ohpc",
+    "872584.kunanyi-ohpc"
+  ]
+}

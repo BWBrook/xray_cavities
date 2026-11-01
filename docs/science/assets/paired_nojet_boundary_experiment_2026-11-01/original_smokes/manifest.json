@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-01T10:15:01.792722Z",
+  "stage": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1",
+  "scope": "original completed smoke evidence, including preserved group-reflective validator cancellation failure",
+  "files": [
+    {
+      "path": "bin/pluto",
+      "bytes": 372768,
+      "sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386"
+    },
+    {
+      "path": "build/build_receipt.json",
+      "bytes": 448,
+      "sha256": "4fec8f47e1029728598ee25d18c67bb0eee101059a8e6ae99dd9f6d9803932ef"
+    },
+    {
+      "path": "experiment_contract.json",
+      "bytes": 1483,
+      "sha256": "96a65b08f731e54e64708950467aa4cab26aa0d9a0693f8ee8d583a66230fa29"
+    },
+    {
+      "path": "logs/cluster_002003_outflow.smoke.final.accounting.txt",
+      "bytes": 10471,
+      "sha256": "f32ece96b3541c80a3d7c2c1f11737773a3329082bf1a41f666fe4972f97ffb1"
+    },
+    {
+      "path": "logs/cluster_002003_outflow.smoke.r2.pbs.out",
+      "bytes": 100,
+      "sha256": "2a6a24c7628d17ce024e077bd1cb54055c0132dc2cc01c758ece61d403fa7a30"
+    },
+    {
+      "path": "logs/cluster_002003_reflective.smoke.final.accounting.txt",
+      "bytes": 10484,
+      "sha256": "c260d37ccfb28f2ca71ef417ccb599df2317910ffcdcfef6fb7940bf86ebe1d2"
+    },
+    {
+      "path": "logs/cluster_002003_reflective.smoke.r2.pbs.out",
+      "bytes": 106,
+      "sha256": "fdcc03079438d99c3be89797525b16603e3fc26c78b519548b38004a09cc3c3a"
+    },
+    {
+      "path": "logs/group_002031_outflow.smoke.final.accounting.txt",
+      "bytes": 10463,
+      "sha256": "f237f640f200f98df42c6ce714b08be16bf42d2982351bd6783207abbede82c2"
+    },
+    {
+      "path": "logs/group_002031_outflow.smoke.r2.pbs.out",
+      "bytes": 96,
+      "sha256": "79aaf4a0283b03e9faa622cd97b78a276fff5b1b97f7619f1b33825609ff26ed"
+    },
+    {
+      "path": "logs/group_002031_reflective.smoke.final.accounting.txt",
+      "bytes": 10473,
+      "sha256": "4c64d9ee64df68f9f88d23a5a6a71cbbb95713fa15ff356afdffa30cce40fcfd"
+    },
+    {
+      "path": "logs/group_002031_reflective.smoke.r2.pbs.out",
+      "bytes": 1183,
+      "sha256": "09f763e67b2dfc7aa7749ced25762dc740b74c510fbfed8ad266660faa77cb21"
+    },
+    {
+      "path": "logs/smoke_capture_source_checksums.txt",
+      "bytes": 34152,
+      "sha256": "cc7a8310967236a6956a777bdac34da2649181f48f65990cd1c8a207b946131f"
+    },
+    {
+      "path": "logs/smoke_gate.final.accounting.txt",
+      "bytes": 9918,
+      "sha256": "11ff41fcca058967375d5f30c839b7c12d06ae6c4b8c0ee2beb26de34b06defa"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/budget_receipt.json",
+      "bytes": 10055,
+      "sha256": "84f985b05872dced5c9886f3bc2d2be73ccb77561971b72d77c2574da2c11142"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/definitions.h",
+      "bytes": 2827,
+      "sha256": "2ce281d805f9d9b92b909db9d29538bfe4940b3fd91b3e935319d03a880c0669"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/definitions_usr.h",
+      "bytes": 4588,
+      "sha256": "afba3639a762950152a2c5c33acd63379ae0adbfafaf9a84f1a4d5b1b4e4d994"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/environment.ini",
+      "bytes": 198,
+      "sha256": "93273faad753ec6efaaa3746fe82c4c0abb8cca5efc50c83ac85de3df96d0e0d"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/launcher.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/launcher.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/output_receipt.json",
+      "bytes": 19732,
+      "sha256": "286be84f81d633c43c3a2268790cc3c1535685c6a353ed5ad68f18351a592128"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/outputs/dbl.h5.out",
+      "bytes": 149,
+      "sha256": "e8515da1d027bb1cd3b1412b9e3f9565e4eac6fe4981c7363176be8432751f89"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/outputs/grid.out",
+      "bytes": 63797,
+      "sha256": "f97c1f983a5de1397be31ee459ae588bdd98be4f514a945f5564dd1eeaa582f7"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/outputs/logs/pluto.0.log",
+      "bytes": 16919,
+      "sha256": "9806c878a153b7d27e1b57f37237db0fccee0c81c198329013dc2d39d28effa4"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/paired_nojet_budget.csv",
+      "bytes": 94955,
+      "sha256": "c33108c2bbec46e66a21312e16eaf62abe5fe21d8b81b271b97de68339075772"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/pluto.ini",
+      "bytes": 2038,
+      "sha256": "8b9584ac70281d6833c4cfc89477265b2a02f0cb0ac0acdb16e9dbf60f18363d"
+    },
+    {
+      "path": "smoke/cluster_002003_outflow/simulation.resources.txt",
+      "bytes": 229,
+      "sha256": "9666c40188435116ee119155da15782c569c10a664c336b663187865074d518b"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/budget_receipt.json",
+      "bytes": 10118,
+      "sha256": "8d7e8c90860794543976900f9884aa373d85a9aea95cca16ecd5f8b4acec31eb"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/definitions.h",
+      "bytes": 2827,
+      "sha256": "2ce281d805f9d9b92b909db9d29538bfe4940b3fd91b3e935319d03a880c0669"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/definitions_usr.h",
+      "bytes": 4588,
+      "sha256": "afba3639a762950152a2c5c33acd63379ae0adbfafaf9a84f1a4d5b1b4e4d994"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/environment.ini",
+      "bytes": 198,
+      "sha256": "93273faad753ec6efaaa3746fe82c4c0abb8cca5efc50c83ac85de3df96d0e0d"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/launcher.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/launcher.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/output_receipt.json",
+      "bytes": 19815,
+      "sha256": "55227395fe676f36ea13d2eefeb6e211bfb1cf53ffa91d541a5df7e2fa9ecf94"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/outputs/dbl.h5.out",
+      "bytes": 149,
+      "sha256": "e8515da1d027bb1cd3b1412b9e3f9565e4eac6fe4981c7363176be8432751f89"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/outputs/grid.out",
+      "bytes": 63797,
+      "sha256": "1d007733232a4ed57735699988931b182057c55c287299a80f69913eeb5d82bc"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/outputs/logs/pluto.0.log",
+      "bytes": 16952,
+      "sha256": "73c9cb5e23b1e6e65dd61250dbfc0b91d7dcbebadee9ffc6bb3e8b5f66fbef4e"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/paired_nojet_budget.csv",
+      "bytes": 99608,
+      "sha256": "463dc28f6ad5b9b2651a46be28e142b4f270fd28b2c8ed1cb85fa2fa46a12d6e"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/pluto.ini",
+      "bytes": 2056,
+      "sha256": "95868df3b94e0501f1807b324600352c493d90d60ae0ec17e97f33b5c9c9ae93"
+    },
+    {
+      "path": "smoke/cluster_002003_reflective/simulation.resources.txt",
+      "bytes": 229,
+      "sha256": "3c2eac2c43b427733f85501688c1711113f817b5ce957b312bc9f629dedb3acc"
+    },
+    {
+      "path": "smoke/group_002031_outflow/budget_receipt.json",
+      "bytes": 10066,
+      "sha256": "62c051a7fe79fd12cecf119de329cfa638a73194e1076079ca818db0a363c6f2"
+    },
+    {
+      "path": "smoke/group_002031_outflow/definitions.h",
+      "bytes": 2827,
+      "sha256": "2ce281d805f9d9b92b909db9d29538bfe4940b3fd91b3e935319d03a880c0669"
+    },
+    {
+      "path": "smoke/group_002031_outflow/definitions_usr.h",
+      "bytes": 4588,
+      "sha256": "afba3639a762950152a2c5c33acd63379ae0adbfafaf9a84f1a4d5b1b4e4d994"
+    },
+    {
+      "path": "smoke/group_002031_outflow/environment.ini",
+      "bytes": 198,
+      "sha256": "d5faa738f89f34e10900d81f067d4a32fc3d39112f1dbc5a6a1ef965c9cda733"
+    },
+    {
+      "path": "smoke/group_002031_outflow/launcher.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "smoke/group_002031_outflow/launcher.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "smoke/group_002031_outflow/output_receipt.json",
+      "bytes": 19687,
+      "sha256": "e29c02b069cdfa3d6f4af3137260b90a4aae0d8358087f873e2f11dab914743a"
+    },
+    {
+      "path": "smoke/group_002031_outflow/outputs/dbl.h5.out",
+      "bytes": 149,
+      "sha256": "e8515da1d027bb1cd3b1412b9e3f9565e4eac6fe4981c7363176be8432751f89"
+    },
+    {
+      "path": "smoke/group_002031_outflow/outputs/grid.out",
+      "bytes": 63797,
+      "sha256": "f97c1f983a5de1397be31ee459ae588bdd98be4f514a945f5564dd1eeaa582f7"
+    },
+    {
+      "path": "smoke/group_002031_outflow/outputs/logs/pluto.0.log",
+      "bytes": 16919,
+      "sha256": "18683bc665f2fea38084d601dd5bea233002925987c871aa79756a315897fcb1"
+    },
+    {
+      "path": "smoke/group_002031_outflow/paired_nojet_budget.csv",
+      "bytes": 94981,
+      "sha256": "dea9dc71b111c21ed670cae0276c04706589b89916153aca5227907996a0a9ca"
+    },
+    {
+      "path": "smoke/group_002031_outflow/pluto.ini",
+      "bytes": 2038,
+      "sha256": "8b9584ac70281d6833c4cfc89477265b2a02f0cb0ac0acdb16e9dbf60f18363d"
+    },
+    {
+      "path": "smoke/group_002031_outflow/simulation.resources.txt",
+      "bytes": 229,
+      "sha256": "7fd03f63bcb96c23a36ef52880d3040acf19116efab2c7d1e7bb9fc27c221f69"
+    },
+    {
+      "path": "smoke/group_002031_reflective/definitions.h",
+      "bytes": 2827,
+      "sha256": "2ce281d805f9d9b92b909db9d29538bfe4940b3fd91b3e935319d03a880c0669"
+    },
+    {
+      "path": "smoke/group_002031_reflective/definitions_usr.h",
+      "bytes": 4588,
+      "sha256": "afba3639a762950152a2c5c33acd63379ae0adbfafaf9a84f1a4d5b1b4e4d994"
+    },
+    {
+      "path": "smoke/group_002031_reflective/environment.ini",
+      "bytes": 198,
+      "sha256": "d5faa738f89f34e10900d81f067d4a32fc3d39112f1dbc5a6a1ef965c9cda733"
+    },
+    {
+      "path": "smoke/group_002031_reflective/launcher.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "smoke/group_002031_reflective/launcher.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "smoke/group_002031_reflective/output_receipt.json",
+      "bytes": 19778,
+      "sha256": "257db0d84386e990afeac8e67943aa6ac305e5ea22ed967a372f29d3392e0954"
+    },
+    {
+      "path": "smoke/group_002031_reflective/outputs/dbl.h5.out",
+      "bytes": 149,
+      "sha256": "e8515da1d027bb1cd3b1412b9e3f9565e4eac6fe4981c7363176be8432751f89"
+    },
+    {
+      "path": "smoke/group_002031_reflective/outputs/grid.out",
+      "bytes": 63797,
+      "sha256": "e9602946ce2ce570707fa67b7db06a24b5859ba38a78c2ada083f8963c1c9821"
+    },
+    {
+      "path": "smoke/group_002031_reflective/outputs/logs/pluto.0.log",
+      "bytes": 16939,
+      "sha256": "36eccb39ac6e002b2149b276904469781da25210f720e6aad3e9ed49ae3ec02a"
+    },
+    {
+      "path": "smoke/group_002031_reflective/paired_nojet_budget.csv",
+      "bytes": 99664,
+      "sha256": "bdd381d7c80c942a392870bdb3d905cfdd39847f2591c7205b18c0d971939e97"
+    },
+    {
+      "path": "smoke/group_002031_reflective/pluto.ini",
+      "bytes": 2056,
+      "sha256": "95868df3b94e0501f1807b324600352c493d90d60ae0ec17e97f33b5c9c9ae93"
+    },
+    {
+      "path": "smoke/group_002031_reflective/simulation.resources.txt",
+      "bytes": 229,
+      "sha256": "6f998c4e3eb207efa956214e42c72959fc59cd4265da4cacc4f64c4179c4d2e6"
+    },
+    {
+      "path": "smoke_gate_submission.json",
+      "bytes": 809,
+      "sha256": "c849a9dbd4778e024850e2f7dde6460f233875bd602654d349c13ec26394ef0d"
+    },
+    {
+      "path": "smoke_submissions_r2.json",
+      "bytes": 3461,
+      "sha256": "b5a4d9fa7ed896d1fbeb4f87c85a8d1b1d9d69f2249e3bc707fde28c6e687a32"
+    },
+    {
+      "path": "source_patch_receipt.json",
+      "bytes": 5566,
+      "sha256": "af28cc8781d24a04e9d737919762aed1916435eb83c0186be1a5e66f3b91eb69"
+    },
+    {
+      "path": "stage_checksums.sha256",
+      "bytes": 80032,
+      "sha256": "bfae5669f67bf0af1755d4b52f75f74e95c73976358bf7b9c5f0789737eaa896"
+    }
+  ]
+}

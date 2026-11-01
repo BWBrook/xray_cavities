@@ -1,0 +1,136 @@
+{
+  "diagnostic_sources": [
+    {
+      "path": "paired_nojet_diagnostics.c",
+      "sha256": "28ae97afd432953b273f084abb235fb78d7caead11be136f0866194ce7dcefbc"
+    },
+    {
+      "path": "paired_nojet_diagnostics.h",
+      "sha256": "b938642dd04145e73a3e17a162cc64e8925f9988e1be2fe4f376a27d6f3a8b0d"
+    }
+  ],
+  "diagnostics_dir": "/private/tmp/paired_nojet_boundary_2026-11-01_r1/scripts/kunanyi",
+  "modified_files": [
+    {
+      "after_sha256": "c2a2dd76d05413116530776f6e58712ef589acf62a7019423697bdb099bbfc0f",
+      "before_sha256": "398607236523f2d5f59eeb68cd53f5f66749b029c0774fa0bef3ad8a8d9cee35",
+      "path": "Src/MHD/rhs.c",
+      "tree": "pluto"
+    },
+    {
+      "after_sha256": "165cc4bdb9c5b9ae59a06cfa6a5e40ffee1ee7eadec8750dd789f03a44065847",
+      "before_sha256": "3a81c865e314a5691ef4585a06c71f0ca6de5867d09c67e6cf97bdd84ad72c29",
+      "path": "Src/MHD/rhs_source.c",
+      "tree": "pluto"
+    },
+    {
+      "after_sha256": "c78b885ab72d6b3546ae50b9ea5c9198a84e8eed353fd23318aa9cf0b23690cd",
+      "before_sha256": "6104091b37958e762594b331bbd2534b0e2bb1f8eda5736acf140ceb905428dd",
+      "path": "Src/Time_Stepping/rk_step.c",
+      "tree": "pluto"
+    },
+    {
+      "after_sha256": "5a12bea7f7ca1c81fe6a980cbd92c2fa130bda9cb04b7739d11e161dff9acf0f",
+      "before_sha256": "9a17fbdddf89845c43a5093d40c1133fa04c461b6d266af34a44af5201ccca47",
+      "path": "Src/HD/mappers.c",
+      "tree": "pluto"
+    },
+    {
+      "after_sha256": "2673f826ca1a81eee840545be12d4704a369f811f800d5acca511b17e6d512d1",
+      "before_sha256": "50527a6dfbc56ea739dd6e5188cce066c323abe76c7304ba9b3de16c9fb8f945",
+      "path": "Tools/Python/menu.py",
+      "tree": "pluto"
+    },
+    {
+      "after_sha256": "8c19a10469ebc784146a07fc9a75d089caa5829d05284a71041a0639c3d8f7b8",
+      "before_sha256": "320100a6d68c2e58858ac34278bf232570b7596932f0a815156340a19cea11d6",
+      "path": "src/init.c",
+      "tree": "jet-setup"
+    },
+    {
+      "after_sha256": "ad16281c53080425392771c135dec071bd76b9460032bf0dece56edf139aca87",
+      "before_sha256": "ff1e18451c19c80cd408e25d4ec5d15a19d6f4d78d9d49a5466186bb884ac7e4",
+      "path": "src/jet.c",
+      "tree": "jet-setup"
+    },
+    {
+      "after_sha256": "78a2d1513863c7c7b092890141db98e07517c51a9f57ced0f39700ca2d77d173",
+      "before_sha256": "a6d48e8063697efc23265e45ed576adcbece0039175647abb3287af8a09f269d",
+      "path": "src/local_make",
+      "tree": "jet-setup"
+    }
+  ],
+  "new_files": [
+    {
+      "after_sha256": "28ae97afd432953b273f084abb235fb78d7caead11be136f0866194ce7dcefbc",
+      "path": "src/paired_nojet_diagnostics.c",
+      "source_path": "/private/tmp/paired_nojet_boundary_2026-11-01_r1/scripts/kunanyi/paired_nojet_diagnostics.c",
+      "source_sha256": "28ae97afd432953b273f084abb235fb78d7caead11be136f0866194ce7dcefbc",
+      "tree": "jet-setup"
+    },
+    {
+      "after_sha256": "b938642dd04145e73a3e17a162cc64e8925f9988e1be2fe4f376a27d6f3a8b0d",
+      "path": "src/paired_nojet_diagnostics.h",
+      "source_path": "/private/tmp/paired_nojet_boundary_2026-11-01_r1/scripts/kunanyi/paired_nojet_diagnostics.h",
+      "source_sha256": "b938642dd04145e73a3e17a162cc64e8925f9988e1be2fe4f376a27d6f3a8b0d",
+      "tree": "jet-setup"
+    }
+  ],
+  "raw_input_alias": "added",
+  "roots": {
+    "jet-setup": "/private/tmp/paired_nojet_boundary_2026-11-01_r1/source/jet-setup",
+    "pluto": "/private/tmp/paired_nojet_boundary_2026-11-01_r1/source/pluto"
+  },
+  "schema_version": 1,
+  "source_guards": [
+    {
+      "expected_sha256": "398607236523f2d5f59eeb68cd53f5f66749b029c0774fa0bef3ad8a8d9cee35",
+      "observed_sha256": "398607236523f2d5f59eeb68cd53f5f66749b029c0774fa0bef3ad8a8d9cee35",
+      "path": "Src/MHD/rhs.c",
+      "tree": "pluto"
+    },
+    {
+      "expected_sha256": "3a81c865e314a5691ef4585a06c71f0ca6de5867d09c67e6cf97bdd84ad72c29",
+      "observed_sha256": "3a81c865e314a5691ef4585a06c71f0ca6de5867d09c67e6cf97bdd84ad72c29",
+      "path": "Src/MHD/rhs_source.c",
+      "tree": "pluto"
+    },
+    {
+      "expected_sha256": "9a17fbdddf89845c43a5093d40c1133fa04c461b6d266af34a44af5201ccca47",
+      "observed_sha256": "9a17fbdddf89845c43a5093d40c1133fa04c461b6d266af34a44af5201ccca47",
+      "path": "Src/HD/mappers.c",
+      "tree": "pluto"
+    },
+    {
+      "expected_sha256": "6104091b37958e762594b331bbd2534b0e2bb1f8eda5736acf140ceb905428dd",
+      "observed_sha256": "6104091b37958e762594b331bbd2534b0e2bb1f8eda5736acf140ceb905428dd",
+      "path": "Src/Time_Stepping/rk_step.c",
+      "tree": "pluto"
+    },
+    {
+      "expected_sha256": "50527a6dfbc56ea739dd6e5188cce066c323abe76c7304ba9b3de16c9fb8f945",
+      "observed_sha256": "50527a6dfbc56ea739dd6e5188cce066c323abe76c7304ba9b3de16c9fb8f945",
+      "path": "Tools/Python/menu.py",
+      "tree": "pluto"
+    },
+    {
+      "expected_sha256": "320100a6d68c2e58858ac34278bf232570b7596932f0a815156340a19cea11d6",
+      "observed_sha256": "320100a6d68c2e58858ac34278bf232570b7596932f0a815156340a19cea11d6",
+      "path": "src/init.c",
+      "tree": "jet-setup"
+    },
+    {
+      "expected_sha256": "ff1e18451c19c80cd408e25d4ec5d15a19d6f4d78d9d49a5466186bb884ac7e4",
+      "observed_sha256": "ff1e18451c19c80cd408e25d4ec5d15a19d6f4d78d9d49a5466186bb884ac7e4",
+      "path": "src/jet.c",
+      "tree": "jet-setup"
+    },
+    {
+      "expected_sha256": "a6d48e8063697efc23265e45ed576adcbece0039175647abb3287af8a09f269d",
+      "observed_sha256": "a6d48e8063697efc23265e45ed576adcbece0039175647abb3287af8a09f269d",
+      "path": "src/local_make",
+      "tree": "jet-setup"
+    }
+  ],
+  "status": "verified"
+}

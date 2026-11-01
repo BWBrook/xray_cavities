@@ -1,0 +1,11 @@
+{
+  "archive_sha256": "c55b659749224e0b14a838b9295bab5a020f4b9eff372aeedb08674cc3f68829",
+  "archive_bytes": 15857,
+  "local_tests": {
+    "passed": 82,
+    "skipped": 1,
+    "skip_reason": "original exported-stage-only test"
+  },
+  "physics_stage_unchanged": true,
+  "target_revalidation_job": "872671.kunanyi-ohpc"
+}

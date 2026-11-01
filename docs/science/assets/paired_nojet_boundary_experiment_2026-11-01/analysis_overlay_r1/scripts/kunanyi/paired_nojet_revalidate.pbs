@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#PBS -N paired_nojet_revalidate
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mem=8gb
+#PBS -l walltime=00:30:00
+#PBS -r n
+#PBS -m n
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+readonly STAGE="/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1"
+readonly OVERLAY="/u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r1"
+cd "$OVERLAY"
+export LC_ALL=C LANG=C PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONPATH="$STAGE/scripts/science"
+python scripts/kunanyi/paired_nojet_revalidate.py \
+  --physics-stage "$STAGE" \
+  --overlay "$OVERLAY"

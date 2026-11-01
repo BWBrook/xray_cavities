@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-01T10:22:53Z",
+  "review_role": "independent adversarial scientific audit",
+  "decision_audited": "Whether the four native 0.25-Myr paired coarse-grid smokes and the cancellation-aware validator correction are sufficient to authorise four fresh 50-Myr coarse reflective/outflow controls, conditional on a fresh target revalidation gate; the production-matched control remains excluded.",
+  "verdict": "conditionally_supported",
+  "conditions_before_full_launch": [
+    "A new immutable analysis overlay must pass target revalidation with scheduler exit 0.",
+    "The fresh gate must report 38 budget tests passed with zero failures, errors or skips; four unchanged native smoke receipts; four measured MPI exit-zero records; four corrected budget receipts; and two paired-identity receipts.",
+    "Cross-node stability may ignore only the NFS client-specific device number, and only when path, resolved path, inode, size, mtime and ctime match, a retained SHA-256 exists, a fresh full-file SHA-256 matches it, and before/after live stats are identical.",
+    "The gate must bind the four CSV ledgers directly as well as the fresh budget receipts, native receipts, measured execution records, pair receipts, stage manifest, overlay manifest and test XML.",
+    "The full wrapper must revalidate the frozen stage and overlay manifests and every gate-evidence hash before creating a fresh full-run directory.",
+    "No result may be generalized to the stretched production grid; full-run boundary attribution requires residual and conversion-repair terms to remain materially below the paired contrast."
+  ],
+  "capture_integrity": {
+    "archive_path_reviewed": "/Users/bwbrook/Downloads/paired_nojet_smoke_capture_2026-11-01_r1.tar.gz",
+    "archive_bytes": 382784,
+    "archive_sha256": "bc9dbf6136d948a4c84263b3b3b776f3f0055580112fd555fe205ac835de0ce5",
+    "manifest_records": 68,
+    "manifest_hash_or_size_failures": 0,
+    "manifest_missing_or_extra_payloads": 0,
+    "frozen_stage_source_checksum_records": 740,
+    "frozen_stage_source_checksum_failures": 0,
+    "common_binary_sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+    "stage_manifest_sha256": "bfae5669f67bf0af1755d4b52f75f74e95c73976358bf7b9c5f0789737eaa896",
+    "important_limit": "The compact capture does not contain the eight approximately 5.77-GB HDF5 snapshots. Their full hashes, native scans and integrated-storage checks are preserved in the four source receipts, but this local audit did not rescan the raw HDF5 arrays."
+  },
+  "execution_evidence": {
+    "jobs": [
+      {
+        "job_id": "872581.kunanyi-ohpc",
+        "run": "cluster_002003_reflective",
+        "measured_mpi_exit": 0,
+        "pbs_exit": 0,
+        "walltime": "00:14:43",
+        "peak_scheduler_memory_kb": 25246792
+      },
+      {
+        "job_id": "872582.kunanyi-ohpc",
+        "run": "cluster_002003_outflow",
+        "measured_mpi_exit": 0,
+        "pbs_exit": 0,
+        "walltime": "00:14:15",
+        "peak_scheduler_memory_kb": 25220844
+      },
+      {
+        "job_id": "872583.kunanyi-ohpc",
+        "run": "group_002031_reflective",
+        "measured_mpi_exit": 0,
+        "pbs_exit": 1,
+        "walltime": "00:16:40",
+        "peak_scheduler_memory_kb": 25236112,
+        "pbs_failure_stage": "post-simulation budget validation",
+        "pbs_failure_message": "signed actual flux does not sum"
+      },
+      {
+        "job_id": "872584.kunanyi-ohpc",
+        "run": "group_002031_outflow",
+        "measured_mpi_exit": 0,
+        "pbs_exit": 0,
+        "walltime": "00:16:34",
+        "peak_scheduler_memory_kb": 25224084
+      }
+    ],
+    "native_snapshot_validations_logged": 8,
+    "native_snapshot_validation_failures_logged": 0,
+    "accepted_updates_per_run": 14,
+    "time_span_myr": [
+      0.0,
+      0.25
+    ]
+  },
+  "pair_identity": {
+    "cluster_002003": {
+      "initial_field_hashes_equal": true,
+      "initial_integrated_storage_equal": true,
+      "grid_geometry_hashes_equal": true,
+      "binary_and_compiled_definitions_equal": true,
+      "atmosphere_table_hash_equal": true,
+      "nonboundary_configuration_equal": true,
+      "only_semantic_configuration_difference": "all six faces reflective versus all six faces outflow",
+      "atmosphere_table_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+    },
+    "group_002031": {
+      "initial_field_hashes_equal": true,
+      "initial_integrated_storage_equal": true,
+      "grid_geometry_hashes_equal": true,
+      "binary_and_compiled_definitions_equal": true,
+      "atmosphere_table_hash_equal": true,
+      "nonboundary_configuration_equal": true,
+      "only_semantic_configuration_difference": "all six faces reflective versus all six faces outflow",
+      "atmosphere_table_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+    },
+    "unit_constants": {
+      "atomic_mass_unit_g": 1.66053886e-24,
+      "mean_molecular_weight": 0.60364,
+      "parsec_cm": 3.0856775807e18,
+      "velocity_cm_s": 29979245800.0,
+      "energy_unit_erg": 2.6467937170917383e61,
+      "source": "pinned compiled PLUTO constants recorded in each native receipt"
+    }
+  },
+  "signed_flux_arithmetic_audit": {
+    "face_quantity_checks": 1080,
+    "old_check_failures": 1,
+    "corrected_check_failures": 0,
+    "functional_validator_change_count": 1,
+    "functional_change": "Use positive minus signed-negative transport, the sum of absolute traffic, as the conditioning scale for net versus positive-plus-negative consistency.",
+    "physical_closure_thresholds_changed": false,
+    "reflective_wall_thresholds_changed": false,
+    "failing_record": {
+      "run": "group_002031_reflective",
+      "state_step": 14,
+      "face": "x3_end",
+      "quantity": "hydro",
+      "net_erg": -6.192058127510826e32,
+      "positive_erg": 8.344191381684754e37,
+      "negative_erg": -8.344253302265932e37,
+      "gross_erg": 1.6688444683950686e38,
+      "identity_error_erg": 9.675467146456259e23,
+      "identity_error_over_gross": 5.797704537296502e-15,
+      "identity_error_over_initial_hydro": 7.287559452689118e-37,
+      "gross_over_initial_hydro": 1.2569732392895177e-22,
+      "old_tolerance_erg": 6.192058127510827e23,
+      "corrected_tolerance_erg": 1.6750365265225795e26,
+      "corrected_tolerance_over_initial_hydro": 1.2616370959339246e-34,
+      "corrected_tolerance_margin": 173.12203133634526,
+      "interpretation": "The discrepancy is approximately 26 binary64 epsilons of gross traffic, consistent with separately accumulated and MPI-reduced signed and partitioned sums; scaling by the cancelled net was ill-conditioned."
+    },
+    "maximum_observed_identity_error_over_gross_any_record": 1.1276989971453231e-14,
+    "negative_control": "A manufactured inconsistency of 1e-6 of gross traffic remains rejected."
+  },
+  "budget_and_materiality_audit": {
+    "all_conversion_failure_counts_zero": true,
+    "maximum_interval_closure_over_initial": {
+      "mass": 1.4459269053218455e-13,
+      "hydro": 1.4364228419097452e-13,
+      "potential": 1.493705077783387e-13,
+      "total": 8.479653855527573e-14
+    },
+    "cluster_002003": {
+      "endpoint_hydro_pair_contrast_erg": 1.1369271735894136e55,
+      "absolute_contribution_fraction_of_hydro_contrast": {
+        "boundary_transport": 0.9996934276654668,
+        "gravity_work_difference": 0.0010824303821270595,
+        "conversion_repair_net_difference": 0.0007758463468080928,
+        "unexplained_residual_difference": 1.1700785630096137e-8,
+        "largest_single_run_conversion_repair_gross": 0.004003059166294857
+      },
+      "reflective_cumulative_gross_over_initial": {
+        "mass": 9.942005171670113e-20,
+        "hydro": 1.3182323254418123e-19,
+        "potential": 1.3512519341790363e-19
+      },
+      "maximum_cumulative_residual_over_initial": {
+        "mass": 1.9170551423340633e-13,
+        "hydro": 1.8826404335056604e-14,
+        "potential": 3.8332418248589e-13
+      }
+    },
+    "group_002031": {
+      "endpoint_hydro_pair_contrast_erg": 1.3481388337995791e53,
+      "absolute_contribution_fraction_of_hydro_contrast": {
+        "boundary_transport": 0.999794700621806,
+        "gravity_work_difference": 0.0013136489257238356,
+        "conversion_repair_net_difference": 0.0011083258186763922,
+        "unexplained_residual_difference": 2.372885340493157e-8,
+        "largest_single_run_conversion_repair_gross": 0.009929062536832864
+      },
+      "reflective_cumulative_gross_over_initial": {
+        "mass": 4.626928811409642e-20,
+        "hydro": 5.303547776378392e-20,
+        "potential": 5.872038478222139e-20
+      },
+      "maximum_cumulative_residual_over_initial": {
+        "mass": 1.8254388419070022e-13,
+        "hydro": 7.028898088347654e-14,
+        "potential": 7.273328104889455e-13
+      }
+    },
+    "interpretation": "At 0.25 Myr the paired hydro-energy contrasts are almost entirely reconstructed by measured boundary transport, with reported gravity and conversion terms small and unexplained hydro residual differences below 2.4e-8 of the contrast. This supports the diagnostic mechanism but is not evidence of 50-Myr stability or production-grid behavior."
+  },
+  "cross_node_device_anomaly": {
+    "original_receipt_device_values": {
+      "cluster_002003_reflective": 46,
+      "cluster_002003_outflow": 46,
+      "group_002031_reflective": 44,
+      "group_002031_outflow": 44
+    },
+    "observation": "The same NFS-backed stage exposed different st_dev values on different compute clients, so the first target revalidation failed before scientific budget checks despite unchanged retained receipt identities.",
+    "scientific_assessment": "st_dev is client mount metadata, not content identity. Ignoring it without compensation would weaken provenance; accepting only that mismatch while requiring a full retained SHA-256 match and exact stable remaining metadata is stronger content evidence and is acceptable."
+  },
+  "independent_checks_performed": [
+    "Recomputed all 68 capture payload sizes and SHA-256 values and exact manifest membership.",
+    "Checked all 740 frozen-stage source checksum records.",
+    "Parsed all scheduler records, measured simulation resource records, native validation logs, receipts and four ledgers.",
+    "Recomputed all four corrected budget reports directly from the CSV ledgers; they exactly match the retained local reports.",
+    "Recomputed all 1,080 signed flux identities under old and corrected tolerances.",
+    "Compared within-pair initial hashes, storage, geometry, tables, binary, definitions and semantic configuration.",
+    "Reconstructed endpoint mass and hydro contrasts from boundary transport, gravity work, conversion repair and residual terms.",
+    "Verified the validator differs from the frozen original by exactly the one authorised scale argument.",
+    "Verified the r1 overlay archive membership and all overlay checksums; focused r1 budget and overlay tests passed 42 of 42 locally."
+  ],
+  "ranked_threats": [
+    {
+      "rank": 1,
+      "severity": "major_if_unresolved",
+      "threat": "No successful fresh target revalidation gate yet; the original group-reflective PBS and the first cross-node revalidation both exited nonzero for analysis-layer reasons.",
+      "resolution": "Require a new immutable overlay and target F/0 gate satisfying every listed condition before full launch."
+    },
+    {
+      "rank": 2,
+      "severity": "major_scope_limit",
+      "threat": "A 0.25-Myr coarse uniform-grid smoke cannot establish 50-Myr stability or behavior on the stretched production grid.",
+      "resolution": "Interpret the four full runs only as coarse boundary controls; keep the production-matched control held and qualify all inference."
+    },
+    {
+      "rank": 3,
+      "severity": "moderate",
+      "threat": "Conversion repair is nonzero and potential closure is diagnostic rather than an exact acceptance gate.",
+      "resolution": "At 50 Myr require conversion-repair and residual contributions to remain materially below the pair contrast; diagnose rather than relax thresholds if they do not."
+    },
+    {
+      "rank": 4,
+      "severity": "minor_provenance_limit",
+      "threat": "The compact local capture omits raw HDF5 arrays.",
+      "resolution": "Retain and recheck their source receipts and live identities in the target gate; preserve the full recorded hashes."
+    }
+  ],
+  "residual_uncertainty": "Even after a successful fresh gate, the smoke evidence establishes implementation identity, numerical accounting and short-run feasibility only. The 50-Myr coarse trajectories may reveal accumulated drift, nonlinear boundary interactions, larger conversion repair or different timestep histories. Neither a null nor non-null coarse contrast determines the production-grid counterfactual."
+}

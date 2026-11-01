@@ -77,6 +77,44 @@ def test_signed_gross_transport_exposes_reflective_cancellation():
         budget.check_rows(rows, "reflective", "smoke")
 
 
+def tiny_cancelling_face_flux(net_offset_fraction=0.):
+    rows = ledger("reflective")
+    observed = {"net": -6.192058127510826e32, "positive": 8.344191381684754e37,
+                "negative": -8.344253302265932e37}
+    observed_gross = observed["positive"] - observed["negative"]
+    scale = 2000. * 1.2569732392895177e-22 / observed_gross
+    values = {part: value * scale for part, value in observed.items()}
+    gross = values["positive"] - values["negative"]
+    values["net"] += net_offset_fraction * gross
+    for index in range(5, 11):
+        row = rows[index * 6 + 5]
+        for part in budget.PARTS:
+            row[f"actual_hydro_{part}_erg"] = str(values[part] if index == 5 else 0.)
+            row[f"cumulative_hydro_{part}_erg"] = str(values[part])
+        if index == 5:
+            for state_row in rows[index * 6:(index + 1) * 6]:
+                state_row["hydro_closure_residual_erg"] = str(values["net"])
+                state_row["total_closure_residual_erg"] = str(values["net"])
+    return rows, values, gross
+
+
+def test_negligible_reflective_flux_passes_cancellation_aware_signed_consistency():
+    rows, values, gross = tiny_cancelling_face_flux()
+    signed_sum = values["positive"] + values["negative"]
+    error = abs(values["net"] - signed_sum)
+    assert error > 1e-9 * max(abs(values["net"]), abs(signed_sum))
+    assert error < 1e-12 * gross
+    report = budget.check_rows(rows, "reflective", "smoke")
+    assert report["cumulative_gross_transport"]["hydro"] / 2000. == pytest.approx(1.2569732392895177e-22)
+    assert report["cumulative_net_transport"]["hydro"] == values["net"]
+
+
+def test_material_signed_flux_inconsistency_still_fails_with_tiny_absolute_transport():
+    rows, _, _ = tiny_cancelling_face_flux(net_offset_fraction=1e-6)
+    with pytest.raises(ValueError, match="signed actual flux does not sum"):
+        budget.check_rows(rows, "reflective", "smoke")
+
+
 @pytest.mark.parametrize("field,value,error", [
     ("boundary_type_code", "2", "dispatch"),
     ("mass_g", "nan", "non-finite"),

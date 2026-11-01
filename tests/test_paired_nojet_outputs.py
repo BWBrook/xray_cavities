@@ -252,6 +252,66 @@ def test_mutation_restoring_size_and_mtime_is_caught_by_ctime(tmp_path, monkeypa
     assert not options["output"].exists()
 
 
+def cross_device_identity(path):
+    identity = {**validator._stat(path), "sha256": validator._hash(path)}
+    identity["device"] += 1
+    return identity
+
+
+def test_stability_same_device_preserves_metadata_only_behavior(tmp_path, monkeypatch):
+    path = tmp_path / "evidence.dat"
+    path.write_bytes(b"same immutable evidence")
+    identity = validator._stat(path)
+
+    def unexpected_hash(_path):
+        pytest.fail("same-device exact metadata must retain the existing no-rehash path")
+
+    monkeypatch.setattr(validator, "_hash", unexpected_hash)
+    validator._stable([identity])
+
+
+def test_stability_cross_device_accepts_only_identity_with_matching_hash(tmp_path):
+    path = tmp_path / "evidence.dat"
+    path.write_bytes(b"same immutable evidence")
+    validator._stable([cross_device_identity(path)])
+
+
+@pytest.mark.parametrize("change", ["missing_hash", "different_hash", "inode", "mtime"])
+def test_stability_cross_device_rejects_unproved_or_changed_identity(tmp_path, change):
+    path = tmp_path / "evidence.dat"
+    path.write_bytes(b"same immutable evidence")
+    identity = cross_device_identity(path)
+    if change == "missing_hash":
+        del identity["sha256"]
+    elif change == "different_hash":
+        identity["sha256"] = "0" * 64
+    else:
+        key = "inode" if change == "inode" else "mtime_ns"
+        identity[key] += 1
+    with pytest.raises(ValueError, match="mutated"):
+        validator._stable([identity])
+
+
+def test_stability_cross_device_rehash_rejects_concurrent_stat_drift(tmp_path, monkeypatch):
+    path = tmp_path / "evidence.dat"
+    path.write_bytes(b"same immutable evidence")
+    identity = cross_device_identity(path)
+    original = validator._stat
+    calls = 0
+
+    def drifting_stat(candidate):
+        nonlocal calls
+        result = original(candidate)
+        calls += 1
+        if calls == 2:
+            result["ctime_ns"] += 1
+        return result
+
+    monkeypatch.setattr(validator, "_stat", drifting_stat)
+    with pytest.raises(ValueError, match="mutated"):
+        validator._stable([identity])
+
+
 def test_pair_refuses_stale_run_receipts(tmp_path):
     left, right = make_run(tmp_path, "reflective"), make_run(tmp_path, "outflow")
     validator.validate_run(**left)

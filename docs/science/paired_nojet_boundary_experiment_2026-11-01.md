@@ -142,3 +142,60 @@ commit `493e724`, with 77/77 tests passing. Archive SHA-256:
 under `assets/paired_nojet_boundary_experiment_2026-11-01/stage_r1/`.
 The frozen plan inside the archive describes the pre-launch state; this live
 note records later access status without mutating that stage.
+
+## Smoke validation correction and preserved evidence
+
+All four 0.25-Myr smoke simulations completed with measured MPI exit 0 and
+passed the native-output validator. Each took 14 accepted updates. Original
+PBS jobs were cluster reflective `872581` F/0 (14:43), cluster outflow `872582`
+F/0 (14:15), group reflective `872583` F/1 (16:40), and group outflow `872584`
+F/0 (16:34). The original pair-gate job `872619` failed its dependency and
+published no gate.
+
+The group-reflective failure occurred only in a signed-flux arithmetic
+identity: net -6.192058127510826e32 erg versus positive 8.344191381684754e37
+and negative -8.344253302265932e37 erg. The summation discrepancy is 5.80e-15
+of gross transport. Using the cancelled net as the rounding scale was
+inappropriate. The sole validator correction uses positive-minus-negative
+transport as its scale. Physical closure, wall transport and cumulative gates
+are unchanged. Regression tests accept the observed cancellation and reject
+a material 1e-6-gross inconsistency. Local integrated checks pass 82 tests with
+one expected exported-stage-only skip.
+
+Original evidence is preserved under `original_smokes/`: all 68 archive
+payloads match their manifest, the actual executable matches the common build,
+and all 740 frozen source checksums pass. All four corrected local arithmetic
+checks pass; these are not a substitute for a fresh target gate. Maximum
+interval mass/hydro residual is at most 1.446e-13 of initial storage, with
+zero reported conversion/failure events. Peak measured RSS is approximately
+24.1 GiB; the 64-GB allocation remains sufficient.
+
+A separate immutable analysis overlay binds the original stage manifest,
+original and corrected validators, unchanged output helper, and original PBS.
+It changes the full-run wrapper only for overlay verification, the fresh gate
+and the corrected budget-validator invocation. Archive SHA-256 is
+`c55b659749224e0b14a838b9295bab5a020f4b9eff372aeedb08674cc3f68829`.
+Target revalidation `872671` is running with one CPU, 8 GB and 30 minutes.
+It will validate all four saved smokes and both pairs before any full launch.
+The physics stage, executable and inputs remain unchanged.
+
+Measured smoke update costs were about 8.7–10.9 seconds after startup; each
+snapshot write took 244–367 seconds and dominated elapsed time. The timestep
+was still increasing toward its CFL limit, so multiplying the 0.25-Myr elapsed
+time by 200 would be inappropriate. The three-hour, 28-rank, 64-GB allocation
+for each 50-Myr run is retained, with six snapshots per run. This is a resource
+estimate, not a completion guarantee.
+
+The independently reviewed r2 overlay is immutable at
+`/u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r2`.
+Its archive SHA-256 is
+`2b461433030c625ee62a40102659d14dea5329f9f145094d04152278b13aa0e1`.
+The helper accepts only device-only differences with matching full-content
+hashes and stable remaining metadata. The full-run native validator remains
+frozen; the corrected helper serves cross-node smoke revalidation and budget
+imports. Four ledger hashes now appear directly in gate evidence. All 91
+local tests pass with one expected stage-only skip; independent focused review
+passes 79 tests. Revalidation `872682` is running on n001 with one CPU, 8 GB
+and a one-hour override, allowing repeated full-content reads. It requires
+38 budget and seven stability tests, four native/budget checks and both pair
+checks. No physics input, executable or scientific acceptance threshold changed.

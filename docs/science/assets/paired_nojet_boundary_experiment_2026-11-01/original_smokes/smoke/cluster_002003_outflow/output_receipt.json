@@ -1,0 +1,493 @@
+{
+  "boundary": "outflow",
+  "case": "cluster_002003",
+  "configuration": {
+    "definitions": {
+      "BODY_FORCE": "VECTOR",
+      "CHAR_LIMITING": "NO",
+      "COOLING": "NO",
+      "DIMENSIONS": "3",
+      "DUST_FLUID": "NO",
+      "ENTROPY_SWITCH": "SELECTIVE",
+      "ENV_B_EXPONENT": "18",
+      "ENV_DELTA_NFW": "17",
+      "ENV_RHO_0": "15",
+      "ENV_R_SCALING": "16",
+      "ENV_TEMP": "19",
+      "ENV_X1O": "20",
+      "ENV_X2O": "21",
+      "ENV_X3O": "22",
+      "EOS": "IDEAL",
+      "GEOMETRY": "CARTESIAN",
+      "INCLUDE_LES": "NO",
+      "INITIAL_SMOOTHING": "NO",
+      "INTERNAL_BOUNDARY": "YES",
+      "JET_ACTIVE_TIME": "13",
+      "JET_CHI": "2",
+      "JET_END_TIME": "12",
+      "JET_EPISODES": "14",
+      "JET_INITIAL_RADIUS": "6",
+      "JET_INJECTION_HEIGHT": "5",
+      "JET_OA_PRIMARY": "3",
+      "JET_OA_SECONDARY": "4",
+      "JET_PWR": "0",
+      "JET_ROTATION_ANGLE": "10",
+      "JET_SPD": "1",
+      "JET_START_TIME": "11",
+      "JET_X1O": "7",
+      "JET_X2O": "8",
+      "JET_X3O": "9",
+      "LIMITER": "MINMOD_LIM",
+      "MULTIPLE_LOG_FILES": "YES",
+      "MU_NORM": "0.60364",
+      "NTRACER": "1",
+      "PARTICLES": "NO",
+      "PART_INJECT_FREQUENCY": "23",
+      "PHYSICS": "HD",
+      "RADIATION": "NO",
+      "RECONSTRUCTION": "LINEAR",
+      "RECONSTRUCT_4VEL": "NO",
+      "ROTATING_FRAME": "NO",
+      "SELF_GRAV": "NO",
+      "SHOCK_FLATTENING": "MULTID",
+      "SHOW_TIME_STEPS": "YES",
+      "SHOW_TIMING": "YES",
+      "STELLAR_MASS": "24",
+      "THERMAL_CONDUCTION": "NO",
+      "TIME_STEPPING": "RK2",
+      "UNIT_DENSITY": "((CONST_amu)*MU_NORM)",
+      "UNIT_LENGTH": "((CONST_pc)*1e3)",
+      "UNIT_VELOCITY": "CONST_c",
+      "USER_DEF_PARAMETERS": "25",
+      "VISCOSITY": "NO",
+      "WARNING_MESSAGES": "NO"
+    },
+    "definitions_user": {
+      "COMPRESS_HDF5": "NO",
+      "DENSITY_PROFILE": "ENV_TABULATED",
+      "EXT_ENV_VELOCITY": "YES",
+      "EXT_ENV_VELOCITY_FACTOR": "1.0",
+      "JD_MODE": "JD_PRES",
+      "JET_DENSITY_CALCULATION": "DENSITY_JET_POWER",
+      "JET_INJECTION_CAP": "YES",
+      "JET_INJECTION_ROTATED": "NO",
+      "JET_INJECTION_ZONE": "SPHERICAL_INJECTION_ZONE",
+      "JET_RELATIVISTIC_DENSITY": "NO",
+      "PARTICLES_INJECT_IN_BATCHES": "NO",
+      "PARTICLES_LP_RAISE": "NO",
+      "PARTICLES_LP_SHK_BINS": "3",
+      "PARTICLES_LP_SHK_THRESH_MAX": "5.0",
+      "PARTICLES_LP_SHK_THRESH_MIN": "0.05",
+      "PARTICLES_RANDOM_MODE": "PARTICLES_RANDOM_GAUSSIAN",
+      "SPH_RADIUS_LOWER_BOUNDARY": "REFLECTIVE",
+      "STELLAR_MASS_LOSS": "NO",
+      "SUPERNOVAE_ENERGY_INPUT": "NO",
+      "UNIQUE_JETS": "YES"
+    },
+    "environment_ini": {
+      "External Environment": {
+        "ExternalData": "UNUSED_FOR_TABULATED_ENVIRONMENT.dbl",
+        "ExternalGrid": "UNUSED_FOR_TABULATED_ENVIRONMENT.grid.out"
+      },
+      "Tabulated Environment": {
+        "TabulatedData": "./tabulated_cosmo_002003.csv"
+      }
+    },
+    "pluto_ini": {
+      "Boundary": {
+        "X1-beg": "outflow",
+        "X1-end": "outflow",
+        "X2-beg": "outflow",
+        "X2-end": "outflow",
+        "X3-beg": "outflow",
+        "X3-end": "outflow"
+      },
+      "Chombo HDF5 output": {
+        "Checkpoint_interval": "-1.0 0",
+        "Plot_interval": "-1.0 0"
+      },
+      "Chombo Refinement": {
+        "Block_factor": "8",
+        "Fill_ratio": "0.75",
+        "Levels": "4",
+        "Max_grid_size": "64",
+        "Ref_ratio": "2 2 2 2 2",
+        "Refine_thresh": "0.3",
+        "Regrid_interval": "2 2 2 2",
+        "Tag_buffer_size": "3"
+      },
+      "Grid": {
+        "X1-grid": "1 -200 400 u 200",
+        "X2-grid": "1 -200 400 u 200",
+        "X3-grid": "1 -250 500 u 250"
+      },
+      "Parameters": {
+        "ENV_B_EXPONENT": "0.38",
+        "ENV_DELTA_NFW": "0.0",
+        "ENV_RHO_0": "2.4e-27",
+        "ENV_R_SCALING": "144.0",
+        "ENV_TEMP": "3.462e7",
+        "ENV_X1O": "0.0",
+        "ENV_X2O": "0.0",
+        "ENV_X3O": "0.0",
+        "JET_ACTIVE_TIME": "0.0",
+        "JET_CHI": "1.0",
+        "JET_END_TIME": "0.0",
+        "JET_EPISODES": "1.0",
+        "JET_INITIAL_RADIUS": "0.1",
+        "JET_INJECTION_HEIGHT": "0.75",
+        "JET_OA_PRIMARY": "15.0",
+        "JET_OA_SECONDARY": "15.0",
+        "JET_PWR": "1e45",
+        "JET_ROTATION_ANGLE": "0.0",
+        "JET_SPD": "0.1",
+        "JET_START_TIME": "0.0",
+        "JET_X1O": "0.0",
+        "JET_X2O": "0.0",
+        "JET_X3O": "0.0",
+        "PART_INJECT_FREQUENCY": "0.01",
+        "STELLAR_MASS": "0.0"
+      },
+      "Particles": {
+        "Nparticles": "-1 -1",
+        "particles_dbl": "-1.0 -1",
+        "particles_flt": "-1.0 -1",
+        "particles_tab": "-1.0 -1",
+        "particles_vtk": "-1.0 -1"
+      },
+      "Solver": {
+        "Solver": "hllc"
+      },
+      "Static Grid Output": {
+        "analysis": "-1.0 1",
+        "dbl": "-1.0 -1 single_file",
+        "dbl.h5": "76.650348447000 -1",
+        "flt": "-1.0 -1 single_file",
+        "flt.h5": "-1.0 -1",
+        "log": "1",
+        "log_dir": "./outputs/logs",
+        "output_dir": "./outputs",
+        "ppm": "-1.0 -1",
+        "tab": "-1.0 -1",
+        "uservar": "0",
+        "vtk": "-1.0 -1 single_file"
+      },
+      "Time": {
+        "CFL": "0.33",
+        "CFL_max_var": "1.1",
+        "first_dt": "3.06601394",
+        "tstop": "76.650348447000"
+      }
+    }
+  },
+  "grid_geometry_hashes": {
+    "x": "fde9f9ef428084c3fcd1b85355048ee723016a07777e2519fb5bfd92fd952159",
+    "x_edges": "a6108a4673ae820e6ee8a5829997a513ab74cb4c03ce46b4223a7463f7258ee6",
+    "y": "fde9f9ef428084c3fcd1b85355048ee723016a07777e2519fb5bfd92fd952159",
+    "y_edges": "a6108a4673ae820e6ee8a5829997a513ab74cb4c03ce46b4223a7463f7258ee6",
+    "z": "7812b20d03b0cfb2f86314641f00088758fcf03a6b6854af8980a751820395f2",
+    "z_edges": "ac18eca13a775e4dd016a82d1614b553ea4d1624a84085e5c90ae6eb27e989a8"
+  },
+  "grid_hash_scope": "canonical axes/edges; raw grid.out hash retained separately because its generation timestamp differs",
+  "initial_field_hash_encoding": "uncompressed little-endian float64 bytes in z,y,x C order",
+  "initial_field_hashes": {
+    "prs": "a2ee6ed5e5c5fb34ba7e9dd1dabb1f48a0f8545768c524ac97b1a10b2673f9b5",
+    "rho": "67048785db38abe2d05b0d63f8dc64c9cf7288380664999f1bb850a73b819a58",
+    "tr1": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+    "vx1": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+    "vx2": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+    "vx3": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8"
+  },
+  "input_files": {
+    "data.0000.dbl.h5": {
+      "ctime_ns": 1793527089253516406,
+      "device": 46,
+      "inode": 2199447238136,
+      "mtime_ns": 1793527089253516406,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/outputs/data.0000.dbl.h5",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/outputs/data.0000.dbl.h5",
+      "sha256": "4363c436ea76d3459d8663ed69e498edeceae89ba919530b581cda8467b8d0ed",
+      "size_bytes": 5766745108
+    },
+    "data.0001.dbl.h5": {
+      "ctime_ns": 1793527458628732524,
+      "device": 46,
+      "inode": 2199447239936,
+      "mtime_ns": 1793527458628732524,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/outputs/data.0001.dbl.h5",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/outputs/data.0001.dbl.h5",
+      "sha256": "68327bc0251023e959fc31ebd1fc50ce297924b36742dc7c93e28a76778d86df",
+      "size_bytes": 5766745108
+    },
+    "dbl.h5.out": {
+      "ctime_ns": 1793527458651550770,
+      "device": 46,
+      "inode": 2199447239490,
+      "mtime_ns": 1793527458651550770,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/outputs/dbl.h5.out",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/outputs/dbl.h5.out",
+      "sha256": "e8515da1d027bb1cd3b1412b9e3f9565e4eac6fe4981c7363176be8432751f89",
+      "size_bytes": 149
+    },
+    "definitions.h": {
+      "ctime_ns": 1793526767046787810,
+      "device": 46,
+      "inode": 2199447237891,
+      "mtime_ns": 1793526767046787810,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/definitions.h",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/definitions.h",
+      "sha256": "2ce281d805f9d9b92b909db9d29538bfe4940b3fd91b3e935319d03a880c0669",
+      "size_bytes": 2827
+    },
+    "definitions_usr.h": {
+      "ctime_ns": 1793526767050828373,
+      "device": 46,
+      "inode": 2199447237894,
+      "mtime_ns": 1793526767050828373,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/definitions_usr.h",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/definitions_usr.h",
+      "sha256": "afba3639a762950152a2c5c33acd63379ae0adbfafaf9a84f1a4d5b1b4e4d994",
+      "size_bytes": 4588
+    },
+    "environment.ini": {
+      "ctime_ns": 1793526766707630594,
+      "device": 46,
+      "inode": 2199447237897,
+      "mtime_ns": 1793526766707630594,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/environment.ini",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/environment.ini",
+      "sha256": "93273faad753ec6efaaa3746fe82c4c0abb8cca5efc50c83ac85de3df96d0e0d",
+      "size_bytes": 198
+    },
+    "grid.out": {
+      "ctime_ns": 1793526770792034983,
+      "device": 46,
+      "inode": 2199447238003,
+      "mtime_ns": 1793526770792034983,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/outputs/grid.out",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/outputs/grid.out",
+      "sha256": "f97c1f983a5de1397be31ee459ae588bdd98be4f514a945f5564dd1eeaa582f7",
+      "size_bytes": 63797
+    },
+    "pluto": {
+      "ctime_ns": 1793526766785788579,
+      "device": 46,
+      "inode": 2199447237902,
+      "mtime_ns": 1793526766785788579,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/pluto",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/pluto",
+      "sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+      "size_bytes": 372768
+    },
+    "pluto.ini": {
+      "ctime_ns": 1793526766712069716,
+      "device": 46,
+      "inode": 2199447237899,
+      "mtime_ns": 1793526766712069716,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/pluto.ini",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/pluto.ini",
+      "sha256": "8b9584ac70281d6833c4cfc89477265b2a02f0cb0ac0acdb16e9dbf60f18363d",
+      "size_bytes": 2038
+    },
+    "tabulated_cosmo_002003.csv": {
+      "ctime_ns": 1793526766717523661,
+      "device": 46,
+      "inode": 2199447237901,
+      "mtime_ns": 1793526766717523661,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/tabulated_cosmo_002003.csv",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/tabulated_cosmo_002003.csv",
+      "sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+      "size_bytes": 608000
+    },
+    "validator_source:measure_q031_fluxes.py": {
+      "ctime_ns": 1793526324058506356,
+      "device": 46,
+      "inode": 2199447235056,
+      "mtime_ns": 1793419235568783998,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/measure_q031_fluxes.py",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/measure_q031_fluxes.py",
+      "sha256": "333d8edfad3849be50b2b0a3da481b5c273a442a012b2368e6eaf9b225546953",
+      "size_bytes": 55347
+    },
+    "validator_source:pluto_h5_level3_ambient_extract.py": {
+      "ctime_ns": 1793526324119523377,
+      "device": 46,
+      "inode": 2199447235058,
+      "mtime_ns": 1781672337013540983,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/pluto_h5_level3_ambient_extract.py",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/pluto_h5_level3_ambient_extract.py",
+      "sha256": "00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de",
+      "size_bytes": 9627
+    },
+    "validator_source:select_common_age_hdf5.py": {
+      "ctime_ns": 1793526324137551684,
+      "device": 46,
+      "inode": 2199447235059,
+      "mtime_ns": 1783918983057744503,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/select_common_age_hdf5.py",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/select_common_age_hdf5.py",
+      "sha256": "c38c9d781b681ff9682950020bade8caf62746ba9e112d28db315787efec451d",
+      "size_bytes": 11185
+    },
+    "validator_source:snapshot_energy.py": {
+      "ctime_ns": 1793526324157725006,
+      "device": 46,
+      "inode": 2199447235060,
+      "mtime_ns": 1788618010234553813,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/snapshot_energy.py",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/snapshot_energy.py",
+      "sha256": "f19859379463462a75ea7e8445d18cd2f6fa9ef05203aa71e507df5f67ebac21",
+      "size_bytes": 20415
+    },
+    "validator_source:validate_paired_nojet_outputs.py": {
+      "ctime_ns": 1793526324202768412,
+      "device": 46,
+      "inode": 2199447235062,
+      "mtime_ns": 1793524017060523033,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/validate_paired_nojet_outputs.py",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/validate_paired_nojet_outputs.py",
+      "sha256": "e9762dcc9c53cf7449ced234c6100241cc9467777795fbba15eadd9db789c9c4",
+      "size_bytes": 23412
+    }
+  },
+  "integrated_storage_definition": "all physical cells, exact FV volumes; thermal=p/(gamma-1), kinetic=rho*v^2/2, potential=rho*Phi_0 with fixed centre-zero tabulated gravity integral",
+  "invariants": [
+    "all physical primitive cells finite; rho/prs positive; tracer zero at every saved output",
+    "initial three-component velocity exactly zero",
+    "initial rho/prs match cell-centre radial linear interpolation of the selected table, rtol=1e-11",
+    "all saved grids have the required shape/coordinates"
+  ],
+  "limitations": [
+    "does not establish energy conservation or validate diagnostic CSV budgets",
+    "saved config hashes do not prove compilation provenance; paired binary equality is checked separately"
+  ],
+  "mode": "smoke",
+  "run_dir": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow",
+  "schema_version": 1,
+  "snapshots": [
+    {
+      "field_ranges_code": {
+        "prs": {
+          "maximum": 5.834587824455922e-08,
+          "minimum": 2.889873366678066e-09
+        },
+        "rho": {
+          "maximum": 0.015337815974745872,
+          "minimum": 0.000993671647263072
+        },
+        "tr1": {
+          "maximum": 0.0,
+          "minimum": 0.0
+        },
+        "vx1": {
+          "maximum": 0.0,
+          "minimum": 0.0
+        },
+        "vx2": {
+          "maximum": 0.0,
+          "minimum": 0.0
+        },
+        "vx3": {
+          "maximum": 0.0,
+          "minimum": 0.0
+        }
+      },
+      "grid_geometry_hashes": {
+        "x": "fde9f9ef428084c3fcd1b85355048ee723016a07777e2519fb5bfd92fd952159",
+        "x_edges": "a6108a4673ae820e6ee8a5829997a513ab74cb4c03ce46b4223a7463f7258ee6",
+        "y": "fde9f9ef428084c3fcd1b85355048ee723016a07777e2519fb5bfd92fd952159",
+        "y_edges": "a6108a4673ae820e6ee8a5829997a513ab74cb4c03ce46b4223a7463f7258ee6",
+        "z": "7812b20d03b0cfb2f86314641f00088758fcf03a6b6854af8980a751820395f2",
+        "z_edges": "ac18eca13a775e4dd016a82d1614b553ea4d1624a84085e5c90ae6eb27e989a8"
+      },
+      "index": 0,
+      "initial_field_hashes": {
+        "prs": "a2ee6ed5e5c5fb34ba7e9dd1dabb1f48a0f8545768c524ac97b1a10b2673f9b5",
+        "rho": "67048785db38abe2d05b0d63f8dc64c9cf7288380664999f1bb850a73b819a58",
+        "tr1": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+        "vx1": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+        "vx2": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+        "vx3": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8"
+      },
+      "integrated_storage": {
+        "kinetic_erg": 0.0,
+        "mass_g": 6.208060677714105e+45,
+        "potential_erg": 3.5212953604596623e+61,
+        "thermal_erg": 2.778020875393243e+61
+      },
+      "shape_nz_ny_nx": [
+        500,
+        400,
+        400
+      ],
+      "time_code": 0.0,
+      "time_myr": 0.0,
+      "timestep": "Timestep_0"
+    },
+    {
+      "field_ranges_code": {
+        "prs": {
+          "maximum": 5.8342261984605876e-08,
+          "minimum": 2.8908514540924176e-09
+        },
+        "rho": {
+          "maximum": 0.01533724558774767,
+          "minimum": 0.0009938734757206154
+        },
+        "tr1": {
+          "maximum": 0.0,
+          "minimum": 0.0
+        },
+        "vx1": {
+          "maximum": 1.322088934206398e-06,
+          "minimum": -1.322088934206398e-06
+        },
+        "vx2": {
+          "maximum": 1.322088934206398e-06,
+          "minimum": -1.322088934206398e-06
+        },
+        "vx3": {
+          "maximum": 1.0511110543243618e-06,
+          "minimum": -1.0511110543243618e-06
+        }
+      },
+      "grid_geometry_hashes": {
+        "x": "fde9f9ef428084c3fcd1b85355048ee723016a07777e2519fb5bfd92fd952159",
+        "x_edges": "a6108a4673ae820e6ee8a5829997a513ab74cb4c03ce46b4223a7463f7258ee6",
+        "y": "fde9f9ef428084c3fcd1b85355048ee723016a07777e2519fb5bfd92fd952159",
+        "y_edges": "a6108a4673ae820e6ee8a5829997a513ab74cb4c03ce46b4223a7463f7258ee6",
+        "z": "7812b20d03b0cfb2f86314641f00088758fcf03a6b6854af8980a751820395f2",
+        "z_edges": "ac18eca13a775e4dd016a82d1614b553ea4d1624a84085e5c90ae6eb27e989a8"
+      },
+      "index": 1,
+      "initial_field_hashes": {},
+      "integrated_storage": {
+        "kinetic_erg": 1.7316492124578924e+52,
+        "mass_g": 6.208062306103087e+45,
+        "potential_erg": 3.5212966418997924e+61,
+        "thermal_erg": 2.778021961862394e+61
+      },
+      "shape_nz_ny_nx": [
+        500,
+        400,
+        400
+      ],
+      "time_code": 76.650348447,
+      "time_myr": 0.2500000000000389,
+      "timestep": "Timestep_1"
+    }
+  ],
+  "status": "validated_paired_control_run",
+  "storage_units": {
+    "atomic_mass_unit_g": 1.66053886e-24,
+    "density_g_cm3": 1.0023676774503999e-24,
+    "energy_erg": 2.6467937170917383e+61,
+    "gamma": 1.6666666666666667,
+    "length_cm": 3.0856775807e+21,
+    "mean_molecular_weight": 0.60364,
+    "parsec_cm": 3.0856775807e+18,
+    "pressure_dyn_cm2": 0.000900883141106943,
+    "source": "pinned compiled PLUTO constants",
+    "velocity_cm_s": 29979245800.0
+  }
+}

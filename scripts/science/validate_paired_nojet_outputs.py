@@ -68,7 +68,17 @@ def _hash(path: Path) -> str:
 
 def _stable(identities: Sequence[Mapping[str, Any]]) -> None:
     for identity in identities:
-        if any(identity[key] != value for key, value in _stat(Path(identity["path"])).items()):
+        path = Path(identity["path"])
+        before = _stat(path)
+        mismatches = {key for key, value in before.items() if identity.get(key) != value}
+        if not mismatches:
+            continue
+        expected_hash = identity.get("sha256")
+        if mismatches != {"device"} or not isinstance(expected_hash, str) or re.fullmatch(r"[0-9a-f]{64}", expected_hash) is None:
+            raise ValueError(f"input mutated during or after validation: {identity['path']}")
+        actual_hash = _hash(path)
+        after = _stat(path)
+        if before != after or actual_hash != expected_hash:
             raise ValueError(f"input mutated during or after validation: {identity['path']}")
 
 

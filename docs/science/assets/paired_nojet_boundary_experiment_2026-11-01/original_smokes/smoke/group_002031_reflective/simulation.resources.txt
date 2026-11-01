@@ -1,0 +1,6 @@
+Measurement: Python resource.getrusage(RUSAGE_CHILDREN)
+Maximum resident set size (kbytes): 944240
+Elapsed wall time (seconds): 838.719411
+User CPU time (seconds): 19107.051086
+System CPU time (seconds): 81.795542
+Exit status: 0

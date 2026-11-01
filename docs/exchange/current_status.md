@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-11-01 (paired boundary smokes running)
+Last updated: 2026-11-01 (paired smoke r2 revalidation running)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -28,9 +28,18 @@ Barry unlocked mini and the archive was uploaded with its exact hash verified.
 Common target build `872548` finished **F/0**, in 1:26, with all **77 tests
 passing and none skipped**. The MPI/HDF5 executable SHA-256 is
 `b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386`.
-Four smoke jobs are observed running: `872581` cluster reflective, `872582`
-cluster outflow, `872583` group reflective, `872584` group outflow. Each uses
-28 ranks, 64 GB and a one-hour limit. Full 50-Myr runs are not submitted yet.
+All four smoke simulations finished MPI exit 0 and passed native validation.
+PBS `872581`, `872582`, `872584` finished F/0. Group-reflective `872583` finished
+F/1 only because a signed-flux identity scaled rounding error by a nearly
+cancelled net. The reviewed one-line correction uses gross transport while
+preserving all physical thresholds. Original failure evidence remains intact.
+Local checks: 82 passed, one expected stage-only skip. Immutable analysis
+overlay revalidation `872671` finished F/1 after 38 tests passed: the frozen
+file-identity helper rejects node-specific NFS device numbers. The independently reviewed
+r2 repair requires a full matching hash and exact other metadata. Target
+revalidation `872682` is running (one CPU, 8 GB, one hour); its fresh gate must
+pass before the four fresh 50-Myr coarse runs. Local tests pass 91 with one
+expected stage-only skip. Full runs are not yet submitted. The physics stage, binary and configuration are unchanged.
 
 The original smoke submissions `872565`–`872568` never started: their
 retrospective dependency on the already-complete build remained system-held.

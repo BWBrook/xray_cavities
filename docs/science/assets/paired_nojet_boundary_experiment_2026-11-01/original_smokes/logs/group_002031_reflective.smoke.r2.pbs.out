@@ -1,0 +1,15 @@
+validated_snapshot=group_002031/reflective/smoke/0
+validated_snapshot=group_002031/reflective/smoke/1
+Traceback (most recent call last):
+  File "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/validate_paired_nojet_budget.py", line 236, in <module>
+    main()
+  File "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/validate_paired_nojet_budget.py", line 232, in main
+    validate(args.run_dir, args.boundary, args.mode, args.output)
+  File "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/validate_paired_nojet_budget.py", line 202, in validate
+    report = check_rows(rows, boundary, mode)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/validate_paired_nojet_budget.py", line 105, in check_rows
+    close(values["net"], values["positive"] + values["negative"], 0, "signed actual flux does not sum")
+  File "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/science/validate_paired_nojet_budget.py", line 32, in close
+    raise ValueError(message)
+ValueError: signed actual flux does not sum

@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+#PBS -N paired_nojet
+#PBS -q normal
+#PBS -l select=1:ncpus=28:mpiprocs=28:mem=64gb
+#PBS -l walltime=03:00:00
+#PBS -r n
+#PBS -m n
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+readonly STAGE="${PAIRED_STAGE:?set PAIRED_STAGE}"
+readonly MODE="${PAIRED_MODE:?set PAIRED_MODE}"
+cd "$STAGE"
+mkdir -p logs
+export LC_ALL=C LANG=C PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+sha256sum --check stage_checksums.sha256 > "logs/checksums.${PBS_JOBID}.txt"
+readonly OVERLAY="/u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r1"
+python3 "$OVERLAY/scripts/kunanyi/paired_nojet_revalidate.py" --physics-stage "$STAGE" --overlay "$OVERLAY" --verify-bindings
+
+load_analysis() {
+  module purge
+  module load Anaconda3/2024.02-1
+  export PYTHONPATH="$STAGE/scripts/science"
+}
+
+if [ "$MODE" = build ]; then
+  mkdir build
+  mkdir -p build/problem bin
+  module purge
+  module load HDF5/1.14.0-gompi-2023a
+  export HDF5_DIR="${EBROOTHDF5:?HDF5 module root missing}"
+  export PLUTO_DIR="$STAGE/source/pluto"
+  cp -a source/jet-setup/src build/problem/src
+  cp inputs/cluster_002003_reflective/definitions.h build/problem/src/definitions.h
+  cp inputs/cluster_002003_reflective/definitions_usr.h build/problem/src/definitions_usr.h
+  cp inputs/cluster_002003_reflective/pluto.ini build/problem/src/pluto.ini
+  printf 'ARCH = Kunanyi.defs\n' > build/problem/src/makefile
+  (
+    cd build/problem/src
+    python3 - "$PLUTO_DIR" <<'PY'
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(sys.argv[1]) / 'Tools/Python'))
+from make_problem import MakeProblem
+MakeProblem(str(Path.cwd()), sys.argv[1], 1, 1)
+PY
+    make -j8
+  ) > build/build.log 2>&1
+  cp build/problem/src/pluto bin/pluto
+  cp build/problem/src/definitions.h build/problem/src/definitions_usr.h bin/
+  module list > build/modules.txt 2>&1
+  mpicc --version > build/compiler.txt
+  ldd bin/pluto > build/linked_libraries.txt
+  python3 - <<'PY'
+from pathlib import Path
+import hashlib,json,os
+names=['pluto','definitions.h','definitions_usr.h']
+receipt={'status':'built_common_binary','job_id':os.environ['PBS_JOBID'],
+         'stage_manifest_sha256':hashlib.sha256(Path('stage_checksums.sha256').read_bytes()).hexdigest(),
+         'files':{n:hashlib.sha256((Path('bin')/n).read_bytes()).hexdigest() for n in names}}
+Path('build/build_receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+PY
+  load_analysis
+  python -m pytest -q -p no:cacheprovider --basetemp build/pytest_tmp --junitxml build/tests.xml \
+    tests/test_paired_nojet_source_patch.py tests/test_paired_nojet_outputs.py \
+    tests/test_paired_nojet_stage.py tests/test_paired_nojet_budget.py
+  sha256sum --check stage_checksums.sha256 > build/final_source_checksums.txt
+  exit 0
+fi
+
+if [ "$MODE" = smoke-gate ]; then
+  mkdir smoke_gate
+  load_analysis
+  for case_id in cluster_002003 group_002031; do
+    python scripts/science/validate_paired_nojet_outputs.py \
+      --pair-receipts "smoke/${case_id}_reflective/output_receipt.json" "smoke/${case_id}_outflow/output_receipt.json" \
+      --output "smoke_gate/${case_id}.json"
+  done
+  python - <<'PY'
+from pathlib import Path
+import hashlib,json,os
+inputs=list(Path('smoke').glob('*/output_receipt.json'))+list(Path('smoke').glob('*/budget_receipt.json'))
+assert len(inputs)==8
+inputs+=list(Path('smoke_gate').glob('cluster_*.json'))+list(Path('smoke_gate').glob('group_*.json'))
+receipt={'status':'all_four_smokes_and_both_pairs_passed','job_id':os.environ['PBS_JOBID'],
+         'stage_manifest_sha256':hashlib.sha256(Path('stage_checksums.sha256').read_bytes()).hexdigest(),
+         'evidence':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs}}
+Path('smoke_gate/receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+PY
+  exit 0
+fi
+
+case "$MODE" in smoke|full) ;; *) echo "invalid PAIRED_MODE: $MODE" >&2; exit 2;; esac
+readonly CASE="${PAIRED_CASE:?set PAIRED_CASE}"
+readonly BOUNDARY="${PAIRED_BOUNDARY:?set PAIRED_BOUNDARY}"
+case "$CASE" in cluster_002003|group_002031) ;; *) exit 2;; esac
+case "$BOUNDARY" in reflective|outflow) ;; *) exit 2;; esac
+readonly KEY="${CASE}_${BOUNDARY}"
+if [ "$MODE" = full ]; then
+  python3 - <<'PY'
+from pathlib import Path
+import hashlib,json
+r=json.loads(Path('/u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r1/revalidated/gate_receipt.json').read_text())
+assert r['status']=='all_four_smokes_and_both_pairs_passed'
+assert r['original_stage_manifest_sha256']==hashlib.sha256(Path('stage_checksums.sha256').read_bytes()).hexdigest()
+for n,h in r['evidence'].items(): assert hashlib.sha256(Path(n).read_bytes()).hexdigest()==h,n
+PY
+  readonly RUN="$STAGE/runs/$KEY"
+  readonly INPUT="$STAGE/inputs/$KEY"
+else
+  readonly RUN="$STAGE/smoke/$KEY"
+  readonly INPUT="$STAGE/smoke_inputs/$KEY"
+fi
+mkdir "$RUN"
+cp "$INPUT"/* "$RUN"/
+cp bin/pluto bin/definitions.h bin/definitions_usr.h "$RUN"/
+mkdir -p "$RUN/outputs/logs"
+python3 - "$RUN" <<'PY'
+from pathlib import Path
+import hashlib,json,sys
+r=Path(sys.argv[1]);b=json.loads(Path('build/build_receipt.json').read_text())
+assert b['stage_manifest_sha256']==hashlib.sha256(Path('stage_checksums.sha256').read_bytes()).hexdigest()
+for n,h in b['files'].items(): assert hashlib.sha256((r/n).read_bytes()).hexdigest()==h,n
+PY
+module purge
+module load HDF5/1.14.0-gompi-2023a
+test "$(wc -l < "$PBS_NODEFILE" | tr -d ' ')" = 28
+cp "$PBS_NODEFILE" "$RUN/pbs_nodefile.txt"
+module list > "$RUN/modules.txt" 2>&1
+export PAIRED_NOJET_TABLE="tabulated_cosmo_${CASE#*_}.csv"
+(
+  cd "$RUN"
+  python3 "$STAGE/scripts/kunanyi/run_q031_measured.py" simulation.resources.txt \
+    mpirun -np 28 ./pluto -dec 2 2 7 -i pluto.ini -e environment.ini
+) > "$RUN/launcher.out" 2> "$RUN/launcher.err"
+load_analysis
+python scripts/science/validate_paired_nojet_outputs.py --run-dir "$RUN" --case "$CASE" \
+  --boundary "$BOUNDARY" --mode "$MODE" --output "$RUN/output_receipt.json"
+python "$OVERLAY/scripts/science/validate_paired_nojet_budget.py" --run-dir "$RUN" \
+  --boundary "$BOUNDARY" --mode "$MODE" --output "$RUN/budget_receipt.json"
+sha256sum --check stage_checksums.sha256 > "$RUN/final_stage_checksums.txt"
