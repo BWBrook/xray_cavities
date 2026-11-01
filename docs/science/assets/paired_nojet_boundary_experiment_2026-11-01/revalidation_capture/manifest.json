@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "remote_base": "/u/bwbrook/codex_kunanyi",
+  "created_utc": "2026-11-01T10:41:22.474914Z",
+  "files": [
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r1/revalidated/budget_tests.xml",
+      "bytes": 6277,
+      "sha256": "f8cf724e9ae9696b1d6aba8217eb35d905540228e065dfe015b8d322435c8196"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r1.final.accounting.txt",
+      "bytes": 9987,
+      "sha256": "193c9d9605b354531e5d6d3e80f13382b1b13535191ece7dfbbd127166f66507"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r1.pbs.out",
+      "bytes": 2492,
+      "sha256": "4922689dba431d1b98e1dd72d6281a019734e8afa65e5b822657b0ba46899412"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r1.submission.json",
+      "bytes": 210,
+      "sha256": "f7af50f177ed4fa62dd30262e7205e6277a769f18bf0a3f8412394b937e366d4"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r1.tar.gz",
+      "bytes": 15857,
+      "sha256": "c55b659749224e0b14a838b9295bab5a020f4b9eff372aeedb08674cc3f68829"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/overlay_checksums.sha256",
+      "bytes": 970,
+      "sha256": "b78dd5f5d141c42231c29bc4eb348447faa49e8690575e6de75633c4439d1b65"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/overlay_contract.json",
+      "bytes": 1654,
+      "sha256": "165b8879ba4adf65039cfe8328d856b249bc2df37c56c466e979be9748fcde5e"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/budget_tests.xml",
+      "bytes": 6277,
+      "sha256": "3f3aec7a296148eede09130bdeaa5eb78d15b7d4e3498a61be503b83beff2bac"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/budgets/cluster_002003_outflow.json",
+      "bytes": 10071,
+      "sha256": "53a76a975e5f0d11cbe3e2f0370cbec592d5020064f1ff9da4725fc7fef948c6"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/budgets/cluster_002003_reflective.json",
+      "bytes": 10134,
+      "sha256": "ee3f24a41bdad2cbd3afa87d234d6f484b9ef156fae634982b52dd851093e1e8"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/budgets/group_002031_outflow.json",
+      "bytes": 10082,
+      "sha256": "e668e986dad7bd54c87949fea80ed8b5824acaa6144c7cdb238db8b860cabb73"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/budgets/group_002031_reflective.json",
+      "bytes": 10149,
+      "sha256": "cf18ec0686d7be8b3b599ee28e9588047e569dfaee63fa0dbd5ab6e062990e96"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/gate_receipt.json",
+      "bytes": 5344,
+      "sha256": "c46121b315bd5b71e98b8a73be5224e5b9a262013406e10ae5b1579542d265b9"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/output_helper_tests.xml",
+      "bytes": 1252,
+      "sha256": "dab79e0bca3f30cd346f88f83a8cfbdeb187b81a1914db63a8833042b0fa4523"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/pairs/cluster_002003.json",
+      "bytes": 2640,
+      "sha256": "49a8bbe2628463d2b4a795a1ddd53c8c8cb5571e4c804617fbc6597d1d70ee28"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/pairs/group_002031.json",
+      "bytes": 2630,
+      "sha256": "6aeff25fe006d97b7ca3bf1a3322ea70b2ad22ef202ea6d70e9030cf45f7016a"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2.final.accounting.txt",
+      "bytes": 10012,
+      "sha256": "12729a2b0a5d1f2be5ac0193b3c2e89aab52c74bac9452aa6f36bea8598ac345"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2.pbs.out",
+      "bytes": 633,
+      "sha256": "d5fb9d689f03d9fb65c5b447f2c08a24a34347cbd4337311fc6e2ff3964023cb"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2.submission.json",
+      "bytes": 245,
+      "sha256": "c8242d0ece8a916ac5892f5c408aec18a8685e791bca8abf516005dbffd7158d"
+    },
+    {
+      "path": "paired_nojet_analysis_overlay_2026-11-01_r2.tar.gz",
+      "bytes": 27898,
+      "sha256": "2b461433030c625ee62a40102659d14dea5329f9f145094d04152278b13aa0e1"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/build/build_receipt.json",
+      "bytes": 448,
+      "sha256": "4fec8f47e1029728598ee25d18c67bb0eee101059a8e6ae99dd9f6d9803932ef"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/output_receipt.json",
+      "bytes": 19732,
+      "sha256": "286be84f81d633c43c3a2268790cc3c1535685c6a353ed5ad68f18351a592128"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/paired_nojet_budget.csv",
+      "bytes": 94955,
+      "sha256": "c33108c2bbec46e66a21312e16eaf62abe5fe21d8b81b271b97de68339075772"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_outflow/simulation.resources.txt",
+      "bytes": 229,
+      "sha256": "9666c40188435116ee119155da15782c569c10a664c336b663187865074d518b"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_reflective/output_receipt.json",
+      "bytes": 19815,
+      "sha256": "55227395fe676f36ea13d2eefeb6e211bfb1cf53ffa91d541a5df7e2fa9ecf94"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_reflective/paired_nojet_budget.csv",
+      "bytes": 99608,
+      "sha256": "463dc28f6ad5b9b2651a46be28e142b4f270fd28b2c8ed1cb85fa2fa46a12d6e"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/cluster_002003_reflective/simulation.resources.txt",
+      "bytes": 229,
+      "sha256": "3c2eac2c43b427733f85501688c1711113f817b5ce957b312bc9f629dedb3acc"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_outflow/output_receipt.json",
+      "bytes": 19687,
+      "sha256": "e29c02b069cdfa3d6f4af3137260b90a4aae0d8358087f873e2f11dab914743a"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_outflow/paired_nojet_budget.csv",
+      "bytes": 94981,
+      "sha256": "dea9dc71b111c21ed670cae0276c04706589b89916153aca5227907996a0a9ca"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_outflow/simulation.resources.txt",
+      "bytes": 229,
+      "sha256": "7fd03f63bcb96c23a36ef52880d3040acf19116efab2c7d1e7bb9fc27c221f69"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_reflective/output_receipt.json",
+      "bytes": 19778,
+      "sha256": "257db0d84386e990afeac8e67943aa6ac305e5ea22ed967a372f29d3392e0954"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_reflective/paired_nojet_budget.csv",
+      "bytes": 99664,
+      "sha256": "bdd381d7c80c942a392870bdb3d905cfdd39847f2591c7205b18c0d971939e97"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_reflective/simulation.resources.txt",
+      "bytes": 229,
+      "sha256": "6f998c4e3eb207efa956214e42c72959fc59cd4265da4cacc4f64c4179c4d2e6"
+    },
+    {
+      "path": "paired_nojet_boundary_2026-11-01_r1/stage_checksums.sha256",
+      "bytes": 80032,
+      "sha256": "bfae5669f67bf0af1755d4b52f75f74e95c73976358bf7b9c5f0789737eaa896"
+    },
+    {
+      "path": "paired_nojet_revalidation_source_checksums_2026-11-01.txt",
+      "bytes": 34152,
+      "sha256": "cc7a8310967236a6956a777bdac34da2649181f48f65990cd1c8a207b946131f"
+    }
+  ]
+}

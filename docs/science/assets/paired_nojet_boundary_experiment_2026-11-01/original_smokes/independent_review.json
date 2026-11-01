@@ -1,9 +1,11 @@
 {
   "schema_version": 1,
   "created_utc": "2026-11-01T10:22:53Z",
+  "updated_utc": "2026-11-01T10:43:22Z",
   "review_role": "independent adversarial scientific audit",
   "decision_audited": "Whether the four native 0.25-Myr paired coarse-grid smokes and the cancellation-aware validator correction are sufficient to authorise four fresh 50-Myr coarse reflective/outflow controls, conditional on a fresh target revalidation gate; the production-matched control remains excluded.",
-  "verdict": "conditionally_supported",
+  "verdict": "supported",
+  "verdict_scope": "The four fresh 50-Myr coarse reflective/outflow controls are cleared for launch with the frozen r1 physics stage and r2 full wrapper. This does not support or authorise a production-matched control, and it does not prejudge the full-run scientific outcome.",
   "conditions_before_full_launch": [
     "A new immutable analysis overlay must pass target revalidation with scheduler exit 0.",
     "The fresh gate must report 38 budget tests passed with zero failures, errors or skips; four unchanged native smoke receipts; four measured MPI exit-zero records; four corrected budget receipts; and two paired-identity receipts.",
@@ -12,6 +14,14 @@
     "The full wrapper must revalidate the frozen stage and overlay manifests and every gate-evidence hash before creating a fresh full-run directory.",
     "No result may be generalized to the stretched production grid; full-run boundary attribution requires residual and conversion-repair terms to remain materially below the paired contrast."
   ],
+  "conditions_status": {
+    "new_immutable_overlay_target_exit_zero": "satisfied by r2 job 872682.kunanyi-ohpc",
+    "test_and_receipt_counts": "satisfied",
+    "cross_node_full_hash_rule": "satisfied",
+    "direct_ledger_evidence": "satisfied",
+    "full_wrapper_manifest_and_evidence_preflight": "implemented and independently source-audited",
+    "production_scope_and_interpretation_limit": "remains mandatory after launch"
+  },
   "capture_integrity": {
     "archive_path_reviewed": "/Users/bwbrook/Downloads/paired_nojet_smoke_capture_2026-11-01_r1.tar.gz",
     "archive_bytes": 382784,
@@ -190,6 +200,74 @@
     "observation": "The same NFS-backed stage exposed different st_dev values on different compute clients, so the first target revalidation failed before scientific budget checks despite unchanged retained receipt identities.",
     "scientific_assessment": "st_dev is client mount metadata, not content identity. Ignoring it without compensation would weaken provenance; accepting only that mismatch while requiring a full retained SHA-256 match and exact stable remaining metadata is stronger content evidence and is acceptable."
   },
+  "r2_overlay_source_audit": {
+    "archive_path": "/private/tmp/paired_nojet_analysis_overlay_2026-11-01_r2.tar.gz",
+    "archive_bytes": 27898,
+    "archive_sha256": "2b461433030c625ee62a40102659d14dea5329f9f145094d04152278b13aa0e1",
+    "overlay_manifest_sha256": "b78dd5f5d141c42231c29bc4eb348447faa49e8690575e6de75633c4439d1b65",
+    "manifest_records": 9,
+    "tar_file_members": 10,
+    "manifest_or_membership_failures": 0,
+    "unsafe_or_link_members": 0,
+    "updated_budget_validator_sha256": "7f7d88d0cb6d2119f40f01095e82464275d5dcb8f61a63ba0329afa090f1a064",
+    "updated_output_helper_sha256": "3174c146cdcf6b6e68d303ce098c83138f6edce6b639204cf90ad8675c7c2b60",
+    "budget_change_exactly_authorised": true,
+    "output_helper_change_exactly_authorised": true,
+    "generated_full_wrapper_only_changes_bound_preflight_gate_and_budget_validator": true,
+    "pbs_syntax_checks_passed": 2,
+    "focused_local_tests": {
+      "passed": 79,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "budget validator, output validator and analysis-overlay suites"
+    },
+    "source_audit_verdict": "no blocker"
+  },
+  "final_target_gate_audit": {
+    "job_id": "872682.kunanyi-ohpc",
+    "scheduler_state": "F",
+    "scheduler_exit_status": 0,
+    "walltime": "00:14:13",
+    "peak_memory_kb": 89744,
+    "gate_status": "all_four_smokes_and_both_pairs_passed",
+    "gate_schema_version": 1,
+    "budget_tests": {
+      "passed": 38,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "output_helper_tests": {
+      "passed": 7,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native_smoke_receipts_verified": 4,
+    "measured_mpi_exit_zero_verified": 4,
+    "budgets_revalidated": 4,
+    "pairs_revalidated": 2,
+    "direct_ledgers_bound": 4,
+    "gate_evidence_records": 24,
+    "gate_evidence_hash_failures": 0,
+    "current_frozen_source_checksum_records": 740,
+    "current_frozen_source_checksum_failures": 0,
+    "common_binary_sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+    "stage_manifest_sha256": "bfae5669f67bf0af1755d4b52f75f74e95c73976358bf7b9c5f0789737eaa896",
+    "overlay_manifest_sha256": "b78dd5f5d141c42231c29bc4eb348447faa49e8690575e6de75633c4439d1b65",
+    "updated_budget_validator_sha256": "7f7d88d0cb6d2119f40f01095e82464275d5dcb8f61a63ba0329afa090f1a064",
+    "updated_output_helper_sha256": "3174c146cdcf6b6e68d303ce098c83138f6edce6b639204cf90ad8675c7c2b60",
+    "capture": {
+      "archive_path": "/Users/bwbrook/Downloads/paired_nojet_revalidation_capture_2026-11-01_r2.tar.gz",
+      "archive_bytes": 201207,
+      "archive_sha256": "3f81d9f8a6bfd7bb1457c3f8ac62313e21a213870a7be1114b039845be7754a8",
+      "manifest_records": 35,
+      "manifest_failures_or_membership_differences": 0,
+      "unsafe_or_link_archive_members": 0
+    },
+    "target_vs_local_budget_recomputation": "All acceptance decisions and reported magnitudes agree. Seven aggregate floats differ by ordinary runtime summation rounding: direct sums by at most 6.5e-16 relative; the cancellation-amplified group-outflow mass residual differs by 9.44e21 g, or 9.00e-24 of initial mass.",
+    "gate_audit_verdict": "supported for the four coarse full-control launches"
+  },
   "independent_checks_performed": [
     "Recomputed all 68 capture payload sizes and SHA-256 values and exact manifest membership.",
     "Checked all 740 frozen-stage source checksum records.",
@@ -199,14 +277,16 @@
     "Compared within-pair initial hashes, storage, geometry, tables, binary, definitions and semantic configuration.",
     "Reconstructed endpoint mass and hydro contrasts from boundary transport, gravity work, conversion repair and residual terms.",
     "Verified the validator differs from the frozen original by exactly the one authorised scale argument.",
-    "Verified the r1 overlay archive membership and all overlay checksums; focused r1 budget and overlay tests passed 42 of 42 locally."
+    "Verified the r1 overlay archive membership and all overlay checksums; focused r1 budget and overlay tests passed 42 of 42 locally.",
+    "Verified the r2 overlay archive, exact helper-only change, generated wrapper diff, both PBS scripts and 79 focused local tests.",
+    "Verified the complete r2 target capture: all 35 manifest payloads, all 24 gate evidence hashes, both JUnit receipts, four budgets, two pair receipts, scheduler F/0 accounting and all 740 current frozen-stage checks."
   ],
   "ranked_threats": [
     {
       "rank": 1,
-      "severity": "major_if_unresolved",
-      "threat": "No successful fresh target revalidation gate yet; the original group-reflective PBS and the first cross-node revalidation both exited nonzero for analysis-layer reasons.",
-      "resolution": "Require a new immutable overlay and target F/0 gate satisfying every listed condition before full launch."
+      "severity": "resolved_before_launch",
+      "threat": "The original group-reflective PBS and first cross-node revalidation exited nonzero for separate analysis-layer reasons.",
+      "resolution": "The preserved r2 overlay corrected only those two conditioned checks and target job 872682 completed F/0 with all source-bound evidence verified."
     },
     {
       "rank": 2,

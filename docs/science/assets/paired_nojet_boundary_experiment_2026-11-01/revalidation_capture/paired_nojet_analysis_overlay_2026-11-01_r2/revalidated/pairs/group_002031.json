@@ -1,0 +1,55 @@
+{
+  "atmosphere_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+  "binary_sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+  "case": "group_002031",
+  "diagnostic_budget_status": "not_checked_by_this_identity_validator",
+  "grid_geometry_hashes": {
+    "x": "fde9f9ef428084c3fcd1b85355048ee723016a07777e2519fb5bfd92fd952159",
+    "x_edges": "a6108a4673ae820e6ee8a5829997a513ab74cb4c03ce46b4223a7463f7258ee6",
+    "y": "fde9f9ef428084c3fcd1b85355048ee723016a07777e2519fb5bfd92fd952159",
+    "y_edges": "a6108a4673ae820e6ee8a5829997a513ab74cb4c03ce46b4223a7463f7258ee6",
+    "z": "7812b20d03b0cfb2f86314641f00088758fcf03a6b6854af8980a751820395f2",
+    "z_edges": "ac18eca13a775e4dd016a82d1614b553ea4d1624a84085e5c90ae6eb27e989a8"
+  },
+  "initial_field_hashes": {
+    "prs": "9cfe4484e76f1f98da1d78d6169d6eeb0bd31327713bc8e4bad3ad388eedb900",
+    "rho": "9c796289f1feeefdf72e608415241482e3779d68f051c7b0f3a163174ef5f2cf",
+    "tr1": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+    "vx1": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+    "vx2": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8",
+    "vx3": "6eb21d668a77c2f4bdea52e8951024c4ba9adcd4e6809030094fb19322736bf8"
+  },
+  "mode": "smoke",
+  "only_semantic_configuration_differences": [
+    "Boundary/X1-beg",
+    "Boundary/X1-end",
+    "Boundary/X2-beg",
+    "Boundary/X2-end",
+    "Boundary/X3-beg",
+    "Boundary/X3-end"
+  ],
+  "schema_version": 1,
+  "source_receipts": [
+    {
+      "ctime_ns": 1793527746529336641,
+      "device": 47,
+      "inode": 2199447241376,
+      "mtime_ns": 1793527746526208495,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_reflective/output_receipt.json",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_reflective/output_receipt.json",
+      "sha256": "257db0d84386e990afeac8e67943aa6ac305e5ea22ed967a372f29d3392e0954",
+      "size_bytes": 19778
+    },
+    {
+      "ctime_ns": 1793527740710470392,
+      "device": 47,
+      "inode": 2199447241357,
+      "mtime_ns": 1793527740707384005,
+      "path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_outflow/output_receipt.json",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/smoke/group_002031_outflow/output_receipt.json",
+      "sha256": "e29c02b069cdfa3d6f4af3137260b90a4aae0d8358087f873e2f11dab914743a",
+      "size_bytes": 19687
+    }
+  ],
+  "status": "validated_paired_control_identity"
+}

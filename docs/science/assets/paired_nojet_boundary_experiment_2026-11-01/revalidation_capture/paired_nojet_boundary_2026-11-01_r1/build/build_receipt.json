@@ -1,0 +1,10 @@
+{
+  "status": "built_common_binary",
+  "job_id": "872548.kunanyi-ohpc",
+  "stage_manifest_sha256": "bfae5669f67bf0af1755d4b52f75f74e95c73976358bf7b9c5f0789737eaa896",
+  "files": {
+    "pluto": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+    "definitions.h": "2ce281d805f9d9b92b909db9d29538bfe4940b3fd91b3e935319d03a880c0669",
+    "definitions_usr.h": "afba3639a762950152a2c5c33acd63379ae0adbfafaf9a84f1a4d5b1b4e4d994"
+  }
+}

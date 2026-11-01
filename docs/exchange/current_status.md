@@ -1,57 +1,50 @@
 # Current Status
 
-Last updated: 2026-11-01 (paired smoke r2 revalidation running)
+Last updated: 2026-11-01 (four paired 50-Myr coarse controls running)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
 
-## Authorised coarse paired boundary controls
+## Authorised coarse paired boundary controls — four 50-Myr runs running
 
-Barry authorised four fresh coarse controls on 1 November: cluster/group,
-each with reflective/outflow boundaries and otherwise identical within each
-pair. The full production-matched run remains held. This continues turn #5;
-Claude has not been asked to implement or approve the experiment.
+Barry authorised four fresh coarse cluster/group controls with reflective and
+outflow boundaries, otherwise identical within each pair. The production-matched
+control remains held. This continues turn #5; no Claude contact or scheduled
+monitoring was created.
 
-The instrumentation, immutable stage builder, target PBS workflow and native
-output/budget validators are implemented. Local serial compilation passes;
-76 local tests pass with one expected stage-only skip, and all 77 pass in an
-exported stage. The independent audit's conversion-energy cancellation concern
-is addressed by recording cellwise positive/negative/gross changes and failing
-on conversion errors. Exact compiled unit constants and independent initial
-atmosphere checks are included. Target build and four 28-rank 0.25-Myr smokes
-must pass before fresh 50-Myr runs. Implementation is committed/pushed as
-`493e724`. The final stage passes 77/77 tests and is frozen locally at
-`/private/tmp/paired_nojet_boundary_2026-11-01_r1.tar.gz` (4,786,674 bytes;
-SHA-256 `0aa334e3a5ec933a749867b2c708cd51ab4884982a2e3780b961672b2fd08973`).
+All four 0.25-Myr MPI smokes completed and passed native-output checks. Two
+analysis-only corrections were needed: scale signed-flux arithmetic by gross
+transport when net flux nearly cancels; accept node-specific NFS device changes
+only after a matching full-content hash and exact other stable metadata.
+Physical closure thresholds, binary and inputs remain unchanged. Both original
+failures and immutable stages are preserved.
 
-Barry unlocked mini and the archive was uploaded with its exact hash verified.
-Common target build `872548` finished **F/0**, in 1:26, with all **77 tests
-passing and none skipped**. The MPI/HDF5 executable SHA-256 is
-`b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386`.
-All four smoke simulations finished MPI exit 0 and passed native validation.
-PBS `872581`, `872582`, `872584` finished F/0. Group-reflective `872583` finished
-F/1 only because a signed-flux identity scaled rounding error by a nearly
-cancelled net. The reviewed one-line correction uses gross transport while
-preserving all physical thresholds. Original failure evidence remains intact.
-Local checks: 82 passed, one expected stage-only skip. Immutable analysis
-overlay revalidation `872671` finished F/1 after 38 tests passed: the frozen
-file-identity helper rejects node-specific NFS device numbers. The independently reviewed
-r2 repair requires a full matching hash and exact other metadata. Target
-revalidation `872682` is running (one CPU, 8 GB, one hour); its fresh gate must
-pass before the four fresh 50-Myr coarse runs. Local tests pass 91 with one
-expected stage-only skip. Full runs are not yet submitted. The physics stage, binary and configuration are unchanged.
+Fresh target revalidation `872682` finished **F/0 in 14:13**: 38 budget plus
+seven stability tests, all four budgets and both paired identities passed.
+Independent review verified 35 capture payloads, all 24 gate evidence hashes
+and 740 frozen-source checks. Local integrated tests pass 91, with one expected
+exported-stage-only skip. Repairs and original evidence were pushed in `c0d32c5`.
 
-The original smoke submissions `872565`–`872568` never started: their
-retrospective dependency on the already-complete build remained system-held.
-They were cancelled after verifying F/0, the target test XML and binary hashes,
-and replaced without that redundant dependency. Frozen source/configuration
-is unchanged. Runtime parent directories `smoke/` and `runs/` were created
-before submission; each PBS job still creates its own new run directory.
-Stage manifests and local evidence are under
-`docs/science/assets/paired_nojet_boundary_experiment_2026-11-01/stage_r1/`.
+Four fresh 50-Myr runs are now observed **R** (10:45 UTC, 21:45 AEDT):
 
-See `docs/science/paired_nojet_boundary_experiment_2026-11-01.md` for the
-predeclared contrast, closure checks, resource estimate and scope limits.
+- `872733`: cluster reflective.
+- `872734`: cluster outflow.
+- `872735`: group reflective.
+- `872736`: group outflow.
+
+Each uses 28 MPI ranks, 64 GB and three hours. All have fresh run directories,
+matching executable/configuration hashes and empty launcher stderr at the check.
+Source stage is `/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1`;
+analysis overlay is `paired_nojet_analysis_overlay_2026-11-01_r2` in the same
+parent. **No 50-Myr result is available yet.** Next: inspect final scheduler
+states, six-snapshot/native/budget receipts and both full paired contrasts;
+retain unchanged gates and evaluate repair/residual materiality before causal
+interpretation. Do not submit duplicates or expand to production-matched runs.
+
+Plan, failure/repair history and source-bound evidence:
+`docs/science/paired_nojet_boundary_experiment_2026-11-01.md`,
+`docs/exchange/logs/2026-11-01-paired-nojet-boundary-controls.md`, and
+`docs/science/assets/paired_nojet_boundary_experiment_2026-11-01/`.
 
 ## Latest stocktake — 1 November
 

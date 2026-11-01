@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "remote_base": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1",
+  "files": [
+    {
+      "path": "full_submissions_r1.jsonl",
+      "bytes": 2389,
+      "sha256": "8810e69b022a2d5dc0204791a8781a13e6d013e99709028afd1e08de82a6e0c4"
+    },
+    {
+      "path": "logs/cluster_002003_reflective.full.observed.accounting.txt",
+      "bytes": 10316,
+      "sha256": "3e1de71a22d0a68b5bf96a697faad5ad748ac8edb0d4f0a6f3295c294f18dc9c"
+    },
+    {
+      "path": "logs/cluster_002003_outflow.full.observed.accounting.txt",
+      "bytes": 10303,
+      "sha256": "c7f4839fb62dcfa22cb5784dd0f25700711cf1101197763aeb5613a19289fdcb"
+    },
+    {
+      "path": "logs/group_002031_reflective.full.observed.accounting.txt",
+      "bytes": 10308,
+      "sha256": "609df69b72cbf789a8e9dec865ab4ff8f2c494e5bd24b0494b6a21f7fbd7c655"
+    },
+    {
+      "path": "logs/group_002031_outflow.full.observed.accounting.txt",
+      "bytes": 10295,
+      "sha256": "d6aaf8e74872f0298716e6d8b410052c3306db23bf5dc9b43a2b9dc2ef82d03e"
+    },
+    {
+      "path": "full_launch_observed_r1.json",
+      "bytes": 1616,
+      "sha256": "d859ae3fae788b9adcd30c375b25002b06be9f9e49d59a3c5b8a59fe5758d769"
+    }
+  ]
+}

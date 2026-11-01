@@ -199,3 +199,56 @@ passes 79 tests. Revalidation `872682` is running on n001 with one CPU, 8 GB
 and a one-hour override, allowing repeated full-content reads. It requires
 38 budget and seven stability tests, four native/budget checks and both pair
 checks. No physics input, executable or scientific acceptance threshold changed.
+
+Independent reconstruction of the short smoke contrasts supports the
+instrumentation: measured boundary transport accounts for approximately 99.97%
+(cluster) and 99.98% (group) of the hydro-energy difference between treatments.
+The unexplained hydro-residual difference is below 2.4e-8 of either contrast.
+Zero failure/event counters do not mean zero floating-point conversion-energy
+adjustment: the largest individual gross adjustment is about 0.40% and 0.99%
+of the respective smoke contrasts. These are 0.25-Myr checks only; all terms
+must be reassessed over the full 50-Myr histories before causal attribution.
+The independent calculations and conditions are retained with the original
+smoke capture.
+
+## Successful target revalidation
+
+Job `872682.kunanyi-ohpc` finished F/0 in 14:13 on n001. All 38 budget tests
+and seven focused cross-node stability tests passed with zero skips; all four
+budgets and both paired identities passed. The source-bound gate records the
+unchanged common executable and original stage plus the two corrected
+analysis helpers. Its 24 evidence hashes include the four numerical ledgers.
+A fresh check of all 740 original source entries passed.
+
+The complete compact capture is retained under `revalidation_capture/` in the
+experiment assets: 35 manifest payloads, 201,207 compressed bytes, SHA-256
+`3f81d9f8a6bfd7bb1457c3f8ac62313e21a213870a7be1114b039845be7754a8`.
+All payload and gate-evidence hashes were verified locally. It preserves both
+immutable overlay archives and the failed r1 accounting, tests and traceback.
+
+## Four full coarse controls launched
+
+After independent approval of the complete r2 gate, four fresh 50-Myr runs
+were submitted and observed running at 10:45 UTC (21:45 AEDT):
+
+| Atmosphere | Boundary | PBS job | Observed state |
+|---|---|---|---|
+| Cluster 002003 | Reflective | 872733 | R |
+| Cluster 002003 | Outflow | 872734 | R |
+| Group 002031 | Reflective | 872735 | R |
+| Group 002031 | Outflow | 872736 | R |
+
+Each uses 28 MPI ranks, 64 GB and a three-hour limit, the frozen r1 physics
+stage/common executable, and the reviewed r2 analysis wrapper. Fresh run
+directories exist, source preflight has executed, executable/configuration
+hashes match their frozen inputs, and launcher stderr is empty at this check.
+No full-run result is claimed yet. Successful completion, all six outputs,
+closure and final paired interpretation remain to be checked.
+
+The six-file launch capture is retained under `full_launch/` with its exact
+manifest and scheduler snapshots. Archive SHA-256:
+`8d30d6f32b266c87c1ae27e48b4d43f2240bbe52e1db1d695e6f616676e2637c`.
+Final independent review is retained as `original_smokes/independent_review.json`
+(SHA-256 `2b4d5dd265ef8a319aaefd52cb9279b553a0660b2b3c6767a3f04cdb2e9839ba`).
+The full production-matched control remains held. This completes the launch
+tranche of turn #5; no Claude contact or scheduled monitoring was created.

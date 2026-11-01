@@ -1,0 +1,21 @@
+{
+  "budget_test_sha256": "dd0e9c528ac31f6eeb9dbe35ddf4eb4b25c6cd8fce490b41729e0e06b20540ad",
+  "expected_budget_test_count": 38,
+  "expected_output_helper_test_count": 7,
+  "full_runtime_budget_validator": "/u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r2/scripts/science/validate_paired_nojet_budget.py",
+  "full_runtime_gate_receipt": "/u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/gate_receipt.json",
+  "original_budget_validator_sha256": "31e136ae771398d73da1f8dbc7cb8efa714e2944cf5e7210b8d43d32bb997f85",
+  "original_output_validator_sha256": "e9762dcc9c53cf7449ced234c6100241cc9467777795fbba15eadd9db789c9c4",
+  "original_pbs_sha256": "82b1f7eb7f4ccb47f0aedd12b5825fcc4d6edd842474c005547fb5dc0afcb285",
+  "original_stage_manifest_sha256": "bfae5669f67bf0af1755d4b52f75f74e95c73976358bf7b9c5f0789737eaa896",
+  "output_test_sha256": "e2421648577e18e992c76d145e07a2cdf1026bf9f2fddc2f5e88fd674ca44044",
+  "physical_acceptance_gates_changed": false,
+  "physics_stage_files_changed": [],
+  "remote_analysis_overlay": "/u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r2",
+  "remote_physics_stage": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1",
+  "schema_version": 1,
+  "status": "validator_only_analysis_overlay",
+  "updated_budget_validator_sha256": "7f7d88d0cb6d2119f40f01095e82464275d5dcb8f61a63ba0329afa090f1a064",
+  "updated_output_validator_sha256": "3174c146cdcf6b6e68d303ce098c83138f6edce6b639204cf90ad8675c7c2b60",
+  "validator_change": "signed actual-flux identity uses positive-minus-negative gross transport as the floating-point consistency scale"
+}

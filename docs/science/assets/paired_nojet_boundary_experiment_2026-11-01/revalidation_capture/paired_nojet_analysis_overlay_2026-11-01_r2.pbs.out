@@ -1,0 +1,7 @@
+......................................                                   [100%]
+- generated xml file: /u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/budget_tests.xml -
+38 passed in 1.29s
+.......                                                                  [100%]
+- generated xml file: /u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/output_helper_tests.xml -
+7 passed, 28 deselected in 0.51s
+{"gate_receipt": "/u/bwbrook/codex_kunanyi/paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/gate_receipt.json", "status": "all_four_smokes_and_both_pairs_passed"}

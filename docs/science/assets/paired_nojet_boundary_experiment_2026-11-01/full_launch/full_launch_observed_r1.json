@@ -1,0 +1,45 @@
+{
+  "observed_utc": "2026-11-01T10:45:00.705709Z",
+  "states": [
+    {
+      "key": "cluster_002003_reflective",
+      "job_id": "872733.kunanyi-ohpc",
+      "state": "R",
+      "run_directory": true,
+      "stage_preflight": true,
+      "binary_sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+      "config_sha256": "db567cf4feeb450ceda9dc78ab1e6790b891485b8a23bd0b3171e831f7c05149",
+      "launcher_stderr_bytes": 0
+    },
+    {
+      "key": "cluster_002003_outflow",
+      "job_id": "872734.kunanyi-ohpc",
+      "state": "R",
+      "run_directory": true,
+      "stage_preflight": true,
+      "binary_sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+      "config_sha256": "e2cb0835c88e4ae38dc857663c39ff5a40acb31b4fd5a9e19bb6b4d06431a229",
+      "launcher_stderr_bytes": 0
+    },
+    {
+      "key": "group_002031_reflective",
+      "job_id": "872735.kunanyi-ohpc",
+      "state": "R",
+      "run_directory": true,
+      "stage_preflight": true,
+      "binary_sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+      "config_sha256": "db567cf4feeb450ceda9dc78ab1e6790b891485b8a23bd0b3171e831f7c05149",
+      "launcher_stderr_bytes": 0
+    },
+    {
+      "key": "group_002031_outflow",
+      "job_id": "872736.kunanyi-ohpc",
+      "state": "R",
+      "run_directory": true,
+      "stage_preflight": true,
+      "binary_sha256": "b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386",
+      "config_sha256": "e2cb0835c88e4ae38dc857663c39ff5a40acb31b4fd5a9e19bb6b4d06431a229",
+      "launcher_stderr_bytes": 0
+    }
+  ]
+}
