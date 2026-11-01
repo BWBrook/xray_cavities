@@ -1,0 +1,9 @@
+{
+  "scope": "local serial compilation only; target MPI/HDF5 smoke remains required",
+  "build_log_sha256": "f095841e251847f23e0b40a55cffb6e16dc710fb806f009836c296b9f054a845",
+  "binary_sha256": "4ebdc50a1c31cf5a2c635bb8288d38c272197187b76cee012e1e997516965103",
+  "source_patch_receipt_sha256": "df3c919d61061f49a18787873ba3efc20c149c729cd895e2117d415bd7116cff",
+  "reported_exit_status": 0,
+  "local_test_result": "76 passed, 1 expected exported-stage-only skip",
+  "exported_stage_test_result": "77 passed; independently reported by implementation delegate"
+}

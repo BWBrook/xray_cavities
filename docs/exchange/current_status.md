@@ -1,9 +1,28 @@
 # Current Status
 
-Last updated: 2026-11-01 18:30 AEDT (two-case no-jet audit complete)
+Last updated: 2026-11-01 (paired boundary controls prepared)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Authorised coarse paired boundary controls
+
+Barry authorised four fresh coarse controls on 1 November: cluster/group,
+each with reflective/outflow boundaries and otherwise identical within each
+pair. The full production-matched run remains held. This continues turn #5;
+Claude has not been asked to implement or approve the experiment.
+
+The instrumentation, immutable stage builder, target PBS workflow and native
+output/budget validators are implemented. Local serial compilation passes;
+76 local tests pass with one expected stage-only skip, and all 77 pass in an
+exported stage. The independent audit's conversion-energy cancellation concern
+is addressed by recording cellwise positive/negative/gross changes and failing
+on conversion errors. Exact compiled unit constants and independent initial
+atmosphere checks are included. Target build and four 28-rank 0.25-Myr smokes
+must pass before fresh 50-Myr runs. No new control is submitted yet.
+
+See `docs/science/paired_nojet_boundary_experiment_2026-11-01.md` for the
+predeclared contrast, closure checks, resource estimate and scope limits.
 
 ## Latest stocktake — 1 November
 
