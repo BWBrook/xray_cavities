@@ -29,3 +29,24 @@ Resume via the existing portal after unlock; verify archive/source hashes,
 run the common target build and all four smokes, then inspect measured resource
 use and paired closure before launching the four fresh full coarse controls.
 No Claude contact or scheduled monitoring was initiated.
+
+Barry unlocked mini; continuation of turn #5. The r1 archive uploaded with its
+SHA-256 matching exactly, then every extracted source checksum passed.
+Build `872548` finished F/0 in 1:26 on n004, with 77/77 target tests passing.
+Target binary SHA-256 is
+`b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386`.
+
+Smoke submissions `872565`–`872568` stayed system-held because their parent
+build had already completed before the retrospective afterok dependency was
+registered. Empty-dependency qalter syntax was rejected without changing jobs.
+After confirming all four remained held with no run directories, they were
+cancelled and replaced by `872581`–`872584`, now observed running. All build
+receipts were checked first; physics/source/configuration are unchanged.
+The runtime parent directories smoke/ and runs/ were created before submission.
+
+The complete target-build capture was downloaded and verified: archive
+`7c90831452af8579254db3abbf23f11917a044c16159c075cef90336024c3330`,
+54,503 bytes, 29 manifest payloads. Independent review confirmed all payload
+hashes, 740 source checksums, definitions/units, source guards and MPI/HDF5
+linkage. Build evidence is under the experiment's `target_build/` assets.
+Paired-identity gate job `872619` is submitted behind the four running smokes.

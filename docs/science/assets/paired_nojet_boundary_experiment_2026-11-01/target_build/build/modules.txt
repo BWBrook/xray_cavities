@@ -1,0 +1,15 @@
+
+Currently Loaded Modules:
+  1) GCCcore/12.3.0                    11) libevent/2.1.12-GCCcore-12.3.0
+  2) zlib/1.2.13-GCCcore-12.3.0        12) UCX/1.14.1-GCCcore-12.3.0
+  3) binutils/2.40-GCCcore-12.3.0      13) libfabric/1.18.0-GCCcore-12.3.0
+  4) GCC/12.3.0                        14) PMIx/4.2.4-GCCcore-12.3.0
+  5) numactl/2.0.16-GCCcore-12.3.0     15) UCC/1.2.0-GCCcore-12.3.0
+  6) XZ/5.4.2-GCCcore-12.3.0           16) OpenMPI/4.1.5-GCC-12.3.0
+  7) libxml2/2.11.4-GCCcore-12.3.0     17) gompi/2023a
+  8) libpciaccess/0.17-GCCcore-12.3.0  18) Szip/2.1.1-GCCcore-12.3.0
+  9) hwloc/2.9.1-GCCcore-12.3.0        19) HDF5/1.14.0-gompi-2023a
+ 10) OpenSSL/1.1
+
+ 
+

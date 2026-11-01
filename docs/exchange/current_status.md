@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-11-01 (paired boundary controls prepared)
+Last updated: 2026-11-01 (paired boundary smokes running)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -24,13 +24,22 @@ must pass before fresh 50-Myr runs. Implementation is committed/pushed as
 `/private/tmp/paired_nojet_boundary_2026-11-01_r1.tar.gz` (4,786,674 bytes;
 SHA-256 `0aa334e3a5ec933a749867b2c708cd51ab4884982a2e3780b961672b2fd08973`).
 
-**Launch is blocked by access:** the Mac mini is locked, and the configured
-SSH route fails authentication at the TPAC jumpbox. Barry has been asked to
-unlock the Mac. No new control/build/smoke job has been submitted, and no
-stage has been uploaded. Resume through the existing portal, verify the
-archive hash, extract into a fresh remote directory, and complete the build
-and smoke gates before full runs. Stage manifests and local test evidence
-are preserved under `docs/science/assets/paired_nojet_boundary_experiment_2026-11-01/stage_r1/`.
+Barry unlocked mini and the archive was uploaded with its exact hash verified.
+Common target build `872548` finished **F/0**, in 1:26, with all **77 tests
+passing and none skipped**. The MPI/HDF5 executable SHA-256 is
+`b8d17288dc28407cadbe390c3d8db2fb973e788686a20a2bc9da3f9369468386`.
+Four smoke jobs are observed running: `872581` cluster reflective, `872582`
+cluster outflow, `872583` group reflective, `872584` group outflow. Each uses
+28 ranks, 64 GB and a one-hour limit. Full 50-Myr runs are not submitted yet.
+
+The original smoke submissions `872565`–`872568` never started: their
+retrospective dependency on the already-complete build remained system-held.
+They were cancelled after verifying F/0, the target test XML and binary hashes,
+and replaced without that redundant dependency. Frozen source/configuration
+is unchanged. Runtime parent directories `smoke/` and `runs/` were created
+before submission; each PBS job still creates its own new run directory.
+Stage manifests and local evidence are under
+`docs/science/assets/paired_nojet_boundary_experiment_2026-11-01/stage_r1/`.
 
 See `docs/science/paired_nojet_boundary_experiment_2026-11-01.md` for the
 predeclared contrast, closure checks, resource estimate and scope limits.

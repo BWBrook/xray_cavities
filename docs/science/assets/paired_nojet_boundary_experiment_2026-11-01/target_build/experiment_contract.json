@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "status": "authorised_for_target_smoke_then_coarse_pair_runs",
+  "authorisation": "Go ahead with the cheap paired reflective/outflow controls, keeping everything else identical. Hold off on a full production-matched run.",
+  "source_revisions": {
+    "pluto": "2674fc38b152f96605cb24e2840e92b64ebd5b81",
+    "jet_setup": "e17ac8f8640017900abfe635737bd3199d607363"
+  },
+  "project_revision": "493e724af4a1d7bc2a81c2503ecb8b0071a2dc7a",
+  "atmospheres": {
+    "cluster_002003": {
+      "table_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+      "historical_job": "690366"
+    },
+    "group_002031": {
+      "table_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+      "historical_job": "690371"
+    }
+  },
+  "boundaries": [
+    "reflective",
+    "outflow"
+  ],
+  "sole_within_pair_physics_difference": "all six Boundary values: reflective versus outflow",
+  "grid_nx_ny_nz": [
+    400,
+    400,
+    500
+  ],
+  "grid_spacing_kpc": 1.0,
+  "duration_myr": 50.0,
+  "smoke_duration_myr": 0.25,
+  "ranks": 28,
+  "decomposition": [
+    2,
+    2,
+    7
+  ],
+  "source_disable": "zero start/end/active times plus explicit inactive-intermittency guard before fmod",
+  "new_full_grid_production_matched_run": false,
+  "outputs_per_full_run": 6,
+  "estimated_full_raw_bytes_all_four": 138401882592,
+  "notes": "One instrumented binary; fresh starts after smoke; no frozen production or migration input is modified."
+}

@@ -1,0 +1,19 @@
+{
+  "key": "cluster_002003_reflective",
+  "job_id": "872581.kunanyi-ohpc",
+  "command": [
+    "qsub",
+    "-N",
+    "pn_c_r_smoke",
+    "-l",
+    "walltime=01:00:00",
+    "-v",
+    "PAIRED_STAGE=/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1,PAIRED_MODE=smoke,PAIRED_CASE=cluster_002003,PAIRED_BOUNDARY=reflective",
+    "-o",
+    "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/logs/cluster_002003_reflective.smoke.r2.pbs.out",
+    "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/kunanyi/paired_nojet_control.pbs"
+  ],
+  "replaces_never_started_job": "872565.kunanyi-ohpc",
+  "created_utc": "2026-11-01T09:52:27.431216Z",
+  "reason": "Parent build already completed and verified before submission; replace retrospective dependency-held job without redundant scheduler dependency."
+}

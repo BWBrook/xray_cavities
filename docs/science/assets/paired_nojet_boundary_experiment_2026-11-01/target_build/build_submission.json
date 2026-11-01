@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-11-01T09:46:02.962785Z",
+  "stage": "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1",
+  "archive_sha256": "0aa334e3a5ec933a749867b2c708cd51ab4884982a2e3780b961672b2fd08973",
+  "build_job_id": "872548.kunanyi-ohpc",
+  "command": [
+    "qsub",
+    "-N",
+    "paired_nojet_build",
+    "-l",
+    "select=1:ncpus=8:mpiprocs=8:mem=16gb",
+    "-l",
+    "walltime=00:30:00",
+    "-v",
+    "PAIRED_STAGE=/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1,PAIRED_MODE=build",
+    "-o",
+    "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/logs/build.pbs.out",
+    "/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/kunanyi/paired_nojet_control.pbs"
+  ]
+}

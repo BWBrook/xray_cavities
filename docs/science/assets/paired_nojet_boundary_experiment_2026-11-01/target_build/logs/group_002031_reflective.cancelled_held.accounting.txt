@@ -1,0 +1,173 @@
+Job Id: 872567.kunanyi-ohpc
+    Job_Name = pn_g_r_smoke
+    Job_Owner = bwbrook@<tpac-host>
+    job_state = H
+    queue = normal
+    server = kunanyi-ohpc
+    Checkpoint = u
+    ctime = Sun Nov  1 20:49:08 2026
+    depend = afterok:872548.kunanyi-ohpc@kunanyi-ohpc
+    Error_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/q031_flux_meas
+	urements_2026-10-31_r5/pn_g_r_smoke.e872567
+    Hold_Types = s
+    Join_Path = oe
+    Keep_Files = n
+    Mail_Points = n
+    mtime = Sun Nov  1 20:49:08 2026
+    Output_Path = <tpac-host>:/u/bwbrook/codex_kunanyi/paired_nojet_
+	boundary_2026-11-01_r1/logs/group_002031_reflective.smoke.pbs.out
+    Priority = 0
+    qtime = Sun Nov  1 20:49:08 2026
+    Rerunable = False
+    Resource_List.mem = 64gb
+    Resource_List.mpiprocs = 28
+    Resource_List.ncpus = 28
+    Resource_List.nodect = 1
+    Resource_List.place = scatter
+    Resource_List.select = 1:ncpus=28:mpiprocs=28:mem=64gb
+    Resource_List.walltime = 01:00:00
+    substate = 22
+    Variable_List = PBS_O_HOME=/u/bwbrook,PBS_O_LANG=en_US.UTF-8,
+	PBS_O_LOGNAME=bwbrook,
+	PBS_O_PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/softwa
+	re/Anaconda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bi
+	n:/opt/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/prun/1.3:/op
+	t/ohpc/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/bin:/usr/l
+	ocal/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	PBS_O_MAIL=/var/spool/mail/bwbrook,PBS_O_SHELL=/bin/bash,
+	PBS_O_WORKDIR=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-
+	31_r5,PBS_O_SYSTEM=Linux,
+	PAIRED_STAGE=/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01
+	_r1,PAIRED_MODE=smoke,PAIRED_CASE=group_002031,
+	PAIRED_BOUNDARY=reflective,LMOD_FAMILY_COMPILER_VERSION=8.3.0,
+	MANPATH=/share/apps/software/Anaconda3/2024.02-1/share/man:/share/apps
+	/software/Anaconda3/2024.02-1/man:/opt/ohpc/pub/compiler/gcc/8.3.0/shar
+	e/man:/opt/ohpc/pub/utils/autotools/share/man:/usr/local/share/man:/usr
+	/share/man/overrides:/usr/share/man/en:/usr/share/man:/opt/pbs/share/ma
+	n,XDG_SESSION_ID=106840,
+	_ModuleTable003_=c3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJvaHBjIix9L
+	HBydW49e1siZm4iXT0iL29wdC9vaHBjL3B1Yi9tb2R1bGVmaWxlcy9wcnVuLzEuMyIsWyJm
+	dWxsTmFtZSJdPSJwcnVuLzEuMyIsWyJsb2FkT3JkZXIiXT0yLHByb3BUPXt9LFsic3RhY2t
+	EZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InBydW4iLH0sfS
+	xtcGF0aEE9eyIvb3B0L29ocGMvcHViL21vZHVsZWRlcHMvZ251OCIsIi9vcHQvb2hwYy9wd
+	WIvbW9kdWxlZmlsZXMiLCIvc2hhcmUvYXBwcy9tb2R1bGVzIiwiL3NoYXJlL2FwcHMvZWIt
+	bW9kdWxlcy9hbGwiLCIvc2hhcmUvYXBwcy9tb2R1bGVkZXBzL3Jvc2FsaW5kL0NvcmUiLH0
+	sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL29w,
+	HOSTNAME=<tpac-host>,
+	EBDEVELANACONDA3=/share/apps/software/Anaconda3/2024.02-1/easybuild/An
+	aconda3-2024.02-1-easybuild-devel,
+	__LMOD_REF_COUNT_MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:2;/opt/ohpc/
+	pub/modulefiles:1;/share/apps/modules:1;/share/apps/eb-modules/all:1;/s
+	hare/apps/moduledeps/rosalind/Core:1,SHELL=/bin/bash,TERM=xterm-16color,
+	PYTHONNOUSERSITE=1,LMOD_ROOT=/opt/ohpc/admin/lmod,HISTSIZE=1000,
+	SSH_CLIENT=<private-ip> 49408 22,LMOD_PKG=/opt/ohpc/admin/lmod/lmod,
+	LMOD_VERSION=8.1.18,LMOD_QUIET=yes,SSH_TTY=/dev/pts/1,
+	__LMOD_REF_COUNT_LOADEDMODULES=autotools:1;prun/1.3:1;gnu8/8.3.0:1;ohp
+	c:1;Anaconda3/2024.02-1:1,QT_GRAPHICSSYSTEM_CHECKED=1,
+	EBROOTANACONDA3=/share/apps/software/Anaconda3/2024.02-1,
+	HISTFILESIZE=2000,USER=bwbrook,
+	LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib64,
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=4
+	0;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=
+	34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31
+	:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;
+	31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:
+	*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.b
+	z2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.r
+	pm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.
+	alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.
+	cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:
+	*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35
+	:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01
+	;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm
+	=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.q
+	t=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.f
+	lc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xc
+	f=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.a
+	nx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.
+	mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:
+	*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36
+	:,
+	_ModuleTable004_=dC9vaHBjL3B1Yi9tb2R1bGVkZXBzL2dudTg6L29wdC9vaHBjL3B1Y
+	i9tb2R1bGVmaWxlczovc2hhcmUvYXBwcy9tb2R1bGVzOi9zaGFyZS9hcHBzL2ViLW1vZHVs
+	ZXMvYWxsOi9zaGFyZS9hcHBzL21vZHVsZWRlcHMvcm9zYWxpbmQvQ29yZSIsfQ==,
+	__LMOD_REF_COUNT__LMFILES_=/opt/ohpc/pub/modulefiles/autotools:1;/opt/
+	ohpc/pub/modulefiles/prun/1.3:1;/opt/ohpc/pub/modulefiles/gnu8/8.3.0:1;
+	/opt/ohpc/pub/modulefiles/ohpc:1;/share/apps/eb-modules/all/Anaconda3/2
+	024.02-1.lua:1,EBVERSIONANACONDA3=2024.02-1,LMOD_PREPEND_BLOCK=normal,
+	_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1a
+	WxkVGltZSJdPTg2NDAwLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5
+	PXtbImNvbXBpbGVyIl09ImdudTgiLH0sbVQ9e0FuYWNvbmRhMz17WyJmbiJdPSIvc2hhcmU
+	vYXBwcy9lYi1tb2R1bGVzL2FsbC9BbmFjb25kYTMvMjAyNC4wMi0xLmx1YSIsWyJmdWxsTm
+	FtZSJdPSJBbmFjb25kYTMvMjAyNC4wMi0xIixbImxvYWRPcmRlciJdPTUscHJvcFQ9e30sW
+	yJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iQW5h
+	Y29uZGEzLzIwMjQuMDItMSIsfSxhdXRvdG9vbHM9e1siZm4iXT0iL29wdC9vaHBjL3B1Yi9
+	tb2R1bGVmaWxlcy9hdXRvdG9vbHMiLFsi,
+	PATH=/share/apps/software/Anaconda3/2024.02-1:/share/apps/software/Ana
+	conda3/2024.02-1/sbin:/share/apps/software/Anaconda3/2024.02-1/bin:/opt
+	/ohpc/pub/compiler/gcc/8.3.0/bin:/opt/ohpc/pub/utils/prun/1.3:/opt/ohpc
+	/pub/utils/autotools/bin:/share/apps/bin:/opt/ohpc/pub/bin:/usr/local/b
+	in:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin,
+	MAIL=/var/spool/mail/bwbrook,LMOD_SETTARG_CMD=:,
+	PWD=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r5,
+	_LMFILES_=/opt/ohpc/pub/modulefiles/autotools:/opt/ohpc/pub/modulefile
+	s/prun/1.3:/opt/ohpc/pub/modulefiles/gnu8/8.3.0:/opt/ohpc/pub/modulefil
+	es/ohpc:/share/apps/eb-modules/all/Anaconda3/2024.02-1.lua,
+	LANG=en_US.UTF-8,
+	MODULEPATH=/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/sh
+	are/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosa
+	lind/Core,_ModuleTable_Sz_=4,
+	LOADEDMODULES=autotools:prun/1.3:gnu8/8.3.0:ohpc:Anaconda3/2024.02-1,
+	PYTHONDONTWRITEBYTECODE=1,
+	LMOD_CMD=/opt/ohpc/admin/lmod/lmod/libexec/lmod,
+	HISTCONTROL=ignoreboth,HOME=/u/bwbrook,SHLVL=1,
+	__LMOD_REF_COUNT_PATH=/share/apps/software/Anaconda3/2024.02-1:1;/shar
+	e/apps/software/Anaconda3/2024.02-1/sbin:1;/share/apps/software/Anacond
+	a3/2024.02-1/bin:1;/opt/ohpc/pub/compiler/gcc/8.3.0/bin:1;/opt/ohpc/pub
+	/utils/prun/1.3:1;/opt/ohpc/pub/utils/autotools/bin:1;/share/apps/bin:1
+	;/opt/ohpc/pub/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr
+	/sbin:1;/opt/pbs/bin:1,TPAC_QUOTA_SHOWN=1,
+	_ModuleTable002_=ZnVsbE5hbWUiXT0iYXV0b3Rvb2xzIixbImxvYWRPcmRlciJdPTEsc
+	HJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5h
+	bWUiXT0iYXV0b3Rvb2xzIix9LGdudTg9e1siZm4iXT0iL29wdC9vaHBjL3B1Yi9tb2R1bGV
+	maWxlcy9nbnU4LzguMy4wIixbImZ1bGxOYW1lIl09ImdudTgvOC4zLjAiLFsibG9hZE9yZG
+	VyIl09Myxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsW
+	yJ1c2VyTmFtZSJdPSJnbnU4Iix9LG9ocGM9e1siZm4iXT0iL29wdC9vaHBjL3B1Yi9tb2R1
+	bGVmaWxlcy9vaHBjIixbImZ1bGxOYW1lIl09Im9ocGMiLFsibG9hZE9yZGVyIl09NCxwcm9
+	wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsi,
+	__LMOD_REF_COUNT_INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include:1,
+	BASH_ENV=/opt/ohpc/admin/lmod/lmod/init/bash,LOGNAME=bwbrook,
+	SSH_CONNECTION=<private-ip> 49408 <private-ip> 22,
+	MODULESHOME=/opt/ohpc/admin/lmod/lmod,
+	PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.02-1/lib/pkgconfig
+	,
+	__LMOD_REF_COUNT_LD_LIBRARY_PATH=/opt/ohpc/pub/compiler/gcc/8.3.0/lib6
+	4:1,LMOD_SETTARG_FULL_SUPPORT=no,LESSOPEN=||/usr/bin/lesspipe.sh %s,
+	PROMPT_COMMAND=history -a,LMOD_FAMILY_COMPILER=gnu8,
+	LMOD_FULL_SETTARG_SUPPORT=no,
+	__LMOD_REF_COUNT_PKG_CONFIG_PATH=/share/apps/software/Anaconda3/2024.0
+	2-1/lib/pkgconfig:1,XDG_RUNTIME_DIR=/run/user/145812,
+	LMOD_CACHED_LOADS=yes,
+	__LMOD_REF_COUNT_MANPATH=/share/apps/software/Anaconda3/2024.02-1/shar
+	e/man:1;/share/apps/software/Anaconda3/2024.02-1/man:1;/opt/ohpc/pub/co
+	mpiler/gcc/8.3.0/share/man:1;/opt/ohpc/pub/utils/autotools/share/man:1;
+	/usr/local/share/man:1;/usr/share/man/overrides:1;/usr/share/man/en:1;/
+	usr/share/man:1;/opt/pbs/share/man:1,
+	INCLUDE=/opt/ohpc/pub/compiler/gcc/8.3.0/include,
+	LMOD_DIR=/opt/ohpc/admin/lmod/lmod/libexec,LMOD_COLORIZE=no,
+	BASH_FUNC_module()=() {  eval $($LMOD_CMD bash \"$@\") && eval $(${LMO
+	D_SETTARG_CMD:-:} -s sh)
+},
+	BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd \"$@\")
+},
+	_=/share/apps/software/Anaconda3/2024.02-1/bin/python3,
+	PBS_O_QUEUE=normal,PBS_O_HOST=<tpac-host>
+    Submit_arguments = -N pn_g_r_smoke -l walltime=01:00:00 -W depend=afterok:8
+	72548.kunanyi-ohpc -v PAIRED_STAGE=/u/bwbrook/codex_kunanyi/paired_noje
+	t_boundary_2026-11-01_r1,PAIRED_MODE=smoke,PAIRED_CASE=group_002031,
+	PAIRED_BOUNDARY=reflective -o /u/bwbrook/codex_kunanyi/paired_nojet_bo
+	undary_2026-11-01_r1/logs/group_002031_reflective.smoke.pbs.out /u/bwbr
+	ook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1/scripts/kunanyi/p
+	aired_nojet_control.pbs
+    project = _pbs_project_default
+

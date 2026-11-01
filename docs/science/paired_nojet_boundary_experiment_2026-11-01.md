@@ -1,9 +1,8 @@
 # Paired coarse-grid boundary experiment
 
-Status: authorised; implementation, local serial compile and local checks pass.
-Target MPI/HDF5 build and smoke gates are next. Launch is blocked because
-the Mac portal is locked and configured TPAC SSH authentication fails. Barry
-has been asked to unlock the Mac; no new job is submitted and no stage uploaded.
+Status: target MPI/HDF5 build `872548` completed F/0 with 77/77 tests passing.
+Four 28-rank smoke runs (`872581`–`872584`) are running. Full 50-Myr controls
+await the runtime budget, native-output and paired-identity gates.
 
 Barry authorised on 1 November 2026: “Go ahead with the cheap paired
 reflective/outflow controls, keeping everything else identical. Hold off on
