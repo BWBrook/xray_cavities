@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+#PBS -N nojet_audit
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mem=8gb
+#PBS -l walltime=02:00:00
+#PBS -r n
+#PBS -m n
+
+set -euo pipefail
+umask 077
+readonly STAGE=/u/bwbrook/codex_kunanyi/nojet_control_audit_2026-11-01_r1
+readonly MIGRATION=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16
+readonly BASE=/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates/2026-05-08
+cd "$STAGE"
+sha256sum --check stage_checksums.sha256
+for path in run results nojet_audit_results.tar.gz; do test ! -e "$path" && test ! -L "$path"; done
+mkdir run
+exec > >(tee run/run.out) 2> >(tee run/run.err >&2)
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1
+export PYTHONPATH="$STAGE/scripts/science"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+python -m pytest -q -p no:cacheprovider --basetemp run/pytest_tmp --junitxml run/tests.xml tests/test_nojet_control_audit.py
+python - "$MIGRATION" <<'PY'
+import hashlib,json,os,sys
+from pathlib import Path
+root=Path(sys.argv[1]);unit='fc40cdd22f95cd549194'
+s=json.loads((root/'state'/('unit-'+unit)/'status.json').read_text())
+assert s['stage']=='complete' and s['plan_hash']=='698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900'
+assert s['source']=='/scratch/bwbrook/xray_cavities_gates'
+assert s['destination']=='/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates'
+assert Path(s['source']).is_symlink() and os.readlink(s['source'])==s['destination']
+assert Path(s['destination']).is_dir() and not Path(s['destination']).is_symlink()
+assert not os.path.lexists(s['tombstone'])
+Path('run/migration_gate.json').write_text(json.dumps(s,indent=2)+'\n')
+unit_dir=root/'state'/('unit-'+unit)
+records=[json.loads(line) for line in (unit_dir/'ledger.jsonl').read_text().splitlines()]
+verified={r['path']:r for r in records if r.get('event')=='file_verified'}
+inputs=[]
+for case,job in [('cluster_002003','690366'),('group_002031','690371')]:
+ prefix=f'2026-05-08/{case}/{job}.kunanyi-ohpc/problem'
+ if case.startswith('group'):prefix+='/outputs'
+ for index in range(6):
+  relative=f'{prefix}/data.{index:04d}.dbl.h5'
+  receipt=verified[relative]
+  path=Path(s['destination'])/relative
+  observed=path.stat()
+  actual={'size':observed.st_size,'mtime_ns':observed.st_mtime_ns,'ctime_ns':observed.st_ctime_ns,'ino':observed.st_ino}
+  assert all(actual[key]==receipt['destination_signature'][key] for key in actual),(path,actual,receipt['destination_signature'])
+  inputs.append({'archive_path':str(path),'migration_relative_path':relative,'sha256_from_completed_migration':receipt['sha256'],'live_stat_checked':actual})
+Path('run/control_migration_receipts.json').write_text(json.dumps({'unit_id':unit,'inputs':inputs,'payload_rehashed':False},indent=2)+'\n')
+PY
+for spec in cluster_002003:690366 group_002031:690371; do
+  case_id="${spec%:*}"
+  job_id="${spec#*:}.kunanyi-ohpc"
+  root="$BASE/$case_id/$job_id/problem"
+  data="$root"
+  if [ "$case_id" = group_002031 ]; then data="$root/outputs"; fi
+  python scripts/kunanyi/run_q031_measured.py "run/$case_id.resources.txt" \
+    python -u scripts/science/audit_nojet_controls.py \
+    --case "$case_id" --job-id "$job_id" --control-root "$root" --data-dir "$data" \
+    --environment "$root/tabulated_cosmo_${case_id#*_}.csv" \
+    --environment-ini "$root/environment.ini" --pluto-ini "$root/pluto.ini" \
+    --definitions "$root/src/definitions.h" --definitions-user "$root/src/definitions_usr.h" \
+    --grid-file "$data/grid.out" --output-index-file "$data/dbl.h5.out" \
+    --output-dir "$STAGE/results/$case_id"
+done
+sha256sum --check stage_checksums.sha256
+python - <<'PY'
+import hashlib,json,tarfile
+from pathlib import Path
+root=Path.cwd()
+for case in ('cluster_002003','group_002031'):
+ d=root/'results'/case;manifest=json.loads((d/'output_manifest.json').read_text())
+ assert set(manifest)=={p.name for p in d.iterdir() if p.name!='output_manifest.json'}
+ for name,digest in manifest.items():assert hashlib.sha256((d/name).read_bytes()).hexdigest()==digest
+paths=sorted(p for p in (root/'results').rglob('*') if p.is_file())
+paths += [root/'stage_checksums.sha256',root/'stage_origin.json',root/'run/tests.xml',root/'run/migration_gate.json',root/'run/control_migration_receipts.json']
+paths += sorted((root/'run').glob('*.resources.txt'))
+for name in ('run.out','run.err'):
+ source=root/'run'/name
+ captured=root/'run'/('captured_'+name)
+ captured.write_bytes(source.read_bytes())
+ paths.append(captured)
+receipt={'status':'complete_existing_control_audit','members':[{'path':str(p.relative_to(root)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'size_bytes':p.stat().st_size} for p in paths]}
+(root/'completion.json').write_text(json.dumps(receipt,indent=2)+'\n')
+with tarfile.open(root/'nojet_audit_results.tar.gz','x:gz') as t:
+ for p in paths+[root/'completion.json']:t.add(p,arcname=str(p.relative_to(root)))
+p=root/'nojet_audit_results.tar.gz';print('RESULT_ARCHIVE',p,hashlib.sha256(p.read_bytes()).hexdigest(),flush=True)
+PY
