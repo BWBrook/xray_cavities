@@ -1,0 +1,24 @@
+.....................                                                    [100%]
+- generated xml file: /u/bwbrook/codex_kunanyi/nojet_control_audit_2026-11-01_r1/run/tests.xml -
+21 passed in 21.10s
+nojet_snapshot_complete=cluster_002003/0; age_myr=0
+nojet_snapshot_complete=cluster_002003/1; age_myr=9.9828481
+nojet_snapshot_complete=cluster_002003/2; age_myr=19.814243
+nojet_snapshot_complete=cluster_002003/3; age_myr=29.6455
+nojet_snapshot_complete=cluster_002003/4; age_myr=39.904056
+nojet_snapshot_complete=cluster_002003/5; age_myr=50
+nojet_snapshot_complete=group_002031/0; age_myr=0
+nojet_snapshot_complete=group_002031/1; age_myr=9.8101908
+nojet_snapshot_complete=group_002031/2; age_myr=19.661365
+nojet_snapshot_complete=group_002031/3; age_myr=29.512236
+nojet_snapshot_complete=group_002031/4; age_myr=39.362797
+nojet_snapshot_complete=group_002031/5; age_myr=50
+scripts/kunanyi/nojet_control_audit.pbs: OK
+scripts/kunanyi/run_q031_measured.py: OK
+scripts/science/audit_nojet_controls.py: OK
+scripts/science/measure_q031_fluxes.py: OK
+scripts/science/pluto_h5_level3_ambient_extract.py: OK
+scripts/science/select_common_age_hdf5.py: OK
+scripts/science/snapshot_energy.py: OK
+stage_origin.json: OK
+tests/test_nojet_control_audit.py: OK

@@ -1,13 +1,13 @@
 # Current Status
 
-Last updated: 2026-11-01 (cluster control reviewed; group retrieval pending)
+Last updated: 2026-11-01 18:30 AEDT (two-case no-jet audit complete)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
 
 ## Latest stocktake — 1 November
 
-At 04:53 UTC migration 870323 remains running. **Nine units are complete**, with
+At 07:23:48 UTC migration 870323 remains running. **Nine units are complete**, with
 5.697 TB of logical payload covered by receipts and live archive links; C-HI
 completed at 01:03 UTC. C-LO is copying its 3.100 TB and has no verification
 receipts yet. Flux 870374 and replacement native 871717 remain held. The native migration
@@ -17,20 +17,19 @@ Kunanyi in fresh smoke 871683. Frozen migration evidence is unchanged.
 Q-032 870640 finished F/0 (11:25). The complete 60-view package, masks, stamps,
 manifest and source-bound receipts are now local and independently checked.
 Claude retains interpretation ownership. G-HI/50 remains scientifically excluded,
-as recorded in the external receipt. Existing May-8 no-jet configurations are
-confirmed to use reflective boundaries, unlike production outflow boundaries;
-signed energy/mass/motion audit 871750 is submitted against their retained
-outputs (2 CPUs, 8 GB, 2 hours), after independent review and 21 local tests.
-See `docs/exchange/logs/2026-11-01-migration-analysis-stocktake.md` for evidence.
-
-The cluster half of audit 871750 is now downloaded and independently reviewed:
-6,198 output/provenance checks pass. Final whole-grid energy drift is
-4.36e-9 of initial energy, but inner/outer 100-kpc changes compensate and
-maximum speed is 1.55 km/s (Mach 0.00222), in a cell beside a reflective wall.
-This is not measured wall inflow or validation of production boundaries.
-Group retrieval and final PBS accounting remain pending because the Mac is
-locked; Barry has been asked to unlock it. No final two-case result is claimed.
-See `docs/science/nojet_control_audit_2026-11-01.md`.
+as recorded in the external receipt. Existing May-8 no-jet configurations use
+reflective boundaries, unlike production outflow boundaries. Signed audit
+871750 finished F/0 (18:49); both six-snapshot results and complete manifests,
+source bindings and final scheduler accounting are now local and verified.
+All 21 target tests and 12,515 independent output/provenance checks passed.
+Final whole-grid energy drift is about 4e-9 of
+initial energy in both atmospheres, with small compensating regional changes.
+Maximum speeds are 1.55/0.98 km/s (cluster/group), Mach 0.00222/0.00276, beside
+reflective faces. These are not measured wall inflows or validation of
+production-background stability. No new simulation was launched. The matched
+control recommendation remains defer until four-case flux/native interpretation.
+See `docs/science/nojet_control_audit_2026-11-01.md` and
+`docs/exchange/logs/2026-11-01-migration-analysis-stocktake.md`.
 
 ## Authorised Q-031 native pilot — submitted, dependency-held
 

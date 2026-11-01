@@ -1,0 +1,8 @@
+{
+  "capture_archive_name": "nojet_final_capture_2026-11-01_0725.tar.gz",
+  "capture_archive_sha256": "b8879dd9f9d968ba7606a875fffd7f6c2823a49ab75df3ed45975cc6a7ee1972",
+  "capture_archive_bytes": 25462760,
+  "result_archive_sha256": "253fb8215fd377e0cbbde1436983994fd0f6d74aa747af39a729fa6db26c0da1",
+  "verification": "Remote printed hashes equal downloaded hashes; all seven capture members and all 24 result-package members match exact membership, sizes and hashes. Cluster outputs equal prior partial package.",
+  "result_archive_storage": "Expanded losslessly under ../results_bundle; compressed transport copy not duplicated in Git."
+}

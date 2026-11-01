@@ -144,3 +144,35 @@ The authenticated portal became inaccessible when the Mac locked. Group
 retrieval and final PBS accounting are pending; no job cancellation or
 resubmission was attempted. Cluster evidence and the qualified interpretation
 are preserved in `docs/science/nojet_control_audit_2026-11-01.md` and its assets.
+
+## Completed two-case audit and final stocktake
+
+After Barry unlocked the Mac, PBS 871750 was verified F/0, 18:49 walltime.
+Both six-snapshot controls completed. All 24 result-package members and all
+seven enclosing capture members match their manifests by exact membership,
+size and hash. Result archive SHA-256:
+`253fb8215fd377e0cbbde1436983994fd0f6d74aa747af39a729fa6db26c0da1`;
+capture SHA-256:
+`b8879dd9f9d968ba7606a875fffd7f6c2823a49ab75df3ed45975cc6a7ee1972`.
+The cluster files are unchanged from the partial capture. The complete
+expanded package is now `assets/nojet_control_audit_2026-11-01/results_bundle/`;
+its cluster subset was moved there without byte changes. Prior partial
+receipts are retained with their new preservation-root mapping.
+
+Group whole-grid energy drift is +1.78616e52 erg, 4.13645e-9 of initial
+energy, with inner/outer 100-kpc changes -1.24490e55/+1.24669e55 erg.
+Maximum speed is 0.981063 km/s, Mach 0.00276157, 0.5 kpc inside the +x
+reflective face. Maximum absolute density/pressure departures are
+0.022948%/0.039888%. Both controls are quiet in their own configurations;
+neither establishes production stability. The final science note includes
+the combined comparison and limits.
+
+Migration at 07:23:48 UTC is still R: nine complete units, 5,696,611,330,969
+logical bytes, exact source symlinks to live archive directories, receipt
+hashes present and no tombstones. C-LO remains `copy-start`, zero verified
+file receipts, source still a directory. Flux 870374 and native 871717 remain
+H with their recorded dependencies. No payload rehash, resubmission, new
+simulation or automation was performed in this closeout.
+
+Independent combined review passed 12,515 checks with no failures or warnings;
+checker, report and their hashes are retained with the final evidence package.

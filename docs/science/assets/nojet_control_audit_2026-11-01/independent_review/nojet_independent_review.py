@@ -916,6 +916,71 @@ def check_receipts(
     }
 
 
+def check_completion_package(
+    completion_path: Path | None,
+    source_root: Path | None,
+    review: Review,
+) -> dict[str, Any]:
+    if completion_path is None:
+        return {"checked": False}
+    root = completion_path.parent
+    completion = load_json(completion_path)
+    review.require(completion.get("status") == "complete_existing_control_audit",
+                   "completion package has unexpected status")
+    members = completion.get("members", [])
+    review.require(isinstance(members, list) and len(members) == 23,
+                   "completion package must declare exactly 23 non-receipt members")
+    declared: set[str] = set()
+    for member in members if isinstance(members, list) else []:
+        relative = str(member.get("path", ""))
+        relative_path = Path(relative)
+        review.require(relative and not relative_path.is_absolute() and ".." not in relative_path.parts,
+                       f"unsafe completion member path: {relative!r}")
+        review.require(relative not in declared, f"duplicate completion member: {relative}")
+        declared.add(relative)
+        path = root / relative_path
+        review.require(path.is_file(), f"completion member missing: {relative}")
+        if not path.is_file():
+            continue
+        review.require(path.stat().st_size == member.get("size_bytes"), f"completion size mismatch: {relative}")
+        review.require(sha256_file(path) == member.get("sha256"), f"completion hash mismatch: {relative}")
+    disk = {str(path.relative_to(root)) for path in root.rglob("*") if path.is_file() and path != completion_path}
+    review.require(disk == declared, f"completion member set differs from extracted files: extra={sorted(disk-declared)}, missing={sorted(declared-disk)}")
+
+    stage_path = root / "stage_checksums.sha256"
+    stage_records = []
+    if stage_path.is_file():
+        for line in stage_path.read_text().splitlines():
+            if not line.strip():
+                continue
+            fields = line.split(None, 1)
+            review.require(len(fields) == 2 and SHA256_RE.fullmatch(fields[0]) is not None,
+                           f"invalid stage-checksum row: {line!r}")
+            if len(fields) != 2:
+                continue
+            digest, relative = fields[0], fields[1].strip()
+            if relative == "stage_origin.json":
+                candidate = root / relative
+            elif source_root is not None:
+                candidate = source_root / relative
+            else:
+                candidate = None
+            review.require(candidate is not None and candidate.is_file(), f"cannot resolve staged source locally: {relative}")
+            if candidate is not None and candidate.is_file():
+                observed = sha256_file(candidate)
+                review.require(observed == digest, f"staged/local source hash mismatch: {relative}")
+                stage_records.append({"path": relative, "sha256": digest, "local_path": str(candidate)})
+    else:
+        review.failures.append("stage_checksums.sha256 missing from completion package")
+    return {
+        "checked": True,
+        "completion_path": str(completion_path),
+        "completion_sha256": sha256_file(completion_path),
+        "declared_member_count": len(declared),
+        "stage_bindings": stage_records,
+    }
+
+
 def boundary_energy_timecourse(
     case: str,
     budgets: Mapping[tuple[int, str], Mapping[str, str]],
@@ -989,6 +1054,12 @@ def run(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
     else:
         provenance = {"raw_payload_rehashed_by_checker": False, "linked_snapshot_count": 0}
         review.failures.append("could not check migration receipts because case metadata was incomplete")
+    completion_path = args.completion
+    if completion_path is None and args.results_root is not None:
+        inferred_completion = args.results_root.parent / "completion.json"
+        if inferred_completion.is_file():
+            completion_path = inferred_completion
+    completion_summary = check_completion_package(completion_path, args.source_root, review)
 
     report = {
         "status": "pass" if not review.failures else "fail",
@@ -998,6 +1069,7 @@ def run(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
         "warnings": review.warnings,
         "scale_aware_floating_error": review.error_metrics,
         "provenance": provenance,
+        "completion_package": completion_summary,
         "cases": case_reports,
         "scientific_limits": [
             "The checker validates internal consistency and migration identity, not an independent raw-cell re-integration.",
@@ -1025,6 +1097,8 @@ def main() -> None:
     parser.add_argument("--report", type=Path, help="Optional JSON report destination")
     parser.add_argument("--source-root", type=Path,
                         help="Optional repository root for cross-checking staged analysis-source hashes")
+    parser.add_argument("--completion", type=Path,
+                        help="Optional completion.json; inferred beside --results-root when present")
     args = parser.parse_args()
     try:
         code, report = run(args)

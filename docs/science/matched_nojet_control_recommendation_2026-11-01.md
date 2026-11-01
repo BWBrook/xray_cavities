@@ -6,9 +6,11 @@ analyses on 1 November 2026.
 
 ## Recommendation
 
-Prepare the exact cluster control specification, but defer a full run until
-the existing-control audit and four-case flux results have been reviewed.
-Those results can show whether a regional energy budget already answers the
+Defer a full matched-control run until the four-case flux results have been
+reviewed. The completed existing-control audit finds both coarse reflective
+atmospheres numerically quiet (see `nojet_control_audit_2026-11-01.md`), but
+does not test production outflow boundaries. The flux results can show whether
+a regional energy budget already answers the
 immediate conservation question and what a new control needs to measure.
 The first native-emission results will inform the value of an evolved
 background for X-ray interpretation. Waiting for adoption of a replacement
@@ -41,8 +43,9 @@ reflective boundaries on all six faces. Production uses outflow boundaries.
 The controls therefore cannot test the specific inflow mechanism suspected
 in the production cluster atmosphere. They also use a uniform 1-kpc grid,
 where production has 0.05-kpc central spacing and stretched outer cells.
-A stable reflective coarse run would be useful evidence about that setup,
-but would not establish stability of production.
+The completed audit finds both reflective coarse runs stable globally, with
+small local redistribution and maximum Mach numbers below 0.003. That is
+evidence about those setups, and does not establish stability of production.
 
 ## Measured accounting and transparent extrapolation
 

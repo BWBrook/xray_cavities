@@ -71,5 +71,7 @@
       "size_bytes": 307,
       "sha256": "1878688f205a5d4c2ec410714d0d9c9e447dcab9e4d47613c94c03ad71a7d6e2"
     }
-  ]
+  ],
+  "preserved_payload_root": "results_bundle",
+  "preservation_note": "Original cluster capture payloads are unchanged and now share the completed two-case package directory."
 }

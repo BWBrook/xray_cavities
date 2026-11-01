@@ -1,0 +1,216 @@
+{
+  "utc": "2026-11-01T07:23:48Z",
+  "payload_rehashed": false,
+  "units": [
+    {
+      "unit_id": "fc40cdd22f95cd549194",
+      "status": {
+        "bytes": 69206921306,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates",
+        "entries": 449,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_gates",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/.xray_cavities_gates.xray-migration-fc40cdd22f95cd549194.tombstone",
+        "unit_id": "fc40cdd22f95cd549194",
+        "updated_at": 1792153574.5755303
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_gates",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 424,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "2e6d99dd4c3fce468eee",
+      "status": {
+        "bytes": 86299870447,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_analysis",
+        "entries": 2547,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_analysis",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/.xray_cavities_analysis.xray-migration-2e6d99dd4c3fce468eee.tombstone",
+        "unit_id": "2e6d99dd4c3fce468eee",
+        "updated_at": 1792157037.8522477
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_analysis",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 2061,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "470c8d1cf0e02d221660",
+      "status": {
+        "bytes": 163150591795,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+        "entries": 3507,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/xray_cavities_runs/.2026-07-07-g-lo-endpoint-oriented-production.xray-migration-470c8d1cf0e02d221660.tombstone",
+        "unit_id": "470c8d1cf0e02d221660",
+        "updated_at": 1792163741.9469185
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-07-g-lo-endpoint-oriented-production",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 3498,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "e6ee270d474357616e4d",
+      "status": {
+        "bytes": 292829367757,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh",
+        "entries": 2468,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/xray_cavities_runs/.2026-06-01-c-hi-fullgrid-agn-impi-fresh.xray-migration-e6ee270d474357616e4d.tombstone",
+        "unit_id": "e6ee270d474357616e4d",
+        "updated_at": 1792175868.6521587
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-01-c-hi-fullgrid-agn-impi-fresh",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 2458,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "5f78a42cd1833346ab21",
+      "status": {
+        "bytes": 291953724634,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64",
+        "entries": 1831,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/xray_cavities_runs/.2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64.xray-migration-5f78a42cd1833346ab21.tombstone",
+        "unit_id": "5f78a42cd1833346ab21",
+        "updated_at": 1792187447.2513046
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-06-06-c-hi-fullgrid-agn-impi-r9-prod64",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 1821,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "0af3bd843ce7e86ccfb4",
+      "status": {
+        "bytes": 372564214428,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+        "entries": 5830,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/xray_cavities_runs/.2026-07-10-g-lo-hdf5-stall-guarded-continuation.xray-migration-0af3bd843ce7e86ccfb4.tombstone",
+        "unit_id": "0af3bd843ce7e86ccfb4",
+        "updated_at": 1792207779.6868186
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-10-g-lo-hdf5-stall-guarded-continuation",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 5823,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "e647fd963ceb93762333",
+      "status": {
+        "bytes": 404712026079,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+        "entries": 2020,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/xray_cavities_runs/.2026-07-05-c-lo-endpoint-oriented-continuation.xray-migration-e647fd963ceb93762333.tombstone",
+        "unit_id": "e647fd963ceb93762333",
+        "updated_at": 1792224652.1328313
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-07-05-c-lo-endpoint-oriented-continuation",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 2011,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "479bc010718428ccc3e3",
+      "status": {
+        "bytes": 925617665748,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-20-g-hi-full-history-production",
+        "entries": 3540,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-20-g-hi-full-history-production",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/xray_cavities_runs/.2026-08-20-g-hi-full-history-production.xray-migration-479bc010718428ccc3e3.tombstone",
+        "unit_id": "479bc010718428ccc3e3",
+        "updated_at": 1792260392.2547128
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-20-g-hi-full-history-production",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 3531,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "e9730c61823192c5937f",
+      "status": {
+        "bytes": 3090276948775,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun",
+        "entries": 7128,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun",
+        "stage": "complete",
+        "tombstone": "/scratch/bwbrook/xray_cavities_runs/.2026-08-17-c-hi-full-history-rerun.xray-migration-e9730c61823192c5937f.tombstone",
+        "unit_id": "e9730c61823192c5937f",
+        "updated_at": 1793494997.6050835
+      },
+      "source_is_symlink": true,
+      "link_target": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun",
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 7119,
+      "verified_hashes_present": true
+    },
+    {
+      "unit_id": "6bc85eed1955f2de9a49",
+      "status": {
+        "bytes": 3099597012312,
+        "destination": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun",
+        "entries": 7128,
+        "plan_hash": "698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900",
+        "schema": 2,
+        "source": "/scratch/bwbrook/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun",
+        "stage": "copy-start",
+        "tombstone": "/scratch/bwbrook/xray_cavities_runs/.2026-08-17-c-lo-full-history-rerun.xray-migration-6bc85eed1955f2de9a49.tombstone",
+        "unit_id": "6bc85eed1955f2de9a49",
+        "updated_at": 1793495002.0421855
+      },
+      "source_is_symlink": false,
+      "link_target": null,
+      "destination_is_directory": true,
+      "tombstone_exists": false,
+      "verified_receipts": 0,
+      "verified_hashes_present": true
+    }
+  ]
+}
