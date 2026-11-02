@@ -128,7 +128,7 @@ To keep them elsewhere, restore into any directory and set `XRAY_CAVITIES_DATA=<
 
 Not published: `sci_lit/` (converted publisher papers), `agent_comms/` (collaborator correspondence), `docs/Honours_*` and the supervision transcripts, the collaborator review notes under `docs/exchange/logs/`, and some coursework. References to them in the handover notes point to files that exist only in local checkouts.
 
-The Claude–Codex–Barry correspondence for this project is published as snapshots in `docs/correspondence/`, regenerated with `uv run python scripts/board/export_board.py`. The exporter redacts addresses, home paths and hostnames, and refuses to write while any message containing a flag term in `docs/correspondence/publication.yaml` has not been reviewed.
+The Claude–Codex–Barry correspondence for this project is published as snapshots in `docs/correspondence/`, regenerated on the board host with `uv run --project ~/work/correspondence correspondence-export docs/correspondence/publication.toml`. The exporter redacts addresses, home paths and listed hostnames, and refuses to write while any message containing a flag term in `publication.toml` has not been withheld or cleared.
 
 ## Licence
 

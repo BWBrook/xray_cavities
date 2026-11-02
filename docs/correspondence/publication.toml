@@ -1,0 +1,22 @@
+project = "xray-cavities"
+
+# A message containing any of these terms must be withheld or cleared below.
+flag_terms = [
+  "password", "credential", "PubkeyAuthentication", "BatchMode", "jumpbox",
+  "OnDemand", "portal", "tpac.org.au", "utas.edu.au", "Tailscale",
+  "Stas", "Patrick", "Honours", "student", "transcript",
+]
+
+# Reviewed and published despite a flag term. Collaborator mentions were cleared
+# on Barry's decision (chat, 2 November 2026): publish Stas's and Patrick's
+# points "as is".
+cleared = [139, 2639, 2640, 2644, 2655, 2667, 2712, 2715, 2718, 2729, 2739, 2750, 2781, 2782, 2783, 2803, 2848, 2858]
+
+redact = [
+  ['\b[\w.-]+\.(?:tpac\.org\.au|utas\.edu\.au)\b', "[host]"],
+  ['\b[\w-]+-via-nectar\b', "[ssh alias]"],
+]
+
+[withheld]
+2714 = "cluster access-route and authentication diagnosis"
+2815 = "repository-maintenance notice inventorying withheld third-party material"
