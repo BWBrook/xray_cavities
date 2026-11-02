@@ -1,0 +1,22 @@
+project: xray-cavities
+# Messages containing any of these terms must be withheld or cleared below.
+flag_terms:
+  - password
+  - credential
+  - PubkeyAuthentication
+  - BatchMode
+  - jumpbox
+  - OnDemand
+  - portal
+  - tpac.org.au
+  - utas.edu.au
+  - Tailscale
+  - Stas
+  - Patrick
+  - Honours
+  - student
+  - transcript
+# message id: reason shown in place of the message
+withheld: {}
+# message ids reviewed and published despite a flag term
+cleared: []
