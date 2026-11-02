@@ -1,0 +1,224 @@
+# Claims ledger: the single source of evidence for the journal article, the
+# two-page brief and the agent guide. Format and rules: claims/README.md.
+# Check with: uv run python scripts/claims/check_claims.py
+schema: 1
+claims:
+  - id: NAT-01
+    status: supported
+    statement: >-
+      With the true age known, native binary-cocoon enthalpy 2.5pV captures a
+      substantial but case-dependent fraction of injected jet energy over
+      10–50 Myr: 0.525–0.559 (C-HI), 0.468–0.498 (G-HI), 0.615–0.785 (G-LO)
+      and 0.631–1.108 (C-LO).
+    evidence:
+      - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
+      - {path: docs/science/assets/q029_binary_native_refresh_2026-09-06/completion_acceptance.json, commit: 5e34fa3}
+    reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
+    caveats:
+      - The 4pV convention multiplies every value by 1.6; it is not a universal correction.
+      - C-LO pressure may include boundary-driven compression of the atmosphere (BND-02).
+    depends_on: [NAT-05]
+
+  - id: NAT-02
+    status: supported
+    statement: >-
+      Cocoon enthalpy differs from the actual total-energy change of the
+      current cocoon region, which spans 0.132–0.426 (C-HI), 0.425–0.571
+      (G-HI), 0.013–0.298 (G-LO) and −0.160–0.137 (C-LO) of injected energy.
+    evidence:
+      - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
+    reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
+    caveats:
+      - Negative regional values reflect gravitational changes relative to the initial fields, not negative absolute energy.
+      - C-LO regional values are exposed to the boundary inflow of BND-01/BND-02.
+    depends_on: [NAT-05]
+
+  - id: NAT-03
+    status: provisional
+    statement: >-
+      The selected shock-processed ambient region gains 0.666–0.765 (C-HI),
+      0.505–0.655 (G-HI) and 0.580–0.854 (G-LO) of injected energy. C-LO has
+      one accepted estimate, 0.223 at 10 Myr; its later ages fail the
+      bilateral shock gate.
+    evidence:
+      - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
+    reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
+    caveats:
+      - Includes thermal, kinetic and gravitational change; not all of it is irreversible heat.
+      - Halving or doubling the mask thresholds changes C-LO/10 by factors of 0.654 and 1.588 and matters in G-LO.
+    test: Cellwise no-jet counterfactual from the paired boundary controls (BND-02), plus measured face fluxes.
+
+  - id: NAT-04
+    status: supported
+    statement: >-
+      The cocoon/ambient energy decompositions close numerically against the
+      independently summed retained energy change; the largest residual is
+      2.30e-14 of injected energy, against a 1e-9 gate.
+    evidence:
+      - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
+    reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
+    caveats:
+      - Numerical closure only; physical closure against injection is BND-01.
+
+  - id: NAT-05
+    status: supported
+    statement: >-
+      The native cocoon is all cells with tracer tr1 > 1e-3 at full cell
+      weight. This binary definition yields lobe volumes 3.8–6.1 times the
+      fractional-tracer volumes at 10 Myr, so the choice of native truth
+      materially changes any recovery ratio.
+    evidence:
+      - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
+    reproduce: uv run --locked python scripts/science/build_binary_native_refresh.py
+    caveats:
+      - A cell at tr1 = 1e-3 is 99.9% ambient gas by mass and emits near ambient level; tracer-defined cocoons are not X-ray cavities (XR-02).
+
+  - id: BND-01
+    status: supported
+    statement: >-
+      Whole-grid energy change exceeds injected energy in all four cases:
+      C-HI by 14–28%, G-HI by about 8%, G-LO by 23–58%, and C-LO by a factor
+      of 6–24.
+    evidence:
+      - {path: docs/science/whole_grid_energy_closure_and_partition_2026-10-21.md, commit: a119b37}
+    reproduce: uv run python scripts/science/build_whole_grid_energy_check.py
+    caveats:
+      - No tracer, shock or emission selection enters this test.
+
+  - id: BND-02
+    status: open
+    statement: >-
+      The whole-grid excess (BND-01) is a boundary artefact. Zero-gradient
+      outflow boundaries on the stratified atmosphere drive jet-independent
+      inflow through every face, reaching about 4.9e43 g (cluster) and 2.4e42 g
+      (group) by 50 Myr and growing roughly as t², and that inflow carries
+      enthalpy plus potential energy ΔM(h + φ) into the grid.
+    evidence:
+      - {path: docs/science/q031_boundary_hypothesis_2026-10-31.md, commit: 72a7c4f}
+      - {path: docs/science/paired_nojet_boundary_experiment_2026-11-01.md, commit: c4dde03}
+      - {path: docs/science/paired_nojet_boundary_prediction_2026-11-02.md, commit: d36ea0a}
+    reproduce: uv run python scripts/science/audit_q031_boundary_hypothesis.py
+    test: >-
+      Paired coarse no-jet controls, outflow minus reflective, PBS
+      872733–872736. The prediction was recorded before the results; it is
+      refuted by a 50-Myr mass contrast below 1e43 g (cluster) or 5e41 g
+      (group), growth far from t², or a contrast not explained by measured
+      face transport.
+    depends_on: [BND-01, BND-03]
+
+  - id: BND-03
+    status: supported
+    statement: >-
+      The coarse (uniform 1 kpc) reflective no-jet cluster control is quiet
+      at 50 Myr: total energy changes by 4.36e-9 of the initial whole-grid
+      energy and peak Mach is 0.0022.
+    evidence:
+      - {path: docs/science/nojet_control_audit_2026-11-01.md, commit: db0e961}
+    reproduce: uv run python scripts/science/audit_nojet_controls.py
+    caveats:
+      - Reflective boundaries and 1 kpc cells; production uses outflow boundaries and a stretched grid.
+
+  - id: OBS-01
+    status: refuted
+    statement: >-
+      The legacy fixed-area (1%) X-ray cavity selector recovers cavity volume
+      and enthalpy well enough to compare the four cases.
+    evidence:
+      - {path: docs/science/xray_cavity_selection_issue_2026-10-21.md, commit: 262a6f9}
+      - {path: docs/science/q032_synthetic_harness_2026-10-31.md, commit: c7cce6a}
+      - {path: docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md, commit: 9f0223d}
+    reproduce: uv run python scripts/science/build_q032_synthetic_harness.py
+    caveats:
+      - >-
+        Refuted three ways: it reports a cavity on 8/8 cavity-free synthetic
+        sides; its recovery falls as true volume rises (0.17 at a = 20 kpc,
+        0.003 at 90 kpc); and on the simulations it compresses the native
+        power contrast of about 1.6 dex to 0.2–0.4 dex, with nine detections
+        that do not overlap the cocoon at all.
+
+  - id: OBS-02
+    status: withdrawn
+    statement: >-
+      X-ray/native enthalpy recovery has medians 0.022 (C-HI), 0.494 (C-LO),
+      0.006 (G-HI) and 0.093 (G-LO). The discrepancy lies mainly in recovered
+      extent and topology rather than in ambient pressure, and the high-power
+      deficits are present before any age error.
+    evidence:
+      - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
+    caveats:
+      - Withdrawn because every number comes from the legacy selector (OBS-01). The question is open again until a detector passes (DET-01).
+    depends_on: [OBS-01]
+
+  - id: DET-01
+    status: supported
+    statement: >-
+      No rung of the retained method ladder is adoptable as a production
+      cavity detector: neither legacy 1%, seed-and-grow, nor radial-deficit
+      thresholds at 5%, 10% or 20%. The failures fall into two classes:
+      detection efficiency that depends on cocoon contrast, and segmentation
+      (background merges, off-axis selection, aperture clipping).
+    evidence:
+      - {path: docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md, commit: 9f0223d}
+      - {path: docs/science/q032_synthetic_harness_2026-10-31.md, commit: c7cce6a}
+    reproduce: >-
+      uv run python scripts/science/summarise_q032_retained_ladder.py
+      docs/science/assets/q032_retained_method_ladder_2026-10-31/results/method_ladder_rows.csv
+      docs/science/assets/q032_retained_method_ladder_2026-10-31/interpretation
+      --native-root docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis
+    caveats:
+      - G-HI at 50 Myr is excluded; no t=0 baseline was used yet.
+
+  - id: DET-02
+    status: supported
+    statement: >-
+      Agreement in cavity volume does not imply agreement in geometry. At the
+      5% deficit rung C-HI recovers 1.08 of native volume, but tracer
+      completeness is 0.36 and purity 0.70–0.77, so the two errors cancel.
+    evidence:
+      - {path: docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md, commit: 9f0223d}
+    reproduce: see DET-01
+    depends_on: [DET-01]
+
+  - id: DET-03
+    status: supported
+    statement: >-
+      The 120 kpc analysis aperture is not neutral: it removes up to 43% of
+      the late high-power cocoon (C-HI tracer area inside the aperture is
+      0.92, 0.72 and 0.57 at 30, 40 and 50 Myr) from any method.
+    evidence:
+      - {path: docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md, commit: 9f0223d}
+    reproduce: see DET-01
+
+  - id: DET-04
+    status: supported
+    statement: >-
+      The projected-tracer revolution volume overestimates the native 3D lobe
+      volume by a median factor of 1.09–1.18 per case, so it is a fair proxy
+      reference for observer tests.
+    evidence:
+      - {path: docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md, commit: 9f0223d}
+    reproduce: see DET-01
+
+  - id: XR-01
+    status: supported
+    statement: >-
+      Above the 10 keV edge of the APEC table, the retained emissivity
+      correction stays positive and smooth to 20 keV, where it is 1.87% below
+      the clamped value. It peaks near 88.5 keV and crosses zero at 544.7 keV.
+    evidence:
+      - {path: docs/science/q031_emissivity_extrapolation_2026-10-31.md, commit: 7f99371}
+    reproduce: see the Reproduction section of the evidence note
+    caveats:
+      - How much emission falls outside the table, region by region, awaits the native pilot (XR-02).
+
+  - id: XR-02
+    status: open
+    statement: >-
+      Tracer-defined cocoons and X-ray-visible cavities are different objects.
+      The native emission pilot will separate shell, cocoon and unshocked
+      emission terms, giving an emission-defined native reference for
+      detector tests.
+    evidence:
+      - {path: docs/science/q031_native_path_length_design_2026-10-31.md, commit: 7f99371}
+    test: Native emission pilot, PBS 871717 (held behind smoke 871683, migration 870323 and flux 870374).
+    depends_on: [NAT-05]
