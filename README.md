@@ -1,8 +1,10 @@
 # xray_cavities
 
+> **Status:** developed in the open as a working record. This is work in progress: contents may change, and nothing here is peer-reviewed unless stated.
+
 Local project shell for UTAS AGN analysis, verification, and documentation workflows on `deep-server`.
 
-This repo is intentionally lightweight. The simulation source lives in the separate GitLab checkout under `/home/bwbrook/git/utas-agn`; this repo provides the reproducible Python/docs environment and the handoff notes needed to work against that source tree confidently.
+The simulation source lives in the separate GitLab checkout under `/home/bwbrook/git/utas-agn`; this repo provides the reproducible Python/docs environment, analysis scripts, tests, science-run specifications and the handoff notes needed to work against that source tree. Bulk simulation outputs (over 1 GB of maps, archives and arrays) are not stored in git; see [Bulk data](#bulk-data).
 
 New project agents should start with
 [docs/exchange/current_status.md](docs/exchange/current_status.md). The former
@@ -111,3 +113,21 @@ Two version constraints here are deliberate:
 - [docs/nectar_vm_setup.md](/home/bwbrook/papers/xray_cavities/docs/nectar_vm_setup.md): Nectar VM clone status and production HDF5 validation
 - [docs/science/three_case_spec.md](/home/bwbrook/papers/xray_cavities/docs/science/three_case_spec.md): frozen `C-HI`, `C-LO`, `G-LO` science-run spec
 - [docs/science/asset_inventory_2026-05-02.md](/home/bwbrook/papers/xray_cavities/docs/science/asset_inventory_2026-05-02.md): current Stewart/GRAiLE asset inventory and blockers
+
+## Bulk data
+
+Large simulation outputs (`*.tar.gz`, `*.npz`, `*.tsv` under `docs/science/assets/`, plus individual diagnostic files over 1 MB) were removed from git history and are listed in `.gitignore`. Reports under `docs/science/` still link to them. The canonical copy is `nectar:/data/share/xray_cavities/`, which mirrors the `docs/science/assets/<run>/...` layout.
+
+To restore them into a checkout:
+
+```bash
+rsync -a nectar:/data/share/xray_cavities/ ./
+```
+
+To keep them elsewhere, restore into any directory and set `XRAY_CAVITIES_DATA=<directory>`. The default is the repository root. Scripts that read bulk inputs (for example `scripts/science/build_g_lo_three_case_endpoint_comparison.py`) stop with a message naming the first missing file. Tests that need the bulk data (listed in `tests/bulk_data_tests.txt`) are skipped when it is absent.
+
+Not published: `sci_lit/` (converted publisher papers), `agent_comms/` (collaborator correspondence), and some coursework. References to them in the handover notes point to files that exist only in local checkouts.
+
+## Licence
+
+Code is released under the [MIT Licence](LICENSE). Text, figures and data created for this project are released under [CC BY-SA 4.0](LICENSE-CONTENT). Third-party material keeps its own terms where stated; see [THIRD_PARTY.md](THIRD_PARTY.md).
