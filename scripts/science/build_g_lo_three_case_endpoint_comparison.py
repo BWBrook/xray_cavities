@@ -8,6 +8,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 import tarfile
 from pathlib import Path
 
@@ -17,12 +18,26 @@ from matplotlib.colors import LogNorm
 
 
 ROOT = Path(__file__).resolve().parents[2]
-GOAL039 = ROOT / "docs/science/assets/g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12"
-GOAL036 = ROOT / "docs/science/assets/c_lo_endpoint_first_products_2026-07-07/review_products"
-CHI0 = ROOT / "docs/science/assets/c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/xraise_grid"
-CHI_REFINED_ARCHIVE = ROOT / "docs/science/assets/c_hi_refined_projection_viewing_rerun_2026-06-25/remote_logs/refined_projection_viewing_rerun_2026-06-25.tar.gz"
+ASSETS = Path("docs/science/assets")
+DATA_ROOT = Path(os.environ.get("XRAY_CAVITIES_DATA", ROOT)).expanduser()
+GOAL039 = ROOT / ASSETS / "g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12"
+GOAL036 = DATA_ROOT / ASSETS / "c_lo_endpoint_first_products_2026-07-07/review_products"
+GOAL039_DATA = DATA_ROOT / ASSETS / "g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12"
+CHI0 = DATA_ROOT / ASSETS / "c_hi_final_endpoint_xray_cavity_alignment_2026-06-11/xraise_grid"
+CHI_REFINED_ARCHIVE = DATA_ROOT / ASSETS / "c_hi_refined_projection_viewing_rerun_2026-06-25/remote_logs/refined_projection_viewing_rerun_2026-06-25.tar.gz"
 ARRAY_NAME = "xray_1kev_xraise_corrected_mjy_sr.tsv"
 LARGE_FILE_THRESHOLD = 5 * 1024 * 1024
+
+
+def _require_bulk_data(paths: list[Path]) -> None:
+    missing = [path for path in paths if not path.exists()]
+    if missing:
+        raise SystemExit(
+            f"Bulk simulation outputs not found under {DATA_ROOT} (first missing: {missing[0]}).\n"
+            "They are not stored in git. Restore them with\n"
+            "  rsync -a nectar:/data/share/xray_cavities/ <data-root>/\n"
+            "and set XRAY_CAVITIES_DATA=<data-root> (default: the repository root); see README.md, section Bulk data."
+        )
 
 
 def _load_tsv(path: Path) -> np.ndarray:
@@ -45,13 +60,18 @@ def _load_chi_refined(view: str) -> np.ndarray:
 
 
 def _maps() -> dict[tuple[str, str], tuple[np.ndarray, str]]:
+    _require_bulk_data(
+        [CHI0 / ARRAY_NAME, CHI_REFINED_ARCHIVE]
+        + [GOAL036 / f"xraise_grid_{view}" / ARRAY_NAME for view in ("0deg", "45deg", "90deg")]
+        + [GOAL039_DATA / "review_products" / f"xraise_grid_{view}" / ARRAY_NAME for view in ("0deg", "45deg", "90deg")]
+    )
     maps: dict[tuple[str, str], tuple[np.ndarray, str]] = {}
     maps[("C-HI", "0deg")] = (_load_tsv(CHI0 / ARRAY_NAME), str(CHI0 / ARRAY_NAME))
     for view in ("45deg", "90deg"):
         maps[("C-HI", view)] = (_load_chi_refined(view), f"{CHI_REFINED_ARCHIVE}::{view}")
     for view in ("0deg", "45deg", "90deg"):
         c_lo = GOAL036 / f"xraise_grid_{view}" / ARRAY_NAME
-        g_lo = GOAL039 / "review_products" / f"xraise_grid_{view}" / ARRAY_NAME
+        g_lo = GOAL039_DATA / "review_products" / f"xraise_grid_{view}" / ARRAY_NAME
         maps[("C-LO", view)] = (_load_tsv(c_lo), str(c_lo))
         maps[("G-LO", view)] = (_load_tsv(g_lo), str(g_lo))
     return maps

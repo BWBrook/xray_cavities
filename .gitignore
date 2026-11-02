@@ -12,3 +12,60 @@ openrc.sh
 *-openrc.sh
 docs/jet-theory/
 env/
+
+# Removed from the published history (kept on disk in local checkouts, untracked).
+# Third-party literature
+sci_lit/
+# Student coursework and collaborator correspondence
+docs/KAA308_*
+docs/Research_Proposal_*.md
+docs/Honours_research_plan_feedback_SS_260424.txt
+docs/exchange/logs/2026-04-24-stas-plan-feedback.md
+agent_comms/
+
+# Bulk simulation outputs: stored on nectar, not in git (see README, "Bulk data")
+docs/science/assets/**/*.tar.gz
+docs/science/assets/**/*.npz
+docs/science/assets/**/*.tsv
+*.h5
+*.hdf5
+*.dbl
+*.flt
+*.vtk
+
+# Individual diagnostic files over 1 MB stripped from history
+docs/science/assets/four_case_selected_age_observables_2026-08-26/completed_pair_2/G-HI-xray/g_hi/compact/selected_age_xray_cavity.png
+docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/C-HI/selected_age_xray_cavity.png
+docs/science/assets/four_case_selected_age_observables_2026-08-26/four_case_xray_complete/review_products/products/G-HI/selected_age_xray_cavity.png
+docs/science/assets/g_lo_critical_stratum_census_failure_2026-07-30/original_particle_comparison.csv
+docs/science/assets/g_lo_critical_stratum_census_failure_2026-07-30/original_selection.csv
+docs/science/assets/g_lo_critical_stratum_census_repair_2026-07-30/original_particle_comparison.csv
+docs/science/assets/g_lo_critical_stratum_census_repair_2026-07-30/original_selection.csv
+docs/science/assets/g_lo_endpoint_first_products_and_three_case_comparison_2026-07-12/g_lo_three_case_endpoint_comparison.png
+docs/science/assets/g_lo_praise2_coefficient_correction_2026-08-14/review_products/2026-08-13-g-lo-praise2-coefficient-correction/representative_lorentz_histories.csv.gz
+docs/science/assets/g_lo_praise_last_shock_comparison_hold_2026-08-11/review_products/goal050_comparator_input.csv
+docs/science/assets/g_lo_praise_last_shock_comparison_hold_2026-08-11/review_products/last_shock_comparison_summary.json
+docs/science/assets/g_lo_praise_last_shock_comparison_hold_2026-08-11/review_products/lorentz_trajectories.csv.gz
+docs/science/assets/g_lo_praise_last_shock_comparison_hold_2026-08-11/review_products/particle_pressure_histories.csv
+docs/science/assets/g_lo_praise_last_shock_comparison_hold_2026-08-11/review_products/population_particle_comparison.csv
+docs/science/assets/g_lo_praise_last_shock_comparison_hold_2026-08-11/review_products/selection_input.csv
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/praise_nonfinite_777213/review_products/2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_log_savgol_checkpoint.json
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/praise_nonfinite_777213/review_products/2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_log_savgol_records.csv
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/praise_nonfinite_777213/review_products/2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_records.csv
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/praise_nonfinite_777213/review_products/2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_selection.csv
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/praise_nonfinite_777213/review_products/2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_summary.json
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/praise_nonfinite_777213/review_products/2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_unsmoothed_checkpoint.json
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/praise_nonfinite_777213/review_products/2026-07-27-g-lo-praise-nonfinite-forensic/praise_forensic_unsmoothed_records.csv
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/pressure_method_branch_semantics_v4_778919/pressure_method_selection.csv
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/pressure_method_nonfinite_evidence_v5_779183/review_products/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_nonfinite_emissivity_records.csv
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/pressure_method_nonfinite_evidence_v5_779183/review_products/2026-07-28-g-lo-pressure-method-value-diagnostic-nonfinite-evidence-v5/pressure_method_selection.csv
+docs/science/assets/g_lo_radio_history_method_value_gate_failure_2026-07-26/pressure_smoothing_diagnostic_777065/pressure_smoothing_affected_rows.csv
+docs/science/assets/g_lo_stable_method_value_comparison_completion_2026-07-29/retry_780137/review_products/2026-07-29-g-lo-stable-method-value-comparison-r1/selection_input.csv
+docs/science/assets/g_lo_stable_method_value_comparison_completion_2026-07-29/retry_780137/review_products/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_particle_comparison.csv
+docs/science/assets/g_lo_stable_method_value_comparison_completion_2026-07-29/retry_780137/review_products/2026-07-29-g-lo-stable-method-value-comparison-r1/stable_method_value_selection.csv
+docs/science/assets/g_lo_stable_method_value_comparison_completion_2026-07-29/review_products/2026-07-29-g-lo-stable-method-value-comparison/selection_input.csv
+docs/science/assets/g_lo_stable_method_value_comparison_completion_2026-07-29/review_products/2026-07-29-g-lo-stable-method-value-comparison/stable_method_value_selection.csv
+docs/science/assets/three_case_lifecycle_compaction_authorization_2026-07-23/authorization_packet/active_hold_register.csv
+docs/science/assets/three_case_lifecycle_compaction_authorization_2026-07-23/authorization_packet/payload_ledger.csv
+docs/science/assets/three_case_lifecycle_compaction_authorization_2026-07-23/completed_run/review_inventory/inventory/payload_inventory.csv
+docs/science/assets/three_case_lifecycle_compaction_execution_2026-07-24/retry1_package/executor_evidence/postdelete_inventory.csv
