@@ -126,7 +126,7 @@ rsync -a nectar:/data/share/xray_cavities/ ./
 
 To keep them elsewhere, restore into any directory and set `XRAY_CAVITIES_DATA=<directory>`. The default is the repository root. Scripts that read bulk inputs (for example `scripts/science/build_g_lo_three_case_endpoint_comparison.py`) stop with a message naming the first missing file. Tests that need the bulk data (listed in `tests/bulk_data_tests.txt`) are skipped when it is absent.
 
-Not published: `sci_lit/` (converted publisher papers), `agent_comms/` (collaborator correspondence), and some coursework. References to them in the handover notes point to files that exist only in local checkouts.
+Not published: `sci_lit/` (converted publisher papers), `agent_comms/` (collaborator correspondence), `docs/Honours_*` and the supervision transcripts, the collaborator review notes under `docs/exchange/logs/`, and some coursework. References to them in the handover notes point to files that exist only in local checkouts.
 
 ## Licence
 

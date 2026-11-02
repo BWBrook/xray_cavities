@@ -22,6 +22,12 @@ docs/Research_Proposal_*.md
 docs/Honours_research_plan_feedback_SS_260424.txt
 docs/exchange/logs/2026-04-24-stas-plan-feedback.md
 agent_comms/
+# Student plan, supervision transcripts and collaborator review notes
+docs/Honours_*
+docs/codex_utas_phys_hons_meeting_*
+docs/exchange/logs/*-stas-*
+docs/exchange/logs/*-patrick-*
+docs/exchange/logs/2026-05-07-supervisor-meeting-2-plan-update.md
 
 # Bulk simulation outputs: stored on nectar, not in git (see README, "Bulk data")
 docs/science/assets/**/*.tar.gz

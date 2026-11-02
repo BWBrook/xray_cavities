@@ -1151,7 +1151,7 @@ The dated architecture review and current tranche are recorded in
 ## Historical Pointers
 
 - Project plan and case definitions: `docs/science/three_case_spec.md` and
-  `docs/Honours_Research_Plan.md`.
+  the local project plan (not published).
 - Data lifecycle: `docs/science/xray_cavities_data_lifecycle_strategy_2026-07-10.md`.
 - Current goals and logs: `docs/goals/`, `docs/exchange/logs/`, and
   `agent_comms/threads/`.

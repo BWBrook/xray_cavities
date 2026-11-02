@@ -35,21 +35,9 @@ Then read, in order:
 
 1. `AGENTS.md`
 2. `docs/READ_THIS_FIRST.md` (this file)
-3. `docs/Honours_Research_Plan.md`
-4. `docs/Honours_Research_Meeting_Brief.md`
-5. `docs/Honours_Research_Meeting_Slides.qmd`
-6. `docs/exchange/current_status.md`
-7. `docs/deep_server_setup.md`
-8. `docs/onboarding/reports/2026-04-18-onboarding-synthesis.qmd`
-
-The current research-plan PDFs were exported on WSL to:
-
-```text
-/mnt/c/Temp/xray_cavities_meeting/
-```
-
-That Windows path will not exist on the MacBook. Re-render locally if needed.
-The committed sources are the important portable artifacts.
+3. `docs/exchange/current_status.md`
+4. `docs/deep_server_setup.md`
+5. `docs/onboarding/reports/2026-04-18-onboarding-synthesis.qmd`
 
 ## Repository purpose
 
@@ -60,7 +48,6 @@ It contains:
 - the repo-local Python/Quarto documentation environment;
 - onboarding and machine-state notes;
 - literature converted to Markdown under `sci_lit/` (local only, not published: publisher copyright);
-- the accelerated Honours research plan, meeting brief, and slide source;
 - scripts and notes for working against the UTAS AGN codebase.
 
 The main simulation and analysis source repos live separately under the UTAS AGN
@@ -221,9 +208,6 @@ Research planning:
 Key committed files:
 
 ```text
-docs/Honours_Research_Plan.md
-docs/Honours_Research_Meeting_Brief.md
-docs/Honours_Research_Meeting_Slides.qmd
 docs/deep_server_setup.md
 docs/exchange/current_status.md
 docs/onboarding/reports/2026-04-18-onboarding-synthesis.qmd
@@ -240,43 +224,11 @@ docs/feedback_on_draft_hons_research_plan.md
 It contained the external AI critique that shaped the revised proposal. It was
 not committed because it is an input artifact rather than a project output. The
 important critique points are already incorporated into
-`docs/Honours_Research_Plan.md` and summarized in this handover.
+the project plan (kept locally, not published) and summarized in this handover.
 
 If the MacBook agent cannot see that file, this is expected.
 
-## Current committed planning materials
-
-The main plan is:
-
-```text
-docs/Honours_Research_Plan.md
-```
-
-Use this as the authoritative version of the project scope.
-
-The short meeting brief is:
-
-```text
-docs/Honours_Research_Meeting_Brief.md
-```
-
-Use this when discussing the project with Stas and Patrick.
-
-The slide deck source is:
-
-```text
-docs/Honours_Research_Meeting_Slides.qmd
-```
-
-Render it with:
-
-```bash
-cd docs
-quarto render Honours_Research_Meeting_Slides.qmd --to beamer
-```
-
-If Quarto or LaTeX is missing on the MacBook, the fastest path is usually to use
-the Markdown brief instead of spending time on local rendering.
+The research plan, meeting brief and slide source are kept locally and are not published.
 
 ## Current timeline
 
@@ -300,7 +252,7 @@ be to update the plan and then start Week 2 execution planning.
 1. Record the supervisors' decisions.
 
    Create or update a dated note under `docs/exchange/logs/`, and if the
-   decisions change scope, update `docs/Honours_Research_Plan.md`.
+   decisions change scope, update the local project plan.
 
 2. Lock the baseline simulation specification.
 
