@@ -59,7 +59,7 @@ It contains:
 
 - the repo-local Python/Quarto documentation environment;
 - onboarding and machine-state notes;
-- literature converted to Markdown under `sci_lit/`;
+- literature converted to Markdown under `sci_lit/` (local only, not published: publisher copyright);
 - the accelerated Honours research plan, meeting brief, and slide source;
 - scripts and notes for working against the UTAS AGN codebase.
 
@@ -193,7 +193,7 @@ Repository and environment:
 
 - `xray_cavities` was initialized and pushed as a private GitHub repository.
 - The repo-local `uv` environment was established.
-- The repository now contains converted literature in `sci_lit/`.
+- Converted literature lives in `sci_lit/` in local checkouts (not published).
 - Onboarding reports and exchange notes are committed.
 - The latest planning package was committed and pushed before this handover.
 
@@ -211,8 +211,8 @@ UTAS AGN onboarding:
 
 Research planning:
 
-- Alain's earlier summer project proposal and final report were imported under
-  `docs/`.
+- An earlier summer project's proposal and final report were imported under
+  `docs/` (kept locally only; not published).
 - A full Honours research plan was drafted, externally reviewed by another AI
   model, and revised.
 - The revised plan was narrowed to a pilot-first minimum viable experiment.
@@ -224,8 +224,6 @@ Key committed files:
 docs/Honours_Research_Plan.md
 docs/Honours_Research_Meeting_Brief.md
 docs/Honours_Research_Meeting_Slides.qmd
-docs/Research_Proposal_REMOVED.md
-docs/KAA308_AT3_REMOVED.md
 docs/deep_server_setup.md
 docs/exchange/current_status.md
 docs/onboarding/reports/2026-04-18-onboarding-synthesis.qmd

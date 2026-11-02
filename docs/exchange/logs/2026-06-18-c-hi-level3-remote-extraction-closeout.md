@@ -52,11 +52,11 @@ Pre-remote local tests passed, but terminal SSH failed:
 
 ```text
 ssh -o BatchMode=yes -o ConnectTimeout=12 kunanyi-via-deep hostname
-bwbrook@<tpac-host>: Permission denied (publickey,password).
+bwbrook@<tpac-jumpbox>: Permission denied (publickey,password).
 Connection closed by UNKNOWN port 65535
 
 ssh -o BatchMode=yes -o ConnectTimeout=12 kunanyi-via-nectar hostname
-bwbrook@<tpac-host>: Permission denied (publickey,password).
+bwbrook@<tpac-jumpbox>: Permission denied (publickey,password).
 Connection closed by UNKNOWN port 65535
 ```
 
@@ -67,7 +67,7 @@ repo-local secret-safe expect helper worked:
 
 ```text
 scripts/kunanyi/run_on_kunanyi.sh 'hostname; pwd'
-<tpac-host>
+<kunanyi-login-host>
 /u/bwbrook
 ```
 

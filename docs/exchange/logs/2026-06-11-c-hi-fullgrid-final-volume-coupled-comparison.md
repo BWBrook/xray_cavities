@@ -46,7 +46,7 @@ Remote output root:
 Remote preflight:
 
 ```text
-host: <tpac-host>
+host: <kunanyi-login-host>
 utc: 2026-06-11T02:50:00Z
 final HDF5: present/readable, 42G
 Goal 002 full loss table: present/readable, 503K

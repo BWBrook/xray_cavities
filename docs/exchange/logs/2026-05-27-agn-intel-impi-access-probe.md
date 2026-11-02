@@ -29,7 +29,7 @@
 
 - Local syntax checks passed:
   `bash -n scripts/kunanyi/probe_agn_intel_impi_stack.sh scripts/kunanyi/stage_and_submit_agn_intel_impi_tiny_smoke.sh scripts/kunanyi/jet_setup_tiny_3d_cart_multinode.pbs`
-- Exact-stack probe reached `<tpac-host>`.
+- Exact-stack probe reached `<kunanyi-login-host>`.
 - Account state:
   `uid=145812(bwbrook) gid=1003(hpcusers) groups=1003(hpcusers)`.
 - `/ds/projects/agn` state:

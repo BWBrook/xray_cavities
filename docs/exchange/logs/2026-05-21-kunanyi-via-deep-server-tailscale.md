@@ -10,7 +10,7 @@ home-network route to `kunanyi`:
 MacBook -> Tailscale utas-ubuntu/deep-server -> TPAC jumpbox -> kunanyi
 ```
 
-This is useful because direct MacBook TCP/22 to `<tpac-host>` still
+This is useful because direct MacBook TCP/22 to `<tpac-jumpbox>` still
 hangs from Barry's home network.
 
 ## Probe Results
@@ -21,19 +21,19 @@ Tailscale saw `utas-ubuntu`:
 <tailscale-ip>   utas-ubuntu      BWBrook@  linux
 ```
 
-Direct home-network TCP from the MacBook to `<tpac-host>:22` hung and
+Direct home-network TCP from the MacBook to `<tpac-jumpbox>:22` hung and
 had to be killed.
 
 From `utas-ubuntu`, TCP/22 to the TPAC jumpbox succeeded:
 
 ```text
-Connection to <tpac-host> (<campus-ip>) 22 port [tcp/ssh] succeeded!
+Connection to <tpac-jumpbox> (<campus-ip>) 22 port [tcp/ssh] succeeded!
 ```
 
 An end-to-end expect probe then reached:
 
 ```text
-<tpac-host>
+<kunanyi-login-host>
 ```
 
 ## Local Mac SSH Aliases Added

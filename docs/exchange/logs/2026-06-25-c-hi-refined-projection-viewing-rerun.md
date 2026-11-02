@@ -111,9 +111,9 @@ git diff --check
 Chrome/Open OnDemand access route:
 
 ```text
-https://<tpac-host>/pun/sys/enable_ssh/
+https://<tpac-portal>/pun/sys/enable_ssh/
 Enable SSH page reported:
-You have a 5.0 min window which closes at Thu Jun 25 13:11:02 2026 to ssh to <tpac-host>.
+You have a 5.0 min window which closes at Thu Jun 25 13:11:02 2026 to ssh to <tpac-jumpbox>.
 ```
 
 Staged files:

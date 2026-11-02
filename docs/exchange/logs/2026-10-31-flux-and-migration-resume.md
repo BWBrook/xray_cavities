@@ -19,8 +19,8 @@ ctime, mode, ownership, xattrs and symlink targets otherwise matched.
 
 The exact NFS4 exports were verified on n001:
 
-- `/scratch/bwbrook`: `<private-ip>:/hpc-kunanyi/scratch/bwbrook`, FSROOT `/`.
-- `/u/bwbrook`: `<private-ip>:/hpc-kunanyi/home/bwbrook`, FSROOT `/`.
+- `/scratch/bwbrook`: `<nfs-ip>:/hpc-kunanyi/scratch/bwbrook`, FSROOT `/`.
+- `/u/bwbrook`: `<nfs-ip>:/hpc-kunanyi/home/bwbrook`, FSROOT `/`.
 
 `resume_xray_migration_device_transition.py` binds this one transition to unit
 8, its immutable manifest and exact mount identities. It changes expected

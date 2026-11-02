@@ -15,7 +15,7 @@ Live `ssh -G` and `~/.ssh/config` agree that both
 jumpbox → Kunanyi; the existing old `nectar-codex` spelling resolves to Nectar.
 
 One read-only verbose BatchMode probe reached authentication at
-`<tpac-host>` as `bwbrook`. The server offered `publickey,password`;
+`<tpac-jumpbox>` as `bwbrook`. The server offered `publickey,password`;
 the client then reported no usable authentication methods and permission denied.
 No password was supplied and no public key authentication was attempted on that
 hop. The method names in the error are the server's advertised alternatives,

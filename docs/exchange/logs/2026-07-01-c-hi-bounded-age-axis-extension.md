@@ -104,7 +104,7 @@ submitted_waiting_pbs_completion
 Chrome/Open OnDemand selector refresh:
 
 ```text
-You have a 5.0 min window which closes at Wed Jul 1 11:45:51 2026 to ssh to <tpac-host>.
+You have a 5.0 min window which closes at Wed Jul 1 11:45:51 2026 to ssh to <tpac-jumpbox>.
 ```
 
 Remote stage:

@@ -99,8 +99,8 @@ projection.projected_accumulation=edge_overlap_uniform_cell_projection
 Chrome/Open OnDemand selector was refreshed successfully:
 
 ```text
-Enable SSH page reached at https://<tpac-host>/pun/sys/enable_ssh/
-Visible status: You have a 5.0 min window which closes at Tue Jun 30 20:52:23 2026 to ssh to <tpac-host>.
+Enable SSH page reached at https://<tpac-portal>/pun/sys/enable_ssh/
+Visible status: You have a 5.0 min window which closes at Tue Jun 30 20:52:23 2026 to ssh to <tpac-jumpbox>.
 ```
 
 The repo-local helper then reached jumpbox, but the inner `ssh kunanyi` failed
@@ -152,7 +152,7 @@ Operational host-key repair:
 Remote helper smoke after repair:
 
 ```text
-<tpac-host>
+<kunanyi-login-host>
 /u/bwbrook
 2026-06-30T10:57:37Z
 __CODEX_STATUS__=0

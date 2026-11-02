@@ -40,7 +40,7 @@ resources_used.walltime = 00:00:21
 ```
 
 Barry confirmed receipt of the completion message from
-`adm@<tpac-host>`. The email included the job id, job name,
+`adm@<tpac-pbs-host>`. The email included the job id, job name,
 termination status, exit status, and resource usage.
 
 For full production runs, use:

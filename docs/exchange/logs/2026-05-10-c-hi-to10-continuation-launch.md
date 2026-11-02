@@ -11,7 +11,7 @@ science production allocation.
 
 ## Access Route
 
-Direct MacBook SSH to `<tpac-host>` timed out again from the current
+Direct MacBook SSH to `<tpac-jumpbox>` timed out again from the current
 network path, so the submission used the validated Nectar-bastion route:
 
 ```text

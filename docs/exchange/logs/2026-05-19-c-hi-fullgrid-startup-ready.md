@@ -7,7 +7,7 @@ has not been submitted to `kunanyi`.
 
 Submission was deferred until Barry is on campus/direct `eduroam` on
 `2026-05-20`. The off-campus direct MacBook route to
-`<tpac-host>:22` timed out, and the previously validated Nectar
+`<tpac-jumpbox>:22` timed out, and the previously validated Nectar
 bastion route was unavailable because Nectar was down for maintenance.
 
 ## Supervisor-Agent Review State

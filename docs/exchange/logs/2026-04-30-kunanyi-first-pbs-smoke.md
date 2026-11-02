@@ -10,7 +10,7 @@
 
 - Used the private TPAC env file at
   `/Users/bwbrook/.config/tpac/kunanyi.env`.
-- Confirmed password-backed SSH to `<tpac-host>`.
+- Confirmed password-backed SSH to `<tpac-jumpbox>`.
 - Confirmed the hop from jumpbox to `kunanyi`.
 - Added local SSH aliases for:
   - `tpac-jumpbox`
@@ -23,7 +23,7 @@
 ## Validation
 
 - Jumpbox login landed on `jumpbox-2`.
-- `ssh kunanyi` landed on `<tpac-host>`.
+- `ssh kunanyi` landed on `<kunanyi-login-host>`.
 - Login-node tools:
   - `qsub`: `/opt/pbs/bin/qsub`
   - `qstat`: `/opt/pbs/bin/qstat`
