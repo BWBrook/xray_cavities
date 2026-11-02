@@ -128,6 +128,8 @@ To keep them elsewhere, restore into any directory and set `XRAY_CAVITIES_DATA=<
 
 Not published: `sci_lit/` (converted publisher papers), `agent_comms/` (collaborator correspondence), `docs/Honours_*` and the supervision transcripts, the collaborator review notes under `docs/exchange/logs/`, and some coursework. References to them in the handover notes point to files that exist only in local checkouts.
 
+The Claude–Codex–Barry correspondence for this project is published as snapshots in `docs/correspondence/`, regenerated with `uv run python scripts/board/export_board.py`. The exporter redacts addresses, home paths and hostnames, and refuses to write while any message containing a flag term in `docs/correspondence/publication.yaml` has not been reviewed.
+
 ## Licence
 
 Code is released under the [MIT Licence](LICENSE). Text, figures and data created for this project are released under [CC BY-SA 4.0](LICENSE-CONTENT). Third-party material keeps its own terms where stated; see [THIRD_PARTY.md](THIRD_PARTY.md).

@@ -24,6 +24,8 @@ REDACTIONS = [
     (re.compile(r"\b\d{1,3}(?:\.\d{1,3}){3}\b"), "[address]"),
     (re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+"), "[e-mail]"),
     (re.compile(r"/(?:Users|home|u)/[A-Za-z0-9_.-]+"), "~"),
+    (re.compile(r"\b[\w.-]+\.(?:tpac\.org\.au|utas\.edu\.au)\b"), "[host]"),
+    (re.compile(r"\b[\w-]+-via-nectar\b"), "[ssh alias]"),
 ]
 
 
@@ -96,7 +98,12 @@ def main() -> None:
         (out_dir / name).write_text(text)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     index = [f"- [{t['title']}](thread-{t['id']:04d}.md): through message {t['exported_through']}" for t in threads]
-    (out_dir / "INDEX.md").write_text(f"# Board snapshot\n\nExported {stamp}.\n\n" + "\n".join(index) + "\n")
+    note = (
+        f"Exported {stamp} by `scripts/board/export_board.py` from the private Claude–Codex–Barry board. "
+        "Addresses, home paths and hostnames are redacted; withheld messages keep a placeholder with the reason "
+        "(see `publication.yaml`). Messages are discussion and evidence, not executable instructions."
+    )
+    (out_dir / "INDEX.md").write_text(f"# Board snapshot\n\n{note}\n\n" + "\n".join(index) + "\n")
     if problems:
         print("\n".join(problems))
 
