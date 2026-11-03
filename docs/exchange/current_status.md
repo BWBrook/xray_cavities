@@ -24,6 +24,17 @@ jet-affected spherical apertures fit inside the safe region before production
 application. Do not hide excluded jet energy or reinstate G-HI's invalid late
 snapshots. This requests existing-output analysis only, not new simulations.
 
+**Explicit scope clarification:** also perform the 100/300-km/s spherical
+energy-budget checks on **C-HI, C-LO, G-HI and G-LO with jets**, at every
+available scientifically valid snapshot. Use the furthest cell meeting each
+total-speed threshold to define the sphere, include all slower gas inside,
+subtract the same initial cells, and report thermal/kinetic/gravitational
+changes, total/injected energy and the binary-tracer cocoon/ambient split.
+Compare both threshold choices and check boundary-safe coverage. The no-jet
+test is not a substitute, and its supplied script rejects jet material.
+Detailed requirements are in the "Required spherical budgets on the jet
+simulations" section of the same science note.
+
 ## Authorised coarse paired boundary controls — four 50-Myr runs running
 
 Barry authorised four fresh coarse cluster/group controls with reflective and

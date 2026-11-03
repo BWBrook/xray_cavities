@@ -91,6 +91,53 @@ injection. Report energy transport across any adopted interior control surface
 before treating its storage change as a closed-system conservation result.
 The existing G-HI late-time boundary-contact exclusion remains in force.
 
+## Required spherical budgets on the jet simulations
+
+The 100/300-km/s speed-threshold checks are required on **all four full,
+with-jet production simulations: C-HI, C-LO, G-HI and G-LO**. The no-jet
+reflective/outflow comparison above diagnoses boundary contamination; it does
+not replace these production energy budgets.
+
+For each available scientifically valid snapshot, calculate two radii from
+the full three-component speed, not just the axial velocity:
+
+\[
+R_{100}(t) = \max_{|\boldsymbol v_i|\geq100\,\mathrm{km\,s^{-1}}} r_i,
+\qquad
+R_{300}(t) = \max_{|\boldsymbol v_i|\geq300\,\mathrm{km\,s^{-1}}} r_i.
+\]
+
+Document the cell-membership rule and any minimal padding to enclose the
+selected cells. If no cell reaches a threshold, mark that radius unavailable;
+do not invent an aperture or report a zero-energy measurement.
+
+For each radius:
+
+- Include **all gas inside the sphere**, including slow cells. Speed defines
+  only the outer aperture, not which interior cells contribute energy.
+- Subtract the actual t=0 state cell by cell, using exactly the same current
+  sphere and fixed initial potential for both times.
+- Report thermal, kinetic and gravitational changes, their total, and the
+  ratio to the case's bipolar injected energy at that age.
+- Then partition the same budget into full-cell cocoon/jet `tr1 > 1e-3` and
+  complementary ambient gas. Do not require a shock detection for inclusion.
+- Check cocoon and disturbed-gas coverage, weak sound waves, isolated fast
+  outliers and boundary-associated flows. Preserve raw threshold radii and
+  disclose any selection issue rather than tuning radii for better closure.
+- Check the sphere against the proposed boundary-safe region. If it overlaps
+  the 40-kpc excluded layer at 50 Myr, flag the conflict. Any separately
+  reported clipped budget must identify lost jet-affected gas and must not be
+  presented as the complete spherical or injected-energy budget.
+
+Return radius and component-energy time series for both thresholds, including
+the total/injected-energy ratios and the difference between threshold choices.
+Retain existing snapshot-validity exclusions, particularly late G-HI outputs.
+Boundary/spherical energy transport remains relevant to interpreting closure.
+
+The script supplied below is specifically for **no-jet paired controls** and
+rejects nonzero tracer. It must not be applied unchanged to the jet runs; the
+production spherical-budget extraction is a separate required task.
+
 ## Ready-to-run post-processing
 
 Implementation: `scripts/science/audit_paired_boundary_interior.py`.
