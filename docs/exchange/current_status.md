@@ -1,9 +1,39 @@
 # Current Status
 
-Last updated: 2026-11-03 (cavity contrast/bow-shock review requested; latest compute status below is unchanged)
+Last updated: 2026-11-04 (controls and migration complete; flux/native still held)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Verified job stocktake — 4 November
+
+At 23:33–23:35 UTC on 3 November (10:33–10:35 AEDT on 4 November),
+all four coarse 50-Myr controls `872733`–`872736` were **F/0**, with
+walltimes 55–62 minutes. Each has successful native-output and budget receipts,
+six saved snapshots through 50 Myr, empty launcher stderr and recorded final
+source checks of 740/740 OK. Full paired contrasts, repair/residual materiality
+and interior cuts remain unevaluated; execution success is not a boundary-cause
+conclusion. The older running-state account below is historical.
+
+Migration `870323` is **F/0**, walltime 51:03:27. Its final manifest and all ten
+unit states report complete: **8,796,208,343,281 logical bytes**. All ten source
+links were checked live against existing archive directories, with no remaining
+tombstones. This check did not repeat payload hashing or measure quota.
+
+Flux `870374` remains system-held on `870373`, although that prerequisite is
+F/0; the completed migration is no longer in its remaining afterok list.
+Native pilot `871717` is also system-held, awaiting flux among its prerequisites.
+Revalidate the existing flux smoke/packaging receipts and reconcile that stale
+dependency before expecting either analysis to run. No hold was bypassed and
+no duplicate job was submitted during this stocktake.
+
+The three 3-November updates through `0f8bf2b` are reviewed. An independent
+reviewer found no material blocker in the interior extractor; 56 focused tests
+passed. Codex turn #6 is with Claude on correspondence thread 29, messages
+2868–2869: settle the numerical negligible-residual criterion and independent
+lateral-shock definition, then perform the interior, four-case spherical and
+G-HI 20-Myr diagnostics. The production-matched simulation remains held.
+See `logs/2026-11-04-pbs-stocktake-and-diagnostic-review.md` for verification scope.
 
 ## Cavity contrast and bow-shock review - 3 November
 
