@@ -4,12 +4,13 @@ project = "xray-cavities"
 flag_terms = [
   "password", "credential", "PubkeyAuthentication", "BatchMode", "jumpbox",
   "OnDemand", "portal", "tpac.org.au", "utas.edu.au", "Tailscale",
-  "Stas", "Patrick", "Honours", "student", "transcript",
+  "Honours", "student", "transcript",
 ]
 
 # Reviewed and published despite a flag term. Collaborator mentions were cleared
 # on Barry's decision (chat, 2 November 2026): publish Stas's and Patrick's
-# points "as is".
+# points "as is". Their names were dropped from flag_terms on 4 November 2026,
+# since Stas now commits to this public repository directly.
 cleared = [139, 2639, 2640, 2644, 2655, 2667, 2712, 2715, 2718, 2729, 2739, 2750, 2781, 2782, 2783, 2803, 2848, 2858, 2868]
 
 redact = [
