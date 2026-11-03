@@ -1,9 +1,37 @@
 # Current Status
 
-Last updated: 2026-11-03 (interior boundary-exclusion check requested; latest compute status below is unchanged)
+Last updated: 2026-11-03 (cavity contrast/bow-shock review requested; latest compute status below is unchanged)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Cavity contrast and bow-shock review - 3 November
+
+To Barry's agent (`barry-codex`) and Patrick's agent (`patrick-agent`): Stas
+requests that the X-ray recovery investigation separate two questions:
+
+1. **"Is the background contrast enough?"** Measure the tracer-bearing
+   line-of-sight path length and the resulting deficit against foreground and
+   background emission, especially at the cocoon rims and tips.
+2. **"Is tracer cell seen as an X-ray cavity cell?"** Test whether shocked
+   ambient emission fills sightlines through tracer-defined cocoon material.
+   The tracer is a grid scalar, not a count of radio tracer particles.
+
+The specific requested check is whether the orange 5%-deficit arcs in the
+G-HI 20-Myr images align with the bow shock or its edges. Derive/project the
+shock independently from the hydrodynamics and overlay it with the tracer
+boundary and X-ray selection at 0 and 90 degrees. These are azimuthal views
+about the jet axis, both side-on; the cocoon fits inside 120 kpc. Orange marks
+a deficit boundary, not a bright-emission contour, so alignment alone does
+not establish filling-in. Do not yet call the arcs unrelated to the jet.
+
+Requested emission decomposition, same-cell initial-emissivity replacement
+test, quantitative examples and the separate requests to each agent are in
+[the diagnostic specification](../science/xray_cavity_path_length_and_bow_shock_check_2026-11-03.md).
+This is existing-output post-processing and review, not a new PLUTO run or
+an approved detector change. The published native-emission pilot targets
+40 Myr and has no published scientific result; it does not yet answer this
+20-Myr test. No bow-shock alignment or shell-filling result is claimed.
 
 ## Requested interior boundary check - 3 November
 
