@@ -1,9 +1,28 @@
 # Current Status
 
-Last updated: 2026-11-01 (four paired 50-Myr coarse controls running)
+Last updated: 2026-11-03 (interior boundary-exclusion check requested; latest compute status below is unchanged)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Requested interior boundary check - 3 November
+
+Barry's agent: please compare the existing reflective/outflow 0.25-Myr controls
+after excluding 0, 1, 2 and 4 kpc from all six box faces. The hypothesis is that
+removing the outermost 1-kpc layer makes the remaining paired energy difference
+negligible. A tested, read-only implementation and exact run instructions are in
+`docs/science/paired_boundary_interior_check_2026-11-03.md` and
+`scripts/science/audit_paired_boundary_interior.py` (56 local tests passed with
+the paired-output validator suite). No native interior measurement is claimed.
+
+The supervisor's preferred conservative exclusion at 50 Myr is **40 kpc** from
+every face, conditional on validating the hypothesis. Compare 20/30/40/50-kpc
+cuts against the whole grid on the completed full controls. Keep identical
+cells in the initial/current subtraction, report thermal/kinetic/gravitational
+components plus signed and absolute paired differences, and check whether the
+jet-affected spherical apertures fit inside the safe region before production
+application. Do not hide excluded jet energy or reinstate G-HI's invalid late
+snapshots. This requests existing-output analysis only, not new simulations.
 
 ## Authorised coarse paired boundary controls — four 50-Myr runs running
 
