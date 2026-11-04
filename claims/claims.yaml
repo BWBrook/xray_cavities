@@ -201,7 +201,7 @@ claims:
       already holds 1.109 times the labelled input, which points to the
       source side for C-HI.
     evidence:
-      - {path: docs/science/production_boundary_residual_2026-11-04.md, commit: 78f9567}
+      - {path: docs/science/production_boundary_residual_2026-11-04.md, commit: 8faba6b}
     reproduce: >-
       uv run python scripts/science/residual_after_boundary_contrast.py
       <new csv path>
