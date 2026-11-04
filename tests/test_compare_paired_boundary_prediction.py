@@ -13,9 +13,21 @@ ROOT = Path(__file__).resolve().parents[1]
 SCIENCE = ROOT / "scripts/science"
 sys.path.insert(0, str(SCIENCE))
 SMOKES = ROOT / "docs/science/assets/paired_nojet_boundary_experiment_2026-11-01/original_smokes/smoke"
+REVALIDATED_BUDGETS = (ROOT / "docs/science/assets/paired_nojet_boundary_experiment_2026-11-01/"
+                       "revalidation_capture/paired_nojet_analysis_overlay_2026-11-01_r2/revalidated/budgets")
 spec = importlib.util.spec_from_file_location("compare", SCIENCE / "compare_paired_boundary_prediction.py")
 compare = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(compare)
+
+
+def stage_smoke_run(root, case, boundary):
+    staged = root / f"{case}_{boundary}"
+    staged.mkdir()
+    source = SMOKES / f"{case}_{boundary}"
+    for name in ("paired_nojet_budget.csv", "output_receipt.json"):
+        shutil.copyfile(source / name, staged / name)
+    shutil.copyfile(REVALIDATED_BUDGETS / f"{case}_{boundary}.json", staged / "budget_receipt.json")
+    return staged
 
 
 def complete_rows(case="cluster_002003"):
@@ -40,22 +52,15 @@ def complete_rows(case="cluster_002003"):
 
 
 def test_smoke_contrasts_reproduce_recorded_values_signs_and_source_accounting(tmp_path):
-    cluster_rows, cluster_mode = compare.contrasts(SMOKES, "cluster_002003")
-    for boundary in ("outflow", "reflective"):
-        staged = tmp_path / f"group_002031_{boundary}"
-        staged.mkdir()
-        source = SMOKES / f"group_002031_{boundary}"
-        shutil.copyfile(source / "paired_nojet_budget.csv", staged / "paired_nojet_budget.csv")
-        shutil.copyfile(source / "output_receipt.json", staged / "output_receipt.json")
-        receipt = source / "budget_receipt.json"
-        if not receipt.exists():
-            receipt = (ROOT / "docs/science/assets/paired_nojet_boundary_experiment_2026-11-01/"
-                       "revalidation_capture/paired_nojet_analysis_overlay_2026-11-01_r2/"
-                       "revalidated/budgets/group_002031_reflective.json")
-        shutil.copyfile(receipt, staged / "budget_receipt.json")
-    group_rows, group_mode = compare.contrasts(tmp_path, "group_002031")
+    for case in compare.PREDICTION:
+        for boundary in ("outflow", "reflective"):
+            stage_smoke_run(tmp_path, case, boundary)
+    cluster_rows, cluster_mode, cluster_provenance = compare.contrasts(tmp_path, "cluster_002003")
+    group_rows, group_mode, group_provenance = compare.contrasts(tmp_path, "group_002031")
     cluster, group = cluster_rows[-1], group_rows[-1]
     assert (cluster_mode, group_mode) == ("smoke", "smoke")
+    assert cluster_provenance["runs"]["outflow"]["receipt_arithmetic"]["six_face_multiplier"] == 8.0
+    assert group_provenance["runs"]["reflective"]["source_sha256"]["budget_validator"]
     assert cluster["contrast_mass_g"] == pytest.approx(1.628e39, rel=1e-3)
     assert cluster["contrast_h_erg"] == pytest.approx(1.137e55, rel=1e-3)
     assert group["contrast_h_erg"] == pytest.approx(1.348e53, rel=1e-3)
@@ -128,11 +133,7 @@ def test_large_repair_or_residual_budget_is_accounting_indeterminate_not_refuted
 
 
 def test_receipt_binding_rejects_changed_ledger_bytes(tmp_path):
-    source = SMOKES / "cluster_002003_outflow"
-    run = tmp_path / "run"
-    run.mkdir()
-    for name in ("paired_nojet_budget.csv", "budget_receipt.json", "output_receipt.json"):
-        shutil.copyfile(source / name, run / name)
+    run = stage_smoke_run(tmp_path, "cluster_002003", "outflow")
     with (run / "paired_nojet_budget.csv").open("a") as handle:
         handle.write("\n")
     with pytest.raises(compare.EvidenceError, match="bytes do not match"):
@@ -140,14 +141,9 @@ def test_receipt_binding_rejects_changed_ledger_bytes(tmp_path):
 
 
 def test_revalidation_rejects_bad_face_coverage_even_if_receipt_hash_is_rebound(tmp_path):
-    source = SMOKES / "cluster_002003_outflow"
-    run = tmp_path / "run"
-    run.mkdir()
+    run = stage_smoke_run(tmp_path, "cluster_002003", "outflow")
     ledger = run / "paired_nojet_budget.csv"
     receipt_path = run / "budget_receipt.json"
-    shutil.copyfile(source / "paired_nojet_budget.csv", ledger)
-    shutil.copyfile(source / "budget_receipt.json", receipt_path)
-    shutil.copyfile(source / "output_receipt.json", run / "output_receipt.json")
     lines = ledger.read_text().splitlines()
     ledger.write_text("\n".join([lines[0], lines[1], lines[1], *lines[2:]]) + "\n")
     receipt = json.loads(receipt_path.read_text())
@@ -159,16 +155,64 @@ def test_revalidation_rejects_bad_face_coverage_even_if_receipt_hash_is_rebound(
         compare.load_bound_run(run, "cluster_002003", "outflow")
 
 
-def test_bound_output_receipts_must_establish_pair_identity():
+def test_bound_output_receipts_must_establish_pair_identity(tmp_path):
+    for boundary in ("outflow", "reflective"):
+        stage_smoke_run(tmp_path, "cluster_002003", boundary)
     runs = {
         boundary: compare.load_bound_run(
-            SMOKES / f"cluster_002003_{boundary}", "cluster_002003", boundary)
+            tmp_path / f"cluster_002003_{boundary}", "cluster_002003", boundary)
         for boundary in ("outflow", "reflective")
     }
     altered = copy.deepcopy(runs)
     altered["outflow"]["output_receipt"]["initial_field_hashes"]["rho"] = "wrong"
     with pytest.raises(compare.EvidenceError, match="initial_field_hashes"):
         compare._validate_pair_identity("cluster_002003", altered)
+
+
+def test_python311_fold_vs_python312_compensated_face_sum_has_bounded_exact_cluster_delta():
+    hydro_faces = [
+        -6.491040532554005e58,
+        -6.491040532554005e58,
+        -6.491040532554005e58,
+        -6.491040532554005e58,
+        -4.051193527700687e58,
+        -4.051193527700687e58,
+    ]
+    rows = []
+    for index, hydro in enumerate(hydro_faces):
+        row = {"face": f"face_{index}"}
+        for quantity, unit in compare.LEDGER_QUANTITIES.items():
+            value = hydro if quantity == "hydro" else 0.0
+            row[f"actual_{quantity}_net_{unit}"] = value
+            row[f"actual_{quantity}_positive_{unit}"] = 0.0
+            row[f"actual_{quantity}_negative_{unit}"] = value
+        rows.append(row)
+    recorded_net = -3.4066549185617397e59
+    current_net = -3.4066549185617393e59
+    recorded_residual = 2.108788941661837e47
+    current_residual = 2.1092349565658078e47
+    report = {
+        "cumulative_net_transport": {"mass": 0.0, "hydro": current_net, "potential": 0.0},
+        "cumulative_gross_transport": {"mass": 0.0, "hydro": -current_net, "potential": 0.0},
+        "cumulative_residual": {
+            "mass": 0.0, "hydro": current_residual, "potential": 0.0, "total": current_residual},
+    }
+    receipt = {
+        "cumulative_net_transport": {"mass": 0.0, "hydro": recorded_net, "potential": 0.0},
+        "cumulative_gross_transport": {"mass": 0.0, "hydro": -recorded_net, "potential": 0.0},
+        "cumulative_residual": {
+            "mass": 0.0, "hydro": recorded_residual, "potential": 0.0, "total": recorded_residual},
+    }
+    audit = compare._receipt_arithmetic_audit(rows, report, receipt)
+    hydro = audit["aggregates"]["hydro"]["net"]
+    assert hydro["delta"] == 4.460149039706125e43
+    assert hydro["roundoff_bound"] > abs(hydro["delta"])
+    assert audit["residuals"]["hydro"]["delta"] == hydro["delta"]
+    bad = copy.deepcopy(receipt)
+    bound = audit["residuals"]["hydro"]["propagated_roundoff_bound"]
+    bad["cumulative_residual"]["hydro"] = current_residual - 2 * bound
+    with pytest.raises(compare.EvidenceError, match="cumulative_residual.hydro"):
+        compare._receipt_arithmetic_audit(rows, report, bad)
 
 
 def test_physical_age_alignment_interpolates_brackets_and_forbids_extrapolation():
@@ -194,4 +238,4 @@ def test_output_directory_must_be_new(tmp_path):
     output = tmp_path / "existing"
     output.mkdir()
     with pytest.raises(FileExistsError):
-        compare.write_outputs(output, complete_rows(), [])
+        compare.write_outputs(output, complete_rows(), [], [])

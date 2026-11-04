@@ -17,6 +17,25 @@ fixed; the amended transport discrepancy uses mass and H+P with a two-sided
 The precise contract is recorded with the comparison implementation and the
 dated amendment to the prediction note before full-run measurements are read.
 
+Commit `e56b89f` freezes that contract. The full capture was then taken:
+archive SHA-256
+`cebd91ce46aa7b3ed7c3c68e8263b7627a0a02dc7a0768de7bad8190c26763a1`.
+All 16 files verified both locally and in the project data share. Original
+ledgers, receipts and scheduler records are retained outside Git; compact
+derived science products are tracked here.
+
+The first comparison stopped during receipt revalidation. Python 3.12's
+compensated float summation differs from the target Python 3.11 summation by
+one unit in the last place in the cluster outflow hydro transport. That
+`4.460149039706125e43 erg` difference propagates into a residual near
+`2.109e47 erg`, so a residual-relative receipt comparison was too strict.
+The original validator's source hash matches exactly, and left-to-right
+summation reproduces the original receipt. The technical correction uses a
+bounded rounding allowance for six-face aggregates and propagates that bound
+to their residuals; scientific closure and 10% decision thresholds are fixed.
+This correction occurred after capture, before scientific contrasts were
+inspected. Original receipts remain unchanged.
+
 The interior extractor now measures cellwise absolute background drift in
 each twin, reports component-wise 0.01 S(t) tests, and reports mass changes
 times initial specific enthalpy plus fixed potential as a contextual energy
@@ -29,6 +48,12 @@ HDF5 payloads to another compute host would add unnecessary transport.
 The two smoke pairs qualify the target environment and read-only measurement
 path before the full 50-Myr pairs. Scientific failure of a width is retained
 as a result, not treated as an execution failure or a reason to widen cuts.
+
+Smoke job `876188` runs that path; full job `876195` is gated on smoke success.
+The immutable r1 raw measurement stage precedes the combined-stability label
+correction. Its raw sums are retained; the frozen decision overlay verifies
+the r1 source/completion/output hashes and supersedes the r1 adoption label.
+This avoids repeating native I/O merely to recompute Boolean decisions.
 
 ## Flux failure discovered during resource check
 

@@ -135,3 +135,30 @@ uses this fail-closed contract:
   remain descriptive support measures, not additional pass/fail criteria.
   Invalid or unbound evidence exits nonzero without an ordinary verdict, and
   an existing output path is never overwritten.
+
+### Receipt arithmetic correction after capture (4 November 2026)
+
+Commit `e56b89f` froze the amended method before the full ledgers were captured
+or read. The raw 16-file capture was then verified and retained unchanged at
+`private_archive/bnd02_ledgers_2026-11-04_r1` (archive SHA-256
+`cebd91ce46aa7b3ed7c3c68e8263b7627a0a02dc7a0768de7bad8190c26763a1`).
+The first local comparison stopped before calculating any paired contrast:
+cluster-outflow's recorded cumulative H residual differed from local
+revalidation.
+
+The ledger and validator source were identical to their receipt hashes. The
+recorded residual, 2.108788941661837e47 erg, uses the Python 3.11 left-to-right
+sum of the six face totals. Python 3.12 changed built-in floating-point `sum`
+to compensated summation; it gives 2.1092349565658078e47 erg. Their difference,
+4.460149039706125e43 erg, is exactly the one-binary64-ULP difference between
+the corresponding approximately 3.407e59-erg face-transport sums. The other
+three ledgers showed only the same 1--3-ULP aggregate-summation pattern.
+
+Receipt equivalence therefore uses a named cross-runtime arithmetic bound for
+six-face aggregates: `8 * u * sum(abs(face term))`, where `u = 2^-53`.
+Cumulative-residual comparisons inherit only the relevant net-transport bound;
+the total residual inherits the sum of the H and potential bounds. State
+counts, hashes, gravity and repair remain exact, the current validator must
+still pass in full, and all deltas and bounds are written to `provenance.json`.
+This correction changes neither a ledger nor any closure, accounting-quality,
+transport, growth or amplitude criterion.

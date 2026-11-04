@@ -43,6 +43,9 @@ COMPARISON_AGES_MYR = {
     "full": (0.0, 10.0, 20.0, 30.0, 40.0, 50.0),
 }
 AGE_MATCH_ABS_TOL_MYR = 1e-6
+FLOAT_UNIT_ROUNDOFF = 2.0 ** -53
+SIX_FACE_SUM_ROUNDOFF_MULTIPLIER = 8.0
+LEDGER_QUANTITIES = {"mass": "g", "hydro": "erg", "potential": "erg"}
 
 
 class EvidenceError(ValueError):
@@ -57,17 +60,79 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _same(actual, recorded, label: str) -> None:
+def _same_exact(actual, recorded, label: str) -> None:
     if isinstance(actual, dict):
         if not isinstance(recorded, dict) or set(actual) != set(recorded):
             raise EvidenceError(f"receipt differs from revalidation: {label}")
         for key in actual:
-            _same(actual[key], recorded[key], f"{label}.{key}")
-    elif isinstance(actual, (int, float)) and isinstance(recorded, (int, float)):
-        if not math.isclose(float(actual), float(recorded), rel_tol=1e-9, abs_tol=0.0):
-            raise EvidenceError(f"receipt differs from revalidation: {label}")
+            _same_exact(actual[key], recorded[key], f"{label}.{key}")
     elif actual != recorded:
         raise EvidenceError(f"receipt differs from revalidation: {label}")
+
+
+def _receipt_arithmetic_audit(rows: list[dict], report: dict, receipt: dict) -> dict:
+    faces = tuple(row["face"] for row in rows[:6])
+    accumulated = {
+        (quantity, part, face): 0.0
+        for quantity in LEDGER_QUANTITIES for part in ("net", "positive", "negative") for face in faces
+    }
+    for row in rows:
+        for quantity, unit in LEDGER_QUANTITIES.items():
+            for part in ("net", "positive", "negative"):
+                accumulated[quantity, part, row["face"]] += float(row[f"actual_{quantity}_{part}_{unit}"])
+    audit = {
+        "method": "abs(revalidated-receipt) <= 8*u*sum(abs(six face terms)); residual bounds inherit net-transport bounds",
+        "binary64_unit_roundoff": FLOAT_UNIT_ROUNDOFF,
+        "six_face_multiplier": SIX_FACE_SUM_ROUNDOFF_MULTIPLIER,
+        "aggregates": {},
+        "residuals": {},
+    }
+    net_bounds = {}
+    for quantity in LEDGER_QUANTITIES:
+        terms = {
+            "net": [accumulated[quantity, "net", face] for face in faces],
+            "gross": [accumulated[quantity, "positive", face]
+                      - accumulated[quantity, "negative", face] for face in faces],
+        }
+        audit["aggregates"][quantity] = {}
+        for kind, values in terms.items():
+            bound = (SIX_FACE_SUM_ROUNDOFF_MULTIPLIER * FLOAT_UNIT_ROUNDOFF
+                     * math.fsum(abs(value) for value in values))
+            current = report[f"cumulative_{kind}_transport"][quantity]
+            recorded = receipt[f"cumulative_{kind}_transport"][quantity]
+            delta = current - recorded
+            audit["aggregates"][quantity][kind] = {
+                "receipt": recorded,
+                "revalidated": current,
+                "delta": delta,
+                "roundoff_bound": bound,
+                "six_face_terms_abs_sum": math.fsum(abs(value) for value in values),
+            }
+            if abs(delta) > bound:
+                raise EvidenceError(
+                    f"receipt arithmetic delta exceeds six-face bound: cumulative_{kind}_transport.{quantity}")
+            if kind == "net":
+                net_bounds[quantity] = bound
+    residual_bounds = {
+        "mass": net_bounds["mass"],
+        "hydro": net_bounds["hydro"],
+        "potential": net_bounds["potential"],
+        "total": net_bounds["hydro"] + net_bounds["potential"],
+    }
+    for quantity, bound in residual_bounds.items():
+        current = report["cumulative_residual"][quantity]
+        recorded = receipt["cumulative_residual"][quantity]
+        delta = current - recorded
+        audit["residuals"][quantity] = {
+            "receipt": recorded,
+            "revalidated": current,
+            "delta": delta,
+            "propagated_roundoff_bound": bound,
+        }
+        if abs(delta) > bound:
+            raise EvidenceError(
+                f"receipt arithmetic delta exceeds propagated bound: cumulative_residual.{quantity}")
+    return audit
 
 
 def _input_identity(receipt: dict, name: str, receipt_path: Path) -> dict:
@@ -100,6 +165,11 @@ def load_bound_run(run_dir: Path, case: str, boundary: str) -> dict:
     if (output_identity.get("size_bytes") != output_receipt_path.stat().st_size
             or output_identity.get("sha256") != _sha256(output_receipt_path)):
         raise EvidenceError(f"{output_receipt_path}: bytes do not match budget_receipt.json")
+    validator_path = Path(check_rows.__code__.co_filename).resolve()
+    validator_identity = _input_identity(receipt, validator_path.name, receipt_path)
+    if (validator_identity.get("size_bytes") != validator_path.stat().st_size
+            or validator_identity.get("sha256") != _sha256(validator_path)):
+        raise EvidenceError(f"{validator_path}: source bytes do not match budget_receipt.json")
     try:
         output_receipt = json.loads(output_receipt_path.read_text())
     except (OSError, json.JSONDecodeError) as exc:
@@ -123,7 +193,11 @@ def load_bound_run(run_dir: Path, case: str, boundary: str) -> dict:
     ):
         if key not in receipt:
             raise EvidenceError(f"{receipt_path}: missing validated accounting field {key}")
-        _same(report[key], receipt[key], key)
+    for key in ("state_count", "accepted_updates", "gravity_work_cumulative_erg",
+                "conversion_energy_repair_net_cumulative_erg",
+                "conversion_energy_repair_gross_cumulative_erg"):
+        _same_exact(report[key], receipt[key], key)
+    arithmetic_audit = _receipt_arithmetic_audit(rows, report, receipt)
     blocks = defaultdict(list)
     for row in rows:
         blocks[int(float(row["state_step"]))].append(row)
@@ -136,7 +210,9 @@ def load_bound_run(run_dir: Path, case: str, boundary: str) -> dict:
             "ledger": identity["sha256"],
             "budget_receipt": _sha256(receipt_path),
             "output_receipt": output_identity["sha256"],
+            "budget_validator": validator_identity["sha256"],
         },
+        "receipt_arithmetic": arithmetic_audit,
     }
 
 
@@ -243,7 +319,7 @@ def _relative_discrepancy(accounted: float, observed: float) -> float | None:
     return abs(accounted - observed) / abs(observed)
 
 
-def contrasts(root: Path, case: str) -> tuple[list[dict], str]:
+def contrasts(root: Path, case: str) -> tuple[list[dict], str, dict]:
     runs = {boundary: load_bound_run(root / f"{case}_{boundary}", case, boundary)
             for boundary in ("outflow", "reflective")}
     if runs["outflow"]["mode"] != runs["reflective"]["mode"]:
@@ -307,7 +383,19 @@ def contrasts(root: Path, case: str) -> tuple[list[dict], str]:
             "h_over_t2_prediction": delta["change_h"] / (pred["h_erg"] * scale),
             "hp_over_t2_prediction": contrast_hp / (pred["hp_erg"] * scale),
         })
-    return output, mode
+    provenance = {
+        "case": case,
+        "mode": mode,
+        "comparison_ages_myr": COMPARISON_AGES_MYR[mode],
+        "runs": {
+            boundary: {
+                "source_sha256": run["source_sha256"],
+                "receipt_arithmetic": run["receipt_arithmetic"],
+            }
+            for boundary, run in runs.items()
+        },
+    }
+    return output, mode, provenance
 
 
 def growth_exponent(rows: list[dict]) -> tuple[float | None, str | None]:
@@ -396,7 +484,7 @@ def verdict(case: str, rows: list[dict], mode: str) -> dict:
     return result
 
 
-def write_outputs(output: Path, rows: list[dict], verdicts: list[dict]) -> None:
+def write_outputs(output: Path, rows: list[dict], verdicts: list[dict], provenance: list[dict]) -> None:
     output.mkdir(parents=True, exist_ok=False)
     with (output / "paired_contrasts.csv").open("x", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
@@ -404,6 +492,8 @@ def write_outputs(output: Path, rows: list[dict], verdicts: list[dict]) -> None:
         writer.writerows(rows)
     payload = json.dumps(verdicts, indent=2, allow_nan=False) + "\n"
     (output / "verdict.json").write_text(payload)
+    provenance_payload = json.dumps(provenance, indent=2, allow_nan=False) + "\n"
+    (output / "provenance.json").write_text(provenance_payload)
 
 
 def main() -> None:
@@ -411,12 +501,13 @@ def main() -> None:
     parser.add_argument("root", type=Path, help="directory holding the four validated paired run directories")
     parser.add_argument("output", type=Path, help="new output directory; existing paths are refused")
     args = parser.parse_args()
-    all_rows, verdicts = [], []
+    all_rows, verdicts, provenance = [], [], []
     for case in PREDICTION:
-        case_rows, mode = contrasts(args.root, case)
+        case_rows, mode, case_provenance = contrasts(args.root, case)
         all_rows.extend(case_rows)
         verdicts.append(verdict(case, case_rows, mode))
-    write_outputs(args.output, all_rows, verdicts)
+        provenance.append(case_provenance)
+    write_outputs(args.output, all_rows, verdicts, provenance)
     print(json.dumps(verdicts, indent=2, allow_nan=False))
 
 
