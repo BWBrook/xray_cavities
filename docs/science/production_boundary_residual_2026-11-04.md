@@ -82,3 +82,44 @@ uv run python scripts/science/residual_after_boundary_contrast.py <new csv path>
 
 The script reads only the two tracked tables named above and refuses to
 overwrite its output.
+
+## Addendum, 5 November: the first spherical budget, and predictions for the rest
+
+Written after Codex's reviewed C-HI 1-Myr spherical budget (NAT-06) and before
+any C-LO, G-LO or G-HI spherical result exists. C-LO and G-LO are queued
+behind the C-HI history; G-HI's 20-Myr budget is queued separately.
+
+**C-HI at 1 Myr corroborates the residual and places it at the source.**
+The 10.7 kpc sphere holds 1.1087 times the labelled input. It sits about
+190 kpc from every face. On the coarse controls, boundary influence reaches
+a few kpc inward by 1 Myr, and the whole-grid boundary term is then about
+0.004 E_inj,HI, all of it in the outer layers. So the 10.9% excess cannot be
+boundary inflow. Disturbed gas outside the sphere (3,848 flagged cells) can
+only add stored energy, unless it is net rarefied, so the realised delivery
+is at least about 1.11 times the label. This agrees with the whole-grid
+residual of +0.097 to +0.098 at 10 and 20 Myr, which this note derived from
+different data. A source-side term, nozzle delivery above the labelled
+kinetic power, is now the leading explanation of BND-05 for C-HI. The Q-031
+nozzle measurement remains the decisive test.
+
+**Consequence for NAT-01.** The enthalpy fractions use the labelled power
+as the denominator. If realised delivery is 1.08–1.3 times the label, the
+fraction of *delivered* energy held as 2.5pV is lower by the same factor:
+C-HI's 0.43 at 1 Myr becomes 0.39.
+
+**Predictions for the earliest spherical snapshot of each remaining case,**
+if the residual is a source term roughly constant in E_inj units. Sphere
+storage divided by labelled input should be:
+
+| Case | Predicted ratio | Basis (whole-grid residual at 10 Myr) |
+| --- | --- | --- |
+| G-HI | 1.08 (1.05–1.11) | +0.076 |
+| G-LO | 1.14 (1.09–1.17) | +0.138 to +0.142 |
+| C-LO | 1.3 (1.22–1.45) | +0.29 to +0.38 |
+
+The lower ends allow 0.03–0.05 for disturbed energy left outside the sphere.
+A ratio at or below 1.03 in G-LO or C-LO would refute the constant-fraction
+source reading for that case. A ratio well above the range would mean that
+the whole-grid residual understates the source term, so that something at
+later times removes energy. The prediction applies only to snapshots of 5
+Myr or less, before any sphere approaches a boundary-affected layer.
