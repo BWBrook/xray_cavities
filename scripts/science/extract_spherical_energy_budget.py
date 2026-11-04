@@ -41,7 +41,7 @@ from select_common_age_hdf5 import CODE_TIME_PER_MYR
 from snapshot_energy import SECONDS_PER_MYR, load_environment
 
 
-METHOD_VERSION = 1
+METHOD_VERSION = 2
 SPEED_THRESHOLDS_KM_S = (100.0, 300.0)
 TRACER_THRESHOLD = 1.0e-3
 DEFAULT_SAFE_BUFFER_KPC = 40.0
@@ -268,6 +268,7 @@ def discover_apertures(
     }
     cocoon_count = 0
     cocoon_volume = 0.0
+    cocoon_pv = []
     cocoon_radius = None
     tracer_min, tracer_max, tracer_outside = math.inf, -math.inf, 0
     area = grid.dy[:, None] * grid.dx[None, :]
@@ -288,6 +289,7 @@ def discover_apertures(
         if np.any(cocoon):
             cocoon_count += int(np.count_nonzero(cocoon))
             cocoon_volume += float(np.sum(volume[cocoon]))
+            cocoon_pv.append(float(np.sum(state["prs"][cocoon] * volume[cocoon])) * UNIT_ENERGY_ERG)
             local = float(np.max(radius[cocoon]))
             cocoon_radius = local if cocoon_radius is None else max(cocoon_radius, local)
         for threshold, record in thresholds.items():
@@ -326,6 +328,7 @@ def discover_apertures(
             "cell_count": cocoon_count,
             "volume_kpc3": cocoon_volume,
             "maximum_cell_radius_kpc": cocoon_radius,
+            "pressure_volume_integral_erg": math.fsum(cocoon_pv),
         },
         "tracer_diagnostics": {
             "minimum": tracer_min,
@@ -761,6 +764,21 @@ def extract_snapshot(
                 record["isolated_radius_defining_fast_cell"] = neighbours == 0
         active_age_myr = min(max(age_myr, 0.0), 50.0)
         injected = CASE_BIPOLAR_POWER_ERG_S[case] * active_age_myr * SECONDS_PER_MYR
+        native_enthalpy = {
+            "definition": "alpha times sum of current pressure times full cell volume over all current tr1 > 1e-3 cells",
+            "scope": "entire saved native lobe; independent of either speed-defined aperture",
+            "relationship_to_energy_ledger": "proxy comparison only; never add enthalpy to the thermal/kinetic/gravitational ledger",
+            "conventions": {
+                f"{alpha:g}": {
+                    "enthalpy_erg": alpha * discovery["cocoon"]["pressure_volume_integral_erg"],
+                    "enthalpy_over_injected": (
+                        alpha * discovery["cocoon"]["pressure_volume_integral_erg"] / injected
+                        if injected > 0.0 else None
+                    ),
+                }
+                for alpha in (2.5, 4.0)
+            },
+        }
         integrated = integrate_budgets(
             current=current_vars,
             initial=initial_vars,
@@ -789,6 +807,8 @@ def extract_snapshot(
             "cell_count": tracer_outside,
             "detail": "raw tracer values retained; no tolerance, clipping, or repair applied",
         })
+    native_enthalpy["scientific_qualification"] = _qualification([dict(item) for item in global_holds])
+    base_holds = [dict(item) for item in global_holds]
     records: dict[str, dict[str, Any]] = {}
     for threshold in SPEED_THRESHOLDS_KM_S:
         aperture = dict(discovery["thresholds"][threshold])
@@ -805,7 +825,7 @@ def extract_snapshot(
         radius = float(aperture["raw_radius_kpc"])
         domain_complete = radius <= domain_radius_limit
         safe_complete = radius <= safe_radius_limit
-        threshold_holds = [dict(item) for item in global_holds]
+        threshold_holds = [dict(item) for item in base_holds]
         if not domain_complete:
             hold = {
                 "code": "domain_truncated_raw_spherical_selection",
@@ -895,6 +915,7 @@ def extract_snapshot(
             "role": "conditional boundary-sensitivity cut, not the primary complete aperture",
         },
         "cocoon_global": discovery["cocoon"],
+        "native_lobe_enthalpy": native_enthalpy,
         "tracer_diagnostics": discovery["tracer_diagnostics"],
         "thresholds": records,
         "threshold_comparison": _threshold_comparison(records, injected),

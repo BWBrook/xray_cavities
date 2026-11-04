@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#PBS -N spherical_budget
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mem=16gb
+#PBS -l walltime=48:00:00
+#PBS -r n
+#PBS -m n
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+readonly STAGE="${SPHERICAL_STAGE:?set immutable analysis stage}"
+readonly CASE="${SPHERICAL_CASE:?set case}"
+readonly MODE="${SPHERICAL_MODE:?set smoke or full}"
+case "$CASE" in C-HI|C-LO|G-HI|G-LO) ;; *) exit 2;; esac
+case "$MODE" in smoke|full) ;; *) exit 2;; esac
+cd "$STAGE"
+sha256sum --check stage_checksums.sha256
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export PYTHONPATH="$STAGE/scripts/science:$STAGE/scripts/kunanyi"
+readonly RESULT="$STAGE/results_$MODE/$CASE"
+mkdir -p "$RESULT"
+exec > >(tee -a "$RESULT/run.out") 2> >(tee -a "$RESULT/run.err" >&2)
+if [ "$MODE" = smoke ]; then
+  python -m pytest -q -p no:cacheprovider --basetemp "$RESULT/test_tmp" \
+    --junitxml "$RESULT/tests.xml" \
+    tests/test_spherical_energy_budget.py tests/test_spherical_budget_inputs.py
+  indices=1
+else
+  python - <<'PY'
+from pathlib import Path
+import hashlib, json
+p = Path('smoke_review.json')
+r = json.loads(p.read_text())
+assert r['decision'] == 'native_smoke_accepted_for_raw_measurement_expansion'
+assert r['stage_manifest_sha256'] == hashlib.sha256(Path('stage_checksums.sha256').read_bytes()).hexdigest()
+for name, digest in r['files'].items():
+    assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == digest, name
+PY
+  indices="${SPHERICAL_INDICES:?set explicit scientifically retained snapshot indices}"
+fi
+contract_sha=$(python - "$CASE" <<'PY'
+from pathlib import Path
+import hashlib, sys
+print(hashlib.sha256((Path('contracts') / (sys.argv[1] + '.json')).read_bytes()).hexdigest())
+PY
+)
+python -u scripts/kunanyi/run_spherical_budget_case.py \
+  --contract "$STAGE/contracts/$CASE.json" --contract-sha256 "$contract_sha" \
+  --output-dir "$RESULT" --indices "$indices"
+sha256sum --check stage_checksums.sha256
+printf 'SPHERICAL_CASE_COMPLETED %s %s\n' "$CASE" "$MODE"

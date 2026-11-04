@@ -6,6 +6,25 @@ has been read and no jet-run budget is claimed here.
 Implementation: `scripts/science/extract_spherical_energy_budget.py`
 Tests: `tests/test_spherical_energy_budget.py`
 
+Turn 15 extension (5 November): method version 2 also records the global
+native lobe pressure integral in the first streaming pass, with resolved
+`2.5*sum(pV)` and `4*sum(pV)` and their injected-energy ratios. It uses current
+pressure without initial subtraction, includes slow lobe cells outside either
+aperture, and is a separate proxy comparison, never an additive fourth ledger
+term. Native-proxy qualification is separate from aperture-specific holds.
+The R100 and R300 geometry holds are now independent; a larger-aperture hold
+must not be copied into the smaller aperture.
+
+`scripts/kunanyi/prepare_spherical_budget_inputs.py` and
+`run_spherical_budget_case.py` bind reviewed historical configuration and
+atmosphere witnesses, the original production path, live source/configuration
+properties and exact stable file identities. Historical executable-to-source
+linkage remains separately flagged when not proved. The runner processes one
+case serially and checks prior receipts against the freshly validated native
+chain before resuming. Its per-snapshot completion receipts bind all analysis
+source hashes. `summarize_spherical_energy_budgets.py` reports absent snapshots
+and unavailable thresholds explicitly, preserving native and aperture holds.
+
 ## Scientific target and scope
 
 The extractor measures the change in stored gas energy inside two

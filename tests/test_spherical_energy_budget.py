@@ -172,6 +172,9 @@ def test_both_thresholds_partition_exactly_and_normalize_to_bipolar_injection(tm
     result, _, _ = _run(tmp_path, current, case="C-LO")
 
     assert result["injected_energy_erg"] == pytest.approx(2.0e43 * 2.0 * budget.SECONDS_PER_MYR)
+    assert "boundary_safe_box_conflict" in _hold_codes(result["thresholds"]["100"])
+    assert "boundary_safe_box_conflict" not in _hold_codes(result["thresholds"]["300"])
+    assert "boundary_safe_box_conflict" not in _hold_codes(result["native_lobe_enthalpy"])
     for threshold in ("100", "300"):
         record = result["thresholds"][threshold]
         assert record["sphere_budget"]["current_binary_partition"]["identity_pass"] is True
@@ -385,3 +388,22 @@ def test_refuses_overwrite_invalid_primitives_and_scientifically_excluded_g_hi(t
             current_h5=Path("unused"), initial_h5=Path("unused"),
             environment_path=Path("unused"), output=tmp_path / "g_hi_48.json",
         )
+
+
+def test_native_enthalpy_keeps_slow_lobe_outside_aperture_and_current_pressure(tmp_path: Path) -> None:
+    current = _base_state()
+    current['vx1'][2, 2, 3] = _velocity_code(310.0)
+    current['tr1'][2, 2, 3] = 0.1
+    current['prs'][2, 2, 3] = 5.0
+    current['tr1'][0, 0, 0] = 0.1
+    current['prs'][0, 0, 0] = 7.0
+    current['tr1'][0, 0, 1] = 1e-3
+    current['prs'][0, 0, 1] = 100.0
+    result, _, _ = _run(tmp_path, current)
+    expected_pv = 12.0 * budget.UNIT_ENERGY_ERG
+    assert result['cocoon_global']['pressure_volume_integral_erg'] == pytest.approx(expected_pv)
+    assert result['thresholds']['100']['coverage']['cocoon_outside_aperture_cell_count'] == 1
+    for alpha in (2.5, 4.0):
+        proxy = result['native_lobe_enthalpy']['conventions'][f'{alpha:g}']
+        assert proxy['enthalpy_erg'] == pytest.approx(alpha * expected_pv)
+        assert proxy['enthalpy_over_injected'] == pytest.approx(alpha * expected_pv / result['injected_energy_erg'])
