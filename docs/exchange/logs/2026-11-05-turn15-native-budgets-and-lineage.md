@@ -86,9 +86,11 @@ precede G-HI validation in the flux wrapper. No historical source is copied,
 rebuilt or invented. Seventy-one focused tests passed in independent review
 and parent integration. Commit `7dae34b` additionally records hash-time file
 identities for every restart input and tests mutation during hashing. The
-independent validator job **876541** is running; its staged-contract check and
-all 15 target tests passed before the full restart hash. It produces no flux
-measurement. Commit `20a32bd` integrates a successful receipt into spherical
+independent validator job **876541** completed **F/0 in 14m 22s**. Its
+staged-contract check, all 15 target tests, full restart hash and final 98
+checksums passed. It produces no flux measurement. The successful lineage
+receipt is pinned by SHA-256
+`a9704e2ea8f66251e8ea3b05c29e1fd5172bacc207880ee9a204e1d0b44ffcdf`. Commit `20a32bd` integrates a successful receipt into spherical
 preflight, admitting only G-HI snapshots 0--47; 31 focused tests pass.
 
 No launch-time source-tree hash manifest was retained. Current source hashes,
@@ -121,5 +123,145 @@ historical retained-map input binding. Their compact archive SHA-256 is
 Exact native edges and retained sky bins will expose coverage loss and map
 compatibility differences explicitly. These are preparation checks, not new
 observer-recovery or emission results. Commit `c5b438d` implements the reviewed
-diagnostic and passes 37 focused tests. Native execution still requires the
-successful G-HI lineage and exact native input receipt.
+diagnostic and passes 37 focused tests. The actual successful lineage receipt
+now supplies a qualified contract for native execution. Emission still requires
+the completed snapshot-20 measurement and its exact native input receipt.
+
+
+## G-HI analysis launch and retained failure
+
+The accepted lineage generated the actual G-HI spherical contract,
+SHA-256 `601ee8f013a089f199912e3194028b2bff39cb7a81c169048d4e557e63eb6778`.
+Independent review reconstructed it byte-for-byte, verified all 20 staged
+Python sources against commit `c5b438d`, and reproduced **80 passing tests**.
+The emission gate checks the first budget's case, index, time, input receipt,
+extractor identity and complete product inventory. Nine substitutions were
+rejected against the genuine earlier smoke. The two budget phases cover
+exactly 0--47; emission cannot block the remaining history.
+
+The frozen analysis archive has 51 regular files including its manifest:
+
+- Archive SHA-256: `fb5c270ce38e1b7f927b367c23975ec5ec3a3e32166ed35387c93d713109825d`.
+- Manifest SHA-256: `988b30e4d413a0ebe2d61616f9bc88a823b92bf5e82b719457ebac3f97f182d0`.
+
+The uploaded archive and all 50 manifest members verified on Kunanyi. Initial
+budget jobs **876545/876546** each failed F/1 after one second: the node's
+Bash rejects an empty `plots` array under `set -u`. This happened after stage
+integrity checks but before Python, tests or native reads; a direct inspection
+confirmed that no `results_*` directory existed. Dependent emission **876547**
+terminated without running. These jobs and logs are retained as failed
+provenance. The frozen science and inputs are unchanged; a separately pinned
+launch overlay addresses only this shell argument handling.
+
+
+The corrected overlay uses positional arguments instead of the empty Bash
+array. Author and independent reviewer each passed all **20 checks under
+Bash 3.2.57**, verifying exact arguments, runtime environment, invalid input
+rejection, failure propagation and pre/post hashes. Both confirmed that every
+r1 member remained unchanged. The overlay archive SHA-256 is
+`f2660146211104c352104dce2deab5085fb297856cfab7ca1c7ec905167a68fa`, and its
+launch manifest SHA-256 is
+`8373bc495b0b0cd913b210fcbf194591968af0db390056246cd5dfefde89ad89`.
+Each replacement submission pins both manifests. Remote resubmission checks
+required all three original jobs to be terminal and all reserved analysis
+output directories to remain absent.
+
+
+Second-attempt submissions (superseded first20/emission; history retained):
+
+| Phase | Job | Indices | Dependency | Resources |
+| --- | --- | --- | --- | --- |
+| G-HI first budget | 876551 | 20 | none | 2 CPU, 16 GB, 3 h |
+| G-HI remaining history | 876552 | 0--19, 21--47 | afterany:876551 | 2 CPU, 16 GB, 48 h |
+| G-HI emission/filling | 876553 | 20 | afterok:876551 | 2 CPU, 32 GB, 12 h |
+
+The history does not depend on emission. Should the first20 phase fail,
+remaining raw measurements can proceed while the missing point remains
+explicit. Emission must pass the successful first20 receipt and semantic gates
+before reading native fields. Optional plots use the same frozen renderer.
+No native-emission completion or full-history completion is claimed here.
+
+
+Replacement job 876551 reached Python and passed all **80 target tests** in
+44.677 seconds, with zero failures, errors or skips. This verifies that the
+launcher repair passed the previous failure point; it is not a completed
+native measurement. At the latest C-HI observation, snapshot 0 had completed
+and snapshot 2 had bound its inputs for extraction; these additional points
+have not yet undergone the first smoke's independent scientific review.
+
+
+## Device-namespace rejection and node-bound recovery
+
+Job **876551** subsequently failed native preflight before any measurement,
+because the exact restart identity differed on its assigned compute node.
+Dependent emission **876553** did not run. The remaining history **876552**
+was assigned to the original validation node, passed its full native preflight
+and continues there. It is retained without resubmission.
+
+The bounded metadata probe **876554** finished F/0 in one second on the rejected
+node. All four restart files differed from the accepted receipt **only in the
+filesystem device number**; paths, resolved paths, inode, size, mtime and ctime
+matched. The probe also rehashed the small fluid catalogue, reproducing its
+accepted SHA-256. It did not reread the large restart payload. This identifies
+a node-local filesystem namespace difference, not evidence of changed file
+contents. The original strict comparison correctly stopped the cross-node use.
+
+Recovery binds the new first20 and emission requests to the original validation
+node, both in PBS resources and through a runtime host guard before reads or
+Python. A fresh isolated stage preserves all failed evidence and has no history
+launcher. Independent review confirmed all 20 scientific sources remain exact
+`c5b438d` Git blobs; the lineage receipt is unchanged. The only contract change
+is the path to its staged historical-input witness, giving contract SHA-256
+`c59a58b9083c9573ecf5c4d9da3f0424936c5a09f247c645b5fc0fcb47ed1dc5`.
+The 49-member preparation check and all staged imports pass; Bash 3.2 checks
+confirm correct argument handling and rejection of wrong-host, history and
+invalid-option requests. No scientific gate or file-identity field is removed.
+
+
+The new first20/emission archive contains 50 regular files including its
+manifest. Archive SHA-256:
+`b5aa5a2bc7f04d43d8ec157b41da64250ec8f58db651b8f9d6001f05d587bcab`;
+manifest SHA-256:
+`ea7a2b1982ded6f2bf586082212b359acab4a7ed6e87de7f7e0c27519404dc3b`.
+The parent verified every archive member locally and every frozen member
+remotely before submitting. This stage supplies only the missing index-20
+budget and its dependent emission diagnostic; history 876552 continues to
+supply the complementary indices from its original stage.
+
+
+Final active submission set:
+
+| Case/phase | Job | Retained indices | Dependency |
+| --- | --- | --- | --- |
+| C-HI history | 876542 | 0, 2--50; reuse reviewed smoke 1 | none |
+| C-LO history | 876543 | 0--50 | afterany:876542 |
+| G-LO history | 876544 | 0--50 | afterany:876543 |
+| G-HI history | 876552 | 0--19, 21--47 | original afterany:876551 fulfilled |
+| G-HI first20 | 876555 | 20 | none |
+| G-HI emission/filling | 876556 | 20 | afterok:876555 |
+
+Jobs 876555 and 876556 are explicitly bound to the validated node. Their
+submission states were Q/no hold and H/dependency hold respectively. There is
+no dependency from the three independent cases to G-HI, and no dependency from
+the G-HI history to emission. Failed first20 and emission attempts remain
+terminal and cannot produce duplicate measurements.
+
+
+At **10:14 AEDT on 5 November**, C-HI 876542 and G-HI history 876552 were R;
+C-LO 876543 and G-LO 876544 were H on their declared dependencies;
+G-HI first20 876555 was Q/no hold, and emission 876556 was H on afterok:876555.
+The fresh first20 stage had not started, so no target startup or completion is
+claimed for it. Additional C-HI snapshots 0 and 2 had completed; only smoke
+snapshot 1 has the independent scientific review reported above.
+
+The downloaded closeout archive SHA-256 is
+`c1e54d5a03ce9404f078625841c86054369ead47064467a91d921ad457d07b35`.
+All **57 captured member hashes** verified locally, and captured stage and
+overlay manifests match the local freezes byte-for-byte. Raw scheduler and
+host-identity records are retained privately. The sanitized public summary is
+`../../science/assets/turn15_spherical_budgets_2026-11-05/execution/submission_summary.json`.
+
+Next: inspect completed per-snapshot receipts and aggregate histories, review
+the G-HI/20 emission/filling products, and render the four-case component and
+native-lobe proxy comparisons. Actual nozzle delivery and aperture transport
+still require the separate flux measurement before any closure interpretation.

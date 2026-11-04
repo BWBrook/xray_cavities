@@ -1,8 +1,9 @@
 # Production spherical energy-budget extractor
 
 Status (5 November): the native C-HI snapshot-1 smoke completed F/0 and passed
-independent provenance, geometry and compact-arithmetic review. Three case
-histories are submitted; no completed history or physical closure is claimed.
+independent provenance, geometry and compact-arithmetic review. All four case
+histories are submitted; G-HI retains only snapshots 0--47 and has a separate
+20-Myr emission dependency. No completed history or physical closure is claimed.
 See [the native result and execution record](../exchange/logs/2026-11-05-turn15-native-budgets-and-lineage.md).
 
 Implementation: `scripts/science/extract_spherical_energy_budget.py`

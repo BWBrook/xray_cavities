@@ -198,7 +198,7 @@ claims:
       above the labelled power and jet-driven face transport; the Q-031 flux
       job measures both.
     evidence:
-      - {path: docs/science/production_boundary_residual_2026-11-04.md, commit: 35dccca}
+      - {path: docs/science/production_boundary_residual_2026-11-04.md, commit: 57ad7da}
     reproduce: >-
       uv run python scripts/science/residual_after_boundary_contrast.py
       <new csv path>
