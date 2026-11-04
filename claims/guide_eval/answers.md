@@ -22,9 +22,11 @@ Update an answer when the claim it cites changes status.
    precision. Binary volumes are 3.8–6.1× the fractional ones at 10 Myr, and
    the C-LO X-ray/native ratio moved from 6.76 to 0.494 on this definition
    alone. Tracer-defined cocoons are not X-ray cavities (XR-02).
-5. **G-HI at 50 Myr**, excluded as its packaging receipt requires. The late
-   G-HI outputs have validity problems, including contact with the z
-   boundary.
+5. **G-HI at 50 Myr.** Its lobe reaches the z boundary: from snapshot 48 the
+   axial edge pressure rises to 140–315 times its initial value, and the
+   final margin is 1.05 kpc
+   (`four_case_boundary_spectral_field_review_2026-08-28.md`). Score 1 for
+   naming the exclusion without the boundary-contact reason.
 6. **Not necessarily.** At the 5% rung, completeness is 0.36 and purity
    0.70–0.77, so the errors cancel (DET-02). Check per-side completeness and
    purity, and the four-case contrasts.

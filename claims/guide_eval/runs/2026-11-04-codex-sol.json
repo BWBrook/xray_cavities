@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "question": 1,
+      "answer": "Native enthalpy/injected energy spans 0.525–0.559 for C-HI, 0.631–1.108 for C-LO, 0.468–0.498 for G-HI, and 0.615–0.785 for G-LO across retained science ages. The primary convention is H = 2.5∫p dV; 4pV is a literature comparator that multiplies these fractions by 1.6. G-HI ends at 40 Myr; the others extend to 50 Myr.",
+      "evidence": ["NAT-01", "AGENT_GUIDE.md"],
+      "not_established": false
+    },
+    {
+      "question": 2,
+      "answer": "No, not as a scientific recovery result. The C-HI median of approximately 0.022 was withdrawn because it came from the refuted legacy fixed-1%-area selector. That selector produces cavity-free false positives, increasingly under-recovers larger cavities, and distorts case contrasts. Recovery remains unresolved until a detector passes.",
+      "evidence": ["OBS-01", "OBS-02", "DET-01"],
+      "not_established": false
+    },
+    {
+      "question": 3,
+      "answer": "The leading explanation is that zero-gradient outflow boundaries disturb pressure support in the stratified atmosphere, permitting inflow that imports enthalpy and gravitational potential energy. Mass growth and specific-energy comparisons strongly support this mechanism, but causal quantitative closure remains unestablished. The latest handover records all four paired 50-Myr controls completed successfully, while their scientific contrasts remain unevaluated. Numerical bookkeeping closure alone does not establish physical conservation against injection.",
+      "evidence": ["BND-01", "BND-02", "NAT-04", "docs/science/q031_boundary_hypothesis_2026-10-31.md", "docs/exchange/current_status.md"],
+      "not_established": true
+    },
+    {
+      "question": 4,
+      "answer": "Promote stored tr1 to double precision, select cells with tr1 > 1e-3, and give each selected cell full weight; ambient gas is the exact complement. Fractional tracer weighting is not primary. This changes the recovery denominator substantially: binary volumes are 3.8–6.1 times fractional volumes at 10 Myr, and C-LO's historical enthalpy recovery changed from 6.76 to 0.494 through the denominator alone. Tracer cocoons also include nearly ambient material and are not necessarily X-ray-visible cavities.",
+      "evidence": ["NAT-05", "XR-02", "AGENT_GUIDE.md", "docs/science/q029_binary_native_refresh_2026-09-06.md"],
+      "not_established": false
+    },
+    {
+      "question": 5,
+      "answer": "Exclude G-HI at 50 Myr from every scientific observable and inference. Its lobe/shock reaches the axial boundary: the final margin is only 1.052 kpc and maximum edge pressure is 315.31 times initial pressure. Contamination begins at snapshot 48. Retain these files as archival evidence; selected G-HI science ages end at 40 Myr.",
+      "evidence": ["docs/science/four_case_boundary_spectral_field_review_2026-08-28.md", "docs/exchange/current_status.md"],
+      "not_established": false
+    },
+    {
+      "question": 6,
+      "answer": "A ratio of 1.08 does not establish detector quality. For the C-HI 5%-deficit rung it accompanies completeness of only 0.36 and purity of 0.70–0.77: geometric errors cancel. Check per-side completeness, purity, missed sides counted as zero, topology/background merges, aperture clipping, viewing dependence, and preservation of four-case contrasts. Keep tracer information diagnostic only; it must not select or repair observed cavities.",
+      "evidence": ["DET-01", "DET-02", "docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md", "AGENT_GUIDE.md"],
+      "not_established": false
+    },
+    {
+      "question": 7,
+      "answer": "No. The May controls use reflective boundaries on a uniform 1-kpc grid; production uses outflow boundaries on a stretched grid. They demonstrate quietness only for their own configurations. For example, the cluster's 50-Myr whole-grid energy change is 4.36e-9 of initial energy and peak Mach is 0.0022, but small regional redistribution remains. Neither those controls nor the new coarse pairs alone establish production-grid stability.",
+      "evidence": ["BND-03", "docs/science/nojet_control_audit_2026-11-01.md", "docs/science/paired_nojet_boundary_experiment_2026-11-01.md"],
+      "not_established": false
+    },
+    {
+      "question": 8,
+      "answer": "Obtain Barry's explicit authorisation for the new PLUTO simulation before running it. Authorisation of the four coarse paired controls does not extend to another experiment; the production-matched control remains held. First determine whether existing-output post-processing can answer the idea.",
+      "evidence": ["AGENT_GUIDE.md", "docs/science/paired_nojet_boundary_experiment_2026-11-01.md", "docs/exchange/current_status.md"],
+      "not_established": false
+    },
+    {
+      "question": 9,
+      "answer": "The classes are contrast-dependent detection efficiency, especially missed faint low-power cocoons, and segmentation failures, including background merges, off-axis selection and aperture clipping. The planned sequence is a t=0-baseline run to address background/contrast estimation, 120-kpc versus footprint-enclosing aperture sensitivity, a background-merge guard, and scale-aware topology validation. No replacement is accepted; all must be assessed using per-side geometry and factorial contrasts.",
+      "evidence": ["DET-01", "docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md"],
+      "not_established": false
+    },
+    {
+      "question": 10,
+      "answer": "Run from the repository root:\n\nuv run python scripts/science/summarise_q032_retained_ladder.py docs/science/assets/q032_retained_method_ladder_2026-10-31/results/method_ladder_rows.csv docs/science/assets/q032_retained_method_ladder_2026-10-31/interpretation --native-root docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis\n\nIt needs the retained Q-032 method_ladder_rows.csv and the per-case Q-029 native_energy_selected_age.csv files beneath remote_analysis. These compact inputs regenerate the interpretation summaries without raw HDF5 or map synthesis. Restore missing inputs first.",
+      "evidence": ["DET-01", "docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md", "scripts/science/summarise_q032_retained_ladder.py"],
+      "not_established": false
+    },
+    {
+      "question": 11,
+      "answer": "Yes. For C-HI, projected tracer area inside the 120-kpc aperture falls to 0.92, 0.72 and 0.57 at 30, 40 and 50 Myr. Thus 8%, 28% and 43% respectively lies outside the analysis aperture, limiting every detector's recovery. These are area fractions, not measured enthalpy-loss fractions.",
+      "evidence": ["DET-03", "docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md"],
+      "not_established": false
+    },
+    {
+      "question": 12,
+      "answer": "The highest-priority question is whether BND-02 explains the whole-grid excess. The decisive test is the no-jet outflow-minus-reflective contrast: at 50 Myr, predicted mass gains are approximately 4.9e43 g for cluster and 2.4e42 g for group, growing approximately as t² and explained by measured face transport. Agreement within about a factor of two supports the coarse-grid mechanism. Predeclared refutations include mass below 1e43/5e41 g, growth exponent outside 1.6–2.4, or transport explaining less than 90% of mass or hydrodynamic-energy contrast. The controls completed, but these contrasts remain unevaluated; production-specific attribution still requires grid-transfer evidence.",
+      "evidence": ["AGENT_GUIDE.md", "BND-02", "docs/science/paired_nojet_boundary_prediction_2026-11-02.md", "docs/science/paired_nojet_boundary_experiment_2026-11-01.md", "docs/exchange/current_status.md"],
+      "not_established": false
+    }
+  ]
+}

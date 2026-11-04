@@ -1,1 +1,2 @@
 date,agent,model,version,guide_commit,score,max_score,notes
+2026-11-04,codex-delegate fresh job (no project memory),gpt-6.1-sol,effort high,4ee2c8b,23,24,"Q3 scored 1: called BND-02 unestablished but did not state its refutation criteria. Q1 omitted the C-LO boundary caveat (not a trap). Q5 found the boundary-contact reason the key lacked; key and guide updated. 78 s, 334k input tokens. Answers in runs/2026-11-04-codex-sol.json."

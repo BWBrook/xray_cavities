@@ -38,8 +38,11 @@ Each factor is tested separately, holding the others at truth.
   1.7–2.1 kpc at the edges. The box is ±200 kpc in x and y and ±250 kpc in
   z, with outflow (zero-gradient) boundaries on every face.
 - **Snapshots.** Selected ages of about 10, 20, 30, 40 and 50 Myr. G-HI at
-  50 Myr is excluded from science summaries, as its packaging receipt
-  requires.
+  50 Myr is excluded from all science summaries: its lobe reaches the z
+  boundary. From snapshot 48 the axial edge pressure rises to 140–315 times
+  its initial value, and the final margin is 1.05 kpc
+  (`docs/science/four_case_boundary_spectral_field_review_2026-08-28.md`).
+  Selected G-HI ages therefore end at 40 Myr.
 - **Synthetic observations.** XRAiSE 1 keV X-ray maps and PRAiSE2 radio maps
   at viewing angles of 0°, 45° and 90°.
 - **Where data lives.**
@@ -55,7 +58,8 @@ pinned commit, its reproduce command and its caveats. In summary:
 
 **Native energetics (the physical-proxy factor).**
 - Native binary-cocoon enthalpy 2.5pV is roughly 0.47–0.79 of injected
-  energy in three cases, and 0.63–1.11 in C-LO. <!-- claims: NAT-01 -->
+  energy in three cases, and 0.63–1.11 in C-LO. Treat the C-LO values as
+  exposed to boundary inflow until BND-02 is settled. <!-- claims: NAT-01 -->
 - Enthalpy is not the energy change of the cocoon region, and the
   shock-processed ambient gas holds a comparable share.
   <!-- claims: NAT-02 NAT-03 -->
@@ -65,9 +69,16 @@ pinned commit, its reproduce command and its caveats. In summary:
 **Physical closure.**
 - The whole grid gains more energy than was injected in every case, by
   6–24× in C-LO. <!-- claims: BND-01 -->
-- The leading explanation is inflow through the outflow boundaries. A
-  prediction was recorded before the paired controls ran, and its test is in
-  progress. <!-- claims: BND-02 BND-03 -->
+- The leading explanation is inflow through the outflow boundaries. It is
+  open, not established. A prediction was recorded before the paired
+  controls ran (`docs/science/paired_nojet_boundary_prediction_2026-11-02.md`).
+  - **Refuted** if any of these holds:
+    - the 50-Myr mass contrast is below 1e43 g (cluster) or 5e41 g (group);
+    - the growth exponent lies outside 1.6–2.4;
+    - face transport explains less than 90% of the contrast.
+  - **Running the test:**
+    `scripts/science/compare_paired_boundary_prediction.py`, once the
+    50-Myr ledgers are retrieved. <!-- claims: BND-02 BND-03 -->
 
 **Measurement (the observer factor).** Nothing is established yet.
 - The legacy detector is refuted, and the recovery numbers in the
