@@ -175,6 +175,6 @@ withdrawn observer numbers.
 
 The test of this guide is whether a fresh agent, given only the repository
 and this file, answers a fixed set of project questions correctly and avoids
-the traps above. The question set and scoring will be agreed with Codex.
-Until then, treat any gap you hit as a defect: report it, or fix it here and
-in the ledger.
+the traps above. The procedure is in `claims/guide_eval/README.md`. If you are
+the agent under test, do not open `claims/guide_eval/`. Treat any gap you hit
+as a defect: report it, or fix it here and in the ledger.
