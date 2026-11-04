@@ -15,7 +15,7 @@ running-state report below is historical. No flux or native scientific result
 was produced, and neither job has been retried in the current tranche.
 
 The independent interior measurement smoke `876188` finished F/0 in 21m 44s;
-full audit `876195` started after validating its receipt. These are
+full audit `876195` finished F/0 in 49m 31s after validating its receipt. These are
 existing-output analyses. The BND-02 contract was frozen as `e56b89f` before
 capture; the bounded cross-runtime arithmetic correction `71bbdbe` followed
 capture but preceded calculation of scientific contrasts.
@@ -29,7 +29,11 @@ mechanism, not production-grid or interior certification.
 At 0.25 Myr, the first passing paired-localization cut is 1 kpc in the cluster
 and 0 in the group. The combined localization/background-stability gate passes
 at 2 kpc in the group; the cluster fails through the largest tested 4-kpc cut.
-The 50-Myr cut remains pending. See
+At 50 Myr, the cluster fails localization at 40 kpc (1.2426 times the bound).
+50 kpc passes localization but still fails each twin's background-stability
+test; no tested cluster cut is adopted. The group first passes the combined
+criterion at 20 kpc, with 40 kpc also passing on these coarse controls.
+Production-grid certification and aperture-coverage checks remain outstanding. See
 `../science/paired_boundary_results_2026-11-04.md` and
 `logs/2026-11-04-boundary-and-extractor-tranche.md`.
 

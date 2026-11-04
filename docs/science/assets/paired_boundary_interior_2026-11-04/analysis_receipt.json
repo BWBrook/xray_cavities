@@ -1,0 +1,30 @@
+{
+  "status": "complete_measurements_and_decision_overlays",
+  "pre_result_criterion_commit": "e56b89f",
+  "scientific_scope": "coarse 1-kpc controls only; no production-grid certification",
+  "jobs": {
+    "smoke": {
+      "job": "876188",
+      "terminal_state": "F",
+      "exit_status": 0,
+      "walltime": "00:21:44"
+    },
+    "full": {
+      "job": "876195",
+      "terminal_state": "F",
+      "exit_status": 0,
+      "walltime": "00:49:31"
+    }
+  },
+  "full_capture_archive_sha256": "53f4ace46cf5b9650e9f5c47a2aac88962bd4fb9b6e08f86cbe730f66e3b1061",
+  "smoke_capture_archive_sha256": "fc2d4c86300fb4f0ce4c27ca4b30af718b41c27d41e143ac265f7cd4217df93f",
+  "files": {
+    "scripts/science/summarize_paired_boundary_interior.py": "4ca1efe3764bab82195eef7dabc884b850d4cb950fb4a811325efb662776774a",
+    "docs/science/assets/paired_boundary_interior_2026-11-04/smoke_decision.json": "f77a7adbb35e04b79d0dc0761c620259e81c95d2f528bf8c75bfbacd5263519d",
+    "docs/science/assets/paired_boundary_interior_2026-11-04/full_decision.json": "dce954a8799ea31117176d864ece6ef65521a18ee15f09f4d8ead7bf57462799"
+  },
+  "commands": [
+    "uv run python scripts/science/summarize_paired_boundary_interior.py <capture_directory> smoke <new_smoke_decision_json>",
+    "uv run python scripts/science/summarize_paired_boundary_interior.py <capture_directory> full <new_full_decision_json>"
+  ]
+}

@@ -75,6 +75,15 @@ fails through 4 kpc. The group first passes the combined gate at 2 kpc.
 Full audit `876195` then started. Detailed result tables and reproduction
 commands are in `../../science/paired_boundary_results_2026-11-04.md`.
 
+Full `876195` subsequently finished F/0 in 49m 31s. All 26 captured files
+verified locally and in the project data share. Full capture hash:
+`53f4ace46cf5b9650e9f5c47a2aac88962bd4fb9b6e08f86cbe730f66e3b1061`.
+At 50 Myr the cluster's 40-kpc cut fails paired localization (1.2426 times
+the bound); 50 kpc passes localization but fails both twins' background
+stability. No tested cluster width is adopted. The group first passes the
+combined criterion at 20 kpc; 40 kpc also passes for those coarse controls.
+No production cut or default has been adopted.
+
 The 126-row independent shock validation deliberately finishes with
 `FAIL_NO_PROMOTION`: all 54 exact-shock rows pass their declared expectations,
 but the isentropic sound wave falsely passes the 1.05 arm in all six
@@ -88,6 +97,11 @@ qualified sphere when the domain is truncated, the candidate boundary-safe
 box is crossed, the tracer lies outside [0,1], or native semantic provenance
 is still unqualified. Native case/configuration/environment binding remains
 the next execution gate; no four-case spherical result is claimed.
+
+The combined focused suite passed 139 tests. The shock harness's scientific
+failure remains explicit despite its passing implementation tests. The
+reviewed correspondence snapshot was refreshed through message 2874; no
+message was sent on Barry's behalf.
 
 ## Flux failure discovered during resource check
 

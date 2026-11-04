@@ -1,5 +1,11 @@
 # Paired boundary controls: measured results
 
+Codex (GPT-6) integrated and executed this analysis, with implementation and
+independent checks by Codex specialist agents (GPT-5.6 Sol). Barry Brook
+authorised the tranche and supplied scientific direction. The original
+prediction was recorded separately by Claude (Opus 5.5). Barry's final review
+of this result note is not claimed.
+
 ## Whole-grid prediction
 
 Both completed 50-Myr atmosphere pairs support the corrected, predeclared
@@ -144,4 +150,73 @@ Reproduce the decision from the extracted immutable stage:
 ```bash
 uv run python scripts/science/summarize_paired_boundary_interior.py \
   <smoke_capture_directory> smoke <new_decision_json>
+```
+
+## Interior cuts at 50 Myr
+
+The full audit finished F/0 in 49m 31s. The same source, receipt, input
+stability, native-time and component checks passed for both atmosphere pairs.
+No simulation was rerun. The frozen decision overlay gives:
+
+| Atmosphere | Cut (kpc) | Paired contrast / bound | Reflective drift / bound | Outflow drift / bound |
+| --- | ---: | ---: | ---: | ---: |
+| Cluster | 0 | 2226.725 | 2.653 | 2229.230 |
+| Cluster | 20 | 403.261 | 2.347 | 405.542 |
+| Cluster | 30 | 55.534 | 2.138 | 57.640 |
+| Cluster | 40 | 1.24261 | 1.69690 | 2.91918 |
+| Cluster | 50 | 0.0101743 | 1.47461 | 1.47714 |
+| Group | 0 | 38.74095 | 0.23355 | 38.96760 |
+| Group | 20 | 0.104765 | 0.179006 | 0.283060 |
+| Group | 30 | 0.000270801 | 0.153170 | 0.153174 |
+| Group | 40 | 3.27991e-7 | 0.149988 | 0.149988 |
+| Group | 50 | 9.86460e-10 | 0.146418 | 0.146418 |
+
+As in the smoke table, each entry is the largest of the four component L1
+sums divided by its bound, now `0.01 S(50 Myr) = 3.15576e56 erg`.
+Every component must pass individually, including total energy.
+
+**Cluster:** the proposed 40-kpc cut fails even the paired-localization test:
+total L1 is 1.24261 times its bound, although thermal and gravitational
+components separately are 0.65675 and 0.58592. A 50-kpc cut passes localization
+comfortably, but absolute thermal drift still exceeds its bound in both twins
+(about 1.0775 and 1.0792), and total drift is about 1.475 times its bound.
+No tested cluster width satisfies the combined criterion. Do not adopt
+40 kpc, or silently substitute 50 kpc as a certified safe region.
+The sampled widths bound the localization threshold to `(40, 50] kpc`;
+50 kpc is the first tested pass, not an estimated exact threshold.
+
+**Group:** 20 kpc is the smallest tested cut satisfying paired localization
+and both twins' background-stability tests. The conservative 40-kpc option
+also passes on these coarse controls. This is a coarse-control candidate,
+not a production-grid acceptance decision.
+Because the tested widths jump from 0 to 20 kpc, the combined threshold is
+only bounded to `(0, 20] kpc`; 40 kpc is conservative rather than necessary
+on these controls.
+
+The absence of a combined cluster pass does not refute the whole-grid
+boundary-inflow mechanism. It distinguishes the large boundary-driven
+contrast from the smaller drift shared by both twins. Nor does near-zero
+paired contrast beyond a cut establish undisturbed gas individually.
+The source of the shared drift remains unresolved here.
+
+Production application still requires checking the stretched grid and whether
+the full jet-affected spherical apertures fit inside any proposed region.
+Clipping jet-affected material or treating interior storage as closed-volume
+conservation would change the estimand. The present results do not authorise
+a production-default change, wider unplanned cuts, or a new simulation.
+
+Independent review verified every capture/source/completion/decision hash,
+recomputed the component ratios and first tested passing widths, and found
+no material defect in the measurement-to-decision derivation.
+
+Tracked full decision: `assets/paired_boundary_interior_2026-11-04/full_decision.json`.
+The accompanying `analysis_receipt.json` binds both decision files, source,
+terminal jobs and capture hashes. Raw stage/results/accounting records are
+retained outside Git in the data-share directory
+`paired_interior_full_2026-11-04_r1/`. Full archive SHA-256:
+`53f4ace46cf5b9650e9f5c47a2aac88962bd4fb9b6e08f86cbe730f66e3b1061`.
+
+```bash
+uv run python scripts/science/summarize_paired_boundary_interior.py \
+  <full_capture_directory> full <new_decision_json>
 ```
