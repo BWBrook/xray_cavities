@@ -214,6 +214,24 @@ def test_accepts_inherited_parent_source_and_binds_analysis(tmp_path: Path) -> N
     assert receipt["snapshots"]["excluded_parent_overlap_indices"] == [11]
     assert receipt["snapshots"]["accepted_chain"][10]["path"].startswith(str(fixture["parent"]))
     assert receipt["snapshots"]["analysis_chain"][10]["path"].startswith(str(fixture["continuation"]))
+    assert set(receipt["restart"]["input_identity"]) == {
+        "fluid_catalogue",
+        "fluid_hdf5",
+        "particle_restart",
+        "restart_out",
+    }
+    for name, identity in receipt["restart"]["input_identity"].items():
+        path = Path(receipt["restart"]["accepted_parent_restart_paths"][name])
+        observed = path.stat()
+        assert identity == {
+            "path": str(path),
+            "resolved_path": str(path.resolve()),
+            "device": observed.st_dev,
+            "inode": observed.st_ino,
+            "size_bytes": observed.st_size,
+            "mtime_ns": observed.st_mtime_ns,
+            "ctime_ns": observed.st_ctime_ns,
+        }
     provenance, manifest = write_analysis_outputs(fixture, receipt)
     bound = lineage.bind_analysis_provenance(
         receipt=fixture["receipt"], provenance=provenance, manifest=manifest
@@ -270,6 +288,33 @@ def test_rejects_changed_historical_evidence(tmp_path: Path) -> None:
         handle.write("changed\n")
     with pytest.raises(lineage.LineageError, match="historical continuation_run_log hash mismatch"):
         validate(fixture)
+
+
+def test_hash_rejects_input_mutated_during_read(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = tmp_path / "restart.bin"
+    path.write_bytes(b"restart-payload")
+    real_sha256 = lineage.hashlib.sha256
+
+    class MutatingDigest:
+        def __init__(self) -> None:
+            self.digest = real_sha256()
+            self.mutated = False
+
+        def update(self, data: bytes) -> None:
+            self.digest.update(data)
+            if not self.mutated:
+                with path.open("ab") as handle:
+                    handle.write(b"-changed")
+                self.mutated = True
+
+        def hexdigest(self) -> str:
+            return self.digest.hexdigest()
+
+    monkeypatch.setattr(lineage.hashlib, "sha256", MutatingDigest)
+    with pytest.raises(lineage.LineageError, match="changed during hashing"):
+        lineage.sha256_file_with_identity(path)
 
 
 def test_binding_rejects_unverified_source_choice_without_mutation(tmp_path: Path) -> None:

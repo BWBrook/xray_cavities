@@ -92,23 +92,44 @@ def _require_directory(path: Path, label: str) -> None:
 
 
 def sha256_file(path: Path, *, require_regular: bool = True) -> str:
+    return sha256_file_with_identity(path, require_regular=require_regular)[0]
+
+
+def sha256_file_with_identity(
+    path: Path, *, require_regular: bool = True
+) -> tuple[str, dict[str, Any]]:
     if require_regular:
         _require_regular(path, "hash input")
     before = path.stat()
+    resolved_before = str(path.resolve(strict=True))
     digest = hashlib.sha256()
     try:
         with path.open("rb") as handle:
             opened = os.fstat(handle.fileno())
             if _identity(before) != _identity(opened):
                 raise LineageError(f"file changed before hashing: {path}")
+            input_identity = {
+                "path": str(path),
+                "resolved_path": resolved_before,
+                "device": opened.st_dev,
+                "inode": opened.st_ino,
+                "size_bytes": opened.st_size,
+                "mtime_ns": opened.st_mtime_ns,
+                "ctime_ns": opened.st_ctime_ns,
+            }
             for block in iter(lambda: handle.read(8 * 1024 * 1024), b""):
                 digest.update(block)
             after = os.fstat(handle.fileno())
     except OSError as exc:
         raise LineageError(f"cannot hash {path}: {exc}") from exc
-    if _identity(opened) != _identity(after) or _identity(after) != _identity(path.stat()):
+    resolved_after = str(path.resolve(strict=True))
+    if (
+        _identity(opened) != _identity(after)
+        or _identity(after) != _identity(path.stat())
+        or resolved_after != resolved_before
+    ):
         raise LineageError(f"file changed during hashing: {path}")
-    return digest.hexdigest()
+    return digest.hexdigest(), input_identity
 
 
 def _read_object(path: Path, label: str) -> dict[str, Any]:
@@ -271,17 +292,29 @@ def _validate_restart(
     if not isinstance(expected_hashes, dict):
         raise LineageError("restart report lacks input SHA-256 values")
     observed_hashes: dict[str, str] = {}
+    input_identity: dict[str, dict[str, Any]] = {}
     for name, path in restart_sources.items():
         expected = expected_hashes.get(name)
         if not isinstance(expected, str) or len(expected) != 64:
             raise LineageError(f"restart report lacks a valid hash for {name}")
         if name == "fluid_hdf5" and not rehash_restart_hdf5:
             observed_hashes[name] = expected
+            observed = path.stat()
+            input_identity[name] = {
+                "path": str(path),
+                "resolved_path": str(path.resolve(strict=True)),
+                "device": observed.st_dev,
+                "inode": observed.st_ino,
+                "size_bytes": observed.st_size,
+                "mtime_ns": observed.st_mtime_ns,
+                "ctime_ns": observed.st_ctime_ns,
+            }
             continue
-        observed = sha256_file(path, require_regular=False)
+        observed, identity = sha256_file_with_identity(path, require_regular=False)
         if observed != expected:
             raise LineageError(f"restart hash mismatch for {name}: expected {expected}, observed {observed}")
         observed_hashes[name] = observed
+        input_identity[name] = identity
     return {
         "report": report,
         "accepted_parent_restart_paths": {name: str(path) for name, path in restart_sources.items()},
@@ -290,6 +323,7 @@ def _validate_restart(
             for name in ("fluid_hdf5", "particle_restart")
         },
         "verified_sha256": observed_hashes,
+        "input_identity": input_identity,
         "fluid_hdf5_rehashed": rehash_restart_hdf5,
     }
 
