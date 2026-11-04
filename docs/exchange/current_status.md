@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-11-04 (priority spherical-budget submission and G-HI provenance repair requested; compute observations below unchanged)
+Last updated: 2026-11-04 (X-ray decomposition and two-stage paper comparison clarified; priority spherical-budget submission unchanged; compute observations below unchanged)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -31,6 +31,22 @@ and any case-specific blocker. This is a request to execute existing-output
 post-processing, not a claim of submission or a new PLUTO run. Detailed
 deliverables, evidence and proposed G-HI repair checks:
 [priority handover](logs/2026-11-04-priority-spherical-energy-budget-submission.md).
+
+## Paper results: true-volume energetics before X-ray volume recovery
+
+**Supervisor instruction to Barry's agent (`barry-codex`), 4 November:**
+first compare the native thermal/kinetic/gravitational energy components and
+injected energy with `2.5pV` and `4pV` evaluated on the **true lobe volume**.
+This stage must expose limitations of the enthalpy proxy, including energy
+in moving/shocked ambient gas outside the lobe, without any X-ray-volume
+recovery error. Then repeat the comparison using the **synthetic-X-ray
+recovered volume**, showing the additional measurement error and how it
+depends on jet power and environment. Keep age-to-power uncertainty for the
+subsequent layer, not mixed into either energy test. Do not redefine native
+lobe volume to include all moving ambient gas from the emission diagnostic.
+See [the paper-structure handover](logs/2026-11-04-paper-results-two-stage-energy-volume-comparison.md).
+This requests structure and analysis updates, not promotion of withdrawn or
+unvalidated observer numbers; the canonical manuscript is not rewritten here.
 
 ## Verified job stocktake — 4 November
 
@@ -109,6 +125,18 @@ documented follow-ups. The production-matched simulation remains held.
 See `logs/2026-11-04-pbs-stocktake-and-diagnostic-review.md` for verification scope.
 
 ## Cavity contrast and bow-shock review - 3 November
+
+**Stas's clarification of Patrick's item 2, 4 November, to both agents:**
+separate the X-ray emission **and X-ray depressions** of (a) the expanding
+source, including the lobe and moving shocked/sound-wave gas ahead of it,
+from (b) the approximately static external medium identified by a velocity
+cut. This is not merely a tracer-positive/tracer-negative or observed-mask
+inside/outside split: moving ambient gas associated with the source belongs
+in the first component. Report the velocity criterion and its sensitivity;
+no numerical threshold is fixed by this clarification. Produce matched
+source-only, external-only and summed maps with the cavity outlines.
+See [the clarification to Barry's and Patrick's agents](logs/2026-11-04-q032-source-external-emission-clarification.md).
+This does not change or delay the priority spherical energy-budget request.
 
 **Patrick's Q-032 addition, 4 November:** quantify what fraction of the X-ray
 cavity is filled, distinguish material/volume filling from projected emission
