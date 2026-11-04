@@ -180,3 +180,20 @@ after checking native/projection identity and these arithmetic tests.
 Update manuscript claims only from measured, source-bound results. Existing
 claims of shock processing or successful observer recovery cannot be carried
 forward solely because these planned panels share their topic.
+
+## Implementation and review
+
+`scripts/science/build_q032_source_emission.py` implements the bounded G-HI/20
+diagnostic; `plot_q032_source_emission.py` renders its completed, hash-bound
+maps. Independent review passed all 37 focused tests after correcting lineage
+receipt enforcement, separate W+/W- nondetection, retained emissivity-input
+path identity and radial/axial truncation flags. Correction-domain tables keep
+signed and absolute contributions for both epochs and correction conventions,
+including their effects within each observed mask. Projection closure uses
+absolute-contribution scales when signed emissivities cancel.
+
+No native emission run or detector promotion is established by these tests.
+The native input receipt must bind the accepted G-HI lineage and exact initial
+and 20-Myr files. Captured metadata and axes match the historical retained-map
+hashes; native projection compatibility and correction-domain effects remain
+execution and scientific review gates.
