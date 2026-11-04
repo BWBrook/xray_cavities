@@ -73,6 +73,35 @@ claims:
     caveats:
       - A cell at tr1 = 1e-3 is 99.9% ambient gas by mass and emits near ambient level; tracer-defined cocoons are not X-ray cavities (XR-02).
 
+  - id: NAT-06
+    status: provisional
+    statement: >-
+      The first native spherical measurement, C-HI at actual age 0.999920251
+      Myr, has R100/R300 of 10.737753/10.715145 kpc and total storage changes
+      of 1.108722/1.108712 times labelled bipolar input. The whole native
+      lobe has 2.5pV/input = 0.432392 and 4pV/input = 0.691827. Both spheres
+      contain the entire traced cocoon, but slower disturbance exists outside.
+    evidence:
+      - {path: docs/science/assets/turn15_spherical_budgets_2026-11-05/smoke/C-HI/snapshot_0001.json, commit: c1f45e4}
+      - {path: docs/science/assets/turn15_spherical_budgets_2026-11-05/smoke_review.json, commit: c1f45e4}
+      - {path: docs/exchange/logs/2026-11-05-turn15-native-budgets-and-lineage.md, commit: c1f45e4}
+    reproduce: >-
+      uv run python scripts/science/summarize_spherical_energy_budgets.py
+      --case C-HI --indices 1 --inputs
+      docs/science/assets/turn15_spherical_budgets_2026-11-05/smoke/C-HI/snapshot_0001.json
+      --output-dir <new summary directory>
+    test: >-
+      Complete the four-case histories and native delivery/transport measurements
+      before interpreting the excess as a physical or numerical closure failure.
+    caveats:
+      - This is one early snapshot; no complete history or four-case conclusion follows.
+      - Labelled power is the denominator, not measured realised jet delivery.
+      - Changing apertures and unmeasured surface transport preclude an energy-closure interpretation.
+      - Native enthalpy is a separate global-lobe proxy, never an additive ledger term.
+      - Independent review verified compact arithmetic and native-grid geometry, not a second extraction of the native energy fields.
+      - Historical source-to-executable linkage remains qualified; exact input identities and external configuration checks are recorded separately.
+    depends_on: [NAT-05, BND-05]
+
   - id: BND-01
     status: supported
     statement: >-

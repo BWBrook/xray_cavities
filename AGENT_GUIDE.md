@@ -167,7 +167,12 @@ withdrawn observer numbers.
    measures face transport and nozzle delivery directly. Until then, write
    physical closure as "boundary-dominated, with an unexplained residual".
    The 100/300 km/s spherical budgets (Stas's priority of 4 November)
-   measure retained energy inside apertures that avoid the boundary layer.
+   measure storage inside speed-defined apertures, retaining boundary and
+   coverage flags rather than imposing an uncertified cut. The first C-HI
+   measurement at 0.999920251 Myr has total/input = 1.10872 in both apertures,
+   while global native-lobe 2.5pV/input and 4pV/input are 0.43239 and 0.69183.
+   Slower disturbance remains outside. This is a reviewed raw comparison
+   against labelled power, not a closure result. <!-- claims: NAT-06 -->
 2. **The emission-defined native reference (XR-02).** Without it, detector
    tests compare against tracer cocoons, which are not what X-ray cavities
    trace.
