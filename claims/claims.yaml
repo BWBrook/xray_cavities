@@ -16,7 +16,7 @@ claims:
     reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
     caveats:
       - The 4pV convention multiplies every value by 1.6; it is not a universal correction.
-      - C-LO pressure may include boundary-driven compression of the atmosphere (BND-02).
+      - C-LO boundary exposure is bounded on the coarse controls: the boundary contrast beyond 50 kpc from the faces is at most 1e-4 E_inj,LO (BND-04). Production-grid confirmation is pending.
     depends_on: [NAT-05]
 
   - id: NAT-02
@@ -86,24 +86,32 @@ claims:
       - No tracer, shock or emission selection enters this test.
 
   - id: BND-02
-    status: open
+    status: supported
     statement: >-
-      The whole-grid excess (BND-01) is a boundary artefact. Zero-gradient
-      outflow boundaries on the stratified atmosphere drive jet-independent
-      inflow through every face, reaching about 4.9e43 g (cluster) and 2.4e42 g
-      (group) by 50 Myr and growing roughly as t², and that inflow carries
-      enthalpy plus potential energy ΔM(h + φ) into the grid.
+      Zero-gradient outflow boundaries on the stratified atmosphere drive
+      jet-independent inflow through every face, growing as t², and that
+      inflow carries enthalpy plus potential energy into the grid. In the
+      paired uniform 1-kpc no-jet controls at 50 Myr, the outflow-minus-
+      reflective contrast is 4.76e43 g and 7.01e59 erg in the cluster and
+      2.29e42 g and 1.21e58 erg in the group, 0.93–0.98 of the prediction
+      recorded beforehand, with growth exponents 1.97 and 1.93. Measured face
+      transport explains the contrast to better than 1e-5. On the low-power
+      scale this is 22.2 E_inj in the cluster and 0.385 E_inj in the group.
     evidence:
-      - {path: docs/science/q031_boundary_hypothesis_2026-10-31.md, commit: 72a7c4f}
-      - {path: docs/science/paired_nojet_boundary_experiment_2026-11-01.md, commit: c4dde03}
-      - {path: docs/science/paired_nojet_boundary_prediction_2026-11-02.md, commit: d36ea0a}
-    reproduce: uv run python scripts/science/audit_q031_boundary_hypothesis.py
+      - {path: docs/science/paired_nojet_boundary_prediction_2026-11-02.md, commit: e56b89f}
+      - {path: docs/science/paired_boundary_results_2026-11-04.md, commit: f2f0f17}
+      - {path: docs/science/assets/paired_boundary_comparison_2026-11-04/verdict.json, commit: f2f0f17}
+    reproduce: >-
+      uv run python scripts/science/compare_paired_boundary_prediction.py
+      <bnd02_ledgers_2026-11-04_r1 capture> <new output directory>
     test: >-
-      Paired coarse no-jet controls, outflow minus reflective, PBS
-      872733–872736. The prediction was recorded before the results; it is
-      refuted by a 50-Myr mass contrast below 1e43 g (cluster) or 5e41 g
-      (group), growth far from t², or a contrast not explained by measured
-      face transport.
+      Frozen at e56b89f before the 50-Myr ledgers were read: refuted by a
+      50-Myr mass contrast below 1e43 g (cluster) or 5e41 g (group), a
+      growth exponent outside 1.6–2.4, or a two-sided H+P face-transport
+      discrepancy above 10%. None occurred.
+    caveats:
+      - Coarse uniform-grid controls. Production uses a stretched grid; its own face transport is measured by the Q-031 flux job, not yet run.
+      - The boundary term explains most but not all of the production excess (BND-05).
     depends_on: [BND-01, BND-03]
 
   - id: BND-03
@@ -117,6 +125,63 @@ claims:
     reproduce: uv run python scripts/science/audit_nojet_controls.py
     caveats:
       - Reflective boundaries and 1 kpc cells; production uses outflow boundaries and a stretched grid.
+      - Quiet in the signed total only. The cellwise absolute (L1) change is 2.65% of the low-power scale 2e43 erg/s × 50 Myr over the whole grid, and 1.47% inside a 50-kpc face cut (BND-04).
+
+  - id: BND-04
+    status: provisional
+    statement: >-
+      In the paired coarse controls the boundary contrast is confined to the
+      outer layers, but neither twin is quiet to 1% of the low-power scale
+      S = 2e43 erg/s × t. At 50 Myr the cluster contrast first passes the
+      0.01 S cellwise L1 bound between 40 and 50 kpc from the faces (1.24
+      times the bound at 40 kpc), while both twins' own drift stays at about
+      1.5 times the bound even at 50 kpc. No tested cluster cut is adopted.
+      The group passes both tests from 20 kpc. The cellwise L1 also bounds any
+      sub-volume: inside the 50-kpc cut, which contains any sphere of radius
+      up to 150 kpc, the boundary contrast is at most 1e-4 S and each twin's
+      drift at most 0.015 S (cluster); inside the 20-kpc cut, at most 0.0028 S
+      (group).
+    evidence:
+      - {path: docs/science/paired_boundary_interior_check_2026-11-03.md, commit: e56b89f}
+      - {path: docs/science/paired_boundary_results_2026-11-04.md, commit: 6c33d1b}
+      - {path: docs/science/assets/paired_boundary_interior_2026-11-04/full_decision.json, commit: 6c33d1b}
+    reproduce: >-
+      uv run python scripts/science/summarize_paired_boundary_interior.py
+      <paired_interior_full_2026-11-04_r1 capture> full <new decision json>
+    test: >-
+      Promoted only by a measurement of drift on the production stretched
+      grid; a production cut must pass the same combined L1 criterion.
+    caveats:
+      - Coarse uniform grid; the production stretched grid's drift is unmeasured.
+      - The shared drift's cause is not identified.
+      - The bounds are absolute; relative to high-power injection they are 100 times smaller.
+    depends_on: [BND-02]
+
+  - id: BND-05
+    status: open
+    statement: >-
+      Subtracting the coarse boundary contrast (BND-02) from the production
+      whole-grid excess (BND-01) leaves a positive residual, roughly constant
+      as a fraction of injected energy: 0.05–0.10 (C-HI), 0.075–0.080 (G-HI),
+      0.14–0.19 (G-LO) and 0.29–0.76 (C-LO, where the boundary term is 22
+      E_inj and a 2% amplitude difference moves the residual by 0.45). Its
+      source is not established. Candidates are realised nozzle delivery
+      above the labelled power and jet-driven face transport; the Q-031 flux
+      job measures both.
+    evidence:
+      - {path: docs/science/production_boundary_residual_2026-11-04.md, commit: 35dccca}
+    reproduce: >-
+      uv run python scripts/science/residual_after_boundary_contrast.py
+      <new csv path>
+    test: >-
+      The Q-031 production flux job: realised nozzle delivery minus Q × t,
+      and production face transport minus the coarse boundary term, must
+      together account for the residual; any part neither explains stays an
+      open closure discrepancy.
+    caveats:
+      - Residual ranges span unscaled and production-mass-scaled boundary terms.
+      - The enthalpy flux of the pressure-matched nozzle is about 1e-4 of the labelled high-power value, so it does not explain the HI residuals.
+    depends_on: [BND-01, BND-02]
 
   - id: OBS-01
     status: refuted

@@ -7,7 +7,7 @@ approaches have already failed and why, and what is still open. It is one of
 three products drawn from the same claims ledger, alongside the journal
 article and a two-page brief for general readers.
 
-Draft of 2 November 2026 by Claude (Opus 5.5, `claude-opus-5-5`), awaiting
+Draft of 2 November 2026, updated 4 November, by Claude (Opus 5.5, `claude-opus-5-5`), awaiting
 critique from Codex (GPT-6). Its form is an experiment; see the end.
 
 ## The question
@@ -31,7 +31,7 @@ Each factor is tested separately, holding the others at truth.
 
 - **Design.** Four PLUTO 4.4 hydrodynamic jet simulations, two atmospheres
   by two powers: C-HI, C-LO, G-HI and G-LO (Cluster or Group; jet power
-  2e45 or 2e43 erg/s bipolar). The source code lives in the UTAS AGN
+  2e45 or 2e43 erg/s bipolar, labelled as kinetic flux). The source code lives in the UTAS AGN
   `pluto` and `jet-setup` repositories; see the README section
   "Relationship to UTAS AGN".
 - **Grid.** Stretched Cartesian grid, 0.05 kpc cells at the centre and about
@@ -69,16 +69,25 @@ pinned commit, its reproduce command and its caveats. In summary:
 **Physical closure.**
 - The whole grid gains more energy than was injected in every case, by
   6–24× in C-LO. <!-- claims: BND-01 -->
-- The leading explanation is inflow through the outflow boundaries. It is
-  open, not established. A prediction was recorded before the paired
-  controls ran (`docs/science/paired_nojet_boundary_prediction_2026-11-02.md`).
-  - **Refuted** if any of these holds:
-    - the 50-Myr mass contrast is below 1e43 g (cluster) or 5e41 g (group);
-    - the growth exponent lies outside 1.6–2.4;
-    - face transport explains less than 90% of the contrast.
-  - **Running the test:**
-    `scripts/science/compare_paired_boundary_prediction.py`, once the
-    50-Myr ledgers are retrieved. <!-- claims: BND-02 BND-03 -->
+- Most of that excess is a boundary artefact (BND-02, supported on coarse
+  controls). Zero-gradient outflow faces on the stratified atmosphere drive
+  jet-independent inflow that grows as t². By 50 Myr it adds 7.0e59 erg in
+  the cluster and 1.2e58 erg in the group, which is 22.2 and 0.385 times
+  the low-power injected energy. The prediction was frozen before the paired
+  controls were read
+  (`docs/science/paired_nojet_boundary_prediction_2026-11-02.md`), and the
+  measurement matched it to within 2–7%
+  (`docs/science/paired_boundary_results_2026-11-04.md`).
+  <!-- claims: BND-02 BND-03 -->
+- The boundary contrast is confined to the outer 40–50 kpc (cluster) and
+  20 kpc (group). The cellwise absolute drift that both twins share is not,
+  so no cluster cut is certified as quiet. Its size, about 1.5% of the
+  low-power scale, is an error bar for any aperture inside the cut.
+  <!-- claims: BND-04 -->
+- After the boundary term is subtracted, 5–19% of E_inj remains unexplained
+  in C-HI, G-HI and G-LO. C-LO is indeterminate at 0.3–0.8. The Q-031
+  production flux job splits this residual into nozzle and face terms.
+  <!-- claims: BND-05 -->
 
 **Measurement (the observer factor).** Nothing is established yet.
 - The legacy detector is refuted, and the recovery numbers in the
@@ -154,9 +163,11 @@ withdrawn observer numbers.
 
 ## Open questions, in priority order
 
-1. **Does BND-02 hold?** The paired no-jet controls decide whether the
-   closure excess is a boundary artefact. That changes how C-LO energetics,
-   and the closure statement in the article, can be written.
+1. **What is the 5–19% residual (BND-05)?** The Q-031 production flux job
+   measures face transport and nozzle delivery directly. Until then, write
+   physical closure as "boundary-dominated, with an unexplained residual".
+   The 100/300 km/s spherical budgets (Stas's priority of 4 November)
+   measure retained energy inside apertures that avoid the boundary layer.
 2. **The emission-defined native reference (XR-02).** Without it, detector
    tests compare against tracer cocoons, which are not what X-ray cavities
    trace.

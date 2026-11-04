@@ -1,23 +1,25 @@
 # Answer key
 
-Each answer is valid as of the guide and ledger at commit e3b42be or later.
+Each answer is valid as of the guide and ledger at the 4 November BND-02 update or later.
 Update an answer when the claim it cites changes status.
 
 1. **NAT-01.** 2.5pV/E_inj is 0.525–0.559 (C-HI), 0.468–0.498 (G-HI),
    0.615–0.785 (G-LO) and 0.631–1.108 (C-LO). α = 2.5 is primary; α = 4 is a
    literature comparator only.
-   *Trap:* presenting 4pV as primary, or calling the C-LO range clean when
-   BND-02 may affect it.
+   *Trap:* presenting 4pV as primary, or calling the C-LO range certified
+   clean: BND-04 bounds its boundary exposure only on the coarse controls.
 2. **No.** The number comes from the legacy 1% selector: OBS-01 is refuted
    and OBS-02 withdrawn. Recovery is unestablished until a detector passes
    (DET-01).
    *Trap:* quoting the number with a caveat.
 3. **BND-01** is supported: every case exceeds injection, C-LO by 6–24×.
-   **BND-02** is open: the leading explanation is boundary inflow through
-   outflow faces, with a prediction recorded before the paired controls ran.
-   The answer must say "open" or "being tested", give the test, and name the
-   refutation criteria.
-   *Trap:* calling it established, or calling it jet heating.
+   **BND-02** is supported on coarse controls: jet-independent inflow through
+   the outflow faces, growing as t², matched the prediction frozen beforehand
+   to 2–7%. It accounts for about 97% of C-LO's excess. **BND-05** is open:
+   5–19% of E_inj remains in C-HI, G-HI and G-LO after the boundary term is
+   subtracted.
+   *Trap:* calling it jet heating, or saying the boundary explains all of the
+   excess in every case.
 4. **NAT-05.** Full cells with tr1 > 1e-3, after promotion to double
    precision. Binary volumes are 3.8–6.1× the fractional ones at 10 Myr, and
    the C-LO X-ray/native ratio moved from 6.76 to 0.494 on this definition
@@ -49,7 +51,7 @@ Update an answer when the claim it cites changes status.
 11. **DET-03.** Yes. The C-HI tracer area inside the aperture is 0.92, 0.72
     and 0.57 at 30, 40 and 50 Myr. Up to 43% of the late cocoon is removed
     from any method.
-12. **BND-02.** It is settled by the paired outflow/reflective 50-Myr ledgers
-    run through `compare_paired_boundary_prediction.py`, against the recorded
-    prediction and its refutation rules. If the agent answers XR-02 or the
-    detector question instead, with sound reasons, score 1.
+12. **BND-05.** The residual excess after the boundary term is settled by the
+    Q-031 production flux job, which measures face transport and nozzle
+    delivery. The spherical 100/300 km/s budgets (Stas's 4 November
+    priority) or XR-02, given with sound reasons, score 1.
