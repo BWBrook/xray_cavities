@@ -23,6 +23,7 @@ from validate_paired_nojet_outputs import (
 
 
 COMPONENTS = ("mass_g", "thermal_erg", "kinetic_erg", "gravitational_erg", "total_energy_erg")
+ENERGY_COMPONENTS = COMPONENTS[1:]
 
 
 def interior_mask(grid, iz: int, buffer_kpc: float) -> np.ndarray:
@@ -67,7 +68,11 @@ def measure_pair(initial_reflective, initial_outflow, reflective, outflow, *, gr
     for width in buffers:
         rows.append({"buffer_kpc": width, "cell_count": 0, "volume_kpc3": 0.,
                      **{kind: dict.fromkeys(COMPONENTS, 0.) for kind in
-                        ("reflective_delta", "outflow_delta", "contrast", "contrast_cell_l1")}})
+                        ("reflective_delta", "outflow_delta", "contrast", "contrast_cell_l1",
+                         "reflective_delta_cell_l1", "outflow_delta_cell_l1")},
+                     "mass_energy_equivalent_erg": dict.fromkeys(
+                         ("reflective_delta", "outflow_delta", "contrast",
+                          "reflective_delta_cell_l1", "outflow_delta_cell_l1", "contrast_cell_l1"), 0.)})
     boundary_cs_min, boundary_cs_max, domain_cs_max = np.inf, -np.inf, -np.inf
     area = grid.dy[:, None] * grid.dx[None, :]
     radius2_xy = grid.y[:, None]**2 + grid.x[None, :]**2
@@ -88,6 +93,8 @@ def measure_pair(initial_reflective, initial_outflow, reflective, outflow, *, gr
                   "outflow_delta": cell_difference(out, before, volume, potential),
                   "contrast": cell_difference(out, ref, volume, potential)}
         cs = np.sqrt(GAMMA_GAS * before["prs"] / before["rho"]) * UNIT_VELOCITY_CMS
+        initial_h_plus_phi = (GAMMA_GAS / (GAMMA_GAS - 1) * before["prs"] / before["rho"]
+                              * UNIT_VELOCITY_CMS**2 + potential)
         boundary = np.ones_like(inner_xy) if iz in (0, grid.z.size - 1) else ~inner_xy
         boundary_cs_min = min(boundary_cs_min, float(np.min(cs[boundary])))
         boundary_cs_max = max(boundary_cs_max, float(np.max(cs[boundary])))
@@ -99,8 +106,10 @@ def measure_pair(initial_reflective, initial_outflow, reflective, outflow, *, gr
             for kind, components in values.items():
                 for key, array in components.items():
                     row[kind][key] += float(np.sum(array[mask]))
-            for key, array in values["contrast"].items():
-                row["contrast_cell_l1"][key] += float(np.sum(np.abs(array[mask])))
+                    row[kind + "_cell_l1"][key] += float(np.sum(np.abs(array[mask])))
+                equivalent = components["mass_g"] * initial_h_plus_phi
+                row["mass_energy_equivalent_erg"][kind] += float(np.sum(equivalent[mask]))
+                row["mass_energy_equivalent_erg"][kind + "_cell_l1"] += float(np.sum(np.abs(equivalent[mask])))
         if iz % 50 == 0:
             print(f"paired_interior_z={iz}/{grid.z.size}", flush=True)
     if any(row["cell_count"] == 0 for row in rows):
@@ -112,9 +121,27 @@ def measure_pair(initial_reflective, initial_outflow, reflective, outflow, *, gr
         row["total_l1_over_low_power_comparison"] = row["contrast_cell_l1"]["total_energy_erg"] / comparison
         row["absolute_total_contrast_over_whole_grid_contrast"] = (
             abs(row["contrast"]["total_energy_erg"]) / denominator if denominator else None)
+        row["boundary_l1_pass"] = {key: row["contrast_cell_l1"][key] <= .01 * comparison
+                                    for key in ENERGY_COMPONENTS}
+        row["boundary_all_components_pass"] = all(row["boundary_l1_pass"].values())
+        row["background_drift_l1_pass"] = {
+            kind: {key: row[kind + "_cell_l1"][key] <= .01 * comparison for key in ENERGY_COMPONENTS}
+            for kind in ("reflective_delta", "outflow_delta")}
+        row["background_stability_pass"] = all(
+            value for components in row["background_drift_l1_pass"].values() for value in components.values())
+        row["combined_interior_pass"] = row["boundary_all_components_pass"] and row["background_stability_pass"]
+    first_pass = next((row["buffer_kpc"] for row in rows if row["boundary_all_components_pass"]), None)
+    combined_pass = next((row["buffer_kpc"] for row in rows if row["combined_interior_pass"]), None)
     return {"regions": rows, "time_myr": time_myr,
             "low_power_comparison_erg": comparison,
             "comparison_role": "2e43 erg/s bipolar jet times age; actual injection is zero",
+            "absolute_energy_tolerance_erg": .01 * comparison,
+            "smallest_tested_passing_width_kpc": first_pass,
+            "smallest_tested_stable_width_kpc": combined_pass,
+            "adopted_coarse_width_at_50_myr_kpc": combined_pass if abs(time_myr - 50.) <= 1e-8 else None,
+            "criterion": "all four energy components must pass the cellwise L1 boundary contrast <=0.01 S(t)",
+            "adoption_criterion": "paired contrast and each twin's absolute background drift must all pass <=0.01 S(t); coarse controls only",
+            "mass_energy_equivalent_definition": "cellwise mass change times initial specific enthalpy plus fixed potential; contextual only, no mass gate",
             "boundary_initial_cs_min_max_km_s": [boundary_cs_min / 1e5, boundary_cs_max / 1e5],
             "boundary_cs_times_age_min_max_kpc": [value * time_myr * SECONDS_PER_MYR / UNIT_LENGTH_CM
                                                  for value in (boundary_cs_min, boundary_cs_max)],

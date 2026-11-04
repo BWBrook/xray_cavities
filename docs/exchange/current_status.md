@@ -1,11 +1,24 @@
 # Current Status
 
-Last updated: 2026-11-04 (flux released and running; native linked to replacement)
+Last updated: 2026-11-04 (boundary analysis and extractor development)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
 
 ## Verified job stocktake — 4 November
+
+**Later observation:** flux `876162` failed with exit status 1 after 1:02,
+at the early/late G-HI source-directory equality assertion. The accepted
+continuation has no duplicate `src` tree; its executable and configuration
+match the early run. Native `871717` became terminal without running. The
+running-state report below is historical. No flux or native scientific result
+was produced, and neither job has been retried in the current tranche.
+
+The independent interior measurement smoke is `876188`; full audit `876195`
+depends on its successful completion and verifies its receipt before reading
+the 50-Myr snapshots. These are existing-output analyses. The BND-02 contract
+is being frozen before full-ledger interpretation. See
+`logs/2026-11-04-boundary-and-extractor-tranche.md`.
 
 At 23:33–23:35 UTC on 3 November (10:33–10:35 AEDT on 4 November),
 all four coarse 50-Myr controls `872733`–`872736` were **F/0**, with

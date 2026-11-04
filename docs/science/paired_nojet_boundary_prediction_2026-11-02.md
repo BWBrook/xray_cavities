@@ -80,3 +80,58 @@ final mass or H contrast. On the 0.25-Myr smokes the script reproduces the
 recorded contrasts and gives mass ratios of 1.34 (cluster) and 1.32 (group)
 to the t²-scaled prediction. It returns no verdict for runs that stop short
 of 50 Myr.
+
+## Methodological correction (4 November 2026, before outcome inspection)
+
+Independent review found that the first implementation could fail open: it did
+not bind or fully revalidate the ledgers, silently intersected unequal state
+histories, treated low transport attribution in an incomplete run as a
+refutation, and could call a complete run supported when the growth exponent
+was unidentified. It also compared face H directly with stored H even though
+the H ledger identity includes gravitational work and conversion repair. No
+50-Myr ledger was read in identifying or correcting these defects.
+
+The numerical predictions, mass-refutation floors and fitted mass-growth
+exponent interval [1.6, 2.4] above remain unchanged. The implementation now
+uses this fail-closed contract:
+
+- Each run directory must contain `paired_nojet_budget.csv`, its validating
+  `budget_receipt.json`, and the bound `output_receipt.json`. Both input files'
+  SHA-256 and size must match the budget receipt. The output receipts must prove
+  identical initial fields, grid, binary, atmosphere and configuration outside
+  the intended six boundary settings, and the complete independent ledger
+  validator is rerun. The six-face blocks,
+  finite fields, zero-time state, monotone complete state history, accounting
+  closure and exact mode endpoint must all pass. Full runs are compared on the
+  predeclared physical-age grid 0, 10, 20, 30, 40 and 50 Myr; smokes use 0 and
+  0.25 Myr. Stored and cumulative quantities are linearly interpolated within
+  each twin's independently valid adaptive-step history, and both brackets and
+  fractions are recorded. Every declared age must be present within the
+  validator's time tolerance or bracketed; neither state-index intersection
+  nor extrapolation is allowed.
+- A valid smoke run ending before 50 Myr is `incomplete` before any
+  scientific criterion is applied. At 50 Myr, any nonpositive mass contrast at
+  t >= 5 Myr, or fewer than two usable contrasts, is
+  `scientifically_indeterminate`; such observations are not dropped from the
+  fit.
+- The original one-sided 90% mass/H face-transport flags are retained in the
+  output for transparency but no longer determine the amended verdict. Face H
+  alone is diagnostic because gravitational work transfers energy between H
+  and P. The diagnostic H identity therefore reports face H plus paired
+  gravitational work and net conversion repair.
+- The amended transport criterion is two-sided: both mass and H+P inward face
+  transport must differ from the corresponding stored pair contrast by no more
+  than 10% of the absolute contrast. A larger discrepancy is a physical
+  refutation only when the accounting-quality gate below passes.
+- For the H+P claim, the sum of both twins' gross conversion-repair magnitudes
+  plus both twins' absolute total numerical residuals must be no more than 10%
+  of the absolute H+P pair contrast. This conservative budget prevents
+  cancellation between twins from manufacturing clean attribution. Exceeding
+  it is `accounting_indeterminate`, not evidence that the boundary mechanism
+  is physically refuted. The 10% bound is the two-sided counterpart of the
+  original 90% attribution threshold and leaves a clear margin inside the
+  separately reported 30% amplitude-agreement scale.
+- Factor-of-two and 30% agreement with the predicted mass and H+P amplitudes
+  remain descriptive support measures, not additional pass/fail criteria.
+  Invalid or unbound evidence exits nonzero without an ordinary verdict, and
+  an existing output path is never overwritten.

@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+#PBS -N paired_interior
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mem=16gb
+#PBS -l walltime=02:00:00
+#PBS -r n
+#PBS -m n
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+readonly STAGE="${INTERIOR_STAGE:?set immutable analysis stage}"
+readonly MODE="${INTERIOR_MODE:?set smoke or full}"
+readonly PHYSICS=/u/bwbrook/codex_kunanyi/paired_nojet_boundary_2026-11-01_r1
+case "$MODE" in smoke|full) ;; *) exit 2;; esac
+cd "$STAGE"
+sha256sum --check stage_checksums.sha256
+test ! -e "results_$MODE" && test ! -L "results_$MODE"
+mkdir "results_$MODE"
+readonly RESULT="$STAGE/results_$MODE"
+exec > >(tee "$RESULT/run.out") 2> >(tee "$RESULT/run.err" >&2)
+module purge
+module load Anaconda3/2024.02-1
+export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export PYTHONPATH="$STAGE/scripts/science"
+if [ "$MODE" = smoke ]; then
+  python -m pytest -q -p no:cacheprovider --basetemp "$RESULT/test_tmp" \
+    --junitxml "$RESULT/tests.xml" \
+    tests/test_paired_boundary_interior.py tests/test_paired_nojet_outputs.py
+  root="$PHYSICS/smoke"
+  index=1
+  widths="0 1 2 4"
+else
+  python - <<'PY'
+from pathlib import Path
+import hashlib, json
+p = Path('results_smoke/completion.json')
+r = json.loads(p.read_text())
+assert r['status'] == 'complete' and r['mode'] == 'smoke'
+assert r['stage_manifest_sha256'] == hashlib.sha256(Path('stage_checksums.sha256').read_bytes()).hexdigest()
+for name, expected in r['files'].items():
+    assert hashlib.sha256((p.parent / name).read_bytes()).hexdigest() == expected, name
+PY
+  root="$PHYSICS/runs"
+  index=5
+  widths="0 20 30 40 50"
+fi
+for case_id in cluster_002003 group_002031; do
+  table="tabulated_cosmo_${case_id##*_}.csv"
+  python -u scripts/science/audit_paired_boundary_interior.py \
+    --reflective-run "$root/${case_id}_reflective" \
+    --outflow-run "$root/${case_id}_outflow" \
+    --environment "$root/${case_id}_reflective/$table" \
+    --snapshot-index "$index" --buffers-kpc $widths \
+    --output "$RESULT/$case_id.json"
+done
+sha256sum --check stage_checksums.sha256
+python - "$RESULT" "$MODE" <<'PY'
+from pathlib import Path
+import hashlib, json, sys, xml.etree.ElementTree as ET
+root, mode = Path(sys.argv[1]), sys.argv[2]
+files = [root / (case + '.json') for case in ('cluster_002003', 'group_002031')]
+for path in files:
+    r = json.loads(path.read_text())
+    assert r['status'] == 'complete_paired_interior_audit'
+    assert r['case'] == path.stem
+    assert abs(r['time_myr'] - (0.25 if mode == 'smoke' else 50.)) < 1e-8
+    assert [x['buffer_kpc'] for x in r['regions']] == ([0, 1, 2, 4] if mode == 'smoke' else [0, 20, 30, 40, 50])
+if mode == 'smoke':
+    files.append(root / 'tests.xml')
+    suites = ET.parse(files[-1]).getroot().findall('testsuite')
+    assert sum(int(s.attrib['tests']) for s in suites) == 58
+    assert all(int(s.attrib[k]) == 0 for s in suites for k in ('failures', 'errors', 'skipped'))
+r = {'status': 'complete', 'mode': mode,
+     'stage_manifest_sha256': hashlib.sha256(Path('stage_checksums.sha256').read_bytes()).hexdigest(),
+     'files': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
+     'scope': 'measurement completeness; scientific boundary criterion may pass or fail'}
+with (root / 'completion.json').open('x') as handle:
+    json.dump(r, handle, indent=2, allow_nan=False)
+    handle.write('\n')
+print('PAIRED_INTERIOR_COMPLETE', mode, flush=True)
+PY

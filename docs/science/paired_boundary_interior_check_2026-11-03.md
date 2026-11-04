@@ -4,6 +4,22 @@ Status: requested for execution by Barry's agent. The post-processing script
 passes local tests, but no native interior-energy measurement is available yet.
 This is an analysis of existing outputs, not a request for new PLUTO runs.
 
+## Decision clarification, 4 November, before full measurements
+
+Report boundary localization and absolute background stability separately.
+The localization width is the smallest tested cut for which every energy
+component's cellwise absolute paired contrast is at most `0.01 S(t)`.
+A candidate adopted coarse-control width must additionally satisfy that same
+bound for each twin's cellwise absolute change from its initial state, for
+every energy component. Common drift cannot certify an unaffected interior.
+Mass times initial specific enthalpy plus fixed potential is contextual only.
+
+The immutable r1 compute stage measures all required signed and absolute
+quantities but its adoption label uses only paired contrast. Preserve those
+raw results; supersede that label with a separately hash-bound decision
+summary applying the combined criterion above. This does not change any
+measured quantity. Production-grid certification remains a separate question.
+
 ## Setup
 
 - Cases: cluster `002003` and group `002031`, each with reflective and outflow

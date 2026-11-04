@@ -107,6 +107,39 @@ def test_complete_cell_containment_not_centre_selection():
     assert audit.interior_mask(grid, 1, 1.).sum() == 10**2
 
 
+def test_shared_drift_is_reported_even_when_paired_contrast_is_zero():
+    grid, initial = setup_arrays()
+    changed = copy.deepcopy(initial)
+    changed["prs"][5, 5, 5] += .25
+    changed["prs"][5, 5, 6] -= .25
+    changed["rho"][5, 5, 5] += .1
+    changed["rho"][5, 5, 6] -= .1
+    result = measure(initial, changed, changed, grid)
+    for row in result["regions"]:
+        assert row["boundary_all_components_pass"]
+        for kind in ("reflective_delta", "outflow_delta"):
+            assert row[kind]["thermal_erg"] == pytest.approx(0., abs=1e40)
+            assert row[kind + "_cell_l1"]["thermal_erg"] == pytest.approx(
+                .5 * audit.UNIT_ENERGY_ERG / (audit.GAMMA_GAS - 1))
+            assert not row["background_drift_l1_pass"][kind]["thermal_erg"]
+            assert row["mass_energy_equivalent_erg"][kind + "_cell_l1"] > 0
+    assert result["smallest_tested_passing_width_kpc"] == 0
+    assert result["smallest_tested_stable_width_kpc"] is None
+    assert not any(row["combined_interior_pass"] for row in result["regions"])
+    assert result["adopted_coarse_width_at_50_myr_kpc"] is None
+
+
+def test_component_l1_failure_cannot_hide_in_signed_contrast():
+    grid, initial = setup_arrays()
+    changed = copy.deepcopy(initial)
+    changed["prs"][0, 5, 5] += .25
+    changed["prs"][0, 5, 6] -= .25
+    result = measure(initial, initial, changed, grid)
+    assert result["regions"][0]["contrast"]["thermal_erg"] == pytest.approx(0., abs=1e40)
+    assert not result["regions"][0]["boundary_l1_pass"]["thermal_erg"]
+    assert result["smallest_tested_passing_width_kpc"] == 1
+
+
 @pytest.mark.parametrize("buffers", [(1.,), (0., -1.), (0., 2., 1.), (0., 1., 1.), (0., float("nan"))])
 def test_invalid_buffers_rejected(buffers):
     grid, initial = setup_arrays()
