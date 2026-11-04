@@ -68,3 +68,15 @@ same way.
 Any of these means the coarse outflow boundary does not reproduce the
 production inflow. The production excess would then need another
 explanation, or a production-matched control.
+
+## Test procedure (added 4 November 2026, before any 50-Myr ledger was read)
+
+`scripts/science/compare_paired_boundary_prediction.py` applies the refutation
+rules above to the four per-update `paired_nojet_budget.csv` ledgers. "Growth
+far from t²" is made operational as a fitted power-law exponent of the mass
+contrast over states at t ≥ 5 Myr outside [1.6, 2.4]. "Not explained by
+measured face transport" means face transport explains less than 90% of the
+final mass or H contrast. On the 0.25-Myr smokes the script reproduces the
+recorded contrasts and gives mass ratios of 1.34 (cluster) and 1.32 (group)
+to the t²-scaled prediction. It returns no verdict for runs that stop short
+of 50 Myr.

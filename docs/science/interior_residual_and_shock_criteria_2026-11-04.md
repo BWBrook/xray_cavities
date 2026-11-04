@@ -14,13 +14,18 @@ Stas's requests of 3 November:
 **Scale.** S(t) = 2e43 erg/s × t, the bipolar injected energy of the
 low-power runs. It is the smallest energy that any production budget must
 resolve, and the controls inject nothing. The scale is the same for both
-atmospheres. S(50 Myr) = 3.16e58 erg; S(0.25 Myr) = 1.58e54 erg.
+atmospheres. S(50 Myr) = 3.16e58 erg; S(0.25 Myr) = 1.58e56 erg.
 
-**Tolerance: 1% of S(t).** Reported budget ratios are quoted to two or three
-significant figures, and the smallest reported low-power regional value is
-0.013 E_inj (G-LO). A contamination below 0.01 S therefore cannot change any
-reported ratio by more than about one unit in its second significant figure.
-A tighter bar is not meaningful: the reflective cluster twin already
+**Tolerance: 1% of S(t), declared as an absolute error budget.** A pass
+bounds boundary contamination at 0.01 E_inj,LO in every aperture. It does
+not give a fixed relative accuracy: 0.01 is about 77% of the smallest
+reported low-power regional value, 0.013 E_inj (G-LO). Any budget term
+smaller than about 0.1 E_inj must therefore carry the ±0.01 E_inj,LO
+allowance explicitly, and must not be quoted to more precision than that
+allows. (Corrected 4 November 2026 after Codex's review: the earlier text
+gave S(0.25 Myr) as 1.58e54 erg and claimed second-significant-figure
+accuracy for every value.) A tighter bar is not meaningful: the reflective
+cluster twin already
 redistributes about 0.54% of S(50 Myr) between the inner and outer 100 kpc
 (BND-03).
 
@@ -97,10 +102,11 @@ native grid:
    - T rises downstream;
    - \|M_p − M_ρ\| ≤ 0.2 M_p.
 
-   This rejects contact discontinuities, which have no pressure jump, including
-   the cocoon edge; it also rejects rarefactions and sound waves below
-   M = 1.1. Keep one flagged cell per stencil, at the maximum of
-   \|∇·v\|.
+   These conditions are intended to reject contact discontinuities (no
+   pressure jump), including the cocoon edge, as well as rarefactions and
+   sound waves below M = 1.1. That discrimination is a design intent until
+   the validation in step 6 demonstrates it on the stratified grid. Keep one
+   flagged cell per stencil, at the maximum of \|∇·v\|.
 4. **Front and shell.**
    - The front is the outermost accepted cell along each ray from the
      nucleus.
@@ -113,7 +119,11 @@ native grid:
 6. **Validation before use.** Insert an exact Rankine–Hugoniot shock at
    M = 1.1, 1.5 and 3 into the tabulated G-HI atmosphere on the production
    stretched axis. The finder must place the front within two cells and
-   recover M within 10%.
+   recover M within 10%. The same validation must include three negatives,
+   each of which the finder must not flag:
+   - a pressure-balanced contact, with a density jump of 10× and of 100×;
+   - a linear sound wave with δp/p = 0.1;
+   - a rarefaction fan.
 7. **Comparison with the arcs.**
    - Project the front and the shell into the retained 1-keV pixel grid for
      the 0°, 45° and 90° views.
