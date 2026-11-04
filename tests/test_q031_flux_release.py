@@ -20,31 +20,37 @@ SPEC.loader.exec_module(release)
 
 def sources(tmp_path):
     flux, native = tmp_path / "flux", tmp_path / "native"
-    for stage, relative in ((flux, release.WRAPPER_PATH), (native, release.VALIDATOR_PATH)):
+    for stage, relative in (
+        (flux, release.WRAPPER_PATH),
+        (flux, release.LINEAGE_VALIDATOR_PATH),
+        (native, release.VALIDATOR_PATH),
+    ):
         target = stage / relative
-        target.parent.mkdir(parents=True)
+        target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes((ROOT / relative).read_bytes())
     return flux, native
 
 
-def test_overlay_preserves_all_bytes_outside_gate_and_integrity_guard(tmp_path):
+def test_overlay_preserves_reviewed_wrapper_outside_integrity_guard(tmp_path):
     flux, native = sources(tmp_path)
     overlay = tmp_path / "release with ' quote"
     original = (flux / release.WRAPPER_PATH).read_bytes()
     native_bytes = (native / release.VALIDATOR_PATH).read_bytes()
+    lineage_bytes = (flux / release.LINEAGE_VALIDATOR_PATH).read_bytes()
     manifest = release.prepare_overlay(flux, native, overlay)
     actual = (overlay / release.OUTPUT_WRAPPER).read_bytes()
-    start = original.index(release.GATE_START)
-    end = original.index(release.GATE_END, start) + len(release.GATE_END)
-    restored = actual.replace(release.NEW_GATE, original[start:end], 1)
+    restored = actual
     guard_start = restored.index(b"readonly RELEASE_OVERLAY=")
-    guard_end = restored.index(b"\n)\n", guard_start) + len(b"\n)\n")
+    guard_end = restored.index(b"Q031_G_HI_LINEAGE_VALIDATOR", guard_start)
+    guard_end = restored.index(b"\n", guard_end) + 1
     assert restored[:guard_start] + restored[guard_end:] == original
     assert (overlay / release.OUTPUT_VALIDATOR).read_bytes() == native_bytes
+    assert (overlay / release.OUTPUT_LINEAGE_VALIDATOR).read_bytes() == lineage_bytes
     assert (flux / release.WRAPPER_PATH).read_bytes() == original
     assert (native / release.VALIDATOR_PATH).read_bytes() == native_bytes
     assert manifest["sources"][str(flux / release.WRAPPER_PATH)] == release.EXPECTED_WRAPPER_SHA256
     assert manifest["sources"][str(native / release.VALIDATOR_PATH)] == manifest["files"][release.OUTPUT_VALIDATOR]
+    assert manifest["sources"][str(flux / release.LINEAGE_VALIDATOR_PATH)] == manifest["files"][release.OUTPUT_LINEAGE_VALIDATOR]
     assert json.loads((overlay / "manifest.json").read_text()) == manifest
     subprocess.run(["bash", "-n", str(overlay / release.OUTPUT_WRAPPER)], check=True)
 
@@ -68,7 +74,9 @@ def test_checksum_guard_detects_changed_validator_before_work(tmp_path):
     assert "FAILED" in result.stdout
 
 
-@pytest.mark.parametrize("mutation", ["stale_wrapper", "wrapper_symlink", "validator_symlink", "stage_symlink"])
+@pytest.mark.parametrize("mutation", [
+    "stale_wrapper", "wrapper_symlink", "validator_symlink", "lineage_symlink", "stage_symlink"
+])
 def test_refuses_unbound_or_nonregular_sources_without_overlay(tmp_path, mutation):
     flux, native = sources(tmp_path)
     overlay = tmp_path / "release"
@@ -80,7 +88,12 @@ def test_refuses_unbound_or_nonregular_sources_without_overlay(tmp_path, mutatio
         alias.symlink_to(native, target_is_directory=True)
         native = alias
     else:
-        path = flux / release.WRAPPER_PATH if mutation == "wrapper_symlink" else native / release.VALIDATOR_PATH
+        if mutation == "wrapper_symlink":
+            path = flux / release.WRAPPER_PATH
+        elif mutation == "lineage_symlink":
+            path = flux / release.LINEAGE_VALIDATOR_PATH
+        else:
+            path = native / release.VALIDATOR_PATH
         content = path.read_bytes()
         path.unlink()
         target = tmp_path / "external"

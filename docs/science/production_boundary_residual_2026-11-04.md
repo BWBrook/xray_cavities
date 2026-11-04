@@ -40,14 +40,21 @@ Full table: `assets/production_boundary_residual_2026-11-04/residual_after_bound
   injection itself, not like the t² boundary inflow. It is larger at low
   power (G-LO 0.14–0.19 against G-HI 0.08) and is not proportional to
   power. C-HI's fraction falls from 0.10 to 0.05 over 10–50 Myr.
-- **One candidate is excluded.** The labelled power is the jet's kinetic
-  flux, ½ρv³A (`jet-setup` `src/jet.c`, `DENSITY_JET_POWER`,
-  non-relativistic branch), and the jet pressure is set to the ambient
-  central pressure (`JET_CHI = 1`). Its uncounted enthalpy flux,
-  2.5 p v A at 0.1c through a 0.1-kpc nozzle, is about 1e41 erg/s per jet
-  in the cluster. That is about 1e-4 of the labelled high-power value, so it
-  cannot produce a 5–8% residual at high power, even if the effective area
-  were ten times larger.
+- **The nozzle explanation requires a branch correction (5 November).**
+  Inspection of all four retained parent source trees finds
+  `JET_DENSITY_CALCULATION = DENSITY_LENGTH_SCALE`, not the
+  `DENSITY_JET_POWER` branch used in the original paragraph. The selected
+  branch obtains density from the atmosphere at the jet length scale and
+  varies injected density as inverse squared offset radius. The configured
+  power therefore must not be equated algebraically with realised kinetic
+  delivery. The pressure normalization is the inlet atmosphere times
+  `JET_CHI`, but injected pressure then scales spatially as
+  `p_j * (rho/rho_j)^(5/3)`. The original pressure-matched enthalpy estimate
+  is therefore withdrawn as a constraint on native flux, along with the
+  categorical nozzle exclusion, pending native flux measurement.
+  These are retained-source observations, with historical
+  source-to-executable linkage separately qualified; no simulation or
+  numerical residual in the table has changed.
 
 ## What the Q-031 flux job will decide
 

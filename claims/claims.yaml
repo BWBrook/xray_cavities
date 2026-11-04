@@ -180,7 +180,7 @@ claims:
       open closure discrepancy.
     caveats:
       - Residual ranges span unscaled and production-mass-scaled boundary terms.
-      - The enthalpy flux of the pressure-matched nozzle is about 1e-4 of the labelled high-power value, so it does not explain the HI residuals.
+      - Retained parent sources select DENSITY_LENGTH_SCALE, not the DENSITY_JET_POWER branch used in the original nozzle argument; labelled input is not proved realised delivery. The categorical nozzle exclusion is withdrawn pending native flux measurement.
     depends_on: [BND-01, BND-02]
 
   - id: OBS-01

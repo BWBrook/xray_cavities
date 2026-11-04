@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare an immutable flux wrapper with the normalized migration gate."""
+"""Prepare an immutable flux wrapper and its provenance validators."""
 
 import argparse
 import hashlib
@@ -12,21 +12,12 @@ import stat
 
 WRAPPER_PATH = Path("scripts/kunanyi/q031_flux_measurements.pbs")
 VALIDATOR_PATH = Path("scripts/kunanyi/validate_q031_native_dependencies.py")
-EXPECTED_WRAPPER_SHA256 = "858fb2db1641ff288e194828aab4a99d77ae5a15ccb0b177003906e8005b7a6a"
+LINEAGE_VALIDATOR_PATH = Path("scripts/kunanyi/validate_g_hi_inherited_lineage.py")
+EXPECTED_WRAPPER_SHA256 = "d53ae9f97e22175df3b470136e7829316190046ed09c9f7a9e30c9e792d95f4d"
 OUTPUT_WRAPPER = "q031_flux_release.pbs"
 OUTPUT_VALIDATOR = "validate_q031_native_dependencies.py"
-GATE_START = b'  python - "$MIGRATION" <<\'PY\'\n'
-GATE_END = b"\nPY\n"
+OUTPUT_LINEAGE_VALIDATOR = "validate_g_hi_inherited_lineage.py"
 GUARD_ANCHOR = b"umask 077\n"
-NEW_GATE = b'''  python - "$MIGRATION" "$RELEASE_OVERLAY" <<'PY'
-import sys
-from pathlib import Path
-sys.path.insert(0, sys.argv[2])
-from validate_q031_native_dependencies import validate_migration_dependencies
-validate_migration_dependencies(Path(sys.argv[1]))
-print('MIGRATION_COMPLETE_GATE_OK', flush=True)
-PY
-'''
 
 
 def digest(data):
@@ -69,35 +60,45 @@ def prepare_overlay(flux_stage, native_stage, overlay):
 
     original_path = flux_stage / WRAPPER_PATH
     validator_path = native_stage / VALIDATOR_PATH
+    lineage_validator_path = flux_stage / LINEAGE_VALIDATOR_PATH
     original = read_regular(original_path)
     if digest(original) != EXPECTED_WRAPPER_SHA256:
         raise ValueError("frozen flux wrapper hash mismatch")
     validator = read_regular(validator_path)
-    if original.count(GATE_START) != 1 or original.count(GUARD_ANCHOR) != 1:
+    lineage_validator = read_regular(lineage_validator_path)
+    if original.count(GUARD_ANCHOR) != 1:
         raise ValueError("frozen wrapper anchors are not unique")
-    start = original.index(GATE_START)
-    end = original.index(GATE_END, start) + len(GATE_END)
     guard = (
         "readonly RELEASE_OVERLAY={}\n"
         "(\n"
         "  cd \"$RELEASE_OVERLAY\"\n"
         "  sha256sum --check overlay_checksums.sha256\n"
         ")\n"
-    ).format(shlex.quote(str(overlay))).encode("utf-8")
-    wrapper = (original[:start] + NEW_GATE + original[end:]).replace(
-        GUARD_ANCHOR, GUARD_ANCHOR + guard, 1
-    )
-    files = {OUTPUT_WRAPPER: wrapper, OUTPUT_VALIDATOR: validator}
+        "export Q031_DEPENDENCY_VALIDATOR=\"$RELEASE_OVERLAY/{}\"\n"
+        "export Q031_G_HI_LINEAGE_VALIDATOR=\"$RELEASE_OVERLAY/{}\"\n"
+    ).format(
+        shlex.quote(str(overlay)), OUTPUT_VALIDATOR, OUTPUT_LINEAGE_VALIDATOR
+    ).encode("utf-8")
+    wrapper = original.replace(GUARD_ANCHOR, GUARD_ANCHOR + guard, 1)
+    files = {
+        OUTPUT_WRAPPER: wrapper,
+        OUTPUT_VALIDATOR: validator,
+        OUTPUT_LINEAGE_VALIDATOR: lineage_validator,
+    }
     checksums = "".join("{}  {}\n".format(digest(files[name]), name) for name in sorted(files)).encode("ascii")
     manifest = {
         "schema_version": 1,
-        "scope": "migration-gate replacement; frozen flux science and result paths unchanged",
+        "scope": (
+            "immutable r6 flux wrapper with normalized migration validation and "
+            "G-HI inherited-source lineage validation"
+        ),
         "flux_stage": str(flux_stage),
         "native_stage": str(native_stage),
         "overlay": str(overlay),
         "sources": {
             str(original_path): digest(original),
             str(validator_path): digest(validator),
+            str(lineage_validator_path): digest(lineage_validator),
         },
         "files": {name: digest(data) for name, data in sorted(files.items())},
         "overlay_checksums_sha256": digest(checksums),

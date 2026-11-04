@@ -8,13 +8,15 @@
 
 set -euo pipefail
 umask 077
-readonly STAGE=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r5
+readonly STAGE=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-11-05_r6
 readonly MODE="${Q031_MODE:-production}"
 readonly R4_SMOKE=/u/bwbrook/codex_kunanyi/q031_flux_measurements_2026-10-31_r4/results_smoke
 readonly MIGRATION=/u/bwbrook/codex_kunanyi/scratch_home_migration_2026-10-16
 readonly ARCHIVE=/u/bwbrook/xray_cavities_scratch_archive_2026-10-16
 readonly HOME_RUNS=/u/bwbrook/xray_cavities_runs
 readonly RESULT="$STAGE/results_$MODE"
+readonly DEPENDENCY_VALIDATOR="${Q031_DEPENDENCY_VALIDATOR:-$STAGE/scripts/kunanyi/validate_q031_native_dependencies.py}"
+readonly G_HI_LINEAGE_VALIDATOR="${Q031_G_HI_LINEAGE_VALIDATOR:-$STAGE/scripts/kunanyi/validate_g_hi_inherited_lineage.py}"
 cd "$STAGE"
 module purge
 module load Anaconda3/2024.02-1
@@ -44,11 +46,11 @@ print({'python': platform.python_version(), 'numpy': numpy.__version__, 'h5py': 
 PY
 
 measure() {
-  local case_id="$1" problem="$2" environment="$3"
-  shift 3
+  local case_id="$1" problem="$2" environment="$3" source_dir="$4"
+  shift 4
   python -u scripts/science/measure_q031_fluxes.py \
     --case "$case_id" --environment "$problem/$environment" \
-    --pluto-ini "$problem/pluto.ini" --problem-source-dir "$problem/src" \
+    --pluto-ini "$problem/pluto.ini" --problem-source-dir "$source_dir" \
     --output-dir "$RESULT/$case_id" "$@"
 }
 
@@ -59,65 +61,83 @@ if [ "$MODE" = smoke ]; then
     test -r "$G_LO/outputs/data.$index.flt.h5"
     ln -s "$G_LO/outputs/data.$index.flt.h5" "$RESULT/smoke_inputs/data.$index.flt.h5"
   done
-  measure G-LO "$G_LO" tabulated_cosmo_002031.csv --outputs-dir "$RESULT/smoke_inputs"
+  measure G-LO "$G_LO" tabulated_cosmo_002031.csv "$G_LO/src" --outputs-dir "$RESULT/smoke_inputs"
 else
-  python - "$MIGRATION" <<'PY'
-import json, os, sys
+  python - "$MIGRATION" "$DEPENDENCY_VALIDATOR" <<'PY'
+import importlib.util, sys
 from pathlib import Path
-stage = Path(sys.argv[1])
-plan = json.loads((stage / 'migration_plan.json').read_text())
-binding = json.loads((stage / 'state/plan-binding.json').read_text())
-assert binding['plan_hash'] == '698d01634ade85df5fac6d42716c5463af56118230b085021ba7b205739c8900'
-assert binding['plan'] == plan
-complete = json.loads((stage / 'state/verified-manifest.json').read_text())
-assert complete['plan_hash'] == binding['plan_hash'] and len(complete['units']) == 10
-for unit, expected in zip(complete['units'], plan['units'], strict=True):
-    assert unit['stage'] == 'complete'
-    assert unit['source'] == expected['source'] and unit['destination'] == expected['destination']
-    source, destination = Path(unit['source']), Path(unit['destination'])
-    assert source.is_symlink() and os.readlink(source) == str(destination)
-    assert destination.is_dir()
-    status = json.loads((stage / 'state' / ('unit-' + unit['unit_id']) / 'status.json').read_text())
-    assert status['stage'] == 'complete' and status['plan_hash'] == binding['plan_hash']
-    assert not os.path.lexists(status['tombstone'])
-events = [json.loads(line) for line in (stage / 'state/events.jsonl').read_text().splitlines()]
-assert events[-1]['event'] == 'device-transition-execute-complete'
+validator = Path(sys.argv[2])
+spec = importlib.util.spec_from_file_location('q031_dependency_validator', validator)
+if spec is None or spec.loader is None:
+    raise RuntimeError('cannot load migration validator: ' + str(validator))
+module = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = module
+spec.loader.exec_module(module)
+module.validate_migration_dependencies(Path(sys.argv[1]))
 print('MIGRATION_COMPLETE_GATE_OK', flush=True)
 PY
   readonly C_HI="$ARCHIVE/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem"
   readonly C_LO="$ARCHIVE/xray_cavities_runs/2026-08-17-c-lo-full-history-rerun/C-LO/particles/problem"
   readonly G_HI_EARLY="$ARCHIVE/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles/problem"
   readonly G_HI_LATE="$HOME_RUNS/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles/problem"
-  python - "$C_HI" "$C_LO" "$G_LO" "$G_HI_EARLY" "$G_HI_LATE" "$RESULT" <<'PY'
-import hashlib, json, sys
+  readonly G_HI_PARENT_WORK="$ARCHIVE/xray_cavities_runs/2026-08-20-g-hi-full-history-production/G-HI/particles"
+  readonly G_HI_PARENT_STAGE=/u/bwbrook/codex_kunanyi/goal060_g_hi_full_history_production
+  readonly G_HI_CONTINUATION_STAGE=/u/bwbrook/codex_kunanyi/goal060_g_hi_full_history_home_continuation
+  readonly G_HI_WORK="$HOME_RUNS/2026-08-21-g-hi-full-history-home-continuation/G-HI/particles"
+  readonly G_HI_LINEAGE_RECEIPT="$RESULT/g_hi_inherited_lineage.json"
+  python - "$C_HI" "$C_LO" "$G_LO" "$RESULT" <<'PY'
+import json, sys
 from pathlib import Path
 from snapshot_energy import canonical_snapshot_chain
-from measure_q031_fluxes import parse_pluto_parameters
-roots = [Path(value) for value in sys.argv[1:6]]
+roots = [Path(value) for value in sys.argv[1:4]]
 chains = {}
-for case, segments in [('C-HI', roots[:1]), ('C-LO', roots[1:2]), ('G-LO', roots[2:3]), ('G-HI', roots[3:])]:
+for case, segments in [('C-HI', roots[:1]), ('C-LO', roots[1:2]), ('G-LO', roots[2:3])]:
     chain = canonical_snapshot_chain([root / 'outputs' for root in segments])
     assert [item.output_index for item in chain] == list(range(51)), case
     assert all(abs(item.actual_time_myr - index) < 0.05 for index, item in enumerate(chain)), case
-    if case == 'G-HI':
-        assert all(item.input_h5.parent == roots[3 if item.output_index < 10 else 4] / 'outputs' for item in chain)
     chains[case] = [{'index': item.output_index, 'time_myr': item.actual_time_myr, 'path': str(item.input_h5)} for item in chain]
-early, late = roots[3:]
-assert parse_pluto_parameters(early / 'pluto.ini') == parse_pluto_parameters(late / 'pluto.ini')
-def source_hashes(root):
-    return {str(path.relative_to(root / 'src')): hashlib.sha256(path.read_bytes()).hexdigest()
-            for path in sorted((root / 'src').rglob('*')) if path.is_file() and path.suffix in {'.c', '.h'}}
-assert source_hashes(early) == source_hashes(late), 'G-HI early/late C and H sources differ'
-assert hashlib.sha256((early / 'tabulated_cosmo_002031.csv').read_bytes()).digest() == hashlib.sha256((late / 'tabulated_cosmo_002031.csv').read_bytes()).digest()
-with (Path(sys.argv[6]) / 'canonical_input_chains.json').open('x') as handle:
-    json.dump({'chains': chains, 'g_hi_lineage': 'accepted 10 Myr continuation; early overlap >=10 excluded',
-               'g_hi_source_hashes': source_hashes(late), 'native_payload_rehashed': False}, handle, indent=2)
-print('CANONICAL_CADENCE_AND_G_HI_SOURCE_GATES_OK', flush=True)
+with (Path(sys.argv[4]) / 'canonical_input_chains.json').open('x') as handle:
+    json.dump({'chains': chains, 'g_hi_status': 'validated separately after unaffected cases',
+               'native_payload_rehashed': False}, handle, indent=2)
+print('THREE_CASE_CANONICAL_CADENCE_GATES_OK', flush=True)
 PY
-  measure C-LO "$C_LO" tabulated_cosmo_002003.csv --outputs-dir "$C_LO/outputs"
-  measure C-HI "$C_HI" tabulated_cosmo_002003.csv --outputs-dir "$C_HI/outputs"
-  measure G-LO "$G_LO" tabulated_cosmo_002031.csv --outputs-dir "$G_LO/outputs"
-  measure G-HI "$G_HI_LATE" tabulated_cosmo_002031.csv --outputs-dir "$G_HI_EARLY/outputs" --outputs-dir "$G_HI_LATE/outputs"
+  measure C-LO "$C_LO" tabulated_cosmo_002003.csv "$C_LO/src" --outputs-dir "$C_LO/outputs"
+  measure C-HI "$C_HI" tabulated_cosmo_002003.csv "$C_HI/src" --outputs-dir "$C_HI/outputs"
+  measure G-LO "$G_LO" tabulated_cosmo_002031.csv "$G_LO/src" --outputs-dir "$G_LO/outputs"
+  python "$G_HI_LINEAGE_VALIDATOR" validate \
+    --parent-problem "$G_HI_EARLY" \
+    --continuation-problem "$G_HI_LATE" \
+    --parent-run-log "$G_HI_PARENT_STAGE/g_hi_full_history_production.out" \
+    --parent-source-revisions "$G_HI_PARENT_WORK/job_logs/source_revisions.txt" \
+    --continuation-run-log "$G_HI_CONTINUATION_STAGE/g_hi_full_history_home_continuation.out" \
+    --staging-manifest "$G_HI_CONTINUATION_STAGE/remote_logs/home_continuation_staging_manifest.txt" \
+    --restart-report "$G_HI_CONTINUATION_STAGE/remote_logs/restart_pair_validation_job.json" \
+    --canonical-sequence-report "$G_HI_CONTINUATION_STAGE/remote_logs/canonical_sequence_validation.csv" \
+    --endpoint-report "$G_HI_CONTINUATION_STAGE/remote_logs/endpoint_validation.json" \
+    --source-revisions "$G_HI_WORK/job_logs/source_revisions.txt" \
+    --done-marker "$G_HI_WORK/markers/DONE" \
+    --receipt "$G_HI_LINEAGE_RECEIPT"
+  python - "$RESULT/canonical_input_chains.json" "$G_HI_LINEAGE_RECEIPT" <<'PY'
+import hashlib, json, sys
+from pathlib import Path
+path, receipt_path = map(Path, sys.argv[1:])
+payload = json.loads(path.read_text())
+receipt_bytes = receipt_path.read_bytes()
+receipt = json.loads(receipt_bytes)
+payload['chains']['G-HI'] = [
+    {'index': item['output_index'], 'time_myr': item['time_myr'], 'path': item['path']}
+    for item in receipt['snapshots']['analysis_chain']
+]
+payload['g_hi_status'] = 'accepted inherited parent source/build and continuation lineage'
+payload['g_hi_lineage_receipt_sha256'] = hashlib.sha256(receipt_bytes).hexdigest()
+path.write_text(json.dumps(payload, indent=2, sort_keys=True) + '\n')
+PY
+  measure G-HI "$G_HI_LATE" tabulated_cosmo_002031.csv "$G_HI_EARLY/src" \
+    --outputs-dir "$G_HI_EARLY/outputs" --outputs-dir "$G_HI_LATE/outputs"
+  python "$G_HI_LINEAGE_VALIDATOR" bind \
+    --receipt "$G_HI_LINEAGE_RECEIPT" \
+    --provenance "$RESULT/G-HI/provenance.json" \
+    --manifest "$RESULT/G-HI/manifest.sha256.csv"
 fi
 python - "$RESULT" <<'PY'
 import csv, hashlib, json, sys
