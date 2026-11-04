@@ -16,6 +16,7 @@ claims:
     reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
     caveats:
       - The 4pV convention multiplies every value by 1.6; it is not a universal correction.
+      - The denominator is labelled kinetic power. If realised delivery exceeds it (BND-05, NAT-06), the fraction of delivered energy is lower by the same factor.
       - C-LO boundary exposure is bounded on the coarse controls: the boundary contrast beyond 50 kpc from the faces is at most 1e-4 E_inj,LO (BND-04). Production-grid confirmation is pending.
     depends_on: [NAT-05]
 
@@ -196,9 +197,11 @@ claims:
       E_inj and a 2% amplitude difference moves the residual by 0.45). Its
       source is not established. Candidates are realised nozzle delivery
       above the labelled power and jet-driven face transport; the Q-031 flux
-      job measures both.
+      job measures both. The C-HI 1-Myr sphere (NAT-06), far from every face,
+      already holds 1.109 times the labelled input, which points to the
+      source side for C-HI.
     evidence:
-      - {path: docs/science/production_boundary_residual_2026-11-04.md, commit: 57ad7da}
+      - {path: docs/science/production_boundary_residual_2026-11-04.md, commit: 78f9567}
     reproduce: >-
       uv run python scripts/science/residual_after_boundary_contrast.py
       <new csv path>
@@ -210,6 +213,7 @@ claims:
     caveats:
       - Residual ranges span unscaled and production-mass-scaled boundary terms.
       - Retained parent sources select DENSITY_LENGTH_SCALE, not the DENSITY_JET_POWER branch used in the original nozzle argument; labelled input is not proved realised delivery. The categorical nozzle exclusion is withdrawn pending native flux measurement.
+      - In the length-scale branch, the analytic nozzle state delivers Q to within −0.4% to +0.3% in all four cases, so a realised excess would be numerical injection at the zone boundary, not prescribed state.
     depends_on: [BND-01, BND-02]
 
   - id: OBS-01

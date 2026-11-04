@@ -55,6 +55,30 @@ Full table: `assets/production_boundary_residual_2026-11-04/residual_after_bound
   These are retained-source observations, with historical
   source-to-executable linkage separately qualified; no simulation or
   numerical residual in the table has changed.
+- **The analytic state of the length-scale branch delivers the labelled
+  power (Claude, 5 November).** In that branch, ρ_j(r) = ρ_env(L1b)(L1b/r)²
+  along a cone of solid angle Ω, with L1 = 2√2 (Q/(ρ_inlet v³))^½ and
+  L1b = L1/(2√Ω). The kinetic flux through any radius is therefore
+  ½ρ_j v³ Ω r² = Q ρ_env(L1b)/ρ_inlet. Using the retained profiles, 15° cones,
+  0.1c, a 0.1-kpc initial width and a 0.75-kpc injection height (offset
+  radius 1.12 kpc):
+
+  | Case | L1b (kpc) | Kinetic flux / Q | Enthalpy flux at zone edge / Q |
+  | --- | ---: | ---: | ---: |
+  | C-HI | 1.54 | 0.9995 | 2.9e-3 |
+  | C-LO | 0.154 | 1.0000 | 1.3e-4 |
+  | G-HI | 2.96 | 0.9962 | 2.9e-3 |
+  | G-LO | 0.296 | 1.0000 | 1.4e-4 |
+
+  The prescribed nozzle state delivers Q to within −0.4% to +0.3% in every
+  case. If the native nozzle measurement finds 1.08–1.3 Q, the excess is
+  generated numerically at the injection-zone boundary: the Riemann fluxes
+  across a staircase cone resolved by about two cells at its throat, plus
+  the per-step overwrite that restores whatever the solver moved. One
+  candidate pattern fits the ordering of the residuals: the low-power jets
+  have L1b of 3–6 cells and are light at the zone edge (about 0.02 times
+  ambient density), while the high-power jets have L1b of 31–59 cells and
+  are heavy (about 2 times). This is a hypothesis, not a measured cause.
 
 ## What the Q-031 flux job will decide
 
