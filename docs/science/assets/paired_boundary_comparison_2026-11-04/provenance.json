@@ -1,0 +1,386 @@
+[
+  {
+    "case": "cluster_002003",
+    "mode": "full",
+    "comparison_ages_myr": [
+      0.0,
+      10.0,
+      20.0,
+      30.0,
+      40.0,
+      50.0
+    ],
+    "runs": {
+      "outflow": {
+        "source_sha256": {
+          "ledger": "937c20e59e96ecbcdc00386a79bbe2d1ede3c92b1bdb1fe9ddfc9650f74db379",
+          "budget_receipt": "fe588b9a66af07210f7a2b36f757de2ba10fa7a81fede28ef4a1ca0d5e986702",
+          "output_receipt": "afeafd866cf4c5617aa8739d90bd3a72bed4b55661c783312c05c5e5d114adb1",
+          "budget_validator": "7f7d88d0cb6d2119f40f01095e82464275d5dcb8f61a63ba0329afa090f1a064"
+        },
+        "receipt_arithmetic": {
+          "method": "abs(revalidated-receipt) <= 8*u*sum(abs(six face terms)); residual bounds inherit net-transport bounds",
+          "binary64_unit_roundoff": 1.1102230246251565e-16,
+          "six_face_multiplier": 8.0,
+          "aggregates": {
+            "mass": {
+              "net": {
+                "receipt": -4.762698022836264e+43,
+                "revalidated": -4.762698022836264e+43,
+                "delta": 0.0,
+                "roundoff_bound": 4.230125603431624e+28,
+                "six_face_terms_abs_sum": 4.762698022836264e+43
+              },
+              "gross": {
+                "receipt": 4.762698022836264e+43,
+                "revalidated": 4.762698022836264e+43,
+                "delta": 0.0,
+                "roundoff_bound": 4.230125603431624e+28,
+                "six_face_terms_abs_sum": 4.762698022836264e+43
+              }
+            },
+            "hydro": {
+              "net": {
+                "receipt": -3.4066549185617397e+59,
+                "revalidated": -3.4066549185617393e+59,
+                "delta": 4.460149039706125e+43,
+                "roundoff_bound": 3.0257173820318244e+44,
+                "six_face_terms_abs_sum": 3.4066549185617393e+59
+              },
+              "gross": {
+                "receipt": 3.4066549185617397e+59,
+                "revalidated": 3.4066549185617393e+59,
+                "delta": -4.460149039706125e+43,
+                "roundoff_bound": 3.0257173820318244e+44,
+                "six_face_terms_abs_sum": 3.4066549185617393e+59
+              }
+            },
+            "potential": {
+              "net": {
+                "receipt": -3.6016104163391975e+59,
+                "revalidated": -3.6016104163391975e+59,
+                "delta": 0.0,
+                "roundoff_bound": 3.1988726479596585e+44,
+                "six_face_terms_abs_sum": 3.6016104163391975e+59
+              },
+              "gross": {
+                "receipt": 3.6016104163391975e+59,
+                "revalidated": 3.6016104163391975e+59,
+                "delta": 0.0,
+                "roundoff_bound": 3.1988726479596585e+44,
+                "six_face_terms_abs_sum": 3.6016104163391975e+59
+              }
+            }
+          },
+          "residuals": {
+            "mass": {
+              "receipt": 1.2113887013227874e+33,
+              "revalidated": 1.2113887013227874e+33,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 4.230125603431624e+28
+            },
+            "hydro": {
+              "receipt": 2.108788941661837e+47,
+              "revalidated": 2.1092349565658078e+47,
+              "delta": 4.460149039706125e+43,
+              "propagated_roundoff_bound": 3.0257173820318244e+44
+            },
+            "potential": {
+              "receipt": 2.1259749375317213e+53,
+              "revalidated": 2.1259749375317213e+53,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 3.1988726479596585e+44
+            },
+            "total": {
+              "receipt": 2.125977046320663e+53,
+              "revalidated": 2.125977046766678e+53,
+              "delta": 4.460149039706125e+43,
+              "propagated_roundoff_bound": 6.224590029991483e+44
+            }
+          }
+        }
+      },
+      "reflective": {
+        "source_sha256": {
+          "ledger": "22d5c0785eb0cac1d777d894694e35c2129a90774efba193bb1329fc2872fc91",
+          "budget_receipt": "e3c6cc793db69776f44e984c0ed75c1a42d903f682ffc5f1b73c20f0c83a3c5d",
+          "output_receipt": "a8fc6b34400df089a224e046b329361be77a751a1f7cf7ed9b0cb3ab80300a77",
+          "budget_validator": "7f7d88d0cb6d2119f40f01095e82464275d5dcb8f61a63ba0329afa090f1a064"
+        },
+        "receipt_arithmetic": {
+          "method": "abs(revalidated-receipt) <= 8*u*sum(abs(six face terms)); residual bounds inherit net-transport bounds",
+          "binary64_unit_roundoff": 1.1102230246251565e-16,
+          "six_face_multiplier": 8.0,
+          "aggregates": {
+            "mass": {
+              "net": {
+                "receipt": 3.852622884148372e+24,
+                "revalidated": 3.8526228841483707e+24,
+                "delta": -1073741824.0,
+                "roundoff_bound": 18120169840.87633,
+                "six_face_terms_abs_sum": 2.0401497535815186e+25
+              },
+              "gross": {
+                "receipt": 1.2555734433448238e+29,
+                "revalidated": 1.255573443344824e+29,
+                "delta": 17592186044416.0,
+                "roundoff_bound": 111517323672745.05,
+                "six_face_terms_abs_sum": 1.255573443344824e+29
+              }
+            },
+            "hydro": {
+              "net": {
+                "receipt": -5.766030422386318e+40,
+                "revalidated": -5.766030422386319e+40,
+                "delta": -9.671406556917033e+24,
+                "roundoff_bound": 2.7339211166010292e+26,
+                "six_face_terms_abs_sum": 3.0781215304961814e+41
+              },
+              "gross": {
+                "receipt": 7.422777255157145e+44,
+                "revalidated": 7.422777255157145e+44,
+                "delta": 0.0,
+                "roundoff_bound": 6.592750572271506e+29,
+                "six_face_terms_abs_sum": 7.422777255157145e+44
+              }
+            },
+            "potential": {
+              "net": {
+                "receipt": 2.906094753045098e+40,
+                "revalidated": 2.9060947530450967e+40,
+                "delta": -1.450710983537555e+25,
+                "roundoff_bound": 1.5695358532411407e+26,
+                "six_face_terms_abs_sum": 1.7671402709503586e+41
+              },
+              "gross": {
+                "receipt": 9.680532136901116e+44,
+                "revalidated": 9.680532136901116e+44,
+                "delta": 0.0,
+                "roundoff_bound": 8.59803973520911e+29,
+                "six_face_terms_abs_sum": 9.680532136901116e+44
+              }
+            }
+          },
+          "residuals": {
+            "mass": {
+              "receipt": 1.4552628929146303e+33,
+              "revalidated": 1.4552628929146303e+33,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 18120169840.87633
+            },
+            "hydro": {
+              "receipt": -6.012016491662758e+47,
+              "revalidated": -6.012016491662758e+47,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 2.7339211166010292e+26
+            },
+            "potential": {
+              "receipt": 1.9178874323278075e+51,
+              "revalidated": 1.9178874323278075e+51,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 1.5695358532411407e+26
+            },
+            "total": {
+              "receipt": 1.9172862306786413e+51,
+              "revalidated": 1.9172862306786413e+51,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 4.30345696984217e+26
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "case": "group_002031",
+    "mode": "full",
+    "comparison_ages_myr": [
+      0.0,
+      10.0,
+      20.0,
+      30.0,
+      40.0,
+      50.0
+    ],
+    "runs": {
+      "outflow": {
+        "source_sha256": {
+          "ledger": "53064fa9b12efdb0b32e00689385fe75b4aa9371d60f617a092f3c82b2ece0b3",
+          "budget_receipt": "60360a6ab064d6801be32d7f875178a32933839d6b671d217c37e99cc7623253",
+          "output_receipt": "c239468f969abfff43daaa85ca1f0d79c45e81a7a775eb00c2656fbcfe5a57b2",
+          "budget_validator": "7f7d88d0cb6d2119f40f01095e82464275d5dcb8f61a63ba0329afa090f1a064"
+        },
+        "receipt_arithmetic": {
+          "method": "abs(revalidated-receipt) <= 8*u*sum(abs(six face terms)); residual bounds inherit net-transport bounds",
+          "binary64_unit_roundoff": 1.1102230246251565e-16,
+          "six_face_multiplier": 8.0,
+          "aggregates": {
+            "mass": {
+              "net": {
+                "receipt": -2.290245091032558e+42,
+                "revalidated": -2.290245091032558e+42,
+                "delta": 0.0,
+                "roundoff_bound": 2.034146265679267e+27,
+                "six_face_terms_abs_sum": 2.290245091032558e+42
+              },
+              "gross": {
+                "receipt": 2.290245091032558e+42,
+                "revalidated": 2.290245091032558e+42,
+                "delta": 0.0,
+                "roundoff_bound": 2.034146265679267e+27,
+                "six_face_terms_abs_sum": 2.290245091032558e+42
+              }
+            },
+            "hydro": {
+              "net": {
+                "receipt": -3.990198252824485e+57,
+                "revalidated": -3.990198252824485e+57,
+                "delta": 0.0,
+                "roundoff_bound": 3.5440079784838516e+42,
+                "six_face_terms_abs_sum": 3.990198252824485e+57
+              },
+              "gross": {
+                "receipt": 3.990198252824485e+57,
+                "revalidated": 3.990198252824485e+57,
+                "delta": 0.0,
+                "roundoff_bound": 3.5440079784838516e+42,
+                "six_face_terms_abs_sum": 3.990198252824485e+57
+              }
+            },
+            "potential": {
+              "net": {
+                "receipt": -8.157801838036742e+57,
+                "revalidated": -8.15780183803674e+57,
+                "delta": 1.393796574908164e+42,
+                "roundoff_bound": 7.245583544734249e+42,
+                "six_face_terms_abs_sum": 8.15780183803674e+57
+              },
+              "gross": {
+                "receipt": 8.157801838036742e+57,
+                "revalidated": 8.15780183803674e+57,
+                "delta": -1.393796574908164e+42,
+                "roundoff_bound": 7.245583544734249e+42,
+                "six_face_terms_abs_sum": 8.15780183803674e+57
+              }
+            }
+          },
+          "residuals": {
+            "mass": {
+              "receipt": 1.4793816748474044e+32,
+              "revalidated": 1.4793816748474044e+32,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 2.034146265679267e+27
+            },
+            "hydro": {
+              "receipt": -7.764461298125661e+46,
+              "revalidated": -7.764461298125661e+46,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 3.5440079784838516e+42
+            },
+            "potential": {
+              "receipt": 5.121826064453297e+51,
+              "revalidated": 5.1218260658470935e+51,
+              "delta": 1.393796574908164e+42,
+              "propagated_roundoff_bound": 7.245583544734249e+42
+            },
+            "total": {
+              "receipt": 5.121748419840316e+51,
+              "revalidated": 5.121748421234112e+51,
+              "delta": 1.393796574908164e+42,
+              "propagated_roundoff_bound": 1.0789591523218101e+43
+            }
+          }
+        }
+      },
+      "reflective": {
+        "source_sha256": {
+          "ledger": "f9d4d5f00e4d0b626f515815ee62ace0fa600d982d06a4023429bc37890594a1",
+          "budget_receipt": "450c5f277fd47eafd0f5bfe43d247bc875df9f427dc990f62dbb03c9c7a356ad",
+          "output_receipt": "d6f944d755e5b833b96f51134b58b36574a89524588b1aeffd5fda32bc22c3f9",
+          "budget_validator": "7f7d88d0cb6d2119f40f01095e82464275d5dcb8f61a63ba0329afa090f1a064"
+        },
+        "receipt_arithmetic": {
+          "method": "abs(revalidated-receipt) <= 8*u*sum(abs(six face terms)); residual bounds inherit net-transport bounds",
+          "binary64_unit_roundoff": 1.1102230246251565e-16,
+          "six_face_multiplier": 8.0,
+          "aggregates": {
+            "mass": {
+              "net": {
+                "receipt": -2.7067082949232057e+23,
+                "revalidated": -2.7067082949232064e+23,
+                "delta": -67108864.0,
+                "roundoff_bound": 1991987014.074363,
+                "six_face_terms_abs_sum": 2.242777993578042e+24
+              },
+              "gross": {
+                "receipt": 9.870332823187233e+27,
+                "revalidated": 9.870332823187232e+27,
+                "delta": -1099511627776.0,
+                "roundoff_bound": 8766616608812.711,
+                "six_face_terms_abs_sum": 9.870332823187232e+27
+              }
+            },
+            "hydro": {
+              "net": {
+                "receipt": 2.6482672291593253e+39,
+                "revalidated": 2.6482672291593253e+39,
+                "delta": 0.0,
+                "roundoff_bound": 4.5034697032907646e+24,
+                "six_face_terms_abs_sum": 5.0704561194036514e+39
+              },
+              "gross": {
+                "receipt": 1.425303592587392e+43,
+                "revalidated": 1.425303592587392e+43,
+                "delta": 0.0,
+                "roundoff_bound": 1.2659238924571809e+28,
+                "six_face_terms_abs_sum": 1.425303592587392e+43
+              }
+            },
+            "potential": {
+              "net": {
+                "receipt": -1.2371265925248471e+39,
+                "revalidated": -1.2371265925248471e+39,
+                "delta": 0.0,
+                "roundoff_bound": 7.21961469717572e+24,
+                "six_face_terms_abs_sum": 8.128563514989782e+39
+              },
+              "gross": {
+                "receipt": 3.5690829556855873e+43,
+                "revalidated": 3.569082955685588e+43,
+                "delta": 4.951760157141521e+27,
+                "roundoff_bound": 3.1699824593594775e+28,
+                "six_face_terms_abs_sum": 3.569082955685588e+43
+              }
+            }
+          },
+          "residuals": {
+            "mass": {
+              "receipt": 1.8111557923693743e+32,
+              "revalidated": 1.8111557923693743e+32,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 1991987014.074363
+            },
+            "hydro": {
+              "receipt": -9.733533089819817e+46,
+              "revalidated": -9.733533089819817e+46,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 4.5034697032907646e+24
+            },
+            "potential": {
+              "receipt": 3.836078098619224e+50,
+              "revalidated": 3.836078098619224e+50,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 7.21961469717572e+24
+            },
+            "total": {
+              "receipt": 3.835104745310242e+50,
+              "revalidated": 3.835104745310242e+50,
+              "delta": 0.0,
+              "propagated_roundoff_bound": 1.1723084400466485e+25
+            }
+          }
+        }
+      }
+    }
+  }
+]

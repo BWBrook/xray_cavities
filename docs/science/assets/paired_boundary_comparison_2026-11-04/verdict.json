@@ -1,0 +1,42 @@
+[
+  {
+    "case": "cluster_002003",
+    "final_time_myr": 50.0,
+    "complete_to_50_myr": true,
+    "growth_exponent_t_ge_5myr": 1.966099212761428,
+    "growth_information_issue": null,
+    "final_mass_ratio": 0.9799790170394808,
+    "final_hp_ratio": 0.9733695559724572,
+    "within_factor_2": true,
+    "within_30_percent": true,
+    "mass_transport_discrepancy_fraction": 5.1200890657060964e-12,
+    "hp_transport_discrepancy_fraction": 6.466510550502981e-07,
+    "repair_residual_budget_fraction": 0.0003956423865807772,
+    "h_face_only_fraction_diagnostic": 0.9765073405462156,
+    "h_with_gravity_repair_fraction_diagnostic": 0.999999999997672,
+    "physical_refutations": [],
+    "accounting_indeterminacies": [],
+    "original_one_sided_transport_flags": [],
+    "verdict": "supported"
+  },
+  {
+    "case": "group_002031",
+    "final_time_myr": 50.0,
+    "complete_to_50_myr": true,
+    "growth_exponent_t_ge_5myr": 1.9325678385903096,
+    "growth_information_issue": null,
+    "final_mass_ratio": 0.9622878533610844,
+    "final_hp_ratio": 0.9344587763474977,
+    "within_factor_2": true,
+    "within_30_percent": true,
+    "mass_transport_discrepancy_fraction": 1.4486402417476813e-11,
+    "hp_transport_discrepancy_fraction": 2.9633231941039438e-06,
+    "repair_residual_budget_fraction": 0.00015231732956823047,
+    "h_face_only_fraction_diagnostic": 0.9849125478501145,
+    "h_with_gravity_repair_fraction_diagnostic": 0.99999999999514,
+    "physical_refutations": [],
+    "accounting_indeterminacies": [],
+    "original_one_sided_transport_flags": [],
+    "verdict": "supported"
+  }
+]

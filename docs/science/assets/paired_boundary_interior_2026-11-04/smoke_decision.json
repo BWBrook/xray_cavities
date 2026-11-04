@@ -1,0 +1,314 @@
+{
+  "status": "complete_decision_overlay",
+  "mode": "smoke",
+  "source_completion_sha256": "bcdbd9c644ebbe6bbee76046832d45477881cc1a090755d6009ad5689800fb2e",
+  "source_stage_manifest_sha256": "90dec57d0e4dabf073445cabe088e8d12c5f91da6868814704da0f962db1695b",
+  "source_measurements": {
+    "cluster_002003.json": "c53515b564560aea1b48e358a3aede5b3d395b68be3068ad9fec1df955f5039d",
+    "group_002031.json": "b27e369001c9b44243d15ce2e1267b8e6e4898e6b57c696458845a796de561b9",
+    "tests.xml": "f245e218b0975c9589ce439a41bc3ee8c9749c5ccb2ee3476d1601b98ed026c1"
+  },
+  "decision_script_sha256": "4ca1efe3764bab82195eef7dabc884b850d4cb950fb4a811325efb662776774a",
+  "cases": [
+    {
+      "case": "cluster_002003",
+      "time_myr": 0.2500000000000389,
+      "absolute_energy_tolerance_erg": 1.5778800000002455e+54,
+      "smallest_paired_localization_width_kpc": 1.0,
+      "smallest_background_stability_width_kpc": null,
+      "smallest_combined_passing_width_kpc": null,
+      "adopted_coarse_width_at_50_myr_kpc": null,
+      "supersedes": "r1 adopted width used paired contrast only; raw measured quantities unchanged",
+      "criterion": "all four component L1 values <=0.01 S(t), for paired contrast and each twin drift",
+      "production_certification": false,
+      "regions": [
+        {
+          "buffer_kpc": 0.0,
+          "cell_count": 80000000,
+          "paired_localization_pass": false,
+          "background_stability_pass": false,
+          "combined_pass": false,
+          "component_l1_erg": {
+            "contrast_cell_l1": {
+              "thermal_erg": 1.1607351892643648e+55,
+              "kinetic_erg": 2.655304439011691e+51,
+              "gravitational_erg": 1.2568132345521677e+55,
+              "total_energy_erg": 2.4178029588722032e+55
+            },
+            "reflective_delta_cell_l1": {
+              "thermal_erg": 8.516478203005254e+55,
+              "kinetic_erg": 1.4768716750850448e+52,
+              "gravitational_erg": 8.730805040136928e+55,
+              "total_energy_erg": 1.724850110311467e+56
+            },
+            "outflow_delta_cell_l1": {
+              "thermal_erg": 9.555017518744955e+55,
+              "kinetic_erg": 1.7316492124578924e+52,
+              "gravitational_erg": 9.855749681614383e+55,
+              "total_energy_erg": 1.941225224215586e+56
+            }
+          },
+          "signed_contrast": {
+            "gravitational_erg": 1.2309635607746628e+55,
+            "kinetic_erg": 2.547775373728454e+51,
+            "mass_g": 1.6283889829742054e+39,
+            "thermal_erg": 1.1366724093549716e+55,
+            "total_energy_erg": 2.3678907476670058e+55
+          }
+        },
+        {
+          "buffer_kpc": 1.0,
+          "cell_count": 78885192,
+          "paired_localization_pass": true,
+          "background_stability_pass": false,
+          "combined_pass": false,
+          "component_l1_erg": {
+            "contrast_cell_l1": {
+              "thermal_erg": 7.257866712542832e+53,
+              "kinetic_erg": 5.497737635077481e+49,
+              "gravitational_erg": 7.81800954957324e+53,
+              "total_energy_erg": 1.5075326497056765e+54
+            },
+            "reflective_delta_cell_l1": {
+              "thermal_erg": 4.609067161074101e+55,
+              "kinetic_erg": 9.558757500011652e+50,
+              "gravitational_erg": 4.4930600022000415e+55,
+              "total_energy_erg": 9.101965637279689e+55
+            },
+            "outflow_delta_cell_l1": {
+              "thermal_erg": 4.560292802303411e+55,
+              "kinetic_erg": 9.033240610687073e+50,
+              "gravitational_erg": 4.4404601652754777e+55,
+              "total_energy_erg": 9.000596703265758e+55
+            }
+          },
+          "signed_contrast": {
+            "gravitational_erg": 5.233042171822799e+53,
+            "kinetic_erg": -5.255168893245835e+49,
+            "mass_g": 6.943160639166778e+37,
+            "thermal_erg": 4.851588721603296e+53,
+            "total_energy_erg": 1.0084105376536777e+54
+          }
+        },
+        {
+          "buffer_kpc": 2.0,
+          "cell_count": 77780736,
+          "paired_localization_pass": true,
+          "background_stability_pass": false,
+          "combined_pass": false,
+          "component_l1_erg": {
+            "contrast_cell_l1": {
+              "thermal_erg": 1.2140844284462933e+53,
+              "kinetic_erg": 1.2130944231013569e+48,
+              "gravitational_erg": 1.3039293025654309e+53,
+              "total_energy_erg": 2.5180016087717106e+53
+            },
+            "reflective_delta_cell_l1": {
+              "thermal_erg": 1.1842020023159426e+55,
+              "kinetic_erg": 3.366788093539793e+49,
+              "gravitational_erg": 7.926887993349482e+54,
+              "total_energy_erg": 1.976821496443342e+55
+            },
+            "outflow_delta_cell_l1": {
+              "thermal_erg": 1.1958654663862099e+55,
+              "kinetic_erg": 3.488047393061303e+49,
+              "gravitational_erg": 8.052297648804654e+54,
+              "total_energy_erg": 2.0010258113122695e+55
+            }
+          },
+          "signed_contrast": {
+            "gravitational_erg": -1.2810380751850155e+53,
+            "kinetic_erg": 1.2125929952151025e+48,
+            "mass_g": -1.7041011045780682e+37,
+            "thermal_erg": -1.1921935624932352e+53,
+            "total_energy_erg": -2.473219511748301e+53
+          }
+        },
+        {
+          "buffer_kpc": 4.0,
+          "cell_count": 75602688,
+          "paired_localization_pass": true,
+          "background_stability_pass": false,
+          "combined_pass": false,
+          "component_l1_erg": {
+            "contrast_cell_l1": {
+              "thermal_erg": 1.1024858940686527e+51,
+              "kinetic_erg": 1.875541484317421e+44,
+              "gravitational_erg": 1.1529350297984833e+51,
+              "total_energy_erg": 2.2554211053581222e+51
+            },
+            "reflective_delta_cell_l1": {
+              "thermal_erg": 6.922807306987135e+54,
+              "kinetic_erg": 6.705987408414076e+48,
+              "gravitational_erg": 2.644337567095217e+54,
+              "total_energy_erg": 9.566478830912557e+54
+            },
+            "outflow_delta_cell_l1": {
+              "thermal_erg": 6.923848441239632e+54,
+              "kinetic_erg": 6.706174911081433e+48,
+              "gravitational_erg": 2.645429626565322e+54,
+              "total_energy_erg": 9.568612121931433e+54
+            }
+          },
+          "signed_contrast": {
+            "gravitational_erg": 1.136187708242953e+51,
+            "kinetic_erg": 1.8750266735706164e+44,
+            "mass_g": 1.543562813540421e+35,
+            "thermal_erg": 1.0866007012371422e+51,
+            "total_energy_erg": 2.2227885969827587e+51
+          }
+        }
+      ]
+    },
+    {
+      "case": "group_002031",
+      "time_myr": 0.2500000000000389,
+      "absolute_energy_tolerance_erg": 1.5778800000002455e+54,
+      "smallest_paired_localization_width_kpc": 0.0,
+      "smallest_background_stability_width_kpc": 2.0,
+      "smallest_combined_passing_width_kpc": 2.0,
+      "adopted_coarse_width_at_50_myr_kpc": null,
+      "supersedes": "r1 adopted width used paired contrast only; raw measured quantities unchanged",
+      "criterion": "all four component L1 values <=0.01 S(t), for paired contrast and each twin drift",
+      "production_certification": false,
+      "regions": [
+        {
+          "buffer_kpc": 0.0,
+          "cell_count": 80000000,
+          "paired_localization_pass": true,
+          "background_stability_pass": false,
+          "combined_pass": false,
+          "component_l1_erg": {
+            "contrast_cell_l1": {
+              "thermal_erg": 1.3646537672663403e+53,
+              "kinetic_erg": 2.1025043995203973e+49,
+              "gravitational_erg": 2.8296662264027967e+53,
+              "total_energy_erg": 4.194525105182524e+53
+            },
+            "reflective_delta_cell_l1": {
+              "thermal_erg": 2.4864627384129705e+54,
+              "kinetic_erg": 2.5028841493677608e+50,
+              "gravitational_erg": 4.36123971488968e+54,
+              "total_energy_erg": 6.847829292995313e+54
+            },
+            "outflow_delta_cell_l1": {
+              "thermal_erg": 2.6152332070983664e+54,
+              "kinetic_erg": 2.7080604717806406e+50,
+              "gravitational_erg": 4.6282348669759574e+54,
+              "total_energy_erg": 7.243615913521009e+54
+            }
+          },
+          "signed_contrast": {
+            "gravitational_erg": 2.795354305285918e+53,
+            "kinetic_erg": 2.0517632241288696e+49,
+            "mass_g": 7.850726543614557e+37,
+            "thermal_erg": 1.3479336894670117e+53,
+            "total_energy_erg": 4.14349317107534e+53
+          }
+        },
+        {
+          "buffer_kpc": 1.0,
+          "cell_count": 78885192,
+          "paired_localization_pass": true,
+          "background_stability_pass": false,
+          "combined_pass": false,
+          "component_l1_erg": {
+            "contrast_cell_l1": {
+              "thermal_erg": 4.547519320783515e+51,
+              "kinetic_erg": 2.5695224041967134e+47,
+              "gravitational_erg": 9.358159213760648e+51,
+              "total_energy_erg": 1.390542159412821e+52
+            },
+            "reflective_delta_cell_l1": {
+              "thermal_erg": 1.4991455418229467e+54,
+              "kinetic_erg": 2.0694805043161388e+49,
+              "gravitational_erg": 2.3068199327814474e+54,
+              "total_energy_erg": 3.805862984807608e+54
+            },
+            "outflow_delta_cell_l1": {
+              "thermal_erg": 1.4962554090871796e+54,
+              "kinetic_erg": 2.0444345529665739e+49,
+              "gravitational_erg": 2.3008641912750656e+54,
+              "total_energy_erg": 3.797017360835193e+54
+            }
+          },
+          "signed_contrast": {
+            "gravitational_erg": 5.926967102072948e+51,
+            "kinetic_erg": -2.504595134956234e+47,
+            "mass_g": 1.669236390334452e+36,
+            "thermal_erg": 2.8755115408505955e+51,
+            "total_energy_erg": 8.802228183410044e+51
+          }
+        },
+        {
+          "buffer_kpc": 2.0,
+          "cell_count": 77780736,
+          "paired_localization_pass": true,
+          "background_stability_pass": true,
+          "combined_pass": true,
+          "component_l1_erg": {
+            "contrast_cell_l1": {
+              "thermal_erg": 8.402380105801886e+50,
+              "kinetic_erg": 3.252145393440462e+45,
+              "gravitational_erg": 1.724216453857292e+51,
+              "total_energy_erg": 2.5644512241165472e+51
+            },
+            "reflective_delta_cell_l1": {
+              "thermal_erg": 5.741517572113174e+53,
+              "kinetic_erg": 9.80637624038444e+47,
+              "gravitational_erg": 3.887664446919364e+53,
+              "total_energy_erg": 9.628354262738893e+53
+            },
+            "outflow_delta_cell_l1": {
+              "thermal_erg": 5.7496890578575206e+53,
+              "kinetic_erg": 9.838782055690525e+47,
+              "gravitational_erg": 3.9044464594546e+53,
+              "total_energy_erg": 9.653307726714838e+53
+            }
+          },
+          "signed_contrast": {
+            "gravitational_erg": -1.70697565783042e+51,
+            "kinetic_erg": 3.240581530607348e+45,
+            "mass_g": -4.816319171135439e+35,
+            "thermal_erg": -8.317697693527315e+50,
+            "total_energy_erg": -2.5387421866016245e+51
+          }
+        },
+        {
+          "buffer_kpc": 4.0,
+          "cell_count": 75602688,
+          "paired_localization_pass": true,
+          "background_stability_pass": true,
+          "combined_pass": true,
+          "component_l1_erg": {
+            "contrast_cell_l1": {
+              "thermal_erg": 4.249698476495235e+48,
+              "kinetic_erg": 1.730651861797039e+41,
+              "gravitational_erg": 8.651945726104662e+48,
+              "total_energy_erg": 1.2901644290498565e+49
+            },
+            "reflective_delta_cell_l1": {
+              "thermal_erg": 5.064557433208679e+53,
+              "kinetic_erg": 8.318367072673915e+47,
+              "gravitational_erg": 2.4976124908495927e+53,
+              "total_energy_erg": 7.561343641776891e+53
+            },
+            "outflow_delta_cell_l1": {
+              "thermal_erg": 5.064597789534962e+53,
+              "kinetic_erg": 8.318368799680518e+47,
+              "gravitational_erg": 2.497694820329728e+53,
+              "total_energy_erg": 7.561466325586399e+53
+            }
+          },
+          "signed_contrast": {
+            "gravitational_erg": 8.58885030076646e+48,
+            "kinetic_erg": 1.7270066068585259e+41,
+            "mass_g": 2.432383518232305e+33,
+            "thermal_erg": 4.2185427509625573e+48,
+            "total_energy_erg": 1.280739322442968e+49
+          }
+        }
+      ]
+    }
+  ]
+}

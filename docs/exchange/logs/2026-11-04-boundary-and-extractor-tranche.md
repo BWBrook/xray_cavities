@@ -55,6 +55,40 @@ correction. Its raw sums are retained; the frozen decision overlay verifies
 the r1 source/completion/output hashes and supersedes the r1 adoption label.
 This avoids repeating native I/O merely to recompute Boolean decisions.
 
+## Results obtained
+
+The frozen comparison supports BND-02 in both atmospheres. At 50 Myr the
+cluster/group mass contrasts are `4.76270e43 / 2.29025e42 g`, and H+P
+contrasts are `7.00826e59 / 1.21480e58 erg`. Growth exponents on the frozen
+five-age grid are `1.96610 / 1.93257`; repair-plus-residual fractions are
+`0.0396% / 0.0152%`. Independent reconstruction verified the raw-ledger
+identities, source hashes, final contrasts and byte-for-byte derived products.
+The paired histories actually share the same step times; the comparison's
+independent time alignment remains appropriate but was not needed to resolve
+unequal sampling in these particular data.
+
+Smoke `876188` finished F/0 in 21m 44s, including all 58 target tests. Its
+capture hash is
+`fc2d4c86300fb4f0ce4c27ca4b30af718b41c27d41e143ac265f7cd4217df93f`.
+The cluster passes paired localization at 1 kpc, but common background drift
+fails through 4 kpc. The group first passes the combined gate at 2 kpc.
+Full audit `876195` then started. Detailed result tables and reproduction
+commands are in `../../science/paired_boundary_results_2026-11-04.md`.
+
+The 126-row independent shock validation deliberately finishes with
+`FAIL_NO_PROMOTION`: all 54 exact-shock rows pass their declared expectations,
+but the isentropic sound wave falsely passes the 1.05 arm in all six
+placements. The 19 implementation tests pass while preserving this negative
+scientific result. No native shock run was attempted.
+
+The production spherical storage extractor is implemented and independently
+reviewed, with 11 focused tests including analytic gravitational sign/scale.
+Review changed its status contract: completed arithmetic cannot imply a
+qualified sphere when the domain is truncated, the candidate boundary-safe
+box is crossed, the tracer lies outside [0,1], or native semantic provenance
+is still unqualified. Native case/configuration/environment binding remains
+the next execution gate; no four-case spherical result is claimed.
+
 ## Flux failure discovered during resource check
 
 The previously released job 876162 finished with exit status 1 after 1:02,

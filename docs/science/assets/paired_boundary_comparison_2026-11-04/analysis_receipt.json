@@ -1,0 +1,15 @@
+{
+  "status": "completed_frozen_comparison",
+  "pre_capture_contract_commit": "e56b89f",
+  "pre_contrast_arithmetic_correction_commit": "71bbdbe",
+  "ledger_capture_archive_sha256": "cebd91ce46aa7b3ed7c3c68e8263b7627a0a02dc7a0768de7bad8190c26763a1",
+  "command": "uv run python scripts/science/compare_paired_boundary_prediction.py <ledger_capture_directory> <new_output_directory>",
+  "files": {
+    "scripts/science/compare_paired_boundary_prediction.py": "199d429cec511962362bbd3235a5026fe9ff6aac9d32360f9ade4b4701a344fa",
+    "scripts/science/validate_paired_nojet_budget.py": "7f7d88d0cb6d2119f40f01095e82464275d5dcb8f61a63ba0329afa090f1a064",
+    "scripts/science/validate_paired_nojet_outputs.py": "3174c146cdcf6b6e68d303ce098c83138f6edce6b639204cf90ad8675c7c2b60",
+    "docs/science/assets/paired_boundary_comparison_2026-11-04/paired_contrasts.csv": "8e5b302896a3365fe27fc5439cb197ceea81fba9bc954103c5a57d15bc6576d5",
+    "docs/science/assets/paired_boundary_comparison_2026-11-04/provenance.json": "56934056edf0130f0002aee13caafcd847952682c5732ea51dff7a6f6cb9b2e3",
+    "docs/science/assets/paired_boundary_comparison_2026-11-04/verdict.json": "e7d8adb300126779b365a7c071ef07eb2db539cfdd63ed1c6af341fbb1547c16"
+  }
+}

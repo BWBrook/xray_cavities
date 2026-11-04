@@ -14,11 +14,32 @@ match the early run. Native `871717` became terminal without running. The
 running-state report below is historical. No flux or native scientific result
 was produced, and neither job has been retried in the current tranche.
 
-The independent interior measurement smoke is `876188`; full audit `876195`
-depends on its successful completion and verifies its receipt before reading
-the 50-Myr snapshots. These are existing-output analyses. The BND-02 contract
-is being frozen before full-ledger interpretation. See
+The independent interior measurement smoke `876188` finished F/0 in 21m 44s;
+full audit `876195` started after validating its receipt. These are
+existing-output analyses. The BND-02 contract was frozen as `e56b89f` before
+capture; the bounded cross-runtime arithmetic correction `71bbdbe` followed
+capture but preceded calculation of scientific contrasts.
+
+Both whole-grid pairs support BND-02: 50-Myr mass/H+P contrasts are within
+2–7% of prediction, with mass-growth exponents 1.9661/1.9326 and accounting
+contamination 0.0396%/0.0152% (cluster/group). Independent review reproduced
+the products and final contrasts. This supports the coarse-control boundary
+mechanism, not production-grid or interior certification.
+
+At 0.25 Myr, the first passing paired-localization cut is 1 kpc in the cluster
+and 0 in the group. The combined localization/background-stability gate passes
+at 2 kpc in the group; the cluster fails through the largest tested 4-kpc cut.
+The 50-Myr cut remains pending. See
+`../science/paired_boundary_results_2026-11-04.md` and
 `logs/2026-11-04-boundary-and-extractor-tranche.md`.
+
+The independent shock candidate fails its synthetic promotion gate: the 10%
+isentropic sound wave passes the 1.05 Mach arm in all six placements. No
+native shock map was run. The spherical storage extractor is implemented,
+independently reviewed and passes 11 tests, but native input semantic identity
+must be qualified before a production smoke. Its scientific qualification
+holds explicitly include domain truncation, candidate boundary-cut conflict
+and out-of-range tracer values.
 
 At 23:33–23:35 UTC on 3 November (10:33–10:35 AEDT on 4 November),
 all four coarse 50-Myr controls `872733`–`872736` were **F/0**, with
