@@ -1,0 +1,13 @@
+{
+  "status": "executed_scientific_gate_failed",
+  "exit_code": 1,
+  "command": ".venv/bin/python scripts/science/validate_independent_bow_shock.py --full-record",
+  "promotion_status": "FAIL_NO_PROMOTION",
+  "files": {
+    "scripts/science/independent_bow_shock.py": "c9b15e34b65df62313f06e4ee56eb2df1838eef1d70b66d993bc084aca7af201",
+    "scripts/science/validate_independent_bow_shock.py": "2497bb73d0db22abedb82d0c2082de775db9c8cf69d6fe9c744428665c25436d",
+    "docs/science/assets/g_lo_hdf5_stall_guarded_continuation_completion_2026-07-12/remote_stage/completion_evidence/grid.out": "2413ee4905525d3e4a770304c955fb88e0602348a2c9efb65857d58d371db2bc",
+    "env/extracted/environments/tabulated/tabulated_cosmo_002031.csv": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+    "docs/science/assets/independent_bow_shock_validation_2026-11-04/synthetic_validation.json": "0b82648c4ae64ee92e77ed3b5744083083f7374a36f5155ca6a6eb3cb553bfad"
+  }
+}
