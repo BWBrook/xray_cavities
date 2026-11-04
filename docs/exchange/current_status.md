@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-11-04 (controls and migration complete; flux/native still held)
+Last updated: 2026-11-04 (flux released and running; native linked to replacement)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -20,19 +20,27 @@ unit states report complete: **8,796,208,343,281 logical bytes**. All ten source
 links were checked live against existing archive directories, with no remaining
 tombstones. This check did not repeat payload hashing or measure quota.
 
-Flux `870374` remains system-held on `870373`, although that prerequisite is
-F/0; the completed migration is no longer in its remaining afterok list.
-Native pilot `871717` is also system-held, awaiting flux among its prerequisites.
-Revalidate the existing flux smoke/packaging receipts and reconcile that stale
-dependency before expecting either analysis to run. No hold was bypassed and
-no duplicate job was submitted during this stocktake.
+At 00:01:46 UTC on 4 November (11:01 AEDT), replacement flux **876162**
+was **R**, with no hold, and native pilot **871717** was system-held only on
+`afterok:876162`. All release prerequisites were revalidated. Startup passed
+18 tests and printed `MIGRATION_COMPLETE_GATE_OK`; no production result is
+claimed yet. The immutable launch overlay fixes the raw-versus-normalized
+migration-plan comparison while preserving frozen science and output paths.
+
+Old flux **870374** is named `superseded_flux` and has a user hold as well as
+its stale system hold. **Do not release it.** PBS retained obsolete reverse
+references after the native dependency changed, so it was quarantined instead
+of cancelled. Remove it only after the native pilot is terminal and any other
+listed successor is checked. See
+`logs/2026-11-04-flux-dependency-release.md` for receipts and checks.
 
 The three 3-November updates through `0f8bf2b` are reviewed. An independent
 reviewer found no material blocker in the interior extractor; 56 focused tests
-passed. Codex turn #6 is with Claude on correspondence thread 29, messages
-2868–2869: settle the numerical negligible-residual criterion and independent
-lateral-shock definition, then perform the interior, four-case spherical and
-G-HI 20-Myr diagnostics. The production-matched simulation remains held.
+passed. Claude answered in message 2870; turn #11 review and release are in
+2871 and 2873. The next scientific sequence is BND-02 whole-grid paired
+contrasts, interior cuts, four-case spherical budgets and G-HI 20-Myr
+diagnostics. Two criterion corrections and synthetic shock validation remain
+documented follow-ups. The production-matched simulation remains held.
 See `logs/2026-11-04-pbs-stocktake-and-diagnostic-review.md` for verification scope.
 
 ## Cavity contrast and bow-shock review - 3 November

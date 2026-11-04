@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "status": "released_running_not_completed",
+  "observed_utc": "2026-11-04T00:01:46.032050+00:00",
+  "flux_job": "876162",
+  "native_job": "871717",
+  "native_afterok": [
+    "876162"
+  ],
+  "superseded_flux_job": "870374",
+  "superseded_policy": "user-held; do not release; retain until native pilot finishes because obsolete reverse references remain",
+  "states": {
+    "876162": [
+      "job_state = R",
+      "Hold_Types = n"
+    ],
+    "871717": [
+      "job_state = H",
+      "Hold_Types = s"
+    ],
+    "870374": [
+      "job_state = H",
+      "Hold_Types = su"
+    ]
+  },
+  "source_check_counts": [
+    8,
+    41,
+    3
+  ],
+  "migration_units_validated": 10,
+  "native_smoke_tests": 104,
+  "native_smoke_skips": 0,
+  "local_focused_tests": 41,
+  "target_startup_tests": 18,
+  "target_migration_gate": "MIGRATION_COMPLETE_GATE_OK observed after running-state capture",
+  "preflight_sha256": "422e5b44e16103904ab1a7b6c359deca55ef4c720fa3735d3882d2a81ea153ac",
+  "overlay_manifest_sha256": "6e2182d9b74c67d264c6bb13d896a06e744195db46d230672db9710a31051131",
+  "overlay_file_hashes": {
+    "q031_flux_release.pbs": "5891740938146984b7a170080f6d07562111544597f93adaa366a184a4030a67",
+    "validate_q031_native_dependencies.py": "379d99dce595ce1e83d69aa6eff0bd20983ab4baa9c240e0cae68a68cbf84f77"
+  },
+  "capture_sha256": "1468815f0609c16687b5f23960e144efb90a32f2225097577fd50560d78db6fb",
+  "capture_bytes": 30396,
+  "capture_payloads_verified": 23,
+  "raw_capture_local": "private_archive/q031_flux_release_2026-11-04",
+  "scope": "migration gate replacement only; frozen science and output paths preserved"
+}

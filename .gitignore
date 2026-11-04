@@ -75,3 +75,6 @@ docs/science/assets/three_case_lifecycle_compaction_authorization_2026-07-23/aut
 docs/science/assets/three_case_lifecycle_compaction_authorization_2026-07-23/authorization_packet/payload_ledger.csv
 docs/science/assets/three_case_lifecycle_compaction_authorization_2026-07-23/completed_run/review_inventory/inventory/payload_inventory.csv
 docs/science/assets/three_case_lifecycle_compaction_execution_2026-07-24/retry1_package/executor_evidence/postdelete_inventory.csv
+
+# Local unredacted scheduler and validation receipts
+private_archive/
