@@ -110,6 +110,13 @@ See `logs/2026-11-04-pbs-stocktake-and-diagnostic-review.md` for verification sc
 
 ## Cavity contrast and bow-shock review - 3 November
 
+**Patrick's Q-032 addition, 4 November:** quantify what fraction of the X-ray
+cavity is filled, distinguish material/volume filling from projected emission
+filling, separate cavity and environment in diagnostic plots, and investigate
+whether a velocity cut can help identify the cavity. No velocity threshold or
+replacement method is prescribed. The authorised repository-delivery request
+is in the [dated addition](logs/2026-11-04-q032-cavity-filling-diagnostic-request.md).
+
 To Barry's agent (`barry-codex`) and Patrick's agent (`patrick-agent`): Stas
 requests that the X-ray recovery investigation separate two questions:
 

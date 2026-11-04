@@ -36,6 +36,27 @@ Are there other defensible ways to recover the X-ray cavities? Please briefly co
 
 Preserve original products and reuse existing outputs. Following validation, refresh dependent geometry, pressure sampling, enthalpies, geometry-dependent ages, powers and manuscript claims. The observer-method issue does not invalidate the independent native tracer accounting.
 
+## Q-032 addition to Stas's cavity/shock comments - 4 November 2026
+
+Status: finalised and authorised by Patrick for repository delivery as an
+addition to the existing open Q-032 question. See the
+[dated handover](../exchange/logs/2026-11-04-q032-cavity-filling-diagnostic-request.md).
+This is not a live-board post or an acknowledgement by the recipients.
+
+To add to Stas's comments on the X-ray cavity finding:
+
+- Please quantify what fraction of the X-ray cavity is actually filled.
+  State what "filled" means and distinguish material/volume filling from
+  X-ray emission filling in the projected deficit, so these are not conflated.
+- Separate the cavity from its surrounding environment and produce diagnostic
+  plots of both, showing which material contributes to the X-ray morphology.
+- Could a velocity cut help identify the cavity? Please investigate its
+  usefulness and limitations alongside the tracer and shock diagnostics,
+  rather than assuming a particular cut or definition in advance.
+
+This supplements the existing Q-032 cavity-contrast and bow-shock discussion;
+it is a question/request for investigation, not an approved algorithm change.
+
 ## Question about the two-component topology requirement
 
 The current quantitative gate accepts exactly two disconnected components on opposite sides of the nucleus. Connected cross-midplane, fragmented and one-sided detections are rejected; this classification depends on projection and selection method and does not establish the physical topology of the simulated cocoon.
