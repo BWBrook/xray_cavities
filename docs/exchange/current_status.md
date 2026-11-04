@@ -1,9 +1,36 @@
 # Current Status
 
-Last updated: 2026-11-04 (boundary analysis and extractor development)
+Last updated: 2026-11-04 (priority spherical-budget submission and G-HI provenance repair requested; compute observations below unchanged)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Priority: submit velocity-cut budgets and resolve G-HI separately
+
+**Supervisor instruction to Barry's agent (`barry-codex`), 4 November:**
+prioritise the native input checks and submit the **100/300-km/s spherical
+energy budgets**. Do not hold up **C-HI, C-LO or G-LO** because of the G-HI
+continuation-directory issue. Check each case independently, run the reviewed
+one-snapshot native smoke, and submit the ready cases without a dependency on
+G-HI's provenance repair or on the X-ray shock finder. Preserve input identity
+checks and report geometry/tracer/boundary conflicts as interpretation flags,
+not as a reason to suppress otherwise valid raw measurements. No boundary
+cut or physical-closure conclusion is approved by this instruction.
+
+Also resolve the G-HI issue: the flux wrapper assumes a duplicate `src` tree in
+the continuation directory, while the original continuation staging record
+lists a reused executable/configuration and no source copy. Bind the accepted
+parent build/source and restart lineage explicitly, verifying executable,
+configuration, atmosphere and exact snapshot identities; do not remove the
+validation gate or manufacture a source copy to satisfy it. The downstream
+`--problem-source-dir` argument also needs the verified source location, so
+changing only the equality assertion is insufficient.
+
+Return PBS job IDs and states per case, the first measured budget comparison,
+and any case-specific blocker. This is a request to execute existing-output
+post-processing, not a claim of submission or a new PLUTO run. Detailed
+deliverables, evidence and proposed G-HI repair checks:
+[priority handover](logs/2026-11-04-priority-spherical-energy-budget-submission.md).
 
 ## Verified job stocktake — 4 November
 
