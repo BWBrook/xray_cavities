@@ -1,0 +1,5 @@
+{
+  "commit": "46ac912cebc59713793e5981a7651a5e188e6bcc",
+  "task": "turn15 independent spherical native smoke and expansion",
+  "native_payloads": "read in place; no copies"
+}

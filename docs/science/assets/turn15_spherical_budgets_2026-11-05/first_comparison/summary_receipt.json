@@ -1,0 +1,18 @@
+{
+  "status": "summarized_raw_measurements",
+  "case": "C-HI",
+  "expected_indices": [
+    1
+  ],
+  "input_sha256": {
+    "docs/science/assets/turn15_spherical_budgets_2026-11-05/smoke/C-HI/snapshot_0001.json": "1ba456471983062704788bf8a4b9ea3c2c09764298f56099b274bd26c03c7771"
+  },
+  "products_sha256": {
+    "C-HI_spherical_budgets.png": "417b3fe98c033f1762bc0238f681c87ed089a095d26736acaa288821f3540a98",
+    "C-HI_spherical_budgets.pdf": "61245ceaaecbf315a050569624706dfa3a500a74fe17dcb55e8a793f72c43aac",
+    "C-HI_spherical_components.pdf": "60ef882d201167aaf63b0d3751cfa572049b80508eae54c4bf8f1a6947330015",
+    "C-HI_spherical_components.png": "b82b55f444ef1caa9888464970c3bd3ca6d070eaa4aec402821d6a9720b7c5e1",
+    "measurements.csv": "b9249b167b001b404cc9ebda1961b72989e09da8738aa51f684c0995cd879ccc"
+  },
+  "interpretation": "Time-varying aperture storage is not energy closure. Native enthalpy is a separate global lobe proxy, not an additive energy term. Blank values are unavailable or not measured; never zero-imputed."
+}

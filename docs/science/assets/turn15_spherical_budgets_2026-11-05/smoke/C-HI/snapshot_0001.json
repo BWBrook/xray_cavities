@@ -1,0 +1,610 @@
+{
+  "actual_time_myr": 0.9999202514051142,
+  "bipolar_power_erg_s": 2e+45,
+  "case": "C-HI",
+  "cocoon_global": {
+    "cell_count": 3191640,
+    "maximum_cell_radius_kpc": 10.38329968553563,
+    "pressure_volume_integral_erg": 1.0915328618029452e+58,
+    "volume_kpc3": 592.5970190616084
+  },
+  "configured_case_index_exclusion_gate": {
+    "scope": "known G-HI indices 48-50 only; not general scientific validation",
+    "status": "passed"
+  },
+  "current_time_code": 306.5769427576077,
+  "current_timestep": "Timestep_1",
+  "energy_estimand": "sum over the current aperture of current minus actual t=0 cell energy",
+  "execution_status": "completed_spherical_energy_budget_measurement",
+  "gravitational_definition": "(rho(t)-rho(0))*Phi0(r)*V with fixed centre-zero initial potential",
+  "initial_time_myr": 0.0,
+  "initial_timestep": "Timestep_0",
+  "injected_energy_erg": 6.311016665148406e+58,
+  "injection_active_age_myr": 0.9999202514051142,
+  "injection_definition": "labelled bipolar power times actual age, capped at 50 Myr",
+  "interpretation_limits": [
+    "storage change in a time-varying sphere is not moving-boundary energy closure",
+    "energy transport through either spherical surface is unmeasured",
+    "the sphere-intersect-safe-box budget is a conditional clipping diagnostic and can exclude jet-affected gas",
+    "one deterministic simulation per case provides no replicate-based population uncertainty",
+    "the 1 percent pressure/density and Mach 0.05 coverage flags diagnose, but do not define, disturbance"
+  ],
+  "kinetic_definition": "0.5*(rho(t)*|v(t)|^2-rho(0)*|v(0)|^2)*V",
+  "method_version": 2,
+  "native_lobe_enthalpy": {
+    "conventions": {
+      "2.5": {
+        "enthalpy_erg": 2.728832154507363e+58,
+        "enthalpy_over_injected": 0.4323918473511421
+      },
+      "4": {
+        "enthalpy_erg": 4.3661314472117807e+58,
+        "enthalpy_over_injected": 0.6918269557618273
+      }
+    },
+    "definition": "alpha times sum of current pressure times full cell volume over all current tr1 > 1e-3 cells",
+    "relationship_to_energy_ledger": "proxy comparison only; never add enthalpy to the thermal/kinetic/gravitational ledger",
+    "scientific_qualification": {
+      "holds": [
+        {
+          "code": "external_native_case_configuration_environment_identity_unverified",
+          "detail": "the extractor binds files and declared labels but does not validate the simulation configuration or prove that the environment belongs to the declared native case"
+        }
+      ],
+      "qualified": false,
+      "scope": "execution and arithmetic do not confer scientific qualification",
+      "status": "held"
+    },
+    "scope": "entire saved native lobe; independent of either speed-defined aperture"
+  },
+  "partition_definition": "current full-cell tr1 > 1e-3 and exact complement applied to the same cell-wise deltas",
+  "provenance": {
+    "environment_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+    "extractor": {
+      "ctime_ns": 1793829979730166762,
+      "device": 48,
+      "inode": 2199448764282,
+      "mtime_ns": 1793829350727990388,
+      "path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/scripts/science/extract_spherical_energy_budget.py",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/scripts/science/extract_spherical_energy_budget.py",
+      "sha256": "a4f0a8f61a2ba9c14c22da9e664a1621dba19045a0feca356b329eb0b92b1375",
+      "size_bytes": 46032
+    },
+    "input_receipt": {
+      "ctime_ns": 1793830960819978814,
+      "device": 48,
+      "inode": 2199448770333,
+      "mtime_ns": 1793830960789541392,
+      "path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/results_smoke/C-HI/inputs/snapshot_0001.json",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/results_smoke/C-HI/inputs/snapshot_0001.json",
+      "sha256": "c4a4c59d58d1bd37bcaf7c84be8de97b21752ba5459d0f98fb562bc4573ccacf",
+      "size_bytes": 3733
+    },
+    "input_receipt_claims": {
+      "case": "C-HI",
+      "current": {
+        "time_code": 306.5769427576077,
+        "timestep": "Timestep_1"
+      },
+      "initial": {
+        "time_code": 0.0,
+        "timestep": "Timestep_0"
+      },
+      "snapshot_index": 1,
+      "status": "bound_spherical_budget_inputs"
+    },
+    "input_stability": "metadata checked after both passes; device-only transitions require full SHA-256",
+    "inputs": [
+      {
+        "ctime_ns": 1792301033237695874,
+        "device": 48,
+        "inode": 2199279960978,
+        "mtime_ns": 1786946297301459591,
+        "path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0001.flt.h5",
+        "resolved_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0001.flt.h5",
+        "role": "current_h5",
+        "sha256": "736802875a4964a7df13874453b8750d6b886b224fd68261b981aca7cbc6046b",
+        "size_bytes": 44890581676
+      },
+      {
+        "ctime_ns": 1792301033230414247,
+        "device": 48,
+        "inode": 2199279949229,
+        "mtime_ns": 1786944376389893770,
+        "path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0000.flt.h5",
+        "resolved_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0000.flt.h5",
+        "role": "initial_h5",
+        "sha256": "939b57aa91bc90836dddc9cc237004cd712984e6b4b1cf1fa2d1fd52bf8a51d8",
+        "size_bytes": 44890581676
+      },
+      {
+        "ctime_ns": 1792301043833063474,
+        "device": 48,
+        "inode": 2199279942934,
+        "mtime_ns": 1786944202976980819,
+        "path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/tabulated_cosmo_002003.csv",
+        "resolved_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/tabulated_cosmo_002003.csv",
+        "role": "environment",
+        "sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+        "size_bytes": 608000
+      },
+      {
+        "ctime_ns": 1792301033467118667,
+        "device": 48,
+        "inode": 2199280329111,
+        "mtime_ns": 1786944254220673080,
+        "path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/grid.out",
+        "resolved_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/grid.out",
+        "role": "grid_file",
+        "sha256": "173fa718049d292790073027fec876fdb4642313da99a7a4d6fb73ad066d1eca",
+        "size_bytes": 143880
+      }
+    ],
+    "mode": "bound_input_receipt",
+    "native_semantic_identity_gate": {
+      "requirements": [
+        "case identity",
+        "compiled and runtime configuration identity",
+        "case-appropriate environment identity"
+      ],
+      "scope": "this extractor verifies bound files and declared labels only; a synthetic or self-authored binding receipt cannot qualify a native production result",
+      "status": "external_validation_required"
+    }
+  },
+  "safe_box": {
+    "buffer_from_each_domain_face_kpc": 40.0,
+    "membership": "complete cells inside all six inset faces",
+    "role": "conditional boundary-sensitivity cut, not the primary complete aperture"
+  },
+  "schema_version": 1,
+  "scientific_qualification": {
+    "holds": [
+      {
+        "code": "external_native_case_configuration_environment_identity_unverified",
+        "detail": "the extractor binds files and declared labels but does not validate the simulation configuration or prove that the environment belongs to the declared native case"
+      }
+    ],
+    "qualified": false,
+    "scope": "execution and arithmetic do not confer scientific qualification",
+    "status": "held"
+  },
+  "shape_nz_ny_nx": [
+    1014,
+    960,
+    960
+  ],
+  "snapshot_index": 1,
+  "speed_definition": "sqrt(vx1^2 + vx2^2 + vx3^2) in the current native surface",
+  "thermal_definition": "(p(t)-p(0))*V/(gamma-1)",
+  "threshold_comparison": {
+    "definition": "conditional R100 budget minus R300 budget on independently selected cell sets; not a nested-aperture qualification or closure result",
+    "delta_difference_erg": {
+      "gravitational_delta_erg": 1.1889740493578055e+51,
+      "kinetic_delta_erg": 3.1118094463469926e+52,
+      "thermal_delta_erg": 6.092297627432758e+53,
+      "total_delta_erg": 6.4153683124933325e+53,
+      "total_over_injected": 1.0165348394532362e-05
+    },
+    "measurement_status": "measured_conditional_diagnostic",
+    "radius_difference_kpc": 0.022607666619222755,
+    "scientific_qualification": {
+      "holds": [
+        {
+          "code": "external_native_case_configuration_environment_identity_unverified",
+          "detail": "the extractor binds files and declared labels but does not validate the simulation configuration or prove that the environment belongs to the declared native case",
+          "source_threshold": "R100"
+        },
+        {
+          "code": "external_native_case_configuration_environment_identity_unverified",
+          "detail": "the extractor binds files and declared labels but does not validate the simulation configuration or prove that the environment belongs to the declared native case",
+          "source_threshold": "R300"
+        }
+      ],
+      "qualified": false,
+      "scope": "execution and arithmetic do not confer scientific qualification",
+      "status": "held"
+    }
+  },
+  "threshold_operator": ">=",
+  "thresholds": {
+    "100": {
+      "aperture_membership": "saved physical cells with centre radius r_i <= raw_radius_kpc",
+      "boundary_safe_box_inscribed_radius_kpc": 160.0,
+      "boundary_safe_conflict": false,
+      "cell_weighting": "full finite-volume cells; no partial-volume weighting",
+      "coverage": {
+        "cocoon_cell_coverage_fraction": 1.0,
+        "cocoon_outside_aperture_cell_count": 0,
+        "cocoon_outside_aperture_volume_kpc3": 0.0,
+        "cocoon_total_cell_count": 3191640,
+        "cocoon_total_volume_kpc3": 592.5970190616084,
+        "cocoon_volume_coverage_fraction": 1.0,
+        "outside_aperture_within_safe_box_disturbance": {
+          "cell_count": 776196480,
+          "flag_rule": "Mach >= 0.05 or abs(p/p0-1) >= 0.01 or abs(rho/rho0-1) >= 0.01",
+          "flagged_cell_count": 3848,
+          "maximum_abs_density_fractional_change": 0.04558649631010181,
+          "maximum_abs_pressure_fractional_change": 0.3441062526148342,
+          "maximum_speed_km_s": 99.92758802065866,
+          "maximum_speed_over_local_sound_speed": 0.11678655944598305,
+          "role": "coverage diagnostic only; never changes the aperture"
+        },
+        "speed_ge_100_cells_outside_aperture": 0
+      },
+      "domain_box_inscribed_radius_kpc": 200.0,
+      "domain_geometry_status": "complete_sphere",
+      "isolated_radius_defining_fast_cell": false,
+      "measurement_status": "measured",
+      "padding_kpc": 0.0,
+      "padding_reason": "none: the discrete estimand is cell-centre membership and <= includes every radius-defining cell",
+      "qualifying_cell_count": 6234304,
+      "qualifying_volume_kpc3": 1148.084678931495,
+      "radius_defining_cell_boundary_margin_kpc": 199.44999998807907,
+      "radius_defining_cell_inside_safe_box": true,
+      "radius_defining_index_zyx": [
+        350,
+        469,
+        470
+      ],
+      "radius_defining_same_threshold_neighbour_count": 13,
+      "radius_defining_speed_km_s": 100.18691332483391,
+      "radius_defining_tracer": 5.73244651747018e-09,
+      "radius_defining_velocity_km_s": [
+        -3.7592030681632007,
+        -4.140999926665114,
+        -100.03068585917748
+      ],
+      "radius_defining_xyz_kpc": [
+        -0.4749999940395355,
+        -0.5249999761581421,
+        -10.714386940002441
+      ],
+      "raw_radius_kpc": 10.737752905957489,
+      "review_flags": {
+        "cocoon_outside_aperture_cell_count": 0,
+        "disturbed_cells_outside_aperture_within_safe_box": 3848,
+        "isolated_radius_defining_fast_cell": false
+      },
+      "safe_box_clipping_identity": {
+        "cell_count_residual": 0,
+        "cocoon_cell_count_residual": 0,
+        "energy_residual_erg": {
+          "gravitational_erg": 0.0,
+          "kinetic_erg": 0.0,
+          "thermal_erg": 0.0,
+          "total_erg": 0.0
+        },
+        "energy_tolerance_erg": 6.997164292380755e+49,
+        "pass": true
+      },
+      "scientific_qualification": {
+        "holds": [
+          {
+            "code": "external_native_case_configuration_environment_identity_unverified",
+            "detail": "the extractor binds files and declared labels but does not validate the simulation configuration or prove that the environment belongs to the declared native case"
+          }
+        ],
+        "qualified": false,
+        "scope": "execution and arithmetic do not confer scientific qualification",
+        "status": "held"
+      },
+      "speed_threshold_km_s": 100.0,
+      "sphere_budget": {
+        "cell_count": 21656112,
+        "cocoon_cell_count": 3191640,
+        "cocoon_volume_kpc3": 592.5970190616083,
+        "current_binary_partition": {
+          "ambient": {
+            "gravitational_delta_erg": 8.813004981972964e+54,
+            "kinetic_delta_erg": 1.0647078139591977e+58,
+            "thermal_delta_erg": 1.6349529422247233e+58,
+            "total_delta_erg": 2.700542056682118e+58,
+            "total_over_injected": 0.42790919434509433
+          },
+          "cocoon": {
+            "gravitational_delta_erg": -4.587438039976588e+54,
+            "kinetic_delta_erg": 2.796640889314669e+58,
+            "thermal_delta_erg": 1.5004400901879648e+58,
+            "total_delta_erg": 4.2966222356986366e+58,
+            "total_over_injected": 0.680813007423361
+          },
+          "identity_pass": true,
+          "identity_residual_erg": {
+            "gravitational_erg": 6.80564733841877e+38,
+            "kinetic_erg": 0.0,
+            "thermal_erg": 0.0,
+            "total_erg": 0.0
+          },
+          "identity_tolerance_erg": 6.997164292380755e+49
+        },
+        "delta_erg": {
+          "gravitational_delta_erg": 4.225566941996375e+54,
+          "kinetic_delta_erg": 3.861348703273867e+58,
+          "thermal_delta_erg": 3.135393032412688e+58,
+          "total_delta_erg": 6.997164292380755e+58,
+          "total_over_injected": 1.1087222017684553
+        },
+        "volume_kpc3": 5186.217725595391
+      },
+      "sphere_cells_outside_boundary_safe_box": {
+        "cell_count": 0,
+        "cocoon_cell_count": 0,
+        "cocoon_volume_kpc3": 0.0,
+        "current_binary_partition": {
+          "ambient": {
+            "gravitational_delta_erg": 0.0,
+            "kinetic_delta_erg": 0.0,
+            "thermal_delta_erg": 0.0,
+            "total_delta_erg": 0.0,
+            "total_over_injected": 0.0
+          },
+          "cocoon": {
+            "gravitational_delta_erg": 0.0,
+            "kinetic_delta_erg": 0.0,
+            "thermal_delta_erg": 0.0,
+            "total_delta_erg": 0.0,
+            "total_over_injected": 0.0
+          },
+          "identity_pass": true,
+          "identity_residual_erg": {
+            "gravitational_erg": 0.0,
+            "kinetic_erg": 0.0,
+            "thermal_erg": 0.0,
+            "total_erg": 0.0
+          },
+          "identity_tolerance_erg": 6.311016665148406e+49
+        },
+        "delta_erg": {
+          "gravitational_delta_erg": 0.0,
+          "kinetic_delta_erg": 0.0,
+          "thermal_delta_erg": 0.0,
+          "total_delta_erg": 0.0,
+          "total_over_injected": 0.0
+        },
+        "volume_kpc3": 0.0
+      },
+      "sphere_geometrically_complete_in_boundary_safe_box": true,
+      "sphere_geometrically_complete_in_domain_box": true,
+      "sphere_intersect_boundary_safe_box_budget": {
+        "cell_count": 21656112,
+        "cocoon_cell_count": 3191640,
+        "cocoon_volume_kpc3": 592.5970190616083,
+        "current_binary_partition": {
+          "ambient": {
+            "gravitational_delta_erg": 8.813004981972964e+54,
+            "kinetic_delta_erg": 1.0647078139591977e+58,
+            "thermal_delta_erg": 1.6349529422247233e+58,
+            "total_delta_erg": 2.700542056682118e+58,
+            "total_over_injected": 0.42790919434509433
+          },
+          "cocoon": {
+            "gravitational_delta_erg": -4.587438039976588e+54,
+            "kinetic_delta_erg": 2.796640889314669e+58,
+            "thermal_delta_erg": 1.5004400901879648e+58,
+            "total_delta_erg": 4.2966222356986366e+58,
+            "total_over_injected": 0.680813007423361
+          },
+          "identity_pass": true,
+          "identity_residual_erg": {
+            "gravitational_erg": 6.80564733841877e+38,
+            "kinetic_erg": 0.0,
+            "thermal_erg": 0.0,
+            "total_erg": 0.0
+          },
+          "identity_tolerance_erg": 6.997164292380755e+49
+        },
+        "delta_erg": {
+          "gravitational_delta_erg": 4.225566941996375e+54,
+          "kinetic_delta_erg": 3.861348703273867e+58,
+          "thermal_delta_erg": 3.135393032412688e+58,
+          "total_delta_erg": 6.997164292380755e+58,
+          "total_over_injected": 1.1087222017684553
+        },
+        "volume_kpc3": 5186.217725595391
+      }
+    },
+    "300": {
+      "aperture_membership": "saved physical cells with centre radius r_i <= raw_radius_kpc",
+      "boundary_safe_box_inscribed_radius_kpc": 160.0,
+      "boundary_safe_conflict": false,
+      "cell_weighting": "full finite-volume cells; no partial-volume weighting",
+      "coverage": {
+        "cocoon_cell_coverage_fraction": 1.0,
+        "cocoon_outside_aperture_cell_count": 0,
+        "cocoon_outside_aperture_volume_kpc3": 0.0,
+        "cocoon_total_cell_count": 3191640,
+        "cocoon_total_volume_kpc3": 592.5970190616084,
+        "cocoon_volume_coverage_fraction": 1.0,
+        "outside_aperture_within_safe_box_disturbance": {
+          "cell_count": 776289176,
+          "flag_rule": "Mach >= 0.05 or abs(p/p0-1) >= 0.01 or abs(rho/rho0-1) >= 0.01",
+          "flagged_cell_count": 6312,
+          "maximum_abs_density_fractional_change": 0.11967647925154612,
+          "maximum_abs_pressure_fractional_change": 1.3331728513474363,
+          "maximum_speed_km_s": 298.0957085690053,
+          "maximum_speed_over_local_sound_speed": 0.2736354187068837,
+          "role": "coverage diagnostic only; never changes the aperture"
+        },
+        "speed_ge_100_cells_outside_aperture": 1216
+      },
+      "domain_box_inscribed_radius_kpc": 200.0,
+      "domain_geometry_status": "complete_sphere",
+      "isolated_radius_defining_fast_cell": false,
+      "measurement_status": "measured",
+      "padding_kpc": 0.0,
+      "padding_reason": "none: the discrete estimand is cell-centre membership and <= includes every radius-defining cell",
+      "qualifying_cell_count": 6143648,
+      "qualifying_volume_kpc3": 1129.97502901721,
+      "radius_defining_cell_boundary_margin_kpc": 199.84999999403954,
+      "radius_defining_cell_inside_safe_box": true,
+      "radius_defining_index_zyx": [
+        350,
+        477,
+        479
+      ],
+      "radius_defining_same_threshold_neighbour_count": 13,
+      "radius_defining_speed_km_s": 300.7889361931811,
+      "radius_defining_tracer": 3.3850668046397914e-08,
+      "radius_defining_velocity_km_s": [
+        -0.4107399873231928,
+        -3.415301266100565,
+        -300.76926562757393
+      ],
+      "radius_defining_xyz_kpc": [
+        -0.02500000037252903,
+        -0.125,
+        -10.714386940002441
+      ],
+      "raw_radius_kpc": 10.715145239338266,
+      "review_flags": {
+        "cocoon_outside_aperture_cell_count": 0,
+        "disturbed_cells_outside_aperture_within_safe_box": 6312,
+        "isolated_radius_defining_fast_cell": false
+      },
+      "safe_box_clipping_identity": {
+        "cell_count_residual": 0,
+        "cocoon_cell_count_residual": 0,
+        "energy_residual_erg": {
+          "gravitational_erg": 0.0,
+          "kinetic_erg": 0.0,
+          "thermal_erg": 0.0,
+          "total_erg": 0.0
+        },
+        "energy_tolerance_erg": 6.997100138697631e+49,
+        "pass": true
+      },
+      "scientific_qualification": {
+        "holds": [
+          {
+            "code": "external_native_case_configuration_environment_identity_unverified",
+            "detail": "the extractor binds files and declared labels but does not validate the simulation configuration or prove that the environment belongs to the declared native case"
+          }
+        ],
+        "qualified": false,
+        "scope": "execution and arithmetic do not confer scientific qualification",
+        "status": "held"
+      },
+      "speed_threshold_km_s": 300.0,
+      "sphere_budget": {
+        "cell_count": 21563416,
+        "cocoon_cell_count": 3191640,
+        "cocoon_volume_kpc3": 592.5970190616083,
+        "current_binary_partition": {
+          "ambient": {
+            "gravitational_delta_erg": 8.811816007923606e+54,
+            "kinetic_delta_erg": 1.0647047021497515e+58,
+            "thermal_delta_erg": 1.634892019248449e+58,
+            "total_delta_erg": 2.7004779029989926e+58,
+            "total_over_injected": 0.4278990289966997
+          },
+          "cocoon": {
+            "gravitational_delta_erg": -4.587438039976588e+54,
+            "kinetic_delta_erg": 2.796640889314669e+58,
+            "thermal_delta_erg": 1.5004400901879648e+58,
+            "total_delta_erg": 4.2966222356986366e+58,
+            "total_over_injected": 0.680813007423361
+          },
+          "identity_pass": true,
+          "identity_residual_erg": {
+            "gravitational_erg": 6.80564733841877e+38,
+            "kinetic_erg": 0.0,
+            "thermal_erg": 0.0,
+            "total_erg": 0.0
+          },
+          "identity_tolerance_erg": 6.997100138697631e+49
+        },
+        "delta_erg": {
+          "gravitational_delta_erg": 4.224377967947017e+54,
+          "kinetic_delta_erg": 3.861345591464421e+58,
+          "thermal_delta_erg": 3.135332109436414e+58,
+          "total_delta_erg": 6.99710013869763e+58,
+          "total_over_injected": 1.1087120364200609
+        },
+        "volume_kpc3": 5153.277071569874
+      },
+      "sphere_cells_outside_boundary_safe_box": {
+        "cell_count": 0,
+        "cocoon_cell_count": 0,
+        "cocoon_volume_kpc3": 0.0,
+        "current_binary_partition": {
+          "ambient": {
+            "gravitational_delta_erg": 0.0,
+            "kinetic_delta_erg": 0.0,
+            "thermal_delta_erg": 0.0,
+            "total_delta_erg": 0.0,
+            "total_over_injected": 0.0
+          },
+          "cocoon": {
+            "gravitational_delta_erg": 0.0,
+            "kinetic_delta_erg": 0.0,
+            "thermal_delta_erg": 0.0,
+            "total_delta_erg": 0.0,
+            "total_over_injected": 0.0
+          },
+          "identity_pass": true,
+          "identity_residual_erg": {
+            "gravitational_erg": 0.0,
+            "kinetic_erg": 0.0,
+            "thermal_erg": 0.0,
+            "total_erg": 0.0
+          },
+          "identity_tolerance_erg": 6.311016665148406e+49
+        },
+        "delta_erg": {
+          "gravitational_delta_erg": 0.0,
+          "kinetic_delta_erg": 0.0,
+          "thermal_delta_erg": 0.0,
+          "total_delta_erg": 0.0,
+          "total_over_injected": 0.0
+        },
+        "volume_kpc3": 0.0
+      },
+      "sphere_geometrically_complete_in_boundary_safe_box": true,
+      "sphere_geometrically_complete_in_domain_box": true,
+      "sphere_intersect_boundary_safe_box_budget": {
+        "cell_count": 21563416,
+        "cocoon_cell_count": 3191640,
+        "cocoon_volume_kpc3": 592.5970190616083,
+        "current_binary_partition": {
+          "ambient": {
+            "gravitational_delta_erg": 8.811816007923606e+54,
+            "kinetic_delta_erg": 1.0647047021497515e+58,
+            "thermal_delta_erg": 1.634892019248449e+58,
+            "total_delta_erg": 2.7004779029989926e+58,
+            "total_over_injected": 0.4278990289966997
+          },
+          "cocoon": {
+            "gravitational_delta_erg": -4.587438039976588e+54,
+            "kinetic_delta_erg": 2.796640889314669e+58,
+            "thermal_delta_erg": 1.5004400901879648e+58,
+            "total_delta_erg": 4.2966222356986366e+58,
+            "total_over_injected": 0.680813007423361
+          },
+          "identity_pass": true,
+          "identity_residual_erg": {
+            "gravitational_erg": 6.80564733841877e+38,
+            "kinetic_erg": 0.0,
+            "thermal_erg": 0.0,
+            "total_erg": 0.0
+          },
+          "identity_tolerance_erg": 6.997100138697631e+49
+        },
+        "delta_erg": {
+          "gravitational_delta_erg": 4.224377967947017e+54,
+          "kinetic_delta_erg": 3.861345591464421e+58,
+          "thermal_delta_erg": 3.135332109436414e+58,
+          "total_delta_erg": 6.99710013869763e+58,
+          "total_over_injected": 1.1087120364200609
+        },
+        "volume_kpc3": 5153.277071569874
+      }
+    }
+  },
+  "tracer_diagnostics": {
+    "handling": "raw stored values used without clipping, tolerance, or repair; any value outside [0,1] places scientific interpretation on hold",
+    "maximum": 1.0,
+    "membership": "current stored float64 tr1 > 1e-3; exact complement is ambient",
+    "minimum": 0.0,
+    "outside_unit_interval_cell_count": 0
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "decision": "native_smoke_accepted_for_raw_measurement_expansion",
+  "stage_manifest_sha256": "84cb193cba9f7527b48a6ad06ba6ceb3976042b606cb85fabed7d7003f1715c2",
+  "files": {
+    "results_smoke/C-HI/snapshot_0001.json": "1ba456471983062704788bf8a4b9ea3c2c09764298f56099b274bd26c03c7771",
+    "results_smoke/C-HI/snapshot_0001.complete.json": "42b0f738f8764f7362686b5c1ece0cd1bbaf18fb6c557bec47f7d97fadebf2ba",
+    "results_smoke/C-HI/inputs/snapshot_0001.json": "c4a4c59d58d1bd37bcaf7c84be8de97b21752ba5459d0f98fb562bc4573ccacf",
+    "results_smoke/C-HI/native_preflight.json": "1db01d23a002ada7c135ec445850517c45b570f74a513fad0e05bbafaf83c5c0",
+    "results_smoke/C-HI/completion.json": "da5f66c76c14a446fd7335b5db7aabe5df14f4bb3f03340fd81b8053dc6e62b7",
+    "results_smoke/C-HI/tests.xml": "9c8151ed954bfac5a9970431a1456712e4e16cb1cbb5f6353b3072b8a837237d"
+  },
+  "reviewed_job": "876531.kunanyi-ohpc",
+  "job_state": "F",
+  "exit_status": 0,
+  "scope": "raw measurements only; no energy closure, boundary-width adoption or realised-injection claim",
+  "independent_checks": [
+    "34 capture/stage checksums",
+    "receipt/result/completion/source bindings",
+    "30 target tests and empty stderr",
+    "sphere counts exact and finite-volume volumes within 2.3e-16 relative",
+    "component and cocoon/ambient sum identities",
+    "labelled Q times actual active age and native 2.5/4pV ratios"
+  ],
+  "native_field_reextraction_by_reviewer": false,
+  "remaining_holds": [
+    "historical executable-to-source build linkage is qualified",
+    "labelled input is not measured realised jet delivery",
+    "surface transport and evolving aperture preclude a closure claim"
+  ]
+}

@@ -1,11 +1,35 @@
 # Current Status
 
-Last updated: 2026-11-04 (X-ray decomposition and two-stage paper comparison clarified; priority spherical-budget submission unchanged; compute observations below unchanged)
+Last updated: 2026-11-05 (first native spherical comparison reviewed; three independent histories submitted; G-HI lineage validation running)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
 
-## Priority: submit velocity-cut budgets and resolve G-HI separately
+## Turn 15: first native result and submitted histories
+
+C-HI snapshot 1 completed in job **876531**, F/0 in 21m 35s. Independent
+review accepts expansion of raw measurements after verifying provenance,
+arithmetic and the sphere geometry. At actual age 0.999920251 Myr, R100/R300
+are **10.737753/10.715145 kpc**, with total storage changes of
+**1.108722/1.108712 times labelled bipolar input**. Global native-lobe
+2.5pV/input and 4pV/input are **0.432392/0.691827**. These proxies are separate
+from the component ledger. Realised jet delivery and aperture transport are
+unmeasured, so the excess is not a closure conclusion.
+
+Independent histories are submitted: **C-HI 876542** (0, 2--50, reusing smoke
+1), **C-LO 876543** (0--50), **G-LO 876544** (0--50). Their `afterany` chain
+serializes I/O without requiring the preceding case to succeed; none depends
+on G-HI. Full history completion is not claimed.
+
+G-HI lineage validator **876541** is running and has passed its staged-contract
+check and 15 target tests. Its successful full restart hash is still required
+before G-HI input-contract creation. The repaired spherical preflight admits
+only snapshots 0--47. The G-HI/20 emission/filling diagnostic is independently
+reviewed (37 tests), with native execution still pending that input chain.
+See [the turn-15 handover](logs/2026-11-05-turn15-native-budgets-and-lineage.md)
+for first-result components, receipts, interpretation limits and submissions.
+
+## Priority instruction: velocity-cut budgets and separate G-HI repair
 
 **Supervisor instruction to Barry's agent (`barry-codex`), 4 November:**
 prioritise the native input checks and submit the **100/300-km/s spherical

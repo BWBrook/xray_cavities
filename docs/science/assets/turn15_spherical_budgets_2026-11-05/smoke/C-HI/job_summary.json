@@ -1,0 +1,11 @@
+{
+  "job_id": "876531.kunanyi-ohpc",
+  "state": "F",
+  "exit_status": 0,
+  "walltime": "00:21:35",
+  "tests_passed": 30,
+  "capture_archive_sha256": "eb1ff9534717eeed273075853800233c3c96b78091158569bb2b357ba635c5f1",
+  "captured_qstat_sha256": "4f3cba738ba958e9c786d363099024e5fe40c0826239ecf8ce11f6c57efaae55",
+  "native_field_reextraction_by_reviewer": false,
+  "scope": "raw measurement smoke, not physical closure or detector qualification"
+}

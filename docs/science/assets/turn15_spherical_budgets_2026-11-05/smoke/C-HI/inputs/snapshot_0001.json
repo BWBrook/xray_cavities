@@ -1,0 +1,81 @@
+{
+  "case": "C-HI",
+  "current": {
+    "time_code": 306.5769427576077,
+    "timestep": "Timestep_1"
+  },
+  "initial": {
+    "time_code": 0.0,
+    "timestep": "Timestep_0"
+  },
+  "inputs": {
+    "current_h5": {
+      "ctime_ns": 1792301033237695874,
+      "device": 48,
+      "inode": 2199279960978,
+      "mtime_ns": 1786946297301459591,
+      "path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0001.flt.h5",
+      "resolved_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0001.flt.h5",
+      "sha256": "736802875a4964a7df13874453b8750d6b886b224fd68261b981aca7cbc6046b",
+      "size_bytes": 44890581676
+    },
+    "environment": {
+      "ctime_ns": 1792301043833063474,
+      "device": 48,
+      "inode": 2199279942934,
+      "mtime_ns": 1786944202976980819,
+      "path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/tabulated_cosmo_002003.csv",
+      "resolved_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/tabulated_cosmo_002003.csv",
+      "sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+      "size_bytes": 608000
+    },
+    "grid_file": {
+      "ctime_ns": 1792301033467118667,
+      "device": 48,
+      "inode": 2199280329111,
+      "mtime_ns": 1786944254220673080,
+      "path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/grid.out",
+      "resolved_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/grid.out",
+      "sha256": "173fa718049d292790073027fec876fdb4642313da99a7a4d6fb73ad066d1eca",
+      "size_bytes": 143880
+    },
+    "initial_h5": {
+      "ctime_ns": 1792301033230414247,
+      "device": 48,
+      "inode": 2199279949229,
+      "mtime_ns": 1786944376389893770,
+      "path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0000.flt.h5",
+      "resolved_path": "/u/bwbrook/xray_cavities_scratch_archive_2026-10-16/xray_cavities_runs/2026-08-17-c-hi-full-history-rerun/C-HI/particles/problem/outputs/data.0000.flt.h5",
+      "sha256": "939b57aa91bc90836dddc9cc237004cd712984e6b4b1cf1fa2d1fd52bf8a51d8",
+      "size_bytes": 44890581676
+    }
+  },
+  "native_preflight": {
+    "contract": {
+      "ctime_ns": 1793829979028167038,
+      "device": 48,
+      "inode": 2199448764236,
+      "mtime_ns": 1793829785370893239,
+      "path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/contracts/C-HI.json",
+      "resolved_path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/contracts/C-HI.json",
+      "sha256": "07fc91f1b90c5440bcc59b47c5cead89037cb8bf983003f91d104fae938fb03e",
+      "size_bytes": 29102
+    },
+    "scientific_qualification": {
+      "holds": [
+        "historical_executable_to_source_build_linkage_not_established_by_this_preflight",
+        "native_geometry_tracer_and_boundary_holds_require_result_review"
+      ],
+      "qualified": false
+    },
+    "semantic_checks": {
+      "compiled_geometry_eos_units": "passed",
+      "historically_bound_configuration_and_atmosphere": "passed",
+      "initialization_gamma": "passed",
+      "runtime_case_power_speed_duration": "passed"
+    }
+  },
+  "schema_version": 1,
+  "snapshot_index": 1,
+  "status": "bound_spherical_budget_inputs"
+}

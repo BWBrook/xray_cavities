@@ -1,0 +1,112 @@
+{
+  "case": "C-HI",
+  "completed_indices": [
+    1
+  ],
+  "contract_sha256": "07fc91f1b90c5440bcc59b47c5cead89037cb8bf983003f91d104fae938fb03e",
+  "products": [
+    {
+      "analysis_source_sha256": {
+        "extract_spherical_energy_budget.py": "a4f0a8f61a2ba9c14c22da9e664a1621dba19045a0feca356b329eb0b92b1375",
+        "measure_q031_fluxes.py": "333d8edfad3849be50b2b0a3da481b5c273a442a012b2368e6eaf9b225546953",
+        "pluto_h5_level3_ambient_extract.py": "00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de",
+        "prepare_spherical_budget_inputs.py": "7a38147e91dca143c43c031d3752c38c78e516d12093aa8987770d3b8c07c671",
+        "run_spherical_budget_case.py": "b1578e8f9f266c0671678e3c7ed50afa283cb62a0d1c4974581c782e36a88c91",
+        "select_common_age_hdf5.py": "c38c9d781b681ff9682950020bade8caf62746ba9e112d28db315787efec451d",
+        "snapshot_energy.py": "f19859379463462a75ea7e8445d18cd2f6fa9ef05203aa71e507df5f67ebac21"
+      },
+      "case": "C-HI",
+      "contract_sha256": "07fc91f1b90c5440bcc59b47c5cead89037cb8bf983003f91d104fae938fb03e",
+      "extractor_sha256": "a4f0a8f61a2ba9c14c22da9e664a1621dba19045a0feca356b329eb0b92b1375",
+      "input_receipt": {
+        "ctime_ns": 1793830960819978814,
+        "device": 48,
+        "inode": 2199448770333,
+        "mtime_ns": 1793830960789541392,
+        "path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/results_smoke/C-HI/inputs/snapshot_0001.json",
+        "resolved_path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/results_smoke/C-HI/inputs/snapshot_0001.json",
+        "sha256": "c4a4c59d58d1bd37bcaf7c84be8de97b21752ba5459d0f98fb562bc4573ccacf",
+        "size_bytes": 3733
+      },
+      "output": {
+        "ctime_ns": 1793831275375955708,
+        "device": 48,
+        "inode": 2199448772485,
+        "mtime_ns": 1793831275372555966,
+        "path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/results_smoke/C-HI/snapshot_0001.json",
+        "resolved_path": "/u/bwbrook/codex_kunanyi/turn15_spherical_2026-11-05_r1/results_smoke/C-HI/snapshot_0001.json",
+        "sha256": "1ba456471983062704788bf8a4b9ea3c2c09764298f56099b274bd26c03c7771",
+        "size_bytes": 25795
+      },
+      "safe_buffer_kpc": 40.0,
+      "schema_version": 1,
+      "snapshot_index": 1,
+      "status": "snapshot_measurement_completed"
+    }
+  ],
+  "requested_indices": [
+    1
+  ],
+  "schema_version": 1,
+  "scientific_qualification": {
+    "holds": [
+      "historical_executable_to_source_build_linkage_not_established_by_this_preflight",
+      "native_geometry_tracer_and_boundary_holds_require_result_review"
+    ],
+    "qualified": false
+  },
+  "scientifically_retained_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "status": "requested_native_measurements_completed"
+}
