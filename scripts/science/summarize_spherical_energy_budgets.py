@@ -102,6 +102,28 @@ def plot(rows: list[dict], output: Path, case: str) -> None:
     fig.savefig(output / f"{case}_spherical_budgets.pdf")
     plt.close(fig)
 
+    fig, axes = plt.subplots(2, 3, figsize=(13, 7), constrained_layout=True, sharex=True)
+    component_colors = {"thermal": "#D55E00", "kinetic": "#0072B2", "gravitational": "#009E73", "total": "#222222"}
+    for row_index, speed in enumerate((100, 300)):
+        selected = [r for r in rows if r["speed_threshold_km_s"] == speed]
+        x = [r["actual_time_myr"] if r["actual_time_myr"] is not None else np.nan for r in selected]
+        for ax, part in zip(axes[row_index], ("all", "cocoon", "ambient")):
+            for component in (*COMPONENTS, "total"):
+                field = f"{part}_{component}_over_injected"
+                y = [r[field] if r[field] is not None else np.nan for r in selected]
+                ax.plot(x, y, "o-", ms=3, color=component_colors[component], label=component)
+            ax.axhline(0, color="#bbbbbb", lw=0.6)
+            ax.axhline(1, color="#777777", lw=0.8, ls=":")
+            ax.set_title(f"{part.capitalize()} — {speed} km/s aperture")
+            ax.set_xlabel("Actual simulation age (Myr)")
+            ax.set_ylabel("Storage change / labelled bipolar input")
+            ax.grid(alpha=0.2)
+            ax.legend(fontsize=8)
+    fig.suptitle(f"{case}: component storage changes; qualification holds retained\nMoving apertures are not closed energy budgets; missing measurements remain gaps", fontsize=11)
+    fig.savefig(output / f"{case}_spherical_components.png", dpi=180)
+    fig.savefig(output / f"{case}_spherical_components.pdf")
+    plt.close(fig)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)

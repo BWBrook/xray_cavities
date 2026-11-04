@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import hashlib
+import shutil
 import sys
 from pathlib import Path
 
@@ -207,3 +209,157 @@ def test_resume_cannot_substitute_receipt_input_from_another_run(tmp_path,monkey
     monkeypatch.setattr(runner.budget,'extract_snapshot',actual)
     with pytest.raises(ValueError,match='historically bound input'):
         runner.run_case(path,preflight.budget._sha256(path),tmp_path/'results',[1,2],0.)
+
+
+def _inherited_contract(tmp_path):
+    path, contract = _contract(tmp_path)
+    parent = tmp_path/'problem'
+    late = tmp_path/'continuation/problem'
+    (late/'outputs').mkdir(parents=True)
+    old_environment = parent/'tabulated_cosmo_002003.csv'
+    environment = parent/'tabulated_cosmo_002031.csv'
+    old_environment.rename(environment)
+    (parent/'environment.ini').write_text('TabulatedData tabulated_cosmo_002031.csv\n')
+    (parent/'src/pluto').write_bytes((parent/'pluto').read_bytes())
+    (parent/'src/pluto.ini').write_bytes((parent/'pluto.ini').read_bytes())
+    names = ['pluto.ini', 'environment.ini', environment.name, 'case_manifest.json', 'definitions_overrides.json']
+    for name in names:
+        if not (parent/name).exists():
+            (parent/name).write_text('{}')
+        shutil.copyfile(parent/name, late/name)
+    shutil.copyfile(parent/'pluto', late/'pluto')
+    for root in (parent, late):
+        (root/'outputs/grid.out').write_text('synthetic retained geometry\n')
+    for index in range(10, 51):
+        current = late/'outputs'/f'data.{index:04d}.flt.h5'
+        if index == 10:
+            current.symlink_to(parent/'outputs'/current.name)
+        else:
+            shutil.copyfile(parent/'outputs'/current.name, current)
+    contract.update(case='G-HI', problem_root=str(late), historical_workdir=str(late.parent))
+    for role, name in [('runtime_config', 'pluto.ini'), ('environment_config', 'environment.ini'),
+                       ('environment', environment.name), ('binary', 'pluto')]:
+        contract['files'][role].update(path=str(late/name), sha256=preflight.budget._sha256(late/name))
+    witness = Path(contract['evidence']['hashes']['path'])
+    witness.write_text('\n'.join(contract['files'][key]['sha256'] for key in preflight.HISTORICAL_ROLES))
+    contract['evidence']['hashes']['sha256'] = preflight.budget._sha256(witness)
+    log = Path(contract['evidence']['production']['path'])
+    log.write_text(f'CASE_ID=G-HI\nWORKDIR={late.parent}\n')
+    contract['evidence']['production']['sha256'] = preflight.budget._sha256(log)
+    source_hashes = {str(Path(value['path']).relative_to(parent/'src')): value['sha256']
+                     for value in contract['source_files'].values()}
+    historical = {name: contract['evidence']['hashes'] for name in (
+        'parent_run_log', 'parent_source_revisions', 'staging_manifest', 'restart_report',
+        'canonical_sequence_report', 'endpoint_report', 'source_revisions', 'done_marker')}
+    historical['continuation_run_log'] = contract['evidence']['production']
+    restart_names = {'fluid_catalogue': 'dbl.h5.out', 'fluid_hdf5': 'data.0002.dbl.h5',
+                     'particle_restart': 'particles.1000.dbl', 'restart_out': 'restart.out'}
+    restart_paths = {}
+    for name, filename in restart_names.items():
+        source = parent/'outputs'/filename
+        source.write_bytes(f'{name} restart fixture'.encode())
+        restart_paths[name] = source
+    for name in ('fluid_hdf5', 'particle_restart'):
+        (late/'outputs'/restart_names[name]).symlink_to(restart_paths[name])
+    restart_hashes = {name: preflight.budget._sha256(source) for name, source in restart_paths.items()}
+    def chain(transition):
+        values = []
+        for index in range(51):
+            source = (parent if index < transition else late)/'outputs'/f'data.{index:04d}.flt.h5'
+            snap = preflight.inspect_file(source, output_index=index)[0]
+            values.append({**preflight.budget._stat_identity(source), 'output_index': index,
+                           'timestep': snap.timestep, 'time_code': snap.time_code,
+                           'time_myr': snap.actual_time_myr, 'shape': list(snap.shape)})
+        return values
+    receipt = {
+        'schema_version': 1, 'status': 'passed',
+        'lineage': 'accepted failed-run parent build/source plus validated 10 Myr home continuation',
+        'parent_problem': str(parent), 'continuation_problem': str(late),
+        'problem_source_dir': str(parent/'src'), 'source_hashes': source_hashes,
+        'source_file_count': len(source_hashes),
+        'source_manifest_sha256': hashlib.sha256(json.dumps(source_hashes,sort_keys=True,separators=(',', ':')).encode()).hexdigest(),
+        'binary_paths': [str(p) for p in (parent/'src/pluto', parent/'pluto', late/'pluto')],
+        'binary_sha256': preflight.budget._sha256(parent/'pluto'),
+        'build_pluto_ini_sha256': preflight.budget._sha256(parent/'src/pluto.ini'),
+        'rendered_inputs': {name: {'parent_path':str(parent/name), 'continuation_path':str(late/name),
+                                  'sha256':preflight.budget._sha256(parent/name)} for name in names},
+        'grid_out': {name:preflight.budget._sha256(root/'outputs/grid.out')
+                     for name,root in [('parent',parent),('continuation',late)]},
+        'historical_evidence': historical,
+        'restart': {'report': {'status':'ok','input_sha256':restart_hashes},
+                    'verified_sha256':restart_hashes, 'fluid_hdf5_rehashed':True,
+                    'accepted_parent_restart_paths': {name:str(source) for name,source in restart_paths.items()},
+                    'continuation_inherited_links': {name:str(late/'outputs'/restart_names[name])
+                                                     for name in ('fluid_hdf5','particle_restart')},
+                    'input_identity': {name:preflight.budget._stat_identity(source) for name,source in restart_paths.items()}},
+        'snapshots': {'analysis_chain':chain(10), 'accepted_chain':chain(11)},
+        'limitations': {'historical_source_tree_hash_manifest_available':False},
+    }
+    lineage_path = tmp_path/'lineage.json'
+    lineage_path.write_text(json.dumps(receipt))
+    contract['inherited_lineage'] = {'path':str(lineage_path), 'sha256':preflight.budget._sha256(lineage_path)}
+    contract['snapshots'] = [{'index':r['output_index'],'path':r['path']} for r in receipt['snapshots']['analysis_chain'][:48]]
+    path.write_text(json.dumps(contract))
+    return path, contract, receipt
+
+
+def test_inherited_lineage_binds_parent_zero_and_continuation_without_restart_rehash(tmp_path, monkeypatch):
+    path, contract, lineage = _inherited_contract(tmp_path)
+    original = preflight.budget._sha256
+    restart_paths = set(lineage['restart']['accepted_parent_restart_paths'].values())
+    def no_restart_hash(source):
+        assert str(source) not in restart_paths, 'verified restart must not be rehashed'
+        return original(source)
+    monkeypatch.setattr(preflight.budget, '_sha256', no_restart_hash)
+    _, report = _validate(path)
+    assert [row['index'] for row in report['chain']] == list(range(48))
+    assert report['chain'][0]['path'].startswith(lineage['parent_problem'])
+    assert report['chain'][10]['path'].startswith(lineage['continuation_problem'])
+    receipt = preflight.prepare_receipt(report, 47, tmp_path/'input.json')
+    assert receipt['native_preflight']['inherited_lineage']['receipt']['sha256'] == contract['inherited_lineage']['sha256']
+    preflight.validate_existing_receipt(report, 47, receipt)
+    with pytest.raises(ValueError, match='scientifically excluded'):
+        preflight.prepare_receipt(report, 48, tmp_path/'excluded.json')
+    changed = Path(lineage['restart']['accepted_parent_restart_paths']['fluid_hdf5'])
+    changed.write_bytes(b'changed after preflight')
+    with pytest.raises(ValueError, match='mutated'):
+        preflight.validate_existing_receipt(report, 47, receipt)
+
+
+def test_inherited_case_executes_with_retained_indices_only(tmp_path):
+    path, _, _ = _inherited_contract(tmp_path)
+    result = runner.run_case(path, preflight.budget._sha256(path), tmp_path/'results', [10], 0.)
+    assert result['scientifically_retained_indices'] == list(range(48))
+    assert result['completed_indices'] == [10]
+    receipt = json.loads((tmp_path/'results/inputs/snapshot_0010.json').read_text())
+    assert receipt['inputs']['initial_h5']['path'] == str(tmp_path/'problem/outputs/data.0000.flt.h5')
+    assert receipt['inputs']['current_h5']['path'] == str(tmp_path/'continuation/problem/outputs/data.0010.flt.h5')
+    assert receipt['native_preflight']['inherited_lineage']['limitations']['historical_source_tree_hash_manifest_available'] is False
+
+
+@pytest.mark.parametrize('change,match', [
+    ('receipt_hash','hash mismatch'), ('receipt_status','non-passing'), ('source','source inventory differs'),
+    ('restart','restart identity changed'), ('missing_identity','hash-time identities'),
+    ('skipped_hash','hash-time identities'), ('chain','canonical chain'), ('case','restricted to G-HI'),
+    ('metadata','metadata differs'), ('excluded','full 0..47'), ('missing_receipt','reviewed inherited'),
+])
+def test_inherited_lineage_rejects_substitution(tmp_path, change, match):
+    path, contract, receipt = _inherited_contract(tmp_path)
+    if change == 'receipt_hash':
+        contract['inherited_lineage']['sha256'] = '0'*64
+    elif change == 'receipt_status': receipt['status'] = 'pending'
+    elif change == 'source': receipt['source_hashes']['init.c'] = '0'*64
+    elif change == 'restart':
+        Path(receipt['restart']['accepted_parent_restart_paths']['fluid_hdf5']).write_bytes(b'changed')
+    elif change == 'missing_identity': del receipt['restart']['input_identity']
+    elif change == 'skipped_hash': receipt['restart']['fluid_hdf5_rehashed'] = False
+    elif change == 'chain': contract['snapshots'][20]['path'] = contract['snapshots'][20]['path'].replace('/continuation', '')
+    elif change == 'case': contract['case'] = 'C-HI'
+    elif change == 'metadata': receipt['snapshots']['analysis_chain'][20]['time_code'] += 1
+    elif change == 'excluded': contract['snapshots'].append({'index':48,'path':receipt['snapshots']['analysis_chain'][48]['path']})
+    elif change == 'missing_receipt': del contract['inherited_lineage']
+    if change != 'receipt_hash' and 'inherited_lineage' in contract:
+        p = Path(contract['inherited_lineage']['path']); p.write_text(json.dumps(receipt))
+        contract['inherited_lineage']['sha256'] = preflight.budget._sha256(p)
+    with pytest.raises(ValueError, match=match):
+        _validate(path, contract)
