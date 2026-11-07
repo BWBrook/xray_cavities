@@ -160,6 +160,11 @@ For the `king/test-3d-hd-gp-cart` case, `8` MPI ranks worked cleanly and gave a 
 
 ## Working Norms
 
+- Save project transfers directly into the ignored `private_archive/incoming/`
+  directory, then file verified evidence in its canonical project location.
+  Do not store project files or run code in Downloads. If a browser creates an
+  unavoidable Downloads copy, relocate it immediately, verify its hash, and
+  clear the transient copy before ending the task.
 - Treat `docs/exchange/current_status.md` as the first-stop handover note for
   cross-machine continuity.
 - Before trusting any handover note, refresh this repo with `git pull --ff-only`
