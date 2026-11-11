@@ -1,11 +1,34 @@
 # Current Status
 
-Last updated: 2026-11-11 (all six turn-15 analyses finished F/0; complete snapshot coverage and emission receipts checked; scientific review pending)
+Last updated: 2026-11-11 (turn-15 provenance and independent compact arithmetic verified; energy/emission review complete; bounded synthesis awaits collaboration adjudication)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
 
-## Turn 15: all analyses finished; scientific review next
+## Turn 15: outputs verified and scientific review complete
+
+The [11 November review](../science/turn15_energy_emission_review_2026-11-11.md)
+verifies all **201 snapshots**, **847 captured files**, exact staged sources,
+phase inventories and emission/rendered products. Independent energy and
+emission arithmetic passes (21,427 and 27,750 checks respectively; twelve
+tiny first-pass histogram flags are preserved with floating-point bounds).
+This is compact-output verification, not independent native reintegration.
+
+What we learned: native true-volume 4pV/R100 stored change spans **0.694--1.289
+at 30 Myr**; ambient storage and aperture choice matter. G-HI/20 seed/grow
+solids are **94--97% lobe cells by volume** while those cells supply only
+**about 1.3% of full-sightline brightness**. Near-unity recovered volume can
+hide a region with only 40--50% lobe volume. Moving-ambient brightening and
+background refitting strongly affect deficit selection.
+
+Evidence and inspected figures are committed at **3e9646e**. Raw captures,
+maps and independent audit tools/reports are archived on Nectar with all
+three archive hashes freshly verified after transfer; see the asset README.
+NAT-07/NAT-08/XR-03/XR-04 record the bounded synthesis as provisional for
+collaboration adjudication. Realised delivery, aperture transport,
+production-boundary safety and observer-method acceptance remain open.
+The canonical manuscript and brief have not been rewritten. See
+[the review handover](logs/2026-11-11-turn15-output-review.md).
 
 Live scheduler checks on **11 November** confirm that all six analyses finished
 with **exit status 0** on 5--6 November. Aggregate completion receipts match
@@ -24,9 +47,9 @@ phase receipt are complete; its scientific qualification remains false.
 | G-HI emission/filling | 876556 | F / 0 | 01:20:43 |
 
 All six records have `Mail_Points = n`, explaining the absence of email.
-This check verifies execution status and receipt coverage. Full product-hash
-verification and scientific review of the new histories/emission products
-remain outstanding. See [the status check](logs/2026-11-11-turn15-completion-check.md).
+The initial check verified execution status and receipt coverage; the later
+review above also verified product hashes and scientific arithmetic. See
+[the initial status check](logs/2026-11-11-turn15-completion-check.md).
 
 ### Previously reviewed first comparison
 
@@ -55,9 +78,9 @@ the compute-node Bash's empty-array handling, followed by a node-local device
 number difference in the strict identity check. All 80 target tests passed
 before the latter rejection. A metadata-only probe verified the device-only
 difference and unchanged catalogue hash; a fresh node-bound stage retains all
-20 scientific source files and every identity gate unchanged. Only C-HI
-snapshot 1 has the independent scientific review reported here; reviewing the
-new full histories and G-HI diagnostic is the next work.
+20 scientific source files and every identity gate unchanged. The later
+11 November review covers the full retained histories and G-HI diagnostic,
+while preserving these lineage and interpretation limits.
 
 See [the turn-15 handover](logs/2026-11-05-turn15-native-budgets-and-lineage.md)
 for first-result components, receipts, interpretation limits and submissions.
