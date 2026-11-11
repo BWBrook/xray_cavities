@@ -1,11 +1,34 @@
 # Current Status
 
-Last updated: 2026-11-05 (first native spherical comparison reviewed; case histories submitted; G-HI history running; node-bound first20 and emission submitted)
+Last updated: 2026-11-11 (all six turn-15 analyses finished F/0; complete snapshot coverage and emission receipts checked; scientific review pending)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
 
-## Turn 15: first native result and all-case submissions
+## Turn 15: all analyses finished; scientific review next
+
+Live scheduler checks on **11 November** confirm that all six analyses finished
+with **exit status 0** on 5--6 November. Aggregate completion receipts match
+every requested index: **51/51** snapshots for each of C-HI, C-LO and G-LO,
+and **48/48** retained G-HI snapshots (0--47). C-HI includes the previously
+reviewed smoke at index 1. The G-HI/20 emission/filling computation and its
+phase receipt are complete; its scientific qualification remains false.
+
+| Analysis | Job | State / exit | Wall time |
+| --- | --- | --- | --- |
+| C-HI history | 876542 | F / 0 | 12:37:05 |
+| C-LO history | 876543 | F / 0 | 10:25:16 |
+| G-LO history | 876544 | F / 0 | 11:06:50 |
+| G-HI history except index 20 | 876552 | F / 0 | 12:04:42 |
+| G-HI index 20 | 876555 | F / 0 | 00:23:39 |
+| G-HI emission/filling | 876556 | F / 0 | 01:20:43 |
+
+All six records have `Mail_Points = n`, explaining the absence of email.
+This check verifies execution status and receipt coverage. Full product-hash
+verification and scientific review of the new histories/emission products
+remain outstanding. See [the status check](logs/2026-11-11-turn15-completion-check.md).
+
+### Previously reviewed first comparison
 
 C-HI snapshot 1 completed in job **876531**, F/0 in 21m 35s. Independent
 review accepts expansion of raw measurements after verifying provenance,
@@ -16,31 +39,25 @@ are **10.737753/10.715145 kpc**, with total storage changes of
 from the component ledger. Realised jet delivery and aperture transport are
 unmeasured, so the excess is not a closure conclusion.
 
-Independent histories are submitted: **C-HI 876542** (0, 2--50, reusing smoke
-1), **C-LO 876543** (0--50), **G-LO 876544** (0--50). Their `afterany` chain
-serializes I/O without requiring the preceding case to succeed; none depends
-on G-HI. Full history completion is not claimed.
+The C-HI, C-LO and G-LO histories used an `afterany` chain to serialize I/O;
+none depended on G-HI. Their completed coverage is recorded above.
 
 G-HI lineage validator **876541** completed **F/0 in 14m 22s**, including the
 full restart hash and final integrity checks. Its accepted receipt now binds
 an independently reconstructed input contract for snapshots **0--47**.
-G-HI remaining snapshots are running as **876552**, with native preflight
-passed. Its separate snapshot-20 budget is submitted as **876555** and the
-emission/filling diagnostic as **876556**, afterok:876555. Both new jobs are
-bound to the original validation node; the history remains untouched. The
-three independent cases have no G-HI dependency. No G-HI measurement or
-emission completion is claimed yet.
+G-HI history **876552**, separate index-20 budget **876555**, and dependent
+emission/filling **876556** now all have completion receipts. The latter two
+were bound to the original validation node. Their execution completion does
+not remove any native or emission scientific-qualification holds.
 
 Two bounded launch issues were resolved while preserving failed evidence:
 the compute-node Bash's empty-array handling, followed by a node-local device
 number difference in the strict identity check. All 80 target tests passed
 before the latter rejection. A metadata-only probe verified the device-only
 difference and unchanged catalogue hash; a fresh node-bound stage retains all
-20 scientific source files and every identity gate unchanged. C-HI has
-completed additional snapshots 0 and 2; only snapshot 1 has independent
-scientific review. At 10:14 AEDT, jobs 876542/876552 were R, 876555 was Q, and
-876543/876544/876556 were H on their declared dependencies. Full histories
-remain in progress.
+20 scientific source files and every identity gate unchanged. Only C-HI
+snapshot 1 has the independent scientific review reported here; reviewing the
+new full histories and G-HI diagnostic is the next work.
 
 See [the turn-15 handover](logs/2026-11-05-turn15-native-budgets-and-lineage.md)
 for first-result components, receipts, interpretation limits and submissions.
@@ -1345,8 +1362,8 @@ current instruction without checking its goal status.
 - The Level 3 gravitational-energy method is now defined by Stas: construct
   the initial-atmosphere potential from `tabulated_cosmo_002003.csv` and apply
   the cellwise mass-change convention with tracer-weighted gas/lobe reporting.
-  The first spherical C-HI measurement includes this component; full
-  spherical histories remain pending.
+  The first reviewed spherical C-HI measurement includes this component;
+  completed spherical histories now await scientific review.
 - `pV`, adopted `2.5pV`, and `4pV` conventions remain carried-forward
   conventions, not a new physical default.
 - No new production run, broad source-age sweep, comparison expansion, or
