@@ -53,6 +53,11 @@ before pilot inspection. The audit and exact stage are archived on Nectar
 with verified readback. See [the review handover](logs/2026-11-11-turn18-review-and-accounting-pilots.md)
 for resumption details.
 
+**12 November notification correction:** all three pilots now have verified
+completion/abort mail (`Mail_Points = ae`) to Barry's UTAS address. Their live
+states remain Q/Q/H. The frozen stage is unchanged; override its old mail
+directive for subsequent submissions and verify the scheduler recipient.
+
 ## Turn 15: outputs verified and scientific review complete
 
 The [11 November review](../science/turn15_energy_emission_review_2026-11-11.md)

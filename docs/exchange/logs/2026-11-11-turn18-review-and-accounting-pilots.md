@@ -67,8 +67,16 @@ Submissions are recorded in the remote stage's `submissions/`; output paths
 are its per-pilot `.out` files and `results/`. Original compatible execution
 hosts are pinned because the existing saved-receipt/lineage validator uses
 strict device identities. That gate is unchanged. Do not remove it to evade
-the queue. Pilot mail is disabled (`Mail_Points = n`); no completion email is
-promised. No new native fields were read during this turn.
+the queue. At submission pilot mail was disabled. **12 November correction:**
+after Barry asked, all three live jobs were changed with `qalter` to
+`Mail_Points = ae` and Barry's verified UTAS recipient. Fresh `qstat -f`
+confirmed both attributes for every job: completion and abort alerts are
+enabled. States remained Q/Q/H. This verifies scheduler configuration, not
+delivery of a future email. No new native fields were read during this turn.
+
+The frozen payload and manifest are unchanged. Follow-on submissions must
+override their old mail directive with `qsub -m ae -M <verified recipient>`
+and verify the live scheduler attributes before handover.
 
 Full fixed and flux requests/launchers for all four retained case histories
 are staged, **not submitted**. After pilot completion, verify aggregate and
