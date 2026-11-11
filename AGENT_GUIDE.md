@@ -71,7 +71,7 @@ pinned commit, its reproduce command and its caveats. In summary:
   <!-- claims: NAT-04 -->
 
 **Physical closure.**
-- The whole grid gains more energy than was injected in every case, by
+- The whole grid gains more energy than the labelled input in every case, by
   6–24× in C-LO. <!-- claims: BND-01 -->
 - Most of that excess is a boundary artefact (BND-02, supported on coarse
   controls). Zero-gradient outflow faces on the stratified atmosphere drive
@@ -88,13 +88,16 @@ pinned commit, its reproduce command and its caveats. In summary:
   so no cluster cut is certified as quiet. Its size, about 1.5% of the
   low-power scale, is an error bar for any aperture inside the cut.
   <!-- claims: BND-04 -->
-- The jets store more than their labelled power (BND-05, provisional).
-  After the boundary term is subtracted, two independent measures agree to
-  within 0.005 E_inj: the whole-grid excess and the native R100 sphere. The
-  excess is 7.5–9.8% in C-HI and G-HI and 14–18% in G-LO; C-LO is at least
-  23%. The analytic nozzle state delivers the label to within 0.4%, so the
-  excess arises in the discrete scheme. Fractions quoted per labelled input
-  therefore overstate the fraction of delivered energy by 1.08–1.23.
+- R100 storage and whole-grid-minus-boundary accounting agree closely
+  (BND-05, provisional). At 11 selected complete, 40-kpc-inset-contained
+  case/ages, differences from the production-mass-scaled estimate are below
+  0.002837 E_label. C-HI/G-HI comparisons include 10/20/30 Myr and G-LO
+  includes 10--50 Myr. The unscaled G-LO endpoint differs by up to 0.01390;
+  C-HI/40 and G-HI/40 fail geometric eligibility. This strengthens the
+  numerical-accounting investigation, but shared production/potential
+  conventions and unmeasured transport prevent a measured delivered-energy
+  correction. C-LO/50's 23.25% aperture storage excess is not yet a rigorous
+  delivered-energy floor. Nozzle and in-grid source terms remain candidates.
   <!-- claims: BND-05 -->
 
 **Measurement (the observer factor).** No observer method is adopted yet.
@@ -117,16 +120,21 @@ withdrawn observer numbers.
 ## Turn-15 results reviewed on 11 November
 
 [The review note](docs/science/turn15_energy_emission_review_2026-11-11.md)
-links compact tables, inspected figures and the bulk archive. Source/product
+links compact tables, inspected figures and the bulk archive. The
+[reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md)
+corrects the primary convention, mass/gauge and emission headline. Source/product
 identities pass for all 201 snapshots, as do independent compact energy and
 emission arithmetic. Native fields were not independently reintegrated.
 The following synthesis remains provisional for collaboration adjudication;
 the raw comparisons can be used with their stated definitions.
 
-- **True-volume pV is not total stored change.** At 30 Myr, native 4pV/R100
-  storage is 0.809/1.289/0.694/1.047 in C-HI/C-LO/G-HI/G-LO. At 20 Myr,
-  current ambient cells carry 72/98/54/82% of the signed R100 change.
-  These are current-region storage comparisons, not delivery efficiencies.
+- **True-volume pV is not total stored change.** At 30 Myr, primary native
+  2.5pV/R100 storage is 0.5054/0.8053/0.4338/0.6545 in C-HI/C-LO/G-HI/G-LO;
+  4pV is the comparator. At 20 Myr, ambient thermal-plus-kinetic shares are
+  69.14/89.64/51.67/77.09%. The old total ambient-share headline is retired
+  pending regional mass measurements: a potential-zero shift changes
+  gravitational storage by that shift times regional mass change. These
+  are signed Eulerian comparisons, not delivery/deposition efficiencies.
   <!-- claims: NAT-07 -->
 - **Aperture and sign matter.** C-LO/50's ambient shell between R300 and
   R100 contains about 25% of the R100 stored change despite both apertures
@@ -134,17 +142,18 @@ the raw comparisons can be used with their stated definitions.
   with positive absolute pV. Late high-power spheres become geometrically
   incomplete; candidate inset clipping is not a certified correction.
   <!-- claims: NAT-08 -->
-- **Filling and projected brightness differ.** G-HI/20 seed/grow solids
-  are 94--97% binary-lobe cells by volume, but these cells supply only
-  about 1.3% of full-sightline brightness. Near-unity recovered volume can
-  hide solids containing only 40--50% lobe cells by volume. These are three
-  side-on azimuths of one snapshot, with bipolar W+/W- pooling.
+- **Volume agreement can hide the wrong material.** G-HI/20's 5% outlines
+  at 45/90 degrees recover nearly the native volume while containing
+  59.63/49.53% non-lobe cells by volume. These are three side-on azimuths of
+  one snapshot, with bipolar W+/W- pooling and full-cell binary membership.
   <!-- claims: XR-03 -->
-- **Ambient brightening and background fitting matter.** Signed deficit
-  attribution and replacement/refit experiments show large background
-  effects and much smaller correction/velocity sensitivities here. Moving
-  ambient is not a causal shock label; below-cut gas is not physically
-  static. Neither detector nor the generic qualification flag is promoted.
+- **Ambient brightening and background fitting matter.** Moving ambient
+  cancels 37--44% of the lobe deficit; its magnitude is 39--84% of the net
+  observed deficit. Background effects exceed the tested correction/velocity
+  sensitivities. The favorable ambient-replaced refit uses native truth;
+  frozen protocol c352554 tests it as a diagnostic separately from the
+  existing observer-only comparator. Moving ambient is not a shock label;
+  below-cut gas is not physically static. Neither detector is promoted.
   <!-- claims: XR-04 -->
 
 ## Conventions you must apply
@@ -159,7 +168,8 @@ the raw comparisons can be used with their stated definitions.
   same-cell change from the actual initial fields; the gravitational term
   uses the fixed initial potential, which is zero at the centre. The
   labelled-input normalization is `E_inj = Q_bipolar × t`; realised delivery
-  remains unmeasured.
+  remains unmeasured. This applies to historical fractions labelled injected
+  energy: do not apply an unmeasured 1.08--1.23 correction.
 - **Observer volumes.**
   - Use the revolution volume `π Σ|u| dA` for each hemisphere.
   - Count an undetected side as zero, never as missing.

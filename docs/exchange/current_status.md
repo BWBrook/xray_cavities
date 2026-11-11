@@ -1,9 +1,57 @@
 # Current Status
 
-Last updated: 2026-11-11 (turn-15 provenance and independent compact arithmetic verified; energy/emission review complete; bounded synthesis awaits collaboration adjudication)
+Last updated: 2026-11-12 (Claude's turn-18 review reconciled; mass/source accounting pilots submitted; prospective refit protocol frozen before new native access)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
+
+## Turn 18: review acted on; native accounting pilots pending
+
+[Reconciliation](../science/turn18_review_reconciliation_2026-11-11.md)
+at **06f9a2d** qualifies the strengthened inference in board message 3244.
+BND-05 stays provisional: 11 complete, 40-kpc-inset-contained selected
+case/ages agree with the **mass-scaled** boundary estimate within **0.002837
+labelled-input units**. The unscaled G-LO endpoint differs by up to 0.01390;
+C-HI/40 and G-HI/40 fail geometric eligibility. No delivered-energy
+denominator correction or strict C-LO delivery lower bound is adopted.
+
+**2.5pV is primary:** its R100-storage ratios at 30 Myr are
+0.5054/0.8053/0.4338/0.6545 in C-HI/C-LO/G-HI/G-LO. The old 54--98%
+total ambient-share headline is retired until the mass ledger accompanies
+it. Ambient thermal-plus-kinetic shares at 20 Myr are
+69.14/89.64/51.67/77.09%, independent of potential zero.
+
+The emission headline is ambient cancellation/background dependence:
+**37--44% of lobe deficit**, equivalent to **39--84% of net observed
+deficit**. Near-unity volume at 45/90 degrees hides about **50--60%
+non-lobe material**. Favorable ambient-replaced refit is truth-assisted.
+The exact diagnostic and separate observer-only comparator were frozen at
+**c352554**, with declared held-out cohort/nulls and sealed prediction/scoring
+ordering. The cohort has not been scored.
+
+Accounting implementations at **06d233f** add regional initial/current/delta
+mass and a fixed 50-kpc-inset budget, plus unresolved outside-nozzle source
+balances. **46 accounting tests and five frozen-evaluator tests pass**.
+Native snapshot data cannot recover exact historical floor/repair/gravity
+update energies; the new source residual is not those individual terms.
+
+Generic sealed-map production and complete cohort assembly are prepared at
+**f1218f1**, with separate scoring-truth custody and both payload hashes bound
+to producer receipts. Their 20 tests pass; **all 71 focused tests pass together**.
+The frozen config/runner remain unchanged. No new cohort map, score or native
+filling measurement is reported.
+
+| Pilot | Job | State at 23:51:51 AEDT |
+| --- | --- | --- |
+| C-LO/20 mass, R100/R300 and fixed-inset storage | 878890 | Q, awaiting compatible host capacity |
+| G-HI/20 mass, R100/R300 and fixed-inset storage | 878891 | Q, awaiting compatible host capacity |
+| G-LO/0--1 extended flux/source balance | 878892 | H, afterany 878890 to serialize I/O |
+
+The submitted immutable stage and archive hashes are verified. No new
+native result is claimed yet; full requests are staged but not submitted
+before pilot inspection. The audit and exact stage are archived on Nectar
+with verified readback. See [the review handover](logs/2026-11-11-turn18-review-and-accounting-pilots.md)
+for resumption details.
 
 ## Turn 15: outputs verified and scientific review complete
 
@@ -14,12 +62,9 @@ emission arithmetic passes (21,427 and 27,750 checks respectively; twelve
 tiny first-pass histogram flags are preserved with floating-point bounds).
 This is compact-output verification, not independent native reintegration.
 
-What we learned: native true-volume 4pV/R100 stored change spans **0.694--1.289
-at 30 Myr**; ambient storage and aperture choice matter. G-HI/20 seed/grow
-solids are **94--97% lobe cells by volume** while those cells supply only
-**about 1.3% of full-sightline brightness**. Near-unity recovered volume can
-hide a region with only 40--50% lobe volume. Moving-ambient brightening and
-background refitting strongly affect deficit selection.
+The raw comparisons remain valid with the definitions above; the turn-18
+reconciliation supersedes the initial 4pV-first/ambient-share and faint-lobe
+headlines. Aperture, ambient cancellation and background selection matter.
 
 Evidence and inspected figures are committed at **3e9646e**. Raw captures,
 maps and independent audit tools/reports are archived on Nectar with all
