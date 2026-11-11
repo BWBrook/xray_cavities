@@ -1,0 +1,192 @@
+{
+  "check_count": 27750,
+  "failures": [],
+  "groups": {
+    "attribution_csv": {
+      "count": 1080,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "brightness_partition": {
+      "count": 36,
+      "failures": 0,
+      "max_error_to_scale": 4.586430450617043e-15
+    },
+    "brightness_share": {
+      "count": 108,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "correction_absolute_bound": {
+      "count": 1728,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "correction_difference_domain": {
+      "count": 54,
+      "failures": 0,
+      "max_error_to_scale": 2.9343261293899497e-16
+    },
+    "correction_partition": {
+      "count": 864,
+      "failures": 0,
+      "max_error_to_scale": 4.778002720079248e-16
+    },
+    "correction_sign": {
+      "count": 1728,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "covered_map_integral": {
+      "count": 120,
+      "failures": 0,
+      "max_error_to_scale": 3.539026048555551e-15
+    },
+    "deficit_partition": {
+      "count": 18,
+      "failures": 0,
+      "max_error_to_scale": 4.041364019295062e-15
+    },
+    "deficit_ratio": {
+      "count": 108,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "filling_bounds": {
+      "count": 162,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "filling_discretization": {
+      "count": 54,
+      "failures": 0,
+      "max_error_to_scale": 1.3715737285341954e-11
+    },
+    "filling_geometric_volume": {
+      "count": 54,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "filling_hemispheres": {
+      "count": 108,
+      "failures": 0,
+      "max_error_to_scale": 2.314886511621019e-15
+    },
+    "filling_pool": {
+      "count": 108,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "filling_ratio": {
+      "count": 162,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "histogram_csv": {
+      "count": 10620,
+      "failures": 0,
+      "max_error_to_scale": 1.2826275028044083e-13
+    },
+    "histogram_nonfinite": {
+      "count": 5310,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "integrated_observer_identity": {
+      "count": 108,
+      "failures": 0,
+      "max_error_to_scale": 9.532196335603414e-17
+    },
+    "near_zero": {
+      "count": 108,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "observer_csv": {
+      "count": 3780,
+      "failures": 0,
+      "max_error_to_scale": 2.679640742295506e-16
+    },
+    "observer_identity": {
+      "count": 36,
+      "failures": 0,
+      "max_error_to_scale": 4.016186579036818e-15
+    },
+    "observer_native_filling_domain": {
+      "count": 540,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "observer_nondetection": {
+      "count": 540,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "path_partition": {
+      "count": 9,
+      "failures": 0,
+      "max_error_to_scale": 2.4771989329526578e-14
+    },
+    "positivity": {
+      "count": 108,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "replacement": {
+      "count": 18,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "retained_difference": {
+      "count": 3,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "retained_tracer_disagreement": {
+      "count": 3,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "same_map_subtraction": {
+      "count": 72,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    },
+    "tracer": {
+      "count": 3,
+      "failures": 0,
+      "max_error_to_scale": 0.0
+    }
+  },
+  "input_sha256": {
+    "G-HI_0020_0deg.npz": "46935fca242ddc96c4ad8776db1b4e00e76ec27f9215a923308e29f323d99e80",
+    "G-HI_0020_45deg.npz": "fb0ed2f4b706b00cbb13a28c0fe87ae7455a25e3cf8c562f6dcacc122b1ac896",
+    "G-HI_0020_90deg.npz": "d77542fff88a0866e772623a6595f1a8babebb9a5d0dae5f349262b1576b5956",
+    "completion.json": "4ca1a4f445ae1d65d6a7aa7619ccea7745d545266656875ddfb469487affd31e",
+    "correction_contributions.csv": "b003427805683711ea5cd611b13d41eb24ab9f0c115fbab1e7a0f3ea29990d09",
+    "deficit_attribution.csv": "dbf7e5c6990e9b3ef370867979826bd4df87c95e847b5c953a5a74cde7789725",
+    "filling.csv": "d42495d1b8a57726cffe7f2d3ae8569a9d69b0b865b6fe35ffdb307180654298",
+    "observer_comparisons.csv": "ae89ddac82c54cd1e4732fbce480f8ace87008954f42450de86d792234743d0f",
+    "path_histograms.csv": "83f1065219fac4e08b26f2558a5aa90f7663f123535253d1d757888fce416cf4"
+  },
+  "receipt_scientific_qualification": {
+    "holds": [
+      "native_source_and_continuation_semantics_require_external_review",
+      "observer_comparators_are_diagnostic_not_promoted",
+      "velocity_cuts_do_not_identify_shock_or_causal_jet_origin",
+      "native_revolution_solids_use_full_cell_centre_membership",
+      "exact_projection_tracer_mask_differs_from_retained_mask",
+      "retained_sky_grid_does_not_cover_every_native_cell",
+      "exact_edge_maps_differ_from_retained_maps",
+      "emissivity_correction_domain_or_sign"
+    ],
+    "qualified": false
+  },
+  "limits": "Native numerator/denominator values are checked arithmetically, not regenerated without native fields. Correction-domain flags cannot be reconstructed from compact maps; their additivity and convention-difference identities are checked.",
+  "numerical_qualification": {
+    "path": "histogram_numerical_qualification.json",
+    "initial_flag_count": 12,
+    "max_abs_area_error_kpc2": 2.328304216092647e-12,
+    "max_error_to_selected_area": 2.0586380376420022e-16
+  }
+}

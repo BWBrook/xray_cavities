@@ -1,0 +1,62 @@
+{
+  "status": "passed_compact_arithmetic",
+  "scope": "Independent arithmetic of compact products, not re-integration of native HDF5; source/input provenance and physical closure are outside this check.",
+  "snapshots": 201,
+  "threshold_rows": 402,
+  "checks": {
+    "active_age": {
+      "count": 201,
+      "maximum_scaled_residual": 0.0
+    },
+    "clip_counts_volume": {
+      "count": 1608,
+      "maximum_scaled_residual": 2.0143785513806463e-16
+    },
+    "clip_energy": {
+      "count": 4824,
+      "maximum_scaled_residual": 2.2760706651343e-16
+    },
+    "component_sum": {
+      "count": 3618,
+      "maximum_scaled_residual": 0.0
+    },
+    "lobe_cell_coverage": {
+      "count": 402,
+      "maximum_scaled_residual": 0.0
+    },
+    "lobe_volume_coverage": {
+      "count": 402,
+      "maximum_scaled_residual": 1.9565320041727006e-15
+    },
+    "normalization": {
+      "count": 201,
+      "maximum_scaled_residual": 0.0
+    },
+    "partition": {
+      "count": 4824,
+      "maximum_scaled_residual": 2.554559435652145e-16
+    },
+    "power": {
+      "count": 201,
+      "maximum_scaled_residual": 0.0
+    },
+    "proxy_energy": {
+      "count": 402,
+      "maximum_scaled_residual": 0.0
+    },
+    "proxy_ratio": {
+      "count": 394,
+      "maximum_scaled_residual": 0.0
+    },
+    "storage_ratio": {
+      "count": 3546,
+      "maximum_scaled_residual": 0.0
+    },
+    "threshold_difference": {
+      "count": 804,
+      "maximum_scaled_residual": 0.0
+    }
+  },
+  "errors": [],
+  "duplicate_aliases": []
+}

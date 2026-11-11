@@ -1,0 +1,17 @@
+{
+  "inputs_sha256": {
+    "C-HI/measurements.csv": "eaa10db7812a85704332f2de04897e3b82072831c2718b8537a6f35cf908b968",
+    "C-LO/measurements.csv": "609a93b736faf194f9c440e438ee0de47da3fcc2310b6d528eabd9c362a6a6c6",
+    "G-HI/measurements.csv": "f3329d6ca83b8583827c028f58f96ba9f3c4179942b94eae135b67261267990d",
+    "G-LO/measurements.csv": "f3208616c90415857d7aad5476a3a46dcdbe314803ec2ad5b7e9f5671d2f69cf",
+    "filling.csv": "d42495d1b8a57726cffe7f2d3ae8569a9d69b0b865b6fe35ffdb307180654298",
+    "deficit_attribution.csv": "dbf7e5c6990e9b3ef370867979826bd4df87c95e847b5c953a5a74cde7789725"
+  },
+  "products_sha256": {
+    "G-HI_filling_and_deficit.pdf": "78f96dca898f2035d2eff701fdebc2a51e6003826587ac553311dac2cb2bb3e3",
+    "G-HI_filling_and_deficit.png": "26874aebd7938cf5ed59599eb4c59cccbcb6f251e738b6be0fcb92b055a3cfc5",
+    "four_case_energy_histories.pdf": "9885f8b4364244f288233b8f9d85da474a5a0546897d273548ef217d61441c3e",
+    "four_case_energy_histories.png": "0563660f0192373bf6d704763662a226728cf68409b1884db3c13168b1c4827b"
+  },
+  "renderer_sha256": "fe259e0fc639a6592e155b5bc8557e5100f5cbd02f25e93d0c748e0e2bada154"
+}

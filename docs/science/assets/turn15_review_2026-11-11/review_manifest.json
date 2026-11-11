@@ -1,0 +1,144 @@
+{
+  "archive_sha256_readback": "All three archive digests freshly matched on Nectar after transfer.",
+  "archives": {
+    "turn15_review_compact_2026-11-11_r1.tar.gz": {
+      "sha256": "f09ab4bee43be9835e5ca8dacf1b5a7b9b820ca28a4e6d12cc25cf408cce182c",
+      "size_bytes": 31468464
+    },
+    "turn15_review_maps_2026-11-11_r1.tar": {
+      "sha256": "e75e5f0fedd0cc8f21126193ae802799f750fde1bbbb565c988097c9b6f9f325",
+      "size_bytes": 645160960
+    },
+    "turn15_review_tools_2026-11-11_r1.tar.gz": {
+      "sha256": "d619bc49412ede7ed4065dce93e464ec6f6696e5b8ee1139573adae7013fdae4",
+      "size_bytes": 3373977
+    }
+  },
+  "bulk_location": "nectar:/data/share/xray_cavities/turn15_review_2026-11-11/",
+  "files": {
+    "README.md": {
+      "sha256": "373de648336546cde84efe82e3304e17558235c6f94eeb22e06350795853f3a1",
+      "size_bytes": 5738
+    },
+    "budgets/C-HI/measurements.csv": {
+      "sha256": "eaa10db7812a85704332f2de04897e3b82072831c2718b8537a6f35cf908b968",
+      "size_bytes": 95745
+    },
+    "budgets/C-LO/measurements.csv": {
+      "sha256": "609a93b736faf194f9c440e438ee0de47da3fcc2310b6d528eabd9c362a6a6c6",
+      "size_bytes": 92597
+    },
+    "budgets/G-HI/measurements.csv": {
+      "sha256": "f3329d6ca83b8583827c028f58f96ba9f3c4179942b94eae135b67261267990d",
+      "size_bytes": 90309
+    },
+    "budgets/G-LO/measurements.csv": {
+      "sha256": "f3208616c90415857d7aad5476a3a46dcdbe314803ec2ad5b7e9f5671d2f69cf",
+      "size_bytes": 92325
+    },
+    "emission/audit_summary.json": {
+      "sha256": "fb470f02f9444b691b5c69c04ec72ffd08736310584a869e2817db60aff165ac",
+      "size_bytes": 5556
+    },
+    "emission/audit_summary_first_pass.json": {
+      "sha256": "686f2f59c0199e146e384d86b67c64c0a1d6b4b91d6d61f5ca7679b86523d0c0",
+      "size_bytes": 7974
+    },
+    "emission/correction_sensitivity.csv": {
+      "sha256": "e2aeca350a547e7bf76c6dd60a5f90925cbe1589efcfe4e264c77aea46a7a315",
+      "size_bytes": 99731
+    },
+    "emission/deficit_attribution.csv": {
+      "sha256": "dbf7e5c6990e9b3ef370867979826bd4df87c95e847b5c953a5a74cde7789725",
+      "size_bytes": 42728
+    },
+    "emission/filling.csv": {
+      "sha256": "d42495d1b8a57726cffe7f2d3ae8569a9d69b0b865b6fe35ffdb307180654298",
+      "size_bytes": 26365
+    },
+    "emission/histogram_numerical_qualification.json": {
+      "sha256": "d5310ff8dd5f63e5105cd0823e3fb2dedea140a00a08601ba9164d8f94af5663",
+      "size_bytes": 8378
+    },
+    "emission/key_comparisons.csv": {
+      "sha256": "6370100e0057aa74c98466fc862bf14cfa822e83cbb2a07f3cafab69d7f57af0",
+      "size_bytes": 11969
+    },
+    "emission/map_integrals.csv": {
+      "sha256": "917ab0a7b6d96ce1e5ff9650ab738c82dbcdc14e50088b4c16f2947967d6ed6e",
+      "size_bytes": 4266
+    },
+    "emission/missed_sightlines.csv": {
+      "sha256": "7671f554bd6e872871ee82441a67c280c690f3a47780f34edd6003dc57cc0b78",
+      "size_bytes": 13937
+    },
+    "emission/velocity_sensitivity.csv": {
+      "sha256": "02a30dcd28f4e132d3f2c4b0e55313b2e437b414eeaf907b8dfae3ebfef80b44",
+      "size_bytes": 21192
+    },
+    "energy/arithmetic_review.json": {
+      "sha256": "ef253ca1f293c831910f2ee91cac12caae979ae76b972572916072d9a8e4140d",
+      "size_bytes": 1524
+    },
+    "energy/case_flag_and_range_summary.csv": {
+      "sha256": "0fa1b7a9bde61a6d972d649a266de9ebe17d7fb6e8b14628692ee8387d1ad055",
+      "size_bytes": 6559
+    },
+    "energy/independent_native_proxies.csv": {
+      "sha256": "796aa1fd48cb0e9bcc8051bb5f5013d462bf1195b7bf22329f8dfdbd48131031",
+      "size_bytes": 32213
+    },
+    "energy/selected_ages.csv": {
+      "sha256": "f32a4b26d1840c96e3939bb198cb359130a4f0d735e84a7d5bdff7e22c45e57c",
+      "size_bytes": 59971
+    },
+    "figures/C-LO_spherical_components.pdf": {
+      "sha256": "aa20081052bc382c7e4fed9a5aaffa8fb52ea090c90460ab6ff6980bb2ec7a4d",
+      "size_bytes": 55827
+    },
+    "figures/C-LO_spherical_components.png": {
+      "sha256": "92dbe8b22ecb86745c3008f31896f2789e4dd4b1f32a4b446069ee25928099cd",
+      "size_bytes": 300222
+    },
+    "figures/G-HI_filling_and_deficit.pdf": {
+      "sha256": "78f96dca898f2035d2eff701fdebc2a51e6003826587ac553311dac2cb2bb3e3",
+      "size_bytes": 24349
+    },
+    "figures/G-HI_filling_and_deficit.png": {
+      "sha256": "26874aebd7938cf5ed59599eb4c59cccbcb6f251e738b6be0fcb92b055a3cfc5",
+      "size_bytes": 141456
+    },
+    "figures/four_case_energy_histories.pdf": {
+      "sha256": "9885f8b4364244f288233b8f9d85da474a5a0546897d273548ef217d61441c3e",
+      "size_bytes": 25982
+    },
+    "figures/four_case_energy_histories.png": {
+      "sha256": "0563660f0192373bf6d704763662a226728cf68409b1884db3c13168b1c4827b",
+      "size_bytes": 165750
+    },
+    "figures/render_receipt.json": {
+      "sha256": "648f58abfeeb340d29e4217200a49f797008c170009a840ba561964c556ba736",
+      "size_bytes": 1138
+    },
+    "verification_summary.json": {
+      "sha256": "3d2737ad9108975a98492a4ae6f755f8ae36dad38464f52159296b0b330cc794",
+      "size_bytes": 1840
+    }
+  },
+  "renderer": {
+    "path": "scripts/science/render_turn15_review.py",
+    "sha256": "fe259e0fc639a6592e155b5bc8557e5100f5cbd02f25e93d0c748e0e2bada154",
+    "size_bytes": 8508
+  },
+  "review_date": "2026-11-11",
+  "review_note": {
+    "path": "docs/science/turn15_energy_emission_review_2026-11-11.md",
+    "sha256": "fa3f11c61a2838eecf85eedbb5c5cd5a56cd916b8a012accff871d8460dc17eb",
+    "size_bytes": 12709
+  },
+  "schema": 1,
+  "source_commits": {
+    "G-HI": "c5b438d59ec63a8de3365e2691ab54bab3d56372",
+    "independent": "46ac912cebc59713793e5981a7651a5e188e6bcc"
+  }
+}

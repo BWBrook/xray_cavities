@@ -1,0 +1,39 @@
+{
+  "status": "completed_independent_compact_output_review",
+  "capture_files_accounted_for": 847,
+  "verified_snapshots": 201,
+  "verified_threshold_rows": 402,
+  "provenance_decision": "GO for source-bound raw-result interpretation; existing scientific qualification holds retained.",
+  "provenance_receipt_sha256": "f9ee3aa28056d40c1332ef638b8daacebef2a75655e202ac1f7d639438a66a7f",
+  "energy_checks": 21427,
+  "energy_maximum_scaled_residual": 1.9565320041727006e-15,
+  "emission_checks": 27750,
+  "emission_unexplained_failures": 0,
+  "histogram_numerical_qualification": {
+    "path": "histogram_numerical_qualification.json",
+    "initial_flag_count": 12,
+    "max_abs_area_error_kpc2": 2.328304216092647e-12,
+    "max_error_to_selected_area": 2.0586380376420022e-16
+  },
+  "original_stage_sources": {
+    "independent": "46ac912cebc59713793e5981a7651a5e188e6bcc",
+    "G-HI": "c5b438d59ec63a8de3365e2691ab54bab3d56372"
+  },
+  "capture_archives": {
+    "turn15_review_compact_2026-11-11_r1.tar.gz": "f09ab4bee43be9835e5ca8dacf1b5a7b9b820ca28a4e6d12cc25cf408cce182c",
+    "turn15_review_maps_2026-11-11_r1.tar": "e75e5f0fedd0cc8f21126193ae802799f750fde1bbbb565c988097c9b6f9f325"
+  },
+  "limits": [
+    "Native HDF5/restart payloads were not independently rehashed or reintegrated.",
+    "Native numerator integrals remain source-bound measurements.",
+    "Realised delivery and moving-aperture transport remain unmeasured.",
+    "Production-grid boundary safety is not certified.",
+    "Observer comparators remain diagnostic and scientific qualification flags are retained."
+  ],
+  "reviewers": {
+    "integration": "Codex GPT-6.1 Sol",
+    "independent_provenance": "Codex GPT-6.1 Sol product_audit",
+    "independent_energy": "Codex GPT-6.1 Sol energy_review",
+    "independent_emission": "Codex GPT-6.1 Sol emission_review"
+  }
+}
