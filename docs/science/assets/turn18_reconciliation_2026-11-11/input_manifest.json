@@ -1,9 +1,32 @@
 {
-  "docs/science/assets/whole_grid_energy_closure_2026-10-21/whole_grid_energy_comparison.csv": "15b534933e0708e9affa485c5cbcdff0074b2d4c68160ef733c69626bae0ed1a",
-  "docs/science/assets/paired_boundary_comparison_2026-11-04/paired_contrasts.csv": "8e5b302896a3365fe27fc5439cb197ceea81fba9bc954103c5a57d15bc6576d5",
-  "docs/science/assets/turn15_review_2026-11-11/emission/key_comparisons.csv": "6370100e0057aa74c98466fc862bf14cfa822e83cbb2a07f3cafab69d7f57af0",
-  "docs/science/assets/turn15_review_2026-11-11/budgets/G-LO/measurements.csv": "f3208616c90415857d7aad5476a3a46dcdbe314803ec2ad5b7e9f5671d2f69cf",
-  "docs/science/assets/turn15_review_2026-11-11/budgets/C-LO/measurements.csv": "609a93b736faf194f9c440e438ee0de47da3fcc2310b6d528eabd9c362a6a6c6",
-  "docs/science/assets/turn15_review_2026-11-11/budgets/G-HI/measurements.csv": "f3329d6ca83b8583827c028f58f96ba9f3c4179942b94eae135b67261267990d",
-  "docs/science/assets/turn15_review_2026-11-11/budgets/C-HI/measurements.csv": "eaa10db7812a85704332f2de04897e3b82072831c2718b8537a6f35cf908b968"
+  "inputs": [
+    {
+      "path": "docs/science/assets/whole_grid_energy_closure_2026-10-21/whole_grid_energy_comparison.csv",
+      "sha256": "15b534933e0708e9affa485c5cbcdff0074b2d4c68160ef733c69626bae0ed1a"
+    },
+    {
+      "path": "docs/science/assets/paired_boundary_comparison_2026-11-04/paired_contrasts.csv",
+      "sha256": "8e5b302896a3365fe27fc5439cb197ceea81fba9bc954103c5a57d15bc6576d5"
+    },
+    {
+      "path": "docs/science/assets/turn15_review_2026-11-11/emission/key_comparisons.csv",
+      "sha256": "6370100e0057aa74c98466fc862bf14cfa822e83cbb2a07f3cafab69d7f57af0"
+    },
+    {
+      "path": "docs/science/assets/turn15_review_2026-11-11/budgets/G-LO/measurements.csv",
+      "sha256": "f3208616c90415857d7aad5476a3a46dcdbe314803ec2ad5b7e9f5671d2f69cf"
+    },
+    {
+      "path": "docs/science/assets/turn15_review_2026-11-11/budgets/C-LO/measurements.csv",
+      "sha256": "609a93b736faf194f9c440e438ee0de47da3fcc2310b6d528eabd9c362a6a6c6"
+    },
+    {
+      "path": "docs/science/assets/turn15_review_2026-11-11/budgets/G-HI/measurements.csv",
+      "sha256": "f3329d6ca83b8583827c028f58f96ba9f3c4179942b94eae135b67261267990d"
+    },
+    {
+      "path": "docs/science/assets/turn15_review_2026-11-11/budgets/C-HI/measurements.csv",
+      "sha256": "eaa10db7812a85704332f2de04897e3b82072831c2718b8537a6f35cf908b968"
+    }
+  ]
 }
