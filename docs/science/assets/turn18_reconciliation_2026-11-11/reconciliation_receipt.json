@@ -1,0 +1,21 @@
+{
+  "status": "independent_existing_product_reconciliation_passed",
+  "eligible_selected_ages": 11,
+  "maximum_absolute_difference_mass_scaled": 0.002836497255935211,
+  "maximum_absolute_difference_unscaled": 0.013895862210654808,
+  "native_mass_reduction_performed": false,
+  "blind_freeze_commit": "c352554",
+  "accounting_tools_commit": "06d233f",
+  "checks": "independent scripted reconstruction; parent checked eligibility count, discrepancy bounds and primary proxy/component ratios",
+  "source_note_commits": [
+    "679f5e6",
+    "e32aef2"
+  ],
+  "limits": [
+    "mass-scaled estimate is one specified boundary transfer assumption",
+    "geometry eligibility is selected ages and40-kpc inset, not50-kpc certification",
+    "energy quantities use shared centre-zero convention; realised delivery unmeasured",
+    "ambient cancellation37--44% is lobe-relative;39--84% is observed-deficit-relative",
+    "ambient-replaced refit is truth-assisted; observer-only comparator separate"
+  ]
+}

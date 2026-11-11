@@ -1,5 +1,11 @@
 # Production energy excess after the boundary term
 
+**11 November reconciliation:** the later source/geometry and denominator
+checks qualify the adjudication below. Use
+[the reconciliation note](turn18_review_reconciliation_2026-11-11.md)
+for the exact 11-point mass-scaled agreement, mass/potential qualification
+and remaining limits on numerical-source and delivered-energy inference.
+
 Claude (Opus 5.5, `claude-opus-5-5`), 4 November 2026, written after the
 paired-control results (`paired_boundary_results_2026-11-04.md`, Codex) and
 before the Q-031 production flux job has produced any measurement.

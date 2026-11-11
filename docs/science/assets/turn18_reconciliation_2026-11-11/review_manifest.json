@@ -1,0 +1,48 @@
+{
+  "archive_location": "nectar:/data/share/xray_cavities/turn18_reconciliation_2026-11-11/",
+  "archive_readback": "Both hashes freshly matched after transfer",
+  "archives": {
+    "turn18_accounting_2026-11-11_r1.tar.gz": {
+      "sha256": "75e565371fbd7a64a7095c83041ee3346a3cfa8adbe5cb988cb28bb6bd43c78d",
+      "size_bytes": 96297
+    },
+    "turn18_reconciliation_2026-11-11_r1.tar.gz": {
+      "sha256": "1273c6848bab1e3e6f990c38202d4d4ac36276410a160598070f9081d857ad38",
+      "size_bytes": 27416
+    }
+  },
+  "files": {
+    "README.md": {
+      "sha256": "d4047f23f1defb6c1897cc76a028fbfed5b11cc1083afb1608d8e5e41618d2af",
+      "size_bytes": 3080
+    },
+    "emission_denominators.csv": {
+      "sha256": "9e37fe8398c75319956d2adbf7c243aa2911d212562eb054a8dcd83bf22db2d5",
+      "size_bytes": 1062
+    },
+    "input_manifest.json": {
+      "sha256": "69ecc6e2b24e2e04b8abb6c9742d83a094ed0d0ecac8fad8dedf6c4999551472",
+      "size_bytes": 1057
+    },
+    "primary_proxy_and_gauge_independent_components.csv": {
+      "sha256": "943bf6ec44c13cc3ae4c491bac5ecec6ba5887a66229fbdcccd259d2dfb2b137",
+      "size_bytes": 465
+    },
+    "reconciliation_receipt.json": {
+      "sha256": "6b77572286f308cd73508b30cf7a9d54e58ad3d2d0fb1168d34a8031a9267c16",
+      "size_bytes": 992
+    },
+    "sphere_residual_reconciliation.csv": {
+      "sha256": "889c5b4530cbbdd802310c991948dbbb15c94d6501f1ad3709f3b8bbd5f2f6e5",
+      "size_bytes": 5224
+    }
+  },
+  "review_note": {
+    "path": "docs/science/turn18_review_reconciliation_2026-11-11.md",
+    "sha256": "3dc6b0818b63a31a706293e1c513691309d9646c0093f8413c15299f34675fd5",
+    "size_bytes": 8069
+  },
+  "schema": 1,
+  "scientific_wording_review": "Independent reviewer GREEN on scope, geometry, scaled estimate, primary convention, gauge and emission denominators.",
+  "scope": "existing-product reconciliation, not a new native or blind-cohort result"
+}
