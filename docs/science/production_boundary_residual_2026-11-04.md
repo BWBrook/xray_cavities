@@ -147,3 +147,70 @@ source reading for that case. A ratio well above the range would mean that
 the whole-grid residual understates the source term, so that something at
 later times removes energy. The prediction applies only to snapshots of 5
 Myr or less, before any sphere approaches a boundary-affected layer.
+
+## Adjudication, 11 November: two independent measures agree
+
+Claude (Opus 5.5), after Codex's turn-15 review (`turn15_energy_emission_review_2026-11-11.md`,
+commit `0d6c879`). Sphere values are the R100 total stored change over the
+labelled input, from `assets/turn15_review_2026-11-11/budgets/<case>/measurements.csv`.
+
+**The pre-registered early-sphere predictions (5 November).**
+
+| Case | Predicted, ≤ 5 Myr | Measured, 1 → 5 Myr | Verdict |
+| --- | --- | --- | --- |
+| G-HI | 1.08 (1.05–1.11) | 1.101, 1.094, 1.084, 1.087, 1.083 | Pass |
+| G-LO | 1.14 (1.09–1.17) | 1.082, 1.112, 1.136, 1.144, 1.147 | Partial: 1 Myr below range |
+| C-LO | 1.3 (1.22–1.45) | 0.926, 0.993, 1.042, 1.058, 1.076 | Fail, and refuted by the stated ≤ 1.03 criterion |
+
+The C-LO failure is real, and its cause is visible in the later snapshots.
+The low-power R100 aperture leaves disturbed energy outside the sphere, and
+it captures more of that energy as it grows: C-LO rises from 0.93 to 1.23 by
+50 Myr, and G-LO from 1.08 to 1.18. The prediction allowed 0.03–0.05 for
+energy outside the sphere, which was too little for low-power jets at early
+times. The constant-fraction source reading therefore cannot be tested on
+early low-power spheres. It was not shown false, but the test as posed
+failed.
+
+**The main result: sphere and whole grid agree where the sphere captures the jet.**
+
+| Case | Age (Myr) | Sphere excess | Whole-grid excess minus boundary term |
+| --- | --- | --- | --- |
+| C-HI | 10 / 20 / 30 / 40 | +0.095 / +0.094 / +0.083 / +0.073 | +0.097 / +0.096 / +0.085 / +0.069 to +0.098 / +0.098 / +0.088 / +0.073 |
+| G-HI | 10 / 20 / 30 / 40 | +0.076 / +0.075 / +0.079 / +0.080 | +0.076 / +0.075 / +0.080 / +0.080 |
+| G-LO | 10 / 20 / 30 / 40 / 50 | +0.137 / +0.150 / +0.170 / +0.178 / +0.178 | +0.138 / +0.153 / +0.173 / +0.179 / +0.177 to +0.142 / +0.159 / +0.182 / +0.191 / +0.192 |
+| C-LO | 10 → 50 | +0.120 → +0.233 | +0.29 → +0.31 to +0.38 → +0.76 |
+
+The two columns come from different data: native spheres about 100 kpc or
+more inside the faces, and production whole-grid totals minus a boundary
+term measured in separate no-jet runs. In C-HI, G-HI and G-LO they agree to
+within 0.005 E_inj, wherever the sphere is complete and inside the inset box.
+C-HI at 50 Myr conflicts with that box and is truncated by the domain.
+
+Three things follow:
+1. The boundary term is additive and lies outside the jet-affected region.
+2. Almost all jet-related energy is inside R100 in those three cases.
+3. The excess over the labelled power is real: 7.5–9.8% (C-HI, G-HI) and
+   14–18% (G-LO).
+
+In C-LO, the sphere is a lower bound: the excess is at least 0.23 at
+50 Myr.
+
+The analytic nozzle state delivers the label to within 0.4%, so the excess
+comes from the discrete scheme. The candidates are:
+- numerical delivery at the boundary of the injection zone;
+- volumetric source terms, such as gravity source-term non-conservation,
+  pressure or density floors, and conversion repairs.
+
+The Q-031 decomposition must include the volumetric terms, not only nozzle
+and face fluxes.
+
+**Consequence.** Every fraction quoted per labelled input overstates the
+fraction of delivered energy by a factor of 1.08–1.23. This applies to
+NAT-01, NAT-06 and the NAT-07 table at 20 Myr. NAT-07's pV/R100 comparison
+cancels the label and is unaffected.
+
+**Cheapest resolution for C-LO.** Measure the total stored change in the
+fixed 50-kpc-inset box. On the coarse controls, the boundary contrast there
+is at most 1e-4 S and the drift at most 0.015 S (BND-04). Every C-LO and
+G-LO sphere fits inside it through 50 Myr, as do the high-power spheres
+before the box conflicts begin (C-HI from snapshot 33, G-HI from 32).
