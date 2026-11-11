@@ -1,0 +1,91 @@
+{
+  "azimuths_deg": [
+    0,
+    45,
+    90
+  ],
+  "correction_policies": [
+    "retained_linear",
+    "clamp_each_coordinate"
+  ],
+  "criteria": {
+    "all_primary_sides_required": true,
+    "aperture_contact_allowed": false,
+    "minimum_completeness": 0.75,
+    "minimum_purity": 0.95,
+    "null_detections_allowed": 0,
+    "purpose": "strict diagnostic generalization screen, never automatic detector adoption"
+  },
+  "detector_adopted": false,
+  "development_excluded": {
+    "case": "G-HI",
+    "snapshot_index": 20
+  },
+  "heldout_exposure_limits": [
+    "G-HI/20 development emission products already reviewed.",
+    "Earlier published legacy-method summaries exist and some were visible during source/doc search; no new ambient-refit held-out maps/tables or truth inspected.",
+    "Native accounting may read held-out native fields after this freeze; accounting results must not feed or retune observer rules."
+  ],
+  "heldout_indices": {
+    "C-HI": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "C-LO": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "G-HI": [
+      10,
+      30,
+      40
+    ],
+    "G-LO": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ]
+  },
+  "methods": [
+    "seed_grow_goal045",
+    "deficit_threshold_observer_radial_0.05"
+  ],
+  "modes": {
+    "ambient_replaced_refit": "original_observers(current whole image + initial-minus-current brightness from current non-C cells above the velocity cut); truth-assisted diagnostic",
+    "observer_refit": "original_observers(current whole image); observer-only existing comparator"
+  },
+  "null_cases": [
+    "C-HI",
+    "C-LO",
+    "G-HI",
+    "G-LO"
+  ],
+  "primary": {
+    "correction": "retained_linear",
+    "diagnostic_velocity_cut_km_s": 100
+  },
+  "protocol": "background-refit-diagnostic-2026-11-11",
+  "runner_sha256": "a56d6700176e47003c8ea53d1f0187414278a39dc87050e3bcc4d4a2d50bb708",
+  "schema": 1,
+  "source_sha256": {
+    "scripts/science/build_q031_native_emission.py": "1fc9ea91c9d5c79708a192ca0f4e01af28d5c1eb87537fa8bfa9e7ac6d59acc3",
+    "scripts/science/build_q032_source_emission.py": "895a35f07411308335c5d37ec09d2768929491cedd6a4108129eadab265f2b12",
+    "scripts/science/build_three_case_cavity_recovery.py": "9759dd270077ea04843c250024f87469b9d634300faa0ef4d53083a5102835c2",
+    "scripts/science/hemisphere_seed_grow_recovery.py": "797a7993a7f803226603347c7815dda343cb9555e8104e96051d59bfd13b94a5",
+    "scripts/science/three_case_cavity_recovery.py": "7db67dbf7efcf6a8ad5ac7a1ebc04a89776b89e7b8d3d3b4adafc488854bd1f3",
+    "scripts/science/xray_cavity_method_ladder.py": "e56e4a356485b113489c27d5ba681fe7b802ac54452113f2d45c7779440e5f5b"
+  },
+  "velocity_cuts_km_s": [
+    30,
+    100,
+    300
+  ]
+}
