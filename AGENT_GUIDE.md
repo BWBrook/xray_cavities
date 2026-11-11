@@ -88,9 +88,13 @@ pinned commit, its reproduce command and its caveats. In summary:
   so no cluster cut is certified as quiet. Its size, about 1.5% of the
   low-power scale, is an error bar for any aperture inside the cut.
   <!-- claims: BND-04 -->
-- After the boundary term is subtracted, 5–19% of E_inj remains unexplained
-  in C-HI, G-HI and G-LO. C-LO is indeterminate at 0.3–0.8. The Q-031
-  production flux job splits this residual into nozzle and face terms.
+- The jets store more than their labelled power (BND-05, provisional).
+  After the boundary term is subtracted, two independent measures agree to
+  within 0.005 E_inj: the whole-grid excess and the native R100 sphere. The
+  excess is 7.5–9.8% in C-HI and G-HI and 14–18% in G-LO; C-LO is at least
+  23%. The analytic nozzle state delivers the label to within 0.4%, so the
+  excess arises in the discrete scheme. Fractions quoted per labelled input
+  therefore overstate the fraction of delivered energy by 1.08–1.23.
   <!-- claims: BND-05 -->
 
 **Measurement (the observer factor).** No observer method is adopted yet.

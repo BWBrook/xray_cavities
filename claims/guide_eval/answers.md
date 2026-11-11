@@ -15,9 +15,9 @@ Update an answer when the claim it cites changes status.
 3. **BND-01** is supported: every case exceeds injection, C-LO by 6–24×.
    **BND-02** is supported on coarse controls: jet-independent inflow through
    the outflow faces, growing as t², matched the prediction frozen beforehand
-   to 2–7%. It accounts for about 97% of C-LO's excess. **BND-05** is open:
-   5–19% of E_inj remains in C-HI, G-HI and G-LO after the boundary term is
-   subtracted.
+   to 2–7%. It accounts for about 97% of C-LO's excess. **BND-05** is
+   provisional: after the boundary term is subtracted, the jets store 8–18%
+   more than labelled (C-HI, G-HI, G-LO), confirmed by native spheres.
    *Trap:* calling it jet heating, or saying the boundary explains all of the
    excess in every case.
 4. **NAT-05.** Full cells with tr1 > 1e-3, after promotion to double
