@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-11-12 (Claude's turn-18 review reconciled; mass/source accounting pilots submitted; prospective refit protocol frozen before new native access)
+Last updated: 2026-11-12 (failed accounting pilots diagnosed; isolated payload check added; repaired pilots submitted with completion/abort mail)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: private scientific control-plane shell for the X-ray Cavities
 simulation project.
@@ -41,22 +41,31 @@ to producer receipts. Their 20 tests pass; **all 71 focused tests pass together*
 The frozen config/runner remain unchanged. No new cohort map, score or native
 filling measurement is reported.
 
-| Pilot | Job | State at 23:51:51 AEDT |
+| Replacement pilot | Job | State at 12:31:59 AEDT, 12 November |
 | --- | --- | --- |
-| C-LO/20 mass, R100/R300 and fixed-inset storage | 878890 | Q, awaiting compatible host capacity |
-| G-HI/20 mass, R100/R300 and fixed-inset storage | 878891 | Q, awaiting compatible host capacity |
-| G-LO/0--1 extended flux/source balance | 878892 | H, afterany 878890 to serialize I/O |
+| C-LO/20 mass, R100/R300 and fixed-inset storage | 879122 | Q, awaiting compatible host capacity |
+| G-HI/20 mass, R100/R300 and fixed-inset storage | 879123 | Q, awaiting compatible host capacity |
+| G-LO/0--1 extended flux/source balance | 879124 | H, afterany 879122 to serialize I/O |
 
-The submitted immutable stage and archive hashes are verified. No new
-native result is claimed yet; full requests are staged but not submitted
-before pilot inspection. The audit and exact stage are archived on Nectar
-with verified readback. See [the review handover](logs/2026-11-11-turn18-review-and-accounting-pilots.md)
-for resumption details.
+The original pilots **878890/878891/878892 all finished F/2** during pytest
+collection: the submitted bundle omitted `run_spherical_budget_case.py`,
+which a test fixture imports. This was a packaging error, reproduced from
+the exact bundle locally; native analysis had not started. Failed logs and
+the original stage are preserved.
 
-**12 November notification correction:** all three pilots now have verified
-completion/abort mail (`Mail_Points = ae`) to Barry's UTAS address. Their live
-states remain Q/Q/H. The frozen stage is unchanged; override its old mail
-directive for subsequent submissions and verify the scheduler recipient.
+Repair **8177795** adds an isolated payload verifier and three packaging
+regression tests. A fresh extraction of the exact replacement archive passes
+**all 46 accounting checks**, with project imports restricted to that stage.
+All 15 previously packaged source/test files and all eight native requests
+are byte-identical to the originals. Native identity gates and the frozen
+emission protocol are unchanged.
+
+The replacement stage is `turn18_accounting_2026-11-12_r2`; archive/member
+hashes were verified after upload. All three live replacements have verified
+completion/abort mail (`Mail_Points = ae`) to Barry's UTAS address. No new
+native result is claimed; full requests remain staged pending pilot review.
+See [the repair handover](logs/2026-11-12-turn18-pilot-packaging-repair.md)
+for exact hashes, preserved evidence and resumption checks.
 
 ## Turn 15: outputs verified and scientific review complete
 
