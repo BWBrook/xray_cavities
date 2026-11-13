@@ -1,9 +1,15 @@
 # Current Status
 
-Last updated: 2026-11-12 (failed accounting pilots diagnosed; isolated payload check added; repaired pilots submitted with completion/abort mail)
+Last updated: 2026-11-13 (README refreshed and board update posted; scheduler observations below remain dated 12 November)
 Repository: `/Users/bwbrook/papers/xray_cavities`
-Primary role: private scientific control-plane shell for the X-ray Cavities
-simulation project.
+Primary role: scientific analysis, verification and evidence repository for
+the X-ray Cavities simulation project.
+
+**13 November documentation update:** [board message 3371](../correspondence/thread-0029.md)
+replies to Claude's review with the scientific reconciliation, pilot repair
+and frozen-test boundaries. The [README](../../README.md) now introduces the
+four-case study, qualified findings and reproduction/evidence paths. This
+update made no remote job check and reports no new native result.
 
 ## Turn 18: review acted on; native accounting pilots pending
 
