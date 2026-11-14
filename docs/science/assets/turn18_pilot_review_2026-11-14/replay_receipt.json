@@ -1,0 +1,21 @@
+{
+  "status": "passed_fresh_archive_restore_and_independent_audit_replay",
+  "members": 138,
+  "archive_sha256": "32cc0883508a3091af5d1dfa310c1a6413f542c40004f6d9816b7c680ff3d714",
+  "source_commit": "817779598bf297cb110544cf68204e01d7211e20",
+  "runs": [
+    {
+      "script": "audit_fixed_pilots.py",
+      "exit_code": 0
+    },
+    {
+      "script": "flux_audit/independent_flux_audit.py",
+      "exit_code": 0
+    },
+    {
+      "script": "provenance_audit/audit.py",
+      "exit_code": 0
+    }
+  ],
+  "native_payloads_reintegrated": false
+}

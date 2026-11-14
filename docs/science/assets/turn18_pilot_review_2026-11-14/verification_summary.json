@@ -1,0 +1,79 @@
+{
+  "review_date": "2026-11-14",
+  "source_commit": "817779598bf297cb110544cf68204e01d7211e20",
+  "stage_manifest_sha256": "52fedf9d9bc088db3c3692dc33c5a6127e0fd5c5a97ac7dda4ce9c85a8a35b81",
+  "pilot_capture_sha256": "1ee2e47dc449761d231f98caf5a0b1f3369aa1065708a75931c1af7b9d9f0241",
+  "full_submission_capture_sha256": "d7608cbb21b93879d848f5a25ac857b5fa07150c741dbbdbded65104a4295e0e",
+  "pilot_capture_members": 41,
+  "full_capture_members": 32,
+  "completion_products_verified": 12,
+  "checks": {
+    "fixed_arithmetic": 460,
+    "flux_arithmetic": 2500,
+    "provenance": 1254
+  },
+  "verdict": "accepted_for_existing_output_history_execution",
+  "native_payloads_independently_reintegrated": false,
+  "numerical_source_localized": false,
+  "physical_energy_closure_qualified": false,
+  "held_out_emission_cohort_scored": false,
+  "full_submission_observed_utc": "2026-11-14T02:03:29.871437Z",
+  "full_submissions": [
+    {
+      "analysis": "fixed_C-LO_full",
+      "job_id": 879902,
+      "state": "Q",
+      "dependency_afterany": null,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "analysis": "flux_C-LO_full",
+      "job_id": 879903,
+      "state": "H",
+      "dependency_afterany": 879902,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "analysis": "fixed_G-HI_full",
+      "job_id": 879904,
+      "state": "H",
+      "dependency_afterany": 879903,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "analysis": "flux_G-HI_full",
+      "job_id": 879905,
+      "state": "H",
+      "dependency_afterany": 879904,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "analysis": "fixed_C-HI_full",
+      "job_id": 879906,
+      "state": "H",
+      "dependency_afterany": 879905,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "analysis": "flux_C-HI_full",
+      "job_id": 879907,
+      "state": "H",
+      "dependency_afterany": 879906,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "analysis": "fixed_G-LO_full",
+      "job_id": 879908,
+      "state": "H",
+      "dependency_afterany": 879907,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "analysis": "flux_G-LO_full",
+      "job_id": 879909,
+      "state": "H",
+      "dependency_afterany": 879908,
+      "completion_abort_mail_verified": true
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "status": "pass",
+  "scope": "independent compact arithmetic, not independent native reintegration or solver flux validation",
+  "input_archive_sha256": "1ee2e47dc449761d231f98caf5a0b1f3369aa1065708a75931c1af7b9d9f0241",
+  "case": "G-LO",
+  "interval_myr": [
+    0.0,
+    0.9996596844404672
+  ],
+  "nominal_labelled_energy_erg": 6.309372091539697e+56,
+  "row_counts": {
+    "instantaneous_flux": 112,
+    "region_storage": 32,
+    "integrated_balances": 24,
+    "outside_nozzle": 36
+  },
+  "checks": {
+    "instantaneous_energy_components": 112,
+    "instantaneous_outflow_plus_inflow": 224,
+    "closed_surface_face_sum": 160,
+    "stored_energy_component_sum": 32,
+    "storage_baseline_delta": 160,
+    "interval_start": 24,
+    "interval_end": 24,
+    "interval_duration": 24,
+    "nominal_energy": 24,
+    "integrated_storage": 96,
+    "integrated_quadrature": 96,
+    "inferred_source_balance": 96,
+    "source_to_label_ratio": 24,
+    "outside_domain_copy": 432,
+    "outside_nozzle_copy": 432,
+    "outside_difference": 432,
+    "potential_gauge_mass_coefficient": 72,
+    "outside_source_to_label_ratio": 36
+  },
+  "total_scalar_checks": 2500,
+  "maximum_residual_over_tolerance_by_check": {
+    "instantaneous_energy_components": 0.000992199652165392,
+    "instantaneous_outflow_plus_inflow": 0.002256001696864153,
+    "closed_surface_face_sum": 0.00017863981284321472,
+    "stored_energy_component_sum": 0.00019971447578898477,
+    "storage_baseline_delta": 0.0,
+    "interval_start": 0.0,
+    "interval_end": 0.0,
+    "interval_duration": 0.0,
+    "nominal_energy": 0.0,
+    "integrated_storage": 0.0,
+    "integrated_quadrature": 0.0,
+    "inferred_source_balance": 0.0,
+    "source_to_label_ratio": 0.0,
+    "outside_domain_copy": 0.0,
+    "outside_nozzle_copy": 0.0,
+    "outside_difference": 0.0,
+    "potential_gauge_mass_coefficient": 0.0,
+    "outside_source_to_label_ratio": 0.0
+  },
+  "failures": [],
+  "all_initial_surface_fluxes_zero": true,
+  "scenarios": {
+    "left_rectangle": {
+      "whole_grid_inferred_source_over_label": {
+        "min": 1.0924161607822984,
+        "max": 1.0924161607822984
+      },
+      "nozzle_inferred_source_over_label": {
+        "min": 0.011590731042927679,
+        "max": 0.028074303098547745
+      },
+      "outside_nozzle_inferred_source_over_label": {
+        "min": 1.0643418576837507,
+        "max": 1.0808254297393707
+      },
+      "outside_potential_shift_1e15_effect_over_label": {
+        "min": 0.002351194127427738,
+        "max": 0.002847058522794199
+      }
+    },
+    "trapezoid": {
+      "whole_grid_inferred_source_over_label": {
+        "min": 1.07600043280372,
+        "max": 1.082192107768763
+      },
+      "nozzle_inferred_source_over_label": {
+        "min": 0.5348152605508752,
+        "max": 0.5579323577629357
+      },
+      "outside_nozzle_inferred_source_over_label": {
+        "min": 0.5180680750407843,
+        "max": 0.5473768472178878
+      },
+      "outside_potential_shift_1e15_effect_over_label": {
+        "min": -0.0008076378959757873,
+        "max": 0.0008072130540554525
+      }
+    },
+    "right_rectangle": {
+      "whole_grid_inferred_source_over_label": {
+        "min": 1.0595847048251419,
+        "max": 1.071968054755228
+      },
+      "nozzle_inferred_source_over_label": {
+        "min": 1.0580397900588228,
+        "max": 1.0877904124273237
+      },
+      "outside_nozzle_inferred_source_over_label": {
+        "min": -0.02820570760218185,
+        "max": 0.013928264696405084
+      },
+      "outside_potential_shift_1e15_effect_over_label": {
+        "min": -0.003966469919379313,
+        "max": -0.001232632414683294
+      }
+    }
+  },
+  "endpoint_flux_and_storage": [
+    {
+      "surface": "domain_boundary",
+      "reconstruction": "linear_to_boundary_face",
+      "endpoint_outward_energy_flux_over_labelled_power": -0.032831455957156495,
+      "post_baseline_stored_energy_change_over_label": 1.0924161607822984
+    },
+    {
+      "surface": "domain_boundary",
+      "reconstruction": "outer_active_cell",
+      "endpoint_outward_energy_flux_over_labelled_power": -0.02044810602707053,
+      "post_baseline_stored_energy_change_over_label": 1.0924161607822984
+    },
+    {
+      "surface": "nozzle_control_p1",
+      "reconstruction": "centered_primitives",
+      "endpoint_outward_energy_flux_over_labelled_power": 1.0464490590158952,
+      "post_baseline_stored_energy_change_over_label": 0.011590731042927679
+    },
+    {
+      "surface": "nozzle_control_p1",
+      "reconstruction": "donor_cell_primitives",
+      "endpoint_outward_energy_flux_over_labelled_power": 1.0548164228016657,
+      "post_baseline_stored_energy_change_over_label": 0.011590731042927679
+    },
+    {
+      "surface": "nozzle_control_p2",
+      "reconstruction": "centered_primitives",
+      "endpoint_outward_energy_flux_over_labelled_power": 1.0471937113196432,
+      "post_baseline_stored_energy_change_over_label": 0.01675795631938747
+    },
+    {
+      "surface": "nozzle_control_p2",
+      "reconstruction": "donor_cell_primitives",
+      "endpoint_outward_energy_flux_over_labelled_power": 1.0487678937342286,
+      "post_baseline_stored_energy_change_over_label": 0.01675795631938747
+    },
+    {
+      "surface": "nozzle_control_p4",
+      "reconstruction": "centered_primitives",
+      "endpoint_outward_energy_flux_over_labelled_power": 1.0501773919001758,
+      "post_baseline_stored_energy_change_over_label": 0.028074303098547745
+    },
+    {
+      "surface": "nozzle_control_p4",
+      "reconstruction": "donor_cell_primitives",
+      "endpoint_outward_energy_flux_over_labelled_power": 1.059716109328776,
+      "post_baseline_stored_energy_change_over_label": 0.028074303098547745
+    }
+  ],
+  "verdict": "Accept execution and compact arithmetic for continued existing-output reduction. Reject source-localization or measured-delivery conclusions: 1-Myr endpoint quadrature is decisive and unresolved.",
+  "interpretation_limits": [
+    "No native HDF5 field integrals were recomputed in this audit.",
+    "All saved t=0 closed-surface fluxes are zero; source-control flux near 1 Myr is near labelled power, so trapezoid assigns only half that sustained flux over the startup interval.",
+    "The outside-nozzle residual changes sign across quadrature/reconstruction variants; its trapezoid magnitude near half the label is not measured numerical volumetric heating.",
+    "Left/trapezoid/right and spatial reconstruction scenarios are sensitivity cases, not formal error bounds.",
+    "Fixed centre-zero gravitational energy is used consistently with advected potential. A potential shift changes inferred source by the corresponding inferred mass source.",
+    "No separate historical gravity, floor, or conversion-repair energy can be identified. Baseline is already nozzle initialized; initial overwrite is excluded."
+  ]
+}

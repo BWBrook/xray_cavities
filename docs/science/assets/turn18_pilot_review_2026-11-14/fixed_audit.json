@@ -1,0 +1,42 @@
+{
+  "status": "pass_compact_arithmetic_and_prior_aperture_reconciliation",
+  "checks": 460,
+  "input_product_sha256": {
+    "C-LO": "4e76820e790acde1dfc174e1588d4d6942fb3065b164971a9b92d898ef20d83f",
+    "G-HI": "3f37a58b69731f40a819bf43a984c00a7ccf674125677ac7f219fac4c8d75d4b"
+  },
+  "prior_comparisons": [
+    {
+      "case": "C-LO",
+      "aperture": "R100",
+      "checks": 18,
+      "maximum_energy_difference_over_labelled_input": 1.1041746979134643e-16
+    },
+    {
+      "case": "C-LO",
+      "aperture": "R300",
+      "checks": 18,
+      "maximum_energy_difference_over_labelled_input": 1.3802183723918304e-17
+    },
+    {
+      "case": "G-HI",
+      "aperture": "R100",
+      "checks": 18,
+      "maximum_energy_difference_over_labelled_input": 1.4133632014099034e-16
+    },
+    {
+      "case": "G-HI",
+      "aperture": "R300",
+      "checks": 18,
+      "maximum_energy_difference_over_labelled_input": 1.4133632014099034e-16
+    }
+  ],
+  "maximum_identity_residual_over_tolerance": 0.009409516226144053,
+  "native_reintegration_independent": false,
+  "scientific_qualification": false,
+  "limits": [
+    "two case/age pilots only; stored energy is not measured delivery",
+    "current cocoon and speed>=30 km/s are inset-contained, but 1% thermodynamic changes also occur outside",
+    "whole-grid and regional total energy retain potential-zero dependence"
+  ]
+}

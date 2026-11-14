@@ -1,0 +1,50 @@
+{
+  "review_source_commit": "817779598bf297cb110544cf68204e01d7211e20",
+  "files": [
+    {
+      "path": "docs/science/assets/turn18_pilot_review_2026-11-14/README.md",
+      "bytes": 3755,
+      "sha256": "c3b935e954914de09dfa92dd858d024cab51de5c6cef74a49150698170eb93cf"
+    },
+    {
+      "path": "docs/science/assets/turn18_pilot_review_2026-11-14/endpoint_flux_and_storage.csv",
+      "bytes": 753,
+      "sha256": "a7dc21ec1a0121eaf021aba54a6837d427842fb1b89fb6d16ed207231ae4d48a"
+    },
+    {
+      "path": "docs/science/assets/turn18_pilot_review_2026-11-14/fixed_audit.json",
+      "bytes": 1377,
+      "sha256": "8b4ca4731ed4377fe883f2803999379574cedddc3e7d985d7a02a1cf8eaf50eb"
+    },
+    {
+      "path": "docs/science/assets/turn18_pilot_review_2026-11-14/fixed_pilot_summary.csv",
+      "bytes": 3539,
+      "sha256": "4c104125a5e27289eb79fb69bf23d9ad06f94e8e7998359b113545a70acbc61f"
+    },
+    {
+      "path": "docs/science/assets/turn18_pilot_review_2026-11-14/flux_audit.json",
+      "bytes": 6839,
+      "sha256": "cfb1cfae4d67c58831ade309e777d43e0526cdf55772f61c2a1d2955ec151afd"
+    },
+    {
+      "path": "docs/science/assets/turn18_pilot_review_2026-11-14/replay_receipt.json",
+      "bytes": 546,
+      "sha256": "7892bd3f3e7d9e8d08e0dbf96fc15bba682953d635db629ee38fa765d4bd2c3c"
+    },
+    {
+      "path": "docs/science/assets/turn18_pilot_review_2026-11-14/startup_scenarios.csv",
+      "bytes": 887,
+      "sha256": "b66a0b06a9cebbfad26a21952ef46a3d0e5c4db67291e4542e71fa9e6807e33d"
+    },
+    {
+      "path": "docs/science/assets/turn18_pilot_review_2026-11-14/verification_summary.json",
+      "bytes": 2331,
+      "sha256": "0d7d2455cbd0bad4e7d1d624351270c0a2d0bcdb88b4f63afe722c3723c313ba"
+    },
+    {
+      "path": "docs/science/turn18_pilot_review_2026-11-14.md",
+      "bytes": 6964,
+      "sha256": "a8910179e9615480daa4626121e832eab6a0895bb25d9a7edc58ba742db9da50"
+    }
+  ]
+}
