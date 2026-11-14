@@ -161,6 +161,39 @@ claims:
       - G-HI snapshots 48--50 are excluded; no extrapolation is made to them.
     depends_on: [NAT-05, NAT-07]
 
+  - id: NAT-09
+    status: provisional
+    statement: >-
+      At approximately 20 Myr, same-cell total stored-energy change in the
+      full-cell 50-kpc-inset box is 1.157066 and 1.074883 labelled-input units
+      for C-LO and G-HI. R100 regional mass changes make their ambient total
+      shares shift from 97.52% to 105.32% and 53.55% to 55.17% respectively
+      under an illustrative +1e15 cm2/s2 potential-zero change. R100/R300
+      energy components reproduce the older products within 1.42e-16
+      labelled-input units.
+    evidence:
+      - {path: docs/science/turn18_pilot_review_2026-11-14.md, commit: 5290cde}
+      - {path: docs/science/assets/turn18_pilot_review_2026-11-14/fixed_pilot_summary.csv, commit: 5290cde}
+      - {path: docs/science/assets/turn18_pilot_review_2026-11-14/fixed_audit.json, commit: 5290cde}
+      - {path: docs/science/assets/turn18_pilot_review_2026-11-14/replay_receipt.json, commit: 5290cde}
+    reproduce: >-
+      Restore the pinned pilot audit archive as documented in
+      docs/science/assets/turn18_pilot_review_2026-11-14/README.md, then run
+      .venv/bin/python private_archive/turn18_pilot_review_2026-11-14/audit_fixed_pilots.py.
+    test: >-
+      Inspect the full four-case regional mass and fixed-box histories with
+      geometry/contact diagnostics before extending the two pilot findings
+      or quoting a general total ambient-energy share. Physical closure
+      separately requires delivery, transport and source diagnostics.
+    caveats:
+      - Two case/age pilots only; the C-LO/50 history has not been resolved by these measurements.
+      - Stored change uses a fixed centre-zero potential and labelled input is not measured numerical delivery.
+      - Current cocoon masks are applied to the same initial/current cells; signed Eulerian shares are not deposition efficiencies.
+      - The potential shift is an illustrative convention change, not a physical error interval; a signed share can exceed one.
+      - Cocoon and speed-at-least-30-km/s cells are inset-contained, while 1% thermodynamic changes also reach domain faces; causal separation and quiet production boundaries are not certified.
+      - Independent compact arithmetic and semantic reviews pass; native field integrals were not independently reintegrated.
+    depends_on: [NAT-05, NAT-07, NAT-08, BND-05]
+
   - id: BND-01
     status: supported
     statement: >-
@@ -281,6 +314,39 @@ claims:
       - Retained parent sources select DENSITY_LENGTH_SCALE, not the DENSITY_JET_POWER branch used in the original nozzle argument; labelled input is not proved realised delivery. The categorical nozzle exclusion is withdrawn pending native flux measurement.
       - Analytic prescribed-state flux within 0.4% of the label does not measure numerical overwrite/Riemann delivery or identify where in-grid source terms arise.
     depends_on: [BND-01, BND-02, BND-04, NAT-07]
+
+  - id: BND-06
+    status: provisional
+    statement: >-
+      In the G-LO 0 to 0.999659684-Myr flux pilot, all saved initial face
+      fluxes are zero and later nozzle-control outward power is
+      1.04645--1.05972 times labelled bipolar power. The inferred
+      outside-nozzle energy-source balance spans 1.06434--1.08083,
+      0.51807--0.54738 and -0.02821--0.01393 labelled-input units for
+      left, trapezoid and right time quadratures respectively. This startup
+      interval does not identify a numerical in-grid heating source.
+    evidence:
+      - {path: docs/science/turn18_pilot_review_2026-11-14.md, commit: 5290cde}
+      - {path: docs/science/assets/turn18_pilot_review_2026-11-14/startup_scenarios.csv, commit: 5290cde}
+      - {path: docs/science/assets/turn18_pilot_review_2026-11-14/endpoint_flux_and_storage.csv, commit: 5290cde}
+      - {path: docs/science/assets/turn18_pilot_review_2026-11-14/flux_audit.json, commit: 5290cde}
+    reproduce: >-
+      Restore the pinned pilot audit archive as documented in
+      docs/science/assets/turn18_pilot_review_2026-11-14/README.md, then run
+      .venv/bin/python private_archive/turn18_pilot_review_2026-11-14/flux_audit/independent_flux_audit.py.
+    test: >-
+      Compare later full-history intervals and accumulated cadence sensitivity.
+      Missing startup trajectories cannot be recovered by extending the end
+      time; identifying historical solver-source terms requires finer saved
+      diagnostics or a separately authorised instrumented run.
+    caveats:
+      - Reconstructed control-surface transport is not discrete Riemann or nozzle-overwrite delivery.
+      - Quadrature, reconstruction and padding variants are scenarios, not certified confidence or error bounds.
+      - A source estimate is storage change plus outward transport; differencing whole-grid and nozzle balances does not identify individual gravity, floor or conversion-repair energies.
+      - The initial stored state already includes nozzle initialisation; its original overwrite is excluded.
+      - Fixed centre-zero potential is retained; inferred source transforms with its corresponding inferred mass-source term.
+      - Independent lower-level arithmetic passes 2500 scalar checks; native HDF5 integrals and solver-step fluxes were not independently verified.
+    depends_on: [BND-05]
 
   - id: OBS-01
     status: refuted

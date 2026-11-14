@@ -1,17 +1,19 @@
 # Current Status
 
-Last updated: 2026-11-13 (README refreshed and board update posted; scheduler observations below remain dated 12 November)
+Last updated: 2026-11-14 (three pilots accepted; eight full accounting histories submitted with completion/abort mail)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
-**13 November documentation update:** [board message 3371](../correspondence/thread-0029.md)
-replies to Claude's review with the scientific reconciliation, pilot repair
-and frozen-test boundaries. The [README](../../README.md) now introduces the
-four-case study, qualified findings and reproduction/evidence paths. This
-update made no remote job check and reports no new native result.
+**Latest:** the [pilot review](../science/turn18_pilot_review_2026-11-14.md)
+verifies all three F/0 completions, twelve products and independent fixed,
+flux and provenance audits. C-LO/G-HI 20-Myr inset storage is
+1.157066/1.074883 labelled-input units. Regional mass confirms the potential
+convention's effect on signed ambient shares. G-LO's startup flux interval
+cannot locate the excess source because time-quadrature scenarios span both
+residual signs. NAT-09/BND-06 and BND-05 remain provisional.
 
-## Turn 18: review acted on; native accounting pilots pending
+## Turn 18: pilots accepted; full accounting histories pending
 
 [Reconciliation](../science/turn18_review_reconciliation_2026-11-11.md)
 at **06f9a2d** qualifies the strengthened inference in board message 3244.
@@ -47,11 +49,11 @@ to producer receipts. Their 20 tests pass; **all 71 focused tests pass together*
 The frozen config/runner remain unchanged. No new cohort map, score or native
 filling measurement is reported.
 
-| Replacement pilot | Job | State at 12:31:59 AEDT, 12 November |
-| --- | --- | --- |
-| C-LO/20 mass, R100/R300 and fixed-inset storage | 879122 | Q, awaiting compatible host capacity |
-| G-HI/20 mass, R100/R300 and fixed-inset storage | 879123 | Q, awaiting compatible host capacity |
-| G-LO/0--1 extended flux/source balance | 879124 | H, afterany 879122 to serialize I/O |
+| Replacement pilot | Job | Final state / exit | Wall time |
+| --- | --- | --- | --- |
+| C-LO/20 mass, R100/R300 and fixed-inset storage | 879122 | F / 0 | 00:08:15 |
+| G-HI/20 mass, R100/R300 and fixed-inset storage | 879123 | F / 0 | 00:10:02 |
+| G-LO/0--1 extended flux/source balance | 879124 | F / 0 | 00:08:12 |
 
 The original pilots **878890/878891/878892 all finished F/2** during pytest
 collection: the submitted bundle omitted `run_spherical_budget_case.py`,
@@ -66,12 +68,29 @@ All 15 previously packaged source/test files and all eight native requests
 are byte-identical to the originals. Native identity gates and the frozen
 emission protocol are unchanged.
 
-The replacement stage is `turn18_accounting_2026-11-12_r2`; archive/member
-hashes were verified after upload. All three live replacements have verified
-completion/abort mail (`Mail_Points = ae`) to Barry's UTAS address. No new
-native result is claimed; full requests remain staged pending pilot review.
-See [the repair handover](logs/2026-11-12-turn18-pilot-packaging-repair.md)
-for exact hashes, preserved evidence and resumption checks.
+The replacement stage is `turn18_accounting_2026-11-12_r2`; its manifest and
+all completion product hashes still match. Independent checks pass:
+**460 fixed-budget, 2,500 flux and 1,254 provenance** checks. The audit bundle
+also passes a fresh restore/replay of all three audit scripts. Native field
+integrals were not independently reintegrated; no physical closure is claimed.
+
+| Full accounting history | Job | State at 13:03:29 AEDT, 14 November |
+| --- | --- | --- |
+| C-LO fixed box/mass | 879902 | Q, awaiting compatible capacity |
+| C-LO flux/source | 879903 | H, afterany 879902 |
+| G-HI fixed box/mass | 879904 | H, afterany 879903 |
+| G-HI flux/source | 879905 | H, afterany 879904 |
+| C-HI fixed box/mass | 879906 | H, afterany 879905 |
+| C-HI flux/source | 879907 | H, afterany 879906 |
+| G-LO fixed box/mass | 879908 | H, afterany 879907 |
+| G-LO flux/source | 879909 | H, afterany 879908 |
+
+Every job has verified completion/abort mail (`Mail_Points = ae`) to Barry's
+UTAS recipient. The serial chain limits I/O, not scientific acceptance;
+each completion must be reviewed even if an earlier job fails. Source and
+native-identity gates are unchanged; only existing outputs are analysed.
+See [the latest handover](logs/2026-11-14-pilot-acceptance-and-full-accounting-history.md)
+for receipts, hashes and review criteria. No blind-emission job was submitted.
 
 ## Turn 15: outputs verified and scientific review complete
 

@@ -11,7 +11,7 @@ enthalpy convention is **2.5pV**; **4pV** is a literature comparator. Labelled
 jet power times age is the reference input, while actual numerical delivery
 remains under investigation.
 
-> **Status, 13 November 2026:** active research, developed in the open. The
+> **Status, 14 November 2026:** active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -79,14 +79,19 @@ truth-assisted background diagnostic from an observer-only detector.
 
 ## Work in progress
 
-Regional mass and fixed 50-kpc-inset energy budgets, together with extended
-flux/source accounting, are implemented. Replacement pilots **879122–879124**
-were submitted after an omitted test dependency caused the original pilots
-to fail before analysis. The repaired archive passed all 46 accounting
-checks in isolation. The last scheduler check, **12 November at 12:31:59
-AEDT**, showed two queued pilots and a third held behind the first; completion
-and abort email settings were verified. No replacement native result has
-yet been verified here. Full histories await pilot acceptance.
+The [accounting pilots](docs/science/turn18_pilot_review_2026-11-14.md) all
+completed successfully. Independent fixed-budget, flux and provenance checks
+pass. At 20 Myr, the fixed interior stores 1.157066 and 1.074883 labelled-input
+units in C-LO and G-HI; regional mass measurements demonstrate the potential
+convention's effect on ambient shares. The first G-LO flux interval remains
+too sensitive to time integration to locate the excess energy source.
+<!-- claims: NAT-09 BND-06 -->
+
+All eight full fixed-budget/flux histories, **879902–879909**, are submitted
+with serial I/O dependencies and verified completion/abort mail. At the
+**14 November, 13:03:29 AEDT** check, the first was queued and seven were
+dependency-held. They analyse existing simulation outputs; full-history
+completion and scientific acceptance remain pending.
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only

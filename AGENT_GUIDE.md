@@ -9,7 +9,8 @@ article and a two-page brief for general readers.
 
 Draft of 2 November 2026 by Claude (Opus 5.5, `claude-opus-5-5`), updated
 11 November with the independently checked turn-15 results by Codex GPT-6.1
-Sol. The new bounded scientific synthesis awaits collaboration adjudication.
+Sol, with accounting-pilot results added on 14 November by Codex (GPT-6).
+The new bounded scientific synthesis awaits collaboration adjudication.
 Its form is an experiment; see the end.
 
 ## The question
@@ -156,6 +157,31 @@ the raw comparisons can be used with their stated definitions.
   below-cut gas is not physically static. Neither detector is promoted.
   <!-- claims: XR-04 -->
 
+## Accounting pilots reviewed on 14 November
+
+The [pilot review](docs/science/turn18_pilot_review_2026-11-14.md) accepts
+three completed jobs for continued existing-output accounting. The fixed
+C-LO/G-HI 20-Myr boxes store 1.157066/1.074883 labelled-input units. Their
+R100/R300 energy components reproduce the old measurements to numerical
+precision. Regional mass now accompanies these two case/ages: an illustrative
++1e15 cm²/s² potential shift changes R100 ambient total shares from
+97.52%/53.55% to 105.32%/55.17%. These are signed same-cell contributions,
+not deposition efficiencies; all four-case histories remain to be reviewed.
+<!-- claims: NAT-09 -->
+
+G-LO's first saved flux interval does not localise a numerical source.
+Initial surface fluxes are zero. The outside-nozzle source balance spans
+1.06434–1.08083, 0.51807–0.54738 and −0.02821–0.01393 labelled-input units
+under left, trapezoid and right quadratures. The roughly half-label trapezoid
+residual is not measured in-grid heating. These are scenarios, not formal
+error bounds; full histories cannot recover the missing startup trajectory.
+<!-- claims: BND-06 -->
+
+Full fixed/flux jobs 879902–879909 are submitted in a serial I/O chain with
+verified completion/abort mail. G-HI requests stop at index 47. The frozen
+emission cohort remains unscored. See the current status before interpreting
+these dated scheduler observations as current execution state.
+
 ## Conventions you must apply
 
 - **Native cocoon.** All cells with tracer `tr1 > 1e-3`, after promoting the
@@ -217,8 +243,10 @@ the raw comparisons can be used with their stated definitions.
 
 ## Open questions, in priority order
 
-1. **What is the 5–19% residual (BND-05)?** The Q-031 production flux job
-   measures face transport and nozzle delivery directly. Until then, write
+1. **What is the 5–19% residual (BND-05)?** Q-031 reconstructs face transport
+   and control-volume balances from saved states; it does not directly
+   measure numerical nozzle overwrite or solver-step delivery. The startup
+   pilot is cadence-ambiguous (BND-06), and full histories are pending. Write
    physical closure as "boundary-dominated, with an unexplained residual".
    The 100/300 km/s spherical budgets (Stas's priority of 4 November)
    measure storage inside speed-defined apertures, retaining boundary and
@@ -226,7 +254,7 @@ the raw comparisons can be used with their stated definitions.
    are now reviewed (201 snapshots); their component/proxy and aperture
    comparisons are above. Slower disturbance remains outside. Realised
    delivery, aperture transport and production-boundary qualification remain
-   the highest-value accounting measurements. <!-- claims: NAT-06 NAT-07 NAT-08 -->
+   the highest-value accounting measurements. <!-- claims: NAT-06 NAT-07 NAT-08 NAT-09 BND-06 -->
 2. **The emission-defined native reference (XR-02).** Without it, detector
    tests compare against tracer cocoons, which are not what X-ray cavities
    trace. The new G-HI/20 C/moving-ambient/below-cut diagnostic is useful
