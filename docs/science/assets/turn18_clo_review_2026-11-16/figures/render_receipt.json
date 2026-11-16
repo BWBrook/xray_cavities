@@ -1,0 +1,10 @@
+{
+  "inputs": {
+    "fixed_history.csv": "3aa4a27adb926341459329bac2502ae16e0867b2b2bb5bef69c51fa82cfd5cce",
+    "cumulative_flux_scenarios.csv": "9ec25d21171535ec1e64851621165510b712b592d3329383fb3eeb031c04caae"
+  },
+  "renderer_sha256": "17afabdb8c935a85413c12bd184d0a66fa80343e6c719846c2eb6fbc845d05d1",
+  "history_points": 50,
+  "scenario_rows": 300,
+  "interpretation": "C-LO only; signed stored change and reconstructed source scenarios, not delivered energy or source localisation"
+}

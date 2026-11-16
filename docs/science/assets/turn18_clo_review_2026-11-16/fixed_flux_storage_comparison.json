@@ -1,0 +1,2763 @@
+{
+  "status": "pass",
+  "scope": "whole-grid compact flux-storage versus cell-difference fixed-budget reduction",
+  "comparison_count": 306,
+  "maximum_energy_difference_over_label": 2.0178384202347343e-10,
+  "maximum_mass_difference_over_whole_grid_mass": 3.519172667757376e-15,
+  "records": [
+    {
+      "snapshot_index": 0,
+      "field": "delta_thermal_erg",
+      "flux_value": 0.0,
+      "fixed_value": 0.0,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 0,
+      "field": "delta_kinetic_erg",
+      "flux_value": 0.0,
+      "fixed_value": 0.0,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 0,
+      "field": "delta_gravitational_erg",
+      "flux_value": 0.0,
+      "fixed_value": 0.0,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 0,
+      "field": "delta_total_energy_erg",
+      "flux_value": 0.0,
+      "fixed_value": 0.0,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 0,
+      "field": "mass_g",
+      "flux_value": 6.208035747385106e+45,
+      "fixed_value": 6.208035747385099e+45,
+      "absolute_difference": 6.338253001141147e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.020975596638743e-15
+    },
+    {
+      "snapshot_index": 0,
+      "field": "delta_mass_g",
+      "flux_value": 0.0,
+      "fixed_value": 0.0,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 1,
+      "field": "delta_thermal_erg",
+      "flux_value": 5.160536919509368e+56,
+      "fixed_value": 5.160536919932135e+56,
+      "absolute_difference": 4.227663771011443e+46,
+      "energy_difference_over_label": 6.699091260715874e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 1,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.4421338779381422e+56,
+      "fixed_value": 2.4421338779381435e+56,
+      "absolute_difference": 1.3066842889764037e+41,
+      "energy_difference_over_label": 2.0705519111569075e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 1,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.9338924367877126e+56,
+      "fixed_value": 1.9338924376167184e+56,
+      "absolute_difference": 8.29005811315315e+46,
+      "energy_difference_over_label": 1.3136299115708623e-10,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 1,
+      "field": "delta_total_energy_erg",
+      "flux_value": 9.53656323421358e+56,
+      "fixed_value": 9.536563235486998e+56,
+      "absolute_difference": 1.273417849224783e+47,
+      "energy_difference_over_label": 2.0178384202347343e-10,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 1,
+      "field": "mass_g",
+      "flux_value": 6.208060411780026e+45,
+      "fixed_value": 6.208060411780033e+45,
+      "absolute_difference": 6.338253001141147e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.0209715403403724e-15
+    },
+    {
+      "snapshot_index": 1,
+      "field": "delta_mass_g",
+      "flux_value": 2.466439492086235e+40,
+      "fixed_value": 2.4664394933456723e+40,
+      "absolute_difference": 1.2594371582097676e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.0287127938058355e-15
+    },
+    {
+      "snapshot_index": 2,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.4903738101891626e+57,
+      "fixed_value": 1.490373810227675e+57,
+      "absolute_difference": 3.8512341610431205e+46,
+      "energy_difference_over_label": 3.052181633499514e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 2,
+      "field": "delta_kinetic_erg",
+      "flux_value": 4.3841246378674e+56,
+      "fixed_value": 4.384124637867405e+56,
+      "absolute_difference": 5.226737155905615e+41,
+      "energy_difference_over_label": 4.1422958156519086e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 2,
+      "field": "delta_gravitational_erg",
+      "flux_value": 7.368089800408658e+56,
+      "fixed_value": 7.368089801641551e+56,
+      "absolute_difference": 1.2328932138093282e+47,
+      "energy_difference_over_label": 9.770930215876035e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 2,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.6655952540073356e+57,
+      "fixed_value": 2.6655952541785704e+57,
+      "absolute_difference": 1.7123487821034248e+47,
+      "energy_difference_over_label": 1.3570713398184406e-10,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 2,
+      "field": "mass_g",
+      "flux_value": 6.20813196446659e+45,
+      "fixed_value": 6.2081319644666e+45,
+      "absolute_difference": 1.0141204801825835e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.6335356367858982e-15
+    },
+    {
+      "snapshot_index": 2,
+      "field": "delta_mass_g",
+      "flux_value": 9.62170814837565e+40,
+      "fixed_value": 9.62170814995596e+40,
+      "absolute_difference": 1.580311699962866e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.54555107560225e-15
+    },
+    {
+      "snapshot_index": 3,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.7996093885696567e+57,
+      "fixed_value": 2.7996093885784826e+57,
+      "absolute_difference": 8.825868361462221e+45,
+      "energy_difference_over_label": 4.662619962266294e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 3,
+      "field": "delta_kinetic_erg",
+      "flux_value": 6.535777934400581e+56,
+      "fixed_value": 6.535777934400581e+56,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 3,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.606394061967812e+57,
+      "fixed_value": 1.6063940619728084e+57,
+      "absolute_difference": 4.996412271902041e+45,
+      "energy_difference_over_label": 2.6395557518629393e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 3,
+      "field": "delta_total_energy_erg",
+      "flux_value": 5.059581243965855e+57,
+      "fixed_value": 5.059581243991349e+57,
+      "absolute_difference": 2.5493933151645227e+46,
+      "energy_difference_over_label": 1.346819562237953e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 3,
+      "field": "mass_g",
+      "flux_value": 6.208246768362813e+45,
+      "fixed_value": 6.208246768362816e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.083763572956437e-16
+    },
+    {
+      "snapshot_index": 3,
+      "field": "delta_mass_g",
+      "flux_value": 2.1102097770754893e+41,
+      "fixed_value": 2.1102097771605373e+41,
+      "absolute_difference": 8.504802812395473e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.369920225422722e-15
+    },
+    {
+      "snapshot_index": 4,
+      "field": "delta_thermal_erg",
+      "flux_value": 4.458067590762694e+57,
+      "fixed_value": 4.458067590758877e+57,
+      "absolute_difference": 3.816911920386007e+45,
+      "energy_difference_over_label": 1.5119909297729477e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 4,
+      "field": "delta_kinetic_erg",
+      "flux_value": 7.921061849094497e+56,
+      "fixed_value": 7.92106184909451e+56,
+      "absolute_difference": 1.2195720030446435e+42,
+      "energy_difference_over_label": 4.831082941578709e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 4,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.7915186320886933e+57,
+      "fixed_value": 2.791518632075705e+57,
+      "absolute_difference": 1.2988441832425453e+46,
+      "energy_difference_over_label": 5.145103332781324e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 4,
+      "field": "delta_total_energy_erg",
+      "flux_value": 8.041692407760979e+57,
+      "fixed_value": 8.041692407744033e+57,
+      "absolute_difference": 1.6945778757733457e+46,
+      "energy_difference_over_label": 6.712720731853021e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 4,
+      "field": "mass_g",
+      "flux_value": 6.208403436744176e+45,
+      "fixed_value": 6.20840343674418e+45,
+      "absolute_difference": 5.070602400912918e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 8.167321039259089e-16
+    },
+    {
+      "snapshot_index": 4,
+      "field": "delta_mass_g",
+      "flux_value": 3.67689359069881e+41,
+      "fixed_value": 3.676893590805103e+41,
+      "absolute_difference": 1.0629262662314096e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.7120766668295495e-15
+    },
+    {
+      "snapshot_index": 5,
+      "field": "delta_thermal_erg",
+      "flux_value": 6.39916526110275e+57,
+      "fixed_value": 6.399165261136071e+57,
+      "absolute_difference": 3.3321494716329475e+46,
+      "energy_difference_over_label": 1.0560196211220066e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 5,
+      "field": "delta_kinetic_erg",
+      "flux_value": 9.559304414200168e+56,
+      "fixed_value": 9.559304414200177e+56,
+      "absolute_difference": 8.711228593176025e+41,
+      "energy_difference_over_label": 2.7607489990431844e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 5,
+      "field": "delta_gravitational_erg",
+      "flux_value": 4.2813684451975096e+57,
+      "fixed_value": 4.281368445230433e+57,
+      "absolute_difference": 3.2923565794193195e+46,
+      "energy_difference_over_label": 1.0434085196943772e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 5,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.1636464147706564e+58,
+      "fixed_value": 1.1636464147786522e+58,
+      "absolute_difference": 7.995792811275664e+46,
+      "energy_difference_over_label": 2.5340142052497655e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 5,
+      "field": "mass_g",
+      "flux_value": 6.20860052490837e+45,
+      "fixed_value": 6.208600524908379e+45,
+      "absolute_difference": 8.873554201597606e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.429235810227709e-15
+    },
+    {
+      "snapshot_index": 5,
+      "field": "delta_mass_g",
+      "flux_value": 5.6477752326460835e+41,
+      "fixed_value": 5.647775232795029e+41,
+      "absolute_difference": 1.4894585067671874e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.3990245479502282e-15
+    },
+    {
+      "snapshot_index": 6,
+      "field": "delta_thermal_erg",
+      "flux_value": 8.618956432493753e+57,
+      "fixed_value": 8.618956432556971e+57,
+      "absolute_difference": 6.321843124810959e+46,
+      "energy_difference_over_label": 1.669523186162087e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 6,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.1304290815485369e+57,
+      "fixed_value": 1.1304290815485372e+57,
+      "absolute_difference": 3.48449143727041e+41,
+      "energy_difference_over_label": 9.202125284752557e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 6,
+      "field": "delta_gravitational_erg",
+      "flux_value": 6.0681585222924775e+57,
+      "fixed_value": 6.0681585223120715e+57,
+      "absolute_difference": 1.959399225005897e+46,
+      "energy_difference_over_label": 5.174539090122058e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 6,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.5817544036321866e+58,
+      "fixed_value": 1.581754403641758e+58,
+      "absolute_difference": 9.571479839209343e+46,
+      "energy_difference_over_label": 2.5277133902181103e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 6,
+      "field": "mass_g",
+      "flux_value": 6.208837008250491e+45,
+      "fixed_value": 6.208837008250496e+45,
+      "absolute_difference": 5.070602400912918e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 8.166750704157547e-16
+    },
+    {
+      "snapshot_index": 6,
+      "field": "delta_mass_g",
+      "flux_value": 8.012608653852759e+41,
+      "fixed_value": 8.012608653961255e+41,
+      "absolute_difference": 1.0849615989306894e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.7474473842508004e-15
+    },
+    {
+      "snapshot_index": 7,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.1135024265807769e+58,
+      "fixed_value": 1.1135024265884908e+58,
+      "absolute_difference": 7.713967143829233e+46,
+      "energy_difference_over_label": 1.746126818251721e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 7,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.2718183832757058e+57,
+      "fixed_value": 1.2718183832757053e+57,
+      "absolute_difference": 5.226737155905615e+41,
+      "energy_difference_over_label": 1.1831196257013196e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 7,
+      "field": "delta_gravitational_erg",
+      "flux_value": 8.14182716260181e+57,
+      "fixed_value": 8.141827162600138e+57,
+      "absolute_difference": 1.6725558898897967e+45,
+      "energy_difference_over_label": 3.785982802244223e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 7,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.054866981167935e+58,
+      "fixed_value": 2.0548669811760752e+58,
+      "absolute_difference": 8.140329516093641e+46,
+      "energy_difference_over_label": 1.8426378298522634e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 7,
+      "field": "mass_g",
+      "flux_value": 6.209111484973708e+45,
+      "fixed_value": 6.209111484973709e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.0415974222656382e-16
+    },
+    {
+      "snapshot_index": 7,
+      "field": "delta_mass_g",
+      "flux_value": 1.0757375886022001e+42,
+      "fixed_value": 1.0757375886100185e+42,
+      "absolute_difference": 7.81836506061173e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.2591761445309005e-15
+    },
+    {
+      "snapshot_index": 8,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.3928418413717616e+58,
+      "fixed_value": 1.3928418413790004e+58,
+      "absolute_difference": 7.23882189144304e+46,
+      "energy_difference_over_label": 1.4337156370176996e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 8,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.4322527673511035e+57,
+      "fixed_value": 1.4322527673511037e+57,
+      "absolute_difference": 1.742245718635205e+41,
+      "energy_difference_over_label": 3.450678809057541e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 8,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.0497578422994837e+58,
+      "fixed_value": 1.0497578423058309e+58,
+      "absolute_difference": 6.347210222474288e+46,
+      "energy_difference_over_label": 1.2571236982853709e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 8,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.5858249604053515e+58,
+      "fixed_value": 2.585824960419942e+58,
+      "absolute_difference": 1.459026254613866e+47,
+      "energy_difference_over_label": 2.889736461857147e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 8,
+      "field": "mass_g",
+      "flux_value": 6.209423396140512e+45,
+      "fixed_value": 6.209423396140516e+45,
+      "absolute_difference": 3.802951800684688e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 6.124484606812966e-16
+    },
+    {
+      "snapshot_index": 8,
+      "field": "delta_mass_g",
+      "flux_value": 1.3876487554067764e+42,
+      "fixed_value": 1.3876487554165703e+42,
+      "absolute_difference": 9.793962620806286e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.577274087460963e-15
+    },
+    {
+      "snapshot_index": 9,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.7049442934137156e+58,
+      "fixed_value": 1.7049442934183031e+58,
+      "absolute_difference": 4.587542046652731e+46,
+      "energy_difference_over_label": 8.076178934874391e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 9,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.5042603010469236e+57,
+      "fixed_value": 1.5042603010469234e+57,
+      "absolute_difference": 1.742245718635205e+41,
+      "energy_difference_over_label": 3.0671518711165424e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 9,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.3133372893212603e+58,
+      "fixed_value": 1.3133372893263223e+58,
+      "absolute_difference": 5.06199040075147e+46,
+      "energy_difference_over_label": 8.911425732416848e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 9,
+      "field": "delta_total_energy_erg",
+      "flux_value": 3.168707612839537e+58,
+      "fixed_value": 3.168707612849318e+58,
+      "absolute_difference": 9.781106844075531e+46,
+      "energy_difference_over_label": 1.721923597659796e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 9,
+      "field": "mass_g",
+      "flux_value": 6.20977250703676e+45,
+      "fixed_value": 6.20977250703676e+45,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 9,
+      "field": "delta_mass_g",
+      "flux_value": 1.7367596516538687e+42,
+      "fixed_value": 1.7367596516595617e+42,
+      "absolute_difference": 5.692976755663643e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 9.16777023508108e-16
+    },
+    {
+      "snapshot_index": 10,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.0406207897668626e+58,
+      "fixed_value": 2.04062078976835e+58,
+      "absolute_difference": 1.4874597047419926e+46,
+      "energy_difference_over_label": 2.3569323223866976e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 10,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.5965760965517905e+57,
+      "fixed_value": 1.596576096551788e+57,
+      "absolute_difference": 2.439144006089287e+42,
+      "energy_difference_over_label": 3.864909636597377e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 10,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.604485899316618e+58,
+      "fixed_value": 1.6044858993164868e+58,
+      "absolute_difference": 1.3129563735634904e+45,
+      "energy_difference_over_label": 2.0804256443855596e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 10,
+      "field": "delta_total_energy_erg",
+      "flux_value": 3.8047642987378224e+58,
+      "fixed_value": 3.8047642987400156e+58,
+      "absolute_difference": 2.1932782902754868e+46,
+      "energy_difference_over_label": 3.475326745228362e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 10,
+      "field": "mass_g",
+      "flux_value": 6.21015825108085e+45,
+      "fixed_value": 6.210158251080857e+45,
+      "absolute_difference": 6.338253001141147e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.0206266482883903e-15
+    },
+    {
+      "snapshot_index": 10,
+      "field": "delta_mass_g",
+      "flux_value": 2.1225036957445643e+42,
+      "fixed_value": 2.122503695756557e+42,
+      "absolute_difference": 1.1992853615586943e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.9311671507726276e-15
+    },
+    {
+      "snapshot_index": 11,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.4023233176264185e+58,
+      "fixed_value": 2.4023233176311778e+58,
+      "absolute_difference": 4.759257784681417e+46,
+      "energy_difference_over_label": 6.8555603546355296e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 11,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.6944361165037982e+57,
+      "fixed_value": 1.694436116503801e+57,
+      "absolute_difference": 2.787593149816328e+42,
+      "energy_difference_over_label": 4.015439790684431e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 11,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.9237446123888243e+58,
+      "fixed_value": 1.9237446123940405e+58,
+      "absolute_difference": 5.216144301936313e+46,
+      "energy_difference_over_label": 7.513690936328708e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 11,
+      "field": "delta_total_energy_erg",
+      "flux_value": 4.4955115416649605e+58,
+      "fixed_value": 4.4955115416755985e+58,
+      "absolute_difference": 1.063801297832907e+47,
+      "energy_difference_over_label": 1.5323721329209926e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 11,
+      "field": "mass_g",
+      "flux_value": 6.210581444884748e+45,
+      "fixed_value": 6.210581444884747e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.0411142040047006e-16
+    },
+    {
+      "snapshot_index": 11,
+      "field": "delta_mass_g",
+      "flux_value": 2.5456974996426915e+42,
+      "fixed_value": 2.545697499648207e+42,
+      "absolute_difference": 5.515641845036012e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 8.881039390569281e-16
+    },
+    {
+      "snapshot_index": 12,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.7923355215097144e+58,
+      "fixed_value": 2.792335521512941e+58,
+      "absolute_difference": 3.226360311597418e+46,
+      "energy_difference_over_label": 4.2601756509369e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 12,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.785827297567602e+57,
+      "fixed_value": 1.7858272975676013e+57,
+      "absolute_difference": 6.96898287454082e+41,
+      "energy_difference_over_label": 9.202038299068818e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 12,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.2708531113594285e+58,
+      "fixed_value": 2.2708531113617386e+58,
+      "absolute_difference": 2.310078443252791e+46,
+      "energy_difference_over_label": 3.050291655375332e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 12,
+      "field": "delta_total_energy_erg",
+      "flux_value": 5.241771362625417e+58,
+      "fixed_value": 5.24177136263144e+58,
+      "absolute_difference": 6.023431278123121e+46,
+      "energy_difference_over_label": 7.953505742651161e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 12,
+      "field": "mass_g",
+      "flux_value": 6.211041840327569e+45,
+      "fixed_value": 6.211041840327571e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.081925811536228e-16
+    },
+    {
+      "snapshot_index": 12,
+      "field": "delta_mass_g",
+      "flux_value": 3.006092942463181e+42,
+      "fixed_value": 3.0060929424718925e+42,
+      "absolute_difference": 8.711384056451221e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.402564059364279e-15
+    },
+    {
+      "snapshot_index": 13,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.213022563062736e+58,
+      "fixed_value": 3.2130225630683856e+58,
+      "absolute_difference": 5.64933627741777e+46,
+      "energy_difference_over_label": 6.885656016584686e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 13,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.829864518926416e+57,
+      "fixed_value": 1.829864518926416e+57,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 13,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.6459019341613764e+58,
+      "fixed_value": 2.6459019341621173e+58,
+      "absolute_difference": 7.4094225922118e+45,
+      "energy_difference_over_label": 9.030925536406836e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 13,
+      "field": "delta_total_energy_erg",
+      "flux_value": 6.041910949116322e+58,
+      "fixed_value": 6.041910949123145e+58,
+      "absolute_difference": 6.822912993490444e+46,
+      "energy_difference_over_label": 8.316062205759733e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 13,
+      "field": "mass_g",
+      "flux_value": 6.211539562999639e+45,
+      "fixed_value": 6.211539562999632e+45,
+      "absolute_difference": 6.338253001141147e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.0203996830184114e-15
+    },
+    {
+      "snapshot_index": 13,
+      "field": "delta_mass_g",
+      "flux_value": 3.503815614532977e+42,
+      "fixed_value": 3.503815614532257e+42,
+      "absolute_difference": 7.198621328444486e+29,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.1589109681156372e-16
+    },
+    {
+      "snapshot_index": 14,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.660489402266133e+58,
+      "fixed_value": 3.6604894022718595e+58,
+      "absolute_difference": 5.726273848352701e+46,
+      "energy_difference_over_label": 6.480783199695107e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 14,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.8991353248066988e+57,
+      "fixed_value": 1.8991353248067005e+57,
+      "absolute_difference": 1.742245718635205e+42,
+      "energy_difference_over_label": 1.9718087332340773e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 14,
+      "field": "delta_gravitational_erg",
+      "flux_value": 3.048891818790767e+58,
+      "fixed_value": 3.0488918187943165e+58,
+      "absolute_difference": 3.549721116976112e+46,
+      "energy_difference_over_label": 4.017441985440439e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 14,
+      "field": "delta_total_energy_erg",
+      "flux_value": 6.899294753537239e+58,
+      "fixed_value": 6.899294753546846e+58,
+      "absolute_difference": 9.607161031526992e+46,
+      "energy_difference_over_label": 1.0873026589148679e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 14,
+      "field": "mass_g",
+      "flux_value": 6.212074603080365e+45,
+      "fixed_value": 6.212074603080354e+45,
+      "absolute_difference": 1.0141204801825835e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.6324988751418342e-15
+    },
+    {
+      "snapshot_index": 14,
+      "field": "delta_mass_g",
+      "flux_value": 4.038855695258932e+42,
+      "fixed_value": 4.0388556952550113e+42,
+      "absolute_difference": 3.9205561044167993e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 6.311186447234118e-16
+    },
+    {
+      "snapshot_index": 15,
+      "field": "delta_thermal_erg",
+      "flux_value": 4.134420270072793e+58,
+      "fixed_value": 4.1344202700792617e+58,
+      "absolute_difference": 6.468888663463771e+46,
+      "energy_difference_over_label": 6.832985408647405e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 15,
+      "field": "delta_kinetic_erg",
+      "flux_value": 1.981642964334963e+57,
+      "fixed_value": 1.981642964334961e+57,
+      "absolute_difference": 2.090694862362246e+42,
+      "energy_difference_over_label": 2.2083681187992563e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 15,
+      "field": "delta_gravitational_erg",
+      "flux_value": 3.4798230964980877e+58,
+      "fixed_value": 3.4798230965012087e+58,
+      "absolute_difference": 3.1209892905343607e+46,
+      "energy_difference_over_label": 3.29665192774353e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 15,
+      "field": "delta_total_energy_erg",
+      "flux_value": 7.812407663003616e+58,
+      "fixed_value": 7.812407663013967e+58,
+      "absolute_difference": 1.0350890883897989e+47,
+      "energy_difference_over_label": 1.0933483331633864e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 15,
+      "field": "mass_g",
+      "flux_value": 6.212647004942635e+45,
+      "fixed_value": 6.212647004942633e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.080871162387681e-16
+    },
+    {
+      "snapshot_index": 15,
+      "field": "delta_mass_g",
+      "flux_value": 4.611257557529559e+42,
+      "fixed_value": 4.6112575575333615e+42,
+      "absolute_difference": 3.8023328306650455e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 6.120310437145392e-16
+    },
+    {
+      "snapshot_index": 16,
+      "field": "delta_thermal_erg",
+      "flux_value": 4.634819849843018e+58,
+      "fixed_value": 4.634819849848698e+58,
+      "absolute_difference": 5.67999980206575e+46,
+      "energy_difference_over_label": 5.624638005826371e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 16,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.0820225859488737e+57,
+      "fixed_value": 2.0820225859488755e+57,
+      "absolute_difference": 1.742245718635205e+42,
+      "energy_difference_over_label": 1.7252644059881634e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 16,
+      "field": "delta_gravitational_erg",
+      "flux_value": 3.9385353347067513e+58,
+      "fixed_value": 3.938535334711621e+58,
+      "absolute_difference": 4.869925232729125e+46,
+      "energy_difference_over_label": 4.8224590676181145e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 16,
+      "field": "delta_total_energy_erg",
+      "flux_value": 8.781557443143819e+58,
+      "fixed_value": 8.781557443155206e+58,
+      "absolute_difference": 1.1387875535629663e+47,
+      "energy_difference_over_label": 1.1276880242148553e-11,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 16,
+      "field": "mass_g",
+      "flux_value": 6.21325660566317e+45,
+      "fixed_value": 6.213256605663166e+45,
+      "absolute_difference": 3.802951800684688e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 6.120706164330041e-16
+    },
+    {
+      "snapshot_index": 16,
+      "field": "delta_mass_g",
+      "flux_value": 5.220858278063772e+42,
+      "fixed_value": 5.2208582780664643e+42,
+      "absolute_difference": 2.692519585445702e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.333507782362578e-16
+    },
+    {
+      "snapshot_index": 17,
+      "field": "delta_thermal_erg",
+      "flux_value": 5.161895940929347e+58,
+      "fixed_value": 5.161895940932102e+58,
+      "absolute_difference": 2.7552570692784585e+46,
+      "energy_difference_over_label": 2.5679559284480296e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 17,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.1715431828944918e+57,
+      "fixed_value": 2.1715431828944904e+57,
+      "absolute_difference": 1.393796574908164e+42,
+      "energy_difference_over_label": 1.2990469083610023e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 17,
+      "field": "delta_gravitational_erg",
+      "flux_value": 4.4248180981883554e+58,
+      "fixed_value": 4.424818098191033e+58,
+      "absolute_difference": 2.6777619797135646e+46,
+      "energy_difference_over_label": 2.495728920343158e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 17,
+      "field": "delta_total_energy_erg",
+      "flux_value": 9.803868357406789e+58,
+      "fixed_value": 9.803868357412584e+58,
+      "absolute_difference": 5.794848639838182e+46,
+      "energy_difference_over_label": 5.400917426201704e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 17,
+      "field": "mass_g",
+      "flux_value": 6.213903156295611e+45,
+      "fixed_value": 6.213903156295612e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.0400231035849181e-16
+    },
+    {
+      "snapshot_index": 17,
+      "field": "delta_mass_g",
+      "flux_value": 5.867408910505247e+42,
+      "fixed_value": 5.867408910512819e+42,
+      "absolute_difference": 7.571241280269386e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.218435673977086e-15
+    },
+    {
+      "snapshot_index": 18,
+      "field": "delta_thermal_erg",
+      "flux_value": 5.718583219556649e+58,
+      "fixed_value": 5.718583219563317e+58,
+      "absolute_difference": 6.667922814360656e+46,
+      "energy_difference_over_label": 5.869276279794649e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 18,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.2480133226737944e+57,
+      "fixed_value": 2.2480133226737937e+57,
+      "absolute_difference": 6.96898287454082e+41,
+      "energy_difference_over_label": 6.13427704828036e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 18,
+      "field": "delta_gravitational_erg",
+      "flux_value": 4.9392339952437516e+58,
+      "fixed_value": 4.939233995241545e+58,
+      "absolute_difference": 2.2066587373946052e+46,
+      "energy_difference_over_label": 1.9423574845674932e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 18,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.0882618547066316e+59,
+      "fixed_value": 1.088261854707224e+59,
+      "absolute_difference": 5.925307999249587e+46,
+      "energy_difference_over_label": 5.2156077175298936e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 18,
+      "field": "mass_g",
+      "flux_value": 6.214587398684153e+45,
+      "fixed_value": 6.214587398684157e+45,
+      "absolute_difference": 3.802951800684688e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 6.119395475055842e-16
+    },
+    {
+      "snapshot_index": 18,
+      "field": "delta_mass_g",
+      "flux_value": 6.551651299047464e+42,
+      "fixed_value": 6.551651299057777e+42,
+      "absolute_difference": 1.0313278467286503e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.6595274642802804e-15
+    },
+    {
+      "snapshot_index": 19,
+      "field": "delta_thermal_erg",
+      "flux_value": 6.303210850786324e+58,
+      "fixed_value": 6.303210850793321e+58,
+      "absolute_difference": 6.996858806038983e+46,
+      "energy_difference_over_label": 5.834915337832334e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 19,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.337368432299558e+57,
+      "fixed_value": 2.337368432299557e+57,
+      "absolute_difference": 1.045347431181123e+42,
+      "energy_difference_over_label": 8.717502994769422e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 19,
+      "field": "delta_gravitational_erg",
+      "flux_value": 5.480874854378288e+58,
+      "fixed_value": 5.480874854380546e+58,
+      "absolute_difference": 2.2579504513512256e+46,
+      "energy_difference_over_label": 1.8829806468701954e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 19,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.2017822548394662e+59,
+      "fixed_value": 1.2017822548403824e+59,
+      "absolute_difference": 9.16114612755638e+46,
+      "energy_difference_over_label": 7.639787157869395e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 19,
+      "field": "mass_g",
+      "flux_value": 6.215308112007932e+45,
+      "fixed_value": 6.215308112007926e+45,
+      "absolute_difference": 6.338253001141147e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.0197809805914035e-15
+    },
+    {
+      "snapshot_index": 19,
+      "field": "delta_mass_g",
+      "flux_value": 7.272364622826278e+42,
+      "fixed_value": 7.272364622826575e+42,
+      "absolute_difference": 2.9710560942849127e+29,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.780223346522204e-17
+    },
+    {
+      "snapshot_index": 20,
+      "field": "delta_thermal_erg",
+      "flux_value": 6.9151579583864e+58,
+      "fixed_value": 6.915157958388191e+58,
+      "absolute_difference": 1.790749839442009e+46,
+      "energy_difference_over_label": 1.418643651879219e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 20,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.4466372727514056e+57,
+      "fixed_value": 2.4466372727514042e+57,
+      "absolute_difference": 1.393796574908164e+42,
+      "energy_difference_over_label": 1.1041746979134643e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 20,
+      "field": "delta_gravitational_erg",
+      "flux_value": 6.051203252027304e+58,
+      "fixed_value": 6.051203252029966e+58,
+      "absolute_difference": 2.66159393944463e+46,
+      "energy_difference_over_label": 2.1085320031355513e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 20,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.3211024937688102e+59,
+      "fixed_value": 1.3211024937693296e+59,
+      "absolute_difference": 5.193843556737782e+46,
+      "energy_difference_over_label": 4.114596594304734e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 20,
+      "field": "mass_g",
+      "flux_value": 6.216067319364737e+45,
+      "fixed_value": 6.216067319364735e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.078625713332139e-16
+    },
+    {
+      "snapshot_index": 20,
+      "field": "delta_mass_g",
+      "flux_value": 8.03157197963173e+42,
+      "fixed_value": 8.031571979634806e+42,
+      "absolute_difference": 3.07628099762417e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.948918407046077e-16
+    },
+    {
+      "snapshot_index": 21,
+      "field": "delta_thermal_erg",
+      "flux_value": 7.553039243419483e+58,
+      "fixed_value": 7.553039243422101e+58,
+      "absolute_difference": 2.618107486307495e+46,
+      "energy_difference_over_label": 1.9753577099372734e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 21,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.590130674590199e+57,
+      "fixed_value": 2.5901306745901978e+57,
+      "absolute_difference": 1.045347431181123e+42,
+      "energy_difference_over_label": 7.88712884610815e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 21,
+      "field": "delta_gravitational_erg",
+      "flux_value": 6.648695310432589e+58,
+      "fixed_value": 6.648695310435338e+58,
+      "absolute_difference": 2.7485668457188993e+46,
+      "energy_difference_over_label": 2.073789077936703e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 21,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.4460747621310532e+59,
+      "fixed_value": 1.446074762131646e+59,
+      "absolute_difference": 5.92753807376944e+46,
+      "energy_difference_over_label": 4.472317540897165e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 21,
+      "field": "mass_g",
+      "flux_value": 6.216863098182193e+45,
+      "fixed_value": 6.216863098182198e+45,
+      "absolute_difference": 5.070602400912918e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 8.15620727179203e-16
+    },
+    {
+      "snapshot_index": 21,
+      "field": "delta_mass_g",
+      "flux_value": 8.827350797087671e+42,
+      "fixed_value": 8.827350797099086e+42,
+      "absolute_difference": 1.1415045102250492e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.8361422669236893e-15
+    },
+    {
+      "snapshot_index": 22,
+      "field": "delta_thermal_erg",
+      "flux_value": 8.219651332210493e+58,
+      "fixed_value": 8.219651332210394e+58,
+      "absolute_difference": 9.812327887353474e+44,
+      "energy_difference_over_label": 7.066923547192129e-14,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 22,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.736221986982415e+57,
+      "fixed_value": 2.736221986982415e+57,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 22,
+      "field": "delta_gravitational_erg",
+      "flux_value": 7.274177869907108e+58,
+      "fixed_value": 7.274177869910516e+58,
+      "absolute_difference": 3.407553866335479e+46,
+      "energy_difference_over_label": 2.454149813661267e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 22,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.576745140081511e+59,
+      "fixed_value": 1.5767451400819151e+59,
+      "absolute_difference": 4.040895029973749e+46,
+      "energy_difference_over_label": 2.9102876062527588e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 22,
+      "field": "mass_g",
+      "flux_value": 6.217696630194329e+45,
+      "fixed_value": 6.21769663019433e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.038778466727171e-16
+    },
+    {
+      "snapshot_index": 22,
+      "field": "delta_mass_g",
+      "flux_value": 9.660882809223295e+42,
+      "fixed_value": 9.660882809230158e+42,
+      "absolute_difference": 6.863139577798148e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.1038074042515074e-15
+    },
+    {
+      "snapshot_index": 23,
+      "field": "delta_thermal_erg",
+      "flux_value": 8.916737442277601e+58,
+      "fixed_value": 8.916737442282069e+58,
+      "absolute_difference": 4.4679543005256103e+46,
+      "energy_difference_over_label": 3.0778730068614347e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 23,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.8383034022826463e+57,
+      "fixed_value": 2.838303402282644e+57,
+      "absolute_difference": 2.090694862362246e+42,
+      "energy_difference_over_label": 1.4402325649775868e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 23,
+      "field": "delta_gravitational_erg",
+      "flux_value": 7.928036844728061e+58,
+      "fixed_value": 7.928036844734902e+58,
+      "absolute_difference": 6.840753589649269e+46,
+      "energy_difference_over_label": 4.712440952606664e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 23,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.7128604627233743e+59,
+      "fixed_value": 1.7128604627245235e+59,
+      "absolute_difference": 1.149157400080283e+47,
+      "energy_difference_over_label": 7.916286301151471e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 23,
+      "field": "mass_g",
+      "flux_value": 6.218568494631844e+45,
+      "fixed_value": 6.218568494631844e+45,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 23,
+      "field": "delta_mass_g",
+      "flux_value": 1.053274724673818e+43,
+      "fixed_value": 1.0532747246744103e+43,
+      "absolute_difference": 5.923543087980545e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 9.525573438797082e-16
+    },
+    {
+      "snapshot_index": 24,
+      "field": "delta_thermal_erg",
+      "flux_value": 9.640273720706993e+58,
+      "fixed_value": 9.640273720711346e+58,
+      "absolute_difference": 4.3531054627531776e+46,
+      "energy_difference_over_label": 2.8737856061855568e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 24,
+      "field": "delta_kinetic_erg",
+      "flux_value": 2.9514764294092983e+57,
+      "fixed_value": 2.951476429409299e+57,
+      "absolute_difference": 6.96898287454082e+41,
+      "energy_difference_over_label": 4.6007069771157095e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 24,
+      "field": "delta_gravitational_erg",
+      "flux_value": 8.60956671877624e+58,
+      "fixed_value": 8.609566718776627e+58,
+      "absolute_difference": 3.869179291945063e+45,
+      "energy_difference_over_label": 2.5543125136946416e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 24,
+      "field": "delta_total_energy_erg",
+      "flux_value": 1.8544988082423725e+59,
+      "fixed_value": 1.8544988082428903e+59,
+      "absolute_difference": 5.178233035098811e+46,
+      "energy_difference_over_label": 3.4185093122760568e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 24,
+      "field": "mass_g",
+      "flux_value": 6.219477804213986e+45,
+      "fixed_value": 6.219477804213985e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.038194588248771e-16
+    },
+    {
+      "snapshot_index": 24,
+      "field": "delta_mass_g",
+      "flux_value": 1.1442056828880587e+43,
+      "fixed_value": 1.144205682888524e+43,
+      "absolute_difference": 4.652178667634459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 7.480014904920783e-16
+    },
+    {
+      "snapshot_index": 25,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.0390359613036894e+59,
+      "fixed_value": 1.0390359613045103e+59,
+      "absolute_difference": 8.208904307579122e+46,
+      "energy_difference_over_label": 5.2025773704669165e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 25,
+      "field": "delta_kinetic_erg",
+      "flux_value": 3.1062424174258675e+57,
+      "fixed_value": 3.1062424174258696e+57,
+      "absolute_difference": 2.090694862362246e+42,
+      "energy_difference_over_label": 1.3250247989167981e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 25,
+      "field": "delta_gravitational_erg",
+      "flux_value": 9.318613696585594e+58,
+      "fixed_value": 9.3186136965883e+58,
+      "absolute_difference": 2.706195429841691e+46,
+      "energy_difference_over_label": 1.7151120997179035e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 25,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.0019597551364541e+59,
+      "fixed_value": 2.001959755137599e+59,
+      "absolute_difference": 1.1449202584925622e+47,
+      "energy_difference_over_label": 7.256189138814764e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 25,
+      "field": "mass_g",
+      "flux_value": 6.220424402738726e+45,
+      "fixed_value": 6.220424402738728e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.0757688484088264e-16
+    },
+    {
+      "snapshot_index": 25,
+      "field": "delta_mass_g",
+      "flux_value": 1.2388655353620244e+43,
+      "fixed_value": 1.2388655353629296e+43,
+      "absolute_difference": 9.051817567254701e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.4551768466584638e-15
+    },
+    {
+      "snapshot_index": 26,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.1167401203140573e+59,
+      "fixed_value": 1.1167401203141452e+59,
+      "absolute_difference": 8.786493608221066e+45,
+      "energy_difference_over_label": 5.354504027100567e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 26,
+      "field": "delta_kinetic_erg",
+      "flux_value": 3.2735122856949065e+57,
+      "fixed_value": 3.27351228569491e+57,
+      "absolute_difference": 3.48449143727041e+42,
+      "energy_difference_over_label": 2.1234549599859482e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 26,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.0055712508433701e+59,
+      "fixed_value": 1.0055712508435633e+59,
+      "absolute_difference": 1.931244534192752e+46,
+      "energy_difference_over_label": 1.176903677022612e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 26,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.155046494014343e+59,
+      "fixed_value": 2.1550464940146575e+59,
+      "absolute_difference": 3.144405072992818e+46,
+      "energy_difference_over_label": 1.9162057558913196e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 26,
+      "field": "mass_g",
+      "flux_value": 6.221409053128366e+45,
+      "fixed_value": 6.22140905312836e+45,
+      "absolute_difference": 6.338253001141147e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.0187809460871302e-15
+    },
+    {
+      "snapshot_index": 26,
+      "field": "delta_mass_g",
+      "flux_value": 1.337330574326071e+43,
+      "fixed_value": 1.3373305743260688e+43,
+      "absolute_difference": 2.2282920707136845e+28,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 3.581651763587567e-18
+    },
+    {
+      "snapshot_index": 27,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.1972435892837137e+59,
+      "fixed_value": 1.1972435892842886e+59,
+      "absolute_difference": 5.749132112181195e+46,
+      "energy_difference_over_label": 3.3737830769121624e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 27,
+      "field": "delta_kinetic_erg",
+      "flux_value": 3.439777241902573e+57,
+      "fixed_value": 3.43977724190257e+57,
+      "absolute_difference": 2.787593149816328e+42,
+      "energy_difference_over_label": 1.6358529271296365e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 27,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.082085705984332e+59,
+      "fixed_value": 1.0820857059840954e+59,
+      "absolute_difference": 2.366109065564099e+46,
+      "energy_difference_over_label": 1.3885119645476356e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 27,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.3137270676870605e+59,
+      "fixed_value": 2.3137270676874098e+59,
+      "absolute_difference": 3.4922966980898956e+46,
+      "energy_difference_over_label": 2.0493965471080087e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 27,
+      "field": "mass_g",
+      "flux_value": 6.222431795951796e+45,
+      "fixed_value": 6.222431795951788e+45,
+      "absolute_difference": 7.605903601369376e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.222336194398732e-15
+    },
+    {
+      "snapshot_index": 27,
+      "field": "delta_mass_g",
+      "flux_value": 1.439604856669035e+43,
+      "fixed_value": 1.439604856668831e+43,
+      "absolute_difference": 2.0401251847423067e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 3.2786621881007657e-16
+    },
+    {
+      "snapshot_index": 28,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.2804924236675351e+59,
+      "fixed_value": 1.2804924236677673e+59,
+      "absolute_difference": 2.321507575167038e+46,
+      "energy_difference_over_label": 1.3136519057094648e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 28,
+      "field": "delta_kinetic_erg",
+      "flux_value": 3.590201525973695e+57,
+      "fixed_value": 3.590201525973693e+57,
+      "absolute_difference": 2.090694862362246e+42,
+      "energy_difference_over_label": 1.1830438632109734e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 28,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.161461337985237e+59,
+      "fixed_value": 1.161461337985416e+59,
+      "absolute_difference": 1.788519764922156e+46,
+      "energy_difference_over_label": 1.0120545901815472e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 28,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.4778557769124267e+59,
+      "fixed_value": 2.47785577691292e+59,
+      "absolute_difference": 4.932924837914974e+46,
+      "energy_difference_over_label": 2.791352560450851e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 28,
+      "field": "mass_g",
+      "flux_value": 6.223493439300323e+45,
+      "fixed_value": 6.223493439300316e+45,
+      "absolute_difference": 7.605903601369376e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.2221276804663073e-15
+    },
+    {
+      "snapshot_index": 28,
+      "field": "delta_mass_g",
+      "flux_value": 1.545769191521751e+43,
+      "fixed_value": 1.5457691915215892e+43,
+      "absolute_difference": 1.6167496913067066e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.5978169770328733e-16
+    },
+    {
+      "snapshot_index": 29,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.3667537250107876e+59,
+      "fixed_value": 1.366753725011553e+59,
+      "absolute_difference": 7.65361575213571e+46,
+      "energy_difference_over_label": 4.181628219249853e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 29,
+      "field": "delta_kinetic_erg",
+      "flux_value": 3.7235791251499796e+57,
+      "fixed_value": 3.723579125149976e+57,
+      "absolute_difference": 3.48449143727041e+42,
+      "energy_difference_over_label": 1.9037861575110418e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 29,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.243541152253141e+59,
+      "fixed_value": 1.243541152254e+59,
+      "absolute_difference": 8.590247050473996e+46,
+      "energy_difference_over_label": 4.693365938388821e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 29,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.647530668515424e+59,
+      "fixed_value": 2.647530668517053e+59,
+      "absolute_difference": 1.6288464293006767e+47,
+      "energy_difference_over_label": 8.899362620454816e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 29,
+      "field": "mass_g",
+      "flux_value": 6.224591934291996e+45,
+      "fixed_value": 6.224591934291998e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.0365200058249529e-16
+    },
+    {
+      "snapshot_index": 29,
+      "field": "delta_mass_g",
+      "flux_value": 1.6556186906890623e+43,
+      "fixed_value": 1.6556186906898273e+43,
+      "absolute_difference": 7.65046944278365e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.22907164414045e-15
+    },
+    {
+      "snapshot_index": 30,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.4562598699282539e+59,
+      "fixed_value": 1.4562598699285806e+59,
+      "absolute_difference": 3.2670591715847363e+46,
+      "energy_difference_over_label": 1.7254955839127517e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 30,
+      "field": "delta_kinetic_erg",
+      "flux_value": 3.821910699844185e+57,
+      "fixed_value": 3.8219106998441946e+57,
+      "absolute_difference": 9.756576024357148e+42,
+      "energy_difference_over_label": 5.152930498032961e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 30,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.328462063326898e+59,
+      "fixed_value": 1.3284620633273043e+59,
+      "absolute_difference": 4.0631957751722795e+46,
+      "energy_difference_over_label": 2.1459747125522415e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 30,
+      "field": "delta_total_energy_erg",
+      "flux_value": 2.822941040253606e+59,
+      "fixed_value": 2.822941040254327e+59,
+      "absolute_difference": 7.207600848165097e+46,
+      "energy_difference_over_label": 3.806690598775436e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 30,
+      "field": "mass_g",
+      "flux_value": 6.225729162057944e+45,
+      "fixed_value": 6.225729162057939e+45,
+      "absolute_difference": 5.070602400912918e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 8.144592013117401e-16
+    },
+    {
+      "snapshot_index": 30,
+      "field": "delta_mass_g",
+      "flux_value": 1.7693414672838359e+43,
+      "fixed_value": 1.76934146728393e+43,
+      "absolute_difference": 9.40834429856889e+29,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.5112035961838926e-16
+    },
+    {
+      "snapshot_index": 31,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.5482977674246894e+59,
+      "fixed_value": 1.548297767425506e+59,
+      "absolute_difference": 8.166532891701914e+46,
+      "energy_difference_over_label": 4.1739374096563384e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 31,
+      "field": "delta_kinetic_erg",
+      "flux_value": 3.999638737876768e+57,
+      "fixed_value": 3.999638737876767e+57,
+      "absolute_difference": 1.393796574908164e+42,
+      "energy_difference_over_label": 7.123732607960709e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 31,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.4162500432780163e+59,
+      "fixed_value": 1.4162500432788078e+59,
+      "absolute_difference": 7.914534470958518e+46,
+      "energy_difference_over_label": 4.045140324104409e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 31,
+      "field": "delta_total_energy_erg",
+      "flux_value": 3.004544198081411e+59,
+      "fixed_value": 3.0045441980830816e+59,
+      "absolute_difference": 1.6707718302739143e+47,
+      "energy_difference_over_label": 8.539360751814661e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 31,
+      "field": "mass_g",
+      "flux_value": 6.226905520360523e+45,
+      "fixed_value": 6.226905520360533e+45,
+      "absolute_difference": 1.0141204801825835e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.6286106748635343e-15
+    },
+    {
+      "snapshot_index": 31,
+      "field": "delta_mass_g",
+      "flux_value": 1.886977297541771e+43,
+      "fixed_value": 1.886977297543372e+43,
+      "absolute_difference": 1.6009040588038538e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.5709464413251005e-15
+    },
+    {
+      "snapshot_index": 32,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.6433789111034967e+59,
+      "fixed_value": 1.643378911103998e+59,
+      "absolute_difference": 5.013207520629684e+46,
+      "energy_difference_over_label": 2.482230330543966e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 32,
+      "field": "delta_kinetic_erg",
+      "flux_value": 4.130256792191701e+57,
+      "fixed_value": 4.130256792191699e+57,
+      "absolute_difference": 2.090694862362246e+42,
+      "energy_difference_over_label": 1.035182800215733e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 32,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.5067555012449511e+59,
+      "fixed_value": 1.5067555012446514e+59,
+      "absolute_difference": 2.997220154682516e+46,
+      "energy_difference_over_label": 1.4840380623892748e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 32,
+      "field": "delta_total_energy_erg",
+      "flux_value": 3.1914369802703265e+59,
+      "fixed_value": 3.1914369802705664e+59,
+      "absolute_difference": 2.399560183361895e+46,
+      "energy_difference_over_label": 1.1881138059009373e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 32,
+      "field": "mass_g",
+      "flux_value": 6.228119054585683e+45,
+      "fixed_value": 6.228119054585675e+45,
+      "absolute_difference": 7.605903601369376e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.2212200079523622e-15
+    },
+    {
+      "snapshot_index": 32,
+      "field": "delta_mass_g",
+      "flux_value": 2.0083307200577207e+43,
+      "fixed_value": 2.0083307200575942e+43,
+      "absolute_difference": 1.2651747201496586e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.0313913543738836e-16
+    },
+    {
+      "snapshot_index": 33,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.7414737755211723e+59,
+      "fixed_value": 1.741473775521159e+59,
+      "absolute_difference": 1.3380447119118374e+45,
+      "energy_difference_over_label": 6.424351962168611e-14,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 33,
+      "field": "delta_kinetic_erg",
+      "flux_value": 4.261300081031153e+57,
+      "fixed_value": 4.261300081031148e+57,
+      "absolute_difference": 4.878288012178574e+42,
+      "energy_difference_over_label": 2.3422116528739724e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 33,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.6001415102377553e+59,
+      "fixed_value": 1.6001415102380982e+59,
+      "absolute_difference": 3.42985461153401e+46,
+      "energy_difference_over_label": 1.6467755529692206e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 33,
+      "field": "delta_total_energy_erg",
+      "flux_value": 3.384228286569238e+59,
+      "fixed_value": 3.384228286569569e+59,
+      "absolute_difference": 3.3094305874619445e+46,
+      "energy_difference_over_label": 1.588956385309703e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 33,
+      "field": "mass_g",
+      "flux_value": 6.229372004075371e+45,
+      "fixed_value": 6.229372004075369e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.0699145897817927e-16
+    },
+    {
+      "snapshot_index": 33,
+      "field": "delta_mass_g",
+      "flux_value": 2.1336256690265866e+43,
+      "fixed_value": 2.1336256690268973e+43,
+      "absolute_difference": 3.1072294986063045e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.988030088062646e-16
+    },
+    {
+      "snapshot_index": 34,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.8420480756939382e+59,
+      "fixed_value": 1.8420480756941681e+59,
+      "absolute_difference": 2.299206829968507e+46,
+      "energy_difference_over_label": 1.0714465290820665e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 34,
+      "field": "delta_kinetic_erg",
+      "flux_value": 4.4564034043301295e+57,
+      "fixed_value": 4.456403404330132e+57,
+      "absolute_difference": 2.787593149816328e+42,
+      "energy_difference_over_label": 1.2990379838531358e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 34,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.6963269059573907e+59,
+      "fixed_value": 1.696326905957644e+59,
+      "absolute_difference": 2.533364654553079e+46,
+      "energy_difference_over_label": 1.1805657197257299e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 34,
+      "field": "delta_total_energy_erg",
+      "flux_value": 3.5829390156945467e+59,
+      "fixed_value": 3.5829390156951136e+59,
+      "absolute_difference": 5.668849429466484e+46,
+      "energy_difference_over_label": 2.641723643963737e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 34,
+      "field": "mass_g",
+      "flux_value": 6.23066333307525e+45,
+      "fixed_value": 6.230663333075243e+45,
+      "absolute_difference": 6.338253001141147e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.0172677710725868e-15
+    },
+    {
+      "snapshot_index": 34,
+      "field": "delta_mass_g",
+      "flux_value": 2.262758569014399e+43,
+      "fixed_value": 2.2627585690144256e+43,
+      "absolute_difference": 2.6739504848564214e+29,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.291598409212475e-17
+    },
+    {
+      "snapshot_index": 35,
+      "field": "delta_thermal_erg",
+      "flux_value": 1.945603288572644e+59,
+      "fixed_value": 1.945603288572916e+59,
+      "absolute_difference": 2.720690914220736e+46,
+      "energy_difference_over_label": 1.2316391609364882e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 35,
+      "field": "delta_kinetic_erg",
+      "flux_value": 4.66920094430484e+57,
+      "fixed_value": 4.6692009443048445e+57,
+      "absolute_difference": 4.181389724724492e+42,
+      "energy_difference_over_label": 1.8928880547179634e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 35,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.7953133382717042e+59,
+      "fixed_value": 1.7953133382715843e+59,
+      "absolute_difference": 1.1997800916809475e+46,
+      "energy_difference_over_label": 5.431326791670744e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 35,
+      "field": "delta_total_energy_erg",
+      "flux_value": 3.787608636287294e+59,
+      "fixed_value": 3.787608636287549e+59,
+      "absolute_difference": 2.546745101672197e+46,
+      "energy_difference_over_label": 1.1528950178602209e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 35,
+      "field": "mass_g",
+      "flux_value": 6.231993111672996e+45,
+      "fixed_value": 6.231993111672999e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.0682028285744507e-16
+    },
+    {
+      "snapshot_index": 35,
+      "field": "delta_mass_g",
+      "flux_value": 2.39573642878907e+43,
+      "fixed_value": 2.395736428789883e+43,
+      "absolute_difference": 8.125838417869236e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.3038907893927099e-15
+    },
+    {
+      "snapshot_index": 36,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.0522314426324242e+59,
+      "fixed_value": 2.0522314426332378e+59,
+      "absolute_difference": 8.135311848423971e+46,
+      "energy_difference_over_label": 3.5805386142720846e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 36,
+      "field": "delta_kinetic_erg",
+      "flux_value": 4.883805272088626e+57,
+      "fixed_value": 4.8838052720886304e+57,
+      "absolute_difference": 4.181389724724492e+42,
+      "energy_difference_over_label": 1.8403261792105698e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 36,
+      "field": "delta_gravitational_erg",
+      "flux_value": 1.8970902165042498e+59,
+      "fixed_value": 1.897090216504355e+59,
+      "absolute_difference": 1.0525951733706454e+46,
+      "energy_difference_over_label": 4.632714435132741e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 36,
+      "field": "delta_total_energy_erg",
+      "flux_value": 3.9981597118575658e+59,
+      "fixed_value": 3.998159711858479e+59,
+      "absolute_difference": 9.134385233318143e+46,
+      "energy_difference_over_label": 4.0202538826914636e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 36,
+      "field": "mass_g",
+      "flux_value": 6.233361247920053e+45,
+      "fixed_value": 6.233361247920048e+45,
+      "absolute_difference": 5.070602400912918e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 8.134619829076775e-16
+    },
+    {
+      "snapshot_index": 36,
+      "field": "delta_mass_g",
+      "flux_value": 2.532550053494762e+43,
+      "fixed_value": 2.5325500534949e+43,
+      "absolute_difference": 1.376589323685343e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.2084221801595152e-16
+    },
+    {
+      "snapshot_index": 37,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.161725096121817e+59,
+      "fixed_value": 2.1617250961219675e+59,
+      "absolute_difference": 1.503070226380964e+46,
+      "energy_difference_over_label": 6.436552727433266e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 37,
+      "field": "delta_kinetic_erg",
+      "flux_value": 5.0886006833065286e+57,
+      "fixed_value": 5.088600683306525e+57,
+      "absolute_difference": 3.48449143727041e+42,
+      "energy_difference_over_label": 1.492153358548142e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 37,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.0017327022986325e+59,
+      "fixed_value": 2.001732702299247e+59,
+      "absolute_difference": 6.143855302195187e+46,
+      "energy_difference_over_label": 2.6309648017920842e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 37,
+      "field": "delta_total_energy_erg",
+      "flux_value": 4.214343805253403e+59,
+      "fixed_value": 4.214343805254279e+59,
+      "absolute_difference": 8.759732713982829e+46,
+      "energy_difference_over_label": 3.751154171121345e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 37,
+      "field": "mass_g",
+      "flux_value": 6.234768802863832e+45,
+      "fixed_value": 6.234768802863835e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.0663916828670716e-16
+    },
+    {
+      "snapshot_index": 37,
+      "field": "delta_mass_g",
+      "flux_value": 2.673305547872686e+43,
+      "fixed_value": 2.6733055478735927e+43,
+      "absolute_difference": 9.066672847726125e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.4542115569003142e-15
+    },
+    {
+      "snapshot_index": 38,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.274275891006412e+59,
+      "fixed_value": 2.2742758910071108e+59,
+      "absolute_difference": 6.989053545219497e+46,
+      "energy_difference_over_label": 2.9141110242414045e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 38,
+      "field": "delta_kinetic_erg",
+      "flux_value": 5.2944028065406316e+57,
+      "fixed_value": 5.29440280654063e+57,
+      "absolute_difference": 1.393796574908164e+42,
+      "energy_difference_over_label": 5.811484971764129e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 38,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.1092349942982057e+59,
+      "fixed_value": 2.109234994299151e+59,
+      "absolute_difference": 9.451055815137278e+46,
+      "energy_difference_over_label": 3.94065172965382e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 38,
+      "field": "delta_total_energy_erg",
+      "flux_value": 4.436454913370007e+59,
+      "fixed_value": 4.436454913371668e+59,
+      "absolute_difference": 1.6609595023865608e+47,
+      "energy_difference_over_label": 6.925430411151877e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 38,
+      "field": "mass_g",
+      "flux_value": 6.23621575515743e+45,
+      "fixed_value": 6.236215755157434e+45,
+      "absolute_difference": 3.802951800684688e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 6.098172273048116e-16
+    },
+    {
+      "snapshot_index": 38,
+      "field": "delta_mass_g",
+      "flux_value": 2.818000777232443e+43,
+      "fixed_value": 2.8180007772333885e+43,
+      "absolute_difference": 9.452910139983164e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.5158087069334445e-15
+    },
+    {
+      "snapshot_index": 39,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.3898196856301883e+59,
+      "fixed_value": 2.3898196856308145e+59,
+      "absolute_difference": 6.262049251747399e+46,
+      "energy_difference_over_label": 2.5440512488807513e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 39,
+      "field": "delta_kinetic_erg",
+      "flux_value": 5.495469476229428e+57,
+      "fixed_value": 5.495469476229419e+57,
+      "absolute_difference": 9.059677736903066e+42,
+      "energy_difference_over_label": 3.6806297003483094e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 39,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.219497692544241e+59,
+      "fixed_value": 2.219497692544868e+59,
+      "absolute_difference": 6.270969549826811e+46,
+      "energy_difference_over_label": 2.5476752535087867e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 39,
+      "field": "delta_total_energy_erg",
+      "flux_value": 4.664272072936722e+59,
+      "fixed_value": 4.664272072937977e+59,
+      "absolute_difference": 1.2550859397733035e+47,
+      "energy_difference_over_label": 5.098974511645608e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 39,
+      "field": "mass_g",
+      "flux_value": 6.237700816935478e+45,
+      "fixed_value": 6.237700816935486e+45,
+      "absolute_difference": 7.605903601369376e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.2193440860002763e-15
+    },
+    {
+      "snapshot_index": 39,
+      "field": "delta_mass_g",
+      "flux_value": 2.9665069550372343e+43,
+      "fixed_value": 2.9665069550385886e+43,
+      "absolute_difference": 1.354306402978206e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.1711628093820023e-15
+    },
+    {
+      "snapshot_index": 40,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.507956093399852e+59,
+      "fixed_value": 2.5079560933999465e+59,
+      "absolute_difference": 9.455515964176984e+45,
+      "energy_difference_over_label": 3.745419726380592e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 40,
+      "field": "delta_kinetic_erg",
+      "flux_value": 5.760817205202608e+57,
+      "fixed_value": 5.7608172052026075e+57,
+      "absolute_difference": 6.96898287454082e+41,
+      "energy_difference_over_label": 2.7604803407875825e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 40,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.332601923610937e+59,
+      "fixed_value": 2.3326019236111567e+59,
+      "absolute_difference": 2.1988534765751194e+46,
+      "energy_difference_over_label": 8.70986757125298e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 40,
+      "field": "delta_total_energy_erg",
+      "flux_value": 4.898166189062798e+59,
+      "fixed_value": 4.8981661890631295e+59,
+      "absolute_difference": 3.3183508855413567e+46,
+      "energy_difference_over_label": 1.3144303190694154e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 40,
+      "field": "mass_g",
+      "flux_value": 6.239225134706792e+45,
+      "fixed_value": 6.239225134706794e+45,
+      "absolute_difference": 2.535301200456459e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 4.063487285229374e-16
+    },
+    {
+      "snapshot_index": 40,
+      "field": "delta_mass_g",
+      "flux_value": 3.118938732168604e+43,
+      "fixed_value": 3.118938732169492e+43,
+      "absolute_difference": 8.878505961754747e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.4230141996906774e-15
+    },
+    {
+      "snapshot_index": 41,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.6296888137889175e+59,
+      "fixed_value": 2.6296888137891678e+59,
+      "absolute_difference": 2.502143611275136e+46,
+      "energy_difference_over_label": 9.669302869809912e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 41,
+      "field": "delta_kinetic_erg",
+      "flux_value": 5.9910719790868564e+57,
+      "fixed_value": 5.991071979086858e+57,
+      "absolute_difference": 1.393796574908164e+42,
+      "energy_difference_over_label": 5.3861981226659494e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 41,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.448644547273491e+59,
+      "fixed_value": 2.4486445472741124e+59,
+      "absolute_difference": 6.212987612310632e+46,
+      "energy_difference_over_label": 2.4009516751595735e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 41,
+      "field": "delta_total_energy_erg",
+      "flux_value": 5.13824408085315e+59,
+      "fixed_value": 5.138244080854149e+59,
+      "absolute_difference": 9.99073384894172e+46,
+      "energy_difference_over_label": 3.860826814326952e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 41,
+      "field": "mass_g",
+      "flux_value": 6.240790068814004e+45,
+      "fixed_value": 6.240790068814014e+45,
+      "absolute_difference": 1.0141204801825835e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.6249873317326706e-15
+    },
+    {
+      "snapshot_index": 41,
+      "field": "delta_mass_g",
+      "flux_value": 3.2754321428898683e+43,
+      "fixed_value": 3.275432142891421e+43,
+      "absolute_difference": 1.552871985279581e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.4882618517156518e-15
+    },
+    {
+      "snapshot_index": 42,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.754287553416458e+59,
+      "fixed_value": 2.7542875534168887e+59,
+      "absolute_difference": 4.3085039723561164e+46,
+      "energy_difference_over_label": 1.6253442457562574e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 42,
+      "field": "delta_kinetic_erg",
+      "flux_value": 6.250732863979066e+57,
+      "fixed_value": 6.2507328639790705e+57,
+      "absolute_difference": 4.181389724724492e+42,
+      "energy_difference_over_label": 1.5773915428535107e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 42,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.567416342068337e+59,
+      "fixed_value": 2.567416342068771e+59,
+      "absolute_difference": 4.3397250156340593e+46,
+      "energy_difference_over_label": 1.6371221026095636e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 42,
+      "field": "delta_total_energy_erg",
+      "flux_value": 5.384211224124482e+59,
+      "fixed_value": 5.384211224125451e+59,
+      "absolute_difference": 9.687443714241703e+46,
+      "energy_difference_over_label": 3.654500726483014e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 42,
+      "field": "mass_g",
+      "flux_value": 6.242392851034052e+45,
+      "fixed_value": 6.242392851034053e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.0307126297221792e-16
+    },
+    {
+      "snapshot_index": 42,
+      "field": "delta_mass_g",
+      "flux_value": 3.435710364894642e+43,
+      "fixed_value": 3.435710364895344e+43,
+      "absolute_difference": 7.021595902826677e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.1248244175570508e-15
+    },
+    {
+      "snapshot_index": 43,
+      "field": "delta_thermal_erg",
+      "flux_value": 2.88201985541258e+59,
+      "fixed_value": 2.882019855413291e+59,
+      "absolute_difference": 7.109477569291563e+46,
+      "energy_difference_over_label": 2.6196248534600626e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 43,
+      "field": "delta_kinetic_erg",
+      "flux_value": 6.488398178948666e+57,
+      "fixed_value": 6.488398178948663e+57,
+      "absolute_difference": 2.787593149816328e+42,
+      "energy_difference_over_label": 1.0271427436716055e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 43,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.6890188464433233e+59,
+      "fixed_value": 2.6890188464437095e+59,
+      "absolute_difference": 3.862489068385504e+46,
+      "energy_difference_over_label": 1.4232089856313766e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 43,
+      "field": "delta_total_energy_erg",
+      "flux_value": 5.635922683645328e+59,
+      "fixed_value": 5.635922683646488e+59,
+      "absolute_difference": 1.1596387503235924e+47,
+      "energy_difference_over_label": 4.272913813673879e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 43,
+      "field": "mass_g",
+      "flux_value": 6.244034904439357e+45,
+      "fixed_value": 6.244034904439347e+45,
+      "absolute_difference": 1.0141204801825835e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.6241428750847792e-15
+    },
+    {
+      "snapshot_index": 43,
+      "field": "delta_mass_g",
+      "flux_value": 3.599915705425123e+43,
+      "fixed_value": 3.599915705424732e+43,
+      "absolute_difference": 3.9118905241418017e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 6.26500425447742e-16
+    },
+    {
+      "snapshot_index": 44,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.0123467023397653e+59,
+      "fixed_value": 3.012346702339953e+59,
+      "absolute_difference": 1.8777227457162785e+46,
+      "energy_difference_over_label": 6.761620995478988e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 44,
+      "field": "delta_kinetic_erg",
+      "flux_value": 6.766159596172825e+57,
+      "fixed_value": 6.766159596172823e+57,
+      "absolute_difference": 1.393796574908164e+42,
+      "energy_difference_over_label": 5.0190179598270396e-17,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 44,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.813452318274305e+59,
+      "fixed_value": 2.813452318275484e+59,
+      "absolute_difference": 1.1792634060982994e+47,
+      "energy_difference_over_label": 4.2464907154504616e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 44,
+      "field": "delta_total_energy_erg",
+      "flux_value": 5.8934606165757585e+59,
+      "fixed_value": 5.893460616577165e+59,
+      "absolute_difference": 1.4067310071233117e+47,
+      "energy_difference_over_label": 5.065594446494235e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 44,
+      "field": "mass_g",
+      "flux_value": 6.245716289062096e+45,
+      "fixed_value": 6.245716289062095e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.0296320574923035e-16
+    },
+    {
+      "snapshot_index": 44,
+      "field": "delta_mass_g",
+      "flux_value": 3.768054167699077e+43,
+      "fixed_value": 3.7680541676996037e+43,
+      "absolute_difference": 5.268672807198578e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 8.435658238952386e-16
+    },
+    {
+      "snapshot_index": 45,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.1459771820962568e+59,
+      "fixed_value": 3.1459771820970043e+59,
+      "absolute_difference": 7.475209790547465e+46,
+      "energy_difference_over_label": 2.6319472657215094e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 45,
+      "field": "delta_kinetic_erg",
+      "flux_value": 7.051756457376311e+57,
+      "fixed_value": 7.051756457376303e+57,
+      "absolute_difference": 8.362779449448984e+42,
+      "energy_difference_over_label": 2.9444517441693497e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 45,
+      "field": "delta_gravitational_erg",
+      "flux_value": 2.9408293046765863e+59,
+      "fixed_value": 2.940829304676552e+59,
+      "absolute_difference": 3.434314760573716e+45,
+      "energy_difference_over_label": 1.2091881829388795e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 45,
+      "field": "delta_total_energy_erg",
+      "flux_value": 6.1573240513464775e+59,
+      "fixed_value": 6.15732405134732e+59,
+      "absolute_difference": 8.420761386965163e+46,
+      "energy_difference_over_label": 2.9648666095955905e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 45,
+      "field": "mass_g",
+      "flux_value": 6.247438580988682e+45,
+      "fixed_value": 6.247438580988698e+45,
+      "absolute_difference": 1.6479457802966982e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.637794287904628e-15
+    },
+    {
+      "snapshot_index": 45,
+      "field": "delta_mass_g",
+      "flux_value": 3.940283360357617e+43,
+      "fixed_value": 3.9402833603598156e+43,
+      "absolute_difference": 2.1985815097708354e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 3.519172667757376e-15
+    },
+    {
+      "snapshot_index": 46,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.2829520708788853e+59,
+      "fixed_value": 3.282952070879034e+59,
+      "absolute_difference": 1.4852296302221395e+46,
+      "energy_difference_over_label": 5.115714871351313e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 46,
+      "field": "delta_kinetic_erg",
+      "flux_value": 7.290345038640127e+57,
+      "fixed_value": 7.290345038640127e+57,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 46,
+      "field": "delta_gravitational_erg",
+      "flux_value": 3.070917282750089e+59,
+      "fixed_value": 3.0709172827505013e+59,
+      "absolute_difference": 4.121177712688459e+46,
+      "energy_difference_over_label": 1.4194956579965806e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 46,
+      "field": "delta_total_energy_erg",
+      "flux_value": 6.42677280401523e+59,
+      "fixed_value": 6.426772804015936e+59,
+      "absolute_difference": 7.064876078894501e+46,
+      "energy_difference_over_label": 2.4334211279941383e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 46,
+      "field": "mass_g",
+      "flux_value": 6.249198690468232e+45,
+      "fixed_value": 6.249198690468242e+45,
+      "absolute_difference": 1.0141204801825835e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.6228008268154412e-15
+    },
+    {
+      "snapshot_index": 46,
+      "field": "delta_mass_g",
+      "flux_value": 4.11629430831263e+43,
+      "fixed_value": 4.1162943083142146e+43,
+      "absolute_difference": 1.5845632502852868e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.5356262918991266e-15
+    },
+    {
+      "snapshot_index": 47,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.423138309595197e+59,
+      "fixed_value": 3.4231383095956927e+59,
+      "absolute_difference": 4.955225583113504e+46,
+      "energy_difference_over_label": 1.6704506101677624e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 47,
+      "field": "delta_kinetic_erg",
+      "flux_value": 7.555256105077399e+57,
+      "fixed_value": 7.555256105077395e+57,
+      "absolute_difference": 4.181389724724492e+42,
+      "energy_difference_over_label": 1.409583660695119e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 47,
+      "field": "delta_gravitational_erg",
+      "flux_value": 3.2039434279107755e+59,
+      "fixed_value": 3.2039434279113446e+59,
+      "absolute_difference": 5.691150174665015e+46,
+      "energy_difference_over_label": 1.918537334450103e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 47,
+      "field": "delta_total_energy_erg",
+      "flux_value": 6.702634298556621e+59,
+      "fixed_value": 6.7026342985578115e+59,
+      "absolute_difference": 1.1908597936015353e+47,
+      "energy_difference_over_label": 4.0144942656596985e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 47,
+      "field": "mass_g",
+      "flux_value": 6.25099974470822e+45,
+      "fixed_value": 6.250999744708213e+45,
+      "absolute_difference": 6.338253001141147e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.0139582882732954e-15
+    },
+    {
+      "snapshot_index": 47,
+      "field": "delta_mass_g",
+      "flux_value": 4.2963997323114205e+43,
+      "fixed_value": 4.2963997323114403e+43,
+      "absolute_difference": 1.9807040628566084e+29,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 3.168619650854048e-17
+    },
+    {
+      "snapshot_index": 48,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.566016243563496e+59,
+      "fixed_value": 3.566016243563812e+59,
+      "absolute_difference": 3.157785520111936e+46,
+      "energy_difference_over_label": 1.042336123357841e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 48,
+      "field": "delta_kinetic_erg",
+      "flux_value": 7.886499691810567e+57,
+      "fixed_value": 7.886499691810567e+57,
+      "absolute_difference": 0.0,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 48,
+      "field": "delta_gravitational_erg",
+      "flux_value": 3.3398077490058345e+59,
+      "fixed_value": 3.339807749005978e+59,
+      "absolute_difference": 1.4361679907853721e+46,
+      "energy_difference_over_label": 4.740568244650068e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 48,
+      "field": "delta_total_energy_erg",
+      "flux_value": 6.984688989487434e+59,
+      "fixed_value": 6.984688989487895e+59,
+      "absolute_difference": 4.611794107056133e+46,
+      "energy_difference_over_label": 1.522281852474587e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 48,
+      "field": "mass_g",
+      "flux_value": 6.252840446245835e+45,
+      "fixed_value": 6.252840446245837e+45,
+      "absolute_difference": 1.2676506002282294e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 2.027319601588936e-16
+    },
+    {
+      "snapshot_index": 48,
+      "field": "delta_mass_g",
+      "flux_value": 4.480469886072961e+43,
+      "fixed_value": 4.480469886073695e+43,
+      "absolute_difference": 7.338508552883734e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.173627988107345e-15
+    },
+    {
+      "snapshot_index": 49,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.7118967225159483e+59,
+      "fixed_value": 3.7118967225161254e+59,
+      "absolute_difference": 1.7706791687633315e+46,
+      "energy_difference_over_label": 5.725535589533859e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 49,
+      "field": "delta_kinetic_erg",
+      "flux_value": 8.200652944668054e+57,
+      "fixed_value": 8.20065294466806e+57,
+      "absolute_difference": 5.575186299632656e+42,
+      "energy_difference_over_label": 1.8027505004829532e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 49,
+      "field": "delta_gravitational_erg",
+      "flux_value": 3.4784038681124217e+59,
+      "fixed_value": 3.478403868112762e+59,
+      "absolute_difference": 3.403093717295773e+46,
+      "energy_difference_over_label": 1.1003989054947946e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 49,
+      "field": "delta_total_energy_erg",
+      "flux_value": 7.2723071200749925e+59,
+      "fixed_value": 7.272307120075568e+59,
+      "absolute_difference": 5.753592261220901e+46,
+      "energy_difference_over_label": 1.8604385164984078e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 49,
+      "field": "mass_g",
+      "flux_value": 6.254719407272561e+45,
+      "fixed_value": 6.254719407272566e+45,
+      "absolute_difference": 5.070602400912918e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 8.106842322962022e-16
+    },
+    {
+      "snapshot_index": 49,
+      "field": "delta_mass_g",
+      "flux_value": 4.668365988745552e+43,
+      "fixed_value": 4.668365988746627e+43,
+      "absolute_difference": 1.07453195409971e+31,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.7179538907058192e-15
+    },
+    {
+      "snapshot_index": 50,
+      "field": "delta_thermal_erg",
+      "flux_value": 3.861185189643069e+59,
+      "fixed_value": 3.861185189643107e+59,
+      "absolute_difference": 3.791126683750206e+45,
+      "energy_difference_over_label": 1.2013355526878486e-13,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 50,
+      "field": "delta_kinetic_erg",
+      "flux_value": 8.495695293813903e+57,
+      "fixed_value": 8.495695293813913e+57,
+      "absolute_difference": 9.756576024357148e+42,
+      "energy_difference_over_label": 3.091672378240787e-16,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 50,
+      "field": "delta_gravitational_erg",
+      "flux_value": 3.6200450308802648e+59,
+      "fixed_value": 3.6200450308806715e+59,
+      "absolute_difference": 4.0676559242119857e+46,
+      "energy_difference_over_label": 1.2889623812368448e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 50,
+      "field": "delta_total_energy_erg",
+      "flux_value": 7.5661871734614085e+59,
+      "fixed_value": 7.566187173461918e+59,
+      "absolute_difference": 5.093490203344394e+46,
+      "energy_difference_over_label": 1.6140296484347333e-12,
+      "mass_difference_over_whole_grid_mass": 0.0
+    },
+    {
+      "snapshot_index": 50,
+      "field": "mass_g",
+      "flux_value": 6.256640925829753e+45,
+      "fixed_value": 6.256640925829745e+45,
+      "absolute_difference": 7.605903601369376e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.215652886514451e-15
+    },
+    {
+      "snapshot_index": 50,
+      "field": "delta_mass_g",
+      "flux_value": 4.860517844464695e+43,
+      "fixed_value": 4.860517844464575e+43,
+      "absolute_difference": 1.1983259580282481e+30,
+      "energy_difference_over_label": 0.0,
+      "mass_difference_over_whole_grid_mass": 1.91528644880532e-16
+    }
+  ]
+}

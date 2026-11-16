@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/README.md",
+      "bytes": 4417,
+      "sha256": "cc3d131b6427c3c2ba3919f0b12e91e07e140a52e298cb1b83d54ba63503e463"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/coverage.csv",
+      "bytes": 22852,
+      "sha256": "a2bdf0f890d9865a7f2c0881693455effd8a76bc254b8bcbb7147fdcce686532"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/cumulative_flux_scenarios.csv",
+      "bytes": 77258,
+      "sha256": "9ec25d21171535ec1e64851621165510b712b592d3329383fb3eeb031c04caae"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/figures/clo_history_review.pdf",
+      "bytes": 21931,
+      "sha256": "7c7b2747f27c0ca49f90d035d0092252be87e415badabcd0bf942053d1fd5756"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/figures/clo_history_review.png",
+      "bytes": 178102,
+      "sha256": "b02f9d6087ae10a5c1e0b423e21fbe3fb4b8def1c905783cb06f71a0a535e95a"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/figures/render_receipt.json",
+      "bytes": 491,
+      "sha256": "fda97e33280d1b34b9d5ded73454aa4930e9163ddc83f70143a09432babe1271"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/fixed_audit.json",
+      "bytes": 5185,
+      "sha256": "2184797aa07aed615eab17c80fb5b0bfafcf3ead228e8e7ae935b4893c0ec545"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/fixed_flux_storage_comparison.json",
+      "bytes": 99808,
+      "sha256": "b82948043bcfb26c598d7b1f2fddd1a0c4b1d6f687d158bc7e5f3f397949ab8d"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/fixed_history.csv",
+      "bytes": 10735,
+      "sha256": "3aa4a27adb926341459329bac2502ae16e0867b2b2bb5bef69c51fa82cfd5cce"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/flux_audit.json",
+      "bytes": 18214,
+      "sha256": "589e3f02ce8cd53b61c2b999b85403e211eec34b668680165dd7832e114967c2"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/flux_direct_firstpass.json",
+      "bytes": 46234,
+      "sha256": "56d141fd4e4a7f1f954258397fbe93f3f4303cdb284016d46d5a38e58475668c"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/regional_mass_energy.csv",
+      "bytes": 80879,
+      "sha256": "d38001111d5ce6feaf89975f6d217151bf2440ddfd979effc9e9f4c35fb0e3ce"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/replay_receipt.json",
+      "bytes": 638,
+      "sha256": "88a1cc040a6730e09bf3e28072e52957b0c57d70aacf1d745d828153ab8514d2"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/selected_flux_scenarios.csv",
+      "bytes": 12704,
+      "sha256": "1c53a4dec09e7581ceef8f0396f00ba057d043f4aa63a006dad4b67e9c66f051"
+    },
+    {
+      "path": "docs/science/assets/turn18_clo_review_2026-11-16/verification_summary.json",
+      "bytes": 2654,
+      "sha256": "e913309c077c28bf13ddb5ca62f6e97f6706db004465546f466191bfd3c3710e"
+    },
+    {
+      "path": "docs/science/turn18_clo_history_review_2026-11-16.md",
+      "bytes": 7689,
+      "sha256": "7d2259ef18e7abb1409f724ca38d7079447d4248cb33db43128d72d26ee2fb98"
+    },
+    {
+      "path": "scripts/science/render_clo_history_review.py",
+      "bytes": 3897,
+      "sha256": "17afabdb8c935a85413c12bd184d0a66fa80343e6c719846c2eb6fbc845d05d1"
+    }
+  ]
+}

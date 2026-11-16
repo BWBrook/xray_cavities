@@ -1,0 +1,138 @@
+{
+  "review_date": "2026-11-16",
+  "source_commit": "817779598bf297cb110544cf68204e01d7211e20",
+  "stage_manifest_sha256": "52fedf9d9bc088db3c3692dc33c5a6127e0fd5c5a97ac7dda4ce9c85a8a35b81",
+  "capture_archive_sha256": "00401e3040412831336de7b9f4e4d8e9bcca5cfa5311560d71fb63e7ff07ef29",
+  "capture_members": 132,
+  "completed_case": "C-LO",
+  "completed_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "completion_products": 110,
+  "jobs": [
+    {
+      "job_id": 879902,
+      "state": "F",
+      "exit_status": 0,
+      "walltime": "05:44:31",
+      "completion_abort_mail_verified": true
+    },
+    {
+      "job_id": 879903,
+      "state": "F",
+      "exit_status": 0,
+      "walltime": "03:04:11",
+      "completion_abort_mail_verified": true
+    },
+    {
+      "job_id": 879904,
+      "state": "Q",
+      "exit_status": null,
+      "walltime": null,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "job_id": 879905,
+      "state": "H",
+      "exit_status": null,
+      "walltime": null,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "job_id": 879906,
+      "state": "H",
+      "exit_status": null,
+      "walltime": null,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "job_id": 879907,
+      "state": "H",
+      "exit_status": null,
+      "walltime": null,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "job_id": 879908,
+      "state": "H",
+      "exit_status": null,
+      "walltime": null,
+      "completion_abort_mail_verified": true
+    },
+    {
+      "job_id": 879909,
+      "state": "H",
+      "exit_status": null,
+      "walltime": null,
+      "completion_abort_mail_verified": true
+    }
+  ],
+  "scheduler_observed_utc": "2026-11-16T10:16:49.352439Z",
+  "native_hdf5_fields_independently_reintegrated": false,
+  "physical_energy_closure_qualified": false,
+  "held_out_emission_cohort_scored": false,
+  "checks": {
+    "fixed_history": 11511,
+    "flux_scalar": 140640,
+    "flux_hash": 15,
+    "provenance": 20393,
+    "cross_storage": 306
+  },
+  "first_pass_mass_flags_preserved": 122,
+  "C_LO_20_product_byte_identical_to_accepted_pilot": true,
+  "first_noncontained_indices": {
+    "thermodynamic_ge_1pct": 5,
+    "speed_ge_30_km_s": 26
+  },
+  "cocoon_and_speed100_contained_through_index50": true
+}

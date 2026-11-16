@@ -1,0 +1,25 @@
+{
+  "status": "pass_fresh_restore_and_four_audit_replays",
+  "members": 294,
+  "archive_sha256": "eda2015ef144e92ac7a319aa652ae838c8b3399bd058961fbd316f256cb4571c",
+  "producer_source_commit": "817779598bf297cb110544cf68204e01d7211e20",
+  "runs": [
+    {
+      "script": "audit_fixed_history.py",
+      "exit_code": 0
+    },
+    {
+      "script": "flux_audit/independent_flux_history_audit.py",
+      "exit_code": 0
+    },
+    {
+      "script": "flux_audit/compare_fixed_whole_grid.py",
+      "exit_code": 0
+    },
+    {
+      "script": "provenance_audit/audit.py",
+      "exit_code": 0
+    }
+  ],
+  "native_fields_reintegrated": false
+}
