@@ -11,7 +11,7 @@ enthalpy convention is **2.5pV**; **4pV** is a literature comparator. Labelled
 jet power times age is the reference input, while actual numerical delivery
 remains under investigation.
 
-> **Status, 14 November 2026:** active research, developed in the open. The
+> **Status, 16 November 2026:** active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -20,6 +20,7 @@ remains under investigation.
 | Reader | Starting point |
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
+| Latest accounting result? | [Complete C-LO fixed-box and flux history](docs/science/turn18_clo_history_review_2026-11-16.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
@@ -87,11 +88,19 @@ convention's effect on ambient shares. The first G-LO flux interval remains
 too sensitive to time integration to locate the excess energy source.
 <!-- claims: NAT-09 BND-06 -->
 
-All eight full fixed-budget/flux histories, **879902–879909**, are submitted
-with serial I/O dependencies and verified completion/abort mail. At the
-**14 November, 13:03:29 AEDT** check, the first was queued and seven were
-dependency-held. They analyse existing simulation outputs; full-history
-completion and scientific acceptance remain pending.
+The [full C-LO accounting history](docs/science/turn18_clo_history_review_2026-11-16.md)
+is now complete and independently audited. Enlarging R100 to the fixed box
+does not remove the early shortfall: storage at 1 Myr is 0.922559 labelled-input
+units. At 50 Myr the box stores 1.288860 units. The flux history cannot locate
+the numerical source: outer-face reconstruction and time sampling change the
+sign of the outside-nozzle balance. These remain provisional C-LO findings.
+<!-- claims: NAT-10 BND-07 -->
+
+Two of eight full accounting jobs, **879902/879903**, finished with exit 0.
+At **16 November, 21:16:49 AEDT**, **879904** (G-HI fixed) was queued and
+**879905–879909** were dependency-held. Their serial I/O dependencies and
+completion/abort mail remain verified. All analyse existing simulation
+outputs; the other three cases await completion and independent review.
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only

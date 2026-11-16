@@ -1,19 +1,28 @@
 # Current Status
 
-Last updated: 2026-11-14 (three pilots accepted; eight full accounting histories submitted with completion/abort mail)
+Last updated: 2026-11-16 (full C-LO fixed/flux histories audited; six remaining jobs queued/held with completion/abort mail)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
-**Latest:** the [pilot review](../science/turn18_pilot_review_2026-11-14.md)
-verifies all three F/0 completions, twelve products and independent fixed,
-flux and provenance audits. C-LO/G-HI 20-Myr inset storage is
-1.157066/1.074883 labelled-input units. Regional mass confirms the potential
-convention's effect on signed ambient shares. G-LO's startup flux interval
-cannot locate the excess source because time-quadrature scenarios span both
-residual signs. NAT-09/BND-06 and BND-05 remain provisional.
+**Latest:** the [full C-LO review](../science/turn18_clo_history_review_2026-11-16.md)
+accepts jobs **879902/879903**, both F/0, with all 51 indices and 110
+completion products. Independent fixed, flux, cross-storage and provenance
+audits pass and replay from a fresh restoration. At 1 Myr, the fixed box
+stores **0.922559** labelled-input units versus R100's **0.926351**: its
+negative signed addition does not rescue the early prediction. At 50 Myr,
+the box stores **1.288860** versus **1.232527** in R100. Full regional mass
+and operational coverage accompany these measurements (NAT-10).
 
-## Turn 18: pilots accepted; full accounting histories pending
+The flux source remains unresolved (BND-07): outer-face reconstruction
+changes the trapezoidal endpoint source by **1.54355** labelled-input units;
+outside-nozzle scenarios span **−1.85036 to +0.65619**. They are sensitivity
+scenarios, not error bounds or measured solver delivery. BND-05 remains
+provisional. The other three accounting histories await completion/review;
+the blind emission cohort remains frozen and unscored. The article and brief
+are unchanged by this partial-history acceptance.
+
+## Turn 18: C-LO accounting reviewed; other three cases pending
 
 [Reconciliation](../science/turn18_review_reconciliation_2026-11-11.md)
 at **06f9a2d** qualifies the strengthened inference in board message 3244.
@@ -74,11 +83,11 @@ all completion product hashes still match. Independent checks pass:
 also passes a fresh restore/replay of all three audit scripts. Native field
 integrals were not independently reintegrated; no physical closure is claimed.
 
-| Full accounting history | Job | State at 13:03:29 AEDT, 14 November |
+| Full accounting history | Job | State at 21:16:49 AEDT, 16 November |
 | --- | --- | --- |
-| C-LO fixed box/mass | 879902 | Q, awaiting compatible capacity |
-| C-LO flux/source | 879903 | H, afterany 879902 |
-| G-HI fixed box/mass | 879904 | H, afterany 879903 |
+| C-LO fixed box/mass | 879902 | F / 0; wall 05:44:31; audited |
+| C-LO flux/source | 879903 | F / 0; wall 03:04:11; audited |
+| G-HI fixed box/mass | 879904 | Q, awaiting capacity |
 | G-HI flux/source | 879905 | H, afterany 879904 |
 | C-HI fixed box/mass | 879906 | H, afterany 879905 |
 | C-HI flux/source | 879907 | H, afterany 879906 |
@@ -89,8 +98,11 @@ Every job has verified completion/abort mail (`Mail_Points = ae`) to Barry's
 UTAS recipient. The serial chain limits I/O, not scientific acceptance;
 each completion must be reviewed even if an earlier job fails. Source and
 native-identity gates are unchanged; only existing outputs are analysed.
-See [the latest handover](logs/2026-11-14-pilot-acceptance-and-full-accounting-history.md)
-for receipts, hashes and review criteria. No blind-emission job was submitted.
+See [the latest handover](logs/2026-11-16-clo-accounting-history-review.md)
+for full C-LO acceptance, archives and remaining work; the
+[submission handover](logs/2026-11-14-pilot-acceptance-and-full-accounting-history.md)
+preserves the original queue capture. No job was added or resubmitted during
+the 16 November review, and no blind-emission job was submitted.
 
 ## Turn 15: outputs verified and scientific review complete
 

@@ -155,8 +155,8 @@ claims:
       requires native delivery, transport and production-boundary measurements.
     caveats:
       - The negative current-cocoon change includes the fixed centre-zero potential and subtracts initial energy in current cocoon cells; it is not negative injected energy.
-      - Regional and aperture gravitational storage shift by potential-zero shift times mass change; native mass measurements are pending.
-      - Disturbed ambient gas outside the apertures is detected, but its omitted energy and cause are unmeasured.
+      - Regional and aperture gravitational storage shift by potential-zero shift times mass change; C-LO's full mass history is now measured in NAT-10, with G-HI/20 in NAT-09 and other histories pending.
+      - Disturbed ambient gas outside the apertures is detected. NAT-10 measures the signed addition out to the C-LO fixed box; energy beyond that box and causal attribution remain unresolved.
       - Candidate inset conflicts precede domain truncation; inset clipping can remove current lobe cells and is not adopted as a correction.
       - G-HI snapshots 48--50 are excluded; no extrapolation is made to them.
     depends_on: [NAT-05, NAT-07]
@@ -186,13 +186,48 @@ claims:
       or quoting a general total ambient-energy share. Physical closure
       separately requires delivery, transport and source diagnostics.
     caveats:
-      - Two case/age pilots only; the C-LO/50 history has not been resolved by these measurements.
+      - Two case/age pilots only; the later C-LO full-history review is NAT-10.
       - Stored change uses a fixed centre-zero potential and labelled input is not measured numerical delivery.
       - Current cocoon masks are applied to the same initial/current cells; signed Eulerian shares are not deposition efficiencies.
       - The potential shift is an illustrative convention change, not a physical error interval; a signed share can exceed one.
       - Cocoon and speed-at-least-30-km/s cells are inset-contained, while 1% thermodynamic changes also reach domain faces; causal separation and quiet production boundaries are not certified.
       - Independent compact arithmetic and semantic reviews pass; native field integrals were not independently reintegrated.
     depends_on: [NAT-05, NAT-07, NAT-08, BND-05]
+
+  - id: NAT-10
+    status: provisional
+    statement: >-
+      Across C-LO indices 0--50, complete R100/R300 apertures lie inside the
+      fixed full-cell 50-kpc-inset box. At approximately 1 Myr, box storage
+      is 0.922559 labelled-input units versus R100's 0.926351: enlarging
+      the aperture does not rescue the registered early shortfall under the
+      declared potential. At 50 Myr the box stores 1.288860 versus R100's
+      1.232527. R100 ambient signed total-energy share is then 112.98%, or
+      123.42% under an illustrative +1e15 cm2/s2 potential-zero shift.
+    evidence:
+      - {path: docs/science/turn18_clo_history_review_2026-11-16.md, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/fixed_history.csv, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/regional_mass_energy.csv, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/coverage.csv, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/fixed_audit.json, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/replay_receipt.json, commit: ad56b07}
+    reproduce: >-
+      Restore the pinned audit archive as documented in
+      docs/science/assets/turn18_clo_review_2026-11-16/README.md, then run
+      .venv/bin/python private_archive/turn18_clo_review_2026-11-16/audit_fixed_history.py.
+    test: >-
+      Collaboration adjudication of the early-aperture test and signed mass
+      semantics; review the other three full accounting histories before
+      extending this C-LO result. Production-boundary qualification and
+      measured delivery/transport remain separate requirements.
+    caveats:
+      - Signed stored change uses a fixed centre-zero potential and labelled kinetic input, not measured numerical delivery or a delivered-energy floor.
+      - Current masks select the same initial/current cells. Potential shifts change gravitational storage by shift times regional mass change; signed ambient shares are not deposition efficiencies.
+      - At 50 Myr, R100 mass change is -2.10110e41 g, comprising -4.01206e42 g in current cocoon cells and +3.80195e42 g in ambient cells.
+      - Cocoon and speed-at-least-100-km/s cells remain inset-contained; speed-at-least-30 containment first fails at index 26 and 1% thermodynamic containment at index 5, with face contact. These masks do not identify a causal jet front or certify a quiet interior.
+      - The added box-minus-R100 region has negative net storage at 1 Myr; positive and negative omitted contributions could coexist, and energy outside the box is not addressed by this aperture test.
+      - Independent compact checks and saved-receipt bindings pass; native HDF5 fields were not independently reintegrated or rehashed locally.
+    depends_on: [NAT-05, NAT-08, NAT-09]
 
   - id: BND-01
     status: supported
@@ -304,7 +339,11 @@ claims:
       gravity-update, floor and conversion-repair energies require retained
       runtime diagnostics or a separately authorised instrumented simulation.
       The 5 November early-sphere predictions passed for G-HI, were partial
-      for G-LO and failed for C-LO; omitted signed energy remains unmeasured.
+      for G-LO and failed for C-LO. NAT-10 now measures C-LO's signed
+      box-minus-R100 addition: it is negative at 1 Myr and does not rescue
+      the early prediction. Energy beyond that box remains unmeasured by
+      this aperture comparison. BND-07's full flux history does not locate
+      the source because reconstruction/cadence sensitivity changes its sign.
     caveats:
       - Eligibility uses complete spheres inside the existing 40-kpc inset. C-HI/40 fails that inset and G-HI/40 is domain-truncated; neither enters the 11-point comparison.
       - Agreement is with the specified mass-scaled estimate or distance to its bracket, not both endpoints. Unscaled G-LO differs by up to 0.013896.
@@ -313,6 +352,7 @@ claims:
       - No unconditional 1.08--1.23 correction to delivered-energy denominators is measured; source-specific attribution and realised delivery remain unresolved.
       - Retained parent sources select DENSITY_LENGTH_SCALE, not the DENSITY_JET_POWER branch used in the original nozzle argument; labelled input is not proved realised delivery. The categorical nozzle exclusion is withdrawn pending native flux measurement.
       - Analytic prescribed-state flux within 0.4% of the label does not measure numerical overwrite/Riemann delivery or identify where in-grid source terms arise.
+      - NAT-10's C-LO fixed-box endpoint is 28.89% above labelled input; neither it nor BND-07 supplies a measured delivered-energy correction.
     depends_on: [BND-01, BND-02, BND-04, NAT-07]
 
   - id: BND-06
@@ -347,6 +387,41 @@ claims:
       - Fixed centre-zero potential is retained; inferred source transforms with its corresponding inferred mass-source term.
       - Independent lower-level arithmetic passes 2500 scalar checks; native HDF5 integrals and solver-step fluxes were not independently verified.
     depends_on: [BND-05]
+
+  - id: BND-07
+    status: provisional
+    statement: >-
+      C-LO's complete 0--50-Myr reconstructed flux history does not localise
+      numerical energy sources. At 50 Myr, trapezoidal whole-grid inferred
+      source is +1.292977 or -0.250570 labelled-input units for outer-active
+      or linearly extrapolated boundary faces, a spread of 1.54355 units.
+      The outside-nozzle balance spans -1.85036 to +0.65619 across all
+      reconstruction, padding and time-quadrature scenarios. The final
+      interval retains sign ambiguity, so startup alone does not explain it.
+    evidence:
+      - {path: docs/science/turn18_clo_history_review_2026-11-16.md, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/cumulative_flux_scenarios.csv, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/flux_audit.json, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/flux_direct_firstpass.json, commit: ad56b07}
+      - {path: docs/science/assets/turn18_clo_review_2026-11-16/fixed_flux_storage_comparison.json, commit: ad56b07}
+    reproduce: >-
+      Restore the pinned audit archive as documented in
+      docs/science/assets/turn18_clo_review_2026-11-16/README.md, then run
+      the independent_flux_history_audit.py and compare_fixed_whole_grid.py
+      commands listed there from the repository root.
+    test: >-
+      Review the other three histories and reduce boundary-subtraction and
+      temporal uncertainty before attributing source energy. Discrete nozzle
+      delivery and individual gravity/floor/repair terms require retained
+      runtime diagnostics or a separately authorised instrumented simulation.
+    caveats:
+      - Inferred source is storage change plus reconstructed outward thermal/kinetic/potential transport against a labelled kinetic-power reference; it is not measured overwrite or discrete Riemann delivery.
+      - The cumulative nozzle-control source spans 1.092215--1.128000 labelled-input units, but scenario ranges are not certified confidence or error bounds and do not justify categorical nozzle exclusion.
+      - The large whole-grid boundary subtraction is sensitive to outer-face reconstruction and time sampling; fixed/flux whole-grid storage itself reconciles within 2.02e-10 labelled-input units.
+      - Fixed centre-zero potential is retained; an energy-source shift follows the matching inferred mass-source term. Initial nozzle initialisation is already present in the first snapshot.
+      - All compact arithmetic/hash checks pass. The preserved first-pass mass flags are accounted for by sequential-versus-fsum rounding under cancellation; no producer data or gate was changed.
+      - Native integrals, solver-step flux and historical executable identity were not independently established by this review.
+    depends_on: [BND-05, BND-06, NAT-10]
 
   - id: OBS-01
     status: refuted

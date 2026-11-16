@@ -9,7 +9,8 @@ article and a two-page brief for general readers.
 
 Draft of 2 November 2026 by Claude (Opus 5.5, `claude-opus-5-5`), updated
 11 November with the independently checked turn-15 results by Codex GPT-6.1
-Sol, with accounting-pilot results added on 14 November by Codex (GPT-6).
+Sol, with accounting-pilot results added on 14 November and the full C-LO
+accounting review on 16 November by Codex (GPT-6).
 The new bounded scientific synthesis awaits collaboration adjudication.
 Its form is an experiment; see the end.
 
@@ -133,7 +134,8 @@ the raw comparisons can be used with their stated definitions.
   2.5pV/R100 storage is 0.5054/0.8053/0.4338/0.6545 in C-HI/C-LO/G-HI/G-LO;
   4pV is the comparator. At 20 Myr, ambient thermal-plus-kinetic shares are
   69.14/89.64/51.67/77.09%. The old total ambient-share headline is retired
-  pending regional mass measurements: a potential-zero shift changes
+  unless accompanied by regional mass measurements (now available for the
+  C-LO history and G-HI/20): a potential-zero shift changes
   gravitational storage by that shift times regional mass change. These
   are signed Eulerian comparisons, not delivery/deposition efficiencies.
   <!-- claims: NAT-07 -->
@@ -166,7 +168,8 @@ R100/R300 energy components reproduce the old measurements to numerical
 precision. Regional mass now accompanies these two case/ages: an illustrative
 +1e15 cm²/s² potential shift changes R100 ambient total shares from
 97.52%/53.55% to 105.32%/55.17%. These are signed same-cell contributions,
-not deposition efficiencies; all four-case histories remain to be reviewed.
+not deposition efficiencies. The later full C-LO review is below; the other
+three accounting histories remain pending.
 <!-- claims: NAT-09 -->
 
 G-LO's first saved flux interval does not localise a numerical source.
@@ -181,6 +184,44 @@ Full fixed/flux jobs 879902–879909 are submitted in a serial I/O chain with
 verified completion/abort mail. G-HI requests stop at index 47. The frozen
 emission cohort remains unscored. See the current status before interpreting
 these dated scheduler observations as current execution state.
+
+## Full C-LO accounting history reviewed on 16 November
+
+Both jobs completed F/0 with exact indices 0–50 and 110 completion products.
+The [history review](docs/science/turn18_clo_history_review_2026-11-16.md)
+and [evidence guide](docs/science/assets/turn18_clo_review_2026-11-16/README.md)
+record independent fixed, flux, cross-storage and provenance checks, all
+replayed successfully from a fresh archive restoration. This accepts compact
+arithmetic and receipt/source bindings, not native reintegration or physical
+energy closure.
+
+- **The early aperture explanation is not rescued.** At 1 Myr the fixed box
+  stores 0.922559 labelled-input units versus R100's 0.926351. The added
+  region has negative net signed storage, so enlarging to this box does not
+  explain the early deficit as omitted positive energy. The registered
+  prediction remains failed. Energy beyond the box and cancellation of
+  positive/negative contributions remain separate questions.
+- **Late storage excess is larger in the box.** At 50 Myr, fixed-box/R100
+  storage is 1.288860/1.232527 labelled-input units. Regional mass accompanies
+  the full history; R100 ambient signed total share is then 112.98%, changing
+  to 123.42% under the illustrative +1e15 cm²/s² potential shift.
+- **Coverage is operational, not causal.** Cocoon and speed≥100-km/s cells
+  remain inset-contained, but speed≥30 containment fails from index 26 and
+  1% thermodynamic containment from index 5, with domain-face contact.
+  Neither a quiet production interior nor a delivered-energy floor follows.
+  <!-- claims: NAT-10 -->
+- **The source remains unlocalised through the full history.** At 50 Myr,
+  changing only outer-face reconstruction changes the trapezoidal whole-grid
+  source by 1.54355 labelled-input units. Outside-nozzle balances span
+  −1.85036 to +0.65619 across the scenarios; the final interval also has sign
+  ambiguity. Nozzle-control cumulative inferred source spans 1.092215–1.128000,
+  but is a continuum snapshot balance, not measured solver delivery. Scenario
+  spreads are not confidence intervals or certified error bounds.
+  <!-- claims: BND-07 -->
+
+The other three fixed/flux accounting histories remain pending with verified
+completion/abort mail. BND-05 stays provisional, and the blind emission cohort
+remains frozen and unscored. Do not propagate this C-LO result to other cases.
 
 ## Conventions you must apply
 
@@ -243,10 +284,12 @@ these dated scheduler observations as current execution state.
 
 ## Open questions, in priority order
 
-1. **What is the 5–19% residual (BND-05)?** Q-031 reconstructs face transport
+1. **What causes the excess stored energy (BND-05)?** Q-031 reconstructs face transport
    and control-volume balances from saved states; it does not directly
    measure numerical nozzle overwrite or solver-step delivery. The startup
-   pilot is cadence-ambiguous (BND-06), and full histories are pending. Write
+   pilot is cadence-ambiguous (BND-06); the full C-LO history also remains
+   reconstruction/cadence-ambiguous (BND-07). The other three full accounting
+   histories are pending. Write
    physical closure as "boundary-dominated, with an unexplained residual".
    The 100/300 km/s spherical budgets (Stas's priority of 4 November)
    measure storage inside speed-defined apertures, retaining boundary and
@@ -254,7 +297,9 @@ these dated scheduler observations as current execution state.
    are now reviewed (201 snapshots); their component/proxy and aperture
    comparisons are above. Slower disturbance remains outside. Realised
    delivery, aperture transport and production-boundary qualification remain
-   the highest-value accounting measurements. <!-- claims: NAT-06 NAT-07 NAT-08 NAT-09 BND-06 -->
+   the highest-value accounting measurements. The C-LO fixed-box history
+   measures signed storage beyond R100 without rescuing its early prediction.
+   <!-- claims: NAT-06 NAT-07 NAT-08 NAT-09 NAT-10 BND-06 BND-07 -->
 2. **The emission-defined native reference (XR-02).** Without it, detector
    tests compare against tracer cocoons, which are not what X-ray cavities
    trace. The new G-HI/20 C/moving-ambient/below-cut diagnostic is useful
