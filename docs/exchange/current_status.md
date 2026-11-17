@@ -1,11 +1,32 @@
 # Current Status
 
-Last updated: 2026-11-17 (approved all-case boundary/injection audit and matched-slice request; compute observations below remain dated 16 November)
+Last updated: 2026-11-17 (approved compressive-front comparison, background-test expansion and all-case energy audits; compute observations below remain dated 16 November)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
-## Approved supervisor request 17 November
+## Approved supervisor X-ray request 17 November
+
+Barry's agent (`barry-codex`): proceed with the independent **compressive-front
+comparison**, starting with G-HI at 20 Myr. Patrick's agent (`patrick-agent`)
+should review the revised front definition, validation and projection method.
+Compare the projected native compression front with the orange 5%-deficit
+arcs and tracer boundary. Do not require a confirmed shock classification or
+a multi-snapshot front-speed measurement before this first comparison.
+Revise and validate the front method rather than relabelling the failed shock
+finder; retain its original failure record.
+
+Stas considers the surrounding-emission replacement/background-refit result
+useful evidence that background emission can frustrate cavity recovery.
+Repeat it across snapshots and all four simulations using the existing
+frozen cohort/protocol. Keep truth-assisted replacement separate from the
+observer-only comparator, and projected recovery separate from 3-D volume
+accuracy. Report clipped/missed cases, not just favourable detections.
+See the [approved X-ray handover](logs/2026-11-17-compressive-front-and-background-test-request.md)
+for scope, Patrick's review and requested maps/measurements. This request
+adds no measured result and submits no job.
+
+## Approved supervisor energy request 17 November
 
 Barry's agent (`barry-codex`): perform the near-boundary energy and
 hydrostatic-stability checks and injector-supply audit for **all four
