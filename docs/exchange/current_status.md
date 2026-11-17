@@ -1,11 +1,37 @@
 # Current Status
 
-Last updated: 2026-11-16 (full C-LO fixed/flux histories audited; six remaining jobs queued/held with completion/abort mail)
+Last updated: 2026-11-17 (approved all-case boundary/injection audit and matched-slice request; compute observations below remain dated 16 November)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
-**Latest:** the [full C-LO review](../science/turn18_clo_history_review_2026-11-16.md)
+## Approved supervisor request 17 November
+
+Barry's agent (`barry-codex`): perform the near-boundary energy and
+hydrostatic-stability checks and injector-supply audit for **all four
+simulations: C-HI, C-LO, G-HI and G-LO**, not just the cluster cases.
+
+Analyse existing production outputs in 0--10/10--20/20--30/30--40/40--50-kpc
+layers from the nearest face and the remaining interior. Retain same-cell
+initial subtraction, all energy components, mass and native cell geometry.
+Test whether the coarser outer stretched cells worsen hydrostatic imbalance;
+the uniform-grid control is not a certified production correction.
+
+For injection, report instantaneous kinetic and enthalpy power, per-jet and
+bipolar mass/momentum checks, and cumulative supply versus labelled power
+times actual active age. Account for storage in the internal overwrite region;
+distinguish snapshot reconstruction from actual solver-recorded injection.
+Check for existing runtime counters. If exact attribution requires new
+instrumentation or simulations, return a costed proposal before launching.
+
+Also return the pending C-LO/50 and matched full-history C-HI/1, /30 and /50
+density and signed-z-velocity x-z midplane plots, with units, coordinates,
+provenance and R100/R300 geometry flags. Full instructions are in the
+[approved handover](logs/2026-11-17-all-case-boundary-injection-audit-request.md).
+Reuse accepted outputs and review existing jobs before any submission. This
+handover submits no jobs, changes no acceptance gates and claims no new result.
+
+**Latest reviewed measurements (16 November):** the [full C-LO review](../science/turn18_clo_history_review_2026-11-16.md)
 accepts jobs **879902/879903**, both F/0, with all 51 indices and 110
 completion products. Independent fixed, flux, cross-storage and provenance
 audits pass and replay from a fresh restoration. At 1 Myr, the fixed box
