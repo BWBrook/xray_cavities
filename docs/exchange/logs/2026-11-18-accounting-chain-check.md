@@ -150,3 +150,10 @@ replay receipt in `turn18_ghi_addendum_2026-11-18/submission_r1.tar.gz`,
 SHA-256 `cf2e1ff20c08fdda2cbade5b6d744b9936ba21f15c505a478f0e1bdf8af3c7b0`.
 On completion, verify the terminal exit and both `endpoint.json` and
 `qualification.json` before integrating the last interval.
+
+**19 November outcome.** 881993 exited 127 at launch. The batch shell
+could not find `module`. Job 882015 used the verified scientific Python
+interpreter directly and finished with exit 0 in 00:05:11. Its endpoint
+and qualification receipt passed verification. The [completed addendum](../../science/ghi_flux_endpoint_2026-11-19.md)
+reports the 24 recoverable estimates, the failed pressure extrapolation
+and the reproducible archive.

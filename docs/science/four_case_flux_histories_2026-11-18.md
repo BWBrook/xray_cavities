@@ -5,6 +5,8 @@ The final job, **879909**, completed the G-LO flux analysis in **03:37:38**
 and returned every index from 0 through 50. The original G-HI flux job
 returned exit 1 at snapshot 47. Its recovered prefix includes intervals
 through 46 Myr. This record describes the products of the original batch.
+The [19 November G-HI addendum](ghi_flux_endpoint_2026-11-19.md) extends
+24 of the 36 estimates through the final 46–47 Myr interval.
 
 ## What changes across the four cases
 

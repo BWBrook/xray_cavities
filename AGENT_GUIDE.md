@@ -246,9 +246,11 @@ requires separate overwrite and solver transport accounting.
 
 The [flux comparison](docs/science/four_case_flux_histories_2026-11-18.md)
 records the complete original batch. G-HI ends at 46 Myr because its outer
-linear reconstruction failed at 47. An endpoint diagnostic must preserve
-that failed method and label coverage by reconstruction. BND-05 remains
-provisional.
+linear reconstruction failed at 47. The [separate endpoint measurement](docs/science/ghi_flux_endpoint_2026-11-19.md)
+recovers 18 outer-active-cell and six linear left-rectangle estimates.
+Every available cumulative outside-nozzle balance is negative. The
+linear trapezoid and right rectangle require a 47 Myr face value where
+linear extrapolation gives negative pressures. BND-05 remains provisional.
 <!-- claims: BND-08 -->
 
 ## Conventions you must apply
