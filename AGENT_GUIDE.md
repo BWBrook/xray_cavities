@@ -168,8 +168,7 @@ R100/R300 energy components reproduce the old measurements to numerical
 precision. Regional mass now accompanies these two case/ages: an illustrative
 +1e15 cm²/s² potential shift changes R100 ambient total shares from
 97.52%/53.55% to 105.32%/55.17%. These are signed same-cell contributions,
-not deposition efficiencies. The later full C-LO review is below; the other
-three accounting histories remain pending.
+not deposition efficiencies. The full C-LO review follows below. NAT-11 compares all four histories.
 <!-- claims: NAT-09 -->
 
 G-LO's first saved flux interval does not localise a numerical source.
@@ -219,9 +218,24 @@ energy closure.
   spreads are not confidence intervals or certified error bounds.
   <!-- claims: BND-07 -->
 
-The other three fixed/flux accounting histories remain pending with verified
-completion/abort mail. BND-05 stays provisional, and the blind emission cohort
-remains frozen and unscored. Do not propagate this C-LO result to other cases.
+## Four fixed histories reviewed by 18 November
+
+The last fixed job, G-LO, brings the total to 201 snapshots. Its fixed-box
+storage at 50 Myr is 1.17814 times labelled input. G-LO's R100 sphere and
+current lobe are inside the box throughout. Thermodynamic changes reach
+the domain faces from index 8. At ~20 and ~30 Myr, the change in energy
+outside the inset box agrees to within 0.008% between HI and LO **within
+each atmosphere**, despite the hundredfold difference in labelled power.
+Mass and thermal-plus-kinetic changes show the same pattern. The discrepancy
+grows at late high-power ages as lobe material leaves the fixed aperture.
+The [four-case review](docs/science/four_case_fixed_histories_2026-11-18.md)
+gives component tables, geometry and the archive replay.
+<!-- claims: NAT-11 -->
+
+G-LO flux was running at 13:21 AEDT on 18 November. Complete C-HI flux and
+partial G-HI flux through 46 Myr are documented in the
+[high-power review](docs/exchange/logs/2026-11-18-accounting-chain-check.md).
+The G-HI interval from 46 to 47 Myr is missing. BND-05 remains provisional.
 
 ## Conventions you must apply
 
@@ -288,8 +302,8 @@ remains frozen and unscored. Do not propagate this C-LO result to other cases.
    and control-volume balances from saved states; it does not directly
    measure numerical nozzle overwrite or solver-step delivery. The startup
    pilot is cadence-ambiguous (BND-06); the full C-LO history also remains
-   reconstruction/cadence-ambiguous (BND-07). The other three full accounting
-   histories are pending. Write
+   reconstruction/cadence-ambiguous (BND-07). All four fixed histories are now available (NAT-11). G-LO flux
+   and the final G-HI interval remain outstanding. Write
    physical closure as "boundary-dominated, with an unexplained residual".
    The 100/300 km/s spherical budgets (Stas's priority of 4 November)
    measure storage inside speed-defined apertures, retaining boundary and

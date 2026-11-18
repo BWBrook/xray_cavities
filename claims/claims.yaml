@@ -155,7 +155,7 @@ claims:
       requires native delivery, transport and production-boundary measurements.
     caveats:
       - The negative current-cocoon change includes the fixed centre-zero potential and subtracts initial energy in current cocoon cells; it is not negative injected energy.
-      - Regional and aperture gravitational storage shift by potential-zero shift times mass change; C-LO's full mass history is now measured in NAT-10, with G-HI/20 in NAT-09 and other histories pending.
+      - Regional and aperture gravitational storage shift by potential-zero shift times mass change; regional mass histories are now available in all four cases (NAT-09 through NAT-11).
       - Disturbed ambient gas outside the apertures is detected. NAT-10 measures the signed addition out to the C-LO fixed box; energy beyond that box and causal attribution remain unresolved.
       - Candidate inset conflicts precede domain truncation; inset clipping can remove current lobe cells and is not adopted as a correction.
       - G-HI snapshots 48--50 are excluded; no extrapolation is made to them.
@@ -228,6 +228,32 @@ claims:
       - The added box-minus-R100 region has negative net storage at 1 Myr; positive and negative omitted contributions could coexist, and energy outside the box is not addressed by this aperture test.
       - Independent compact checks and saved-receipt bindings pass; native HDF5 fields were not independently reintegrated or rehashed locally.
     depends_on: [NAT-05, NAT-08, NAT-09]
+
+  - id: NAT-11
+    status: provisional
+    statement: >-
+      G-LO stores 1.178142 labelled-input units inside the fixed 50-kpc-inset
+      box at 50 Myr. Its R100 sphere fits inside at every saved age, and
+      the absolute difference in stored change is below 0.000204 labelled-input
+      units at every nonzero age. At nominal 20 and 30 Myr the difference
+      in exterior energy change between high and low power is below 0.008%
+      of the low-power exterior change in each atmosphere.
+    evidence:
+      - {path: docs/science/four_case_fixed_histories_2026-11-18.md, commit: 34a8953}
+      - {path: docs/science/assets/four_case_fixed_2026-11-18/histories.csv, commit: 34a8953}
+      - {path: docs/science/assets/four_case_fixed_2026-11-18/exterior_pairs.csv, commit: 34a8953}
+    reproduce: >-
+      Restore the private archive and run scripts/science/compare_fixed_histories.py
+      with the four fixed-output directories listed in docs/science/four_case_fixed_histories_2026-11-18.md.
+    test: >-
+      Collaboration review of the aperture and paired-atmosphere comparison.
+      Use the approved boundary-layer and transport audits to test whether the
+      shared exterior signal reflects hydrostatic evolution or jet disturbance.
+    caveats:
+      - Same-cell signed change uses the initial centre-zero potential. Actual saved ages of the matched HI and LO snapshots differ by up to 0.00083 Myr at the selected indices.
+      - Late high-power jets extend beyond the fixed box. The first traced-lobe containment failures are C-HI index 44 and G-HI index 40.
+      - The paired exterior comparisons use absolute changes in erg. They measure neither realised injector supply nor a production-grid boundary correction.
+    depends_on: [NAT-09, NAT-10]
 
   - id: BND-01
     status: supported

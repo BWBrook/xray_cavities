@@ -108,3 +108,12 @@ review=private_archive/turn18_high_review_2026-11-18
 The [17 November energy](2026-11-17-all-case-boundary-injection-audit-request.md)
 and [X-ray](2026-11-17-compressive-front-and-background-test-request.md)
 requests describe further analyses beyond this eight-job batch.
+
+## G-LO update at 13:21 AEDT
+
+879908 finished with exit 0 in 06:40:19. Its completion receipt covers
+indices 0–50. Independent audits verified the 59 captured files, all 51
+products and historical input bindings, and the fixed-box measurements.
+879909 started at 13:13:37 AEDT and had completion/abort email enabled.
+The [four-case fixed-history review](../../science/four_case_fixed_histories_2026-11-18.md)
+records the new comparison, public tables and reproducible private archive.

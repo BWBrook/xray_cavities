@@ -1,16 +1,19 @@
 # Current Status
 
-Last updated: 2026-11-18 (five accounting jobs successful, G-HI flux exit 1, G-LO fixed running and G-LO flux held at 11:09 AEDT)
+Last updated: 2026-11-18 (all four fixed histories verified, six accounting jobs successful, G-HI flux exit 1, G-LO flux running at 13:21 AEDT)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
 ## Accounting jobs checked on 18 November
 
-Both C-HI jobs and G-HI fixed have now returned complete outputs. G-HI flux
-saved checkpoints through index 46 and exited 1 while reconstructing the
-outer-face state at index 47. At 11:09 AEDT G-LO fixed was running and G-LO
-flux was waiting on it. See the [per-case check and failure diagnosis](logs/2026-11-18-accounting-chain-check.md).
+G-LO fixed (879908) finished F/0 in 06:40:19. All 51 products and prior
+input bindings passed verification. All four fixed-box histories are now
+available (201 snapshots). The [four-case review](../science/four_case_fixed_histories_2026-11-18.md)
+compares interior storage, exterior energy and mass, and lobe containment.
+G-LO flux (879909) started at 13:13:37 AEDT and was running at 13:21.
+Completion/abort mail remains enabled. The G-HI flux interval 46–47 Myr
+remains missing. See the [morning check and failure diagnosis](logs/2026-11-18-accounting-chain-check.md).
 The 17 November requests below are separate follow-up analyses.
 
 ## Approved supervisor X-ray request 17 November
@@ -138,7 +141,7 @@ all completion product hashes still match. Independent checks pass:
 also passes a fresh restore/replay of all three audit scripts. Native field
 integrals were not independently reintegrated; no physical closure is claimed.
 
-| Full accounting history | Job | State at 11:09 AEDT, 18 November |
+| Full accounting history | Job | Latest verified state, 18 November (G-LO at 13:21 AEDT) |
 | --- | --- | --- |
 | C-LO fixed box/mass | 879902 | F / 0, 05:44:31 |
 | C-LO flux/source | 879903 | F / 0, 03:04:11 |
@@ -146,8 +149,8 @@ integrals were not independently reintegrated; no physical closure is claimed.
 | G-HI flux/source | 879905 | F / 1, 03:19:52, checkpoints 0–46, final aggregate absent |
 | C-HI fixed box/mass | 879906 | F / 0, 06:59:48, indices 0–50 |
 | C-HI flux/source | 879907 | F / 0, 03:38:24, indices 0–50 |
-| G-LO fixed box/mass | 879908 | R |
-| G-LO flux/source | 879909 | H, afterany 879908 |
+| G-LO fixed box/mass | 879908 | F / 0, 06:40:19, indices 0–50 |
+| G-LO flux/source | 879909 | R, started 13:13:37 AEDT |
 
 Every job has verified completion/abort mail (`Mail_Points = ae`) to Barry's
 UTAS recipient. The serial chain limits I/O, not scientific acceptance;

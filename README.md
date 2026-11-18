@@ -20,7 +20,7 @@ remains under investigation.
 | Reader | Starting point |
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
-| Latest accounting result? | [Complete C-LO fixed-box and flux history](docs/science/turn18_clo_history_review_2026-11-16.md) |
+| Latest accounting result? | [Four-case fixed-box energy histories](docs/science/four_case_fixed_histories_2026-11-18.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
@@ -96,11 +96,17 @@ the numerical source: outer-face reconstruction and time sampling change the
 sign of the outside-nozzle balance. These remain provisional C-LO findings.
 <!-- claims: NAT-10 BND-07 -->
 
-At **11:09 AEDT on 18 November**, five of the eight full accounting jobs had
-finished successfully, including both C-HI jobs and the G-HI fixed budget.
-G-HI flux saved 47 of 48 snapshots before a boundary extrapolation failed
-at index 47. The two G-LO jobs were still outstanding. See the
-[execution and output check](docs/exchange/logs/2026-11-18-accounting-chain-check.md).
+All four fixed-box histories are complete. At 50 Myr G-LO stores 1.17814
+times labelled input inside the box, which still encloses its traced lobe.
+At 20 and 30 Myr the energy change outside the box agrees within 0.008%
+between HI and LO in each atmosphere, despite their hundredfold power
+difference. The [four-case comparison](docs/science/four_case_fixed_histories_2026-11-18.md)
+shows where this resemblance breaks down at later ages.
+<!-- claims: NAT-11 -->
+
+At **13:21 AEDT on 18 November**, six of the eight jobs had succeeded.
+G-LO flux (879909) was running. G-HI flux had exited 1, with its history
+recovered through 46 Myr and its final 46–47 Myr interval missing.
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only
