@@ -114,6 +114,9 @@ and the physical source of excess storage remain open. The
 the numerical ranges, their interpretation and the complete batch inventory.
 <!-- claims: BND-08 -->
 
+A separate [G-HI endpoint job](docs/exchange/logs/2026-11-18-accounting-chain-check.md#g-hi-endpoint-addendum-at-2324-aedt)
+will test which flux estimates extend through the final 46–47 Myr interval.
+
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only
 comparator remain separate. Exact historical gravity-update, floor and

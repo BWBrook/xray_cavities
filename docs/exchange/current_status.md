@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-11-18 (original eight-job batch finished, seven successful, original G-HI flux coverage through 46 Myr)
+Last updated: 2026-11-18 (original batch finished, separate G-HI endpoint addendum 881993 queued)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -17,6 +17,10 @@ flux reached 46 Myr and failed the original linear domain-face check at
 index 47. The [flux synthesis](../science/four_case_flux_histories_2026-11-18.md)
 and [G-HI partial recovery](logs/2026-11-18-accounting-chain-check.md)
 document the original batch and the remaining endpoint gap.
+PBS accepted [endpoint addendum 881993](logs/2026-11-18-accounting-chain-check.md#g-hi-endpoint-addendum-at-2324-aedt)
+at 23:24 AEDT. It reads the last retained G-HI snapshot and reuses the verified
+history through 46 Myr. Collect its endpoint and qualification receipt before
+extending the flux comparison.
 The 17 November requests below are separate follow-up analyses.
 
 ## Approved supervisor X-ray request 17 November

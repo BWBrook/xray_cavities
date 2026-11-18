@@ -117,3 +117,36 @@ products and historical input bindings, and the fixed-box measurements.
 879909 started at 13:13:37 AEDT and had completion/abort email enabled.
 The [four-case fixed-history review](../../science/four_case_fixed_histories_2026-11-18.md)
 records the new comparison, public tables and reproducible private archive.
+
+## G-HI endpoint addendum at 23:24 AEDT
+
+PBS accepted job **881993** on 18 November. Its first scheduler record shows
+it queued for the required compute node, with completion and abort mail
+addressed to the original recipient. All eight original jobs are terminal.
+The [four-case comparison](../../science/four_case_flux_histories_2026-11-18.md)
+includes the verified final G-LO job 879909 and the 0–46 G-HI prefix.
+
+This job reads the existing G-HI index 47 fields to measure storage, flux at
+the nozzle and outer active cells, and locate each invalid linearly extrapolated
+boundary value. It rechecks the source and the identities of the native inputs
+and all 47 earlier checkpoints. Original job 879905 retains its failed status.
+No endpoint measurement was available at submission.
+
+If the outer active cells and nozzle pass and the index 47 linear face fails
+again, 24 of the 36 final-interval estimates have all their inputs. Eighteen
+use outer active cells. Six use the linear face at index 46 under the
+left-rectangle rule. The trapezoid and right rectangle each need the missing
+index 47 linear flux. The integrator reports those twelve combinations as
+unavailable. Domain contact at this age also limits the physical interpretation.
+
+Source commit `da3b69f` contains the [native measurement](../../../scripts/science/measure_ghi_final_flux.py),
+[qualification runner](../../../scripts/kunanyi/run_ghi_final_flux_addendum.py)
+and [local integrator](../../../scripts/science/integrate_ghi_final_flux.py).
+The archived prefix replay matched 103,776 scalar fields exactly. The
+submission stage manifest has SHA-256
+`29ff3560ea961d25e9036d83520b311c0b733550ff07ef227564193274915551`.
+The private project archive holds the submitted stage, PBS record and local
+replay receipt in `turn18_ghi_addendum_2026-11-18/submission_r1.tar.gz`,
+SHA-256 `cf2e1ff20c08fdda2cbade5b6d744b9936ba21f15c505a478f0e1bdf8af3c7b0`.
+On completion, verify the terminal exit and both `endpoint.json` and
+`qualification.json` before integrating the last interval.
