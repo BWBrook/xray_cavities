@@ -20,7 +20,7 @@ remains under investigation.
 | Reader | Starting point |
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
-| Latest accounting result? | [Four-case fixed-box energy histories](docs/science/four_case_fixed_histories_2026-11-18.md) |
+| Latest accounting result? | [Four-case fixed-box energy histories](docs/science/four_case_fixed_histories_2026-11-18.md) and [flux results](docs/science/four_case_flux_histories_2026-11-18.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
@@ -104,9 +104,15 @@ difference. The [four-case comparison](docs/science/four_case_fixed_histories_20
 shows where this resemblance breaks down at later ages.
 <!-- claims: NAT-11 -->
 
-At **13:21 AEDT on 18 November**, six of the eight jobs had succeeded.
-G-LO flux (879909) was running. G-HI flux had exited 1, with its history
-recovered through 46 Myr and its final 46–47 Myr interval missing.
+All eight jobs in the original accounting batch have finished. Seven succeeded.
+G-LO flux (879909) returned every requested snapshot. G-HI flux returned a
+verified history through index 46 and failed at 47. At 30 Myr, all 36
+reconstructions give a negative outside-nozzle energy balance in the two
+high-power runs. The low-power runs admit both signs. Realised jet delivery
+and the physical source of excess storage remain open. The
+[flux comparison](docs/science/four_case_flux_histories_2026-11-18.md) gives
+the numerical ranges, their interpretation and the complete batch inventory.
+<!-- claims: BND-08 -->
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only

@@ -232,10 +232,24 @@ The [four-case review](docs/science/four_case_fixed_histories_2026-11-18.md)
 gives component tables, geometry and the archive replay.
 <!-- claims: NAT-11 -->
 
-G-LO flux was running at 13:21 AEDT on 18 November. Complete C-HI flux and
-partial G-HI flux through 46 Myr are documented in the
-[high-power review](docs/exchange/logs/2026-11-18-accounting-chain-check.md).
-The G-HI interval from 46 to 47 Myr is missing. BND-05 remains provisional.
+## Flux histories from the original accounting batch
+
+G-LO flux finished with 51 snapshots. At its 50-Myr endpoint, the cumulative
+outside-nozzle balance spans −0.03464 to +0.07091 times labelled input.
+The final individual interval is negative across the tested choices. It
+uses the input during that one interval. At the common 30-Myr age the two
+low-power cumulative balances span zero, and both high-power balances are
+negative across all 36 choices. The four endpoint nozzle-control balances
+exceed labelled input across the scenarios. This is a reconstructed source
+in a control volume containing the nozzle. Assessing discrete jet supply
+requires separate overwrite and solver transport accounting.
+
+The [flux comparison](docs/science/four_case_flux_histories_2026-11-18.md)
+records the complete original batch. G-HI ends at 46 Myr because its outer
+linear reconstruction failed at 47. An endpoint diagnostic must preserve
+that failed method and label coverage by reconstruction. BND-05 remains
+provisional.
+<!-- claims: BND-08 -->
 
 ## Conventions you must apply
 
@@ -302,8 +316,8 @@ The G-HI interval from 46 to 47 Myr is missing. BND-05 remains provisional.
    and control-volume balances from saved states; it does not directly
    measure numerical nozzle overwrite or solver-step delivery. The startup
    pilot is cadence-ambiguous (BND-06); the full C-LO history also remains
-   reconstruction/cadence-ambiguous (BND-07). All four fixed histories are now available (NAT-11). G-LO flux
-   and the final G-HI interval remain outstanding. Write
+   reconstruction/cadence-ambiguous (BND-07). All four fixed histories are now available (NAT-11). BND-08 covers
+   the original flux batch, including the partial G-HI result. Write
    physical closure as "boundary-dominated, with an unexplained residual".
    The 100/300 km/s spherical budgets (Stas's priority of 4 November)
    measure storage inside speed-defined apertures, retaining boundary and

@@ -449,6 +449,31 @@ claims:
       - Native integrals, solver-step flux and historical executable identity were not independently established by this review.
     depends_on: [BND-05, BND-06, NAT-10]
 
+  - id: BND-08
+    status: provisional
+    statement: >-
+      At approximately 30 Myr all 36 reconstructed cumulative balances
+      outside the nozzle control volume are negative in C-HI and G-HI,
+      while both signs occur in C-LO and G-LO. In G-LO the balance spans
+      -0.034636 to +0.070915 labelled-input units at 50 Myr. All four cases
+      have an inferred cumulative nozzle-control source above labelled input
+      across the scenarios at their last available original-batch endpoints.
+    evidence:
+      - {path: docs/science/four_case_flux_histories_2026-11-18.md, commit: fc33494}
+      - {path: docs/science/assets/four_case_flux_2026-11-18/scenario_histories.csv, commit: fc33494}
+    reproduce: >-
+      Restore the verified archive and run scripts/science/compare_flux_histories.py
+      on the four source-balance tables specified in docs/science/four_case_flux_histories_2026-11-18.md.
+    test: >-
+      Collaboration review of reconstruction sensitivity, then the approved
+      boundary-layer and injector audits to distinguish transport, numerical
+      delivery and in-grid sources. Diagnose the G-HI endpoint separately.
+    caveats:
+      - Inside and outside balances include signed storage and reconstructed transport in the fixed centre-zero potential, normalized by labelled bipolar kinetic power times active age.
+      - The comparison uses three complete histories to 50 Myr and the verified G-HI prefix through index 46. The 30-Myr comparison has full original scenario coverage in all four cases.
+      - Sign agreement and spread across these finite reconstructions quantify method sensitivity. Actual discrete solver delivery and separate repair, floor or gravity-update energies remain unresolved.
+    depends_on: [BND-05, BND-06, BND-07, NAT-11]
+
   - id: OBS-01
     status: refuted
     statement: >-
