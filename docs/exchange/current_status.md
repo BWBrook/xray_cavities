@@ -1,9 +1,17 @@
 # Current Status
 
-Last updated: 2026-11-17 (approved compressive-front comparison, background-test expansion and all-case energy audits; compute observations below remain dated 16 November)
+Last updated: 2026-11-18 (five accounting jobs successful, G-HI flux exit 1, G-LO fixed running and G-LO flux held at 11:09 AEDT)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Accounting jobs checked on 18 November
+
+Both C-HI jobs and G-HI fixed have now returned complete outputs. G-HI flux
+saved checkpoints through index 46 and exited 1 while reconstructing the
+outer-face state at index 47. At 11:09 AEDT G-LO fixed was running and G-LO
+flux was waiting on it. See the [per-case check and failure diagnosis](logs/2026-11-18-accounting-chain-check.md).
+The 17 November requests below are separate follow-up analyses.
 
 ## Approved supervisor X-ray request 17 November
 
@@ -52,7 +60,7 @@ provenance and R100/R300 geometry flags. Full instructions are in the
 Reuse accepted outputs and review existing jobs before any submission. This
 handover submits no jobs, changes no acceptance gates and claims no new result.
 
-**Latest reviewed measurements (16 November):** the [full C-LO review](../science/turn18_clo_history_review_2026-11-16.md)
+**C-LO measurements reviewed on 16 November:** the [full C-LO review](../science/turn18_clo_history_review_2026-11-16.md)
 accepts jobs **879902/879903**, both F/0, with all 51 indices and 110
 completion products. Independent fixed, flux, cross-storage and provenance
 audits pass and replay from a fresh restoration. At 1 Myr, the fixed box
@@ -65,11 +73,11 @@ The flux source remains unresolved (BND-07): outer-face reconstruction
 changes the trapezoidal endpoint source by **1.54355** labelled-input units;
 outside-nozzle scenarios span **−1.85036 to +0.65619**. They are sensitivity
 scenarios, not error bounds or measured solver delivery. BND-05 remains
-provisional. The other three accounting histories await completion/review;
+provisional. At that review the other three cases were still pending;
 the blind emission cohort remains frozen and unscored. The article and brief
 are unchanged by this partial-history acceptance.
 
-## Turn 18: C-LO accounting reviewed; other three cases pending
+## Turn 18 accounting and original pilots
 
 [Reconciliation](../science/turn18_review_reconciliation_2026-11-11.md)
 at **06f9a2d** qualifies the strengthened inference in board message 3244.
@@ -130,22 +138,22 @@ all completion product hashes still match. Independent checks pass:
 also passes a fresh restore/replay of all three audit scripts. Native field
 integrals were not independently reintegrated; no physical closure is claimed.
 
-| Full accounting history | Job | State at 21:16:49 AEDT, 16 November |
+| Full accounting history | Job | State at 11:09 AEDT, 18 November |
 | --- | --- | --- |
-| C-LO fixed box/mass | 879902 | F / 0; wall 05:44:31; audited |
-| C-LO flux/source | 879903 | F / 0; wall 03:04:11; audited |
-| G-HI fixed box/mass | 879904 | Q, awaiting capacity |
-| G-HI flux/source | 879905 | H, afterany 879904 |
-| C-HI fixed box/mass | 879906 | H, afterany 879905 |
-| C-HI flux/source | 879907 | H, afterany 879906 |
-| G-LO fixed box/mass | 879908 | H, afterany 879907 |
+| C-LO fixed box/mass | 879902 | F / 0, 05:44:31 |
+| C-LO flux/source | 879903 | F / 0, 03:04:11 |
+| G-HI fixed box/mass | 879904 | F / 0, 06:27:27, indices 0–47 |
+| G-HI flux/source | 879905 | F / 1, 03:19:52, checkpoints 0–46, final aggregate absent |
+| C-HI fixed box/mass | 879906 | F / 0, 06:59:48, indices 0–50 |
+| C-HI flux/source | 879907 | F / 0, 03:38:24, indices 0–50 |
+| G-LO fixed box/mass | 879908 | R |
 | G-LO flux/source | 879909 | H, afterany 879908 |
 
 Every job has verified completion/abort mail (`Mail_Points = ae`) to Barry's
 UTAS recipient. The serial chain limits I/O, not scientific acceptance;
 each completion must be reviewed even if an earlier job fails. Source and
 native-identity gates are unchanged; only existing outputs are analysed.
-See [the latest handover](logs/2026-11-16-clo-accounting-history-review.md)
+See [the C-LO handover](logs/2026-11-16-clo-accounting-history-review.md)
 for full C-LO acceptance, archives and remaining work; the
 [submission handover](logs/2026-11-14-pilot-acceptance-and-full-accounting-history.md)
 preserves the original queue capture. No job was added or resubmitted during

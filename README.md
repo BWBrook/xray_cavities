@@ -11,7 +11,7 @@ enthalpy convention is **2.5pV**; **4pV** is a literature comparator. Labelled
 jet power times age is the reference input, while actual numerical delivery
 remains under investigation.
 
-> **Status, 16 November 2026:** active research, developed in the open. The
+> **Status, 18 November 2026:** active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -96,11 +96,11 @@ the numerical source: outer-face reconstruction and time sampling change the
 sign of the outside-nozzle balance. These remain provisional C-LO findings.
 <!-- claims: NAT-10 BND-07 -->
 
-Two of eight full accounting jobs, **879902/879903**, finished with exit 0.
-At **16 November, 21:16:49 AEDT**, **879904** (G-HI fixed) was queued and
-**879905–879909** were dependency-held. Their serial I/O dependencies and
-completion/abort mail remain verified. All analyse existing simulation
-outputs; the other three cases await completion and independent review.
+At **11:09 AEDT on 18 November**, five of the eight full accounting jobs had
+finished successfully, including both C-HI jobs and the G-HI fixed budget.
+G-HI flux saved 47 of 48 snapshots before a boundary extrapolation failed
+at index 47. The two G-LO jobs were still outstanding. See the
+[execution and output check](docs/exchange/logs/2026-11-18-accounting-chain-check.md).
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only

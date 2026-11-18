@@ -1,0 +1,165 @@
+{
+  "observed_utc": "2026-11-18T00:09:47Z",
+  "capture_sha256": "7ddf50b4018b983b427d9feb62bccfae884c8cc6a5983ff8d90718689931e2a7",
+  "producer_commit": "817779598bf297cb110544cf68204e01d7211e20",
+  "measurements": "fixed centre-zero potential; labelled bipolar power times actual active age",
+  "pbs": {
+    "879902": {
+      "state": "F",
+      "exit": 0,
+      "mail_points": "ae"
+    },
+    "879903": {
+      "state": "F",
+      "exit": 0,
+      "mail_points": "ae"
+    },
+    "879904": {
+      "state": "F",
+      "exit": 0,
+      "mail_points": "ae"
+    },
+    "879905": {
+      "state": "F",
+      "exit": 1,
+      "mail_points": "ae"
+    },
+    "879906": {
+      "state": "F",
+      "exit": 0,
+      "mail_points": "ae"
+    },
+    "879907": {
+      "state": "F",
+      "exit": 0,
+      "mail_points": "ae"
+    },
+    "879908": {
+      "state": "R",
+      "exit": null,
+      "mail_points": "ae"
+    },
+    "879909": {
+      "state": "H",
+      "exit": null,
+      "mail_points": "ae"
+    }
+  },
+  "high_power_outputs": [
+    {
+      "case": "C-HI",
+      "mode": "fixed",
+      "last_saved_index": 50,
+      "requested_final_index": 50,
+      "completion_receipt": true,
+      "completion_sha256": "b5300a70230ee343b8d4d72eddd137760045d268e0e2c1b2d78b8acec4627a4f",
+      "product_count": 51,
+      "selected_snapshots": [
+        {
+          "snapshot_index": 1,
+          "actual_age_myr": 0.9999202514051142,
+          "fixed_box_over_label": 1.1086873813828824,
+          "R100_over_label": 1.1087222017684553,
+          "R100_inside_inset": true,
+          "contains_all_current_lobe_cells": true
+        },
+        {
+          "snapshot_index": 20,
+          "actual_age_myr": 19.99911131620285,
+          "fixed_box_over_label": 1.0941310403489306,
+          "R100_over_label": 1.0941558725048217,
+          "R100_inside_inset": true,
+          "contains_all_current_lobe_cells": true
+        },
+        {
+          "snapshot_index": 30,
+          "actual_age_myr": 29.999994397799835,
+          "fixed_box_over_label": 1.0833804072714315,
+          "R100_over_label": 1.0833893612018564,
+          "R100_inside_inset": true,
+          "contains_all_current_lobe_cells": true
+        },
+        {
+          "snapshot_index": 50,
+          "actual_age_myr": 50.00000000000777,
+          "fixed_box_over_label": 0.9998636179191477,
+          "R100_over_label": 1.112492979065627,
+          "R100_inside_inset": false,
+          "contains_all_current_lobe_cells": false
+        }
+      ]
+    },
+    {
+      "case": "C-HI",
+      "mode": "flux",
+      "last_saved_index": 50,
+      "requested_final_index": 50,
+      "completion_receipt": true,
+      "completion_sha256": "40a1de356c8cedbcc4813308b88cf52784449e6284a1c21179522092528e21fc",
+      "product_count": 59,
+      "cumulative_outside_nozzle_balance_over_label": {
+        "age_myr": 50.00000000000777,
+        "scenario_count": 36,
+        "min": -0.12160311243483135,
+        "max": -0.05514988328059656
+      }
+    },
+    {
+      "case": "G-HI",
+      "mode": "fixed",
+      "last_saved_index": 47,
+      "requested_final_index": 47,
+      "completion_receipt": true,
+      "completion_sha256": "9bac8c77d2dcef62d6f9c6109a2a1a0747eb17464cb544c0f29b2a18d149657d",
+      "product_count": 48,
+      "selected_snapshots": [
+        {
+          "snapshot_index": 1,
+          "actual_age_myr": 0.9996354241687355,
+          "fixed_box_over_label": 1.1006308916156402,
+          "R100_over_label": 1.10063175864347,
+          "R100_inside_inset": true,
+          "contains_all_current_lobe_cells": true
+        },
+        {
+          "snapshot_index": 20,
+          "actual_age_myr": 19.999614294878622,
+          "fixed_box_over_label": 1.0748830834095529,
+          "R100_over_label": 1.0748838670310759,
+          "R100_inside_inset": true,
+          "contains_all_current_lobe_cells": true
+        },
+        {
+          "snapshot_index": 30,
+          "actual_age_myr": 29.999366625762217,
+          "fixed_box_over_label": 1.0794284704980042,
+          "R100_over_label": 1.079428698728563,
+          "R100_inside_inset": false,
+          "contains_all_current_lobe_cells": true
+        },
+        {
+          "snapshot_index": 47,
+          "actual_age_myr": 46.99914999860678,
+          "fixed_box_over_label": 0.9342502439159689,
+          "R100_over_label": 1.0800018179815813,
+          "R100_inside_inset": false,
+          "contains_all_current_lobe_cells": false
+        }
+      ]
+    },
+    {
+      "case": "G-HI",
+      "mode": "flux",
+      "last_saved_index": 46,
+      "requested_final_index": 47,
+      "completion_receipt": false,
+      "cumulative_outside_nozzle_balance_over_label": {
+        "age_myr": 45.99958358613507,
+        "scenario_count": 36,
+        "min": -0.07169050368559127,
+        "max": -0.027586081363940362
+      },
+      "missing": "index 47, final input stability and production aggregate"
+    }
+  ]
+}
