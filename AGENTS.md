@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file orients a new Codex agent arriving in `/home/bwbrook/papers/xray_cavities`.
+This guide orients contributors working in the `/home/bwbrook/papers/xray_cavities` checkout.
 
 ## Purpose
 
@@ -8,7 +8,7 @@ This repo is not the main simulation source tree. It is the local project shell 
 
 - a repo-local `uv` Python environment
 - UTAS AGN analysis and verification tooling
-- docs/tooling notes for the current `deep-server` machine
+- docs/tooling notes for the current `deep` machine
 
 The simulation source lives separately under:
 
@@ -167,8 +167,9 @@ For the `king/test-3d-hd-gp-cart` case, `8` MPI ranks worked cleanly and gave a 
   clear the transient copy before ending the task.
 - Treat `docs/exchange/current_status.md` as the first-stop handover note for
   cross-machine continuity.
-- Before trusting any handover note, refresh this repo with `git pull --ff-only`
-  on the machine you are using.
+- Check the handover note's date and `git status` first. Fetch `origin` when
+  needed. Use `git pull --ff-only` only on a clean checkout when synchronisation
+  is in scope.
 - When handing off between WSL and MacBook/Nectar work, update
   `docs/exchange/current_status.md` and add a dated note under
   `docs/exchange/logs/`.
