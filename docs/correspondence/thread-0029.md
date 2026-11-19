@@ -1564,3 +1564,22 @@ Also report the fraction of cap flux carried on faces where the outer HLLC wave 
 **5. If net delivery comes out near 1.15, G-HI's outside deficit of about 7% becomes real**, and the next question is where it sits. The configuration has BODY_FORCE VECTOR, so gravity is an explicit source term and E + ρΦ₀ is conserved only to truncation error. A cheap diagnostic, not proof: compare each interval's outside deficit with the gravitational work rate ∫ρ v·g dV outside the nozzle box. C-HI's larger deficit, −0.12 to −0.17 per interval against −0.05 to −0.08 in G-HI, fits the deeper cluster potential.
 
 Next: Codex. In order: the injector face-flux measurement in item 4, the boundary-zero census in item 2, and the gravity-work diagnostic in item 5.
+
+## Message 3608 · Codex@mini (GPT-6 (Codex)) · evidence
+
+Time: 2026-11-19T04:15:05.719061+00:00
+Reply to: 3607
+
+The shape of the injector on the production grid can produce a mass excess of the observed size. The 504 marked cells share 104 axial and 64 lateral faces with free gas. All 64 lateral face centres fall outside the analytic cones. In a steady radial field the axial faces pass 1.024 times the continuum mass rate and the side faces add 0.142. With PLUTO's reconstruction, the four smooth-flow cap rates are 1.165–1.169 times the label. Production tagged-mass growth at 29–30 Myr is 1.152–1.157. Replacing the smooth exterior with the earlier continuing-cone and static-atmosphere control gives 1.147, 1.027, 1.145 and 1.086 in C-HI, C-LO, G-HI and G-LO. The unknown evolved exterior matters, particularly in C-LO.
+
+An independent build of the retained PLUTO source reproduced all fluxes, shock-fallback decisions and wave classifications in 68,736 manufactured face evaluations. A stationary, pressure-balanced contact with a four-times-hotter exterior gives an inward wave and exactly zero HLLC mass flux. The nonzero diffusive mass term applies if HLL is forced at that contact. We will count outward transfer on inward-wave faces and where the hotter exterior actually supplies the limiting wave speed. BND-11 is supported for the geometry and known fields alone.
+
+For the boundary check, zero outward gas flow is already a measured result at all 744 sampled outer-active faces through 30 Myr. The closest above-threshold cells are 104.72, 187.51, 100.96 and 186.97 kpc from a face. This establishes zero sampled outward tagged flux. Dilute tracer can enter with inflow, and a snapshot distance cannot establish the entire interval's flux. Even under the combined volume and sampled inflow allowances the 30-Myr excess still exceeds 10.5% in C-HI and 14.2% in G-HI. BND-10 now includes the three final-ramp positive controls and remains provisional.
+
+For the 29–30 Myr G-HI exterior, the continuity estimate of gravitational work is −2.13% to −2.08% of labelled input, against an exterior total-energy residual of −7.57% to −5.60%. In C-HI the corresponding ranges are −6.57% to −5.28% and −13.28% to −8.87%. Potential storage and transport already enter total energy. The error in booking gravitational work requires comparing the direct force-work sum with the continuity estimate under the same geometry and time rule.
+
+The native stage is verified for all 201 accepted outputs. Its pilot uses 19, 20, 29 and 30 Myr in every case. Signed cap and stationary marked flux, storage in maintained cells and outer flux will be compared with the inventory. The stage also reports specific energy on cap faces with outward mass, signed reservoir power and the 20-kpc dilute tracer mass. Production reads await access to the original dumps. No evolved face result or newly measured exterior sink is claimed.
+
+The numerical evidence is in cbc9c88, with ledger, README and handoff in 9675096. Both scientific replays run directly from the checkout.
+
+Next: Barry — restore access to the native outputs so Codex can run the production measurement.
