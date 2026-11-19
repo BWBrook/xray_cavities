@@ -11,7 +11,7 @@ enthalpy convention is **2.5pV**; **4pV** is a literature comparator. Labelled
 jet power times age is the reference input, while actual numerical delivery
 remains under investigation.
 
-> **Status, 18 November 2026:** active research, developed in the open. The
+> **Status, 19 November 2026:** active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -20,7 +20,7 @@ remains under investigation.
 | Reader | Starting point |
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
-| Latest accounting result? | [Four-case fixed-box energy histories](docs/science/four_case_fixed_histories_2026-11-18.md) and [flux results](docs/science/four_case_flux_histories_2026-11-18.md) |
+| Latest accounting result? | [Jet-tagged mass and nozzle calibration](docs/science/tracer_mass_budget_2026-11-19.md) and [final energy intervals](docs/science/three_case_final_interval_2026-11-19.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
@@ -120,15 +120,21 @@ cumulative outside-nozzle balance. The other twelve require an extrapolation
 that gives negative pressure on part of the negative-z boundary.
 <!-- claims: BND-08 -->
 
-We tested the nozzle measurement on a steady jet with known power on each
-production grid. In G-HI its largest reading was 1.0345 times the label,
-whereas the same method gives 1.1305–1.1494 for the simulated jet at
-29–30 Myr. In C-LO the reconstruction can assign six times too much
-kinetic power to the cells straddling the jet edge. The test rules out a
-shared 14% bias on these steady jets. G-HI's roughly 8% whole-grid excess
-persists, while its division between the injector and the surrounding gas
-remains unresolved. [Four-case calibration and figure](docs/science/nozzle_flux_calibration_2026-11-19.md)
+On a steady jet of known power, every nozzle measurement fell below the
+29–30 Myr production estimates in C-HI, G-HI and G-LO. In C-LO the centred
+reconstruction can assign six times too much kinetic power to cells
+straddling the jet edge. The production excess in C-LO is within the size
+of error this test can generate. [Four-case calibration and figure](docs/science/nozzle_flux_calibration_2026-11-19.md)
 <!-- claims: BND-08 BND-09 -->
+
+The tracer carried by jet material gives a separate measure of how much
+mass the simulations retain. By 30 Myr G-HI has gained 15.2% more tagged mass
+than the power and speed on its label imply. Even the most adverse correction
+for cell volumes leaves 14.5%. Its whole-grid energy excess at this age
+is about 8%. The extra marked mass supports excess numerical mass loading
+in G-HI. Determining the energy it carried would require the energy flux
+across the injector. [Four-case tracer-mass test](docs/science/tracer_mass_budget_2026-11-19.md)
+<!-- claims: BND-08 BND-10 -->
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only

@@ -269,6 +269,24 @@ give the case-specific references, component and refinement checks, and the
 matched final intervals.
 <!-- claims: BND-08 BND-09 -->
 
+The manufactured nozzle test falls below production in C-HI, G-HI and G-LO.
+C-LO admits a reconstruction error of the observed size. The gas adjacent
+to the production jet can differ from the gas in either manufactured
+representation. [Case-by-case comparison](docs/science/nozzle_flux_calibration_2026-11-19.md)
+<!-- claims: BND-09 -->
+
+For jet mass history use the whole-grid sum of density times the stored
+tracer fraction and cell volume, subtract its measured initial value, and
+compare with twice the bipolar labelled kinetic energy divided by speed
+squared. The retained-to-labelled mass ratios at 30 Myr are 1.1554,
+1.1047, 1.1516 and 1.1326 in C-HI, C-LO, G-HI and G-LO. The archive replay
+checks native volume bounds, all 201 raw tracer ranges, net total-gas mass
+through the nozzle boxes, and sampled outer-face bounds. The 2 November
+HI-minus-LO total-mass difference includes complementary gas. The marked
+mass supports excess mass loading in G-HI and leaves the kinetic
+energy per unit numerical transfer open. [Tracer-mass test and replay](docs/science/tracer_mass_budget_2026-11-19.md)
+<!-- claims: BND-10 -->
+
 ## Conventions you must apply
 
 - **Native cocoon.** All cells with tracer `tr1 > 1e-3`, after promoting the
@@ -336,8 +354,11 @@ matched final intervals.
    pilot is cadence-ambiguous (BND-06); the full C-LO history also remains
    reconstruction/cadence-ambiguous (BND-07). All four fixed histories are now available (NAT-11). BND-08 covers
    the original flux batch and G-HI endpoint addendum. BND-09 tests the
-   nozzle reconstruction on known flows. The next existing-output check
-   pairs flux with storage at larger surfaces around the injector. Write
+   nozzle reconstruction on known flows. BND-10 measures net marked-mass
+   accumulation independently. A trend with control radius can arise from
+   changing reconstruction error or from real energy exchange. Interpreting
+   a radial comparison requires storage and mass transport as well as
+   energy transport. Write
    physical closure as "boundary-dominated, with an unexplained residual".
    The 100/300 km/s spherical budgets (Stas's priority of 4 November)
    measure storage inside speed-defined apertures, retaining boundary and
@@ -347,7 +368,7 @@ matched final intervals.
    delivery, aperture transport and production-boundary qualification remain
    the highest-value accounting measurements. The C-LO fixed-box history
    measures signed storage beyond R100 without rescuing its early prediction.
-   <!-- claims: NAT-06 NAT-07 NAT-08 NAT-09 NAT-10 BND-06 BND-07 BND-08 BND-09 -->
+   <!-- claims: NAT-06 NAT-07 NAT-08 NAT-09 NAT-10 BND-06 BND-07 BND-08 BND-09 BND-10 -->
 2. **The emission-defined native reference (XR-02).** Without it, detector
    tests compare against tracer cocoons, which are not what X-ray cavities
    trace. The new G-HI/20 C/moving-ambient/below-cut diagnostic is useful

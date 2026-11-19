@@ -1,9 +1,20 @@
 # Current Status
 
-Last updated: 2026-11-19 (four-case nozzle calibration and matched endpoint checks complete)
+Last updated: 2026-11-19 (four-case tracer mass and three terminal energy comparisons verified)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Tracer-mass test, 19 November
+
+G-HI retained 4.8522 × 10⁴¹ g of additional jet-tagged mass by 30 Myr,
+15.2% above the label. Native-volume bounds and the sampled outer-face
+inflow check both support excess marked loading. Inferring how much energy
+it carried still requires the specific energy of the interface flux.
+BND-10 is provisional. BND-09 now states separately which steady-field
+calibrations can generate the production-scale error. The C-LO final energy
+drop was 0.0232–0.0294 labelled interval units, smaller than the ideal
+0.0417 kinetic shortfall from the prescribed dip. [Mass and source review](../science/tracer_mass_budget_2026-11-19.md) · [Final-interval table](../science/three_case_final_interval_2026-11-19.md) · [Verification and handoff](logs/2026-11-19-tracer-mass-test.md)
 
 ## Nozzle-flux calibration, 19 November
 
