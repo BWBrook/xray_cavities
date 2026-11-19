@@ -1,0 +1,3 @@
+case,mode,density_inner,density_outer,pressure_both,velocity_both,tracer_inner,tracer_outer,S_L,S_R,classical_HLL_density_jump_term,compiled_actual_mass_flux,compiled_actual_gas_energy_flux,compiled_actual_tracer_flux
+stationary_contact_equal_pressure,ordinary_HLLC,1.0,0.25,0.1,0.0,1.0,0.0,-0.816496580927726,0.816496580927726,0.30618621784789724,0.0,0.0,0.0
+stationary_contact_equal_pressure,forced_HLL_fallback,1.0,0.25,0.1,0.0,1.0,0.0,-0.816496580927726,0.816496580927726,0.30618621784789724,0.30618621784789724,0.0,0.30618621784789724

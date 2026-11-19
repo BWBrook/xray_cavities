@@ -1,0 +1,9 @@
+{
+  "production_kernel_sha256": "87807976b27d7ac174985b7a63db511a695c6266ffe5d642b9a6a92292f89b07",
+  "states": 16,
+  "interfaces_per_state": 4296,
+  "interfaces_total": 68736,
+  "largest_scaled_error": 4.255708728818893e-16,
+  "wave_and_hll_decisions_all_match": true,
+  "table_sha256": "63c7232497f053a0d22c1b61bbf0163ab00b82c483594ca5c06e7d53154af534"
+}

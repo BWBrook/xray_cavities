@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mem=6gb
+#PBS -l walltime=36:00:00
+#PBS -j oe
+#PBS -m ae
+#PBS -r n
+
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?submit from the staged diagnostic directory}"
+printf '%s  stage.sha256\n' "${INJECTOR_STAGE_SHA256:?}" | sha256sum --check --status
+sha256sum --check --status stage.sha256
+readonly python=/share/apps/software/Anaconda3/2024.02-1/bin/python
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+"$python" -B -c 'import sys, h5py, numpy; print(sys.executable, sys.version.split()[0], h5py.__version__, numpy.__version__, flush=True)'
+case "${INJECTOR_MODE:?}" in
+  smoke)
+    for run in C-HI C-LO G-HI G-LO; do
+      "$python" -B -u scripts/science/capture_injector_states.py "requests/$run" results patch --indices 19,20,29,30
+    done
+    "$python" -B -u scripts/science/reduce_injector_patches.py requests results tagged_mass_intervals.csv smoke_summary --domain-balances domain_interval_energy.csv
+    ;;
+  history)
+    case "${INJECTOR_CASE:?}" in C-HI|C-LO|G-HI|G-LO) ;; *) exit 2 ;; esac
+    "$python" -B -u scripts/science/capture_injector_states.py "requests/$INJECTOR_CASE" results patch
+    "$python" -B -u scripts/science/reduce_injector_patches.py requests results tagged_mass_intervals.csv "patch_summary/$INJECTOR_CASE" --cases "$INJECTOR_CASE" --domain-balances domain_interval_energy.csv
+    "$python" -B -u scripts/science/capture_injector_states.py "requests/$INJECTOR_CASE" results outer
+    "$python" -B -u scripts/science/reduce_injector_patches.py requests results tagged_mass_intervals.csv "summary/$INJECTOR_CASE" --cases "$INJECTOR_CASE" --domain-balances domain_interval_energy.csv --require-outer
+    ;;
+  *) exit 2 ;;
+esac

@@ -1,0 +1,39 @@
+{
+  "production_sha256": "87807976b27d7ac174985b7a63db511a695c6266ffe5d642b9a6a92292f89b07",
+  "faces": 2400,
+  "axes": [
+    825,
+    800,
+    775
+  ],
+  "outward_orientation": {
+    "reverse": 1224,
+    "forward": 1176
+  },
+  "solver_branches": {
+    "contact": 436,
+    "upwind_inner": 340,
+    "upwind_outer": 334,
+    "two_wave_fallback": 1290
+  },
+  "errors": {
+    "mass": {
+      "max_abs": 4.440892098500626e-16,
+      "max_rel_with_floor": 3.871299337494398e-13,
+      "floor": 1.7511247237308428e-09,
+      "max_rel_nonzero": 3.871299337494398e-13
+    },
+    "gas_energy": {
+      "max_abs": 2.220446049250313e-16,
+      "max_rel_with_floor": 5.476580952285556e-13,
+      "floor": 1.7077385628149447e-10,
+      "max_rel_nonzero": 5.476580952285556e-13
+    },
+    "tracer_mass": {
+      "max_abs": 4.440892098500626e-16,
+      "max_rel_with_floor": 3.870215245040685e-13,
+      "floor": 1.0172658804113187e-09,
+      "max_rel_nonzero": 3.870215245040685e-13
+    }
+  }
+}
