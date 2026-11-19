@@ -120,6 +120,16 @@ cumulative outside-nozzle balance. The other twelve require an extrapolation
 that gives negative pressure on part of the negative-z boundary.
 <!-- claims: BND-08 -->
 
+We tested the nozzle measurement on a steady jet with known power on each
+production grid. In G-HI its largest reading was 1.0345 times the label,
+whereas the same method gives 1.1305–1.1494 for the simulated jet at
+29–30 Myr. In C-LO the reconstruction can assign six times too much
+kinetic power to the cells straddling the jet edge. The test rules out a
+shared 14% bias on these steady jets. G-HI's roughly 8% whole-grid excess
+persists, while its division between the injector and the surrounding gas
+remains unresolved. [Four-case calibration and figure](docs/science/nozzle_flux_calibration_2026-11-19.md)
+<!-- claims: BND-08 BND-09 -->
+
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only
 comparator remain separate. Exact historical gravity-update, floor and

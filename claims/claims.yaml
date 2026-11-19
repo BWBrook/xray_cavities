@@ -377,7 +377,7 @@ claims:
       - C-LO/50 has observed aperture storage excess 0.232527; calling it a delivered-energy lower bound assumes unmeasured omitted-energy signs and mass/transport accounting.
       - No unconditional 1.08--1.23 correction to delivered-energy denominators is measured; source-specific attribution and realised delivery remain unresolved.
       - Retained parent sources select DENSITY_LENGTH_SCALE, not the DENSITY_JET_POWER branch used in the original nozzle argument; labelled input is not proved realised delivery. The categorical nozzle exclusion is withdrawn pending native flux measurement.
-      - Analytic prescribed-state flux within 0.4% of the label does not measure numerical overwrite/Riemann delivery or identify where in-grid source terms arise.
+      - The analytic kinetic flux of the prescribed state is within 0.4% of the label. Its total flux also includes enthalpy and gravitational transport at the chosen surface (BND-09). Neither calculation establishes discrete overwrite or solver-step delivery.
       - NAT-10's C-LO fixed-box endpoint is 28.89% above labelled input; neither it nor BND-07 supplies a measured delivered-energy correction.
     depends_on: [BND-01, BND-02, BND-04, NAT-07]
 
@@ -466,23 +466,59 @@ claims:
       - {path: docs/science/assets/four_case_flux_2026-11-18/scenario_histories.csv, commit: fc33494}
       - {path: docs/science/ghi_flux_endpoint_2026-11-19.md, commit: c74585e}
       - {path: docs/science/assets/ghi_flux_endpoint_2026-11-19/independent_final_scenarios.csv, commit: c74585e}
+      - {path: docs/science/assets/nozzle_flux_calibration_2026-11-19/ghi_same_scenarios.csv, commit: 4d8a96a}
     reproduce: >-
       Restore the verified archive and run scripts/science/compare_flux_histories.py
       on the four source-balance tables specified in docs/science/four_case_flux_histories_2026-11-18.md.
       For the endpoint, run the integrator and independent audit specified in
       docs/science/ghi_flux_endpoint_2026-11-19.md.
     test: >-
-      Collaboration review of reconstruction sensitivity, then the approved
-      boundary-layer and injector audits to distinguish transport, numerical
-      delivery and in-grid sources.
+      Compare paired storage and transport at larger control surfaces in
+      the saved production fields. BND-09 tests the six reconstructions
+      with a known input. Solver-step fluxes, overwrite and source terms
+      would directly distinguish numerical delivery and in-grid sources.
     caveats:
       - Inside and outside balances include signed storage and reconstructed transport in the fixed centre-zero potential, normalized by labelled bipolar kinetic power times active age.
       - The comparison uses three complete histories to 50 Myr and the verified G-HI prefix through index 46. The 30-Myr comparison has full original scenario coverage in all four cases.
       - Twelve G-HI endpoint combinations require the invalid linear face flux at index 47. The lobe reaches the domain boundary at this age.
       - Sign agreement and spread across these finite reconstructions quantify method sensitivity. Actual discrete solver delivery and separate repair, floor or gravity-update energies remain unresolved.
-      - Only the whole-grid source is invariant to the reconstructions. G-HI's is 1.0778–1.0796 cumulative at 30, 40 and 46 Myr, and 1.0670–1.0694 for the 46–47 Myr interval, across every face and time rule. The outside balance is whole-grid minus nozzle-control, and every scenario shares one family of nozzle reconstructions on a staircase cone about two cells wide at the throat. Its sign is therefore not independent evidence of an energy sink outside the nozzle. What is measured is that the nozzle estimate exceeds the whole-grid source. A synthetic prescribed-state calibration of the nozzle-control code would separate a real split from a reconstruction bias (Claude, 19 Nov 2026).
-      - Of the 24 recovered endpoint estimates, only the 12 outer-active trapezoid and right-rectangle rows use any 47-Myr face flux. Six-face transport at 47 Myr is about 0.5% of labelled power, so the lobe's boundary contact does not alter the endpoint sign.
+      - G-HI's inferred whole-grid source is 1.0778–1.0796 cumulative at 30, 40 and 46 Myr under all six face and time rules, and 1.0670–1.0694 in the final interval under the four available rules. The outside balance subtracts the reconstructed nozzle source. BND-09 finds that a known G-HI steady jet does not reproduce the production 13–15% nozzle excess. The physical sign of the outside balance remains unresolved.
+      - Twelve outer-active trapezoid and right-rectangle combinations use the 47-Myr domain-face value. The twelve left-rectangle estimates use the 46-Myr face. Net six-face transport at 47 Myr is about 0.54% of labelled power. All 24 final interval increments lie within each scenario's own preceding ten-interval range. These checks do not quantify every effect of boundary contact.
     depends_on: [BND-05, BND-06, BND-07, NAT-11]
+
+  - id: BND-09
+    status: provisional
+    statement: >-
+      On the native G-HI grid a prescribed steady cone has a known total
+      flux of 0.99980–1.00072 times labelled bipolar power at the three
+      nozzle-control surfaces. The six estimators recover 0.91711–1.03447
+      from cell-centre samples and 0.98188–0.99436 from conservative
+      cell-volume averages. The matched production source at 29–30 Myr is
+      1.13045–1.14945. On the same calibration in C-LO the centred
+      estimate reaches 1.23117 from point samples. All six estimates fall
+      below the reference when the same field is volume averaged.
+    evidence:
+      - {path: docs/science/nozzle_flux_calibration_2026-11-19.md, commit: 4d8a96a}
+      - {path: docs/science/assets/nozzle_flux_calibration_2026-11-19/matched_nozzle_flux.csv, commit: 4d8a96a}
+      - {path: docs/science/assets/nozzle_flux_calibration_2026-11-19/continuum_reference.csv, commit: 4d8a96a}
+      - {path: docs/science/assets/nozzle_flux_calibration_2026-11-19/mixed_density_contrast.csv, commit: 4d8a96a}
+      - {path: docs/science/assets/nozzle_flux_calibration_2026-11-19/true_kinetic_footprints.csv, commit: 4d8a96a}
+      - {path: scripts/science/calibrate_nozzle_flux.py, commit: 4d8a96a}
+      - {path: scripts/science/calibrate_nozzle_volume_averages.py, commit: 4d8a96a}
+    reproduce: >-
+      Restore nozzle_calibration_review_r1.tar.gz under private_archive as
+      described in the calibration report, then run .venv/bin/python
+      private_archive/turn19_nozzle_calibration/replay.py private_archive/nozzle_calibration_replay.
+    test: >-
+      Review the four-case continuum references, per-face reconstruction,
+      finite-volume encoding and matched production comparison. Test how
+      the production source estimate changes when the control surface is
+      moved out into better-resolved flow, including its storage change.
+    caveats:
+      - The manufactured field continues the retained spherical-cap prescription at constant radial speed in a static atmosphere. It conserves mass and kinetic flux. Its known total flux includes the enthalpy and centre-zero potential at each actual surface.
+      - The volume average conserves mass, momentum and gas energy before conversion to the native stored primitives. Both encodings describe the same known continuum. Neither establishes the actual subcell state of the evolving production jet.
+      - The six production estimates refer to a single common 29–30 Myr interval and include signed storage. A universal 14% measurement excess is absent on these fixtures. The result supplies no production correction factor or evidence of a physical outside-nozzle sink.
+    depends_on: [BND-08]
 
   - id: OBS-01
     status: refuted

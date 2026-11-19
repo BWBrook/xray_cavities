@@ -62,7 +62,7 @@ Full table: `assets/production_boundary_residual_2026-11-04/residual_after_bound
   source-to-executable linkage separately qualified; no simulation or
   numerical residual in the table has changed.
 - **The analytic state of the length-scale branch delivers the labelled
-  power (Claude, 5 November).** In that branch, ρ_j(r) = ρ_env(L1b)(L1b/r)²
+  power (Claude, 5 November, geometry corrected 19 November below).** In that branch, ρ_j(r) = ρ_env(L1b)(L1b/r)²
   along a cone of solid angle Ω, with L1 = 2√2 (Q/(ρ_inlet v³))^½ and
   L1b = L1/(2√Ω). The kinetic flux through any radius is therefore
   ½ρ_j v³ Ω r² = Q ρ_env(L1b)/ρ_inlet. Using the retained profiles, 15° cones,
@@ -229,3 +229,17 @@ The reconstructed nozzle-control balance is 1.09–1.15 labelled-input units
 in all four cases (BND-08, `four_case_flux_histories_2026-11-18.md`), with
 no low-power versus high-power ordering. Whether that 9–15% is solver
 delivery or a bias of the nozzle-control reconstruction is open; see BND-08.
+
+The [19 November calibration](nozzle_flux_calibration_2026-11-19.md)
+corrects the offset and enthalpy in the 5 November estimate. All four
+retained spherical injection branches set the apex offset to zero.
+At the measured control surfaces the high-power enthalpy term is
+0.354–0.451% of the bipolar label. The analytic kinetic ratios in the
+earlier table survive. In G-HI the same reconstruction on the prescribed
+steady jet reaches at most 1.0345, compared with 1.1305–1.1494 in the
+29–30 Myr production interval. In C-LO a change in how the same continuum
+field is represented in a cell reverses the sign of the centred bias.
+The 11 November inference of a general correction to fractions of
+delivered energy remains unsupported. The measured whole-grid excess and
+its source attribution are distinct questions.
+<!-- claims: BND-05 BND-08 BND-09 -->

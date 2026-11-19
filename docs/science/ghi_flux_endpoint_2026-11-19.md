@@ -50,9 +50,12 @@ storage change through 47 Myr. The trapezoid and right rectangle need the
 missing 47 Myr linear face value. The [36 combinations](assets/ghi_flux_endpoint_2026-11-19/independent_final_scenarios.csv)
 retain the nozzle estimates for all rows. Empty domain and outside values
 mark the twelve unavailable estimates. The resulting negative balance
-describes energy accounting at the saved cadence. Determining jet delivery
-and the origin of the storage excess still requires solver-step accounting.
-<!-- claims: BND-08 -->
+describes energy accounting at the saved cadence. Each of the 24 final
+increments falls within its own range over the preceding ten intervals.
+The [known-input nozzle calibration](nozzle_flux_calibration_2026-11-19.md)
+leaves open whether the inferred deficit outside the nozzle is physical
+or comes from reconstructing flux in the evolving jet.
+<!-- claims: BND-08 BND-09 -->
 
 ## Verification and reproduction
 

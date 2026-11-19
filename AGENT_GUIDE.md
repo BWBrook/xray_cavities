@@ -253,6 +253,22 @@ linear trapezoid and right rectangle require a 47 Myr face value where
 linear extrapolation gives negative pressures. BND-05 remains provisional.
 <!-- claims: BND-08 -->
 
+The known-input nozzle calibration uses the native cell coordinates, the
+three original padded surfaces and the original two face reconstructions.
+The spherical injection branch sets the cone offset to zero. On G-HI the
+largest synthetic reading is 1.0345 times the label across two encodings
+of a steady jet. The six matched production sources at 29–30 Myr are
+1.1305–1.1494. On C-LO the centred estimate at the widest box reads 1.2312
+from point samples and falls below one on volume-averaged conserved
+quantities. The calibration measures a dependence on unresolved structure
+and supplies no common correction to production. G-HI's cumulative
+whole-grid excess is 7.8–8.0% at 30, 40 and 46 Myr under all six outer-face
+and time rules. Use the measured outside balance as an accounting difference.
+The [calibration report and replay](docs/science/nozzle_flux_calibration_2026-11-19.md)
+give the case-specific references, component and refinement checks, and the
+matched final intervals.
+<!-- claims: BND-08 BND-09 -->
+
 ## Conventions you must apply
 
 - **Native cocoon.** All cells with tracer `tr1 > 1e-3`, after promoting the
@@ -319,7 +335,9 @@ linear extrapolation gives negative pressures. BND-05 remains provisional.
    measure numerical nozzle overwrite or solver-step delivery. The startup
    pilot is cadence-ambiguous (BND-06); the full C-LO history also remains
    reconstruction/cadence-ambiguous (BND-07). All four fixed histories are now available (NAT-11). BND-08 covers
-   the original flux batch, including the partial G-HI result. Write
+   the original flux batch and G-HI endpoint addendum. BND-09 tests the
+   nozzle reconstruction on known flows. The next existing-output check
+   pairs flux with storage at larger surfaces around the injector. Write
    physical closure as "boundary-dominated, with an unexplained residual".
    The 100/300 km/s spherical budgets (Stas's priority of 4 November)
    measure storage inside speed-defined apertures, retaining boundary and
@@ -329,7 +347,7 @@ linear extrapolation gives negative pressures. BND-05 remains provisional.
    delivery, aperture transport and production-boundary qualification remain
    the highest-value accounting measurements. The C-LO fixed-box history
    measures signed storage beyond R100 without rescuing its early prediction.
-   <!-- claims: NAT-06 NAT-07 NAT-08 NAT-09 NAT-10 BND-06 BND-07 -->
+   <!-- claims: NAT-06 NAT-07 NAT-08 NAT-09 NAT-10 BND-06 BND-07 BND-08 BND-09 -->
 2. **The emission-defined native reference (XR-02).** Without it, detector
    tests compare against tracer cocoons, which are not what X-ray cavities
    trace. The new G-HI/20 C/moving-ambient/below-cut diagnostic is useful

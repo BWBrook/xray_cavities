@@ -1,9 +1,20 @@
 # Current Status
 
-Last updated: 2026-11-19 (G-HI endpoint verified and integrated, 24 of 36 final estimates available)
+Last updated: 2026-11-19 (four-case nozzle calibration and matched endpoint checks complete)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Nozzle-flux calibration, 19 November
+
+The [calibration](../science/nozzle_flux_calibration_2026-11-19.md) tests all
+six production nozzle estimates on steady flows with known energy flux. On
+G-HI the two representations return at most 1.0345 times labelled power,
+below the production interval's 1.1305–1.1494 at 29–30 Myr. The large C-LO
+error changes sign with cell representation. BND-09 is provisional. The
+G-HI whole-grid excess survives this check. The actual split between nozzle
+delivery and the rest of the grid remains open. The [dated handoff](logs/2026-11-19-nozzle-flux-calibration.md)
+records the replay and the individual endpoint checks for review.
 
 ## Accounting jobs checked on 18 November
 
