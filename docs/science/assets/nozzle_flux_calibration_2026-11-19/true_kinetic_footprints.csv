@@ -1,0 +1,13 @@
+padding_cells,pair_category,fraction_true_cone_kinetic_flux_inside_these_cell_areas
+1,jet_inside_jet_outside,0.8987962912334592
+1,ambient_inside_jet_outside,0.06174505589701961
+1,jet_inside_ambient_outside,0.0
+1,ambient_inside_ambient_outside,0.039458652869522326
+2,jet_inside_jet_outside,0.8983206672577533
+2,ambient_inside_jet_outside,0.06106216125661978
+2,jet_inside_ambient_outside,0.0
+2,ambient_inside_ambient_outside,0.04061717148562795
+4,jet_inside_jet_outside,0.9540180033043213
+4,ambient_inside_jet_outside,0.039738312961308905
+4,jet_inside_ambient_outside,0.0
+4,ambient_inside_ambient_outside,0.006243683734371397
