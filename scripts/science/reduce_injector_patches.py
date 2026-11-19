@@ -26,6 +26,37 @@ def divide(a, b):
     return a/b if b else None
 
 
+def read_tracer_intervals(records):
+    result = {}
+    for row in records:
+        key = (row["case"], int(row["start_index"]), int(row["end_index"]))
+        if key in result:
+            raise ValueError(f"Duplicate tracer interval at {key}")
+        result[key] = row
+    return result
+
+
+def unavailable_domain_balance(case, index, method, rule):
+    return (case, index, method) == ("G-HI", 47, "linear_to_boundary_face") and rule in ("trapezoid", "right")
+
+
+def read_domain_balances(records):
+    rules = {"left_rectangle": "left", "right_rectangle": "right", "trapezoid": "trapezoid"}
+    result = {}
+    for row in records:
+        if row["surface"] != "domain_boundary":
+            continue
+        key = (row["case"], int(row["end_index"]), row["method"], rules[row["rule"]])
+        value = row["inferred_energy_source_erg"].strip()
+        if key in result or (not value) != unavailable_domain_balance(*key):
+            raise ValueError(f"Unexpected domain energy balance coverage at {key}")
+        energy = float(value) if value else None
+        if energy is not None and not math.isfinite(energy):
+            raise ValueError(f"Nonfinite domain energy balance at {key}")
+        result[key] = energy
+    return result
+
+
 def reduce_case(request_dir, result_dir, reference, domain=None, require_outer=False):
     request = json.loads((request_dir / "request.json").read_text())
     case = request["case"]
@@ -105,7 +136,7 @@ def reduce_case(request_dir, result_dir, reference, domain=None, require_outer=F
     for i in sorted(tagged):
         if i-1 not in tagged:
             continue
-        ref = reference[case, i]
+        ref = reference[case, i-1, i]
         elapsed = (request["history"][i]["age_myr"]-request["history"][i-1]["age_myr"])*SECONDS_PER_MYR
         label = float(ref["labelled_mass_g"])
         active = (min(request["history"][i]["age_myr"], params["JET_END_TIME"])
@@ -134,7 +165,7 @@ def reduce_case(request_dir, result_dir, reference, domain=None, require_outer=F
                 balances = {}
                 for boundary in ("outer_active_cell", "linear_to_boundary_face"):
                     source = None if domain is None else domain.get((case, i, boundary, rule))
-                    unavailable = case == "G-HI" and i == 47 and boundary == "linear_to_boundary_face" and rule != "left"
+                    unavailable = unavailable_domain_balance(case, i, boundary, rule)
                     if domain is not None and (source is None) != unavailable:
                         raise ValueError(f"Domain balance coverage differs at {case}/{i}/{boundary}/{rule}")
                     balances["outside_flagged_sphere_"+boundary] = (source/energy_label - delivery - flagged_energy_change
@@ -162,12 +193,9 @@ if __name__ == "__main__":
     parser.add_argument("--require-outer", action="store_true")
     args = parser.parse_args()
     with args.tagged_mass_intervals.open() as stream:
-        reference = {(r["case"], int(r["end_index"])): r for r in csv.DictReader(stream)}
+        reference = read_tracer_intervals(csv.DictReader(stream))
     with args.domain_balances.open() as stream:
-        rule_names = {"left_rectangle": "left", "right_rectangle": "right", "trapezoid": "trapezoid"}
-        domain = {(r["case"], int(r["end_index"]), r["method"], rule_names[r["rule"]]):
-                  float(r["inferred_energy_source_erg"]) for r in csv.DictReader(stream)
-                  if r["surface"] == "domain_boundary"}
+        domain = read_domain_balances(csv.DictReader(stream))
     outputs, pairs = [], []
     for case in args.cases:
         new_rows, new_intervals = reduce_case(args.requests / case, args.results, reference, domain, args.require_outer)

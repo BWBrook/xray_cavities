@@ -1,0 +1,28 @@
+{
+  "signed_outward_from_sphere_is_positive": true,
+  "snapshot_inputs": 16,
+  "physical_faces_per_snapshot": 4296,
+  "c_vs_python_faces_compared": 68736,
+  "same_face_wave_and_fallback_masks": true,
+  "max_face_error_over_largest_flux_in_state": 3.277249197762292e-16,
+  "max_scaled_primary_snapshot_rate_difference": 3.9088129368505946e-16,
+  "interval_rule_rows_compared": 24,
+  "max_absolute_primary_interval_signed_rate_difference": 3.3306690738754696e-15,
+  "max_absolute_native_mesh_change_in_net_or_partition_signed_Q": 7.56928069112206e-08,
+  "reclassified_faces_using_native_mesh": 0,
+  "primary_snapshot_table_sha256": "84211d35c48ac98d6a605c026e75363e6380b3920b4da0e21a8a9876be60280d",
+  "primary_interval_table_sha256": "4a3640a8228c622ba66eac0994a88a701a2606c3f62c3e66e9c8ff47be5f28e8",
+  "comparison_kernel_sha256": "87807976b27d7ac174985b7a63db511a695c6266ffe5d642b9a6a92292f89b07",
+  "frozen_reference_manifest_sha256": "7a2ee29b149003ca7fbf1fe37df26cf183e87acb790664458cb90cbc0ae0d5ce",
+  "source_commit": "2674fc38b152f96605cb24e2840e92b64ebd5b81",
+  "binary_sha256": "b6a859a94c25cf1eb85525bd491d0cdbc014b129a1c1f699166bb31e925c1d93",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "driver_sha256": "dc45491abb636ac9441f87787657fb5181d5447c9e1c1f8c20fa759609b95aff",
+  "products_sha256": {
+    "signed_rates.csv": "c478bb994c2dd9229b800dc2b5d47bf06a5347e23becbfd84c118370a8db169e",
+    "primary_residuals.csv": "283d1eb8aaf76e4629f0f1c46bab042a89c812c76a48b214aeec6b67bddae904",
+    "native_mesh_sensitivity.csv": "da61e8533817d85d8129de15a4eac6a3b93f81934c1cc29da88c9988eb3e6d44",
+    "cap_direction_and_waves.csv": "217ade180683b3b709ed84d96e744bd2fe6da8aacba315e4f1bfa3f8a48bdceb",
+    "signed_intervals.csv": "08e4d15a23018c2efe687ea1dc9817c7d89ed622956e6f4ed0d013cb060fab1e"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "remote_archive": "d3e4ccefb8cdcb16d2da63be5ff8d161c26d993ff12089796fcdee403bf509c3",
+  "stage": "52da1d7509a6c628eb33956f7b08d7a0dab7950b359ccbdd0ca8582c58adac34",
+  "native_patches": 16,
+  "comparisons": {
+    "injector_snapshot_rates.csv": {
+      "rows": 192,
+      "fields_compared": 3336,
+      "max_abs_difference_scaled_by_max_1_or_value": 2.117582368135751e-22,
+      "remote_sha256": "408bddfa3170d4be1404778f623e07698cc40edcf7e6c7833c24fc51930db096",
+      "local_sha256": "84211d35c48ac98d6a605c026e75363e6380b3920b4da0e21a8a9876be60280d"
+    },
+    "injector_interval_balances.csv": {
+      "rows": 96,
+      "fields_compared": 1344,
+      "max_abs_difference_scaled_by_max_1_or_value": 0.0,
+      "remote_sha256": "4a3640a8228c622ba66eac0994a88a701a2606c3f62c3e66e9c8ff47be5f28e8",
+      "local_sha256": "4a3640a8228c622ba66eac0994a88a701a2606c3f62c3e66e9c8ff47be5f28e8"
+    }
+  }
+}

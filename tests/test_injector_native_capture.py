@@ -1,5 +1,8 @@
+import csv
+import io
 import json
 import sys
+import zipfile
 from pathlib import Path
 
 import h5py
@@ -8,10 +11,38 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts/science"))
 from capture_injector_states import capture, sha
-from reduce_injector_patches import reduce_case
+from reduce_injector_patches import read_domain_balances, read_tracer_intervals, reduce_case
 from select_common_age_hdf5 import CODE_TIME_PER_MYR
 from snapshot_energy import SECONDS_PER_MYR
 from pluto_h5_level3_ambient_extract import UNIT_VELOCITY_CMS
+
+
+def test_tracer_reference_distinguishes_three_intervals_ending_at_30():
+    source = Path(__file__).resolve().parents[1] / "docs/science/assets/tracer_mass_budget_2026-11-19/tagged_mass_intervals.csv"
+    with source.open() as stream:
+        references = read_tracer_intervals(csv.DictReader(stream))
+    assert len(references) == 197 + 8
+    for case in ("C-HI", "C-LO", "G-HI", "G-LO"):
+        annual, decade, two_decades = [float(references[case, start, 30]["labelled_mass_g"]) for start in (29, 20, 10)]
+        assert decade / annual == pytest.approx(10, rel=.001)
+        assert two_decades / annual == pytest.approx(20, rel=.001)
+    row = references["G-HI", 29, 30]
+    with pytest.raises(ValueError, match="Duplicate tracer interval"):
+        read_tracer_intervals([row, row])
+
+
+def test_archived_domain_endpoint_keeps_two_unknown_balances():
+    archive = Path(__file__).resolve().parents[1] / "docs/science/assets/outer_tracer_gravity_2026-11-19/compact_inputs.zip"
+    with zipfile.ZipFile(archive) as source, source.open("source_check.csv") as data:
+        records = list(csv.DictReader(io.TextIOWrapper(data)))
+    values = read_domain_balances(records)
+    assert len(values) == 197 * 6
+    assert {k for k, v in values.items() if v is None} == {
+        ("G-HI", 47, "linear_to_boundary_face", rule) for rule in ("right", "trapezoid")}
+    assert values["G-HI", 47, "linear_to_boundary_face", "left"] > 0
+    good = next(r for r in records if r["surface"] == "domain_boundary" and r["inferred_energy_source_erg"])
+    with pytest.raises(ValueError, match="coverage"):
+        read_domain_balances([{**good, "inferred_energy_source_erg": ""}])
 
 
 def test_bound_patch_and_outer_read_then_replay(tmp_path):
@@ -58,7 +89,7 @@ def test_bound_patch_and_outer_read_then_replay(tmp_path):
     assert outer["gravity"]["outside_p2"]["net_erg_s"] == 0
     assert outer["tracer"]["min_margin_above_threshold_kpc"] > 0
     label = 4e45 * SECONDS_PER_MYR / (.1*UNIT_VELOCITY_CMS)**2
-    ref = {("test", 1): {"labelled_mass_g": label, "delta_over_label": 0}}
+    ref = {("test", 0, 1): {"labelled_mass_g": label, "delta_over_label": 0}}
     domain = {("test", 1, boundary, rule): 2e45 * SECONDS_PER_MYR for boundary in
               ("outer_active_cell", "linear_to_boundary_face") for rule in ("left", "right", "trapezoid")}
     rates, intervals = reduce_case(req, out, ref, domain, require_outer=True)
