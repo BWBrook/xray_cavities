@@ -470,6 +470,8 @@ claims:
       - {path: docs/science/assets/nozzle_flux_calibration_2026-11-19/ghi_same_scenarios.csv, commit: 4d8a96a}
       - {path: docs/science/three_case_final_interval_2026-11-19.md, commit: fd7305c}
       - {path: docs/science/assets/three_case_final_interval_2026-11-19/matched_final_intervals.csv, commit: fd7305c}
+      - {path: docs/science/outer_tracer_gravity_2026-11-19.md, commit: cbc9c88}
+      - {path: docs/science/assets/outer_tracer_gravity_2026-11-19/potential_work_intervals.csv, commit: cbc9c88}
     reproduce: >-
       Restore the verified archive and run scripts/science/compare_flux_histories.py
       on the four source-balance tables specified in docs/science/four_case_flux_histories_2026-11-18.md.
@@ -483,6 +485,7 @@ claims:
       overwrite and source terms would directly test that attribution.
     caveats:
       - Inside and outside balances include signed storage and reconstructed transport in the fixed centre-zero potential, normalized by labelled bipolar kinetic power times active age.
+      - Outside the padded G-HI nozzle at 29–30 Myr, potential storage and transport imply gravitational work of −2.13% to −2.08% of labelled input. The total-energy residual spans −7.57% to −5.60%. Gravitational work contributes to the gas energy budget and cancels against the change and transport of potential energy in the continuum total. Its contribution to numerical error remains unresolved.
       - The comparison uses three complete histories to 50 Myr and the verified G-HI prefix through index 46. The 30-Myr comparison has full original scenario coverage in all four cases.
       - Twelve G-HI endpoint combinations require the invalid linear face flux at index 47. The lobe reaches the domain boundary at this age.
       - Sign agreement and spread across these finite reconstructions quantify method sensitivity. Actual discrete solver delivery and separate repair, floor or gravity-update energies remain unresolved.
@@ -536,7 +539,9 @@ claims:
       and sampled inward tracer transport through the domain faces is at most
       0.216% of labelled mass across the three time rules. This independently
       supports excess net numerical loading of marked material in G-HI.
-      Its specific energy at transfer remains unmeasured.
+      The final-interval tagged growth rates fall by 3.12%, 3.18% and 3.10%
+      in C-HI, C-LO and G-LO. The prescribed velocity ramp predicts 3.18%.
+      The specific energy at transfer remains unmeasured.
     evidence:
       - {path: docs/science/tracer_mass_budget_2026-11-19.md, commit: fd7305c}
       - {path: docs/science/assets/tracer_mass_budget_2026-11-19/tagged_mass_history.csv, commit: fd7305c}
@@ -545,6 +550,8 @@ claims:
       - {path: docs/science/assets/tracer_mass_budget_2026-11-19/sampled_tracer_boundary_integral_bounds.csv, commit: fd7305c}
       - {path: docs/science/assets/tracer_mass_budget_2026-11-19/paired_mass_decomposition.csv, commit: fd7305c}
       - {path: scripts/science/build_tracer_mass_budget.py, commit: fd7305c}
+      - {path: docs/science/assets/injector_faces_2026-11-19/late_tracer_change.csv, commit: cbc9c88}
+      - {path: docs/science/assets/outer_tracer_gravity_2026-11-19/saved_tracer_clearance.csv, commit: cbc9c88}
     reproduce: >-
       Extract tracer_mass_review_r1.tar.gz under private_archive and run
       .venv/bin/python private_archive/turn20_tracer_mass_review_r1/replay_review.py
@@ -557,9 +564,31 @@ claims:
     caveats:
       - The census uses the raw tracer fraction with centre-derived cell widths. Independent scans found zero tracer excursions outside [0,1] at all 201 matched outputs. Native node coordinates bound the geometry effect on each nonnegative inventory before subtraction.
       - Net retention uses the measured nonzero starting inventory. Tracer is advected conservatively in ordinary cells of the inspected solver. Flagged cells maintain the prescribed state. Unmarked inflow adds no tracer, but marked boundary exchange between saved outputs is unmeasured. The sampled boundary limits in the two low-power cases are too loose to assign all retained mass to the injector.
+      - Gross outward gas transport is zero in all 744 outer-active face measurements through 30 Myr. Above-threshold tracer stays at least 100.96 kpc from every face in every case through that age. Combining the sampled inward allowances with adverse cell-volume bounds still leaves 10.5% excess loading in C-HI and 14.2% in G-HI.
       - The reconstructed nozzle surface mass is the signed flux of all gas. C-LO can have net inward mass transport while its inventory of marked material increases. The nozzle speed alone does not give the specific energy of the numerical interface flux or establish an energy sink outside the nozzle.
       - The historical source-tree bytes at compilation were not attested. The retained executable identities, configurations and build commands are checked. The G-HI comparison ends at the accepted index 47.
     depends_on: [BND-08]
+
+  - id: BND-11
+    status: supported
+    statement: >-
+      All four production grids expose 104 axial and 64 lateral faces of the
+      tagged injector cells. Evaluating a smooth prescribed radial jet at those
+      face centres gives 1.16601 times its continuum mass flux. The lateral
+      faces contribute 0.14215. Using the production solver reconstruction on
+      a smooth radial field gives 1.165–1.169 times the labelled mass rate.
+    evidence:
+      - {path: docs/science/injector_faces_2026-11-19.md, commit: cbc9c88}
+      - {path: docs/science/assets/injector_faces_2026-11-19/cap_reference_summary.csv, commit: cbc9c88}
+      - {path: docs/science/assets/injector_faces_2026-11-19/compiled_manufactured_controls.csv, commit: cbc9c88}
+      - {path: docs/science/assets/injector_faces_2026-11-19/compiled_patch_comparison.json, commit: cbc9c88}
+      - {path: docs/science/assets/injector_faces_2026-11-19/wave_counterexample.csv, commit: cbc9c88}
+    reproduce: >-
+      Run python3 docs/science/assets/injector_faces_2026-11-19/geometry_replay.py
+      and .venv/bin/python docs/science/assets/injector_faces_2026-11-19/replay_controls.py.
+    caveats:
+      - The smooth control extends radial gas and tracer through the full stencil and counts the cap faces. The gas around the production jet evolves. Substituting a continuing cone and static atmosphere changes the cap mass rate to 1.027–1.147 across cases.
+      - HLLC can resolve a stationary contact with zero mass transfer even when the exterior sets an inward acoustic bound. The share of transported mass on such faces diagnoses their location. Causal attribution and net energy transfer require the production states.
 
   - id: OBS-01
     status: refuted

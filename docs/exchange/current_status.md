@@ -1,9 +1,21 @@
 # Current Status
 
-Last updated: 2026-11-19 (four-case tracer mass and three terminal energy comparisons verified)
+Last updated: 2026-11-19 (injector solver verified on known fields, native production read pending)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Injector faces, 19 November
+
+The lateral faces of the jet-marked cells can supply 14.2% of the analytic
+mass rate in a prescribed radial flow. BND-11 covers this four-grid geometry
+and its known-field calibration. The energy passing from the moving caps
+and into the stationary reservoir in the evolved simulations remains open.
+The checked job bundle covers all 201 accepted native outputs. It is staged
+for submission when production access resumes. The compact histories already
+give zero outward flow in all 744 domain-face measurements through 30 Myr and
+a G-HI gravitational-work estimate of −2.1% of labelled energy at 29–30 Myr.
+[Injector results](../science/injector_faces_2026-11-19.md) · [Boundary and gravity](../science/outer_tracer_gravity_2026-11-19.md) · [Run status and hashes](logs/2026-11-19-injector-face-reconstruction.md)
 
 ## Tracer-mass test, 19 November
 

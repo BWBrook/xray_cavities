@@ -1,0 +1,17 @@
+# Injector transfer and outer tracer, 19 November
+
+Review 3607 asked for energy and tracer flux at the actual sphere of maintained cells, the dilute tracer inventory at the domain edges, and gravitational work outside the nozzle. The four-grid cap geometry, compiled PLUTO calibration, 201 tracer clearances and 197 interval potential-work estimates are complete. The evolved cap and stationary-reservoir fluxes, raw 20-kpc layer inventories and direct gravity-work sums await the native reads. [Injector measurement and controls](../../science/injector_faces_2026-11-19.md) · [Boundary and gravity evidence](../../science/outer_tracer_gravity_2026-11-19.md)
+
+All 15 focused tests passed, including extraction and replay of a synthetic native HDF5 history with matching source geometry. A fresh independent reference build verified 11 recipe files, 45 inputs, 24 solver source files and 11 numerical products. Both small production-summary tables replayed byte for byte. The reference archive and the diagnostic stage were checksum-verified in the project's private shared archive under `turn21_injector_2026-11-19`.
+
+| File | SHA-256 |
+| --- | --- |
+| `private_solver_reference_r1.tar.gz` | `5aad7eee958d7f609dbf2f599fc5eeb10790bd93685920d0617825f51e920bd4` |
+| `injector_native_stage_b197edee72ab.tar.gz` | `61b99766c22728a5be560cde771f15703bf14f73de15ee2f75fd820989d10052` |
+| `stage.sha256` in that native archive | `b197edee72ab9e98121d0ffccaee4635fd2f1c6b71de02020b5d29e284809d21` |
+
+No production job was submitted in this turn. The original files are on the cluster. The private shared archive holds the compact histories and analysis stage. The stage contains the canonical paths, per-dump file identities, historical SHA-256 values, coordinate hashes and receipt links for 51 C-HI, 51 C-LO, 48 G-HI and 51 G-LO outputs. Native readers compare the identity before and after each read and verify the HDF5 time, precision, shape and coordinates. A central cutout gets its own digest. The historical 45-GB native-file digests are carried forward from their receipts.
+
+When access resumes, extract the final native stage in a fresh cluster job directory, verify `stage.sha256` against the table above and its member hashes, then run its `submit_native.py` there. The pilot reads indices 19, 20, 29 and 30 in all four cases and produces the first two interval comparisons. Four full histories follow in a serial I/O queue after the pilot succeeds. Each requests completion and abort mail to the address already recorded for this project. A dry-run scheduler recorded the five expected requests, their dependencies and mail arguments, and produced no duplicate submissions on a second invocation. The PBS script uses the explicit interpreter from the successful endpoint job.
+
+The pilot reports cap energy per outward gram, stationary gas-energy absorption or emission, net transfer, and wave-conditioned flux fractions. Its mass check includes signed tracer from both parts of the sphere. The full histories add exact native-volume marked inventories and signed boundary fluxes. They compare the exterior energy residual under both domain-face reconstructions and three time rules, using the actual maintained sphere for the source. For direct gravity versus potential continuity across the original padded boxes, give the verified result root to the compact replay's `--native-root` option. Preserve the method-specific gap at G-HI/47. The terminal ramp remains a known inter-dump change.

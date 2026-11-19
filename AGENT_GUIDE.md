@@ -287,6 +287,17 @@ mass supports excess mass loading in G-HI and leaves the kinetic
 energy per unit numerical transfer open. [Tracer-mass test and replay](docs/science/tracer_mass_budget_2026-11-19.md)
 <!-- claims: BND-10 -->
 
+The cap geometry gives a direct control. Its 64 lateral faces add 14.2% of the
+continuum mass rate when the prescribed radial state is evaluated at their
+centres. The public fixture reproduces the geometry, and the compiled PLUTO
+comparisons establish how the exterior changes cap transport. For production,
+compare the signed cap and stationary fluxes with the tracer inventory,
+including storage in the maintained sphere and transport through the outer
+faces. The zero outward rates through 30 Myr apply at saved times.
+Potential-energy accounting supplies a comparison for the direct gravity-work
+integral. [Injector inputs and replay](docs/science/injector_faces_2026-11-19.md) · [Boundary and gravitational work](docs/science/outer_tracer_gravity_2026-11-19.md)
+<!-- claims: BND-08 BND-10 BND-11 -->
+
 ## Conventions you must apply
 
 - **Native cocoon.** All cells with tracer `tr1 > 1e-3`, after promoting the

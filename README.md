@@ -20,7 +20,7 @@ remains under investigation.
 | Reader | Starting point |
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
-| Latest accounting result? | [Jet-tagged mass and nozzle calibration](docs/science/tracer_mass_budget_2026-11-19.md) and [final energy intervals](docs/science/three_case_final_interval_2026-11-19.md) |
+| Latest accounting result? | [How the injector grid can supply excess jet mass](docs/science/injector_faces_2026-11-19.md), [tracer at the boundary and gravitational work](docs/science/outer_tracer_gravity_2026-11-19.md), and [final energy intervals](docs/science/three_case_final_interval_2026-11-19.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
@@ -132,9 +132,11 @@ mass the simulations retain. By 30 Myr G-HI has gained 15.2% more tagged mass
 than the power and speed on its label imply. Even the most adverse correction
 for cell volumes leaves 14.5%. Its whole-grid energy excess at this age
 is about 8%. The extra marked mass supports excess numerical mass loading
-in G-HI. Determining the energy it carried would require the energy flux
-across the injector. [Four-case tracer-mass test](docs/science/tracer_mass_budget_2026-11-19.md)
-<!-- claims: BND-08 BND-10 -->
+in G-HI. In a smooth radial flow the production grid delivers
+1.165–1.169 times the labelled mass rate through the jet-marked cells.
+Gas crosses their 64 lateral faces as well as their 104 axial faces.
+The energy delivered in the evolved runs remains open. [Four-case tracer-mass test](docs/science/tracer_mass_budget_2026-11-19.md) · [Injector geometry and solver check](docs/science/injector_faces_2026-11-19.md)
+<!-- claims: BND-08 BND-10 BND-11 -->
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only
