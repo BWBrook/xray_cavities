@@ -12,6 +12,9 @@ The G-HI production estimate is 13–15% above labelled power at 29–30 Myr. We
 
 All entries are multiples of labelled bipolar kinetic power, or of its integral over the interval. Each measured range spans the same three boxes and two face reconstructions. Production uses trapezoidal time integration of the outward flux plus the change in stored energy. The storage term contributes less than 0.000052 in absolute value in every row. The synthetic field has zero storage change. [Matched results by case, box and reconstruction](assets/nozzle_flux_calibration_2026-11-19/matched_nozzle_flux.csv)
 
+**What the test excludes in each case.** Across both representations of the prescribed steady jet, even the largest synthetic reading falls below the smallest production reading in C-HI (1.038 versus 1.134), G-HI (1.034 versus 1.130) and G-LO (1.056 versus 1.143). Those geometries on the tested fields do not account for the observed excess. In C-LO all three centred point-sampled estimates exceed their matched production values, reaching 1.231. Geometry and the choice of cell representation can give an error of the required size there. Bias from the cocoon gas adjacent to the evolving production jet remains uncalibrated in every case. The [independent tagged-mass inventory](tracer_mass_budget_2026-11-19.md) measures how much marked material accumulated.
+<!-- claims: BND-09 BND-10 -->
+
 ![Known and measured nozzle energy fluxes by case, control-box padding and reconstruction](assets/nozzle_flux_calibration_2026-11-19/nozzle_flux_calibration.png)
 
 ## The jet with known power

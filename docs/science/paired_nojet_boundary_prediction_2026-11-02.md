@@ -20,6 +20,14 @@ The production boundary mass gain does not depend on jet power. Whole-grid
 loading is removed using the HI−LO difference of about 2.2e41 g per 10 Myr;
 the 1e43 erg/s low-power runs carry about 1% of that.
 
+**19 November correction to the loading estimate.** At 10 Myr the group
+HI-minus-LO difference of 2.176 × 10⁴¹ g includes 1.602 × 10⁴¹ g of tagged
+material and 0.574 × 10⁴¹ g of complementary gas. The tagged difference is
+1.152 times the labelled mass difference at the two actual ages. The 1.57
+whole-grid ratio cannot serve as jet mass loading. The original prediction
+below retains its recorded inputs. [Tracer-mass test](tracer_mass_budget_2026-11-19.md#boundary-exchange-and-the-earlier-157-estimate)
+<!-- claims: BND-10 -->
+
 | Atmosphere | ΔM at 50 Myr, LO | ΔM at 50 Myr, HI minus jet mass | ΔM(t)/ΔM(50) at 10/20/30/40 Myr |
 | --- | ---: | ---: | --- |
 | Cluster | 4.86e43 g | 4.86e43 g | 0.044 / 0.165 / 0.364 / 0.641 |
