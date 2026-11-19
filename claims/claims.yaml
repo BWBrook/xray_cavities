@@ -480,6 +480,8 @@ claims:
       - The comparison uses three complete histories to 50 Myr and the verified G-HI prefix through index 46. The 30-Myr comparison has full original scenario coverage in all four cases.
       - Twelve G-HI endpoint combinations require the invalid linear face flux at index 47. The lobe reaches the domain boundary at this age.
       - Sign agreement and spread across these finite reconstructions quantify method sensitivity. Actual discrete solver delivery and separate repair, floor or gravity-update energies remain unresolved.
+      - Only the whole-grid source is invariant to the reconstructions. G-HI's is 1.0778–1.0796 cumulative at 30, 40 and 46 Myr, and 1.0670–1.0694 for the 46–47 Myr interval, across every face and time rule. The outside balance is whole-grid minus nozzle-control, and every scenario shares one family of nozzle reconstructions on a staircase cone about two cells wide at the throat. Its sign is therefore not independent evidence of an energy sink outside the nozzle. What is measured is that the nozzle estimate exceeds the whole-grid source. A synthetic prescribed-state calibration of the nozzle-control code would separate a real split from a reconstruction bias (Claude, 19 Nov 2026).
+      - Of the 24 recovered endpoint estimates, only the 12 outer-active trapezoid and right-rectangle rows use any 47-Myr face flux. Six-face transport at 47 Myr is about 0.5% of labelled power, so the lobe's boundary contact does not alter the endpoint sign.
     depends_on: [BND-05, BND-06, BND-07, NAT-11]
 
   - id: OBS-01

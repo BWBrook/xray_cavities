@@ -220,3 +220,12 @@ fixed 50-kpc-inset box. On the coarse controls, the boundary contrast there
 is at most 1e-4 S and the drift at most 0.015 S (BND-04). Every C-LO and
 G-LO sphere fits inside it through 50 Myr, as do the high-power spheres
 before the box conflicts begin (C-HI from snapshot 33, G-HI from 32).
+
+## Withdrawal, 19 November
+
+The 5 November resolution hypothesis is withdrawn. It held that low-power
+jets, with L1b of 3–6 cells, are over-delivered more than high-power jets.
+The reconstructed nozzle-control balance is 1.09–1.15 labelled-input units
+in all four cases (BND-08, `four_case_flux_histories_2026-11-18.md`), with
+no low-power versus high-power ordering. Whether that 9–15% is solver
+delivery or a bias of the nozzle-control reconstruction is open; see BND-08.
