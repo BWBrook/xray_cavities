@@ -588,7 +588,33 @@ claims:
       and .venv/bin/python docs/science/assets/injector_faces_2026-11-19/replay_controls.py.
     caveats:
       - The smooth control extends radial gas and tracer through the full stencil and counts the cap faces. The gas around the production jet evolves. Substituting a continuing cone and static atmosphere changes the cap mass rate to 1.027–1.147 across cases.
-      - HLLC can resolve a stationary contact with zero mass transfer even when the exterior sets an inward acoustic bound. The share of transported mass on such faces diagnoses their location. Causal attribution and net energy transfer require the production states.
+      - HLLC can resolve a stationary contact with zero mass transfer even when the exterior sets an inward acoustic bound. The share of transported mass on such faces diagnoses their location. BND-12 measures net energy transfer and wave directions at four production epochs.
+
+  - id: BND-12
+    status: supported
+    statement: >-
+      At the 19, 20, 29 and 30 Myr outputs of all four production runs, the
+      64 lateral cap faces carry 79.9–81.9% of the marked-mass flux in excess
+      of the labelled mass rate. All 2,688 sampled cap face states use the
+      outward upwind branch. At 29–30 Myr the net injector gas-energy fluxes
+      under trapezoidal weighting are 1.1620, 1.1361, 1.1584 and 1.1553
+      times label in C-HI, C-LO, G-HI and G-LO. G-HI's exterior balance is
+      −8.40% to −8.45% of labelled energy under the two outer-face conventions.
+    evidence:
+      - {path: docs/science/production_injector_pilot_2026-11-19.md, commit: 5439ff1}
+      - {path: docs/science/assets/production_injector_pilot_2026-11-19/pilot_tables.zip, commit: 5439ff1}
+      - {path: docs/science/assets/production_injector_pilot_2026-11-19/cap_direction_and_waves.csv, commit: 5439ff1}
+      - {path: docs/science/assets/production_injector_pilot_2026-11-19/signed_intervals.csv, commit: 5439ff1}
+      - {path: docs/science/assets/production_injector_pilot_2026-11-19/public_comparison_receipt.json, commit: 5439ff1}
+      - {path: docs/science/assets/production_injector_pilot_2026-11-19/flagged_sphere_gravity_intervals.csv, commit: 5439ff1}
+    reproduce: >-
+      Run python3 docs/science/assets/production_injector_pilot_2026-11-19/replay.py.
+      For the native input and gravity replay follow docs/exchange/logs/2026-11-19-production-injector-pilot.md.
+    caveats:
+      - This claim covers the specified saved states and quadrature. A separate build of the retained PLUTO C routines reproduced 68,736 individual interfaces and the 24 primary interval and quadrature combinations. The independent whole-grid tracer census agrees within 0.00018 of labelled mass across the eight trapezoidal comparisons.
+      - Inner-face reconstruction can depend on slopes involving exterior cells. All faces on both caps have positive outward lower wave speed at these epochs.
+      - Intermediate Runge–Kutta states and the terminal velocity ramp are unsampled. Extending the result to other ages or attributing the exterior residual to a particular source requires separate evidence. In the two low-power cases the exterior residual changes sign with outer-boundary reconstruction.
+    depends_on: [BND-10, BND-11]
 
   - id: OBS-01
     status: refuted

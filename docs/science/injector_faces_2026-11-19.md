@@ -1,5 +1,7 @@
 # Why the injector grid can supply excess jet mass
 
+The subsequent production measurement identifies how much marked mass and gas energy crossed the injector at 19, 20, 29 and 30 Myr in all four runs. The steady fields below give the comparisons used to design that measurement. [Production injector results](production_injector_pilot_2026-11-19.md)
+
 The jet-marked mass in the four production runs grew at 1.152–1.157 times the labelled mass rate during 29–30 Myr. The same excess can arise on the production grid when the jet expands into a smooth radial flow. The geometry has a specific effect. Each moving cap supplies gas through the sides of its grid cells as well as their ends. The gas outside those cells determines how much crosses. Its evolved pressure, density and velocity are the missing inputs to the energy measurement. [Production tracer census](tracer_mass_budget_2026-11-19.md) · [Four-case geometry and mass comparison](assets/injector_faces_2026-11-19/cap_reference_summary.csv)
 <!-- claims: BND-10 BND-11 -->
 

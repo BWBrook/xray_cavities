@@ -283,20 +283,22 @@ squared. The retained-to-labelled mass ratios at 30 Myr are 1.1554,
 checks native volume bounds, all 201 raw tracer ranges, net total-gas mass
 through the nozzle boxes, and sampled outer-face bounds. The 2 November
 HI-minus-LO total-mass difference includes complementary gas. The marked
-mass supports excess mass loading in G-HI and leaves the kinetic
-energy per unit numerical transfer open. [Tracer-mass test and replay](docs/science/tracer_mass_budget_2026-11-19.md)
+mass supports excess mass loading in G-HI. The production pilot measures
+the energy per gram crossing the jet cones at four epochs. [Tracer-mass test and replay](docs/science/tracer_mass_budget_2026-11-19.md) · [Production pilot](docs/science/production_injector_pilot_2026-11-19.md)
 <!-- claims: BND-10 -->
 
 The cap geometry gives a direct control. Its 64 lateral faces add 14.2% of the
 continuum mass rate when the prescribed radial state is evaluated at their
-centres. The public fixture reproduces the geometry, and the compiled PLUTO
-comparisons establish how the exterior changes cap transport. For production,
-compare the signed cap and stationary fluxes with the tracer inventory,
-including storage in the maintained sphere and transport through the outer
-faces. The zero outward rates through 30 Myr apply at saved times.
-Potential-energy accounting supplies a comparison for the direct gravity-work
-integral. [Injector inputs and replay](docs/science/injector_faces_2026-11-19.md) · [Boundary and gravitational work](docs/science/outer_tracer_gravity_2026-11-19.md)
-<!-- claims: BND-08 BND-10 BND-11 -->
+centres. At the four production epochs those faces carry 79.9–81.9% of the
+cap mass excess. Start with the primary piecewise-linear calculation validated
+against the C solver, combine the signed cone and stationary fluxes, and
+include the storage change in the maintained cells. The pilot's eight
+intervals reproduce the tracer census within 0.00018 of labelled mass.
+Full-history tracer closure also requires the signed outer transport. The
+previously established zero outward rates through 30 Myr apply at saved times.
+Compare direct gravity work and potential continuity on the same exterior
+volume and time rule. [Production tables and replay](docs/science/production_injector_pilot_2026-11-19.md) · [Boundary and gravitational work](docs/science/outer_tracer_gravity_2026-11-19.md)
+<!-- claims: BND-08 BND-10 BND-11 BND-12 -->
 
 ## Conventions you must apply
 
