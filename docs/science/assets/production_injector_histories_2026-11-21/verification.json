@@ -1,0 +1,135 @@
+{
+  "archive": {
+    "archive": "production_injector_201.tar.gz",
+    "archive_bytes": 140839560,
+    "archive_sha256": "2e2e7646535aca9885f9e1c4fc408200e4898129c930a70cb10a9fd83de745c2",
+    "completion_sha256": "5efabeb0c94ce7c21c333f9670aa2c7e237a29d5b39ecf7946b1f3462c38bf0b",
+    "join_sha256": "d00be96fb42dc0e930a835bc5cd87f42ddda88e53015eb4a321627581b3f20c3",
+    "stage_sha256": "52da1d7509a6c628eb33956f7b08d7a0dab7950b359ccbdd0ca8582c58adac34"
+  },
+  "checked_native_outputs": {
+    "C-HI": 51,
+    "C-LO": 51,
+    "G-HI": 48,
+    "G-LO": 51
+  },
+  "original_failed_stage_sha256": "6d2436740caedd99ba243e579fe536c0b9f030e7a4e36f6c6cbc16d9b4a44ea1",
+  "public_member_sha256": {
+    "comparison/flagged_sphere_gravity_intervals.csv": "41b42ec1baed81018e7fc5d4343bd42f88efadab4d887a7a9441e1041ca5c8a5",
+    "comparison/flagged_sphere_gravity_snapshots.csv": "78fed19e90be845fa6236a9e8b6a8a96ac36f8f39aaf98bf53be3fd18cb323c4",
+    "comparison/native_outer_snapshot_summary.csv": "29502d45ea1115680b615cfec4943a5de69247212d7372b10a839bcafe2813e0",
+    "comparison/native_signed_tracer_transport.csv": "4a6cc0a8a5d984f5eb420f64606ea54600dd4806b562648c28b4777a0258219e",
+    "comparison/potential_work_intervals.csv": "f60f8ea9b79905360d43459173bf0c7ee05e88c9e4bf1f406f1cbc86d4015b61",
+    "comparison/saved_tracer_clearance.csv": "ebc92067ae72e3bd0466a85bcdb069ffda8cdf8e8a6d103681b680c8a5f5bc62",
+    "native/summary/C-HI/injector_interval_balances.csv": "203fb1e49557f172be8fcd9becf443fa8f9334bb2b12c1e07116f4548364088b",
+    "native/summary/C-HI/injector_snapshot_rates.csv": "993e67bb473f8e0ebba57c214fb9f9cd9c09b85f0625031662e3b71a2f064016",
+    "native/summary/C-LO/injector_interval_balances.csv": "066033bb4637143c058a5a2fed0e9c526443a0b812c14794fff5c4cd90df4187",
+    "native/summary/C-LO/injector_snapshot_rates.csv": "8ccfcfc6f11f0b4ae6a7ef643560f22d16757b6e25b60e995a431c44fc281883",
+    "native/summary/G-HI/injector_interval_balances.csv": "6f9fcd9f5fae1e9e9e361223fae5ee054519194c34c20a03abbdc727db594061",
+    "native/summary/G-HI/injector_snapshot_rates.csv": "285b0dc90bd07a67feabea978c1737caec3b20bd24fde6e74f14777fc03bcc39",
+    "native/summary/G-LO/injector_interval_balances.csv": "4ba59cff90b22384761e6831e96bf000d50eed8a6a739a0872327da63fac3032",
+    "native/summary/G-LO/injector_snapshot_rates.csv": "b1c8fce054f6b378026e44205aa91e0abd6fa8b76211e5e31e9374d177870012"
+  },
+  "public_zip_sha256": "5b5d0b2c526c8340e8cbd89e11f66d23e721c310443bb3e66b6aa7b4489a7461",
+  "raw_histories_archive_sha256": "2369b45c02d8ae9eec5c2981edf44bf081a713452dcabcaa0e071764a3b2463e",
+  "replay": {
+    "flagged_sphere_gravity_intervals.csv": {
+      "cluster_sha256": "41b42ec1baed81018e7fc5d4343bd42f88efadab4d887a7a9441e1041ca5c8a5",
+      "fields_with_different_serialization": 0,
+      "max_scaled_difference": 0,
+      "rows": 4720
+    },
+    "flagged_sphere_gravity_snapshots.csv": {
+      "cluster_sha256": "78fed19e90be845fa6236a9e8b6a8a96ac36f8f39aaf98bf53be3fd18cb323c4",
+      "fields_with_different_serialization": 51,
+      "max_scaled_difference": 1.6123554655988998e-16,
+      "rows": 201
+    },
+    "injector_interval_balances.csv": {
+      "fields_with_different_serialization": 0,
+      "max_scaled_difference": 0,
+      "rows": 2364
+    },
+    "injector_snapshot_rates.csv": {
+      "fields_with_different_serialization": 182,
+      "max_scaled_difference": 2.117582368135751e-22,
+      "rows": 2412
+    },
+    "native_gravity_comparison.csv": {
+      "cluster_sha256": "5999d0ab5d2d4a52b0cc4fa1d49b94f14dcc5287c3932f92f1d533c933f811fe",
+      "fields_with_different_serialization": 0,
+      "max_scaled_difference": 0,
+      "rows": 7080
+    },
+    "native_outer_snapshot_summary.csv": {
+      "cluster_sha256": "29502d45ea1115680b615cfec4943a5de69247212d7372b10a839bcafe2813e0",
+      "fields_with_different_serialization": 0,
+      "max_scaled_difference": 0,
+      "rows": 201
+    },
+    "native_signed_tracer_transport.csv": {
+      "cluster_sha256": "4a6cc0a8a5d984f5eb420f64606ea54600dd4806b562648c28b4777a0258219e",
+      "fields_with_different_serialization": 0,
+      "max_scaled_difference": 0,
+      "rows": 591
+    },
+    "potential_work_intervals.csv": {
+      "cluster_sha256": "f60f8ea9b79905360d43459173bf0c7ee05e88c9e4bf1f406f1cbc86d4015b61",
+      "fields_with_different_serialization": 0,
+      "max_scaled_difference": 0,
+      "rows": 197
+    },
+    "saved_tracer_clearance.csv": {
+      "cluster_sha256": "ebc92067ae72e3bd0466a85bcdb069ffda8cdf8e8a6d103681b680c8a5f5bc62",
+      "fields_with_different_serialization": 0,
+      "max_scaled_difference": 0,
+      "rows": 201
+    }
+  },
+  "scheduler": {
+    "882246": {
+      "end_abort_mail": true,
+      "exit": 0,
+      "name": "inj_ghi",
+      "state": "F",
+      "walltime": "02:45:32"
+    },
+    "882247": {
+      "end_abort_mail": true,
+      "exit": 0,
+      "name": "inj_clo",
+      "state": "F",
+      "walltime": "02:44:34"
+    },
+    "882248": {
+      "end_abort_mail": true,
+      "exit": 0,
+      "name": "inj_chi",
+      "state": "F",
+      "walltime": "03:15:17"
+    },
+    "882249": {
+      "end_abort_mail": true,
+      "exit": 0,
+      "name": "inj_glo",
+      "state": "F",
+      "walltime": "02:47:21"
+    },
+    "882251": {
+      "end_abort_mail": true,
+      "exit": 1,
+      "name": "inj_join",
+      "state": "F",
+      "walltime": "00:00:22"
+    },
+    "882661": {
+      "end_abort_mail": true,
+      "exit": 0,
+      "name": "inj_join_fix",
+      "state": "F",
+      "walltime": "00:00:15"
+    }
+  },
+  "verified_returned_members": 619,
+  "verified_source_members": 611
+}

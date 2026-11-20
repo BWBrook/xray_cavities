@@ -1,0 +1,63 @@
+{
+  "source_identity": {
+    "source_commit": "2674fc38b152f96605cb24e2840e92b64ebd5b81",
+    "binary_sha256": "b6a859a94c25cf1eb85525bd491d0cdbc014b129a1c1f699166bb31e925c1d93",
+    "driver_sha256": "dc45491abb636ac9441f87787657fb5181d5447c9e1c1f8c20fa759609b95aff",
+    "comparison_kernel_sha256": "87807976b27d7ac174985b7a63db511a695c6266ffe5d642b9a6a92292f89b07",
+    "frozen_reference_manifest_sha256": "7a2ee29b149003ca7fbf1fe37df26cf183e87acb790664458cb90cbc0ae0d5ce"
+  },
+  "full_driver_sha256": "6e85f6082443379892bb648168474522093f4874505b33359f1b008c9b959a4a",
+  "case_table_hashes": {
+    "C-HI": {
+      "snapshot_sha256": "993e67bb473f8e0ebba57c214fb9f9cd9c09b85f0625031662e3b71a2f064016",
+      "intervals_sha256": "203fb1e49557f172be8fcd9becf443fa8f9334bb2b12c1e07116f4548364088b"
+    },
+    "C-LO": {
+      "snapshot_sha256": "8ccfcfc6f11f0b4ae6a7ef643560f22d16757b6e25b60e995a431c44fc281883",
+      "intervals_sha256": "066033bb4637143c058a5a2fed0e9c526443a0b812c14794fff5c4cd90df4187"
+    },
+    "G-HI": {
+      "snapshot_sha256": "285b0dc90bd07a67feabea978c1737caec3b20bd24fde6e74f14777fc03bcc39",
+      "intervals_sha256": "6f9fcd9f5fae1e9e9e361223fae5ee054519194c34c20a03abbdc727db594061"
+    },
+    "G-LO": {
+      "snapshot_sha256": "b1c8fce054f6b378026e44205aa91e0abd6fa8b76211e5e31e9374d177870012",
+      "intervals_sha256": "4ba59cff90b22384761e6831e96bf000d50eed8a6a739a0872327da63fac3032"
+    }
+  },
+  "case_snapshots": {
+    "C-HI": 51,
+    "C-LO": 51,
+    "G-HI": 48,
+    "G-LO": 51
+  },
+  "snapshots": 201,
+  "interfaces_per_snapshot": 4296,
+  "case_epoch_native_interfaces": 863496,
+  "cap_face_epochs": 33768,
+  "signed_snapshot_region_rows": 603,
+  "signed_interval_rule_rows": 591,
+  "max_face_error_as_fraction_of_largest_flux": 4.611736269564734e-16,
+  "max_scaled_primary_snapshot_difference": 5.863730870884539e-16,
+  "max_scaled_primary_interval_difference": 1.4654943925052066e-14,
+  "classification_changes_on_ascii_grid": {
+    "return_wave_faces_reclassified": 0,
+    "HLL_faces_reclassified": 0,
+    "outer_acoustic_faces_reclassified": 0,
+    "exterior_sets_wave_faces_reclassified": 0,
+    "hotter_exterior_faces_reclassified": 0
+  },
+  "max_ascii_mesh_change": {
+    "max_region_change_gas_energy_over_label": 7.733440621215948e-08,
+    "max_region_change_mass_over_label": 1.6747562447960718e-07,
+    "max_region_change_tracer_over_label": 8.087295200187583e-08
+  },
+  "output_sha256": {
+    "face_direction_history.csv": "2f28cd0627bfe0a025cb39adc20485a79db1b8987eab0f8498ac9e95d5ffe925",
+    "signed_rates.csv": "c728bf58c6ce242391064cc26a31a575348fc4ef319dc08ebd07fd0319f5dbee",
+    "signed_intervals.csv": "788fd021ca1fa46dce3149a881d6903e9bee575707fc6e0c244553b3598d2ea3",
+    "mesh_sensitivity.csv": "d7725e2603d20dbc1b602f93c3f220a61550654174627f6018c7e266f2385608",
+    "native_input_sha256.csv": "56d7b813f93112e2b431815112e6617585dbb956878325b6d08cae6eb43a1462"
+  },
+  "time_interpretation": "Fluxes reconstructed at saved epochs from retained primitives with contemporaneous shock flags. Interval values use the specified quadrature over those epochs."
+}

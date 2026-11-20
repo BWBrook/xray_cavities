@@ -1,0 +1,15 @@
+{
+  "status": "passed_independent_energy_review",
+  "snapshot_count": 201,
+  "snapshot_rate_rows": 2412,
+  "interval_rows": 2364,
+  "scalar_checks": 44344,
+  "failures": [],
+  "maximum_scaled_residual": 0.0007549516567451064,
+  "maximum_absolute_numeric_residual": 1.509903313490213e-14,
+  "source_face_fluxes_independently_recomputed": false,
+  "raw_patch_storage_independently_recomputed": true,
+  "physical_closure_qualified": false,
+  "reviewer_sha256": "b274afd2d024200fb565e3b762b0f75cf96a500d8a5f08923b9b67d67c11ba1c",
+  "source_inputs_count": 628
+}

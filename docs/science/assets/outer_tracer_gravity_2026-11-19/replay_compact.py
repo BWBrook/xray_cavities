@@ -160,7 +160,30 @@ NATIVE_WORK = ("case", "start_index", "end_index", "padding", "nozzle_method", "
                "direct_minus_continuity_work_over_label", "hydro_balance_minus_direct_work_over_label")
 
 
+def check_work_partition(gravity, pad, epoch):
+    fields = ("inward_motion_erg_s", "outward_motion_erg_s", "net_erg_s")
+    whole, inside, outside = (gravity[key] for key in ("whole_grid", f"inside_p{pad}", f"outside_p{pad}"))
+    for region in (whole, inside, outside):
+        if not all(math.isfinite(region[f]) for f in fields):
+            raise ValueError(f"nonfinite native gravity work at {epoch}, padding {pad}")
+    for region in (whole, inside):
+        inward, outward, net = (region[f] for f in fields)
+        if abs(math.fsum((inward, outward, -net))) > 1.e-10 * (abs(inward) + abs(outward)):
+            raise ValueError(f"native inward and outward work do not sum at {epoch}, padding {pad}")
+    for field in fields:
+        a, b, c = whole[field], inside[field], outside[field]
+        # The producer subtracts before the cgs conversion and rounds all three stored powers independently.
+        tolerance = 4 * math.ulp(max(abs(a), abs(b), abs(c)))
+        if abs(math.fsum((a, -b, -c))) > tolerance:
+            raise ValueError(f"native exterior {field} differs from whole minus inside at {epoch}, padding {pad}")
+
+
 def join_native_work(epochs, scenarios):
+    pads = {scenario["padding"] for scenario in scenarios}
+    for epoch, (_, gravity) in epochs.items():
+        if gravity:
+            for pad in pads:
+                check_work_partition(gravity, pad, epoch)
     rows = []
     for scenario in scenarios:
         case, a, b = scenario["case"], scenario["start_index"], scenario["end_index"]
@@ -172,8 +195,6 @@ def join_native_work(epochs, scenarios):
         scale = (scenario["end_myr"] - scenario["start_myr"])*SECONDS_PER_MYR/scenario["labelled_energy_erg"]
         direct = [scale*((1.-weight)*left[1][region][f] + weight*right[1][region][f])
                   for f in ("inward_motion_erg_s","outward_motion_erg_s","net_erg_s")]
-        if abs(direct[-1] - sum(direct[:2])) > 1.e-10 * max(sum(map(abs,direct[:2])),1.e-30):
-            raise ValueError(f"native inward and outward work do not sum for {case} {b} {region}")
         proxy = scenario["inferred_gravity_work_over_label"]
         residual = scenario["outside_total_residual_over_label"]
         gap = direct[-1] - proxy

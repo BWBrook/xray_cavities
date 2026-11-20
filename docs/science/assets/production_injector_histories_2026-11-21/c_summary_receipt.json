@@ -1,0 +1,13 @@
+{
+  "parent_receipt_sha256": "d0b5b754adef2ac07b2a4b36c6966aad3167489ace36d2278436c1b76a957fe7",
+  "summary_driver_sha256": "120c327f5c8371911dbed30e758377c9724b175737ea2f6be44f30425e5adbd7",
+  "tables_sha256": {
+    "phase_ranges.csv": "a08073066b9905b09c82331b39ed1944497830fb232253c42fc9ef5294f455b3",
+    "wave_exceptions.csv": "563f45638e31900f5f9a6ff0eb46aeca14f478a53d414491380830e9163a440a",
+    "cumulative_flux.csv": "bbb98c65e85b75934c65e8850d92d61cef751f67aee08338597ae161a543c5b6",
+    "tracer_closure_ranges.csv": "a7c3139cb79ac3c25f06486f3328118a43d663a14196e6254a6fe45f6ce51589"
+  },
+  "cap_faces_with_two_outward_speeds_at_positive_age": 33029,
+  "cap_faces_at_positive_age": 33096,
+  "count_scope": "One instance for each physical face per saved epoch. All component mass and gas-energy signs are outward from the flagged sphere. Fractions of an excess require a positive denominator."
+}

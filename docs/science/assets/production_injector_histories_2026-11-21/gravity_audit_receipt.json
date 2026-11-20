@@ -1,0 +1,14 @@
+{
+  "replayed": 4720,
+  "max_abs_errors_over_label": {
+    "direct_inward_motion_work_over_label": 2.220446049250313e-16,
+    "direct_outward_motion_work_over_label": 5.551115123125783e-17,
+    "direct_net_work_over_label": 1.887379141862766e-15,
+    "potential_continuity_work_over_label": 8.881784197001252e-15,
+    "direct_minus_continuity_work_over_label": 9.547918011776346e-15,
+    "outside_total_residual_over_label": 1.8207657603852567e-14,
+    "hydro_balance_minus_direct_work_over_label": 1.9984014443252818e-14
+  },
+  "cumulative": "ratios of summed signed energies to summed interval labels, identical time rule at every epoch",
+  "required_if_sole_cause": "continuity work plus the outside total residual, assuming all hydro transport and other sources close"
+}

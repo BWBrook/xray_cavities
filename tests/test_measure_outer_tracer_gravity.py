@@ -86,10 +86,28 @@ def test_subnormal_positive_support_and_empty_threshold():
         outer.measure_snapshot(fields, grid, {}, None, gravity=False)
 
 
+def test_startup_work_partition_retains_roundoff_and_rejects_bad_component():
+    # G-HI index zero, second padded box. The stored exterior net is less than one ulp of the parent powers.
+    parent_power = -1.9217576543160226e38
+    whole = dict(inward_motion_erg_s=0., outward_motion_erg_s=parent_power, net_erg_s=parent_power)
+    outside = dict(inward_motion_erg_s=0., outward_motion_erg_s=0., net_erg_s=2.228690990728549e22)
+    gravity = {"whole_grid": whole, "inside_p2": whole.copy(), "outside_p2": outside}
+    compact.check_work_partition(gravity, 2, ("G-HI", 0))
+    assert outside["net_erg_s"] == 2.228690990728549e22
+    outside["net_erg_s"] = 2.e24
+    with pytest.raises(ValueError, match="whole minus inside"):
+        compact.check_work_partition(gravity, 2, ("G-HI", 0))
+    outside["net_erg_s"] = 0.
+    gravity["inside_p2"]["outward_motion_erg_s"] = 0.
+    with pytest.raises(ValueError, match="inward and outward work"):
+        compact.check_work_partition(gravity, 2, ("G-HI", 0))
+
+
 def test_native_join_matches_regions_and_requires_both_annual_endpoints():
     def epoch(i, inward, outward):
         row = dict(age_myr=i,tagged_inward_g_s=-i,tagged_outward_g_s=0.,tagged_net_outward_g_s=-i)
-        return row, {"outside_p4":dict(inward_motion_erg_s=inward,outward_motion_erg_s=outward,net_erg_s=inward+outward)}
+        work = dict(inward_motion_erg_s=inward,outward_motion_erg_s=outward,net_erg_s=inward+outward)
+        return row, {"whole_grid": work, "inside_p4": dict.fromkeys(work, 0.), "outside_p4": work.copy()}
     epochs = {("C-HI",0):epoch(0,0.,-2.), ("C-HI",1):epoch(1,2.,-4.),
               ("C-HI",3):epoch(3,2.,-4.), ("C-HI",4):epoch(4,2.,-4.)}
     intervals = [dict(case="C-HI",start_index=i,end_index=i+1,start_myr=i,end_myr=i+1,

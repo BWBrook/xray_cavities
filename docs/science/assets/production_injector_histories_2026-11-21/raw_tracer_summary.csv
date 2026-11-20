@@ -1,0 +1,5 @@
+case,epochs,raw_margin_zero_epochs,min_raw_margin_through30_kpc,min_raw_margin_all_kpc,first_raw_shell_index,first_dilute_shell_index,first_raw_face_index,first_threshold_face_index,first_tagged_inward_index,first_tagged_outward_index,final_raw_margin_kpc,final_threshold_margin_kpc,final_shell_tagged_g,final_shell_dilute_g,final_numerator_over_label
+C-HI,51,0,95.79954528808594,26.025314331054688,,,,,,,26.025314331054688,31.64013671875,0.0,0.0,1.154605040860622
+C-LO,51,0,176.27932739257812,162.35921478271484,,,,,,,162.35921478271484,178.1738510131836,0.0,0.0,1.124730658750049
+G-HI,48,1,93.15339660644531,0.0,43,43,47,47,47,47,0.0,0.0,7.818018452389062e+39,3.9566372331438454e+37,1.151548128629787
+G-LO,51,0,178.227632522583,157.70884704589844,,,,,,,157.70884704589844,165.33241271972656,0.0,0.0,1.1410065910589509
