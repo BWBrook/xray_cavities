@@ -278,27 +278,26 @@ representation. [Case-by-case comparison](docs/science/nozzle_flux_calibration_2
 For jet mass history use the whole-grid sum of density times the stored
 tracer fraction and cell volume, subtract its measured initial value, and
 compare with twice the bipolar labelled kinetic energy divided by speed
-squared. The retained-to-labelled mass ratios at 30 Myr are 1.1554,
-1.1047, 1.1516 and 1.1326 in C-HI, C-LO, G-HI and G-LO. The archive replay
-checks native volume bounds, all 201 raw tracer ranges, net total-gas mass
-through the nozzle boxes, and sampled outer-face bounds. The 2 November
-HI-minus-LO total-mass difference includes complementary gas. The marked
-mass supports excess mass loading in G-HI. The production pilot measures
-the energy per gram crossing the jet cones at four epochs. [Tracer-mass test and replay](docs/science/tracer_mass_budget_2026-11-19.md) · [Production pilot](docs/science/production_injector_pilot_2026-11-19.md)
+squared. The native-volume retained-to-labelled mass ratios at 30 Myr are
+1.1553, 1.1047, 1.1515 and 1.1325 in C-HI, C-LO, G-HI and G-LO. Use the
+raw positive tracer for clearance and the actual six face samples for signed
+transport. All four boundary layers remain clear through 30 Myr. G-HI reaches
+the negative-z face at the final 47-Myr output. The 2 November HI-minus-LO
+total-mass difference includes complementary gas. [Native tracer, output hashes and replay](docs/science/production_injector_histories_2026-11-21.md)
 <!-- claims: BND-10 -->
 
 The cap geometry gives a direct control. Its 64 lateral faces add 14.2% of the
 continuum mass rate when the prescribed radial state is evaluated at their
-centres. At the four production epochs those faces carry 79.9–81.9% of the
-cap mass excess. Start with the primary piecewise-linear calculation validated
-against the C solver, combine the signed cone and stationary fluxes, and
-include the storage change in the maintained cells. The pilot's eight
-intervals reproduce the tracer census within 0.00018 of labelled mass.
-Full-history tracer closure also requires the signed outer transport. The
-previously established zero outward rates through 30 Myr apply at saved times.
-Compare direct gravity work and potential continuity on the same exterior
-volume and time rule. [Production tables and replay](docs/science/production_injector_pilot_2026-11-19.md) · [Boundary and gravitational work](docs/science/outer_tracer_gravity_2026-11-19.md)
-<!-- claims: BND-08 BND-10 BND-11 BND-12 -->
+centres. Across the 197 post-startup production snapshots those faces carry
+78.4–81.9% of the cap mass excess. Start with the primary piecewise-linear
+calculation validated against the C solver. Combine signed cone and stationary
+fluxes, include the storage change in the maintained cells, and subtract raw
+outer transport for tracer closure. The terminal ramp and startup produce
+larger timing errors than the pilot intervals. Compare direct gravity work
+minus continuity-inferred work with the total-energy residual on the same
+exterior volume and time rule. Keep the two unavailable G-HI outer-face
+endpoint choices missing. [Full history and independent checks](docs/science/production_injector_histories_2026-11-21.md) · [Native replay instructions](docs/exchange/logs/2026-11-21-production-injector-histories.md)
+<!-- claims: BND-08 BND-10 BND-11 BND-12 BND-13 -->
 
 ## Conventions you must apply
 

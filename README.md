@@ -9,9 +9,9 @@ synthetic X-ray and radio observations, separating the physical energy proxy, th
 of cavity geometry, and the age estimate used to infer power. The primary
 enthalpy convention is **2.5pV**; **4pV** is a literature comparator. Labelled
 jet power times age is the reference input. The production injector has
-also been measured at four saved ages in every run.
+also been measured at all 201 saved states across the four runs.
 
-> **Status, 19 November 2026:** active research, developed in the open. The
+> **Status, 21 November 2026:** active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -20,7 +20,7 @@ also been measured at four saved ages in every run.
 | Reader | Starting point |
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
-| Latest accounting result? | [Measured energy and mass at the jet injector](docs/science/production_injector_pilot_2026-11-19.md), [tracer at the boundary and gravitational work](docs/science/outer_tracer_gravity_2026-11-19.md), and [final energy intervals](docs/science/three_case_final_interval_2026-11-19.md) |
+| Latest accounting result? | [Full jet energy budgets, tracer leakage and the gravity test](docs/science/production_injector_histories_2026-11-21.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
@@ -127,18 +127,20 @@ straddling the jet edge. The production excess in C-LO is within the size
 of error this test can generate. [Four-case calibration and figure](docs/science/nozzle_flux_calibration_2026-11-19.md)
 <!-- claims: BND-08 BND-09 -->
 
-The tracer carried by jet material gives a separate measure of how much
-mass the simulations retain. By 30 Myr G-HI has gained 15.2% more tagged mass
-than the power and speed on its label imply. Even the most adverse correction
-for cell volumes leaves 14.5%. Its whole-grid energy excess at this age
-is about 8%. The extra marked mass supports excess numerical mass loading
-in G-HI. Across 16 production snapshots, about four-fifths of the excess
-marked mass crossed the lateral faces of the cells that supply the jet. The
-outgoing gas carried within 0.5% of its nominal energy per gram. At 29–30 Myr
-the injector supplied 13.6–16.2% more gas energy than label across the four
-runs. The G-HI energy balance outside it was −8.4% of labelled input under
-both outer-boundary reconstructions. [Four-case tracer census](docs/science/tracer_mass_budget_2026-11-19.md) · [Measured injector energy and its limits](docs/science/production_injector_pilot_2026-11-19.md)
-<!-- claims: BND-08 BND-10 BND-11 BND-12 -->
+At every saved age after startup, the sides of the grid cells that inject the
+jets carried **78–82% of the excess marked mass**. The outgoing gas carried
+within 0.5% of its nominal energy per gram. Over the full available histories
+the net injector supplied **16.2%, 12.3%, 15.8% and 15.1% more gas energy than
+label** in C-HI, C-LO, G-HI and G-LO. Through 30 Myr even the most dilute
+recorded tracer remained at least 93 kpc from a domain face in every run.
+
+After accounting for outer-boundary transport, G-HI's whole-grid energy
+source was 7.8% above label by 47 Myr. The deficit outside its injector
+was about 8% of labelled input. Two
+ways of measuring gravitational work on that same gas agreed to within 1.03%
+of the deficit's magnitude in every matched interval and method. The cause
+of the remaining imbalance is open. [Four-case results, figure and replay](docs/science/production_injector_histories_2026-11-21.md)
+<!-- claims: BND-08 BND-10 BND-11 BND-12 BND-13 -->
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only

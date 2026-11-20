@@ -530,19 +530,19 @@ claims:
     depends_on: [BND-08]
 
   - id: BND-10
-    status: provisional
+    status: supported
     statement: >-
-      At 30 Myr the whole-grid gain in jet-marked mass above startup is
-      1.1554, 1.1047, 1.1516 and 1.1326 times labelled bipolar mass in
-      C-HI, C-LO, G-HI and G-LO. All four remain above one under worst-case
-      bounds for the native cell volumes. In G-HI the bound is 1.1451–1.1662,
-      and sampled inward tracer transport through the domain faces is at most
-      0.216% of labelled mass across the three time rules. This independently
-      supports excess net numerical loading of marked material in G-HI.
+      At 30 Myr the whole-grid gain in jet-marked mass above startup, using
+      native cell volumes, is 1.1553, 1.1047, 1.1515 and 1.1325 times
+      labelled bipolar mass in C-HI, C-LO, G-HI and G-LO. Every sampled
+      domain face has zero raw tracer through 30 Myr in all four runs.
       The final-interval tagged growth rates fall by 3.12%, 3.18% and 3.10%
       in C-HI, C-LO and G-LO. The prescribed velocity ramp predicts 3.18%.
-      The specific energy at transfer remains unmeasured.
     evidence:
+      - {path: docs/science/production_injector_histories_2026-11-21.md, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/case_energy_budgets.csv, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/raw_tracer_faces.csv, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/raw_tracer_summary.csv, commit: 0a37ff6}
       - {path: docs/science/tracer_mass_budget_2026-11-19.md, commit: fd7305c}
       - {path: docs/science/assets/tracer_mass_budget_2026-11-19/tagged_mass_history.csv, commit: fd7305c}
       - {path: docs/science/assets/tracer_mass_budget_2026-11-19/tagged_mass_intervals.csv, commit: fd7305c}
@@ -553,18 +553,11 @@ claims:
       - {path: docs/science/assets/injector_faces_2026-11-19/late_tracer_change.csv, commit: cbc9c88}
       - {path: docs/science/assets/outer_tracer_gravity_2026-11-19/saved_tracer_clearance.csv, commit: cbc9c88}
     reproduce: >-
-      Extract tracer_mass_review_r1.tar.gz under private_archive and run
-      .venv/bin/python private_archive/turn20_tracer_mass_review_r1/replay_review.py
-      private_archive/tracer_mass_replay as described in the report.
-    test: >-
-      Review the scalar update and flagged reservoir, the conservative
-      cell-volume bounds, and the sampled outer-face limits. Exact face
-      transport of tagged mass and energy through the injector would test
-      how much kinetic energy accompanies the excess marked mass.
+      Run python3 docs/science/assets/production_injector_histories_2026-11-21/replay.py.
+      For the original centre-width census run the private tracer-mass replay as described in the 19 November report.
     caveats:
-      - The census uses the raw tracer fraction with centre-derived cell widths. Independent scans found zero tracer excursions outside [0,1] at all 201 matched outputs. Native node coordinates bound the geometry effect on each nonnegative inventory before subtraction.
-      - Net retention uses the measured nonzero starting inventory. Tracer is advected conservatively in ordinary cells of the inspected solver. Flagged cells maintain the prescribed state. Unmarked inflow adds no tracer, but marked boundary exchange between saved outputs is unmeasured. The sampled boundary limits in the two low-power cases are too loose to assign all retained mass to the injector.
-      - Gross outward gas transport is zero in all 744 outer-active face measurements through 30 Myr. Above-threshold tracer stays at least 100.96 kpc from every face in every case through that age. Combining the sampled inward allowances with adverse cell-volume bounds still leaves 10.5% excess loading in C-HI and 14.2% in G-HI.
+      - Both inventories subtract the measured nonzero starting mass. The original centre-width calculation gives 1.1554, 1.1047, 1.1516 and 1.1326. The independent scans use native edges and all stored raw tracer values at 201 outputs.
+      - All sampled boundary transport of marked mass also vanishes through 50 Myr for C-HI, C-LO and G-LO. G-HI first reaches the negative-z face at 47 Myr. Its net outward transport under trapezoidal weighting for 46–47 Myr is 0.04185% of interval-labelled mass. Transport between output times is unmeasured.
       - The reconstructed nozzle surface mass is the signed flux of all gas. C-LO can have net inward mass transport while its inventory of marked material increases. The nozzle speed alone does not give the specific energy of the numerical interface flux or establish an energy sink outside the nozzle.
       - The historical source-tree bytes at compilation were not attested. The retained executable identities, configurations and build commands are checked. The G-HI comparison ends at the accepted index 47.
     depends_on: [BND-08]
@@ -588,19 +581,24 @@ claims:
       and .venv/bin/python docs/science/assets/injector_faces_2026-11-19/replay_controls.py.
     caveats:
       - The smooth control extends radial gas and tracer through the full stencil and counts the cap faces. The gas around the production jet evolves. Substituting a continuing cone and static atmosphere changes the cap mass rate to 1.027–1.147 across cases.
-      - HLLC can resolve a stationary contact with zero mass transfer even when the exterior sets an inward acoustic bound. The share of transported mass on such faces diagnoses their location. BND-12 measures net energy transfer and wave directions at four production epochs.
+      - HLLC can resolve a stationary contact with zero mass transfer even when the exterior sets an inward acoustic bound. The share of transported mass on such faces diagnoses their location. BND-12 measures net energy transfer and wave directions throughout the saved production histories.
 
   - id: BND-12
     status: supported
     statement: >-
-      At the 19, 20, 29 and 30 Myr outputs of all four production runs, the
-      64 lateral cap faces carry 79.9–81.9% of the marked-mass flux in excess
-      of the labelled mass rate. All 2,688 sampled cap face states use the
-      outward upwind branch. At 29–30 Myr the net injector gas-energy fluxes
-      under trapezoidal weighting are 1.1620, 1.1361, 1.1584 and 1.1553
-      times label in C-HI, C-LO, G-HI and G-LO. G-HI's exterior balance is
-      −8.40% to −8.45% of labelled energy under the two outer-face conventions.
+      At all 197 post-startup production outputs, the 64 lateral cap faces
+      carry 78.4–81.9% of the marked-mass flux in excess of the labelled rate.
+      Cap gas carries 0.99972–1.00468 times the nominal kinetic energy per
+      outward gram. Full-history trapezoidal net injector gas energies are
+      1.1618, 1.1228, 1.1581 and 1.1512 times label in C-HI, C-LO, G-HI and
+      G-LO. The stationary region supplies gas energy at each high-power
+      output and absorbs it at each low-power output.
     evidence:
+      - {path: docs/science/production_injector_histories_2026-11-21.md, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/c_solver_receipt.json, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/face_direction_history.csv, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/wave_exceptions.csv, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/case_energy_budgets.csv, commit: 0a37ff6}
       - {path: docs/science/production_injector_pilot_2026-11-19.md, commit: 5439ff1}
       - {path: docs/science/assets/production_injector_pilot_2026-11-19/pilot_tables.zip, commit: 5439ff1}
       - {path: docs/science/assets/production_injector_pilot_2026-11-19/cap_direction_and_waves.csv, commit: 5439ff1}
@@ -608,13 +606,34 @@ claims:
       - {path: docs/science/assets/production_injector_pilot_2026-11-19/public_comparison_receipt.json, commit: 5439ff1}
       - {path: docs/science/assets/production_injector_pilot_2026-11-19/flagged_sphere_gravity_intervals.csv, commit: 5439ff1}
     reproduce: >-
-      Run python3 docs/science/assets/production_injector_pilot_2026-11-19/replay.py.
-      For the native input and gravity replay follow docs/exchange/logs/2026-11-19-production-injector-pilot.md.
+      Run python3 docs/science/assets/production_injector_histories_2026-11-21/replay.py.
+      For the native input and gravity replay follow docs/exchange/logs/2026-11-21-production-injector-histories.md.
     caveats:
-      - This claim covers the specified saved states and quadrature. A separate build of the retained PLUTO C routines reproduced 68,736 individual interfaces and the 24 primary interval and quadrature combinations. The independent whole-grid tracer census agrees within 0.00018 of labelled mass across the eight trapezoidal comparisons.
-      - Inner-face reconstruction can depend on slopes involving exterior cells. All faces on both caps have positive outward lower wave speed at these epochs.
-      - Intermediate Runge–Kutta states and the terminal velocity ramp are unsampled. Extending the result to other ages or attributing the exterior residual to a particular source requires separate evidence. In the two low-power cases the exterior residual changes sign with outer-boundary reconstruction.
+      - The independent PLUTO C reconstruction reproduced 863,496 individual interfaces and 591 primary interval and quadrature combinations. All four cases use HLL at startup. After startup 33,029 of 33,096 cap faces use the outward upwind branch. All 67 exceptions are lateral C-LO faces carrying outward mass.
+      - Flux quadrature omits intermediate Runge–Kutta states and the terminal ramp between outputs. Its final-interval marked growth exceeds the native census by 3.52–3.59% of labelled mass in the three 50-Myr runs. Mass closure does not set a bound on the energy error.
     depends_on: [BND-10, BND-11]
+
+  - id: BND-13
+    status: supported
+    statement: >-
+      In G-HI the primary cumulative energy source through 47 Myr is
+      1.1581 times label at the injector and 1.0782 across the whole grid.
+      The exterior deficit is 7.99% of labelled input. All 1,120 valid
+      saved-interval and method comparisons on that same exterior have
+      negative residuals. The discrepancy between force-times-velocity
+      gravitational work and work inferred from potential continuity is
+      at most 1.021% of the magnitude of the matched G-HI residual.
+    evidence:
+      - {path: docs/science/production_injector_histories_2026-11-21.md, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/history_tables.zip, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/gravity_scientific_check_summary.csv, commit: 0a37ff6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/gravity_audit_receipt.json, commit: 0a37ff6}
+    reproduce: python3 docs/science/assets/production_injector_histories_2026-11-21/replay.py
+    caveats:
+      - The primary estimate uses linear reconstructed states, the configured solver switch, outer active-cell values and trapezoidal time weights. G-HI's linearly extrapolated outer state at index 47 is invalid. Its endpoint supports the left rule for that boundary reconstruction.
+      - The simulation applies gravity using stage-resolved numerical face mass fluxes. Both work estimates use saved states. The historical cause of the remaining energy imbalance is unresolved.
+      - The C-HI exterior residual also stays negative, with a maximum paired gravity discrepancy of 20.5% of its magnitude. In the low-power runs the exterior balance changes sign across boundary reconstructions.
+    depends_on: [BND-08, BND-12]
 
   - id: OBS-01
     status: refuted

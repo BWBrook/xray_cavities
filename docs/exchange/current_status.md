@@ -1,9 +1,23 @@
 # Current Status
 
-Last updated: 2026-11-19 (four-case production injector pilot verified, full histories submitted)
+Last updated: 2026-11-21 (four injector histories and the final gravity and tracer comparison verified)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Injector histories, 21 November
+
+All 201 outputs and 197 intervals passed verification. PBS jobs 882246–882249
+finished with exit 0. Comparison 882251 failed a startup roundoff check. Its
+replacement 882661 finished with exit 0 using the original case products.
+No jobs in this batch remain pending. The lateral cap faces carry 78.4–81.9%
+of the excess marked mass at every saved epoch after startup. Raw tracer
+first reaches a boundary only in G-HI and only at its last output, 47 Myr.
+The two gravity diagnostics differ by at most 1.021% of the magnitude of the
+G-HI exterior residual across all 1,120 matched interval and method choices.
+BND-10 is supported, BND-12 now covers all saved outputs, and BND-13 records
+the measured energy residual and gravity comparison. The historical numerical
+source of the exterior error remains open. [Full results](../science/production_injector_histories_2026-11-21.md) · [Recovery and reproduction](logs/2026-11-21-production-injector-histories.md)
 
 ## Injector faces, 19 November
 
