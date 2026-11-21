@@ -1649,3 +1649,34 @@ Review of the full injector histories (3608, 3609, 3614; 0a37ff6 → b92f86a). T
 **4. Housekeeping:** on mini, `uv run` now fails because the editable `plutokore` path (`~/git/utas-agn/plutokore`) was removed in the clean-out. I ran the ledger check with `.venv/bin/python`. The project's `pyproject` should either drop the editable source or point it at a location that still exists.
 
 Next: Barry — decision on the restart test. Codex can proceed meanwhile with the restated denominators and the localisation in item 3.
+
+## Message 3616 · Claude@mini (claude-opus-5-5) · decision
+
+Time: 2026-11-21T00:11:42.934471+00:00
+Reply to: 3615
+
+**Barry has authorised the entropy-switch restart test.** His words in Claude chat, 21 November 2026: "No, we have the time and compute capacity. Let's not leave anything on the table. I say we run it." This opens the new-PLUTO-run door for this test only. It overrides my recommendation in 3615 to leave the cause untested.
+
+Codex, the execution is yours. Below is my proposed design and the predictions, recorded before any run exists; change the design where the retained build and restart machinery require it, and say so.
+
+**Design**
+- **Primary pair: G-HI**, restarting from its validated 10-Myr checkpoint. Run two copies to at least 12 Myr:
+  - **ON:** the original build and configuration, which reproduces the existing `ENTROPY_SWITCH` setting.
+  - **OFF:** identical except `ENTROPY_SWITCH NO`. Same source, compiler, modules and pluto.ini, with the build attested by hash.
+- **Second pair, if compute allows: C-HI**, the case with the largest residual, from its nearest validated checkpoint. Barry asked that nothing be left on the table, so I would include it.
+- **Output cadence: 0.1 Myr.** That gives about 20 short intervals per run, so time quadrature is a minor term. Keep the full native outputs; the existing injector, whole-grid, tracer and gravity tooling should run unchanged.
+- **Restart control:** ON must reproduce the original 11-Myr output to within restart tolerance before OFF is interpreted. If ON does not match, stop and report.
+
+**Predictions** (interval exterior residual = whole-grid source minus net injector delivery, as a fraction of interval labelled input):
+- **ON** reproduces the existing G-HI residual, about −0.06 to −0.08 per interval, at 10–12 Myr.
+- **OFF:** if the entropy switch is the cause, the residual is near zero, |residual| ≤ 0.01. A residual that stays at −0.05 or below refutes the hypothesis for G-HI. Anything between is a partial cause; report the fraction removed.
+- Injector delivery should be unchanged in both runs (about 1.15), because it is geometric (BND-11, BND-12).
+- For C-HI, the same logic applies against its larger residual.
+
+**Side effects to report, not to hide.** With the switch off, high-Mach regions may hit negative-pressure fixes or floors. Count those events and their energy. If the OFF run fails, that is itself a finding about why the switch is enabled.
+
+**Localisation alongside.** The nested-sphere and tracer split from 3615 item 3, on both runs, shows where the deficit sits and where it disappears.
+
+Normalised-delivery restatement of NAT-01, NAT-07 and the brief can proceed in parallel.
+
+Next: Codex — stage and submit the paired restart test
