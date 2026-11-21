@@ -7,9 +7,9 @@ This project tests that inference against four deterministic hydrodynamic
 jet simulations. It compares the full three-dimensional fluid state with
 synthetic X-ray and radio observations, separating the physical energy proxy, the measurement
 of cavity geometry, and the age estimate used to infer power. The primary
-enthalpy convention is **2.5pV**; **4pV** is a literature comparator. Labelled
-jet power times age is the reference input. The production injector has
-also been measured at all 201 saved states across the four runs.
+enthalpy convention is **2.5pV**. For the native lobe fractions we integrate
+the measured net injector gas power through the age of each measurement.
+The tables also give labelled jet power times age and the 4pV literature comparator.
 
 > **Status, 21 November 2026:** active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
@@ -21,6 +21,8 @@ also been measured at all 201 saved states across the four runs.
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
 | Latest accounting result? | [Full jet energy budgets, tracer leakage and the gravity test](docs/science/production_injector_histories_2026-11-21.md) |
+| How much of the supplied energy does the lobe enthalpy represent? | [Matched fractions and their denominators](docs/science/native_delivery_restatement_2026-11-21.md) and [the short research brief](manuscript/text/brief.md) |
+| Where does the remaining energy discrepancy occur? | [Near-injector and exterior balances](docs/science/entropy_localisation_2026-11-21.md) and [the entropy-switch restart protocol](docs/science/entropy_restart_protocol_2026-11-21.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
@@ -53,6 +55,10 @@ cell moving at least 100 km/s in three dimensions. Its budget includes
 every cell inside the sphere, including slower gas, and measures the
 current-minus-initial stored energy in those cells.
 
+- At 30 Myr the native lobe's 2.5pV accounts for **47.1%, 87.1%, 40.4% and
+  66.7%** of measured net injector gas energy in C-HI, C-LO, G-HI and G-LO.
+  [Matched-case restatement and sensitivity](docs/science/native_delivery_restatement_2026-11-21.md)
+  <!-- claims: NAT-01 NAT-07 -->
 - **The enthalpy-to-stored-energy ratio varies across cases.** At 30 Myr,
   native whole-lobe 2.5pV divided by the R100 stored-energy change is
   0.5054, 0.8053, 0.4338 and 0.6545 for C-HI, C-LO, G-HI and G-LO.
@@ -187,7 +193,7 @@ Three products draw on the same claims ledger:
 
 - The [article draft](manuscript/text/main.md), with its
   [build workflow](manuscript/README.md).
-- A brief of at most two A4 pages for a broad audience; not yet drafted.
+- A [short research brief on native lobe energy](manuscript/text/brief.md).
 - The [agent guide](AGENT_GUIDE.md), covering evidence, conventions,
   failed methods, reproduction and open questions.
 

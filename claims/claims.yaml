@@ -4,20 +4,38 @@
 schema: 1
 claims:
   - id: NAT-01
-    status: supported
+    status: provisional
     statement: >-
-      With the true age known, native binary-cocoon enthalpy 2.5pV captures a
-      substantial but case-dependent fraction of injected jet energy over
-      10–50 Myr: 0.525–0.559 (C-HI), 0.468–0.498 (G-HI), 0.615–0.785 (G-LO)
-      and 0.631–1.108 (C-LO).
+      Current native binary-lobe 2.5pV divided by reconstructed cumulative
+      signed net injector gas delivery spans 0.4518–0.4810 (C-HI),
+      0.5827–0.9864 (C-LO), 0.4043–0.4306 (G-HI) and 0.5417–0.6818 (G-LO).
+      These are matched-case, actual-age ratios at the selected outputs near
+      10, 20, 30, 40 and 50 Myr; G-HI stops at 40 Myr on this selected surface.
+      The primary time rule is trapezoidal and the native enthalpy convention
+      remains 2.5pV.
     evidence:
+      - {path: docs/science/assets/native_delivery_restatement_2026-11-21/primary_selected_ages.csv, commit: 58ce7e6}
+      - {path: docs/science/assets/native_delivery_restatement_2026-11-21/verification.json, commit: 58ce7e6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/history_tables.zip, commit: 1b3de17}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/verification.json, commit: 1b3de17}
+      - {path: docs/science/assets/turn15_review_2026-11-11/budgets/C-HI/measurements.csv, commit: 3e9646e}
+      - {path: docs/science/assets/turn15_review_2026-11-11/budgets/C-LO/measurements.csv, commit: 3e9646e}
+      - {path: docs/science/assets/turn15_review_2026-11-11/budgets/G-HI/measurements.csv, commit: 3e9646e}
+      - {path: docs/science/assets/turn15_review_2026-11-11/budgets/G-LO/measurements.csv, commit: 3e9646e}
       - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
-      - {path: docs/science/assets/q029_binary_native_refresh_2026-09-06/completion_acceptance.json, commit: 5e34fa3}
-    reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
+    reproduce: .venv/bin/python scripts/science/restate_native_delivery.py
+    test: >-
+      Independently review the new matched cumulative calculation, signed
+      cone-plus-stationary sum, quadrature and brief. Check the 19 primary rows
+      and 228 method/rule rows against the pinned input archive before promoting
+      this restatement; pin its derived evidence at the integration commit.
     caveats:
-      - The 4pV convention multiplies every value by 1.6; it is not a universal correction.
-      - The denominator is labelled kinetic power. If realised delivery exceeds it (BND-05, NAT-06), the fraction of delivered energy is lower by the same factor.
-      - C-LO boundary exposure is bounded on the coarse controls: the boundary contrast beyond 50 kpc from the faces is at most 1e-4 E_inj,LO (BND-04). Production-grid confirmation is pending.
+      - The previously supported label-normalized comparison is retained as a comparator, not renamed measured delivery. The exact-native-volume numerator gives 0.5249–0.5587 (C-HI), 0.6309–1.1075 (C-LO), 0.4682–0.4983 (G-HI) and 0.6147–0.7849 (G-LO); historical Q029 numerators differ by at most 0.0071%.
+      - Gas delivery includes internal and kinetic energy plus pressure work, with signed stationary absorption; it excludes potential-energy transport and the already initialized nozzle content at t=0.
+      - Saved-state reconstruction uses linear_snapshot_flags and trapezoidal integration. Missing intermediate solver states, startup and the unsaved terminal dip preclude an exact realised-delivery or closure claim.
+      - The 4pV convention multiplies every proxy ratio by 1.6; it is not an independently calibrated correction.
+      - Across all 228 selected case-age/method/quadrature rows, C-LO remains below unity (maximum 0.989571). These sensitivities do not bound unsaved-state error.
+      - Current absolute pV is not a current-minus-initial storage term. Four deterministic cases do not supply a population calibration or production-boundary certification.
     depends_on: [NAT-05]
 
   - id: NAT-02
@@ -107,32 +125,43 @@ claims:
   - id: NAT-07
     status: provisional
     statement: >-
-      In the verified four-case spherical histories, native whole-lobe 2.5pV
-      divided by R100 same-cell total stored-energy change at about 30 Myr
-      is 0.5054, 0.8053, 0.4338 and 0.6545 for C-HI, C-LO, G-HI and G-LO.
-      Both apertures contain all current lobe cells and are geometrically
-      complete at this age. At about 20 Myr, current ambient cells contribute
-      69.14%, 89.64%, 51.67% and 77.09% of R100 thermal-plus-kinetic change.
+      At matched actual ages near 30 Myr, current whole-lobe 2.5pV divided
+      by reconstructed cumulative net injector gas delivery is 0.4714,
+      0.8714, 0.4043 and 0.6673 for C-HI, C-LO, G-HI and G-LO. R100 same-cell
+      stored thermal-plus-kinetic-plus-fixed-potential change divided by that
+      same delivery is 0.9326, 1.0821, 0.9322 and 1.0196. Their ratio retains
+      the previously reviewed 2.5pV/R100-storage values 0.5054, 0.8053, 0.4338
+      and 0.6545. Both apertures contain all current lobe cells and are
+      geometrically complete at this age. At about 20 Myr, current ambient
+      cells contribute 69.14%, 89.64%, 51.67% and 77.09% of R100
+      thermal-plus-kinetic change.
     evidence:
+      - {path: docs/science/assets/native_delivery_restatement_2026-11-21/matched_30myr.csv, commit: 58ce7e6}
+      - {path: docs/science/assets/native_delivery_restatement_2026-11-21/selected_age_scenarios.csv, commit: 58ce7e6}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/history_tables.zip, commit: 1b3de17}
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/verification.json, commit: 1b3de17}
+      - {path: docs/science/assets/turn15_review_2026-11-11/budgets/C-HI/measurements.csv, commit: 3e9646e}
+      - {path: docs/science/assets/turn15_review_2026-11-11/budgets/C-LO/measurements.csv, commit: 3e9646e}
+      - {path: docs/science/assets/turn15_review_2026-11-11/budgets/G-HI/measurements.csv, commit: 3e9646e}
+      - {path: docs/science/assets/turn15_review_2026-11-11/budgets/G-LO/measurements.csv, commit: 3e9646e}
       - {path: docs/science/turn18_review_reconciliation_2026-11-11.md, commit: 06f9a2d}
       - {path: docs/science/assets/turn18_reconciliation_2026-11-11/primary_proxy_and_gauge_independent_components.csv, commit: 06f9a2d}
       - {path: docs/science/turn15_energy_emission_review_2026-11-11.md, commit: 3e9646e}
-      - {path: docs/science/assets/turn15_review_2026-11-11/energy/selected_ages.csv, commit: 3e9646e}
-      - {path: docs/science/assets/turn15_review_2026-11-11/verification_summary.json, commit: 3e9646e}
-    reproduce: See the archived independent arithmetic commands and rendering command in docs/science/assets/turn15_review_2026-11-11/README.md.
+    reproduce: .venv/bin/python scripts/science/restate_native_delivery.py
     test: >-
-      Review the new native regional mass ledger and potential-shift identities
-      before reinstating a headline ambient share of total stored energy;
-      retain the stated same-cell current-region and normalization definitions.
+      Independently review the new delivery-normalized restatement and the
+      unchanged pV/storage ratio. Regional mass and potential-shift identities
+      remain necessary before a headline ambient share of total stored energy;
+      this restatement does not reinstate that retired headline.
     caveats:
-      - Independent compact arithmetic and source/input identities pass; native HDF5 integrals were not independently regenerated.
-      - Current pV is absolute; the ledger is current-minus-initial storage. Their ratio is not an injection efficiency.
+      - Prior compact arithmetic and source/input identity checks remain valid; the new normalization awaits separate review. Native HDF5 energy integrals were not independently regenerated.
+      - Current pV is absolute and R100 storage is current-minus-initial in the current aperture. Their ratio is not an injection efficiency, and storage/delivery near unity does not establish physical closure.
       - Ambient shares are signed Eulerian current-region contributions, not Lagrangian deposition fractions.
-      - Total stored change transforms by potential-zero shift times regional mass change; pV/storage cancels labelled power but not that gauge dependence. The old 54--98% total ambient-share headline is retired pending the mass ledger.
+      - Total stored change transforms by potential-zero shift times regional mass change; a common delivery denominator does not remove that gauge dependence. The old 54–98% total ambient-share headline remains retired.
       - 2.5pV is primary; the 4pV comparator multiplies the proxy ratio by 1.6.
-      - Labelled power is not measured realised delivery, and geometric containment does not establish production boundary safety.
-      - One deterministic realisation per case; G-HI retains only snapshots 0--47.
-    depends_on: [NAT-05]
+      - The new denominator is cumulative signed reconstructed gas delivery, excluding potential transport. Its time-resolution limits are those of NAT-01; geometric containment does not establish production boundary safety.
+      - One deterministic realisation per case; G-HI retains only snapshots 0–47.
+    depends_on: [NAT-05, NAT-01]
 
   - id: NAT-08
     status: provisional
@@ -624,15 +653,21 @@ claims:
       gravitational work and work inferred from potential continuity is
       at most 1.021% of the magnitude of the matched G-HI residual.
     evidence:
+      - {path: docs/science/entropy_localisation_2026-11-21.md, commit: 58ce7e6}
+      - {path: docs/science/assets/entropy_localisation_2026-11-21/entropy_localisation_gravity_ratio.csv, commit: 58ce7e6}
+      - {path: docs/science/assets/entropy_localisation_2026-11-21/entropy_localisation_near_spheres.csv, commit: 58ce7e6}
       - {path: docs/science/production_injector_histories_2026-11-21.md, commit: 0a37ff6}
       - {path: docs/science/assets/production_injector_histories_2026-11-21/history_tables.zip, commit: 0a37ff6}
       - {path: docs/science/assets/production_injector_histories_2026-11-21/gravity_scientific_check_summary.csv, commit: 0a37ff6}
       - {path: docs/science/assets/production_injector_histories_2026-11-21/gravity_audit_receipt.json, commit: 0a37ff6}
-    reproduce: python3 docs/science/assets/production_injector_histories_2026-11-21/replay.py
+    reproduce: >-
+      python3 docs/science/assets/production_injector_histories_2026-11-21/replay.py &&
+      .venv/bin/python scripts/science/entropy_localisation.py /tmp/xray_bnd13_localisation
     caveats:
       - The primary estimate uses linear reconstructed states, the configured solver switch, outer active-cell values and trapezoidal time weights. G-HI's linearly extrapolated outer state at index 47 is invalid. Its endpoint supports the left rule for that boundary reconstruction.
       - The simulation applies gravity using stage-resolved numerical face mass fluxes. Both work estimates use saved states. The historical cause of the remaining energy imbalance is unresolved.
       - The C-HI exterior residual also stays negative, with a maximum paired gravity discrepancy of 20.5% of its magnitude. In the low-power runs the exterior balance changes sign across boundary reconstructions.
+      - C-HI's sampled absolute net gravitational work is 32.8% of the primary exterior deficit at 10–12 Myr and 51.9% at 29–30 Myr. In G-HI, 6.95–7.13 percentage points of the 10–12 Myr deficit lie beyond 0.85 kpc across the 24 matched methods. These saved-state spatial balances motivate the paired native-stage measurement of the entropy update.
       - Agreement between the two saved-state work estimates shows that the saved fields satisfy discrete continuity. It cannot detect an error in the solver's stage-resolved source term. The stronger exclusion is magnitude: at 29–30 Myr the whole exterior gravitational work is about −2.1% of labelled energy, a quarter of the −8.4% residual, and a second-order source-term error cannot exceed the term itself (Claude, 21 Nov 2026).
       - The production runs enable PLUTO's entropy switch (G-LO run log, `ENTROPY_SWITCH: ENABLED`; the paired-control definitions.h uses SELECTIVE). In cells it marks unshocked, pressure is recovered from entropy, so kinetic energy dissipated numerically in shear and mixing layers is not returned as heat, and total energy is not conserved. This is the leading candidate for the exterior deficit. It is untested.
     depends_on: [BND-08, BND-12]

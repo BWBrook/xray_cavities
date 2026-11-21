@@ -1,0 +1,24 @@
+default_profile: brief
+profiles:
+  brief:
+    description: Focused native-energy brief, at most two A4 pages.
+    manuscript_sources:
+      - ../manuscript/text/brief.md
+    bibliography: ../references/refs.yaml
+    csl: ../csl/cambridge-university-press-author-date.csl
+    output_dir: ../build/manuscript/native_energy_brief
+    output_stem: native_energy_brief
+    page_numbers: lower_right
+    line_spacing: single
+    line_numbering: none
+    references_new_page: false
+    figures:
+      placement: in_place
+      caption_position: bottom
+    margins:
+      unit: cm
+      paper_size: a4
+      top: 1.5
+      right: 1.8
+      bottom: 1.5
+      left: 1.8

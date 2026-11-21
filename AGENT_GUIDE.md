@@ -20,7 +20,9 @@ How well do X-ray cavities measure the energy that radio jets deposit in
 hot cluster and group atmospheres? Observers estimate jet power from the
 enthalpy of X-ray cavities divided by an estimated age. This project tests
 that chain against simulations with known labelled power, true age and full
-3D state. Realised nozzle delivery still needs measurement.
+3D state. Net injector delivery has been reconstructed at every retained
+output. The paired entropy-switch experiment tests the remaining exterior
+energy discrepancy. [Protocol and control](docs/science/entropy_restart_protocol_2026-11-21.md)
 
 The answer is organised as a product of three factors:
 
@@ -63,9 +65,12 @@ power times actual age; it must not be presented as measured true injection.
 pinned commit, its reproduce command and its caveats. In summary:
 
 **Native energetics (the physical-proxy factor).**
-- Native binary-cocoon enthalpy 2.5pV is roughly 0.47–0.79 of injected
-  energy in three cases, and 0.63–1.11 in C-LO. Treat the C-LO values as
-  exposed to boundary inflow until BND-02 is settled. <!-- claims: NAT-01 -->
+- Across the selected ages, native binary-lobe 2.5pV divided by cumulative
+  measured net injector gas energy is 0.452–0.481 in C-HI, 0.583–0.986 in
+  C-LO, 0.404–0.431 in G-HI and 0.542–0.682 in G-LO. The denominator includes
+  exchange through the stationary part of the injector. Reproduce it from
+  each case's signed power history. [Calculation and label comparators](docs/science/native_delivery_restatement_2026-11-21.md)
+  <!-- claims: NAT-01 -->
 - Enthalpy is not the energy change of the cocoon region, and the
   shock-processed ambient gas holds a comparable share.
   <!-- claims: NAT-02 NAT-03 -->
@@ -132,6 +137,7 @@ the raw comparisons can be used with their stated definitions.
 
 - **True-volume pV is not total stored change.** At 30 Myr, primary native
   2.5pV/R100 storage is 0.5054/0.8053/0.4338/0.6545 in C-HI/C-LO/G-HI/G-LO;
+  using cumulative measured gas delivery instead gives 0.4714/0.8714/0.4043/0.6673.
   4pV is the comparator. At 20 Myr, ambient thermal-plus-kinetic shares are
   69.14/89.64/51.67/77.09%. The old total ambient-share headline is retired
   unless accompanied by regional mass measurements (now available for the

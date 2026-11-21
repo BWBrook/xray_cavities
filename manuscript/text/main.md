@@ -34,7 +34,9 @@ The primary native cocoon comprises cells with tracer $\mathrm{tr1}>10^{-3}$, ev
 
 Native enthalpy is $H_{\mathrm{native}}=\alpha\int_{\mathrm{cocoon}}p\,dV$, with $\alpha=2.5$ for the primary non-relativistic convention and $\alpha=4$ as a literature comparator. Thermal, kinetic and gravitational energies form a separate additive ledger. For each component we subtract the initial field in the same cells selected by the current cocoon mask, and do likewise for its ambient complement. These regional differences sum to the retained whole-domain energy change. They describe changes relative to the initial conditions in a current spatial region; they do not follow a material parcel or the evolving cocoon boundary. The initial snapshots already contain a nozzle region. Absolute current lobe energy therefore differs from the regional change, and subtracting the entire initial domain energy from the ambient allocation is not equivalent to subtracting only the initial ambient-region energy.
 
-We identify shock-processed ambient gas using entropy excess connected to a compressed axial-front seed, with environment-matched no-jet noise calibration. The calculation retains the accepted supersonic-front, seed, extent, boundary, minimum-cell and bilateral validity gates. Selected cells contribute their full current-minus-initial energy, and are a subset of the ambient region. Shock energy must therefore not be added again to the full ambient energy change. The calibration is not a native-resolution cellwise no-jet subtraction. Boundary energy flux and radial advection are unavailable; agreement of the numerical partition identities does not establish a closed physical energy budget.
+We normalize the primary native pressure estimate to the cumulative net gas energy transferred from the maintained injector to freely evolved cells at the identical case and actual output age. The signed cone and stationary-region fluxes are added before integrating the saved-state rates from the already initialized $t=0$ output. Gas-energy flux includes internal and kinetic energy and pressure work; it excludes gravitational-potential transport. The primary interface reconstruction is linear with the saved shock-flag fallback, and the primary time integral is trapezoidal. Left/right rectangles, first-order states and forced HLL/HLLC solvers provide sensitivity comparisons. These reconstructions omit intermediate Runge–Kutta states and the unsaved terminal velocity dip, so they are estimates of cumulative delivery rather than exact injection counters. Labelled bipolar kinetic power times actual active age, $E_{\mathrm{label}}$, remains a separate comparator. <!-- claims: NAT-01 -->
+
+We identify shock-processed ambient gas using entropy excess connected to a compressed axial-front seed, with environment-matched no-jet noise calibration. The calculation retains the accepted supersonic-front, seed, extent, boundary, minimum-cell and bilateral validity gates. Selected cells contribute their full current-minus-initial energy, and are a subset of the ambient region. Shock energy must therefore not be added again to the full ambient energy change. The calibration is not a native-resolution cellwise no-jet subtraction. The saved whole-grid boundary and injector flux reconstructions do not measure transport through the moving shock or spherical apertures; agreement of the numerical partition identities does not establish a closed physical energy budget.
 
 X-ray cavity measurements are evaluated independently of tracer-based membership. The primary comparison uses geometric depth, pressure averaged over the inferred ellipsoid, and the same enthalpy convention as the native estimate. We evaluate viewing angles of 0, 45 and 90 degrees and require a valid bilateral cavity topology. Invalid views remain unresolved and do not enter quantitative recovery summaries.
 
@@ -44,9 +46,20 @@ We report within-case ranges and medians across the accepted ages and views. The
 
 ## Results
 
-### Does cavity enthalpy capture the injected jet energy?
+### How much cumulative gas delivery does native enthalpy represent?
 
-With the true age known, binary-cocoon enthalpy captures a substantial but case-dependent fraction of injected energy (Figure [1](#fig-main-1)). Native $2.5pV/E_{\mathrm{inj}}$ spans 0.525–0.559 in C-HI, 0.468–0.498 in G-HI and 0.615–0.785 in G-LO. C-LO spans 0.631–1.108. Switching to $4pV$ multiplies every value by 1.6; it changes the normalization but does not supply a universal correction across the four cases.
+Native $2.5pV$ divided by reconstructed cumulative net injector gas delivery spans 0.4518–0.4810 in C-HI, 0.5827–0.9864 in C-LO, 0.4043–0.4306 in G-HI and 0.5417–0.6818 in G-LO over the selected actual ages near 10–50 Myr (G-HI ends at 40 Myr on this surface). The corresponding label-normalized ranges are 0.5249–0.5587, 0.6309–1.1075, 0.4682–0.4983 and 0.6147–0.7849; Figure [1](#fig-main-1) retains this labelled comparator. Thus C-LO's late pressure estimate exceeds the labelled kinetic reference but remains below the primary reconstructed cumulative gas supply. These are descriptive fractions for four deterministic cases, not calibrated injection efficiencies. Switching to $4pV$ multiplies every proxy ratio by 1.6. <!-- claims: NAT-01 -->
+
+At the matched outputs near 30 Myr, the pressure estimate and spherical storage comparison are:
+
+| Case | Actual age (Myr) | $2.5pV/D_{\mathrm{gas}}$ | $\Delta E_{R100}/D_{\mathrm{gas}}$ | $2.5pV/\Delta E_{R100}$ |
+| --- | ---: | ---: | ---: | ---: |
+| C-HI | 29.999994 | 0.4714 | 0.9326 | 0.5054 |
+| C-LO | 29.999166 | 0.8714 | 1.0821 | 0.8053 |
+| G-HI | 29.999367 | 0.4043 | 0.9322 | 0.4338 |
+| G-LO | 29.999644 | 0.6673 | 1.0196 | 0.6545 |
+
+Here $D_{\mathrm{gas}}$ is cumulative signed net gas delivery with the primary trapezoidal rule, while $\Delta E_{R100}$ is thermal-plus-kinetic-plus-fixed-potential change relative to the initial fields in the cells of the current R100 aperture. R100 includes physical cells whose centres lie no farther than the most distant cell with total speed at least 100 km s$^{-1}$; R300 uses 300 km s$^{-1}$. Both apertures contain the entire current lobe and are geometrically complete at these ages. A common external denominator leaves $2.5pV/\Delta E_{R100}$ unchanged. Current absolute pressure energy and signed storage remain different quantities: neither their ratio nor storage/delivery near unity establishes physical closure. Total storage also retains the gravitational-potential-zero dependence associated with regional mass change. <!-- claims: NAT-07 -->
 
 Enthalpy also differs from the actual energy change in the current cocoon region. The latter spans 0.132–0.426 of injected energy in C-HI, 0.425–0.571 in G-HI and 0.013–0.298 in G-LO. In C-LO it ranges from −0.160 to 0.137. Negative gravitational changes relative to the initial fields contribute to this separation, and a negative net regional value does not imply negative absolute energy or a Lagrangian loss from the jet. Thermal pressure alone cannot represent all terms in this accounting.
 
@@ -62,7 +75,7 @@ Median X-ray/native enthalpy ratios are 0.0222 in C-HI, 0.494 in C-LO, 0.00603 i
 
 ### How do uncertain ages affect inferred jet power?
 
-For constant bipolar power, the three contributions to an inferred-power error can be written
+For the constant labelled bipolar kinetic power, with $E_{\mathrm{inj}}$ in this identity denoting $E_{\mathrm{label}}$, the three contributions to an inferred-power error can be written
 
 $$
 \frac{Q_{\mathrm{cav}}}{Q_{\mathrm{true}}}

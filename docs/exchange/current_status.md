@@ -1,9 +1,24 @@
 # Current Status
 
-Last updated: 2026-11-21 (four injector histories and the final gravity and tracer comparison verified)
+Last updated: 2026-11-21 (paired restart staged on Nectar, Kunanyi submission pending)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Paired entropy-switch restart, 21 November
+
+Barry authorised the 10–12 Myr G-HI restart pair and a C-HI pair if capacity
+allows. The complete two-pair submission bundle passed checksum readback on
+Nectar. Kunanyi access awaits portal reactivation. There are no PBS IDs for
+this experiment. Each OFF job depends on every selected ON copy reproducing
+its own 11-Myr production state. The submission script requests and verifies
+end and abort email on each job. [Frozen protocol](../science/entropy_restart_protocol_2026-11-21.md) · [Staging receipt and resumption](logs/2026-11-21-entropy-paired-restart.md)
+
+The matched 30-Myr native 2.5pV fractions of delivered energy are 0.4714,
+0.8714, 0.4043 and 0.6673 for C-HI, C-LO, G-HI and G-LO. In G-HI the
+10–12 Myr exterior deficit is 9.21% of labelled input. The primary
+reconstruction places 2.25 percentage points in the first 0.10 kpc outside
+the injector and 6.96 points farther out. [Matched energy fractions](../science/native_delivery_restatement_2026-11-21.md) · [Radial budgets and tracer partition](../science/entropy_localisation_2026-11-21.md)
 
 ## Injector histories, 21 November
 
