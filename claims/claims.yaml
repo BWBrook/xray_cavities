@@ -4,7 +4,7 @@
 schema: 1
 claims:
   - id: NAT-01
-    status: provisional
+    status: supported
     statement: >-
       Current native binary-lobe 2.5pV divided by reconstructed cumulative
       signed net injector gas delivery spans 0.4518–0.4810 (C-HI),
@@ -23,6 +23,10 @@ claims:
       - {path: docs/science/assets/turn15_review_2026-11-11/budgets/G-HI/measurements.csv, commit: 3e9646e}
       - {path: docs/science/assets/turn15_review_2026-11-11/budgets/G-LO/measurements.csv, commit: 3e9646e}
       - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
+      - {path: docs/science/assets/native_delivery_review_2026-11-21/comparison.json, commit: e36bf6e}
+      - {path: docs/science/assets/native_delivery_review_2026-11-21/threshold_and_lobe_state.csv, commit: e36bf6e}
+      - {path: docs/science/assets/native_delivery_review_2026-11-21/incremental_ratios.csv, commit: e36bf6e}
+      - {path: docs/science/assets/native_delivery_review_2026-11-21/tracer_closure_limits.csv, commit: e36bf6e}
     reproduce: .venv/bin/python scripts/science/restate_native_delivery.py
     test: >-
       Independently review the new matched cumulative calculation, signed
@@ -36,6 +40,12 @@ claims:
       - The 4pV convention multiplies every proxy ratio by 1.6; it is not an independently calibrated correction.
       - Across all 228 selected case-age/method/quadrature rows, C-LO remains below unity (maximum 0.989571). These sensitivities do not bound unsaved-state error.
       - Current absolute pV is not a current-minus-initial storage term. Four deterministic cases do not supply a population calibration or production-boundary certification.
+      - "Independent review (Claude, 21 November 2026): all 228 rows reproduce to 5e-16 from the snapshot-rate and turn-15 tables without the published script or its interval tables (scripts/science/review_native_delivery.py). Independence stops at those tables; the face-flux reconstruction and native integrals were not regenerated."
+      - "The ratio depends on the tracer cut more than on any quadrature choice. For tr1 > 1e-3, 5e-3 and 1e-2 C-LO at 50 Myr gives 0.986, 0.847 and 0.765; at 30 Myr the four cases give 0.471/0.426/0.401 (C-HI), 0.871/0.774/0.717 (C-LO), 0.404/0.355/0.331 (G-HI) and 0.667/0.617/0.588 (G-LO)."
+      - "Unity is not a bound on this ratio. After 20 Myr C-LO's enthalpy grows faster than its delivery: 1.05, 1.10 and 1.21 per unit delivered over 20-30, 30-40 and 40-50 Myr at tr1 > 1e-3, against 0.92-0.98 at 5e-3 and 0.82-0.85 at 1e-2. C-LO's lobe thermal energy is 0.95-1.05 of the initial thermal energy in the same cells, so its numerator is close to the undisturbed ambient pressure times a tracer-defined volume."
+      - "Net delivery measures what the free grid received. Dividing by cone delivery alone changes the high-power ratios by 0.1% and lowers C-LO to 0.545-0.957 and G-LO to 0.530-0.677."
+      - "Tagged-mass closure discriminates between the reconstructions. In steady intervals the primary method closes to 1e-4 of an interval's labelled mass or better in all four cases; first-order states miss by 5.6-6.2% per interval, so their rows are not an uncertainty envelope. Startup closure sums to -0.126 (C-LO) and +0.038 (G-LO) of one interval's labelled mass and the terminal interval over-predicts by 0.035-0.036. Applied to energy at the same scale these move C-LO's 50-Myr ratio by about 0.3% and 0.1%, and its 10-Myr ratio by about 1.3%."
+      - "The high-power ratios come from runs with an unexplained exterior energy deficit of 5-18% of labelled input (BND-13). If that energy would otherwise heat the lobe the high-power values are biased low, and part of the high/low-power contrast is numerical. The entropy-switch restart pairs test this."
     depends_on: [NAT-05]
 
   - id: NAT-02
@@ -88,9 +98,10 @@ claims:
       materially changes any recovery ratio.
     evidence:
       - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
+      - {path: docs/science/assets/native_delivery_review_2026-11-21/threshold_and_lobe_state.csv, commit: e36bf6e}
     reproduce: uv run --locked python scripts/science/build_binary_native_refresh.py
     caveats:
-      - A cell at tr1 = 1e-3 is 99.9% ambient gas by mass and emits near ambient level; tracer-defined cocoons are not X-ray cavities (XR-02).
+      - "The tr1 > 1e-3 lobe is strongly underdense: its mean density is 0.03-0.26 of the initial density in the same cells across the 19 retained case-ages. The outer skin with 1e-3 < tr1 < 5e-3 holds 7-13% of lobe volume at 0.21-0.39 (low power), 0.48-0.84 (C-HI) and 0.79-1.00 (G-HI) of initial density. A tracer mass fraction is not an emissivity. The earlier caveat here, that a cell at tr1 = 1e-3 emits near ambient level, was wrong (Claude; corrected 21 November 2026 after Gemini's review). Emission from tracer-defined cells has to be measured (XR-03, XR-04); projected cavities still differ from the lobe (XR-02)."
 
   - id: NAT-06
     status: provisional
@@ -123,7 +134,7 @@ claims:
     depends_on: [NAT-05, BND-05]
 
   - id: NAT-07
-    status: provisional
+    status: supported
     statement: >-
       At matched actual ages near 30 Myr, current whole-lobe 2.5pV divided
       by reconstructed cumulative net injector gas delivery is 0.4714,
@@ -147,6 +158,7 @@ claims:
       - {path: docs/science/turn18_review_reconciliation_2026-11-11.md, commit: 06f9a2d}
       - {path: docs/science/assets/turn18_reconciliation_2026-11-11/primary_proxy_and_gauge_independent_components.csv, commit: 06f9a2d}
       - {path: docs/science/turn15_energy_emission_review_2026-11-11.md, commit: 3e9646e}
+      - {path: docs/science/assets/native_delivery_review_2026-11-21/nat07_matched_30myr.csv, commit: e36bf6e}
     reproduce: .venv/bin/python scripts/science/restate_native_delivery.py
     test: >-
       Independently review the new delivery-normalized restatement and the
@@ -161,6 +173,8 @@ claims:
       - 2.5pV is primary; the 4pV comparator multiplies the proxy ratio by 1.6.
       - The new denominator is cumulative signed reconstructed gas delivery, excluding potential transport. Its time-resolution limits are those of NAT-01; geometric containment does not establish production boundary safety.
       - One deterministic realisation per case; G-HI retains only snapshots 0–47.
+      - "Independent review (Claude, 21 November 2026): the twelve 30-Myr ratios and the four 20-Myr ambient shares reproduce from the pinned tables (scripts/science/review_native_delivery.py). The sensitivities recorded under NAT-01 apply to the first ratio."
+      - "R100 storage exceeds measured delivery in C-LO by 3.8-11.1% of labelled input over 10-50 Myr and in G-LO by at most 2.8%. The coarse no-jet controls bound in-box drift at 1.5% of the low-power scale (BND-04), but drift on the production grid is unmeasured, so the C-LO excess has no identified source."
     depends_on: [NAT-05, NAT-01]
 
   - id: NAT-08
