@@ -1,0 +1,16 @@
+{
+  "rows_compared": 228,
+  "published_rows": 228,
+  "max_relative_difference": {
+    "ratio_net": 4.834305869709552e-16,
+    "net_gas_erg": 4.867770299969325e-16,
+    "cone_gas_erg": 3.6359369002761993e-16,
+    "stationary_gas_erg": 5.513236202647266e-16
+  },
+  "c_lo_maximum_ratio": 0.9895710711808589,
+  "c_lo_maximum_row": [
+    "50",
+    "linear_hllc",
+    "left"
+  ]
+}
