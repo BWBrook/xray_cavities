@@ -1,0 +1,134 @@
+{
+  "checker_sha256": "290f1c815895fa79248cfaa2c1b7f8ef1666e36f5e8b332a2f29ffc2a5f61d85",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "fixture_sha256": "9b4010e73fb6f67fa66857ed57310010490e5023482f9a94529132bec714f890",
+  "native_sha256": {
+    "arrays.c": "6b6f254be69035b0269de28e1291c9e8d1d92dd7a99ebd1887838640fb91f1bf",
+    "mappers3D.c": "2cbe28f76250c839e9f32b406555937aa0b3893a67ff38fa46e2e366d0d1f040",
+    "rbox.c": "3f27ec71c7a232467686383d0c38e50b2653df1b1aa4bca3a45ff0ba4d8051d5"
+  },
+  "patch_receipt_sha256": "0d79b781263b1119de307551b87c7b41cc7eed7f3b14a568bd3f1f7a1e428362",
+  "results": {
+    "off": {
+      "bit_identical_native_fixture_stdout_sha256": "ca8f848c123757959c387eb4610d4c9fd354b084386b7b8a40dce4fc1a1cf724",
+      "effective_sum": 41.7,
+      "executable_sha256": {
+        "instrumented": "d9c07d2e50470f2d39ba9208594db6953842e3bf21a4e57f260a931f86be46e5",
+        "original": "5fa0f3177fed5ad218b98ed5e594acdc2b5a84e4c4ab5256dee82811228974b5"
+      },
+      "final_minus_initial_minus_rk_transport": 41.699999999999996,
+      "independent_stage_rows": 22,
+      "ledger_sha256": "872924a7a5598048c82bb5ebe50083e893063e1ae57f82f3ea9298ff10656af2",
+      "max_bin_absolute_error": 0.0,
+      "per_stage": {
+        "1": {
+          "cell_visits": 11.0,
+          "density_floors": 1.0,
+          "effective_cell_gross_code": 9.25,
+          "effective_net_code": 9.25,
+          "entropy_visits": 0.0,
+          "entropy_visits_with_negative_p_energy": 0.0,
+          "gas_energy_floors": 2.0,
+          "nonfinite_energy_visits": 0.0,
+          "p_energy_floors": 2.0,
+          "p_entropy_floors": 0.0,
+          "raw_E_floor_gain": 6.487500000000001,
+          "raw_E_floor_loss": 0.0,
+          "raw_cell_gain": 18.5,
+          "raw_cell_loss": 0.0,
+          "raw_density_floor_mass_code": 1.1199999999999999,
+          "raw_entropy_gain": 0.0,
+          "raw_entropy_loss": 0.0,
+          "raw_entropy_with_p_floor_gain": 0.0,
+          "raw_entropy_with_p_floor_loss": 0.0,
+          "raw_p_energy_floor_gain": 12.0125,
+          "raw_p_energy_floor_loss": 0.0
+        },
+        "2": {
+          "cell_visits": 11.0,
+          "density_floors": 0.0,
+          "effective_cell_gross_code": 32.45,
+          "effective_net_code": 32.45,
+          "entropy_visits": 0.0,
+          "entropy_visits_with_negative_p_energy": 0.0,
+          "gas_energy_floors": 1.0,
+          "nonfinite_energy_visits": 0.0,
+          "p_energy_floors": 3.0,
+          "p_entropy_floors": 0.0,
+          "raw_E_floor_gain": 2.875,
+          "raw_E_floor_loss": 0.0,
+          "raw_cell_gain": 32.45,
+          "raw_cell_loss": 0.0,
+          "raw_density_floor_mass_code": 0.0,
+          "raw_entropy_gain": 0.0,
+          "raw_entropy_loss": 0.0,
+          "raw_entropy_with_p_floor_gain": 0.0,
+          "raw_entropy_with_p_floor_loss": 0.0,
+          "raw_p_energy_floor_gain": 29.575000000000003,
+          "raw_p_energy_floor_loss": 0.0
+        }
+      }
+    },
+    "on": {
+      "bit_identical_native_fixture_stdout_sha256": "c2522f5f4c60ea1165c3460ce246185637159bf842525ccbf1dd9044d748e15a",
+      "effective_sum": 34.92575000000001,
+      "executable_sha256": {
+        "instrumented": "d7f45b402641434fcf8e6cf6469db483f149f701d9caf4726cb4d4aa15d5fead",
+        "original": "c75f16ddf37286612bbf0680eb979938d855d4979f77f5bb9d9f0381f03c507c"
+      },
+      "final_minus_initial_minus_rk_transport": 34.92575000000001,
+      "independent_stage_rows": 22,
+      "ledger_sha256": "c134b569dc5f0d6fe2baa5b34b233cf1db93d34311a2a60f6bda0ef34d25a0e4",
+      "max_bin_absolute_error": 0.0,
+      "per_stage": {
+        "1": {
+          "cell_visits": 11.0,
+          "density_floors": 1.0,
+          "effective_cell_gross_code": 17.257,
+          "effective_net_code": 1.5070000000000014,
+          "entropy_visits": 5.0,
+          "entropy_visits_with_negative_p_energy": 1.0,
+          "gas_energy_floors": 2.0,
+          "nonfinite_energy_visits": 0.0,
+          "p_energy_floors": 1.0,
+          "p_entropy_floors": 2.0,
+          "raw_E_floor_gain": 6.487500000000001,
+          "raw_E_floor_loss": 0.0,
+          "raw_cell_gain": 18.764000000000003,
+          "raw_cell_loss": -15.749999999999998,
+          "raw_density_floor_mass_code": 1.1199999999999999,
+          "raw_entropy_gain": 8.075000000000001,
+          "raw_entropy_loss": -14.098499999999998,
+          "raw_entropy_with_p_floor_gain": 0.0,
+          "raw_entropy_with_p_floor_loss": -2.0999999999999996,
+          "raw_p_energy_floor_gain": 4.6499999999999995,
+          "raw_p_energy_floor_loss": 0.0
+        },
+        "2": {
+          "cell_visits": 11.0,
+          "density_floors": 0.0,
+          "effective_cell_gross_code": 35.08125,
+          "effective_net_code": 33.41875,
+          "entropy_visits": 5.0,
+          "entropy_visits_with_negative_p_energy": 2.0,
+          "gas_energy_floors": 1.0,
+          "nonfinite_energy_visits": 0.0,
+          "p_energy_floors": 1.0,
+          "p_entropy_floors": 1.0,
+          "raw_E_floor_gain": 2.875,
+          "raw_E_floor_loss": 0.0,
+          "raw_cell_gain": 34.25,
+          "raw_cell_loss": -0.8312499999999999,
+          "raw_density_floor_mass_code": 0.0,
+          "raw_entropy_gain": 22.6,
+          "raw_entropy_loss": 0.0,
+          "raw_entropy_with_p_floor_gain": 0.0,
+          "raw_entropy_with_p_floor_loss": -0.8312499999999999,
+          "raw_p_energy_floor_gain": 8.775,
+          "raw_p_energy_floor_loss": 0.0
+        }
+      }
+    }
+  },
+  "scope": "serial native AdvanceStep + 3D/HD mappers, manufactured transport, flags and boundary"
+}

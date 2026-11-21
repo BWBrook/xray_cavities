@@ -1,0 +1,58 @@
+{
+  "status": "reproduced_matched_native_delivery_ratios",
+  "primary_method": "linear_snapshot_flags",
+  "primary_quadrature": "trapezoid",
+  "primary_selected_rows": 19,
+  "sensitivity_rows": 228,
+  "numeric_checks": 20667,
+  "maximum_relative_check_residual": 6.081954012587379e-16,
+  "maximum_relative_historical_numerator_difference": 7.014132826493827e-05,
+  "numerator": "current whole binary-lobe 2.5*sum(pV), tr1>1e-3, exact native finite-volume geometry",
+  "denominator": "signed cone plus stationary gas-energy flux, saved-state reconstruction, cumulative from initialized t0 to the identical case/age",
+  "input_sha256": {
+    "docs/science/assets/production_injector_histories_2026-11-21/verification.json": "9cdf21211f3f891ee5e805808412a4424e2a63e93848279ca4fca167676d0647",
+    "docs/science/assets/production_injector_histories_2026-11-21/history_tables.zip": "5b5d0b2c526c8340e8cbd89e11f66d23e721c310443bb3e66b6aa7b4489a7461",
+    "docs/science/assets/turn15_review_2026-11-11/budgets/C-HI/measurements.csv": "eaa10db7812a85704332f2de04897e3b82072831c2718b8537a6f35cf908b968",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-HI/native_energy_selected_age.csv": "8d8691c6183601e47836a08b859e0d151bc609f6fc96900be74aa7afd62c17b5",
+    "docs/science/assets/turn15_review_2026-11-11/budgets/C-LO/measurements.csv": "609a93b736faf194f9c440e438ee0de47da3fcc2310b6d528eabd9c362a6a6c6",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/native_energy_selected_age.csv": "a035de60355570ca2ee602706d31403e2e6fc17b8d566126718cf7f7f9bb7451",
+    "docs/science/assets/turn15_review_2026-11-11/budgets/G-HI/measurements.csv": "f3329d6ca83b8583827c028f58f96ba9f3c4179942b94eae135b67261267990d",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-HI/native_energy_selected_age.csv": "b98bfaf343b81790ac286ada258e12670526020ea0e50402b0e9cae5305abf1a",
+    "docs/science/assets/turn15_review_2026-11-11/budgets/G-LO/measurements.csv": "f3208616c90415857d7aad5476a3a46dcdbe314803ec2ad5b7e9f5671d2f69cf",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/native_energy_selected_age.csv": "6254800d84ca5748f91c7d4aebb18282fb0de4b24ad15e7a23d6af19e617a16a"
+  },
+  "archive_member_sha256": {
+    "comparison/flagged_sphere_gravity_intervals.csv": "41b42ec1baed81018e7fc5d4343bd42f88efadab4d887a7a9441e1041ca5c8a5",
+    "comparison/flagged_sphere_gravity_snapshots.csv": "78fed19e90be845fa6236a9e8b6a8a96ac36f8f39aaf98bf53be3fd18cb323c4",
+    "comparison/native_outer_snapshot_summary.csv": "29502d45ea1115680b615cfec4943a5de69247212d7372b10a839bcafe2813e0",
+    "comparison/native_signed_tracer_transport.csv": "4a6cc0a8a5d984f5eb420f64606ea54600dd4806b562648c28b4777a0258219e",
+    "comparison/potential_work_intervals.csv": "f60f8ea9b79905360d43459173bf0c7ee05e88c9e4bf1f406f1cbc86d4015b61",
+    "comparison/saved_tracer_clearance.csv": "ebc92067ae72e3bd0466a85bcdb069ffda8cdf8e8a6d103681b680c8a5f5bc62",
+    "native/summary/C-HI/injector_interval_balances.csv": "203fb1e49557f172be8fcd9becf443fa8f9334bb2b12c1e07116f4548364088b",
+    "native/summary/C-HI/injector_snapshot_rates.csv": "993e67bb473f8e0ebba57c214fb9f9cd9c09b85f0625031662e3b71a2f064016",
+    "native/summary/C-LO/injector_interval_balances.csv": "066033bb4637143c058a5a2fed0e9c526443a0b812c14794fff5c4cd90df4187",
+    "native/summary/C-LO/injector_snapshot_rates.csv": "8ccfcfc6f11f0b4ae6a7ef643560f22d16757b6e25b60e995a431c44fc281883",
+    "native/summary/G-HI/injector_interval_balances.csv": "6f9fcd9f5fae1e9e9e361223fae5ee054519194c34c20a03abbdc727db594061",
+    "native/summary/G-HI/injector_snapshot_rates.csv": "285b0dc90bd07a67feabea978c1737caec3b20bd24fde6e74f14777fc03bcc39",
+    "native/summary/G-LO/injector_interval_balances.csv": "4ba59cff90b22384761e6831e96bf000d50eed8a6a739a0872327da63fac3032",
+    "native/summary/G-LO/injector_snapshot_rates.csv": "b1c8fce054f6b378026e44205aa91e0abd6fa8b76211e5e31e9374d177870012"
+  },
+  "script_sha256": "3d1c4ad87af09f3e835741ff34a83737b73fca66df0e781f9f064be8879b0e48",
+  "products_sha256": {
+    "selected_age_scenarios.csv": "4e8eeeedbb69c48254120d9d15da529292d4a588bfd7838485cfc14797686509",
+    "primary_selected_ages.csv": "dfaebebf21b1fcbb147a1c7d7a5f85e91c6440f4da2b5afda83ab3aaa5bda473",
+    "claim_ranges.csv": "0d08f7a89ea40646b597c77923d818c423edfef0caa0116b5c71037746a13895",
+    "matched_30myr.csv": "fad5ae1e25d893a0df5c395555ad9accf3846f3041228d4a82de166e0d3d3144"
+  },
+  "limits": [
+    "saved-state quadrature omits intermediate RK stages and the unsaved terminal dip",
+    "current absolute pV and signed moving-aperture storage are distinct estimands",
+    "R100 total includes centre-zero fixed-potential energy and retains geometry/boundary holds",
+    "no population calibration, scalar delivery correction or physical-closure promotion"
+  ],
+  "figure_sha256": {
+    "native_delivery_30myr.png": "258d80b0858e1815df4cf6550d0c967e9fc70b1db211f022a7017809b6c7c269",
+    "native_delivery_30myr.pdf": "7785c670e80782c41e3499be02c813b89d81e1f124e5e6adecc5e9095e6108ab",
+    "native_delivery_30myr.svg": "678032f0e7d28a2eefd8951487c57b5003eecdc3e815eed465ccee63f706dba5"
+  }
+}

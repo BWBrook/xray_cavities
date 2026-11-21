@@ -1,0 +1,78 @@
+#!/bin/bash
+#PBS -q normal
+#PBS -r n
+#PBS -m ae
+
+set -euo pipefail
+cd "${PBS_O_WORKDIR:?missing PBS submission directory}"
+stage=$PWD
+python=${ANALYSIS_PYTHON:-/share/apps/software/Anaconda3/2024.02-1/bin/python}
+export PYTHONDONTWRITEBYTECODE=1
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export HDF5_USE_FILE_LOCKING=FALSE
+export I_MPI_JOB_SIGNAL_PROPAGATION=1
+sha256sum -c --quiet SHA256SUMS
+work=$("$python" -c 'import json;print(json.load(open("contract.json"))["work_root"])')
+
+load_production_modules() {
+    module purge
+    module use /ds/projects/agn/modulefiles
+    module load intel/18.0.1.163 impi/2018.1.163 hdf5/1.12.1p zfp/0.5.5
+    if [[ -z ${HDF5_DIR:-} ]]; then
+        for lib in ${LD_LIBRARY_PATH//:/ }; do
+            if [[ -f $lib/libhdf5.so || -f $lib/libhdf5.a ]]; then
+                export HDF5_DIR="${lib%/*}"
+                break
+            fi
+        done
+    fi
+    test -r "${HDF5_DIR:?missing parallel HDF5}/include/hdf5.h"
+}
+
+case "${ROLE:?}" in
+    prepare)
+        "$python" stage_entropy_restart.py "$stage" "$stage/contract.json"
+        load_production_modules
+        mapfile -t cases < <("$python" -c 'import json; print(*json.load(open("contract.json"))["cases"],sep="\n")')
+        for case_id in "${cases[@]}"; do
+            for setting in ON OFF; do
+                arm="$work/$case_id/$setting"
+                command -v mpicc mpirun > "$arm/wrappers.txt"
+                (
+                    module list
+                    command -v mpicc mpirun
+                    mpicc -show
+                    mpirun -version
+                    make -C "$arm/src" -j 12 PLUTO_DIR="$work/core" pluto
+                ) > "$arm/build.log" 2>&1
+                ldd "$arm/src/pluto" > "$arm/links.txt"
+                if grep -F 'not found' "$arm/links.txt"; then exit 4; fi
+                "$python" stage_entropy_restart.py --check-build "$stage" "$arm"
+                cp "$arm/src/pluto" "$arm/pluto"
+                (cd "$arm" && sha256sum pluto pluto.ini environment.ini src/definitions.h > build.sha256)
+            done
+        done
+        ;;
+    simulate)
+        case_id=${CASE_ID:?}
+        arm="$work/$case_id/${SETTING:?}"
+        load_production_modules
+        if [[ $SETTING == OFF ]]; then
+            "$python" -c 'import json,pathlib,sys; r=pathlib.Path(sys.argv[1]); c=json.load(open("contract.json"))["cases"]; assert all(json.loads((r/k/"gate.json").read_text())["passed"] is True for k in c)' "$work"
+        fi
+        cd "$arm"
+        sha256sum -c build.sha256
+        test ! -e outputs/data.0011.flt.h5
+        nproc=$(wc -l < "${PBS_NODEFILE:?}")
+        test "$nproc" -eq 1792
+        mpirun -genv HDF5_USE_FILE_LOCKING FALSE -np "$nproc" -machinefile "$PBS_NODEFILE" \
+            ./pluto -i pluto.ini -e environment.ini -h5restart 2 > mpi.log 2>&1
+        "$python" "$stage/check_entropy_restart_control.py" --check-series "$arm"
+        ;;
+    gate)
+        original=$("$python" -c 'import json,sys;print(json.load(open("contract.json"))["cases"][sys.argv[1]]["production"])' "${CASE_ID:?}")
+        "$python" check_entropy_restart_control.py "$CASE_ID" "$original" "$work/$CASE_ID/ON" "$work/$CASE_ID/gate.json"
+        ;;
+    *) echo "Unknown job role: $ROLE" >&2; exit 2 ;;
+esac

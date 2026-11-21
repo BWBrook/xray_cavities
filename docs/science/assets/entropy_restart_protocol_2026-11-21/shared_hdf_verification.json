@@ -1,0 +1,34 @@
+{
+  "core": "2674fc38b152f96605cb24e2840e92b64ebd5b81",
+  "file_sha256": {
+    "data.0000.dbl.h5": "1138ddbb2fe8e7b4ff5d8ab7c50a99e614d71fa2cd1d514aeb5a3f5d0adec897",
+    "dbl.h5.out": "b7f374049d2b7a1d56659483c41fe4a04e9e836c55f6b8dfba3be9ea57aebfe9",
+    "restart.out": "65116ee611c85aefe116b665b05b52518f0bb7e036fbc40da447908acebfbbcb"
+  },
+  "h5py": "3.16.0",
+  "hdf5": "2.2.0",
+  "results": {
+    "off": {
+      "executable_sha256": "da16f8353ed68449cd5213ad9914742cb5222bb3e7698a69c99dfb306bbf3af3",
+      "native_reader_report": "internal=6 metadata=128 enabled=rho,vx1,vx2,vx3,prs,tr1,probe,\nmatching_shared_values=84 time=3.25 dt=0.0078125 step=137\n"
+    },
+    "on": {
+      "executable_sha256": "0bea125228b113340c59351e400fb42d93668af22b3958cc5d8a16e5a85e6fc0",
+      "native_reader_report": "internal=7 metadata=128 enabled=rho,vx1,vx2,vx3,prs,tr1,probe,\nmatching_shared_values=84 time=3.25 dt=0.0078125 step=137\n"
+    }
+  },
+  "source_sha256": {
+    "arrays.c": "6b6f254be69035b0269de28e1291c9e8d1d92dd7a99ebd1887838640fb91f1bf",
+    "bin_io.c": "9e6769842fbb810243dbfdf8e305183c8ff31c1919d20b94ab33906ff22f7a47",
+    "check_restart.c": "ec224102de1574c4722a98d1f7ea83d9c956874511a884c9a9c19bb5df18d7b5",
+    "check_restart.py": "72a7571fbdb2bb164bd56b7d03a4130821a61eeaa95ef102b80ef9d98424059b",
+    "entropy_switch.c": "f295161d2de266500daba61ff5346b63de8550850d02f583cebcc39400670a29",
+    "eos.c": "81bb6bdadd2b205314f4f8b7f53269123991fee9d33201417d1d8d223022aad2",
+    "hdf5_io.c": "2bdcb211840615ba201eef5fcb8fba34bc8c9c8b041b308d9fca000da16958d7",
+    "restart.c": "6b5c7808dcd8068f4624c2ace8ce3babbb1c9ec8886e9515b8d5ef22954cecee",
+    "set_output.c": "23a6513ea8c9347e1ab4f7de37d6c8caa6147d606047c620d61a5dd198667fb5",
+    "tools.c": "e1f84c092239dc944a457872a9cb1ba8bc6a9163a56a9277d7f3e4cd3f62869c",
+    "var_names.c": "8f508638a10a74faeb55a09662ce6be5529b783600192a7642c565f01b9547f3"
+  },
+  "startup_particles": "outside this serial fluid-reader fixture"
+}
