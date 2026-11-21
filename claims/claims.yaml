@@ -633,6 +633,8 @@ claims:
       - The primary estimate uses linear reconstructed states, the configured solver switch, outer active-cell values and trapezoidal time weights. G-HI's linearly extrapolated outer state at index 47 is invalid. Its endpoint supports the left rule for that boundary reconstruction.
       - The simulation applies gravity using stage-resolved numerical face mass fluxes. Both work estimates use saved states. The historical cause of the remaining energy imbalance is unresolved.
       - The C-HI exterior residual also stays negative, with a maximum paired gravity discrepancy of 20.5% of its magnitude. In the low-power runs the exterior balance changes sign across boundary reconstructions.
+      - Agreement between the two saved-state work estimates shows that the saved fields satisfy discrete continuity. It cannot detect an error in the solver's stage-resolved source term. The stronger exclusion is magnitude: at 29–30 Myr the whole exterior gravitational work is about −2.1% of labelled energy, a quarter of the −8.4% residual, and a second-order source-term error cannot exceed the term itself (Claude, 21 Nov 2026).
+      - The production runs enable PLUTO's entropy switch (G-LO run log, `ENTROPY_SWITCH: ENABLED`; the paired-control definitions.h uses SELECTIVE). In cells it marks unshocked, pressure is recovered from entropy, so kinetic energy dissipated numerically in shear and mixing layers is not returned as heat, and total energy is not conserved. This is the leading candidate for the exterior deficit. It is untested.
     depends_on: [BND-08, BND-12]
 
   - id: OBS-01
