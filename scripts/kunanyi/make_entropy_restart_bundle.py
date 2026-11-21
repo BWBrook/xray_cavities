@@ -26,7 +26,8 @@ def main():
     out = args.destination
     out.mkdir(parents=True, exist_ok=False)
     for name in ("stage_entropy_restart.py", "patch_entropy_restart.py",
-                 "entropy_restart_diagnostics.h", "entropy_restart.pbs", "submit_entropy_restart.sh"):
+                 "entropy_restart_diagnostics.h", "entropy_restart.pbs", "entropy_restart_cases.pbs",
+                 "submit_entropy_restart.sh"):
         shutil.copyfile(ROOT / "scripts/kunanyi" / name, out / name)
     for name in ("check_entropy_restart_control", "validate_pluto_particle_restart_pair",
                  "measure_q031_fluxes", "pluto_h5_level3_ambient_extract",

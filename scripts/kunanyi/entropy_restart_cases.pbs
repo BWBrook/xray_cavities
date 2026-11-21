@@ -1,0 +1,28 @@
+#!/bin/bash
+#PBS -q normal
+#PBS -r n
+#PBS -m ae
+
+set -euo pipefail
+cd "${PBS_O_WORKDIR:?missing PBS submission directory}"
+case "${SETTING:?missing entropy-switch setting}" in ON|OFF) ;; *) exit 2 ;; esac
+python=${ANALYSIS_PYTHON:-/share/apps/software/Anaconda3/2024.02-1/bin/python}
+order=$("$python" -c 'import json; print(*sorted(json.load(open("contract.json"))["cases"], reverse=True))')
+case "$order" in G-HI|"G-HI C-HI") ;; *) exit 2 ;; esac
+export ROLE=simulate
+first_failure=0
+for CASE_ID in $order; do
+    export CASE_ID
+    log="logs/${PBS_JOBID:?}.${CASE_ID}.${SETTING}"
+    printf '%s %s %s started\n' "$(date -Is)" "$CASE_ID" "$SETTING"
+    if bash ./entropy_restart.pbs > "$log.out" 2> "$log.err"; then
+        rc=0
+    else
+        rc=$?
+        if (( first_failure == 0 )); then first_failure=$rc; fi
+    fi
+    printf '%d\n' "$rc" > "$log.exit"
+    printf '%s %s %s exited %d\n' "$(date -Is)" "$CASE_ID" "$SETTING" "$rc"
+    if [[ $SETTING == ON && $rc != 0 ]]; then break; fi
+done
+exit "$first_failure"

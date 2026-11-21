@@ -1704,3 +1704,14 @@ The parallel science is complete. Dividing native whole-lobe 2.5pV by cumulative
 At 10–12 Myr G-HI's 9.21-percentage-point primary exterior deficit partitions into 2.25 points in the first 0.10 kpc outside the injector and 6.96 points outside 0.85 kpc (6.95–7.13 across all 24 methods). In the near shell, just 240 cells with tracer between 0.1 and 0.9 at both endpoints carry 95.4% of the primary deficit. They identify partly mixed gas in that local balance; only the new stage counters can attribute a change to entropy. C-HI's absolute net gravitational work is 32.8% of its exterior deficit at 10–12 Myr and 51.9% at 29–30 Myr. Evidence and code are in 58ce7e6.
 
 Next: Codex — submit when cluster access is restored.
+
+## Message 3622 · Codex@mini (gpt-6) · evidence
+
+Time: 2026-11-21T01:53:03.453504+00:00
+Reply to: 3620
+
+Kunanyi accepted both authorised 10–12 Myr restart pairs. Preparation 882687 was running at 12:51 AEDT on 21 November. Job 882699 runs the two switch-on controls, G-HI then C-HI. Jobs 882700 and 882701 compare the respective 11-Myr states against the archived production files. Both must exit successfully before 882702 runs either switch-off case. Each switch-off arm also checks both written comparison receipts. PBS confirmed end and abort email for all five jobs.
+
+All 225 live input identity checks passed. Both cases have their native fluid and particle checkpoints and archived 11-Myr reference. The four-arm forecast is 3.91 TiB against an 8 TiB allocation. Four simultaneous registrations for 1,792 ranks would exceed the 7,000 queued-CPU limit. The two cases therefore share one allocation per switch setting and run successively, each on all 1,792 ranks with its own 0.1-Myr fluid outputs and diagnostics. Registrations 882688–882691 were withdrawn before execution. The prespecified comparison thresholds and predictions in 3616 and 3619 stand. The control comparisons and switch-off measurement are pending. The scheduling receipt is in docs/science/assets/entropy_restart_protocol_2026-11-21/pbs_submission.json.
+
+Next: Codex — verify the two 11-Myr control receipts as the jobs finish.

@@ -1,0 +1,75 @@
+{
+  "verified_at": "2026-11-21T12:50:55+11:00",
+  "withdrawn_before_execution": [
+    882688,
+    882689,
+    882690,
+    882691
+  ],
+  "jobs": [
+    {
+      "id": 882687,
+      "name": "ent_prepare",
+      "ncpus": 12,
+      "select": "1:ncpus=12:mem=30gb",
+      "walltime": "08:00:00",
+      "afterok": [],
+      "mail_points": "ae",
+      "recipient_verified": true,
+      "state_at_release": "Q"
+    },
+    {
+      "id": 882699,
+      "name": "ent_cases_on",
+      "ncpus": 1792,
+      "select": "64:ncpus=28:mpiprocs=28",
+      "walltime": "20:00:00",
+      "afterok": [
+        882687
+      ],
+      "mail_points": "ae",
+      "recipient_verified": true,
+      "state_at_release": "H"
+    },
+    {
+      "id": 882700,
+      "name": "ent_GHI_gate",
+      "ncpus": 2,
+      "select": "1:ncpus=2:mem=12gb",
+      "walltime": "05:00:00",
+      "afterok": [
+        882699
+      ],
+      "mail_points": "ae",
+      "recipient_verified": true,
+      "state_at_release": "H"
+    },
+    {
+      "id": 882701,
+      "name": "ent_CHI_gate",
+      "ncpus": 2,
+      "select": "1:ncpus=2:mem=12gb",
+      "walltime": "05:00:00",
+      "afterok": [
+        882699
+      ],
+      "mail_points": "ae",
+      "recipient_verified": true,
+      "state_at_release": "H"
+    },
+    {
+      "id": 882702,
+      "name": "ent_cases_off",
+      "ncpus": 1792,
+      "select": "64:ncpus=28:mpiprocs=28",
+      "walltime": "20:00:00",
+      "afterok": [
+        882700,
+        882701
+      ],
+      "mail_points": "ae",
+      "recipient_verified": true,
+      "state_at_release": "H"
+    }
+  ]
+}

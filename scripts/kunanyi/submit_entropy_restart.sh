@@ -36,10 +36,11 @@ mkdir -p logs
 submit() {
     local role=$1 case_id=$2 setting=$3 name=$4 resources=$5
     shift 5
-    local job
+    local job script=entropy_restart.pbs
+    if [[ $role == simulate ]]; then script=entropy_restart_cases.pbs; fi
     job=$("$pbs/qsub" -N "$name" -m ae -M "$mail" -l "$resources" \
         -v "ROLE=$role,CASE_ID=$case_id,SETTING=$setting" \
-        -o "$PWD/logs/$name.out" -e "$PWD/logs/$name.err" "$@" entropy_restart.pbs)
+        -o "$PWD/logs/$name.out" -e "$PWD/logs/$name.err" "$@" "$script")
     [[ $job =~ ^[0-9]+([.][a-zA-Z0-9._-]+)?$ ]]
     printf '%s\t%s\t%s\t%s\n' "$job" "$role" "$case_id" "$setting" >> jobs.tsv
     "$pbs/qstat" -f "$job" > "logs/$name.submitted"
@@ -64,19 +65,17 @@ PY
 }
 submit prepare all both ent_prepare 'select=1:ncpus=12:mem=30gb,walltime=08:00:00' -h
 prep=$job_id
-hydro='select=64:ncpus=28:mpiprocs=28,walltime=10:00:00'
+hours=$((10 * ${#cases[@]}))
+hydro="select=64:ncpus=28:mpiprocs=28,walltime=$hours:00:00"
+submit simulate all ON ent_cases_on "$hydro" -W "depend=afterok:$prep"
+on=$job_id
 gates=()
 for c in "${cases[@]}"; do
     short=${c//-/}
-    submit simulate "$c" ON "ent_${short}_on" "$hydro" -W "depend=afterok:$prep"
-    on=$job_id
-    submit gate "$c" ON "ent_${short}_chk" 'select=1:ncpus=2:mem=12gb,walltime=05:00:00' -W "depend=afterok:$on"
+    submit gate "$c" ON "ent_${short}_gate" 'select=1:ncpus=2:mem=12gb,walltime=05:00:00' -W "depend=afterok:$on"
     gates+=("$job_id")
 done
 joint=$(IFS=:; echo "${gates[*]}")
-for c in "${cases[@]}"; do
-    short=${c//-/}
-    submit simulate "$c" OFF "ent_${short}_off" "$hydro" -W "depend=afterok:$joint"
-done
+submit simulate all OFF ent_cases_off "$hydro" -W "depend=afterok:$joint"
 "$pbs/qrls" "$prep"
 cat jobs.tsv

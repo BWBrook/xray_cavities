@@ -22,7 +22,8 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
 | Latest accounting result? | [Full jet energy budgets, tracer leakage and the gravity test](docs/science/production_injector_histories_2026-11-21.md) |
 | How much of the supplied energy does the lobe enthalpy represent? | [Matched fractions and their denominators](docs/science/native_delivery_restatement_2026-11-21.md) and [the short research brief](manuscript/text/brief.md) |
-| Where does the remaining energy discrepancy occur? | [Near-injector and exterior balances](docs/science/entropy_localisation_2026-11-21.md) and [the entropy-switch restart protocol](docs/science/entropy_restart_protocol_2026-11-21.md) |
+| Where does the remaining energy discrepancy occur? | [Near-injector and exterior balances](docs/science/entropy_localisation_2026-11-21.md) |
+| How is the entropy switch being tested? | [Predictions and control criteria](docs/science/entropy_restart_protocol_2026-11-21.md) and [the submitted G-HI and C-HI restart jobs](docs/exchange/logs/2026-11-21-entropy-paired-restart.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
