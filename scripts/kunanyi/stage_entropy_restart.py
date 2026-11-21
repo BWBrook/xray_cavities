@@ -20,6 +20,9 @@ from validate_pluto_particle_restart_pair import RESTART_RECORD_SIZE, sha256_fil
 
 FIELDS = ("rho", "prs", "tr1", "vx1", "vx2", "vx3")
 PARTICLES = "id x1 x2 x3 vx1 vx2 vx3 tinj color tracer last_shock_time density pressure".split()
+# With MXCSR FTZ enabled, the x86 cast rounds to 24 significant bits before
+# testing for a tiny result. This tie rounds up to the smallest normal float.
+FLOAT32_FTZ_BOUNDARY = float.fromhex("0x1.ffffffp-127")
 
 
 def write_json(path, value):
@@ -46,6 +49,22 @@ def native_copy(source, dest, expected=None):
     if expected:
         verified(dest, expected)
     dest.chmod(0o444)
+
+
+def compare_checkpoint_slab(values, stored, field, iz):
+    with np.errstate(over="ignore", under="ignore", invalid="ignore"):
+        rounded = values.astype(np.float32)
+    if not np.isfinite(rounded).all() or not np.isfinite(stored).all():
+        raise ValueError(f"{field}: nonfinite checkpoint float at slab {iz}")
+    flushed = (np.abs(values) < FLOAT32_FTZ_BOUNDARY) & (rounded != 0)
+    count = int(np.count_nonzero(flushed))
+    rounded[flushed] = np.copysign(np.float32(0), rounded[flushed])
+    if not np.array_equal(rounded, stored):
+        different = rounded != stored
+        first = np.unravel_index(np.argmax(different), different.shape)
+        raise ValueError(f"{field}: {np.count_nonzero(different)} native float discrepancies at "
+                         f"slab {iz}, first offset {first}: expected {rounded[first]}, stored {stored[first]}")
+    return count
 
 
 def seed_checkpoint(case_root, config, source):
@@ -84,14 +103,18 @@ def seed_checkpoint(case_root, config, source):
         d, f = dbl["Timestep_2"], flt["Timestep_10"]
         if float(d.attrs["Time"]) != float(f.attrs["Time"]) or float(d.attrs["Time"]) != config["time10"]:
             raise ValueError("checkpoint and accepted float history have different times")
+        report["production_float_check"] = {}
         for field in FIELDS:
             a, b = d["vars"][field], f["vars"][field]
             if a.dtype.itemsize != 8 or b.dtype.itemsize != 4 or a.shape != b.shape:
                 raise ValueError(f"unexpected native field types or shape for {field}")
+            flushed = 0
             for iz in range(0, a.shape[0], 4):
                 slab = slice(iz, iz+4)
-                if not np.array_equal(a[slab].astype(np.float32), b[slab]):
-                    raise ValueError(f"{field}: double checkpoint differs from production float at slab {iz}")
+                flushed += compare_checkpoint_slab(a[slab], b[slab], field, iz)
+            report["production_float_check"][field] = {
+                "cells_checked": int(a.size), "nonzero_numpy_casts_flushed_to_zero": flushed,
+            }
     write_json(case_root / "seed-validation.json", report)
     return seed
 

@@ -1,19 +1,27 @@
 # Current Status
 
-Last updated: 2026-11-21 (both entropy-switch pairs submitted to Kunanyi)
+Last updated: 2026-11-21 (entropy restart preparation resubmitted after checking the native float conversion)
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
 ## Paired entropy-switch restart, 21 November
 
-Kunanyi accepted both 10–12 Myr pairs. Preparation **882687** was running
-at 12:51 AEDT. Job **882699** runs the G-HI and C-HI switch-on controls in
-sequence, using 1,792 ranks for each. Jobs **882700** (G-HI) and **882701**
-(C-HI) compare the 11-Myr states with production. Both must pass before
-**882702** starts the switch-off runs. PBS confirmed end and abort email
-for all five jobs. The control comparisons and the entropy-switch result
-are pending. [Frozen protocol](../science/entropy_restart_protocol_2026-11-21.md) · [Submission and scheduler receipts](logs/2026-11-21-entropy-paired-restart.md)
+Only preparation **882687** ran in the first submission. Its float-file check
+stopped on tracer values that the production writer flushed to zero. The
+corrected comparison reproduced all 3,686,400 values in the failing slab.
+Replacement preparation **882758** was running at 17:06 AEDT. **882759**
+runs G-HI and C-HI with the switch on. **882760** and **882761** compare the
+respective 11-Myr states with production. Both must pass before **882762**
+starts the switch-off runs. PBS confirmed end and abort email for each job.
+The 11-Myr tests and the entropy result are pending. [Frozen protocol](../science/entropy_restart_protocol_2026-11-21.md) · [Recovery and PBS receipts](logs/2026-11-21-entropy-paired-restart.md)
+
+Gemini's review identified a publication blocker. The article and Figures 2–3
+still treat withdrawn detector results as current. The NAT-05 caveat also
+infers band emissivity from tracer mass fraction alone. The assessment
+checks those points, the two possible signs of the entropy correction,
+the low-power shock counterexample and the proposed spectral-age bias.
+[Assessment and evidence](../science/gemini_review_assessment_2026-11-21.md)
 
 The matched 30-Myr native 2.5pV fractions of delivered energy are 0.4714,
 0.8714, 0.4043 and 0.6673 for C-HI, C-LO, G-HI and G-LO. In G-HI the

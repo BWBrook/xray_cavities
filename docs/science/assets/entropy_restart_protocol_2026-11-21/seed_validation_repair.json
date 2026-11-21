@@ -1,0 +1,257 @@
+{
+  "failed_chain": {
+    "jobs": [
+      {
+        "id": 882687,
+        "role": "ent_prepare",
+        "state_before_cleanup": "F",
+        "state_after_cleanup": "F",
+        "ever_started": true,
+        "exit_status": 1,
+        "walltime": "00:38:50"
+      },
+      {
+        "id": 882699,
+        "role": "ent_cases_on",
+        "state_before_cleanup": "F",
+        "state_after_cleanup": "F",
+        "ever_started": false,
+        "exit_status": null,
+        "walltime": null
+      },
+      {
+        "id": 882700,
+        "role": "ent_GHI_gate",
+        "state_before_cleanup": "H",
+        "state_after_cleanup": "F",
+        "ever_started": false,
+        "exit_status": null,
+        "walltime": null
+      },
+      {
+        "id": 882701,
+        "role": "ent_CHI_gate",
+        "state_before_cleanup": "H",
+        "state_after_cleanup": "F",
+        "ever_started": false,
+        "exit_status": null,
+        "walltime": null
+      },
+      {
+        "id": 882702,
+        "role": "ent_cases_off",
+        "state_before_cleanup": "H",
+        "state_after_cleanup": "F",
+        "ever_started": false,
+        "exit_status": null,
+        "walltime": null
+      }
+    ],
+    "error": "tr1: double checkpoint differs from production float at slab 184"
+  },
+  "conversion_verification": {
+    "original_mismatch": {
+      "case": "C-HI",
+      "field": "tr1",
+      "slab": [
+        184,
+        188
+      ],
+      "checked": 3686400,
+      "numpy_nonzero_stored_zero": 10183,
+      "min_native_double": 7.007271384112098e-46,
+      "max_native_double": 1.174388211416287e-38,
+      "remaining_discrepancies": 0
+    },
+    "central_sample_flushed": {
+      "C-HI": {
+        "rho": 0,
+        "prs": 0,
+        "vx1": 0,
+        "vx2": 0,
+        "vx3": 0,
+        "tr1": 0
+      },
+      "G-HI": {
+        "rho": 0,
+        "prs": 0,
+        "vx1": 0,
+        "vx2": 0,
+        "vx3": 0,
+        "tr1": 0
+      }
+    },
+    "central_sample_cells_each": 288,
+    "original_binary_sha256": "46755d88e8f70d311a82cd4da7769daef392807b1b3a5bcb1663d40a30a87727",
+    "hdf5_writer_sha256": "2bdcb211840615ba201eef5fcb8fba34bc8c9c8b041b308d9fca000da16958d7",
+    "conversion_sha256": "9e6769842fbb810243dbfdf8e305183c8ff31c1919d20b94ab33906ff22f7a47",
+    "mxcsr_or_mask": "0x8040",
+    "all_21_oracle_vectors_passed": true,
+    "native_cast_examples": [
+      {
+        "input_double_hex": "0x0p+0",
+        "output_float32_bits_hex": "00000000"
+      },
+      {
+        "input_double_hex": "-0x0p+0",
+        "output_float32_bits_hex": "80000000"
+      },
+      {
+        "input_double_hex": "0x1p-150",
+        "output_float32_bits_hex": "00000000"
+      },
+      {
+        "input_double_hex": "-0x1p-150",
+        "output_float32_bits_hex": "80000000"
+      },
+      {
+        "input_double_hex": "0x1p-149",
+        "output_float32_bits_hex": "00000000"
+      },
+      {
+        "input_double_hex": "-0x1p-149",
+        "output_float32_bits_hex": "80000000"
+      },
+      {
+        "input_double_hex": "0x1.234p-130",
+        "output_float32_bits_hex": "00000000"
+      },
+      {
+        "input_double_hex": "-0x1.234p-130",
+        "output_float32_bits_hex": "80000000"
+      },
+      {
+        "input_double_hex": "0x1.fffffcp-127",
+        "output_float32_bits_hex": "00000000"
+      },
+      {
+        "input_double_hex": "0x1.fffffdfffffffp-127",
+        "output_float32_bits_hex": "00000000"
+      },
+      {
+        "input_double_hex": "0x1.fffffep-127",
+        "output_float32_bits_hex": "00000000"
+      },
+      {
+        "input_double_hex": "0x1.fffffe0000001p-127",
+        "output_float32_bits_hex": "00000000"
+      },
+      {
+        "input_double_hex": "0x1.ffffffp-127",
+        "output_float32_bits_hex": "00800000"
+      },
+      {
+        "input_double_hex": "0x1.ffffff0000001p-127",
+        "output_float32_bits_hex": "00800000"
+      },
+      {
+        "input_double_hex": "0x1.fffffffffffffp-127",
+        "output_float32_bits_hex": "00800000"
+      },
+      {
+        "input_double_hex": "-0x1.fffffep-127",
+        "output_float32_bits_hex": "80000000"
+      },
+      {
+        "input_double_hex": "0x1p-126",
+        "output_float32_bits_hex": "00800000"
+      },
+      {
+        "input_double_hex": "-0x1p-126",
+        "output_float32_bits_hex": "80800000"
+      },
+      {
+        "input_double_hex": "0x1.000001p-126",
+        "output_float32_bits_hex": "00800000"
+      },
+      {
+        "input_double_hex": "0x1p+0",
+        "output_float32_bits_hex": "3f800000"
+      },
+      {
+        "input_double_hex": "-0x1p+1",
+        "output_float32_bits_hex": "c0000000"
+      }
+    ],
+    "native_bit_check": {
+      "probe_values": 34352,
+      "numpy_nonzero_flushed": 6530,
+      "bit_disagreements": 0,
+      "hardware_output_sha256": "ffae4e40d5f7e6b1b84fc77b25c34207b6cc363f7d28468d39fded4ad14d1190",
+      "transition_input_hex": [
+        "0x1.fffffefffffffp-127",
+        "0x1.ffffff0000000p-127",
+        "0x1.ffffff0000001p-127"
+      ],
+      "transition_output_bits_hex": [
+        "00000000",
+        "00800000",
+        "00800000"
+      ],
+      "random_seed": 882687
+    }
+  },
+  "replacement_submission": {
+    "checked_at": "2026-11-21T17:06:16+11:00",
+    "jobs": [
+      {
+        "id": 882758,
+        "name": "ent_prepare",
+        "state": "R",
+        "afterok": [],
+        "ncpus": 12,
+        "mail_points": "ae",
+        "recipient_verified": true
+      },
+      {
+        "id": 882759,
+        "name": "ent_cases_on",
+        "state": "H",
+        "afterok": [
+          882758
+        ],
+        "ncpus": 1792,
+        "mail_points": "ae",
+        "recipient_verified": true
+      },
+      {
+        "id": 882760,
+        "name": "ent_GHI_gate",
+        "state": "H",
+        "afterok": [
+          882759
+        ],
+        "ncpus": 2,
+        "mail_points": "ae",
+        "recipient_verified": true
+      },
+      {
+        "id": 882761,
+        "name": "ent_CHI_gate",
+        "state": "H",
+        "afterok": [
+          882759
+        ],
+        "ncpus": 2,
+        "mail_points": "ae",
+        "recipient_verified": true
+      },
+      {
+        "id": 882762,
+        "name": "ent_cases_off",
+        "state": "H",
+        "afterok": [
+          882760,
+          882761
+        ],
+        "ncpus": 1792,
+        "mail_points": "ae",
+        "recipient_verified": true
+      }
+    ],
+    "forecast_bytes": 4296730891728,
+    "quota_bytes": 8796093022208
+  },
+  "original_manifest_sha256": "9092ce6f4f4a52fbf7385a4ac5991a207afe4ce77fc63d36ffc61587325246a3",
+  "replacement_manifest_sha256": "27279acfb20d8f756241656bea34674d41beb832d9c81080054443b1f437f516"
+}

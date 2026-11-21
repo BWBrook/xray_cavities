@@ -1,8 +1,26 @@
-# Entropy-switch restart submission, 21 November 2026
+# Entropy-switch restart submission and recovery, 21 November 2026
+
+## Replacement jobs, 17:06 AEDT
+
+Preparation 882687 failed after 38 min 50 s at the comparison of C-HI’s 10-Myr double checkpoint with the independently identified single-precision output. PBS cancelled 882699 before execution. The two comparisons and switch-off job stayed held, and were retired after their accounting records were saved. None of the initial four simulations started. Both original production histories and the failed staging area are retained.
+
+| PBS ID | Work | State at 17:06 AEDT | Successful prerequisite |
+| --- | --- | --- | --- |
+| 882758 | Validate seeds and build four executables | Running | Released |
+| 882759 | G-HI then C-HI, switch on | Waiting | 882758 |
+| 882760 | G-HI at 11 Myr against production | Waiting | 882759 |
+| 882761 | C-HI at 11 Myr against production | Waiting | 882759 |
+| 882762 | G-HI then C-HI, switch off | Waiting | 882760 and 882761 |
+
+The two archived executables have the same digest. Their startup code sets MXCSR bits `0x8040`, enabling flush-to-zero and denormals-are-zero. Their HDF5 writer calls the native double-to-float conversion with a unit factor of one. Ordinary NumPy conversion preserved **10,183** tiny nonzero tracer values in the four-plane slab beginning at index 184. The production single-precision file recorded zeros for all of them. The archived double values ranged from about 7.01 × 10⁻⁴⁶ to 1.17 × 10⁻³⁸. [Intel’s floating-point mode reference](https://www.intel.com/content/www/us/en/docs/fortran-compiler/developer-guide-reference/2026-2/set-the-ftz-and-daz-flags.html)
+
+The repaired reader reproduces the native cast and continues to require numerical equality cell by cell. A 21-value x86 test established the rounding boundary. A second check compared 34,352 output bit patterns, including both signs and adjacent representable doubles at the transition to the smallest normal float. All matched. The entire failing slab and six-field central samples from both original production file pairs passed. Regression tests reject a one-ULP normal discrepancy, an unexpected subnormal, a missing normal value and nonfinite data. Full-field comparisons for both seeds run in 882758 and record counts by field. The 11-Myr thresholds, original double seeds, production source contract and both simulation arms match the first submission. The new work root is separate. PBS verified both dependency links into the switch-off allocation, all rank requests and end/abort notifications for the existing recipient. [Failure, native conversion and replacement submission receipts](../../science/assets/entropy_restart_protocol_2026-11-21/seed_validation_repair.json) · [Reader](../../../scripts/kunanyi/stage_entropy_restart.py) · [Regression checks](../../../tests/test_entropy_restart_checkpoint.py)
+
+## Original submission, 12:50 AEDT
 
 Kunanyi accepted both authorised G-HI and C-HI pairs at 12:50 AEDT. At 12:51 AEDT preparation was running and the other four PBS jobs were waiting for their prerequisites. The switch-on runs must each reproduce their own 11-Myr production state before either switch-off run can start.
 
-## PBS jobs
+### Original PBS jobs
 
 | PBS ID | Work | Must finish successfully first |
 | --- | --- | --- |

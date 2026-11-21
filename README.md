@@ -26,7 +26,7 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | How is the entropy switch being tested? | [Predictions and control criteria](docs/science/entropy_restart_protocol_2026-11-21.md) and [the submitted G-HI and C-HI restart jobs](docs/exchange/logs/2026-11-21-entropy-paired-restart.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
-| How were the conclusions challenged? | [Reviewed correspondence snapshots](docs/correspondence/INDEX.md) |
+| How were the conclusions challenged? | [Assessment of Gemini’s independent review](docs/science/gemini_review_assessment_2026-11-21.md) and [the correspondence record](docs/correspondence/INDEX.md) |
 
 The ledger and current status govern interpretation. Older reports and the
 article draft retain historical results and may predate later qualifications.
