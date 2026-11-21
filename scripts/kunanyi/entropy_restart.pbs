@@ -16,9 +16,15 @@ sha256sum -c --quiet SHA256SUMS
 work=$("$python" -c 'import json;print(json.load(open("contract.json"))["work_root"])')
 
 load_production_modules() {
+    set +u
+    if ! type module > /dev/null 2>&1; then
+        export MODULEPATH="${MODULEPATH:-/opt/ohpc/pub/moduledeps/gnu8:/opt/ohpc/pub/modulefiles:/share/apps/modules:/share/apps/eb-modules/all:/share/apps/moduledeps/rosalind/Core}"
+        . /opt/ohpc/admin/lmod/lmod/init/bash
+    fi
     module purge
     module use /ds/projects/agn/modulefiles
     module load intel/18.0.1.163 impi/2018.1.163 hdf5/1.12.1p zfp/0.5.5
+    set -u
     if [[ -z ${HDF5_DIR:-} ]]; then
         for lib in ${LD_LIBRARY_PATH//:/ }; do
             if [[ -f $lib/libhdf5.so || -f $lib/libhdf5.a ]]; then

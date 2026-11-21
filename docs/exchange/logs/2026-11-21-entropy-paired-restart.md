@@ -4,7 +4,7 @@ The G-HI and C-HI submission bundle is staged and verified on the project's Nect
 
 ## Handoff
 
-The private bundle is `turn22_entropy_2026-11-21/paired_release_r4/` on the project share. Its twelve file digests and manifest matched after transfer. The SHA-256 of `SHA256SUMS` is `d8c29f1b7f14495dd5649e4951d829f8eff780987d975a3b10beb0243aa92cea`. Private route information and the notification recipient reside in the existing operations configuration.
+The private bundle is `turn22_entropy_2026-11-21/paired_release_r5/` on the project share. Its twelve file digests and manifest matched after transfer. The SHA-256 of `SHA256SUMS` is `9092ce6f4f4a52fbf7385a4ac5991a207afe4ce77fc63d36ffc61587325246a3`. The batch wrapper initialises Lmod explicitly and loads the production module versions. Its shell checks passed both with and without a pre-existing module function. Private route information and the notification recipient reside in the existing operations configuration.
 
 Once access is available, confirm the two production roots, original source tree, archive availability and current quota. For both pairs the forecast is **3.91 TiB**, including allowance for an extra full native float per arm, four final double checkpoints, independent restart seeds, particle histories and logs. The one-pair forecast is about **1.96 TiB**. If only G-HI fits, generate the matching one-case contract with the same code and protocol. Keep all outputs and use the allocation with measured space.
 
