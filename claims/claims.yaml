@@ -29,10 +29,9 @@ claims:
       - {path: docs/science/assets/native_delivery_review_2026-11-21/tracer_closure_limits.csv, commit: e36bf6e}
     reproduce: .venv/bin/python scripts/science/restate_native_delivery.py
     test: >-
-      Independently review the new matched cumulative calculation, signed
-      cone-plus-stationary sum, quadrature and brief. Check the 19 primary rows
-      and 228 method/rule rows against the pinned input archive before promoting
-      this restatement; pin its derived evidence at the integration commit.
+      Claude independently recomputed the 19 primary rows within all 228
+      method and time-rule combinations from the pinned snapshot rates and
+      lobe integrals. The largest relative difference was below 5e-16.
     caveats:
       - The previously supported label-normalized comparison is retained as a comparator, not renamed measured delivery. The exact-native-volume numerator gives 0.5249–0.5587 (C-HI), 0.6309–1.1075 (C-LO), 0.4682–0.4983 (G-HI) and 0.6147–0.7849 (G-LO); historical Q029 numerators differ by at most 0.0071%.
       - Gas delivery includes internal and kinetic energy plus pressure work, with signed stationary absorption; it excludes potential-energy transport and the already initialized nozzle content at t=0.
@@ -161,12 +160,12 @@ claims:
       - {path: docs/science/assets/native_delivery_review_2026-11-21/nat07_matched_30myr.csv, commit: e36bf6e}
     reproduce: .venv/bin/python scripts/science/restate_native_delivery.py
     test: >-
-      Independently review the new delivery-normalized restatement and the
-      unchanged pV/storage ratio. Regional mass and potential-shift identities
-      remain necessary before a headline ambient share of total stored energy;
-      this restatement does not reinstate that retired headline.
+      Claude reproduced the twelve matched 30-Myr ratios and four 20-Myr
+      ambient shares from the pinned input tables. A total-energy ambient
+      share would also require the measured regional mass change and a
+      declared gravitational reference.
     caveats:
-      - Prior compact arithmetic and source/input identity checks remain valid; the new normalization awaits separate review. Native HDF5 energy integrals were not independently regenerated.
+      - The independent review used the archived native HDF5 integrals and snapshot rates as inputs. It checked the normalization and ratios from those tables.
       - Current pV is absolute and R100 storage is current-minus-initial in the current aperture. Their ratio is not an injection efficiency, and storage/delivery near unity does not establish physical closure.
       - Ambient shares are signed Eulerian current-region contributions, not Lagrangian deposition fractions.
       - Total stored change transforms by potential-zero shift times regional mass change; a common delivery denominator does not remove that gauge dependence. The old 54–98% total ambient-share headline remains retired.

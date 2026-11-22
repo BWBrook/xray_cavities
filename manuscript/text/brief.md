@@ -1,25 +1,25 @@
-# Lobe enthalpy is 40–87% of measured jet supply at 30 Myr
+# Lobe enthalpy is 40–87% of reconstructed net jet supply at 30 Myr
 
-Focused native-energy brief · Draft of 21 November 2026\
-Barry W. Brook · Calculations and draft by Codex (OpenAI, GPT-6)\
-Provisional results from the [X-ray cavities project](https://github.com/BWBrook/xray_cavities).
+Native-energy brief · Draft of 22 November 2026\
+Barry W. Brook · Analysis and draft by Codex (OpenAI, GPT-6) · Review by Claude (Anthropic, Fable 5.2)\
+This brief summarises the living [X-ray cavities project](https://github.com/BWBrook/xray_cavities).
 
 ![Current native 2.5pV divided by cumulative reconstructed gas supply (blue) or labelled kinetic energy (grey), at matched outputs near 30 Myr. Each pair uses the same pressure estimate. Claims NAT-01 and NAT-07.](../../docs/science/assets/native_delivery_restatement_2026-11-21/native_delivery_30myr.png){#fig-native-brief width=100%}
 
-Jets from black holes inflate lobes in the hot gas around galaxies. Their pressure and volume can suggest how much energy the jets supplied. But the answer depends on which gas defines the lobe and what we count as the supplied energy.
+Jets from black holes inflate lobes in the hot gas around galaxies. How much of the energy supplied by a jet can we recover from a lobe's pressure and volume?
 
-Here the *native lobe* means all simulation cells containing more than 0.1% marked jet material, each counted at its full volume. It is a three-dimensional simulation definition, rather than an identified X-ray cavity. We use the usual non-relativistic *enthalpy estimate*, 2.5 times pressure multiplied by volume, as the primary comparison. <!-- claims: NAT-05 NAT-01 -->
+We measured the lobes directly in four simulations of high- and low-power jets in cluster and group atmospheres. Our *lobe* includes the full volume of every cell containing more than 0.1% jet material by mass. Its *enthalpy estimate* for non-relativistic gas is 2.5 times the sum of current pressure times volume in these cells. <!-- claims: NAT-05 NAT-01 -->
 
-We compared four simulations: cluster (C) and group (G) atmospheres, each with high (HI) or low (LO) labelled jet power. We reconstructed energy crossing from the maintained jet injector into freely evolving gas, including pressure work and energy absorbed by the stationary part of the injector. We then added these signed rates over time, using each run's actual saved ages. <!-- claims: NAT-01 -->
+The injector emits gas through two cones. Its stationary surface also exchanges energy with surrounding gas. We added these signed flows, including pressure work, from startup to each saved age to reconstruct the net supply. <!-- claims: NAT-01 -->
 
-1. **The power label understates the reconstructed gas supply.** By 30 Myr the net supply exceeds the labelled kinetic-energy reference by about 16% in C-HI, 11% in C-LO, 16% in G-HI and 15% in G-LO. Dividing by that larger, matched supply lowers the pressure-based fractions shown above. An instantaneous power correction would not give this cumulative comparison. <!-- claims: NAT-01 NAT-07 -->
+1. **The power label understates the net gas supply.** By 30 Myr the net supply exceeds the labelled kinetic energy by 16% and 11% in the high- and low-power cluster runs (C-HI, C-LO) and by 16% and 15% in the corresponding group runs (G-HI, G-LO). <!-- claims: NAT-01 NAT-07 -->
 
-2. **The four runs retain different pressure-based fractions.** Across the selected ages near 10–50 Myr, 2.5pV accounts for 45–48% of reconstructed supply in C-HI, 58–99% in C-LO, 40–43% in G-HI and 54–68% in G-LO. G-HI contributes only the selected ages through 40 Myr. C-LO's late estimate exceeds its power-label reference but stays below its reconstructed gas supply in all tested methods. Using 4pV instead multiplies every fraction by 1.6; it does not supply a calibrated correction. <!-- claims: NAT-01 -->
+2. **The fraction depends on which energy we count.** At selected ages from 10 to 50 Myr (through 40 Myr for G-HI), lobe enthalpy accounts for 45–48% of net supply in C-HI, 58–99% in C-LO, 40–43% in G-HI and 54–68% in G-LO. Counting only energy from the cones gives 54.5–95.6% in C-LO and 53.0–67.7% in G-LO. The high-power fractions change by less than 0.1 percentage point. Using 4pV raises each value by 60%. <!-- claims: NAT-01 -->
 
-3. **Pressure and volume do not measure the same quantity as stored-energy change.** Near 30 Myr the pressure estimate is 43–81% of the change in thermal, motion and gravitational energy inside a surrounding spherical region. The spheres contain the entire native lobe at these ages. Changing the common supply denominator leaves this pressure-to-storage comparison unchanged. It cannot establish that the missing fraction was irreversibly deposited in the atmosphere. <!-- claims: NAT-07 -->
+3. **The lobe edge matters.** At 50 Myr C-LO's enthalpy is 98.6%, 84.7% or 76.5% of net supply when cells must contain more than 0.1%, 0.5% or 1% jet material. Counting more mixed cells increases the volume. At all five ages the lobe's mean pressure is within 5% of the initial mean in the same cells at the primary cut. <!-- claims: NAT-01 NAT-05 -->
 
-These four runs do not support a universal pressure-to-energy conversion. There is one run per case. The reconstruction misses intermediate solver updates and a short terminal speed dip. The pressure estimate uses current gas, whereas the spherical budget subtracts the initial state and depends on the chosen gravitational reference. These measurements do not establish a closed energy budget or certify the outer simulation boundary. <!-- claims: NAT-01 NAT-07 -->
+4. **We can measure the energy change around each lobe separately.** At 30 Myr lobe enthalpy is 43–81% of the change in thermal, motion and gravitational energy in spheres enclosing the lobes. The storage estimate depends on the gravitational reference. Energy crossing each sphere remains unmeasured, so the difference cannot tell us how much energy permanently heated the atmosphere. <!-- claims: NAT-07 -->
 
-Separate sums of archived rates and interval balances agree to numerical precision. This new normalization awaits independent review; historical roles remain recorded in the repository.
+There is one run per case. A shortfall in the high-power energy budgets could lower their lobe fractions. The saved outputs miss intermediate updates and a final speed dip. Over intervals ending at 20–47 Myr, the main method matches the balance of marked jet gas to within 0.04% of labelled mass per interval. A first-order reconstruction misses by 5.6–6.2% and fails this check. <!-- claims: NAT-01 -->
 
-Sources: claims NAT-01, NAT-05 and NAT-07 in the repository ledger; [matched calculation, tables and sensitivities](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/native_delivery_restatement_2026-11-21.md).
+Claude independently recomputed the 19 primary results and all 228 tested combinations from the archived injector rates and lobe tables. See claims NAT-01, NAT-05 and NAT-07. [Calculations and review](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/native_delivery_restatement_2026-11-21.md).
