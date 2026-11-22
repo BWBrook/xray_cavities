@@ -44,7 +44,7 @@ claims:
       - "Unity is not a bound on this ratio. After 20 Myr C-LO's enthalpy grows faster than its delivery: 1.05, 1.10 and 1.21 per unit delivered over 20-30, 30-40 and 40-50 Myr at tr1 > 1e-3, against 0.92-0.98 at 5e-3 and 0.82-0.85 at 1e-2. C-LO's lobe thermal energy is 0.95-1.05 of the initial thermal energy in the same cells, so its numerator is close to the undisturbed ambient pressure times a tracer-defined volume."
       - "Net delivery measures what the free grid received. Dividing by cone delivery alone changes the high-power ratios by 0.1% and lowers C-LO to 0.545-0.956 and G-LO to 0.530-0.677."
       - "Tagged-mass closure discriminates between the reconstructions. Over intervals 20-47 the primary method closes to 4e-4 of an interval's labelled mass or better in G-HI and to 1e-4 or better in the other three cases; first-order states miss by 5.6-6.2% in every one of those intervals, so their rows are not an uncertainty envelope. Startup closure sums to -0.126 (C-LO) and +0.038 (G-LO) of one interval's labelled mass and the terminal interval over-predicts by 0.035-0.036. Applied to energy at the same scale these move C-LO's 50-Myr ratio by about 0.3% and 0.1%, and its 10-Myr ratio by about 1.3%."
-      - "The high-power ratios come from runs with an unexplained exterior energy deficit. Per 1-Myr interval after 5 Myr it is 6-10% of labelled input in G-HI and 4-23% in C-HI, where it grows with age and depends on the outer-boundary flux reconstruction (BND-13; comparison/flagged_sphere_gravity_intervals.csv in the injector archive). If that energy would otherwise heat the lobe the high-power values are biased low, and part of the high/low-power contrast is numerical. The entropy-switch restart pairs test this."
+      - "The high-power ratios come from runs with a measured exterior energy deficit. Per 1-Myr interval after 5 Myr it is 6-10% of labelled input in G-HI and 4-23% in C-HI, where it grows with age and depends on the outer-boundary flux reconstruction (BND-13; comparison/flagged_sphere_gravity_intervals.csv in the injector archive). If that energy would otherwise heat the lobe the high-power values are biased low, and part of the high/low-power contrast is numerical. The restart pairs identify the net entropy update in the 10–12 Myr window (BND-14). Its effect on lobe enthalpy at the quoted ages remains unmeasured."
     depends_on: [NAT-05]
 
   - id: NAT-02
@@ -678,12 +678,40 @@ claims:
       .venv/bin/python scripts/science/entropy_localisation.py /tmp/xray_bnd13_localisation
     caveats:
       - The primary estimate uses linear reconstructed states, the configured solver switch, outer active-cell values and trapezoidal time weights. G-HI's linearly extrapolated outer state at index 47 is invalid. Its endpoint supports the left rule for that boundary reconstruction.
-      - The simulation applies gravity using stage-resolved numerical face mass fluxes. Both work estimates use saved states. The historical cause of the remaining energy imbalance is unresolved.
+      - The simulation applies gravity using stage-resolved numerical face mass fluxes. Both work estimates use saved states. The paired restarts attribute the 10–12 Myr primary balance in G-HI and C-HI to the entropy update (BND-14). Its contribution at other ages remains unresolved.
       - The C-HI exterior residual also stays negative, with a maximum paired gravity discrepancy of 20.5% of its magnitude. In the low-power runs the exterior balance changes sign across boundary reconstructions.
       - C-HI's sampled absolute net gravitational work is 32.8% of the primary exterior deficit at 10–12 Myr and 51.9% at 29–30 Myr. In G-HI, 6.95–7.13 percentage points of the 10–12 Myr deficit lie beyond 0.85 kpc across the 24 matched methods. These saved-state spatial balances motivate the paired native-stage measurement of the entropy update.
       - Agreement between the two saved-state work estimates shows that the saved fields satisfy discrete continuity. It cannot detect an error in the solver's stage-resolved source term. The stronger exclusion is magnitude: at 29–30 Myr the whole exterior gravitational work is about −2.1% of labelled energy, a quarter of the −8.4% residual, and a second-order source-term error cannot exceed the term itself (Claude, 21 Nov 2026).
-      - The production runs enable PLUTO's entropy switch (G-LO run log, `ENTROPY_SWITCH: ENABLED`; the paired-control definitions.h uses SELECTIVE). In cells it marks unshocked, pressure is recovered from conservatively advected entropy, so total energy is not conserved. The change is two-signed. Kinetic energy dissipated numerically in shear layers is not returned as heat, while mixing gas of different density at equal pressure raises the recovered pressure (Gemini's review, 21 November 2026; a factor 7.15 for an equal-volume 100:1 mix). A net loss is the leading candidate for the high-power exterior deficit. It is untested, and its sign and size in the low-power runs are unknown.
+      - The production runs enable PLUTO's entropy switch (G-LO run log, `ENTROPY_SWITCH: ENABLED`; the paired-control definitions.h uses SELECTIVE). In cells it marks unshocked, pressure is recovered from conservatively advected entropy, so total energy is not conserved. The change is two-signed. Kinetic energy dissipated numerically in shear layers is not returned as heat, while mixing gas of different density at equal pressure raises the recovered pressure (Gemini's review, 21 November 2026; a factor 7.15 for an equal-volume 100:1 mix). BND-14 measures both signs in the high-power restarts and their net loss at 10–12 Myr. The sign and size in the low-power runs remain unknown.
     depends_on: [BND-08, BND-12]
+
+  - id: BND-14
+    status: provisional
+    statement: >-
+      In the two high-power 10–12 Myr restarts the solver's signed entropy
+      recovery accounts for the primary energy deficit outside the injector.
+      Disabling it changes the exterior residual from −9.21313% to −0.01722%
+      of labelled input in G-HI and from −4.61482% to −0.01707% in C-HI,
+      removing 99.81% and 99.63% of the respective deficits.
+    evidence:
+      - {path: docs/science/entropy_restart_result_2026-11-22.md, commit: 5cf2809}
+      - {path: docs/science/assets/entropy_restart_result_2026-11-22/compact_inputs.zip, commit: 5cf2809}
+      - {path: docs/science/assets/entropy_restart_result_2026-11-22/primary_windows.csv, commit: 5cf2809}
+      - {path: docs/science/assets/entropy_restart_result_2026-11-22/primary_intervals.csv, commit: 5cf2809}
+      - {path: docs/science/assets/entropy_restart_result_2026-11-22/paired_windows.csv, commit: 5cf2809}
+      - {path: docs/science/assets/entropy_restart_result_2026-11-22/independent_verification.json, commit: 5cf2809}
+    reproduce: See the public ZIP replay in docs/science/entropy_restart_result_2026-11-22.md.
+    test: >-
+      Claude to independently adjudicate the registered score, whole-window
+      normalization, region and accepted-stage weights, and sensitivity of
+      the absolute residual to the injector and domain faces.
+    caveats:
+      - The primary reconstruction uses configured injector flags, outer active cells, trapezoidal time integration and the centre-referenced gravitational potential.
+      - The signed switch-on RK counter equals the primary exterior residual to within 0.000032 percentage points of label in each case. Gross changes include both gains and losses. The counter measures their net per visit and cannot separate contact mixing from dissipation inside a visit.
+      - The initial switch-off transient dominates the small primary remainder. The first interval is sampled at its endpoints, with a common production seed.
+      - Under linear outer-face extrapolation C-HI's residual is −6.200% on and −1.602% off. The corresponding paired change agrees with the primary 4.598 percentage points. Forcing HLL on every injector face also changes the absolute residual.
+      - The test covers two high-power jets at 10–12 Myr. Contributions to low-power runs, later deficits and changes to lobe enthalpy at the ages used in the headline comparison remain unmeasured.
+    depends_on: [BND-12, BND-13]
 
   - id: OBS-01
     status: refuted

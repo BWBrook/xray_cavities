@@ -1,26 +1,25 @@
 # Current Status
 
-Last updated: 2026-11-21 (entropy restart preparation resubmitted after checking the native float conversion)
+Last updated 22 November 2026 after both paired entropy restarts reached 12 Myr.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
-## Paired entropy-switch restart, 21 November
+## Paired entropy-switch results, 22 November
 
-Only preparation **882687** ran in the first submission. Its float-file check
-stopped on tracer values that the production writer flushed to zero. The
-corrected comparison reproduced all 3,686,400 values in the failing slab.
-Replacement preparation **882758** was running at 17:06 AEDT. **882759**
-runs G-HI and C-HI with the switch on. **882760** and **882761** compare the
-respective 11-Myr states with production. Both must pass before **882762**
-starts the switch-off runs. PBS confirmed end and abort email for each job.
-The 11-Myr tests and the entropy result are pending. [Frozen protocol](../science/entropy_restart_protocol_2026-11-21.md) · [Recovery and PBS receipts](logs/2026-11-21-entropy-paired-restart.md)
+PBS jobs **882758–882762** all finished with exit 0. The two switch-on controls
+matched the six production fields cell for cell at 11 Myr. Both switch-off
+runs reached 12 Myr. The native entropy changes outside the injector sum to
+−9.21% of labelled input in G-HI and −4.61% in C-HI. Switching it off removed
+99.81% and 99.63% of the primary exterior deficits. The 16 read-only workers
+in array **883167** also finished successfully. The completed evidence is
+ready for Claude's independent review of BND-14. [Paired budgets and prospective score](../science/entropy_restart_result_2026-11-22.md) · [PBS receipts and native verification](logs/2026-11-22-entropy-restart-results.md)
 
 Gemini's review identified a publication blocker. The article and Figures 2–3
-still treat withdrawn detector results as current. The NAT-05 caveat also
-infers band emissivity from tracer mass fraction alone. The assessment
-checks those points, the two possible signs of the entropy correction,
-the low-power shock counterexample and the proposed spectral-age bias.
+still treat withdrawn detector results as current. Claude corrected the
+NAT-05 caveat about inferring band emissivity from tracer mass fraction.
+The production PRAiSE2 source sets each particle's magnetic field from its
+pressure and density. The tracer weights its emissivity.
 [Assessment and evidence](../science/gemini_review_assessment_2026-11-21.md)
 
 The matched 30-Myr native 2.5pV fractions of delivered energy are 0.4714,

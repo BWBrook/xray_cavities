@@ -11,7 +11,7 @@ enthalpy convention is **2.5pV**. For the native lobe fractions we integrate
 the measured net injector gas power through the age of each measurement.
 The tables also give labelled jet power times age and the 4pV literature comparator.
 
-> **Status, 21 November 2026:** active research, developed in the open. The
+> **Status, 22 November 2026.** Active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -20,10 +20,10 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | Reader | Starting point |
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
-| Latest accounting result? | [Full jet energy budgets, tracer leakage and the gravity test](docs/science/production_injector_histories_2026-11-21.md) |
+| Latest accounting result? | [Paired entropy-switch restart results](docs/science/entropy_restart_result_2026-11-22.md) and [the four full production budgets](docs/science/production_injector_histories_2026-11-21.md) |
 | How much of the supplied energy does the lobe enthalpy represent? | [Matched fractions and their denominators](docs/science/native_delivery_restatement_2026-11-21.md) and [the short research brief](manuscript/text/brief.md) |
 | Where does the remaining energy discrepancy occur? | [Near-injector and exterior balances](docs/science/entropy_localisation_2026-11-21.md) |
-| How is the entropy switch being tested? | [Predictions and control criteria](docs/science/entropy_restart_protocol_2026-11-21.md) and [the submitted G-HI and C-HI restart jobs](docs/exchange/logs/2026-11-21-entropy-paired-restart.md) |
+| Did the restarts reproduce the production runs? | [Predictions and control criteria](docs/science/entropy_restart_protocol_2026-11-21.md) and [the completed jobs and control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Assessment of Gemini’s independent review](docs/science/gemini_review_assessment_2026-11-21.md) and [the correspondence record](docs/correspondence/INDEX.md) |
@@ -145,9 +145,13 @@ After accounting for outer-boundary transport, G-HI's whole-grid energy
 source was 7.8% above label by 47 Myr. The deficit outside its injector
 was about 8% of labelled input. Two
 ways of measuring gravitational work on that same gas agreed to within 1.03%
-of the deficit's magnitude in every matched interval and method. The cause
-of the remaining imbalance is open. [Four-case results, figure and replay](docs/science/production_injector_histories_2026-11-21.md)
+of the deficit's magnitude in every matched interval and method. The
+source of the imbalance can now be identified for a two-million-year window.
+At 10–12 Myr the entropy update itself removed a net 9.21% of labelled input
+in G-HI and 4.61% in C-HI. It added and removed energy in different cells.
+The low-power cases and other ages still lack this test. [Paired restart evidence](docs/science/entropy_restart_result_2026-11-22.md) · [Four-case results and replay](docs/science/production_injector_histories_2026-11-21.md)
 <!-- claims: BND-08 BND-10 BND-11 BND-12 BND-13 -->
+<!-- claims: BND-14 -->
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only

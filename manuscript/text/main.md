@@ -67,6 +67,14 @@ The selected shock-processed ambient region contains energy changes of 0.666–0
 
 The numerical cocoon/ambient decompositions agree with the independently summed retained energy change to the prescribed tolerance of $10^{-9}E_{\mathrm{inj}}$. Physical closure remains unresolved: the retained whole-domain change exceeds injected energy, particularly in C-LO, where the ratio is approximately 6–24. That case's background-dominated ambient budget cannot be interpreted as jet coupling efficiency. The shock measurements support substantial energy outside the native cocoon, while neither their restricted masks nor the whole-domain ledger establish the fraction of jet power irreversibly coupled to the atmosphere.
 
+In paired 10–12 Myr restarts, the entropy update reduced the energy outside
+the injector by 9.21% of labelled input in the high-power group jet and by
+4.61% in the high-power cluster jet. These were net changes. The same update
+added 21.72% and removed 30.93% in the group, and added 29.98% and removed
+34.59% in the cluster. Both switch-on controls reproduced the six production
+fluid fields at 11 Myr. The test covers these two atmospheres at high power
+over this interval. <!-- claims: BND-14 -->
+
 ### How accurately do X-ray observations recover cavity enthalpy?
 
 Of the 57 selected case-age-view combinations, 37 pass the bilateral X-ray topology criterion and 20 remain unresolved. Within the valid surface, pressure recovery is within a factor of two for 36 of 37 views, compared with four for volume and five for enthalpy (Figure [2](#fig-main-2)). Thus the dominant measurement discrepancy lies in the recovered cavity extent and topology, rather than in the inferred ambient pressure. This conclusion is conditional on successful cavity identification; excluded views are not assigned small but finite cavity energies.

@@ -21,8 +21,9 @@ hot cluster and group atmospheres? Observers estimate jet power from the
 enthalpy of X-ray cavities divided by an estimated age. This project tests
 that chain against simulations with known labelled power, true age and full
 3D state. Net injector delivery has been reconstructed at every retained
-output. The paired entropy-switch experiment tests the remaining exterior
-energy discrepancy. [Protocol and control](docs/science/entropy_restart_protocol_2026-11-21.md)
+output. Paired restarts isolate the energy changed by PLUTO's entropy switch
+in the two high-power simulations at 10–12 Myr. [Result and public replay](docs/science/entropy_restart_result_2026-11-22.md) · [Frozen protocol](docs/science/entropy_restart_protocol_2026-11-21.md)
+<!-- claims: BND-14 -->
 
 The answer is organised as a product of three factors:
 
@@ -32,8 +33,9 @@ Q_cav / Q_true = (H_native / E_inj) × (H_X / H_native) × (t_true / t_est)
 ```
 
 Each factor is tested separately, holding the others at truth.
-Until delivery is measured, the numerical denominator uses labelled bipolar
-power times actual age; it must not be presented as measured true injection.
+The native enthalpy tables use cumulative signed gas delivery across the
+injector. The exterior-balance tables express their residuals in units of
+labelled bipolar power times the actual interval duration. <!-- claims: NAT-01 BND-14 -->
 
 ## The experiment
 
@@ -304,6 +306,15 @@ minus continuity-inferred work with the total-energy residual on the same
 exterior volume and time rule. Keep the two unavailable G-HI outer-face
 endpoint choices missing. [Full history and independent checks](docs/science/production_injector_histories_2026-11-21.md) · [Native replay instructions](docs/exchange/logs/2026-11-21-production-injector-histories.md)
 <!-- claims: BND-08 BND-10 BND-11 BND-12 BND-13 -->
+
+For the 10–12 Myr high-power restarts, use each arm's actual output times and
+its own change in energy outside the maintained cells. The switch-on controls
+reproduced all six 11-Myr fluid fields exactly. Compare the signed native
+Runge–Kutta counter to its own arm's exterior balance before comparing arms.
+Use the sum of the positive and negative entropy changes when stating the
+effect on conservation. Their separate magnitudes describe how much energy
+was rewritten in either direction. [Paired result, compact replay and scope](docs/science/entropy_restart_result_2026-11-22.md)
+<!-- claims: BND-14 -->
 
 ## Conventions you must apply
 
