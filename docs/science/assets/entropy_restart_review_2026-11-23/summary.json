@@ -1,0 +1,36 @@
+{
+  "G-HI/ON": {
+    "window_residual": -0.09213134160301877,
+    "counter_net": -0.09213145418285414,
+    "counter_gain": 0.2172000877838236,
+    "counter_loss": -0.3093315419666777,
+    "max_abs_interval_residual_minus_counter": 2.841611537866638e-06,
+    "max_abs_interval_residual_minus_counter_after_first": 2.841611537866638e-06
+  },
+  "G-HI/OFF": {
+    "window_residual": -0.000172193873286455,
+    "counter_net": 2.3948119252799656e-09,
+    "counter_gain": 0.0,
+    "counter_loss": 0.0,
+    "max_abs_interval_residual_minus_counter": 0.0034316832351866293,
+    "max_abs_interval_residual_minus_counter_after_first": 2.8166279437477057e-06
+  },
+  "C-HI/ON": {
+    "window_residual": -0.04614815715867855,
+    "counter_net": -0.04614784352140291,
+    "counter_gain": 0.2997623750966163,
+    "counter_loss": -0.3459102186180192,
+    "max_abs_interval_residual_minus_counter": 8.735004108407803e-07,
+    "max_abs_interval_residual_minus_counter_after_first": 8.735004108407803e-07
+  },
+  "C-HI/OFF": {
+    "window_residual": -0.0001706513393838845,
+    "counter_net": 9.054415129129606e-11,
+    "counter_gain": 0.0,
+    "counter_loss": 0.0,
+    "max_abs_interval_residual_minus_counter": 0.0034170312982134783,
+    "max_abs_interval_residual_minus_counter_after_first": 4.730405052883449e-06
+  },
+  "G-HI/deficit_removed": 0.9981309957036292,
+  "C-HI/deficit_removed": 0.9963020985042348
+}
