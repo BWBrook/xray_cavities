@@ -686,7 +686,7 @@ claims:
     depends_on: [BND-08, BND-12]
 
   - id: BND-14
-    status: provisional
+    status: supported
     statement: >-
       In the two high-power 10–12 Myr restarts the solver's signed entropy
       recovery accounts for the primary energy deficit outside the injector.
@@ -700,6 +700,9 @@ claims:
       - {path: docs/science/assets/entropy_restart_result_2026-11-22/primary_intervals.csv, commit: 5cf2809}
       - {path: docs/science/assets/entropy_restart_result_2026-11-22/paired_windows.csv, commit: 5cf2809}
       - {path: docs/science/assets/entropy_restart_result_2026-11-22/independent_verification.json, commit: 5cf2809}
+      - {path: docs/science/assets/entropy_restart_review_2026-11-23/summary.json, commit: d951a12}
+      - {path: docs/science/assets/entropy_restart_review_2026-11-23/primary_interval_closure.csv, commit: d951a12}
+      - {path: docs/science/assets/entropy_restart_review_2026-11-23/budgets_by_method.csv, commit: d951a12}
     reproduce: See the public ZIP replay in docs/science/entropy_restart_result_2026-11-22.md.
     test: >-
       Claude to independently adjudicate the registered score, whole-window
@@ -711,6 +714,8 @@ claims:
       - The initial switch-off transient dominates the small primary remainder. The first interval is sampled at its endpoints, with a common production seed.
       - Under linear outer-face extrapolation C-HI's residual is −6.200% on and −1.602% off. The corresponding paired change agrees with the primary 4.598 percentage points. Forcing HLL on every injector face also changes the absolute residual.
       - The test covers two high-power jets at 10–12 Myr. Contributions to low-power runs, later deficits and changes to lobe enthalpy at the ages used in the headline comparison remain unmeasured.
+      - "Independent review (Claude, 23 November 2026): the four window residuals, both removal fractions, the counter's net, gain and loss and the delivery ratios reproduce from the snapshot receipts and raw stage codes in compact_inputs.zip (scripts/science/review_entropy_restart.py). In each of the 20 switch-on intervals the residual equals the counter within 2.8e-6 (G-HI) and 8.7e-7 (C-HI) of that interval's labelled input. Independence stops at those receipts; the native files and stage ledgers were not reread."
+      - "The switch-off arm calibrates the reconstructions. After the first interval its primary budget closes within 2.8e-6 (G-HI) and 4.7e-6 (C-HI) of labelled input in each of 19 intervals, which also bounds the gravity-source and floor terms. In the same intervals forced HLL leaves -1.7%, first-order states -5.9% and, in C-HI, linear outer-face extrapolation -1.6%. Those are biased reconstructions, not a band on the absolute residual. The first interval's -0.34% comes from averaging across the step in delivery at the shared seed."
     depends_on: [BND-12, BND-13]
 
   - id: OBS-01
