@@ -1,0 +1,26 @@
+#!/bin/bash
+#PBS -N ent_readout
+#PBS -q normal
+#PBS -J 0-15
+#PBS -l select=1:ncpus=1:mem=5gb
+#PBS -l walltime=04:00:00
+#PBS -j oe
+#PBS -r y
+#PBS -m ae
+
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?submit from the checksummed readout directory}"
+sha256sum --check --quiet inputs.sha256
+python=${ANALYSIS_PYTHON:-/share/apps/software/Anaconda3/2024.02-1/bin/python}
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+while read -r slot case_id arm index; do
+    if [[ $slot != "${PBS_ARRAY_INDEX:?}" ]]; then continue; fi
+    source="${ENTROPY_WORK_ROOT:?missing completed restart root}/$case_id/$arm"
+    out="results/$case_id/$arm"
+    mkdir -p "$out"
+    printf '%s %s %s %s\n' "$(date -Is)" "$case_id" "$arm" "$index"
+    "$python" readers/measure_entropy_injector_snapshot.py "$source" "$index" "$out/injector_$index.tmp.json"
+    mv "$out/injector_$index.tmp.json" "$out/injector_$index.json"
+    "$python" readers/measure_entropy_grid_snapshot.py "$source" "$index" "$out/grid_$index.json"
+done < tasks.tsv

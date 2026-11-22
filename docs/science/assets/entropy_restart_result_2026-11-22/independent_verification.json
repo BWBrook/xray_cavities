@@ -1,0 +1,154 @@
+{
+  "G-HI": {
+    "ON": {
+      "rk_exterior": {
+        "stage_1_over_label": -0.04431466217365543,
+        "stage_2_over_label": -0.0478167920091987,
+        "net_over_label": -0.09213145418285412
+      },
+      "intervals": 20,
+      "budget_over_label": {
+        "grid_storage_change": 1.0681317036015523,
+        "grid_components": {
+          "thermal": 0.6490805491180565,
+          "kinetic": 0.40979001695218953,
+          "gravitational": 0.009261137531306396
+        },
+        "flagged_storage_change": 0.0,
+        "outer_flux": -0.0018902140554586664,
+        "injector_total": 1.1583728311491137,
+        "first_interval_injector_trapezoid_minus_right": -3.399153623567329e-13,
+        "cap_gas": 1.1569393441601032,
+        "stationary_gas": 0.0014333273415524286,
+        "net_gas": 1.1583726715016558,
+        "tagged_mass": 1.1515511633049504,
+        "exterior": -0.09213134160302006,
+        "left_exterior": -0.09212359581088836,
+        "right_exterior": -0.09213908739515175,
+        "interval_weighted_exterior": -0.0921313416030188
+      },
+      "exterior_minus_rk": 1.1257983406620653e-07,
+      "primary_table_verified": true
+    },
+    "production_control": {
+      "production_control_step": 10990,
+      "production_control_age_myr": 10.999844170011517,
+      "production_control_sha256": "5e427ae7ad1efdc7141ee5b03063157f7e6eb144f58fd8e36ce8e0317e564c01",
+      "differing_primitive_values": 0,
+      "archived_10_11": -0.09101744739753914,
+      "coarse_replay_10_11": -0.09101744739757622,
+      "archived_11_12": -0.0932456971542206,
+      "archived_10_12_weighted": -0.0921310029734382,
+      "production_final_age_myr": 11.999410582480328,
+      "thermal_kinetic_sources_checked": true
+    },
+    "OFF": {
+      "rk_exterior": {
+        "stage_1_over_label": 2.3932450572240262e-09,
+        "stage_2_over_label": 1.5668680559388834e-12,
+        "net_over_label": 2.3948119252799648e-09
+      },
+      "intervals": 20,
+      "budget_over_label": {
+        "grid_storage_change": 1.1531714037849923,
+        "grid_components": {
+          "thermal": 0.7068903970867318,
+          "kinetic": 0.4370147238994426,
+          "gravitational": 0.009266282798817799
+        },
+        "flagged_storage_change": 0.0,
+        "outer_flux": -0.0018902084030192532,
+        "injector_total": 1.1514533892552599,
+        "first_interval_injector_trapezoid_minus_right": 0.00017882529224827188,
+        "cap_gas": 1.1504569371423812,
+        "stationary_gas": 0.0009962962483985184,
+        "net_gas": 1.1514532333907799,
+        "tagged_mass": 1.144664435668931,
+        "exterior": -0.0001721938732868189,
+        "left_exterior": -0.000342997831509928,
+        "right_exterior": -1.389915063709779e-06,
+        "interval_weighted_exterior": -0.00017219387328653378
+      },
+      "exterior_minus_rk": -0.0001721962680987442,
+      "primary_table_verified": true
+    },
+    "off_minus_on": 0.09195914772973324,
+    "fraction_of_on_deficit_removed": 0.9981309957036252
+  },
+  "C-HI": {
+    "ON": {
+      "rk_exterior": {
+        "stage_1_over_label": -0.019907630934251738,
+        "stage_2_over_label": -0.026240212587151195,
+        "net_over_label": -0.04614784352140293
+      },
+      "intervals": 20,
+      "budget_over_label": {
+        "grid_storage_change": 1.2181633289925062,
+        "grid_components": {
+          "thermal": 0.7772860929099346,
+          "kinetic": 0.37251414165869445,
+          "gravitational": 0.06836309442387713
+        },
+        "flagged_storage_change": 0.0,
+        "outer_flux": -0.10228229805169206,
+        "injector_total": 1.1620291880994538,
+        "first_interval_injector_trapezoid_minus_right": -3.895782859300201e-11,
+        "cap_gas": 1.1606295312801054,
+        "stationary_gas": 0.001399494415121871,
+        "net_gas": 1.1620290256952273,
+        "tagged_mass": 1.1553250790858736,
+        "exterior": -0.04614815715863951,
+        "left_exterior": -0.045715873799442974,
+        "right_exterior": -0.04658044051783605,
+        "interval_weighted_exterior": -0.04614815715867863
+      },
+      "exterior_minus_rk": -3.1363723658472953e-07,
+      "primary_table_verified": true
+    },
+    "production_control": {
+      "production_control_step": 11159,
+      "production_control_age_myr": 10.999142790537116,
+      "production_control_sha256": "198578a32ff2b7c48a45fff7bea768584dd286bdf5c88545654e0e236bcc3c05",
+      "differing_primitive_values": 0,
+      "archived_10_11": -0.046194025610503786,
+      "coarse_replay_10_11": -0.04619402560934294,
+      "archived_11_12": -0.046103992497881,
+      "archived_10_12_weighted": -0.04614899374294229,
+      "production_final_age_myr": 11.999075950762043,
+      "thermal_kinetic_sources_checked": true
+    },
+    "OFF": {
+      "rk_exterior": {
+        "stage_1_over_label": 9.054415129129606e-11,
+        "stage_2_over_label": 0.0,
+        "net_over_label": 9.054415129129606e-11
+      },
+      "intervals": 20,
+      "budget_over_label": {
+        "grid_storage_change": 1.257240348253437,
+        "grid_components": {
+          "thermal": 0.8426988190245798,
+          "kinetic": 0.3461752185382593,
+          "gravitational": 0.06836631069059784
+        },
+        "flagged_storage_change": 0.0,
+        "outer_flux": -0.10228211862911003,
+        "injector_total": 1.1551288809637505,
+        "first_interval_injector_trapezoid_minus_right": 0.000176908135349569,
+        "cap_gas": 1.1541640208607533,
+        "stationary_gas": 0.0009647015372444872,
+        "net_gas": 1.1551287223979978,
+        "tagged_mass": 1.148460483313632,
+        "exterior": -0.000170651339423733,
+        "left_exterior": 8.501775071612094e-05,
+        "right_exterior": -0.00042632042956358696,
+        "interval_weighted_exterior": -0.00017065133938385887
+      },
+      "exterior_minus_rk": -0.00017065142996788428,
+      "primary_table_verified": true
+    },
+    "off_minus_on": 0.04597750581921578,
+    "fraction_of_on_deficit_removed": 0.9963020985033681
+  }
+}
