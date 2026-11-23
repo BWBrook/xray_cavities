@@ -1,0 +1,26 @@
+#!/bin/bash -l
+#PBS -N ghi20_comp
+#PBS -q normal
+#PBS -l select=1:ncpus=2:mem=48gb
+#PBS -l walltime=06:00:00
+#PBS -m ae
+#PBS -j oe
+#PBS -r n
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?}"
+sha256sum -c stage.sha256
+python=/share/apps/software/Anaconda3/2024.02-1/bin/python
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export MPLBACKEND=Agg PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1
+export MPLCONFIGDIR="${TMPDIR:-/tmp}/front-mpl-${PBS_JOBID}"
+original="$HOME/codex_kunanyi/turn15_ghi_first20_r3"
+export PYTHONPATH="$PWD:$original/scripts/science:$original/scripts/kunanyi"
+# Use the project stage for temporary arrays when the local filesystem cannot hold them.
+scratch=$PWD
+if [[ -n ${TMPDIR:-} && -d "$TMPDIR" ]] && [[ $(df -Pk "$TMPDIR" | awk 'END {print $4}') -gt 18000000 ]]; then
+    scratch=$TMPDIR
+fi
+"$python" -u compressive_front_native_run.py --previous "$original/results_emission" \
+    --validation synthetic_validation.json --scratch "$scratch" --output "results-${PBS_JOBID}"
+sha256sum -c stage.sha256

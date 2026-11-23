@@ -1,0 +1,80 @@
+{
+  "case": "G-HI",
+  "snapshot_index": 20,
+  "actual_time_myr": 19.999614294878622,
+  "view_map_sha256": {
+    "0": "46935fca242ddc96c4ad8776db1b4e00e76ec27f9215a923308e29f323d99e80",
+    "45": "fb0ed2f4b706b00cbb13a28c0fe87ae7455a25e3cf8c562f6dcacc122b1ac896",
+    "90": "d77542fff88a0866e772623a6595f1a8babebb9a5d0dae5f349262b1576b5956"
+  },
+  "source_receipt_sha256": "4ca1a4f445ae1d65d6a7aa7619ccea7745d545266656875ddfb469487affd31e",
+  "qualifications": [
+    "native_source_and_continuation_semantics_require_external_review",
+    "observer_comparators_are_diagnostic_not_promoted",
+    "velocity_cuts_do_not_identify_shock_or_causal_jet_origin",
+    "native_revolution_solids_use_full_cell_centre_membership",
+    "exact_projection_tracer_mask_differs_from_retained_mask",
+    "retained_sky_grid_does_not_cover_every_native_cell",
+    "exact_edge_maps_differ_from_retained_maps",
+    "emissivity_correction_domain_or_sign"
+  ],
+  "native_source_sha256": {
+    "current_h5": "d70c396e24e1f66a785a4d26039d83cfc5aa88235872390012c72d3105ec4268",
+    "environment": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+    "grid_file": "77d10309df9fbe4366cd540bc966a6f06736109141a2e7931f28eebfdb88196d",
+    "initial_h5": "7f8db954a7683fdb9ea58ff57708b11c45145ce4f0fa1d7cd41d85ab42f3132f"
+  },
+  "historical_velocity_replacement_control": {
+    "0": {
+      "original_detector_masks_matched": 2,
+      "exact_original_fixed_and_refitted_masks_matched": 4,
+      "velocity_replacement_fixed_and_refitted_masks_matched": 4,
+      "brightness_partition": {
+        "current": {
+          "max_abs_error": 3.725290298461914e-09,
+          "error_to_scale": 6.659241632920992e-16,
+          "max_per_pixel_relative_error": 2.8886970829437945e-15
+        },
+        "initial": {
+          "max_abs_error": 2.3283064365386963e-09,
+          "error_to_scale": 4.162064437225445e-16,
+          "max_per_pixel_relative_error": 2.370456189584489e-15
+        }
+      }
+    },
+    "45": {
+      "original_detector_masks_matched": 2,
+      "exact_original_fixed_and_refitted_masks_matched": 4,
+      "velocity_replacement_fixed_and_refitted_masks_matched": 4,
+      "brightness_partition": {
+        "current": {
+          "max_abs_error": 1.4551915228366852e-09,
+          "error_to_scale": 2.293215225308525e-15,
+          "max_per_pixel_relative_error": 1.5251699684244133e-14
+        },
+        "initial": {
+          "max_abs_error": 2.9103830456733704e-10,
+          "error_to_scale": 4.587329649713974e-16,
+          "max_per_pixel_relative_error": 5.4928390985452266e-15
+        }
+      }
+    },
+    "90": {
+      "original_detector_masks_matched": 2,
+      "exact_original_fixed_and_refitted_masks_matched": 4,
+      "velocity_replacement_fixed_and_refitted_masks_matched": 4,
+      "brightness_partition": {
+        "current": {
+          "max_abs_error": 1.57160684466362e-09,
+          "error_to_scale": 1.7590901482316927e-15,
+          "max_per_pixel_relative_error": 9.517416516900721e-15
+        },
+        "initial": {
+          "max_abs_error": 9.313225746154785e-10,
+          "error_to_scale": 1.0425008565615692e-15,
+          "max_per_pixel_relative_error": 8.442014498549203e-15
+        }
+      }
+    }
+  }
+}

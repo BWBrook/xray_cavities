@@ -1,0 +1,13 @@
+view_deg,hemisphere,profile,row,z_kpc
+0,negative_z,lateral_arc,146,-71.51563262939453
+0,negative_z,lobe,151,-68.4744644165039
+0,positive_z,lateral_arc,867,71.51563262939453
+0,positive_z,lobe,861,67.88133239746094
+45,negative_z,lateral_arc,469,-1.875
+45,negative_z,lobe,151,-68.4744644165039
+45,positive_z,lateral_arc,507,0.02500000037252903
+45,positive_z,lobe,861,67.88133239746094
+90,negative_z,lateral_arc,461,-2.2750000953674316
+90,negative_z,lobe,151,-68.4744644165039
+90,positive_z,lateral_arc,507,0.02500000037252903
+90,positive_z,lobe,861,67.88133239746094

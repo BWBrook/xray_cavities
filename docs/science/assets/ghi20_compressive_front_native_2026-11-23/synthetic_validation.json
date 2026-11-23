@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "sphere": {
+    "tiled_exact": true,
+    "radius_kpc": 1.0080000000000002,
+    "normal_scale_kpc": 0.050000000000000044,
+    "selected_xyz_extent_kpc": [
+      1.125,
+      1.125,
+      1.125
+    ],
+    "winners": [
+      1,
+      1
+    ],
+    "passed": true
+  },
+  "exact_grid_file_sha256": "77d10309df9fbe4366cd540bc966a6f06736109141a2e7931f28eebfdb88196d",
+  "environment_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+  "axis_edge_sha256": {
+    "x": "dd372217be58d68c03492863627f470321494b97bb13cbc5a9efde8791d52570",
+    "y": "dd372217be58d68c03492863627f470321494b97bb13cbc5a9efde8791d52570",
+    "z": "a600c0bcc51baeb293ec8d73dcaf9323e6cfcc6136afb509083792765255755b"
+  },
+  "required_rows": 256,
+  "sensitivity_rows": 64,
+  "failures": []
+}
