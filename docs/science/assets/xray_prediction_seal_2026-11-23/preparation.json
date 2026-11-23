@@ -1,0 +1,175 @@
+{
+  "assembler_sha256": "1ebd7c631d78861e92c6ea38a0bfc6bc3b39bf9c7c5f7c5dbc249be727e2a981",
+  "custody_wrapper_sha256": "ea0dc8cebcdcaf4d757db5b363ed98b892e53ea40c192ff524ee344d61deaa9a",
+  "frozen_config_sha256": "aaef89201ec5e4ab7fd792b754a66b8463e9ed71756ad33e55d22f84bf9844b8",
+  "native_input_csv_sha256": "bf41d2e0e7aa143a68316c0a3aeffcbe49fa0c3bea7288c0183d0e555fbc2fb3",
+  "original_scheduler_registration": [
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883556[]",
+      "indices": "0-5",
+      "name": "blind_chi"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883557[]",
+      "indices": "6-11",
+      "name": "blind_clo"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883558[]",
+      "indices": "16-21",
+      "name": "blind_glo"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883559",
+      "indices": null,
+      "name": "blind_ghi00"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883560",
+      "indices": null,
+      "name": "blind_ghi10"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883561",
+      "indices": null,
+      "name": "blind_ghi30"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883562",
+      "indices": null,
+      "name": "blind_ghi40"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [
+        "883556[]",
+        "883557[]",
+        "883558[]",
+        "883559",
+        "883560",
+        "883561",
+        "883562"
+      ],
+      "id": "883563",
+      "indices": null,
+      "name": "blind_seal"
+    }
+  ],
+  "preparation": {
+    "additional_synthetic_custody_smoke": "full cohort with dummy observer masks; 67 scoring resources had zero permission before first observer call",
+    "expected_masks": 1056,
+    "frozen_tests_passed": 25,
+    "host_metadata_probe_initial": {
+      "exit_status": 1,
+      "id": "883552",
+      "reason": "unsupported -u flag in PBS task launcher; no native input opened"
+    },
+    "host_metadata_probe_repair": {
+      "exit_status": 0,
+      "id": "883554",
+      "matched_ghi_hosts": 4
+    },
+    "initial_null_views": 12,
+    "mask_variants_per_view": 16,
+    "native_age_contracts": 22,
+    "science_views": 54
+  },
+  "private_slots_sha256": "48ba028653476411df25460095c243859983f4dd9a1dda9292a482bea0dd569b",
+  "producer_sha256": "d84be77567aad949599c1ce0d3be7186990352898ee89fd22507538107ad6bf1",
+  "registration_notes": "The first launch stopped before Python because the non-login batch shell did not supply the module function. The repair uses the verified analysis interpreter directly. PBS accepted plain array ranges with rerunnable subjobs.",
+  "repair_source_sha256": {
+    "seal_r4.pbs": "4ffa1b810a917fdf4584d04c35bbd01907be15ae92a04270eca49a8de13c9824",
+    "submit_r4.py": "0121b2021e34deb86c7e843bfeee8bf747ca59db2723e34d0eb77a05a980a6ce",
+    "worker_r4.pbs": "d089a30063c9d040a3b6589fb13fcc2054a8261c0686df27a67ac1efc01205e1"
+  },
+  "repaired_scheduler_registration": [
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883567[]",
+      "indices": "0-5",
+      "name": "blind_chi"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883568[]",
+      "indices": "6-11",
+      "name": "blind_clo"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883569[]",
+      "indices": "16-21",
+      "name": "blind_glo"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883566",
+      "indices": null,
+      "name": "blind_ghi00"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883570",
+      "indices": null,
+      "name": "blind_ghi10"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883571",
+      "indices": null,
+      "name": "blind_ghi30"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [],
+      "id": "883572",
+      "indices": null,
+      "name": "blind_ghi40"
+    },
+    {
+      "abort_and_completion_email_verified": true,
+      "dependencies": [
+        "883567[]",
+        "883568[]",
+        "883569[]",
+        "883566",
+        "883570",
+        "883571",
+        "883572"
+      ],
+      "id": "883573",
+      "indices": null,
+      "name": "blind_seal"
+    }
+  ],
+  "runner_sha256": "a56d6700176e47003c8ea53d1f0187414278a39dc87050e3bcc4d4a2d50bb708",
+  "runtime": {
+    "apec_table": "e0f53a9f276a956f347af0e4fe627ee152762abc8b5116fc458070ee5f0925e3",
+    "gaunt_lut": "64df88d39896f14064bb799fd5b70c6f68d20bcbdc5a15d19e2e4fd15b22f747",
+    "xraise_py": "4bf17cb8e63e2d87a06615c170c7dd307788554a0cee83409762223123ec8da5"
+  },
+  "source_commit": "1da7ef3d0ac644484a137f35adfe9895649c0b48",
+  "stage_archive_sha256": "9e7db9065b078254a6c5b20dda7f77e74c1afdac775123e7f205d57e92935bec",
+  "stage_manifest_sha256": "c206d2f37424661b643befb558f606c27d066eab57824cf8ed661f4dfe87e26a",
+  "status": "native_readout_registered_predictions_pending"
+}
