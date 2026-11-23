@@ -334,7 +334,7 @@ claims:
     depends_on: [NAT-01, NAT-07, BND-14]
 
   - id: NAT-13
-    status: provisional
+    status: supported
     statement: >-
       In the low-power 10–12 Myr restart pairs, lobe enthalpy gain per unit
       of delivered gas energy changes from 67.62% with the entropy update
@@ -347,6 +347,9 @@ claims:
       - {path: docs/science/assets/low_power_entropy_result_2026-11-23/lobe_paired_effects.csv, commit: ffc61cb}
       - {path: docs/science/assets/low_power_entropy_result_2026-11-23/lobe_verification.json, commit: ffc61cb}
       - {path: docs/science/assets/entropy_redistribution_review_2026-11-23/lobe_contrasts.csv, commit: d7cc075}
+      - {path: docs/science/assets/low_power_entropy_review_2026-11-23/lobe_and_history_summary.json, commit: 9a2116f}
+      - {path: docs/science/assets/low_power_entropy_review_2026-11-23/lobe_rows.csv, commit: 9a2116f}
+      - {path: docs/science/assets/low_power_entropy_review_2026-11-23/four_case_increments_by_cut.csv, commit: 9a2116f}
     reproduce: .venv/bin/python scripts/science/reduce_low_power_entropy_lobes.py --output /tmp/xray-low-power-lobes
     test: >-
       Gemini 4 Carbon independently recomputed the six paired tracer-cut
@@ -357,6 +360,10 @@ claims:
       - The 0.1%, 0.5% and 1% tracer cuts give differences of −0.575, +0.397 and +1.285 percentage points in C-LO and +4.969, +5.652 and +6.353 points in G-LO.
       - This follow-up used completed outputs after forecast scoring. With one pair per case and ten shared Myr, the ratios measure changes in the pressure-volume estimate over these two Myr. Deposition of heat and later-age bias are separate questions.
       - In C-LO the primary volume and mean pressure change by −0.307% and +0.097%. The signed complementary thermal difference cannot establish a fraction of energy radiated as sound. All three calculations use the same native field extractions.
+      - "Independent review (Claude, 23 November 2026; scripts/science/review_low_power_lobes.py). The six contrasts reproduce to 1e-15 from the lobe receipts and from injector rates integrated separately. The pressure-field hashes equal those in the budget receipts and both 10-Myr seeds equal the production tables exactly. The native files and the tracer selections were not re-read."
+      - "C-LO is a null within the lobe-edge definition. Its mean lobe pressure rises at all three cuts (+0.097%, +0.039% and +0.028%), and the sign of the enthalpy contrast follows the volume change (−0.31% to +0.33%). The tested window lies in the 9–13 Myr trough of C-LO's production residual: +3.0% and +4.7% of labelled input per Myr, against +13.7%, +15.4% and +27.8% in the intervals ending at 20, 30 and 40 Myr (BND-16). The null does not extend to later ages."
+      - "In G-LO the lobe thermal energy at 12 Myr is higher by 0.067 of one Myr of labelled input, against a whole-grid thermal plus kinetic difference of 0.037. The lobe gain therefore includes energy moved from other forms and regions, as in C-HI (NAT-12)."
+      - "As a ratio, the change in gain per delivered energy across the three cuts is 0.031–0.043 dex in G-LO and −0.003 to +0.007 dex in C-LO, against 0.089–0.105 dex in G-HI and 0.097–0.114 dex in C-HI. At the primary cut the low-minus-high difference in that gain falls from 38.6 to 25.4 percentage points in the cluster and from 25.9 to 21.4 in the group with the update off. Low power exceeds high power at all three cuts in both arms."
     depends_on: [NAT-01, NAT-05, BND-15]
 
   - id: BND-01
@@ -797,6 +804,8 @@ claims:
       - {path: docs/science/assets/low_power_entropy_result_2026-11-23/off_interval_scores.csv, commit: ffc61cb}
       - {path: docs/science/assets/low_power_entropy_result_2026-11-23/compact_inputs.zip, commit: ffc61cb}
       - {path: docs/science/assets/low_power_entropy_result_2026-11-23/independent_verification.json, commit: ffc61cb}
+      - {path: docs/science/assets/low_power_entropy_review_2026-11-23/summary.json, commit: 9a2116f}
+      - {path: docs/science/assets/low_power_entropy_review_2026-11-23/primary_interval_closure.csv, commit: 9a2116f}
     reproduce: >-
       .venv/bin/python scripts/science/verify_low_power_entropy.py
       docs/science/assets/low_power_entropy_result_2026-11-23/compact_inputs.zip
@@ -813,6 +822,8 @@ claims:
       - The two excluded switch-off startup intervals remain in the tables. Ordinary pressure floors in the switch-off arms add 0.0244% of labelled input in C-LO and 0.0258% in G-LO over the two Myr.
       - Gemini 4 Carbon independently recomputed the exterior budgets from the compact snapshot receipts. These jet-on restarts measure a signed numerical energy balance. A matched no-jet production-mesh control would address hydrostatic drift separately.
       - The 10-Myr checkpoint already incorporates the first ten million years of production evolution. The experiment addresses the next two million years and does not quantify late-time enthalpy bias.
+      - "Independent recomputation (Claude, 23 November 2026; scripts/science/review_entropy_restart.py --low-power) from the snapshot receipts and raw stage codes. The four 1-Myr counters are +3.058% and +4.709% in C-LO and −1.747% and −2.175% in G-LO. The reconstructed switch-on residual equals the counter within 1.3e-5 of labelled input in every interval, and the largest switch-off residual after the first interval is 0.030%. In C-LO the switch-off arm closes to 0.019% while the boundary inflow is 10.2 times labelled input. Extrapolating that inflow to the boundary face leaves −159%, which rejects that reconstruction at low power."
+      - "The C-LO surplus sits in jet-mixed gas. Gas with tracer at or below 0.001 carries +0.43% of labelled input in C-LO and +0.59% in G-LO, and gas beyond 100 kpc carries −0.011% and −0.001%."
     depends_on: [BND-14]
 
   - id: BND-16
@@ -830,6 +841,7 @@ claims:
       - {path: docs/science/assets/production_entropy_review_2026-11-23/milestone_and_decade_balances.csv, commit: d7cc075}
       - {path: docs/science/assets/production_entropy_review_2026-11-23/restart_calibration.csv, commit: d7cc075}
       - {path: docs/science/gemini_second_review_2026-11-23.md, commit: d7cc075}
+      - {path: docs/science/assets/low_power_entropy_review_2026-11-23/production_cumulative_residuals.csv, commit: 9a2116f}
     reproduce: python3 scripts/science/review_production_entropy_history.py --output /tmp/xray-production-entropy-history
     test: >-
       Gemini compared the archived interval balances and fixed-region stocks.
@@ -841,10 +853,12 @@ claims:
       - Only the 10–12 Myr restarts have stage-resolved entropy counters. A late residual is conditional on the primary boundary, injector, gravitational reference and time rule. The last annual interval in each 50-Myr case includes an unsampled speed dip.
       - The fixed-box and exterior comparisons share the signed net injector gas flux. Their difference constrains a net shell balance. Energy crossing the inset faces, acoustic transport and individual sources within the shell are unmeasured.
       - The controlled-window residual and the late production history do not bound the change in tracer-defined lobe enthalpy after a longer switch-off evolution.
+      - "Review (Claude, 23 November 2026). The cumulative values re-accumulate from the archived interval reductions within 2.5e-14. The stocks were not re-integrated. The independent support is at 10–12 Myr, where the production interval residuals equal the restart solver counters I recomputed within 0.018 percentage points in all eight case-windows."
+      - "That window lies in a 9–13 Myr trough of both cluster histories. C-HI is −4.6% of labelled input per Myr at 10–12 Myr, against −9.0%, −12.1% and −15.6% in the intervals ending at 20, 30 and 40 Myr. C-LO is +3.0% and +4.7%, against +13.7%, +15.4% and +27.8%. Reading the later residuals as the entropy update extrapolates from its mildest phase, and the restart lobe contrasts (NAT-12, NAT-13) sample that same phase."
     depends_on: [BND-12, BND-14, BND-15]
 
   - id: RAD-01
-    status: provisional
+    status: supported
     statement: >-
       For G-HI at 20 Myr in the original 45-degree radio view, removing only
       the PRAiSE2 tracer emissivity weight lowers the continuous-injection
@@ -857,6 +871,7 @@ claims:
       - {path: docs/science/assets/radio_tracer_weight_check_2026-11-23/spectra.csv, commit: d7cc075}
       - {path: docs/science/assets/radio_tracer_weight_check_2026-11-23/particle_age_bins.csv, commit: d7cc075}
       - {path: docs/science/assets/radio_tracer_weight_check_2026-11-23/result.json, commit: d7cc075}
+      - {path: docs/science/assets/radio_tracer_weight_review_2026-11-23/refit.json, commit: 9a2116f}
     reproduce: >-
       Follow the source-module and particle-archive instructions in
       docs/science/radio_tracer_weight_check_2026-11-23.md to run
@@ -869,6 +884,8 @@ claims:
     caveats:
       - Fits above the observing band are model extrapolations. The observable constrains each break to exceed 15 GHz. One view gives no estimate of how many of the other 36 above-band breaks would remain censored under unit weights.
       - Pressure, density, field, cooling histories, active particle set and ray paths are common to the arms. Time since injection and time since the last qualifying shock are distinct particle age measures.
+      - "Independent review (Claude, 23 November 2026; scripts/science/review_radio_tracer_weight.py). A separate grid-search refit of the public spectra returns an injection index of 0.6000 and breaks of 56.02 and 20.11 GHz. Breaks whose log-RMS is within twice the best fit span 41–85 GHz with the production weight and 17.6–24.1 GHz with unit weight, so the two ranges do not overlap. Placing the unit-weight break at 15 GHz raises its log-RMS 4.9-fold. The ten weighted luminosities equal the archived production table exactly."
+      - "The pinned praise2.py (SHA-256 eeee3675…, plutokore 73210e15) uses the tracer only as a multiplier in its two emissivity functions, so dividing each particle's emissivity by its tracer gives the unit-weight value. The ray-traced unit-weight spectrum and the age-group shares were not re-run. Unit weighting is a sensitivity test of the weighting, not a preferred emissivity model (Claude's reading)."
 
   - id: OBS-01
     status: refuted
