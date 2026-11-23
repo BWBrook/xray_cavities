@@ -16,4 +16,12 @@ The two build-input manifests for each case differed only in `definitions.h`. Th
 
 The read-only endpoint measurement 883524[] used the same native lobe definition as the high-power comparison. Its six workers each read the pressure and jet-material fraction in one shared seed or one 12-Myr endpoint. All six finished with exit 0. The two seeds reproduced the production lobe enthalpies and the six pressure hashes matched the energy-budget receipts. [Readout accounting](../../science/assets/low_power_entropy_result_2026-11-23/lobe_readout_pbs.json) · [Endpoint comparison](../../science/low_power_entropy_result_2026-11-23.md)
 
+## Preserved high-power 12-Myr restarts
+
+The persistent archive `retained_high_endpoints` holds all four high-power endpoints, with 16 files per arm and 448,867,123,190 bytes overall. Each includes its double-precision fluid checkpoint, single-precision companion, matching particles, catalogues, grid, executable and runtime settings. Source and installed SHA-256 digests agreed for all 64 files. The restart validator matched both fluid catalogues to the integrator step and verified every particle record. [Member digests, steps, particle counts and PBS accounting](../../science/assets/low_power_entropy_result_2026-11-23/retained_high_checkpoints.json)
+
+The cluster workers in 883523[] completed on the first pass. The two group workers stopped after copying the fluid and particle files because the copy script requested the cluster atmosphere table. Both workers in 883530[] verified the existing copies against the originals and completed each archive with the atmosphere table named in that arm’s runtime settings. The receipt and verification procedure also match their backup copies. Extending a simulation beyond 12 Myr remains a separate decision.
+
+## Low-power source archive
+
 In the project archive, `turn25_entropy_2026-11-23/` contains the four original solver ledgers, their native companions, the terminal score packet and the source checksums. All 50 selected native files and all 181 score-packet files matched their original hashes after transfer. The unmodified terminal packet (`scored.tar.gz`) has SHA-256 `b215136a6ce8c01c7e988288d4ed7a2d5e3e8a5478c65cf1c50e4a058a5837f8`. The native receipt bundle (`native-receipts.tar.gz`) has SHA-256 `659148e1f3f860233cb3cb710ffa620ab4f97a31277dc340b1bc2ade5d3e4d21`. Both matched the copies in the backup archive. The public ZIP is 593,690 bytes, SHA-256 `02df47c1c377a943883fb6a0211c4de5c38409c4aff334e638396ef7f763f9f7`.

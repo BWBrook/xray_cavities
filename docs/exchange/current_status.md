@@ -36,6 +36,10 @@ contrast reverses at the stricter lobe edges. NAT-13 is provisional.
 [High-power review and replay](../science/entropy_restart_lobes_2026-11-23.md) ·
 [Four-case comparison](../science/low_power_entropy_result_2026-11-23.md)
 
+All four high-power 12-Myr restart sets are in persistent storage. The
+64 files match their originals by SHA-256. Each fluid checkpoint and its
+particle records passed the restart validator. [Retention receipt and repair](logs/2026-11-23-low-power-entropy-results.md#preserved-high-power-12-myr-restarts)
+
 PBS jobs **882758–882762** all finished with exit 0. The two switch-on controls
 matched the six production fields cell for cell at 11 Myr. Both switch-off
 runs reached 12 Myr. The native entropy changes outside the injector sum to

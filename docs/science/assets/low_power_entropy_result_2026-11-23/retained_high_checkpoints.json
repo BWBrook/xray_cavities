@@ -1,0 +1,402 @@
+{
+  "archive_key": "retained_high_endpoints",
+  "arms": [
+    {
+      "age_myr": 12.0,
+      "arm": "ON",
+      "case": "C-HI",
+      "members": {
+        "build-inputs.json": {
+          "bytes": 5472,
+          "sha256": "9c571708b8600b83a6298bdf20163e44c53bf109b826026812d3be7f17cab77c"
+        },
+        "build.sha256": {
+          "bytes": 314,
+          "sha256": "c35ee16769fbb5f4d7cd7134a463527753160cef8baf09839a581bb8f027ef9b"
+        },
+        "compiler.json": {
+          "bytes": 442,
+          "sha256": "576a325d6ace95392a7cefa1a258a46c304fc55b8e9831b83f2424405c9801aa"
+        },
+        "environment.ini": {
+          "bytes": 196,
+          "sha256": "3b49690db1185c70742400925fb19f3f51abead2967f0e46a732b9734c86630b"
+        },
+        "outputs/data.0003.dbl.h5": {
+          "bytes": 67318639276,
+          "sha256": "afbbfa1c2f71c23a6167894e686efa20dab6d92e7adc5b3c470401013cc54b69"
+        },
+        "outputs/data.0030.flt.h5": {
+          "bytes": 44890581676,
+          "sha256": "0e8eb15e027b9dcb87b8d2fe1da97a64f67be299b35310e17df38b1ffe7afbd3"
+        },
+        "outputs/dbl.h5.out": {
+          "bytes": 307,
+          "sha256": "d96ad2e1a277e17fad2f9a4b6627b6e747157a37e6b58af92c8438b0ae74c53d"
+        },
+        "outputs/flt.h5.out": {
+          "bytes": 2426,
+          "sha256": "7c58d3d81794ec8019da7e4efbccabe67fd159ae7246df16c817cc396f3675b3"
+        },
+        "outputs/grid.out": {
+          "bytes": 143880,
+          "sha256": "21950ffc3a6118bc83bdebb86777ff82c092095a95f9c516497d964822ec0a37"
+        },
+        "outputs/particles.1200.dbl": {
+          "bytes": 5794147,
+          "sha256": "d76ae0da1791fa215b66198495ff981fa0380ad8bf912df0897717ba9f2e5ad6"
+        },
+        "outputs/restart.out": {
+          "bytes": 512,
+          "sha256": "8d8700fb9303af0f20502fe08b57959c58288ea80f13c0eb59bc9ec75193b3d4"
+        },
+        "pluto": {
+          "bytes": 939152,
+          "sha256": "e525549062b48a298884485c39ecd781a096a5a25b5bf23f51ea22237b629d2b"
+        },
+        "pluto.ini": {
+          "bytes": 2243,
+          "sha256": "483a4352a7bc2835ea15791f3525578bda38167ac1424c47e692d112c637a1bf"
+        },
+        "series.json": {
+          "bytes": 796,
+          "sha256": "49af1a9eb29b78eff21dd83d5f5edbae8ce48f5569fc3e45616e57a5a7c8a6db"
+        },
+        "src/definitions.h": {
+          "bytes": 2847,
+          "sha256": "a540e34a2370efc48f2d1ac5a08a6b68b1e53314c0adce4d06179770d3085502"
+        },
+        "tabulated_cosmo_002003.csv": {
+          "bytes": 608000,
+          "sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+        }
+      },
+      "native_receipt_sha256": "4c31684abfa8b5ecb263529ffad3e39bd1ddcb37bce0b6628e7b349ba0268b50",
+      "particle_content": {
+        "id_max": 48280,
+        "id_min": 1,
+        "records_scanned": 48280,
+        "unique_ids": 48280
+      },
+      "particles": 48280,
+      "pbs_id": "883523[0]",
+      "step": 12140
+    },
+    {
+      "age_myr": 12.0,
+      "arm": "OFF",
+      "case": "C-HI",
+      "members": {
+        "build-inputs.json": {
+          "bytes": 5472,
+          "sha256": "310c50495bc626ae9d619def6cb2b450efba194b70f47a4dc22977cc9b396562"
+        },
+        "build.sha256": {
+          "bytes": 314,
+          "sha256": "663d26679e6f82ff911a2e8b3894d9cf8b682bf6f019a0c9600db3e7687b47f5"
+        },
+        "compiler.json": {
+          "bytes": 442,
+          "sha256": "3746ead8cb352ded1a4baa1ef26d055b636937eb9dbc914e2769c280c9e1da7d"
+        },
+        "environment.ini": {
+          "bytes": 196,
+          "sha256": "3b49690db1185c70742400925fb19f3f51abead2967f0e46a732b9734c86630b"
+        },
+        "outputs/data.0003.dbl.h5": {
+          "bytes": 67318639276,
+          "sha256": "cad2e301122ce88a6f77631fa0369df125cb737d5421d33fec56ef78c39fa3e7"
+        },
+        "outputs/data.0030.flt.h5": {
+          "bytes": 44890581676,
+          "sha256": "b012f39a7a0f78ec5a7c954229d98c8959b3c6d11e11964c82adb9ea07f6a0d5"
+        },
+        "outputs/dbl.h5.out": {
+          "bytes": 307,
+          "sha256": "521411de790cb54428c0e7faa15b4f51656e278ba580586a49c2b4cb9d4f4419"
+        },
+        "outputs/flt.h5.out": {
+          "bytes": 2426,
+          "sha256": "b4b986a53dbc09f527e651c5b9a749dffe796e1c9c8fc753d81cd95c11841f53"
+        },
+        "outputs/grid.out": {
+          "bytes": 143880,
+          "sha256": "fc90f470f68253cf4405dfc4cee2546fed876bf3ad3818c918d59863da4e1749"
+        },
+        "outputs/particles.1200.dbl": {
+          "bytes": 5998627,
+          "sha256": "cbab979c76016b9013cece9283d7d2721f69dfb8d7586a91f2eaf28140136ab9"
+        },
+        "outputs/restart.out": {
+          "bytes": 512,
+          "sha256": "78b074212240ea3c7ce86d0065789bfed9031b2d44a9987d08d46d4267ac3596"
+        },
+        "pluto": {
+          "bytes": 934984,
+          "sha256": "5694f77aef949a33d7bb569dcf5ef6dc92f00bef695ae525db5e356c984e8741"
+        },
+        "pluto.ini": {
+          "bytes": 2243,
+          "sha256": "483a4352a7bc2835ea15791f3525578bda38167ac1424c47e692d112c637a1bf"
+        },
+        "series.json": {
+          "bytes": 795,
+          "sha256": "fc942d492cf084177aa77fac4ddd616f2698543878481bd6892556ca9cb40a82"
+        },
+        "src/definitions.h": {
+          "bytes": 2840,
+          "sha256": "f1bf4c1b264f99275aff4eb52d20386287825fd1e3544cada14c0cdc81a1fb7a"
+        },
+        "tabulated_cosmo_002003.csv": {
+          "bytes": 608000,
+          "sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+        }
+      },
+      "native_receipt_sha256": "1e861d058fa3c428197a61455b5e40a999bac6878f55d8544fc8f124d577b0c8",
+      "particle_content": {
+        "id_max": 49984,
+        "id_min": 1,
+        "records_scanned": 49984,
+        "unique_ids": 49984
+      },
+      "particles": 49984,
+      "pbs_id": "883523[1]",
+      "step": 12566
+    },
+    {
+      "age_myr": 12.0,
+      "arm": "ON",
+      "case": "G-HI",
+      "members": {
+        "build-inputs.json": {
+          "bytes": 5472,
+          "sha256": "9c571708b8600b83a6298bdf20163e44c53bf109b826026812d3be7f17cab77c"
+        },
+        "build.sha256": {
+          "bytes": 314,
+          "sha256": "c611271531e5467ab35c88bbc8408409da4990044cd530229b6229ce0a3beec8"
+        },
+        "compiler.json": {
+          "bytes": 442,
+          "sha256": "576a325d6ace95392a7cefa1a258a46c304fc55b8e9831b83f2424405c9801aa"
+        },
+        "environment.ini": {
+          "bytes": 196,
+          "sha256": "b222f3a4ec1b4a78fa3b99d4db0c66c44b63146b00424e9ff451bdf3c141fce5"
+        },
+        "outputs/data.0003.dbl.h5": {
+          "bytes": 67318639276,
+          "sha256": "3d7692752b09b6ec026cbfc51c6de336b332656b6fb66f65d3c1df6364816540"
+        },
+        "outputs/data.0030.flt.h5": {
+          "bytes": 44890581676,
+          "sha256": "a180750706ec831c76152238d794c8f850e7fadb491fdd9fda1c76189dd9c4ec"
+        },
+        "outputs/dbl.h5.out": {
+          "bytes": 307,
+          "sha256": "73b45498af6b8f56bec3e65d42d00fef4e38cbd2917967d8c407447a90ad9e29"
+        },
+        "outputs/flt.h5.out": {
+          "bytes": 2426,
+          "sha256": "e8f0b4dcb8055607ea7b41983e527d3b250416d8ee0050cbbf7ca32f17a85ac8"
+        },
+        "outputs/grid.out": {
+          "bytes": 143880,
+          "sha256": "a8fc7cfbc249f971d77dca07f851e0ec0fa3b4dd551d3d7b632a079bc968da6d"
+        },
+        "outputs/particles.1200.dbl": {
+          "bytes": 5712067,
+          "sha256": "bbeec96d41c4029c587b025c5ea3f6984f4cd66589cadfc77ae7d1e0cf0b11fa"
+        },
+        "outputs/restart.out": {
+          "bytes": 512,
+          "sha256": "db2dd9b63851a9e35f91bff37dda7d036cd2d7cbd2fbf6489c99a704f811bc55"
+        },
+        "pluto": {
+          "bytes": 939152,
+          "sha256": "e525549062b48a298884485c39ecd781a096a5a25b5bf23f51ea22237b629d2b"
+        },
+        "pluto.ini": {
+          "bytes": 2243,
+          "sha256": "483a4352a7bc2835ea15791f3525578bda38167ac1424c47e692d112c637a1bf"
+        },
+        "series.json": {
+          "bytes": 795,
+          "sha256": "3dde67571e5f8e36ae4b6d6aa3681073d25f8573ddd9f274ee6f2897c9fb1d56"
+        },
+        "src/definitions.h": {
+          "bytes": 2847,
+          "sha256": "a540e34a2370efc48f2d1ac5a08a6b68b1e53314c0adce4d06179770d3085502"
+        },
+        "tabulated_cosmo_002031.csv": {
+          "bytes": 608000,
+          "sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+        }
+      },
+      "native_receipt_sha256": "d301d7989538541540a506c09fe8cc602a017f17bf46d2b192c8ba733fb2ea63",
+      "particle_content": {
+        "id_max": 47596,
+        "id_min": 1,
+        "records_scanned": 47596,
+        "unique_ids": 47596
+      },
+      "particles": 47596,
+      "pbs_id": "883530[0]",
+      "step": 11969
+    },
+    {
+      "age_myr": 12.0,
+      "arm": "OFF",
+      "case": "G-HI",
+      "members": {
+        "build-inputs.json": {
+          "bytes": 5472,
+          "sha256": "310c50495bc626ae9d619def6cb2b450efba194b70f47a4dc22977cc9b396562"
+        },
+        "build.sha256": {
+          "bytes": 314,
+          "sha256": "7db648e9f66c648639b01677e4760d782fe1d7a64230546a3b2a860c77af2055"
+        },
+        "compiler.json": {
+          "bytes": 442,
+          "sha256": "3746ead8cb352ded1a4baa1ef26d055b636937eb9dbc914e2769c280c9e1da7d"
+        },
+        "environment.ini": {
+          "bytes": 196,
+          "sha256": "b222f3a4ec1b4a78fa3b99d4db0c66c44b63146b00424e9ff451bdf3c141fce5"
+        },
+        "outputs/data.0003.dbl.h5": {
+          "bytes": 67318639276,
+          "sha256": "0dc939d7ffccd30f11d1d2c5cde8e89855996a97945711117b33855afb2cc653"
+        },
+        "outputs/data.0030.flt.h5": {
+          "bytes": 44890581676,
+          "sha256": "306f8773f7cdfbc295de89780cfc6904478242f33570aa0736eefeba025fea27"
+        },
+        "outputs/dbl.h5.out": {
+          "bytes": 307,
+          "sha256": "a4be24a37d4042b02c8ae85e3ddfa0514392783484b8c2d9663c5cb41c963ca0"
+        },
+        "outputs/flt.h5.out": {
+          "bytes": 2426,
+          "sha256": "9bfe8078a271a1245202d472f20becca332225841bd8496f31f24ad5459a60d4"
+        },
+        "outputs/grid.out": {
+          "bytes": 143880,
+          "sha256": "a42844bdfc0b4dd9a6a9839157e66ccfaf184481e722a6a7da04ed5dd987b23c"
+        },
+        "outputs/particles.1200.dbl": {
+          "bytes": 5916547,
+          "sha256": "75b7f9a8b01ac8e4d49fd03f28762e9d6972ed227c7bba08271d5ab87da97e92"
+        },
+        "outputs/restart.out": {
+          "bytes": 512,
+          "sha256": "0c1ad3e31c88a6f954f6c700f7cd9f5b9f0443601ec88065bafc7bf5c826913e"
+        },
+        "pluto": {
+          "bytes": 934984,
+          "sha256": "5694f77aef949a33d7bb569dcf5ef6dc92f00bef695ae525db5e356c984e8741"
+        },
+        "pluto.ini": {
+          "bytes": 2243,
+          "sha256": "483a4352a7bc2835ea15791f3525578bda38167ac1424c47e692d112c637a1bf"
+        },
+        "series.json": {
+          "bytes": 794,
+          "sha256": "662fea61d2c06f6996b3dfb9331bace5362eb8be4f59e1f7b9a8478ff819723a"
+        },
+        "src/definitions.h": {
+          "bytes": 2840,
+          "sha256": "f1bf4c1b264f99275aff4eb52d20386287825fd1e3544cada14c0cdc81a1fb7a"
+        },
+        "tabulated_cosmo_002031.csv": {
+          "bytes": 608000,
+          "sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+        }
+      },
+      "native_receipt_sha256": "ce1e8ec416a7eefe4f3f20ecca4f1d4453b9ecc36c3084a088bdd00e4765dd86",
+      "particle_content": {
+        "id_max": 49300,
+        "id_min": 1,
+        "records_scanned": 49300,
+        "unique_ids": 49300
+      },
+      "particles": 49300,
+      "pbs_id": "883530[1]",
+      "step": 12395
+    }
+  ],
+  "double_index": 3,
+  "float_index": 30,
+  "particle_index": 1200,
+  "pbs": [
+    {
+      "end_and_abort_mail_to_designated_recipient": true,
+      "exit_status": 1,
+      "finished_utc": "2026-11-23T10:36:37+00:00",
+      "id": "883523[]",
+      "state": "F",
+      "walltime": null
+    },
+    {
+      "end_and_abort_mail_to_designated_recipient": true,
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T10:36:30+00:00",
+      "id": "883523[0]",
+      "state": "F",
+      "walltime": "00:40:38"
+    },
+    {
+      "end_and_abort_mail_to_designated_recipient": true,
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T10:36:37+00:00",
+      "id": "883523[1]",
+      "state": "F",
+      "walltime": "00:40:45"
+    },
+    {
+      "end_and_abort_mail_to_designated_recipient": true,
+      "exit_status": 1,
+      "finished_utc": "2026-11-23T10:35:38+00:00",
+      "id": "883523[2]",
+      "state": "F",
+      "walltime": "00:39:46"
+    },
+    {
+      "end_and_abort_mail_to_designated_recipient": true,
+      "exit_status": 1,
+      "finished_utc": "2026-11-23T10:36:19+00:00",
+      "id": "883523[3]",
+      "state": "F",
+      "walltime": "00:40:27"
+    },
+    {
+      "end_and_abort_mail_to_designated_recipient": true,
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T10:51:59+00:00",
+      "id": "883530[]",
+      "state": "F",
+      "walltime": null
+    },
+    {
+      "end_and_abort_mail_to_designated_recipient": true,
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T10:51:59+00:00",
+      "id": "883530[0]",
+      "state": "F",
+      "walltime": "00:12:52"
+    },
+    {
+      "end_and_abort_mail_to_designated_recipient": true,
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T10:51:52+00:00",
+      "id": "883530[1]",
+      "state": "F",
+      "walltime": "00:12:46"
+    }
+  ],
+  "repair": "The first two group workers stopped on a cluster-only atmosphere filename after verifying the fluid and particle files. The two group-only repair workers reread source and destination hashes, copied the atmosphere file specified in the group runtime and verified the complete endpoint.",
+  "total_bytes": 448867123190,
+  "total_files": 64,
+  "verification": "Each worker compared the source SHA-256 with an independent read of its copy, checked the field types, grid shape, catalogue indices, integrator step and particle time, and matched the original executable. The collector checked every installed member against its receipt, validated the double and float catalogues and scanned all final particle records with the production restart validator."
+}
