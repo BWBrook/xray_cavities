@@ -1,0 +1,80 @@
+{
+  "G-HI": {
+    "seed_cumulative_net_gas_erg": 7.303293230154335e+59,
+    "ratio_on_12": 0.42831022370288857,
+    "ratio_off_12": 0.44400545508928185,
+    "enthalpy_change_percent_11": 1.055784400911135,
+    "enthalpy_change_percent_12": 3.5611251123714083,
+    "volume_change_percent_12": 0.015389757169614882,
+    "marginal_enthalpy_per_delivered_12": 0.09195557253510021,
+    "enthalpy_gain_10_to_12_per_delivered_on": 0.41693827040374126,
+    "enthalpy_gain_10_to_12_per_delivered_off": 0.5113993537789289,
+    "shared_pressure_hash_records": 6,
+    "shared_pressure_hashes_match": true,
+    "switch_on_lobe_and_r100_max_relative_difference_from_production": 0.0,
+    "whole_grid_component_variability": {
+      "thermal": {
+        "on_rms_about_quadratic_over_myr_label": 0.00122209013114861,
+        "on_max_about_quadratic_over_myr_label": 0.002222919898824266,
+        "off_minus_on_at_11_over_myr_label": 0.030848306230719654,
+        "off_minus_on_at_12_over_myr_label": 0.1156627234605536,
+        "off_minus_on_min_over_myr_label": 0.0,
+        "off_minus_on_max_over_myr_label": 0.1156627234605536,
+        "off_minus_on_at_12_over_on_stock": 0.004110487084643033
+      },
+      "kinetic": {
+        "on_rms_about_quadratic_over_myr_label": 0.0016581573254660265,
+        "on_max_about_quadratic_over_myr_label": 0.002920587983216929,
+        "off_minus_on_at_11_over_myr_label": 0.053131972736767855,
+        "off_minus_on_at_12_over_myr_label": 0.0544696770806418,
+        "off_minus_on_min_over_myr_label": 0.0,
+        "off_minus_on_max_over_myr_label": 0.06764818468542833,
+        "off_minus_on_at_12_over_on_stock": 0.00947260661751646
+      }
+    }
+  },
+  "C-HI": {
+    "seed_cumulative_net_gas_erg": 7.326694742842938e+59,
+    "ratio_on_12": 0.4817376002571334,
+    "ratio_off_12": 0.5027249156929638,
+    "enthalpy_change_percent_11": 0.24484380892762206,
+    "enthalpy_change_percent_12": 4.253213138287797,
+    "volume_change_percent_12": -0.15477925311462304,
+    "marginal_enthalpy_per_delivered_12": 0.1235596187146259,
+    "enthalpy_gain_10_to_12_per_delivered_on": 0.5077438429893663,
+    "enthalpy_gain_10_to_12_per_delivered_off": 0.6343365319116605,
+    "shared_pressure_hash_records": 6,
+    "shared_pressure_hashes_match": true,
+    "switch_on_lobe_and_r100_max_relative_difference_from_production": 0.0,
+    "whole_grid_component_variability": {
+      "thermal": {
+        "on_rms_about_quadratic_over_myr_label": 0.0006379925319822575,
+        "on_max_about_quadratic_over_myr_label": 0.0011229200078728472,
+        "off_minus_on_at_11_over_myr_label": -0.005154820492458606,
+        "off_minus_on_at_12_over_myr_label": 0.13083267357857611,
+        "off_minus_on_min_over_myr_label": -0.01144313822125636,
+        "off_minus_on_max_over_myr_label": 0.13083267357857611,
+        "off_minus_on_at_12_over_on_stock": 0.00029169091259617614
+      },
+      "kinetic": {
+        "on_rms_about_quadratic_over_myr_label": 0.001531700775820541,
+        "on_max_about_quadratic_over_myr_label": 0.0028005937280100876,
+        "off_minus_on_at_11_over_myr_label": 0.044252599764187744,
+        "off_minus_on_at_12_over_myr_label": -0.05268075397113867,
+        "off_minus_on_min_over_myr_label": -0.05272521253439372,
+        "off_minus_on_max_over_myr_label": 0.0444466600903411,
+        "off_minus_on_at_12_over_on_stock": -0.01041539282831971
+      }
+    }
+  },
+  "max_abs_difference_from_published": {
+    "ratio_on": 1.6653345369377348e-16,
+    "ratio_off": 2.220446049250313e-16,
+    "enthalpy_change_over_label": 7.008282842946301e-16,
+    "r100_total_change_over_label": 0.0
+  },
+  "published_timing_labels": [
+    "native_outputs",
+    "off_interpolated_to_on"
+  ]
+}
