@@ -1,0 +1,36 @@
+{
+  "case": "G-HI",
+  "snapshot_index": 20,
+  "successful_job": 883581,
+  "exit_status": 0,
+  "walltime": "00:55:00",
+  "peak_kib": 13145972,
+  "native_projection_size_bytes": 65857152,
+  "archive_file_count": 14,
+  "archive_data_bytes": 82774393,
+  "archive_sha256_manifest": "8abdc421f84e13df6e398eb9656b2ee8497ca5d0575289c9b6c859b7090acb7d",
+  "verified_at_durable_destination_utc": "2026-11-23T14:01:33.315727+00:00",
+  "geometry_receipt_sha256": "9a288b600771a99900d75841b16d8b143de54cac376447cbd9fc72ec43103e52",
+  "full_receipt_sha256": "eab950abbd5ed5afe30f4f2703cf16539f318a32a50d15df6ebb877087599bde",
+  "history": [
+    {
+      "job": 883555,
+      "exit_status": 127,
+      "reason": "The batch shell lacked module initialization; extraction did not start."
+    },
+    {
+      "job": 883565,
+      "exit_status": 1,
+      "reason": "Text-grid and stored-coordinate byte identities differed; all native hashes passed, classification had not started."
+    },
+    {
+      "job": 883577,
+      "reason": "Duplicate metadata check removed from queue after successful original-gate replay on the actual worker."
+    },
+    {
+      "job": 883581,
+      "exit_status": 0,
+      "reason": "All 3 geometry and 3 fixed-cell emission projections and independent closure tests completed."
+    }
+  ]
+}

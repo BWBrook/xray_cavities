@@ -1,0 +1,32 @@
+{
+  "G-HI_0020_0deg.npz": {
+    "current": {
+      "lobe_max_abs_to_peak": 1.4545100048785289e-15,
+      "whole_max_abs_to_peak": 2.663696653168397e-15
+    },
+    "initial": {
+      "lobe_max_abs_to_peak": 7.23113303461864e-16,
+      "whole_max_abs_to_peak": 6.659303099560715e-16
+    }
+  },
+  "G-HI_0020_45deg.npz": {
+    "current": {
+      "lobe_max_abs_to_peak": 2.3518467133489156e-15,
+      "whole_max_abs_to_peak": 1.0823975863456221e-14
+    },
+    "initial": {
+      "lobe_max_abs_to_peak": 1.6237703075032305e-15,
+      "whole_max_abs_to_peak": 6.2387683236110066e-15
+    }
+  },
+  "G-HI_0020_90deg.npz": {
+    "current": {
+      "lobe_max_abs_to_peak": 2.7250567902537402e-15,
+      "whole_max_abs_to_peak": 7.427269514756032e-15
+    },
+    "initial": {
+      "lobe_max_abs_to_peak": 2.023899428844096e-15,
+      "whole_max_abs_to_peak": 6.255005139369408e-15
+    }
+  }
+}

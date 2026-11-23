@@ -426,10 +426,13 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
 
 ## Open questions, in priority order
 
-1. **Which X-ray arcs trace a compression front?** Start with the exposed
-   G-HI/20 case and the three side-on azimuths. Define the front from native
-   gas gradients and compression on the stretched mesh, independently of the
-   X-ray arcs and tracer boundary. Patrick reviews the method. [Supervisor’s request](docs/exchange/logs/2026-11-17-compressive-front-and-background-test-request.md)
+1. **Which X-ray arcs trace a compression front?** At G-HI/20 and 0°,
+   the two lateral arcs lie a median 25–26 kpc beyond the dominant
+   compression front. At 45° and 90°, inward and outward offsets give small
+   signed medians. Use the absolute distances and the length within a local
+   cell width to assess alignment. Patrick reviews the front selection,
+   projection and interpretation. [Three-view comparison and replay](docs/science/ghi20_compressive_front_comparison_2026-11-23.md)
+   <!-- claims: XR-05 -->
 2. **Does background refitting generalise?** Follow the frozen 54-view design.
    Seal predictions before releasing the truth manifest for independent
    scoring. Report the 108 sides per science arm and method, initial nulls,

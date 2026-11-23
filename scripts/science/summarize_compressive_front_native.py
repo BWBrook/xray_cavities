@@ -18,7 +18,8 @@ def digest(path):
 
 def write_csv(path, rows):
     with path.open('w', newline='') as output:
-        writer = csv.DictWriter(output, fieldnames=rows[0])
+        columns = list(dict.fromkeys(key for row in rows for key in row))
+        writer = csv.DictWriter(output, fieldnames=columns)
         writer.writeheader()
         writer.writerows(rows)
 

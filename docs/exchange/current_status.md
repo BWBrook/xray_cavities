@@ -18,8 +18,13 @@ HDF5 outputs. The native projection from PBS 883581 places the lateral
 orange X-ray arcs a median 25–26 kpc outside the compression front at 0°.
 At 45° and 90° the small signed medians combine edges on both sides of the
 front. Across all three views, 91–99% of the lateral orange area lies off
-every qualifying compression component. The same-cell emission comparison
-is running on the same inputs.
+every qualifying compression component. On missed lobe sightlines the
+front's extra emission fills 33–49% of the lobe deficit for the 5% outline
+and 45–49% for seed/grow, pooling both hemispheres at each azimuth.
+On the 0° image, restoring those front cells to their initial emissivity
+gives an inferred/native volume ratio of 4.11 with the original radial
+background and 1.08 with a refit. The latter covers 56.4% of the projected
+lobe. The three-way brightness sum reproduces every original pixel.
 Patrick’s review concerns the front and its interpretation.
 [Exposed comparison](../science/ghi20_compressive_front_comparison_2026-11-23.md) · [Method review packet](logs/2026-11-23-ghi20-compressive-front-method-review.md)
 

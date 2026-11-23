@@ -23,6 +23,33 @@ A small signed median at 45° or 90° conceals lengths on both sides of the fron
 
 The overlays use the same brightness and deficit scales; the colour bars indicate values beyond their displayed limits. The dashed circle marks the 120-kpc search aperture. Distances use the complete rectangular pixel edges. The qualifying native width is the local effective cell length along the three-dimensional gradient of log pressure relative to the initial gas, averaged along the ray through the selected layer. An independent brute-force segment calculation reproduced all six signed medians. [45° overlay](assets/compressive_front_observer_2026-11-23/45deg_front_overlay.png) · [90° overlay](assets/compressive_front_observer_2026-11-23/90deg_front_overlay.png)
 
+## What the compressed gas changes in the X-ray image
+
+On genuine lobe sightlines that the original masks missed, front-associated ambient gas brightened relative to the same cells at time zero. Its increase offsets roughly one-third to one-half of the lobe’s own lost emission. By contrast, on the orange area beyond the lobe, the front’s **net brightening** is at most 0.20% of the observed brightness when the two hemispheres are pooled. The table sums each numerator and denominator over both hemispheres with the exact pixel areas before division. [Thirty per-side component budgets](assets/compressive_front_observer_2026-11-23/emission_regions.csv)
+
+| Side-on azimuth | Lobe decrement offset on blue-missed sightlines | Lobe decrement offset on orange-missed sightlines | Front brightening / current brightness on exterior orange area |
+| --- | ---: | ---: | ---: |
+| 0° | 47.43% | 32.84% | 0.00068% |
+| 45° | 49.48% | 49.23% | 0.193% |
+| 90° | 44.95% | 47.07% | 0.105% |
+
+Here the numerator is current minus initial emissivity in the **current compressive-layer ambient cells**. The decrement in the first two columns is initial minus current emissivity of current `tr1 > 0.001` lobe cells, along **missed** tracer sightlines only. The older 39–84% statistic integrates **speed-selected** ambient brightening over **selected** sightlines and divides by the fitted-background-minus-current observed deficit there. Expressed against the lobe’s own decrement on those selected sightlines, that older measure was 37–44%. The changed cell sets, sky regions and denominators answer different questions. [Earlier reconciliation](turn18_review_reconciliation_2026-11-11.md)
+
+The outer arcs also respond **indirectly** to the front through the observer’s radial background fit. At 0° the original orange inferred volume is 3.98 times the native lobe. Replacing only the front-associated ambient gas with its initial emissivity in the same cells raises that figure to 4.11 with the original background. Refitting the background to that **same altered image** gives 1.08. The area selected outside the lobe drops from 7,229 to 1,170 kpc² and purity rises from 44.7% to 84.5%, yet completeness rises only from 51.6% to 56.4%. The near-unit volume therefore still misses 43.6% of the projected lobe area. The substitution changes only the 1-keV emissivity assigned to those fixed cells in the saved snapshot. [All 60 side, method and treatment results](assets/compressive_front_observer_2026-11-23/replacement_recovery.csv)
+
+| Azimuth | Outline | Exact image, original background | Replacement, original background | Exact image, refitted | Replacement, refitted | Refitted completeness, before → after |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 0° | Orange | 3.984 | 4.108 | 3.981 | 1.082 | 51.6% → 56.4% |
+| 45° | Orange | 1.020 | 1.111 | 1.018 | 0.647 | 49.8% → 53.4% |
+| 90° | Orange | 1.091 | 1.191 | 1.089 | 0.847 | 60.4% → 63.5% |
+| 0° | Blue | 0.678 | 0.729 | 0.678 | 0.734 | 67.8% → 71.8% |
+| 45° | Blue | 0.493 | 0.574 | 0.493 | 0.535 | 55.1% → 57.8% |
+| 90° | Blue | 0.622 | 0.681 | 0.622 | 0.653 | 64.4% → 67.2% |
+
+The four middle columns give summed symmetrised revolution volume divided by the summed native lobe volume. All baseline and replacement estimates use a common exact-edge projection. The original backgrounds were fitted to the historical images. The separate refitted arms each derive a fresh background from their exact-edge image. Replacing the front and refitting improves orange completeness in every view here, yet moves the 45° and 90° inferred volumes below their native values. The procedure uses the native front and its initial gas fields. A general claim about observer performance requires a different test. [0° replacement maps](assets/compressive_front_observer_2026-11-23/00deg_front_replacement.png) · [45° maps](assets/compressive_front_observer_2026-11-23/45deg_front_replacement.png) · [90° maps](assets/compressive_front_observer_2026-11-23/90deg_front_replacement.png)
+
+The profiles plot raw brightness, the original radial background and same-cell replacement along twelve predetermined rows. They also give lobe and front path lengths and the front’s current-minus-initial brightness. Summing all three independently measured emission components reproduces every original sky pixel in both epochs to $1.49\times10^{-14}$ of the sum of the absolute terms. A separate integration reproduced 192 regional component totals. The final and geometry-only runs generated identical contour tables and overlay files. [0° profiles](assets/compressive_front_observer_2026-11-23/00deg_transverse_profiles.png) · [45° profiles](assets/compressive_front_observer_2026-11-23/45deg_transverse_profiles.png) · [90° profiles](assets/compressive_front_observer_2026-11-23/90deg_transverse_profiles.png) · [All 7,496 profile samples](assets/compressive_front_observer_2026-11-23/transverse_profiles.csv.gz) · [Final receipt and hashes](assets/compressive_front_observer_2026-11-23/comparison_receipt.json)
+
 ## How far the X-ray arcs extend beyond the lobes
 
 The development image has a 5% brightness-deficit outline (orange) and a seed/grow outline (blue). The orange arcs include pixels outside the full projected lobe. At 0° the extralobe orange selection covers 3,611 and 3,618 kpc² in the negative and positive jet hemispheres. The blue selection includes 0.00 and 0.42 kpc² outside the lobe. The table measures exact distances from the exterior orange arc faces to the full projected lobe boundary, weighted by physical contour length. A positive sign means the face lies outside the lobe. [Per-side geometry](assets/compressive_front_observer_2026-11-23/original_geometry.csv) · [Signed distance distributions](assets/compressive_front_observer_2026-11-23/original_contour_to_lobe.csv)
