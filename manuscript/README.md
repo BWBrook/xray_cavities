@@ -8,7 +8,7 @@ no manuscript files are copied into that repository.
 
 - `text/main.md`: canonical manuscript body
 - `text/figures.md`: selected paper figures and captions
-- `figures/`: selected manuscript figures only
+- `figures/`: image files, including earlier drafts. The active figure list is in `text/figures.md`.
 - `authors.template.yaml`: authorship schema to complete after author list and order are agreed
 - `../references/refs.yaml`: canonical Pandoc bibliography
 - `../csl/`: citation style used for draft PDF/DOCX builds
@@ -28,9 +28,10 @@ make manuscript-all
 make manuscript-check
 ```
 
-`manuscript-check` applies the strict submission-profile lint, citation audit,
-configuration checks, and PDF/DOCX build. The ordinary draft target remains
-fast enough for iterative writing.
+`manuscript-submission` and `manuscript-check` require supported claims in
+every article source and caption before building the submission PDF and DOCX.
+Place each figure's claim IDs in a separate `<!-- claims: ... -->` paragraph
+immediately below the image. The draft permits provisional and open claims.
 
 ## PASA contract
 
@@ -70,9 +71,9 @@ and MIT for code. Each written product is a snapshot drawn from it:
    use the work fully: the claims and their evidence, conventions, dead ends,
    reproduction commands and open questions. Its form is experimental.
 
-All three should draw on the same evidence and must not drift apart. None
-should be drafted until the boundary-control result is in and a cavity
-detector has passed.
+All three draw on the claims ledger. The article and brief can report native
+energy budgets while the X-ray work tests which outlines recover the simulated
+lobes. Observer enthalpy and power estimates depend on that detector test.
 
 Authorship injection is intentionally disabled until the author list and order
 are agreed. Once agreed, create `manuscript/authors.yaml` from the template and

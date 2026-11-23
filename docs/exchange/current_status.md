@@ -1,10 +1,29 @@
 # Current Status
 
-Last updated 23 November 2026 after the four paired restarts, the low-power
-forecast scores and the 12-Myr lobe comparisons.
+Last updated 23 November 2026 after Gemini’s second review, the production
+history reconstruction and the G-HI/20 radio reweighting test.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Production balances, radio weighting and observer work
+
+At 30 Myr the reconstructed net exterior residual as a share of gas delivery
+is −6.73%, +8.74%, −6.78% and +1.97% in C-HI, C-LO, G-HI and G-LO.
+G-LO’s annual balance turns positive at output 15 and its cumulative balance
+at 17. BND-16 is supported for this reconstruction. The solver directly
+counted the entropy update at 10–12 Myr. The later lobe response, acoustic
+energy flux and sign of late switch-only corrections remain questions for
+different measurements. The recommendation is to retain the 12-Myr
+checkpoints and defer continuations. [Second-review assessment and evidence](../science/gemini_second_review_2026-11-23.md)
+
+At 45° in the exposed G-HI/20 radio case, removing tracer weighting lowers
+the fitted break from 56.02 to 20.11 GHz. Both fits preserve the upper
+spectral-age limit. RAD-01 is provisional for this view. Gemini also
+independently checked the arithmetic of NAT-13. Claude’s adjudication of
+that low-power lobe claim is pending. The frozen 54 X-ray views remain
+unscored. Stas’s first observer task is the independent G-HI/20 compressive
+front comparison. [Radio test](../science/radio_tracer_weight_check_2026-11-23.md) · [Supervisor’s request](logs/2026-11-17-compressive-front-and-background-test-request.md)
 
 ## Entropy-switch experiments, 23 November
 
@@ -47,8 +66,9 @@ runs reached 12 Myr. The native entropy changes outside the injector sum to
 99.81% and 99.63% of the primary exterior deficits. The 16 read-only workers
 in array **883167** also finished successfully. [Paired budgets and prospective score](../science/entropy_restart_result_2026-11-22.md) · [PBS receipts and native verification](logs/2026-11-22-entropy-restart-results.md)
 
-Gemini's review identified a publication blocker. The article and Figures 2–3
-still treat withdrawn detector results as current. Claude corrected the
+The article and captions have been revised to remove recovery medians and
+the two figures based on the withdrawn detector. The submission build
+checks all its text and captions against supported claims. Claude corrected the
 NAT-05 caveat about inferring band emissivity from tracer mass fraction.
 The production PRAiSE2 source sets each particle's magnetic field from its
 pressure and density. The tracer weights its emissivity.
@@ -71,8 +91,10 @@ first reaches a boundary only in G-HI and only at its last output, 47 Myr.
 The two gravity diagnostics differ by at most 1.021% of the magnitude of the
 G-HI exterior residual across all 1,120 matched interval and method choices.
 BND-10 is supported, BND-12 now covers all saved outputs, and BND-13 records
-the measured energy residual and gravity comparison. The historical numerical
-source of the exterior error remains open. [Full results](../science/production_injector_histories_2026-11-21.md) · [Recovery and reproduction](logs/2026-11-21-production-injector-histories.md)
+the measured energy residual and gravity comparison. The subsequent paired
+tests identify the signed switch contribution at 10–12 Myr. The long
+production records measure the combined residual outside that window.
+[Full results](../science/production_injector_histories_2026-11-21.md) · [Recovery and reproduction](logs/2026-11-21-production-injector-histories.md)
 
 ## Injector faces, 19 November
 

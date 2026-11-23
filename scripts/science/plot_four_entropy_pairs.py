@@ -37,9 +37,9 @@ def paired_values():
 def plot():
     vals = paired_values()
     fig, (grid, lobe) = plt.subplots(1, 2, figsize=(8.5, 3.35), gridspec_kw={"width_ratios": [1, 1.5]})
-    fig.subplots_adjust(left=.19, right=.985, top=.76, bottom=.20, wspace=.29)
-    names = {"G-HI": "Group, high", "G-LO": "Group, low", "C-HI": "Cluster, high", "C-LO": "Cluster, low"}
-    for y, case in enumerate(names):
+    fig.subplots_adjust(left=.13, right=.985, top=.76, bottom=.20, wspace=.29)
+    cases = ("C-HI", "C-LO", "G-HI", "G-LO")
+    for y, case in enumerate(cases):
         net, on, off = (100*x for x in vals[case])
         grid.barh(y, net, height=.36, color="#3e6270", zorder=2)
         grid.text(net + (.28 if net >= 0 else -.28), y, f"{net:+.1f}%", va="center",
@@ -54,7 +54,7 @@ def plot():
         ax.spines["bottom"].set_color("#7c898e")
         ax.tick_params(axis="both", length=0, labelsize=9, pad=4)
         ax.xaxis.set_major_formatter(PercentFormatter(100, decimals=0))
-    grid.set_yticks(range(4), list(names.values()))
+    grid.set_yticks(range(len(cases)), cases)
     lobe.set_yticks([])
     grid.set_xlim(-15, 7)
     grid.set_xticks([-10, -5, 0, 5])

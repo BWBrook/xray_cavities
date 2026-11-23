@@ -22,14 +22,15 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
 | How does the energy error affect the lobes? | [Four-case 10–12 Myr comparison and low-power forecast scores](docs/science/low_power_entropy_result_2026-11-23.md) and [the high-power age comparison](docs/science/entropy_restart_lobes_2026-11-23.md) |
 | How much of the supplied energy does the lobe enthalpy represent? | [Matched fractions and their denominators](docs/science/native_delivery_restatement_2026-11-21.md) and [the short research brief](manuscript/text/brief.md) |
-| Where does the remaining energy discrepancy occur? | [Near-injector and exterior balances](docs/science/entropy_localisation_2026-11-21.md) |
+| How does the energy balance change as the jet ages? | [All 197 production intervals and the short-window calibration](docs/science/assets/production_entropy_review_2026-11-23/README.md) |
+| Does mixing affect the radio age estimate? | [A tracer-weight comparison in one G-HI radio spectrum](docs/science/radio_tracer_weight_check_2026-11-23.md) |
 | Did the restarts reproduce the production runs? | [High-power control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) and [low-power controls, job accounting and replay](docs/exchange/logs/2026-11-23-low-power-entropy-results.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
-| How were the conclusions challenged? | [Assessment of Gemini’s independent review](docs/science/gemini_review_assessment_2026-11-21.md) and [the correspondence record](docs/correspondence/INDEX.md) |
+| How were the conclusions challenged? | [Second Gemini review and response](docs/science/gemini_second_review_2026-11-23.md), [first review](docs/science/gemini_review_assessment_2026-11-21.md) and [correspondence record](docs/correspondence/INDEX.md) |
 
-The ledger and current status govern interpretation. Older reports and the
-article draft retain historical results and may predate later qualifications.
+The ledger and current status give the scope of each result. Dated reports
+retain the evidence for earlier conclusions and withdrawals.
 
 ## The four cases
 
@@ -115,11 +116,12 @@ All eight jobs in the original accounting batch have finished. Seven succeeded.
 G-LO flux (879909) returned every requested snapshot. G-HI flux returned a
 verified history through index 46 and failed at 47. At 30 Myr, all 36
 reconstructions give a negative outside-nozzle energy balance in the two
-high-power runs. The low-power runs admit both signs. Realised jet delivery
-and the physical source of excess storage remain open. The
+high-power runs. The low-power runs admit both signs under those earlier
+reconstructions. The paired restarts subsequently measured the signed
+entropy contribution at 10–12 Myr in all four cases. The
 [flux comparison](docs/science/four_case_flux_histories_2026-11-18.md) gives
 the numerical ranges, their interpretation and the complete batch inventory.
-<!-- claims: BND-08 -->
+<!-- claims: BND-08 BND-14 BND-15 -->
 
 The [G-HI endpoint addendum](docs/science/ghi_flux_endpoint_2026-11-19.md)
 extends 24 of the 36 estimates through 47 Myr. All 24 give a negative
@@ -158,6 +160,13 @@ C-LO response changed sign with the choice of lobe edge. The size of the
 bias at 30–50 Myr remains unknown. [Four-case comparison](docs/science/low_power_entropy_result_2026-11-23.md) · [High-power lobe measurements](docs/science/entropy_restart_lobes_2026-11-23.md) · [Full production budgets](docs/science/production_injector_histories_2026-11-21.md)
 <!-- claims: BND-08 BND-10 BND-11 BND-12 BND-13 -->
 <!-- claims: BND-14 NAT-12 BND-15 NAT-13 -->
+
+At 30 Myr the reconstructed cumulative exterior deficits in C-HI and G-HI
+are 6.73% and 6.78% of delivered gas energy. C-LO and G-LO have positive
+residuals of 8.74% and 1.97%. Direct measurements of the entropy update
+cover 10–12 Myr. The later residuals quantify the total energy imbalance
+on the calibrated method. [Annual and cumulative balances](docs/science/assets/production_entropy_review_2026-11-23/README.md)
+<!-- claims: BND-16 -->
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only
@@ -208,8 +217,10 @@ Three products draw on the same claims ledger:
 - The [agent guide](AGENT_GUIDE.md), covering evidence, conventions,
   failed methods, reproduction and open questions.
 
-The article is a working draft; its interpretation has not yet been fully
-reconciled with the latest review. Builds use the external `makedoc` engine:
+The working article reports native measurements and detector tests.
+The draft build accepts clearly scoped provisional results. The submission
+build checks every cited claim in its text and figure captions for supported
+status before rendering with `makedoc`.
 
 ```bash
 make manuscript-validate

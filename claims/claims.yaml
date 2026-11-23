@@ -158,6 +158,7 @@ claims:
       - {path: docs/science/assets/turn18_reconciliation_2026-11-11/primary_proxy_and_gauge_independent_components.csv, commit: 06f9a2d}
       - {path: docs/science/turn15_energy_emission_review_2026-11-11.md, commit: 3e9646e}
       - {path: docs/science/assets/native_delivery_review_2026-11-21/nat07_matched_30myr.csv, commit: e36bf6e}
+      - {path: docs/science/assets/production_entropy_review_2026-11-23/milestone_and_decade_balances.csv, commit: d7cc075}
     reproduce: .venv/bin/python scripts/science/restate_native_delivery.py
     test: >-
       Claude reproduced the twelve matched 30-Myr ratios and four 20-Myr
@@ -173,7 +174,7 @@ claims:
       - The new denominator is cumulative signed reconstructed gas delivery, excluding potential transport. Its time-resolution limits are those of NAT-01; geometric containment does not establish production boundary safety.
       - One deterministic realisation per case; G-HI retains only snapshots 0–47.
       - "Independent review (Claude, 21 November 2026): the twelve 30-Myr ratios and the four 20-Myr ambient shares reproduce from the pinned tables (scripts/science/review_native_delivery.py). The sensitivities recorded under NAT-01 apply to the first ratio."
-      - "R100 storage exceeds measured delivery in C-LO by 3.8-11.1% of labelled input over 10-50 Myr and in G-LO by at most 2.8%. The coarse no-jet controls bound in-box drift at 1.5% of the low-power scale (BND-04), but drift on the production grid is unmeasured, so the C-LO excess has no identified source."
+      - "R100 storage exceeds reconstructed gas delivery in C-LO by 3.8–11.1% of labelled input at the selected ages. The switch directly adds energy outside the injector in C-LO at 10–12 Myr (BND-15). At 50 Myr the excess is 10.98% in R100 and 16.61% in the fixed inset box, alongside a whole-exterior residual of +17.02% (BND-16). The aperture fluxes, late switch counter and no-jet hydrostatic drift on the production mesh are unmeasured. The 1.5% coarse-control result belongs to BND-04."
     depends_on: [NAT-05, NAT-01]
 
   - id: NAT-08
@@ -315,6 +316,7 @@ claims:
       - {path: docs/science/assets/entropy_lobe_review_2026-11-23/paired_rows.csv, commit: db0c31e}
       - {path: docs/science/assets/entropy_lobe_review_2026-11-23/growth_and_counter.csv, commit: db0c31e}
       - {path: docs/science/assets/entropy_lobe_review_2026-11-23/grid_component_differences.csv, commit: db0c31e}
+      - {path: docs/science/assets/entropy_redistribution_review_2026-11-23/paired_components.csv, commit: d7cc075}
     reproduce: .venv/bin/python scripts/science/verify_entropy_lobes.py
     test: >-
       Claude recomputed the pressure-volume changes, matched 11-Myr
@@ -324,6 +326,7 @@ claims:
       - The primary lobe contains all cells with jet tracer mass fraction greater than 0.001. The sign persists at the 0.005 and 0.01 thresholds.
       - The 11-Myr comparisons interpolate the OFF arm to the ON time across offsets below 400 years. Each 12-Myr endpoint is measured at exactly the same time.
       - Both arms inherit ten million years of switch-on production evolution. The paired intervention does not measure the bias at 30–50 Myr.
+      - The C-HI thermal contrast at 11.8, 11.9 and 12 Myr is 0.11786, 0.12694 and 0.13083 in fixed one-Myr labelled-energy units. Normalizing by elapsed input gives a much flatter ratio. Neither series localises a propagating disturbance.
       - Enthalpy uses absolute pressure. Current-aperture change in stored thermal, kinetic and gravitational energy uses the same cells at time zero and the current time. The two quantities need not change by the same amount.
       - "Independent review (Claude, 23 November 2026, scripts/science/review_entropy_lobes.py). All 12 time-matched paired rows reproduce to 1e-15 from the native lobe receipts and from injector rates integrated separately from compact_inputs.zip. The six pressure-field hashes per case equal those in the energy-budget receipts, and the switch-on lobe and R100 values at 10 and 11 Myr equal the production tables exactly. The net R100 storage difference accounts for the whole-grid difference to within 2e-5 of labelled input. Local changes outside the moving apertures could cancel in that net comparison. The review used the compact receipts and retained the original switch-off tracer selections."
       - "The cumulative fractions spread a 2-Myr intervention over a 12-Myr denominator. From 10 to 12 Myr each arm's own enthalpy gain per unit of gas energy delivered is 0.417 with the update on and 0.511 with it off in G-HI, and 0.508 and 0.634 in C-HI. The between-arm enthalpy gain per interval of labelled input grew from 0.058 (10–11 Myr) to 0.154 (11–12 Myr) in G-HI and from 0.015 to 0.270 in C-HI. The response had not settled, so no rate can be carried to later ages."
@@ -343,13 +346,17 @@ claims:
       - {path: docs/science/assets/low_power_entropy_result_2026-11-23/lobe_native_snapshots.json, commit: ffc61cb}
       - {path: docs/science/assets/low_power_entropy_result_2026-11-23/lobe_paired_effects.csv, commit: ffc61cb}
       - {path: docs/science/assets/low_power_entropy_result_2026-11-23/lobe_verification.json, commit: ffc61cb}
+      - {path: docs/science/assets/entropy_redistribution_review_2026-11-23/lobe_contrasts.csv, commit: d7cc075}
     reproduce: .venv/bin/python scripts/science/reduce_low_power_entropy_lobes.py --output /tmp/xray-low-power-lobes
     test: >-
-      Cross-lab review of the shared-seed subtraction, signed gas delivery
-      and dependence on tracer threshold in the six endpoint receipts.
+      Gemini 4 Carbon independently recomputed the six paired tracer-cut
+      comparisons from the pressure receipts and signed injector rates.
+      A further replay matched all twelve arm ratios within 9e-16. Claude's
+      review of the interpretation and case-specific bounds remains pending.
     caveats:
       - The 0.1%, 0.5% and 1% tracer cuts give differences of −0.575, +0.397 and +1.285 percentage points in C-LO and +4.969, +5.652 and +6.353 points in G-LO.
       - This follow-up used completed outputs after forecast scoring. With one pair per case and ten shared Myr, the ratios measure changes in the pressure-volume estimate over these two Myr. Deposition of heat and later-age bias are separate questions.
+      - In C-LO the primary volume and mean pressure change by −0.307% and +0.097%. The signed complementary thermal difference cannot establish a fraction of energy radiated as sound. All three calculations use the same native field extractions.
     depends_on: [NAT-01, NAT-05, BND-15]
 
   - id: BND-01
@@ -728,12 +735,13 @@ claims:
       - {path: docs/science/assets/production_injector_histories_2026-11-21/history_tables.zip, commit: 0a37ff6}
       - {path: docs/science/assets/production_injector_histories_2026-11-21/gravity_scientific_check_summary.csv, commit: 0a37ff6}
       - {path: docs/science/assets/production_injector_histories_2026-11-21/gravity_audit_receipt.json, commit: 0a37ff6}
+      - {path: docs/science/assets/production_entropy_review_2026-11-23/README.md, commit: d7cc075}
     reproduce: >-
       python3 docs/science/assets/production_injector_histories_2026-11-21/replay.py &&
       .venv/bin/python scripts/science/entropy_localisation.py /tmp/xray_bnd13_localisation
     caveats:
       - The primary estimate uses linear reconstructed states, the configured solver switch, outer active-cell values and trapezoidal time weights. G-HI's linearly extrapolated outer state at index 47 is invalid. Its endpoint supports the left rule for that boundary reconstruction.
-      - The simulation applies gravity using stage-resolved numerical face mass fluxes. Both work estimates use saved states. The paired restarts attribute the 10–12 Myr primary balance in G-HI and C-HI to the entropy update (BND-14). Its contribution at other ages remains unresolved.
+      - The simulation applies gravity using stage-resolved numerical face mass fluxes. Both work estimates use saved states. The paired restarts identify the entropy contribution in all four cases at 10–12 Myr (BND-14 and BND-15). BND-16 reconstructs the net exterior residual at other ages. The individual solver contributions at those ages remain unresolved.
       - The C-HI exterior residual also stays negative, with a maximum paired gravity discrepancy of 20.5% of its magnitude. In the low-power runs the exterior balance changes sign across boundary reconstructions.
       - C-HI's sampled absolute net gravitational work is 32.8% of the primary exterior deficit at 10–12 Myr and 51.9% at 29–30 Myr. In G-HI, 6.95–7.13 percentage points of the 10–12 Myr deficit lie beyond 0.85 kpc across the 24 matched methods. These saved-state spatial balances motivate the paired native-stage measurement of the entropy update.
       - Agreement between the two saved-state work estimates shows that the saved fields satisfy discrete continuity. It cannot detect an error in the solver's stage-resolved source term. The stronger exclusion is magnitude: at 29–30 Myr the whole exterior gravitational work is about −2.1% of labelled energy, a quarter of the −8.4% residual, and a second-order source-term error cannot exceed the term itself (Claude, 21 Nov 2026).
@@ -803,8 +811,64 @@ claims:
     caveats:
       - Claude registered the forecasts using the older production residuals and high-power calibration. A separate computation checked the 405,171 raw low-power solver rows and all 80 primary stock-and-flux intervals. The published ZIP replays the binned raw inputs. The full native per-step ledgers are in the project archive.
       - The two excluded switch-off startup intervals remain in the tables. Ordinary pressure floors in the switch-off arms add 0.0244% of labelled input in C-LO and 0.0258% in G-LO over the two Myr.
+      - Gemini 4 Carbon independently recomputed the exterior budgets from the compact snapshot receipts. These jet-on restarts measure a signed numerical energy balance. A matched no-jet production-mesh control would address hydrostatic drift separately.
       - The 10-Myr checkpoint already incorporates the first ten million years of production evolution. The experiment addresses the next two million years and does not quantify late-time enthalpy bias.
     depends_on: [BND-14]
+
+  - id: BND-16
+    status: supported
+    statement: >-
+      On the primary saved-state reconstruction the cumulative exterior
+      energy residual at 30 Myr is −6.73%, +8.74%, −6.78% and +1.97% of
+      net gas delivery in C-HI, C-LO, G-HI and G-LO. C-LO reaches +17.02%
+      of cumulative labelled input at 50 Myr. G-LO's annual residual turns
+      positive over 14–15 Myr and stays positive through output 49. Its
+      cumulative balance returns above zero at output 17.
+    evidence:
+      - {path: docs/science/assets/production_injector_histories_2026-11-21/history_tables.zip, commit: 0a37ff6}
+      - {path: docs/science/assets/production_entropy_review_2026-11-23/annual_balances.csv, commit: d7cc075}
+      - {path: docs/science/assets/production_entropy_review_2026-11-23/milestone_and_decade_balances.csv, commit: d7cc075}
+      - {path: docs/science/assets/production_entropy_review_2026-11-23/restart_calibration.csv, commit: d7cc075}
+      - {path: docs/science/gemini_second_review_2026-11-23.md, commit: d7cc075}
+    reproduce: python3 scripts/science/review_production_entropy_history.py --output /tmp/xray-production-entropy-history
+    test: >-
+      Gemini compared the archived interval balances and fixed-region stocks.
+      An independent integration of the endpoint rates and stocks reproduces
+      all 197 primary interval residuals within 1.5e-14 of the interval
+      label. The independently measured shell stocks close the corresponding
+      regional identity within 2.4e-10.
+    caveats:
+      - Only the 10–12 Myr restarts have stage-resolved entropy counters. A late residual is conditional on the primary boundary, injector, gravitational reference and time rule. The last annual interval in each 50-Myr case includes an unsampled speed dip.
+      - The fixed-box and exterior comparisons share the signed net injector gas flux. Their difference constrains a net shell balance. Energy crossing the inset faces, acoustic transport and individual sources within the shell are unmeasured.
+      - The controlled-window residual and the late production history do not bound the change in tracer-defined lobe enthalpy after a longer switch-off evolution.
+    depends_on: [BND-12, BND-14, BND-15]
+
+  - id: RAD-01
+    status: provisional
+    statement: >-
+      For G-HI at 20 Myr in the original 45-degree radio view, removing only
+      the PRAiSE2 tracer emissivity weight lowers the continuous-injection
+      best-fit break from 56.02 to 20.11 GHz. Particles last shocked 10–20 Myr
+      earlier contribute 4.76% and 10.51% of the 15-GHz luminosity with the
+      original and unit weights, respectively. Both spectral ages are upper
+      limits for the 0.15–15 GHz band.
+    evidence:
+      - {path: docs/science/radio_tracer_weight_check_2026-11-23.md, commit: d7cc075}
+      - {path: docs/science/assets/radio_tracer_weight_check_2026-11-23/spectra.csv, commit: d7cc075}
+      - {path: docs/science/assets/radio_tracer_weight_check_2026-11-23/particle_age_bins.csv, commit: d7cc075}
+      - {path: docs/science/assets/radio_tracer_weight_check_2026-11-23/result.json, commit: d7cc075}
+    reproduce: >-
+      Follow the source-module and particle-archive instructions in
+      docs/science/radio_tracer_weight_check_2026-11-23.md to run
+      scripts/science/check_radio_tracer_weight.py. The public spectra
+      permit refitting both breaks independently.
+    test: >-
+      Independent review of the per-particle weight substitution, the ten
+      reproduced production luminosities and the censoring decision for
+      this exposed view.
+    caveats:
+      - Fits above the observing band are model extrapolations. The observable constrains each break to exceed 15 GHz. One view gives no estimate of how many of the other 36 above-band breaks would remain censored under unit weights.
+      - Pressure, density, field, cooling histories, active particle set and ray paths are common to the arms. Time since injection and time since the last qualifying shock are distinct particle age measures.
 
   - id: OBS-01
     status: refuted

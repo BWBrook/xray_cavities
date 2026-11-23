@@ -6,6 +6,8 @@ This brief summarises the living [X-ray cavities project](https://github.com/BWB
 
 ![Current native 2.5pV divided by cumulative reconstructed gas supply (blue) or labelled kinetic energy (grey), at matched outputs near 30 Myr. Each pair uses the same pressure estimate. Claims NAT-01 and NAT-07.](../../docs/science/assets/native_delivery_restatement_2026-11-21/native_delivery_30myr.png){#fig-native-brief width=100%}
 
+<!-- claims: NAT-01 NAT-07 -->
+
 Jets from black holes inflate lobes in the hot gas around galaxies. How much of the energy supplied by a jet can we recover from a lobe's pressure and volume?
 
 We measured the lobes directly in four simulations of high- and low-power jets in cluster and group atmospheres. Our *lobe* includes the full volume of every cell containing more than 0.1% jet material by mass. Its *enthalpy estimate* for non-relativistic gas is 2.5 times the sum of current pressure times volume in these cells. <!-- claims: NAT-05 NAT-01 -->
@@ -30,8 +32,10 @@ We repeated ages 10–12 Myr in all four jets. Turning the solver’s entropy up
 
 ![Four paired restarts from a shared state in each case. Left, the net energy the entropy update added to or removed from the gas outside the injector over 10–12 Myr. Right, growth in the pressure-volume estimate for the lobe over those same two Myr.](../../docs/science/assets/low_power_entropy_result_2026-11-23/four_case_entropy_response.png){#fig-entropy-brief width=100%}
 
-At low power the same update added 3.88% of labelled energy in the cluster and removed 1.96% in the group. Turning it off changed the enthalpy gain per unit delivered from 89.4% to 88.8% in C-LO and 67.6% to 72.6% in G-LO. Tightening the cluster lobe’s boundary reversed its small change. The overall energy error therefore gives no simple correction for a lobe at a later age. <!-- claims: BND-15 NAT-13 -->
+<!-- claims: BND-14 BND-15 NAT-12 NAT-13 -->
+
+At low power the same update added 3.88% of labelled energy in the cluster and removed 1.96% in the group. Turning it off changed the enthalpy gain per unit delivered from 89.4% to 88.8% in C-LO and 67.6% to 72.6% in G-LO. Tightening the cluster lobe’s boundary reversed its small change. In the group run the annual energy balance later turned positive. These changes give no simple correction for a lobe at a later age. <!-- claims: BND-15 BND-16 NAT-13 -->
 
 The low-power experiment also tested a prediction made before the runs. The energy update fell inside its forecast range in both atmospheres in both million-year intervals. With the update off, the independent energy balances closed to within 0.03% of labelled input in each of the 38 intervals scored. <!-- claims: BND-15 -->
 
-Claude independently checked 19 primary results, 228 method combinations and the high-power restart comparison from the archived injector rates and lobe measurements. A separate calculation verified the low-power budgets against the solver records. [Original calculations](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/native_delivery_restatement_2026-11-21.md) · [High-power comparison](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/entropy_restart_lobes_2026-11-23.md) · [Low-power scores and data](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/low_power_entropy_result_2026-11-23.md).
+Claude independently checked the 19 primary results, 228 method combinations and high-power restart contrasts. Gemini independently checked the low-power lobe comparisons. Both used archived measurements and injector rates. [Original calculations](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/native_delivery_restatement_2026-11-21.md) · [High-power comparison](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/entropy_restart_lobes_2026-11-23.md) · [Low-power scores and subsequent energy history](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/gemini_second_review_2026-11-23.md).

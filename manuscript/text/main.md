@@ -26,7 +26,13 @@ We compare four jet simulations crossing cluster and group atmospheres with high
 
 ### Synthetic X-ray and radio products
 
-<!-- Describe XRAiSE/PRAiSE2 products, viewing angles, masks, and common-age surface. -->
+PRAiSE2 weights each radio-emitting particle’s emissivity by its jet-tracer
+fraction at the emission time. To test whether this affects the integrated
+spectrum, we used the existing G-HI snapshot at 20 Myr in its original 45°
+radio view. We repeated the ray integration with the tracer weight set to
+one for the same particles, retaining their magnetic fields, cooling
+histories and geometry. We fitted the five frequencies between 0.15 and
+15 GHz with the same continuous-injection model in each arm. <!-- claims: RAD-01 -->
 
 ### Cavity geometry, age, and energetics
 
@@ -36,13 +42,26 @@ Native enthalpy is $H_{\mathrm{native}}=\alpha\int_{\mathrm{cocoon}}p\,dV$, with
 
 We normalize the primary native pressure estimate to the cumulative net gas energy transferred from the maintained injector to freely evolved cells at the identical case and actual output age. The signed cone and stationary-region fluxes are added before integrating the saved-state rates from the already initialized $t=0$ output. Gas-energy flux includes internal and kinetic energy and pressure work; it excludes gravitational-potential transport. The primary interface reconstruction is linear with the saved shock-flag fallback, and the primary time integral is trapezoidal. Left/right rectangles, first-order states and forced HLL/HLLC solvers provide sensitivity comparisons. These reconstructions omit intermediate Runge–Kutta states and the unsaved terminal velocity dip, so they are estimates of cumulative delivery rather than exact injection counters. Labelled bipolar kinetic power times actual active age, $E_{\mathrm{label}}$, remains a separate comparator. <!-- claims: NAT-01 -->
 
-We identify shock-processed ambient gas using entropy excess connected to a compressed axial-front seed, with environment-matched no-jet noise calibration. The calculation retains the accepted supersonic-front, seed, extent, boundary, minimum-cell and bilateral validity gates. Selected cells contribute their full current-minus-initial energy, and are a subset of the ambient region. Shock energy must therefore not be added again to the full ambient energy change. The calibration is not a native-resolution cellwise no-jet subtraction. The saved whole-grid boundary and injector flux reconstructions do not measure transport through the moving shock or spherical apertures; agreement of the numerical partition identities does not establish a closed physical energy budget.
+We identify shock-processed ambient gas using entropy excess connected to a compressed axial-front seed, with environment-matched no-jet noise calibration. The calculation retains the accepted supersonic-front, seed, extent, boundary, minimum-cell and bilateral validity gates. Selected cells contribute their full current-minus-initial energy, and are a subset of the ambient region. Adding the shock energy to the full ambient change would count these cells twice. The calibration uses the available coarser no-jet runs. Transport across the moving shock and spherical apertures remains unmeasured. <!-- claims: NAT-03 NAT-04 -->
 
-X-ray cavity measurements are evaluated independently of tracer-based membership. The primary comparison uses geometric depth, pressure averaged over the inferred ellipsoid, and the same enthalpy convention as the native estimate. We evaluate viewing angles of 0, 45 and 90 degrees and require a valid bilateral cavity topology. Invalid views remain unresolved and do not enter quantitative recovery summaries.
+We tested X-ray cavity outlines on corrected 1-keV images of the 19 case–age combinations at three side-on azimuths ($0^\circ$, $45^\circ$ and $90^\circ$). The methods use X-ray brightness to select pixels. We reserved the projected jet tracer and the native three-dimensional lobe volumes for evaluating the outlines. We tested a fixed-area selector, an algorithm that grows regions from seed pixels, and cuts at 5%, 10% and 20% below the radial median brightness. <!-- claims: DET-01 DET-04 -->
 
 ### Statistical comparisons
 
-We report within-case ranges and medians across the accepted ages and views. These are descriptive summaries of repeated measurements, without population-level significance tests or an assumption that ages and views are independent. A factor of two provides a common descriptive recovery band. Spectral breaks above the fitted frequency range yield upper limits on age and lower limits on inferred power; these limits remain separate from exact estimates. Sound-crossing, buoyant-rise and refill clocks use the retained initial-atmosphere sound speed and gravity with the observed component geometry. The mean-pressure spectral clock retains its previously defined fractional-tracer global magnetic-field estimate; it does not use the X-ray pressure or the revised binary-cocoon pressure. The emissivity-weighted field supplies its separate sensitivity comparator.
+We report within-case ranges and medians across ages and views of the same simulation. For the detector tests each side contributes its reconstructed volume, with zero assigned to an undetected side. We also measure the fraction of projected tracer area inside the outline (completeness) and the fraction of the selected area that overlaps the tracer (purity). <!-- claims: DET-01 DET-02 -->
+
+For a cavity with a validated outline, the X-ray enthalpy estimator uses geometric depth, ambient pressure averaged over the inferred ellipsoid, and the same enthalpy convention as the native estimate. Sound-crossing, buoyant-rise and refill clocks use the observed geometry with the initial atmosphere's sound speed or gravity. Spectral ages use the fitted radio break and a field estimated from the tracer-weighted mean pressure, with a radio-emissivity-weighted field as a sensitivity comparison.
+
+For a constant labelled bipolar kinetic power, the cavity-power estimate can be factorised as
+
+$$
+\frac{Q_{\mathrm{cav}}}{Q_{\mathrm{label}}}
+=\frac{H_{\mathrm{native}}}{E_{\mathrm{label}}}
+\frac{H_X}{H_{\mathrm{native}}}
+\frac{t_{\mathrm{true}}}{t_{\mathrm{est}}}.
+$$
+
+Here $E_{\mathrm{label}}=Q_{\mathrm{label}}t_{\mathrm{true}}$, and $H_X$ and $H_{\mathrm{native}}$ use the same bipolar enthalpy convention. If the two sides have separate age estimates $t_s$, the effective age is $t_{\mathrm{est}}=H_X/(\sum_s H_{X,s}/t_s)$ so that the power is the sum of the two side powers. A spectral break above the fitted frequency range gives an upper limit on spectral age and a lower limit on the corresponding power. Knowing the true age fixes the last factor. Estimating $H_X$ still requires a validated cavity outline.
 
 ## Results
 
@@ -61,11 +80,11 @@ At the matched outputs near 30 Myr, the pressure estimate and spherical storage 
 
 Here $D_{\mathrm{gas}}$ is cumulative signed net gas delivery with the primary trapezoidal rule, while $\Delta E_{R100}$ is thermal-plus-kinetic-plus-fixed-potential change relative to the initial fields in the cells of the current R100 aperture. R100 includes physical cells whose centres lie no farther than the most distant cell with total speed at least 100 km s$^{-1}$; R300 uses 300 km s$^{-1}$. Both apertures contain the entire current lobe and are geometrically complete at these ages. A common external denominator leaves $2.5pV/\Delta E_{R100}$ unchanged. Current absolute pressure energy and signed storage remain different quantities: neither their ratio nor storage/delivery near unity establishes physical closure. Total storage also retains the gravitational-potential-zero dependence associated with regional mass change. <!-- claims: NAT-07 -->
 
-Enthalpy also differs from the actual energy change in the current cocoon region. The latter spans 0.132–0.426 of injected energy in C-HI, 0.425–0.571 in G-HI and 0.013–0.298 in G-LO. In C-LO it ranges from −0.160 to 0.137. Negative gravitational changes relative to the initial fields contribute to this separation, and a negative net regional value does not imply negative absolute energy or a Lagrangian loss from the jet. Thermal pressure alone cannot represent all terms in this accounting.
+The actual energy change in the current cocoon region spans 0.132–0.426 of labelled input in C-HI, 0.425–0.571 in G-HI and 0.013–0.298 in G-LO. In C-LO it ranges from −0.160 to 0.137. The gravitational term can decrease relative to the initial fields in the same cells. A negative total therefore describes a regional change under the chosen gravitational reference. <!-- claims: NAT-02 -->
 
-The selected shock-processed ambient region contains energy changes of 0.666–0.765, 0.505–0.655 and 0.580–0.854 times the injected energy in C-HI, G-HI and G-LO, respectively. C-LO supplies one accepted estimate, 0.223 at 10 Myr; its four later ages fail the bilateral shock gate. This selected energy includes thermal, kinetic and gravitational changes and is not entirely irreversible heat. The estimated irreversible-heating term spans 0.177–0.229, 0.257–0.283 and 0.120–0.263 of injected energy in the three fully resolved series.
+The selected shock-processed ambient region gains 0.666–0.765, 0.505–0.655 and 0.580–0.854 times the labelled input in C-HI, G-HI and G-LO, respectively. C-LO supplies one accepted estimate, 0.223 at 10 Myr. Its four later ages fail the bilateral shock criterion. This energy includes thermal, kinetic and gravitational changes. The estimated irreversible-heating term spans 0.177–0.229, 0.257–0.283 and 0.120–0.263 of labelled input in the three fully resolved series. <!-- claims: NAT-03 -->
 
-The numerical cocoon/ambient decompositions agree with the independently summed retained energy change to the prescribed tolerance of $10^{-9}E_{\mathrm{inj}}$. Physical closure remains unresolved: the retained whole-domain change exceeds injected energy, particularly in C-LO, where the ratio is approximately 6–24. That case's background-dominated ambient budget cannot be interpreted as jet coupling efficiency. The shock measurements support substantial energy outside the native cocoon, while neither their restricted masks nor the whole-domain ledger establish the fraction of jet power irreversibly coupled to the atmosphere.
+The cocoon and ambient contributions sum to the independently measured whole-domain energy change within $10^{-9}E_{\mathrm{label}}$. C-LO gains about 6–24 times the labelled jet input across the domain, which includes a large energy inflow through its outer boundary. This inflow must be accounted for before interpreting the domain's energy gain as a response to the jet. <!-- claims: NAT-04 BND-01 BND-02 -->
 
 During the 10–12 Myr restarts, the high-power group lobe gained enthalpy
 equal to 41.7% of the net gas energy delivered over those two Myr with the
@@ -100,37 +119,35 @@ added 21.72% and removed 30.93% in the group, and added 29.98% and removed
 34.59% in the cluster. Both switch-on controls reproduced the six production
 fluid fields at 11 Myr. <!-- claims: BND-14 -->
 
-### How accurately do X-ray observations recover cavity enthalpy?
+At 30 Myr the reconstructed cumulative energy balance outside the injector
+was −6.73% and −6.78% of delivered gas energy in the high-power cluster and
+group. The corresponding low-power balances were +8.74% and +1.97%. G-LO’s
+annual balance changed from negative to positive over 14–15 Myr, and its
+cumulative balance returned above zero at 17 Myr. The direct measurements
+of the entropy update cover 10–12 Myr. At the later ages we can reconstruct
+the balance from storage and transport, while its partition among solver
+operations and its effect on lobe enthalpy remain uncertain. <!-- claims: BND-14 BND-15 BND-16 -->
 
-Of the 57 selected case-age-view combinations, 37 pass the bilateral X-ray topology criterion and 20 remain unresolved. Within the valid surface, pressure recovery is within a factor of two for 36 of 37 views, compared with four for volume and five for enthalpy (Figure [2](#fig-main-2)). Thus the dominant measurement discrepancy lies in the recovered cavity extent and topology, rather than in the inferred ambient pressure. This conclusion is conditional on successful cavity identification; excluded views are not assigned small but finite cavity energies.
+### Can a brightness deficit identify the lobe?
 
-Median X-ray/native enthalpy ratios are 0.0222 in C-HI, 0.494 in C-LO, 0.00603 in G-HI and 0.0929 in G-LO. The low-power cluster case is the closest median recovery, and the high-power cases show the largest deficits. These values use the binary cocoon required for the native comparison. Fractional tracer weighting gives a C-LO median ratio of 6.76, so its apparent over-recovery under that alternative convention disappears when the full binary region defines native truth. The observer measurements themselves are unchanged. This sensitivity changes the interpretation of C-LO but preserves the broader evidence for geometry-dependent recovery.
+Across the 57 views, some algorithms missed the low-contrast lobes and others selected unrelated deficits or merged the lobe with the background. In C-HI, the 5% brightness-deficit threshold gave a median recovered volume of 1.08 times the native lobe volume. Yet its outlines covered only 36% of the projected tracer area, and only 70–77% of the selected area overlapped the tracer. Agreement in volume can therefore arise from errors on opposite sides of the outline. These tests leave the four-case X-ray enthalpy and power recovery unresolved. <!-- claims: DET-01 DET-02 -->
 
-### How do uncertain ages affect inferred jet power?
+### Does tracer weighting change the fitted radio age?
 
-For the constant labelled bipolar kinetic power, with $E_{\mathrm{inj}}$ in this identity denoting $E_{\mathrm{label}}$, the three contributions to an inferred-power error can be written
-
-$$
-\frac{Q_{\mathrm{cav}}}{Q_{\mathrm{true}}}
-=\frac{H_{\mathrm{native}}}{E_{\mathrm{inj}}}
-\frac{H_X}{H_{\mathrm{native}}}
-\frac{t_{\mathrm{true}}}{t_{\mathrm{est}}}.
-$$
-
-The identity separates the native enthalpy proxy, observational recovery and age estimate, using the same bipolar region and enthalpy convention throughout. When ages are estimated separately for the two sides, we retain the summed power $\sum_s H_{X,s}/t_s$ and define $t_{\mathrm{est}}=H_X/(\sum_s H_{X,s}/t_s)$ for this identity. This effective age is an enthalpy-weighted harmonic mean, distinct from the arithmetic mean used to summarise the two side ages. It does not assume that the factors are statistically independent. Changing the native mask changes the first two factors reciprocally, leaving their product unchanged for a fixed X-ray measurement.
-
-Using X-ray $2.5pV$ and the true age, median inferred-to-known power ratios are 0.0122, 0.514, 0.00292 and 0.0725 for C-HI, C-LO, G-HI and G-LO, respectively. The high-power deficits are therefore already present before any clock error is introduced. Sound-crossing, buoyant-rise, refill, shock and spectral clocks add method-dependent shifts (Figure [3](#fig-main-3)). Among exact mean-pressure spectral estimates, the corresponding medians are 0.0181 for C-HI and 0.856 for C-LO. However, 20 of 37 mean-pressure spectral rows are censored; both group cases supply only power lower limits for this clock. These limits cannot establish a finite correction to their energy deficit. Emissivity-weighted spectral ages remain a sensitivity comparison.
-
+In the G-HI test, particles last shocked 10–20 Myr earlier supplied 4.76%
+of the 15-GHz luminosity with production weighting and 10.51% with unit
+weights. Removing the weight steepened the 1.4–15 GHz spectral index from
+0.621 to 0.645. The fitted break moved from 56.0 to 20.1 GHz. Both fits
+place the break beyond the observed band, leaving the spectral age an upper
+limit in this view. <!-- claims: RAD-01 -->
 
 <div id="figures"></div>
 
 ## Discussion
 
-The four simulations separate two limitations of cavity calorimetry. Even an exactly measured native enthalpy is a conditional proxy for jet energy because the pressure integral omits kinetic and gravitational changes and does not isolate energy deposited outside the cocoon. The independent X-ray measurement then introduces a larger deficit in the high-power cases through cavity geometry and topology. An age correction acts on that already biased energy estimate.
+Even when the native pressure and volume are known, their product omits the kinetic and gravitational energy changes and energy stored outside the lobe. The observational comparison poses a separate problem. The C-HI outlines that reproduced the lobe volume missed most of its projected area. A comparison of X-ray enthalpies or clocks across atmospheres therefore needs an independent test of the detector's geometry. <!-- claims: NAT-02 NAT-07 DET-01 DET-02 -->
 
-The binary native definition is consequential for the low-power cluster case. It converts apparent X-ray over-recovery under fractional tracer weighting into a median underestimate. This illustrates why the definition of native truth must accompany a recovery claim. It does not justify using tracer to repair an observed cavity or applying a single empirical correction across environments and powers.
-
-Shock-mask sensitivity also limits the precision of energy-deposition claims. Halving and doubling the shock-mask thresholds leaves the G-HI shock energy almost unchanged, but produces appreciable variation in G-LO and in C-LO's sole resolved point. Together with the absent boundary flux and cellwise no-jet counterfactual, this warrants interpreting the shock integral as a selected-region diagnostic. The present comparison establishes the structure of the bias within four deterministic cases; a population calibration or causal coupling efficiency requires additional evidence.
+Halving or doubling the shock-mask thresholds changes G-HI's estimated shock energy little, while G-LO's estimates and the sole accepted C-LO point depend on that choice. The integral measures energy change in the selected cells. Inferring irreversible atmospheric heating also requires their thermodynamic histories and energy transport. <!-- claims: NAT-03 -->
 
 ## Conclusions
 
@@ -162,6 +179,11 @@ None.
 
 ## AI-use declaration
 
-<!-- Describe AI-assisted analysis and manuscript drafting in accordance with PASA policy. -->
+OpenAI Codex (GPT-6) ran the paired tests, reconstructed the energy
+budgets, tested the radio emissivity weighting and drafted the analysis.
+Anthropic Claude (Fable 5.2) registered the low-power energy forecasts and
+independently checked the high-power budgets and lobe contrasts. Google
+DeepMind Gemini (4 Carbon) independently checked the low-power lobe
+arithmetic, compared the production histories and proposed the radio test.
 
 ## References

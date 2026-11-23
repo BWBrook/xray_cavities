@@ -32,7 +32,9 @@ C-HI. For the cumulative endpoint, divide current enthalpy by gas delivered
 since startup. About five-sixths of that delivery predates the shared seed.
 With the update off, the endpoint ratio rises by 1.57 percentage points in
 G-HI and 2.10 in C-HI.
-Each case has a single pair whose enthalpy gap was still growing at 12 Myr.
+Each case has a single pair. Its enthalpy gap grew more during the second
+Myr than the first. To check growth near 12 Myr, plot the difference in ergs
+or divide all outputs by the same one Myr of labelled energy.
 Neither ratio measures deposited heat. In both cases the extra lobe enthalpy
 exceeds the extra energy stored inside the current 100 km/s sphere. The
 sphere's net storage difference matches the whole-grid difference to the
@@ -49,6 +51,15 @@ arm's net gas delivery and its own 12-Myr endpoint with the common
 10-Myr seed. C-LO's small lobe contrast changes sign with tracer cut.
 [Low-power calculations and commands](docs/science/low_power_entropy_result_2026-11-23.md)
 <!-- claims: BND-15 NAT-13 -->
+
+The production reconstruction gives 197 annual balances outside the injector.
+At 30 Myr, the cumulative residual as a share of net gas delivery is
+−6.73%, +8.74%, −6.78% and +1.97% in C-HI, C-LO, G-HI and G-LO. The
+entropy switch has a direct solver counter during the 10–12 Myr restarts.
+Elsewhere, an attribution needs assumptions about the other numerical terms
+and sampling. G-LO’s annual residual becomes positive at output 15, while the
+cumulative balance returns above zero at output 17. [Four-case history and interpretation](docs/science/gemini_second_review_2026-11-23.md)
+<!-- claims: BND-14 BND-15 BND-16 -->
 
 The answer is organised as a product of three factors:
 
@@ -119,8 +130,9 @@ pinned commit, its reproduce command and its caveats. In summary:
   <!-- claims: BND-02 BND-03 -->
 - The boundary contrast is confined to the outer 40–50 kpc (cluster) and
   20 kpc (group). The cellwise absolute drift that both twins share is not,
-  so no cluster cut is certified as quiet. Its size, about 1.5% of the
-  low-power scale, is an error bar for any aperture inside the cut.
+  so no cluster cut is certified as quiet. The roughly 1.5% estimate uses
+  the coarse control and the low-power label. The production grid has a
+  different spacing, and its paired runs contain jets.
   <!-- claims: BND-04 -->
 - R100 storage and whole-grid-minus-boundary accounting agree closely
   (BND-05, provisional). At 11 selected complete, 40-kpc-inset-contained
@@ -128,11 +140,11 @@ pinned commit, its reproduce command and its caveats. In summary:
   0.002837 E_label. C-HI/G-HI comparisons include 10/20/30 Myr and G-LO
   includes 10--50 Myr. The unscaled G-LO endpoint differs by up to 0.01390;
   C-HI/40 and G-HI/40 fail geometric eligibility. This strengthens the
-  numerical-accounting investigation, but shared production/potential
-  conventions and unmeasured transport prevent a measured delivered-energy
-  correction. C-LO/50's 23.25% aperture storage excess is not yet a rigorous
-  delivered-energy floor. Nozzle and in-grid source terms remain candidates.
-  <!-- claims: BND-05 -->
+  case for a production energy excess. Since that comparison, the injector
+  histories have measured net gas delivery, and instrumented restarts have
+  measured the signed entropy correction at 10–12 Myr. The energy flux
+  across the moving aperture remains unknown. [Production balances](docs/science/assets/production_entropy_review_2026-11-23/README.md)
+  <!-- claims: BND-05 BND-12 BND-14 BND-15 BND-16 -->
 
 **Measurement (the observer factor).** No observer method is adopted yet.
 - The legacy detector is refuted, and the recovery numbers in the
@@ -148,8 +160,12 @@ pinned commit, its reproduce command and its caveats. In summary:
 - An emission-defined native reference is the next major input.
   <!-- claims: XR-02 -->
 
-**Clock factor.** Not yet re-established. Its earlier results rest on the
-withdrawn observer numbers.
+**Clock factor.** Four-case cavity-power ratios await a validated X-ray
+detector. For the radio spectrum itself, a controlled G-HI/20 test with all
+78,918 active particles found that removing the tracer emissivity weight
+moved the fitted break from 56.0 to 20.1 GHz. Both fits give an age upper
+limit in the observed band. [Single-view spectrum and replay](docs/science/radio_tracer_weight_check_2026-11-23.md)
+<!-- claims: RAD-01 -->
 
 ## Turn-15 results reviewed on 11 November
 
@@ -347,14 +363,17 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
   stored tracer to double precision, each at full cell weight. Ambient gas is
   the exact complement. Do not use fractional tracer weighting as the
   primary definition. <!-- claims: NAT-05 -->
-- **Enthalpy.** `H = α ∫ p dV`, with α = 2.5 as the primary value and α = 4
-  only as a literature comparator.
-- **Energy ledger.** Thermal, kinetic and gravitational energy, each as a
-  same-cell change from the actual initial fields; the gravitational term
-  uses the fixed initial potential, which is zero at the centre. The
-  labelled-input normalization is `E_inj = Q_bipolar × t`; realised delivery
-  remains unmeasured. This applies to historical fractions labelled injected
-  energy: do not apply an unmeasured 1.08--1.23 correction.
+- **Enthalpy.** Use $H=2.5\int p\,dV$ for the simulated gas with
+  $\gamma=5/3$. The $4pV$ convention for a relativistic gas multiplies
+  these results by 1.6 and is a literature comparator. <!-- claims: NAT-01 -->
+- **Energy ledger.** Measure thermal, kinetic and gravitational changes
+  against the actual initial fields in the same cells. The fixed potential
+  is zero at the centre. Normalize native enthalpy by cumulative signed
+  net **gas** delivery at the same age, reconstructed across the cone and
+  stationary injector faces. For a labelled-energy comparison use bipolar
+  power times the actual elapsed active time. The exterior balance also
+  needs potential transport and the change inside maintained cells.
+  <!-- claims: NAT-01 NAT-07 BND-12 BND-16 -->
 - **Observer volumes.**
   - Use the revolution volume `π Σ|u| dA` for each hemisphere.
   - Count an undetected side as zero, never as missing.
@@ -374,9 +393,10 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
   production caller ran a fixed 1%-area selection, not seed-and-grow. It
   reports cavities on cavity-free maps, and its recovery falls as cavities
   grow. Any number traced to it is unusable. <!-- claims: OBS-01 OBS-02 -->
-- **The native definition can flip a conclusion.** C-LO's X-ray/native
-  ratio moved from 6.76 under fractional tracer to 0.494 under the binary
-  definition, from the denominator alone. <!-- claims: NAT-05 -->
+- **The native definition changes the result.** At 50 Myr, C-LO's
+  enthalpy ranges from 98.6% to 76.5% of net delivered gas energy as the
+  lobe boundary moves from 0.1% to 1% jet material. The withdrawn X-ray
+  medians have no role in this comparison. <!-- claims: NAT-01 NAT-05 -->
 - **Volume agreement can be cancellation.** Check geometry before trusting a
   ratio near 1. <!-- claims: DET-02 -->
 - **The 120 kpc aperture clips late high-power lobes.** <!-- claims: DET-03 -->
@@ -402,40 +422,26 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
 
 ## Open questions, in priority order
 
-1. **What causes the excess stored energy (BND-05)?** Q-031 reconstructs face transport
-   and control-volume balances from saved states; it does not directly
-   measure numerical nozzle overwrite or solver-step delivery. The startup
-   pilot is cadence-ambiguous (BND-06); the full C-LO history also remains
-   reconstruction/cadence-ambiguous (BND-07). All four fixed histories are now available (NAT-11). BND-08 covers
-   the original flux batch and G-HI endpoint addendum. BND-09 tests the
-   nozzle reconstruction on known flows. BND-10 measures net marked-mass
-   accumulation independently. A trend with control radius can arise from
-   changing reconstruction error or from real energy exchange. Interpreting
-   a radial comparison requires storage and mass transport as well as
-   energy transport. Write
-   physical closure as "boundary-dominated, with an unexplained residual".
-   The 100/300 km/s spherical budgets (Stas's priority of 4 November)
-   measure storage inside speed-defined apertures, retaining boundary and
-   coverage flags rather than imposing an uncertified cut. All four histories
-   are now reviewed (201 snapshots); their component/proxy and aperture
-   comparisons are above. Slower disturbance remains outside. Realised
-   delivery, aperture transport and production-boundary qualification remain
-   the highest-value accounting measurements. The C-LO fixed-box history
-   measures signed storage beyond R100 without rescuing its early prediction.
-   <!-- claims: NAT-06 NAT-07 NAT-08 NAT-09 NAT-10 BND-06 BND-07 BND-08 BND-09 BND-10 -->
-2. **The emission-defined native reference (XR-02).** Without it, detector
-   tests compare against tracer cocoons, which are not what X-ray cavities
-   trace. The new G-HI/20 C/moving-ambient/below-cut diagnostic is useful
-   evidence, but supplies neither a validated shock label nor an adopted
-   four-case reference. <!-- claims: XR-02 XR-03 XR-04 -->
-3. **A detector that passes.** It must be judged on per-side completeness,
-   purity and the four-case contrasts. The next rungs, in order: a t = 0
-   baseline, aperture sensitivity, a background-merge guard, and topology
-   validation.
-4. **Re-running the clock factor** on whichever detector passes.
-5. **Whether α = 4 should be primary.** That depends on lobe composition: if
-   the lobe plasma is mostly electron–positron pairs it is relativistic, and
-   4pV is the appropriate enthalpy.
+1. **Which X-ray arcs trace a compression front?** Start with the exposed
+   G-HI/20 case and the three side-on azimuths. Define the front from native
+   gas gradients and compression on the stretched mesh, independently of the
+   X-ray arcs and tracer boundary. Patrick reviews the method. [Supervisor’s request](docs/exchange/logs/2026-11-17-compressive-front-and-background-test-request.md)
+2. **Does background refitting generalise?** Follow the frozen 54-view design.
+   Seal predictions before releasing the truth manifest for independent
+   scoring. Report the 108 sides per science arm and method, initial nulls,
+   failures and aperture clipping. The surrounding-emission replacement uses
+   native information. Only the image-only arm can test observer performance.
+   [Protocol and custody order](docs/science/background_refit_blind_protocol_2026-11-11.md)
+   <!-- claims: DET-01 XR-02 XR-03 XR-04 -->
+3. **How well can the clocks recover jet power?** Use geometries from a
+   detector that has passed its tests. Preserve radio spectral-age limits
+   when the fitted break lies beyond the sampled band. <!-- claims: RAD-01 -->
+4. **What does entropy recovery change at later ages?** The native counters
+   identify the switch in four 10–12 Myr pairs. A later annual residual is
+   measurable from the production histories. The difference in lobe enthalpy
+   after a longer switch-off evolution remains open. The four 12-Myr
+   high-power restart sets are archived for that question. [Review and compute recommendation](docs/science/gemini_second_review_2026-11-23.md)
+   <!-- claims: NAT-07 NAT-12 NAT-13 BND-14 BND-15 BND-16 -->
 
 ## People and venues
 
@@ -443,6 +449,9 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
   can: authorisation, taste, release.
 - **Claude** (Anthropic) and **Codex** (OpenAI) are collaborators with equal
   implementation priority.
+- **Gemini 4 Carbon** (Google DeepMind) independently checked the low-power
+  lobe arithmetic, connected the long production histories to the paired
+  tests and proposed the single-view radio reweighting comparison.
 - **Stas and Patrick**, of the UTAS AGN group, review the simulation and
   detector work.
 - Discussion happens on a private correspondence board. Reviewed snapshots
