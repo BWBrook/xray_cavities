@@ -1,0 +1,52 @@
+{
+  "archive_sha256": "bcf75a57834e6e7f102d753d5c990ccc1b2d490e9ce3a95aa5d79940ac4f0bd0",
+  "files": {
+    "C-LO/OFF/lobe_30.json": "3a65a9f5663a3a753b6657ce56bdc11b1dfb576368491d808366356e6f2a4372",
+    "C-LO/ON/lobe_10.json": "0bca80fa13c39fd421d141a5d96b7f01f7cb87168978e88a474a4794291684e3",
+    "C-LO/ON/lobe_30.json": "3c0c07999d41f34d745895c536f31494978148dcfd81d14f3a165a633a5a45af",
+    "G-LO/OFF/lobe_30.json": "3e8aa552b6cf72f5bab2febf69988370a0279fd26f84f305ce1bdc63866ef14e",
+    "G-LO/ON/lobe_10.json": "b96c85d4140ad020237afe04a5e7321766bd438cea1eb9410524cfd69961f48a",
+    "G-LO/ON/lobe_30.json": "ce59270f23d98b3f1a8cc00e177e22d0806ad2e9a9a765b5c64c491a1e63e7f3"
+  },
+  "jobs": {
+    "883524[0]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:02:07"
+    },
+    "883524[1]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:02:05"
+    },
+    "883524[2]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:02:08"
+    },
+    "883524[3]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:02:07"
+    },
+    "883524[4]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:01:59"
+    },
+    "883524[5]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:02:01"
+    },
+    "883524[]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": null
+    }
+  },
+  "mail_points": "ae",
+  "recipient_verified": true,
+  "submitted_manifest_sha256": "16ff17859e084e61455306b75fef9adaeff9d74d6d42a098543955ac8adc72d6",
+  "workers": 6
+}

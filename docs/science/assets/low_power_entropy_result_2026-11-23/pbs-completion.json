@@ -1,0 +1,332 @@
+{
+  "arms": {
+    "C-LO_OFF": {
+      "final_double_bytes": 67318639276,
+      "final_double_time_code": 3679.216725455428,
+      "first_step": 11585,
+      "last_step": 13924,
+      "particle_files": 201,
+      "ranks": 1792
+    },
+    "C-LO_ON": {
+      "final_double_bytes": 67318639276,
+      "final_double_time_code": 3679.216725455428,
+      "first_step": 11585,
+      "last_step": 13873,
+      "particle_files": 201,
+      "ranks": 1792
+    },
+    "G-LO_OFF": {
+      "final_double_bytes": 67318639276,
+      "final_double_time_code": 3679.216725455428,
+      "first_step": 10578,
+      "last_step": 12917,
+      "particle_files": 201,
+      "ranks": 1792
+    },
+    "G-LO_ON": {
+      "final_double_bytes": 67318639276,
+      "final_double_time_code": 3679.216725455428,
+      "first_step": 10578,
+      "last_step": 12478,
+      "particle_files": 201,
+      "ranks": 1792
+    }
+  },
+  "controls_and_builds": {
+    "C-LO": {
+      "compile_commands_checked_per_arm": 126,
+      "gate_production_step": 12729,
+      "seed_validation_sha256": "5b0cce73e1906b125b951806f72abb5eb4de9b6f0345798b1f896813f18cb815",
+      "source_differences": [
+        "definitions.h"
+      ],
+      "source_members_per_arm": 58,
+      "unequal_gate_cells": {
+        "prs": 0,
+        "rho": 0,
+        "tr1": 0,
+        "vx1": 0,
+        "vx2": 0,
+        "vx3": 0
+      }
+    },
+    "G-LO": {
+      "compile_commands_checked_per_arm": 126,
+      "gate_production_step": 11526,
+      "seed_validation_sha256": "0bc8307c3cd8aa5316dc4e132f0ad264402817b4ec47183da43b287fa0ef6d8a",
+      "source_differences": [
+        "definitions.h"
+      ],
+      "source_members_per_arm": 58,
+      "unequal_gate_cells": {
+        "prs": 0,
+        "rho": 0,
+        "tr1": 0,
+        "vx1": 0,
+        "vx2": 0,
+        "vx3": 0
+      }
+    }
+  },
+  "field_receipts_identical_to_scored": 164,
+  "native_float_inventories_rechecked": 84,
+  "observed_utc": "2026-11-23T09:59:33.738558+00:00",
+  "pbs": [
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T02:29:29+00:00",
+      "id": "883299",
+      "name": "ent_lo_prepare",
+      "ncpus": 12,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 12:06:29 2026",
+      "state": "F",
+      "walltime": "01:23:00"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T05:36:19+00:00",
+      "id": "883300",
+      "name": "ent_lo_on",
+      "ncpus": 1792,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 13:29:29 2026",
+      "state": "F",
+      "walltime": "03:06:45"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T05:50:57+00:00",
+      "id": "883301",
+      "name": "ent_GLO_gate",
+      "ncpus": 2,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 16:36:19 2026",
+      "state": "F",
+      "walltime": "00:14:36"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T05:49:48+00:00",
+      "id": "883302",
+      "name": "ent_CLO_gate",
+      "ncpus": 2,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 16:36:20 2026",
+      "state": "F",
+      "walltime": "00:13:28"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:06:15+00:00",
+      "id": "883303",
+      "name": "ent_lo_off",
+      "ncpus": 1792,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 16:50:57 2026",
+      "state": "F",
+      "walltime": "03:15:14"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:36:47+00:00",
+      "id": "883304[]",
+      "name": "ent_readout",
+      "ncpus": null,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": null
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:33:43+00:00",
+      "id": "883304[0]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:27:28"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:33:33+00:00",
+      "id": "883304[1]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:27:18"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:33:14+00:00",
+      "id": "883304[2]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:26:59"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:33:56+00:00",
+      "id": "883304[3]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:27:41"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:32:37+00:00",
+      "id": "883304[4]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:26:21"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:33:06+00:00",
+      "id": "883304[5]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:26:48"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:29:12+00:00",
+      "id": "883304[6]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:22:56"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:29:14+00:00",
+      "id": "883304[7]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:22:59"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:36:47+00:00",
+      "id": "883304[8]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:30:32"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:35:59+00:00",
+      "id": "883304[9]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:29:43"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:29:47+00:00",
+      "id": "883304[10]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:23:32"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:29:54+00:00",
+      "id": "883304[11]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:23:39"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:33:53+00:00",
+      "id": "883304[12]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:27:37"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:32:30+00:00",
+      "id": "883304[13]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:26:15"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:32:50+00:00",
+      "id": "883304[14]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:26:35"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:32:23+00:00",
+      "id": "883304[15]",
+      "name": "ent_readout",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:06:15 2026",
+      "state": "F",
+      "walltime": "00:26:08"
+    },
+    {
+      "exit_status": 0,
+      "finished_utc": "2026-11-23T09:37:36+00:00",
+      "id": "883305",
+      "name": "ent_lo_score",
+      "ncpus": 1,
+      "recipient_verified": true,
+      "start_aedt": "Mon Nov 23 20:36:47 2026",
+      "state": "F",
+      "walltime": "00:00:49"
+    }
+  ],
+  "readout_manifest_sha256": "3032885a20f6ce014dbf393bed6945ce1d76923079088f8c3a353b6bb5ddd7d8",
+  "score_manifest_sha256": "e1815d7bd762303f29e26b314dcc2b33608f7d503d130f8cd411fa0cc80373e0"
+}

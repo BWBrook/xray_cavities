@@ -1,0 +1,551 @@
+{
+  "forecast_board_message": 3665,
+  "bipolar_power_erg_s": 2e+43,
+  "compact_rk_bins_sha256": "0f53779dbf0168b79aea4478d9ed0a0aa6e58f912d9ffa6eb172bebea6a3364c",
+  "cases": {
+    "C-LO": {
+      "differing_control_values": 0,
+      "control_step_minus_production": 0,
+      "control_time_minus_production": 0.0,
+      "arms": {
+        "ON": {
+          "windows": [
+            {
+              "start_index": 10,
+              "end_index": 20,
+              "label_erg": 6.311876029210125e+56,
+              "entropy_gain": 0.2872737162312047,
+              "entropy_loss": -0.256693296047687,
+              "entropy_net": 0.030580420183517698,
+              "mapper_net": 0.03058042018351768,
+              "exterior": 0.030586061121542496,
+              "exterior_minus_mapper": 5.640938024815273e-06,
+              "grid_change": {
+                "thermal": 5.73050747811099,
+                "kinetic": 0.15504109950692313,
+                "gravitational": 5.058063745230064
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -9.79533053428564,
+              "injector_total": 1.1176957274407953,
+              "injector_gas": 1.1176960202203114,
+              "tagged_mass": 1.1271144510216868,
+              "signed_total_mass": -2.8768179485165937,
+              "visits": {
+                "entropy_visits": 2123640077812,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 0
+              }
+            },
+            {
+              "start_index": 20,
+              "end_index": 30,
+              "label_erg": 6.316376016797729e+56,
+              "entropy_gain": 0.3202682975577462,
+              "entropy_loss": -0.2731803365534229,
+              "entropy_net": 0.04708796100432333,
+              "mapper_net": 0.04708796100432332,
+              "exterior": 0.047093784326459,
+              "exterior_minus_mapper": 5.823322135681264e-06,
+              "grid_change": {
+                "thermal": 6.179896047213655,
+                "kinetic": 0.1447731322529447,
+                "gravitational": 5.500088690435468
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -10.660202865382631,
+              "injector_total": 1.1174612201929768,
+              "injector_gas": 1.1174614991795018,
+              "tagged_mass": 1.1268907934414583,
+              "signed_total_mass": -2.742921722676013,
+              "visits": {
+                "entropy_visits": 2124009568064,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 0
+              }
+            },
+            {
+              "start_index": 10,
+              "end_index": 30,
+              "label_erg": 1.2628252046007855e+57,
+              "entropy_gain": 0.3037768855863912,
+              "entropy_loss": -0.26493975382022755,
+              "entropy_net": 0.03883713176616366,
+              "mapper_net": 0.038837131766163685,
+              "exterior": 0.03884286392873956,
+              "exterior_minus_mapper": 5.7321625758777195e-06,
+              "grid_change": {
+                "thermal": 5.955281830868738,
+                "kinetic": 0.14990528642146947,
+                "gravitational": 5.279154974051742
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -10.227920795378816,
+              "injector_total": 1.1175784320343929,
+              "injector_gas": 1.117578717914956,
+              "tagged_mass": 1.1270025823821803,
+              "signed_total_mass": -2.8098459791135486,
+              "visits": {
+                "entropy_visits": 4247649645876,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 0
+              }
+            }
+          ],
+          "native_ledger_sha256": "d5cf18463050761458613cce57ae427e7a55081e9d98abbf269ada218b971bb3"
+        },
+        "OFF": {
+          "windows": [
+            {
+              "start_index": 10,
+              "end_index": 20,
+              "label_erg": 6.3166487030195215e+56,
+              "entropy_gain": 0.0,
+              "entropy_loss": 0.0,
+              "entropy_net": 0.0,
+              "mapper_net": 0.00024329085659980358,
+              "exterior": 0.0001239807406140936,
+              "exterior_minus_mapper": -0.00011931011598570999,
+              "grid_change": {
+                "thermal": 5.675162818294547,
+                "kinetic": 0.17726675538818276,
+                "gravitational": 5.058226195260404
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -9.795651709005446,
+              "injector_total": 1.1148800791970737,
+              "injector_gas": 1.1148803691945264,
+              "tagged_mass": 1.1240677779306611,
+              "signed_total_mass": -2.849868192639849,
+              "visits": {
+                "entropy_visits": 0,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 4975994
+              }
+            },
+            {
+              "start_index": 20,
+              "end_index": 30,
+              "label_erg": 6.311603342988334e+56,
+              "entropy_gain": 0.0,
+              "entropy_loss": 0.0,
+              "entropy_net": 0.0,
+              "mapper_net": 0.00024398917261067332,
+              "exterior": 0.0002518346921884934,
+              "exterior_minus_mapper": 7.84551957782009e-06,
+              "grid_change": {
+                "thermal": 6.1862970143562555,
+                "kinetic": 0.08931622293365905,
+                "gravitational": 5.50022184662691
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -10.660499510787698,
+              "injector_total": 1.1150837384369376,
+              "injector_gas": 1.115084016066626,
+              "tagged_mass": 1.123345133974503,
+              "signed_total_mass": -2.7299313508207685,
+              "visits": {
+                "entropy_visits": 0,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 4987674
+              }
+            },
+            {
+              "start_index": 10,
+              "end_index": 30,
+              "label_erg": 1.2628252046007855e+57,
+              "entropy_gain": 0.0,
+              "entropy_loss": 0.0,
+              "entropy_net": 0.0,
+              "mapper_net": 0.00024363987510629285,
+              "exterior": 0.00018788217568360688,
+              "exterior_minus_mapper": -5.5757699422685975e-05,
+              "grid_change": {
+                "thermal": 5.930627809714209,
+                "kinetic": 0.1333090585798536,
+                "gravitational": 5.279135725778766
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -10.227902843764083,
+              "injector_total": 1.114981868133062,
+              "injector_gas": 1.1149821519491032,
+              "tagged_mass": 1.1237066003113945,
+              "signed_total_mass": -2.789923730887355,
+              "visits": {
+                "entropy_visits": 0,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 9963668
+              }
+            }
+          ],
+          "native_ledger_sha256": "3f506cc88c2dfc614c2687e82e73708e6e2c88045a2077f8a56cd7a13784b7cc"
+        }
+      },
+      "annual_forecasts": [
+        {
+          "prediction": 0.03,
+          "actual": 0.030580420183517698,
+          "difference": 0.0005804201835176992,
+          "passed": true
+        },
+        {
+          "prediction": 0.047,
+          "actual": 0.04708796100432333,
+          "difference": 8.796100432333087e-05,
+          "passed": true
+        }
+      ],
+      "below_refutation_plus_0p01": [
+        false,
+        false,
+        false
+      ],
+      "off_exterior_by_end_index_11_to_30": [
+        -0.0010850140941761899,
+        0.00028058561971622265,
+        0.00026690317297309307,
+        0.00029724586708493317,
+        0.00021829820195373717,
+        0.00016131376527564467,
+        0.0002888666631689907,
+        0.00026914357813706546,
+        0.0002595166640237123,
+        0.00028517545244968745,
+        0.00024200503623753034,
+        0.00020237442695134056,
+        0.00025152013212470514,
+        0.000275648573206555,
+        0.0002571332461439174,
+        0.0002570318870062857,
+        0.0002653108817765974,
+        0.0002665400811151684,
+        0.00023291719546637488,
+        0.0002676814603923272
+      ],
+      "off_post_first": {
+        "passed": 19,
+        "tested": 19,
+        "violating_end_indices": [],
+        "maximum_absolute": 0.00029724586708493317
+      }
+    },
+    "G-LO": {
+      "differing_control_values": 0,
+      "control_step_minus_production": 0,
+      "control_time_minus_production": 0.0,
+      "arms": {
+        "ON": {
+          "windows": [
+            {
+              "start_index": 10,
+              "end_index": 20,
+              "label_erg": 6.309020219309292e+56,
+              "entropy_gain": 0.3492473595522453,
+              "entropy_loss": -0.36671854449114066,
+              "entropy_net": -0.01747118493889538,
+              "mapper_net": -0.017471184938895382,
+              "exterior": -0.01747153393276213,
+              "exterior_minus_mapper": -3.489938667465553e-07,
+              "grid_change": {
+                "thermal": 0.9303980087537506,
+                "kinetic": 0.24936525415149183,
+                "gravitational": 0.13787388505513873
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -0.18128110552605836,
+              "injector_total": 1.1538275763670849,
+              "injector_gas": 1.1538274725380773,
+              "tagged_mass": 1.1492565419868457,
+              "signed_total_mass": 1.0013799261739573,
+              "visits": {
+                "entropy_visits": 1749300472258,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 0
+              }
+            },
+            {
+              "start_index": 20,
+              "end_index": 30,
+              "label_erg": 6.315650829509771e+56,
+              "entropy_gain": 0.36991120468495003,
+              "entropy_loss": -0.39166442087470593,
+              "entropy_net": -0.021753216189755897,
+              "mapper_net": -0.021753216189755883,
+              "exterior": -0.02175318072944457,
+              "exterior_minus_mapper": 3.546031131229643e-08,
+              "grid_change": {
+                "thermal": 0.976316559063691,
+                "kinetic": 0.20199365474490338,
+                "gravitational": 0.1508399492023596
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -0.1967611361091441,
+              "injector_total": 1.1541422076312544,
+              "injector_gas": 1.154142104860773,
+              "tagged_mass": 1.1495988701853173,
+              "signed_total_mass": 0.9910305965965865,
+              "visits": {
+                "entropy_visits": 1756938242724,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 0
+              }
+            },
+            {
+              "start_index": 10,
+              "end_index": 30,
+              "label_erg": 1.2624671048819063e+57,
+              "entropy_gain": 0.3595847085531474,
+              "entropy_loss": -0.3791980336014291,
+              "entropy_net": -0.019613325048281727,
+              "mapper_net": -0.01961332504828173,
+              "exterior": -0.019613481714099656,
+              "exterior_minus_mapper": -1.5666581792625478e-07,
+              "grid_change": {
+                "thermal": 0.953369342361844,
+                "kinetic": 0.2256670144167297,
+                "gravitational": 0.14436032208547486
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -0.1890251859551518,
+              "injector_total": 1.1539849746229964,
+              "injector_gas": 1.1539848713235301,
+              "tagged_mass": 1.149427795983269,
+              "signed_total_mass": 0.9962025435968243,
+              "visits": {
+                "entropy_visits": 3506238714982,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 0
+              }
+            }
+          ],
+          "native_ledger_sha256": "5a6555a25583a2029b0cb3402e59ab66f97caac8cd4033dda8beae699ab7dc65"
+        },
+        "OFF": {
+          "windows": [
+            {
+              "start_index": 10,
+              "end_index": 20,
+              "label_erg": 6.309748142471495e+56,
+              "entropy_gain": 0.0,
+              "entropy_loss": 0.0,
+              "entropy_net": 0.0,
+              "mapper_net": 0.00025768956398661736,
+              "exterior": 0.00013511541383781633,
+              "exterior_minus_mapper": -0.00012257415014880102,
+              "grid_change": {
+                "thermal": 0.91555890243767,
+                "kinetic": 0.28009402063739336,
+                "gravitational": 0.13787387593338365
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -0.18128184440589198,
+              "injector_total": 1.1521098391887172,
+              "injector_gas": 1.1521097344150928,
+              "tagged_mass": 1.1478275464078396,
+              "signed_total_mass": 1.0104555050504371,
+              "visits": {
+                "entropy_visits": 0,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 7359757
+              }
+            },
+            {
+              "start_index": 20,
+              "end_index": 30,
+              "label_erg": 6.3149229063475665e+56,
+              "entropy_gain": 0.0,
+              "entropy_loss": 0.0,
+              "entropy_net": 0.0,
+              "mapper_net": 0.0002582178536089263,
+              "exterior": 0.0002580718843198382,
+              "exterior_minus_mapper": -1.4596928908812683e-07,
+              "grid_change": {
+                "thermal": 1.0442010829724493,
+                "kinetic": 0.15478304945641772,
+                "gravitational": 0.15083340725598587
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -0.19676105277238742,
+              "injector_total": 1.1527984150281456,
+              "injector_gas": 1.152798309709609,
+              "tagged_mass": 1.148935370839795,
+              "signed_total_mass": 1.0160530277770947,
+              "visits": {
+                "entropy_visits": 0,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 7364079
+              }
+            },
+            {
+              "start_index": 10,
+              "end_index": 30,
+              "label_erg": 1.2624671048819063e+57,
+              "entropy_gain": 0.0,
+              "entropy_loss": 0.0,
+              "entropy_net": 0.0,
+              "mapper_net": 0.00025795381706887225,
+              "exterior": 0.00019661884857508083,
+              "exterior_minus_mapper": -6.133496849379142e-05,
+              "grid_change": {
+                "thermal": 0.9799063574676026,
+                "kinetic": 0.21741285300400576,
+                "gravitational": 0.14435629760505841
+              },
+              "flagged_change": 0.0,
+              "outer_outward": -0.1890246209984633,
+              "injector_total": 1.1524542682296284,
+              "injector_gas": 1.1524541631834362,
+              "tagged_mass": 1.148381685668539,
+              "signed_total_mass": 1.0132554136063656,
+              "visits": {
+                "entropy_visits": 0,
+                "density_floors": 0,
+                "gas_energy_floors": 0,
+                "p_entropy_floors": 0,
+                "p_energy_floors": 14723836
+              }
+            }
+          ],
+          "native_ledger_sha256": "8116bb9932bc2f4033bb021fe908b095d3479c913e4bae3b521ede58467d231d"
+        }
+      },
+      "annual_forecasts": [
+        {
+          "prediction": -0.017,
+          "actual": -0.01747118493889538,
+          "difference": -0.0004711849388953776,
+          "passed": true
+        },
+        {
+          "prediction": -0.022,
+          "actual": -0.021753216189755897,
+          "difference": 0.0002467838102441014,
+          "passed": true
+        }
+      ],
+      "off_exterior_by_end_index_11_to_30": [
+        -0.0009835339128508314,
+        0.00026179472438808693,
+        0.00025911688405338973,
+        0.0002555773493297664,
+        0.00025863555713451225,
+        0.00026335321503212494,
+        0.00025743443723291737,
+        0.0002580482029214126,
+        0.00025770019409288025,
+        0.00025854068550273945,
+        0.0002565225256171977,
+        0.0002589179723984647,
+        0.00025779140566883907,
+        0.00026080339452316803,
+        0.000258570601543745,
+        0.00025758242507620266,
+        0.00025952995761892306,
+        0.00025528900099715257,
+        0.0002571888195030958,
+        0.0002585081286680946
+      ],
+      "off_post_first": {
+        "passed": 19,
+        "tested": 19,
+        "violating_end_indices": [],
+        "maximum_absolute": 0.00026335321503212494
+      }
+    }
+  },
+  "registered_tests": {
+    "annual_forecasts_within_plus_or_minus_0p005": 4,
+    "annual_forecasts_tested": 4,
+    "OFF_post_first_intervals_within_plus_or_minus_0p002": 38,
+    "OFF_post_first_intervals_tested": 38,
+    "C_LO_annual_or_full_counter_below_plus_0p01": false,
+    "opposite_ON_entropy_signs_in_each_registered_year": true
+  },
+  "raw_stage_csv_crosscheck": {
+    "C-LO/ON": {
+      "raw_csv_sha256": "d5cf18463050761458613cce57ae427e7a55081e9d98abbf269ada218b971bb3",
+      "stage_csv_data_rows": 108960,
+      "raw_and_compact_exterior_visit_counts_agree": true,
+      "largest_absolute_raw_minus_compact_operation_over_interval_label": 1.0547118733938987e-15,
+      "raw_entropy_net_over_label": [
+        0.030580420183517476,
+        0.04708796100432333,
+        0.0388371317661636
+      ]
+    },
+    "C-LO/OFF": {
+      "raw_csv_sha256": "3f506cc88c2dfc614c2687e82e73708e6e2c88045a2077f8a56cd7a13784b7cc",
+      "stage_csv_data_rows": 111398,
+      "raw_and_compact_exterior_visit_counts_agree": true,
+      "largest_absolute_raw_minus_compact_operation_over_interval_label": 3.7947076036992655e-19,
+      "raw_entropy_net_over_label": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "G-LO/ON": {
+      "raw_csv_sha256": "5a6555a25583a2029b0cb3402e59ab66f97caac8cd4033dda8beae699ab7dc65",
+      "stage_csv_data_rows": 82723,
+      "raw_and_compact_exterior_visit_counts_agree": true,
+      "largest_absolute_raw_minus_compact_operation_over_interval_label": 1.0547118733938987e-15,
+      "raw_entropy_net_over_label": [
+        -0.01747118493889549,
+        -0.02175321618975573,
+        -0.019613325048281727
+      ]
+    },
+    "G-LO/OFF": {
+      "raw_csv_sha256": "8116bb9932bc2f4033bb021fe908b095d3479c913e4bae3b521ede58467d231d",
+      "stage_csv_data_rows": 102090,
+      "raw_and_compact_exterior_visit_counts_agree": true,
+      "largest_absolute_raw_minus_compact_operation_over_interval_label": 4.336808689942018e-19,
+      "raw_entropy_net_over_label": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "scored_table_crosscheck": {
+    "primary_intervals": 80,
+    "ON_windows": 6,
+    "OFF_intervals": 40,
+    "maximum_absolute_fractional_difference_by_quantity": {
+      "exterior": 4.3021142204224816e-15,
+      "net_injector": 6.661338147750939e-16,
+      "boundary_outward": 3.552713678800501e-15,
+      "flagged_storage": 0.0,
+      "tagged_mass": 4.440892098500626e-16,
+      "native_stage": 1.457167719820518e-16,
+      "unexplained": 4.302005800205233e-15,
+      "grid_storage": 1.7763568394002505e-15,
+      "annual_or_full_native_entropy": 4.85722573273506e-17,
+      "annual_or_full_exterior": 1.033895191682177e-15,
+      "annual_or_full_native_mapper": 2.7755575615628914e-17,
+      "short_OFF_scored_exterior": 4.3021142204224816e-15
+    }
+  }
+}

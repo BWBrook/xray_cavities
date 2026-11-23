@@ -138,7 +138,8 @@ def measure(arm, index, initial_file, with_sphere):
     restart = json.loads((arm.parent / "restart.json").read_text())
     series = json.loads((arm / "series.json").read_text())
     gate = json.loads((arm.parent / "gate.json").read_text())
-    if (case not in ("G-HI", "C-HI") or arm.name not in ("ON", "OFF") or restart["case"] != case
+    allowed_cases = ("G-HI", "C-HI") if with_sphere else ("G-HI", "C-HI", "G-LO", "C-LO")
+    if (case not in allowed_cases or arm.name not in ("ON", "OFF") or restart["case"] != case
             or (series["case"], series["arm"]) != (case, arm.name) or gate["case"] != case or gate["passed"] is not True):
         raise ValueError("restart identity or 11-Myr control differs")
     outputs = arm / "outputs"
@@ -177,10 +178,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("arm", type=Path)
     parser.add_argument("index", type=int)
-    parser.add_argument("initial_file", type=Path)
+    parser.add_argument("initial_file", type=Path, nargs="?", help="original 0-Myr native file, required for R100")
     parser.add_argument("output", type=Path)
-    parser.add_argument("--lobe-only", action="store_true", help="measure the adjacent output used for time matching")
+    parser.add_argument("--lobe-only", action="store_true", help="measure native tracer-lobe enthalpy and volume only")
     args = parser.parse_args()
+    if not args.lobe_only and args.initial_file is None:
+        parser.error("the R100 measurement requires the original 0-Myr native file")
     record = measure(args.arm, args.index, args.initial_file, not args.lobe_only)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(mode="w", dir=args.output.parent, delete=False) as tmp:

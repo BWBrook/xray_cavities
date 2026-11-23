@@ -1,0 +1,30 @@
+{
+  "bipolar_label_erg_s": 2e+43,
+  "clo_combined_net_below_threshold": false,
+  "clo_refutation_below": 0.01,
+  "counter_branches": [
+    "entropy",
+    "entropy_with_p_floor"
+  ],
+  "off_excludes_first_interval": true,
+  "off_passes_out_of_19": {
+    "C-LO": 19,
+    "G-LO": 19
+  },
+  "on_forecasts": {
+    "C-LO": [
+      "pass",
+      "pass"
+    ],
+    "G-LO": [
+      "pass",
+      "pass"
+    ]
+  },
+  "registration": 3665,
+  "source_sha256": {
+    "entropy_restart_budget.py": "271846691e24a94b607ce732b8e515726c7f8f6ff4a9a66bb1984012a4a90660",
+    "reduce_entropy_restart_stages.py": "7abc427d21478299ce3c2f7fb9784784be3c2b00a5a15282f6294715e361b2f8",
+    "score_low_power_entropy.py": "54be25d9c19e01bbf20b4a59ae9d22746f8a56bc616e8e9eb1b7707ee56d2f47"
+  }
+}

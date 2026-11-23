@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -N ent_lo_lobes
+#PBS -q normal
+#PBS -J 0-5
+#PBS -l select=1:ncpus=1:mem=3gb
+#PBS -l walltime=01:00:00
+#PBS -m ae
+#PBS -j oe
+#PBS -r y
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?}"
+sha256sum --check --quiet inputs.sha256
+cases=(C-LO C-LO C-LO G-LO G-LO G-LO)
+arms=(ON ON OFF ON ON OFF)
+indices=(10 30 30 10 30 30)
+i=${PBS_ARRAY_INDEX:?}
+case_id=${cases[i]}
+arm=${arms[i]}
+index=${indices[i]}
+out="results/$case_id/$arm/lobe_$index.json"
+mkdir -p "results/$case_id/$arm"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+/share/apps/software/Anaconda3/2024.02-1/bin/python readers/measure_entropy_lobe.py --lobe-only \
+    "${ENTROPY_WORK_ROOT:?}/$case_id/$arm" "$index" "$out"

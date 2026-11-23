@@ -1,0 +1,70 @@
+{
+  "native_snapshots": 6,
+  "pressure_hash_matches": 6,
+  "signed_gas_interval_checks": 80,
+  "thresholds": [
+    0.001,
+    0.005,
+    0.01
+  ],
+  "controls": {
+    "C-LO": {
+      "turn15_primary_h_relative_difference": 0.0,
+      "turn15_primary_volume_relative_difference": 2.220446049250313e-16,
+      "q029_seed_comparisons": [
+        {
+          "tracer_cut": 0.001,
+          "h_relative_difference": -1.7493669979051774e-05,
+          "volume_relative_difference": -1.7500795461256047e-05
+        },
+        {
+          "tracer_cut": 0.005,
+          "h_relative_difference": -1.7393890761385755e-05,
+          "volume_relative_difference": -1.7418441139227525e-05
+        },
+        {
+          "tracer_cut": 0.01,
+          "h_relative_difference": -1.72891377071549e-05,
+          "volume_relative_difference": -1.7332183931406675e-05
+        }
+      ]
+    },
+    "G-LO": {
+      "turn15_primary_h_relative_difference": 0.0,
+      "turn15_primary_volume_relative_difference": 2.220446049250313e-16,
+      "q029_seed_comparisons": [
+        {
+          "tracer_cut": 0.001,
+          "h_relative_difference": -7.013640880404459e-05,
+          "volume_relative_difference": -7.058595807851731e-05
+        },
+        {
+          "tracer_cut": 0.005,
+          "h_relative_difference": -7.051439958083439e-05,
+          "volume_relative_difference": -7.080018733907067e-05
+        },
+        {
+          "tracer_cut": 0.01,
+          "h_relative_difference": -7.063007853336245e-05,
+          "volume_relative_difference": -7.078463909915289e-05
+        }
+      ]
+    }
+  },
+  "source_sha256": {
+    "low_power_entropy_result_2026-11-23/compact_inputs.zip": "02df47c1c377a943883fb6a0211c4de5c38409c4aff334e638396ef7f763f9f7",
+    "low_power_entropy_result_2026-11-23/budget/primary_intervals.csv": "a7c6ccd04487446e267fa71e4db4ed63a04e59018c90c2fd77742e21049b498a",
+    "low_power_entropy_result_2026-11-23/lobe_readout_pbs.json": "212544b2f86bf9ea5fafdb8aafc366d8d11ba4e96a689d97d20e3d22586547dd",
+    "native_delivery_restatement_2026-11-21/primary_selected_ages.csv": "dfaebebf21b1fcbb147a1c7d7a5f85e91c6440f4da2b5afda83ab3aaa5bda473",
+    "native_delivery_review_2026-11-21/recomputed_rows.csv": "0272ac439f632e2f4c586e32d37876f6d113f9602b93b45d231e8b9b82c350a2",
+    "turn15_review_2026-11-11/budgets/C-LO/measurements.csv": "609a93b736faf194f9c440e438ee0de47da3fcc2310b6d528eabd9c362a6a6c6",
+    "turn15_review_2026-11-11/budgets/G-LO/measurements.csv": "f3208616c90415857d7aad5476a3a46dcdbe314803ec2ad5b7e9f5671d2f69cf",
+    "q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/native_energy_selected_age.csv": "a035de60355570ca2ee602706d31403e2e6fc17b8d566126718cf7f7f9bb7451",
+    "q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/native_energy_selected_age.csv": "6254800d84ca5748f91c7d4aebb18282fb0de4b24ad15e7a23d6af19e617a16a"
+  },
+  "output_sha256": {
+    "lobe_native_snapshots.json": "f1e26b384eaab6a139f008cf63c9fec7bc65a56040ef8f2fe3ee94c3fb3dddae",
+    "lobe_measurements.csv": "995fd7c0c98541a09f9d6d2558f1d3d7ab76b6f76c6af927a93d57c6f2e33b1f",
+    "lobe_paired_effects.csv": "8d9613ffcad4fdf989841552bcb778bdfb3c3478fad7199b9cd9b69242dbb04a"
+  }
+}
