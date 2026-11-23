@@ -109,8 +109,10 @@ residuals met the registered ±0.2% bound. Over the two Myr, lobe enthalpy
 gain per unit of net gas delivered changed from 67.6% to 72.6% in the group
 and from 89.4% to 88.8% in the cluster. In the low-power cluster, requiring
 0.5% or 1% jet material reversed the sign of this small enthalpy contrast.
-The sign of the numerical energy change alone therefore gives no reliable
-correction to the lobe enthalpy. <!-- claims: BND-15 NAT-13 -->
+At the primary lobe edge, switching the update off narrowed the low-power
+advantage from 39 to 25 percentage points in the cluster and from 26 to 21
+points in the group. Low power retained the higher fraction at all three
+tracer cuts in both atmospheres. <!-- claims: BND-15 NAT-12 NAT-13 -->
 
 In the same pairs, the entropy update reduced the energy outside
 the injector by 9.21% of labelled input in the high-power group jet and by
@@ -127,6 +129,17 @@ cumulative balance returned above zero at 17 Myr. The direct measurements
 of the entropy update cover 10–12 Myr. At the later ages we can reconstruct
 the balance from storage and transport, while its partition among solver
 operations and its effect on lobe enthalpy remain uncertain. <!-- claims: BND-14 BND-15 BND-16 -->
+
+The cluster restarts sampled a relatively weak phase of that residual.
+In C-HI it was about −4.6% of labelled energy over 10–12 Myr and −12.1%
+in the interval ending at 30 Myr. C-LO went from +3.0% and +4.7% in the
+two restart intervals to +15.4% in the interval ending at 30 Myr.
+Both high-power lobes gained more enthalpy with the update off, and their
+annual exterior residuals stayed negative after 12 Myr. We therefore expect
+the production high-power fractions to be biased low if the later energy
+loss continues to draw on the lobe. Redistribution between the lobe,
+its surroundings and bulk motion leaves the size of such a bias open.
+<!-- claims: NAT-12 NAT-13 BND-16 -->
 
 ### Can a brightness deficit identify the lobe?
 
@@ -181,8 +194,9 @@ None.
 
 OpenAI Codex (GPT-6) ran the paired tests, reconstructed the energy
 budgets, tested the radio emissivity weighting and drafted the analysis.
-Anthropic Claude (Fable 5.2) registered the low-power energy forecasts and
-independently checked the high-power budgets and lobe contrasts. Google
+Anthropic Claude (Fable 5.2) registered the low-power energy forecasts,
+independently checked the four restart budgets and lobe contrasts, and
+refitted the public radio spectra. Google
 DeepMind Gemini (4 Carbon) independently checked the low-power lobe
 arithmetic, compared the production histories and proposed the radio test.
 

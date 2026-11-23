@@ -1,7 +1,7 @@
 # Current Status
 
-Last updated 23 November 2026 after Gemini’s second review, the production
-history reconstruction and the G-HI/20 radio reweighting test.
+Last updated after Claude’s 23 November review of the low-power lobe
+contrasts, production balances and radio reweighting test.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -14,14 +14,21 @@ G-LO’s annual balance turns positive at output 15 and its cumulative balance
 at 17. BND-16 is supported for this reconstruction. The solver directly
 counted the entropy update at 10–12 Myr. The later lobe response, acoustic
 energy flux and sign of late switch-only corrections remain questions for
-different measurements. The recommendation is to retain the 12-Myr
-checkpoints and defer continuations. [Second-review assessment and evidence](../science/gemini_second_review_2026-11-23.md)
+different measurements. The 12–20 Myr continuations are deferred. Revisit
+them if the observer comparison shows a spread comparable to the roughly
+0.1-dex high-power contrast, or a conclusion depends on the low- versus
+high-power difference. The four high-power 12-Myr checkpoints are retained.
+The frozen X-ray screen measures outline geometry. Measuring the spread in
+X-ray enthalpy relative to native enthalpy also needs matched gas pressure
+and native volume for eligible detections.
+[Independent review and compute decision](../correspondence/thread-0029.md#message-3719--claudemini-claude-fable-52--evidence)
 
 At 45° in the exposed G-HI/20 radio case, removing tracer weighting lowers
 the fitted break from 56.02 to 20.11 GHz. Both fits preserve the upper
-spectral-age limit. RAD-01 is provisional for this view. Gemini also
-independently checked the arithmetic of NAT-13. Claude’s adjudication of
-that low-power lobe claim is pending. The frozen 54 X-ray views remain
+spectral-age limit. RAD-01 is supported for this view. Claude refitted the
+public spectra and verified the tracer multiplier in the pinned source.
+Gemini and Claude independently checked the low-power lobe ratios from
+archived measurements. NAT-13 is supported for the 10–12 Myr pairs. The frozen 54 X-ray views remain
 unscored. Stas’s first observer task is the independent G-HI/20 compressive
 front comparison. [Radio test](../science/radio_tracer_weight_check_2026-11-23.md) · [Supervisor’s request](logs/2026-11-17-compressive-front-and-background-test-request.md)
 
@@ -49,9 +56,10 @@ than 0.16% in either case. The enthalpy fractions of cumulative net gas
 supply rose by 1.57 and 2.10 percentage points, respectively. Relative to
 delivery only during 10–12 Myr, enthalpy gains rose from 41.7% to 51.1% in
 G-HI and from 50.8% to 63.4% in C-HI. NAT-12 is supported as a measured
-contrast for these pairs. The exploratory low-power comparison gives
+contrast for these pairs. The low-power comparison gives
 67.6% to 72.6% in G-LO and 89.4% to 88.8% in C-LO. The small C-LO
-contrast reverses at the stricter lobe edges. NAT-13 is provisional.
+contrast reverses at the stricter lobe edges. Both cluster pairs sampled
+a relatively weak 9–13 Myr phase of the reconstructed exterior residual.
 [High-power review and replay](../science/entropy_restart_lobes_2026-11-23.md) ·
 [Four-case comparison](../science/low_power_entropy_result_2026-11-23.md)
 

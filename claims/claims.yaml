@@ -354,8 +354,9 @@ claims:
     test: >-
       Gemini 4 Carbon independently recomputed the six paired tracer-cut
       comparisons from the pressure receipts and signed injector rates.
-      A further replay matched all twelve arm ratios within 9e-16. Claude's
-      review of the interpretation and case-specific bounds remains pending.
+      Claude independently integrated delivery, checked both common seeds
+      against production, and reproduced all twelve arm ratios within 9e-16
+      from the archived measurements. The native lobe selection is shared.
     caveats:
       - The 0.1%, 0.5% and 1% tracer cuts give differences of −0.575, +0.397 and +1.285 percentage points in C-LO and +4.969, +5.652 and +6.353 points in G-LO.
       - This follow-up used completed outputs after forecast scoring. With one pair per case and ten shared Myr, the ratios measure changes in the pressure-volume estimate over these two Myr. Deposition of heat and later-age bias are separate questions.
@@ -878,9 +879,10 @@ claims:
       scripts/science/check_radio_tracer_weight.py. The public spectra
       permit refitting both breaks independently.
     test: >-
-      Independent review of the per-particle weight substitution, the ten
-      reproduced production luminosities and the censoring decision for
-      this exposed view.
+      Claude checked the tracer multiplier in the pinned PRAiSE2 source,
+      matched all ten weighted luminosities against production and independently
+      refitted the public spectra. Both fitted breaks exceed 15 GHz. The
+      independent refit uses the original ray integrals and particle groups.
     caveats:
       - Fits above the observing band are model extrapolations. The observable constrains each break to exceed 15 GHz. One view gives no estimate of how many of the other 36 above-band breaks would remain censored under unit weights.
       - Pressure, density, field, cooling histories, active particle set and ray paths are common to the arms. Time since injection and time since the last qualifying shock are distinct particle age measures.

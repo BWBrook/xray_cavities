@@ -156,8 +156,11 @@ and 4.25% in the cluster, with less than 0.16% change in either volume.
 In the two low-power restarts the same update added 3.88% of labelled
 input in C-LO and removed 1.96% in G-LO. All four signed forecasts passed.
 Turning it off raised 12-Myr lobe enthalpy by 1.46% in G-LO. The small
-C-LO response changed sign with the choice of lobe edge. The size of the
-bias at 30–50 Myr remains unknown. [Four-case comparison](docs/science/low_power_entropy_result_2026-11-23.md) · [High-power lobe measurements](docs/science/entropy_restart_lobes_2026-11-23.md) · [Full production budgets](docs/science/production_injector_histories_2026-11-21.md)
+C-LO response changed sign with the choice of lobe edge. With the update
+off, the low-power lobes still gained more enthalpy per unit delivered
+than the high-power lobes in both atmospheres. The high-power production
+fractions may be biased low at later ages. The paired evidence ends at
+12 Myr. [Four-case comparison](docs/science/low_power_entropy_result_2026-11-23.md) · [Independent replay by tracer cut](docs/science/assets/low_power_entropy_review_2026-11-23/four_case_increments_by_cut.csv) · [Full production budgets](docs/science/production_injector_histories_2026-11-21.md)
 <!-- claims: BND-08 BND-10 BND-11 BND-12 BND-13 -->
 <!-- claims: BND-14 NAT-12 BND-15 NAT-13 -->
 

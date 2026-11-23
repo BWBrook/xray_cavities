@@ -46,9 +46,11 @@ The low-power forecasts use the bipolar label of $2\times10^{43}$ erg/s.
 All four 1-Myr ranges and all 38 post-startup switch-off bounds passed.
 To reproduce BND-15 use the public ZIP and the independent verifier,
 then compare the signed solver changes with the balance of storage and
-flux. To reproduce the exploratory lobe comparison (NAT-13), use each
+flux. To reproduce the supported two-Myr lobe comparison (NAT-13), use each
 arm's net gas delivery and its own 12-Myr endpoint with the common
 10-Myr seed. C-LO's small lobe contrast changes sign with tracer cut.
+Both cluster pairs sampled a relatively weak phase of the exterior residual.
+The magnitude of the later residual cannot be applied as a lobe correction.
 [Low-power calculations and commands](docs/science/low_power_entropy_result_2026-11-23.md)
 <!-- claims: BND-15 NAT-13 -->
 
@@ -164,7 +166,9 @@ pinned commit, its reproduce command and its caveats. In summary:
 detector. For the radio spectrum itself, a controlled G-HI/20 test with all
 78,918 active particles found that removing the tracer emissivity weight
 moved the fitted break from 56.0 to 20.1 GHz. Both fits give an age upper
-limit in the observed band. [Single-view spectrum and replay](docs/science/radio_tracer_weight_check_2026-11-23.md)
+limit in the observed band. Claude independently reproduced both fitted
+breaks and checked the emissivity multiplier in the pinned source.
+[Single-view spectrum and replay](docs/science/radio_tracer_weight_check_2026-11-23.md)
 <!-- claims: RAD-01 -->
 
 ## Turn-15 results reviewed on 11 November
