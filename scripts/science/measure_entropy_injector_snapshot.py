@@ -9,7 +9,7 @@ from pathlib import Path
 import h5py
 import numpy as np
 
-from check_entropy_restart_control import catalogue
+from check_entropy_restart_control import catalogue, labelled_power
 from measure_injector_faces import FIELDS, METHODS, measure
 from measure_q031_fluxes import derive_control_box, parse_pluto_parameters, read_grid
 from pluto_h5_level3_ambient_extract import (
@@ -111,7 +111,7 @@ def measure_snapshot(arm, index):
     arm = arm.resolve(strict=True)
     restart = json.loads((arm.parent / "restart.json").read_text())
     case = arm.parent.name
-    if restart["case"] != case or case not in ("G-HI", "C-HI") or arm.name not in ("ON", "OFF"):
+    if restart["case"] != case or arm.name not in ("ON", "OFF"):
         raise ValueError("invalid paired-restart case or switch label")
     ini = arm / "pluto.ini"
     if sha256_file(ini) != restart["paired_runtime_sha256"]:
@@ -123,6 +123,8 @@ def measure_snapshot(arm, index):
     atmosphere = load_environment(arm / restart["atmosphere"])
     metadata, patch, centres, edges = snapshot_patch(arm, index)
     power = 2 * params["JET_PWR"]
+    if power != labelled_power(case):
+        raise ValueError(f"{case} has a different bipolar jet power from the production case")
     return dict(case=case, arm=arm.name, primary_method="linear_snapshot_flags",
                 labelled_power_erg_s=power, labelled_mass_rate_g_s=2*power/(params["JET_SPD"]*V)**2,
                 atmosphere_sha256=atmosphere.source_sha256, **metadata,

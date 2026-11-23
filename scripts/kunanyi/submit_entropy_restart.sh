@@ -11,10 +11,20 @@ mail=$(<"$1")
 sha256sum -c --quiet SHA256SUMS
 test ! -e jobs.tsv
 mapfile -t cases < <("$python" -c 'import json; print(*sorted(json.load(open("contract.json"))["cases"], reverse=True),sep="\n")')
-[[ ${cases[0]} == G-HI ]]
-"$python" - "$2" "$3" <<'PY'
+case "${cases[*]}" in
+    G-HI|"G-HI C-HI") prepare=ent_prepare; simulate=ent_cases ;;
+    "G-LO C-LO") prepare=ent_lo_prepare; simulate=ent_lo ;;
+    *) echo "Unexpected cases in paired restart contract" >&2; exit 2 ;;
+esac
+layout=$("$python" - "$2" "$3" <<'PY'
 import json, pathlib, shutil, subprocess, sys
 cfg = json.load(open("contract.json"))
+layouts = {(case["mpi_nodes"], case["mpi_ranks_per_node"]) for case in cfg["cases"].values()}
+if len(layouts) != 1 or any(
+        c["mpi_ranks"] != c["mpi_nodes"] * c["mpi_ranks_per_node"] or c["mpi_decomposition"] != "automatic"
+        for c in cfg["cases"].values()):
+    raise SystemExit("one sequential PBS allocation must reproduce each historical MPI layout")
+nodes, ranks_per_node = layouts.pop()
 root = pathlib.Path(sys.argv[1]).resolve(strict=True)
 work = pathlib.Path(cfg["work_root"]).resolve()
 if work.exists() or not work.is_relative_to(root) or root == work:
@@ -30,7 +40,9 @@ receipt = dict(quota_limit_bytes=limit, directory_allocated_bytes=used, filesyst
 pathlib.Path("capacity.json").write_text(json.dumps(receipt, indent=2) + "\n")
 if min(limit - used, filesystem_free) < required:
     raise SystemExit("insufficient accounted space for the selected complete native histories")
+print(f"select={nodes}:ncpus={ranks_per_node}:mpiprocs={ranks_per_node}")
 PY
+)
 mkdir -p logs
 (set -o noclobber; : > jobs.tsv)
 submit() {
@@ -63,11 +75,11 @@ else:
 PY
     job_id=$job
 }
-submit prepare all both ent_prepare 'select=1:ncpus=12:mem=30gb,walltime=08:00:00' -h
+submit prepare all both "$prepare" 'select=1:ncpus=12:mem=30gb,walltime=08:00:00' -h
 prep=$job_id
 hours=$((10 * ${#cases[@]}))
-hydro="select=64:ncpus=28:mpiprocs=28,walltime=$hours:00:00"
-submit simulate all ON ent_cases_on "$hydro" -W "depend=afterok:$prep"
+hydro="$layout,walltime=$hours:00:00"
+submit simulate all ON "${simulate}_on" "$hydro" -W "depend=afterok:$prep"
 on=$job_id
 gates=()
 for c in "${cases[@]}"; do
@@ -76,6 +88,6 @@ for c in "${cases[@]}"; do
     gates+=("$job_id")
 done
 joint=$(IFS=:; echo "${gates[*]}")
-submit simulate all OFF ent_cases_off "$hydro" -W "depend=afterok:$joint"
+submit simulate all OFF "${simulate}_off" "$hydro" -W "depend=afterok:$joint"
 "$pbs/qrls" "$prep"
 cat jobs.tsv

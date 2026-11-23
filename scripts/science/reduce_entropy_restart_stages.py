@@ -14,7 +14,7 @@ from pathlib import Path
 
 import numpy as np
 
-from check_entropy_restart_control import LABEL_POWER, OPERATIONS, catalogue
+from check_entropy_restart_control import OPERATIONS, catalogue, labelled_power, paired_cases
 from pluto_h5_level3_ambient_extract import UNIT_VELOCITY_CMS
 from select_common_age_hdf5 import CODE_TIME_PER_MYR
 from snapshot_energy import SECONDS_PER_MYR
@@ -181,7 +181,7 @@ def row_metrics(stages, weights, unit, label, *, include_raw):
 
 def make_rows(case, arm, indices, times, steps, cubes, info):
     for whole_window, first, last in [(False, i, i+1) for i in range(len(cubes))] + [(True, 0, len(cubes))]:
-        label = LABEL_POWER * SECONDS_PER_MYR * (times[last]-times[first]) / CODE_TIME_PER_MYR
+        label = labelled_power(case) * SECONDS_PER_MYR * (times[last]-times[first]) / CODE_TIME_PER_MYR
         prefix = dict(case=case, arm=arm, start_index=indices[first], end_index=indices[last],
                       start_step=steps[first], end_step_exclusive=steps[last],
                       start_age_myr=times[first]/CODE_TIME_PER_MYR, end_age_myr=times[last]/CODE_TIME_PER_MYR,
@@ -205,7 +205,10 @@ def reduce(raw, output):
     output.parent.mkdir(parents=True, exist_ok=True)
     verification = {}
     tables = {}
-    for case, arm in itertools.product(("G-HI", "C-HI"), ("ON", "OFF")):
+    present = sorted(p.parent.name for p in raw.glob("*/restart.json"))
+    if len(present) != 2 or set(present) != set(paired_cases(present[0])):
+        raise ValueError(f"expected a matched group and cluster restart pair, found {present}")
+    for case, arm in itertools.product(paired_cases(present[0]), ("ON", "OFF")):
         indices, times, steps, cubes, info = load_arm(raw, case, arm)
         verification[f"{case}/{arm}"] = info
         for name, row in make_rows(case, arm, indices, times, steps, cubes, info):

@@ -9,6 +9,7 @@ import json
 import math
 from pathlib import Path
 
+from check_entropy_restart_control import labelled_power, paired_cases
 from select_common_age_hdf5 import CODE_TIME_PER_MYR
 from snapshot_energy import SECONDS_PER_MYR
 
@@ -48,7 +49,8 @@ def paired_snapshots(root, case, arm, inventory):
                 or grid["time_code"] != native["time_code"]
                 or grid["input"]["mtime_ns"] != native["mtime_ns"]
                 or grid["input"]["bytes"] != native["size"] or injector["file_size_bytes"] != native["size"]
-                or grid["input"]["atmosphere_sha256"] != injector["atmosphere_sha256"]):
+                or grid["input"]["atmosphere_sha256"] != injector["atmosphere_sha256"]
+                or injector["labelled_power_erg_s"] != labelled_power(case)):
             raise ValueError(f"unmatched native snapshot receipts {identity}")
         samples.append((grid, injector))
     if len({(i["grid_axes_sha256"], i["atmosphere_sha256"], i["labelled_power_erg_s"],
@@ -170,7 +172,10 @@ def run(root, out):
     inventory = {(r["case"], r["arm"], r["index"]): r for r in native["outputs"]}
     if len(inventory) != 84 or len(native["outputs"]) != 84:
         raise ValueError("expected 84 native catalogue entries")
-    for case in ("G-HI", "C-HI"):
+    cases = paired_cases(native["outputs"][0]["case"])
+    if set(inventory) != set(itertools.product(cases, ("ON", "OFF"), range(10, 31))):
+        raise ValueError("native catalogue does not cover both atmospheres and arms at one power")
+    for case in cases:
         gate = read_json(root / "raw" / case / "gate.json")
         if gate["case"] != case or gate["passed"] is not True:
             raise ValueError(f"11-Myr control failed for {case}")
@@ -180,7 +185,7 @@ def run(root, out):
     if len(stages) != 80:
         raise ValueError("expected 80 exterior stage intervals")
     intervals, windows, primary_intervals, primary_windows, annual_windows = [], [], [], [], []
-    for case, arm in itertools.product(("G-HI", "C-HI"), ("ON", "OFF")):
+    for case, arm in itertools.product(cases, ("ON", "OFF")):
         samples = paired_snapshots(root, case, arm, inventory)
         native_intervals = [stages[case, arm, i] for i in range(11, 31)]
         annual_windows.append(annual_sampling(case, arm, samples, native_intervals))

@@ -13,7 +13,7 @@ from pathlib import Path
 import h5py
 import numpy as np
 
-from measure_q031_fluxes import read_grid
+from measure_q031_fluxes import parse_pluto_parameters, read_grid
 from pluto_h5_level3_ambient_extract import (
     GAMMA_GAS, REQUIRED_DATASETS, UNIT_ENERGY_ERG, UNIT_LENGTH_CM, UNIT_VELOCITY_CMS,
     require_datasets,
@@ -30,7 +30,42 @@ OPERATIONS = ("E_floor", "entropy", "entropy_with_p_floor", "p_energy_floor")
 KNOWN_11 = {
     "G-HI": ("5e427ae7ad1efdc7141ee5b03063157f7e6eb144f58fd8e36ce8e0317e564c01", 10990),
     "C-HI": ("198578a32ff2b7c48a45fff7bea768584dd286bdf5c88545654e0e236bcc3c05", 11159),
+    "G-LO": ("fa7d48233007223f29b274fbba07847579cb563654d42e397e06a25337ecaf8c", 11526),
+    "C-LO": ("fc03993609b51ac4cb208ade551d2113fd1ddce24b32af3d55c151b0392097b6", 12729),
 }
+TIME_11 = {"G-HI": 3372.5675539758126, "C-HI": 3372.3525100513866,
+           "G-LO": 3372.414663985967, "C-LO": 3372.379435794779}
+MPI_NODES, RANKS_PER_NODE = 64, 28
+FIELD_SHAPE = (1014, 960, 960)
+
+
+def paired_cases(case):
+    if case not in KNOWN_11:
+        raise ValueError(f"unknown production case {case!r}")
+    power_class = case.split("-")[1]
+    return f"G-{power_class}", f"C-{power_class}"
+
+
+def labelled_power(case):
+    return 2e43 if paired_cases(case)[0] == "G-LO" else LABEL_POWER
+
+
+def runtime_power(case, ini):
+    power = 2 * parse_pluto_parameters(ini)["JET_PWR"]
+    if power != labelled_power(case):
+        raise ValueError(f"{case}: runtime bipolar jet power differs from the production label")
+    return power
+
+
+def checked_particle_seed(arm):
+    seed = json.loads((arm.parent / "seed-validation.json").read_text())
+    path = arm / "outputs" / "particles.1000.dbl"
+    if sha256_file(path) != seed["input_sha256"]["particle_restart"]:
+        raise ValueError("particle restart differs from the validated seed")
+    particle = parse_particle_header(path)
+    if particle.nparticles != seed["particle_restart"]["nparticles"]:
+        raise ValueError("particle count differs from the validated seed")
+    return particle
 
 
 def catalogue(directory):
@@ -55,7 +90,7 @@ def check_series(arm):
             raise ValueError(f"{file.name}: expected independent, full-sized native output")
         with h5py.File(file) as h5:
             group = f"Timestep_{index}"
-            if require_datasets(h5, group) != (1014, 960, 960):
+            if require_datasets(h5, group) != FIELD_SHAPE:
                 raise ValueError(f"{file.name}: production grid shape changed")
             t = float(h5[group].attrs["Time"])
             if not math.isclose(t, rows[index][0], abs_tol=.001, rel_tol=0):
@@ -64,9 +99,12 @@ def check_series(arm):
     if (not all(b > a for a, b in zip(ages, ages[1:])) or abs(ages[-1] - 12) > 1e-8
             or any(min(abs(age - n/10) for age in ages) > .0015 for n in range(101, 121))):
         raise ValueError("native 0.1-Myr sampling or the 12-Myr endpoint is incomplete")
-    particle = parse_particle_header(outputs / "particles.1000.dbl")
+    particle = checked_particle_seed(arm)
     counts = []
-    for rank in range(1792):
+    ranks = state.get("mpi_ranks", MPI_NODES * RANKS_PER_NODE)
+    if ranks != MPI_NODES * RANKS_PER_NODE:
+        raise ValueError("staged rank count differs from the verified production layout")
+    for rank in range(ranks):
         log = (outputs / "logs" / f"pluto.{rank}.log").read_text(errors="replace")
         matches = re.findall(r"Restarted with (\d+) local particles", log)
         if len(matches) != 1 or "Continuing without restarting particles" in log:
@@ -78,7 +116,7 @@ def check_series(arm):
     start, end = None, None
     counts_by_stage = {}
     bins = set()
-    expected_counts = {1: 1014*960*960, 2: 1014*960*960}
+    expected_counts = dict.fromkeys((1, 2), math.prod(FIELD_SHAPE))
     step_time = None
     previous_end = None
     setting = "selective" if arm.name == "ON" else "off"
@@ -213,7 +251,7 @@ def check(case, production, arm):
     if file.samefile(ref_path):
         raise ValueError("a linked production file cannot serve as a new control")
     log = (outputs / "logs" / "pluto.0.log").read_text(errors="replace")
-    particle = parse_particle_header(outputs / "particles.1000.dbl")
+    particle = checked_particle_seed(arm)
     if ("Restarting from Particle File" not in log or "particles.1000.dbl" not in log
             or f"building linked list of {particle.nparticles} particles" not in log
             or "Continuing without restarting particles" in log):
@@ -222,15 +260,20 @@ def check(case, production, arm):
         t0 = state["restart_time_code"]
         t1 = float(ref["Timestep_11"].attrs["Time"])
         t2 = float(new[f"Timestep_{idx}"].attrs["Time"])
-        if (not all(map(math.isfinite, (t0, t1, t2))) or not t1 > t0
+        if (not all(map(math.isfinite, (t0, t1, t2))) or t1 != TIME_11[case] or not t1 > t0
                 or abs(t1 - t2) > ref_index[1] or abs(rows[idx][2] - original_step) > 1):
             raise ValueError("11-Myr control is displaced by more than one native hydro step")
         profile = load_environment(arm / state["atmosphere"])
-        interval = LABEL_POWER * (t1 - t0) / CODE_TIME_PER_MYR * SECONDS_PER_MYR
+        power = runtime_power(case, arm / "pluto.ini")
+        if state.get("label_power_erg_s", power) != power:
+            raise ValueError("staged bipolar jet power differs from the runtime")
+        interval = power * (t1 - t0) / CODE_TIME_PER_MYR * SECONDS_PER_MYR
         result = compare_fields(ref, new, originals / "grid.out", outputs / "grid.out", profile, interval)
     result.update(case=case, reference_sha256=original_hash, control_output=idx,
                   reference_step=original_step, control_step=rows[idx][2],
                   reference_time=t1, control_time=t2, particle_count_at_restart=particle.nparticles)
+    if "label_power_erg_s" in state:
+        result.update(labelled_power_erg_s=power, labelled_control_interval_erg=interval)
     result["passed"] = bool(max(result["relative_L1_in_affected_gas"].values()) <= MAX_FIELD_L1
                             and max(result["component_L1_per_labelled_interval"].values()) <= MAX_COMPONENT_L1_PER_INTERVAL)
     return result

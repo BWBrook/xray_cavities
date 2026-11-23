@@ -6,7 +6,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "scripts/kunanyi"), str(ROOT / "scripts/science")]
-from stage_entropy_restart import compare_checkpoint_slab
+from stage_entropy_restart import allocated_ranks, compare_checkpoint_slab
 
 
 def test_production_float_conversion():
@@ -35,3 +35,15 @@ def test_production_float_conversion():
 def test_checkpoint_still_rejects_other_discrepancies(double, stored):
     with pytest.raises(ValueError, match="tr1:"):
         compare_checkpoint_slab(np.array([double]), np.array([stored], dtype=np.float32), "tr1", 0)
+
+
+def test_allocation_requires_the_archived_rank_distribution(tmp_path):
+    hosts = [f"node-{i}" for i in range(64) for _ in range(28)]
+    nodefile = tmp_path / "nodes"
+    config = dict(mpi_nodes=64, mpi_ranks_per_node=28, mpi_ranks=1792)
+    nodefile.write_text("\n".join(hosts))
+    assert allocated_ranks(config, nodefile) == 1792
+    hosts[0] = hosts[-1]
+    nodefile.write_text("\n".join(hosts))
+    with pytest.raises(ValueError, match="MPI layout"):
+        allocated_ranks(config, nodefile)

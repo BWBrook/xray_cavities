@@ -70,8 +70,8 @@ case "${ROLE:?}" in
         cd "$arm"
         sha256sum -c build.sha256
         test ! -e outputs/data.0011.flt.h5
-        nproc=$(wc -l < "${PBS_NODEFILE:?}")
-        test "$nproc" -eq 1792
+        nproc=$("$python" "$stage/stage_entropy_restart.py" --allocated-ranks "$stage/contract.json" \
+            "$case_id" "${PBS_NODEFILE:?}")
         mpirun -genv HDF5_USE_FILE_LOCKING FALSE -np "$nproc" -machinefile "$PBS_NODEFILE" \
             ./pluto -i pluto.ini -e environment.ini -h5restart 2 > mpi.log 2>&1
         "$python" "$stage/check_entropy_restart_control.py" --check-series "$arm"

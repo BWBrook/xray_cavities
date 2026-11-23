@@ -8,7 +8,7 @@ cd "${PBS_O_WORKDIR:?missing PBS submission directory}"
 case "${SETTING:?missing entropy-switch setting}" in ON|OFF) ;; *) exit 2 ;; esac
 python=${ANALYSIS_PYTHON:-/share/apps/software/Anaconda3/2024.02-1/bin/python}
 order=$("$python" -c 'import json; print(*sorted(json.load(open("contract.json"))["cases"], reverse=True))')
-case "$order" in G-HI|"G-HI C-HI") ;; *) exit 2 ;; esac
+case "$order" in G-HI|"G-HI C-HI"|"G-LO C-LO") ;; *) exit 2 ;; esac
 export ROLE=simulate
 first_failure=0
 for CASE_ID in $order; do

@@ -14,7 +14,7 @@ import h5py
 import numpy as np
 
 import measure_q031_fluxes as flux
-from check_entropy_restart_control import catalogue
+from check_entropy_restart_control import catalogue, paired_cases
 from pluto_h5_level3_ambient_extract import UNIT_LENGTH_CM, require_datasets
 from select_common_age_hdf5 import CODE_TIME_PER_MYR
 from snapshot_energy import load_environment, sha256_file, slice_energy
@@ -71,7 +71,7 @@ def reduce_snapshot(arm, index):
     if state["case"] != arm.parent.name or arm.name not in ("ON", "OFF"):
         raise ValueError("arm directory differs from the paired restart identity")
     if arm.name == "OFF":
-        for case in ("G-HI", "C-HI"):
+        for case in paired_cases(state["case"]):
             if json.loads((arm.parent.parent / case / "gate.json").read_text())["passed"] is not True:
                 raise ValueError(f"11-Myr control failed for {case}")
     series = json.loads((arm / "series.json").read_text())

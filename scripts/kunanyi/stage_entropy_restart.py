@@ -9,11 +9,15 @@ import re
 import shutil
 import subprocess
 import sys
+from collections import Counter
 from pathlib import Path
 
 import h5py
 import numpy as np
 
+from check_entropy_restart_control import (
+    FIELD_SHAPE, KNOWN_11, MPI_NODES, RANKS_PER_NODE, TIME_11, catalogue, labelled_power, runtime_power,
+)
 from select_common_age_hdf5 import CODE_TIME_PER_MYR
 from validate_pluto_particle_restart_pair import RESTART_RECORD_SIZE, sha256_file, validate_restart_pair
 
@@ -67,6 +71,38 @@ def compare_checkpoint_slab(values, stored, field, iz):
     return count
 
 
+def validate_case_contract(case, config, production):
+    digest, step = KNOWN_11[case]
+    expected = {"float11_sha256": digest, "step11": step, "time11": TIME_11[case],
+                "label_power_erg_s": labelled_power(case), "mpi_nodes": MPI_NODES,
+                "mpi_ranks_per_node": RANKS_PER_NODE, "mpi_ranks": MPI_NODES*RANKS_PER_NODE,
+                "mpi_decomposition": "automatic"}
+    if case.endswith("-LO"):
+        required = set(expected) | {"particle_count10", "particle_sha256", "restart_prefix_sha256"}
+        missing = required - config.keys()
+        if missing or config.get("particle_count10", 0) <= 0:
+            raise ValueError(f"{case}: incomplete low-power restart contract; missing {sorted(missing)}")
+    for key, value in expected.items():
+        if key in config and config[key] != value:
+            raise ValueError(f"{case}: {key} differs from verified production")
+    runtime_power(case, production / "pluto.ini")
+    rows = catalogue(production / "outputs")
+    for index, time, step in ((10, config["time10"], config["step10"]), (11, TIME_11[case], step)):
+        if rows[index][2] != step or abs(rows[index][0] - time) > .001:
+            raise ValueError(f"{case}: production float catalogue differs at index {index}")
+
+
+def allocated_ranks(config, nodefile):
+    hosts = Counter(nodefile.read_text().split())
+    nodes = config.get("mpi_nodes", MPI_NODES)
+    per_node = config.get("mpi_ranks_per_node", RANKS_PER_NODE)
+    ranks = config.get("mpi_ranks", MPI_NODES*RANKS_PER_NODE)
+    if ((nodes, per_node) != (MPI_NODES, RANKS_PER_NODE) or ranks != nodes*per_node
+            or len(hosts) != nodes or set(hosts.values()) != {per_node}):
+        raise ValueError("PBS allocation differs from the verified production MPI layout")
+    return ranks
+
+
 def seed_checkpoint(case_root, config, source):
     seed = case_root / "seed"
     seed.mkdir()
@@ -87,18 +123,22 @@ def seed_checkpoint(case_root, config, source):
         (seed / name).write_text("".join(rows))
     raw = (orig / "restart.out").read_bytes()
     (seed / "restart.out").write_bytes(raw[:3 * RESTART_RECORD_SIZE])
+    if "restart_prefix_sha256" in config:
+        verified(seed / "restart.out", config["restart_prefix_sha256"])
     report = validate_restart_pair(
         restart_out=seed / "restart.out", fluid_restart_index=2, fluid_output_slot=2,
         particle_output_slot=8, expected_particle_index=1000, expected_record_count=3,
         expected_output_indices=[(3, 10)], particle_dir=seed, expected_step=config["step10"],
         fluid_hdf5=seed / fluid, fluid_catalogue=seed / "dbl.h5.out", fluid_timestep="Timestep_2",
-        expected_fluid_hdf5_size=67318639276, expected_fluid_shape=(1014, 960, 960),
+        expected_fluid_hdf5_size=67318639276, expected_fluid_shape=FIELD_SHAPE,
         required_fluid_datasets=FIELDS, expected_field_names=PARTICLES,
         expected_field_dims=[1]*10+[3,1,1], nonnegative_fields=["density", "pressure"],
         hash_inputs=True,
     )
     if config.get("fluid_sha256") and report["input_sha256"]["fluid_hdf5"] != config["fluid_sha256"]:
         raise ValueError("10-Myr fluid digest disagrees with the validated historical restart")
+    if "particle_count10" in config and report["particle_restart"]["nparticles"] != config["particle_count10"]:
+        raise ValueError("10-Myr particle count differs from the captured production header")
     with h5py.File(seed / fluid) as dbl, h5py.File(seed / companion) as flt:
         d, f = dbl["Timestep_2"], flt["Timestep_10"]
         if float(d.attrs["Time"]) != float(f.attrs["Time"]) or float(d.attrs["Time"]) != config["time10"]:
@@ -150,11 +190,12 @@ def stage(staging, contract):
     run = Path(cfg["work_root"]).resolve()
     if stage_root == run or stage_root.is_relative_to(run):
         raise ValueError("stage controls must live outside the new output directory")
-    for c in cfg["cases"].values():
+    for case, c in cfg["cases"].items():
         for key in ("source_problem", "production"):
             archive = Path(c[key]).resolve()
             if run == archive or run.is_relative_to(archive) or archive.is_relative_to(run):
                 raise ValueError("the experiment directory overlaps the production source")
+        validate_case_contract(case, c, Path(c["production"]))
     run.mkdir(parents=True, exist_ok=False)
     source = Path(cfg["core_root"])
     core = run / "core"
@@ -215,13 +256,21 @@ def stage(staging, contract):
         off = json.loads((croot / "OFF/build-inputs.json").read_text())
         if on.keys() != off.keys() or {k for k in on if on[k] != off[k]} != {"definitions.h"}:
             raise ValueError("arm sources differ beyond the entropy switch")
-        write_json(croot / "restart.json", {"case":case, "restart_time_code":config["time10"],
+        state = {"case":case, "restart_time_code":config["time10"],
                    "atmosphere":config["atmosphere"], "original_executable_sha256":config["binary_sha256"],
-                   "paired_runtime_sha256":hashlib.sha256(text.encode()).hexdigest()})
+                   "paired_runtime_sha256":hashlib.sha256(text.encode()).hexdigest()}
+        state.update({k: config[k] for k in ("mpi_ranks", "mpi_nodes", "mpi_ranks_per_node", "mpi_decomposition",
+                                             "label_power_erg_s", "time11", "step11", "float11_sha256",
+                                             "particle_count10") if k in config})
+        write_json(croot / "restart.json", state)
     print("Validated and staged " + ", ".join(cfg["cases"]))
 
 
 if __name__ == "__main__":
+    if len(sys.argv) == 5 and sys.argv[1] == "--allocated-ranks":
+        cfg = json.loads(Path(sys.argv[2]).read_text())["cases"][sys.argv[3]]
+        print(allocated_ranks(cfg, Path(sys.argv[4])))
+        raise SystemExit(0)
     if len(sys.argv) == 4 and sys.argv[1] == "--check-build":
         check_build(Path(sys.argv[2]), Path(sys.argv[3]))
         raise SystemExit(0)
