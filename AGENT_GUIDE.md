@@ -25,6 +25,16 @@ output. Paired restarts isolate the energy changed by PLUTO's entropy switch
 in the two high-power simulations at 10–12 Myr. [Result and public replay](docs/science/entropy_restart_result_2026-11-22.md) · [Frozen protocol](docs/science/entropy_restart_protocol_2026-11-21.md)
 <!-- claims: BND-14 -->
 
+For lobe bias, compare each arm's current $2.5\int p\,dV$ with its cumulative
+signed gas supply, including the common 0–10 Myr injection history. At
+12 Myr that fraction rises by 1.57 percentage points in G-HI and 2.10 in
+C-HI with the switch disabled. The stored-energy comparison uses a different
+denominator, the change since time zero inside each current 100 km/s sphere.
+The measured lobe enthalpy increments exceed the increments in spherical
+storage in both cases. The low-power counter forecasts use the low-power
+label and their own 11-Myr gates. [Paired lobe tables and replay](docs/science/entropy_restart_lobes_2026-11-23.md) · [Low-power protocol](docs/science/low_power_entropy_restart_protocol_2026-11-23.md)
+<!-- claims: NAT-12 BND-15 -->
+
 The answer is organised as a product of three factors:
 
 ```text

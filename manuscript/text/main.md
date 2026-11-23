@@ -72,8 +72,13 @@ the injector by 9.21% of labelled input in the high-power group jet and by
 4.61% in the high-power cluster jet. These were net changes. The same update
 added 21.72% and removed 30.93% in the group, and added 29.98% and removed
 34.59% in the cluster. Both switch-on controls reproduced the six production
-fluid fields at 11 Myr. The test covers these two atmospheres at high power
-over this interval. <!-- claims: BND-14 -->
+fluid fields at 11 Myr. At the common 12-Myr endpoint, switching off the update
+increased lobe enthalpy by 3.56% in the group and 4.25% in the cluster.
+Lobe volumes changed by +0.015% and −0.155%, respectively, so the increase
+came mainly from higher mean pressure. The fraction of cumulative net gas
+supply represented by lobe enthalpy rose from 42.83% to 44.40% in the group
+and from 48.17% to 50.27% in the cluster. Both arms share the first 10 Myr
+of evolution. The bias at 30–50 Myr remains unmeasured. <!-- claims: BND-14 NAT-12 -->
 
 ### How accurately do X-ray observations recover cavity enthalpy?
 

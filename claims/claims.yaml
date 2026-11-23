@@ -44,7 +44,7 @@ claims:
       - "Unity is not a bound on this ratio. After 20 Myr C-LO's enthalpy grows faster than its delivery: 1.05, 1.10 and 1.21 per unit delivered over 20-30, 30-40 and 40-50 Myr at tr1 > 1e-3, against 0.92-0.98 at 5e-3 and 0.82-0.85 at 1e-2. C-LO's lobe thermal energy is 0.95-1.05 of the initial thermal energy in the same cells, so its numerator is close to the undisturbed ambient pressure times a tracer-defined volume."
       - "Net delivery measures what the free grid received. Dividing by cone delivery alone changes the high-power ratios by 0.1% and lowers C-LO to 0.545-0.956 and G-LO to 0.530-0.677."
       - "Tagged-mass closure discriminates between the reconstructions. Over intervals 20-47 the primary method closes to 4e-4 of an interval's labelled mass or better in G-HI and to 1e-4 or better in the other three cases; first-order states miss by 5.6-6.2% in every one of those intervals, so their rows are not an uncertainty envelope. Startup closure sums to -0.126 (C-LO) and +0.038 (G-LO) of one interval's labelled mass and the terminal interval over-predicts by 0.035-0.036. Applied to energy at the same scale these move C-LO's 50-Myr ratio by about 0.3% and 0.1%, and its 10-Myr ratio by about 1.3%."
-      - "The high-power ratios come from runs with a measured exterior energy deficit. Per 1-Myr interval after 5 Myr it is 6-10% of labelled input in G-HI and 4-23% in C-HI, where it grows with age and depends on the outer-boundary flux reconstruction (BND-13; comparison/flagged_sphere_gravity_intervals.csv in the injector archive). If that energy would otherwise heat the lobe the high-power values are biased low, and part of the high/low-power contrast is numerical. The restart pairs identify the net entropy update in the 10–12 Myr window (BND-14). Its effect on lobe enthalpy at the quoted ages remains unmeasured."
+      - "The high-power ratios come from runs with a measured exterior energy deficit. Per 1-Myr interval after 5 Myr it is 6–10% of labelled input in G-HI and 4–23% in C-HI, where it grows with age and depends on the outer-boundary flux reconstruction (BND-13). Paired restarts identify the entropy update at 10–12 Myr (BND-14). Disabling it from 10 Myr raises the 12-Myr native enthalpy fraction by 1.57 percentage points in G-HI and 2.10 in C-HI (NAT-12). Its effect on the quoted later ages remains unmeasured."
     depends_on: [NAT-05]
 
   - id: NAT-02
@@ -296,6 +296,32 @@ claims:
       - Late high-power jets extend beyond the fixed box. The first traced-lobe containment failures are C-HI index 44 and G-HI index 40.
       - The paired exterior comparisons use absolute changes in erg. They measure neither realised injector supply nor a production-grid boundary correction.
     depends_on: [NAT-09, NAT-10]
+
+  - id: NAT-12
+    status: provisional
+    statement: >-
+      In the high-power restarts from the common 10-Myr checkpoints,
+      disabling the entropy update raises native lobe enthalpy at 12 Myr
+      by 3.561% in G-HI and 4.253% in C-HI. Lobe volume changes by
+      +0.015% and −0.155%, respectively. Enthalpy as a fraction of cumulative
+      net gas supply rises from 42.831% to 44.401% and from 48.174% to
+      50.272%, respectively.
+    evidence:
+      - {path: docs/science/entropy_restart_lobes_2026-11-23.md, commit: 551e6d7}
+      - {path: docs/science/assets/entropy_restart_lobes_2026-11-23/snapshot_readout.json, commit: 551e6d7}
+      - {path: docs/science/assets/entropy_restart_lobes_2026-11-23/paired_effects.csv, commit: 551e6d7}
+      - {path: docs/science/assets/entropy_restart_lobes_2026-11-23/independent_verification.json, commit: 551e6d7}
+    reproduce: .venv/bin/python scripts/science/verify_entropy_lobes.py
+    test: >-
+      Cross-lab review of the paired pressure-volume and delivery changes,
+      the short 11-Myr timing interpolation and the distinction between
+      absolute enthalpy and signed storage.
+    caveats:
+      - The primary lobe contains all cells with jet tracer mass fraction greater than 0.001. The sign persists at the 0.005 and 0.01 thresholds.
+      - The 11-Myr comparisons interpolate the OFF arm to the ON time across offsets below 400 years. Each 12-Myr endpoint is measured at exactly the same time.
+      - Both arms inherit ten million years of switch-on production evolution. The paired intervention does not measure the bias at 30–50 Myr.
+      - Enthalpy uses absolute pressure. Current-aperture change in stored thermal, kinetic and gravitational energy uses the same cells at time zero and the current time. The two quantities need not change by the same amount.
+    depends_on: [NAT-01, NAT-07, BND-14]
 
   - id: BND-01
     status: supported
