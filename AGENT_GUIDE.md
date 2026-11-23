@@ -430,9 +430,12 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    the two lateral arcs lie a median 25–26 kpc beyond the dominant
    compression front. At 45° and 90°, inward and outward offsets give small
    signed medians. Use the absolute distances and the length within a local
-   cell width to assess alignment. Patrick reviews the front selection,
+   cell width to assess alignment. For emission, compare the same replaced
+   image under fixed and refitted backgrounds. At 0° the inferred volume is
+   4.11 and 1.08 times the true volume respectively. The refit still misses
+   43.6% of the projected lobe area. Patrick reviews the front selection,
    projection and interpretation. [Three-view comparison and replay](docs/science/ghi20_compressive_front_comparison_2026-11-23.md)
-   <!-- claims: XR-05 -->
+   <!-- claims: XR-05 XR-06 -->
 2. **Does background refitting generalise?** Follow the frozen 54-view design.
    Seal predictions before releasing the truth manifest for independent
    scoring. Report the 108 sides per science arm and method, initial nulls,

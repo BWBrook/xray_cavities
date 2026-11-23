@@ -1084,3 +1084,31 @@ claims:
       - The front finder admits smooth acoustic compressions. The edges alone cannot establish a shock or attribute brightness to it.
       - At 45° and 90° small signed medians combine inward and outward offsets. Only 0.6–2.0% of arc length is within one native resolution element of the dominant projected edge there.
       - All three views come from one previously exposed simulation output.
+
+  - id: XR-06
+    status: provisional
+    statement: >-
+      In G-HI at 19.999614 Myr the ambient gas in the dominant compression
+      front offsets 32.8–49.5% of the lobe emission deficit on sightlines
+      missed by the original cavity finders, pooling both hemispheres per
+      azimuth and method. In the 0° view, assigning those front cells their
+      initial emissivity gives an inferred/native volume ratio of 4.11 with
+      the original radial background and 1.08 after refitting the same image.
+      The refitted outline covers 56.4% of the projected tracer lobe.
+    evidence:
+      - {path: docs/science/ghi20_compressive_front_comparison_2026-11-23.md, commit: eef1497}
+      - {path: docs/science/assets/compressive_front_observer_2026-11-23/emission_regions.csv, commit: eef1497}
+      - {path: docs/science/assets/compressive_front_observer_2026-11-23/replacement_recovery.csv, commit: eef1497}
+      - {path: docs/science/assets/ghi20_compressive_front_native_2026-11-23/independent_map_closure.json, commit: eef1497}
+    reproduce: >-
+      Run the compare_compressive_front.py command in
+      docs/science/ghi20_compressive_front_comparison_2026-11-23.md with the
+      full native receipt. Sum the two side numerators and denominators in
+      emission_regions.csv and replacement_recovery.csv before division.
+    test: >-
+      Independent review of the native front definition, per-region emission
+      sums and fixed-background versus refitted-background comparison.
+    caveats:
+      - The emissivity replacement uses the same present-day cells at both epochs. It requires three-dimensional simulation data.
+      - The inferred volume uses axial symmetry. Completeness measures projected area. Both geometries come from one exposed case and age.
+    depends_on: [XR-05]
