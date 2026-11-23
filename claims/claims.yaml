@@ -753,6 +753,10 @@ claims:
     evidence:
       - {path: docs/science/low_power_entropy_restart_protocol_2026-11-23.md, commit: c4ad0c3}
       - {path: docs/correspondence/thread-0029.md, commit: 110cfbd}
+      - {path: scripts/science/score_low_power_entropy.py, commit: dd3dae5}
+    reproduce: >-
+      .venv/bin/python scripts/science/score_low_power_entropy.py
+      <completed-paired-native-directory> <snapshot-receipts-directory> <score-output-directory>
     test: >-
       The registered 10–11 and 11–12 Myr switch-on counter predictions,
       as fractions of low-power labelled input, are +0.030 and +0.047 in

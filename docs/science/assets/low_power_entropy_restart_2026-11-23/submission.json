@@ -1,0 +1,106 @@
+{
+  "observed_utc": "2026-11-23T01:07:12.398705+00:00",
+  "jobs": [
+    {
+      "id": "883299",
+      "role": "prepare",
+      "afterok": [],
+      "state": "R",
+      "exit": null,
+      "mail_points": "ae",
+      "recipient_verified": true
+    },
+    {
+      "id": "883300",
+      "role": "simulate ON",
+      "afterok": [
+        "883299"
+      ],
+      "state": "H",
+      "exit": null,
+      "mail_points": "ae",
+      "recipient_verified": true
+    },
+    {
+      "id": "883301",
+      "role": "G-LO control",
+      "afterok": [
+        "883300"
+      ],
+      "state": "H",
+      "exit": null,
+      "mail_points": "ae",
+      "recipient_verified": true
+    },
+    {
+      "id": "883302",
+      "role": "C-LO control",
+      "afterok": [
+        "883300"
+      ],
+      "state": "H",
+      "exit": null,
+      "mail_points": "ae",
+      "recipient_verified": true
+    },
+    {
+      "id": "883303",
+      "role": "simulate OFF",
+      "afterok": [
+        "883301",
+        "883302"
+      ],
+      "state": "H",
+      "exit": null,
+      "mail_points": "ae",
+      "recipient_verified": true
+    },
+    {
+      "id": "883304[]",
+      "role": "measure 82 saved states",
+      "afterok": [
+        "883303"
+      ],
+      "state": "H",
+      "exit": null,
+      "mail_points": "ae",
+      "recipient_verified": true
+    },
+    {
+      "id": "883305",
+      "role": "score forecasts",
+      "afterok": [
+        "883304[]"
+      ],
+      "state": "H",
+      "exit": null,
+      "mail_points": "ae",
+      "recipient_verified": true
+    }
+  ],
+  "native_input_manifest_sha256": "3d9874db547946a9580e2672f70dd525ef03fab48a0e663badadb584305382c9",
+  "contract_sha256": "e860311ab33082b9f805743b7e70af9680a454b2912fff5e81e44dae6d04133c",
+  "readout_manifest_sha256": "3032885a20f6ce014dbf393bed6945ce1d76923079088f8c3a353b6bb5ddd7d8",
+  "preflight": {
+    "all_match": true,
+    "case_files_checked": {
+      "C-LO/binary": 1,
+      "C-LO/runtime": 3,
+      "C-LO/setup": 50,
+      "G-LO/binary": 1,
+      "G-LO/runtime": 3,
+      "G-LO/setup": 50,
+      "core": 117
+    },
+    "total_files_checked": 225
+  },
+  "simulation_allocation": {
+    "nodes": 64,
+    "ranks_per_node": 28,
+    "ranks": 1792
+  },
+  "readout_workers": 16,
+  "readout_distinct_states": 82,
+  "storage_forecast_bytes": 4296730891728,
+  "available_space_verified": true
+}

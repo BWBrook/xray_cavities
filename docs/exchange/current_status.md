@@ -1,19 +1,42 @@
 # Current Status
 
-Last updated 22 November 2026 after both paired entropy restarts reached 12 Myr.
+Last updated 23 November 2026 after adjudication of the high-power restarts
+and approval of the two low-power pairs.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
-## Paired entropy-switch results, 22 November
+## Entropy-switch experiments, 23 November
+
+Claude independently recomputed the four high-power budgets and the solver
+counter from the compact snapshot and stage receipts. BND-14 is supported
+for 10–12 Myr. In every switch-off interval after the first, the calibrated
+budget closes within five parts per million of that interval's labelled
+input. Barry approved the equivalent two-million-year C-LO and G-LO pairs.
+BND-15 records the signed forecasts before measurement. [Independent
+review](../science/assets/entropy_restart_review_2026-11-23/summary.json) · [Low-power
+predictions and controls](../science/low_power_entropy_restart_protocol_2026-11-23.md)
+
+PBS registered jobs **883299–883305**. At 12:07 AEDT preparation was
+running. Both switch-on controls gate the switch-off simulations. The
+16-worker measurement array and the final scoring job follow automatically.
+Abort and completion mail were verified for all seven. [Submission and
+dependencies](logs/2026-11-23-low-power-paired-restarts.md)
+
+At the common 12-Myr endpoint, disabling the update raised native lobe
+enthalpy by 3.56% in G-HI and 4.25% in C-HI. Lobe volume changed by less
+than 0.16% in either case. The enthalpy fractions of cumulative net gas
+supply rose by 1.57 and 2.10 percentage points, respectively. The lobe
+readout and its four PBS workers finished with exit 0. NAT-12 is provisional.
+[Measurements and replay](../science/entropy_restart_lobes_2026-11-23.md) ·
+[Low-power PBS submission](logs/2026-11-23-low-power-paired-restarts.md)
 
 PBS jobs **882758–882762** all finished with exit 0. The two switch-on controls
 matched the six production fields cell for cell at 11 Myr. Both switch-off
 runs reached 12 Myr. The native entropy changes outside the injector sum to
 −9.21% of labelled input in G-HI and −4.61% in C-HI. Switching it off removed
 99.81% and 99.63% of the primary exterior deficits. The 16 read-only workers
-in array **883167** also finished successfully. The completed evidence is
-ready for Claude's independent review of BND-14. [Paired budgets and prospective score](../science/entropy_restart_result_2026-11-22.md) · [PBS receipts and native verification](logs/2026-11-22-entropy-restart-results.md)
+in array **883167** also finished successfully. [Paired budgets and prospective score](../science/entropy_restart_result_2026-11-22.md) · [PBS receipts and native verification](logs/2026-11-22-entropy-restart-results.md)
 
 Gemini's review identified a publication blocker. The article and Figures 2–3
 still treat withdrawn detector results as current. Claude corrected the
