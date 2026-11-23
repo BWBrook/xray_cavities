@@ -173,11 +173,13 @@ cover 10–12 Myr. The later residuals quantify the total energy imbalance
 on the calibrated method. [Annual and cumulative balances](docs/science/assets/production_entropy_review_2026-11-23/README.md)
 <!-- claims: BND-16 -->
 
-The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
-is frozen and unscored. Its truth-assisted diagnostic and observer-only
-comparator remain separate. Exact historical gravity-update, floor and
-conversion-repair energies cannot be recovered individually from primitive
-snapshots alone.
+The X-ray test has 1,056 sealed predictions across 54 science views and
+12 initial controls. It tests two outline methods on the images alone and
+after using the simulated gas to replace surrounding emission. The scoring
+truth remains closed pending independent review. [Frozen design](docs/science/background_refit_blind_protocol_2026-11-11.md) · [Prediction seal and verification](docs/science/xray_prediction_seal_2026-11-23.md)
+
+The original fluid snapshots do not record the individual energy changes
+from gravity updates, pressure floors and conversion repairs.
 
 See the [current handover](docs/exchange/current_status.md) and
 [pilot repair record](docs/exchange/logs/2026-11-12-turn18-pilot-packaging-repair.md)

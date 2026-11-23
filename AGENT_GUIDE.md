@@ -436,12 +436,13 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    43.6% of the projected lobe area. Patrick reviews the front selection,
    projection and interpretation. [Three-view comparison and replay](docs/science/ghi20_compressive_front_comparison_2026-11-23.md)
    <!-- claims: XR-05 XR-06 -->
-2. **Does background refitting generalise?** Follow the frozen 54-view design.
-   Seal predictions before releasing the truth manifest for independent
-   scoring. Report the 108 sides per science arm and method, initial nulls,
+2. **Does background refitting generalise?** All 1,056 predictions are sealed.
+   Review the native input register, the live custody record and the output
+   commitments before releasing any scoring truth. Report the 108 sides per
+   primary science arm and method, initial nulls,
    failures and aperture clipping. The surrounding-emission replacement uses
    native information. Only the image-only arm can test observer performance.
-   [Protocol and custody order](docs/science/background_refit_blind_protocol_2026-11-11.md)
+   [Frozen protocol](docs/science/background_refit_blind_protocol_2026-11-11.md) · [Seal and audit](docs/science/xray_prediction_seal_2026-11-23.md)
    <!-- claims: DET-01 XR-02 XR-03 XR-04 -->
 3. **How well can the clocks recover jet power?** Use geometries from a
    detector that has passed its tests. Preserve radio spectral-age limits

@@ -1,0 +1,59 @@
+{
+  "archive_bytes": 1161011200,
+  "archive_sha256": "d9e36825bd6c6032adc2f9124bef3aaa7044401b879efb6a82862012ae4d9c77",
+  "archiver_source_sha256": "2c85ca8a901c390515927860a801be8bf59112f16b36803a95041877532c8e44",
+  "copies": {
+    "analysis_project_archive": {
+      "all_member_bytes_rehashed": true,
+      "archive_bytes": 1161011200,
+      "archive_sha256": "d9e36825bd6c6032adc2f9124bef3aaa7044401b879efb6a82862012ae4d9c77",
+      "detector_input_rasters": 66,
+      "members": 232,
+      "prediction_rasters": 66,
+      "private_archive_manifest_sha256": "d2ae4e80766462a6e2104209b1bf6c933f86c51fd2cea7837c80c31e93af8507",
+      "receiver_record_sha256": "973d0f17eb5489519d70711011fc12e03fb72d2e9a86adf38d34d10d52e8efcb",
+      "scoring_resources": 0,
+      "verified_utc": "2026-11-23T17:01:25.926521+00:00"
+    },
+    "second_private_archive": {
+      "all_member_bytes_rehashed": true,
+      "archive_bytes": 1161011200,
+      "archive_sha256": "d9e36825bd6c6032adc2f9124bef3aaa7044401b879efb6a82862012ae4d9c77",
+      "detector_input_rasters": 66,
+      "members": 232,
+      "prediction_rasters": 66,
+      "private_archive_manifest_sha256": "d2ae4e80766462a6e2104209b1bf6c933f86c51fd2cea7837c80c31e93af8507",
+      "receiver_record_sha256": "5f8dcb053a390ab1e48aa9d02201518583b11accc07b24dd886d0ed9dd853eae",
+      "scoring_resources": 0,
+      "verified_utc": "2026-11-23T17:07:47.077767+00:00"
+    }
+  },
+  "creator_manifest_sha256": "d2ae4e80766462a6e2104209b1bf6c933f86c51fd2cea7837c80c31e93af8507",
+  "creator_utc": "2026-11-23T16:54:24.553731+00:00",
+  "member_byte_counts": {
+    "contracts": 28354,
+    "map_inputs": 1154618543,
+    "native_receipts": 84039,
+    "predictions": 3893188,
+    "preflight_contracts": 110868,
+    "prior_completions": 44994,
+    "producer_receipts": 1409444,
+    "root_metadata": 642287
+  },
+  "member_classes": {
+    "contracts": 22,
+    "map_inputs": 66,
+    "native_receipts": 22,
+    "predictions": 66,
+    "preflight_contracts": 4,
+    "prior_completions": 22,
+    "producer_receipts": 22,
+    "root_metadata": 8
+  },
+  "member_count": 232,
+  "prediction_receipt_sha256": "e85211c2e59e4a1cc6175421619ba1920da2bb98b0a542b347a406f1a53bc504",
+  "receiver_source_sha256": "350e639ec69507cb53d64903b42ab9f759db2e10fd3719cb709ec1e010c0b660",
+  "scoring_resources": 0,
+  "seal_sha256": "5e917a299e83c5693e01f2c8dbf787213aa99e322aac77ebf5ad11d48a4244ce",
+  "status": "two_verified_private_prediction_archives"
+}

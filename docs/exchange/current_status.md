@@ -1,7 +1,7 @@
 # Current Status
 
-Last updated after Claude’s 23 November review of the low-power lobe
-contrasts, production balances and radio reweighting test.
+Updated 24 November 2026 after the G-HI compression-front measurement
+and verification of the sealed X-ray predictions.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -19,8 +19,8 @@ orange X-ray arcs a median 25–26 kpc outside the compression front at 0°.
 At 45° and 90° the small signed medians combine edges on both sides of the
 front. Across all three views, 91–99% of the lateral orange area lies off
 every qualifying compression component. On missed lobe sightlines the
-front's extra emission fills 33–49% of the lobe deficit for the 5% outline
-and 45–49% for seed/grow, pooling both hemispheres at each azimuth.
+front's extra emission fills 32.8–49.2% of the lobe deficit for the 5% outline
+and 45.0–49.5% for seed/grow, pooling both hemispheres at each azimuth.
 On the 0° image, restoring those front cells to their initial emissivity
 gives an inferred/native volume ratio of 4.11 with the original radial
 background and 1.08 with a refit. The latter covers 56.4% of the projected
@@ -28,12 +28,15 @@ lobe. The three-way brightness sum reproduces every original pixel.
 Patrick’s review concerns the front and its interpretation.
 [Exposed comparison](../science/ghi20_compressive_front_comparison_2026-11-23.md) · [Method review packet](logs/2026-11-23-ghi20-compressive-front-method-review.md)
 
-The pre-result input register at `1bc015c` binds 18 held-out case-ages and
-four initial nulls. PBS 883566–883572 produce the inputs. PBS 883573 seals
-the 66 views, and 883579 checks the predictions and coordinates against the
-public input commitments. Each job requests completion and abort mail.
-Claude checks provenance and custody before release of the scoring truth.
-[Frozen comparison and custody record](../science/xray_prediction_seal_2026-11-23.md)
+PBS 883566–883572 completed all 22 native inputs. PBS 883573 sealed
+1,056 predicted masks for 54 science views and 12 initial nulls. The raw
+seal at `ca88add` begins `5e917a299e83`. PBS 883579 verified every
+prediction and map file, all 22 source bindings and the array coordinates.
+At the receiving archive, all 132 detector-input and prediction files
+independently matched the hashes in the public seal.
+The live permission check at `35c0879` precedes the seal. The scoring
+truth remains closed for Claude’s independent custody and provenance review.
+[Custody record](../science/xray_prediction_seal_2026-11-23.md) · [Prediction audit](../science/assets/xray_prediction_seal_2026-11-23/prediction_audit.json)
 
 ## Production balances, radio weighting and observer work
 
@@ -57,9 +60,8 @@ the fitted break from 56.02 to 20.11 GHz. Both fits preserve the upper
 spectral-age limit. RAD-01 is supported for this view. Claude refitted the
 public spectra and verified the tracer multiplier in the pinned source.
 Gemini and Claude independently checked the low-power lobe ratios from
-archived measurements. NAT-13 is supported for the 10–12 Myr pairs. The frozen 54 X-ray views remain
-unscored. Stas’s first observer task is the independent G-HI/20 compressive
-front comparison. [Radio test](../science/radio_tracer_weight_check_2026-11-23.md) · [Supervisor’s request](logs/2026-11-17-compressive-front-and-background-test-request.md)
+archived measurements. NAT-13 is supported for the 10–12 Myr pairs.
+[Radio test](../science/radio_tracer_weight_check_2026-11-23.md) · [Four-case lobe comparison](../science/low_power_entropy_result_2026-11-23.md)
 
 ## Entropy-switch experiments, 23 November
 
