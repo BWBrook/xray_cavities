@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
+import math
 import zipfile
 from datetime import datetime
 from pathlib import Path
@@ -21,6 +23,8 @@ import run_background_refit_blind as frozen
 CONFIG_SHA256 = "aaef89201ec5e4ab7fd792b754a66b8463e9ed71756ad33e55d22f84bf9844b8"
 PRODUCER_SHA256 = "d84be77567aad949599c1ce0d3be7186990352898ee89fd22507538107ad6bf1"
 ASSEMBLER_SHA256 = "1ebd7c631d78861e92c6ea38a0bfc6bc3b39bf9c7c5f7c5dbc249be727e2a981"
+# Published at 1bc015c before scientific predictions were available.
+REGISTER_SHA256 = "bf41d2e0e7aa143a68316c0a3aeffcbe49fa0c3bea7288c0183d0e555fbc2fb3"
 
 
 def array_headers(path, fields):
@@ -59,6 +63,41 @@ def check_member_layout(map_path, prediction_path, labels):
         if any(pred_headers[name] != map_headers[name] or not np.array_equal(axes[name], preds[name])
                for name in frozen.AXES):
             raise ValueError(f"{prediction_path.name}: prediction and input coordinates differ")
+
+
+def check_registered_inputs(register, maps_path, register_pin=REGISTER_SHA256):
+    if frozen.digest(register) != register_pin:
+        raise ValueError("native input register differs from its published pre-result hash")
+    with register.open(newline="") as source:
+        entries = list(csv.DictReader(source))
+    expected = {(row["case"], int(row["snapshot_index"])): row for row in entries}
+    seen = set()
+    for unit in frozen.read_json(maps_path)["units"]:
+        pair = (unit["case"], unit["snapshot_index"])
+        if pair not in expected:
+            raise ValueError(f"{pair}: unit absent from native register")
+        row = expected[pair]
+        refs = unit["provenance"]
+        if row["native_input_receipt_sha256"] != refs["native_input_receipt"]["sha256"] or unit["kind"] != row["kind"]:
+            raise ValueError(f"{pair}: native receipt differs from pre-result commitment")
+        if pair in seen:
+            continue
+        seen.add(pair)
+        native = frozen.read_json(refs["native_input_receipt"]["path"])
+        source = frozen.read_json(refs["producer_receipt"]["path"])
+        provenance = source["provenance"]
+        if (provenance["contract"]["sha256"] != row["producer_contract_sha256"]
+                or provenance["native_preflight_contract"]["sha256"] != row["native_preflight_contract_sha256"]
+                or not math.isclose(source["actual_time_myr"], float(row["actual_age_myr"]), rel_tol=0, abs_tol=1e-9)
+                or (provenance["inherited_lineage_receipt"] or {}).get("sha256", "") != row["lineage_sha256"]):
+            raise ValueError(f"{pair}: contracted producer, lineage or epoch differs")
+        for role, column in (("current_h5", "current_h5_sha256"), ("initial_h5", "initial_h5_sha256"),
+                             ("environment", "atmosphere_sha256"), ("grid_file", "grid_file_sha256")):
+            if native["inputs"][role]["sha256"] != row[column]:
+                raise ValueError(f"{pair}: original {role} digest differs")
+    if seen != set(expected) or len(seen) != len(entries):
+        raise ValueError("native register contains missing or duplicate sources")
+    return len(seen)
 
 
 def audit(seal_path: Path, maps_path: Path, predictions: Path, config_path: Path) -> dict:
@@ -164,5 +203,9 @@ if __name__ == "__main__":
     parser.add_argument("--maps-manifest", type=Path, required=True)
     parser.add_argument("--predictions", type=Path, required=True)
     parser.add_argument("--config", type=Path, required=True)
+    parser.add_argument("--native-inputs", type=Path, required=True, help="native_inputs.csv published at 1bc015c")
     args = parser.parse_args()
-    print(json.dumps(audit(args.seal, args.maps_manifest, args.predictions, args.config), indent=2))
+    result = audit(args.seal, args.maps_manifest, args.predictions, args.config)
+    result["precommitted_native_inputs_verified"] = check_registered_inputs(args.native_inputs, args.maps_manifest)
+    result["precommitted_native_inputs_sha256"] = REGISTER_SHA256
+    print(json.dumps(result, indent=2))

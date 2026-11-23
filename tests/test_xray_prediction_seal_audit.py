@@ -1,3 +1,4 @@
+import csv
 import json
 import shutil
 import sys
@@ -70,3 +71,33 @@ def test_header_check_rejects_a_shifted_coordinate_or_nonboolean_mask(tmp_path):
     np.savez(target, **{**pred, "m": pred["m"].astype(float)})
     with pytest.raises(ValueError, match="invalid mask header"):
         auditor.check_member_layout(source, target, [{"key": "m"}])
+
+
+def test_precommit_binds_each_new_readout_to_the_original_native_fields(tmp_path):
+    native, production, manifest = (tmp_path / name for name in ("native.json", "completion.json", "maps_manifest.json"))
+    material = ["current_h5", "initial_h5", "environment", "grid_file"]
+    fields = {name: {"sha256": str(i) * 64} for i, name in enumerate(material)}
+    native.write_text(json.dumps({"inputs": fields}))
+    production.write_text(json.dumps({"actual_time_myr": 10.001,
+        "provenance": {"contract": {"sha256": "c" * 64}, "native_preflight_contract": {"sha256": "d" * 64},
+                       "inherited_lineage_receipt": None}}))
+    native_hash = auditor.frozen.digest(native)
+    unit = {"case": "C-HI", "snapshot_index": 10, "kind": "science",
+            "provenance": {"native_input_receipt": {"path": str(native), "sha256": native_hash},
+                           "producer_receipt": {"path": str(production), "sha256": auditor.frozen.digest(production)}}}
+    manifest.write_text(json.dumps({"units": [{**unit, "view_deg": i} for i in (0,45,90)]}))
+    register = tmp_path / "native_inputs.csv"
+    row = {"case": "C-HI", "snapshot_index": 10, "kind": "science", "actual_age_myr": 10.001,
+           "producer_contract_sha256": "c"*64, "native_preflight_contract_sha256": "d"*64,
+           "native_input_receipt_sha256": native_hash, "lineage_sha256": ""}
+    for name in material:
+        row[("atmosphere" if name == "environment" else name) + "_sha256"] = fields[name]["sha256"]
+    with register.open("w", newline="") as dest:
+        writer = csv.DictWriter(dest, fieldnames=list(row))
+        writer.writeheader()
+        writer.writerow(row)
+    assert auditor.check_registered_inputs(register, manifest, auditor.frozen.digest(register)) == 1
+    fields["initial_h5"]["sha256"] = "f"*64
+    native.write_text(json.dumps({"inputs": fields}))
+    with pytest.raises(ValueError, match="original initial_h5 digest differs"):
+        auditor.check_registered_inputs(register, manifest, auditor.frozen.digest(register))

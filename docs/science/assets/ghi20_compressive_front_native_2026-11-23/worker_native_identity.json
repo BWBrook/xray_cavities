@@ -1,0 +1,31 @@
+{
+  "checked_utc": "2026-11-23T12:50:26.226428+00:00",
+  "lineage_certificate_sha256": "a9704e2ea8f66251e8ea3b05c29e1fd5172bacc207880ee9a204e1d0b44ffcdf",
+  "native": {
+    "current_h5": {
+      "archive_device": 46,
+      "chain_device": 46,
+      "differing_stat_keys": [],
+      "matching_timestep": true,
+      "sha256": "d70c396e24e1f66a785a4d26039d83cfc5aa88235872390012c72d3105ec4268",
+      "worker_device": 46
+    },
+    "initial_h5": {
+      "archive_device": 46,
+      "chain_device": 46,
+      "differing_stat_keys": [],
+      "matching_timestep": true,
+      "sha256": "7f8db954a7683fdb9ea58ff57708b11c45145ce4f0fa1d7cd41d85ab42f3132f",
+      "worker_device": 46
+    }
+  },
+  "native_receipt_sha256": "05de7343f5cb9446ea7eb6b08538fa841750e377e791e2a496e02d6118e2085e",
+  "original_budget_gate": "pass",
+  "original_inherited_lineage_gate": "pass",
+  "private_receipt_sha256": "bc6fc9ba5b22d27a5a9c9e7b6cce931db528c237c1f3e67bb18ab10c90e667c5",
+  "same_compute_host_as_job": "883565.kunanyi-ohpc",
+  "source_sha256": {
+    "build_q032_source_emission.py": "895a35f07411308335c5d37ec09d2768929491cedd6a4108129eadab265f2b12",
+    "extract_spherical_energy_budget.py": "a4f0a8f61a2ba9c14c22da9e664a1621dba19045a0feca356b329eb0b92b1375"
+  }
+}
