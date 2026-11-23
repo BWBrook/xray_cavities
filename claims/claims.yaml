@@ -718,6 +718,28 @@ claims:
       - "The switch-off arm calibrates the reconstructions. After the first interval its primary budget closes within 2.8e-6 (G-HI) and 4.7e-6 (C-HI) of labelled input in each of 19 intervals, which also bounds the gravity-source and floor terms. In the same intervals forced HLL leaves -1.7%, first-order states -5.9% and, in C-HI, linear outer-face extrapolation -1.6%. Those are biased reconstructions, not a band on the absolute residual. The first interval's -0.34% comes from averaging across the step in delivery at the shared seed."
     depends_on: [BND-12, BND-13]
 
+  - id: BND-15
+    status: open
+    statement: >-
+      At 10–12 Myr, selective entropy recovery is predicted to add energy
+      outside the injector in C-LO and remove it in G-LO. The proposed source
+      is tested against paired switch-on and switch-off restarts.
+    evidence:
+      - {path: docs/science/low_power_entropy_restart_protocol_2026-11-23.md, commit: c4ad0c3}
+      - {path: docs/correspondence/thread-0029.md, commit: 110cfbd}
+    test: >-
+      The registered 10–11 and 11–12 Myr switch-on counter predictions,
+      as fractions of low-power labelled input, are +0.030 and +0.047 in
+      C-LO and −0.017 and −0.022 in G-LO, each within ±0.005. A C-LO net
+      below +0.01 refutes the proposed attribution under the forecast.
+      Each switch-off exterior residual after the first short interval
+      should lie within ±0.002 of the interval's labelled energy in both
+      cases. Compare with the native signed energy changes.
+    caveats:
+      - The estimates were inferred from older production residuals and the high-power boundary calibration. The low-power counter and the switch-off controls supply the prospective measurements.
+      - The 10-Myr checkpoint already incorporates the first ten million years of production evolution. The experiment addresses the next two million years and does not quantify late-time enthalpy bias.
+    depends_on: [BND-14]
+
   - id: OBS-01
     status: refuted
     statement: >-

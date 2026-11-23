@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -N ent_lo_score
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mem=3gb
+#PBS -l walltime=01:00:00
+#PBS -j oe
+#PBS -r y
+#PBS -m ae
+
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?submit from the checksummed readout directory}"
+sha256sum --check --quiet inputs.sha256
+python=${ANALYSIS_PYTHON:-/share/apps/software/Anaconda3/2024.02-1/bin/python}
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+"$python" readers/score_low_power_entropy.py "${ENTROPY_WORK_ROOT:?missing completed restart root}" results scored
