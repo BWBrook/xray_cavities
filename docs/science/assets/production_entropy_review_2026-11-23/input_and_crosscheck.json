@@ -1,0 +1,32 @@
+{
+  "max_abs_differences_over_label": {
+    "C-HI": {
+      "exterior": 1.1518563880485999e-14,
+      "fixed_vs_domain_whole_change": 6.890044090823721e-13,
+      "shell_equation": 1.7986936691476564e-12
+    },
+    "C-LO": {
+      "exterior": 1.0047518372857667e-14,
+      "fixed_vs_domain_whole_change": 2.0178370085943698e-10,
+      "shell_equation": 2.3093097198812625e-10
+    },
+    "G-HI": {
+      "exterior": 1.4530043834781736e-14,
+      "fixed_vs_domain_whole_change": 5.218048215738236e-14,
+      "shell_equation": 2.0679004344333747e-13
+    },
+    "G-LO": {
+      "exterior": 7.750744490664374e-15,
+      "fixed_vs_domain_whole_change": 8.65174598629892e-12,
+      "shell_equation": 1.1950689085566062e-11
+    }
+  },
+  "production_intervals": 197,
+  "source_sha256": {
+    "entropy_restart_result_2026-11-22/compact_inputs.zip": "3ba5fa77d79d9f43e125f04a1d026206ce2c5127c1ed1c9be671ea3f284d882b",
+    "four_case_fixed_2026-11-18/histories.csv": "bc2be27c97d6890db73eb891e37c19d1376330bb7e139b37f6a78a0dd19c68be",
+    "low_power_entropy_result_2026-11-23/compact_inputs.zip": "02df47c1c377a943883fb6a0211c4de5c38409c4aff334e638396ef7f763f9f7",
+    "outer_tracer_gravity_2026-11-19/compact_inputs.zip": "070aba418680e2a6c0d4d9ddadf4a22ea1eb590dfc5efc96de910b359d25e745",
+    "production_injector_histories_2026-11-21/history_tables.zip": "5b5d0b2c526c8340e8cbd89e11f66d23e721c310443bb3e66b6aa7b4489a7461"
+  }
+}

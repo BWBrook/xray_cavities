@@ -1,0 +1,59 @@
+{
+  "above_band_views": 37,
+  "active_radio_particles": 78918,
+  "case": "G-HI",
+  "emitting_particles_age_tracer_spearman": {
+    "last_shock_time": -0.5784171530142992,
+    "tinj": -0.6086701707971993
+  },
+  "fits": {
+    "unit_tracer": {
+      "alpha_injection": 0.5999999999999963,
+      "amplitude": 8.810502662582377e+27,
+      "break_status": "break_above_observed_band",
+      "fitted_break_ghz": 20.11032846349574,
+      "log_rms": 0.0037806936530519744,
+      "reported_break_ghz": 15.0,
+      "slope_1p4_to_15_ghz": 0.6447564750933522,
+      "spectral_age_limit_direction": "spectral_age_upper_limit"
+    },
+    "weighted": {
+      "alpha_injection": 0.5999999999999963,
+      "amplitude": 3.0149566045361307e+27,
+      "break_status": "break_above_observed_band",
+      "fitted_break_ghz": 56.02217284255674,
+      "log_rms": 0.002776703510890871,
+      "reported_break_ghz": 15.0,
+      "slope_1p4_to_15_ghz": 0.6210395311560916,
+      "spectral_age_limit_direction": "spectral_age_upper_limit"
+    }
+  },
+  "input_slice_sha256": "3b367a6009462161f4c4f4fc095adba0c28cacb0a8a55a4cd3bdcebbb730510e",
+  "legacy_selected_cavity_views": 37,
+  "legacy_spectral_age_upper_limits": 20,
+  "low_frequency_emitting_particles": 75481,
+  "max_tracer": 1.0000000000000002,
+  "min_tracer": 0.0015374640276555847,
+  "native_file_particles": 78952,
+  "native_particle_sha256": "a4e8e783045734aae2ed10ccb26085b5e1cca5757fa41d5c9141f7c84da73eee",
+  "nonpositive_tracer": 0,
+  "original_fitted_break_ghz": 56.022180493621924,
+  "particle_age_myr": 19.9996142950345,
+  "particle_output": 2000,
+  "particles_without_positive_last_shock_time": 3372,
+  "reference_sha256": {
+    "age_power_method_summary.csv": "00ce92d9085901a1e4668881e022e7d86baef732288e95a4e4527d6bd2ee3b8a",
+    "g_lo_snapshot_radio_metadata.json": "b7224b652a3f7576cb57f22e4cf8019362220ff2224e2020b961eba0cba84884",
+    "radio_view_luminosity.csv": "3253bd44760b0771f30471453cfcf23322c222fa274c1009622f34f52e64717d",
+    "spectral_break_frequencies.csv": "1c1bdaff1be5ee0f13c8e2fdd9dc45351f1d990139ad046776a6379a12eea1ca"
+  },
+  "snapshot_index": 20,
+  "source_modules_sha256": {
+    "praise.py": "ce4b17cf40ecefabbbd4ef4330b75fb63c39d40c2ef1a05a6e5ac87131145bf4",
+    "praise2.py": "eeee367581829b4dd779992c6b582a1676b796fc792b0bb70b8e9c13ee193895",
+    "raytracing.py": "597bf9241fee0eabc1f57a9715a338ee588157787dd2ad1edd939e7c17426f38"
+  },
+  "total_views": 57,
+  "view_deg": 45,
+  "weighted_luminosity_max_relative_error": 0.0
+}
