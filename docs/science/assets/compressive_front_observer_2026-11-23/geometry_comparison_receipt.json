@@ -1,0 +1,116 @@
+{
+  "phase": "geometry_only",
+  "analysis_sha256": {
+    "compare_compressive_front.py": "39a4a4ac767915b586c0d16f71720d5f10a12ee892715d585eb582085dce7015",
+    "render_compressive_front.py": "ec7d7bb544eb32411bc3e10e55626f97cf2f0a0c81997553178cf6c27ba337f2",
+    "build_q032_source_emission.py": "895a35f07411308335c5d37ec09d2768929491cedd6a4108129eadab265f2b12"
+  },
+  "snapshot": "G-HI/20",
+  "actual_time_myr": 19.999614294878622,
+  "observer_input_hashes": {
+    "case": "G-HI",
+    "snapshot_index": 20,
+    "actual_time_myr": 19.999614294878622,
+    "view_map_sha256": {
+      "0": "46935fca242ddc96c4ad8776db1b4e00e76ec27f9215a923308e29f323d99e80",
+      "45": "fb0ed2f4b706b00cbb13a28c0fe87ae7455a25e3cf8c562f6dcacc122b1ac896",
+      "90": "d77542fff88a0866e772623a6595f1a8babebb9a5d0dae5f349262b1576b5956"
+    },
+    "source_receipt_sha256": "4ca1a4f445ae1d65d6a7aa7619ccea7745d545266656875ddfb469487affd31e",
+    "qualifications": [
+      "native_source_and_continuation_semantics_require_external_review",
+      "observer_comparators_are_diagnostic_not_promoted",
+      "velocity_cuts_do_not_identify_shock_or_causal_jet_origin",
+      "native_revolution_solids_use_full_cell_centre_membership",
+      "exact_projection_tracer_mask_differs_from_retained_mask",
+      "retained_sky_grid_does_not_cover_every_native_cell",
+      "exact_edge_maps_differ_from_retained_maps",
+      "emissivity_correction_domain_or_sign"
+    ],
+    "native_source_sha256": {
+      "current_h5": "d70c396e24e1f66a785a4d26039d83cfc5aa88235872390012c72d3105ec4268",
+      "environment": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+      "grid_file": "77d10309df9fbe4366cd540bc966a6f06736109141a2e7931f28eebfdb88196d",
+      "initial_h5": "7f8db954a7683fdb9ea58ff57708b11c45145ce4f0fa1d7cd41d85ab42f3132f"
+    },
+    "historical_velocity_replacement_control": {
+      "0": {
+        "original_detector_masks_matched": 2,
+        "exact_original_fixed_and_refitted_masks_matched": 4,
+        "velocity_replacement_fixed_and_refitted_masks_matched": 4,
+        "brightness_partition": {
+          "current": {
+            "max_abs_error": 3.725290298461914e-09,
+            "error_to_scale": 6.659241632920992e-16,
+            "max_per_pixel_relative_error": 2.8886970829437945e-15
+          },
+          "initial": {
+            "max_abs_error": 2.3283064365386963e-09,
+            "error_to_scale": 4.162064437225445e-16,
+            "max_per_pixel_relative_error": 2.370456189584489e-15
+          }
+        }
+      },
+      "45": {
+        "original_detector_masks_matched": 2,
+        "exact_original_fixed_and_refitted_masks_matched": 4,
+        "velocity_replacement_fixed_and_refitted_masks_matched": 4,
+        "brightness_partition": {
+          "current": {
+            "max_abs_error": 1.4551915228366852e-09,
+            "error_to_scale": 2.293215225308525e-15,
+            "max_per_pixel_relative_error": 1.5251699684244133e-14
+          },
+          "initial": {
+            "max_abs_error": 2.9103830456733704e-10,
+            "error_to_scale": 4.587329649713974e-16,
+            "max_per_pixel_relative_error": 5.4928390985452266e-15
+          }
+        }
+      },
+      "90": {
+        "original_detector_masks_matched": 2,
+        "exact_original_fixed_and_refitted_masks_matched": 4,
+        "velocity_replacement_fixed_and_refitted_masks_matched": 4,
+        "brightness_partition": {
+          "current": {
+            "max_abs_error": 1.57160684466362e-09,
+            "error_to_scale": 1.7590901482316927e-15,
+            "max_per_pixel_relative_error": 9.517416516900721e-15
+          },
+          "initial": {
+            "max_abs_error": 9.313225746154785e-10,
+            "error_to_scale": 1.0425008565615692e-15,
+            "max_per_pixel_relative_error": 8.442014498549203e-15
+          }
+        }
+      }
+    }
+  },
+  "front_receipt_sha256": "9a288b600771a99900d75841b16d8b143de54cac376447cbd9fc72ec43103e52",
+  "views": {
+    "0": {
+      "native_map_sha256": "b3f2c0b8b117afd26d694982ee022e56d9603e98e955ab467cb8971bb1204aa8",
+      "primary_pixels": 463856
+    },
+    "45": {
+      "native_map_sha256": "e127c6a9ffb26c891dfd036da45f2f8d5ed67e7545727f77e7526cf1f9ab4344",
+      "primary_pixels": 104158
+    },
+    "90": {
+      "native_map_sha256": "ed674f12719ced89cfa8100e695c041d90e0b9b0e2100e5db89c83a3360c58f5",
+      "primary_pixels": 146791
+    }
+  },
+  "products": {
+    "00deg_front_overlay.png": "b286a4fc5b0fd995ebafe4d3e06adc737942228823673554f548fe6ebfefdb7a",
+    "45deg_front_overlay.png": "ab988ac605aaf52abfe6b6931a6419e8be1e38bb5aaeb0541b160ba2e8431e99",
+    "90deg_front_overlay.png": "e1c1c036bc65efa3dd64953ac6d5b3bf2846df2b76d4544a8538c44035a20d89",
+    "front_contour_separations.csv": "3577d9999ff6e368e1416501a9ded3aa2adbfcdcef27f20a7a729ddd29324ad1",
+    "front_sightline_overlap.csv": "b575ca13de5b42f4ae179aeb48a4f94579dbd07ca8283b468c9cea749464b6bd",
+    "observer_inputs.json": "44376b3edac2ef3962f35452d179c3897d767bd225136c05f74db6c21c388760",
+    "original_contour_to_lobe.csv": "19c1313208b642ec9aa4c20ddcc421e99ed23ed242534f8240335e77d53e987e",
+    "original_geometry.csv": "8334272c7ccfea01e6726fb60dcc55c133be73e761db0ef83fd1d4942c51c140",
+    "profile_positions.csv": "4029f2d69365884f4b650393de0bfccf0ba6edb435c2f038302136d6c802cfec"
+  }
+}

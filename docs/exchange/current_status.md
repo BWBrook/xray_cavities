@@ -14,8 +14,12 @@ method passed 256 required controls on the stretched production grid. The
 three exposed views reproduced all 30 stored detector masks. PBS 883565
 stopped at a coordinate-precision check before classifying any cells. The
 same controls passed on the six coordinates extracted directly from both
-HDF5 outputs. PBS 883581 uses these exact axes for the native projection
-and its same-cell emission comparison.
+HDF5 outputs. The native projection from PBS 883581 places the lateral
+orange X-ray arcs a median 25–26 kpc outside the compression front at 0°.
+At 45° and 90° the small signed medians combine edges on both sides of the
+front. Across all three views, 91–99% of the lateral orange area lies off
+every qualifying compression component. The same-cell emission comparison
+is running on the same inputs.
 Patrick’s review concerns the front and its interpretation.
 [Exposed comparison](../science/ghi20_compressive_front_comparison_2026-11-23.md) · [Method review packet](logs/2026-11-23-ghi20-compressive-front-method-review.md)
 

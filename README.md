@@ -11,7 +11,7 @@ enthalpy convention is **2.5pV**. For the native lobe fractions we integrate
 the measured net injector gas power through the age of each measurement.
 The tables also give labelled jet power times age and the 4pV literature comparator.
 
-> **Status, 23 November 2026.** Active research, developed in the open. The
+> **Status, 24 November 2026.** Active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -24,6 +24,8 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | How much of the supplied energy does the lobe enthalpy represent? | [Matched fractions and their denominators](docs/science/native_delivery_restatement_2026-11-21.md) and [the short research brief](manuscript/text/brief.md) |
 | How does the energy balance change as the jet ages? | [All 197 production intervals and the short-window calibration](docs/science/assets/production_entropy_review_2026-11-23/README.md) |
 | Does mixing affect the radio age estimate? | [A tracer-weight comparison in one G-HI radio spectrum](docs/science/radio_tracer_weight_check_2026-11-23.md) |
+| Do the X-ray arcs follow the compressed gas? | [G-HI at 20 Myr, viewed from three directions](docs/science/ghi20_compressive_front_comparison_2026-11-23.md) |
+| How is the X-ray detector being tested? | [The 54 held-out views and their prediction record](docs/science/xray_prediction_seal_2026-11-23.md) |
 | Did the restarts reproduce the production runs? | [High-power control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) and [low-power controls, job accounting and replay](docs/exchange/logs/2026-11-23-low-power-entropy-results.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |

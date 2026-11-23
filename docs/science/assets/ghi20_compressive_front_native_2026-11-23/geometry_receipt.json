@@ -1,0 +1,38 @@
+{
+  "actual_time_myr": 19.999614294878622,
+  "case": "G-HI",
+  "completed_utc": "2026-11-23T13:42:15.449334+00:00",
+  "components_sha256": "635d711d0fc72f1c84227a5585e675862f31c60840a8d3e0a52c05bd35ebfda6",
+  "files": {
+    "G-HI_0020_0deg.npz": {
+      "sha256": "b3f2c0b8b117afd26d694982ee022e56d9603e98e955ab467cb8971bb1204aa8",
+      "size_bytes": 6813021
+    },
+    "G-HI_0020_45deg.npz": {
+      "sha256": "e127c6a9ffb26c891dfd036da45f2f8d5ed67e7545727f77e7526cf1f9ab4344",
+      "size_bytes": 3679036
+    },
+    "G-HI_0020_90deg.npz": {
+      "sha256": "ed674f12719ced89cfa8100e695c041d90e0b9b0e2100e5db89c83a3360c58f5",
+      "size_bytes": 4739466
+    }
+  },
+  "implementation_sha256": {
+    "compressive_front_native.py": "53a4c7ce5589a02736a33a9c782d6123b0efbea11f782f366a53c5e0a85f372e",
+    "compressive_front_native_run.py": "0e6332767465cb5e58e597a7564b8bdc1896dff92378388299fa1f43a50180f6"
+  },
+  "native_inputs_sha256": {
+    "current_h5": "d70c396e24e1f66a785a4d26039d83cfc5aa88235872390012c72d3105ec4268",
+    "environment": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+    "grid_file": "77d10309df9fbe4366cd540bc966a6f06736109141a2e7931f28eebfdb88196d",
+    "initial_h5": "7f8db954a7683fdb9ea58ff57708b11c45145ce4f0fa1d7cd41d85ab42f3132f"
+  },
+  "pbs_job_id": "883581.kunanyi-ohpc",
+  "product": "native geometry ready for provisional overlay; attribution pending",
+  "selection_contract_sha256": "94106c32a8aa783b4f17dc2fa2c30feda3da4c7f60bfe4a3c148cd31c33d0ebe",
+  "snapshot_index": 20,
+  "source_contract_sha256": "f2239f3ea557bb08be97beb128ae0f7898aaa744c3d32e51d17dfaae05e519e4",
+  "source_producer_sha256": "4ca1a4f445ae1d65d6a7aa7619ccea7745d545266656875ddfb469487affd31e",
+  "started_utc": "2026-11-23T13:02:48.599581+00:00",
+  "validation_sha256": "6b45ab07bc7387e3069cd03fa82757b4004d5a7ae0704b0b8da4f1c4f67dc777"
+}
