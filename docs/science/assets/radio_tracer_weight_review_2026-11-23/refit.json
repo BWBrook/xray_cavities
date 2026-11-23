@@ -48,6 +48,7 @@
     4.764080231199693,
     4.555510533818117
   ],
+  "weighted_control_max_relative_difference_from_archived": 0.0,
   "age_bin_fraction_sums": {
     "last_shock_time": {
       "weighted_fraction_0.15GHz": 1.0,

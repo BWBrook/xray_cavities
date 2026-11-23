@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "docs/science/assets"
 SPECTRA = ASSETS / "radio_tracer_weight_check_2026-11-23/spectra.csv"
 BINS = ASSETS / "radio_tracer_weight_check_2026-11-23/particle_age_bins.csv"
+ARCHIVED = ASSETS / "four_case_selected_age_observables_2026-08-26/completed_radio_pair_1/G-HI/radio_view_luminosity.csv"
 OUT = ASSETS / "radio_tracer_weight_review_2026-11-23"
 
 
@@ -57,6 +58,12 @@ def main():
     result["unit_over_weighted_full_loss"] = [
         float(v) for v in spectra[(spectra.arm == "unit_tracer") & (spectra.loss_model == "full_loss")].luminosity_w_hz.values
         / spectra[(spectra.arm == "weighted") & (spectra.loss_model == "full_loss")].luminosity_w_hz.values]
+    archived = pd.read_csv(ARCHIVED)
+    archived = archived[(archived.case == "G-HI") & (archived.snapshot_index == 20) & (archived["view"] == "45deg")]
+    control = spectra[spectra.arm == "weighted"].merge(archived, on=["loss_model", "frequency_ghz"], suffixes=("", "_archived"))
+    assert len(control) == 10
+    result["weighted_control_max_relative_difference_from_archived"] = float(
+        (control.luminosity_w_hz / control.luminosity_w_hz_archived - 1).abs().max())
     bins = pd.read_csv(BINS)
     sums = bins.groupby("clock")[[c for c in bins.columns if "fraction" in c]].sum()
     result["age_bin_fraction_sums"] = {clock: row.round(6).to_dict() for clock, row in sums.iterrows()}
