@@ -1,0 +1,28 @@
+#!/bin/bash
+#PBS -N ent_lobe
+#PBS -q normal
+#PBS -J 0-3
+#PBS -l select=1:ncpus=1:mem=4gb
+#PBS -l walltime=03:00:00
+#PBS -j oe
+#PBS -r y
+#PBS -m ae
+
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?submit from the checksummed lobe readout directory}"
+sha256sum --check --quiet inputs.sha256
+case "${PBS_ARRAY_INDEX:?}" in
+    0) case_id=G-HI; arm=ON;  indices=(10 20 30); initial=${ENTROPY_GHI_INITIAL:?} ;;
+    1) case_id=G-HI; arm=OFF; indices=(20 30 21); initial=${ENTROPY_GHI_INITIAL:?} ;;
+    2) case_id=C-HI; arm=ON;  indices=(10 20 30); initial=${ENTROPY_CHI_INITIAL:?} ;;
+    3) case_id=C-HI; arm=OFF; indices=(20 30 19); initial=${ENTROPY_CHI_INITIAL:?} ;;
+    *) exit 2 ;;
+esac
+python=${ANALYSIS_PYTHON:-/share/apps/software/Anaconda3/2024.02-1/bin/python}
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+for index in "${indices[@]}"; do
+    printf '%s %s %s %s\n' "$(date -Is)" "$case_id" "$arm" "$index"
+    "$python" readers/measure_entropy_lobe.py "${ENTROPY_WORK_ROOT:?}/$case_id/$arm" "$index" "$initial" \
+        "results/$case_id/$arm/lobe_$index.json"
+done

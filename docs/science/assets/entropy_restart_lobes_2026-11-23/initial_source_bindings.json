@@ -1,0 +1,26 @@
+{
+  "source": "Index zero in each original turn-21 production injector request.",
+  "comparison": "Match filename, bytes, server inode and modification time; the full-file SHA-256 is historical.",
+  "cases": {
+    "G-HI": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "inode": 2199279635036,
+      "mtime_ns": 1787187872337072902,
+      "historical_ctime_ns": 1792237020208109937,
+      "historical_sha256": "7f8db954a7683fdb9ea58ff57708b11c45145ce4f0fa1d7cd41d85ab42f3132f",
+      "historical_native_request_sha256": "79d4a299e19ccad37ee370ee261da14d415f5381acd3492ae975e32a5b944e08",
+      "historical_fixed_receipt_sha256": "472427a3d420b1f2a79cdcf510d11a82fa7a51baa4fd7d2e40a9349826bc2010"
+    },
+    "C-HI": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "inode": 2199279949229,
+      "mtime_ns": 1786944376389893770,
+      "historical_ctime_ns": 1792301033230414247,
+      "historical_sha256": "939b57aa91bc90836dddc9cc237004cd712984e6b4b1cf1fa2d1fd52bf8a51d8",
+      "historical_native_request_sha256": "d63fe9048e3b55389db7ab7336d1dc50452ef1e9daedaecb2d553d65edf380b4",
+      "historical_fixed_receipt_sha256": "1c94d472201cad4fed3d457817d9c21050f11175d3da34c1f08d477280dc3760"
+    }
+  }
+}

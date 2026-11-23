@@ -1,0 +1,40 @@
+# Lobe enthalpy and spherical energy storage in the high-power restart pairs
+
+Turning the entropy switch off raises native lobe enthalpy as a fraction of cumulative jet supply at 12 Myr from **42.83% to 44.40% in G-HI** and from **48.17% to 50.27% in C-HI**. The difference comes mainly from higher lobe pressure. The volume-weighted mean lobe pressure rises by 3.55% in G-HI and 4.41% in C-HI, while the primary lobe volume changes by +0.015% and −0.155%, respectively. These comparisons apply to the two high-power jets two million years after the shared checkpoint. The size of any effect at 30–50 Myr or at low power remains open.
+
+## Paired results
+
+Each entry gives the switch-on value followed by the switch-off value. The primary tracer threshold is 0.001. Both arms stop at exactly 12 Myr. For the 11-Myr comparison the table uses the actual switch-on age and interpolates the switch-off measurements to that age.
+
+| Case | Nominal age (Myr) | Lobe 2.5pV (10⁵⁹ erg) | Lobe volume (10³ kpc³) | 2.5pV / net gas supply | R100 radius (kpc) | R100 stored change (10⁵⁹ erg) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| G-HI | 11 | 3.4483 → 3.4847 | 133.927 → 133.919 | 42.916% → 43.392% | 72.458 → 72.460 | 7.4664 → 7.5194 |
+| G-HI | 12 | 3.7546 → 3.8883 | 159.916 → 159.940 | 42.831% → 44.401% | 77.362 → 77.421 | 8.1387 → 8.2461 |
+| C-HI | 11 | 3.8681 → 3.8776 | 47.419 → 47.377 | 47.994% → 48.137% | 52.197 → 51.914 | 7.6168 → 7.6415 |
+| C-HI | 12 | 4.2362 → 4.4164 | 55.150 → 55.064 | 48.174% → 50.272% | 54.700 → 54.691 | 8.3217 → 8.3710 |
+
+At 12 Myr, higher 2.5pV adds 1.525 percentage points to the G-HI ratio and 2.049 points to the C-HI ratio when each uses its ON denominator. The slightly smaller cumulative OFF gas supply adds another 0.044 and 0.050 points, respectively. Across tracer thresholds 0.001, 0.005 and 0.01, the total rise spans 1.5695–1.5709 points in G-HI and 2.0987–2.1671 points in C-HI. [Paired ratios and tracer sensitivities](assets/entropy_restart_lobes_2026-11-23/paired_effects.csv)
+
+**Enthalpy and storage respond differently.** In units of labelled input over the two restart Myr, the extra lobe 2.5pV is 10.59% in G-HI and 14.27% in C-HI. The extra thermal, kinetic and gravitational energy stored inside R100 totals 8.50% and 3.91%. In G-HI the thermal and kinetic contributions both rise, by 5.78 and 2.72 percentage points of labelled input. In C-HI thermal energy rises by 6.54 points while kinetic energy falls by 2.63. The gravitational contribution changes by less than 0.001 point in each case. Current lobe enthalpy includes pressure work and its tracer-defined volume can change. Its increase can exceed the extra stored energy, so dividing one by the other would misstate the share retained in the lobe. [R100 components](assets/entropy_restart_lobes_2026-11-23/r100_storage.csv) · [Whole-grid comparison](assets/entropy_restart_result_2026-11-22/primary_windows.csv)
+
+The 11-Myr native output ages differ between arms by 388 years in G-HI and 357 years in C-HI. We used the neighbouring OFF output to linearly interpolate the measured enthalpy, volume and R100 quantities, and integrated the linearly reconstructed gas-supply rate to the ON time. The adjusted ratio gains are 0.4761 and 0.1428 percentage points. Using the slightly offset native outputs directly gives 0.4758 and 0.1432 points. All twelve measured spheres are complete and enclose the primary lobe. The reader reproduces the archived 10-Myr seeds and 11-Myr production controls to within 9 × 10⁻¹⁶ relative difference across the selected lobe and sphere measurements. [Native-time and interpolated comparisons](assets/entropy_restart_lobes_2026-11-23/paired_effects.csv) · [Reproduction checks](assets/entropy_restart_lobes_2026-11-23/verification.json)
+
+## Measurements
+
+The two arms of each high-power case share the production state at 10 Myr. One keeps PLUTO's entropy switch on and the other turns it off. The published whole-grid comparison records the energy gained or lost outside the injector. Here we measure how the change appears in the lobe pressure and volume, and separately in the gas inside a surrounding sphere. [Paired restart experiment](entropy_restart_result_2026-11-22.md)
+
+The primary lobe includes the full native volume of every cell whose jet-material mass fraction exceeds 0.001. Each stored float32 value is promoted to float64 before the strict comparison. Current enthalpy is 2.5 times the sum of each selected cell's pressure times its volume, using the exact cell edges. Thresholds of 0.005 and 0.01 test how the choice of lobe edge affects the result. [Native lobe measurements](assets/entropy_restart_lobes_2026-11-23/native_lobes.csv)
+
+The denominator is the signed cumulative gas energy delivered by the injector. Both arms start with the same audited integral from startup to the 10-Myr checkpoint. From there each adds its own signed cone and stationary-surface gas flux, including pressure work, integrated over the actual saved times at 0.1-Myr cadence. This follows the NAT-01 convention, which excludes gravitational-potential transport. To distinguish pressure-volume change from delivery change, we first replace the ON numerator with the OFF numerator at fixed ON delivery, then replace the denominator. The two contributions add exactly to the difference between the measured ratios. [Original normalization](native_delivery_restatement_2026-11-21.md) · [Paired effects](assets/entropy_restart_lobes_2026-11-23/paired_effects.csv)
+
+For each output, R100 is the distance from the grid origin to the outermost current cell centre moving at least 100 km/s. All cells with centres inside that radius contribute. For those same cells we subtract the original 0-Myr thermal and kinetic energy and sum the density change times the original, centre-zero gravitational potential and cell volume. The radius can change between arms. Energy transport through this moving sphere remains unmeasured. [Radii, containment and energy components](assets/entropy_restart_lobes_2026-11-23/r100_storage.csv)
+
+## Reproduction
+
+The native reader takes a completed arm directory, saved index, original 0-Myr HDF5 file and output JSON. The snapshot receipts retain separate pressure and tracer hashes, file identities and exact ages. The reduction checks each pressure field against the completed restart energy readout and each 0-Myr file against the original server inode, size and modification time. The full 0-Myr file digests come from the earlier production audit. The reduction also compares the seed and 11-Myr switch-on measurements with the original native tables and independently integrates the post-seed net gas flux from snapshot rates. Rebuild the tables from the committed measurements with the command below. [Native reader](../../scripts/science/measure_entropy_lobe.py) · [Source-zero bindings](assets/entropy_restart_lobes_2026-11-23/initial_source_bindings.json) · [Checks](assets/entropy_restart_lobes_2026-11-23/verification.json)
+
+```sh
+.venv/bin/python scripts/science/reduce_entropy_lobes.py docs/science/assets/entropy_restart_lobes_2026-11-23/snapshot_readout.json --output /tmp/xray-entropy-lobe-tables
+```
+
+A separate calculation checked the R100 cell counts against the archived grid centres and independently integrated the signed injector rates through each measurement time. It checked all 18 paired rows from the compact native receipts. [Independent verification](assets/entropy_restart_lobes_2026-11-23/independent_verification.json) · [Verification code](../../scripts/science/verify_entropy_lobes.py) · [PBS receipts](assets/entropy_restart_lobes_2026-11-23/readout-pbs.json)

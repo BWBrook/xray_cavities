@@ -1,0 +1,48 @@
+{
+  "snapshot_count": 12,
+  "tracer_rows": 36,
+  "sphere_rows": 12,
+  "paired_rows": 18,
+  "signed_gas_interval_crosschecks": 80,
+  "controls": [
+    {
+      "case": "G-HI",
+      "index": 10,
+      "production_index": 10,
+      "maximum_relative_difference": 6.661338147750939e-16
+    },
+    {
+      "case": "G-HI",
+      "index": 20,
+      "production_index": 11,
+      "maximum_relative_difference": 8.881784197001252e-16
+    },
+    {
+      "case": "C-HI",
+      "index": 10,
+      "production_index": 10,
+      "maximum_relative_difference": 3.3306690738754696e-16
+    },
+    {
+      "case": "C-HI",
+      "index": 20,
+      "production_index": 11,
+      "maximum_relative_difference": 2.220446049250313e-16
+    }
+  ],
+  "source_sha256": {
+    "native_delivery_restatement_2026-11-21/primary_selected_ages.csv": "dfaebebf21b1fcbb147a1c7d7a5f85e91c6440f4da2b5afda83ab3aaa5bda473",
+    "entropy_restart_result_2026-11-22/primary_intervals.csv": "4ed423fb0e49b1d4c33f53b9521bcbea392c4bb332c6d6950093db35dd7e807a",
+    "entropy_restart_result_2026-11-22/compact_inputs.zip": "3ba5fa77d79d9f43e125f04a1d026206ce2c5127c1ed1c9be671ea3f284d882b",
+    "entropy_restart_lobes_2026-11-23/initial_source_bindings.json": "3551f81fc57aa6834d387f282c681075fd8dadf4e546d878fe3340800beb2cec",
+    "entropy_restart_lobes_2026-11-23/readout-pbs.json": "5c097fdf8e297d10bcdc8887b1d7a8e90cdfee5071a666399e44bf0e9291f197",
+    "turn15_review_2026-11-11/budgets/G-HI/measurements.csv": "f3329d6ca83b8583827c028f58f96ba9f3c4179942b94eae135b67261267990d",
+    "turn15_review_2026-11-11/budgets/C-HI/measurements.csv": "eaa10db7812a85704332f2de04897e3b82072831c2718b8537a6f35cf908b968"
+  },
+  "output_sha256": {
+    "snapshot_readout.json": "ee24d09c2ad37c6aebb0e9a98e9fe854c572b053580c6b62b77c52b878318b5a",
+    "native_lobes.csv": "fc9f466eb90a20d98f64f19db7717978eb59db1a82bf946aad7df4696fb3fbd3",
+    "r100_storage.csv": "7adfbf893a762d3ed9d5b3ef1e75f560450f10bbb2d530caeb730a643e269704",
+    "paired_effects.csv": "2b8f594bc7e919edcf50a3531a0f2aab738c18aa45adf7280b2d2175cb2b24b5"
+  }
+}

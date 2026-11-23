@@ -1,0 +1,782 @@
+[
+  {
+    "case": "C-HI",
+    "arm": "OFF",
+    "index": 19,
+    "age_myr": 10.899645048497643,
+    "time_code": 3341.8463636633305,
+    "step": 11254,
+    "source": {
+      "filename": "data.0019.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795343379377894543,
+      "device": 46,
+      "inode": 1099816660489
+    },
+    "grid_out_sha256": "fc90f470f68253cf4405dfc4cee2546fed876bf3ad3818c918d59863da4e1749",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 61492622,
+        "volume_kpc3": 46643.691727875535,
+        "enthalpy_2p5pv_erg": 3.834981415379572e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 58522623,
+        "volume_kpc3": 42899.23940244274,
+        "enthalpy_2p5pv_erg": 3.413972687099271e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 56826646,
+        "volume_kpc3": 40893.53801427979,
+        "enthalpy_2p5pv_erg": 3.2123672733215515e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 50.930025704608944,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "e69585d6c3928906fc27f705088c294398821106e662352e01da07f9481b81ef",
+      "tr1": "ba53aa75a646adc712d3b4aea7cffb57895cfbe5a7ab82c5b1f9229862f86be4"
+    },
+    "r100_radius_kpc": 51.81938048929356,
+    "r100_defining_cell_zyx": [
+      829,
+      581,
+      392
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.570950717325179e+59,
+      "kinetic_delta_erg": 2.9589177787483033e+59,
+      "gravitational_delta_erg": 3.9090429735802506e+57,
+      "total_delta_erg": 7.568958925809285e+59,
+      "cells": 235606056,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1786944376389893770,
+      "device": 44,
+      "inode": 2199279949229
+    },
+    "atmosphere_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+  },
+  {
+    "case": "C-HI",
+    "arm": "OFF",
+    "index": 20,
+    "age_myr": 10.999499807351107,
+    "time_code": 3372.461971904162,
+    "step": 11373,
+    "source": {
+      "filename": "data.0020.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795343691174089917,
+      "device": 46,
+      "inode": 1099816660501
+    },
+    "grid_out_sha256": "fc90f470f68253cf4405dfc4cee2546fed876bf3ad3818c918d59863da4e1749",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 62049776,
+        "volume_kpc3": 47379.92450971599,
+        "enthalpy_2p5pv_erg": 3.877741864988105e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 59045746,
+        "volume_kpc3": 43566.01181183574,
+        "enthalpy_2p5pv_erg": 3.4536509185261537e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 57328600,
+        "volume_kpc3": 41525.7243392557,
+        "enthalpy_2p5pv_erg": 3.250311034016321e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 51.237508715032504,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "9a3182db4ea68d1805c6c9fa91647f45f8ff89becf05e1685683cc44a56f8f37",
+      "tr1": "5d6ac8a5e97c1d33f3f23b53eb19aca231631984aa7b8b9b467bad30ba5c80d9"
+    },
+    "r100_radius_kpc": 51.91440608482726,
+    "r100_defining_cell_zyx": [
+      829,
+      586,
+      384
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.618638616473535e+59,
+      "kinetic_delta_erg": 2.9830225174994596e+59,
+      "gravitational_delta_erg": 4.007327157856759e+57,
+      "total_delta_erg": 7.641734405551562e+59,
+      "cells": 236106240,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1786944376389893770,
+      "device": 44,
+      "inode": 2199279949229
+    },
+    "atmosphere_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+  },
+  {
+    "case": "C-HI",
+    "arm": "OFF",
+    "index": 30,
+    "age_myr": 12.0,
+    "time_code": 3679.216725455428,
+    "step": 12566,
+    "source": {
+      "filename": "data.0030.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795347036292556170,
+      "device": 46,
+      "inode": 1099816660623
+    },
+    "grid_out_sha256": "fc90f470f68253cf4405dfc4cee2546fed876bf3ad3818c918d59863da4e1749",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 67588678,
+        "volume_kpc3": 55064.35444684969,
+        "enthalpy_2p5pv_erg": 4.4163875265284255e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 64316351,
+        "volume_kpc3": 50657.54648990005,
+        "enthalpy_2p5pv_erg": 3.9509379199264084e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 62408831,
+        "volume_kpc3": 48258.06161479127,
+        "enthalpy_2p5pv_erg": 3.722210284895916e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 53.79411592466651,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "57aa3f99684a567dff815f71da97451c2f1e6470ebefd6569112692597a5d408",
+      "tr1": "0bdd30719655e9e16bdb6b3ee1c756f4895f67d3498449d8ea13e934de08de65"
+    },
+    "r100_radius_kpc": 54.690746695806084,
+    "r100_defining_cell_zyx": [
+      835,
+      589,
+      384
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 5.1619506178126315e+59,
+      "kinetic_delta_erg": 3.1583284408576696e+59,
+      "gravitational_delta_erg": 5.076628760034967e+57,
+      "total_delta_erg": 8.371045346270651e+59,
+      "cells": 250250288,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1786944376389893770,
+      "device": 44,
+      "inode": 2199279949229
+    },
+    "atmosphere_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+  },
+  {
+    "case": "C-HI",
+    "arm": "ON",
+    "index": 10,
+    "age_myr": 9.999889603297177,
+    "time_code": 3065.980090096568,
+    "step": 10183,
+    "source": {
+      "filename": "data.0010.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795242275434507867,
+      "device": 46,
+      "inode": 1099816651632
+    },
+    "grid_out_sha256": "21950ffc3a6118bc83bdebb86777ff82c092095a95f9c516497d964822ec0a37",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 56474924,
+        "volume_kpc3": 40183.78371357662,
+        "enthalpy_2p5pv_erg": 3.491395399471417e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 53692510,
+        "volume_kpc3": 36997.51398238878,
+        "enthalpy_2p5pv_erg": 3.087661248644027e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 52153496,
+        "volume_kpc3": 35322.02113139295,
+        "enthalpy_2p5pv_erg": 2.898690963957094e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 48.22313574797693,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "7fa1f2d8f3969e885ce2a1b5cf394bcb35bd0345798cbf6e312ca53188abe7dc",
+      "tr1": "d476e1bb56fb22cf5cfdc3566d197eb5eb875aae18177feb164910d4f46f9976"
+    },
+    "r100_radius_kpc": 48.67383032761086,
+    "r100_defining_cell_zyx": [
+      822,
+      573,
+      399
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.160581053383468e+59,
+      "kinetic_delta_erg": 2.7216138938689966e+59,
+      "gravitational_delta_erg": 3.088307074817969e+57,
+      "total_delta_erg": 6.913078018000645e+59,
+      "cells": 219378480,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1786944376389893770,
+      "device": 44,
+      "inode": 2199279949229
+    },
+    "atmosphere_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+  },
+  {
+    "case": "C-HI",
+    "arm": "ON",
+    "index": 20,
+    "age_myr": 10.999142790537116,
+    "time_code": 3372.3525100513866,
+    "step": 11159,
+    "source": {
+      "filename": "data.0020.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795329748434094367,
+      "device": 46,
+      "inode": 1099816656423
+    },
+    "grid_out_sha256": "21950ffc3a6118bc83bdebb86777ff82c092095a95f9c516497d964822ec0a37",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 62043894,
+        "volume_kpc3": 47419.477053727416,
+        "enthalpy_2p5pv_erg": 3.8681181331716463e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 59049801,
+        "volume_kpc3": 43595.17090041997,
+        "enthalpy_2p5pv_erg": 3.4331062091897307e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 57330943,
+        "volume_kpc3": 41537.3015636056,
+        "enthalpy_2p5pv_erg": 3.2243743635237266e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 51.215341807659144,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "93260d8be1fdae8d90f09ccd83263765d71afcbdc79b2cb36a10374cea16bccb",
+      "tr1": "4dc09a46d6f3bc9d5dab16378ad72ad19eee4f2826fafe243c42e2eb4796a5b0"
+    },
+    "r100_radius_kpc": 52.19713775099768,
+    "r100_defining_cell_zyx": [
+      830,
+      576,
+      398
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.621733991332685e+59,
+      "kinetic_delta_erg": 2.9550064715049306e+59,
+      "gravitational_delta_erg": 4.007050720717657e+57,
+      "total_delta_erg": 7.616810970044792e+59,
+      "cells": 237550952,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1786944376389893770,
+      "device": 44,
+      "inode": 2199279949229
+    },
+    "atmosphere_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+  },
+  {
+    "case": "C-HI",
+    "arm": "ON",
+    "index": 30,
+    "age_myr": 12.0,
+    "time_code": 3679.216725455428,
+    "step": 12140,
+    "source": {
+      "filename": "data.0030.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795332695938701062,
+      "device": 46,
+      "inode": 1099816656545
+    },
+    "grid_out_sha256": "21950ffc3a6118bc83bdebb86777ff82c092095a95f9c516497d964822ec0a37",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 67662171,
+        "volume_kpc3": 55149.71476345541,
+        "enthalpy_2p5pv_erg": 4.236212384811834e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 64369310,
+        "volume_kpc3": 50640.587683750346,
+        "enthalpy_2p5pv_erg": 3.765309566812021e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 62421946,
+        "volume_kpc3": 48169.40096094474,
+        "enthalpy_2p5pv_erg": 3.535336931049495e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 53.784469519198694,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "1d18d8bf86b919947983bf758159df846688cb8ca6c278994d138e6ebc6a27b0",
+      "tr1": "7fdc2b7e013fe71ab43c36771e5cfedf59f21f7fb712567c6ed049700ce0d239"
+    },
+    "r100_radius_kpc": 54.69986097177841,
+    "r100_defining_cell_zyx": [
+      835,
+      590,
+      384
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 5.079374169547438e+59,
+      "kinetic_delta_erg": 3.1915779855880633e+59,
+      "gravitational_delta_erg": 5.076170007488512e+57,
+      "total_delta_erg": 8.321713855210386e+59,
+      "cells": 250300216,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1786944376389893770,
+      "device": 44,
+      "inode": 2199279949229
+    },
+    "atmosphere_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa"
+  },
+  {
+    "case": "G-HI",
+    "arm": "OFF",
+    "index": 20,
+    "age_myr": 10.99945611102077,
+    "time_code": 3372.4485745483776,
+    "step": 11202,
+    "source": {
+      "filename": "data.0020.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795336842117755627,
+      "device": 45,
+      "inode": 1099816658463
+    },
+    "grid_out_sha256": "a42844bdfc0b4dd9a6a9839157e66ccfaf184481e722a6a7da04ed5dd987b23c",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 99431365,
+        "volume_kpc3": 133909.6405359991,
+        "enthalpy_2p5pv_erg": 3.484512928059224e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 94530392,
+        "volume_kpc3": 122373.18492729207,
+        "enthalpy_2p5pv_erg": 3.0664237731577803e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 91834719,
+        "volume_kpc3": 116425.26569579248,
+        "enthalpy_2p5pv_erg": 2.865805746787743e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 71.6107874935119,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "2919f16caf249d339db8753922ae6da3b8020414e0d4b36cca787ad4583c07a7",
+      "tr1": "bb3bf3fc4b7ed0c5a73c80988708a16f86c16f178d1792348eb90a02972f7ac4"
+    },
+    "r100_radius_kpc": 72.45828123570284,
+    "r100_defining_cell_zyx": [
+      147,
+      640,
+      629
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.0899267138457955e+59,
+      "kinetic_delta_erg": 3.4054122016278024e+59,
+      "gravitational_delta_erg": 2.3740660519601443e+57,
+      "total_delta_erg": 7.519079575993199e+59,
+      "cells": 337284736,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1787187872337072902,
+      "device": 46,
+      "inode": 2199279635036
+    },
+    "atmosphere_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+  },
+  {
+    "case": "G-HI",
+    "arm": "OFF",
+    "index": 21,
+    "age_myr": 11.09928318849798,
+    "time_code": 3403.055695640668,
+    "step": 11321,
+    "source": {
+      "filename": "data.0021.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795337149716203931,
+      "device": 45,
+      "inode": 1099816658475
+    },
+    "grid_out_sha256": "a42844bdfc0b4dd9a6a9839157e66ccfaf184481e722a6a7da04ed5dd987b23c",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 100194537,
+        "volume_kpc3": 136394.2610951822,
+        "enthalpy_2p5pv_erg": 3.522172209812705e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 95247831,
+        "volume_kpc3": 124663.68336970442,
+        "enthalpy_2p5pv_erg": 3.099800800743514e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 92530677,
+        "volume_kpc3": 118625.39382398619,
+        "enthalpy_2p5pv_erg": 2.8981156308134814e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 72.18748388191784,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "66f3ad3b693b0569e1c6619792623e5b8993894a4f19dd5ccdfe69c355609d1b",
+      "tr1": "0f5b77af318ccd249d48439073798007271e7b24c5f496218b3884458e969a36"
+    },
+    "r100_radius_kpc": 72.9661772383011,
+    "r100_defining_cell_zyx": [
+      146,
+      636,
+      627
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.134704171923929e+59,
+      "kinetic_delta_erg": 3.4326655866385175e+59,
+      "gravitational_delta_erg": 2.4247211740945766e+57,
+      "total_delta_erg": 7.591616970303392e+59,
+      "cells": 339639000,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1787187872337072902,
+      "device": 46,
+      "inode": 2199279635036
+    },
+    "atmosphere_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+  },
+  {
+    "case": "G-HI",
+    "arm": "OFF",
+    "index": 30,
+    "age_myr": 12.0,
+    "time_code": 3679.216725455428,
+    "step": 12395,
+    "source": {
+      "filename": "data.0030.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795340123314805905,
+      "device": 45,
+      "inode": 1099816658585
+    },
+    "grid_out_sha256": "a42844bdfc0b4dd9a6a9839157e66ccfaf184481e722a6a7da04ed5dd987b23c",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 106478292,
+        "volume_kpc3": 159940.4406381666,
+        "enthalpy_2p5pv_erg": 3.888297035968203e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 101177888,
+        "volume_kpc3": 146473.49504926914,
+        "enthalpy_2p5pv_erg": 3.4346899427456517e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 98255552,
+        "volume_kpc3": 139522.96533368525,
+        "enthalpy_2p5pv_erg": 3.2173467670195314e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 76.69324894331989,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "fec20b7ad851dda40aaeb3464c0021ae8d1bf68d210edd49390bf155062684db",
+      "tr1": "91f2e5cbc7f15bef569d660607b2bce4c3d3468475e5681848167428d9a0e027"
+    },
+    "r100_radius_kpc": 77.42073187883823,
+    "r100_defining_cell_zyx": [
+      139,
+      628,
+      639
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.553401812258053e+59,
+      "kinetic_delta_erg": 3.66364008328643e+59,
+      "gravitational_delta_erg": 2.9061685234167153e+57,
+      "total_delta_erg": 8.24610358077865e+59,
+      "cells": 360477208,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1787187872337072902,
+      "device": 46,
+      "inode": 2199279635036
+    },
+    "atmosphere_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+  },
+  {
+    "case": "G-HI",
+    "arm": "ON",
+    "index": 10,
+    "age_myr": 9.999255705996216,
+    "time_code": 3065.7857363005746,
+    "step": 10011,
+    "source": {
+      "filename": "data.0010.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795245320462331689,
+      "device": 45,
+      "inode": 1099816651790
+    },
+    "grid_out_sha256": "a8fc7cfbc249f971d77dca07f851e0ec0fa3b4dd551d3d7b632a079bc968da6d",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 91219956,
+        "volume_kpc3": 110223.67005771903,
+        "enthalpy_2p5pv_erg": 3.144709625342798e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 86748062,
+        "volume_kpc3": 100692.70403348884,
+        "enthalpy_2p5pv_erg": 2.763493642991922e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 84308780,
+        "volume_kpc3": 95739.87018355486,
+        "enthalpy_2p5pv_erg": 2.578750781312477e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 66.89244393596663,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "6711550bb23e1eb65e0f91b14ca0c8be8b665eaeb66df69d73ff1d045793a7e5",
+      "tr1": "79901182436a5e0983c36d4bd677c8d2e92944284e31ed12bfd4deed98841222"
+    },
+    "r100_radius_kpc": 67.6930477080169,
+    "r100_defining_cell_zyx": [
+      155,
+      634,
+      629
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 3.661539147831142e+59,
+      "kinetic_delta_erg": 3.1117920955858515e+59,
+      "gravitational_delta_erg": 1.8965905614714007e+57,
+      "total_delta_erg": 6.792297149031708e+59,
+      "cells": 314564432,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1787187872337072902,
+      "device": 46,
+      "inode": 2199279635036
+    },
+    "atmosphere_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+  },
+  {
+    "case": "G-HI",
+    "arm": "ON",
+    "index": 20,
+    "age_myr": 10.999844170011517,
+    "time_code": 3372.5675539758126,
+    "step": 10990,
+    "source": {
+      "filename": "data.0020.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795323568820857149,
+      "device": 45,
+      "inode": 1099816654385
+    },
+    "grid_out_sha256": "a8fc7cfbc249f971d77dca07f851e0ec0fa3b4dd551d3d7b632a079bc968da6d",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 99075305,
+        "volume_kpc3": 133926.88119162482,
+        "enthalpy_2p5pv_erg": 3.448253202024148e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 94157851,
+        "volume_kpc3": 122354.68632730002,
+        "enthalpy_2p5pv_erg": 3.026558512165809e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 91458323,
+        "volume_kpc3": 116369.21083247331,
+        "enthalpy_2p5pv_erg": 2.824243206391722e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 71.5979015720673,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "a16eae26250a5a0628efd47a3b0c5851fc51436cf7a968b3c7f2ee3125cf8e87",
+      "tr1": "38cce52ed6987b23b2212cdce1b29aed5f4138a3799f486e672173b1233f655b"
+    },
+    "r100_radius_kpc": 72.45828123570284,
+    "r100_defining_cell_zyx": [
+      147,
+      640,
+      629
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.0706308601351055e+59,
+      "kinetic_delta_erg": 3.3719837929275913e+59,
+      "gravitational_delta_erg": 2.374124744516501e+57,
+      "total_delta_erg": 7.466355900507862e+59,
+      "cells": 337284736,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1787187872337072902,
+      "device": 46,
+      "inode": 2199279635036
+    },
+    "atmosphere_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+  },
+  {
+    "case": "G-HI",
+    "arm": "ON",
+    "index": 30,
+    "age_myr": 12.0,
+    "time_code": 3679.216725455428,
+    "step": 11969,
+    "source": {
+      "filename": "data.0030.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1795326483593899467,
+      "device": 45,
+      "inode": 1099816654507
+    },
+    "grid_out_sha256": "a8fc7cfbc249f971d77dca07f851e0ec0fa3b4dd551d3d7b632a079bc968da6d",
+    "lobes": [
+      {
+        "tracer_cut": 0.001,
+        "cells": 106158103,
+        "volume_kpc3": 159915.82998025685,
+        "enthalpy_2p5pv_erg": 3.754591340861849e+59
+      },
+      {
+        "tracer_cut": 0.005,
+        "cells": 100855740,
+        "volume_kpc3": 146311.33455358262,
+        "enthalpy_2p5pv_erg": 3.3004576448974596e+59
+      },
+      {
+        "tracer_cut": 0.01,
+        "cells": 97946220,
+        "volume_kpc3": 139263.32618743728,
+        "enthalpy_2p5pv_erg": 3.0828543282599997e+59
+      }
+    ],
+    "lobe_outermost_centre_kpc": 76.66479808769624,
+    "tracer_outside_unit_interval_cells": 0,
+    "field_sha256": {
+      "prs": "6d2d4e48ea2265dcd65f06d6080548eafc9ed66545a5895bcb9776db2fb1cce8",
+      "tr1": "b74b70e97e40d6781813dec448facecc5ff86dd8029c6338bc48a2a84229ee09"
+    },
+    "r100_radius_kpc": 77.361869726643,
+    "r100_defining_cell_zyx": [
+      139,
+      626,
+      637
+    ],
+    "r100_storage": {
+      "thermal_delta_erg": 4.480401267090251e+59,
+      "kinetic_delta_erg": 3.6292614384000916e+59,
+      "gravitational_delta_erg": 2.9055195446928435e+57,
+      "total_delta_erg": 8.138717900937272e+59,
+      "cells": 360208144,
+      "complete_sphere": true,
+      "box_radius_limit_kpc": 200.0
+    },
+    "initial": {
+      "filename": "data.0000.flt.h5",
+      "bytes": 44890581676,
+      "mtime_ns": 1787187872337072902,
+      "device": 46,
+      "inode": 2199279635036
+    },
+    "atmosphere_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a"
+  }
+]

@@ -1,0 +1,135 @@
+{
+  "archive_sha256": {
+    "history_tables.zip": "5b5d0b2c526c8340e8cbd89e11f66d23e721c310443bb3e66b6aa7b4489a7461",
+    "compact_inputs.zip": "3ba5fa77d79d9f43e125f04a1d026206ce2c5127c1ed1c9be671ea3f284d882b"
+  },
+  "cell_centres_sha256": "9ed6b14b9117795fec014a0b1729fe01f2edafdd9d4c8a72dfbecb83cbdd7462",
+  "native_records": 12,
+  "source_checks": "Server inode, size and nanosecond modification time for each native file and baseline. The current pressure field matches its earlier full-field SHA-256. The baseline full-file digests come from the production archive.",
+  "archived_control_rows": 4,
+  "effect_rows": 18,
+  "cases": {
+    "G-HI": {
+      "gas_delivery_through_10_myr_erg": 7.303293230154336e+59,
+      "aperture_counts": {
+        "OFF_20": {
+          "cells": 337284736,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "OFF_21": {
+          "cells": 339639000,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "OFF_30": {
+          "cells": 360477208,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "ON_10": {
+          "cells": 314564432,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "ON_20": {
+          "cells": 337284736,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "ON_30": {
+          "cells": 360208144,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        }
+      },
+      "primary": [
+        {
+          "on_age_myr": 10.999844170011517,
+          "off_age_myr": 10.999844170011517,
+          "H_change_percent": 1.0557844009111417,
+          "volume_change_percent": -0.005661417916147382,
+          "H_over_delivered_on": 0.4291630373736936,
+          "H_over_delivered_off": 0.43392397391942356,
+          "H_over_storage_on": 0.4618388472199132,
+          "H_over_storage_off": 0.4634248928690768,
+          "H_change_over_post_seed_label": 0.05764809161554897,
+          "R100_storage_change_over_post_seed_label": 0.08393299457349415
+        },
+        {
+          "on_age_myr": 12.0,
+          "off_age_myr": 12.0,
+          "H_change_percent": 3.5611251123714105,
+          "volume_change_percent": 0.015389757169614882,
+          "H_over_delivered_on": 0.42831022370288846,
+          "H_over_delivered_off": 0.44400545508928174,
+          "H_over_storage_on": 0.46132466889280715,
+          "H_over_storage_off": 0.4715314327401457,
+          "H_change_over_post_seed_label": 0.10588254132384155,
+          "R100_storage_change_over_post_seed_label": 0.08503952411562797
+        }
+      ]
+    },
+    "C-HI": {
+      "gas_delivery_through_10_myr_erg": 7.3266947428429365e+59,
+      "aperture_counts": {
+        "OFF_19": {
+          "cells": 235606056,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "OFF_20": {
+          "cells": 236106240,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "OFF_30": {
+          "cells": 250250288,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "ON_10": {
+          "cells": 219378480,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "ON_20": {
+          "cells": 237550952,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        },
+        "ON_30": {
+          "cells": 250300216,
+          "centres_at_radius": 16,
+          "extra_centres_in_one_ulp_guard": 0
+        }
+      },
+      "primary": [
+        {
+          "on_age_myr": 10.999142790537116,
+          "off_age_myr": 10.999142790537116,
+          "H_change_percent": 0.24484380892761948,
+          "volume_change_percent": -0.08896100217367087,
+          "H_over_delivered_on": 0.47994136555659656,
+          "H_over_delivered_off": 0.4813697292017597,
+          "H_over_storage_on": 0.5078395864600141,
+          "H_over_storage_off": 0.5074399096214484,
+          "H_change_over_post_seed_label": 0.01501686758048545,
+          "R100_storage_change_over_post_seed_label": 0.03910574549059721
+        },
+        {
+          "on_age_myr": 12.0,
+          "off_age_myr": 12.0,
+          "H_change_percent": 4.2532131382877925,
+          "volume_change_percent": -0.15477925311462304,
+          "H_over_delivered_on": 0.48173760025713347,
+          "H_over_delivered_off": 0.502724915692964,
+          "H_over_storage_on": 0.5090552809815083,
+          "H_over_storage_off": 0.5275789753660756,
+          "H_change_over_post_seed_label": 0.14272726450580955,
+          "R100_storage_change_over_post_seed_label": 0.039078358456903696
+        }
+      ]
+    }
+  }
+}

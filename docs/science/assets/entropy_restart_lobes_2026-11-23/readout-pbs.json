@@ -1,0 +1,47 @@
+{
+  "files": {
+    "C-HI/OFF/lobe_19.json": "67b8b7e886d18797fbe9576d4ae8d6a9ed409aa0f48f5bf45ba7f68e93a8d5cf",
+    "C-HI/OFF/lobe_20.json": "2691d1dcc8a99c9890a53a63067ff68e6f308ddc5b9baa496a07c85925e76f9a",
+    "C-HI/OFF/lobe_30.json": "7ceefde5991a777adb7de26b4d2304acc4bd4bdee32b65f88c06e68ca2092bf4",
+    "C-HI/ON/lobe_10.json": "0e5033f84bf1a05edb1381245d060e486d4c4046b8c80121bfd30c2a29144f92",
+    "C-HI/ON/lobe_20.json": "757dc51b8d3f65a32b58488ea65cb6dbd59ede22ee7727c07d5044cb7b710034",
+    "C-HI/ON/lobe_30.json": "bdab2b3f19325a59bb489896deb21ca5577557c87f6856ab5cf2acf1f52e6532",
+    "G-HI/OFF/lobe_20.json": "e0fa9aaa13483e2b000bfdbfd2506c327198cfc51d5660fc1780c94d0d5c1915",
+    "G-HI/OFF/lobe_21.json": "56b13fe27195f3f1659ab46465b490657a44c1f23c66850cedc5e17b15dd351c",
+    "G-HI/OFF/lobe_30.json": "db7d41bb4e6c7b4b4d43a92dbe5723a5f983b37f04600a02eab1f0df539b389e",
+    "G-HI/ON/lobe_10.json": "017d61c802c06d0c31c9b36b8508065e8993e5af7311458a233537cbff78db28",
+    "G-HI/ON/lobe_20.json": "a3cfebdebba1121de8a1d1ea0b4b1768952cc591a05e37949f2d7020d7b2c833",
+    "G-HI/ON/lobe_30.json": "e060d55fff868936598f0860f581fd52722b40b299a2835467c9c44628575bae"
+  },
+  "jobs": {
+    "883289[0]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:18:05"
+    },
+    "883289[1]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:18:05"
+    },
+    "883289[2]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:17:41"
+    },
+    "883289[3]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": "00:17:40"
+    },
+    "883289[]": {
+      "exit_status": 0,
+      "state": "F",
+      "walltime": null
+    }
+  },
+  "mail_points": "ae",
+  "recipient_verified": true,
+  "submitted_manifest_sha256": "135ef3bea7e87054f58d440c98b29c7e5b03f8ac534aec7150c82e910f1c085c",
+  "workers": 4
+}
