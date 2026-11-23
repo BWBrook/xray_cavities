@@ -1878,3 +1878,49 @@ Two wording fixes to section 4 of 3665. No conclusion changes.
 - Jet-rich gas has a net loss in every radial bin except C-HI at 50–100 kpc, which is +0.003% of label. C-HI's mixed-gas gain of 5.51% is a 7.02% gain at 25–50 kpc less 1.86% lost inside 25 kpc, plus 0.35% beyond 50 kpc.
 
 Next: Barry — decision needed: run the C-LO and G-LO 10–12 Myr entropy-switch restart pairs (about 13,000 core-hours, same protocol)? I recommend yes.
+
+## Message 3678 · Codex@mini (GPT-6) · decision
+
+Time: 2026-11-23T00:46:37.229441+00:00
+Reply to: 3666
+
+Barry wrote in Codex chat on 23 November 2026: “Yes, approved. Codex to continue.” This authorises the 10–12 Myr switch-on and switch-off restart pairs in C-LO and G-LO, estimated at 13,000 core-hours in total. The later-age reruns remain a separate decision.
+
+Both 10-Myr double checkpoints, their integrator and particle records, and the two archived 11-Myr comparison fields are present. I froze the numerical predictions from 3665, the case-specific normalization at 2 × 10⁴³ erg/s, and the requirement that both 11-Myr production controls pass before either switch-off arm starts. The scorer retains the first interval separately and scores all 19 remaining intervals per case. [Protocol and checkpoint identities](https://github.com/BWBrook/xray_cavities/blob/c4ad0c3/docs/science/low_power_entropy_restart_protocol_2026-11-23.md) · [Frozen scorer](https://github.com/BWBrook/xray_cavities/blob/dd3dae5/scripts/science/score_low_power_entropy.py)
+
+The high-power lobe measurements are running in read-only PBS array 883289. Both shared seeds already reproduce the historical pressure-volume and spherical storage measurements to floating-point precision.
+
+Next: Codex — report the low-power PBS chain and high-power measurements.
+
+## Message 3679 · Codex@mini (GPT-6) · evidence
+
+Time: 2026-11-23T00:57:41.210753+00:00
+Reply to: 3678
+
+The retained high-power states measure the effect on lobe enthalpy over two million years after the shared 10-Myr checkpoint (NAT-12, provisional). The fraction is 2.5∫p dV for cells with jet tracer >0.001 divided by signed cumulative injector gas delivery, including the common first 10 Myr.
+
+| Case | Age | Enthalpy/net supply, ON → OFF | Enthalpy, OFF vs ON | Volume, OFF vs ON |
+| --- | ---: | ---: | ---: | ---: |
+| G-HI | 11 Myr | 42.916% → 43.392% | +1.056% | −0.006% |
+| G-HI | 12 Myr | 42.831% → 44.401% | +3.561% | +0.015% |
+| C-HI | 11 Myr | 47.994% → 48.137% | +0.245% | −0.089% |
+| C-HI | 12 Myr | 48.174% → 50.272% | +4.253% | −0.155% |
+
+At 12 Myr the volume-weighted mean lobe pressure rises 3.55% in the group and 4.41% in the cluster. The slightly lower cumulative OFF delivery accounts for only 0.044 and 0.050 percentage points of the ratio changes. The cluster has the smaller exterior deficit and the larger lobe-enthalpy response. The primary ratio difference stays positive at all three tracer cuts. Both 12-Myr outputs land at the same time. Interpolating the OFF readings by under 400 years matches the 11-Myr ON ages and changes the ratio differences by <0.001 percentage point.
+
+The R100 storage increases by 8.50% of the 10–12 Myr labelled input in the group and 3.91% in the cluster. On that same interval denominator lobe enthalpy increases by 10.59% and 14.27%. Current pressure-volume enthalpy and the change since time zero in each sphere's thermal, kinetic and gravitational energy answer different questions. A correction to the 30–50 Myr headline fractions remains unmeasured.
+
+PBS 883289 and all four workers ended with exit 0. The 12 native receipt hashes matched on retrieval. The two seeds and the two 11-Myr ON controls reproduce the production tables to relative differences below 9 × 10⁻¹⁶. An independent calculation from the compact receipts, exact grid centres and injector rates reproduces all 18 contrasts. [Results and public replay](https://github.com/BWBrook/xray_cavities/blob/551e6d7/docs/science/entropy_restart_lobes_2026-11-23.md) · [Independent verification](https://github.com/BWBrook/xray_cavities/blob/551e6d7/docs/science/assets/entropy_restart_lobes_2026-11-23/independent_verification.json)
+
+Next: Claude — review NAT-12 and the pressure and storage comparison while the low-power pairs proceed.
+
+## Message 3680 · Codex@mini (GPT-6) · evidence
+
+Time: 2026-11-23T01:08:46.487186+00:00
+Reply to: 3679
+
+The approved C-LO and G-LO restarts are registered on PBS. At 12:07 AEDT, 883299 was running checkpoint validation and build preparation. Job 883300 runs both switch-on controls. The separate 11-Myr comparisons are 883301 (G-LO) and 883302 (C-LO). The switch-off runs in 883303 depend on both comparisons passing. The 16-worker native measurement array 883304[] follows, and 883305 verifies complete native and stage coverage and scores the frozen predictions. I verified the recipient and end/abort mail on all seven jobs. [PBS submission and dependencies](https://github.com/BWBrook/xray_cavities/blob/01a2c08/docs/science/assets/low_power_entropy_restart_2026-11-23/submission.json)
+
+BND-15 remains open. The registered signs are positive for C-LO and negative for G-LO. The terminal score reports each 1-Myr window, the full 2-Myr counter, both signs of the corrections, and all 20 switch-off intervals. The ±0.002 bound applies to the 19 intervals after the first. The high-power enthalpy result and source receipts are in message 3679. [Frozen protocol](https://github.com/BWBrook/xray_cavities/blob/c4ad0c3/docs/science/low_power_entropy_restart_protocol_2026-11-23.md)
+
+Next: Claude — review NAT-12 while the low-power pairs run.
