@@ -222,6 +222,12 @@ def separation_rows(angle, g, orange, blue, lateral, references):
                     d = signed[selection]
                     length = observed.length[selection]
                     nearest = near[selection]
+                    reference_half = (
+                        g.z[ref.edges.row] < 0
+                        if side == "negative_z"
+                        else g.z[ref.edges.row] > 0
+                    )
+                    local_count = int(reference_half.sum())
                     row = {
                         "view_deg": angle,
                         "reference": ref_name,
@@ -231,8 +237,10 @@ def separation_rows(angle, g, orange, blue, lateral, references):
                         "segments": len(d),
                         "observed_perimeter_kpc": float(length.sum()),
                         "reference_segments": len(ref.edges.length),
+                        "same_hemisphere_reference_segments": local_count,
                     }
                     stats = {
+                        "nearest_in_other_hemisphere_fraction": None,
                         "signed_p10_kpc": None,
                         "signed_median_kpc": None,
                         "signed_p90_kpc": None,
@@ -245,7 +253,10 @@ def separation_rows(angle, g, orange, blue, lateral, references):
                         "farther_inside_fraction": None,
                         "farther_outside_fraction": None,
                     }
-                    if len(d) and ref.tree is not None:
+                    if len(d) and local_count:
+                        stats["nearest_in_other_hemisphere_fraction"] = float(
+                            length[~reference_half[nearest]].sum() / length.sum()
+                        )
                         for q, name in (
                             (0.1, "signed_p10_kpc"),
                             (0.5, "signed_median_kpc"),
@@ -503,7 +514,7 @@ def region_rows(angle, g, fields, regions, radial_background):
     return rows
 
 
-def recovery_metrics(g, mask, path, side_mask):
+def recovery_metrics(g, mask, path, side_mask, reference_mask):
     select = mask & side_mask
     tracer = (path > 0) & side_mask
     area = g.area
@@ -517,6 +528,10 @@ def recovery_metrics(g, mask, path, side_mask):
     aperture = g.u[None, :] ** 2 + g.z[:, None] ** 2 <= 120**2
     return {
         "selected_kpc2": found,
+        "added_vs_baseline_kpc2": float(area[select & ~reference_mask].sum()),
+        "lost_vs_baseline_kpc2": float(
+            area[reference_mask & side_mask & ~select].sum()
+        ),
         "truth_kpc2": target,
         "false_area_kpc2": found - overlap,
         "completeness": overlap / target if target else None,
@@ -578,6 +593,10 @@ def observer_replacement(angle, g, raw, path, masks, bg, fields, data, retained_
                     f"original exact-edge comparator failed at {angle}/{method}/{name}"
                 )
         for mode, selection in modes.items():
+            reference = {
+                "replace_same_cells_original_background": "exact_original_background",
+                "replace_same_cells_refit_background": "exact_refit_background",
+            }.get(mode, "original")
             for side, half in zip(SIDES, (g.z[:, None] < 0, g.z[:, None] > 0)):
                 rows.append(
                     dict(
@@ -585,7 +604,8 @@ def observer_replacement(angle, g, raw, path, masks, bg, fields, data, retained_
                         method=method,
                         comparison=mode,
                         hemisphere=side,
-                        **recovery_metrics(g, selection, path, half),
+                        reference=reference,
+                        **recovery_metrics(g, selection, path, half, modes[reference]),
                     )
                 )
         display[method] = modes

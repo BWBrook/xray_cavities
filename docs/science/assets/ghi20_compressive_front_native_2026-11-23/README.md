@@ -16,3 +16,14 @@ To rerun with public files, from the repository root:
 The public grid comes from G-LO. Every physical edge on each axis equals the corresponding G-HI edge bit for bit; the header timestamp differs. The matrix reproduces identically. The `exact_grid_file_sha256` field distinguishes the files. The [historical shock-specific negative result](../../independent_bow_shock_validation_2026-11-04.md) remains part of the record.
 
 An independent replay on the actual extraction host passed both original source checks, including the inherited G-HI production chain. Both HDF5 files retain the archived device number 46 and all other native identity fields. The primary extractor also hashes their full 44,890,581,676 bytes apiece. [Original gate replay](worker_native_identity.json) · [Replay implementation](../../../../scripts/science/compressive_front_native_identity.py)
+
+## Native coordinate precision
+
+The text-grid digest check in PBS 883565 stopped after hashing the two native files and before classifying any cells. The previous projection used HDF5 coordinates stored in single precision and cross-checked against `grid.out`. We extracted all six HDF5 coordinate arrays and verified exact equality for the initial and 20-Myr fields. The exposed 0° projection has these exact x edges, z edges and z centres. Comparing the HDF5 and text representations gives the following maxima. The local-width fraction for a shared edge uses the smaller adjacent width.
+
+| Coordinate | Centre discrepancy (kpc) | Edge discrepancy (kpc) | Centre / local width | Edge / local width |
+| --- | ---: | ---: | ---: | ---: |
+| x and y | 7.04 × 10⁻⁶ | 7.60 × 10⁻⁶ | 5.97 × 10⁻⁶ | 6.94 × 10⁻⁶ |
+| z | 7.41 × 10⁻⁶ | 7.41 × 10⁻⁶ | 6.03 × 10⁻⁶ | 6.25 × 10⁻⁶ |
+
+The unchanged 320-row matrix was rerun on those stored coordinates. All 256 required checks passed, and all 64 sensitivities detected the prescribed structure. The complete/tiled and lateral/axial sphere checks passed. To replay, append `--native-axes docs/science/assets/ghi20_compressive_front_native_2026-11-23/native_axes.npz` to the command above and use a separate output directory. The native extractor checks all six HDF5 coordinate digests before selecting a cell. With access to the production holdings, `compressive_front_native_identity.py --previous <original emission directory> --axes native_axes.npz --output identity.json` reproduces the coordinate file using the two original identity gates. [Six stored axes](native_axes.npz) · [Second matrix](hdf5_validation/synthetic_validation.csv) · [Coordinate hashes and validation](hdf5_validation/synthetic_validation.json)

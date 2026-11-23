@@ -7,6 +7,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+from dataclasses import dataclass
 
 import numpy as np
 from scipy import ndimage
@@ -19,6 +20,25 @@ from validate_independent_bow_shock import (Atmosphere, GROUP_ATMOSPHERE, _backg
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+@dataclass
+class StoredGrid:
+    x: np.ndarray
+    y: np.ndarray
+    z: np.ndarray
+    x_edges: np.ndarray
+    y_edges: np.ndarray
+    z_edges: np.ndarray
+
+    @property
+    def shape(self):
+        return self.z.size, self.y.size, self.x.size
+
+    def subgrid(self, z, y, x):
+        axes = tuple((getattr(self,n)[sl], getattr(self,n+'_edges')[sl.start:sl.stop+1])
+                     for n,sl in zip(('x','y','z'),(x,y,z)))
+        return StoredGrid(*(a[0] for a in axes), *(a[1] for a in axes))
 
 
 def coords(grid):
@@ -78,8 +98,17 @@ def sphere_check(grid):
                 winners=regions.winners,passed=bool(same and winner and winner==regions.winners[1] and axial_lateral))
 
 
-def validate(grid_path, atmospheric_path, out):
-    grid = parse_pluto_grid(grid_path); atmosphere = Atmosphere.read(atmospheric_path)
+def validate(grid_path, atmospheric_path, out, native_axes=None):
+    if native_axes is None:
+        grid = parse_pluto_grid(grid_path)
+    else:
+        with np.load(native_axes, allow_pickle=False) as arrays:
+            grid = StoredGrid(**{n: arrays[n] for n in StoredGrid.__dataclass_fields__})
+        for n in ('x','y','z'):
+            c = getattr(grid,n); e = getattr(grid,n+'_edges')
+            if e.shape!=(c.size+1,) or not (np.all(np.diff(c)>0) and np.all(c>e[:-1]) and np.all(c<e[1:])):
+                raise ValueError(f'malformed G-HI native coordinates on {n}')
+    atmosphere = Atmosphere.read(atmospheric_path)
     if grid.shape!=(1014,960,960):
         raise ValueError('validation requires the G-HI production axes')
     rows=[]
@@ -109,6 +138,20 @@ def validate(grid_path, atmospheric_path, out):
                 axis_edge_sha256={n:hashlib.sha256(np.asarray(getattr(grid,n+'_edges'),dtype='<f8').tobytes()).hexdigest() for n in ('x','y','z')},
                 required_rows=sum(row['criterion']!='sensitivity' for row in rows),sensitivity_rows=sum(row['criterion']=='sensitivity' for row in rows),
                 failures=[row for row in rows if row['passed'] is False])
+    if native_axes is not None:
+        result['native_axes_npz_sha256'] = digest(native_axes)
+        text_grid = parse_pluto_grid(grid_path)
+        result['source_representation_difference'] = {}
+        result['axis_center_sha256'] = {}
+        for n in ('x','y','z'):
+            c,e = getattr(grid,n),getattr(grid,n+'_edges')
+            tc,te = getattr(text_grid,n),getattr(text_grid,n+'_edges')
+            width = np.diff(te)
+            ew = np.minimum(np.r_[width[0],width],np.r_[width,width[-1]])
+            result['source_representation_difference'][n] = dict(
+                max_center_abs_kpc=float(np.max(np.abs(c-tc))),max_edge_abs_kpc=float(np.max(np.abs(e-te))),
+                max_center_local_width=float(np.max(np.abs(c-tc)/width)),max_edge_local_width=float(np.max(np.abs(e-te)/ew)))
+            result['axis_center_sha256'][n] = hashlib.sha256(np.asarray(c,dtype='<f8').tobytes()).hexdigest()
     out.mkdir(parents=True,exist_ok=True)
     with (out/'synthetic_validation.csv').open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=rows[0]);w.writeheader();w.writerows(rows)
@@ -118,5 +161,5 @@ def validate(grid_path, atmospheric_path, out):
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--grid',type=Path,required=True)
-    ap.add_argument('--atmosphere',type=Path,default=GROUP_ATMOSPHERE);ap.add_argument('--output',type=Path,required=True)
-    a=ap.parse_args();result=validate(a.grid,a.atmosphere,a.output);print(json.dumps(result));raise SystemExit(int(not result['passed']))
+    ap.add_argument('--native-axes',type=Path);ap.add_argument('--atmosphere',type=Path,default=GROUP_ATMOSPHERE);ap.add_argument('--output',type=Path,required=True)
+    a=ap.parse_args();result=validate(a.grid,a.atmosphere,a.output,a.native_axes);print(json.dumps(result));raise SystemExit(int(not result['passed']))

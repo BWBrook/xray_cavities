@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "sphere": {
+    "tiled_exact": true,
+    "radius_kpc": 1.0080000305175782,
+    "normal_scale_kpc": 0.05000000447034836,
+    "selected_xyz_extent_kpc": [
+      1.125,
+      1.125,
+      1.125
+    ],
+    "winners": [
+      1,
+      1
+    ],
+    "passed": true
+  },
+  "exact_grid_file_sha256": "77d10309df9fbe4366cd540bc966a6f06736109141a2e7931f28eebfdb88196d",
+  "environment_sha256": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+  "axis_edge_sha256": {
+    "x": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b",
+    "y": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b",
+    "z": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+  },
+  "required_rows": 256,
+  "sensitivity_rows": 64,
+  "failures": [],
+  "native_axes_npz_sha256": "e05a3e0f97ca9b78fa0291e2239ea10edbd277954aa835039d9cdc9142e23b98",
+  "source_representation_difference": {
+    "x": {
+      "max_center_abs_kpc": 7.040728121410211e-06,
+      "max_edge_abs_kpc": 7.598324998525641e-06,
+      "max_center_local_width": 5.965732755926455e-06,
+      "max_edge_local_width": 6.942624997591745e-06
+    },
+    "y": {
+      "max_center_abs_kpc": 7.040728121410211e-06,
+      "max_edge_abs_kpc": 7.598324998525641e-06,
+      "max_center_local_width": 5.965732755926455e-06,
+      "max_edge_local_width": 6.942624997591745e-06
+    },
+    "z": {
+      "max_center_abs_kpc": 7.413353131369149e-06,
+      "max_edge_abs_kpc": 7.406167185308732e-06,
+      "max_center_local_width": 6.032397825288761e-06,
+      "max_edge_local_width": 6.246559574021737e-06
+    }
+  },
+  "axis_center_sha256": {
+    "x": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8",
+    "y": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8",
+    "z": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19"
+  }
+}

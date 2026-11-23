@@ -28,7 +28,7 @@ def test_rectilinear_distance_uses_segment_not_nearest_centre_and_marks_enclosed
     # Every rectangular interface has its physical length, including the island hole.
     assert cdist.edges.length.sum() == 34
     rng = np.random.default_rng(17)
-    points = rng.uniform((-8, -5), (11, 5), (150, 2))
+    points = rng.uniform((-8, -5), (11, 5), (317, 2))
     d, _nearest = cdist.signed(points)
     clamped = np.clip(points[:, None, :], cdist.edges.lo, cdist.edges.hi)
     brute = np.linalg.norm(clamped - points[:, None, :], axis=2).min(axis=1)
@@ -88,3 +88,42 @@ def test_separation_summary_represents_absent_front_and_keeps_missed_regions():
     assert len(r) == 6 and all(
         row["reference_segments"] == 0 and row["signed_median_kpc"] is None for row in r
     )
+
+
+def test_same_area_swapped_pixels_are_counted_for_each_hemisphere():
+    g = grid([-3, -1, 1, 3], [-2, 0, 2])
+    base = np.array([[1, 0, 0], [0, 1, 0]], dtype=bool)
+    changed = np.array([[0, 1, 0], [0, 1, 0]], dtype=bool)
+    truth_path = base.astype(float) * 2
+    metrics = c.recovery_metrics(g, changed, truth_path, g.z[:, None] < 0, base)
+    assert (
+        metrics["selected_kpc2"]
+        == metrics["added_vs_baseline_kpc2"]
+        == metrics["lost_vs_baseline_kpc2"]
+        == 4
+    )
+    assert metrics["purity"] == metrics["completeness"] == 0
+    assert (
+        c.recovery_metrics(g, changed, truth_path, g.z[:, None] > 0, base)[
+            "added_vs_baseline_kpc2"
+        ]
+        == 0
+    )
+
+
+def test_missing_upper_front_has_no_forced_signed_distance_to_lower_front():
+    g = grid([-3, -1, 1, 3], [-3, -1, 1, 3])
+    mask = np.zeros((3, 3), bool)
+    mask[[0, 2], 1] = True
+    one_side = mask.copy()
+    one_side[2] = False
+    rows = c.separation_rows(0, g, mask, mask, mask, {"one_side": (one_side, None)})
+    for row in rows:
+        if row["hemisphere"] == "positive_z":
+            assert (
+                row["reference_segments"] > 0
+                and row["same_hemisphere_reference_segments"] == 0
+            )
+            assert row["signed_median_kpc"] is None
+        else:
+            assert row["signed_median_kpc"] == 0

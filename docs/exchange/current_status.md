@@ -6,6 +6,26 @@ Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
+## X-ray comparison and prediction custody
+
+The native front definition and the exposed G-HI/20 contour measurements
+were fixed at `8905180` and `0190f5b` before comparison. The revised
+method passed 256 required controls on the stretched production grid. The
+three exposed views reproduced all 30 stored detector masks. PBS 883565
+stopped at a coordinate-precision check before classifying any cells. The
+same controls passed on the six coordinates extracted directly from both
+HDF5 outputs. PBS 883581 uses these exact axes for the native projection
+and its same-cell emission comparison.
+Patrick’s review concerns the front and its interpretation.
+[Exposed comparison](../science/ghi20_compressive_front_comparison_2026-11-23.md) · [Method review packet](logs/2026-11-23-ghi20-compressive-front-method-review.md)
+
+The pre-result input register at `1bc015c` binds 18 held-out case-ages and
+four initial nulls. PBS 883566–883572 produce the inputs. PBS 883573 seals
+the 66 views, and 883579 checks the predictions and coordinates against the
+public input commitments. Each job requests completion and abort mail.
+Claude checks provenance and custody before release of the scoring truth.
+[Frozen comparison and custody record](../science/xray_prediction_seal_2026-11-23.md)
+
 ## Production balances, radio weighting and observer work
 
 At 30 Myr the reconstructed net exterior residual as a share of gas delivery

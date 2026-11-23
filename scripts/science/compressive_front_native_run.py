@@ -96,7 +96,9 @@ def native_grid(current,initial,source,validation):
         grid=read_grid(h5,shape,grid_file=gpath)
         for n in ('x','y','z'):
             sha=hashlib.sha256(np.asarray(getattr(grid,n+'_edges'),dtype='<f8').tobytes()).hexdigest()
-            if sha!=validation['axis_edge_sha256'][n]:raise ValueError('native and validation axes differ')
+            if sha!=validation['axis_edge_sha256'][n]:raise ValueError('native and validation edges differ')
+            center=hashlib.sha256(np.asarray(getattr(grid,n),dtype='<f8').tobytes()).hexdigest()
+            if center!=validation['axis_center_sha256'][n]:raise ValueError('native and validation centres differ')
     return grid
 
 
