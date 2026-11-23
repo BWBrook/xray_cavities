@@ -1,0 +1,56 @@
+{
+  "G-LO/ON": {
+    "window_residual": -0.019613481713974146,
+    "counter_net": -0.019613325048281737,
+    "counter_net_first_myr": -0.01747118493889539,
+    "counter_net_second_myr": -0.021753216189755904,
+    "residual_first_myr": -0.01747153393240972,
+    "residual_second_myr": -0.021753180729545536,
+    "max_abs_interval_residual_after_first": 0.0341988262615481,
+    "counter_gain": 0.35958470855314756,
+    "counter_loss": -0.37919803360142934,
+    "max_abs_interval_residual_minus_counter": 2.5121583948377286e-06,
+    "max_abs_interval_residual_minus_counter_after_first": 2.5121583948377286e-06
+  },
+  "G-LO/OFF": {
+    "window_residual": 0.00019661884856035086,
+    "counter_net": 0.00025795381706887236,
+    "counter_net_first_myr": 0.00025768956398661725,
+    "counter_net_second_myr": 0.00025821785360892653,
+    "residual_first_myr": 0.00013511541371858052,
+    "residual_second_myr": 0.00025807188440951374,
+    "max_abs_interval_residual_after_first": 0.00026335320813656904,
+    "counter_gain": 0.0,
+    "counter_loss": 0.0,
+    "max_abs_interval_residual_minus_counter": 0.001235542011457931,
+    "max_abs_interval_residual_minus_counter_after_first": 5.0893798851803804e-06
+  },
+  "C-LO/ON": {
+    "window_residual": 0.03884286392491403,
+    "counter_net": 0.038837131766163734,
+    "counter_net_first_myr": 0.030580420183517695,
+    "counter_net_second_myr": 0.047087961004323366,
+    "residual_first_myr": 0.030586061115266645,
+    "residual_second_myr": 0.047093784325082,
+    "max_abs_interval_residual_after_first": 0.06183359817375807,
+    "counter_gain": 0.3037768855863915,
+    "counter_loss": -0.2649397538202277,
+    "max_abs_interval_residual_minus_counter": 1.2652968897417662e-05,
+    "max_abs_interval_residual_minus_counter_after_first": 1.2652968897417662e-05
+  },
+  "C-LO/OFF": {
+    "window_residual": 0.00018788216843645353,
+    "counter_net": 0.00024363987510629302,
+    "counter_net_first_myr": 0.00024329085659980355,
+    "counter_net_second_myr": 0.0002439891726106737,
+    "residual_first_myr": 0.00012398072501263366,
+    "residual_second_myr": 0.0002518346933004505,
+    "max_abs_interval_residual_after_first": 0.00029724590450604343,
+    "counter_gain": 0.0,
+    "counter_loss": 0.0,
+    "max_abs_interval_residual_minus_counter": 0.0013225326615419833,
+    "max_abs_interval_residual_minus_counter_after_first": 8.273838607888042e-05
+  },
+  "G-LO/deficit_removed": 1.010024678505717,
+  "C-LO/deficit_removed": 0.9951630196784758
+}

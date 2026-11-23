@@ -1,0 +1,65 @@
+{
+  "unit_tracer": {
+    "alpha_injection": 0.5999999999999963,
+    "fitted_break_ghz": 20.11033012962933,
+    "log_rms_at_best": 0.0037806936530512584,
+    "break_range_with_rms_within_twice_best_ghz": [
+      17.55092458117967,
+      24.149047180616506
+    ],
+    "log_rms_at_15_ghz": 0.018628531876082977,
+    "log_rms_with_no_break": 0.04393847008808907,
+    "index_1p4_to_15": 0.6447564750933522,
+    "index_4p5_to_15": 0.6694139164929178,
+    "index_0p15_to_1p4": 0.6063877179774273,
+    "full_loss_over_lossless": [
+      1.121399175009106,
+      1.115296071677492,
+      1.1055131450533457,
+      1.0808401003437484,
+      0.9941831256487585
+    ]
+  },
+  "weighted": {
+    "alpha_injection": 0.5999999999999963,
+    "fitted_break_ghz": 56.02217166859642,
+    "log_rms_at_best": 0.0027767035108922497,
+    "break_range_with_rms_within_twice_best_ghz": [
+      40.96377763696798,
+      85.48698491636668
+    ],
+    "log_rms_at_15_ghz": 0.04191333945874028,
+    "log_rms_with_no_break": 0.020587243276147357,
+    "index_1p4_to_15": 0.6210395311560916,
+    "index_4p5_to_15": 0.6322312776215189,
+    "index_0p15_to_1p4": 0.6032548309040152,
+    "full_loss_over_lossless": [
+      1.0715610533544486,
+      1.0685676463076212,
+      1.0637990907969355,
+      1.0520653602314,
+      1.0120213426096347
+    ]
+  },
+  "unit_over_weighted_full_loss": [
+    4.852925797713109,
+    4.840034875398871,
+    4.819085540260059,
+    4.764080231199693,
+    4.555510533818117
+  ],
+  "age_bin_fraction_sums": {
+    "last_shock_time": {
+      "weighted_fraction_0.15GHz": 1.0,
+      "weighted_fraction_15GHz": 1.0,
+      "unit_tracer_fraction_0.15GHz": 1.0,
+      "unit_tracer_fraction_15GHz": 1.0
+    },
+    "tinj": {
+      "weighted_fraction_0.15GHz": 1.0,
+      "weighted_fraction_15GHz": 1.0,
+      "unit_tracer_fraction_0.15GHz": 1.0,
+      "unit_tracer_fraction_15GHz": 1.0
+    }
+  }
+}

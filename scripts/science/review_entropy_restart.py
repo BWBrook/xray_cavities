@@ -7,7 +7,9 @@ independent down to those receipts, not to the native HDF5 files or stage
 ledgers behind them.
 
 Run: uv run --no-project --with pandas python scripts/science/review_entropy_restart.py
+Low power (BND-15): add --low-power
 """
+import argparse
 import io
 import json
 import re
@@ -19,11 +21,8 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 SCI = ROOT / "docs/science/assets"
-ARCHIVE = SCI / "entropy_restart_result_2026-11-22/compact_inputs.zip"
-OUT = SCI / "entropy_restart_review_2026-11-23"
 MYR = 365.25 * 86400 * 1e6
-POWER = 2e45
-CASES, ARMS = ("G-HI", "C-HI"), ("ON", "OFF")
+ARMS = ("ON", "OFF")
 PRIMARY = ("outer_active_cell", "linear_snapshot_flags", "trapezoid")
 RAW = ["raw_entropy_gain_code", "raw_entropy_loss_code", "raw_entropy_with_p_floor_gain_code",
        "raw_entropy_with_p_floor_loss_code", "raw_p_energy_floor_gain_code", "raw_p_energy_floor_loss_code",
@@ -31,6 +30,13 @@ RAW = ["raw_entropy_gain_code", "raw_entropy_loss_code", "raw_entropy_with_p_flo
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--low-power", action="store_true")
+    low = parser.parse_args().low_power
+    ARCHIVE = SCI / ("low_power_entropy_result_2026-11-23" if low else "entropy_restart_result_2026-11-22") / "compact_inputs.zip"
+    OUT = SCI / ("low_power_entropy_review_2026-11-23" if low else "entropy_restart_review_2026-11-23")
+    POWER = 2e43 if low else 2e45
+    CASES = ("G-LO", "C-LO") if low else ("G-HI", "C-HI")
     bundle = zipfile.ZipFile(ARCHIVE)
     snaps = {}
     for name in bundle.namelist():
@@ -79,6 +85,11 @@ def main():
                                                       residual_minus_counter=(resid[k] - counter.net_erg.iloc[k]) / label[k]))
                             summary[f"{case}/{arm}"] = dict(
                                 window_residual=resid.sum() / label.sum(), counter_net=counter.net_erg.sum() / label.sum(),
+                                counter_net_first_myr=counter.net_erg.values[:10].sum() / label[:10].sum(),
+                                counter_net_second_myr=counter.net_erg.values[10:].sum() / label[10:].sum(),
+                                residual_first_myr=resid[:10].sum() / label[:10].sum(),
+                                residual_second_myr=resid[10:].sum() / label[10:].sum(),
+                                max_abs_interval_residual_after_first=float(np.abs(resid[1:] / label[1:]).max()),
                                 counter_gain=counter.gain_erg.sum() / label.sum(), counter_loss=counter.loss_erg.sum() / label.sum(),
                                 max_abs_interval_residual_minus_counter=float(np.abs((resid - counter.net_erg.values) / label).max()),
                                 max_abs_interval_residual_minus_counter_after_first=float(np.abs((resid - counter.net_erg.values) / label)[1:].max()))

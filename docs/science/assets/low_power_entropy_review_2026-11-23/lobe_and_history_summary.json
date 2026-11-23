@@ -1,0 +1,39 @@
+{
+  "nat13_max_abs_difference_from_published": 8.881784197001252e-16,
+  "increments_10_to_12": {
+    "G-HI": {
+      "on": 0.41693827040374126,
+      "off": 0.5113993537789289
+    },
+    "C-HI": {
+      "on": 0.5077438429893663,
+      "off": 0.6343365319116605
+    },
+    "G-LO": {
+      "on": 0.6761961689093976,
+      "off": 0.7258901076225094
+    },
+    "C-LO": {
+      "on": 0.8940261544259491,
+      "off": 0.88827773036491
+    }
+  },
+  "low_minus_high_increment_contrast": {
+    "C": {
+      "low_minus_high_on": 0.38628231143658287,
+      "low_minus_high_off": 0.2539411984532495
+    },
+    "G": {
+      "low_minus_high_on": 0.25925789850565634,
+      "low_minus_high_off": 0.21449075384358052
+    }
+  },
+  "bnd16_cumulative_residual_over_delivered_gas_at_30": {
+    "C-HI": -0.06732623991665244,
+    "C-LO": 0.08742901738793872,
+    "G-HI": -0.0678407857429845,
+    "G-LO": 0.019688830646771016
+  },
+  "bnd16_max_abs_difference_from_published_cumulative": 2.4896751327219135e-14,
+  "bnd16_production_minus_restart_counter_10_to_12": 0.00018360641920803916
+}
