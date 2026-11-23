@@ -1,0 +1,15 @@
+{
+  "assembly_receipt_sha256": "dd86877d1e6bb153f71a197f840fb1753f31eaa2f9eb0dc8738e8f06959d640b",
+  "final_seal_present": false,
+  "map_units": 66,
+  "maps_manifest_sha256": "88cf1f99340fae9f5828a41a3b70fb831696398db95e1c0cea2e2baef6c8da30",
+  "method": "Independent live stat of the 66 scoring rasters and scoring manifest while the predictor was still running; no scoring resource was opened.",
+  "observed_utc": "2026-11-23T15:23:07.854834+00:00",
+  "opaque_scoring_manifest_commitment_sha256": "7ad2cc4b8d46209931aded1ec206e884963fdf7cc30d024d044fa458f8ed170a",
+  "predictor_payloads_present": 2,
+  "predictor_pbs_job": 883573,
+  "predictor_state": "R",
+  "producing_case_ages": 22,
+  "scoring_files_mode_000": 67,
+  "scoring_manifest_released": false
+}
