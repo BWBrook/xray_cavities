@@ -82,6 +82,17 @@ to 50.27% in the cluster. Each case has one pair, and the enthalpy gap grew
 more in the second Myr than in the first. Its size at 30–50 Myr remains
 unmeasured. <!-- claims: NAT-12 -->
 
+In the low-power pairs, the same entropy update added 3.88% of labelled
+input to gas outside the injector in the cluster and removed 1.96% in the
+group over 10–12 Myr. The signed solver counter met all four prospective
+1-Myr predictions. With the switch off, all 38 post-startup exterior
+residuals met the registered ±0.2% bound. Over the two Myr, lobe enthalpy
+gain per unit of net gas delivered changed from 67.6% to 72.6% in the group
+and from 89.4% to 88.8% in the cluster. In the low-power cluster, requiring
+0.5% or 1% jet material reversed the sign of this small enthalpy contrast.
+The sign of the numerical energy change alone therefore gives no reliable
+correction to the lobe enthalpy. <!-- claims: BND-15 NAT-13 -->
+
 In the same pairs, the entropy update reduced the energy outside
 the injector by 9.21% of labelled input in the high-power group jet and by
 4.61% in the high-power cluster jet. These were net changes. The same update

@@ -11,7 +11,7 @@ enthalpy convention is **2.5pV**. For the native lobe fractions we integrate
 the measured net injector gas power through the age of each measurement.
 The tables also give labelled jet power times age and the 4pV literature comparator.
 
-> **Status, 22 November 2026.** Active research, developed in the open. The
+> **Status, 23 November 2026.** Active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -20,10 +20,10 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | Reader | Starting point |
 | --- | --- |
 | What has been learned? | [Reviewed energy and emission results](docs/science/turn15_energy_emission_review_2026-11-11.md), followed by the [review reconciliation](docs/science/turn18_review_reconciliation_2026-11-11.md) |
-| How does the energy error affect the lobes? | [High-power lobe enthalpy and volume at 11 and 12 Myr](docs/science/entropy_restart_lobes_2026-11-23.md) and [the paired energy budgets](docs/science/entropy_restart_result_2026-11-22.md) |
+| How does the energy error affect the lobes? | [Four-case 10–12 Myr comparison and low-power forecast scores](docs/science/low_power_entropy_result_2026-11-23.md) and [the high-power age comparison](docs/science/entropy_restart_lobes_2026-11-23.md) |
 | How much of the supplied energy does the lobe enthalpy represent? | [Matched fractions and their denominators](docs/science/native_delivery_restatement_2026-11-21.md) and [the short research brief](manuscript/text/brief.md) |
 | Where does the remaining energy discrepancy occur? | [Near-injector and exterior balances](docs/science/entropy_localisation_2026-11-21.md) |
-| Did the restarts reproduce the production runs? | [Predictions and control criteria](docs/science/entropy_restart_protocol_2026-11-21.md) and [the completed jobs and control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) |
+| Did the restarts reproduce the production runs? | [High-power control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) and [low-power controls, job accounting and replay](docs/exchange/logs/2026-11-23-low-power-entropy-results.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
 | How were the conclusions challenged? | [Assessment of Gemini’s independent review](docs/science/gemini_review_assessment_2026-11-21.md) and [the correspondence record](docs/correspondence/INDEX.md) |
@@ -151,11 +151,13 @@ At 10–12 Myr the entropy update itself removed a net 9.21% of labelled input
 in G-HI and 4.61% in C-HI. It added and removed energy in different cells.
 Turning the update off raised lobe enthalpy at 12 Myr by 3.56% in the group
 and 4.25% in the cluster, with less than 0.16% change in either volume.
-At 30–50 Myr the size of this bias remains unknown. The approved low-power
-restarts test the forecast that the same update adds energy in C-LO and
-removes it in G-LO. [High-power lobe measurements](docs/science/entropy_restart_lobes_2026-11-23.md) · [Low-power forecast](docs/science/low_power_entropy_restart_protocol_2026-11-23.md) · [Four-case production budgets](docs/science/production_injector_histories_2026-11-21.md)
+In the two low-power restarts the same update added 3.88% of labelled
+input in C-LO and removed 1.96% in G-LO. All four signed forecasts passed.
+Turning it off raised 12-Myr lobe enthalpy by 1.46% in G-LO. The small
+C-LO response changed sign with the choice of lobe edge. The size of the
+bias at 30–50 Myr remains unknown. [Four-case comparison](docs/science/low_power_entropy_result_2026-11-23.md) · [High-power lobe measurements](docs/science/entropy_restart_lobes_2026-11-23.md) · [Full production budgets](docs/science/production_injector_histories_2026-11-21.md)
 <!-- claims: BND-08 BND-10 BND-11 BND-12 BND-13 -->
-<!-- claims: BND-14 NAT-12 BND-15 -->
+<!-- claims: BND-14 NAT-12 BND-15 NAT-13 -->
 
 The [prospective background test](docs/science/background_refit_blind_protocol_2026-11-11.md)
 is frozen and unscored. Its truth-assisted diagnostic and observer-only

@@ -1,7 +1,7 @@
 # Current Status
 
-Last updated 23 November 2026 after adjudication of the high-power restarts
-and approval of the two low-power pairs.
+Last updated 23 November 2026 after the four paired restarts, the low-power
+forecast scores and the 12-Myr lobe comparisons.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -12,24 +12,29 @@ Claude independently recomputed the four high-power budgets and the solver
 counter from the compact snapshot and stage receipts. BND-14 is supported
 for 10–12 Myr. In every switch-off interval after the first, the calibrated
 budget closes within five parts per million of that interval's labelled
-input. Barry approved the equivalent two-million-year C-LO and G-LO pairs.
-BND-15 records the signed forecasts before measurement. [Independent
+input. In the approved low-power pairs the update added 3.884% of labelled
+input in C-LO and removed 1.961% in G-LO. Both exact production controls,
+all four registered 1-Myr sign-and-size forecasts and all 38 post-startup
+switch-off bounds passed. BND-15 is supported in this window. [High-power
 review](../science/assets/entropy_restart_review_2026-11-23/summary.json) · [Low-power
-predictions and controls](../science/low_power_entropy_restart_protocol_2026-11-23.md)
+forecasts and results](../science/low_power_entropy_result_2026-11-23.md)
 
-PBS registered jobs **883299–883305**. At 12:07 AEDT preparation was
-running. Both switch-on controls gate the switch-off simulations. The
-16-worker measurement array and the final scoring job follow automatically.
-Abort and completion mail were verified for all seven. [Submission and
-dependencies](logs/2026-11-23-low-power-paired-restarts.md)
+All seven PBS jobs **883299–883305** finished with exit 0. The scorer
+finished at 20:37 AEDT. The 164 snapshot receipts and 405,171 native
+solver rows passed an independent check. [Final accounting and reproducible
+inputs](logs/2026-11-23-low-power-entropy-results.md)
 
 At the common 12-Myr endpoint, disabling the update raised native lobe
 enthalpy by 3.56% in G-HI and 4.25% in C-HI. Lobe volume changed by less
 than 0.16% in either case. The enthalpy fractions of cumulative net gas
-supply rose by 1.57 and 2.10 percentage points, respectively. The lobe
-readout and its four PBS workers finished with exit 0. NAT-12 is provisional.
-[Measurements and replay](../science/entropy_restart_lobes_2026-11-23.md) ·
-[Low-power PBS submission](logs/2026-11-23-low-power-paired-restarts.md)
+supply rose by 1.57 and 2.10 percentage points, respectively. Relative to
+delivery only during 10–12 Myr, enthalpy gains rose from 41.7% to 51.1% in
+G-HI and from 50.8% to 63.4% in C-HI. NAT-12 is supported as a measured
+contrast for these pairs. The exploratory low-power comparison gives
+67.6% to 72.6% in G-LO and 89.4% to 88.8% in C-LO. The small C-LO
+contrast reverses at the stricter lobe edges. NAT-13 is provisional.
+[High-power review and replay](../science/entropy_restart_lobes_2026-11-23.md) ·
+[Four-case comparison](../science/low_power_entropy_result_2026-11-23.md)
 
 PBS jobs **882758–882762** all finished with exit 0. The two switch-on controls
 matched the six production fields cell for cell at 11 Myr. Both switch-off

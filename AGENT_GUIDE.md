@@ -21,9 +21,9 @@ hot cluster and group atmospheres? Observers estimate jet power from the
 enthalpy of X-ray cavities divided by an estimated age. This project tests
 that chain against simulations with known labelled power, true age and full
 3D state. Net injector delivery has been reconstructed at every retained
-output. Paired restarts isolate the energy changed by PLUTO's entropy switch
-in the two high-power simulations at 10–12 Myr. [Result and public replay](docs/science/entropy_restart_result_2026-11-22.md) · [Frozen protocol](docs/science/entropy_restart_protocol_2026-11-21.md)
-<!-- claims: BND-14 -->
+output. Paired restarts measure the signed energy change from PLUTO's
+entropy switch in all four cases at 10–12 Myr. [High-power budgets](docs/science/entropy_restart_result_2026-11-22.md) · [Low-power forecasts, scores and public replay](docs/science/low_power_entropy_result_2026-11-23.md)
+<!-- claims: BND-14 BND-15 -->
 
 For the high-power lobe comparison (NAT-12), divide each arm's gain in native
 $2.5\int p\,dV$ from 10 to 12 Myr by its own signed net gas delivery in that
@@ -37,9 +37,18 @@ Neither ratio measures deposited heat. In both cases the extra lobe enthalpy
 exceeds the extra energy stored inside the current 100 km/s sphere. The
 sphere's net storage difference matches the whole-grid difference to the
 reported precision. Opposing changes outside the sphere could cancel.
-The low-power counter forecasts use the low-power
-label and their own 11-Myr gates. [Paired lobe tables and replay](docs/science/entropy_restart_lobes_2026-11-23.md) · [Low-power protocol](docs/science/low_power_entropy_restart_protocol_2026-11-23.md)
-<!-- claims: NAT-12 BND-15 -->
+[Paired high-power lobe tables and replay](docs/science/entropy_restart_lobes_2026-11-23.md)
+<!-- claims: NAT-12 -->
+
+The low-power forecasts use the bipolar label of $2\times10^{43}$ erg/s.
+All four 1-Myr ranges and all 38 post-startup switch-off bounds passed.
+To reproduce BND-15 use the public ZIP and the independent verifier,
+then compare the signed solver changes with the balance of storage and
+flux. To reproduce the exploratory lobe comparison (NAT-13), use each
+arm's net gas delivery and its own 12-Myr endpoint with the common
+10-Myr seed. C-LO's small lobe contrast changes sign with tracer cut.
+[Low-power calculations and commands](docs/science/low_power_entropy_result_2026-11-23.md)
+<!-- claims: BND-15 NAT-13 -->
 
 The answer is organised as a product of three factors:
 

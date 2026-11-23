@@ -20,8 +20,18 @@ The injector emits gas through two cones. Its stationary surface also exchanges 
 
 4. **We can measure the energy change around each lobe separately.** At 30 Myr lobe enthalpy is 43–81% of the change in thermal, motion and gravitational energy in spheres enclosing the lobes. The storage estimate depends on the gravitational reference. Energy crossing each sphere remains unmeasured, so the difference cannot tell us how much energy permanently heated the atmosphere. <!-- claims: NAT-07 -->
 
-We repeated ages 10–12 Myr once for each high-power jet. Over those two million years the lobe's enthalpy estimate grew by 41.7% of the gas energy delivered with the solver's entropy update on and 51.1% with it off in the group, and by 50.8% and 63.4% in the cluster. At 12 Myr higher pressure raised enthalpy by 3.6% and 4.3%, with less than 0.16% change in volume. Counting all 12 Myr, the fractions rose by 1.6 and 2.1 percentage points because the runs shared their first 10 Myr. The gap grew more in the second Myr than in the first. Its size at 30 Myr remains unknown. <!-- claims: BND-14 NAT-12 -->
-
 There is one production run per case. The saved outputs miss intermediate updates and a final speed dip. Over intervals ending at 20–47 Myr, the main method reproduces the balance of marked jet gas to within 0.04% of labelled mass per interval. A first-order reconstruction misses by 5.6–6.2%. <!-- claims: NAT-01 -->
 
-Claude independently checked the 19 primary results, all 228 tested combinations and the high-power restarts from the archived injector rates and lobe measurements. See claims NAT-01, NAT-05, NAT-07 and NAT-12. [Original calculations](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/native_delivery_restatement_2026-11-21.md) · [Restart comparison](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/entropy_restart_lobes_2026-11-23.md).
+\newpage
+
+## How much does the solver change the lobe?
+
+We repeated ages 10–12 Myr in all four jets. Turning the solver’s entropy update off raised lobe enthalpy gain per unit of gas energy delivered during those two Myr from **41.7% to 51.1% in G-HI** and **50.8% to 63.4% in C-HI**. At 12 Myr, higher pressure raised enthalpy by 3.6% and 4.3%, with less than 0.16% change in volume. Including the shared first 10 Myr gives smaller rises of 1.6 and 2.1 percentage points. The gap grew faster in the second Myr. Its size at 30 Myr is unknown. <!-- claims: BND-14 NAT-12 -->
+
+![Four paired restarts from a shared state in each case. Left, the net energy the entropy update added to or removed from the gas outside the injector over 10–12 Myr. Right, growth in the pressure-volume estimate for the lobe over those same two Myr.](../../docs/science/assets/low_power_entropy_result_2026-11-23/four_case_entropy_response.png){#fig-entropy-brief width=100%}
+
+At low power the same update added 3.88% of labelled energy in the cluster and removed 1.96% in the group. Turning it off changed the enthalpy gain per unit delivered from 89.4% to 88.8% in C-LO and 67.6% to 72.6% in G-LO. Tightening the cluster lobe’s boundary reversed its small change. The overall energy error therefore gives no simple correction for a lobe at a later age. <!-- claims: BND-15 NAT-13 -->
+
+The low-power experiment also tested a prediction made before the runs. The energy update fell inside its forecast range in both atmospheres in both million-year intervals. With the update off, the independent energy balances closed to within 0.03% of labelled input in each of the 38 intervals scored. <!-- claims: BND-15 -->
+
+Claude independently checked 19 primary results, 228 method combinations and the high-power restart comparison from the archived injector rates and lobe measurements. A separate calculation verified the low-power budgets against the solver records. [Original calculations](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/native_delivery_restatement_2026-11-21.md) · [High-power comparison](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/entropy_restart_lobes_2026-11-23.md) · [Low-power scores and data](https://github.com/BWBrook/xray_cavities/blob/main/docs/science/low_power_entropy_result_2026-11-23.md).

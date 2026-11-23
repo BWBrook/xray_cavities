@@ -330,6 +330,28 @@ claims:
       - "The whole-grid energy difference between arms holds at 0.082–0.085 (G-HI) and 0.038–0.046 (C-HI) of cumulative labelled input at every 0.1-Myr output, while its thermal and kinetic parts move by more than that total. In units of one Myr of labelled input, the C-HI kinetic difference is +0.044 at 11 Myr and −0.053 at 12 Myr, and C-HI lobe thermal energy at 12 Myr is higher by 0.171 against a total difference of 0.078. There is one pair per case and no replicate to show how fast two trajectories separate. The 3.56% and 4.25% are a measured contrast at one time, not an effect size or a correction."
     depends_on: [NAT-01, NAT-07, BND-14]
 
+  - id: NAT-13
+    status: provisional
+    statement: >-
+      In the low-power 10–12 Myr restart pairs, lobe enthalpy gain per unit
+      of delivered gas energy changes from 67.62% with the entropy update
+      on to 72.59% with it off in G-LO, and from 89.40% to 88.83% in C-LO.
+      The absolute 12-Myr enthalpy changes by +1.46% and −0.21%, respectively.
+      The sign in C-LO reverses at the two stricter tracer thresholds.
+    evidence:
+      - {path: docs/science/low_power_entropy_result_2026-11-23.md, commit: ffc61cb}
+      - {path: docs/science/assets/low_power_entropy_result_2026-11-23/lobe_native_snapshots.json, commit: ffc61cb}
+      - {path: docs/science/assets/low_power_entropy_result_2026-11-23/lobe_paired_effects.csv, commit: ffc61cb}
+      - {path: docs/science/assets/low_power_entropy_result_2026-11-23/lobe_verification.json, commit: ffc61cb}
+    reproduce: .venv/bin/python scripts/science/reduce_low_power_entropy_lobes.py --output /tmp/xray-low-power-lobes
+    test: >-
+      Cross-lab review of the shared-seed subtraction, signed gas delivery
+      and dependence on tracer threshold in the six endpoint receipts.
+    caveats:
+      - The 0.1%, 0.5% and 1% tracer cuts give differences of −0.575, +0.397 and +1.285 percentage points in C-LO and +4.969, +5.652 and +6.353 points in G-LO.
+      - This follow-up used completed outputs after forecast scoring. With one pair per case and ten shared Myr, the ratios measure changes in the pressure-volume estimate over these two Myr. Deposition of heat and later-age bias are separate questions.
+    depends_on: [NAT-01, NAT-05, BND-15]
+
   - id: BND-01
     status: supported
     statement: >-
@@ -715,7 +737,7 @@ claims:
       - The C-HI exterior residual also stays negative, with a maximum paired gravity discrepancy of 20.5% of its magnitude. In the low-power runs the exterior balance changes sign across boundary reconstructions.
       - C-HI's sampled absolute net gravitational work is 32.8% of the primary exterior deficit at 10–12 Myr and 51.9% at 29–30 Myr. In G-HI, 6.95–7.13 percentage points of the 10–12 Myr deficit lie beyond 0.85 kpc across the 24 matched methods. These saved-state spatial balances motivate the paired native-stage measurement of the entropy update.
       - Agreement between the two saved-state work estimates shows that the saved fields satisfy discrete continuity. It cannot detect an error in the solver's stage-resolved source term. The stronger exclusion is magnitude: at 29–30 Myr the whole exterior gravitational work is about −2.1% of labelled energy, a quarter of the −8.4% residual, and a second-order source-term error cannot exceed the term itself (Claude, 21 Nov 2026).
-      - The production runs enable PLUTO's entropy switch (G-LO run log, `ENTROPY_SWITCH: ENABLED`; the paired-control definitions.h uses SELECTIVE). In cells it marks unshocked, pressure is recovered from conservatively advected entropy, so total energy is not conserved. The change is two-signed. Kinetic energy dissipated numerically in shear layers is not returned as heat, while mixing gas of different density at equal pressure raises the recovered pressure (Gemini's review, 21 November 2026; a factor 7.15 for an equal-volume 100:1 mix). BND-14 measures both signs in the high-power restarts and their net loss at 10–12 Myr. The sign and size in the low-power runs remain unknown.
+      - The production runs enable PLUTO's entropy switch (G-LO run log, `ENTROPY_SWITCH: ENABLED`; the paired-control definitions.h uses SELECTIVE). In cells it marks unshocked, pressure is recovered from conservatively advected entropy, so total energy is not conserved. The change is two-signed. Kinetic energy dissipated numerically in shear layers is not returned as heat, while mixing gas of different density at equal pressure raises the recovered pressure (Gemini's review, 21 November 2026; a factor 7.15 for an equal-volume 100:1 mix). BND-14 measures the net loss in the high-power restarts at 10–12 Myr. BND-15 measures a gain in C-LO and a loss in G-LO in that window. At later ages the numerical attribution remains open.
     depends_on: [BND-08, BND-12]
 
   - id: BND-14
@@ -746,34 +768,41 @@ claims:
       - The signed switch-on RK counter equals the primary exterior residual to within 0.000032 percentage points of label in each case. Gross changes include both gains and losses. The counter measures their net per visit and cannot separate contact mixing from dissipation inside a visit.
       - The initial switch-off transient dominates the small primary remainder. The first interval is sampled at its endpoints, with a common production seed.
       - Under linear outer-face extrapolation C-HI's residual is −6.200% on and −1.602% off. The corresponding paired change agrees with the primary 4.598 percentage points. Forcing HLL on every injector face also changes the absolute residual.
-      - The test covers two high-power jets at 10–12 Myr. Contributions to low-power runs, later deficits and changes to lobe enthalpy at the ages used in the headline comparison remain unmeasured.
+      - This test covers two high-power jets at 10–12 Myr. BND-15 covers the paired low-power tests in the same window. NAT-12 and NAT-13 measure the enthalpy response to 12 Myr. The response at later headline ages remains open.
       - "Independent review (Claude, 23 November 2026): the four window residuals, both removal fractions, the counter's net, gain and loss and the delivery ratios reproduce from the snapshot receipts and raw stage codes in compact_inputs.zip (scripts/science/review_entropy_restart.py). In each of the 20 switch-on intervals the residual equals the counter within 2.8e-6 (G-HI) and 8.7e-7 (C-HI) of that interval's labelled input. Independence stops at those receipts; the native files and stage ledgers were not reread."
       - "The switch-off arm calibrates the reconstructions. After the first interval its primary budget closes within 2.8e-6 (G-HI) and 4.7e-6 (C-HI) of labelled input in each of 19 intervals, which also bounds the gravity-source and floor terms. In the same intervals forced HLL leaves -1.7%, first-order states -5.9% and, in C-HI, linear outer-face extrapolation -1.6%. Those are biased reconstructions, not a band on the absolute residual. The first interval's -0.34% comes from averaging across the step in delivery at the shared seed."
     depends_on: [BND-12, BND-13]
 
   - id: BND-15
-    status: open
+    status: supported
     statement: >-
-      At 10–12 Myr, selective entropy recovery is predicted to add energy
-      outside the injector in C-LO and remove it in G-LO. The proposed source
-      is tested against paired switch-on and switch-off restarts.
+      Across the tested 10–12 Myr, selective entropy recovery adds 3.8837%
+      of labelled input outside the injector in C-LO and removes 1.9613% in
+      G-LO. All four registered 1-Myr counter predictions pass. With the
+      update off, all 38 post-startup exterior energy residuals fall within
+      the registered ±0.2% of the short interval’s labelled input.
     evidence:
       - {path: docs/science/low_power_entropy_restart_protocol_2026-11-23.md, commit: c4ad0c3}
       - {path: docs/correspondence/thread-0029.md, commit: 110cfbd}
       - {path: scripts/science/score_low_power_entropy.py, commit: dd3dae5}
+      - {path: docs/science/assets/low_power_entropy_result_2026-11-23/on_counter_windows.csv, commit: ffc61cb}
+      - {path: docs/science/assets/low_power_entropy_result_2026-11-23/off_interval_scores.csv, commit: ffc61cb}
+      - {path: docs/science/assets/low_power_entropy_result_2026-11-23/compact_inputs.zip, commit: ffc61cb}
+      - {path: docs/science/assets/low_power_entropy_result_2026-11-23/independent_verification.json, commit: ffc61cb}
     reproduce: >-
-      .venv/bin/python scripts/science/score_low_power_entropy.py
-      <completed-paired-native-directory> <snapshot-receipts-directory> <score-output-directory>
+      .venv/bin/python scripts/science/verify_low_power_entropy.py
+      docs/science/assets/low_power_entropy_result_2026-11-23/compact_inputs.zip
     test: >-
       The registered 10–11 and 11–12 Myr switch-on counter predictions,
       as fractions of low-power labelled input, are +0.030 and +0.047 in
-      C-LO and −0.017 and −0.022 in G-LO, each within ±0.005. A C-LO net
-      below +0.01 refutes the proposed attribution under the forecast.
-      Each switch-off exterior residual after the first short interval
-      should lie within ±0.002 of the interval's labelled energy in both
-      cases. Compare with the native signed energy changes.
+      C-LO and −0.017 and −0.022 in G-LO, each within ±0.005. Both C-LO
+      windows cleared the +0.01 refutation threshold. All 19 post-startup
+      switch-off intervals in each case met the ±0.002 exterior-residual
+      bound. The signed counters and reconstructed switch-on balances
+      agreed to within 0.000006 of label across each two-Myr window.
     caveats:
-      - The estimates were inferred from older production residuals and the high-power boundary calibration. The low-power counter and the switch-off controls supply the prospective measurements.
+      - Claude registered the forecasts using the older production residuals and high-power calibration. A separate computation checked the 405,171 raw low-power solver rows and all 80 primary stock-and-flux intervals. The published ZIP replays the binned raw inputs. The full native per-step ledgers are in the project archive.
+      - The two excluded switch-off startup intervals remain in the tables. Ordinary pressure floors in the switch-off arms add 0.0244% of labelled input in C-LO and 0.0258% in G-LO over the two Myr.
       - The 10-Myr checkpoint already incorporates the first ten million years of production evolution. The experiment addresses the next two million years and does not quantify late-time enthalpy bias.
     depends_on: [BND-14]
 

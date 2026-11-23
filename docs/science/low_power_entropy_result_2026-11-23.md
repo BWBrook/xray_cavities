@@ -29,7 +29,9 @@ The C-LO control is particularly informative. Across the two Myr the grid stored
 
 ## How much of the difference appears in the lobe?
 
-After scoring the forecasts we measured pressure and volume in the two shared 10-Myr seeds and all four low-power 12-Myr endpoints. The table uses the same quantity in all four runs: the increase in $2.5\int p\,dV$ in the tracer-defined lobe divided by the gas energy delivered in that arm during 10–12 Myr. The last column compares absolute lobe enthalpies at 12 Myr. The primary lobe includes cells with more than 0.1% jet material by mass. [Low-power lobe measurements](assets/low_power_entropy_result_2026-11-23/lobe_measurements.csv) · [High-power interval calculation](assets/entropy_lobe_review_2026-11-23/summary.json)
+![Signed energy correction outside the injector, as a percentage of labelled input, and lobe enthalpy gain per unit of gas energy delivered during 10–12 Myr in each of the four cases.](assets/low_power_entropy_result_2026-11-23/four_case_entropy_response.png)
+
+After scoring the forecasts we measured pressure and volume in the two shared 10-Myr seeds and all four low-power 12-Myr endpoints. In each arm we divided the increase in the lobe pressure–volume estimate, $2.5\int p\,dV$, by the gas energy the injector delivered during 10–12 Myr. The last column compares absolute lobe enthalpies at 12 Myr. The primary lobe includes cells with more than 0.1% jet material by mass. [Low-power lobe measurements](assets/low_power_entropy_result_2026-11-23/lobe_measurements.csv) · [High-power interval calculation](assets/entropy_lobe_review_2026-11-23/summary.json)
 
 | Case | Enthalpy gain / delivered gas energy, switch on | Switch off | Change in absolute 12-Myr enthalpy, off vs on |
 | --- | ---: | ---: | ---: |
