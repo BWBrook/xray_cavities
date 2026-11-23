@@ -1,0 +1,11 @@
+{
+  "seal_sha256": "5e917a299e83c5693e01f2c8dbf787213aa99e322aac77ebf5ad11d48a4244ce",
+  "prediction_receipt_sha256": "e85211c2e59e4a1cc6175421619ba1920da2bb98b0a542b347a406f1a53bc504",
+  "science_views": 54,
+  "null_views": 12,
+  "producer_pairs": 22,
+  "prediction_masks": 1056,
+  "pixel_values_examined": false,
+  "precommitted_native_inputs_verified": 22,
+  "precommitted_native_inputs_sha256": "bf41d2e0e7aa143a68316c0a3aeffcbe49fa0c3bea7288c0183d0e555fbc2fb3"
+}
