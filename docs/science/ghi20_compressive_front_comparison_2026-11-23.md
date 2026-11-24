@@ -2,9 +2,19 @@
 
 **Simulation and observation.** The high-power jet in group atmosphere `002031` has bipolar labelled power $2\times10^{45}$ erg s⁻¹, speed $0.1c$, 15° half-opening angle and 0.75-kpc injection height. Its 960 × 960 × 1,014 Cartesian grid spans 400 × 400 × 500 kpc, with cell widths from 0.05 kpc at the centre to 1.69 kpc transversely and 2.10 kpc axially at the outer edges. The HLLC solver used CFL 0.33 and an initial step of $10^{-5}$ code units. Native single-precision fluid outputs were scheduled every 306.60139379 code units. The compared output is `Timestep_20`, code time 6131.909618, actual age **19.9996143 Myr**. The original 1-keV maps use redshift 0.05 and side-on azimuths 0°, 45° and 90° about the jet axis. [Frozen front definition](ghi20_compressive_front_contract_2026-11-23.md) · [Frozen observer comparison](compressive_front_observer_protocol_2026-11-23.md)
 
-Patrick’s requested review covers the independent three-dimensional front definition, its projection and the interpretation of any apparent alignment. The lobe and observer metrics below use the previously exposed development maps. [Method review request](../exchange/logs/2026-11-23-ghi20-compressive-front-method-review.md)
+Claude reproduced the contour distances and emission budgets from the published tables. Patrick’s review of the three-dimensional front definition and its interpretation remains open. All measurements here use the previously exposed development snapshot. [Independent review](../correspondence/thread-0029.md#message-3731--claudemini-claude-fable-52--evidence) · [Method review request](../exchange/logs/2026-11-23-ghi20-compressive-front-method-review.md)
 
 ## Do the lateral orange arcs follow the independent front?
+
+**The radial background fit creates the broad apparent deficits.** Beyond the projected lobe, the original orange arcs select sightlines whose pooled 1-keV brightness has barely changed since time zero. The fitted background sits 5.7–8.5% above the initial brightness there. A direct comparison of each pixel with its own initial brightness finds a decline exceeding 5% on just 0.56% of the exterior arc area at 45° and on none at 0° or 90°. This check uses whole-sightline brightness and is independent of how the compressing gas is identified. It measures projected change and leaves the distribution of gas along each sightline unresolved. [Complete exterior arc measurements by hemisphere and view](assets/compressive_front_observer_2026-11-23/exterior_arc_background_check.csv)
+
+| Side-on azimuth | Exterior arc brightness change since time zero | Original fitted background above time-zero brightness | Exterior area that dimmed by more than 5% |
+| --- | ---: | ---: | ---: |
+| 0° | +0.017% | 5.67% | 0% |
+| 45° | +0.015% | 8.02% | 0.56% |
+| 90° | +0.109% | 8.49% | 0% |
+
+Each brightness percentage compares sums over both hemispheres weighted by physical pixel area. The last column compares individual pixels, then sums the area of those that dimmed.
 
 The most conspicuous arcs, at 0°, sit **25–26 kpc outside** the edge of the dominant compressive layer at the median contour position in either hemisphere. Their median separations span 25.2–26.2 kpc across the four native definitions. The projected compression occupies only **0.60–0.65%** of the lateral orange area in that view. Across all six sides and views, **91.4–99.4%** of that area has no sightline intersecting either the dominant or other qualifying compression components. The selected layer reaches roughly 45 kpc from the jet axis and 105 kpc along it. All three independent sky projections recover its native volume of 103,965 kpc³. No qualifying component touches the boundary at the primary settings. [Area overlaps](assets/compressive_front_observer_2026-11-23/front_sightline_overlap.csv) · [Native definition, controls and limitations](assets/ghi20_compressive_front_native_2026-11-23/README.md)
 
@@ -25,7 +35,7 @@ The overlays use the same brightness and deficit scales; the colour bars indicat
 
 ## What the compressed gas changes in the X-ray image
 
-On genuine lobe sightlines that the original masks missed, front-associated ambient gas brightened relative to the same cells at time zero. Its increase offsets roughly one-third to one-half of the lobe’s own lost emission. By contrast, on the orange area beyond the lobe, the front’s **net brightening** is at most 0.20% of the observed brightness when the two hemispheres are pooled. The table sums each numerator and denominator over both hemispheres with the exact pixel areas before division. [Thirty per-side component budgets](assets/compressive_front_observer_2026-11-23/emission_regions.csv)
+On lobe sightlines missed by the original outlines, **ambient gas brightens by 1.68–2.56 times the lobe's own loss of X-ray emission**. The dominant compressive layer supplies 18–20% of that ambient gain. Gas outside the layer adds 1.35–2.09 times the lobe decrement, integrated along the same sightlines. The lobe plus all intervening gas is therefore 12–24% brighter at 20 Myr than at time zero on these missed sightlines. Over the *full* projected lobe, including sightlines the outlines detected, ambient brightening offsets 72–78% of the lobe decrement. The component sums do not locate the gas outside the layer along the line of sight. [Pooled component and whole-sightline budgets](assets/compressive_front_review_2026-11-24/pooled_emission_budget.csv) · [Per-side integrals](assets/compressive_front_observer_2026-11-23/emission_regions.csv)
 
 | Side-on azimuth | Lobe decrement offset on blue-missed sightlines | Lobe decrement offset on orange-missed sightlines | Front brightening / current brightness on exterior orange area |
 | --- | ---: | ---: | ---: |
@@ -33,9 +43,11 @@ On genuine lobe sightlines that the original masks missed, front-associated ambi
 | 45° | 49.48% | 49.23% | 0.193% |
 | 90° | 44.95% | 47.07% | 0.105% |
 
-Here the numerator is current minus initial emissivity in the **current compressive-layer ambient cells**. The decrement in the first two columns is initial minus current emissivity of current `tr1 > 0.001` lobe cells, along **missed** tracer sightlines only. The older 39–84% statistic integrates **speed-selected** ambient brightening over **selected** sightlines and divides by the fitted-background-minus-current observed deficit there. Expressed against the lobe’s own decrement on those selected sightlines, that older measure was 37–44%. The changed cell sets, sky regions and denominators answer different questions. [Earlier reconciliation](turn18_review_reconciliation_2026-11-11.md)
+Here the numerator is current minus initial emission from the **current compressive-layer ambient cells**. The first two columns divide by the intrinsic loss from current `tr1 > 0.001` lobe cells on **missed** tracer sightlines, pooling the two hemispheres before division. The layer's volume-weighted effective native cell size along the pressure gradient is 0.320 kpc. The physical thickness of the layer can span several cells. The earlier 39–84% statistic divides **speed-selected** ambient brightening on **selected** sightlines by the fitted-background-minus-current observed deficit there. Expressed against the lobe’s own decrement on those selected sightlines, that earlier measure was 37–44%. [Native cell-size measurement](assets/ghi20_compressive_front_native_2026-11-23/native_projection_totals.csv) · [Earlier reconciliation](turn18_review_reconciliation_2026-11-11.md)
 
-The outer arcs also respond **indirectly** to the front through the observer’s radial background fit. At 0° the original orange inferred volume is 3.98 times the native lobe. Replacing only the front-associated ambient gas with its initial emissivity in the same cells raises that figure to 4.11 with the original background. Refitting the background to that **same altered image** gives 1.08. The area selected outside the lobe drops from 7,229 to 1,170 kpc² and purity rises from 44.7% to 84.5%, yet completeness rises only from 51.6% to 56.4%. The near-unit volume therefore still misses 43.6% of the projected lobe area. The substitution changes only the 1-keV emissivity assigned to those fixed cells in the saved snapshot. [All 60 side, method and treatment results](assets/compressive_front_observer_2026-11-23/replacement_recovery.csv)
+The 0° arc lies close to the 5% selection threshold. The difference between the area-integrated original radial background and current brightness is **5.35%** of that background. Restoring the front-associated ambient cells to their initial emissivity lowers the integrated arc brightness by only **0.00068%**. Refitting the background to the altered image lowers the integrated background over that same arc by **0.585%**. All the original exterior arc area remains selected with the fixed background. With the refit, only **15.8%** remains above threshold and selected. The corresponding fractions after refitting are 33.8% at 45° and 46.7% at 90°. These figures cover the complete arcs. On the four previously selected 0° profile rows, pixels outside both the lobe and front have a maximum original deficit of 5.58% and a median background drop of 0.64%. [Full-area threshold and selection check](assets/compressive_front_observer_2026-11-23/exterior_arc_background_check.csv) · [Profile-row thresholds](assets/compressive_front_review_2026-11-24/exterior_arc_threshold_margin.csv)
+
+The threshold crossing accounts for the change in inferred volume. On the same altered 0° image, the original radial background gives **4.11** times the native lobe volume and the refitted background gives **1.08**. The refit still misses 43.6% of the projected lobe area. Comparing the refitted outlines before and after emissivity replacement, selected area outside the lobe falls from 7,229 to 1,170 kpc², purity rises from 44.7% to 84.5%, and completeness rises from 51.6% to 56.4%. The other two views give ratios of 0.65 and 0.85 after the same treatment. [All 60 side, method and treatment results](assets/compressive_front_observer_2026-11-23/replacement_recovery.csv)
 
 | Azimuth | Outline | Exact image, original background | Replacement, original background | Exact image, refitted | Replacement, refitted | Refitted completeness, before → after |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -72,4 +84,12 @@ Restore the reviewed Turn 15 compact and map bundles into a common archive direc
 .venv/bin/python scripts/science/compare_compressive_front.py \
   --inputs "$DEVELOPMENT_MAPS" --native "$NATIVE_FRONT" \
   --front-receipt "$NATIVE_FRONT/completion.json" --output "$NEW_RESULT_DIRECTORY"
+```
+
+The complete exterior arc check uses the final emissivity projections. It verifies the original and native map hashes and repeats the radial-background fit and 5% selection on the same replaced image.
+
+```bash
+.venv/bin/python scripts/science/ghi20_exterior_arc_check.py \
+  --inputs "$DEVELOPMENT_MAPS" --native "$NATIVE_FRONT" \
+  --output "$NEW_RESULT_DIRECTORY/exterior_arc_background_check.csv"
 ```

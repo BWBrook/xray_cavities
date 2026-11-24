@@ -40,3 +40,12 @@ with a refit. The lateral arcs themselves receive very little excess
 light from the front. These results distinguish a change in the background
 estimate from emission on the selected sightlines. XR-05 and XR-06 are
 provisional pending review. [Regional emission](../../science/assets/compressive_front_observer_2026-11-23/emission_regions.csv) · [Fixed and refitted comparisons](../../science/assets/compressive_front_observer_2026-11-23/replacement_recovery.csv)
+
+The 24 November pixel check answers the background part of this question.
+Across the three views, integrated exterior arc brightness changes by at
+most 0.11% from time zero. The fitted background exceeds the initial
+brightness there by 5.67–8.49%. At 0°, holding the background fixed
+retains the entire exterior arc after replacement. Refitting it retains
+15.8%. The question for the native review is whether the selected layer
+represents the front and how much of the ambient brightening it captures.
+[Exterior arc check](../../science/assets/compressive_front_observer_2026-11-23/exterior_arc_background_check.csv)
