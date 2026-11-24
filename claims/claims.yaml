@@ -1073,6 +1073,8 @@ claims:
       - {path: docs/science/assets/compressive_front_observer_2026-11-23/front_contour_separations.csv, commit: c6fc259}
       - {path: docs/science/assets/compressive_front_observer_2026-11-23/front_sightline_overlap.csv, commit: c6fc259}
       - {path: docs/science/ghi20_compressive_front_contract_2026-11-23.md, commit: 8905180}
+      - {path: scripts/science/review_compressive_front.py, commit: 505eaf2}
+      - {path: docs/science/assets/compressive_front_review_2026-11-24/summary.json, commit: 505eaf2}
     reproduce: >-
       Restore the original three development images and the verified native
       projections. Run the compare_compressive_front.py command in
@@ -1084,6 +1086,8 @@ claims:
       - The front finder admits smooth acoustic compressions. The edges alone cannot establish a shock or attribute brightness to it.
       - At 45° and 90° small signed medians combine inward and outward offsets. Only 0.6–2.0% of arc length is within one native resolution element of the dominant projected edge there.
       - All three views come from one previously exposed simulation output.
+      - "Claude, 24 November 2026: the six medians, the 91.4–99.4% range and the 25.2–26.2 kpc range across the four definitions reproduce from the published tables. The contract and the observer protocol are unchanged since commits 8905180 and 0190f5b. My half of the test is done; the claim stays provisional until Patrick's review of the native selection."
+      - "Claude, 24 November 2026: the exterior 5%-deficit area is undisturbed gas. Pooled over both hemispheres, its brightness is 0.017% (0°), 0.015% (45°) and 0.11% (90°) above its time-zero value, while the fitted radial background stands 5.7%, 8.0% and 8.5% above that value. The arcs arise in the background fit. This reading does not depend on the front definition."
 
   - id: XR-06
     status: provisional
@@ -1100,6 +1104,8 @@ claims:
       - {path: docs/science/assets/compressive_front_observer_2026-11-23/emission_regions.csv, commit: eef1497}
       - {path: docs/science/assets/compressive_front_observer_2026-11-23/replacement_recovery.csv, commit: eef1497}
       - {path: docs/science/assets/ghi20_compressive_front_native_2026-11-23/independent_map_closure.json, commit: eef1497}
+      - {path: docs/science/assets/compressive_front_review_2026-11-24/pooled_emission_budget.csv, commit: 505eaf2}
+      - {path: docs/science/assets/compressive_front_review_2026-11-24/exterior_arc_threshold_margin.csv, commit: 505eaf2}
     reproduce: >-
       Run the compare_compressive_front.py command in
       docs/science/ghi20_compressive_front_comparison_2026-11-23.md with the
@@ -1111,4 +1117,6 @@ claims:
     caveats:
       - The emissivity replacement uses the same present-day cells at both epochs. It requires three-dimensional simulation data.
       - The inferred volume uses axial symmetry. Completeness measures projected area. Both geometries come from one exposed case and age.
+      - "Claude, 24 November 2026: the pooled offsets and all replacement ratios reproduce. The 32.8–49.5% is the share of the compressing layer alone, whose volume-weighted width is 0.32 kpc. On the same missed sightlines the ambient gas outside the layer brightens by 1.35–2.09 times the lobe deficit, so the layer supplies 18–20% of the ambient brightening and those sightlines are 12–24% brighter than at time zero. Over all lobe sightlines the ambient gain is 72–78% of the lobe deficit."
+      - "Claude, 24 November 2026: the change from 4.11 to 1.08 is a threshold crossing. At 0° the exterior ring has an area-mean deficit of 5.35% against the 5% threshold, and at most 5.58% on the four sampled rows. The replacement leaves the ring's brightness unchanged and lowers the refitted background there by 0.64%. The same step gives 0.65 and 0.85 at 45° and 90°, so 1.08 is not a recovery of the lobe volume."
     depends_on: [XR-05]
