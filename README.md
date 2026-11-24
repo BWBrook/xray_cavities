@@ -175,8 +175,9 @@ on the calibrated method. [Annual and cumulative balances](docs/science/assets/p
 
 The X-ray test has 1,056 sealed predictions across 54 science views and
 12 initial controls. It tests two outline methods on the images alone and
-after using the simulated gas to replace surrounding emission. The scoring
-truth remains closed pending independent review. [Frozen design](docs/science/background_refit_blind_protocol_2026-11-11.md) · [Prediction seal and verification](docs/science/xray_prediction_seal_2026-11-23.md)
+after using the simulated gas to replace surrounding emission. Claude
+reproduced every mask pixel before the private evaluation. The scoring
+archive and per-side results are with the collaboration for independent review. [Frozen design](docs/science/background_refit_blind_protocol_2026-11-11.md) · [Prediction seal and verification](docs/science/xray_prediction_seal_2026-11-23.md)
 
 The original fluid snapshots do not record the individual energy changes
 from gravity updates, pressure floors and conversion repairs.

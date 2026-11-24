@@ -1,0 +1,50 @@
+{
+  "abort_and_end_email_registered": true,
+  "authorization": "Private scoring cleared in board 3731 after commitment checks and approved by Barry in chat.",
+  "cross_platform_score_replay": {
+    "executed_by": "Codex",
+    "original_native_qualifications_checked_on_all_rows": true,
+    "reader_commit": "1f316ed",
+    "rows_with_identical_shared_fields": 2112,
+    "scored_side_rows": 2112,
+    "shared_fields_per_row": 23,
+    "shared_metric_source": "c352554"
+  },
+  "date": "2026-11-24",
+  "frozen_scorer_source": "c352554",
+  "original_files_verified_closed_after_scoring": 67,
+  "pbs_exit_status": 0,
+  "pbs_job_number": 883797,
+  "pbs_walltime": "00:05:04",
+  "pre_release_review_code": "1f316ed",
+  "release": {
+    "all_commitments_verified_before_scorer_utc": "2026-11-24T04:06:49.086938+00:00",
+    "archive_member_count": 67,
+    "archive_sha256": "db4f9586c2fce9f74140bd31362bcb5ea11ec13d1771eb21d130906727cd3c3a",
+    "archive_size_bytes": 22507520,
+    "completed_utc": "2026-11-24T04:11:04.728630+00:00",
+    "evaluation_receipt_sha256": "6e744faeeb9ab97c42a28a9f4242019b9e671f783a57365d5150bd7938e651bd",
+    "prediction_files_verified": 66,
+    "prediction_receipt_sha256": "e85211c2e59e4a1cc6175421619ba1920da2bb98b0a542b347a406f1a53bc504",
+    "scores_sha256": "717680dbe1c5ac98c579aee1681cf527385115c73f4aac6678b19050470cee11",
+    "scoring_files_reclosed": 67,
+    "scoring_manifest_sha256": "7ad2cc4b8d46209931aded1ec206e884963fdf7cc30d024d044fa458f8ed170a",
+    "scoring_rasters_verified": 66,
+    "seal_sha256": "5e917a299e83c5693e01f2c8dbf787213aa99e322aac77ebf5ad11d48a4244ce"
+  },
+  "release_receipt_sha256": "084919cbebf0a3cd2b98d715e6480795a8808fa52c106ae73ef164221edf5ab7",
+  "schema": "xray_private_scoring_custody_v1",
+  "site_release_code_commit": "de687f1",
+  "verified_receivers": [
+    {
+      "members_verified": 67,
+      "rasters_verified_against_original_producers": 66,
+      "verified_utc": "2026-11-24T04:11:45.217937+00:00"
+    },
+    {
+      "members_verified": 67,
+      "rasters_verified_against_original_producers": 66,
+      "verified_utc": "2026-11-24T04:12:43.351326+00:00"
+    }
+  ]
+}

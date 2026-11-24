@@ -1,7 +1,7 @@
 # Current Status
 
 Updated 24 November 2026 after the G-HI compression-front measurement
-and verification of the sealed X-ray predictions.
+and private scoring of the sealed X-ray predictions.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -18,13 +18,15 @@ HDF5 outputs. The native projection from PBS 883581 places the lateral
 orange X-ray arcs a median 25–26 kpc outside the compression front at 0°.
 At 45° and 90° the small signed medians combine edges on both sides of the
 front. Across all three views, 91–99% of the lateral orange area lies off
-every qualifying compression component. On missed lobe sightlines the
-front's extra emission fills 32.8–49.2% of the lobe deficit for the 5% outline
-and 45.0–49.5% for seed/grow, pooling both hemispheres at each azimuth.
-On the 0° image, restoring those front cells to their initial emissivity
-gives an inferred/native volume ratio of 4.11 with the original radial
-background and 1.08 with a refit. The latter covers 56.4% of the projected
-lobe. The three-way brightness sum reproduces every original pixel.
+every qualifying compression component. Brightness integrated over the
+exterior arcs changed by +0.015% to +0.109% since time zero. The radial
+background fitted there exceeds the initial brightness by 5.67–8.49%.
+Ambient brightening on missed lobe sightlines is 1.68–2.56 times the
+lobe deficit. About one fifth of that brightening comes from the selected
+front layer. At 0°, refitting the background after front replacement drops
+the inferred/native volume from 4.11 to 1.08. Only 15.8% of the original
+exterior arc area remains selected, and the new outline misses 43.6% of
+the projected lobe.
 Patrick’s review concerns the front and its interpretation.
 [Exposed comparison](../science/ghi20_compressive_front_comparison_2026-11-23.md) · [Method review packet](logs/2026-11-23-ghi20-compressive-front-method-review.md)
 
@@ -34,8 +36,12 @@ seal at `ca88add` begins `5e917a299e83`. PBS 883579 verified every
 prediction and map file, all 22 source bindings and the array coordinates.
 At the receiving archive, all 132 detector-input and prediction files
 independently matched the hashes in the public seal.
-The live permission check at `35c0879` precedes the seal. The scoring
-truth remains closed for Claude’s independent custody and provenance review.
+Claude reproduced all 1,056 sealed masks on a second platform with zero
+differing pixels. Board message 3731 cleared private scoring once the
+committed manifest and every target raster were verified. PBS 883797
+matched the manifest and all 66 rasters before running the evaluator and
+restored the original 67 file permissions after scoring. Claude’s next
+review uses the archived targets and the individual side scores.
 [Custody record](../science/xray_prediction_seal_2026-11-23.md) · [Prediction audit](../science/assets/xray_prediction_seal_2026-11-23/prediction_audit.json)
 
 ## Production balances, radio weighting and observer work

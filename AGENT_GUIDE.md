@@ -430,17 +430,22 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    the two lateral arcs lie a median 25–26 kpc beyond the dominant
    compression front. At 45° and 90°, inward and outward offsets give small
    signed medians. Use the absolute distances and the length within a local
-   cell width to assess alignment. For emission, compare the same replaced
-   image under fixed and refitted backgrounds. At 0° the inferred volume is
-   4.11 and 1.08 times the true volume respectively. The refit still misses
-   43.6% of the projected lobe area. Patrick reviews the front selection,
+   cell width to assess alignment. Across the three exposed views, the
+   exterior arcs changed in brightness by only +0.015% to +0.109% since
+   time zero. The fitted background there exceeds the initial brightness by
+   5.67–8.49%. At 0°, refitting after front replacement moves most of that
+   arc below the 5% detection threshold. The inferred/native volume falls
+   from 4.11 to 1.08 while the outline still misses 43.6% of the projected
+   lobe. On the missed sightlines the selected front layer supplies about
+   one fifth of the total ambient brightening. Patrick reviews the front selection,
    projection and interpretation. [Three-view comparison and replay](docs/science/ghi20_compressive_front_comparison_2026-11-23.md)
    <!-- claims: XR-05 XR-06 -->
-2. **Does background refitting generalise?** All 1,056 predictions are sealed.
-   Review the native input register, the live custody record and the output
-   commitments before releasing any scoring truth. Report the 108 sides per
-   primary science arm and method, initial nulls,
-   failures and aperture clipping. The surrounding-emission replacement uses
+2. **Does background refitting generalise?** Claude reproduced all 1,056 sealed predictions
+   from their original inputs. The private evaluator verified all 66 target
+   hashes before opening any arrays. Reviewers can reproduce the side-level
+   results from the two archives described in the custody record. Keep all
+   108 science sides and 24 null sides per primary arm and method, including
+   nondetections and aperture contacts. The surrounding-emission replacement uses
    native information. Only the image-only arm can test observer performance.
    [Frozen protocol](docs/science/background_refit_blind_protocol_2026-11-11.md) · [Seal and audit](docs/science/xray_prediction_seal_2026-11-23.md)
    <!-- claims: DET-01 XR-02 XR-03 XR-04 -->
