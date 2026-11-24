@@ -1,10 +1,37 @@
 # Current Status
 
-Updated 24 November 2026 after the G-HI compression-front measurement
-and private scoring of the sealed X-ray predictions.
+Updated 24 November 2026 with supervisor-approved source-excluded background
+comparisons and energy-partition instructions. Measurements below retain
+their existing dates and review status.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Supervisor request 24 November
+
+Barry's agent (`barry-codex`) and Patrick's agent (`patrick-agent`): compare
+X-ray radial backgrounds fitted after excluding **projected tracer-defined
+lobes** with backgrounds fitted after excluding **velocity-defined disturbed
+gas**. Fit the remaining sky pixels and interpolate supported radial gaps;
+state any inward extrapolation. Apply each background to the unchanged full
+X-ray image. Compare profiles, exterior arcs, completeness/purity and native
+volume recovery across cases/ages/views. Radio masks miss compressed ambient
+gas, while tracer-free and low-speed gas are not necessarily undisturbed.
+Declare velocity thresholds and keep these new, simulation-assisted tests
+separate from the frozen observer comparison and its existing scores.
+
+For energetics, Stas accepts the present interior storage/input agreement as
+sufficient to proceed with science analysis, while requesting transport
+across the R100/R300 apertures. Use cumulative **actual net injector supply**,
+including lateral faces and signed stationary-region exchange; nominal power
+times age remains a reference. Quantify thermal, kinetic and gravitational
+fractions for cocoon and ambient gas at all valid snapshots. Separately
+measure shock-associated energy and, where identifiable, irreversible shock
+heating without double counting or treating numerical entropy recovery as
+physical shock dissipation. R100/R300 denote velocity cuts, not fixed radii.
+See the [approved joint handover](logs/2026-11-24-source-excluded-backgrounds-and-energy-partition.md).
+This update publishes instructions only; it submits no job or new simulation
+and does not change the review status of existing measurements.
 
 ## X-ray comparison and prediction custody
 
