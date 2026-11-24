@@ -970,6 +970,32 @@ claims:
       - {path: docs/science/q032_retained_method_ladder_interpretation_2026-11-01.md, commit: 9f0223d}
     reproduce: see DET-01
 
+  - id: DET-05
+    status: supported
+    statement: >-
+      Across 54 held-out noiseless 1-keV views from 18 case-ages in four
+      simulations, the image-only seed/grow and radial 5%-deficit rules
+      each recovered less than 75% of the projected lobe area on every
+      one of 108 science sides. Median completeness was 22.8% and 41.6%.
+      Replacing moving ambient emission using native fields at the primary
+      100 km/s cut gave 6 and 13 passing sides, respectively. Every primary
+      arm and method left all 24 initial control sides empty.
+    evidence:
+      - {path: docs/science/background_refit_blind_protocol_2026-11-11.md, commit: c352554}
+      - {path: docs/science/assets/xray_prediction_seal_2026-11-23/seal.json, commit: ca88add}
+      - {path: docs/science/assets/xray_prediction_seal_2026-11-23/private_scoring_custody.json, commit: 341125a}
+      - {path: docs/science/assets/heldout_xray_2026-11-24/scores.csv.gz, commit: 10207dc}
+      - {path: docs/science/assets/heldout_xray_2026-11-24/summary.json, commit: 10207dc}
+      - {path: docs/science/heldout_xray_results_2026-11-24.md, commit: 10207dc}
+      - {path: scripts/science/summarise_heldout_xray.py, commit: 10207dc}
+    reproduce: >-
+      .venv/bin/python scripts/science/summarise_heldout_xray.py
+    caveats:
+      - A science pass required at least 75% completeness, at least 95% purity and no aperture contact. The denominator includes the entire target and all nondetections. Of 108 sides, 18 had less than 75% of their target inside the aperture. Both image-only rules also failed on the other 90.
+      - Three azimuths and two hemispheres share each simulated state. The scope is the two frozen automated rules and image model. Hand-drawn outlines, other background models and observational noise require separate tests.
+      - The assisted method uses simulation velocities and tracer. The follow-up depth and exterior brightness measurements were proposed after scoring. Inferred outline volumes alone do not measure enthalpy or jet power.
+      - Claude independently recomputed both areas and overlap across all 2,112 rows. Codex separately checked aperture contact from the physical radii of the selected centres and four face neighbours. Combining those checks reproduced all pass decisions.
+
   - id: XR-01
     status: supported
     statement: >-
@@ -1052,7 +1078,7 @@ claims:
       new rule is proposed. No selection is retuned using tracer truth here.
     caveats:
       - Replacement uses initial same-cell emissivity, not an evolved no-jet counterfactual or causal shock-energy estimate.
-      - The favorable ambient-replaced refit arm uses native tracer/velocity truth; it is not an observer-available detector. Frozen protocol c352554 separates it from the existing observer-only comparator and awaits held-out evaluation.
+      - The favorable ambient-replaced refit arm uses native tracer/velocity truth; it is not an observer-available detector. The held-out comparison under frozen protocol c352554 is recorded in DET-05.
       - The fitted-background-minus-initial term is a reference offset; a negative value is not gas brightening.
       - Nearly 89% of disturbed non-lobe volume is below 30 km/s; the below-cut complement is not physically static.
       - Correction agreement measures sensitivity, not physical correctness. Domain/sign, sky-coverage and projection qualifications remain recorded.
