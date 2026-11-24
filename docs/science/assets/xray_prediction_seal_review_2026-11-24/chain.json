@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "all_22_native_bindings_agree_from_register_to_sealed_unit": true,
+    "all_232_members_rehash_to_creator_inventory": true,
+    "all_modules_the_detector_can_import_identical_at_freeze_in_stage_and_now": true,
+    "archive_bytes_and_sha256_match_public_record": true,
+    "cohort_is_exactly_the_frozen_66_views": true,
+    "config_identical_at_freeze_commit_archive_and_now": true,
+    "custody_wrapper_identical_at_register_commit_and_in_stage": true,
+    "detector_inputs_hold_only_axes_brightness_and_declared_components": true,
+    "every_sealed_prediction_and_input_hash_matches_archive": true,
+    "frozen_sources_identical_at_freeze_commit_and_now": true,
+    "map_producer_and_assembler_identical_at_adapter_commit_in_stage_and_seal": true,
+    "maps_manifest_and_assembly_bound": true,
+    "member_classes": true,
+    "native_register_unchanged_since_pre_production_commit": true,
+    "no_scoring_member_names": true,
+    "prediction_receipt_bound": true,
+    "prediction_receipt_units_agree_with_seal": true,
+    "predictions_hold_only_axes_and_sixteen_masks": true,
+    "producer_receipts_commit_all_66_scoring_raster_hashes": true,
+    "scoring_manifest_commitment_consistent": true,
+    "seal_matches_public_copy_and_announced_hash": true,
+    "sixteen_frozen_labels": true,
+    "stage_records_freeze_and_adapter_commits": true
+  },
+  "notes": {
+    "detector_import_closure": 15,
+    "distinct_native_snapshot_hashes": 22,
+    "imported_modules_outside_the_protocol_hash_list": [
+      "scripts/science/build_selected_age_native_shock.py",
+      "scripts/science/extract_spherical_energy_budget.py",
+      "scripts/science/measure_q031_fluxes.py",
+      "scripts/science/pluto_h5_level3_ambient_extract.py",
+      "scripts/science/select_common_age_hdf5.py",
+      "scripts/science/snapshot_energy.py",
+      "scripts/science/snapshot_shock_energy.py",
+      "scripts/science/xraise_grid_smoke.py"
+    ],
+    "scoring_manifest_commitment_sha256": "7ad2cc4b8d46209931aded1ec206e884963fdf7cc30d024d044fa458f8ed170a",
+    "seal_sha256": "5e917a299e83c5693e01f2c8dbf787213aa99e322aac77ebf5ad11d48a4244ce"
+  },
+  "status": "passed"
+}

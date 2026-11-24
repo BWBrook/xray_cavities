@@ -1,0 +1,111 @@
+{
+  "added_by_this_review": {
+    "exterior_orange_current_over_initial_minus_one": {
+      "0": 0.00016657116744256406,
+      "45": 0.00014552990885974282,
+      "90": 0.0010895101799699436
+    },
+    "exterior_orange_mean_fractional_deficit": {
+      "0": 0.05351830202284841,
+      "45": 0.07412245301217404,
+      "90": 0.07727803331129332
+    },
+    "exterior_orange_radial_background_over_initial_minus_one": {
+      "0": 0.05672045566758244,
+      "45": 0.08021361265606997,
+      "90": 0.0849308310850061
+    },
+    "full_lobe_ambient_gain_over_lobe_deficit": {
+      "0": 0.715787809742506,
+      "45": 0.7841081230428604,
+      "90": 0.7225152901265267
+    },
+    "layer_share_of_ambient_gain_blue_missed": {
+      "0": 0.1950726160593161,
+      "45": 0.19975685348634062,
+      "90": 0.1903049556012214
+    },
+    "layer_share_of_ambient_gain_orange_missed": {
+      "0": 0.19553359002905812,
+      "45": 0.19589143277244309,
+      "90": 0.18361836704127787
+    },
+    "missed_blue_current_over_initial_minus_one": {
+      "0": 0.20285533087121732,
+      "45": 0.2328260584507087,
+      "90": 0.19793536459250638
+    },
+    "missed_orange_current_over_initial_minus_one": {
+      "0": 0.12192623821750259,
+      "45": 0.2402322380864239,
+      "90": 0.2251640863951938
+    },
+    "other_ambient_gain_over_lobe_deficit_blue_missed": {
+      "0": 1.9570405559803576,
+      "45": 1.9820132655438059,
+      "90": 1.9127105472758072
+    },
+    "other_ambient_gain_over_lobe_deficit_orange_missed": {
+      "0": 1.3511360072478624,
+      "45": 2.0208579788027006,
+      "90": 2.092546937194956
+    },
+    "sampled_rows_background_shift_median": {
+      "0": -0.006364272722216624,
+      "45": -0.028583868404767565,
+      "90": -0.031902079174709774
+    },
+    "sampled_rows_exterior_deficit_max": {
+      "0": 0.055838688007507624,
+      "45": 0.09780782636009608,
+      "90": 0.10655265632409004
+    },
+    "sampled_rows_largest_brightness_change": 0.0
+  },
+  "reproduced_from_published_tables": {
+    "layer_gain_over_current_on_exterior_orange": {
+      "0": 6.839573937031298e-06,
+      "45": 0.0019252084519392322,
+      "90": 0.0010545102993297045
+    },
+    "layer_gain_over_lobe_deficit_blue_missed": {
+      "0": 0.4742850455903978,
+      "45": 0.4947505457786005,
+      "90": 0.4495498623776182
+    },
+    "layer_gain_over_lobe_deficit_orange_missed": {
+      "0": 0.3284070917569385,
+      "45": 0.4923076074940717,
+      "90": 0.4706500441128771
+    },
+    "no_compression_fraction_of_lateral_area_range": [
+      0.9142373469190646,
+      0.9940462676765647
+    ],
+    "orange_zero_degree_false_area_before_after_kpc2": [
+      7229.3557776528905,
+      1170.3439876953785
+    ],
+    "orange_zero_degree_inferred_over_native": {
+      "original": 3.9809309766289545,
+      "replace_same_cells_original_background": 4.107847743169535,
+      "replace_same_cells_refit_background": 1.0817197270007812
+    },
+    "orange_zero_degree_refit_completeness_before_after": [
+      0.5158402372843988,
+      0.5643367929095552
+    ],
+    "signed_median_arc_to_front_kpc": {
+      "0_negative_z": 26.122651467846076,
+      "0_positive_z": 25.469122938135083,
+      "45_negative_z": -0.4467920877682425,
+      "45_positive_z": -0.5343899726867676,
+      "90_negative_z": 0.8333185850000007,
+      "90_positive_z": 0.8333185850000007
+    },
+    "zero_degree_median_range_across_four_definitions_kpc": [
+      25.209103738516312,
+      26.195287202692676
+    ]
+  }
+}
