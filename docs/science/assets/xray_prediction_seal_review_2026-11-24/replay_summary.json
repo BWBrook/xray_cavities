@@ -1,0 +1,14 @@
+{
+  "acceptance_rule": "every pixel equal; fixed in the script before the first run",
+  "labels_per_unit": [
+    16
+  ],
+  "masks": 1056,
+  "masks_reproduced_exactly": 1056,
+  "pixels_compared": 1027952640,
+  "replay_host": "arm64 macOS, Python 3.12.13, numpy 2.2.6, scipy 1.13.1",
+  "selected_areas_or_scores_computed": false,
+  "source": "git archive of c352554",
+  "unequal_pixels": 0,
+  "units": 66
+}
