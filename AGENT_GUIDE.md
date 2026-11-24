@@ -440,15 +440,17 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    one fifth of the total ambient brightening. Patrick reviews the front selection,
    projection and interpretation. [Three-view comparison and replay](docs/science/ghi20_compressive_front_comparison_2026-11-23.md)
    <!-- claims: XR-05 XR-06 -->
-2. **Does background refitting generalise?** Claude reproduced all 1,056 sealed predictions
-   from their original inputs. The private evaluator verified all 66 target
-   hashes before opening any arrays. Reviewers can reproduce the side-level
-   results from the two archives described in the custody record. Keep all
-   108 science sides and 24 null sides per primary arm and method, including
-   nondetections and aperture contacts. The surrounding-emission replacement uses
-   native information. Only the image-only arm can test observer performance.
-   [Frozen protocol](docs/science/background_refit_blind_protocol_2026-11-11.md) · [Seal and audit](docs/science/xray_prediction_seal_2026-11-23.md)
-   <!-- claims: DET-01 XR-02 XR-03 XR-04 -->
+2. **How much of the lobe do the refitted outlines recover?** Neither image-only
+   rule covered 75% of the projected lobe on any of the 108 held-out science
+   sides. Using native information to remove moving ambient emission raised
+   the number of passes to 6 for seed/grow and 13 for the radial 5% rule.
+   Read the score table with the nondetections, empty initial controls
+   and aperture contacts intact. The two hemispheres and three azimuths share
+   a simulated state. The subsequent depth-weighted check measures true lobe
+   volume along the selected sightlines. The volume inferred by revolving an
+   outline measures something different.
+   [Results, scores and reproduction commands](docs/science/heldout_xray_results_2026-11-24.md) · [Prediction custody](docs/science/xray_prediction_seal_2026-11-23.md)
+   <!-- claims: DET-05 -->
 3. **How well can the clocks recover jet power?** Use geometries from a
    detector that has passed its tests. Preserve radio spectral-age limits
    when the fitted break lies beyond the sampled band. <!-- claims: RAD-01 -->

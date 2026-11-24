@@ -145,6 +145,17 @@ its surroundings and bulk motion leaves the size of such a bias open.
 
 Across the 57 views, some algorithms missed the low-contrast lobes and others selected unrelated deficits or merged the lobe with the background. In C-HI, the 5% brightness-deficit threshold gave a median recovered volume of 1.08 times the native lobe volume. Yet its outlines covered only 36% of the projected tracer area, and only 70–77% of the selected area overlapped the tracer. Agreement in volume can therefore arise from errors on opposite sides of the outline. These tests leave the four-case X-ray enthalpy and power recovery unresolved. <!-- claims: DET-01 DET-02 -->
 
+We then froze two background-refitted rules and tested them on 54 held-out,
+noiseless 1-keV views, excluding the G-HI/20 development case. The 18
+case-ages each supplied three azimuths and two hemispheres. A passing
+outline had to cover at least 75% of the projected lobe, place at least
+95% of its selected area on the lobe and avoid the aperture boundary.
+On images alone, seed/grow recovered a median 22.8% of the lobe area and
+the radial 5% rule recovered 41.6%. Neither passed on any of the 108
+science sides. Both returned empty masks on all 24 initial control sides.
+Replacing the emissivity of moving ambient gas using native simulation
+fields brought the pass counts to 6 and 13, respectively. <!-- claims: DET-05 -->
+
 ### Does tracer weighting change the fitted radio age?
 
 In the G-HI test, particles last shocked 10–20 Myr earlier supplied 4.76%
@@ -158,7 +169,7 @@ limit in this view. <!-- claims: RAD-01 -->
 
 ## Discussion
 
-Even when the native pressure and volume are known, their product omits the kinetic and gravitational energy changes and energy stored outside the lobe. The observational comparison poses a separate problem. The C-HI outlines that reproduced the lobe volume missed most of its projected area. A comparison of X-ray enthalpies or clocks across atmospheres therefore needs an independent test of the detector's geometry. <!-- claims: NAT-02 NAT-07 DET-01 DET-02 -->
+Even when the native pressure and volume are known, their product omits the kinetic and gravitational energy changes and energy stored outside the lobe. The observational comparison poses a separate problem. The C-HI outlines that reproduced the lobe volume missed most of its projected area. The held-out test confirms that these two image-only rules systematically omit lobe area. Their inferred volumes therefore provide an uncertain basis for comparing X-ray enthalpies or clocks across atmospheres. <!-- claims: NAT-02 NAT-07 DET-01 DET-02 DET-05 -->
 
 Halving or doubling the shock-mask thresholds changes G-HI's estimated shock energy little, while G-LO's estimates and the sole accepted C-LO point depend on that choice. The integral measures energy change in the selected cells. Inferring irreversible atmospheric heating also requires their thermodynamic histories and energy transport. <!-- claims: NAT-03 -->
 
@@ -193,10 +204,11 @@ None.
 ## AI-use declaration
 
 OpenAI Codex (GPT-6) ran the paired tests, reconstructed the energy
-budgets, tested the radio emissivity weighting and drafted the analysis.
+budgets, tested the radio emissivity weighting, sealed and scored the X-ray outlines, and drafted the analysis.
 Anthropic Claude (Fable 5.2) registered the low-power energy forecasts,
-independently checked the four restart budgets and lobe contrasts, and
-refitted the public radio spectra. Google
+independently checked the four restart budgets and lobe contrasts, refitted
+the public radio spectra, and replayed the held-out X-ray masks and overlap
+measurements. Google
 DeepMind Gemini (4 Carbon) independently checked the low-power lobe
 arithmetic, compared the production histories and proposed the radio test.
 

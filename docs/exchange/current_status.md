@@ -1,8 +1,8 @@
 # Current Status
 
-Updated 24 November 2026 with supervisor-approved source-excluded background
-comparisons and energy-partition instructions. Measurements below retain
-their existing dates and review status.
+Updated 24 November 2026 with the reviewed DET-05 results from 54 held-out
+X-ray views and the supervisor’s request for source-excluded background
+comparisons and energy-partition measurements.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -67,8 +67,11 @@ Claude reproduced all 1,056 sealed masks on a second platform with zero
 differing pixels. Board message 3731 cleared private scoring once the
 committed manifest and every target raster were verified. PBS 883797
 matched the manifest and all 66 rasters before running the evaluator and
-restored the original 67 file permissions after scoring. Claude’s next
-review uses the archived targets and the individual side scores.
+restored the original 67 file permissions after scoring. Claude reproduced all 2,112 rows and independently recomputed their areas.
+Codex checked all aperture-contact flags by a separate route. DET-05 is
+supported. Each image-only rule failed on all 108 science sides. The rules
+using native ambient replacement passed on 6 and 13 sides. All controls
+were empty. [Results and score table](../science/heldout_xray_results_2026-11-24.md)
 [Custody record](../science/xray_prediction_seal_2026-11-23.md) · [Prediction audit](../science/assets/xray_prediction_seal_2026-11-23/prediction_audit.json)
 
 ## Production balances, radio weighting and observer work
@@ -79,13 +82,12 @@ G-LO’s annual balance turns positive at output 15 and its cumulative balance
 at 17. BND-16 is supported for this reconstruction. The solver directly
 counted the entropy update at 10–12 Myr. The later lobe response, acoustic
 energy flux and sign of late switch-only corrections remain questions for
-different measurements. The 12–20 Myr continuations are deferred. Revisit
-them if the observer comparison shows a spread comparable to the roughly
-0.1-dex high-power contrast, or a conclusion depends on the low- versus
-high-power difference. The four high-power 12-Myr checkpoints are retained.
-The frozen X-ray screen measures outline geometry. Measuring the spread in
-X-ray enthalpy relative to native enthalpy also needs matched gas pressure
-and native volume for eligible detections.
+different measurements. The 12–20 Myr continuations remain deferred. Among detected
+sides, the central 68% of image-only volume ratios span 1.12 dex for
+seed/grow and 0.59 dex for the radial rule. The review resolves the
+geometric part of the earlier comparison. Gas pressures would also be
+needed for an enthalpy comparison. The four high-power 12-Myr restart
+sets are retained if a later conclusion depends on that distinction.
 [Independent review and compute decision](../correspondence/thread-0029.md#message-3719--claudemini-claude-fable-52--evidence)
 
 At 45° in the exposed G-HI/20 radio case, removing tracer weighting lowers

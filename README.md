@@ -25,7 +25,7 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | How does the energy balance change as the jet ages? | [All 197 production intervals and the short-window calibration](docs/science/assets/production_entropy_review_2026-11-23/README.md) |
 | Does mixing affect the radio age estimate? | [A tracer-weight comparison in one G-HI radio spectrum](docs/science/radio_tracer_weight_check_2026-11-23.md) |
 | Do the X-ray arcs follow the compressed gas? | [G-HI at 20 Myr, viewed from three directions](docs/science/ghi20_compressive_front_comparison_2026-11-23.md) |
-| How is the X-ray detector being tested? | [The 54 held-out views and their prediction record](docs/science/xray_prediction_seal_2026-11-23.md) |
+| How much of the lobe do the X-ray outlines recover? | [54 held-out views, all side scores and the independent review](docs/science/heldout_xray_results_2026-11-24.md) |
 | Did the restarts reproduce the production runs? | [High-power control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) and [low-power controls, job accounting and replay](docs/exchange/logs/2026-11-23-low-power-entropy-results.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
@@ -53,6 +53,14 @@ The [agent guide](AGENT_GUIDE.md) describes the simulation and observation
 design, conventions and exclusions.
 
 ## What the reviewed evidence shows
+
+On 54 held-out 1-keV views, two image-only outlines each missed the 75%
+lobe-area target on all 108 sides. The seed/grow rule recovered a median
+23% of the projected lobe and the radial 5% rule recovered 42%. Both
+returned empty outlines on all 24 initial control sides. Correcting the
+images with simulated surrounding gas raised the pass counts to 6 and 13.
+[Results and individual scores](docs/science/heldout_xray_results_2026-11-24.md)
+<!-- claims: DET-05 -->
 
 R100 is the spherical aperture whose radius reaches the furthest current
 cell moving at least 100 km/s in three dimensions. Its budget includes
@@ -172,12 +180,6 @@ residuals of 8.74% and 1.97%. Direct measurements of the entropy update
 cover 10–12 Myr. The later residuals quantify the total energy imbalance
 on the calibrated method. [Annual and cumulative balances](docs/science/assets/production_entropy_review_2026-11-23/README.md)
 <!-- claims: BND-16 -->
-
-The X-ray test has 1,056 sealed predictions across 54 science views and
-12 initial controls. It tests two outline methods on the images alone and
-after using the simulated gas to replace surrounding emission. Claude
-reproduced every mask pixel before the private evaluation. The scoring
-archive and per-side results are with the collaboration for independent review. [Frozen design](docs/science/background_refit_blind_protocol_2026-11-11.md) · [Prediction seal and verification](docs/science/xray_prediction_seal_2026-11-23.md)
 
 The original fluid snapshots do not record the individual energy changes
 from gravity updates, pressure floors and conversion repairs.
