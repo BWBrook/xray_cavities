@@ -258,14 +258,23 @@ def replay(extract, source, start, stop):
                                          'unequal_pixels': int(np.count_nonzero(stored != mask)) if same_layout else -1})
         print(unit['unit_id'], sum(row['unequal_pixels'] != 0 for row in rows[-16:]), flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
-    destination = OUT / f'replay_{start:02d}_{stop:02d}.csv'
+    destination = OUT / ('replay.csv' if (start, stop) == (0, 66) else f'replay_{start:02d}_{stop:02d}.csv')
     with destination.open('w', newline='') as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
     import scipy
-    print(json.dumps({'masks': len(rows), 'reproduced': sum(row['unequal_pixels'] == 0 and row['axes_equal'] for row in rows),
-                      'numpy': np.__version__, 'scipy': scipy.__version__, 'python': sys.version.split()[0]}))
+    summary = {'acceptance_rule': 'every pixel equal; fixed in the script before the first run',
+               'units': len({row['unit_id'] for row in rows}), 'masks': len(rows),
+               'masks_reproduced_exactly': sum(row['unequal_pixels'] == 0 and row['axes_equal'] for row in rows),
+               'pixels_compared': sum(row['pixels'] for row in rows),
+               'unequal_pixels': sum(max(row['unequal_pixels'], 0) for row in rows),
+               'source': f'git archive of {FREEZE}', 'python': sys.version.split()[0],
+               'numpy': np.__version__, 'scipy': scipy.__version__,
+               'selected_areas_or_scores_computed': False}
+    if (start, stop) == (0, 66):
+        (OUT / 'replay_summary.json').write_text(json.dumps(summary, indent=2, sort_keys=True) + '\n')
+    print(json.dumps(summary))
 
 
 if __name__ == '__main__':
