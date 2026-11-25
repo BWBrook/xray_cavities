@@ -1,0 +1,18 @@
+{
+  "coverage.csv.gz": {
+    "rows": 345,
+    "sha256": "bfce9b3786145ab3245d485f09114398a161b1d78abd4ba7c806f2ab1f350983"
+  },
+  "input_receipts.csv.gz": {
+    "rows": 69,
+    "sha256": "be95b6d601aeae042e5db3c40f1ac5325a2834ad671827943afc1d63792254a7"
+  },
+  "radial_support.csv.gz": {
+    "rows": 12420,
+    "sha256": "c741ccdca7949412200adc7cb33d4c71d284739f5278ef0ae8fc80242a81d05f"
+  },
+  "scores.csv.gz": {
+    "rows": 1863,
+    "sha256": "d5a783a0c8215d587f200b0f80d2386752d421df14463267331eb1e4338c42cc"
+  }
+}

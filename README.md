@@ -11,7 +11,7 @@ enthalpy convention is **2.5pV**. For the native lobe fractions we integrate
 the measured net injector gas power through the age of each measurement.
 The tables also give labelled jet power times age and the 4pV literature comparator.
 
-> **Status, 24 November 2026.** Active research, developed in the open. The
+> **Status, 25 November 2026.** Active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -26,6 +26,7 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | Does mixing affect the radio age estimate? | [A tracer-weight comparison in one G-HI radio spectrum](docs/science/radio_tracer_weight_check_2026-11-23.md) |
 | Do the X-ray arcs follow the compressed gas? | [G-HI at 20 Myr, viewed from three directions](docs/science/ghi20_compressive_front_comparison_2026-11-23.md) |
 | How much of the lobe do the X-ray outlines recover? | [54 held-out views, all side scores and the independent review](docs/science/heldout_xray_results_2026-11-24.md) |
+| Does excluding the lobe or moving gas improve the X-ray background fit? | [Same-image comparison against the published radial outlines](docs/science/source_excluded_background_results_2026-11-25.md) |
 | Did the restarts reproduce the production runs? | [High-power control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) and [low-power controls, job accounting and replay](docs/exchange/logs/2026-11-23-low-power-entropy-results.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |

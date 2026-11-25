@@ -62,7 +62,7 @@ def collect(source, out):
         unit = {**base, 'private_result_sha256': digest(path), 'protocol_sha256': data['protocol_sha256'],
                 'projection_source_sha256': native['producer_source_sha256'],
                 'projection_receipt_sha256': native['native_receipt_sha256'],
-                'projection_file_sha256': native['native_map_sha256'], 'projection_job': native['pbs_job'],
+                'projection_file_sha256': native['native_map_sha256'], 'projection_job': native['pbs_job'].split('.', 1)[0],
                 'native_tracer_kpc3': native['native_tracer_kpc3'], 'projected_tracer_kpc3': native['projected_tracer_kpc3'],
                 'xy_uncovered_fraction': geom['uncovered_native_xy_area_fraction'],
                 'input_qualifications': '|'.join(data['qualifications']),
@@ -170,6 +170,44 @@ def summarise(directory):
     return result
 
 
+def plot_cases(summary, output):
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import PercentFormatter
+
+    fig, axes = plt.subplots(1, 2, figsize=(8.1, 3.6), sharey=True)
+    methods = [('original', 'Whole image', -0.19, '#414952', 'o'),
+               ('tracer', 'Tracer excluded', 0, '#007562', 's'),
+               ('speed_100', 'Speed ≥100 km/s excluded', 0.19, '#a03b61', 'D')]
+    for name, label, offset, color, marker in methods:
+        for y, case in enumerate(CASES):
+            primary = summary['science'][case][name]['flat']
+            for ax, value in zip(axes, (primary['median_completeness'],
+                                       fraction(primary['false_area_kpc2'], primary['total_selected_kpc2'])), strict=True):
+                if value is not None:
+                    ax.scatter(value, y + offset, label=label if y == 0 else None,
+                               s=47, color=color, marker=marker, edgecolor='white', linewidth=.5, zorder=3)
+    axes[0].set_yticks(range(len(CASES)), CASES)
+    axes[0].set_ylim(len(CASES) - .58, -.58)
+    for ax, title in zip(axes, ('Lobe area recovered', 'Selected area outside the lobe'), strict=True):
+        ax.set_title(title, loc='left', fontsize=11)
+        ax.set_xlim(-.025, 1.025)
+        ax.set_xticks([0, .25, .5, .75, 1])
+        ax.xaxis.set_major_formatter(PercentFormatter(xmax=1, decimals=0))
+        ax.set_axisbelow(True)
+        ax.grid(axis='x', color='#d8dadd', linewidth=.8)
+        ax.spines[['top', 'right', 'left']].set_visible(False)
+        ax.tick_params(axis='y', length=0)
+    axes[0].set_xlabel('Median across sides')
+    axes[1].set_xlabel('Sum of areas across views')
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc='lower center', ncols=3, frameon=False, fontsize=9)
+    fig.subplots_adjust(left=.085, right=.98, top=.89, bottom=.27, wspace=.16)
+    fig.savefig(output, dpi=170, facecolor='white')
+    plt.close(fig)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--collect', type=Path, help='directory containing completed private per-view results')
@@ -181,6 +219,7 @@ def main():
     path = args.assets / 'summary.json'
     if args.collect:
         path.write_text(json.dumps(data, sort_keys=True, indent=2, allow_nan=False) + '\n')
+        plot_cases(data, args.assets / 'case_comparison.png')
     elif json.loads(path.read_text()) != data:
         raise ValueError('published summary differs from numerical tables')
     for name in ARMS:

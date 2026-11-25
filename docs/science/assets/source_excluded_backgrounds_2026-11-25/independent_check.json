@@ -1,0 +1,689 @@
+{
+  "phase": "native_comparison",
+  "counts": {
+    "views": 69,
+    "nested_physical_footprints": 69,
+    "all_24_published_columns_checked_side_rows": 132
+  },
+  "sampled": {
+    "G-HI_0020_0deg": {
+      "tracer": {
+        "bins": 36,
+        "flat_mask_sha256": "bed768cf9738717deab350241c01e6e8ae9cae4c9b6722cb7df26835d724b29b",
+        "selected_pixels": 423388,
+        "negative_contact": false,
+        "positive_contact": false
+      },
+      "speed_100": {
+        "bins": 36,
+        "flat_mask_sha256": "90929dd2ba7eafcdeb763eb430e8bef3c41cd1d45b25285dc5a5046a4eb888cc",
+        "selected_pixels": 150984,
+        "negative_contact": false,
+        "positive_contact": false
+      }
+    },
+    "G-HI_0020_45deg": {
+      "tracer": {
+        "bins": 36,
+        "flat_mask_sha256": "773e917ea35f810fbbcafc33c365462f5edb2b175a51a76a84e27766d8c17c80",
+        "selected_pixels": 103417,
+        "negative_contact": false,
+        "positive_contact": false
+      },
+      "speed_100": {
+        "bins": 36,
+        "flat_mask_sha256": "14bc5acca4114fd664dcc4181585a4ce7bb264ee50ee4b7a08970799c01f7add",
+        "selected_pixels": 21531,
+        "negative_contact": false,
+        "positive_contact": false
+      }
+    },
+    "G-HI_0020_90deg": {
+      "tracer": {
+        "bins": 36,
+        "flat_mask_sha256": "401b5ec98284d7599e76ea9ee6bda10bd4cae26a12c7e2032d5caf62e985c1de",
+        "selected_pixels": 151353,
+        "negative_contact": false,
+        "positive_contact": false
+      },
+      "speed_100": {
+        "bins": 36,
+        "flat_mask_sha256": "db8a3496833d4d6156609e965ab3b9e8a949c9d2298294b96648f65b9670a345",
+        "selected_pixels": 34264,
+        "negative_contact": false,
+        "positive_contact": false
+      }
+    },
+    "C-HI_0050_45deg": {
+      "tracer": {
+        "bins": 36,
+        "flat_mask_sha256": "303ddb35e350b3d9e23459e0a5df05db5e2a475cdc51e14e104c85fb3b6d353a",
+        "selected_pixels": 102775,
+        "negative_contact": false,
+        "positive_contact": false
+      },
+      "speed_100": {
+        "bins": 36,
+        "flat_mask_sha256": "89dacc053b0ee227bab3541b22fa0010b09c79e94bbef49c6c7b60dae3589847",
+        "selected_pixels": 4514,
+        "negative_contact": false,
+        "positive_contact": false
+      }
+    },
+    "G-LO_0030_90deg": {
+      "tracer": {
+        "bins": 36,
+        "flat_mask_sha256": "46750b6f5b958fff9080972b9c4e784fa5832a44296b3a78fe785787bd9252eb",
+        "selected_pixels": 49995,
+        "negative_contact": false,
+        "positive_contact": false
+      },
+      "speed_100": {
+        "bins": 36,
+        "flat_mask_sha256": "ba28143f51e9ecddbf70b97363244dd33bf35dc0959ec4d5bfbc0497489b3003",
+        "selected_pixels": 3677,
+        "negative_contact": false,
+        "positive_contact": false
+      }
+    }
+  },
+  "auditor_sha256": "cfa72070a45476f2edd9138a2ba0784b9cf1da49ac1b1449ee9084aeabd39239",
+  "result_json_sha256": {
+    "G-HI_0020_0deg": "2be8994206a740385ed5606c3320245447b13a511d6277f545cdd30887aa2e92",
+    "G-HI_0020_45deg": "0ff4c8bba6842506a297388ece469c0a53c1cf916a18b5e746ea5abd6bee82ae",
+    "G-HI_0020_90deg": "308472c31fab1fb660af308702d2bb67b6517dfdb4493d0eadf97307735ea3f6",
+    "C-HI_0000_0deg": "be1252bb533322408dfa18fb7165946c573ca9647167716b0a34a6ef767ec2fc",
+    "C-HI_0000_45deg": "a81e321d79f55d59d4a76cc03efc5535b91c2984015a7c7b3361c1326d34a1fe",
+    "C-HI_0000_90deg": "0e789e61009852a91983ba7457bd6ab6c3190351e0d8a86bcff87e549a7ab15c",
+    "C-HI_0010_0deg": "28311da40114885a9e63c9288542e4959d02e3b86021e07a305bf9670093b08b",
+    "C-HI_0010_45deg": "ceeeb4c650b04ce2e8f2e10116fa8c426ee3d1f03f4821c8fb26dd55bf642964",
+    "C-HI_0010_90deg": "eb7747a88aec8d0fdb277aa78400e84d02f550b044150c9b06d7d8c0a9ccbc88",
+    "C-HI_0020_0deg": "696889a70e015ca460c239009aa217eddd1930a9514a9a467bd7934a2c728879",
+    "C-HI_0020_45deg": "32c2517b6254df4b82c2dfbd99451e3a19b5ca7a8b49e48aac802e41add21046",
+    "C-HI_0020_90deg": "8b30a60063de627fa0b18c232bcc187b18b163abb3108c586d0680ca22df1672",
+    "C-HI_0030_0deg": "3d486e277d3f8f5039380e2d42c4a1e0ac908d4076eb3c5048c6fce575cf1371",
+    "C-HI_0030_45deg": "69e3b0ff3f8924567f834c6681eaa383535262ca56ce5163ab7c2a1c46723ef5",
+    "C-HI_0030_90deg": "a71b5ddfa848797cec96d026944e08fe67e7bcde2434b7e8653bb8c72c803cac",
+    "C-HI_0040_0deg": "17dd8976c5d875e5f1a1c575a7c1d73d234ac05b0a5009abb9928c31a1bf8635",
+    "C-HI_0040_45deg": "5cd4a9ac7fadd37379762c86bd621d4a8d5e90161ffbb17bc63e1a3b1491be16",
+    "C-HI_0040_90deg": "010cfa7f6e6f551a727ba5deeace2333158cd1c522f80380374c37e5d7ea49b8",
+    "C-HI_0050_0deg": "2acc097d84c9bc90f7bfdc056e9e91b68b139a9ce8e582a2888427c3d3347b28",
+    "C-HI_0050_45deg": "bf97717dff3c066a2ca4c983ae2146ec2d91a6355c6095bea2266afc69f24a58",
+    "C-HI_0050_90deg": "02869ef56aa111fadad64a156312522ec884a87138e99ba9620178070e5cf956",
+    "C-LO_0000_0deg": "6f7526f6ba74efe8bb3ff2534463ecb0dcf77ac23d59c4e1d54158178f7e5a85",
+    "C-LO_0000_45deg": "8bcb1588af9f4938c8288f8b82adfd01e38f9f69a43d0e515829418d70f3e41d",
+    "C-LO_0000_90deg": "94fad1993ac566b8667209cf37e9ce9ae3f12d6f8d93f6fb6a2da5c044d674ae",
+    "C-LO_0010_0deg": "13f97873254a3d71753c36a46d3928e947923b5d39e02e6f6ff1c0f703afe5b3",
+    "C-LO_0010_45deg": "44d10e710c93c5c7e0795bcd249aeca8ef727b667e1c2bd02c6f0dd84f133afd",
+    "C-LO_0010_90deg": "cf44a124c9d61e32b4c1523ccccf1201fa4afd7b908a0c517c05f7cb99d935b8",
+    "C-LO_0020_0deg": "6832c8cb5d0c59105b9338554288a4ef43e147411af5e536a6ad000f95588398",
+    "C-LO_0020_45deg": "010f83104eb732e0ea9f8f6d30d464853fa564679c2d59d061605928ce00f302",
+    "C-LO_0020_90deg": "948224fd7384af37be5911551e5840bc330066a15d0b126e44260e8992675a22",
+    "C-LO_0030_0deg": "c078816b8f07a4f86d1372673f27781a12561fa494f1203eb81560555f45d147",
+    "C-LO_0030_45deg": "4143fadb9de349f9340f7b687557712ae79f1069ca0e2eb744fae70d8c7219af",
+    "C-LO_0030_90deg": "d1a4e3a458ea8289ed6b88bb26dbdbac192f3013c4f7e5794d6f2028e3f53685",
+    "C-LO_0040_0deg": "f893475368049c38437d593ea364816c11e1ab856a2d92afe96c109702f491cd",
+    "C-LO_0040_45deg": "7b4ae79ceb6f5f9e35f16eb3ad461cd85e5502f98766fd2e096885e0095d2b30",
+    "C-LO_0040_90deg": "550fbe3e4e862808214dc6574f5df4854c61bdd1d0f5569f5fe944473a289060",
+    "C-LO_0050_0deg": "a4feb5b9add5d12c3bf5ae5f2c5aa40d699bf57ccd5091f64a57e67289a894e1",
+    "C-LO_0050_45deg": "dc09b0d367b7866d5bfd86f909e1e9d2487abb69526ca4266ab429abe4900945",
+    "C-LO_0050_90deg": "5d871f3ca60692cb31fcbff13bbdecc8d4b84fa4e58d79b4e49dc5927ea18444",
+    "G-HI_0000_0deg": "6c6c926cad6478474d1362a2fda02764bf8d163cd7554aae942907a71be75145",
+    "G-HI_0000_45deg": "b8fc36d1614a7b89474c5baf3e29bdebf975b073c4e76331973c0a26abc0c6c7",
+    "G-HI_0000_90deg": "31b70e7d78a5c6180e99a8f09c7512b23e54a5ca3c648dc217bed381bfbeb0fb",
+    "G-HI_0010_0deg": "e581d8702b958effd2741ededfc3b8fc8d3f07cb72af05e33f0c408c20575fe2",
+    "G-HI_0010_45deg": "046c93d2e1b44a8a56996b2b2052292eec6cb42e4a52e7f8b4c12510c9d86711",
+    "G-HI_0010_90deg": "2b911126db01799428a42f8f756b29fd291740cb0dc0184c9e98d45b9ce0791b",
+    "G-HI_0030_0deg": "32dda2ae939e6ff62bee3b9e12f52993738427d8b88cc29d8d3d550c8d7376a1",
+    "G-HI_0030_45deg": "d51584f44ce937833d31ea9099c9e463c229be9e2a703433647508bfe50eef88",
+    "G-HI_0030_90deg": "567e7116227f29faac8dd991ac6e72fb6a44a7b60ef3da83fb20ca63419a389f",
+    "G-HI_0040_0deg": "6d67146c63bf96ad78e6d0429531026370e68ba1699c03d7191f59261d4544b0",
+    "G-HI_0040_45deg": "19c3f56c04ca7272a216586222ee46997c2ee3626e04c07a60055b88982f6433",
+    "G-HI_0040_90deg": "496d75b3990a11a71328515ff7e7aa59f49edf962844726bb46db33eac494d46",
+    "G-LO_0000_0deg": "37ad55e1db830656bc41f86fd7e5e933423b4df4aef278e3fe968d4a47e6fa3d",
+    "G-LO_0000_45deg": "00a29da0ef53e90a870cdfbd867c72a0fa98688139023fe673db04b51ea1d668",
+    "G-LO_0000_90deg": "6c7e7013f26f39f545fffc074af7e08820103729691a963d23d36075ec8f043b",
+    "G-LO_0010_0deg": "9cee9024b9ebacc40f5e042e91d8cd675af76708495ee93e39e711b1bf86ecca",
+    "G-LO_0010_45deg": "8b59a60cc0c07dd5fad5ff0fe5ad6ce7a4407722ace64911e2863884f3d6c70e",
+    "G-LO_0010_90deg": "61715ed8b47220fd764c17f2d281bf9a789102095310a27873514b614982a2ad",
+    "G-LO_0020_0deg": "106a305599a8e5089ff619efe20a35813d338cba888d21f22450630034777f88",
+    "G-LO_0020_45deg": "36591cec8bdfdd7d28846e9d228cf510b98bd45a98cfb2f2b47aedfc401a4942",
+    "G-LO_0020_90deg": "4d54b5a4a3715bbb48eeccf967e2e3b5a6f4f125eddc4fc72170b3110802dd09",
+    "G-LO_0030_0deg": "af98f8c28cc9d1dcccdd93b5cf9b86fdff94f719583e2eb823f94414a11156bd",
+    "G-LO_0030_45deg": "2115f666342afb1d374daf5211546df072a96a1191d32ca3bd5f3c9658667d52",
+    "G-LO_0030_90deg": "87beef91b79332b022ccf11d083fbe5e9e5a5ac3c9c9fa73cef6c25a05e70905",
+    "G-LO_0040_0deg": "44cda494b1e8e8baf4abf352ee07666fede021e63036815f4a15a0b68f83a1ac",
+    "G-LO_0040_45deg": "0fb0cb9724451b73991bed68e7355fd1bce8b76e8e61d692a111f836a6b885d2",
+    "G-LO_0040_90deg": "11bc7abc7f8e216e1f8b5ba2ea260008ec9e9a006656f156764415f8b5385209",
+    "G-LO_0050_0deg": "66f9f5ce71911feb526064cc0cbfe181d33683c164f31544a81b2d1105f76df8",
+    "G-LO_0050_45deg": "2f649a8f618ce075800723cb2367c62c998b654e8c6fae8152daab2edb2768a2",
+    "G-LO_0050_90deg": "c947bfa235929d7b789d229a47455f2a2e61610a9a960ef32b50e18af495506d"
+  },
+  "published_scores_sha256": "717680dbe1c5ac98c579aee1681cf527385115c73f4aac6678b19050470cee11",
+  "exposed_speed_against_archived_tracer_negative_speed_paths": {
+    "G-HI_0020_0deg": {
+      "30": {
+        "moving_ambient_pixels": 460679,
+        "additional_fast_tracer_only_pixels": 0
+      },
+      "100": {
+        "moving_ambient_pixels": 459638,
+        "additional_fast_tracer_only_pixels": 0
+      },
+      "300": {
+        "moving_ambient_pixels": 458091,
+        "additional_fast_tracer_only_pixels": 0
+      }
+    },
+    "G-HI_0020_45deg": {
+      "30": {
+        "moving_ambient_pixels": 103261,
+        "additional_fast_tracer_only_pixels": 0
+      },
+      "100": {
+        "moving_ambient_pixels": 103010,
+        "additional_fast_tracer_only_pixels": 0
+      },
+      "300": {
+        "moving_ambient_pixels": 102667,
+        "additional_fast_tracer_only_pixels": 0
+      }
+    },
+    "G-HI_0020_90deg": {
+      "30": {
+        "moving_ambient_pixels": 144725,
+        "additional_fast_tracer_only_pixels": 0
+      },
+      "100": {
+        "moving_ambient_pixels": 144037,
+        "additional_fast_tracer_only_pixels": 0
+      },
+      "300": {
+        "moving_ambient_pixels": 142938,
+        "additional_fast_tracer_only_pixels": 0
+      }
+    }
+  },
+  "initial_nozzle_and_arms_with_detected_sides": {
+    "C-HI_0000_0deg": {
+      "physical_nozzle_pixels": 112,
+      "physical_nozzle_area_kpc2": 0.28000000759959187,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 112,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "C-HI_0000_45deg": {
+      "physical_nozzle_pixels": 48,
+      "physical_nozzle_area_kpc2": 1.4141885164681094,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 48,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "C-HI_0000_90deg": {
+      "physical_nozzle_pixels": 48,
+      "physical_nozzle_area_kpc2": 0.9999822898707564,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 48,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "C-LO_0000_0deg": {
+      "physical_nozzle_pixels": 112,
+      "physical_nozzle_area_kpc2": 0.28000000759959187,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 112,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "C-LO_0000_45deg": {
+      "physical_nozzle_pixels": 48,
+      "physical_nozzle_area_kpc2": 1.4141885164681094,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 48,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "C-LO_0000_90deg": {
+      "physical_nozzle_pixels": 48,
+      "physical_nozzle_area_kpc2": 0.9999822898707564,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 48,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "G-HI_0000_0deg": {
+      "physical_nozzle_pixels": 112,
+      "physical_nozzle_area_kpc2": 0.28000000759959187,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 112,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "G-HI_0000_45deg": {
+      "physical_nozzle_pixels": 48,
+      "physical_nozzle_area_kpc2": 1.4141885164681094,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 48,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "G-HI_0000_90deg": {
+      "physical_nozzle_pixels": 48,
+      "physical_nozzle_area_kpc2": 0.9999822898707564,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 48,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "G-LO_0000_0deg": {
+      "physical_nozzle_pixels": 112,
+      "physical_nozzle_area_kpc2": 0.28000000759959187,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 112,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 112,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "G-LO_0000_45deg": {
+      "physical_nozzle_pixels": 48,
+      "physical_nozzle_area_kpc2": 1.4141885164681094,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 48,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    },
+    "G-LO_0000_90deg": {
+      "physical_nozzle_pixels": 48,
+      "physical_nozzle_area_kpc2": 0.9999822898707564,
+      "original": {
+        "excluded_pixels": 0,
+        "unmasked_nozzle_pixels": 48,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "tracer": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_30": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_100": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      },
+      "speed_300": {
+        "excluded_pixels": 48,
+        "unmasked_nozzle_pixels": 0,
+        "flat_fit_status": "ok",
+        "flat_detected_sides": []
+      }
+    }
+  },
+  "speed100_retained_tracer_sightlines_kpc2": {
+    "G-HI_0020_0deg": 0.0,
+    "G-HI_0020_45deg": 0.0,
+    "G-HI_0020_90deg": 0.0,
+    "C-HI_0000_0deg": 0.0,
+    "C-HI_0000_45deg": 0.0,
+    "C-HI_0000_90deg": 0.0,
+    "C-HI_0010_0deg": 0.0,
+    "C-HI_0010_45deg": 0.0,
+    "C-HI_0010_90deg": 0.0,
+    "C-HI_0020_0deg": 0.0,
+    "C-HI_0020_45deg": 0.0,
+    "C-HI_0020_90deg": 0.0,
+    "C-HI_0030_0deg": 0.0,
+    "C-HI_0030_45deg": 0.0,
+    "C-HI_0030_90deg": 0.0,
+    "C-HI_0040_0deg": 0.0,
+    "C-HI_0040_45deg": 0.0,
+    "C-HI_0040_90deg": 0.0,
+    "C-HI_0050_0deg": 0.0,
+    "C-HI_0050_45deg": 0.0,
+    "C-HI_0050_90deg": 0.0,
+    "C-LO_0000_0deg": 0.0,
+    "C-LO_0000_45deg": 0.0,
+    "C-LO_0000_90deg": 0.0,
+    "C-LO_0010_0deg": 0.06890939186652645,
+    "C-LO_0010_45deg": 0.0,
+    "C-LO_0010_90deg": 0.0,
+    "C-LO_0020_0deg": 6.242865306393789,
+    "C-LO_0020_45deg": 4.493127992180048,
+    "C-LO_0020_90deg": 6.465938876517849,
+    "C-LO_0030_0deg": 8.834437162318153,
+    "C-LO_0030_45deg": 5.489392173805282,
+    "C-LO_0030_90deg": 10.895658693785826,
+    "C-LO_0040_0deg": 10.80076741166343,
+    "C-LO_0040_45deg": 15.7261733137916,
+    "C-LO_0040_90deg": 9.659693722322201,
+    "C-LO_0050_0deg": 12.371335391279231,
+    "C-LO_0050_45deg": 18.440466677461927,
+    "C-LO_0050_90deg": 15.282718334414493,
+    "G-HI_0000_0deg": 0.0,
+    "G-HI_0000_45deg": 0.0,
+    "G-HI_0000_90deg": 0.0,
+    "G-HI_0010_0deg": 0.0,
+    "G-HI_0010_45deg": 0.0,
+    "G-HI_0010_90deg": 0.0,
+    "G-HI_0030_0deg": 0.0,
+    "G-HI_0030_45deg": 0.0,
+    "G-HI_0030_90deg": 0.0,
+    "G-HI_0040_0deg": 0.0,
+    "G-HI_0040_45deg": 0.0,
+    "G-HI_0040_90deg": 0.0,
+    "G-LO_0000_0deg": 0.0,
+    "G-LO_0000_45deg": 0.0,
+    "G-LO_0000_90deg": 0.0,
+    "G-LO_0010_0deg": 0.0,
+    "G-LO_0010_45deg": 0.0,
+    "G-LO_0010_90deg": 0.0,
+    "G-LO_0020_0deg": 0.0,
+    "G-LO_0020_45deg": 0.0,
+    "G-LO_0020_90deg": 0.0,
+    "G-LO_0030_0deg": 0.0,
+    "G-LO_0030_45deg": 0.0,
+    "G-LO_0030_90deg": 0.0,
+    "G-LO_0040_0deg": 0.0,
+    "G-LO_0040_45deg": 0.0,
+    "G-LO_0040_90deg": 0.0,
+    "G-LO_0050_0deg": 4.024001648159867,
+    "G-LO_0050_45deg": 0.41247167624615133,
+    "G-LO_0050_90deg": 3.2916085177639713
+  },
+  "method": "Uses the common hash-bound original image/tracer loader and supplied native projections. Recomputes annulus selection, medians, flat and log profile continuation, Gaussian convolution, flat-continuation selection, contact, exact-edge areas and volumes independently. Shares SciPy's 8-neighbour labelling primitive with the original detector."
+}

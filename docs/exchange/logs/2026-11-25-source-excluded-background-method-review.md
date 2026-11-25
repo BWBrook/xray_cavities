@@ -1,0 +1,15 @@
+# Source-excluded X-ray backgrounds for method review
+
+Stas asked whether excluding the source from the radial atmosphere fit removes the exterior arcs and improves cavity recovery. The original brightness and detector are the same in all arms. The exposed development case and the previously scored 54 science views have separate results. [Supervisor request](2026-11-24-source-excluded-backgrounds-and-energy-partition.md) · [Fit and scoring protocol](../../science/source_excluded_background_protocol_2026-11-25.md) · [Measurements and reproduction](../../science/source_excluded_background_results_2026-11-25.md)
+
+Patrick’s review concerns three choices with measurable consequences.
+
+1. Inspect which annuli still have sky at several azimuths, especially the innermost directly supported annulus. The support table reports retained positive-brightness area and the occupied sectors out of twelve. The figures compare the primary constant inward continuation with an extrapolation of the measured inner slope.
+2. Check the physical meaning of the three-component speed mask against the tracer mask, the 30/100/300 km/s comparisons and the surviving slow tracer sightlines. A pressure or density change at a computational face can project onto the same ray as the fitted atmosphere. The reported area of such rays measures incidence and supplies no emissivity weight.
+3. Compare exterior area with the fraction of lobe area recovered and with aperture contact. The side rows retain empty selections and shares of the full tracer target outside the search radius. The bipolar ratio uses the sum of inferred volumes divided by the sum of native volumes.
+
+The project’s private review directory is `private_archive/turn30_source_excluded_2026-11-25/`. Each `comparison/<unit_id>/comparison.png` shows the original image, the two primary fitting exclusions, all three deficit maps with native and selected outlines, the radial fits and retained sky area. The machine-readable support profiles, numerical scores and input digests accompany the public results. Patrick’s judgement of the physical comparison is pending.
+
+Two views illustrate why the inner fit warrants review. In `G-HI_0020_0deg`, the speed exclusion removes the broad exterior arcs and leaves the central 30 kpc without direct support. In `C-HI_0050_45deg`, the tracer fit first finds support at 20 kpc and recovers 39.2% of the lobe area. The speed fit first finds support at 60 kpc and recovers 7.3%. Both late-cluster outlines avoid the aperture rim, although the tracer target extends beyond the search radius.
+
+Patrick has also reviewed the earlier G-HI/20 front overlay. He found the mapped compressive front credible and proposed holding the background fixed while restricting candidate pixels to its interior, with open or ambiguous fronts flagged. That experiment changes where a cavity can be selected. The present experiment changes where the background is fitted. The proposed front constraint provides a follow-up using the existing exposed maps. [Patrick’s front review](2026-11-25-q032-front-constrained-cavity-handover.md)
