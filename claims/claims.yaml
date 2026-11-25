@@ -1052,6 +1052,11 @@ claims:
       - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/receipt.json, commit: 0c39fb6}
       - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/independent_review.json, commit: 0c39fb6}
       - {path: scripts/science/summarise_ghi20_front_constraint.py, commit: 0c39fb6}
+      - {path: scripts/science/check_ghi20_front_bound.py, commit: d1cfeb8}
+      - {path: docs/science/assets/ghi20_front_constraint_review_2026-11-25/sides.csv, commit: d1cfeb8}
+      - {path: docs/science/assets/ghi20_front_constraint_review_2026-11-25/offsets.csv, commit: d1cfeb8}
+      - {path: docs/science/assets/ghi20_front_constraint_review_2026-11-25/bounds.csv, commit: d1cfeb8}
+      - {path: docs/science/assets/ghi20_front_constraint_review_2026-11-25/summary.json, commit: d1cfeb8}
     reproduce: .venv/bin/python scripts/science/summarise_ghi20_front_constraint.py
     test: >-
       Review the primary projected contour against Patrick’s proposed enclosure
@@ -1062,6 +1067,9 @@ claims:
       - The three azimuths and two hemispheres share one simulated state. The front comes from native gas fields. An X-ray-only front and held-out recovery require their own test.
       - All four pre-existing front definitions enclosed the entire projected tracer footprint. Pooled false-area removal ranged from 96.0% to 97.1%. This geometry does not identify a shock.
       - A second implementation reproduced all 24 clipped masks and all 72 side or bipolar rows for the original and emissivity-replacement/refit radial candidates from the same archived projections.
+      - "Claude, 25 November 2026: a separate implementation (no shared code, scikit-image labelling, written after reading the protocol and Codex's script) reproduced the footprints of all four front definitions, both orange outlines and all 24 clipped masks by SHA-256, and all 72 side and bipolar area rows within 1e-8 kpc². The published orange outline was read from the producer archive and the smaller refitted outline was rebuilt. The clipped region is exactly the footprint whose edge the published overlays draw in magenta. The projections are Codex's and are taken as given. Whether the selected layer is the front remains Patrick's review, so the status stays provisional."
+      - "Claude, 25 November 2026: the six removal shares equal one minus the dominant-front fraction of the lateral orange area in front_sightline_overlap.csv, published on 23 November, so the headline restates an earlier measurement. The projected footprint has no holes under either adjacency. Inside the front therefore means on a sightline that crosses the layer, and the open-front rule was exercised only on synthetic cases. No other qualifying or boundary component projects outside it. Zero lobe loss is geometric. The tracer footprint lies at least 2.1 kpc inside the footprint edge in every view and definition, so no candidate could lose lobe area to this cut."
+      - "Claude, 25 November 2026: the result depends on where the bound sits. Of the 349 kpc² of false area left, 262 kpc² lies within 1 kpc of the footprint edge. A bound 5 kpc further out removes 91.4%, 58.8% and 55.0% of false area at 0°, 45° and 90°, and one 20 kpc further out removes 67.8%, 1.4% and 0%. All six sides keep at least 95% purity only for bounds up to 1 kpc outside the edge. A bound 5 kpc inside it excludes 1.2% to 1.5% of the projected lobe area. Distances are between pixel centres on a 0.59-kpc sky grid. No side meets the DET-05 criterion. After the cut, purity is 97.2% to 99.3% and coverage is at most 60.5%. A candidate filling the whole front would have 70% to 73% purity."
 
   - id: XR-01
     status: supported
