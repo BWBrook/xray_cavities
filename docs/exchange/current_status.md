@@ -1,7 +1,7 @@
 # Current Status
 
-Updated 25 November 2026 with the supervisor's request for +/-10 and +/-30 kpc
-midplane-slab X-ray cavity tests, alongside the spectral-age scope decision.
+Updated 25 November 2026 with the G-HI/20 midplane-slab result and the
+spectral-age scope decision.
 Existing measurements retain their reported review status.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
@@ -21,10 +21,10 @@ scores separately from recovery against the common full lobe reference.
 Start with G-HI/20, then use existing valid selected ages across all four
 cases. This changes the emitting domain and is separate from fitting-only
 source exclusions and frozen observer scores. No new simulation is requested
-and no calculation/job is reported by this handover.
+and the approved handover specifies the scope of the four-case comparison.
 [Approved instruction](logs/2026-11-25-midplane-slab-xray-cavity-request.md).
 
-The G-HI/20 exact-edge 0° projection already integrates along native y on the requested x–z grid. Its original full-depth 5% outline overlaps 5,834.1 of 11,309.9 kpc² of tracer lobe and selects 7,229.4 kpc² outside it. That gives 51.6% completeness and 44.7% purity before applying any front constraint. The archive includes the matched time-zero image. Each thinner image requires a new integration of the native cells because the saved maps have already summed over y. [Full-depth comparison rows](../science/assets/ghi20_front_constraint_2026-11-25/area_scores.csv)
+**G-HI/20 pilot complete.** PBS job 884129 finished with exit status 0. All five full-depth fields reproduce the archive bit for bit, and two implementations agree on the three outlines and all 18 area rows. At full depth, ±30 kpc and ±10 kpc the detector covers 51.6%, 67.1% and 79.7% of the same tracer footprint. False exterior area is 7,229, 15,335 and 14,417 kpc². The ±30 kpc slab retains 98.8% of the lobe volume, while ±10 kpc retains 40.3%. On the sightlines originally missed, the inner ±10 kpc dims by 46.4%, but brightening at larger |y| leaves the full column 12.2% brighter than at time zero. XR-07 is provisional for this view. Independent review of the pilot precedes the remaining selected case-ages. [Matched maps, regional fluxes, side-level area table and replay](../science/ghi20_midplane_slab_results_2026-11-25.md)
 
 ## Supervisor scope decision 25 November
 

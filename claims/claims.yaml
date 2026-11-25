@@ -1242,3 +1242,36 @@ claims:
       - "Claude, 24 November 2026: the pooled offsets and all replacement ratios reproduce. The 32.8–49.5% is the share of the compressing layer alone, whose volume-weighted width is 0.32 kpc. On the same missed sightlines the ambient gas outside the layer, summed along the whole sightline, brightens by 1.35–2.09 times the lobe deficit, so the layer supplies 18–20% of the ambient brightening and those sightlines are 12–24% brighter than at time zero. Over all lobe sightlines the ambient gain is 72–78% of the lobe deficit."
       - "Claude, 24 November 2026: the change from 4.11 to 1.08 is a threshold crossing. At 0° the exterior ring has an area-mean deficit of 5.35% against the 5% threshold, and at most 5.58% on the four sampled rows. The replacement leaves the ring's brightness unchanged and lowers the refitted background there by 0.64%. The same step gives 0.65 and 0.85 at 45° and 90°, so 1.08 is not a recovery of the lobe volume."
     depends_on: [XR-05]
+
+  - id: XR-07
+    status: provisional
+    statement: >-
+      In the exposed side-on G-HI image at 19.999614 Myr, the 1-keV brightness
+      deficit over the fixed full tracer footprint rises from 8.7% at full
+      depth to 44.6% at ±30 kpc and 73.2% at ±10 kpc, measured against the
+      matched initial atmosphere. The radial detector covers 51.6%, 67.1%
+      and 79.7% of that footprint. False exterior area grows from 7,229
+      to 15,335 and 14,417 kpc², giving purities of 44.7%, 33.1% and 38.5%.
+      The ±30 kpc slab keeps the entire footprint and 98.8% of its volume.
+      The ±10 kpc slab keeps 97.9% of the footprint and 40.3% of the volume.
+    evidence:
+      - {path: docs/science/ghi20_midplane_slab_protocol_2026-11-25.md, commit: e7fca24}
+      - {path: docs/science/ghi20_midplane_slab_results_2026-11-25.md, commit: c66bebe}
+      - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/areas.csv, commit: c66bebe}
+      - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/filling.csv, commit: c66bebe}
+      - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/native_completion.json, commit: c66bebe}
+      - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/independent_review.json, commit: c66bebe}
+    reproduce: >-
+      Run the project_ghi20_midplane_slabs.py, score_ghi20_midplane_slabs.py
+      and review_ghi20_midplane_slabs.py commands in the results note.
+      For the bipolar values in the public CSVs select hemisphere=both
+      and target=full_lobe in areas.csv or region=full_lobe in filling.csv.
+    test: >-
+      Reconstruct the partial-cell native integrals, refit the backgrounds,
+      and reproduce the signed flux changes and exterior areas with a second
+      implementation. Test generality on the remaining selected case-ages.
+    caveats:
+      - Cutting the emitting depth requires the simulation. Both scoring implementations use the same native projections and their 1-keV emissivity extrapolation.
+      - On the original missed sightlines the gas at |y| ≤ 10 kpc dims by 46.4%, gas at 10 < |y| ≤ 30 kpc brightens by 45.9% and gas beyond 30 kpc brightens by 19.7%, each relative to its own initial brightness. The emitting layer's physical identity remains open.
+      - The follow-up exterior check finds zero area physically dimmed by more than 5% at full depth and ±30 kpc. At ±10 kpc only 139.6 kpc² of its 14,417 kpc² exterior passes that physical cut. The registered detector thresholds each refitted radial background.
+      - Both jet sides share one simulation. Other cases, ages and sightline directions require their own measurements.

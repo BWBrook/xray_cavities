@@ -485,6 +485,17 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    [Per-lobe areas, front checks and reproduction](docs/science/ghi20_front_constraint_2026-11-25.md)
    <!-- claims: DET-07 -->
 
+   Stas’s slab pilot changes the physical emitting depth along y. On the
+   same G-HI/20 lobe footprint the full, ±30 and ±10 kpc maps yield 51.6%,
+   67.1% and 79.7% coverage, with 44.7%, 33.1% and 38.5% purity. Use
+   `full_lobe` in the area table to compare the same target across depths.
+   Use `slab_lobe` to measure recovery of the retained material. The
+   ±10 kpc slab intersects 97.9% of the original projected area and
+   contains 40.3% of the original volume. The flux table compares each
+   slab with the initial gas integrated over the same depth.
+   [Native projection, figures, area scores and independent replay](docs/science/ghi20_midplane_slab_results_2026-11-25.md)
+   <!-- claims: XR-07 -->
+
 3. **How well can the adopted clocks recover jet power?** Compare sound-crossing,
    buoyant-rise and refill estimates separately, retaining true simulation
    age as a control. Use qualified geometries and preserve detection and
