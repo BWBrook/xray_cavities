@@ -56,6 +56,48 @@ def sides(grid):
     return (grid.z < 0, grid.z > 0, np.ones(grid.z.size, dtype=bool))
 
 
+def radial_outline(image, grid, depth, epoch):
+    background, profile = fit_image(image, grid, depth, epoch)
+    outline = ladder.deficit_threshold(image, grid.u, grid.z, background=background,
+                                       background_label="observer_radial", threshold=THRESHOLD)
+    return outline, background, profile
+
+
+def depth_controls(grid, initial, mask, full_path, physical_deficit):
+    _, aperture = ladder._rois(grid.u, grid.z)
+    area, lobe = grid.area, full_path > 0
+    valid, dim, bright = np.isfinite(physical_deficit), physical_deficit > THRESHOLD, physical_deficit < -THRESHOLD
+    rows = []
+    for name, side in zip(HALVES, sides(grid), strict=True):
+        half = side[:, None]
+        search = half & aperture
+        selected = half & initial.mask
+        on, off = half & lobe, search & ~lobe
+        search_area = float(area[search].sum())
+        selected_area = float(area[selected].sum())
+        incomplete = search & ~np.isfinite(initial.deficit)
+        if selected.any():
+            status = "failed_nonempty"
+        elif incomplete.any() or not search.any():
+            status = "unscorable"
+        else:
+            status = "empty"
+        rows.append({
+            "hemisphere": name, "time_zero_status": status, "search_kpc2": search_area,
+            "time_zero_selected_kpc2": selected_area, "time_zero_share_of_search": ratio(selected_area, search_area),
+            "time_zero_invalid_fit_kpc2": float(area[incomplete].sum()),
+            "time_zero_touches_aperture": ladder.touches_aperture(selected, grid.u, grid.z),
+            "current_false_in_time_zero_outline_kpc2": float(area[off & mask & selected].sum()),
+            "full_lobe_kpc2": float(area[on].sum()), "full_lobe_in_search_kpc2": float(area[on & aperture].sum()),
+            "dimmed_on_lobe_kpc2": float(area[on & dim].sum()), "brightened_on_lobe_kpc2": float(area[on & bright].sum()),
+            "dimmed_off_lobe_in_search_kpc2": float(area[off & dim].sum()),
+            "brightened_off_lobe_in_search_kpc2": float(area[off & bright].sum()),
+            "invalid_initial_on_lobe_kpc2": float(area[on & ~valid].sum()),
+            "invalid_initial_off_lobe_in_search_kpc2": float(area[off & ~valid].sum()),
+        })
+    return rows
+
+
 def area_scores(grid, mask, full_mask, full_path, slab_path):
     area = grid.area
     _, aperture = ladder._rois(grid.u, grid.z)
@@ -269,26 +311,46 @@ def plot_profiles(output, rows):
         plt.close(fig)
 
 
+def plot_time_zero_controls(output, grid, measured):
+    fig, axes = plt.subplots(1, 3, figsize=(9.3, 3.4), layout="constrained", sharex=True, sharey=True)
+    radius = ladder.recovery.CANDIDATE_RADIUS_KPC
+    try:
+        for ax, depth, label in zip(axes, DEPTHS, LABELS, strict=True):
+            control = measured[depth]["initial_outline"]
+            image = ax.pcolormesh(grid.ue, grid.ze, 100 * control.deficit, shading="flat",
+                                  cmap="RdBu_r", vmin=-8, vmax=8, rasterized=True)
+            outline(ax, grid, control.mask, "#151515", .75)
+            ax.add_patch(Circle((0, 0), radius, fill=False, edgecolor="#555", lw=.7, ls="--"))
+            ax.set(title=label, xlabel="x (kpc)", aspect="equal",
+                   xlim=(-radius-5, radius+5), ylim=(-radius-5, radius+5))
+        axes[0].set_ylabel("z (kpc)")
+        fig.colorbar(image, ax=axes, extend="both", label="Apparent deficit at time zero (%)")
+        fig.savefig(output, dpi=140)
+    finally:
+        plt.close(fig)
+
+
 def run(projection_dir, reference, output):
     if output.exists():
         raise FileExistsError(f"Output directory already exists: {output}")
     receipt, grid, fields, archived_mask = read_projection(projection_dir, reference)
-    areas, filling, profiles = [], [], []
-    measured, mask_hashes, support = {}, {}, {}
+    areas, filling, profiles, controls = [], [], [], []
+    measured, mask_hashes, initial_hashes, support = {}, {}, {}, {}
     for depth in DEPTHS:
         maps = fields[depth]
-        background, profile_now = fit_image(maps["current"], grid, depth, "current")
-        _, profile_zero = fit_image(maps["initial"], grid, depth, "initial")
-        observer = ladder.deficit_threshold(maps["current"], grid.u, grid.z, background=background,
-                                           background_label="observer_radial", threshold=THRESHOLD)
+        initial, _, profile_zero = radial_outline(maps["initial"], grid, depth, "initial")
+        observer, background, profile_now = radial_outline(maps["current"], grid, depth, "current")
         mask = observer.mask
         if depth == "full" and not np.array_equal(mask, archived_mask):
             raise ValueError("Full-depth radial candidate does not reproduce the exact-edge archived mask")
         initial_deficit = ladder.recovery.compute_fractional_deficit(maps["current"], maps["initial"])
-        measured[depth] = {"mask": mask, "fit_deficit": observer.deficit, "initial_deficit": initial_deficit}
+        measured[depth] = {"mask": mask, "fit_deficit": observer.deficit, "initial_deficit": initial_deficit,
+                           "initial_outline": initial}
         mask_hashes[depth] = hashlib.sha256(mask.tobytes(order="C")).hexdigest()
+        initial_hashes[depth] = hashlib.sha256(initial.mask.tobytes(order="C")).hexdigest()
         full_mask = measured["full"]["mask"]
         full_path = fields["full"]["tracer_path"]
+        controls.extend({"depth": depth, **r} for r in depth_controls(grid, initial, mask, full_path, initial_deficit))
         depth_areas = area_scores(grid, mask, full_mask, full_path, maps["tracer_path"])
         for row in depth_areas:
             target_depth = "full" if row["target"] == "full_lobe" else depth
@@ -305,17 +367,21 @@ def run(projection_dir, reference, output):
     with TemporaryDirectory(dir=output.parent) as tmp:
         work = Path(tmp) / "scores"
         work.mkdir()
-        for name, rows in (("areas.csv", areas), ("filling.csv", filling), ("radial_profiles.csv", profiles)):
+        for name, rows in (("areas.csv", areas), ("filling.csv", filling), ("radial_profiles.csv", profiles),
+                           ("time_zero_controls.csv", controls)):
             front.write_rows(work / name, rows)
         display = plot_maps(work / "maps.png", grid, fields, measured, receipt["actual_time_myr"], receipt["depths"]["full"])
         plot_profiles(work / "profiles.png", profiles)
+        plot_time_zero_controls(work / "time_zero_controls.png", grid, measured)
         result = {
             "case": receipt["case"], "snapshot_index": receipt["snapshot_index"], "view_deg": receipt["view_deg"],
             "actual_time_myr": receipt["actual_time_myr"], "frequency_hz": receipt["frequency_hz"],
             "redshift": receipt["redshift"], "projection_receipt_sha256": front.HASH(projection_dir / "completion.json"),
             "projection_file_sha256": receipt["files"]["projections.npz"]["sha256"],
             "reference_sha256": front.SOURCE_HASHES[0], "full_depth_candidate_matches_archive": True,
-            "candidate_mask_sha256": mask_hashes, "native_tracer_boundary_face_cells": receipt["tracer_boundary_face_cells"],
+            "candidate_mask_sha256": mask_hashes, "time_zero_mask_sha256": initial_hashes,
+            "time_zero_status": {r["depth"]: r["time_zero_status"] for r in controls if r["hemisphere"] == "both"},
+            "native_tracer_boundary_face_cells": receipt["tracer_boundary_face_cells"],
             "support_by_5kpc_annulus": support, "flux_integral_units": "mJy sr^-1 kpc^2",
             "detector": {"fit_radius_kpc": ladder.recovery.BACKGROUND_RADIUS_KPC,
                          "candidate_radius_kpc": ladder.recovery.CANDIDATE_RADIUS_KPC,

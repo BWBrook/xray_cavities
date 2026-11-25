@@ -5,7 +5,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts/science"))
 from compare_compressive_front import Grid
-from score_ghi20_midplane_slabs import area_scores, filling_scores, fit_image
+from score_ghi20_midplane_slabs import area_scores, depth_controls, filling_scores, fit_image, radial_outline
 import xray_cavity_method_ladder as ladder
 
 
@@ -85,3 +85,23 @@ def test_unmasked_profiles_match_the_original_fitter_and_record_an_unsupported_a
     assert gap["smoothed_mjy_sr"] > 0
     scaled, _ = fit_image(0.4 * image, grid, "slab10", "current")
     np.testing.assert_allclose(0.4 * fit, scaled)
+
+
+def test_undisturbed_steep_profile_fails_control_even_when_matched_pixels_do_not_change():
+    edges = np.arange(-182., 184., 2.)
+    centres = (edges[:-1] + edges[1:]) / 2
+    grid = Grid(centres, edges, centres, edges)
+    radius = np.hypot(centres[:, None], centres[None, :])
+    truth = radius < 35
+    for initial_image, expected_status in ((np.ones_like(radius), "empty"), (np.exp(-radius / 24), "failed_nonempty")):
+        initial, _, _ = radial_outline(initial_image, grid, "slab10", "initial")
+        matched_deficit = ladder.recovery.compute_fractional_deficit(initial_image, initial_image)
+        rows = depth_controls(grid, initial, initial.mask, truth, matched_deficit)
+        assert {row["time_zero_status"] for row in rows} == {expected_status}
+        for row in rows:
+            assert row["dimmed_on_lobe_kpc2"] == row["brightened_on_lobe_kpc2"] == 0
+            assert row["dimmed_off_lobe_in_search_kpc2"] == row["brightened_off_lobe_in_search_kpc2"] == 0
+        negative, positive, both = rows
+        assert both["time_zero_selected_kpc2"] == negative["time_zero_selected_kpc2"] + positive["time_zero_selected_kpc2"]
+        assert both["time_zero_selected_kpc2"] == grid.area[initial.mask].sum()
+        assert both["current_false_in_time_zero_outline_kpc2"] == grid.area[initial.mask & ~truth].sum()

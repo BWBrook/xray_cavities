@@ -1,10 +1,28 @@
 # How much does foreground gas hide the G-HI cavity at 20 Myr?
 
-Removing gas in front of and behind the lobes makes their 1-keV X-ray depression much clearer. It also makes the radial detector select more gas outside them. Across both lobes, the ±30 kpc image keeps the entire projected tracer footprint and 98.8% of its volume. Coverage rises from 51.6% to 67.1%, while false area grows from 7,229 to 15,335 kpc². This is one side-on view of the exposed high-power group simulation at 19.9996143 Myr. [Matched area measurements](assets/ghi20_midplane_slabs_2026-11-25/areas.csv) · [Stas’s request](../exchange/logs/2026-11-25-midplane-slab-xray-cavity-request.md)
+Removing foreground and background gas reveals more of the G-HI cavity at 19.9996143 Myr. At full depth, **55.8%** of the projected lobe is more than 5% dimmer at 1 keV than the same sightlines at time zero. That share rises to **73.2%** within ±30 kpc and **85.1%** within ±10 kpc. The ±30 kpc slab retains the entire projected tracer footprint and 98.8% of the lobe volume. [Matched brightness measurements](assets/ghi20_midplane_slab_review_2026-11-25/physical_reference.csv) · [Slab geometry](assets/ghi20_midplane_slabs_2026-11-25/areas.csv)
 
-## What the outline recovers
+The original pilot fitted the time-zero images but omitted the detector run on them. **The registered 5% detector fails on both undisturbed slabs.** Its smoothed radial background produces large annular selections before the jet evolves. That explains much of the false exterior area in the 20-Myr outlines and changes how their purity can be interpreted. XR-07 is provisional for this one side-on view. [Control replay](assets/ghi20_midplane_slabs_2026-11-25/time_zero_controls.csv) · [Claude’s review](assets/ghi20_midplane_slab_review_2026-11-25/summary.json)
 
-The common target is the same 11,309.9 kpc² full-depth projected lobe at every depth. Overlap and missed area sum to the target area. Overlap and false area sum to the selected area. Coverage divides overlap by target area, and purity divides it by selected area. Each bipolar percentage uses the sum of the two sides’ physical areas.
+## What the undisturbed images show
+
+| Emitting depth | Time-zero area selected at 5% (kpc²) | Share of search aperture | Lobe area physically dimmed >5% | Off-lobe area physically dimmed >5% (kpc²) |
+|---|---:|---:|---:|---:|
+| Full (±200 kpc) | 0 | 0% | 55.8% | 0.1 |
+| ±30 kpc | 27,028 | 59.7% | 73.2% | 2.3 |
+| ±10 kpc | 30,936 | 68.4% | 85.1% | 562.3 |
+
+The first two columns of measurements apply the detector to the initial image against its own fitted background. The last two compare each 20-Myr pixel directly with its initial brightness, using the full tracer footprint and all off-lobe pixels inside 120 kpc. The physical area count has no component-size cut. The underlying table includes brightened area at the same threshold. [Areas dimmed and brightened](assets/ghi20_midplane_slab_review_2026-11-25/physical_reference.csv)
+
+![The fitted radial deficit on the undisturbed atmosphere at all three depths](assets/ghi20_midplane_slabs_2026-11-25/time_zero_controls.png)
+
+The solid black outlines enclose the time-zero selections. The dashed circle is the search boundary. Smoothing the steeper initial profiles gives peak apparent deficits of 4.0%, 6.4% and 7.1%, each expressed relative to the fitted background. At ±30 kpc, 7,478 of the 15,335 kpc² of evolved false area already lie in the control outline. At ±10 kpc the overlap is 7,934 of 14,417 kpc². The remaining false area in each slab lies between 100 and 120 kpc, where the initial fit already produces a mean apparent deficit of 4.6–4.8%. Changes in the fit or the gas brightness can then move pixels across 5%. [Background by radius](assets/ghi20_midplane_slab_review_2026-11-25/background_bias.csv) · [Control overlap](assets/ghi20_midplane_slabs_2026-11-25/time_zero_controls.csv)
+
+As a sensitivity check, Claude tried an **8% cut after inspecting the pilot**. It empties all three initial outlines. At 20 Myr it covers 46.8%, 66.5% and 79.4% of the lobe, with 0, 0 and 120 kpc² of false area. The four-case comparison keeps the registered 5% cut and reports its control outcome alongside each evolved score. [Threshold checks](assets/ghi20_midplane_slab_review_2026-11-25/outlines.csv) · [Four-case protocol](four_case_midplane_slab_protocol_2026-11-25.md)
+
+## Registered radial outlines at 20 Myr
+
+These scores describe the detector at its registered 5% cut. The common target is the same 11,309.9 kpc² full-depth projected lobe at every depth. Coverage divides overlap by target area, and purity divides it by selected area. Each bipolar percentage uses the sum of the two sides’ physical areas. Both slab rows have failed initial controls.
 
 | Emitting depth along y | Jet side | Selected (kpc²) | Overlap (kpc²) | Missed (kpc²) | False (kpc²) | Coverage | Purity |
 |---|---|---:|---:|---:|---:|---:|---:|
@@ -34,11 +52,13 @@ At ±10 kpc the slab-matched coverage and purity are 80.2% and 38.2% on the nega
 
 ## Where the brightness comes from
 
-Summing flux over the same full-lobe footprint, the fractional brightness deficit against the matching initial atmosphere rises from **8.7% at full depth to 44.6% at ±30 kpc and 73.2% at ±10 kpc**. Gas beyond 30 kpc provided 48.4% of the initial flux on those sightlines and became 29.5% brighter. Classifying cells by their tracer at 20 Myr for both epochs, gas outside the tracer cells offsets 71.6%, 24.7% and 1.2% of the tracer cells’ own brightness decrease at the three depths. The full-depth deficit includes both the original foreground and background light and the subsequent brightening of that gas. [Emission by region](assets/ghi20_midplane_slabs_2026-11-25/filling.csv) · [Independent flux accounting](assets/ghi20_midplane_slabs_2026-11-25/independent_review.json)
+Over the fixed lobe footprint the area-integrated flux deficit is **8.7% at full depth, 44.6% at ±30 kpc and 73.2% at ±10 kpc**. Gas beyond 30 kpc supplied 48.4% of the initial light. Adding just that initial light to the evolved ±30 kpc image would bring the deficit down to 23.0%, a fall of **21.6 percentage points** from dilution. The outer gas also brightened by 29.5%, taking another **14.3 points** off the full-column deficit. At the three depths, ambient gas offsets 71.6%, 24.7% and 1.2% of the tracer cells’ own brightness decrease, using current tracer membership at both epochs. [Component fluxes](assets/ghi20_midplane_slabs_2026-11-25/filling.csv) · [Outer gas held at initial brightness](assets/ghi20_midplane_slab_review_2026-11-25/summary.json)
 
-The sightlines missed by the original outline show *where* the cavity is hidden. Over these same 5,475.8 kpc², gas at |y| ≤ 10 kpc dims by 46.4%, gas at 10 < |y| ≤ 30 kpc brightens by 45.9%, and gas beyond 30 kpc brightens by 19.7%, each relative to its own initial flux. These three regions supplied 23.1%, 29.7% and 47.2% of the initial light. Their weighted sum leaves the sightlines **12.2% brighter at full depth**. Even the ±30 kpc image is 5.5% brighter on those sightlines taken together. The depth cut locates the extra light without assigning it to a particular shock or wave. [Independent component sums](assets/ghi20_midplane_slabs_2026-11-25/independent_review.json)
+Grouping sightlines by the **length of tracer material along them** gives a physical comparison independent of the outline. The three shortest path bins cover 1,849 kpc² in total. For paths of (0, 5], (5, 10] and (10, 20] kpc, full-column flux is **36.3%, 25.4% and 16.1% brighter** than at time zero. These are flux changes for each bin as a whole. Gas 10–30 kpc from the midplane brightens by 107%, 91% and 65% in those bins. All three would remain brighter even if gas beyond 30 kpc had retained its initial brightness. [Tracer-path and layer table](assets/ghi20_midplane_slab_review_2026-11-25/layers.csv)
 
-The exterior areas in the outlines behave differently. As a follow-up to the area scores, we compared every selected pixel outside the full tracer footprint with its own time-zero brightness. At ±30 kpc **zero of 15,335 kpc²** dims by more than 5%. On that area the integrated brightness changes by less than 0.003% and the refitted background exceeds the initial flux by 6.47%. At ±10 kpc only 139.6 of 14,417 kpc² (0.97%) dims by more than 5%. There the area-integrated brightness falls 2.17% and the fitted background stands 4.29% above its initial flux reference. At full depth the corresponding dimmed exterior area is also zero. The detector’s 5% cut is relative to the refitted radial profile, which changes with depth. [Exterior brightness checks](assets/ghi20_midplane_slabs_2026-11-25/independent_review.json) · [Radial profiles](assets/ghi20_midplane_slabs_2026-11-25/radial_profiles.csv)
+The detected and missed subsets are selected by the full-depth detector. In the 10–30 kpc layer the detected subset dims by 77.9% while the missed subset brightens by 45.9%. Beyond 30 kpc the gas actually brightens more on detected sightlines (37.0%) than on missed ones (19.7%). The layer’s association with the outline therefore depends on both depth and tracer path. A shock or wave identification would require additional evidence. [Detected and missed layer balances](assets/ghi20_midplane_slab_review_2026-11-25/layers.csv)
+
+Within the detector’s selected exterior region, zero of 15,335 kpc² at ±30 kpc and 139.6 of 14,417 kpc² at ±10 kpc dims by more than 5% against time zero. This uses a smaller denominator than the all-exterior physical measurements in the first table. [Selected exterior fluxes](assets/ghi20_midplane_slabs_2026-11-25/independent_review.json)
 
 ![Matched maps of both lobes at full depth, ±30 kpc and ±10 kpc](assets/ghi20_midplane_slabs_2026-11-25/maps.png)
 
@@ -50,7 +70,11 @@ The exterior areas in the outlines behave differently. As a follow-up to the are
 
 ## Verification
 
-PBS job 884129 completed in 33 min 32 s with exit status 0. All five full-depth fields matched their archived rasters bit for bit. The native cell-volume sums and the projected tracer path times sky area agree for both sides at every depth. The ±30 kpc boundaries each take 0.139505 kpc of a native cell. The ±10 kpc boundaries coincide with cell edges. Two scoring implementations using the same projections produced identical masks at all three depths. They reproduce all 18 physical area rows within 4 × 10⁻¹² kpc² and agree on the three exterior brightness checks. Independent review of the native extraction and extension to other cases and ages remain open. [Native receipt](assets/ghi20_midplane_slabs_2026-11-25/native_completion.json) · [PBS accounting](assets/ghi20_midplane_slabs_2026-11-25/pbs_accounting.json) · [Scoring receipt](assets/ghi20_midplane_slabs_2026-11-25/score_receipt.json) · [Independent replay](assets/ghi20_midplane_slabs_2026-11-25/independent_review.json)
+PBS job 884129 completed in 33 min 32 s with exit status 0. All five full-depth fields matched their archived rasters bit for bit. The projected tracer path times sky area agrees with the native volume sum on both sides at every depth. Each ±30 kpc boundary takes 0.139505 kpc of one cell. The ±10 kpc boundaries coincide with cell edges. [Native receipt](assets/ghi20_midplane_slabs_2026-11-25/native_completion.json) · [PBS accounting](assets/ghi20_midplane_slabs_2026-11-25/pbs_accounting.json)
+
+The two detector implementations are the primary scorer and Claude’s DET-06 detector, which both subsequent review scripts use. They agree on the three evolved masks, all 18 area rows and the exterior brightness checks. After review the primary scorer reproduced all three time-zero masks bit for bit, the selected areas in all nine control rows, and all 12 bipolar areas dimmed or brightened on and off the lobe. Codex also replayed Claude’s 44 checks from the hash-verified projections, reproducing all six review files byte for byte. [Primary receipt](assets/ghi20_midplane_slabs_2026-11-25/score_receipt.json) · [Pilot replay](assets/ghi20_midplane_slabs_2026-11-25/independent_review.json) · [Review checks](assets/ghi20_midplane_slab_review_2026-11-25/run.json)
+
+Two geometry checks use earlier data. The archived perpendicular (90°) tracer path gives the lobe volume in each slab to within three parts in ten million. Spherical deprojection of the original full-depth initial image predicts the radial brightness of both undisturbed slabs within 0.25% at 20–120 kpc. The evolved emission inside the narrow slabs still comes from a single native extraction. [Volume and radial deprojection checks](assets/ghi20_midplane_slab_review_2026-11-25/run.json)
 
 ## Reproducing the measurement
 
@@ -67,4 +91,12 @@ uv run --no-project --python 3.12 --with scikit-image==0.26.0 python \
   scripts/science/review_ghi20_midplane_slabs.py --reference "$GHI20_REFERENCE" \
   --projection "$SLAB_DIR/projections.npz" --compare "$NEW_SCORES" \
   --output "$NEW_SCORES/independent_review.json"
+```
+
+To repeat Claude’s review, set `GHI20_SIDE_VIEW` to the archived `G-HI_0020_90deg.npz`. The command regenerates the review tables and summary. Running the script without arguments regenerates the summary from the public tables.
+
+```sh
+uv run --no-project --python 3.12 --with scikit-image==0.26.0 python \
+  scripts/science/check_ghi20_midplane_slabs.py --projection "$SLAB_DIR/projections.npz" \
+  --side-view "$GHI20_SIDE_VIEW"
 ```

@@ -14,6 +14,16 @@
     "slab30": "42d36d4515958493b3363d7b7e753c74f87cc8478d07501f14934bedcc34d305",
     "slab10": "0218d9fa87051ea3a2904849aeaa27f384ebee845a36bc936c7453184f7e1ae2"
   },
+  "time_zero_mask_sha256": {
+    "full": "00db140d586440b347c91e90456ecdb53b61265ae57a1a8f45e55a3a07676e18",
+    "slab30": "3ec4e436bdc3aafb66a843b4d6939a97144b1d401d605fb203991b70a38343e2",
+    "slab10": "e4031194d4f87c820304a4bab332cc939a2b3ee11e2d9ceb25e30e1c8f77d424"
+  },
+  "time_zero_status": {
+    "full": "empty",
+    "slab30": "failed_nonempty",
+    "slab10": "failed_nonempty"
+  },
   "native_tracer_boundary_face_cells": {
     "x_max": 0,
     "x_min": 0,
@@ -75,12 +85,14 @@
     ],
     "display_samples_per_axis": 480
   },
-  "scorer_sha256": "52276100ebd72abaa31fededa8431f4c9ec90c8d6a7875bb95a4db8c3298d925",
+  "scorer_sha256": "14ecdd1036818abf74df12692439ef686c3a4401b054f7b4ced488fe04d4cb1b",
   "products": {
     "areas.csv": "ef418a65a05c2fb81b78b0c146cbbdc4363e3a61e11b9f20323c090e9e560bf8",
     "filling.csv": "f16c8c074f5cb9aa13f143b8dd80118abb6cb066135b96c8f89b9c85664d3ca5",
     "maps.png": "48c8e7a3a72bbecae3acfb04e70b1dddb401e024050602ab90bf525a8db94551",
     "profiles.png": "3cf07a22b2aa9b3d227daf2390c8e3bf2700f2b520749124fc015a5c9ac661f2",
-    "radial_profiles.csv": "92ba358a746c27160bc51b00c8376f44f073d341ba2cb4ab4a015261c7f3c8bc"
+    "radial_profiles.csv": "92ba358a746c27160bc51b00c8376f44f073d341ba2cb4ab4a015261c7f3c8bc",
+    "time_zero_controls.csv": "f42c8ed0f9e6ccaf17dba7c4a26b903de53b99668fa5023be19f99ba6eae3c2f",
+    "time_zero_controls.png": "05e6e209129ae3bc874be0604b00ea3d23d2a54b33af75f34d316ed163790f70"
   }
 }
