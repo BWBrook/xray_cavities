@@ -2,7 +2,7 @@
 
 A separate implementation, written after reading the protocol and Codex's
 measurement script, so it shares their reading of the rule. It imports
-nothing from the project's modules and labels components with scikit-image.
+nothing from Codex's modules and labels components with scikit-image.
 The published orange outline is read straight from the producer's archive.
 The smaller refitted outline is rebuilt with the radial detector written for
 the DET-06 review. The projected front, tracer and brightness maps are
