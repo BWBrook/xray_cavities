@@ -1,14 +1,15 @@
 # Fitting the X-ray atmosphere outside the simulated lobes and moving gas
 
-Excluding sightlines through gas moving at least 100 km/s from the background fit removed **95.7% of the falsely selected exterior area** across the 54 previously scored views. It also reduced median coverage of the projected lobe from **41.6% to 19.5%**. Excluding only the tracer-marked lobe raised median coverage to **52.5%** and increased exterior area by **64.3%**. None of the 108 science sides met the published recovery criterion under any of these three fits. Every primary fit was defined, and all 24 initial control sides stayed empty.
+Excluding sightlines through gas moving at least 100 km/s from the background fit removed **about 96% of falsely selected exterior area under either central fit**. Across the 54 science views, median coverage of the projected lobe was **39.9%** when the measured inner brightness slope was extrapolated, **19.5%** when the innermost measured brightness was held constant, and **41.6%** with the original background. The slope fit recovered 168,639 kpc² of lobe area, close to the original 169,944 kpc². None of the fits passed on any of the 108 science sides. All 24 initial control sides stayed empty. [Independent reproduction](assets/source_excluded_review_2026-11-25/summary.json)
 
 | Sightlines excluded from fit | Median lobe area recovered | Exterior area, summed over views (kpc²) | Purity, pooled by selected area | Median inferred / native volume | Empty science sides |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | None, original DET-05 radial rule | 41.6% | 55,071 | 75.5% | 0.508 | 15 |
-| Tracer-marked gas | 52.5% | 90,457 | 69.3% | 1.298 | 9 |
-| Gas moving ≥100 km/s | 19.5% | 2,372 | 97.6% | 0.129 | 21 |
+| Tracer-marked gas, constant centre | 52.5% | 90,457 | 69.3% | 1.298 | 9 |
+| Gas moving ≥100 km/s, extrapolated inner slope | 39.9% | 2,453 | 98.6% | 0.390 | 10 |
+| Gas moving ≥100 km/s, constant centre | 19.5% | 2,372 | 97.6% | 0.129 | 21 |
 
-Each median includes empty science outlines. Purity is the fraction of all selected sky area that overlaps the lobe. A passing side needed at least 75% lobe coverage, 95% purity and no aperture contact. Even the most complete science side covered only 59.6%, 74.7% and 64.7% with the original, tracer and primary speed fits, respectively. Eighteen sides had less than 75% of their target inside the aperture. The other 90 also failed. The separate exposed G-HI/20 example below is outside these totals. [Full numerical summary](assets/source_excluded_backgrounds_2026-11-25/summary.json)
+Each median includes empty science outlines. Purity is the fraction of all selected sky area that overlaps the lobe. A passing side needed at least 75% lobe coverage, 95% purity and no aperture contact. The tracer fit with the slope continuation reached 75.02% coverage on one side, with 39.6% purity. Eighteen sides had less than 75% of their target inside the aperture. The other 90 also failed. The separate exposed G-HI/20 example below is outside these totals. The figure shows the constant-centre fits. [Full numerical summary](assets/source_excluded_backgrounds_2026-11-25/summary.json)
 
 ![Per-case recovery and exterior contamination for the original, tracer-excluded and speed-excluded fits](assets/source_excluded_backgrounds_2026-11-25/case_comparison.png)
 

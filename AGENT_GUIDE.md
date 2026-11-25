@@ -454,9 +454,10 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
 
    The later simulation-assisted test excluded tracer or moving-gas sightlines
    only from the radial background fit. Median coverage across the same 108
-   science sides was 52.5% for tracer exclusion and 19.5% for the 100 km/s
-   speed exclusion, compared with 41.6% in the original. The central
-   continuation materially affects the speed result. The public reduction
+   science sides was 41.6% with the original background and 52.5% with tracer
+   exclusion and a constant centre. The 100 km/s speed exclusion removed about
+   96% of exterior area with either central fit. Median coverage reached 39.9%
+   with the extrapolated inner slope and 19.5% with a constant centre. The public reduction
    reproduces the comparison from its tables. Each of the 69 private figures
    shows the masks, outlines and radial support for one view.
    [Scores, method and figure index](docs/science/source_excluded_background_results_2026-11-25.md)

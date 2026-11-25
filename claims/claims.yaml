@@ -1002,11 +1002,13 @@ claims:
       On the same 54 previously scored science views as DET-05, excluding
       tracer-marked sightlines from the radial background fit increased median
       lobe-area completeness from 41.6% to 52.5% and summed false exterior area
-      from 55,071 to 90,457 kpc². Excluding sightlines through any gas moving at
-      least 100 km/s instead gave 19.5% completeness and 2,372 kpc² of false
-      exterior. These fits use the same full image and constant inward continuation.
-      Each fit missed the 75% completeness criterion on all 108 science sides
-      and returned empty outlines on all 24 initial control sides.
+      from 55,071 to 90,457 kpc² under constant inward continuation. Excluding
+      sightlines through any gas moving at least 100 km/s removed about 96% of
+      false exterior area with either central fit. Extrapolating the measured
+      inner log-brightness slope gave 39.9% median completeness and 2,453 kpc²
+      of false exterior. Holding the innermost measured brightness constant
+      gave 19.5% and 2,372 kpc². No fit passed on any of the 108 science sides.
+      All 24 initial control sides stayed empty.
     evidence:
       - {path: docs/science/source_excluded_background_protocol_2026-11-25.md, commit: 6516866}
       - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/scores.csv.gz, commit: 5d2a4cd}
