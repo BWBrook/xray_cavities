@@ -1,0 +1,18 @@
+#!/bin/bash
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mem=6gb
+#PBS -l walltime=02:00:00
+#PBS -m ae
+#PBS -j oe
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?}"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 MPLBACKEND=Agg
+export MPLCONFIGDIR="${TMPDIR:-/tmp}/src-excl-mpl-${PBS_JOBID:?}"
+printf '%s  stage.sha256\n' "${SOURCE_STAGE_SHA256:?}" | sha256sum --check --quiet -
+sha256sum --check --quiet stage.sha256
+printf '%s  plan.json\n' "${SOURCE_PLAN_SHA256:?}" | sha256sum --check --quiet -
+slot="${PBS_ARRAY_INDEX:-${SOURCE_SLOT:?missing projection slot}}"
+/share/apps/software/Anaconda3/2024.02-1/bin/python -u scripts/science/project_source_exclusion_support.py run --plan plan.json --slot "$slot" --output-dir ../native_outputs
+sha256sum --check --quiet stage.sha256
