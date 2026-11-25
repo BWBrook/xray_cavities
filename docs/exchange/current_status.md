@@ -51,7 +51,7 @@ no analysis job or simulation.
 
 ## Patrick’s fixed-background front test, 25 November
 
-In the 0°, 45° and 90° G-HI/20 views, clipping the original radial cavity candidates to the native compression front removed 99.4%, 91.6% and 92.0% of false exterior area. Real lobe area lost was zero on each of the six sides. Pooled purity rose from 63.0% to 98.2% while coverage stayed at 53.8%. A second implementation reproduced all 24 clipped masks for the original and previously refitted orange candidates. DET-07 records the exposed simulation comparison. An X-ray-only front estimator remains to be tested. [Per-lobe results and figure](../science/ghi20_front_constraint_2026-11-25.md) · [Patrick’s original request](logs/2026-11-25-q032-front-constrained-cavity-handover.md)
+In the 0°, 45° and 90° G-HI/20 views, clipping the original radial candidates to the mapped front removed 99.4%, 91.6% and 92.0% of false area. These shares reproduce the 24 November sightline-overlap table. The entire tracer footprint lies inside the front. All six sides exceeded 95% purity. Coverage topped out at 60.5%, below the 75% requirement. Claude’s review reproduced the projected masks and areas. In the offset test, the lowest side purity fell from 95.5% at 1 kpc outward to 93.1% at 2 kpc. Those offsets use pixel centres. The physical tracer-to-front edge gap was at least 1.48 kpc for the primary front and 1.07 kpc across all four definitions. DET-07 remains provisional pending Patrick’s assessment of the native front identity. [Results, distances and sensitivity table](../science/ghi20_front_constraint_2026-11-25.md) · [Patrick’s request](logs/2026-11-25-q032-front-constrained-cavity-handover.md)
 
 ## Source-excluded backgrounds, 25 November
 

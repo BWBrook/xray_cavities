@@ -475,10 +475,13 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    <!-- claims: DET-06 -->
 
    Patrick’s fixed-background test clips the already selected pixels to the
-   projected native compression front. In the three exposed G-HI/20 views
-   it removed 96.8% of the original radial rule’s false area and retained
-   every selected lobe pixel. Pooled coverage stayed at 53.8%. The public
-   tables give each hemisphere and all four native front definitions.
+   projected native compression front. At 0°, 45° and 90° in G-HI/20 it
+   removed 99.4%, 91.6% and 92.0% of false area, as implied by the 24 November
+   sightline table. The front encloses the entire tracer footprint. Any
+   candidate keeps its selected lobe pixels when clipped there. The six
+   sides reached 97.2–99.3% purity and at most 60.5% coverage, below the
+   DET-05 coverage threshold. For the offset test, distinguish pixel-centre
+   distances from the physical gap between the two drawn contours.
    [Per-lobe areas, front checks and reproduction](docs/science/ghi20_front_constraint_2026-11-25.md)
    <!-- claims: DET-07 -->
 

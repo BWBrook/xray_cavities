@@ -1041,12 +1041,18 @@ claims:
       At G-HI/20 Myr, holding the original X-ray radial background fixed and
       restricting its 5% deficit candidates to the projected native compression
       front removed 99.4%, 91.6% and 92.0% of false exterior area at 0°, 45°
-      and 90°. The cut removed 10,577 of 10,926 kpc² summed across three
-      projections and zero tracer-defined lobe pixels on all six sides.
-      Pooled purity rose from 63.0% to 98.2%. Lobe coverage remained 53.8%.
+      and 90°. The 24 November sightline-overlap table already determines
+      these shares. The entire tracer footprint lies inside the front, so
+      clipping any candidate there preserves its selected lobe pixels.
+      All six development sides exceeded 95% purity after clipping. Coverage
+      was 49.3–60.5%, so zero of six met the DET-05 recovery criterion.
+      The 0° view contributed 67.9% of the 10,577 kpc² of false area removed.
     evidence:
+      - {path: docs/science/assets/compressive_front_observer_2026-11-23/front_sightline_overlap.csv, commit: c6fc259}
       - {path: docs/science/ghi20_front_constraint_protocol_2026-11-25.md, commit: 3bf61df}
-      - {path: docs/science/ghi20_front_constraint_2026-11-25.md, commit: 0c39fb6}
+      - {path: docs/science/ghi20_front_constraint_2026-11-25.md, commit: b22c4f5}
+      - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/tracer_front_clearance.csv, commit: b22c4f5}
+      - {path: scripts/science/measure_ghi20_front_clearance.py, commit: b22c4f5}
       - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/area_scores.csv, commit: 0c39fb6}
       - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/front_geometry.csv, commit: 0c39fb6}
       - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/receipt.json, commit: 0c39fb6}
@@ -1059,17 +1065,18 @@ claims:
       - {path: docs/science/assets/ghi20_front_constraint_review_2026-11-25/summary.json, commit: d1cfeb8}
     reproduce: .venv/bin/python scripts/science/summarise_ghi20_front_constraint.py
     test: >-
-      Review the primary projected contour against Patrick’s proposed enclosure
-      in all three exposed panels, retaining any ambiguous front as unscored.
-      Check both hemisphere partitions and the earlier refitted orange candidates.
-      A disputed sky enclosure would change the set of scoreable views.
+      Patrick to assess whether the selected three-dimensional compressive
+      layer traces the physical outer front in this G-HI snapshot. Claude
+      verified that the cut uses the exact footprint edged in magenta in the
+      published panels. A different physical front could give a different cut.
     caveats:
       - The three azimuths and two hemispheres share one simulated state. The front comes from native gas fields. An X-ray-only front and held-out recovery require their own test.
       - All four pre-existing front definitions enclosed the entire projected tracer footprint. Pooled false-area removal ranged from 96.0% to 97.1%. This geometry does not identify a shock.
       - A second implementation reproduced all 24 clipped masks and all 72 side or bipolar rows for the original and emissivity-replacement/refit radial candidates from the same archived projections.
       - "Claude, 25 November 2026: a separate implementation (no shared code, scikit-image labelling, written after reading the protocol and Codex's script) reproduced the footprints of all four front definitions, both orange outlines and all 24 clipped masks by SHA-256, and all 72 side and bipolar area rows within 1e-8 kpc². The published orange outline was read from the producer archive and the smaller refitted outline was rebuilt. The clipped region is exactly the footprint whose edge the published overlays draw in magenta. The projections are Codex's and are taken as given. Whether the selected layer is the front remains Patrick's review, so the status stays provisional."
-      - "Claude, 25 November 2026: the six removal shares equal one minus the dominant-front fraction of the lateral orange area in front_sightline_overlap.csv, committed on 24 November at c6fc259, so the headline restates an earlier measurement. The projected footprint has no holes under either adjacency. Inside the front therefore means on a sightline that crosses the layer, and the open-front rule was exercised only on synthetic cases. Under the primary definition no other qualifying or boundary component projects outside it. Zero lobe loss is geometric. The tracer footprint lies at least 2.1 kpc inside the footprint edge in every view and definition, so no candidate could lose lobe area to this cut."
-      - "Claude, 25 November 2026: the result depends on where the bound sits. Of the 349 kpc² of false area left, 262 kpc² lies within 1 kpc of the footprint edge. A bound 5 kpc further out removes 91.4%, 58.8% and 55.0% of false area at 0°, 45° and 90°, and one 20 kpc further out removes 67.8%, 1.4% and 0%. Among the offsets tested (1, 2, 5, 10 and 20 kpc either way), all six sides keep at least 95% purity only for bounds up to 1 kpc outside the edge. A bound 5 kpc inside it excludes 1.1% to 1.5% of the projected lobe area. Distances are between pixel centres. Sky cells along the footprint edge are 0.05 to 0.9 kpc wide, so each 1-kpc step moves the bound by at least one cell. No side meets the DET-05 criterion. After the cut, purity is 97.2% to 99.3% and coverage is at most 60.5%. A candidate filling the whole front would have 70% to 73% purity."
+      - "Claude, 25 November 2026: the six removal shares equal one minus the dominant-front fraction of the lateral orange area in front_sightline_overlap.csv, committed on 24 November at c6fc259, so the headline restates an earlier measurement. The projected footprint has no holes under either adjacency. Inside the front therefore means on a sightline that crosses the layer, and the open-front rule was exercised only on synthetic cases. Under the primary definition no other qualifying or boundary component projects outside it. Zero lobe loss is geometric. The tracer-pixel centres lie at least 2.1 kpc from the nearest exterior-pixel centre in every view and definition, so no candidate could lose lobe area to this cut."
+      - "Claude, 25 November 2026: the result depends on where the bound sits. Of the 349 kpc² of false area left, 262 kpc² lies within 1 kpc of the footprint edge. A bound 5 kpc further out removes 91.4%, 58.8% and 55.0% of false area at 0°, 45° and 90°, and one 20 kpc further out removes 67.8%, 1.4% and 0%. Among the outward offsets tested (1, 2, 5, 10 and 20 kpc), all six sides keep at least 95% purity only at 1 kpc. The inward offsets tested were 1, 2, 5 and 10 kpc. A bound 5 kpc inside it excludes 1.1% to 1.5% of the projected lobe area. Distances are between pixel centres. Sky cells along the footprint edge are 0.05 to 0.9 kpc wide, so each 1-kpc step moves the bound by at least one cell. No side meets the DET-05 criterion. After the cut, purity is 97.2% to 99.3% and coverage is at most 60.5%. A candidate filling the whole front would have 70% to 73% purity."
+      - Measured between physical contour edges, the minimum gap is 1.48 kpc for the primary front and 1.07 kpc across all four definitions. The 1-to-2 kpc outward offset comparison brackets the loss of 95% purity for the six sides under the review’s uniform pixel-centre rule. A 5 kpc outward offset still removes 58.8% and 55.0% of false area at 45° and 90°.
 
   - id: XR-01
     status: supported
