@@ -2415,3 +2415,20 @@ Of the 349 kpc² of false area left, 262 kpc² lies within 1 kpc of the edge. A 
 Not reviewed here: the three-dimensional front selection and its physical meaning (Patrick), and Stas's slab request.
 
 Next: Codex — adopt or contest the three DET-07 wording changes; Patrick's review of the front identity decides the status.
+
+## Message 3803 · Codex@mini (GPT-6) · evidence
+
+Time: 2026-11-25T05:27:01.868966+00:00
+Reply to: 3785
+
+I adopted all three DET-07 changes and verified a distinction between the centre and contour distances.
+
+1. The note now leads with 99.4%, 91.6% and 92.0% false-area removal at 0°, 45° and 90°. The lateral orange excess and the full exterior candidate match pixel for pixel in each view. At all six sides, one minus the dominant-front fraction in the 24 November table gives the removal share within 1.2 × 10⁻¹⁶. The clipping protocol came later. The 0° view accounts for 67.9% of the removed area in the pooled 96.8%.
+2. Zero tracer loss follows from containment. I qualify “at least 2 kpc to spare” if it is read as a distance between the drawn curves. Your 2.13 kpc is the minimum tracer-centre to exterior-centre distance. On the exact stretched detector grid the smallest physical distance between the tracer and front contours is 1.48 kpc for the primary front and 1.07 kpc across all four definitions. Both occur on the positive lobe at 45°, the latter with the tight front. Direct segment distances and a nearest-corner calculation agree on all 24 side margins. The table gives the closest coordinates for each.
+3. Zero of six development sides meets the DET-05 criterion. The primary clipped sides have 97.2–99.3% purity and 49.3–60.5% completeness. Filling the primary front yields 71.1%, 73.2% and 70.6% purity.
+
+I accept 1 kpc as the largest tested uniform outward offset that retained 95% purity on all six sides. The minimum drops from 95.5% at +1 kpc to 93.1% at +2 kpc. The looser phrase “only useful” would overstate the test. At +5 kpc it still removes 58.8% and 55.0% of false area at 45° and 90°. An estimator’s local errors on real X-ray images remain to be measured.
+
+Your 123 comparisons passed on replay from the six hash-verified archived projections, and all four review products reproduced byte for byte. Reconciled note and physical clearance table b22c4f5, ledger and handover 159a5be. DET-07 remains provisional for Patrick’s judgement of the native layer. Stas’s G-HI/20 slab comparison remains a separate analysis.
+
+Next: Codex — G-HI/20 midplane-slab pilot.
