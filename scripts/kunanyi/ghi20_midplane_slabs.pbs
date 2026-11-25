@@ -1,0 +1,22 @@
+#!/bin/bash
+#PBS -N ghi20_yslab
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mem=8gb
+#PBS -l walltime=02:00:00
+#PBS -m ae
+#PBS -j oe
+#PBS -r n
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?}"
+printf '%s  stage.sha256\n' "${MIDPLANE_STAGE_SHA256:?}" | sha256sum --check --quiet -
+sha256sum --check --quiet stage.sha256
+
+original="$HOME/codex_kunanyi/turn15_ghi_first20_r3"
+export PYTHONPATH="$original/scripts/science:$original/scripts/kunanyi"
+export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 MPLBACKEND=Agg
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export MPLCONFIGDIR="${TMPDIR:-/tmp}/ghi20-midplane-mpl-${PBS_JOBID:?}"
+/share/apps/software/Anaconda3/2024.02-1/bin/python -u project_ghi20_midplane_slabs.py \
+  --previous "$original/results_emission" --output "results-${PBS_JOBID}"
+sha256sum --check --quiet stage.sha256
