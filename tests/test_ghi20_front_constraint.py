@@ -5,6 +5,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts/science"))
 from compare_compressive_front import Grid
+from measure_ghi20_front_clearance import edge_gaps
 from measure_ghi20_front_constraint import area_scores, front_interior
 
 
@@ -54,3 +55,20 @@ def test_physical_area_partitions_selected_and_unselected_lobe_separately():
     assert row["fraction_selected_true_lost"] == 5/28 and row["fraction_full_lobe_lost"] == 5/43
     empty = area_scores(np.zeros_like(seen), truth, front, area)
     assert empty["fraction_false_removed"] is None and empty["fraction_selected_true_lost"] is None
+
+
+def test_clearance_uses_exposed_cell_faces_on_a_stretched_grid():
+    u = np.array([-9, -5, -3, -2, 0, 1, 2.5, 5, 9])
+    z = np.array([-11, -7, -4, -2, 0, 2, 3, 6, 10])
+    grid = Grid((u[1:] + u[:-1]) / 2, u, (z[1:] + z[:-1]) / 2, z)
+    inside = np.zeros((8, 8), dtype=bool)
+    inside[1:-1, 1:-1] = True
+    tracer = np.zeros_like(inside)
+    tracer[3:5, 3:5] = True
+    rows = list(edge_gaps(tracer, inside, grid))
+    assert [r["hemisphere"] for r in rows] == ["negative_z", "positive_z"]
+    assert all(r["contour_gap_kpc"] == 3 for r in rows)
+    assert all((r["tracer_u_kpc"], r["front_u_kpc"]) == (-2, -5) for r in rows)
+    tracer[0, 3] = True
+    with np.testing.assert_raises(ValueError):
+        list(edge_gaps(tracer, inside, grid))
