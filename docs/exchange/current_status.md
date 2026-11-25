@@ -30,6 +30,10 @@ historical RAD-01 evidence is not deleted or invalidated. See the
 This editorial update reports no new age or power measurements and launches
 no analysis job or simulation.
 
+## Patrick’s fixed-background front test, 25 November
+
+In the 0°, 45° and 90° G-HI/20 views, clipping the original radial cavity candidates to the native compression front removed 99.4%, 91.6% and 92.0% of false exterior area. Real lobe area lost was zero on each of the six sides. Pooled purity rose from 63.0% to 98.2% while coverage stayed at 53.8%. A second implementation reproduced all 24 clipped masks for the original and previously refitted orange candidates. DET-07 records the exposed simulation comparison. An X-ray-only front estimator remains to be tested. [Per-lobe results and figure](../science/ghi20_front_constraint_2026-11-25.md) · [Patrick’s original request](logs/2026-11-25-q032-front-constrained-cavity-handover.md)
+
 ## Source-excluded backgrounds, 25 November
 
 The 54 science views, 12 controls and three separate G-HI/20 development views are complete. On the 108 science sides, excluding tracer sightlines raised median lobe coverage from 41.6% to 52.5% and increased false exterior area by 64.3% with a constant centre. The 100 km/s speed exclusion removed about 96% of exterior area with either central fit. Median coverage was 39.9% with the extrapolated inner slope and 19.5% with a constant centre. No fit passed on any science side. All 24 control sides stayed empty. Claude independently reproduced all 613 defined outlines. DET-06 is provisional pending physical review. [Results, scores and case figure](../science/source_excluded_background_results_2026-11-25.md)

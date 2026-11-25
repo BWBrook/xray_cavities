@@ -1014,7 +1014,7 @@ claims:
       - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/scores.csv.gz, commit: 5d2a4cd}
       - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/radial_support.csv.gz, commit: 5d2a4cd}
       - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/independent_check.json, commit: 5d2a4cd}
-      - {path: docs/science/source_excluded_background_results_2026-11-25.md, commit: 5d2a4cd}
+      - {path: docs/science/source_excluded_background_results_2026-11-25.md, commit: de1957b}
       - {path: scripts/science/review_source_excluded_backgrounds.py, commit: 02ebd46}
       - {path: docs/science/assets/source_excluded_review_2026-11-25/summary.json, commit: 02ebd46}
       - {path: docs/science/assets/source_excluded_review_2026-11-25/sides.csv.gz, commit: 02ebd46}
@@ -1034,6 +1034,34 @@ claims:
       - "Claude, 25 November 2026: the fall to 19.5% comes from the constant inward continuation. Of the 75,494 kpc² of lobe area the 100 km/s fit loses relative to the original outline, 59,793 kpc² (79%) lies inside the unsupported centre, and all 2,372 kpc² of its false area lies outside it. On the 30 sides with direct central support, all in C-LO, median completeness is 34.8% before and 35.0% after. The constant continuation puts the central background at a median 0.71 (0.32–0.97) of the time-zero radial profile. The slope continuation gives 1.10 (0.90–1.22) at the centre and 1.02 (0.90–1.09) averaged over the unsupported region."
       - "Claude, 25 November 2026: with the slope continuation the 100 km/s fit recovers 168,639 kpc² of lobe area against 169,944 kpc² for the original outline, with 2,453 against 55,071 kpc² of false area. The paired median change in completeness is +0.6 points (55 sides up, 37 down; C-HI −6.0, G-HI −0.8, G-LO +13.1 points). Of the lobe area the slope continuation adds, 95.5% is more than 5% dimmer than the same pixels at time zero. Under the slope continuation the tracer fit reaches 75.02% completeness on one side (G-LO at 30 Myr, 0°), where its purity is 39.6%. The statement that every fit missed 75% therefore holds for the constant continuation only. No side in any fit combines 75% completeness with 95% purity."
       - "Claude, 25 November 2026 (measured after seeing the scores): 41.0% of projected lobe area is more than 5% dimmer than the same pixels at time zero. The median side is 40.6% and the best side 59.5%, so no side reaches 75%. Half the lobe area (50.4%) is dimmer than time zero at all. The time-zero image is a reference and need not equal the current undisturbed background. Of that dimmed lobe area the original outline recovers 89.9%, the 100 km/s fit 54.4% with the constant continuation and 96.6% with the slope, and the tracer fit 99.4%. The tracer fit also selects 17.5% of the lobe area that is not dimmed by 5%, with its background a median 12% above the time-zero profile across the unsupported centre."
+
+  - id: DET-07
+    status: provisional
+    statement: >-
+      At G-HI/20 Myr, holding the original X-ray radial background fixed and
+      restricting its 5% deficit candidates to the projected native compression
+      front removed 99.4%, 91.6% and 92.0% of false exterior area at 0°, 45°
+      and 90°. The cut removed 10,577 of 10,926 kpc² summed across three
+      projections and zero tracer-defined lobe pixels on all six sides.
+      Pooled purity rose from 63.0% to 98.2%. Lobe coverage remained 53.8%.
+    evidence:
+      - {path: docs/science/ghi20_front_constraint_protocol_2026-11-25.md, commit: 3bf61df}
+      - {path: docs/science/ghi20_front_constraint_2026-11-25.md, commit: 0c39fb6}
+      - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/area_scores.csv, commit: 0c39fb6}
+      - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/front_geometry.csv, commit: 0c39fb6}
+      - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/receipt.json, commit: 0c39fb6}
+      - {path: docs/science/assets/ghi20_front_constraint_2026-11-25/independent_review.json, commit: 0c39fb6}
+      - {path: scripts/science/summarise_ghi20_front_constraint.py, commit: 0c39fb6}
+    reproduce: .venv/bin/python scripts/science/summarise_ghi20_front_constraint.py
+    test: >-
+      Review the primary projected contour against Patrick’s proposed enclosure
+      in all three exposed panels, retaining any ambiguous front as unscored.
+      Check both hemisphere partitions and the earlier refitted orange candidates.
+      A disputed sky enclosure would change the set of scoreable views.
+    caveats:
+      - The three azimuths and two hemispheres share one simulated state. The front comes from native gas fields. An X-ray-only front and held-out recovery require their own test.
+      - All four pre-existing front definitions enclosed the entire projected tracer footprint. Pooled false-area removal ranged from 96.0% to 97.1%. This geometry does not identify a shock.
+      - A second implementation reproduced all 24 clipped masks and all 72 side or bipolar rows for the original and emissivity-replacement/refit radial candidates from the same archived projections.
 
   - id: XR-01
     status: supported

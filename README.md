@@ -30,7 +30,7 @@ diagnostics are separate archival work; see the
 | How much of the supplied energy does the lobe enthalpy represent? | [Matched fractions and their denominators](docs/science/native_delivery_restatement_2026-11-21.md) and [the short research brief](manuscript/text/brief.md) |
 | How does the energy balance change as the jet ages? | [All 197 production intervals and the short-window calibration](docs/science/assets/production_entropy_review_2026-11-23/README.md) |
 | Separate radio-age diagnostic, outside the current paper scope | [Archived tracer-weight comparison in one G-HI radio spectrum](docs/science/radio_tracer_weight_check_2026-11-23.md) |
-| Do the X-ray arcs follow the compressed gas? | [G-HI at 20 Myr, viewed from three directions](docs/science/ghi20_compressive_front_comparison_2026-11-23.md) |
+| Do the X-ray arcs follow the compressed gas? | [Three G-HI views at 20 Myr](docs/science/ghi20_compressive_front_comparison_2026-11-23.md) and [how much false area lies beyond the front](docs/science/ghi20_front_constraint_2026-11-25.md) |
 | How much of the lobe do the X-ray outlines recover? | [54 held-out views, all side scores and the independent review](docs/science/heldout_xray_results_2026-11-24.md) |
 | Does excluding the lobe or moving gas improve the X-ray background fit? | [Same-image comparison against the published radial outlines](docs/science/source_excluded_background_results_2026-11-25.md) |
 | Did the restarts reproduce the production runs? | [High-power control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) and [low-power controls, job accounting and replay](docs/exchange/logs/2026-11-23-low-power-entropy-results.md) |

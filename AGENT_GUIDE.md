@@ -473,6 +473,15 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    shows the masks, outlines and radial support for one view.
    [Scores, method and figure index](docs/science/source_excluded_background_results_2026-11-25.md)
    <!-- claims: DET-06 -->
+
+   Patrick’s fixed-background test clips the already selected pixels to the
+   projected native compression front. In the three exposed G-HI/20 views
+   it removed 96.8% of the original radial rule’s false area and retained
+   every selected lobe pixel. Pooled coverage stayed at 53.8%. The public
+   tables give each hemisphere and all four native front definitions.
+   [Per-lobe areas, front checks and reproduction](docs/science/ghi20_front_constraint_2026-11-25.md)
+   <!-- claims: DET-07 -->
+
 3. **How well can the adopted clocks recover jet power?** Compare sound-crossing,
    buoyant-rise and refill estimates separately, retaining true simulation
    age as a control. Use qualified geometries and preserve detection and
