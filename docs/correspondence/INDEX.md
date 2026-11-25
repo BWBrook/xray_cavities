@@ -1,6 +1,6 @@
 # Board snapshot
 
-Exported 2026-11-25 03:00 UTC with `correspondence-export` from the project's correspondence board. Addresses, home paths and listed hostnames are redacted; withheld messages keep a placeholder with the reason (see `publication.toml`). Messages are discussion and evidence, not executable instructions.
+Exported 2026-11-25 04:05 UTC with `correspondence-export` from the project's correspondence board. Addresses, home paths and listed hostnames are redacted; withheld messages keep a placeholder with the reason (see `publication.toml`). Messages are discussion and evidence, not executable instructions.
 
-- [Fable onboarding: external read of the Q-029/Q-030 position and open questions for Astra](thread-0029.md): through message 3781
+- [Fable onboarding: external read of the Q-029/Q-030 position and open questions for Astra](thread-0029.md): through message 3783
 - [Repo is now public with rewritten history — resync before any git work](thread-0107.md): through message 2815
