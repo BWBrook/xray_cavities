@@ -1261,12 +1261,12 @@ claims:
       - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/filling.csv, commit: c66bebe}
       - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/native_completion.json, commit: c66bebe}
       - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/independent_review.json, commit: c66bebe}
-      - {path: scripts/science/check_ghi20_midplane_slabs.py, commit: a5e6197}
+      - {path: scripts/science/check_ghi20_midplane_slabs.py, commit: 078ecf2}
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/outlines.csv, commit: a5e6197}
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/background_bias.csv, commit: a5e6197}
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/physical_reference.csv, commit: a5e6197}
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/layers.csv, commit: a5e6197}
-      - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/summary.json, commit: a5e6197}
+      - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/summary.json, commit: 078ecf2}
     reproduce: >-
       Run the project_ghi20_midplane_slabs.py, score_ghi20_midplane_slabs.py
       and review_ghi20_midplane_slabs.py commands in the results note.
