@@ -1013,6 +1013,10 @@ claims:
       - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/radial_support.csv.gz, commit: 5d2a4cd}
       - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/independent_check.json, commit: 5d2a4cd}
       - {path: docs/science/source_excluded_background_results_2026-11-25.md, commit: 5d2a4cd}
+      - {path: scripts/science/review_source_excluded_backgrounds.py, commit: 02ebd46}
+      - {path: docs/science/assets/source_excluded_review_2026-11-25/summary.json, commit: 02ebd46}
+      - {path: docs/science/assets/source_excluded_review_2026-11-25/sides.csv.gz, commit: 02ebd46}
+      - {path: docs/science/assets/source_excluded_review_2026-11-25/fits.csv, commit: 02ebd46}
     reproduce: .venv/bin/python scripts/science/summarise_source_excluded_backgrounds.py
     test: >-
       Independently reproduce the 108-side and 24-control comparisons. Review
@@ -1024,6 +1028,10 @@ claims:
       - The 100 km/s exclusion leaves the centre without direct support in 39 of 54 views, extending to 60 kpc. Extrapolating the measured inner slope raises median completeness to 39.9% with zero passing sides. At 30 km/s four cluster views have no usable annulus.
       - A changed outer-face cell occurs on 92.45% of the retained sky area in the 100 km/s fit. The flag measures sightline incidence. Native velocities, thermodynamic changes and projected overlap alone do not identify shock heating or brightness from the boundary.
       - A second Codex implementation checked all 132 original radial side rows and reproduced the ten primary excluded outlines on five specified views pixel for pixel. Independent physical review of the fitting support and interpretation is pending.
+      - "Claude, 25 November 2026: an independent fitter written from the protocol, with a different component labeller, reproduces all 613 outlines on the 69 views pixel for pixel (original, tracer and 30, 100 and 300 km/s, both continuations) and all 1,226 side areas and volumes. The tracer and speed sky masks are Codex's native projections and were taken as given."
+      - "Claude, 25 November 2026: the fall to 19.5% comes from the constant inward continuation. Of the 75,494 kpc² of lobe area the 100 km/s fit loses relative to the original outline, 59,793 kpc² (79%) lies inside the unsupported centre, and all 2,372 kpc² of its false area lies outside it. On the 30 sides with direct central support, all in C-LO, median completeness is 34.8% before and 35.0% after. The constant continuation puts the central background at a median 0.71 (0.32–0.97) of the time-zero radial profile. The slope continuation gives 1.10 (0.90–1.22) at the centre and 1.02 (0.90–1.09) averaged over the unsupported region."
+      - "Claude, 25 November 2026: with the slope continuation the 100 km/s fit recovers 168,639 kpc² of lobe area against 169,944 kpc² for the original outline, with 2,453 against 55,071 kpc² of false area. The paired median change in completeness is +0.6 points (55 sides up, 37 down; C-HI −6.0, G-HI −0.8, G-LO +13.1 points). Of the lobe area the slope continuation adds, 95.5% is more than 5% dimmer than the same pixels at time zero. Under the slope continuation the tracer fit reaches 75.02% completeness on one side, so the statement that every fit missed 75% holds for the constant continuation only."
+      - "Claude, 25 November 2026 (measured after seeing the scores): 41.0% of projected lobe area is more than 5% dimmer than the same pixels at time zero. The median side is 40.6% and the best side 59.5%, so no side reaches 75%. Half the lobe area (50.4%) is dimmer than time zero at all. The time-zero image is a reference and need not equal the current undisturbed background. The tracer fit recovers more than this dimmed area on 93 of 108 sides, with its background a median 12% above the time-zero profile across the unsupported centre."
 
   - id: XR-01
     status: supported
