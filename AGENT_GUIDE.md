@@ -485,15 +485,18 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    [Per-lobe areas, front checks and reproduction](docs/science/ghi20_front_constraint_2026-11-25.md)
    <!-- claims: DET-07 -->
 
-   Stas’s slab pilot changes the physical emitting depth along y. On the
-   same G-HI/20 lobe footprint the full, ±30 and ±10 kpc maps yield 51.6%,
-   67.1% and 79.7% coverage, with 44.7%, 33.1% and 38.5% purity. Use
-   `full_lobe` in the area table to compare the same target across depths.
-   Use `slab_lobe` to measure recovery of the retained material. The
-   ±10 kpc slab intersects 97.9% of the original projected area and
-   contains 40.3% of the original volume. The flux table compares each
-   slab with the initial gas integrated over the same depth.
-   [Native projection, figures, area scores and independent replay](docs/science/ghi20_midplane_slab_results_2026-11-25.md)
+   Stas’s G-HI/20 slab test compares the same sightlines with their initial
+   brightness. The share of lobe area that dimmed by more than 5% is 55.8%, 73.2%
+   and 85.1% at full depth, ±30 and ±10 kpc. The registered radial rule on
+   the undisturbed images selects 0, 27,028 and 30,936 kpc². Read
+   `time_zero_controls.csv` alongside each evolved outline. A nonempty
+   control makes its false area and purity diagnostics of that fit.
+   In `areas.csv`, `full_lobe` keeps the same target across depths and
+   `slab_lobe` scores the retained material. The ±10 kpc slab intersects
+   97.9% of the original area and contains 40.3% of the volume. Use
+   full-column tracer path bins for the layer balance. Detected and missed
+   sightlines are defined by the detector.
+   [Pilot results and independent review](docs/science/ghi20_midplane_slab_results_2026-11-25.md) · [Four-case protocol](docs/science/four_case_midplane_slab_protocol_2026-11-25.md)
    <!-- claims: XR-07 -->
 
 3. **How well can the adopted clocks recover jet power?** Compare sound-crossing,

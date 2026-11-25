@@ -1249,14 +1249,20 @@ claims:
       In the exposed side-on G-HI image at 19.999614 Myr, the 1-keV brightness
       deficit over the fixed full tracer footprint rises from 8.7% at full
       depth to 44.6% at ±30 kpc and 73.2% at ±10 kpc, measured against the
-      matched initial atmosphere. The radial detector covers 51.6%, 67.1%
-      and 79.7% of that footprint. False exterior area grows from 7,229
-      to 15,335 and 14,417 kpc², giving purities of 44.7%, 33.1% and 38.5%.
+      matched initial atmosphere. The share of that footprint more than 5%
+      dimmer than at time zero rises from 55.8% to 73.2% and 85.1%.
+      On the undisturbed images the registered 5% radial detector selects
+      0, 27,028 and 30,936 kpc². Both slabs fail the time-zero control.
+      Their false area and purity at 20 Myr depend strongly on the
+      smoothed radial background.
       The ±30 kpc slab keeps the entire footprint and 98.8% of its volume.
       The ±10 kpc slab keeps 97.9% of the footprint and 40.3% of the volume.
     evidence:
       - {path: docs/science/ghi20_midplane_slab_protocol_2026-11-25.md, commit: e7fca24}
-      - {path: docs/science/ghi20_midplane_slab_results_2026-11-25.md, commit: c66bebe}
+      - {path: docs/science/ghi20_midplane_slab_results_2026-11-25.md, commit: 2e03378}
+      - {path: docs/science/four_case_midplane_slab_protocol_2026-11-25.md, commit: 2e03378}
+      - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/time_zero_controls.csv, commit: 2e03378}
+      - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/score_receipt.json, commit: 2e03378}
       - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/areas.csv, commit: c66bebe}
       - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/filling.csv, commit: c66bebe}
       - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/native_completion.json, commit: c66bebe}
@@ -1268,17 +1274,20 @@ claims:
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/layers.csv, commit: a5e6197}
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/summary.json, commit: 078ecf2}
     reproduce: >-
-      Run the project_ghi20_midplane_slabs.py, score_ghi20_midplane_slabs.py
-      and review_ghi20_midplane_slabs.py commands in the results note.
-      For the bipolar values in the public CSVs select hemisphere=both
-      and target=full_lobe in areas.csv or region=full_lobe in filling.csv.
+      Run the native, primary and review commands in the results note.
+      In time_zero_controls.csv select hemisphere=both for the initial
+      selected area and divide dimmed_on_lobe_kpc2 by full_lobe_kpc2 for
+      the physical area fraction. Select region=full_lobe and hemisphere=both
+      in filling.csv for the flux deficit. The independent layer and path
+      estimates are in layers.csv from check_ghi20_midplane_slabs.py.
     test: >-
-      Reconstruct the partial-cell native integrals, refit the backgrounds,
-      and reproduce the signed flux changes and exterior areas with a second
-      implementation. Test generality on the remaining selected case-ages.
+      Check the evolved narrow-slab emissivities against an independent
+      native extraction. Apply the registered matched-depth physical
+      measures and per-depth time-zero detector controls to the remaining
+      selected case-ages.
     caveats:
       - Cutting the emitting depth requires the simulation. Both scoring implementations use the same native projections and their 1-keV emissivity extrapolation.
-      - On the original missed sightlines the gas at |y| ≤ 10 kpc dims by 46.4%, gas at 10 < |y| ≤ 30 kpc brightens by 45.9% and gas beyond 30 kpc brightens by 19.7%, each relative to its own initial brightness. The emitting layer's physical identity remains open.
+      - The three full-column tracer path bins spanning 0–20 kpc cover 1,849 kpc². Their integrated full-depth brightness is 16.1–36.3% above time zero. The gas at 10–30 kpc from the midplane dims on detected sightlines and brightens on missed ones. This latter split conditions on the outline. The emitting layer's physical identity remains open.
       - The follow-up exterior check finds zero area physically dimmed by more than 5% at full depth and ±30 kpc. At ±10 kpc only 139.6 kpc² of its 14,417 kpc² exterior passes that physical cut. The registered detector thresholds each refitted radial background.
       - Both jet sides share one simulation. Other cases, ages and sightline directions require their own measurements.
       - "Claude, 25 November 2026: the slab false areas and purities are set mainly by the detector's smoothed background. Applied to the undisturbed time-zero images, the same detector selects nothing at full depth and 27,028 and 30,936 kpc² at ±30 and ±10 kpc, more than at 20 Myr; the time-zero fits equal the profiles in radial_profiles.csv. The 10-kpc smoothing lifts the fit above an undisturbed atmosphere by up to 4.0%, 6.4% and 7.1% at the three depths; against the unsmoothed annular medians the band-mean excess beyond 20 kpc is 0.2–0.4%. Of the 20-Myr false area, 7,478 of 15,335 kpc² (±30) and 7,934 of 14,417 kpc² (±10) lie inside the time-zero outline. The rest lies at 100–120 kpc, where smoothing alone gives 4.6–4.8% and the gas supplies the last step: a 1.0% rise in the fit at ±30 kpc and a 2.2% dimming of the selected exterior at ±10 kpc. With an 8% cut all three time-zero outlines are empty and the 20-Myr outlines cover 46.8%, 66.5% and 79.4% of the footprint with 0, 0 and 120 kpc² of false area. The 8% cut was chosen after seeing these images."

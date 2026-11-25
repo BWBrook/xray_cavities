@@ -33,7 +33,7 @@ diagnostics are separate archival work; see the
 | Do the X-ray arcs follow the compressed gas? | [Three G-HI views at 20 Myr](docs/science/ghi20_compressive_front_comparison_2026-11-23.md) and [how much false area lies beyond the front](docs/science/ghi20_front_constraint_2026-11-25.md) |
 | How much of the lobe do the X-ray outlines recover? | [54 held-out views, all side scores and the independent review](docs/science/heldout_xray_results_2026-11-24.md) |
 | Does excluding the lobe or moving gas improve the X-ray background fit? | [Same-image comparison against the published radial outlines](docs/science/source_excluded_background_results_2026-11-25.md) |
-| How much cavity area is hidden by gas along the line of sight? | [Full-depth and midplane-slab maps of G-HI at 20 Myr, with lobe coverage, purity and volume retention](docs/science/ghi20_midplane_slab_results_2026-11-25.md) |
+| How much cavity area is hidden by gas along the line of sight? | [The physical brightness change and the detector’s time-zero controls in G-HI at 20 Myr](docs/science/ghi20_midplane_slab_results_2026-11-25.md) · [Four-case protocol](docs/science/four_case_midplane_slab_protocol_2026-11-25.md) |
 | Did the restarts reproduce the production runs? | [High-power control checks](docs/exchange/logs/2026-11-22-entropy-restart-results.md) and [low-power controls, job accounting and replay](docs/exchange/logs/2026-11-23-low-power-entropy-results.md) |
 | What is established, provisional or withdrawn? | [Claims ledger](claims/claims.yaml) and [status definitions](claims/README.md) |
 | Joining or resuming the work? | [Current status](docs/exchange/current_status.md), then the [agent guide](AGENT_GUIDE.md) and [repository instructions](AGENTS.md) |
