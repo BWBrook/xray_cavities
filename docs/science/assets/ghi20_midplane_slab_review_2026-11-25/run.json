@@ -1,0 +1,96 @@
+{
+  "projection_sha256": "b522653fb78406049a5a61feffb8b5252e6fff059999b1cb661ef2845b0c98ae",
+  "side_view_sha256": "d77542fff88a0866e772623a6595f1a8babebb9a5d0dae5f349262b1576b5956",
+  "checks_passed": 38,
+  "exterior": {
+    "full": {
+      "false_kpc2": 7229.3557776528905,
+      "false_inside_time_zero_outline_kpc2": 0.0,
+      "current_over_time_zero_image": 1.0001665711674423,
+      "time_zero_fit_over_time_zero_image": 1.0362844809346143,
+      "current_fit_over_time_zero_fit": 1.0197071161936748,
+      "current_fit_over_time_zero_image": 1.056706659610095,
+      "largest_time_zero_fitted_deficit_in_search": 0.03961638769087512
+    },
+    "slab30": {
+      "false_kpc2": 15335.211640807887,
+      "false_inside_time_zero_outline_kpc2": 7478.379141562589,
+      "current_over_time_zero_image": 1.0000278476721678,
+      "time_zero_fit_over_time_zero_image": 1.0539962622954067,
+      "current_fit_over_time_zero_fit": 1.0101391470601555,
+      "current_fit_over_time_zero_image": 1.064682885399674,
+      "largest_time_zero_fitted_deficit_in_search": 0.06389578763119146
+    },
+    "slab10": {
+      "false_kpc2": 14417.215239861293,
+      "false_inside_time_zero_outline_kpc2": 7934.14576305143,
+      "current_over_time_zero_image": 0.9783428240354709,
+      "time_zero_fit_over_time_zero_image": 1.0551335786287854,
+      "current_fit_over_time_zero_fit": 0.9884208518297924,
+      "current_fit_over_time_zero_image": 1.0429160305824814,
+      "largest_time_zero_fitted_deficit_in_search": 0.0708628658536731
+    }
+  },
+  "lobe_volume": {
+    "full/negative_z": {
+      "side_view_kpc3": 230727.55352030144,
+      "slab_job_kpc3": 230727.55352030136
+    },
+    "full/positive_z": {
+      "side_view_kpc3": 230877.0406642926,
+      "slab_job_kpc3": 230877.04066429264
+    },
+    "full/both": {
+      "side_view_kpc3": 461604.59418459435,
+      "slab_job_kpc3": 461604.594184594
+    },
+    "slab30/negative_z": {
+      "side_view_kpc3": 227832.855567118,
+      "slab_job_kpc3": 227832.91221590134
+    },
+    "slab30/positive_z": {
+      "side_view_kpc3": 228226.47949360666,
+      "slab_job_kpc3": 228226.54967930206
+    },
+    "slab30/both": {
+      "side_view_kpc3": 456059.33506072493,
+      "slab_job_kpc3": 456059.4618952034
+    },
+    "slab10/negative_z": {
+      "side_view_kpc3": 93941.02265189814,
+      "slab_job_kpc3": 93941.02407545695
+    },
+    "slab10/positive_z": {
+      "side_view_kpc3": 92083.3360085291,
+      "slab_job_kpc3": 92083.33699900864
+    },
+    "slab10/both": {
+      "side_view_kpc3": 186024.3586604273,
+      "slab_job_kpc3": 186024.3610744656
+    }
+  },
+  "deprojection": {
+    "full_fit_rms_log_residual": 0.005864105181238026,
+    "slab30_2_20_kpc_max_abs_error": 0.004391128739808403,
+    "slab30_20_60_kpc_max_abs_error": 0.00037540497127186434,
+    "slab30_60_120_kpc_max_abs_error": 0.002281860240593403,
+    "slab30_120_180_kpc_max_abs_error": 0.007500161997371579,
+    "slab10_2_20_kpc_max_abs_error": 0.01124628809999173,
+    "slab10_20_60_kpc_max_abs_error": 0.0004644047406229257,
+    "slab10_60_120_kpc_max_abs_error": 0.0021067525271227794,
+    "slab10_120_180_kpc_max_abs_error": 0.007516087670589977
+  },
+  "footprint_flux": {
+    "full/current": 2528662.714817744,
+    "full/initial": 2769966.447003369,
+    "slab30/current": 791095.696508143,
+    "slab30/initial": 1428618.5872128652,
+    "slab10/current": 154565.72943811922,
+    "slab10/initial": 576558.7133409346
+  },
+  "footprint_flux_from_lobe_cells": {
+    "full": 54663.81251837653,
+    "slab30": 52699.66618132499,
+    "slab10": 21001.41461278255
+  }
+}
