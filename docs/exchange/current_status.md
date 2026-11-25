@@ -1,11 +1,28 @@
 # Current Status
 
-Updated 25 November 2026 with the supervisor's scope decision to exclude
-radio spectral ageing and use all three standard cavity-age prescriptions.
+Updated 25 November 2026 with the supervisor's request for +/-10 and +/-30 kpc
+midplane-slab X-ray cavity tests, alongside the spectral-age scope decision.
 Existing measurements retain their reported review status.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Supervisor request: midplane slab projections, 25 November
+
+Barry's agent: test whether foreground/background X-ray emission fills the
+tracer-defined cavities by comparing full-depth y integrations with slabs
+`|y| <= 30 kpc` and `|y| <= 10 kpc`, viewed along y onto the x-z plane.
+Keep all emitting gas inside each slab, the same 5% detection cut and matched
+background prescriptions. Report physical selected/overlap/missed/exterior
+areas, completeness/purity and maps with tracer and cavity contours.
+The lobe reference remains full-cell `tr1 > 1e-3`, not the shocked/sound-wave
+envelope. Report how much lobe each slab excludes and give slab-matched
+scores separately from recovery against the common full lobe reference.
+Start with G-HI/20, then use existing valid selected ages across all four
+cases. This changes the emitting domain and is separate from fitting-only
+source exclusions and frozen observer scores. No new simulation is requested
+and no calculation/job is reported by this handover.
+[Approved instruction](logs/2026-11-25-midplane-slab-xray-cavity-request.md).
 
 ## Supervisor scope decision 25 November
 
