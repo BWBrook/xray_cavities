@@ -6,7 +6,8 @@ here is a rerun, not a third implementation. This script adds what the
 pilot did not measure:
 
 - the registered detector applied to the three time-zero images, and the
-  outline at stricter cuts;
+  outline at stricter cuts (the time-zero fits are checked against the
+  profiles Codex published);
 - the excess of the smoothed radial fit over an undisturbed atmosphere;
 - the area dimmed or brightened by more than 5% against matched time zero,
   on and off the lobe;
@@ -106,6 +107,7 @@ def run(args):
     nothing = np.zeros_like(truth)
     receipt = json.loads((PUBLIC / 'score_receipt.json').read_text())
     checks, outlines, bias, physical, layers = [], [], [], [], []
+    published = read(PUBLIC / 'radial_profiles.csv')
     masks, exterior = {}, {}
 
     for depth in DEPTHS:
@@ -117,6 +119,9 @@ def run(args):
         area, halves = view.area, {**view.sides, 'both': np.ones_like(truth)}
         fit, fit0 = view.profiles(current, nothing)[0], null.profiles(initial, nothing)[0]
         raw0 = null.medians(initial, nothing)
+        for epoch, mine in (('current', fit), ('initial', fit0)):
+            theirs = [float(r['smoothed_mjy_sr']) for r in published if (r['depth'], r['epoch']) == (depth, epoch)]
+            checks.append((f'{depth}/{epoch} smoothed radial fit', len(theirs) == len(mine) and np.allclose(mine, theirs, rtol=1e-12)))
         zero = {}
         for cut in CUTS:
             mask, background = outline(view, fit, cut, det, label)

@@ -1,7 +1,7 @@
 {
   "projection_sha256": "b522653fb78406049a5a61feffb8b5252e6fff059999b1cb661ef2845b0c98ae",
   "side_view_sha256": "d77542fff88a0866e772623a6595f1a8babebb9a5d0dae5f349262b1576b5956",
-  "checks_passed": 38,
+  "checks_passed": 44,
   "exterior": {
     "full": {
       "false_kpc2": 7229.3557776528905,
