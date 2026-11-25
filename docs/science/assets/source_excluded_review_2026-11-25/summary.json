@@ -1,0 +1,264 @@
+{
+  "central_background_over_time_zero_median_min_max": {
+    "speed_100": {
+      "flat_over_time_zero_centre": [
+        0.710024442929123,
+        0.31824369673934466,
+        0.9705714437347587
+      ],
+      "flat_over_time_zero_gap_mean": [
+        0.8066657456251369,
+        0.5764360143738491,
+        0.9888692463900913
+      ],
+      "largest_unsupported_radius_kpc": 60.0,
+      "log_slope_over_time_zero_centre": [
+        1.102532542666835,
+        0.9017012671443082,
+        1.2200018966533468
+      ],
+      "log_slope_over_time_zero_gap_mean": [
+        1.0173789458155142,
+        0.9017012671443082,
+        1.0872624504731543
+      ],
+      "original_over_time_zero_centre": [
+        0.8907879590966149,
+        0.7190087247771606,
+        1.134131979678444
+      ],
+      "original_over_time_zero_gap_mean": [
+        1.017284493581435,
+        0.8044966528828131,
+        1.2340167984736092
+      ],
+      "views": 39
+    },
+    "tracer": {
+      "flat_over_time_zero_centre": [
+        1.0615052771126365,
+        0.9082265453792241,
+        1.9731325889282016
+      ],
+      "flat_over_time_zero_gap_mean": [
+        1.1225744211501765,
+        0.960710130600685,
+        1.9731325889282016
+      ],
+      "largest_unsupported_radius_kpc": 25.0,
+      "log_slope_over_time_zero_centre": [
+        1.0795558468936144,
+        0.9055280051822394,
+        3.504132788815742
+      ],
+      "log_slope_over_time_zero_gap_mean": [
+        1.146633499304712,
+        0.9590410018476959,
+        3.144500730527469
+      ],
+      "original_over_time_zero_centre": [
+        0.8907879590966149,
+        0.7190087247771606,
+        1.134131979678444
+      ],
+      "original_over_time_zero_gap_mean": [
+        0.9085016892138958,
+        0.6883637124360559,
+        1.116007907153944
+      ],
+      "views": 39
+    }
+  },
+  "lobe_area_dimmer_than_time_zero": {
+    "best_side": 0.5951823979128735,
+    "best_side_by_dimming_cut_pct": {
+      "0": 0.95460861355992,
+      "10": 0.47934075091548434,
+      "2": 0.8201585325437579
+    },
+    "by_case_median_min_max": {
+      "C-HI": [
+        0.33482206897139244,
+        0.20967352328936426,
+        0.38003399795300646
+      ],
+      "C-LO": [
+        0.2593470692113914,
+        0.0,
+        0.5435134823353611
+      ],
+      "G-HI": [
+        0.46701868723173356,
+        0.3935893839626465,
+        0.5252964096197258
+      ],
+      "G-LO": [
+        0.5550293403168762,
+        0.4007727465387764,
+        0.5951823979128735
+      ]
+    },
+    "median_side": 0.4056010286795022,
+    "median_side_within_search_aperture": 0.483953650292812,
+    "pooled_share_by_dimming_cut_pct": {
+      "0": 0.5039421088150691,
+      "10": 0.3275299051008454,
+      "2": 0.4668218564691922
+    },
+    "pooled_share_of_lobe_area_dimmed_over_5pct": 0.40964488891147416,
+    "pooled_share_of_lobe_volume_on_dimmed_sightlines": 0.5355900434655869,
+    "sides_at_or_above_75pct": 0
+  },
+  "reproduction": {
+    "original_outlines_replayed": 69,
+    "outlines_compared": 613,
+    "outlines_equal_to_public_hash": 613,
+    "side_rows": 1226,
+    "side_rows_with_equal_areas_and_volumes": 1226,
+    "views": 69,
+    "views_without_a_30_km_s_fit": 4
+  },
+  "science_sides": {
+    "original/flat": {
+      "best_completeness": 0.596212053174654,
+      "false_area_inside_unsupported_centre_kpc2": 0.0,
+      "false_area_kpc2": 55070.62351744918,
+      "lobe_area_kpc2": 169944.09572874816,
+      "lobe_area_lost_inside_unsupported_centre_kpc2": 0.0,
+      "lobe_area_lost_outside_kpc2": 0.0,
+      "median_completeness": 0.41568926843366283,
+      "paired_median_change_by_case": {
+        "C-HI": 0.0,
+        "C-LO": 0.0,
+        "G-HI": 0.0,
+        "G-LO": 0.0
+      },
+      "paired_median_completeness_change": 0.0,
+      "pooled_purity": 0.7552576840220204,
+      "share_of_recovered_lobe_area_dimmed_over_5pct": 0.8683219877151342,
+      "sides_at_or_above_75pct": 0,
+      "sides_recovering_more_than_the_dimmed_lobe_area": 60,
+      "sides_up_down_by_half_point": [
+        0,
+        0
+      ]
+    },
+    "speed_100/flat": {
+      "best_completeness": 0.6469543304877098,
+      "false_area_inside_unsupported_centre_kpc2": 0.0,
+      "false_area_kpc2": 2371.613284979159,
+      "lobe_area_kpc2": 96101.38553436435,
+      "lobe_area_lost_inside_unsupported_centre_kpc2": 59793.134717681314,
+      "lobe_area_lost_outside_kpc2": 15700.839482512652,
+      "median_completeness": 0.1947448267653539,
+      "paired_median_change_by_case": {
+        "C-HI": -0.29200885377141417,
+        "C-LO": 0.0012002829379999524,
+        "G-HI": -0.1393686828875899,
+        "G-LO": -0.2094272836727309
+      },
+      "paired_median_completeness_change": -0.14777612773843232,
+      "pooled_purity": 0.9759161058014482,
+      "share_of_recovered_lobe_area_dimmed_over_5pct": 0.9283680411810351,
+      "sides_at_or_above_75pct": 0,
+      "sides_recovering_more_than_the_dimmed_lobe_area": 20,
+      "sides_up_down_by_half_point": [
+        17,
+        69
+      ]
+    },
+    "speed_100/log_slope": {
+      "best_completeness": 0.6888131942418404,
+      "false_area_inside_unsupported_centre_kpc2": 73.10874313486212,
+      "false_area_kpc2": 2453.1185270921683,
+      "lobe_area_kpc2": 168638.85620549164,
+      "lobe_area_lost_inside_unsupported_centre_kpc2": 8789.114602646277,
+      "lobe_area_lost_outside_kpc2": 9147.777136502524,
+      "median_completeness": 0.3988216982963416,
+      "paired_median_change_by_case": {
+        "C-HI": -0.05982031094026094,
+        "C-LO": 0.0012002829379999524,
+        "G-HI": -0.007998888895120293,
+        "G-LO": 0.1310145874559248
+      },
+      "paired_median_completeness_change": 0.0063341579956684435,
+      "pooled_purity": 0.9856619895180567,
+      "share_of_recovered_lobe_area_dimmed_over_5pct": 0.9396195149786347,
+      "sides_at_or_above_75pct": 0,
+      "sides_recovering_more_than_the_dimmed_lobe_area": 65,
+      "sides_up_down_by_half_point": [
+        55,
+        37
+      ]
+    },
+    "tracer/flat": {
+      "best_completeness": 0.7465608511058631,
+      "false_area_inside_unsupported_centre_kpc2": 0.0,
+      "false_area_kpc2": 90457.295960035,
+      "lobe_area_kpc2": 204606.76394826084,
+      "lobe_area_lost_inside_unsupported_centre_kpc2": 0.0,
+      "lobe_area_lost_outside_kpc2": 174.35189062723165,
+      "median_completeness": 0.5249911035768693,
+      "paired_median_change_by_case": {
+        "C-HI": 0.1023730102652462,
+        "C-LO": 0.006315613887628413,
+        "G-HI": 0.09016692408933302,
+        "G-LO": 0.1978274640451736
+      },
+      "paired_median_completeness_change": 0.09069562590012586,
+      "pooled_purity": 0.6934316704374346,
+      "share_of_recovered_lobe_area_dimmed_over_5pct": 0.7973693059563579,
+      "sides_at_or_above_75pct": 0,
+      "sides_recovering_more_than_the_dimmed_lobe_area": 93,
+      "sides_up_down_by_half_point": [
+        96,
+        0
+      ]
+    },
+    "tracer/log_slope": {
+      "best_completeness": 0.750248192586526,
+      "false_area_inside_unsupported_centre_kpc2": 0.5398464096690001,
+      "false_area_kpc2": 91516.1309485228,
+      "lobe_area_kpc2": 205848.96358666054,
+      "lobe_area_lost_inside_unsupported_centre_kpc2": 0.0,
+      "lobe_area_lost_outside_kpc2": 174.35189062723165,
+      "median_completeness": 0.5463223715242982,
+      "paired_median_change_by_case": {
+        "C-HI": 0.11898690120922395,
+        "C-LO": 0.006315613887628413,
+        "G-HI": 0.09144154467755278,
+        "G-LO": 0.1978011480854598
+      },
+      "paired_median_completeness_change": 0.09474592974531304,
+      "pooled_purity": 0.6922431965608697,
+      "share_of_recovered_lobe_area_dimmed_over_5pct": 0.7928311747252772,
+      "sides_at_or_above_75pct": 1,
+      "sides_recovering_more_than_the_dimmed_lobe_area": 93,
+      "sides_up_down_by_half_point": [
+        96,
+        0
+      ]
+    }
+  },
+  "speed_100_unsupported_centre": {
+    "lobe_area_added_by_slope_kpc2": 72537.47067112727,
+    "median_completeness_original_flat_slope_with_gap": [
+      0.4306574481877121,
+      0.18536575146403528,
+      0.4361764850227089
+    ],
+    "median_completeness_original_flat_slope_without_gap": [
+      0.34763689689002136,
+      0.34971138475516783,
+      0.34971138475516783
+    ],
+    "share_of_added_area_dimmed_by_case": {
+      "C-HI": 0.9526123412181065,
+      "G-HI": 0.9774116129876689,
+      "G-LO": 0.9055734150432708
+    },
+    "share_of_added_area_dimmed_over_5pct": 0.9545260482675506,
+    "sides_with_gap": 78,
+    "sides_without_gap": 30
+  }
+}
