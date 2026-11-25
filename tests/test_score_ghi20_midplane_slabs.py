@@ -50,9 +50,11 @@ def test_fixed_sightlines_separate_ambient_change_from_the_fitted_baseline():
     }
     background = np.array([[8, 10, 14], [10, 10, 10]])
     deficit = ladder.recovery.compute_fractional_deficit
+    selected = mask.copy()
+    selected[0, 1] = True
     rows = {(r["region"], r["hemisphere"]): r for r in filling_scores(
         grid, fields, background, deficit(fields["current"], background),
-        deficit(fields["current"], fields["initial"]), full_path, mask)}
+        deficit(fields["current"], fields["initial"]), full_path, mask, selected)}
     whole = rows["full_lobe", "both"]
     assert whole["current_flux"] == whole["initial_flux"] == 60
     assert whole["lobe_brightness_decrement"] == whole["ambient_brightness_change"] == 18
@@ -61,6 +63,10 @@ def test_fixed_sightlines_separate_ambient_change_from_the_fitted_baseline():
     assert whole["initial_only_dimmed_kpc2"] == 2 and whole["fitted_only_dimmed_kpc2"] == 4
     missed = rows["missed_by_full_depth_detector", "both"]
     assert missed["area_kpc2"] == 4 and missed["physical_deficit_fraction"] == -.1
+    exterior = rows["selected_outside_full_lobe", "both"]
+    assert exterior["physical_deficit_fraction"] == .1
+    assert exterior["initial_dimmed_5pct_kpc2"] == exterior["area_kpc2"]
+    assert exterior["lobe_brightness_decrement"] == 0
     assert rows["full_lobe", "positive_z"]["physical_deficit_fraction"] is None
 
 

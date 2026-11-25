@@ -1,0 +1,86 @@
+{
+  "case": "G-HI",
+  "snapshot_index": 20,
+  "view_deg": 0,
+  "actual_time_myr": 19.999614294878622,
+  "frequency_hz": 2.417990504024e+17,
+  "redshift": 0.05,
+  "projection_receipt_sha256": "27ce38e78b2c93d28a7554d6f11e784a99580005e83e7f155098f1ed6d1ebcb2",
+  "projection_file_sha256": "b522653fb78406049a5a61feffb8b5252e6fff059999b1cb661ef2845b0c98ae",
+  "reference_sha256": "46935fca242ddc96c4ad8776db1b4e00e76ec27f9215a923308e29f323d99e80",
+  "full_depth_candidate_matches_archive": true,
+  "candidate_mask_sha256": {
+    "full": "6edc13f61b595e18abd28c6a0d442fb3493ea3b5a4db8c00fb70c5c0d41e7c56",
+    "slab30": "42d36d4515958493b3363d7b7e753c74f87cc8478d07501f14934bedcc34d305",
+    "slab10": "0218d9fa87051ea3a2904849aeaa27f384ebee845a36bc936c7453184f7e1ae2"
+  },
+  "native_tracer_boundary_face_cells": {
+    "x_max": 0,
+    "x_min": 0,
+    "y_max": 0,
+    "y_min": 0,
+    "z_max": 0,
+    "z_min": 0
+  },
+  "support_by_5kpc_annulus": {
+    "full": {
+      "current": {
+        "direct": 36
+      },
+      "initial": {
+        "direct": 36
+      }
+    },
+    "slab30": {
+      "current": {
+        "direct": 36
+      },
+      "initial": {
+        "direct": 36
+      }
+    },
+    "slab10": {
+      "current": {
+        "direct": 36
+      },
+      "initial": {
+        "direct": 36
+      }
+    }
+  },
+  "flux_integral_units": "mJy sr^-1 kpc^2",
+  "detector": {
+    "fit_radius_kpc": 180.0,
+    "candidate_radius_kpc": 120.0,
+    "radial_bin_kpc": 5.0,
+    "smoothing_sigma_kpc": 10.0,
+    "strict_deficit_cut": 0.05,
+    "min_component_kpc2": 25.0,
+    "connectivity": 8
+  },
+  "figure": {
+    "display_extent_xz_kpc": [
+      -125.0,
+      125.0,
+      -125.0,
+      125.0
+    ],
+    "shared_log_brightness_limits_mjy_sr": [
+      0.01745246918877066,
+      525.0393986087254
+    ],
+    "shared_deficit_limits_pct": [
+      -199.42652258062515,
+      199.42652258062515
+    ],
+    "display_samples_per_axis": 480
+  },
+  "scorer_sha256": "52276100ebd72abaa31fededa8431f4c9ec90c8d6a7875bb95a4db8c3298d925",
+  "products": {
+    "areas.csv": "ef418a65a05c2fb81b78b0c146cbbdc4363e3a61e11b9f20323c090e9e560bf8",
+    "filling.csv": "f16c8c074f5cb9aa13f143b8dd80118abb6cb066135b96c8f89b9c85664d3ca5",
+    "maps.png": "48c8e7a3a72bbecae3acfb04e70b1dddb401e024050602ab90bf525a8db94551",
+    "profiles.png": "3cf07a22b2aa9b3d227daf2390c8e3bf2700f2b520749124fc015a5c9ac661f2",
+    "radial_profiles.csv": "92ba358a746c27160bc51b00c8376f44f073d341ba2cb4ab4a015261c7f3c8bc"
+  }
+}

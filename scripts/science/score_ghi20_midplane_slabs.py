@@ -88,12 +88,13 @@ def area_scores(grid, mask, full_mask, full_path, slab_path):
     return rows
 
 
-def filling_scores(grid, fields, background, fit_deficit, initial_deficit, full_path, full_mask):
-    """Use the same two sightline sets at every depth, including the originally missed lobe."""
+def filling_scores(grid, fields, background, fit_deficit, initial_deficit, full_path, full_mask, selected_mask):
+    """Compare two fixed lobe regions and the exterior selected at this depth."""
     rows = []
     area = grid.area
     truth = full_path > 0
-    for region, use in (("full_lobe", truth), ("missed_by_full_depth_detector", truth & ~full_mask)):
+    for region, use in (("full_lobe", truth), ("missed_by_full_depth_detector", truth & ~full_mask),
+                        ("selected_outside_full_lobe", selected_mask & ~truth)):
         for name, side in zip(HALVES, sides(grid), strict=True):
             cells = use & side[:, None]
             weights = area[cells]
@@ -294,7 +295,7 @@ def run(projection_dir, reference, output):
             native_volume = receipt["native_tracer_volume_kpc3"][target_depth][row["hemisphere"]]
             if not np.isclose(row["native_lobe_kpc3"], native_volume, rtol=4e-11, atol=0):
                 raise ValueError(f"{depth}/{row['target']}/{row['hemisphere']} volume differs from the native cell sum")
-        depth_filling = filling_scores(grid, maps, background, observer.deficit, initial_deficit, full_path, full_mask)
+        depth_filling = filling_scores(grid, maps, background, observer.deficit, initial_deficit, full_path, full_mask, mask)
         areas.extend({"depth": depth, **r} for r in depth_areas)
         filling.extend({"depth": depth, **r} for r in depth_filling)
         profiles.extend(profile_now + profile_zero)

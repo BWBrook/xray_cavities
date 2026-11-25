@@ -108,7 +108,7 @@ def measure(reference_file, projection_file):
     maps = {"full": reference}
     output = {"reference_sha256": REFERENCE_SHA,
               "detector_sha256": digest(Path(__file__).with_name("review_source_excluded_backgrounds.py")),
-              "masks": {}, "areas": [], "emission_mixture": []}
+              "masks": {}, "areas": [], "emission_mixture": [], "selected_exterior": []}
     if projection_file:
         output["projection_sha256"] = digest(projection_file)
         with np.load(projection_file, allow_pickle=False) as data:
@@ -135,6 +135,16 @@ def measure(reference_file, projection_file):
         if depth == "full" and not np.array_equal(mask, reference_mask):
             raise ValueError("Full-depth outline disagrees with the archived exact projection refit")
         output["masks"][depth] = hashlib.sha256(mask.tobytes(order="C")).hexdigest()
+        exterior = mask & (full_path == 0)
+        integrate = integrator(dz, du, slice(None))
+        flux_now, flux_zero = (integrate(np.where(exterior, field, 0)) for field in (current, initial))
+        bg = np.interp(view.radius, view.centres, fit)
+        output["selected_exterior"].append({
+            "depth": depth, "area_kpc2": integrate(exterior),
+            "initial_dimmed_5pct_kpc2": integrate(exterior & view.dimmed),
+            "physical_deficit_fraction": fraction(flux_zero - flux_now, flux_zero),
+            "fitted_background_over_initial": fraction(integrate(np.where(exterior, bg, 0)), flux_zero),
+        })
         padded = np.pad(view.search, 1)
         interior = view.search & padded[:-2, 1:-1] & padded[2:, 1:-1] & padded[1:-1, :-2] & padded[1:-1, 2:]
         for side, rows in (("negative_z", z < 0), ("positive_z", z > 0), ("both", slice(None))):
@@ -184,7 +194,19 @@ def compare(result, directory):
             if not np.isclose(expected, computed, rtol=1e-11, atol=1e-11):
                 raise ValueError(f"{[row[k] for k in key]}/{name} differs: {expected} vs {computed}")
             maximum[name] = max(maximum.get(name, 0.), abs(computed - expected))
-    return {"rows": len(reader), "masks": len(result["masks"]), "max_absolute_error": maximum}
+    with (directory / "filling.csv").open(newline="") as stream:
+        exterior = {r["depth"]: r for r in csv.DictReader(stream)
+                    if r["region"] == "selected_outside_full_lobe" and r["hemisphere"] == "both"}
+    if set(exterior) != {r["depth"] for r in result["selected_exterior"]}:
+        raise ValueError("Exterior brightness comparisons do not cover all depths")
+    for row in result["selected_exterior"]:
+        for name in row.keys() - {"depth"}:
+            value = exterior[row["depth"]][name]
+            if row[name] is None and value == "":
+                continue
+            np.testing.assert_allclose(row[name], float(value), rtol=1e-11, atol=1e-11)
+    return {"rows": len(reader), "masks": len(result["masks"]), "max_absolute_error": maximum,
+            "exterior_brightness_comparisons": len(exterior)}
 
 
 if __name__ == "__main__":

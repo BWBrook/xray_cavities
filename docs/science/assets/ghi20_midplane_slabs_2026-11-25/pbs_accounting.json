@@ -1,0 +1,20 @@
+{
+  "pbs_id": 884129,
+  "state": "F",
+  "exit_status": 0,
+  "resources_used": {
+    "cpupercent": 98,
+    "cput": "00:22:48",
+    "mem": "512096kb",
+    "ncpus": 1,
+    "vmem": "985084kb",
+    "walltime": "00:33:32"
+  },
+  "end_and_abort_email_verified": true,
+  "stage_sha256": "dd821bc5829d2fcbce9608a8f175709bc59b9fa33526df5bb12a1a1b3faca840",
+  "requested": {
+    "ncpus": 1,
+    "mem": "8gb",
+    "walltime": "02:00:00"
+  }
+}

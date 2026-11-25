@@ -1,0 +1,187 @@
+{
+  "actual_time_myr": 19.999614294878622,
+  "axis_edges_source": "hdf5_node_coords_crosschecked_grid_file",
+  "brightness_factor": 3.0856775814913676e+48,
+  "case": "G-HI",
+  "closure_against_previous": {
+    "current_full": {
+      "bitwise_equal": true,
+      "error_to_scale": 0.0,
+      "max_abs_error": 0.0,
+      "reference_key": "brightness_current_retained_linear_whole"
+    },
+    "current_lobe_full": {
+      "bitwise_equal": true,
+      "error_to_scale": 0.0,
+      "max_abs_error": 0.0,
+      "reference_key": "brightness_current_retained_linear_C"
+    },
+    "initial_full": {
+      "bitwise_equal": true,
+      "error_to_scale": 0.0,
+      "max_abs_error": 0.0,
+      "reference_key": "brightness_initial_retained_linear_whole"
+    },
+    "initial_on_current_lobe_full": {
+      "bitwise_equal": true,
+      "error_to_scale": 0.0,
+      "max_abs_error": 0.0,
+      "reference_key": "brightness_initial_retained_linear_C"
+    },
+    "tracer_path_full": {
+      "bitwise_equal": true,
+      "error_to_scale": 0.0,
+      "max_abs_error": 0.0,
+      "reference_key": "path_C_kpc"
+    }
+  },
+  "completed_utc": "2026-11-25T06:39:16.338389+00:00",
+  "contract_sha256": "f2239f3ea557bb08be97beb128ae0f7898aaa744c3d32e51d17dfaae05e519e4",
+  "depths": {
+    "full": {
+      "integrated_width_kpc": 400.0,
+      "intersecting_y_cells": 960,
+      "partial_cells": [],
+      "y_max_kpc": 200.0,
+      "y_min_kpc": -200.0
+    },
+    "slab10": {
+      "integrated_width_kpc": 20.0,
+      "intersecting_y_cells": 300,
+      "partial_cells": [],
+      "y_max_kpc": 10.0,
+      "y_min_kpc": -10.0
+    },
+    "slab30": {
+      "integrated_width_kpc": 60.0,
+      "intersecting_y_cells": 526,
+      "partial_cells": [
+        {
+          "included_width_kpc": 0.13950538635253906,
+          "index_y": 217,
+          "lower_kpc": -30.13503074645996,
+          "upper_kpc": -29.86049461364746
+        },
+        {
+          "included_width_kpc": 0.13950538635253906,
+          "index_y": 742,
+          "lower_kpc": 29.86049461364746,
+          "upper_kpc": 30.13503074645996
+        }
+      ],
+      "y_max_kpc": 30.0,
+      "y_min_kpc": -30.0
+    }
+  },
+  "emission_inputs_sha256": {
+    "apec_table": "e0f53a9f276a956f347af0e4fe627ee152762abc8b5116fc458070ee5f0925e3",
+    "gaunt_lut": "64df88d39896f14064bb799fd5b70c6f68d20bcbdc5a15d19e2e4fd15b22f747",
+    "xraise_py": "4bf17cb8e63e2d87a06615c170c7dd307788554a0cee83409762223123ec8da5"
+  },
+  "emissivity": "retained_linear with original signed extrapolation",
+  "emissivity_cell_count_domain": "native cells with positive y overlap; a partial cell counts once",
+  "emissivity_cell_counts": {
+    "full": {
+      "current": {
+        "negative": 192184,
+        "out_of_table": 137195542,
+        "raw_nonfinite": 0,
+        "retained_nonfinite": 0
+      },
+      "initial": {
+        "negative": 0,
+        "out_of_table": 4032,
+        "raw_nonfinite": 0,
+        "retained_nonfinite": 0
+      }
+    },
+    "slab10": {
+      "current": {
+        "negative": 191440,
+        "out_of_table": 90213078,
+        "raw_nonfinite": 0,
+        "retained_nonfinite": 0
+      },
+      "initial": {
+        "negative": 0,
+        "out_of_table": 4032,
+        "raw_nonfinite": 0,
+        "retained_nonfinite": 0
+      }
+    },
+    "slab30": {
+      "current": {
+        "negative": 192184,
+        "out_of_table": 137051310,
+        "raw_nonfinite": 0,
+        "retained_nonfinite": 0
+      },
+      "initial": {
+        "negative": 0,
+        "out_of_table": 4032,
+        "raw_nonfinite": 0,
+        "retained_nonfinite": 0
+      }
+    }
+  },
+  "energy_kev": 1.0,
+  "files": {
+    "projections.npz": {
+      "sha256": "b522653fb78406049a5a61feffb8b5252e6fff059999b1cb661ef2845b0c98ae",
+      "size_bytes": 50596429
+    }
+  },
+  "frequency_hz": 2.417990504024e+17,
+  "inherited_lineage_receipt_sha256": "a9704e2ea8f66251e8ea3b05c29e1fd5172bacc207880ee9a204e1d0b44ffcdf",
+  "native_inputs_sha256": {
+    "current_h5": "d70c396e24e1f66a785a4d26039d83cfc5aa88235872390012c72d3105ec4268",
+    "environment": "1bad5c1028439cc8f9e00f5614328c29e9a7e105519245511410e7c170a6de2a",
+    "grid_file": "77d10309df9fbe4366cd540bc966a6f06736109141a2e7931f28eebfdb88196d",
+    "initial_h5": "7f8db954a7683fdb9ea58ff57708b11c45145ce4f0fa1d7cd41d85ab42f3132f"
+  },
+  "native_receipt_sha256": "05de7343f5cb9446ea7eb6b08538fa841750e377e791e2a496e02d6118e2085e",
+  "native_shape_zyx": [
+    1014,
+    960,
+    960
+  ],
+  "native_tracer_volume_kpc3": {
+    "full": {
+      "both": 461604.594184594,
+      "negative_z": 230727.55352030136,
+      "positive_z": 230877.04066429264
+    },
+    "slab10": {
+      "both": 186024.3610744656,
+      "negative_z": 93941.02407545695,
+      "positive_z": 92083.33699900864
+    },
+    "slab30": {
+      "both": 456059.4618952034,
+      "negative_z": 227832.91221590134,
+      "positive_z": 228226.54967930206
+    }
+  },
+  "previous_map_sha256": "46935fca242ddc96c4ad8776db1b4e00e76ec27f9215a923308e29f323d99e80",
+  "previous_producer_sha256": "4ca1a4f445ae1d65d6a7aa7619ccea7745d545266656875ddfb469487affd31e",
+  "projection": "direct y integral onto x-z, with exact overlap lengths in kpc",
+  "projector_sha256": "86ff048c4fccad2bc41cc29390b43c15617e20d90747c732dd3e6a8a8380b470",
+  "redshift": 0.05,
+  "schema_version": 1,
+  "snapshot_index": 20,
+  "status": "complete",
+  "tracer": "binary current tr1 > 0.001 at both emission epochs",
+  "tracer_boundary_face_cells": {
+    "x_max": 0,
+    "x_min": 0,
+    "y_max": 0,
+    "y_min": 0,
+    "z_max": 0,
+    "z_min": 0
+  },
+  "view_deg": 0,
+  "y_extent_kpc": [
+    -200.0,
+    200.0
+  ]
+}
