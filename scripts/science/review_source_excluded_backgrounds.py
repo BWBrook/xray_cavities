@@ -1,10 +1,12 @@
 """Independent review of the source-excluded background comparison (DET-06).
 
 The radial fit, support rule, both inward continuations, 5% deficit
-outline and side areas are reimplemented here from the protocol text.
-Nothing is imported from the project's detector modules. Component
-labelling uses scikit-image, not SciPy. The tracer and speed sky masks are
-Codex's native projections and are taken as given.
+outline and side areas are implemented separately here. Nothing is
+imported from the project's detector modules, and component labelling uses
+scikit-image, not SciPy. It was written after reading the protocol, the
+original detector and Codex's fitting module, so it shares their reading of
+the rules. The tracer and speed sky masks are Codex's native projections
+and are taken as given.
 
 Adds, for every view and fit, the split of gained, lost and false area at
 the first directly supported radius, the share of each outline that is
