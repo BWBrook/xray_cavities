@@ -996,6 +996,35 @@ claims:
       - The assisted method uses simulation velocities and tracer. The follow-up depth and exterior brightness measurements were proposed after scoring. Inferred outline volumes alone do not measure enthalpy or jet power.
       - Claude independently recomputed both areas and overlap across all 2,112 rows. Codex separately checked aperture contact from the physical radii of the selected centres and four face neighbours. Combining those checks reproduced all pass decisions.
 
+  - id: DET-06
+    status: provisional
+    statement: >-
+      On the same 54 previously scored science views as DET-05, excluding
+      tracer-marked sightlines from the radial background fit increased median
+      lobe-area completeness from 41.6% to 52.5% and summed false exterior area
+      from 55,071 to 90,457 kpc². Excluding sightlines through any gas moving at
+      least 100 km/s instead gave 19.5% completeness and 2,372 kpc² of false
+      exterior. These fits use the same full image and constant inward continuation.
+      Each fit missed the 75% completeness criterion on all 108 science sides
+      and returned empty outlines on all 24 initial control sides.
+    evidence:
+      - {path: docs/science/source_excluded_background_protocol_2026-11-25.md, commit: 6516866}
+      - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/scores.csv.gz, commit: 5d2a4cd}
+      - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/radial_support.csv.gz, commit: 5d2a4cd}
+      - {path: docs/science/assets/source_excluded_backgrounds_2026-11-25/independent_check.json, commit: 5d2a4cd}
+      - {path: docs/science/source_excluded_background_results_2026-11-25.md, commit: 5d2a4cd}
+    reproduce: .venv/bin/python scripts/science/summarise_source_excluded_backgrounds.py
+    test: >-
+      Independently reproduce the 108-side and 24-control comparisons. Review
+      the retained angular support, physical velocity footprint, and both central
+      continuations against the per-view profiles and contours before adjudicating
+      the claim. Check whether the gain in purity persists alongside lost lobe area.
+    caveats:
+      - The retrospective comparison uses simulation tracer and full three-component speed, noiseless 1-keV images and the original DET-05 radial detector. Views and hemispheres share simulation histories. The three exposed G-HI/20 views are reported separately.
+      - The 100 km/s exclusion leaves the centre without direct support in 39 of 54 views, extending to 60 kpc. Extrapolating the measured inner slope raises median completeness to 39.9% with zero passing sides. At 30 km/s four cluster views have no usable annulus.
+      - A changed outer-face cell occurs on 92.45% of the retained sky area in the 100 km/s fit. The flag measures sightline incidence. Native velocities, thermodynamic changes and projected overlap alone do not identify shock heating or brightness from the boundary.
+      - A second Codex implementation checked all 132 original radial side rows and reproduced the ten primary excluded outlines on five specified views pixel for pixel. Independent physical review of the fitting support and interpretation is pending.
+
   - id: XR-01
     status: supported
     statement: >-

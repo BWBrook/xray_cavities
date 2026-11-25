@@ -1,11 +1,15 @@
 # Current Status
 
-Updated 24 November 2026 with the reviewed DET-05 results from 54 held-out
-X-ray views and the supervisor’s request for source-excluded background
-comparisons and energy-partition measurements.
+Updated 25 November 2026 with the four-case source-excluded X-ray fits.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Source-excluded backgrounds, 25 November
+
+The 54 science views, 12 controls and three separate G-HI/20 development views are complete. On the 108 science sides, excluding tracer sightlines raised median lobe coverage from 41.6% to 52.5% and increased false exterior area by 64.3%. Excluding all-gas sightlines at ≥100 km/s removed 95.7% of exterior area, with 19.5% median coverage. Extrapolating the measured slope through unsupported central radii gave 39.9%. No primary fit passed on any science side. All 24 control sides stayed empty. DET-06 is provisional pending method review. [Results, scores and case figure](../science/source_excluded_background_results_2026-11-25.md)
+
+All 23 analysis jobs exited 0. The private review archive contains 69 comparison figures, source projections and per-view fit receipts. A second implementation checked all 132 original radial side rows and reproduced ten excluded outlines pixel for pixel. Claude can review the public comparison and Patrick can inspect its radial support and physical interpretation. Patrick’s separate G-HI/20 proposal tests the interior of the compressive front with the background held fixed. [Review guide](logs/2026-11-25-source-excluded-background-method-review.md) · [Patrick’s front review](logs/2026-11-25-q032-front-constrained-cavity-handover.md)
 
 ## Supervisor request 24 November
 
@@ -30,8 +34,7 @@ measure shock-associated energy and, where identifiable, irreversible shock
 heating without double counting or treating numerical entropy recovery as
 physical shock dissipation. R100/R300 denote velocity cuts, not fixed radii.
 See the [approved joint handover](logs/2026-11-24-source-excluded-backgrounds-and-energy-partition.md).
-This update publishes instructions only; it submits no job or new simulation
-and does not change the review status of existing measurements.
+The 24 November handover recorded the instructions for these two analyses.
 
 ## X-ray comparison and prediction custody
 

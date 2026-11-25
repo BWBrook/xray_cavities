@@ -451,6 +451,16 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    outline measures something different.
    [Results, scores and reproduction commands](docs/science/heldout_xray_results_2026-11-24.md) · [Prediction custody](docs/science/xray_prediction_seal_2026-11-23.md)
    <!-- claims: DET-05 -->
+
+   The later simulation-assisted test excluded tracer or moving-gas sightlines
+   only from the radial background fit. Median coverage across the same 108
+   science sides was 52.5% for tracer exclusion and 19.5% for the 100 km/s
+   speed exclusion, compared with 41.6% in the original. The central
+   continuation materially affects the speed result. The public reduction
+   reproduces the comparison from its tables. Each of the 69 private figures
+   shows the masks, outlines and radial support for one view.
+   [Scores, method and figure index](docs/science/source_excluded_background_results_2026-11-25.md)
+   <!-- claims: DET-06 -->
 3. **How well can the clocks recover jet power?** Use geometries from a
    detector that has passed its tests. Preserve radio spectral-age limits
    when the fitted break lies beyond the sampled band. <!-- claims: RAD-01 -->
