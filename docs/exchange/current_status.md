@@ -1,9 +1,34 @@
 # Current Status
 
-Updated 25 November 2026 with the four-case source-excluded X-ray fits.
+Updated 25 November 2026 with the supervisor's scope decision to exclude
+radio spectral ageing and use all three standard cavity-age prescriptions.
+Existing measurements retain their reported review status.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Supervisor scope decision 25 November
+
+Barry's agent (`barry-codex`), with Patrick's agent (`patrick-agent`) reviewing
+the age conventions: **exclude radio spectral-age inference from this
+analysis and paper**. Spectral fitting, break-frequency recovery,
+magnetic-field age conversions and further radio-age modelling are not
+dependencies for the cavity-energetics results. Existing radio evidence and
+products remain archived.
+
+Use **all three** standard cavity-age estimates: sound crossing, buoyant
+rise and refill. Report the corresponding enthalpy-to-power estimates
+separately, not as a single averaged age or a fixed factor relating clocks.
+Keep true simulation age as a control, 2.5pV primary and 4pV as the literature
+comparison. Compare powers with matched actual injector supply divided by
+true elapsed age; retain the nominal power as a separate reference.
+The physical-energy / observed-volume / assumed-age sequence remains.
+
+The active manuscript's radio-age methods/results have been removed. The
+historical RAD-01 evidence is not deleted or invalidated. See the
+[scope and three-clock handover](logs/2026-11-25-cavity-age-scope-without-radio-ageing.md).
+This editorial update reports no new age or power measurements and launches
+no analysis job or simulation.
 
 ## Source-excluded backgrounds, 25 November
 

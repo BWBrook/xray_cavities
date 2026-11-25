@@ -24,15 +24,11 @@ We compare four jet simulations crossing cluster and group atmospheres with high
 
 <!-- Expand the numerical setup and environment description from the validated simulation documentation. -->
 
-### Synthetic X-ray and radio products
+### Synthetic X-ray products
 
-PRAiSE2 weights each radio-emitting particle’s emissivity by its jet-tracer
-fraction at the emission time. To test whether this affects the integrated
-spectrum, we used the existing G-HI snapshot at 20 Myr in its original 45°
-radio view. We repeated the ray integration with the tracer weight set to
-one for the same particles, retaining their magnetic fields, cooling
-histories and geometry. We fitted the five frequencies between 0.15 and
-15 GHz with the same continuous-injection model in each arm. <!-- claims: RAD-01 -->
+We use the existing corrected, noiseless 1-keV X-ray images at the three
+side-on azimuths. Radio spectral-age inference is outside the scope of the
+present cavity-energetics comparison.
 
 ### Cavity geometry, age, and energetics
 
@@ -50,7 +46,7 @@ We tested X-ray cavity outlines on corrected 1-keV images of the 19 case–age c
 
 We report within-case ranges and medians across ages and views of the same simulation. For the detector tests each side contributes its reconstructed volume, with zero assigned to an undetected side. We also measure the fraction of projected tracer area inside the outline (completeness) and the fraction of the selected area that overlaps the tracer (purity). <!-- claims: DET-01 DET-02 -->
 
-For a cavity with a validated outline, the X-ray enthalpy estimator uses geometric depth, ambient pressure averaged over the inferred ellipsoid, and the same enthalpy convention as the native estimate. Sound-crossing, buoyant-rise and refill clocks use the observed geometry with the initial atmosphere's sound speed or gravity. Spectral ages use the fitted radio break and a field estimated from the tracer-weighted mean pressure, with a radio-emissivity-weighted field as a sensitivity comparison.
+For a cavity with a validated outline, the X-ray enthalpy estimator uses geometric depth, ambient pressure averaged over the inferred ellipsoid, and the same enthalpy convention as the native estimate. We retain all three adopted cavity clocks separately: sound-crossing, buoyant-rise and refill ages. They use the observed geometry with the initial atmosphere's sound speed or gravity. Each prescription gives its own enthalpy-to-power estimate, rather than being averaged into a single age. The true simulation age supplies a control for separating enthalpy and volume errors from the assumed clock. No spectral age is inferred from the radio emission.
 
 For a constant labelled bipolar kinetic power, the cavity-power estimate can be factorised as
 
@@ -61,7 +57,7 @@ $$
 \frac{t_{\mathrm{true}}}{t_{\mathrm{est}}}.
 $$
 
-Here $E_{\mathrm{label}}=Q_{\mathrm{label}}t_{\mathrm{true}}$, and $H_X$ and $H_{\mathrm{native}}$ use the same bipolar enthalpy convention. If the two sides have separate age estimates $t_s$, the effective age is $t_{\mathrm{est}}=H_X/(\sum_s H_{X,s}/t_s)$ so that the power is the sum of the two side powers. A spectral break above the fitted frequency range gives an upper limit on spectral age and a lower limit on the corresponding power. Knowing the true age fixes the last factor. Estimating $H_X$ still requires a validated cavity outline.
+Here $E_{\mathrm{label}}=Q_{\mathrm{label}}t_{\mathrm{true}}$, and $H_X$ and $H_{\mathrm{native}}$ use the same bipolar enthalpy convention. If the two sides have separate age estimates $t_s$, the effective age is $t_{\mathrm{est}}=H_X/(\sum_s H_{X,s}/t_s)$ so that the power is the sum of the two side powers. Knowing the true age fixes the last factor. The primary actual-input comparison replaces $Q_{\mathrm{label}}$ by cumulative net injector gas delivery divided by $t_{\mathrm{true}}$, and $E_{\mathrm{label}}$ by that same cumulative delivery. Estimating $H_X$ still requires a validated cavity outline.
 
 ## Results
 
@@ -155,15 +151,6 @@ the radial 5% rule recovered 41.6%. Neither passed on any of the 108
 science sides. Both returned empty masks on all 24 initial control sides.
 Replacing the emissivity of moving ambient gas using native simulation
 fields brought the pass counts to 6 and 13, respectively. <!-- claims: DET-05 -->
-
-### Does tracer weighting change the fitted radio age?
-
-In the G-HI test, particles last shocked 10–20 Myr earlier supplied 4.76%
-of the 15-GHz luminosity with production weighting and 10.51% with unit
-weights. Removing the weight steepened the 1.4–15 GHz spectral index from
-0.621 to 0.645. The fitted break moved from 56.0 to 20.1 GHz. Both fits
-place the break beyond the observed band, leaving the spectral age an upper
-limit in this view. <!-- claims: RAD-01 -->
 
 <div id="figures"></div>
 

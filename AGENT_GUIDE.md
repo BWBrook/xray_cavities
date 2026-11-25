@@ -14,6 +14,17 @@ accounting review on 16 November by Codex (GPT-6).
 The new bounded scientific synthesis awaits collaboration adjudication.
 Its form is an experiment; see the end.
 
+## Current analysis scope
+
+Supervisor decision, 25 November 2026: radio spectral-age inference is
+outside this analysis and paper. Use all three standard cavity-age
+prescriptions, sound crossing, buoyant rise and refill, to convert enthalpy
+to estimated power. Report them separately, with true simulation age as a
+control and actual injector supply as the energy reference. Do not replace
+the three clocks by a fixed spectral-to-buoyant ratio. Existing radio-age
+reports, code and supported evidence remain archival, not active priorities.
+See the [scope handover](docs/exchange/logs/2026-11-25-cavity-age-scope-without-radio-ageing.md).
+
 ## The question
 
 How well do X-ray cavities measure the energy that radio jets deposit in
@@ -461,9 +472,11 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    shows the masks, outlines and radial support for one view.
    [Scores, method and figure index](docs/science/source_excluded_background_results_2026-11-25.md)
    <!-- claims: DET-06 -->
-3. **How well can the clocks recover jet power?** Use geometries from a
-   detector that has passed its tests. Preserve radio spectral-age limits
-   when the fitted break lies beyond the sampled band. <!-- claims: RAD-01 -->
+3. **How well can the adopted clocks recover jet power?** Compare sound-crossing,
+   buoyant-rise and refill estimates separately, retaining true simulation
+   age as a control. Use qualified geometries and preserve detection and
+   coverage failures. Radio spectral ageing is outside the current scope;
+   no new spectral-age fits or magnetic-field age conversions are required.
 4. **What does entropy recovery change at later ages?** The native counters
    identify the switch in four 10–12 Myr pairs. A later annual residual is
    measurable from the production histories. The difference in lobe enthalpy

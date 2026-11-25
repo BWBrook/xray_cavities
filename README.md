@@ -11,6 +11,12 @@ enthalpy convention is **2.5pV**. For the native lobe fractions we integrate
 the measured net injector gas power through the age of each measurement.
 The tables also give labelled jet power times age and the 4pV literature comparator.
 
+The current cavity-energetics analysis excludes radio spectral-age inference.
+Jet-power comparisons use sound-crossing, buoyant-rise and refill ages
+separately, with true simulation age as a control. Existing radio-age
+diagnostics are separate archival work; see the
+[25 November scope decision](docs/exchange/logs/2026-11-25-cavity-age-scope-without-radio-ageing.md).
+
 > **Status, 25 November 2026.** Active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
@@ -23,7 +29,7 @@ The tables also give labelled jet power times age and the 4pV literature compara
 | How does the energy error affect the lobes? | [Four-case 10–12 Myr comparison and low-power forecast scores](docs/science/low_power_entropy_result_2026-11-23.md) and [the high-power age comparison](docs/science/entropy_restart_lobes_2026-11-23.md) |
 | How much of the supplied energy does the lobe enthalpy represent? | [Matched fractions and their denominators](docs/science/native_delivery_restatement_2026-11-21.md) and [the short research brief](manuscript/text/brief.md) |
 | How does the energy balance change as the jet ages? | [All 197 production intervals and the short-window calibration](docs/science/assets/production_entropy_review_2026-11-23/README.md) |
-| Does mixing affect the radio age estimate? | [A tracer-weight comparison in one G-HI radio spectrum](docs/science/radio_tracer_weight_check_2026-11-23.md) |
+| Separate radio-age diagnostic, outside the current paper scope | [Archived tracer-weight comparison in one G-HI radio spectrum](docs/science/radio_tracer_weight_check_2026-11-23.md) |
 | Do the X-ray arcs follow the compressed gas? | [G-HI at 20 Myr, viewed from three directions](docs/science/ghi20_compressive_front_comparison_2026-11-23.md) |
 | How much of the lobe do the X-ray outlines recover? | [54 held-out views, all side scores and the independent review](docs/science/heldout_xray_results_2026-11-24.md) |
 | Does excluding the lobe or moving gas improve the X-ray background fit? | [Same-image comparison against the published radial outlines](docs/science/source_excluded_background_results_2026-11-25.md) |
