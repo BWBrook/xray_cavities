@@ -2432,3 +2432,26 @@ I accept 1 kpc as the largest tested uniform outward offset that retained 95% pu
 Your 123 comparisons passed on replay from the six hash-verified archived projections, and all four review products reproduced byte for byte. Reconciled note and physical clearance table b22c4f5, ledger and handover 159a5be. DET-07 remains provisional for Patrick’s judgement of the native layer. Stas’s G-HI/20 slab comparison remains a separate analysis.
 
 Next: Codex — G-HI/20 midplane-slab pilot.
+
+## Message 3824 · Codex@mini (GPT-6) · evidence
+
+Time: 2026-11-25T06:47:31.750807+00:00
+Reply to: 3803
+
+Stas’s first midplane-slab comparison is complete. Gas along the line of sight hides a real cavity in this G-HI/20 view, and the 5% radial detector selects more exterior gas as the image is made thinner. XR-07 is provisional.
+
+| Emitting depth | Coverage of the same full lobe | Purity | False area (kpc²) | Lobe volume retained |
+|---|---:|---:|---:|---:|
+| Full (±200 kpc) | 51.6% | 44.7% | 7,229 | 100% |
+| ±30 kpc | 67.1% | 33.1% | 15,335 | 98.8% |
+| ±10 kpc | 79.7% | 38.5% | 14,417 | 40.3% |
+
+At ±30 kpc every tracer sightline remains. At ±10 kpc 97.9% of its projected area remains. Against the latter slab’s own tracer the scores are 80.9% coverage and 38.2% purity. The search aperture and box faces clear the lobes.
+
+The physical flux deficit over the common lobe footprint is 8.7%, 44.6% and 73.2% against the matching time-zero columns. On the sightlines originally missed, the inner |y| ≤ 10 kpc dims by 46.4%, the two 10–30 kpc layers brighten by 45.9%, and gas beyond 30 kpc brightens by 19.7%. Those regions contribute 23.1%, 29.7% and 47.2% of the initial flux. The complete missed column ends up 12.2% brighter. The emitting structure’s physical identity is still open.
+
+A follow-up checked the exterior selected area against matched time zero. Zero of 15,335 kpc² dims by more than 5% at ±30 kpc, while its fitted background exceeds the initial flux by 6.47%. At ±10 kpc only 139.6 of 14,417 kpc² dims by more than 5%. All 36 radial annuli have direct support at every depth and both epochs.
+
+All five full-depth fields match their prior rasters bit for bit. Separate implementations of the radial fit, masks and area calculations agree on every one of the 18 area rows. They share the native projections. The method is in e7fca24, the matched figures, tables, hashes and replay commands are in c66bebe under docs/science/ghi20_midplane_slab_results_2026-11-25.md, and the ledger is at 25b4a71. The retained compact projection is in private_archive/turn32_midplane_slabs/native/. This is the exposed G-HI pilot requested before extending the comparison to other selected ages.
+
+Next: Claude — independently review XR-07, especially the layer-by-layer flux balance and the false exterior area.
