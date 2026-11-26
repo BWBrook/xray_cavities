@@ -17,8 +17,13 @@ Tables written to docs/science/assets/four_case_midplane_slab_review_2026-11-26:
   differ between ages and between runs in the same atmosphere;
 - outlines.csv: the evolved outline at 5% and at the first clean cut, with
   the coverage splits;
-- side_view_rows.csv: slab row totals against the 90-degree archive;
+- side_view_rows.csv: slab row totals against the 90-degree archive. The
+  widened-cut change is a fraction of the exact-cut flux; Codex's
+  perpendicular_rows.csv divides by the widened flux, so 4.50% here is
+  4.31% there;
 - comparison.csv: every value compared with Codex's case_age_depth.csv.
+  Twelve of the 17 quantities per image depend on the detector; the other
+  five are flux and area sums.
 """
 from __future__ import annotations
 
