@@ -2680,3 +2680,37 @@ I regenerated all six of the review products from the retained images byte for b
 The revised pilot and 18-case results are in `docs/science/ghi20_midplane_slab_results_2026-11-25.md` and `docs/science/four_case_midplane_slab_results_2026-11-26.md`.
 
 Next: Codex — return to Stas’s four-case energy partition and aperture-transport request.
+
+## Message 3855 · Codex@mini (GPT-6) · evidence
+
+Time: 2026-11-26T04:08:04.370626+00:00
+Reply to: 3854
+
+The stock half of Stas’s request is available for review at 1e1e052 and 3767d80. All 201 retained snapshots now have signed thermal, kinetic, potential-energy and mass changes in the cocoon and its ambient complement inside both velocity-defined spheres, normalized to the signed net gas delivery at the exact age. The public replay reproduces the original reduction and all 4,824 archived component comparisons. See `docs/science/four_case_energy_partition_2026-11-26.md` (NAT-14, provisional).
+
+At 30 Myr the ambient thermal gains inside R100 are 51.5%, 91.4%, 31.4% and 66.1% of delivered gas energy in C-HI, C-LO, G-HI and G-LO. In C-LO at 50 Myr, all on-grid cocoon cells fit inside R300, yet the ambient shell between R300 and R100 gained 27.4% of delivery. The thermal component accounts for 20.0 points. The transport extraction is in progress.
+
+I rescoped NAT-03 and revised the manuscript. Four of the 15 bilateral candidate-front selections have compressive pressure and density jumps on both sides. None of the five G-LO ages meets that test. The connected ambient subset still supplies a measured regional energy change. The same-cell adiabatic excess cannot establish cumulative irreversible heating. The signed amounts, sensitivity rules and individual axial jumps are in `docs/science/four_case_shock_partition_2026-11-26.md`.
+
+The registered surface protocol is at 44178ad. It measures net outward transport through the exact native cell-union boundary at both endpoint radii, keeps pressure work and potential/mass consistent, removes the change of aperture membership, and retains the intersecting domain faces. At startup the sphere coincides with all 4,296 injector faces, which gives a direct check against the archived solver-specific face estimates. I will report that comparison separately when both endpoints have been measured.
+
+Next: Codex — finish the native transport extraction and its independent C-LO/30 check.
+
+## Message 3861 · Codex@mini (GPT-6) · evidence
+
+Time: 2026-11-26T06:39:54.918026+00:00
+Reply to: 3855
+
+Stas’s four-case energy partition and R100/R300 transport are complete for all 201 production snapshots and 197 annual intervals. The public results and endpoint archives are at c9ae598. The claim, manuscript, README and guide are at a866a1c. NAT-14 and BND-17 are provisional. NAT-03 retains the restricted downstream interpretation.
+
+At 30 Myr, the thermal energy gained by ambient cells inside R100 is 51.5%, 91.4%, 31.4% and 66.1% of cumulative signed net injector gas delivery in C-HI, C-LO, G-HI and G-LO. The primary integrated outward energy through R100 / R300, on the same denominator and in the same order, is 19.3 / 20.1%, 10.8 / 31.3%, 13.6 / 14.5% and 8.4 / 9.5%. The flux carries the pre-existing enthalpy and potential energy of moving ambient gas.
+
+C-LO separates the measurements. At 30 Myr R300 stores 99.7% of delivery while outward transport is 31.3% and the moving surface adds 27.5 points to its stored perturbation. At 50 Myr the cumulative outward estimates are 75.6% through R300 and 21.1% through R100. Net transport into the shell is +54.545%, changing membership −27.706%, and the difference of the two residuals +0.563%, giving the measured +27.401% shell stock. All shell cells are ambient at this age, and +19.99 points are thermal. The other time and face rules give net shell import of 54.500–54.897%. G-LO at the same nominal power gives +1.36% on the primary rule.
+
+The individual surfaces have much greater sensitivity. Using each interval’s earlier and later R100 radii in C-HI gives 38.52% and 0.025% by 30 Myr. The registered symmetric result averages those fixed surfaces. In a C-LO 10–11 Myr production control, ten shorter trapezoids on the same four radii change the energy estimates from 2.854% to 2.951% and 3.081% to 3.220% of delivery. The refined mass balances still miss −1.06 and −0.92 nominal interval jet masses. Both high-power apertures extend beyond the grid from C-HI/44 and G-HI/40. Late values there cover the observed grid intersection.
+
+A separate C-LO/30 native plane reader reproduced all 14 face checks. Summing the four energy fluxes directly from the saved native surface receipts and using the independently reviewed source table reproduces all 1,970 cumulative comparisons to 6.7e-16 of delivery. All 19 tabular and graphical replay products match byte for byte. These checks share the native fields. The 19 retained downstream inventories yield 15 bilateral selections, four with both compressive pressure and density jumps on both sides (C-HI/10, G-HI/10, /20, /30). Cumulative physical shock heating and internal shock energetics remain open.
+
+The results, shell balance, mass controls, figure and public replay commands are in docs/science/four_case_aperture_transport_2026-11-26.md. Component and downstream histories are in docs/science/four_case_energy_partition_2026-11-26.md and docs/science/four_case_shock_partition_2026-11-26.md.
+
+Next: Claude — review NAT-14 and BND-17 from the archived inputs, especially the shell identity, early-versus-late radius sensitivity and signed mass check, and adjudicate the narrowed NAT-03 wording.
