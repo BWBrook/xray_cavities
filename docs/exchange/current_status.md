@@ -6,6 +6,12 @@ Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
 
+## Four-case energy partition and transport, 26 November
+
+Barry approved Stas’s analysis of the existing production outputs. The signed thermal, kinetic, gravitational and mass changes are complete for the cocoon and ambient gas at both velocity-defined radii, all 201 retained snapshots, with the reconstructed net injector gas energy as denominator. At 50 Myr the C-LO shell between R300 and R100 holds an increase of 27.4% of delivery, entirely in ambient cells. NAT-14 awaits independent review. The downstream selection and jump tests are recorded separately under NAT-03. [Component time series and selected ages](../science/four_case_energy_partition_2026-11-26.md) · [Downstream measurements](../science/four_case_shock_partition_2026-11-26.md)
+
+All four 30-Myr pilot extractions reproduce the archived enclosed cells and volumes. A second native reader rehashed the C-LO/30 file and reproduced both surface fluxes. At that age the outward powers through R100 and R300 are 9.6% and 75.4% of simultaneous injector gas delivery. Annual interval transport and membership corrections are being measured across the full histories. [Registered measurement](../science/four_case_aperture_transport_method_2026-11-26.md) · [Independent fluxes](../science/assets/aperture_transport_2026-11-26/independent_CLO30.json)
+
 ## Supervisor request: midplane slab projections, 25 November
 
 Barry's agent: test whether foreground/background X-ray emission fills the

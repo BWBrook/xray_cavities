@@ -1,0 +1,59 @@
+{
+  "case": "C-LO",
+  "index": 30,
+  "age_myr": 29.99916629402413,
+  "native_sha256": "dbc345be532e367b259446540ef991302ba54de9be832649631af8f887699433",
+  "request_sha256": "87c9f13a0631a668b9e9b20aa743edac5ffc1bc6f74de7fd5751f47f451f4db5",
+  "axes_sha256": "e05a3e0f97ca9b78fa0291e2239ea10edbd277954aa835039d9cdc9142e23b98",
+  "atmosphere_sha256": "30cf7aa1ece95c1a0d0d9ea23d6baae2e16469f52c96a08b9a18a681527383aa",
+  "registration_sha256": "2adb3221da4ed806f6d42f33be3d37dc2c2c7fc4039c785c68d3b4abf8a098b6",
+  "script_sha256": "3124e688c81434c4f30b90a937e0d9652b37f70ad4ac5cd59d80852ec915e4ef",
+  "apertures": {
+    "R100": {
+      "radius_kpc": 69.21065664857906,
+      "cell_count": 321810192,
+      "volume_kpc3": 1388611.8255758225,
+      "face_count": 2925784,
+      "area_kpc2": 90270.24220696226,
+      "centred_flux": {
+        "mass_flux_outward_g_s": 1.9522003894572538e+26,
+        "thermal_advective_flux_outward_erg_s": 1.0261349583967166e+42,
+        "pressure_work_outward_erg_s": 6.8408997226447784e+41,
+        "kinetic_flux_outward_erg_s": 5.9973835096327e+39,
+        "gravitational_flux_outward_erg_s": 4.5848105662253164e+41,
+        "gas_flux_outward_erg_s": 1.7162223141708274e+42,
+        "total_energy_flux_outward_erg_s": 2.174703370793359e+42
+      },
+      "sum_absolute_face_contributions": {
+        "mass_flux_outward_g_s": 1.9564573696573014e+26,
+        "thermal_advective_flux_outward_erg_s": 1.0282412152825005e+42,
+        "pressure_work_outward_erg_s": 6.854941435216671e+41,
+        "kinetic_flux_outward_erg_s": 5.997383509639537e+39,
+        "gravitational_flux_outward_erg_s": 4.5948106717438575e+41
+      }
+    },
+    "R300": {
+      "radius_kpc": 63.90960847236966,
+      "cell_count": 296174680,
+      "volume_kpc3": 1093369.9006830314,
+      "face_count": 2772944,
+      "area_kpc2": 76981.68780859033,
+      "centred_flux": {
+        "mass_flux_outward_g_s": 1.517619176711634e+27,
+        "thermal_advective_flux_outward_erg_s": 8.265743798960648e+42,
+        "pressure_work_outward_erg_s": 5.5104958659737655e+42,
+        "kinetic_flux_outward_erg_s": 1.5558512095078654e+41,
+        "gravitational_flux_outward_erg_s": 3.2033733599086146e+42,
+        "gas_flux_outward_erg_s": 1.39318247858852e+43,
+        "total_energy_flux_outward_erg_s": 1.7135198145793813e+43
+      },
+      "sum_absolute_face_contributions": {
+        "mass_flux_outward_g_s": 1.5181162708244856e+27,
+        "thermal_advective_flux_outward_erg_s": 8.26824328468274e+42,
+        "pressure_work_outward_erg_s": 5.512162189788494e+42,
+        "kinetic_flux_outward_erg_s": 1.555977565699401e+41,
+        "gravitational_flux_outward_erg_s": 3.2044229902515254e+42
+      }
+    }
+  }
+}
