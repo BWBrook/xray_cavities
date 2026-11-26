@@ -1,0 +1,77 @@
+{
+  "case_ages": 18,
+  "prospective_images": 54,
+  "ordered_cases": [
+    "C-HI",
+    "C-LO",
+    "G-HI",
+    "G-LO"
+  ],
+  "case_depth_controls": 12,
+  "pilot_separate": true,
+  "pilot_in_separate_table": true,
+  "shared_control_status": {
+    "empty": 8,
+    "failed_nonempty": 4
+  },
+  "matched_flux_by_case": {
+    "C-HI": {
+      "case_ages": 5,
+      "evaluable_at_all_depths": 5,
+      "larger_deficit_at_slab10_than_full": 5,
+      "deficit_increases_at_both_depth_cuts": 4
+    },
+    "C-LO": {
+      "case_ages": 5,
+      "evaluable_at_all_depths": 5,
+      "larger_deficit_at_slab10_than_full": 5,
+      "deficit_increases_at_both_depth_cuts": 5
+    },
+    "G-HI": {
+      "case_ages": 3,
+      "evaluable_at_all_depths": 3,
+      "larger_deficit_at_slab10_than_full": 3,
+      "deficit_increases_at_both_depth_cuts": 3
+    },
+    "G-LO": {
+      "case_ages": 5,
+      "evaluable_at_all_depths": 5,
+      "larger_deficit_at_slab10_than_full": 5,
+      "deficit_increases_at_both_depth_cuts": 5
+    }
+  },
+  "physical_summary": {
+    "case_ages": 18,
+    "evaluable_area_case_ages": 18,
+    "dimmed_area_increases_at_both_cuts": 18,
+    "median_dimmed_area_fraction": {
+      "full": 0.4226598964706596,
+      "slab30": 0.6770280259950974,
+      "slab10": 0.9121496703710315
+    },
+    "median_matched_flux_deficit": {
+      "full": 0.04956345432779895,
+      "slab30": 0.1277241422871228,
+      "slab10": 0.6666759376851332
+    },
+    "defined_initial_light_fractions_full_to_slab10": 18,
+    "initial_light_fraction_full_to_slab10_median": 0.9466533121411909
+  },
+  "exact_perpendicular_field_depths": {
+    "compared": 108,
+    "unchecked": 108
+  },
+  "denominator": "Matched flux is integrated over the full evolved tracer footprint at all depths.",
+  "sampling": "Each case is one production run viewed along y at several ages.",
+  "manifest_sha256": "352efa8e31209690ac06380b0d2d5cafe2be6f034b6dad500667b96ef8bf4c71",
+  "registration_sha256": "ad89f2b9e77ce986da21ade49c08e40a71539b859a4078a34b61a32394980173",
+  "summariser_sha256": "a85ce30d3bb3217f3ceb3f0851fdc347c2039fd578834c557a096bd8c4ffc536",
+  "products": {
+    "case_age_depth.csv": "b366402857e4ac343684d7aafccdc3ba9c6a8a967aea7ea2aa2d0ac305b970eb",
+    "case_age_targets.csv": "32cadca2c5e8bf0c166b8efba9b42485400eb56d6dce453c2f74950da8a15419",
+    "case_depth_controls.csv": "c54fc926fbb22e74042d4ca439a74aba48de67c168f3ef3fc3874302b1afd6ff",
+    "perpendicular_rows.csv": "0546d8c0f877491610ee245cc520bda2a2c090b226db0ede10f87f3d7cc36c5d",
+    "physical_deficit.png": "8d541bb8302e6023ff7c9a3e04648f5275b53fe0968b4610cda051243eb244c0",
+    "pilot_case_age_depth.csv": "be7159b1b36a28e58b05caed854d9bdaa6575b95a93c1caaa06ea25dfc9dd9d5"
+  }
+}

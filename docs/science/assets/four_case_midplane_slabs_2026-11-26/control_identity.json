@@ -1,0 +1,167 @@
+{
+  "initial_only_receipt_sha256": "3338c04610d7617821a756b4d8f4a68003e65b360475b34f74b1ca6750acd835",
+  "comparison": "The complete image identity includes the brightness bytes and all four sky axes. A new initial detector evaluation was used for each distinct case.",
+  "pilot_native_sha256": "27ce38e78b2c93d28a7554d6f11e784a99580005e83e7f155098f1ed6d1ebcb2",
+  "cases": {
+    "C-HI": {
+      "native_unit": "C-HI_0010",
+      "brightness_sha256": {
+        "full": "2ad1c45520c303667d482f71c2cdb2fd51a74df40c4e02c486bb9733a44d7ef5",
+        "slab30": "3ab2cca558341b6bb8818b7f40b03df8850521703e137264921c4028c9c0c062",
+        "slab10": "3e3def2e150bd52c7eba875729468bd38674ecf9888bb615afe609b4e80b50d1"
+      },
+      "pilot_brightness_bitwise_equal": {
+        "full": false,
+        "slab30": false,
+        "slab10": false
+      },
+      "max_abs_difference_from_pilot_axes_kpc": {
+        "horizontal_axis_kpc": 4.9902340037988324e-08,
+        "horizontal_edges_kpc": 0.0,
+        "z_axis_kpc": 0.0,
+        "z_edges_kpc": 0.0
+      },
+      "pilot_mask_bitwise_equal": {
+        "full": true,
+        "slab30": false,
+        "slab10": false
+      },
+      "registered_control": {
+        "full": "empty",
+        "slab30": "empty",
+        "slab10": "empty"
+      },
+      "first_clear_both_hemispheres": {
+        "full": 0.05,
+        "slab30": 0.05,
+        "slab10": 0.05
+      },
+      "sky_axes_sha256": {
+        "horizontal_axis_kpc": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8",
+        "horizontal_edges_kpc": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b",
+        "z_axis_kpc": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19",
+        "z_edges_kpc": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+      }
+    },
+    "C-LO": {
+      "native_unit": "C-LO_0010",
+      "brightness_sha256": {
+        "full": "ac5a3e73795e22192c8989bb7c1950303bfa4e5b3c3b6eeb68082967912f51cf",
+        "slab30": "4d45e3e686dbf26da4816968204bbe17e7b45e3dcf7090d2c185b67c8509086d",
+        "slab10": "41d5812bf74d85effbe9e182d94936b35d4ae122efbcb4af448ca1d75f68643d"
+      },
+      "pilot_brightness_bitwise_equal": {
+        "full": false,
+        "slab30": false,
+        "slab10": false
+      },
+      "max_abs_difference_from_pilot_axes_kpc": {
+        "horizontal_axis_kpc": 4.9902340037988324e-08,
+        "horizontal_edges_kpc": 0.0,
+        "z_axis_kpc": 0.0,
+        "z_edges_kpc": 0.0
+      },
+      "pilot_mask_bitwise_equal": {
+        "full": true,
+        "slab30": false,
+        "slab10": false
+      },
+      "registered_control": {
+        "full": "empty",
+        "slab30": "empty",
+        "slab10": "empty"
+      },
+      "first_clear_both_hemispheres": {
+        "full": 0.05,
+        "slab30": 0.05,
+        "slab10": 0.05
+      },
+      "sky_axes_sha256": {
+        "horizontal_axis_kpc": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8",
+        "horizontal_edges_kpc": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b",
+        "z_axis_kpc": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19",
+        "z_edges_kpc": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+      }
+    },
+    "G-HI": {
+      "native_unit": "G-HI_0010",
+      "brightness_sha256": {
+        "full": "d67f21dd675ec1f11151ed2ee4e5a7030726215c0480ca0820255d8e7ba8d2ea",
+        "slab30": "110105676009f8340c55c71d442ab1f9aedbf5cdd8944a00b2ef4491300af99a",
+        "slab10": "305c51e48b9699ae3a6c6fbbc42e3d6012dabf2e33498129594bd4cd4a6e912e"
+      },
+      "pilot_brightness_bitwise_equal": {
+        "full": true,
+        "slab30": true,
+        "slab10": true
+      },
+      "max_abs_difference_from_pilot_axes_kpc": {
+        "horizontal_axis_kpc": 4.9902340037988324e-08,
+        "horizontal_edges_kpc": 0.0,
+        "z_axis_kpc": 0.0,
+        "z_edges_kpc": 0.0
+      },
+      "pilot_mask_bitwise_equal": {
+        "full": true,
+        "slab30": true,
+        "slab10": true
+      },
+      "registered_control": {
+        "full": "empty",
+        "slab30": "failed_nonempty",
+        "slab10": "failed_nonempty"
+      },
+      "first_clear_both_hemispheres": {
+        "full": 0.05,
+        "slab30": 0.07,
+        "slab10": 0.08
+      },
+      "sky_axes_sha256": {
+        "horizontal_axis_kpc": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8",
+        "horizontal_edges_kpc": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b",
+        "z_axis_kpc": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19",
+        "z_edges_kpc": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+      }
+    },
+    "G-LO": {
+      "native_unit": "G-LO_0010",
+      "brightness_sha256": {
+        "full": "fcad460b584be250ff5a0411fadac46ff4c82a0ebf5fe80e9d9226e35b2b2d37",
+        "slab30": "bca11bc7d6495263b410ec9e298b41277ab783c89c241afc6c44dd98c3f9c64e",
+        "slab10": "24c99d7822356fd33162a2f9a78d16d8bed7609483c1576e273501f28bc2901c"
+      },
+      "pilot_brightness_bitwise_equal": {
+        "full": false,
+        "slab30": false,
+        "slab10": false
+      },
+      "max_abs_difference_from_pilot_axes_kpc": {
+        "horizontal_axis_kpc": 4.9902340037988324e-08,
+        "horizontal_edges_kpc": 0.0,
+        "z_axis_kpc": 0.0,
+        "z_edges_kpc": 0.0
+      },
+      "pilot_mask_bitwise_equal": {
+        "full": true,
+        "slab30": true,
+        "slab10": true
+      },
+      "registered_control": {
+        "full": "empty",
+        "slab30": "failed_nonempty",
+        "slab10": "failed_nonempty"
+      },
+      "first_clear_both_hemispheres": {
+        "full": 0.05,
+        "slab30": 0.07,
+        "slab10": 0.08
+      },
+      "sky_axes_sha256": {
+        "horizontal_axis_kpc": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8",
+        "horizontal_edges_kpc": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b",
+        "z_axis_kpc": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19",
+        "z_edges_kpc": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+      }
+    }
+  }
+}

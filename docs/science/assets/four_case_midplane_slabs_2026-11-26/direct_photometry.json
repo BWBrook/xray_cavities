@@ -1,0 +1,9 @@
+{
+  "case_ages": 18,
+  "side_depth_values_checked": 1458,
+  "largest_absolute_difference_scaled_by_max_one_and_reference": 9.43689570931383e-16,
+  "registration_sha256": "ad89f2b9e77ce986da21ade49c08e40a71539b859a4078a34b61a32394980173",
+  "checker_sha256": "3f58bfacbede57734477f0f11c746e3937c78a94a26d98954aca3fe487fc7ea8",
+  "reference": "Original released full-depth tracer raster, separately bound to the sealed producer",
+  "scope": "Footprint and aperture areas, dimmed and brightened areas on and off the lobe, both fluxes and matched deficit"
+}

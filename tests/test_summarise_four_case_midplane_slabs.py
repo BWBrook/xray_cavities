@@ -60,7 +60,9 @@ def test_aggregation_keeps_exposed_pilot_separate_and_counts_repeated_ages_by_ca
     def synthetic_tables(directory, entry, frozen):
         case, age = panel.case_key(entry)
         base = {"case": case, "snapshot_index": age, "actual_time_myr": age}
-        pooled = [{**base, "depth": d, "matched_deficit": str(v)} for d, v in zip(panel.DEPTHS, (0.2, 0.4, 0.3))]
+        pooled = [{**base, "depth": d, "matched_deficit": str(v), "lobe_kpc2": 10,
+                   "dimmed_on_lobe_kpc2": 10 * v, "dilution_by_initial_outer_light": v - 0.2,
+                   "change_due_to_outer_brightening": 0.0} for d, v in zip(panel.DEPTHS, (0.2, 0.4, 0.3))]
         targets = [{**base, "depth": "full", "target": "full_lobe"}]
         controls = [{"case": case, "depth": d, "hemisphere": h, "time_zero_status": "empty"}
                     for d in panel.DEPTHS for h in panel.HALVES]
@@ -80,3 +82,16 @@ def test_aggregation_keeps_exposed_pilot_separate_and_counts_repeated_ages_by_ca
     with (out / "case_age_depth.csv").open() as stream:
         assert all(panel.case_key(r) != ("G-HI", 20) for r in csv.DictReader(stream))
     assert result["products"]["physical_deficit.png"] == panel.front.HASH(out / "physical_deficit.png")
+
+
+def test_physical_summary_keeps_signed_outer_change_and_skips_zero_denominators():
+    rows = [{"case": "G-HI", "snapshot_index": 40, "depth": d, "lobe_kpc2": 10,
+             "dimmed_on_lobe_kpc2": a, "matched_deficit": f,
+             "dilution_by_initial_outer_light": 0.55, "change_due_to_outer_brightening": -0.05}
+            for d, a, f in zip(panel.DEPTHS, (1, 4, 8), (0.1, 0.3, 0.6), strict=True)]
+    empty = [dict(r, snapshot_index=10, lobe_kpc2=0, dimmed_on_lobe_kpc2=0, matched_deficit="") for r in rows]
+    summary = panel.physical_summary(rows + empty)
+    assert summary["evaluable_area_case_ages"] == summary["dimmed_area_increases_at_both_cuts"] == 1
+    assert summary["median_dimmed_area_fraction"] == dict(full=0.1, slab30=0.4, slab10=0.8)
+    assert summary["defined_initial_light_fractions_full_to_slab10"] == 1
+    assert summary["initial_light_fraction_full_to_slab10_median"] == pytest.approx(1.1)

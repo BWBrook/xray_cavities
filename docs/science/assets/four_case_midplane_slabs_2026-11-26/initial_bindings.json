@@ -1,0 +1,299 @@
+{
+  "source_units": {
+    "C-HI": {
+      "unit": "C-HI_0010",
+      "completion_sha256": "b039082fdea3d4cd312a5dc50a24bbdce9c6fe6b45c50689c4120f2eb5ac168f",
+      "images_and_axes": {
+        "horizontal_axis_kpc": {
+          "shape": [
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8"
+        },
+        "horizontal_edges_kpc": {
+          "shape": [
+            961
+          ],
+          "dtype": "float64",
+          "sha256": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b"
+        },
+        "z_axis_kpc": {
+          "shape": [
+            1014
+          ],
+          "dtype": "float64",
+          "sha256": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19"
+        },
+        "z_edges_kpc": {
+          "shape": [
+            1015
+          ],
+          "dtype": "float64",
+          "sha256": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+        },
+        "initial_full": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "2ad1c45520c303667d482f71c2cdb2fd51a74df40c4e02c486bb9733a44d7ef5"
+        },
+        "initial_slab30": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "3ab2cca558341b6bb8818b7f40b03df8850521703e137264921c4028c9c0c062"
+        },
+        "initial_slab10": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "3e3def2e150bd52c7eba875729468bd38674ecf9888bb615afe609b4e80b50d1"
+        }
+      }
+    },
+    "C-LO": {
+      "unit": "C-LO_0010",
+      "completion_sha256": "a755124a346ca76f756375f79e13670883f7ca0634b9b48d69b952569adbd63e",
+      "images_and_axes": {
+        "horizontal_axis_kpc": {
+          "shape": [
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8"
+        },
+        "horizontal_edges_kpc": {
+          "shape": [
+            961
+          ],
+          "dtype": "float64",
+          "sha256": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b"
+        },
+        "z_axis_kpc": {
+          "shape": [
+            1014
+          ],
+          "dtype": "float64",
+          "sha256": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19"
+        },
+        "z_edges_kpc": {
+          "shape": [
+            1015
+          ],
+          "dtype": "float64",
+          "sha256": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+        },
+        "initial_full": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "ac5a3e73795e22192c8989bb7c1950303bfa4e5b3c3b6eeb68082967912f51cf"
+        },
+        "initial_slab30": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "4d45e3e686dbf26da4816968204bbe17e7b45e3dcf7090d2c185b67c8509086d"
+        },
+        "initial_slab10": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "41d5812bf74d85effbe9e182d94936b35d4ae122efbcb4af448ca1d75f68643d"
+        }
+      }
+    },
+    "G-HI": {
+      "unit": "G-HI_0010",
+      "completion_sha256": "f3c4a69d250524bae918c38f77832be492b047d66f901afaa38c5c2a7908a0ae",
+      "images_and_axes": {
+        "horizontal_axis_kpc": {
+          "shape": [
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8"
+        },
+        "horizontal_edges_kpc": {
+          "shape": [
+            961
+          ],
+          "dtype": "float64",
+          "sha256": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b"
+        },
+        "z_axis_kpc": {
+          "shape": [
+            1014
+          ],
+          "dtype": "float64",
+          "sha256": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19"
+        },
+        "z_edges_kpc": {
+          "shape": [
+            1015
+          ],
+          "dtype": "float64",
+          "sha256": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+        },
+        "initial_full": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "d67f21dd675ec1f11151ed2ee4e5a7030726215c0480ca0820255d8e7ba8d2ea"
+        },
+        "initial_slab30": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "110105676009f8340c55c71d442ab1f9aedbf5cdd8944a00b2ef4491300af99a"
+        },
+        "initial_slab10": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "305c51e48b9699ae3a6c6fbbc42e3d6012dabf2e33498129594bd4cd4a6e912e"
+        }
+      }
+    },
+    "G-LO": {
+      "unit": "G-LO_0010",
+      "completion_sha256": "833380167933e9495e1d4de4fbb201a5b2c6af6d91472a22065c472481f45474",
+      "images_and_axes": {
+        "horizontal_axis_kpc": {
+          "shape": [
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "99a19cbd9f66f6ea21c118fa37a9e0841a5511ff30338617a140b159a0370fc8"
+        },
+        "horizontal_edges_kpc": {
+          "shape": [
+            961
+          ],
+          "dtype": "float64",
+          "sha256": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b"
+        },
+        "z_axis_kpc": {
+          "shape": [
+            1014
+          ],
+          "dtype": "float64",
+          "sha256": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19"
+        },
+        "z_edges_kpc": {
+          "shape": [
+            1015
+          ],
+          "dtype": "float64",
+          "sha256": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+        },
+        "initial_full": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "fcad460b584be250ff5a0411fadac46ff4c82a0ebf5fe80e9d9226e35b2b2d37"
+        },
+        "initial_slab30": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "bca11bc7d6495263b410ec9e298b41277ab783c89c241afc6c44dd98c3f9c64e"
+        },
+        "initial_slab10": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "24c99d7822356fd33162a2f9a78d16d8bed7609483c1576e273501f28bc2901c"
+        }
+      }
+    },
+    "exposed_G-HI/20": {
+      "unit": "G-HI_0020",
+      "completion_sha256": "27ce38e78b2c93d28a7554d6f11e784a99580005e83e7f155098f1ed6d1ebcb2",
+      "images_and_axes": {
+        "horizontal_axis_kpc": {
+          "shape": [
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "950e7c97cca0482579d9bf3da3290ec28019876400dac4f6faf52688fd12de1a"
+        },
+        "horizontal_edges_kpc": {
+          "shape": [
+            961
+          ],
+          "dtype": "float64",
+          "sha256": "ce2d2cc03ea50dbc00fbf643f255664c3ccef535435323dc3eeba79a08a1042b"
+        },
+        "z_axis_kpc": {
+          "shape": [
+            1014
+          ],
+          "dtype": "float64",
+          "sha256": "a9f3e9411a6a9e31ff1a7854bde6f08321470427b638437642f38e7bc67d4c19"
+        },
+        "z_edges_kpc": {
+          "shape": [
+            1015
+          ],
+          "dtype": "float64",
+          "sha256": "78f825cc3d626365c98ea9d5f8ed9189edf9e6047d2f988146ffaf88688374bc"
+        },
+        "initial_full": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "d67f21dd675ec1f11151ed2ee4e5a7030726215c0480ca0820255d8e7ba8d2ea"
+        },
+        "initial_slab30": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "110105676009f8340c55c71d442ab1f9aedbf5cdd8944a00b2ef4491300af99a"
+        },
+        "initial_slab10": {
+          "shape": [
+            1014,
+            960
+          ],
+          "dtype": "float64",
+          "sha256": "305c51e48b9699ae3a6c6fbbc42e3d6012dabf2e33498129594bd4cd4a6e912e"
+        }
+      }
+    }
+  },
+  "byte_equal_to_exposed_GHI_pilot": {
+    "initial_full": [],
+    "initial_slab30": [],
+    "initial_slab10": []
+  }
+}

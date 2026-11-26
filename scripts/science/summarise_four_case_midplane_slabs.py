@@ -205,6 +205,48 @@ def depth_comparison(rows):
             "deficit_increases_at_both_depth_cuts": sum(full < middle < inner for full, middle, inner in evaluable)}
 
 
+def physical_summary(rows):
+    units = {}
+    for row in rows:
+        units.setdefault(case_key(row), {})[row["depth"]] = row
+    shares = {depth: [] for depth in DEPTHS}
+    deficits = {depth: [] for depth in DEPTHS}
+    outer_light_fractions = []
+    evaluable_areas = 0
+    increases = 0
+    for measurements in units.values():
+        areas = []
+        for depth in DEPTHS:
+            row = measurements[depth]
+            target = float(row["lobe_kpc2"])
+            if target > 0:
+                fraction = float(row["dimmed_on_lobe_kpc2"]) / target
+                shares[depth].append(fraction)
+                areas.append(fraction)
+            if row["matched_deficit"] != "":
+                deficits[depth].append(float(row["matched_deficit"]))
+        if len(areas) == len(DEPTHS):
+            evaluable_areas += 1
+            increases += areas[0] < areas[1] < areas[2]
+        inner = measurements["slab10"]
+        if measurements["full"]["matched_deficit"] == "" or any(inner[k] == "" for k in (
+                "matched_deficit", "dilution_by_initial_outer_light", "change_due_to_outer_brightening")):
+            continue
+        change = float(inner["matched_deficit"]) - float(measurements["full"]["matched_deficit"])
+        initial = float(inner["dilution_by_initial_outer_light"])
+        evolved = float(inner["change_due_to_outer_brightening"])
+        if not np.isclose(initial + evolved, change, rtol=1e-12, atol=1e-14):
+            raise ValueError("The two signed outer-light terms do not recover the paired deficit change")
+        if change != 0:
+            outer_light_fractions.append(initial / change)
+    return {"case_ages": len(units), "evaluable_area_case_ages": evaluable_areas,
+            "dimmed_area_increases_at_both_cuts": increases,
+            "median_dimmed_area_fraction": {d: float(np.median(v)) if v else None for d, v in shares.items()},
+            "median_matched_flux_deficit": {d: float(np.median(v)) if v else None for d, v in deficits.items()},
+            "defined_initial_light_fractions_full_to_slab10": len(outer_light_fractions),
+            "initial_light_fraction_full_to_slab10_median": float(np.median(outer_light_fractions)) if outer_light_fractions else None}
+
+
 def run(manifest_path, output, registration_path=REGISTRATION):
     if output.exists():
         raise FileExistsError(f"Aggregate directory already exists: {output}")
@@ -238,6 +280,7 @@ def run(manifest_path, output, registration_path=REGISTRATION):
             "pilot_in_separate_table": "pilot" in manifest,
             "shared_control_status": dict(Counter(r["time_zero_status"] for r in controls if r["hemisphere"] == "both")),
             "matched_flux_by_case": {c: depth_comparison([r for r in pooled if r["case"] == c]) for c in CASES},
+            "physical_summary": physical_summary(pooled),
             "exact_perpendicular_field_depths": dict(Counter(r["status"] for r in combined["perpendicular_rows"]
                                                               if r["side_view_cut"] == "exact")),
             "denominator": "Matched flux is integrated over the full evolved tracer footprint at all depths.",
