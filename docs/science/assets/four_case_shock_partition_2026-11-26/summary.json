@@ -1,0 +1,45 @@
+{
+  "denominator": "Cumulative signed gas energy through injector faces, both cones and stationary zone; bipolar for every row.",
+  "region": "Whole-domain current ambient full cells, tr1 <= 0.001; axial gate and connected entropy-excess component.",
+  "interpretation": "Instantaneous stock changes on the same cells relative to t=0. Neither a shock-dissipation integral nor a measurement of internal shocks.",
+  "retained_snapshots": 201,
+  "positive_age_snapshots": 197,
+  "selected_case_ages": 19,
+  "qualified_bilateral_primary": 15,
+  "positive_ages_without_3d_measurement": 178,
+  "qualified_with_both_jump_inversions_on_both_sides": [
+    "C-HI/10",
+    "G-HI/10",
+    "G-HI/20",
+    "G-HI/30"
+  ],
+  "input_sha256": {
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/shock_closeout/local_asset_manifest.sha256": "16c0c0450148b9925fe8a4ed02e342c5edc10129fd0d049c382ea569561abcfa",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/shock_closeout/selected_age_native_shock_closeout_metadata.json": "fe0bae3350807d1a65f57d1718d96de81a392b9a63b9c86f849bd42675acd1fb",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/shock_closeout/native_shock_energy_selected_age.csv": "d8e4e3159bbc3e07ede0405ff4fe4892e9b8396fdc47fa0be2b2cf30ee4548b8",
+    "docs/science/assets/cluster_background_and_age_validity_2026-08-26/local_asset_manifest.sha256": "a3906b3180694e01ad49678c0e09e27e7a3e09313454f142206bf35f329577d6",
+    "docs/science/assets/cluster_background_and_age_validity_2026-08-26/shock_validity_by_snapshot.csv": "ff80e89462579aeb01ac3216b088b6a336533efba297805218d00e994ccba7b8",
+    "docs/science/assets/native_delivery_restatement_2026-11-21/verification.json": "76b4d15678936241ebf44a3c117c6cacdf8c5845e3dfeba527d533f600d53bef",
+    "docs/science/assets/native_delivery_restatement_2026-11-21/primary_selected_ages.csv": "dfaebebf21b1fcbb147a1c7d7a5f85e91c6440f4da2b5afda83ab3aaa5bda473",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-HI/local_asset_manifest.sha256": "ff077a984542f66dd00ba02857bcec0fb3ddc8a54f647f78125abd1a247e1ac7",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-HI/native_energy_selected_age.csv": "8d8691c6183601e47836a08b859e0d151bc609f6fc96900be74aa7afd62c17b5",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-HI/accepted_axial_shock_dynamics.csv": "6d9b3972f6d6678d4babbc99da530dc867cc017b84d315a676e20c5eb8618333",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-HI/source_manifest.csv": "e66f0c7eb7080ca9e9323683e7bb6932198e360456cef699f3a948d6e6f09d3b",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/local_asset_manifest.sha256": "d61608d96f26d29e84ec4517e809f3e3e7906a703dd267df4d6919e8b0f738a8",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/native_energy_selected_age.csv": "a035de60355570ca2ee602706d31403e2e6fc17b8d566126718cf7f7f9bb7451",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/accepted_axial_shock_dynamics.csv": "0616ddb1c1d06c584f2a767c1a32c81b1c3171146e8f3a2548a2e7db5a57ca6c",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/source_manifest.csv": "22806f1da953ace11316daed5c03c728ac7ac64065e5f3e17112dccea854df22",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-HI/local_asset_manifest.sha256": "de259a7b928e7f1ce6b20ae1e7e7bc0f685fd7a04921cf9cafa26c284e36ebd2",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-HI/native_energy_selected_age.csv": "b98bfaf343b81790ac286ada258e12670526020ea0e50402b0e9cae5305abf1a",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-HI/accepted_axial_shock_dynamics.csv": "08546d201d3b8d4c384014e51a11bc75a75aa89585e0e57a47cbb10df476d6d0",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-HI/source_manifest.csv": "62459746452f1bde2e494e26ff4d55ddf5a07ec433f17cef9abb77b6222b3d51",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/local_asset_manifest.sha256": "f8eb3417e766b025ec5830d3969a4c42a321b89b92b2ddaf8a337e4188952c5e",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/native_energy_selected_age.csv": "6254800d84ca5748f91c7d4aebb18282fb0de4b24ad15e7a23d6af19e617a16a",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/accepted_axial_shock_dynamics.csv": "8ff915f454eda575a865350a9e21465e3b1cbea4e641f232e4a99d68c620623b",
+    "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/source_manifest.csv": "740f6fa7d0fdd12a6791066c2b28ae082b74ac545907383356715c65e102cd49"
+  },
+  "product_sha256": {
+    "downstream_components.csv": "458eabb6bae63945c7de17ee905525f9cf980731dd7587729883b964b18ba756",
+    "axial_evidence.csv": "e124a92eb6612e5a90c1eb1d0edf5bc1a66266e1fd5a22854a8209a7a6a1a558"
+  }
+}

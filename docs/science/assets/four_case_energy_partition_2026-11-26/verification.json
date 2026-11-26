@@ -1,0 +1,89 @@
+{
+  "case_last_indices": {
+    "C-HI": 50,
+    "C-LO": 50,
+    "G-HI": 47,
+    "G-LO": 50
+  },
+  "retained_snapshots": 201,
+  "positive_age_intervals": 197,
+  "sphere_rows": 1206,
+  "fixed_rows": 1809,
+  "published_selected_ages": 19,
+  "primary_injector": [
+    "linear_snapshot_flags",
+    "trapezoid"
+  ],
+  "fixed_completion_sha256": {
+    "C-HI": "b5300a70230ee343b8d4d72eddd137760045d268e0e2c1b2d78b8acec4627a4f",
+    "C-LO": "4fed63215e4e5b37e6b9f24562528542ff5abf16c5d45a7890c2b3397732824a",
+    "G-HI": "9bac8c77d2dcef62d6f9c6109a2a1a0747eb17464cb544c0f29b2a18d149657d",
+    "G-LO": "3f5e7361e2f1c4779de01da4edb062ad62b0f264f9a179f4d47c1d9ff1cced6a"
+  },
+  "compact_source_uncompressed_sha256": "f9df74456fa22d0f321e44c3439ddae38671d2a190b200fc482c0a93072fdf20",
+  "pinned_receipts": {
+    "docs/science/assets/turn15_review_2026-11-11/review_manifest.json": "20a782b396b1772ee48d0d346fde9715a42af57458cba9a8addaa981cf0e5726",
+    "docs/science/assets/production_injector_histories_2026-11-21/verification.json": "9cdf21211f3f891ee5e805808412a4424e2a63e93848279ca4fca167676d0647",
+    "docs/science/assets/native_delivery_restatement_2026-11-21/verification.json": "76b4d15678936241ebf44a3c117c6cacdf8c5845e3dfeba527d533f600d53bef"
+  },
+  "checks": {
+    "cumulative_signed_regions": {
+      "count": 201,
+      "max_scaled_error": 3.7455174506405163e-16
+    },
+    "instantaneous_vs_interval": {
+      "count": 591,
+      "max_scaled_error": 1.2374230204124778e-14
+    },
+    "actual_age": {
+      "count": 603,
+      "max_scaled_error": 0.0
+    },
+    "label": {
+      "count": 201,
+      "max_scaled_error": 0.0
+    },
+    "whole_lobe_pv": {
+      "count": 603,
+      "max_scaled_error": 2.087338355654285e-16
+    },
+    "radius": {
+      "count": 402,
+      "max_scaled_error": 0.0
+    },
+    "two_native_stock_reductions": {
+      "count": 4824,
+      "max_scaled_error": 8.721812904336708e-16
+    },
+    "cocoon_plus_ambient": {
+      "count": 9045,
+      "max_scaled_error": 5.020548907447635e-15
+    },
+    "three_energy_components": {
+      "count": 3015,
+      "max_scaled_error": 0.0
+    },
+    "mass_delta": {
+      "count": 3015,
+      "max_scaled_error": 1.0642951780828872e-15
+    },
+    "box_plus_shell": {
+      "count": 5427,
+      "max_scaled_error": 6.598433522800529e-15
+    },
+    "published_selected_ages": {
+      "count": 76,
+      "max_scaled_error": 2.6178542212337576e-16
+    }
+  },
+  "source_sha256": "9c7f1ccad7b984924eb64a11a348f2ab12c93dfb5206b9b1cbda45917c6fcb0c",
+  "products_sha256": {
+    "R100_components.png": "541fdea219764ee05a60b56608d3eaa01f7610439352b276788345d0d659754b",
+    "R300_components.png": "b9aaa99354e12c4cd4912403a6d69d3cd0481c65d625670736a5ab1454ec9f02",
+    "box_components.csv": "76476f00a67c594f27935d19bba191263c7b5f45018b9e60515a7f9218a60b7b",
+    "native_fixed_stocks.json.gz": "0b6c9e159ab2d16ef0bdab39a63d78a9501dc441fa58b0d7ac515163e11f416e",
+    "selected_age_components.csv": "690db8ec513119d3b209a5ff491aa47c4737ea174e5ededc8acb08090395f330",
+    "snapshots.csv": "71ad8882566f5e3e795448696eac3dc1f0b0c1dccae4b1144b28c77cbdab56cf",
+    "sphere_components.csv": "b4684a7dbe097fe0bf26a276243067fe1fd0203230db4ab200f6241075f28d9d"
+  }
+}
