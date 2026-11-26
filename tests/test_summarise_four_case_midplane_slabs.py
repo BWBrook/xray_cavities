@@ -35,6 +35,16 @@ def test_time_zero_control_with_same_area_but_different_raster_cannot_be_dedupli
             panel.distinct_controls([base, {**base, field: "different"}])
 
 
+def test_atmosphere_count_requires_matching_detector_outcomes_across_powers():
+    high = {"case": "G-HI", "depth": "slab10", "sky_axes_sha256": "axes", "null_mask_sha256": "mask",
+            "time_zero_status": "failed_nonempty", "first_clean_status": "found", "first_clean_cut": 0.08}
+    low = {**high, "case": "G-LO"}
+    assert panel.atmosphere_control_counts([high, low]) == {"failed_nonempty": 1}
+    for field, value in (("null_mask_sha256", "other mask"), ("first_clean_cut", 0.07)):
+        with pytest.raises(ValueError, match="different control"):
+            panel.atmosphere_control_counts([high, {**low, field: value}])
+
+
 def test_authenticated_score_and_perpendicular_receipts_must_bind_the_same_projection(tmp_path):
     unit = {"case": "G-HI", "snapshot_index": 20}
     common = {**unit, "actual_time_myr": 19.99}
@@ -64,8 +74,14 @@ def test_aggregation_keeps_exposed_pilot_separate_and_counts_repeated_ages_by_ca
                    "dimmed_on_lobe_kpc2": 10 * v, "dilution_by_initial_outer_light": v - 0.2,
                    "change_due_to_outer_brightening": 0.0} for d, v in zip(panel.DEPTHS, (0.2, 0.4, 0.3))]
         targets = [{**base, "depth": "full", "target": "full_lobe"}]
-        controls = [{"case": case, "depth": d, "hemisphere": h, "time_zero_status": "empty"}
-                    for d in panel.DEPTHS for h in panel.HALVES]
+        controls = []
+        for d in panel.DEPTHS:
+            group_slab = case.startswith("G-") and d != "full"
+            for h in panel.HALVES:
+                controls.append({"case": case, "depth": d, "hemisphere": h, "sky_axes_sha256": "axes",
+                                 "null_mask_sha256": d if group_slab else "empty", "first_clean_status": "found",
+                                 "first_clean_cut": 0.08 if group_slab else 0.05,
+                                 "time_zero_status": "failed_nonempty" if group_slab else "empty"})
         side = [{**base, "side_view_cut": "exact", "status": "compared"}]
         return pooled, targets, controls, side
 
@@ -73,7 +89,10 @@ def test_aggregation_keeps_exposed_pilot_separate_and_counts_repeated_ages_by_ca
     out = tmp_path / "summary"
     result = panel.run(path, out)
     assert result["case_ages"] == 18 and result["prospective_images"] == 54
-    assert result["case_depth_controls"] == 12 and result["shared_control_status"] == {"empty": 12}
+    assert result["case_depth_controls"] == 12
+    assert result["case_depth_control_status"] == {"empty": 8, "failed_nonempty": 4}
+    assert result["atmosphere_depth_controls"] == 6
+    assert result["atmosphere_depth_control_status"] == {"empty": 4, "failed_nonempty": 2}
     assert result["matched_flux_by_case"]["G-HI"] == {
         "case_ages": 3, "evaluable_at_all_depths": 3, "larger_deficit_at_slab10_than_full": 3,
         "deficit_increases_at_both_depth_cuts": 0}

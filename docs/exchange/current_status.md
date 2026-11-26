@@ -1,8 +1,7 @@
 # Current Status
 
-Updated 26 November 2026 after the 18 four-case slab projections, the
-time-zero coverage controls and the checks against the archived perpendicular
-views. XR-08 awaits independent review.
+Updated 26 November 2026 after independent review of the G-HI/20 pilot
+and the 18 additional side-on slab projections. Both XR-07 and XR-08 are supported.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -24,9 +23,11 @@ source exclusions and frozen observer scores. No new simulation is requested
 and the approved handover specifies the scope of the four-case comparison.
 [Approved instruction](logs/2026-11-25-midplane-slab-xray-cavity-request.md).
 
-**G-HI/20 after review.** The share of the same tracer footprint more than 5% dimmer than at time zero rises from 55.8% at full depth to 73.2% at ±30 and 85.1% at ±10 kpc. The radial detector on the undisturbed images selects 0, 27,028 and 30,936 kpc². Both thin slabs fail the control, so their evolved false areas and purities reflect the fitted background. The three shortest tracer path bins, together 1,849 kpc², remain 16–36% brighter at full depth. Across the whole footprint, the initial light beyond 30 kpc dilutes the deficit by 21.6 percentage points and its subsequent brightening removes another 14.3. XR-07 remains provisional. Simulated 20-Myr narrow-slab emission has one native extraction. [Revised results, maps and control rows](../science/ghi20_midplane_slab_results_2026-11-25.md)
+**G-HI/20 after review.** The share of the same tracer footprint more than 5% dimmer than at time zero rises from 55.8% at full depth to 73.2% at ±30 and 85.1% at ±10 kpc. The radial detector on the undisturbed images selects 0, 27,028 and 30,936 kpc². Both thin slabs fail the control, so their evolved false areas and purities reflect the fitted background. The three shortest tracer path bins, together 1,849 kpc², remain 16–36% brighter at full depth. Across the whole footprint, the initial light beyond 30 kpc dilutes the deficit by 21.6 percentage points and its subsequent brightening removes another 14.3. The perpendicular whole-gas and lobe-cell row totals check the native depth weights. Both projections share the emissivity calculation. [Pilot results, maps and checks](../science/ghi20_midplane_slab_results_2026-11-25.md)
 
-**Four-case result.** All 18 other case-ages passed native projection, scoring and the perpendicular row checks. The median area physically dimmed by more than 5% rose from 42.3% at full depth to 67.7% and 91.2% at ±30 and ±10 kpc. Initial outer light accounts for a median 94.7% of the full-to-±10 kpc gain in the integrated deficit. All four full-depth controls and both slab controls in each cluster run are empty. Both group runs fail the 5% slab controls. At ±30 kpc, G-LO/10 loses its entire radial outline at the first clean cut even though 59.5% of its footprint physically dimmed. The amended protocol predates all 18 runs. The public numerical archive regenerates the tables and figure. The review gallery and map bundle are in `private_archive/turn34_four_case_slabs/`. XR-08 is provisional. [Results, controls and reproduction](../science/four_case_midplane_slab_results_2026-11-26.md) · [Registered protocol](../science/four_case_midplane_slab_protocol_2026-11-25.md)
+**Four-case result.** At all 18 other case-ages, more of the projected lobe dimmed by more than 5% with each cut. The median share rose from 42.3% at full depth to 67.7% at ±30 kpc and 91.2% at ±10 kpc. Initial outer light accounts for a median 94.7% of the full-to-±10 kpc increase in integrated deficit. Outer ambient gas brightened in every case-age. In G-HI/40 its contribution of +28.3 points nearly cancels −28.8 points from dimming in outer lobe cells. [Component balance](../science/assets/four_case_midplane_slab_review_2026-11-26/outer_gas.csv)
+
+Two of the six atmosphere-by-depth controls fail at 5%, both in the group atmosphere. Empty initial controls still give outlines with less than 50% purity in three cluster slabs at 5% and four of the eight group ±30 kpc slabs at 7%. G-LO/10 at ±30 kpc loses its entire outline at 7% even though 59.5% of the footprint physically dimmed. Claude reproduced all 918 compared values, using a separate detector for 648 of them. The public archive regenerates the tables and figure. The review gallery and map bundle are in `private_archive/turn34_four_case_slabs/`. [Results, controls and reproduction](../science/four_case_midplane_slab_results_2026-11-26.md) · [Registered protocol](../science/four_case_midplane_slab_protocol_2026-11-25.md)
 
 ## Supervisor scope decision 25 November
 

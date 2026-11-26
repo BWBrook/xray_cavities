@@ -171,6 +171,19 @@ def distinct_controls(all_controls):
     return list(controls.values())
 
 
+def atmosphere_control_counts(case_controls):
+    grouped = {}
+    for row in case_controls:
+        atmosphere, _ = row["case"].split("-")
+        key = atmosphere, row["depth"]
+        outcome = selected(row, ("sky_axes_sha256", "null_mask_sha256", "time_zero_status",
+                                 "first_clean_status", "first_clean_cut"))
+        if key in grouped and grouped[key] != outcome:
+            raise ValueError(f"Jet powers give different control masks, geometry or thresholds for {key}")
+        grouped[key] = outcome
+    return Counter(row["time_zero_status"] for row in grouped.values())
+
+
 def physical_figure(output, rows):
     fig, axes = plt.subplots(2, 2, figsize=(8.1, 5.8), sharex=True, sharey=True, layout="constrained")
     styles = (("full", "Full depth", "#252830", "o"), ("slab30", "±30 kpc", "#156868", "s"),
@@ -264,6 +277,8 @@ def run(manifest_path, output, registration_path=REGISTRATION):
     if len(controls) != len(CASES) * len(DEPTHS) * len(HALVES):
         raise ValueError("Time-zero controls do not cover all cases, depths and hemispheres")
     combined["case_depth_controls"] = [{**r, "number_of_case_ages": counts[r["case"]]} for r in controls]
+    case_controls = [r for r in controls if r["hemisphere"] == "both"]
+    by_atmosphere = atmosphere_control_counts(case_controls)
     if "pilot" in manifest:
         combined["pilot_case_age_depth"] = unit_tables(manifest_path.parent, manifest["pilot"], None)[0]
     pooled = combined["case_age_depth"]
@@ -276,9 +291,12 @@ def run(manifest_path, output, registration_path=REGISTRATION):
         physical_figure(work / "physical_deficit.png", pooled)
         result = {
             "case_ages": len(expected), "prospective_images": len(pooled), "ordered_cases": list(CASES),
-            "case_depth_controls": len(controls) // len(HALVES), "pilot_separate": True,
+            "atmosphere_depth_controls": by_atmosphere.total(),
+            "atmosphere_depth_control_status": dict(by_atmosphere),
+            "case_depth_controls": len(case_controls),
+            "case_depth_control_status": dict(Counter(r["time_zero_status"] for r in case_controls)),
+            "pilot_separate": True,
             "pilot_in_separate_table": "pilot" in manifest,
-            "shared_control_status": dict(Counter(r["time_zero_status"] for r in controls if r["hemisphere"] == "both")),
             "matched_flux_by_case": {c: depth_comparison([r for r in pooled if r["case"] == c]) for c in CASES},
             "physical_summary": physical_summary(pooled),
             "exact_perpendicular_field_depths": dict(Counter(r["status"] for r in combined["perpendicular_rows"]

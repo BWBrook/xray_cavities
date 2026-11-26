@@ -485,7 +485,7 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    [Per-lobe areas, front checks and reproduction](docs/science/ghi20_front_constraint_2026-11-25.md)
    <!-- claims: DET-07 -->
 
-   Stas’s G-HI/20 slab test compares the same sightlines with their initial
+   Stas’s G-HI/20 slab test (XR-07, supported) compares the same sightlines with their initial
    brightness. The share of lobe area that dimmed by more than 5% is 55.8%, 73.2%
    and 85.1% at full depth, ±30 and ±10 kpc. The registered radial rule on
    the undisturbed images selects 0, 27,028 and 30,936 kpc². Read
@@ -498,22 +498,30 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    `slab_lobe` scores the retained material. The ±10 kpc slab intersects
    97.9% of the original area and contains 40.3% of the volume. Use
    full-column tracer path bins for the layer balance. Detected and missed
-   sightlines are defined by the detector. Matching the 90° per-z row
-   totals checks the emitting depth. Light can still be misplaced within
-   a row, and both projections share the emissivity calculation.
+   sightlines are defined by the detector. The native projection uses one
+   width per y cell at every x and z. The archived 90° row totals therefore
+   check the cut across the image. Within-row placement and the shared
+   emissivity prescription have one native implementation.
    [Pilot results and independent review](docs/science/ghi20_midplane_slab_results_2026-11-25.md) · [Four-case protocol](docs/science/four_case_midplane_slab_protocol_2026-11-25.md)
    <!-- claims: XR-07 -->
 
-   In the other 18 side-on case-ages the share of the same footprint dimmed
+   In the other 18 side-on case-ages (XR-08, supported), the share of the same footprint dimmed
    by more than 5% increases at both cuts in every comparison. Its medians
    are 42.3%, 67.7% and 91.2%. The initial light beyond ±10 kpc accounts
    for a median 94.7% of the increase in the integrated flux deficit from
-   full depth to that slab. Rebuild the case-age table from the compact
-   archive. Use the initial and evolved coverage splits for both group
-   runs, where the registered slab controls fail. The archived 90° images
-   check the whole-gas row integrals at both epochs in all 18 case-ages.
-   The G-HI/20 pilot has its own table and a separate lobe-cell check.
-   [Four-case result and commands](docs/science/four_case_midplane_slab_results_2026-11-26.md) · [Portable tables and receipts](docs/science/assets/four_case_midplane_slabs_2026-11-26/tables.zip)
+   full depth to that slab. Use current tracer membership to split the outer
+   emission at both epochs. In G-HI/40, outer ambient brightening contributes
+   +28.3 points and dimming in outer lobe cells contributes −28.8 points.
+   The 90° archives check whole-gas row integrals at both epochs in all 18.
+   The G-HI/20 pilot also has a lobe-cell check. [Four-case result and reproduction](docs/science/four_case_midplane_slab_results_2026-11-26.md) · [Component table](docs/science/assets/four_case_midplane_slab_review_2026-11-26/outer_gas.csv)
+   <!-- claims: XR-08 -->
+
+   Count six atmosphere-by-depth controls. The twelve case-by-depth records
+   preserve both power settings and their input hashes. Two group slab controls
+   fail at 5%. Use coverage for the share of the lobe found and purity for
+   the share of the selected area on the lobe. Three cluster slabs at the
+   registered cut and four of eight group ±30 kpc slabs at the first clean
+   cut have purity below 50% despite empty initial controls. [Outline scores and false-area brightness](docs/science/assets/four_case_midplane_slab_review_2026-11-26/outlines.csv) · [Portable tables and receipts](docs/science/assets/four_case_midplane_slabs_2026-11-26/tables.zip)
    <!-- claims: XR-08 -->
 
 3. **How well can the adopted clocks recover jet power?** Compare sound-crossing,

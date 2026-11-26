@@ -8,10 +8,20 @@ In all 18 side-on case-ages, more of the projected jet lobe dimmed when the emit
 | Flux lost over the whole lobe footprint relative to time zero | 5.0% | 12.8% | 66.7% |
 | Lobe area covered by the registered 5% radial outline | 38.7% | 58.9% | 81.2% |
 | Lobe area covered at the first tested cut that empties the initial image | 38.7% | 56.6% | 80.5% |
+| Purity at that cut, among nonempty outlines (number of outlines) | 100% (16) | 91.8% (16) | 97.8% (18) |
 
 ## What fills the cavity in projection?
 
-Most of the full-column filling comes from light the atmosphere **already emitted before the jet turned on**. For each case-age we held the gas beyond ±10 kpc at its initial brightness, then compared that hypothetical full column with both the slab and the actual full column. The initial outer light accounted for a median **94.7%** of the increase in the integrated deficit from full depth to ±10 kpc. Its share ranged from 73.0% in C-HI/10 to 100.7% in G-HI/40, where the outer gas itself dimmed slightly. The initial-light contribution exceeded the subsequent change in outer brightness in every case-age. These percentages describe the *change between depths*. [Signed dilution and brightening terms](assets/four_case_midplane_slabs_2026-11-26/case_age_depth.csv)
+Light that the atmosphere **already emitted before the jet turned on** accounts for a median **94.7%** of the increase in integrated flux deficit from full depth to ±10 kpc. We measured this fraction for each case-age by holding the gas beyond ±10 kpc at its initial brightness. Initial light was the largest contribution in all 18 case-ages. Its share ranged from 73.0% in C-HI/10 to 100.7% in G-HI/40. [Signed dilution and brightness changes](assets/four_case_midplane_slabs_2026-11-26/case_age_depth.csv)
+
+The gas outside the slab includes ambient gas and cells occupied by the evolved lobe. In **G-HI/40** the ambient gas beyond ±10 kpc was **55% brighter** than at time zero. That brightening contributed **+28.3 percentage points** to the full-to-slab increase in deficit. Dimming in the outer lobe cells contributed **−28.8 points**. Their sum was −0.47 points, which explains why the initial-light share slightly exceeded 100%. Ambient gas beyond ±10 kpc brightened at every case-age. Its increase was 16–55% across the eight high-power snapshots. [Component fluxes on the fixed footprint](assets/four_case_midplane_slab_review_2026-11-26/outer_gas.csv)
+
+| Jet power | Initial outer light | Change in outer ambient gas | Change in outer lobe cells |
+|---|---:|---:|---:|
+| High (8 case-ages) | +37.7 to +80.8 | +11.8 to +28.3 | −28.8 to −1.3 |
+| Low (10 case-ages) | +9.4 to +71.7 | +0.1 to +10.8 | −2.6 to 0 |
+
+Entries are percentage-point contributions to the difference between the ±10 kpc and full-column flux deficits. The three terms add within each snapshot. The ranges give each term’s extrema across snapshots. Both epochs use the same cells, classified by their evolved tracer.
 
 The flux deficit grew at both cuts in 17 of 18 case-ages. **C-HI at 10 Myr** illustrates why flux and area need separate measurements. More of the lobe area dimmed with each cut, yet its integrated flux was 6.5% **brighter** than the initial atmosphere at full depth and 14.4% brighter at ±30 kpc. Gas 10–30 kpc from the midplane was 49.6% brighter along these sightlines. Only at ±10 kpc was the total flux lower, by 45.2%. Short paths through jet gas also often appear bright in projection. The band with up to 5 kpc of tracer path was brighter in aggregate at full depth in 13 of 18 case-ages. The five C-LO outputs were the exceptions. [Per-case layer and tracer-path tables](assets/four_case_midplane_slabs_2026-11-26/tables.zip)
 
@@ -19,9 +29,19 @@ The flux deficit grew at both cuts in 17 of 18 case-ages. **C-HI at 10 Myr** ill
 
 ## What the undisturbed images say about the outlines
 
-The registered 5% rule selects no area in any of the four full-depth initial images or in either slab of the two cluster runs. In **both group runs**, the same rule selects **27,028 kpc²** at ±30 kpc and **30,936 kpc²** at ±10 kpc even before a jet exists. That is 59.7% and 68.4% of the search aperture. Four of twelve case-by-depth controls therefore fail, affecting 16 of the 54 evolved images. In both groups the first tested cuts that empty both initial sides are 7% at ±30 kpc and 8% at ±10 kpc. The four cases have distinct initial brightness arrays at every depth. The two group runs happen to give identical initial masks. [Initial controls](assets/four_case_midplane_slabs_2026-11-26/case_depth_controls.csv) · [Control identities](assets/four_case_midplane_slabs_2026-11-26/control_identity.json)
+Two atmospheres at three depths give **six distinct controls**. At the registered 5% cut, **two fail**. The group initial image selects **27,028 kpc²** at ±30 kpc and **30,936 kpc²** at ±10 kpc, or 59.7% and 68.4% of the search aperture. The group full-depth control and all three cluster controls are empty. We evaluated both jet powers separately, giving twelve case-by-depth records. Within each atmosphere the initial brightness arrays differ in 716 pixels inside the central 0.75 kpc. Their outlines and first empty-control cuts agree at every depth. The two group failures therefore apply to 16 of the 54 evolved images. The first tested cuts that empty both initial sides are 7% at ±30 kpc and 8% at ±10 kpc. [Per-case control records](assets/four_case_midplane_slabs_2026-11-26/case_depth_controls.csv) · [Paired initial-image and mask checks](assets/four_case_midplane_slab_review_2026-11-26/controls.csv)
 
 The control changes the interpretation of individual cavities. In G-HI/30 at ±30 kpc, the 5% radial outline covers 72.4% of the lobe and the initial outline alone covers 51.4%. Of the area the evolved outline correctly selects, 9,942 kpc² lies inside that initial outline and 4,948 kpc² outside it. All but 16 kpc² of the overlap physically dimmed by more than 5%, and the outline still covers 72.2% at the clean 7% cut. In the weaker **G-LO/10** lobe at the same depth, coverage falls from 24.3% to **zero** at 7%, although **59.5%** of the footprint physically dimmed. Here the failed initial outline lies entirely outside the small lobe. A clean control alone cannot establish that a detector finds a weak cavity. [Coverage splits, physical dimming and clean-cut sensitivities](assets/four_case_midplane_slabs_2026-11-26/case_age_depth.csv)
+
+An empty initial control can also precede a low-purity outline. In three cluster slabs at the registered 5% cut, over half the selected area lies outside the tracer lobe. Comparing that exterior area directly with time zero shows how little of it physically dimmed. [Independent outline and brightness measurements](assets/four_case_midplane_slab_review_2026-11-26/outlines.csv)
+
+| Cluster run and age | Slab | Purity | Selected area outside lobe (kpc²) | Of that area, dimmed >5% (kpc²) |
+|---|---:|---:|---:|---:|
+| C-HI, 20 Myr | ±30 kpc | 24.6% | 7,567 | 0 |
+| C-HI, 30 Myr | ±30 kpc | 45.4% | 6,232 | 66 |
+| C-LO, 50 Myr | ±10 kpc | 29.4% | 3,442 | 491 |
+
+At the 7% cut that clears the group ±30 kpc control, four of eight case-ages have purity below 50% (G-HI/10 and G-LO at 30, 40 and 50 Myr). G-LO/10 is empty, so its purity is undefined. The four low-purity outlines each select 3,070–13,582 kpc² outside the lobe, of which at most 8 kpc² physically dimmed by more than 5%. Across these four outlines and the three cluster examples, the smoothed initial fit already exceeded the initial brightness on the falsely selected area by 2.8–6.7%. The evolved fit rose another 0.7–3.3%. Other exterior selections can trace real dimming. In C-HI/50 at ±10 kpc, 2,503 of the 2,525 kpc² selected outside the lobe dimmed by more than 5%. [False-area photometry and fitted backgrounds](assets/four_case_midplane_slab_review_2026-11-26/outlines.csv)
 
 ## Projected area and three-dimensional volume
 
@@ -54,7 +74,9 @@ The three numbers in each area or flux entry give full depth, ±30 kpc and ±10 
 
 The new full-depth initial brightness, evolved brightness and tracer path reproduce the archived rasters bit for bit for all 18 case-ages. All 18 full-depth radial masks reproduce their sealed hashes. The projected and native tracer volumes agree in all 162 depth-by-side comparisons, and 90 stored full-depth integrals also reproduce. A separate implementation using the released tracer footprints recovered all 1,458 flux, deficit and area quantities it checked, with a maximum scaled discrepancy below 10⁻¹⁵. [Identity and closure checks](assets/four_case_midplane_slabs_2026-11-26/identity_verification.json) · [Direct photometry](assets/four_case_midplane_slabs_2026-11-26/direct_photometry.json)
 
-Every case-age has an archived perpendicular view of all emitting gas at both epochs. Integrating those images over the slab cuts gives 73,008 narrow-slab row comparisons across 1,014 native height rows per snapshot. The largest evolved row differences are 1.14 parts per million at ±30 kpc and 2.01 parts per million at ±10 kpc. The corresponding initial maxima are below 0.062 parts per million. Widening each edge by one 0.42-kpc sky pixel changes the evolved integrated light by 1.06–1.58% and 3.75–4.31% respectively. The row comparison can detect a misplaced cut. It leaves the distribution of brightness within each row and the shared emissivity calculation untested. These 18 perpendicular archives contain whole-gas brightness only. The older G-HI/20 archive also supplies lobe-cell brightness. [Perpendicular comparisons and shifted-cut sensitivities](assets/four_case_midplane_slabs_2026-11-26/perpendicular_rows.csv)
+Every case-age has an archived perpendicular view of all emitting gas at both epochs. The 73,008 narrow-slab comparisons cover all 1,014 height rows per snapshot. The largest evolved row differences are 1.13 parts per million at ±30 kpc and 2.01 at ±10 kpc. Both initial maxima are below 0.062 parts per million. Widening each edge by one 0.42-kpc sky pixel increases the evolved integrated light by 1.07–1.60% and 3.90–4.50% of the exact-cut flux, respectively. The production tables express the same differences as fractions of the widened flux. The native projector applies one width per y cell at every x and z, which makes these row totals sensitive to a misplaced slab cut. Within-row brightness placement and the shared emissivity calculation still have one native implementation. The 18 perpendicular archives check whole-gas brightness. The pilot archive also checks lobe-cell brightness. [Production row checks](assets/four_case_midplane_slabs_2026-11-26/perpendicular_rows.csv) · [Independently weighted perpendicular rows](assets/four_case_midplane_slab_review_2026-11-26/side_view_rows.csv)
+
+Claude reproduced 918 comparison values, including 648 that use a separately implemented radial detector. The other 270 check area and flux arithmetic on the retained rasters. Codex regenerated all six review files byte for byte and verified the component sums at both cuts from the production flux table. XR-08 is supported for the 18 side-on case-ages. [Review comparisons](assets/four_case_midplane_slab_review_2026-11-26/comparison.csv) · [Review receipt](assets/four_case_midplane_slab_review_2026-11-26/summary.json)
 
 The first submission pointed to the protected prediction-stage tracer copies. Fourteen jobs stopped before projection and the remaining four obsolete jobs were cancelled. All 18 replacements used the released scoring copies after their hashes matched the original producer records. All 18 finished with exit status 0. The map panels, rasters and row-by-row evidence have two verified project copies. The review gallery is `private_archive/turn34_four_case_slabs/maps.html` and its portable bundle is `slab_map_panels.zip` beside it. [PBS accounting](assets/four_case_midplane_slabs_2026-11-26/pbs_accounting.json) · [Retained files receipt](assets/four_case_midplane_slabs_2026-11-26/mirror_receipt.json)
 
@@ -101,4 +123,11 @@ To check the physical photometry separately, run the direct area and flux sums o
 .venv/bin/python scripts/science/check_four_case_slab_photometry.py \
   --native "$ALL_NATIVE" --scores "$ALL_SCORES" --released-tracer "$RELEASED_TRACER" \
   --producer-receipts "$ORIGINAL_PRODUCER_RECEIPTS" --out "$WORK/photometry.json"
+```
+
+Claude’s review script regenerates the component, control, outline, perpendicular and comparison tables from the retained images, and records their hashes in its summary.
+
+```sh
+uv run --no-project --python 3.12 --with scikit-image==0.26.0 python \
+  scripts/science/check_four_case_midplane_slabs.py --archive private_archive/turn34_four_case_slabs
 ```

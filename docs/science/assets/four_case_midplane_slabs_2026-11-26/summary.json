@@ -7,13 +7,18 @@
     "G-HI",
     "G-LO"
   ],
+  "atmosphere_depth_controls": 6,
+  "atmosphere_depth_control_status": {
+    "empty": 4,
+    "failed_nonempty": 2
+  },
   "case_depth_controls": 12,
-  "pilot_separate": true,
-  "pilot_in_separate_table": true,
-  "shared_control_status": {
+  "case_depth_control_status": {
     "empty": 8,
     "failed_nonempty": 4
   },
+  "pilot_separate": true,
+  "pilot_in_separate_table": true,
   "matched_flux_by_case": {
     "C-HI": {
       "case_ages": 5,
@@ -65,7 +70,7 @@
   "sampling": "Each case is one production run viewed along y at several ages.",
   "manifest_sha256": "352efa8e31209690ac06380b0d2d5cafe2be6f034b6dad500667b96ef8bf4c71",
   "registration_sha256": "ad89f2b9e77ce986da21ade49c08e40a71539b859a4078a34b61a32394980173",
-  "summariser_sha256": "a85ce30d3bb3217f3ceb3f0851fdc347c2039fd578834c557a096bd8c4ffc536",
+  "summariser_sha256": "da53e9f918956334c0fb45e5da76b951f3484f584d93b75a35af3cee2a747fb5",
   "products": {
     "case_age_depth.csv": "b366402857e4ac343684d7aafccdc3ba9c6a8a967aea7ea2aa2d0ac305b970eb",
     "case_age_targets.csv": "32cadca2c5e8bf0c166b8efba9b42485400eb56d6dce453c2f74950da8a15419",

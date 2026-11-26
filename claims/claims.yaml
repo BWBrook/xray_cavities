@@ -1244,7 +1244,7 @@ claims:
     depends_on: [XR-05]
 
   - id: XR-07
-    status: provisional
+    status: supported
     statement: >-
       In the exposed side-on G-HI image at 19.999614 Myr, the 1-keV brightness
       deficit over the fixed full tracer footprint rises from 8.7% at full
@@ -1280,6 +1280,8 @@ claims:
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/side_view_rows.csv, commit: 78db880}
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/coverage_split.csv, commit: 78db880}
       - {path: docs/science/assets/ghi20_midplane_slab_review_2026-11-25/side_view.json, commit: 78db880}
+      - {path: scripts/science/project_ghi20_midplane_slabs.py, commit: e7fca24}
+      - {path: docs/correspondence/thread-0029.md, commit: eeda2a7}
     reproduce: >-
       Run the native, primary and review commands in the results note.
       In time_zero_controls.csv select hemisphere=both for the initial
@@ -1288,10 +1290,12 @@ claims:
       in filling.csv for the flux deficit. The independent layer and path
       estimates are in layers.csv from check_ghi20_midplane_slabs.py.
     test: >-
-      Check the evolved narrow-slab emissivities within each sky row
-      against an independent native extraction. The archived 90° images
-      already check their row integrals. XR-08 reports the matched-depth
-      comparison in the other 18 case-ages.
+      Claude independently reproduced the outline and flux measurements and
+      checked the slab cut against the archived 90° whole-gas and lobe-cell
+      emission in all 1,014 height rows. The native projector applies one
+      weight per y cell at every x and z. These checks constrain the
+      integration depth. The emissivity prescription is shared and the
+      distribution of light within each row has one native extraction.
     caveats:
       - Cutting the emitting depth requires the simulation. Both scoring implementations use the same native projections and their 1-keV emissivity extrapolation.
       - The three full-column tracer path bins spanning 0–20 kpc cover 1,849 kpc². Their integrated full-depth brightness is 16.1–36.3% above time zero. The gas at 10–30 kpc from the midplane dims on detected sightlines and brightens on missed ones. This latter split conditions on the outline. The emitting layer's physical identity remains open.
@@ -1306,7 +1310,7 @@ claims:
       - "Claude, 26 November 2026: at the 5% cut the failed control cannot validate slab coverage, although the coverage is stable to the cut (46.8%, 66.5% and 79.4% at 8%, where all three controls are empty). The time-zero outline already covers 65.3% (±30 kpc) and 69.6% (±10 kpc) of the 20-Myr lobe footprint, against evolved coverage of 67.1% and 79.7%; 5,003 of 7,585 kpc² and 6,157 of 9,019 kpc² of the evolved overlap lie inside it. The selected lobe pixels are physically dim: all but 287, 25 and 15 kpc² of the overlap at the three depths dimmed by more than 5% against time zero. The detector misses 759, 714 and 617 kpc² of dimmed lobe."
 
   - id: XR-08
-    status: provisional
+    status: supported
     statement: >-
       In all 18 registered side-on case-ages from four production runs, the
       share of the full jet-tracer footprint more than 5% dimmer than its
@@ -1315,7 +1319,9 @@ claims:
       91.2%. The corresponding median integrated flux deficits are 5.0%,
       12.8% and 66.7%. Holding the outer gas at its initial brightness
       attributes a median 94.7% of the signed full-to-±10 kpc increase
-      in flux deficit to dilution by its initial light.
+      in flux deficit to dilution by its initial light. The gas beyond
+      ±10 kpc includes cells occupied by the evolved lobe. Ambient gas
+      beyond the slab brightened in every case-age.
     evidence:
       - {path: docs/science/four_case_midplane_slab_protocol_2026-11-25.md, commit: 762edbf}
       - {path: docs/science/assets/four_case_midplane_slabs_2026-11-26/registration.json, commit: 762edbf}
@@ -1333,22 +1339,28 @@ claims:
       - {path: docs/science/assets/four_case_midplane_slab_review_2026-11-26/side_view_rows.csv, commit: c4e009c}
       - {path: docs/science/assets/four_case_midplane_slab_review_2026-11-26/comparison.csv, commit: c4e009c}
       - {path: docs/science/assets/four_case_midplane_slab_review_2026-11-26/summary.json, commit: c4e009c}
+      - {path: scripts/science/project_four_case_midplane_slabs.py, commit: baaece4}
+      - {path: docs/correspondence/thread-0029.md, commit: eeda2a7}
     reproduce: >-
       Unpack tables.zip into a fresh directory, then run
       .venv/bin/python scripts/science/summarise_four_case_midplane_slabs.py
       --manifest DIR/manifest.json --out DIR/cohort. The physical_summary in
       summary.json uses the full evolved footprint at every depth. The
       results note gives the commands for the direct area and flux
-      calculation and the perpendicular row comparisons.
+      calculation, the perpendicular row comparisons and Claude's independent
+      replay from the retained projections.
     test: >-
-      Independently recompute case-age dimmed area, integrated deficit and
-      the initial-light share. Check the control-dependent coverage against
-      the retained outlines, and compare the perpendicular row discrepancies
-      with the changes from shifting the slab boundary.
+      Claude reproduced 918 values on the retained projections, using a
+      separate radial detector for 648 outline-dependent values. The
+      other 270 check flux and area arithmetic on the same rasters.
+      Independently computed perpendicular projection weights reproduced the
+      row totals and the sensitivity to the slab cut. Codex reproduced all six review
+      products and checked the outer-component balance against the primary
+      flux table at both cuts in all 18 case-ages.
     caveats:
       - The 18 case-ages sample four trajectories in one viewing direction on noiseless 1-keV maps. The exposed G-HI/20 pilot is separate. Restricting the emitting depth uses the simulation.
-      - The flux deficit grows at both depth cuts in 17 of 18 case-ages. C-HI/10 brightens at full depth and at ±30 kpc. The signed initial-light share can exceed 100% when the outer gas dims.
-      - Both group runs produce nonempty initial outlines in both slabs at the registered 5% detector cut. The first tested cuts with empty controls are 7% at ±30 kpc and 8% at ±10 kpc. Failed controls leave the 5% radial coverage unvalidated. Physical dimming uses matched initial brightness.
+      - The flux deficit grows at both depth cuts in 17 of 18 case-ages. C-HI/10 brightens at full depth and at ±30 kpc. In G-HI/40 the initial-light share reaches 100.7% because dimming in cells occupied by the outer lobe slightly exceeds the brightening of outer ambient gas.
+      - Two of the six atmosphere-by-depth controls fail at the registered 5% cut, the group at ±30 and ±10 kpc. The twelve case-by-depth evaluations include both jet powers. The first cuts giving empty group controls are 7% and 8% respectively. Three cluster slabs at 5% and four of eight group ±30 kpc slabs at 7% have purity below 50% despite empty controls. Physical dimming uses matched initial brightness.
       - The ±10 kpc slabs intersect 93.4–100% of the projected lobe area and contain 26.4–100% of its volume. The physical area and flux include the footprint beyond the 120-kpc detector aperture.
       - Archived perpendicular images check whole-gas emission in every height row at both epochs. They share the emissivity calculation. Within-row placement and the slab emission from lobe cells alone lack an independent native check.
       - "Claude, 26 November 2026: all 918 values recomputed from the retained projections agree with case_age_depth.csv. The 648 that depend on the radial detector use a separate implementation; the other 270 are flux and area sums on the same rasters. Row totals against the 90° archive, with separately written weights, give the same largest evolved differences (1.13 and 2.01 parts per million)."

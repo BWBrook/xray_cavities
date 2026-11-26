@@ -152,6 +152,17 @@ science sides. Both returned empty masks on all 24 initial control sides.
 Replacing the emissivity of moving ambient gas using native simulation
 fields brought the pass counts to 6 and 13, respectively. <!-- claims: DET-05 -->
 
+After a pilot on G-HI at 20 Myr, we restricted the emitting depth in the
+side-on view of each of the other 18 case-ages. The median share of lobe
+area more than 5% dimmer than the matched initial image rose from 42.3%
+at full depth to 67.7% within ±30 kpc of the midplane and 91.2% within
+±10 kpc. Light already present outside ±10 kpc accounted for a median 94.7%
+of the increase in the integrated flux deficit. Ambient gas beyond that
+slab brightened in all 18 snapshots, by 16–55% in the high-power runs.
+In three cluster slabs the registered radial outline placed more than half
+its area outside the lobe despite an empty time-zero control.
+<!-- claims: XR-07 XR-08 -->
+
 <div id="figures"></div>
 
 ## Discussion
