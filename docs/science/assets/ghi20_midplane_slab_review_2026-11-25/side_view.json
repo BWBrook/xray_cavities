@@ -1,0 +1,13 @@
+{
+  "projection_sha256": "b522653fb78406049a5a61feffb8b5252e6fff059999b1cb661ef2845b0c98ae",
+  "side_view_sha256": "d77542fff88a0866e772623a6595f1a8babebb9a5d0dae5f349262b1576b5956",
+  "side_view_pixel_kpc": 0.4166592915625,
+  "side_view_nearest_edge_to_cut_kpc": {
+    "slab30": 0.0005310049999991406,
+    "slab10": 0.00017700400000109084
+  },
+  "tables": {
+    "side_view_rows.csv": "6d1888467711e7cfa9cdfae574b8b3b05cf01c0973c1f2b44a3a31f77f78413b",
+    "coverage_split.csv": "52986a819037ed5577e2f3856cc07c5b25c575f96f1a9f3d43b8ce8f02da3950"
+  }
+}
