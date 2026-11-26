@@ -1,7 +1,6 @@
 # Current Status
 
-Updated 26 November 2026 after independent review of the G-HI/20 pilot
-and the 18 additional side-on slab projections. Both XR-07 and XR-08 are supported.
+Updated 26 November 2026 with Stas’s four-case energy partition and transport across the velocity-defined spheres. The preceding independent slab review supports XR-07 and XR-08.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -10,7 +9,9 @@ the X-ray Cavities simulation project.
 
 Barry approved Stas’s analysis of the existing production outputs. The signed thermal, kinetic, gravitational and mass changes are complete for the cocoon and ambient gas at both velocity-defined radii, all 201 retained snapshots, with the reconstructed net injector gas energy as denominator. At 50 Myr the C-LO shell between R300 and R100 holds an increase of 27.4% of delivery, entirely in ambient cells. NAT-14 awaits independent review. The downstream selection and jump tests are recorded separately under NAT-03. [Component time series and selected ages](../science/four_case_energy_partition_2026-11-26.md) · [Downstream measurements](../science/four_case_shock_partition_2026-11-26.md)
 
-All four 30-Myr pilot extractions reproduce the archived enclosed cells and volumes. A second native reader rehashed the C-LO/30 file and reproduced both surface fluxes. At that age the outward powers through R100 and R300 are 9.6% and 75.4% of simultaneous injector gas delivery. Annual interval transport and membership corrections are being measured across the full histories. [Registered measurement](../science/four_case_aperture_transport_method_2026-11-26.md) · [Independent fluxes](../science/assets/aperture_transport_2026-11-26/independent_CLO30.json)
+The primary C-LO balance through 50 Myr gives outward transport equivalent to 21.1% of cumulative injector delivery at R100 and 75.6% at R300. The shell received 54.5%. Its changing membership contributed −27.7 percentage points and its measured energy increased by 27.4%, with a residual difference of +0.6 points. The tested face and time rules give net shell transport of 54.5–54.9%. At 50 Myr the corresponding net transport into the G-LO shell is 1.4%. The two high-power spheres extend beyond the grid from C-HI/44 and G-HI/40. [Four-case transport histories](../science/four_case_aperture_transport_2026-11-26.md)
+
+A separate native extraction reproduces the C-LO/30 fluxes through both surfaces. At C-LO/10–11 the outward energy estimates move by at most 0.14 percentage points of delivery on refining the sampling from 1 Myr to 0.1 Myr, while signed mass residuals remain about one nominal interval jet mass. BND-17 awaits independent review of the 197 interval budgets, moving boundaries and mass control. [Surface method](../science/four_case_aperture_transport_method_2026-11-26.md) · [Cadence check](../science/assets/aperture_transport_2026-11-26/cadence_budget.csv)
 
 ## Supervisor request: midplane slab projections, 25 November
 

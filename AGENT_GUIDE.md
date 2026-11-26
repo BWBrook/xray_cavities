@@ -124,9 +124,11 @@ pinned commit, its reproduce command and its caveats. In summary:
   <!-- claims: NAT-01 -->
 - For R100 and R300, use the same-cell thermal, kinetic, gravitational and mass changes in the current tracer mask and ambient complement. At 50 Myr in C-LO, the ambient shell between the two radii contains a 27.4%-of-delivery increase. Both spheres contain the entire on-grid cocoon. [Stock histories and public replay](docs/science/four_case_energy_partition_2026-11-26.md)
   <!-- claims: NAT-02 NAT-14 -->
+- For transport, use the four face-rate samples per interval and report the change from moving the aperture. The shell receives the outward flux through R300 minus the outward flux through R100. Compare that difference with shell storage only after allowing for the motion of both surfaces. Read the signed mass balance alongside any energy residual. At 30 Myr in C-HI, using the earlier and later R100 radii gives outward totals of 38.52% and 0.025% of delivery, respectively. [Native endpoint archives, reconstruction and checks](docs/science/four_case_aperture_transport_2026-11-26.md)
+  <!-- claims: BND-17 -->
 - The downstream mask is a whole-domain subset of ambient gas. Four of its 15 bilateral selections show both pressure and density jumps on both sides. Use the per-side jump and propagation evidence before attributing changes to a bow shock. [Components and axial checks](docs/science/four_case_shock_partition_2026-11-26.md)
   <!-- claims: NAT-03 -->
-- The numerical bookkeeping closes to 2e-14 of injected energy.
+- The largest difference between the cocoon-plus-ambient sum and the independently summed retained energy change is 2.30e-14 of labelled input.
   <!-- claims: NAT-04 -->
 
 **Physical closure.**

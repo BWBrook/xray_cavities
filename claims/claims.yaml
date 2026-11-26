@@ -179,7 +179,7 @@ claims:
       - The new denominator is cumulative signed reconstructed gas delivery, excluding potential transport. Its time-resolution limits are those of NAT-01; geometric containment does not establish production boundary safety.
       - One deterministic realisation per case; G-HI retains only snapshots 0–47.
       - "Independent review (Claude, 21 November 2026): the twelve 30-Myr ratios and the four 20-Myr ambient shares reproduce from the pinned tables (scripts/science/review_native_delivery.py). The sensitivities recorded under NAT-01 apply to the first ratio."
-      - "R100 storage exceeds reconstructed gas delivery in C-LO by 3.8–11.1% of labelled input at the selected ages. The switch directly adds energy outside the injector in C-LO at 10–12 Myr (BND-15). At 50 Myr the excess is 10.98% in R100 and 16.61% in the fixed inset box, alongside a whole-exterior residual of +17.02% (BND-16). The aperture fluxes, late switch counter and no-jet hydrostatic drift on the production mesh are unmeasured. The 1.5% coarse-control result belongs to BND-04."
+      - "R100 storage exceeds reconstructed gas delivery in C-LO by 3.8–11.1% of labelled input at the selected ages. The switch directly adds energy outside the injector in C-LO at 10–12 Myr (BND-15). At 50 Myr the excess is 10.98% in R100 and 16.61% in the fixed inset box, alongside a whole-exterior residual of +17.02% (BND-16). BND-17 now reconstructs the aperture fluxes at the saved times. The late switch counter and production-grid hydrostatic drift in a no-jet control remain unmeasured. The 1.5% coarse-control result belongs to BND-04."
     depends_on: [NAT-05, NAT-01]
 
   - id: NAT-08
@@ -389,7 +389,7 @@ claims:
     reproduce: .venv/bin/python scripts/science/four_case_energy_partition.py --out /tmp/four-case-energy
     test: Independently integrate the signed delivery histories, rebuild the regional component sums and mass changes, and compare the two C-LO shell memberships with the tracer census.
     caveats:
-      - Current tracer selection, same positions at time zero, full cell weights, and centre-zero initial potential. The shell holds an instantaneous stock change. Annual rates require a separate transport measurement.
+      - Current tracer selection, same positions at time zero, full cell weights, and centre-zero initial potential. The shell holds an instantaneous stock change. BND-17 measures transport separately and accounts for the changing set of cells inside each aperture.
       - Both high-power apertures extend beyond the grid from output 44 in C-HI and 40 in G-HI. G-HI ends when the tracer contacts a grid face at output 47.
       - The 50-Myr C-LO shell numerator was already measured in NAT-08 on the labelled-input basis. The current table uses the same physical stock difference and the matched measured delivery.
     depends_on: [NAT-04, NAT-05, BND-12]
@@ -884,6 +884,43 @@ claims:
       - "Review (Claude, 23 November 2026). The cumulative values re-accumulate from the archived interval reductions within 2.5e-14. The stocks were not re-integrated. The independent support is at 10–12 Myr, where the production interval residuals equal the restart solver counters I recomputed within 0.018 percentage points in all eight case-windows."
       - "That window lies in a 9–13 Myr trough of both cluster histories. C-HI is −4.6% of labelled input per Myr at 10–12 Myr, against −9.0%, −12.1% and −15.6% in the intervals ending at 20, 30 and 40 Myr. C-LO is +3.0% and +4.7%, against +13.7%, +15.4% and +27.8%. Reading the later residuals as the entropy update extrapolates from its mildest phase, and the restart lobe contrasts (NAT-12, NAT-13) sample that same phase."
     depends_on: [BND-12, BND-14, BND-15]
+
+  - id: BND-17
+    status: provisional
+    statement: >-
+      On the registered reconstruction from the four production series, net
+      outward energy through R100 / R300 by 30 Myr is 19.3% / 20.1%,
+      10.8% / 31.3%, 13.6% / 14.5% and 8.4% / 9.5% of cumulative signed
+      injector gas delivery in C-HI, C-LO, G-HI and G-LO. By 50 Myr in
+      C-LO it is 21.1% / 75.6%. The intervening shell receives a net
+      54.5% of delivery. Its changing membership contributes −27.7 points
+      and the difference in aperture residuals +0.6 points, giving the
+      measured 27.4% shell stock increase.
+    evidence:
+      - {path: docs/science/four_case_aperture_transport_2026-11-26.md, commit: c9ae598}
+      - {path: docs/science/four_case_aperture_transport_method_2026-11-26.md, commit: c9ae598}
+      - {path: docs/science/assets/aperture_transport_2026-11-26/extraction_receipt.json, commit: c9ae598}
+      - {path: docs/science/assets/aperture_transport_2026-11-26/tables/primary_balances.csv, commit: c9ae598}
+      - {path: docs/science/assets/aperture_transport_2026-11-26/shell_balance.csv, commit: c9ae598}
+      - {path: docs/science/assets/aperture_transport_2026-11-26/mass_balances.csv.gz, commit: c9ae598}
+      - {path: docs/science/assets/aperture_transport_2026-11-26/replay_check.json, commit: c9ae598}
+      - {path: docs/science/assets/aperture_transport_2026-11-26/independent_CLO30.json, commit: 6e70991}
+      - {path: docs/science/assets/aperture_transport_2026-11-26/cadence_budget.csv, commit: af9e87c}
+    reproduce: .venv/bin/python scripts/science/check_aperture_transport_history.py
+    test: >-
+      Independently recompute the C-LO shell transport, moving membership and
+      residual from the endpoint face components and stocks. Check the full
+      four-case histories, geometry flags, startup sensitivity and signed
+      mass balance against the public receipts.
+    caveats:
+      - The flux contains the pre-existing enthalpy and gravitational energy of moving ambient gas. Measured injector delivery sets its normalisation.
+      - The primary time rule averages the two endpoint-radius fixed-surface trapezoids. The membership correction tracks excess storage relative to initial gas in the same positions. It excludes the initial energy of newly enclosed atmosphere.
+      - The individual surface histories depend strongly on the radius used within each annual interval. For C-HI at 30 Myr the R100 integral using each earlier radius is 38.52% of delivery, versus 0.025% using each later radius. The symmetric estimate is their mean.
+      - The 50-Myr C-LO net transport into the shell spans 54.5–54.9% across the tested face and time rules. The old-radius and new-radius R100 integrals alone give 28.1% and 14.1%. The methods share annual snapshot times.
+      - Two native implementations agree for the C-LO/30 surface rates. In the C-LO 10–11 Myr control, changing from 1 to 0.1 Myr samples shifts outward energy by 0.10 and 0.14 percentage points of delivery at R100 and R300. Signed mass residuals still reach −1.06 and −0.92 nominal interval jet masses.
+      - The potential is zero at the centre. A shift by a constant changes the energy residual by that constant times the measured mass residual. The residual combines sources within the aperture and errors in reconstructing fluxes and integrating in time. The data do not resolve individual contributions.
+      - Both high-power apertures extend beyond the grid from output 44 in C-HI and 40 in G-HI. Those integrals include transport on the intersected box faces. G-HI ends at output 47. Both low-power histories retain complete spheres through 50 Myr.
+    depends_on: [NAT-14, BND-12, BND-16]
 
   - id: RAD-01
     status: supported
