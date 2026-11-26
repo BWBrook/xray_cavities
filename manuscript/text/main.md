@@ -63,7 +63,7 @@ Here $E_{\mathrm{label}}=Q_{\mathrm{label}}t_{\mathrm{true}}$, and $H_X$ and $H_
 
 ### How much cumulative gas delivery does native enthalpy represent?
 
-Native $2.5pV$ divided by reconstructed cumulative net injector gas delivery spans 0.4518–0.4810 in C-HI, 0.5827–0.9864 in C-LO, 0.4043–0.4306 in G-HI and 0.5417–0.6818 in G-LO over the selected actual ages near 10–50 Myr (G-HI ends at 40 Myr on this surface). The corresponding label-normalized ranges are 0.5249–0.5587, 0.6309–1.1075, 0.4682–0.4983 and 0.6147–0.7849; Figure [1](#fig-main-1) retains this labelled comparator. Thus C-LO's late pressure estimate exceeds the labelled kinetic reference but remains below the primary reconstructed cumulative gas supply. These are descriptive fractions for four deterministic cases, not calibrated injection efficiencies. Switching to $4pV$ multiplies every proxy ratio by 1.6. <!-- claims: NAT-01 -->
+Native $2.5pV$ divided by reconstructed cumulative net injector gas delivery spans 0.4518–0.4810 in C-HI, 0.5827–0.9864 in C-LO, 0.4043–0.4306 in G-HI and 0.5417–0.6818 in G-LO over the selected actual ages near 10–50 Myr (Figure [1](#fig-main-1)). G-HI ends at 40 Myr on this selected-age series. The corresponding label-normalized ranges are 0.5249–0.5587, 0.6309–1.1075, 0.4682–0.4983 and 0.6147–0.7849. Thus C-LO's late pressure estimate exceeds the labelled kinetic reference but remains below the primary reconstructed cumulative gas supply. These are descriptive fractions for four deterministic cases, not calibrated injection efficiencies. Switching to $4pV$ multiplies every proxy ratio by 1.6. <!-- claims: NAT-01 -->
 
 At the matched outputs near 30 Myr, the pressure estimate and spherical storage comparison are:
 

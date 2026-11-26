@@ -52,7 +52,7 @@ claims:
     statement: >-
       Cocoon enthalpy differs from the actual total-energy change of the
       current cocoon region, which spans 0.132–0.426 (C-HI), 0.425–0.571
-      (G-HI), 0.013–0.298 (G-LO) and −0.160–0.137 (C-LO) of injected energy.
+      (G-HI), 0.013–0.298 (G-LO) and −0.160–0.137 (C-LO) of labelled kinetic input.
     evidence:
       - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
     reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
