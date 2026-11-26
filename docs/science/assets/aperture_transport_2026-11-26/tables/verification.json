@@ -1,0 +1,457 @@
+{
+  "source_sha256": {
+    "registration": "2adb3221da4ed806f6d42f33be3d37dc2c2c7fc4039c785c68d3b4abf8a098b6",
+    "injector_verification": "9cdf21211f3f891ee5e805808412a4424e2a63e93848279ca4fca167676d0647",
+    "annual_review": "da769097af6e8b7e1d8884f085d8dd32eb62bcba202f399818dcc28fe3b5bdab",
+    "labelled_mass": "cbf1fbfc4da6e641064a41969c6cd81984cc21d49ce3d7015f5318e77f608364",
+    "fixed_stock_basis_uncompressed": "f9df74456fa22d0f321e44c3439ddae38671d2a190b200fc482c0a93072fdf20",
+    "history_archive": "5b5d0b2c526c8340e8cbd89e11f66d23e721c310443bb3e66b6aa7b4489a7461",
+    "reducer": "badff1cb62800f66dd93c58359cb31348eb80b9b41a15cc1ec481c00cc2e62d1"
+  },
+  "stage_sha256": "6d891b93b5905a686d7f6c457cba881bab4e1df6a892cdcc7da39d56cdca3215",
+  "stage_provenance": "supplied digest",
+  "endpoint_sha256": {
+    "C-HI": {
+      "snapshot_0000.json": "f89e77ccb6ae447afee16474b2e6cb1d4f28b3bba889be9a182371dd6038f938",
+      "snapshot_0001.json": "d5cd4b9bc5a1f5cfe34ff03fb0e8d9e9bf8c852776ba4c2e5fefc0bc38bf1c6d",
+      "snapshot_0002.json": "50f49212f5cfef574cf4f41951e825bd461b6c7a6c5b2cd7dc1d43b55b1cf9b2",
+      "snapshot_0003.json": "6ad51bce4873edbd9bd1536a60f3f5a1733e5754260490b0c228bdcf4a67230d",
+      "snapshot_0004.json": "868f14446ca8bb8e260f426c06ebfd2bcab3d43adab3a3455070fa3dcc469b69",
+      "snapshot_0005.json": "31534313aa9e74c8cce8ad67ce24a84f20f3f06806affebaa1c643c4fe7d6a7e",
+      "snapshot_0006.json": "0fd57a4271b7657a636af9dde3a2679ca334d9114f8959c19b4acd56bb5a70e8",
+      "snapshot_0007.json": "a48dbb10d93601f0bbeda848fba4a38f3f87cf01451fc2baec0398115fe76be0",
+      "snapshot_0008.json": "6173369d73eeaf4b704f378de12b99594bb5e85d2b2a3f8e818a0bcc381e495a",
+      "snapshot_0009.json": "04e3935ced4a24659c7e4f645847b2db85354ec1db90a748149cda087548b059",
+      "snapshot_0010.json": "63382bd998d842d769507a89d9ef4a7bcccee2ce9c86166d0d97068ed18323ea",
+      "snapshot_0011.json": "d30ee23e429f73c750ee6f9f5494f7929455ef395883a843e4054911b3500694",
+      "snapshot_0012.json": "eb68a45958676f9a179e42d96ef4368bba2c7d56c813f5ccd9b0ec01884e1453",
+      "snapshot_0013.json": "f800ebbfd5cc293010440329466d5e9f400f4f349e0bdd110e36db29c663f450",
+      "snapshot_0014.json": "3b9ade703ee88f0dbe7f06558f308b8b33652ee98f122538485b696582d6b7c5",
+      "snapshot_0015.json": "7da832d29206eabeac52d7fab9a2cd16e2995fc1956ab0cec24be67328f72768",
+      "snapshot_0016.json": "c2c899a4630e248c01938098ead1450f5a0bcd997738819b6672b2f1e0bffb2e",
+      "snapshot_0017.json": "2817a2747b3c9c4a38c3af9c6dd726fd6d1f361c94baf824859de5ef93381c3e",
+      "snapshot_0018.json": "9ff7878a85039cf7a6c4f54e88fdfee5d413ff69f82fa98406ad1b8aacb41870",
+      "snapshot_0019.json": "93edd828f86be3ae0251af54a8b1609718fcfce457ac8a5b8718cef12dd55dd8",
+      "snapshot_0020.json": "f270676c578cd09c683a3a68d3b6b8d2fefd31d593f3451be50dfa68512440dc",
+      "snapshot_0021.json": "d712ea536f6a2f480b67c49cf54ec579692a69d4ce403a85eb5da2690e93b8e0",
+      "snapshot_0022.json": "6f59586cc283dd26e5fb46432e35e34520d4348b2ece97ffb10b8f0901e96f9e",
+      "snapshot_0023.json": "4dba0199ea045974bf49a7bf845a716ecdc8e02bdb79abae13c6714fa3772de2",
+      "snapshot_0024.json": "7efc400407d34de9b70dd5223b7176c80ba85c5127f066c6b7372b9dd9dcc5c6",
+      "snapshot_0025.json": "9028edbe8805010630dbc6170e6f209d059c31c3b8142cf1124d5daa6201f578",
+      "snapshot_0026.json": "1c9cce56b62c223fa2930bad47860856a102b382a6f0c6b97615e8f719ec9084",
+      "snapshot_0027.json": "5f849616b0118412da2df7ef8b87b2c9b46bbc5d6091b6041049ce7cf0e5342a",
+      "snapshot_0028.json": "e9b5afd6db1a656d6b719803ad07f526463f89746b27e5f7434b19bb311991ff",
+      "snapshot_0029.json": "36524fcb1759993bef29ea1ac36ca613c23614fcc5e7b01b036caf042f2cf717",
+      "snapshot_0030.json": "baddc7b17bb7a4a7c1732277998ed7c2d786b4a1a522db7b70991ded4f1ba552",
+      "snapshot_0031.json": "8c3adba43bb0ec5055e2d98af2c80034902fb5fa0f02fd67d413dbb2d8be8314",
+      "snapshot_0032.json": "9c5f97b25f3f9b61f8ef7a7051c79276dcbe053be70f7267fb6f47dc9dac3099",
+      "snapshot_0033.json": "437e624f1cc3b86bd78ab851bd4ff688cba9c2443fd7bd006530dc3c3902ffae",
+      "snapshot_0034.json": "cf560ddaf126f39a9c4b2d4bf200e9d575c3727cf8e1404db4fe25ec495b30b3",
+      "snapshot_0035.json": "1e57c5b99dff64e38c10d1658fa90b4f816e1e5ff27812476b3db248f8cda95c",
+      "snapshot_0036.json": "6cd17d21c3656a7f61f4af71750c08c5c1fe990ee3482138867b6a28d65732d2",
+      "snapshot_0037.json": "581abaf5ce55719c16fd4d066c92e4e87366c3ac5578bf098ac2d99c8c926b58",
+      "snapshot_0038.json": "07b523686686d8c44cd46db82f3e2fa72f2279722c4a7805d1c8ae1bee652fe2",
+      "snapshot_0039.json": "9ffd082d1b3f957374794bce9e3b13961708b7a804db06badb22d4f1c9d76ece",
+      "snapshot_0040.json": "75b05632783f5a326426b036cdcd40a4a7a3bfa82e06f52e25956d517c38c500",
+      "snapshot_0041.json": "3211abd203b3dff022ad62b43e41f44d0a1348a316889bc61ea9d0f77aa8a9a7",
+      "snapshot_0042.json": "962c4b016806dbfdeb4520961e098fb2b1d6702d894042000f3a704f41719041",
+      "snapshot_0043.json": "d85e02b7dc3859b5a53f73b0002a826bbbcf8092e4c1ce652673696979ad06ba",
+      "snapshot_0044.json": "50c572441864bfa6feffd7dfdb626f38899555368cdd1d9fd3a0309f797e4088",
+      "snapshot_0045.json": "34ebe7e5b30b6ca70bcdfb521882d800f8dc5985afbec26028844aead176fbb2",
+      "snapshot_0046.json": "a871bad77ac581fe10d26064879ed7298b3a3894bd8b7ef2abff26af8e7aa7ac",
+      "snapshot_0047.json": "36d203c42e23977a2cdfc22cc8d5cbb20863c94579671ecf5e385559a0d721bd",
+      "snapshot_0048.json": "818201e4b48e223df22ed1e1f599584a8697d3ad047a3c3e3a89422545cd991f",
+      "snapshot_0049.json": "ddc7bed079675797eed0cebc9ab1846b4b818ce024e9e1a22fb7f9a69506ca69",
+      "snapshot_0050.json": "2d7169040abfe1ded749820be1e8d50008d54c537b582196df7e3d9ceb0a1382"
+    },
+    "C-LO": {
+      "snapshot_0000.json": "ab5b68548591c45e84b17b53242cae2718dbc05adf12c31927eaedbb5a4cfbb9",
+      "snapshot_0001.json": "4e8607207f290abd0377d000c717dde9d79d5f7957e9279aaf9720cc15b1b244",
+      "snapshot_0002.json": "af431a0d6cf2da008cb882bc119a350883de21d8eaa49965b1c0b1466f307e19",
+      "snapshot_0003.json": "8e739e5fd99f6e783459a1fc614521d3661a61f39b0a52d32d497369a60c5cac",
+      "snapshot_0004.json": "a87f295e74e45817311a4e6baafb7837b913a0b597bd1c9d0b4ff230f456fcd4",
+      "snapshot_0005.json": "ae0c75f400500b519c189d344d39d3d2faf17ab508e98b175b63baa5fcb90881",
+      "snapshot_0006.json": "776732d1223f343f43a4f8fe7b0051fb950bf780957cd8d2d56ba3250e57bee7",
+      "snapshot_0007.json": "1da3f050866ea3622cc4edf46ecd68cea2375e0698285a7846ee4a04a2e09278",
+      "snapshot_0008.json": "b1f968373a4f531201739f1c354ca3e3c36118ca9e9f3b7a2ccaca22107d5e3a",
+      "snapshot_0009.json": "114cc32f3ba094fc2672f38b15e2a7c0c16077111f43adc6b6eefda9a475e92c",
+      "snapshot_0010.json": "9a817653de84df69e3c6c619fc76a28b4092cc4e918c881256620b34051c8018",
+      "snapshot_0011.json": "22060f1c1c3e0da3d3166f5be7cfd81f84c3f83de7d156fc008f5a23d0517f0e",
+      "snapshot_0012.json": "324d1220d5194f620a6e6178f4e184217714a52945e0ba1309ef3e29306c711c",
+      "snapshot_0013.json": "c7693cc3a3849e44a20c039e344cfc38236c0aa3755d279b70a5722f3e1f4049",
+      "snapshot_0014.json": "8fef3bd264eba3a74090c4c77243300d146aa55b545ba3c557e8fe09069b29ac",
+      "snapshot_0015.json": "a38cc7599b8e84041ab5c9b65b359e585a9b07baac0be6a7978dcab02db1d7f7",
+      "snapshot_0016.json": "15b8f7dbbd141353864ce4fafbb09e4acc9f4a72dc2072db70adeabe586acba9",
+      "snapshot_0017.json": "78905837f7ecaaa9d0c734f423862939a94c6cc3d82aee7cc2d2b8e26d5fc4ad",
+      "snapshot_0018.json": "760bdc56e3a85b4128da8c6887822f9d7d1fe261801ee7e9395de5926b263ce2",
+      "snapshot_0019.json": "66660dd50ed18b83daf887daf3833360671402f6b46cabe79af6ca0a01fa225d",
+      "snapshot_0020.json": "5d3d08e5dac34b55d5cf08b21c729441830c7cd407ea575e2b2bf1bf6cc244c9",
+      "snapshot_0021.json": "cdcdc468c32e73e02b543a8348ba99c15ef7d9b2070aa380c2b0e620d8dc1404",
+      "snapshot_0022.json": "9247652804770fecaa7599b233774a6450e664e0e88c7ea2c57d173afe7708b2",
+      "snapshot_0023.json": "6ae43a230fb7ee2fc6033a78451689715b0e15d98c7ced9a8d6c73307898789d",
+      "snapshot_0024.json": "fb60ac77e732fa01e3e9c0f70126cdb855ce210cc19e070f3cd5de806269bffa",
+      "snapshot_0025.json": "bfe6840eb9c55a6e5922ee90d7e8d47fb9e1da3a6cf36ad1e46bb756c03dce4b",
+      "snapshot_0026.json": "62313d1f088d77ef4508d61921842d088ea31101f2349274a38e8965114683ec",
+      "snapshot_0027.json": "93adff8bce72602c9d07b990e449b704ca542e3197730b03a699668c0df8eb40",
+      "snapshot_0028.json": "be8bee8f18635037817171c326bd9f7d710381a45ab1c157ea5b7265a6211ea5",
+      "snapshot_0029.json": "041e6a768c366095478b867244d8a830a543144b0fc065cd20199e695a818c01",
+      "snapshot_0030.json": "58591100b5b993edf5fdbb8c75428c95ada3ea08ca9dc239f5f8f32d3664043b",
+      "snapshot_0031.json": "7a98583ff85f6a8886984eb001094355600bc936df32a2e419b9418bcb743bbe",
+      "snapshot_0032.json": "f992803e072242840981ddbf06bdc69dce7e88108127559a449fbe7923c543d0",
+      "snapshot_0033.json": "5de54926af0327bf9353586322dc64b3120ae389bc88d5ef07895cbed7e368a3",
+      "snapshot_0034.json": "095c8f528501894200acf680e7cd2f1002a75a11d59ccfee30c5806a7d7d63be",
+      "snapshot_0035.json": "a50184899e328e78d9aede31762b62df205bb61c4742428a65da085d3027e639",
+      "snapshot_0036.json": "e82bfe7bfba168d2996d20681e6bd506debd1bdf7a67251f637e71bc5173fd67",
+      "snapshot_0037.json": "a50fba9f77b9b03c2c0f2691e3a8d460f8c6cb281821b1684d8809a811014a0a",
+      "snapshot_0038.json": "4d35c55df9ae67348a485fa51e9425a6420134a4d2e543ea642f87bc8d70f5e8",
+      "snapshot_0039.json": "6fa44993a82f23b4278f78a684887b5a202675f005c7c2bdba0c0e5f4618a507",
+      "snapshot_0040.json": "d24c45a92acb1efbb58e28f1d884186f4d5366fb565a441ae38eebb86c820854",
+      "snapshot_0041.json": "3b65525e03a577abcdacccb797c5e5afa30ef71e2e3ba828243851d56b2c7454",
+      "snapshot_0042.json": "3e6d66f893a3fc373a5d7ac280350d985da09c1fffef392bde808080c53bf3cd",
+      "snapshot_0043.json": "6e596cc277486438da63ff94334d400772c2033c6f86857e8b47fef8546d6f2a",
+      "snapshot_0044.json": "06696999eed13093f30e05ccf92f6d47e444701f4d0d43410517e68455783c81",
+      "snapshot_0045.json": "562ddf8439cfffe0b214270fb630d080cb5d8ccc9ba41a9f48eed49d35e77aa2",
+      "snapshot_0046.json": "4788b78abc98e0e7e7149ae9726707582dfa58e73d4ee79df5cf7940a242ea16",
+      "snapshot_0047.json": "777b73c6759f7fae6d10a4301096816c5e01dd8d8bc1eb1c6b5f02f462b9eb12",
+      "snapshot_0048.json": "6baa4c116437d550834120d6f8ca3970241ac8d79544705286fa946b3ab67caf",
+      "snapshot_0049.json": "b58f45a1d5f91bbb58e8588f4eb3099d518443a6d4bd8f0d72cf530d9b57727a",
+      "snapshot_0050.json": "162bd3523c75b7a371d8ab80c9e6dc5eb61a04e3e0aecba24af0060e8187265c"
+    },
+    "G-HI": {
+      "snapshot_0000.json": "081262c757537d968431bf3438aa811d845755a60af087d30bed8cd93bf415a3",
+      "snapshot_0001.json": "7d1baaf5536835754bf36f31ec7c910035cd1542d1854cfeb1ac37e0a9084880",
+      "snapshot_0002.json": "061cf1ec5c833e05e52e38de97a6ae15c5a1f91ee945b8d5a87dd59be0954d89",
+      "snapshot_0003.json": "f67e93fd71f42c4f30f721e4da74f84c3cfeb7587e98a2743af6efa7b0f651f7",
+      "snapshot_0004.json": "1829b462e6dc2d0cf534e26a89c2f866f90f4364fd621a0d44154668a3b10060",
+      "snapshot_0005.json": "36b548a7e887210f2c51c24ab712728f0672b66b2bfcdbf0e373d500e3f206d1",
+      "snapshot_0006.json": "ffba5d02972d95fa1900f571802defea68351d17d888ddad16f413a4a60d2fc7",
+      "snapshot_0007.json": "6e8268f9ddc3a007feb54cf322c08531a46c8282d4397872d5c1f3b4d8487bb3",
+      "snapshot_0008.json": "8d01a9d2c8c5ae3da9afeb2fd6118b538011a36838cb5feaad964f786b462e0f",
+      "snapshot_0009.json": "47c51a5c9e590a23469e953efba86f7b1bd1145222ff8bb4993b5e6d9306dd22",
+      "snapshot_0010.json": "889282a575a12261b8023e22fe893b9138b109949b05ff47db5d9eac00f70cb1",
+      "snapshot_0011.json": "20405c14f457f0bd341fb15ab8b6a9853386614964349a59b03325e40f545443",
+      "snapshot_0012.json": "5dd912f7f0ef56a8401e99a80730d70fcc2013634c9e84d3ab8d46bd2e3f395c",
+      "snapshot_0013.json": "2c92e10116b50c79ef9a9709a573f3eff5b2ddb75d72f4c1828ff3adb0a6d0b5",
+      "snapshot_0014.json": "4c283200bc2deb6f688c0aabbc9b018542b625b71b059f68406af4f43835fc28",
+      "snapshot_0015.json": "fb4962962371c1b895134078b89bd8d5bf18d02af46d514afb4dc5683abd8aab",
+      "snapshot_0016.json": "0f3b00881f803c559a909e1785dd9a23157449f3aef805767c19ecda4bcdc3fd",
+      "snapshot_0017.json": "1d52ca2648e52c9e8574dc096bf5ada83cbd20bec04d2c2fffaaacdc9d5ad924",
+      "snapshot_0018.json": "c3730cb21a7f3925ba1e4682752e54d4de29354f3194463878d947bcd9a3e4f3",
+      "snapshot_0019.json": "c83476e70c9dd8befa59baa4d0b15065ff1dd2577ebbea179e5fdffd1dddb0b2",
+      "snapshot_0020.json": "9f3b5c6f0ca68e2e4cb1b40ae583126579c56bb17cd118c0e93f82045793fe03",
+      "snapshot_0021.json": "8e068d3c3c43d3da7bc3baa2d25f45d441c4ac8d7f87f763db73e7664540d7b8",
+      "snapshot_0022.json": "89ae77648e3cdf86814fbdc04027e4c826c9861cd57ec7fe29e2f034b6362418",
+      "snapshot_0023.json": "a7cb8283c152ede719596c7b1bfa53eb62e611cf22579996e69b67eb27c0cf19",
+      "snapshot_0024.json": "891fc83c56153d934013004f51840e7212b96cb98a17b2f0962c5d5c70d96a2a",
+      "snapshot_0025.json": "ab5012d4f2277abaada8fb890193e0ef43c2891b4f81c6da2d7817b5121ab707",
+      "snapshot_0026.json": "335856a5963625c3698e447c7e6ab459894470b57443ca8704db2afa1178505d",
+      "snapshot_0027.json": "7bb2af7a6a5fa4bd968325c05be263e2657e3281071991d84c1cfde5c6d83c49",
+      "snapshot_0028.json": "0d255a55062f69c6fff389b68480a82d81b89b0f865d7c9e2150834756f4897f",
+      "snapshot_0029.json": "463b1849949ad2917bbe58da945f1150f9a2e94a05655788170f1b43d80e5a6b",
+      "snapshot_0030.json": "d83d151fa705b59ee906f5a1517d95b0eb8a355e623b2ec3bf7c053e92c82ae4",
+      "snapshot_0031.json": "7d16d9269172e4ad4c22017101119b22aee3cbdc61201c3ebb870675e6b70556",
+      "snapshot_0032.json": "1e4100f8fefe40d6972b4d88c01c321e489ea8f6489e2742b09ed9f6cc80baca",
+      "snapshot_0033.json": "94c1eccfd50c858eda6ab178936f768ec12fec75b43785c1a55f844f92e3a58c",
+      "snapshot_0034.json": "b7fe53a295c0b48582b486c001e77623ee2d676ab5c21640e1dad5c55dfa09c6",
+      "snapshot_0035.json": "65d328324cffc1d967e76392e38676484b4ea47d06a34bfc214bdc11bc8fb9a4",
+      "snapshot_0036.json": "fb988c7b9a67da0e8861d63eb8dcfed79b6897b12b466a838323b305ceeaa080",
+      "snapshot_0037.json": "ab5a061dda7b216459c471f7dd10994e6c48caae9e02e615f8d0baa8608fcde0",
+      "snapshot_0038.json": "c1dcc093c77352ce2850dcfa711c4e9e79e5afab23ab85136bdb03fee35c78fc",
+      "snapshot_0039.json": "519a439420b3bc5a6e22b1d9c499b194c0dbc42b90a9918c047d60ef57c5a506",
+      "snapshot_0040.json": "92fcce060f34a96076029175f3048d26444beb9a030e5f2ace1969492ba55bd4",
+      "snapshot_0041.json": "926605e2b69dbea7b729b69e9921c6ace33aea9f176b37910af924095e22d741",
+      "snapshot_0042.json": "125a8f816423c39328418ccd2d7a1883840cbdfbaec7df5b478061a446bb375e",
+      "snapshot_0043.json": "faba9e2004c02ddeae8cc38cd878aeb9fdf11fe41075a32710f04612d36f42ab",
+      "snapshot_0044.json": "a802736488adbb59c49433c8f70ed0d8ae6c2e327eecb736a9caf43de49a3dc2",
+      "snapshot_0045.json": "7a26bc752413a58d77a28e9bb39ac2fe16f858bc2b6a6ff482e14f35c653e32a",
+      "snapshot_0046.json": "bad3e7f062a8ca40af23f8531bf9b5a31b6767fdb83e17d1a919200102c0c2af",
+      "snapshot_0047.json": "3044d1d9635056ae77d85b58305613216e0e2541096a5e3c9fcadebc2b04eb61"
+    },
+    "G-LO": {
+      "snapshot_0000.json": "3d1a8878693041a6115de3d4631f2f67ad926c2a739181366c05187e4872f585",
+      "snapshot_0001.json": "1b04a1d2841196789b672abb179ef7cf569995988f16e82fba346d553754a8a3",
+      "snapshot_0002.json": "371fd1075344e8f6b1c6b414f55d144100d1da78ec168a2169897ece6855c3c3",
+      "snapshot_0003.json": "bd0a4d372cfb197efe07ba7c2311fa4695b71e4063cc4c917e1ff335fb516f2e",
+      "snapshot_0004.json": "d16c132b6763626b55017c5109bd486f2a1af89704c25b02cfbf9df7886f2ebd",
+      "snapshot_0005.json": "0bda2a1c12935f61c0a8373fb1648ac5e731a6f6b770a192b0bb8543c980c388",
+      "snapshot_0006.json": "ed506d105685903b90cbe8638fcd8b7c1c15af85e886ca9cf5a8f5d4effc5945",
+      "snapshot_0007.json": "45e6a46af5d471db72dfd0f5d1ac69caa635d458a227f0353c64eefdacb03dbc",
+      "snapshot_0008.json": "895a26a45794aad53b2a4736a4ba11593692f231d68b88bd6343f5fddedbcdfb",
+      "snapshot_0009.json": "f484b80b6bfa0e640849e07cd258397eaa81776824ff555ca4702551ec4ac94b",
+      "snapshot_0010.json": "d42b8e742f5cac4a490aabe2f0da92628d958a0cc25d9063d9d427b3ae671401",
+      "snapshot_0011.json": "c2566d79a16521dc65ea24d62dd61a7c0e38c14b972cc9e48199cb7f0adc9cee",
+      "snapshot_0012.json": "c502e06168ec014cc7823d8e10b550dec81f54e175fe7c5dbd974913fb7c6abf",
+      "snapshot_0013.json": "d87ca85ba9269cbdbea8684d2bd47a19bd17e53dd7404c2496aa225b9c121ac2",
+      "snapshot_0014.json": "b5eab4f4c55bc894a675ec97f3c09bf47d316c7d126c65be041154c68aa64bfc",
+      "snapshot_0015.json": "07b98f17d17046a16e26f78159385c042ae67ba255468d934ecea365e12f1293",
+      "snapshot_0016.json": "00555a418b3fc2ec4960c96e88a6f2b81b96e713f25616efdb9df8924b34272f",
+      "snapshot_0017.json": "ae4e895ae90e22d39cb67c513773893e233d7994e312ca20c12ac346f0da7158",
+      "snapshot_0018.json": "2f113105fad23fa556b261b3834a5affaced8914e9629c37ab4d7963dc10c6bb",
+      "snapshot_0019.json": "06eb44998358d266030fd47949ffde583bef9f896005973ebbb97f5c7578e994",
+      "snapshot_0020.json": "db9c6ed05482bbd039f4fc15d157e7d72b0b25c0f13d566d53c14d19d5843229",
+      "snapshot_0021.json": "23e327a11e18a1afacac168e40d77163ccd1872500a9ce040952875a7765540d",
+      "snapshot_0022.json": "1ebce6e21e297f95ad0f6c518714c5eef019f0d53e2c9b66bdcf01d3773e9f07",
+      "snapshot_0023.json": "ba7c7608163140fd706c3f206e21a625b3955adb13a01666ac6542163215fd40",
+      "snapshot_0024.json": "b8e7fc0f922dc4dcbc474cb7dd5bdce13ee36ac5437eef4fbbbd8b20d37349e0",
+      "snapshot_0025.json": "aee992b65a12173e5b88d5e4d6f796fba332c2d5ae0a1838268464459a3dd5b5",
+      "snapshot_0026.json": "5cc317eab2e7d8a0a28d64bf78dc85d1b3b32ed0332b641f82e2235d692fb814",
+      "snapshot_0027.json": "970a3be97cbe955f9a1bb9d1e1770f5d9f58aa968755fdbaddce7376fc0bc468",
+      "snapshot_0028.json": "a467a5380c2dac69c8dd3dfac06b87390db04c463d812940b9a9681865f8245d",
+      "snapshot_0029.json": "5dcaad5b427ae9e69db045599fd5a93a50fcecf1f6a23d0b2bde3e2572b21752",
+      "snapshot_0030.json": "1547d1afcce08d0f15287f8ff04f444a9bf7c63c7786a80fcc5bc64c2b754958",
+      "snapshot_0031.json": "7259602e41e0f1516c2e6817034f91c241977de86a3d9382c72180214924a3a1",
+      "snapshot_0032.json": "2838077ee192dfdcc2dd851141fe3f68ffbb15159fcac50fcc53a924bc2732c7",
+      "snapshot_0033.json": "237aadff158c34cee914cd2af8227dad29018e74990a54b265917316fbb6dfa5",
+      "snapshot_0034.json": "ee87979783458297650eecfb982d9e991ef6f346cfe6db3b93373d5b4f78c1ea",
+      "snapshot_0035.json": "4550fce88c82ff6dab51c16bf7ea07fd1e52782249d73bbe7e0fbe20a9e7887a",
+      "snapshot_0036.json": "c802314fa2c5ea111b69e4de09fba2ad53909767fc0aaa6de7dd8a12c5c59a38",
+      "snapshot_0037.json": "65fe582e90d060ac42cb13b67bf983fa014c2dcfccef05fecd79dcf6f82ead69",
+      "snapshot_0038.json": "b1505e370c1a04ed46a7d68f5e248fff5b3a8ed8ca510eb53e1fc89450f0a9f9",
+      "snapshot_0039.json": "8584704183d8395597643b116f2eea39850e9dea9fd3238d843ccf2d8cd29ce0",
+      "snapshot_0040.json": "b23fa7f013a64c633a387b0771119b330485a56dba94d3dc3c1c7d62e8863302",
+      "snapshot_0041.json": "f6f4de51e4853546919408ac3ca958bf29e848c67f1d9b1fbc71384d81e7cc61",
+      "snapshot_0042.json": "4f2270a6c9a7aacbdd8343919807a92e61712ce87444783101cf52483cf2c8ad",
+      "snapshot_0043.json": "bd6396dbed0ebc5a6b45ecff1152914e5a2dc8354cd752c4808ab4ce1015ece5",
+      "snapshot_0044.json": "412748fe8ca9b75dd78c932914832d43892489c7482b002efb1dd02882e02bca",
+      "snapshot_0045.json": "43ba76b1160834faf40a8833c9c553bb5a2f2b31bd457f73da9df969096652de",
+      "snapshot_0046.json": "61b4943fae60ca0b83f63f4e475783e69457a34ffa0525826c3dde1e4e065246",
+      "snapshot_0047.json": "59856ae9c9bfb9b60d0df80352941be7dd5b4f7ed16e68086881c411cd4a443a",
+      "snapshot_0048.json": "dd13fef0e409a2f520ca608f28ffccae9bad665a90a19d3e1b29cd3f3e5747e2",
+      "snapshot_0049.json": "2978b9afa7993b21eb6d57769d9327966d2ae2b2cfeed8f19b67a5dbad91543f",
+      "snapshot_0050.json": "0d4cee6647260f8a078973bd69b2faa736527a344956fb2419171093e94fe514"
+    }
+  },
+  "endpoint_zip_sha256": {
+    "endpoints_C-HI.zip": "3c8f4cbe814cc5bb66baf2584e858dd7cf27ecac36e61a72894cb45d9837ffaa",
+    "endpoints_C-LO.zip": "92995b54e1b21ed4b413d060304d356c19d91dd7b8451a8b0c5745678f92c2b9",
+    "endpoints_G-HI.zip": "6c5bd84bf8d2537567e062ef6beee6f07d6e06cb8f2509e4bddeafdfd9ad2f0e",
+    "endpoints_G-LO.zip": "af6aa985f7992bb868c18f66f640c458f3afdc7d702e60fa32d0a9aeca871149"
+  },
+  "snapshots": 201,
+  "intervals": 197,
+  "last_indices": {
+    "C-HI": 50,
+    "C-LO": 50,
+    "G-HI": 47,
+    "G-LO": 50
+  },
+  "primary": {
+    "face_method": "centered_primitives",
+    "integration_rule": "symmetric_fixed"
+  },
+  "outward_sign": "Positive leaves the selected native cells. Domain is the part on the simulation box.",
+  "elapsed_seconds_per_myr": 31557600000000.0,
+  "injector": {
+    "method": "linear_snapshot_flags",
+    "integration": "trapezoid",
+    "box_method": "outer_active_cell"
+  },
+  "integration_sample_order": [
+    "start_old",
+    "start_new",
+    "end_old",
+    "end_new"
+  ],
+  "integration_weights": {
+    "symmetric_fixed": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "old_fixed": [
+      0.5,
+      0.0,
+      0.5,
+      0.0
+    ],
+    "new_fixed": [
+      0.0,
+      0.5,
+      0.0,
+      0.5
+    ],
+    "moving_endpoints": [
+      0.5,
+      0.0,
+      0.0,
+      0.5
+    ]
+  },
+  "membership_correction": {
+    "symmetric_fixed": "mean of start and end sweeps",
+    "moving_endpoints": "mean of start and end sweeps",
+    "old_fixed": "sweep measured at end",
+    "new_fixed": "sweep measured at start"
+  },
+  "energy_balance": "stock change minus membership plus outward transport minus net gas, injector potential and maintained stock change",
+  "mass_diagnostic": "Stock change minus membership plus outward transport and archived signed net injector mass are reported separately.",
+  "cumulative": "Sum signed intervals from snapshot zero to end_index, then divide by cumulative denominators.",
+  "products": {
+    "transport_C-HI.csv.gz": {
+      "rows": 2400,
+      "sha256": "ae7dd4778704aca491c9542dcb422b59ad3123374923004407748d6e6cfcd86f",
+      "expanded_csv_sha256": "f3ab182d1a951df38a5079275bcc0d1d88418796d916dab1bc2bb20491aad44b"
+    },
+    "balances_C-HI.csv.gz": {
+      "rows": 800,
+      "sha256": "f984c6d8d4ffdc65f141807a6ca92cb6ed9e287807e355f67c860526186c5a98",
+      "expanded_csv_sha256": "19267848ea9689ae37c0395fe0ad40798307ed466e5ed93c300f62668cc46386"
+    },
+    "transport_C-LO.csv.gz": {
+      "rows": 2400,
+      "sha256": "510aec08bb3490e050250366f5f88fc8508c9e24af876209fb6714efbe46c233",
+      "expanded_csv_sha256": "03bee460040566ea90e9f9e5fe051c286051fd59c0ae2fbb7240cf49ea0b5628"
+    },
+    "balances_C-LO.csv.gz": {
+      "rows": 800,
+      "sha256": "096b9d8e64a5ea12c8b6800c2bf15208627c1f56f29d69c6d5592eb5a504e92c",
+      "expanded_csv_sha256": "d5b17db766df3bc24a136c68fb035e79de933cff246876549716543fc9e5fc74"
+    },
+    "transport_G-HI.csv.gz": {
+      "rows": 2256,
+      "sha256": "7ac52ffb0cca680cde6933066d42415a6b1a60b6cbbc47352c03dd03c4e4f195",
+      "expanded_csv_sha256": "2ce4b640f3ff7551200272669c0965bb454ec8e08048ee5fdca2293afb5d3fe8"
+    },
+    "balances_G-HI.csv.gz": {
+      "rows": 752,
+      "sha256": "212e49d26fdaffe515630d0f7c112e98eda311da0d819d5cc067a2fa73a972a8",
+      "expanded_csv_sha256": "94085e3858fd67322388144a961c9977c3767d4ec4cb3cf467af1c7a9f623f8e"
+    },
+    "transport_G-LO.csv.gz": {
+      "rows": 2400,
+      "sha256": "d0e0fcfbbd4170777a3bae36467b40b5cf9ed2362eb46f9d01bb3f9887946d4d",
+      "expanded_csv_sha256": "f4d4dca1c5def605384eedc137d566be1c860a0d449512712ba71a6d87431085"
+    },
+    "balances_G-LO.csv.gz": {
+      "rows": 800,
+      "sha256": "2874899eefc43ad93f3766c538972cd97660248be9206942f6fef3d0a7727fd3",
+      "expanded_csv_sha256": "d3bb74c0295a46cf59850c99148e51f9136d4f430431f9c57c0faf7265c8198d"
+    },
+    "primary_balances.csv": {
+      "rows": 394,
+      "sha256": "409b8ce465e1f974f71904f7060d6c2c5933a310acbadde3cb647768d4510522",
+      "expanded_csv_sha256": "409b8ce465e1f974f71904f7060d6c2c5933a310acbadde3cb647768d4510522"
+    },
+    "stock_motion.csv.gz": {
+      "rows": 394,
+      "sha256": "e3d7ad53ffe780e89dd867cbf38ed858a4da370c8077ea7b8ef8f52604fd7da5",
+      "expanded_csv_sha256": "cac5b786910836aaa2df3f9c77da9a7f205fb8f2e14fbcf091b538b81b35f97b"
+    },
+    "geometry.csv.gz": {
+      "rows": 402,
+      "sha256": "c1c20f5398b7edf075a8c24cc93ff1ce75e43662729e59f2e1f48bd14696bff8",
+      "expanded_csv_sha256": "8cab3c654662c8da5ade93cac26d45a2aa1ad9eea8c2cd2920d1afed788908ba"
+    }
+  },
+  "numerical_checks": {
+    "energy label from active seconds and bipolar power": {
+      "checks": 197,
+      "max_scaled_difference": 0.0
+    },
+    "energy and mass labels at 0.1c": {
+      "checks": 197,
+      "max_scaled_difference": 1.2372053881225318e-14
+    },
+    "independent energy label": {
+      "checks": 197,
+      "max_scaled_difference": 0.0
+    },
+    "signed gas endpoint trapezoid": {
+      "checks": 197,
+      "max_scaled_difference": 1.2511498035380394e-14
+    },
+    "potential endpoint trapezoid": {
+      "checks": 197,
+      "max_scaled_difference": 1.3168633658851697e-22
+    },
+    "gas plus potential injector delivery": {
+      "checks": 197,
+      "max_scaled_difference": 4.57737669917788e-16
+    },
+    "net gas": {
+      "checks": 197,
+      "max_scaled_difference": 1.2511498035380394e-14
+    },
+    "potential": {
+      "checks": 197,
+      "max_scaled_difference": 0.0
+    },
+    "maintained stock": {
+      "checks": 197,
+      "max_scaled_difference": 0.0
+    },
+    "whole grid review": {
+      "checks": 197,
+      "max_scaled_difference": 1.453716331043975e-14
+    },
+    "whole grid gravity archive": {
+      "checks": 197,
+      "max_scaled_difference": 0.0
+    },
+    "registered volume": {
+      "checks": 1190,
+      "max_scaled_difference": 3.5839038262511144e-16
+    },
+    "six box faces": {
+      "checks": 2380,
+      "max_scaled_difference": 0.0
+    },
+    "internal and box geometry": {
+      "checks": 2380,
+      "max_scaled_difference": 0.0
+    },
+    "gas flux components": {
+      "checks": 7140,
+      "max_scaled_difference": 2.2098388200865555e-16
+    },
+    "total energy flux components": {
+      "checks": 7140,
+      "max_scaled_difference": 2.2175738916507263e-16
+    },
+    "internal plus box flux": {
+      "checks": 16660,
+      "max_scaled_difference": 3.1617821236911143e-16
+    },
+    "swept volume": {
+      "checks": 788,
+      "max_scaled_difference": 4.565496210014032e-16
+    },
+    "swept energy components": {
+      "checks": 788,
+      "max_scaled_difference": 0.0
+    },
+    "registered stock energy components": {
+      "checks": 402,
+      "max_scaled_difference": 0.0
+    },
+    "same fixed face area across endpoint states": {
+      "checks": 7092,
+      "max_scaled_difference": 0.0
+    },
+    "symmetric stock change equals mean fixed-radius changes": {
+      "checks": 1970,
+      "max_scaled_difference": 1.4616416639573622e-16
+    },
+    "component stock differences and sweeps": {
+      "checks": 2758,
+      "max_scaled_difference": 1.7425942620953878e-16
+    },
+    "cumulative moving stock versus endpoint": {
+      "checks": 1970,
+      "max_scaled_difference": 1.7188546563727378e-16
+    },
+    "symmetric transport equals mean of fixed-surface transports": {
+      "checks": 16548,
+      "max_scaled_difference": 4.0673927606323206e-16
+    },
+    "integrated internal plus box flux": {
+      "checks": 22064,
+      "max_scaled_difference": 4.414453562937531e-16
+    },
+    "signed local energy balance": {
+      "checks": 6304,
+      "max_scaled_difference": 6.956083472818283e-17
+    }
+  }
+}

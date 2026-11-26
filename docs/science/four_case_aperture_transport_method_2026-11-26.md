@@ -28,6 +28,8 @@ Keep the two fixed-radius estimates and the moving-endpoint trapezoid to show se
 
 Use the signed gas energy delivered across the complete discretised injector surface, \(D_{\rm gas}\), from the [archived injector history](production_injector_histories_2026-11-21.md). The primary reconstruction uses the stored linear states and solver flags, with trapezoidal integration. The axial, lateral and stationary sectors all contribute. Report the balance as \(\Delta S-M+T-D_{\rm gas}-D_{\Phi}-\Delta E_{\rm maintained}\). The last two terms account for injector potential-energy transport and changing storage in its maintained cells. Keep the mechanical denominator \(D_{\rm gas}\) and nominal labelled input separately visible. For cumulative ratios, sum signed energies first and divide by cumulative delivery.
 
+If a constant \(C\) is added to the potential everywhere, each potential-energy term in this balance gains \(C\) times its corresponding mass term. The energy residual therefore changes by \(C\) times the mass residual. The published energy residual uses the centre-zero convention. Thermal and kinetic components and the mechanical delivery denominator are independent of this choice.
+
 These snapshot estimates have one sample per Myr. Rapid wave or jet passages can fall between outputs, and a reconstructed primitive-state flux can differ from the solver's time-integrated flux. Separate both limitations from the exact discrete membership correction and the archived stock changes. A balance residual by itself does not identify dissipation, a shock or an entropy-switch contribution. The [component partition](four_case_energy_partition_2026-11-26.md) gives the complementary cocoon and ambient measurements.
 
 ## Checks added after the 30-Myr pilot

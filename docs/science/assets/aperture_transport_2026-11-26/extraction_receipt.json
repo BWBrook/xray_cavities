@@ -1,0 +1,59 @@
+{
+  "registration_sha256": "2adb3221da4ed806f6d42f33be3d37dc2c2c7fc4039c785c68d3b4abf8a098b6",
+  "native_read_source_commit": "10d546b",
+  "native_code_sha256": {
+    "scripts/kunanyi/run_aperture_transport.py": "987052bf33e1f667f9e6e71cf0a203500e481a1615da0eb6132dc7fac79a5200",
+    "scripts/kunanyi/aperture_transport.pbs": "38d304d20031538889fcb53275b5e202d17f68f13b99599daf48a9b3b6415bb3",
+    "scripts/science/aperture_slab_reader.py": "0199f78a6388a112775107db8f962396d751f0f6ec078b71230d9c846c1e9ee2",
+    "scripts/science/aperture_surface_transport.py": "3cff9ce6f9d0dacb8c583ed5627492d6bb5efca0d4486f92ac33809070bf756a",
+    "scripts/science/capture_injector_states.py": "de4034669802e628838215160225962543049e7bed1bfbfe01db0124922f3857",
+    "scripts/science/check_native_aperture_flux.py": "3124e688c81434c4f30b90a937e0d9652b37f70ad4ac5cd59d80852ec915e4ef",
+    "scripts/science/measure_q031_fluxes.py": "333d8edfad3849be50b2b0a3da481b5c273a442a012b2368e6eaf9b225546953",
+    "scripts/science/pluto_h5_level3_ambient_extract.py": "00d4f10b729cd74982514f4dde52c8ef7f5ee7a2b1074305d479c99aa6cd26de",
+    "scripts/science/select_common_age_hdf5.py": "c38c9d781b681ff9682950020bade8caf62746ba9e112d28db315787efec451d",
+    "scripts/science/snapshot_energy.py": "f19859379463462a75ea7e8445d18cd2f6fa9ef05203aa71e507df5f67ebac21"
+  },
+  "stage_sha256": "6d891b93b5905a686d7f6c457cba881bab4e1df6a892cdcc7da39d56cdca3215",
+  "pre_cache_stage_sha256": "2d1be4f985c14e5f862f25ae7eec9f96df0826e1dff171224155157a539c52c5",
+  "archives": {
+    "endpoints_C-HI.zip": {
+      "bytes": 156561,
+      "sha256": "3c8f4cbe814cc5bb66baf2584e858dd7cf27ecac36e61a72894cb45d9837ffaa",
+      "native_snapshots": 51
+    },
+    "endpoints_C-LO.zip": {
+      "bytes": 144042,
+      "sha256": "92995b54e1b21ed4b413d060304d356c19d91dd7b8451a8b0c5745678f92c2b9",
+      "native_snapshots": 51
+    },
+    "endpoints_G-HI.zip": {
+      "bytes": 150739,
+      "sha256": "6c5bd84bf8d2537567e062ef6beee6f07d6e06cb8f2509e4bddeafdfd9ad2f0e",
+      "native_snapshots": 48
+    },
+    "endpoints_G-LO.zip": {
+      "bytes": 146870,
+      "sha256": "af6aa985f7992bb868c18f66f640c458f3afdc7d702e60fa32d0a9aeca871149",
+      "native_snapshots": 51
+    }
+  },
+  "independent_CLO30_sha256": "9aadef8150feeb5280b058f8a46d3daf76c41dde54aa6885bfc80cd5cbfe25f0",
+  "native_identity_checks": 201,
+  "terminal_jobs": {
+    "direct_HDF5_pilots": 4,
+    "sequential_read_pilots": 4,
+    "batches": 28,
+    "independent_plane_check": 1
+  },
+  "direct_and_sequential_read_agreement": [
+    "C-HI/snapshot_0000.json",
+    "C-HI/snapshot_0030.json",
+    "C-LO/snapshot_0000.json",
+    "C-LO/snapshot_0030.json",
+    "G-HI/snapshot_0000.json",
+    "G-HI/snapshot_0030.json",
+    "G-LO/snapshot_0000.json",
+    "G-LO/snapshot_0030.json"
+  ],
+  "custody": "Endpoint digests checked against the cluster files. Source identity checked before/after read against prior HDF5 hashes via path, size, inode and timestamps. One C-LO/30 native file also rehashed in full."
+}

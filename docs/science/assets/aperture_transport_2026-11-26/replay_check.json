@@ -1,0 +1,28 @@
+{
+  "independent_component_recalculation": {
+    "checks": 1970,
+    "max_difference_over_delivery": 6.661338147750939e-16
+  },
+  "matching_replay_products": {
+    "selected_age_transport.csv": "82513744568cf62e9ab42058a2870cb410b8da1116a9fe11beeec2294f4fa8f4",
+    "cumulative_aperture_transport.png": "93a22e1cc0b8d703be67a8dfa7018f838d96d5a67cda5e4ebd31fcf7c81b014c",
+    "instantaneous_rates.csv": "a9b35faf6b2de4c1661c7e31726a40a205eadd3005f42e8d9dbb97cdefde734f",
+    "shell_balance.csv": "9ae837c99f130461f685fbe79a2dd58db24e610cf327e97261d01ca2e6fb3f01",
+    "cadence_budget.csv": "6eac672edbddb22c200e90977fb015cb91e71327179303d8b38a0d5f1468f0ed",
+    "mass_balances.csv.gz": "b92455f7f34353c5c10b00d2b1c846af77d265abddec85a426e84987080c62aa",
+    "independent_flux_check.csv": "bea3bb5937f199aaecf156441a465933df79cbf6b395639aabffd73841c6a998",
+    "startup_injector_comparison.csv": "ac93b1536904af4513110647da6a130be0d6fc40bf49be59a41746a5fc556ade",
+    "tables/geometry.csv.gz": "c1c20f5398b7edf075a8c24cc93ff1ce75e43662729e59f2e1f48bd14696bff8",
+    "tables/balances_G-HI.csv.gz": "212e49d26fdaffe515630d0f7c112e98eda311da0d819d5cc067a2fa73a972a8",
+    "tables/transport_C-HI.csv.gz": "ae7dd4778704aca491c9542dcb422b59ad3123374923004407748d6e6cfcd86f",
+    "tables/primary_balances.csv": "409b8ce465e1f974f71904f7060d6c2c5933a310acbadde3cb647768d4510522",
+    "tables/transport_G-LO.csv.gz": "d0e0fcfbbd4170777a3bae36467b40b5cf9ed2362eb46f9d01bb3f9887946d4d",
+    "tables/balances_C-LO.csv.gz": "096b9d8e64a5ea12c8b6800c2bf15208627c1f56f29d69c6d5592eb5a504e92c",
+    "tables/stock_motion.csv.gz": "e3d7ad53ffe780e89dd867cbf38ed858a4da370c8077ea7b8ef8f52604fd7da5",
+    "tables/transport_C-LO.csv.gz": "510aec08bb3490e050250366f5f88fc8508c9e24af876209fb6714efbe46c233",
+    "tables/balances_G-LO.csv.gz": "2874899eefc43ad93f3766c538972cd97660248be9206942f6fef3d0a7727fd3",
+    "tables/balances_C-HI.csv.gz": "f984c6d8d4ffdc65f141807a6ca92cb6ed9e287807e355f67c860526186c5a98",
+    "tables/transport_G-HI.csv.gz": "7ac52ffb0cca680cde6933066d42415a6b1a60b6cbbc47352c03dd03c4e4f195"
+  },
+  "replay": "Native endpoint receipts in case directories vs their public ZIP archives. The two verification manifests describe the differing input containers. Compared all numerical tables and the figure as exact bytes."
+}

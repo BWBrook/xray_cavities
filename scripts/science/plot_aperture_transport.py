@@ -74,7 +74,7 @@ def create(tables, output):
     if len(primary) != 2*sum(CASES.values()):
         raise ValueError("Incomplete signed primary interval series")
     selected, shells = [], []
-    fig, axes = plt.subplots(2, 4, figsize=(13.7, 6), sharex=True, layout="constrained")
+    fig, axes = plt.subplots(2, 4, figsize=(13.7, 6), sharex=True, sharey="row", layout="constrained")
     for column, case in enumerate(CASES_IN_FIGURE):
         all_balances = load(tables / f"balances_{case}.csv.gz")
         balances = {(r["aperture"], int(r["end_index"]), r["face_method"], r["integration_rule"]): r for r in all_balances}
@@ -89,13 +89,18 @@ def create(tables, output):
             if [int(r["end_index"]) for r in rows] != list(range(1, CASES[case] + 1)):
                 raise ValueError("Gap in registered transport history")
             dates = [float(r["end_age_myr"]) for r in rows]
+            last_complete = max(int(r["end_index"]) for r in rows if r["end_geometry_complete"] == "True")
+            if name == "R100":
+                fixed = [[100 * ratio(balances[name, int(r["end_index"]), "centered_primitives", rule], "total_energy_outward")
+                          for r in rows] for rule in ("old_fixed", "new_fixed")]
+                axes[0, column].fill_between(dates, *fixed, color=COLOURS[name], alpha=.15, linewidth=0)
             for i, key in enumerate(("total_energy_outward", "membership_correction")):
                 ax = axes[i, column]
                 series = [100*ratio(r, key) for r in rows]
                 ax.plot(dates, series, color=COLOURS[name], lw=1.9, ls="-" if name == "R100" else "--")
             for r in rows:
                 end = int(r["end_index"])
-                if end not in (10,20,30,40,CASES[case]):
+                if end not in (10, 20, 30, 40, last_complete, CASES[case]):
                     continue
                 comp = components[name, end]
                 d = float(r["cumulative_delivered_gas_erg"])
@@ -137,12 +142,13 @@ def create(tables, output):
         axes[0,column].set_title(case)
         axes[1,column].set_xlabel("Age (Myr)")
         axes[1,column].set_xticks([0,10,20,30,40,50])
-    axes[0,0].set_ylabel("Cumulative outward energy\n(% of delivered energy)")
-    axes[1,0].set_ylabel("Cumulative change from aperture motion\n(% of delivered energy)")
+    axes[0,0].set_ylabel("Net energy carried outward\n(% of cumulative delivery)")
+    axes[1,0].set_ylabel("Energy change from aperture motion\n(% of cumulative delivery)")
     fig.legend(handles=[Line2D([0],[0], color=COLOURS["R100"], lw=2, label="R100"),
                         Line2D([0],[0], color=COLOURS["R300"], lw=2, ls="--", label="R300"),
+                        Patch(facecolor=COLOURS["R100"], alpha=.15, label="R100 using earlier or later radius"),
                         Patch(color="#c8c4bc", alpha=.5, label="Sphere extends beyond grid")],
-               loc="outside lower center", ncols=3, frameon=False)
+               loc="outside lower center", ncols=4, frameon=False)
     output.mkdir(parents=True,exist_ok=True)
     fig.savefig(output/"cumulative_aperture_transport.png",dpi=170,facecolor="white")
     plt.close(fig)
