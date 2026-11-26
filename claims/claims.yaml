@@ -64,17 +64,22 @@ claims:
   - id: NAT-03
     status: provisional
     statement: >-
-      The selected shock-processed ambient region gains 0.666–0.765 (C-HI),
-      0.505–0.655 (G-HI) and 0.580–0.854 (G-LO) of injected energy. C-LO has
-      one accepted estimate, 0.223 at 10 Myr; its later ages fail the
-      bilateral shock gate.
+      At 30 Myr the selected downstream ambient gas stores thermal, kinetic and
+      gravitational increases totalling 63.0% of reconstructed injector gas
+      delivery in C-HI, 54.3% in G-HI and 69.4% in G-LO. The sole bilateral
+      C-LO result is 20.6% at 10 Myr. Only four of 15 bilateral selections
+      have both compressive pressure and density jumps on both sides.
     evidence:
       - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
-    reproduce: uv run --locked python scripts/science/build_q029_power_refresh.py
+      - {path: docs/science/four_case_shock_partition_2026-11-26.md, commit: 1e1e052}
+      - {path: docs/science/assets/four_case_shock_partition_2026-11-26/downstream_components.csv, commit: 1e1e052}
+      - {path: docs/science/assets/four_case_shock_partition_2026-11-26/axial_evidence.csv, commit: 1e1e052}
+    reproduce: .venv/bin/python scripts/science/four_case_shock_partition.py --out /tmp/four-case-shocks
     caveats:
-      - Includes thermal, kinetic and gravitational change; not all of it is irreversible heat.
+      - The selection covers a connected subset of ambient cells in the domain. Its initial energy is measured at the same positions. Intersections with each velocity-defined sphere were not archived.
+      - The same-cell adiabatic comparison, axial jumps and propagation do not establish the total irreversible heat generated in a bow shock or internal jet shocks. In G-LO the axial cuts show no compressive pressure or density jump on either side at any of the five selected ages.
       - Halving or doubling the mask thresholds changes C-LO/10 by factors of 0.654 and 1.588 and matters in G-LO.
-    test: Cellwise no-jet counterfactual from the paired boundary controls (BND-02), plus measured face fluxes.
+    test: Independently replay the component sums, signed propagation and jump classifications. Identifying physical dissipation would require the upstream state and mass processed over time.
 
   - id: NAT-04
     status: supported
@@ -366,6 +371,27 @@ claims:
       - "In G-LO the lobe thermal energy at 12 Myr is higher by 0.067 of one Myr of labelled input, against a whole-grid thermal plus kinetic difference of 0.037. The lobe gain therefore includes energy moved from other forms and regions, as in C-HI (NAT-12)."
       - "As a ratio, the change in gain per delivered energy across the three cuts is 0.031–0.043 dex in G-LO and −0.003 to +0.007 dex in C-LO, against 0.089–0.105 dex in G-HI and 0.097–0.114 dex in C-HI. At the primary cut the low-minus-high difference in that gain falls from 38.6 to 25.4 percentage points in the cluster and from 25.9 to 21.4 in the group with the update off. Low power exceeds high power at all three cuts in both arms."
     depends_on: [NAT-01, NAT-05, BND-15]
+
+  - id: NAT-14
+    status: provisional
+    statement: >-
+      At 30 Myr the thermal energy change of ambient cells inside R100 amounts
+      to 51.5%, 91.4%, 31.4% and 66.1% of signed injector gas delivery in
+      C-HI, C-LO, G-HI and G-LO. At 50 Myr in C-LO the shell between R300
+      and R100 contains an ambient energy increase of 27.4% of delivery.
+      Thermal, kinetic and gravitational energy contribute 20.0, 1.0 and
+      6.5 percentage points, respectively, rounded separately.
+    evidence:
+      - {path: docs/science/four_case_energy_partition_2026-11-26.md, commit: 1e1e052}
+      - {path: docs/science/assets/four_case_energy_partition_2026-11-26/native_fixed_stocks.json.gz, commit: 1e1e052}
+      - {path: docs/science/assets/four_case_energy_partition_2026-11-26/sphere_components.csv, commit: 1e1e052}
+      - {path: docs/science/assets/four_case_energy_partition_2026-11-26/verification.json, commit: 1e1e052}
+    reproduce: .venv/bin/python scripts/science/four_case_energy_partition.py --out /tmp/four-case-energy
+    test: Independently integrate the signed delivery histories, rebuild the regional component sums and mass changes, and compare the two C-LO shell memberships with the tracer census.
+    caveats:
+      - Current tracer selection, same positions at time zero, full cell weights, and centre-zero initial potential. The shell holds an instantaneous stock change. Annual rates require a separate transport measurement.
+      - Both high-power apertures extend beyond the grid from output 44 in C-HI and 40 in G-HI. G-HI ends when the tracer contacts a grid face at output 47.
+    depends_on: [NAT-04, NAT-05, BND-12]
 
   - id: BND-01
     status: supported

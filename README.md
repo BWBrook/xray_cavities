@@ -106,6 +106,9 @@ truth-assisted background diagnostic from an observer-only detector.
 
 ## Work in progress
 
+At 30 Myr the ambient thermal energy inside the 100 km/s sphere increased by 31–91% of measured injector delivery across the four runs. At 50 Myr in the low-power cluster, the ambient shell between the 300 and 100 km/s spheres alone holds an increase of 27.4% of delivery. Of 15 bilateral downstream selections, four have compressive pressure and density jumps on both sides. Both measurements await independent review. [Energy partition and figures](docs/science/four_case_energy_partition_2026-11-26.md) · [Downstream gas and shock checks](docs/science/four_case_shock_partition_2026-11-26.md)
+<!-- claims: NAT-03 NAT-14 -->
+
 The [accounting pilots](docs/science/turn18_pilot_review_2026-11-14.md) all
 completed successfully. Independent fixed-budget, flux and provenance checks
 pass. At 20 Myr, the fixed interior stores 1.157066 and 1.074883 labelled-input

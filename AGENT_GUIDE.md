@@ -122,9 +122,10 @@ pinned commit, its reproduce command and its caveats. In summary:
   exchange through the stationary part of the injector. Reproduce it from
   each case's signed power history. [Calculation and label comparators](docs/science/native_delivery_restatement_2026-11-21.md)
   <!-- claims: NAT-01 -->
-- Enthalpy is not the energy change of the cocoon region, and the
-  shock-processed ambient gas holds a comparable share.
-  <!-- claims: NAT-02 NAT-03 -->
+- For R100 and R300, use the same-cell thermal, kinetic, gravitational and mass changes in the current tracer mask and ambient complement. At 50 Myr in C-LO, the ambient shell between the two radii contains a 27.4%-of-delivery increase. Both spheres contain the entire on-grid cocoon. [Stock histories and public replay](docs/science/four_case_energy_partition_2026-11-26.md)
+  <!-- claims: NAT-02 NAT-14 -->
+- The downstream mask is a whole-domain subset of ambient gas. Four of its 15 bilateral selections show both pressure and density jumps on both sides. Use the per-side jump and propagation evidence before attributing changes to a bow shock. [Components and axial checks](docs/science/four_case_shock_partition_2026-11-26.md)
+  <!-- claims: NAT-03 -->
 - The numerical bookkeeping closes to 2e-14 of injected energy.
   <!-- claims: NAT-04 -->
 
