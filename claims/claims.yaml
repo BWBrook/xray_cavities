@@ -391,6 +391,7 @@ claims:
     caveats:
       - Current tracer selection, same positions at time zero, full cell weights, and centre-zero initial potential. The shell holds an instantaneous stock change. Annual rates require a separate transport measurement.
       - Both high-power apertures extend beyond the grid from output 44 in C-HI and 40 in G-HI. G-HI ends when the tracer contacts a grid face at output 47.
+      - The 50-Myr C-LO shell numerator was already measured in NAT-08 on the labelled-input basis. The current table uses the same physical stock difference and the matched measured delivery.
     depends_on: [NAT-04, NAT-05, BND-12]
 
   - id: BND-01

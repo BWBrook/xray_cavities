@@ -101,8 +101,8 @@ def create(tables, output):
                 d = float(r["cumulative_delivered_gas_erg"])
                 def amt(key):
                     return float(r["cumulative_" + key + "_erg"])
-                def at(method, rule):
-                    return ratio(balances[name, end, method, rule], "total_energy_outward")
+                def at(method, rule, quantity="total_energy_outward"):
+                    return ratio(balances[name, end, method, rule], quantity)
                 selected.append(dict(case=case, index=end, actual_age_myr=r["end_age_myr"], aperture=name,
                                      radius_kpc=r["end_radius_kpc"], geometrically_complete=r["end_geometry_complete"],
                                      intersects_box_faces=r["end_domain_contact"], cocoon_contacts_box=r["end_cocoon_contacts_domain"],
@@ -121,7 +121,11 @@ def create(tables, output):
                                      outward_donor_over_delivery=at("donor_cell_primitives","symmetric_fixed"),
                                      outward_on_old_radii_over_delivery=at("centered_primitives","old_fixed"),
                                      outward_on_new_radii_over_delivery=at("centered_primitives","new_fixed"),
-                                     outward_moving_endpoints_over_delivery=at("centered_primitives","moving_endpoints")))
+                                     outward_moving_endpoints_over_delivery=at("centered_primitives","moving_endpoints"),
+                                     residual_donor_over_delivery=at("donor_cell_primitives", "symmetric_fixed", "aperture_residual"),
+                                     residual_old_fixed_over_delivery=at("centered_primitives", "old_fixed", "aperture_residual"),
+                                     residual_new_fixed_over_delivery=at("centered_primitives", "new_fixed", "aperture_residual"),
+                                     residual_moving_endpoints_over_delivery=at("centered_primitives", "moving_endpoints", "aperture_residual")))
         clipped = [float(r["end_age_myr"]) for r in primary if r["case"] == case and r["end_geometry_complete"] == "False"]
         for ax in axes[:,column]:
             ax.axhline(0, color="#707070", lw=.7, zorder=0)

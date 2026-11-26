@@ -9,19 +9,24 @@ from pathlib import Path
 from zipfile import ZipFile
 
 from restate_native_delivery import CASES, INJECTOR, PRIMARY, SECONDS
+from check_aperture_flux_cadence import COMPACT_SHA, integrate
 
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSET = ROOT / "docs/science/assets/aperture_transport_2026-11-26"
 
 
-def endpoint(root, case, i):
+def endpoint_raw(root, case, i):
     name = f"snapshot_{i:04d}.json"
     local = root / case / name
     if local.is_file():
-        return json.loads(local.read_bytes())
+        return local.read_bytes()
     with ZipFile(root / f"endpoints_{case}.zip") as archive:
-        return json.loads(archive.read(name))
+        return archive.read(name)
+
+
+def endpoint(root, case, i):
+    return json.loads(endpoint_raw(root, case, i))
 
 
 def independent_check(root, plane_file, reg_sha):
@@ -147,6 +152,61 @@ def startup(root, registration, reg_sha, rates):
     return rows
 
 
+def cadence_budget(root, registration):
+    archive = ASSET.parent / "low_power_entropy_result_2026-11-23/compact_inputs.zip"
+    raw = (ASSET / "cadence_CLO_10_11.json").read_bytes()
+    cadence = json.loads(raw)
+    checked = json.loads((ASSET / "cadence_comparison.json").read_bytes())
+    if (hashlib.sha256(archive.read_bytes()).hexdigest() != COMPACT_SHA or cadence["restart_archive_sha256"] != COMPACT_SHA
+            or checked["cadence_receipt_sha256"] != hashlib.sha256(raw).hexdigest()
+            or checked["status"] != "both_production_endpoints_match" or checked["number_compared"] != 56
+            or cadence["integrals"] != integrate(cadence["snapshots"])):
+        raise ValueError("Fine-cadence control is not bound to its two verified production endpoints")
+    with ZipFile(archive) as bundle:
+        series = [json.loads(bundle.read(f"snapshots/C-LO/ON/injector_{i}.json")) for i in range(10, 21)]
+    if [s["age_myr"] for s in series] != [s["age_myr"] for s in cadence["snapshots"]]:
+        raise ValueError("Injector and aperture samples have different times")
+    duration = SECONDS * (series[-1]["age_myr"] - series[0]["age_myr"])
+    label_mass = series[0]["labelled_mass_rate_g_s"] * duration
+    snaps = registration["cases"]["C-LO"]["snapshots"]
+    endpoints = []
+    for i in (10, 11):
+        data = endpoint_raw(root, "C-LO", i)
+        if hashlib.sha256(data).hexdigest() != checked["production_endpoint_sha256"][str(i)]:
+            raise ValueError("The cadence check used a different production endpoint")
+        endpoints.append(json.loads(data)["measurement"]["apertures"])
+    result = []
+    for rule, samples in (("annual", [series[0], series[-1]]), ("subinterval_trapezoids", series)):
+        def source(field):
+            return math.fsum(SECONDS * (b["age_myr"] - a["age_myr"]) * 0.5 *
+                             (a["rates"][PRIMARY[0]]["net"][field] + b["rates"][PRIMARY[0]]["net"][field])
+                             for a, b in zip(samples, samples[1:]))
+        gas, total, mass = (source(k) for k in ("gas_energy_erg_s", "total_energy_erg_s", "mass_g_s"))
+        for name in ("R100", "R300"):
+            fixed = cadence["integrals"]["mean_of_two_fixed_surfaces"][name]
+            row = dict(case="C-LO", aperture=name, time_rule=rule, start_age_myr=series[0]["age_myr"],
+                       end_age_myr=series[-1]["age_myr"], subintervals=len(samples)-1, delivered_gas_erg=gas,
+                       labelled_mass_g=label_mass, net_mass_from_injector_g=mass)
+            for stock, sweep, flux, source_value, maintenance in (
+                    ("total_delta_erg", "total_energy_erg", "total_energy_outward_erg", total, "total_erg"),
+                    ("mass_delta_g", "mass_g", "mass_outward_g", mass, "mass_g")):
+                membership = 0.5 * (endpoints[0][name]["sweeps"]["current_to_next"][sweep] +
+                                    endpoints[1][name]["sweeps"]["previous_to_current"][sweep])
+                change = snaps[11]["apertures"][name]["stock"][stock] - snaps[10]["apertures"][name]["stock"][stock]
+                maintained = series[-1]["flagged_storage"][maintenance] - series[0]["flagged_storage"][maintenance]
+                transport = fixed[flux][rule]
+                residual = math.fsum((change, -membership, transport, -source_value, -maintained))
+                row[flux] = transport
+                if maintenance == "mass_g":
+                    row["mass_residual_g"] = residual
+                    row["mass_residual_over_labelled_mass"] = residual / label_mass
+                else:
+                    row["outward_over_delivered_gas"] = transport / gas
+                    row["energy_residual_over_delivered_gas"] = residual / gas
+            result.append(row)
+    return result
+
+
 def write(path, rows):
     with path.open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
@@ -170,6 +230,7 @@ def main():
     write(args.output / "independent_flux_check.csv", checked)
     write(args.output / "startup_injector_comparison.csv", first)
     write(args.output / "instantaneous_rates.csv", current)
+    write(args.output / "cadence_budget.csv", cadence_budget(args.endpoints, json.loads(blob)))
 
 
 if __name__ == "__main__":

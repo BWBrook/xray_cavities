@@ -1,0 +1,745 @@
+{
+  "cadence_receipt_sha256": "74b096c2edc5509047995fe54c5ee67f22f7570e6a4c56dd6ca5d0de02eb487c",
+  "case": "C-LO",
+  "comparisons": [
+    {
+      "aperture": "R100",
+      "production": 7.343111751787432e+24,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "mass_flux_outward_g_s",
+      "restart": 7.343111751787432e+24,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 4.429412882608554e+40,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "thermal_advective_flux_outward_erg_s",
+      "restart": 4.429412882608554e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 2.952941921739037e+40,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "pressure_work_outward_erg_s",
+      "restart": 2.9529419217390364e+40,
+      "scaled_absolute_difference": 1.6270211172108441e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 8.887207374412823e+38,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "kinetic_flux_outward_erg_s",
+      "restart": 8.887207374412825e+38,
+      "scaled_absolute_difference": 1.7003735941495337e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 1.1285969669195412e+40,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "gravitational_flux_outward_erg_s",
+      "restart": 1.1285969669195412e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 7.471226878091719e+40,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "gas_flux_outward_erg_s",
+      "restart": 7.471226878091719e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 8.59982384501126e+40,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "total_energy_flux_outward_erg_s",
+      "restart": 8.59982384501126e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 3.551541807316185e+22,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "mass_flux_outward_g_s",
+      "restart": 3.5515418073161846e+22,
+      "scaled_absolute_difference": 4.6364998319401935e-17
+    },
+    {
+      "aperture": "R100",
+      "production": 1.7848369722198898e+38,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "thermal_advective_flux_outward_erg_s",
+      "restart": 1.7848369722198898e+38,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 1.1898913148132601e+38,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "pressure_work_outward_erg_s",
+      "restart": 1.18989131481326e+38,
+      "scaled_absolute_difference": 6.232474910853751e-17
+    },
+    {
+      "aperture": "R100",
+      "production": 9.21882856012137e+28,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "kinetic_flux_outward_erg_s",
+      "restart": 9.218828560121369e+28,
+      "scaled_absolute_difference": 1.907941942018925e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 5.687885665663634e+37,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "gravitational_flux_outward_erg_s",
+      "restart": 5.687885665663634e+37,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 2.974728287955033e+38,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "gas_flux_outward_erg_s",
+      "restart": 2.9747282879550326e+38,
+      "scaled_absolute_difference": 4.9859799280762556e-17
+    },
+    {
+      "aperture": "R100",
+      "production": 3.543516854521396e+38,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "total_energy_flux_outward_erg_s",
+      "restart": 3.543516854521396e+38,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.358647363449335e+25,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "mass_flux_outward_g_s",
+      "restart": 1.358647363449335e+25,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.0162588791708054e+41,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "thermal_advective_flux_outward_erg_s",
+      "restart": 1.0162588791708054e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 6.775059194472037e+40,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "pressure_work_outward_erg_s",
+      "restart": 6.775059194472037e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 6.4898333443023e+39,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "kinetic_flux_outward_erg_s",
+      "restart": 6.489833344302302e+39,
+      "scaled_absolute_difference": 1.8627994826338538e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 2.0800334870196483e+40,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "gravitational_flux_outward_erg_s",
+      "restart": 2.0800334870196483e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.758663132061032e+41,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "gas_flux_outward_erg_s",
+      "restart": 1.758663132061032e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.9666664807629968e+41,
+      "production_index": 10,
+      "radius_at_index": 10,
+      "rate": "total_energy_flux_outward_erg_s",
+      "restart": 1.966666480762997e+41,
+      "scaled_absolute_difference": 1.9614055818435785e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 5.241048598980453e+22,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "mass_flux_outward_g_s",
+      "restart": 5.241048598980452e+22,
+      "scaled_absolute_difference": 7.759354528870111e-17
+    },
+    {
+      "aperture": "R300",
+      "production": 2.6357926639361875e+38,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "thermal_advective_flux_outward_erg_s",
+      "restart": 2.6357926639361875e+38,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.7571951092907918e+38,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "pressure_work_outward_erg_s",
+      "restart": 1.7571951092907918e+38,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.8761494381163608e+32,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "kinetic_flux_outward_erg_s",
+      "restart": 1.87614943811636e+32,
+      "scaled_absolute_difference": 3.8407168478885387e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 8.303845328301409e+37,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "gravitational_flux_outward_erg_s",
+      "restart": 8.30384532830141e+37,
+      "scaled_absolute_difference": 5.520615744912364e-17
+    },
+    {
+      "aperture": "R300",
+      "production": 4.392989649376417e+38,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "gas_flux_outward_erg_s",
+      "restart": 4.392989649376417e+38,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 5.223374182206558e+38,
+      "production_index": 10,
+      "radius_at_index": 11,
+      "rate": "total_energy_flux_outward_erg_s",
+      "restart": 5.223374182206558e+38,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 9.70537759236254e+25,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "mass_flux_outward_g_s",
+      "restart": 9.70537759236254e+25,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 1.2013007498176963e+42,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "thermal_advective_flux_outward_erg_s",
+      "restart": 1.2013007498176962e+42,
+      "scaled_absolute_difference": 1.2873175460345513e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 8.00867166545131e+41,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "pressure_work_outward_erg_s",
+      "restart": 8.00867166545131e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 1.834376746940532e+41,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "kinetic_flux_outward_erg_s",
+      "restart": 1.834376746940532e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 1.4876264799038045e+41,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "gravitational_flux_outward_erg_s",
+      "restart": 1.4876264799038046e+41,
+      "scaled_absolute_difference": 1.2991594338384192e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 2.1856055910568806e+42,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "gas_flux_outward_erg_s",
+      "restart": 2.1856055910568803e+42,
+      "scaled_absolute_difference": 1.4151757795187104e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 2.3343682390472608e+42,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "total_energy_flux_outward_erg_s",
+      "restart": 2.3343682390472608e+42,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 1.1715442643807481e+25,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "mass_flux_outward_g_s",
+      "restart": 1.171544264380748e+25,
+      "scaled_absolute_difference": 1.8227851846518482e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 6.695642462054009e+40,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "thermal_advective_flux_outward_erg_s",
+      "restart": 6.695642462054008e+40,
+      "scaled_absolute_difference": 1.4373248263454264e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 4.463761641369339e+40,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "pressure_work_outward_erg_s",
+      "restart": 4.463761641369339e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 1.0571385589840585e+39,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "kinetic_flux_outward_erg_s",
+      "restart": 1.0571385589840584e+39,
+      "scaled_absolute_difference": 1.4294789095296256e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 1.8706911843650852e+40,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "gravitational_flux_outward_erg_s",
+      "restart": 1.8706911843650852e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R100",
+      "production": 1.1265117959321754e+41,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "gas_flux_outward_erg_s",
+      "restart": 1.1265117959321752e+41,
+      "scaled_absolute_difference": 1.7086829665690953e-16
+    },
+    {
+      "aperture": "R100",
+      "production": 1.313580914368684e+41,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "total_energy_flux_outward_erg_s",
+      "restart": 1.3135809143686838e+41,
+      "scaled_absolute_difference": 1.465192816338186e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 8.557509210274965e+25,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "mass_flux_outward_g_s",
+      "restart": 8.557509210274963e+25,
+      "scaled_absolute_difference": 2.0053691097029503e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 1.0542232520827714e+42,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "thermal_advective_flux_outward_erg_s",
+      "restart": 1.0542232520827715e+42,
+      "scaled_absolute_difference": 1.4644487127635765e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 7.028155013885143e+41,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "pressure_work_outward_erg_s",
+      "restart": 7.028155013885144e+41,
+      "scaled_absolute_difference": 2.1966730691453645e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 1.4783106309286534e+41,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "kinetic_flux_outward_erg_s",
+      "restart": 1.4783106309286534e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.3096810037506764e+41,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "gravitational_flux_outward_erg_s",
+      "restart": 1.3096810037506764e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.904869816564151e+42,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "gas_flux_outward_erg_s",
+      "restart": 1.9048698165641512e+42,
+      "scaled_absolute_difference": 1.6211499894001835e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 2.0358379169392188e+42,
+      "production_index": 11,
+      "radius_at_index": 10,
+      "rate": "total_energy_flux_outward_erg_s",
+      "restart": 2.0358379169392188e+42,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 3.9817420834238575e+25,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "mass_flux_outward_g_s",
+      "restart": 3.9817420834238575e+25,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 2.66129717325422e+41,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "thermal_advective_flux_outward_erg_s",
+      "restart": 2.66129717325422e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.7741981155028133e+41,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "pressure_work_outward_erg_s",
+      "restart": 1.7741981155028133e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 1.5411441540162458e+40,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "kinetic_flux_outward_erg_s",
+      "restart": 1.5411441540162458e+40,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 6.291880384485241e+40,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "gravitational_flux_outward_erg_s",
+      "restart": 6.291880384485242e+40,
+      "scaled_absolute_difference": 1.5345445744647692e-16
+    },
+    {
+      "aperture": "R300",
+      "production": 4.589609704158658e+41,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "gas_flux_outward_erg_s",
+      "restart": 4.589609704158658e+41,
+      "scaled_absolute_difference": 0.0
+    },
+    {
+      "aperture": "R300",
+      "production": 5.218797742607182e+41,
+      "production_index": 11,
+      "radius_at_index": 11,
+      "rate": "total_energy_flux_outward_erg_s",
+      "restart": 5.2187977426071814e+41,
+      "scaled_absolute_difference": 1.4806579730061215e-16
+    }
+  ],
+  "integrals": {
+    "fixed": {
+      "R100_at_10": {
+        "gas_outward_erg": {
+          "annual": 3.566711529476432e+55,
+          "refined_minus_annual": 2.3270002659543583e+54,
+          "subinterval_trapezoids": 3.799411556071868e+55
+        },
+        "gravitational_outward_erg": {
+          "annual": 2.5255175832842338e+54,
+          "refined_minus_annual": 4.59819700496905e+53,
+          "subinterval_trapezoids": 2.9853372837811388e+54
+        },
+        "kinetic_outward_erg": {
+          "annual": 2.9086133921868922e+54,
+          "refined_minus_annual": 5.8506165205016724e+53,
+          "subinterval_trapezoids": 3.4936750442370595e+54
+        },
+        "mass_outward_g": {
+          "annual": 1.6473505321064507e+39,
+          "refined_minus_annual": 2.9802048076164523e+38,
+          "subinterval_trapezoids": 1.945371012868096e+39
+        },
+        "pressure_work_outward_erg": {
+          "annual": 1.3103400761030975e+55,
+          "refined_minus_annual": 6.9677544556167425e+53,
+          "subinterval_trapezoids": 1.380017620659265e+55
+        },
+        "thermal_advective_outward_erg": {
+          "annual": 1.9655101141546456e+55,
+          "refined_minus_annual": 1.0451631683425155e+54,
+          "subinterval_trapezoids": 2.0700264309888972e+55
+        },
+        "total_energy_outward_erg": {
+          "annual": 3.8192632878048556e+55,
+          "refined_minus_annual": 2.7868199664512667e+54,
+          "subinterval_trapezoids": 4.0979452844499823e+55
+        }
+      },
+      "R100_at_11": {
+        "gas_outward_erg": {
+          "annual": 1.7822947293852256e+54,
+          "refined_minus_annual": -1.2197030902899763e+54,
+          "subinterval_trapezoids": 5.6259163909524935e+53
+        },
+        "gravitational_outward_erg": {
+          "annual": 2.9608680184596682e+53,
+          "refined_minus_annual": -1.968799427636004e+53,
+          "subinterval_trapezoids": 9.920685908236644e+52
+        },
+        "kinetic_outward_erg": {
+          "annual": 1.6681318826467736e+52,
+          "refined_minus_annual": -1.4133633635819285e+52,
+          "subinterval_trapezoids": 2.54768519064845e+51
+        },
+        "mass_outward_g": {
+          "annual": 1.8542647627759475e+38,
+          "refined_minus_annual": -1.2331093947493367e+38,
+          "subinterval_trapezoids": 6.211553680266108e+37
+        },
+        "pressure_work_outward_erg": {
+          "annual": 7.062453642235033e+53,
+          "refined_minus_annual": -4.822277826616629e+53,
+          "subinterval_trapezoids": 2.240175815618404e+53
+        },
+        "thermal_advective_outward_erg": {
+          "annual": 1.0593680463352549e+54,
+          "refined_minus_annual": -7.233416739924943e+53,
+          "subinterval_trapezoids": 3.3602637234276057e+53
+        },
+        "total_energy_outward_erg": {
+          "annual": 2.0783815312311928e+54,
+          "refined_minus_annual": -1.4165830330535769e+54,
+          "subinterval_trapezoids": 6.617984981776159e+53
+        }
+      },
+      "R300_at_10": {
+        "gas_outward_erg": {
+          "annual": 3.28333712515208e+55,
+          "refined_minus_annual": 6.993679232592076e+54,
+          "subinterval_trapezoids": 3.9827050484112875e+55
+        },
+        "gravitational_outward_erg": {
+          "annual": 2.39485887103828e+54,
+          "refined_minus_annual": 3.3342276934627905e+53,
+          "subinterval_trapezoids": 2.728281640384559e+54
+        },
+        "kinetic_outward_erg": {
+          "annual": 2.435135917569942e+54,
+          "refined_minus_annual": 1.2017102859820131e+54,
+          "subinterval_trapezoids": 3.636846203551955e+54
+        },
+        "mass_outward_g": {
+          "annual": 1.5647387744896204e+39,
+          "refined_minus_annual": 2.176533330536417e+38,
+          "subinterval_trapezoids": 1.782392107543262e+39
+        },
+        "pressure_work_outward_erg": {
+          "annual": 1.2159294133580344e+55,
+          "refined_minus_annual": 2.3167875786440264e+54,
+          "subinterval_trapezoids": 1.447608171222437e+55
+        },
+        "thermal_advective_outward_erg": {
+          "annual": 1.8238941200370514e+55,
+          "refined_minus_annual": 3.4751813679660355e+54,
+          "subinterval_trapezoids": 2.171412256833655e+55
+        },
+        "total_energy_outward_erg": {
+          "annual": 3.522823012255908e+55,
+          "refined_minus_annual": 7.327102001938355e+54,
+          "subinterval_trapezoids": 4.2555332124497433e+55
+        }
+      },
+      "R300_at_11": {
+        "gas_outward_erg": {
+          "annual": 7.24919387029342e+54,
+          "refined_minus_annual": -4.757301380737619e+54,
+          "subinterval_trapezoids": 2.4918924895558022e+54
+        },
+        "gravitational_outward_erg": {
+          "annual": 9.94149545494194e+53,
+          "refined_minus_annual": -6.102287896202976e+53,
+          "subinterval_trapezoids": 3.839207558738964e+53
+        },
+        "kinetic_outward_erg": {
+          "annual": 2.431877740428172e+53,
+          "refined_minus_annual": -1.963762544695493e+53,
+          "subinterval_trapezoids": 4.681151957326788e+52
+        },
+        "mass_outward_g": {
+          "annual": 6.291335814970016e+38,
+          "refined_minus_annual": -3.862635968956117e+38,
+          "subinterval_trapezoids": 2.428699846013899e+38
+        },
+        "pressure_work_outward_erg": {
+          "annual": 2.8024024385002414e+54,
+          "refined_minus_annual": -1.8243700505072278e+54,
+          "subinterval_trapezoids": 9.780323879930138e+53
+        },
+        "thermal_advective_outward_erg": {
+          "annual": 4.2036036577503615e+54,
+          "refined_minus_annual": -2.736555075760841e+54,
+          "subinterval_trapezoids": 1.4670485819895206e+54
+        },
+        "total_energy_outward_erg": {
+          "annual": 8.243343415787613e+54,
+          "refined_minus_annual": -5.367530170357915e+54,
+          "subinterval_trapezoids": 2.8758132454296985e+54
+        }
+      }
+    },
+    "mean_of_two_fixed_surfaces": {
+      "R100": {
+        "gas_outward_erg": {
+          "annual": 1.8724705012074775e+55,
+          "refined_minus_annual": 5.53648587832191e+53,
+          "subinterval_trapezoids": 1.9278353599906964e+55
+        },
+        "gravitational_outward_erg": {
+          "annual": 1.4108021925651003e+54,
+          "refined_minus_annual": 1.314698788666523e+53,
+          "subinterval_trapezoids": 1.5422720714317527e+54
+        },
+        "kinetic_outward_erg": {
+          "annual": 1.46264735550668e+54,
+          "refined_minus_annual": 2.85464009207174e+53,
+          "subinterval_trapezoids": 1.748111364713854e+54
+        },
+        "mass_outward_g": {
+          "annual": 9.163885041920227e+38,
+          "refined_minus_annual": 8.735477064335579e+37,
+          "subinterval_trapezoids": 1.0037432748353785e+39
+        },
+        "pressure_work_outward_erg": {
+          "annual": 6.90482306262724e+54,
+          "refined_minus_annual": 1.0727383145000567e+53,
+          "subinterval_trapezoids": 7.012096894077246e+54
+        },
+        "thermal_advective_outward_erg": {
+          "annual": 1.0357234593940856e+55,
+          "refined_minus_annual": 1.6091074717501058e+53,
+          "subinterval_trapezoids": 1.0518145341115866e+55
+        },
+        "total_energy_outward_erg": {
+          "annual": 2.0135507204639874e+55,
+          "refined_minus_annual": 6.851184666988449e+53,
+          "subinterval_trapezoids": 2.082062567133872e+55
+        }
+      },
+      "R300": {
+        "gas_outward_erg": {
+          "annual": 2.004128256090711e+55,
+          "refined_minus_annual": 1.1181889259272285e+54,
+          "subinterval_trapezoids": 2.115947148683434e+55
+        },
+        "gravitational_outward_erg": {
+          "annual": 1.694504208266237e+54,
+          "refined_minus_annual": -1.3840301013700928e+53,
+          "subinterval_trapezoids": 1.5561011981292278e+54
+        },
+        "kinetic_outward_erg": {
+          "annual": 1.3391618458063795e+54,
+          "refined_minus_annual": 5.026670157562319e+53,
+          "subinterval_trapezoids": 1.8418288615626115e+54
+        },
+        "mass_outward_g": {
+          "annual": 1.096936177993311e+39,
+          "refined_minus_annual": -8.430513192098501e+37,
+          "subinterval_trapezoids": 1.012631046072326e+39
+        },
+        "pressure_work_outward_erg": {
+          "annual": 7.480848286040293e+54,
+          "refined_minus_annual": 2.462087640683993e+53,
+          "subinterval_trapezoids": 7.727057050108693e+54
+        },
+        "thermal_advective_outward_erg": {
+          "annual": 1.1221272429060437e+55,
+          "refined_minus_annual": 3.6931314610259727e+53,
+          "subinterval_trapezoids": 1.1590585575163035e+55
+        },
+        "total_energy_outward_erg": {
+          "annual": 2.1735786769173346e+55,
+          "refined_minus_annual": 9.7978591579022e+53,
+          "subinterval_trapezoids": 2.2715572684963567e+55
+        }
+      }
+    }
+  },
+  "maximum_scaled_absolute_difference": 3.8407168478885387e-16,
+  "number_compared": 56,
+  "production_endpoint_sha256": {
+    "10": "9a817653de84df69e3c6c619fc76a28b4092cc4e918c881256620b34051c8018",
+    "11": "22060f1c1c3e0da3d3166f5be7cfd81f84c3f83de7d156fc008f5a23d0517f0e"
+  },
+  "status": "both_production_endpoints_match"
+}

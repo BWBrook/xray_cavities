@@ -22,7 +22,7 @@ Here the subscripts denote interval endpoints. The change of stored energy minus
 T=\tfrac{\Delta t}{4}[F_0(a)+F_1(a)+F_0(b)+F_1(b)].
 \]
 
-Keep the two fixed-radius estimates and the moving-endpoint trapezoid to show sensitivity to the annual sampling. The same motion identity and flux accounting apply to mass. The sweep is a stock change relative to the initial atmosphere, so it excludes the undisturbed atmosphere acquired by expanding the aperture. Rates are in cgs and use the actual elapsed time of each pair.
+Keep the two fixed-radius estimates and the moving-endpoint trapezoid to show sensitivity to the annual sampling. The same motion identity and flux accounting apply to mass. For the mass check, subtract the signed net mass supplied across the injector and the measured change in maintained-cell mass. The native injector stencils show identical density values in those 14,328 cells at all 201 snapshots. The maintained-cell mass term is therefore zero in all 197 intervals. Report the mass residual in grams and in units of labelled jet mass. Signed net mass delivery can pass through zero when ambient gas enters the stationary part of the injector. [Maintained mass and stencil identities](assets/aperture_transport_2026-11-26/maintained_masses.csv) The sweep is a stock change relative to the initial atmosphere, so it excludes the undisturbed atmosphere acquired by expanding the aperture. Rates are in cgs and use the actual elapsed time of each pair.
 
 ## Injector normalization and balance
 

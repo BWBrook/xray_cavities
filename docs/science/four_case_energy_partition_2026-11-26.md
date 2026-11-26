@@ -40,7 +40,9 @@ The machine-readable table gives each component in erg and as a fraction of D fo
 
 ## Radius, outer gas and boundary contact
 
-At 30 Myr the R100 and R300 totals differ by less than 0.0001 of D in three cases. In C-LO the 5.30-kpc layer between the two spheres contributes 0.0853 of D. By 50 Myr the layer extends from 72.86 to 80.94 kpc and contributes 0.2740 of D, divided into +0.1999 thermal, +0.0096 kinetic and +0.0645 gravitational. These are changes in the gas occupying the layer at that epoch. The flux crossing either moving surface requires an interval measurement.
+At 30 Myr the R100 and R300 totals differ by less than 0.0001 of D in three cases. In C-LO the 5.30-kpc layer between the two spheres contributes 0.0853 of D. By 50 Myr the layer extends from 72.86 to 80.94 kpc and contributes 0.2740 of D, divided into +0.1999 thermal, +0.0096 kinetic and +0.0645 gravitational. The 11 November review measured the same 50-Myr shell increase as 0.307653 of labelled input. The 27.4% value uses the measured gas delivery for that same case and age. [Earlier shell measurement](turn15_energy_emission_review_2026-11-11.md)
+
+These are changes in the gas occupying the layer at that epoch. The flux crossing either moving surface requires an interval measurement.
 
 | Case | Final actual Myr | ΔE(R100)/D | ΔE(R300)/D | Fixed inset box/D | Outside inset box/D | Whole grid/D |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
