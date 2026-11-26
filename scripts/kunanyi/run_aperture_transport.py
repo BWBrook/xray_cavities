@@ -11,6 +11,7 @@ import time
 import h5py
 import numpy as np
 
+from aperture_slab_reader import slab_fields
 from aperture_surface_transport import measure_snapshot
 from capture_injector_states import check_identity
 from measure_q031_fluxes import read_grid
@@ -81,7 +82,8 @@ def run(registration, root, output, case, indices):
     shared = {"case": case, "registration_sha256": digest(registration),
               "stage_sha256": digest(root / "stage.sha256"), "initial_sha256": zero["native"]["sha256"]}
     with h5py.File(zero_path, "r") as init:
-        baseline, _ = state(init, zero, axes)
+        initial_variables, _ = state(init, zero, axes)
+        baseline = slab_fields(initial_variables)
         for i in indices:
             started = time.monotonic()
             frozen_row = frozen["snapshots"][i]
@@ -107,7 +109,8 @@ def run(registration, root, output, case, indices):
             print(f"Measuring {case}/{i} on {len(roles)} endpoint aperture pairs", flush=True)
             with h5py.File(input_path, "r") as current:
                 variables, grid = state(current, record, axes)
-                measured = measure_snapshot(current=variables, initial=baseline, grid=grid, environment=env, radii=radii)
+                current_fields = baseline if i == 0 else slab_fields(variables)
+                measured = measure_snapshot(current=current_fields, initial=baseline, grid=grid, environment=env, radii=radii)
             check_identity(input_path, record["native"])
             check_identity(zero_path, zero["native"])
             validate_measured_geometry(measured, windows, i)
