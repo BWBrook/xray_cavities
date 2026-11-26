@@ -504,6 +504,18 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    [Pilot results and independent review](docs/science/ghi20_midplane_slab_results_2026-11-25.md) · [Four-case protocol](docs/science/four_case_midplane_slab_protocol_2026-11-25.md)
    <!-- claims: XR-07 -->
 
+   In the other 18 side-on case-ages the share of the same footprint dimmed
+   by more than 5% increases at both cuts in every comparison. Its medians
+   are 42.3%, 67.7% and 91.2%. The initial light beyond ±10 kpc accounts
+   for a median 94.7% of the increase in the integrated flux deficit from
+   full depth to that slab. Rebuild the case-age table from the compact
+   archive. Use the initial and evolved coverage splits for both group
+   runs, where the registered slab controls fail. The archived 90° images
+   check the whole-gas row integrals at both epochs in all 18 case-ages.
+   The G-HI/20 pilot has its own table and a separate lobe-cell check.
+   [Four-case result and commands](docs/science/four_case_midplane_slab_results_2026-11-26.md) · [Portable tables and receipts](docs/science/assets/four_case_midplane_slabs_2026-11-26/tables.zip)
+   <!-- claims: XR-08 -->
+
 3. **How well can the adopted clocks recover jet power?** Compare sound-crossing,
    buoyant-rise and refill estimates separately, retaining true simulation
    age as a control. Use qualified geometries and preserve detection and

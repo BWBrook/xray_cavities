@@ -1,8 +1,8 @@
 # Current Status
 
-Updated 26 November 2026 with the four-case slab registration and the
-perpendicular-projection and coverage checks on the G-HI/20 pilot.
-Existing measurements retain their reported review status.
+Updated 26 November 2026 after the 18 four-case slab projections, the
+time-zero coverage controls and the checks against the archived perpendicular
+views. XR-08 awaits independent review.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -26,7 +26,7 @@ and the approved handover specifies the scope of the four-case comparison.
 
 **G-HI/20 after review.** The share of the same tracer footprint more than 5% dimmer than at time zero rises from 55.8% at full depth to 73.2% at ±30 and 85.1% at ±10 kpc. The radial detector on the undisturbed images selects 0, 27,028 and 30,936 kpc². Both thin slabs fail the control, so their evolved false areas and purities reflect the fitted background. The three shortest tracer path bins, together 1,849 kpc², remain 16–36% brighter at full depth. Across the whole footprint, the initial light beyond 30 kpc dilutes the deficit by 21.6 percentage points and its subsequent brightening removes another 14.3. XR-07 remains provisional. Simulated 20-Myr narrow-slab emission has one native extraction. [Revised results, maps and control rows](../science/ghi20_midplane_slab_results_2026-11-25.md)
 
-The amended protocol was pushed at `762edbf` before submitting the 18 other case-ages. It reports the initial outline’s cover of the later lobe, physical dimming, and coverage at the first tested cut that empties both control sides. The sealed archive supplies evolved and initial 90° whole-gas brightness for every case-age. The pilot reproduces all published row comparisons. The initial full-depth masks were empty in every case; the brightness arrays differ across the four runs. [Four-case protocol and bindings](../science/four_case_midplane_slab_protocol_2026-11-25.md)
+**Four-case result.** All 18 other case-ages passed native projection, scoring and the perpendicular row checks. The median area physically dimmed by more than 5% rose from 42.3% at full depth to 67.7% and 91.2% at ±30 and ±10 kpc. Initial outer light accounts for a median 94.7% of the full-to-±10 kpc gain in the integrated deficit. All four full-depth controls and both slab controls in each cluster run are empty. Both group runs fail the 5% slab controls. At ±30 kpc, G-LO/10 loses its entire radial outline at the first clean cut even though 59.5% of its footprint physically dimmed. The amended protocol predates all 18 runs. The public numerical archive regenerates the tables and figure. The review gallery and map bundle are in `private_archive/turn34_four_case_slabs/`. XR-08 is provisional. [Results, controls and reproduction](../science/four_case_midplane_slab_results_2026-11-26.md) · [Registered protocol](../science/four_case_midplane_slab_protocol_2026-11-25.md)
 
 ## Supervisor scope decision 25 November
 
