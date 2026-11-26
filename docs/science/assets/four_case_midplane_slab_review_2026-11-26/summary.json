@@ -1,0 +1,22 @@
+{
+  "case_ages": 18,
+  "values_compared_with_published": 918,
+  "values_agreeing": 918,
+  "disagreements": [],
+  "largest_evolved_row_difference": {
+    "slab30": 1.134604467045719e-06,
+    "slab10": 2.0060689263079468e-06
+  },
+  "largest_initial_row_difference": {
+    "slab30": 6.11822819074348e-08,
+    "slab10": 5.044244533181086e-08
+  },
+  "published_table_sha256": "b366402857e4ac343684d7aafccdc3ba9c6a8a967aea7ea2aa2d0ac305b970eb",
+  "tables": {
+    "outer_gas.csv": "b081887be8c99fc01d762caf842323ba67fa520974a34df6874b82e4001cfc2d",
+    "controls.csv": "dd4e0922f4b2baad9cf9f12a0d06e4ca88b21775bbc883163e5f269204d0fa17",
+    "outlines.csv": "3536b331fbd37de1fce3cae7da72f4d389b2a28976e67200d1971ba41865f264",
+    "side_view_rows.csv": "b801a1bfcf4dc9f1d4d7762d017b9d73ba4989223bf7c0b5202582d1233ae4ae",
+    "comparison.csv": "7e56b35b374ae6643d993ca28c3dafb8d625ee779937566e4c55cba63ae4ba81"
+  }
+}
