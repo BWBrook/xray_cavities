@@ -490,12 +490,17 @@ was rewritten in either direction. [Paired result, compact replay and scope](doc
    and 85.1% at full depth, ±30 and ±10 kpc. The registered radial rule on
    the undisturbed images selects 0, 27,028 and 30,936 kpc². Read
    `time_zero_controls.csv` alongside each evolved outline. A nonempty
-   control makes its false area and purity diagnostics of that fit.
+   control makes its false area and purity diagnostics of that fit. For
+   coverage, show how much of the later lobe the initial outline already
+   covered and how much dimmed physically. The first tested threshold that
+   clears both initial sides provides a sensitivity to the fitted background.
    In `areas.csv`, `full_lobe` keeps the same target across depths and
    `slab_lobe` scores the retained material. The ±10 kpc slab intersects
    97.9% of the original area and contains 40.3% of the volume. Use
    full-column tracer path bins for the layer balance. Detected and missed
-   sightlines are defined by the detector.
+   sightlines are defined by the detector. Matching the 90° per-z row
+   totals checks the emitting depth. Light can still be misplaced within
+   a row, and both projections share the emissivity calculation.
    [Pilot results and independent review](docs/science/ghi20_midplane_slab_results_2026-11-25.md) · [Four-case protocol](docs/science/four_case_midplane_slab_protocol_2026-11-25.md)
    <!-- claims: XR-07 -->
 

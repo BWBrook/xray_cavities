@@ -1,0 +1,34 @@
+#!/bin/bash
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mem=4gb
+#PBS -l walltime=03:00:00
+#PBS -m ae
+#PBS -j oe
+#PBS -r n
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?}"
+printf '%s  stage.sha256\n' "${SLAB_STAGE_SHA256:?}" | sha256sum --check --quiet -
+sha256sum --check --quiet stage.sha256
+archive="$HOME/codex_kunanyi/turn27_blind_2026-11-23_r1/stage"
+export PYTHONPATH="$PWD:$archive/scripts/science:$archive/scripts/kunanyi"
+export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 MPLBACKEND=Agg
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export MPLCONFIGDIR="${TMPDIR:-/tmp}/slab-mpl-${PBS_JOBID:?}"
+/share/apps/software/Anaconda3/2024.02-1/bin/python -u - "${SLAB_UNIT:?}" "$archive" <<'PY'
+import json
+from pathlib import Path
+import sys
+
+from project_four_case_midplane_slabs import run
+
+name, archive = sys.argv[1], Path(sys.argv[2])
+units = {r["case_age"]: r for r in json.loads(Path("registration.json").read_text())["science"]}
+r = units[name]
+print(f"Starting {name}", flush=True)
+run(archive / "contracts" / f"{name}.json", r["contract_sha256"],
+    archive / "products" / name, r["previous_producer_sha256"],
+    r["initial_previous_producer_sha256"], Path("released_targets"), Path("results") / name)
+print(f"Completed {name}", flush=True)
+PY
+sha256sum --check --quiet stage.sha256

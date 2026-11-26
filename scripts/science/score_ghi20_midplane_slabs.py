@@ -209,7 +209,7 @@ def read_projection(directory, reference):
     return receipt, grid, fields, archive_mask
 
 
-def plot_maps(output, grid, fields, measured, age, full_depth):
+def plot_maps(output, grid, fields, measured, case, age, full_depth):
     full_tracer = fields["full"]["tracer_path"] > 0
     extent = ladder.recovery.CANDIDATE_RADIUS_KPC + 5
     if full_tracer.any():
@@ -236,7 +236,7 @@ def plot_maps(output, grid, fields, measured, age, full_depth):
     labels = ("Current brightness", initial_label, "Deficit against radial fit", "Deficit against time zero")
     colors = {"selected": "#e67d00", "full": "#098073", "slab": "#7b30b2"}
     try:
-        fig.suptitle(f"G-HI · 1 keV · {age:.4f} Myr · looking along y", fontsize=13)
+        fig.suptitle(f"{case} · 1 keV · {age:.4f} Myr · looking along y", fontsize=13)
         full_title = f"Full ({full_depth['y_min_kpc']:g} to {full_depth['y_max_kpc']:g} kpc)"
         for j, (depth, depth_label) in enumerate(zip(DEPTHS, (full_title, *LABELS[1:]), strict=True)):
             maps, fitted = fields[depth], measured[depth]
@@ -370,7 +370,8 @@ def run(projection_dir, reference, output):
         for name, rows in (("areas.csv", areas), ("filling.csv", filling), ("radial_profiles.csv", profiles),
                            ("time_zero_controls.csv", controls)):
             front.write_rows(work / name, rows)
-        display = plot_maps(work / "maps.png", grid, fields, measured, receipt["actual_time_myr"], receipt["depths"]["full"])
+        display = plot_maps(work / "maps.png", grid, fields, measured, receipt["case"], receipt["actual_time_myr"],
+                            receipt["depths"]["full"])
         plot_profiles(work / "profiles.png", profiles)
         plot_time_zero_controls(work / "time_zero_controls.png", grid, measured)
         result = {

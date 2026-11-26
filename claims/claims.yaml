@@ -1253,8 +1253,11 @@ claims:
       dimmer than at time zero rises from 55.8% to 73.2% and 85.1%.
       On the undisturbed images the registered 5% radial detector selects
       0, 27,028 and 30,936 kpc². Both slabs fail the time-zero control.
-      Their false area and purity at 20 Myr depend strongly on the
-      smoothed radial background.
+      The initial outlines alone cover 65.3% and 69.6% of the later lobe
+      in the two slabs. Their evolved false area and purity depend strongly
+      on the smoothed radial background. At the post-hoc 8% cut all initial
+      outlines are empty and evolved lobe coverage rises from 46.8% at
+      full depth to 66.5% and 79.4% in the slabs.
       The ±30 kpc slab keeps the entire footprint and 98.8% of its volume.
       The ±10 kpc slab keeps 97.9% of the footprint and 40.3% of the volume.
     evidence:
@@ -1285,10 +1288,10 @@ claims:
       in filling.csv for the flux deficit. The independent layer and path
       estimates are in layers.csv from check_ghi20_midplane_slabs.py.
     test: >-
-      Check the evolved narrow-slab emissivities against an independent
-      native extraction. Apply the registered matched-depth physical
-      measures and per-depth time-zero detector controls to the remaining
-      selected case-ages.
+      Check the evolved narrow-slab emissivities within each sky row
+      against an independent native extraction. The archived 90° images
+      already check their row integrals. Compare the matched-depth
+      measurements in the other 18 case-ages under the four-case protocol.
     caveats:
       - Cutting the emitting depth requires the simulation. Both scoring implementations use the same native projections and their 1-keV emissivity extrapolation.
       - The three full-column tracer path bins spanning 0–20 kpc cover 1,849 kpc². Their integrated full-depth brightness is 16.1–36.3% above time zero. The gas at 10–30 kpc from the midplane dims on detected sightlines and brightens on missed ones. This latter split conditions on the outline. The emitting layer's physical identity remains open.
