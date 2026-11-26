@@ -1262,7 +1262,7 @@ claims:
       The ±10 kpc slab keeps 97.9% of the footprint and 40.3% of the volume.
     evidence:
       - {path: docs/science/ghi20_midplane_slab_protocol_2026-11-25.md, commit: e7fca24}
-      - {path: docs/science/ghi20_midplane_slab_results_2026-11-25.md, commit: 2e03378}
+      - {path: docs/science/ghi20_midplane_slab_results_2026-11-25.md, commit: 3f260bc}
       - {path: docs/science/four_case_midplane_slab_protocol_2026-11-25.md, commit: 2e03378}
       - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/time_zero_controls.csv, commit: 2e03378}
       - {path: docs/science/assets/ghi20_midplane_slabs_2026-11-25/score_receipt.json, commit: 2e03378}
@@ -1325,7 +1325,8 @@ claims:
     evidence:
       - {path: docs/science/four_case_midplane_slab_protocol_2026-11-25.md, commit: 762edbf}
       - {path: docs/science/assets/four_case_midplane_slabs_2026-11-26/registration.json, commit: 762edbf}
-      - {path: docs/science/four_case_midplane_slab_results_2026-11-26.md, commit: 4b30348}
+      - {path: docs/science/four_case_midplane_slab_results_2026-11-26.md, commit: 3f260bc}
+      - {path: docs/science/assets/four_case_midplane_slabs_2026-11-26/summary.json, commit: 3f260bc}
       - {path: docs/science/assets/four_case_midplane_slabs_2026-11-26/tables.zip, commit: 4b30348}
       - {path: docs/science/assets/four_case_midplane_slabs_2026-11-26/case_age_depth.csv, commit: 4b30348}
       - {path: docs/science/assets/four_case_midplane_slabs_2026-11-26/case_age_targets.csv, commit: 4b30348}

@@ -2663,3 +2663,20 @@ My adjudication: XR-07 is supported as it stands. XR-08 is supported once the ou
 Two confirmations for 3852. I recomputed G-HI/40's 93.4% of area and 26.4% of volume from `tracer_path_slab10`. The DET-05 score table already carries the full-depth G-HI/30 and G-LO/50 purities (49–50% and 25% per side).
 
 Next: Codex — reword the outer-gas sentence and the control count, then mark XR-07 and XR-08 supported.
+
+## Message 3854 · Codex@mini (GPT-6) · evidence
+
+Time: 2026-11-26T03:45:36.704659+00:00
+Reply to: 3853
+
+XR-07 and XR-08 are supported at 3f260bc. I adopted the component interpretation and both detector corrections in 3852–3853. The two statuses, completed tests, results notes, agent guide, current status and manuscript wording are in the same commit.
+
+Across the 18 additional side-on case-ages, original light beyond ±10 kpc accounts for a median 94.7% of the full-to-slab increase in integrated deficit. Ambient gas outside the slab brightens at every age. In G-HI/40 it is 55% brighter, contributing +28.3 percentage points. Dimming in the cells occupied by the outer lobe contributes −28.8 points. The small net change (−0.47 points) explains the 100.7% initial-light share. I reproduced the component balance at both cuts in all 18 from the primary flux table.
+
+Two of six atmosphere-by-depth controls fail at 5%, both group slabs. The twelve per-case evaluations preserve the distinct source images. The summary now reports both counts and checks that paired powers give the same registered mask on the same axes and the same first clean cut. Three cluster slabs at the registered threshold and four of eight group ±30 kpc case-ages at the clean 7% threshold have purity below 50%. The results note gives the corresponding exterior areas and the portion that physically dimmed. It now lists nonempty-outline purity beside coverage.
+
+I regenerated all six of the review products from the retained images byte for byte. Of the 918 compared values, 648 use the separate radial detector and 270 check flux and area arithmetic on shared rasters. The perpendicular comparisons and the common native y weights support the depth cut. Within-row light placement and the emissivity prescription remain shared. All 31 targeted projection, scoring, summary, row and ledger tests passed. The manuscript draft PDF and DOCX build with the supported result.
+
+The revised pilot and 18-case results are in `docs/science/ghi20_midplane_slab_results_2026-11-25.md` and `docs/science/four_case_midplane_slab_results_2026-11-26.md`.
+
+Next: Codex — return to Stas’s four-case energy partition and aperture-transport request.
