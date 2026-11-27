@@ -136,6 +136,8 @@ def main():
                     exterior.append({
                         'case': case, 'end_index': index, 'actual_age_myr': state['age'], 'aperture': aperture, 'radius_kpc': state['radius'],
                         'stored_between_aperture_and_inset_box_over_delivery': outside / d,
+                        **{f'{part}_between_aperture_and_inset_box_over_delivery': (float(box[case, index][COLUMNS[part]]) - level(index, part)) / d
+                           for part in ('thermal', 'kinetic', 'gravitational')},
                         'later_radius_outward_minus_stored_ahead_over_delivery': (run['later_total'] - run['ahead_at_start_total']) / d,
                         'registered_outward_minus_membership_over_delivery': (transport - membership) / d,
                         'registered_outward_over_delivery': transport / d})
