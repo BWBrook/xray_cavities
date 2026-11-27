@@ -38,18 +38,26 @@ Within R100, the kinetic increase in the high-power cases is larger than in the 
 
 The machine-readable table gives each component in erg and as a fraction of D for outputs near 10, 20, 30, 40 and 50 Myr where retained, plus the flagged G-HI endpoint. [Selected-age component table](assets/four_case_energy_partition_2026-11-26/selected_age_components.csv)
 
-## How tracer weighting changes the 30-Myr thermal partition
+## Two ways of assigning thermal energy to the atmosphere
 
-The primary calculation gives each cell with jet tracer at or below 0.001 its full weight. An alternative assigns a share `1 − tr1` of every cell’s thermal change to ambient material, applying the current tracer weight to both the evolved and initial pressure at the same position. The archived pressure sums and the measured containment of all cells above 0.001 already bound this alternative.
+The binary convention sums the full thermal change in cells whose jet tracer is at or below the cut. Tightening that cut from 0.001 to 0.0001 measures the signed change in the cells removed. The continuous convention assigns each cell’s change a weight of `1 − tr1`, including cells inside the tracer-defined lobe. All three columns use the current tracer and compare the same positions in the evolved and initial pressure fields. Each cell has one fluid pressure.
 
-| Case | Thermal gain from the binary mask (% of delivery) | Thermal gain with continuous weights (% of delivery) | Fraction of all tagged mass at tracer ≤ 0.001, whole grid |
-| --- | ---: | ---: | ---: |
-| C-HI | 51.50 | 56.91–59.61 | 0.529% |
-| C-LO | 91.37 | 86.70–96.46 | 1.657% |
-| G-HI | 31.40 | 47.57–47.82 | 0.427% |
-| G-LO | 66.13 | 68.74–80.55 | 1.415% |
+| Case at 30 Myr, R100 | Binary ≤ 0.001 (% D) | Binary ≤ 0.0001 (% D) | Removed band (% D) | Continuous ambient (% D) | Claude’s forecast (% D) | Measured minus forecast (pp) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| C-HI | 51.499 | 49.975 | 1.524 | 58.242 | 58.2 | +0.042 |
+| C-LO | 91.374 | 90.935 | 0.440 | 91.559 | 91.6 | −0.041 |
+| G-HI | 31.399 | 28.012 | 3.387 | 47.695 | 47.7 | −0.005 |
+| G-LO | 66.134 | 64.549 | 1.585 | 74.301 | 74.3 | +0.001 |
 
-The continuous intervals are algebraic bounds, rounded outwards. In G-HI, assigning mixed cells proportionally adds at least 16.17 percentage points to the ambient share. The cut and weighting also give distinct answers in C-HI and G-LO. The C-LO bounds contain its binary result. The dilute tracer-mass column measures marked mass on the whole grid and bounds its share inside R100. The single-fluid calculation stores one pressure per cell. Neither convention can recover separate temperatures for material of the two origins. The jet speed fixes the *kinetic* energy per gram at injection. Determining the thermal gain of cells with tracer between 0.0001 and 0.001 requires their current and initial pressures. [Derivation and source receipts](assets/aperture_partition_followup_2026-11-27/tracer_bounds.md) · [Numerical bounds](assets/aperture_partition_followup_2026-11-27/thermal_tracer_30myr.csv)
+**G-HI separates the two effects.** The cells removed by the tighter cut account for 3.387% of delivery, or 10.8% of the primary ambient gain. Under continuous weighting the cells **above** 0.001 contribute 16.297 percentage points to the ambient share. Weighting the cells **at or below** 0.001 subtracts just 0.00149 points. This gives 47.695% under continuous weighting and 31.399% for the binary ambient region. The 3.387 points belong to the full cells in the removed band. Their tagged mass alone cannot identify how much of that heat came from jet material. [Thermal changes by band and aperture](assets/aperture_partition_followup_2026-11-27/native_thermal_partition.csv)
+
+The tagged share of the gas **mass inside the binary lobe** at 30 Myr is 4.74% in C-HI, 2.93% in C-LO, 5.46% in G-HI and 4.05% in G-LO. All cells above 0.001 lie inside R100, so we can subtract the dilute tagged mass from the whole-grid tagged mass and divide by the gas mass of the selected lobe. Pressure weighting answers a different question. Neither weighting recovers separate temperatures for material of the two origins. [Tagged mass and native pressure bounds](assets/aperture_partition_followup_2026-11-27/tracer_bounds.md) · [Regional gas masses](assets/four_case_energy_partition_2026-11-26/sphere_components.csv)
+
+Claude recorded the four one-decimal forecasts before the jobs were submitted. All four native measurements round to the predicted values and lie within the earlier algebraic bounds. Applying Claude’s formula to the unrounded archived sums gives discrepancies below 0.00022 percentage points in all four cases. That comparison uses a whole-grid tracer-weighted pressure difference and centre-derived cell widths. Its agreement constrains their combined effect on the signed thermal change. [Forecast in board message 3870](../correspondence/thread-0029.md#message-3870--claudemini-claude-fable-52--evidence) · [Bounds recorded before the reads](assets/aperture_partition_followup_2026-11-27/thermal_tracer_30myr.csv)
+
+**C-LO shell at 50 Myr.** All 37,477,304 cells between R300 and R100 have tracer at or below 0.0001. Both binary cuts therefore give the same shell thermal gain, 19.98996975% of delivery. Continuous weighting gives 19.98996962%. For the full R100 sphere, the corresponding figures are 95.461%, 95.400% and 92.696%. The cells above 0.001 now have a net thermal decrease and contribute a negative term to the continuous assignment. [C-LO native receipt](assets/aperture_partition_followup_2026-11-27/native/C-LO_50.json)
+
+Five native reads reproduced all published primary thermal sums and cell counts at the selected apertures. A separate recombination of the four tracer bands checked the results and shell subtraction against the earlier stocks to within $1.2 \times 10^{-15}D$. It used the five compact receipts. The native reader checked the registered file identities, times, axes and published thermal sums. The receipt records the production files’ historical SHA-256 identities, and each new result matched its hash on the cluster. NAT-14 is supported for these measured partitions. [Native reader](../../scripts/science/measure_ambient_tracer_sensitivity.py) · [Job and file checksums](assets/aperture_partition_followup_2026-11-27/native_receipt.json) · [Receipt replay and forecast comparison](../../scripts/science/summarise_ambient_tracer_sensitivity.py)
 
 ## Radius, outer gas and boundary contact
 
@@ -80,5 +88,6 @@ Run from the repository root with a fresh output path. Adding `--fixed-root priv
 
 ```sh
 .venv/bin/python scripts/science/four_case_energy_partition.py --out /tmp/four-case-energy-partition
-.venv/bin/python -m pytest -q tests/test_four_case_energy_partition.py
+.venv/bin/python scripts/science/summarise_ambient_tracer_sensitivity.py --out /tmp/native-thermal-partition.csv
+.venv/bin/python -m pytest -q tests/test_four_case_energy_partition.py tests/test_ambient_tracer_sensitivity.py
 ```

@@ -1,0 +1,83 @@
+{
+  "case": "G-LO",
+  "index": 30,
+  "actual_age_myr": 29.999643622014947,
+  "cumulative_net_gas_delivery_erg": 2.173396544105416e+58,
+  "weighting": "Current tr1 applied to same-cell thermal change; one_minus_tr1 is evaluated over the indicated region.",
+  "initial_sha256": "bdce6361bfa7d3dafee98592e72ba7aebce418bbb9f86c33baba27c5ed13ae99",
+  "native_sha256": "7e3b7b5899d984e91de2e3e55d84e385390d6d0c49d765967e03cb3bdd185e3a",
+  "fixed_receipt_sha256": "85927b3d9e5ceeb617d86b5f5f620f367835343f2a3b019e6ca6c4069af5aff5",
+  "axes_sha256": "e05a3e0f97ca9b78fa0291e2239ea10edbd277954aa835039d9cdc9142e23b98",
+  "registration_sha256": "2adb3221da4ed806f6d42f33be3d37dc2c2c7fc4039c785c68d3b4abf8a098b6",
+  "published_stocks_sha256": "b4684a7dbe097fe0bf26a276243067fe1fd0203230db4ab200f6241075f28d9d",
+  "reader_sha256": "f2bc89e7a8df8f1adcb3f3307acaba6270ad700b5ae17006f42e03740f88aeab",
+  "apertures": {
+    "R100": {
+      "all": {
+        "cell_count": 298906856,
+        "volume_kpc3": 1122339.90672592,
+        "thermal_change_erg": 1.681767558565792e+58,
+        "thermal_change_over_delivery": 0.7737969231279964,
+        "one_minus_tr1_thermal_change_erg": 1.6148545604814296e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.7430096292649228
+      },
+      "ambient_le_1e-4": {
+        "cell_count": 246449593,
+        "volume_kpc3": 1084339.102959138,
+        "thermal_change_erg": 1.402911598159466e+58,
+        "thermal_change_over_delivery": 0.6454926975771526,
+        "one_minus_tr1_thermal_change_erg": 1.4029101666319245e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.645492038917993
+      },
+      "ambient_le_1e-3": {
+        "cell_count": 249250851,
+        "volume_kpc3": 1087351.454907949,
+        "thermal_change_erg": 1.4373539236160568e+58,
+        "thermal_change_over_delivery": 0.6613399324271406,
+        "one_minus_tr1_thermal_change_erg": 1.4373391426143232e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.6613331315505249
+      },
+      "bands": {
+        "unmarked": {
+          "cell_count": 199578835,
+          "volume_kpc3": 1016749.4085337147,
+          "thermal_change_erg": 6.735791278414876e+57,
+          "thermal_change_over_delivery": 0.30992003261822476,
+          "one_minus_tr1_thermal_change_erg": 6.735791278414876e+57,
+          "one_minus_tr1_thermal_change_over_delivery": 0.30992003261822476
+        },
+        "positive_le_1e-4": {
+          "cell_count": 46870758,
+          "volume_kpc3": 67589.6944254234,
+          "thermal_change_erg": 7.293324703179783e+57,
+          "thermal_change_over_delivery": 0.3355726649589278,
+          "one_minus_tr1_thermal_change_erg": 7.293310387904371e+57,
+          "one_minus_tr1_thermal_change_over_delivery": 0.3355720062997682
+        },
+        "gt_1e-4_le_1e-3": {
+          "cell_count": 2801258,
+          "volume_kpc3": 3012.351948810997,
+          "thermal_change_erg": 3.4442325456590995e+56,
+          "thermal_change_over_delivery": 0.015847234849988075,
+          "one_minus_tr1_thermal_change_erg": 3.4428975982398527e+56,
+          "one_minus_tr1_thermal_change_over_delivery": 0.015841092632531868
+        },
+        "gt_1e-3": {
+          "cell_count": 49656005,
+          "volume_kpc3": 34988.45181797086,
+          "thermal_change_erg": 2.4441363494973497e+57,
+          "thermal_change_over_delivery": 0.11245699070085582,
+          "one_minus_tr1_thermal_change_erg": 1.775154178671064e+57,
+          "one_minus_tr1_thermal_change_over_delivery": 0.08167649771439794
+        }
+      }
+    }
+  },
+  "radii_kpc": {
+    "R100": 64.46911503485266
+  },
+  "tracer_range_in_R100": [
+    0.0,
+    1.0
+  ]
+}

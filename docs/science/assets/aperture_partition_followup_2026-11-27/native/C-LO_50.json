@@ -1,0 +1,204 @@
+{
+  "case": "C-LO",
+  "index": 50,
+  "actual_age_myr": 50.00000000000777,
+  "cumulative_net_gas_delivery_erg": 3.543160563559363e+58,
+  "weighting": "Current tr1 applied to same-cell thermal change; one_minus_tr1 is evaluated over the indicated region.",
+  "initial_sha256": "c4803ec760cbc554bc2cc39ced2cad56849963cf9188ad1bb3505644542a7a59",
+  "native_sha256": "5ff85887624125fb40261dcba753330e5ae30ddf158a3b21a920229fde1716d2",
+  "fixed_receipt_sha256": "c45c657548d24c394f0914dbe9c488666a92333fb5602bb85cb09edd48555d95",
+  "axes_sha256": "e05a3e0f97ca9b78fa0291e2239ea10edbd277954aa835039d9cdc9142e23b98",
+  "registration_sha256": "2adb3221da4ed806f6d42f33be3d37dc2c2c7fc4039c785c68d3b4abf8a098b6",
+  "published_stocks_sha256": "b4684a7dbe097fe0bf26a276243067fe1fd0203230db4ab200f6241075f28d9d",
+  "reader_sha256": "f2bc89e7a8df8f1adcb3f3307acaba6270ad700b5ae17006f42e03740f88aeab",
+  "apertures": {
+    "R100": {
+      "all": {
+        "cell_count": 376636944,
+        "volume_kpc3": 2220761.692052872,
+        "thermal_change_erg": 3.278199280341909e+58,
+        "thermal_change_over_delivery": 0.9252189454967061,
+        "one_minus_tr1_thermal_change_erg": 3.284378655391234e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.9269629745742699
+      },
+      "ambient_le_1e-4": {
+        "cell_count": 364367338,
+        "volume_kpc3": 2203661.8383502574,
+        "thermal_change_erg": 3.380171525057355e+58,
+        "thermal_change_over_delivery": 0.9539989691186126,
+        "one_minus_tr1_thermal_change_erg": 3.380171259626536e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.9539988942050391
+      },
+      "ambient_le_1e-3": {
+        "cell_count": 365927853,
+        "volume_kpc3": 2205631.054414503,
+        "thermal_change_erg": 3.382344503657029e+58,
+        "thermal_change_over_delivery": 0.9546122573285861,
+        "one_minus_tr1_thermal_change_erg": 3.3823440919963874e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.9546121411440006
+      },
+      "bands": {
+        "unmarked": {
+          "cell_count": 335215555,
+          "volume_kpc3": 2163266.4042188553,
+          "thermal_change_erg": 3.1327719506188986e+58,
+          "thermal_change_over_delivery": 0.8841744240548333,
+          "one_minus_tr1_thermal_change_erg": 3.1327719506188986e+58,
+          "one_minus_tr1_thermal_change_over_delivery": 0.8841744240548333
+        },
+        "positive_le_1e-4": {
+          "cell_count": 29151783,
+          "volume_kpc3": 40395.43413140208,
+          "thermal_change_erg": 2.473995744384565e+57,
+          "thermal_change_over_delivery": 0.06982454506377932,
+          "one_minus_tr1_thermal_change_erg": 2.4739930900763735e+57,
+          "one_minus_tr1_thermal_change_over_delivery": 0.06982447015020586
+        },
+        "gt_1e-4_le_1e-3": {
+          "cell_count": 1560515,
+          "volume_kpc3": 1969.2160642456329,
+          "thermal_change_erg": 2.1729785996739197e+55,
+          "thermal_change_over_delivery": 0.0006132882099734719,
+          "one_minus_tr1_thermal_change_erg": 2.1728323698517742e+55,
+          "one_minus_tr1_thermal_change_over_delivery": 0.0006132469389614694
+        },
+        "gt_1e-3": {
+          "cell_count": 10709091,
+          "volume_kpc3": 15130.637638369248,
+          "thermal_change_erg": -1.0414522331512006e+57,
+          "thermal_change_over_delivery": -0.029393311831880004,
+          "one_minus_tr1_thermal_change_erg": -9.796543660515392e+56,
+          "one_minus_tr1_thermal_change_over_delivery": -0.02764916656973075
+        }
+      }
+    },
+    "R300": {
+      "all": {
+        "cell_count": 339159640,
+        "volume_kpc3": 1620087.5703497194,
+        "thermal_change_erg": 2.569922555607215e+58,
+        "thermal_change_over_delivery": 0.7253192480290932,
+        "one_minus_tr1_thermal_change_erg": 2.5761019351525963e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.7270632783755964
+      },
+      "ambient_le_1e-4": {
+        "cell_count": 326890034,
+        "volume_kpc3": 1602987.7166471046,
+        "thermal_change_erg": 2.6718948003226615e+58,
+        "thermal_change_over_delivery": 0.7540992716509997,
+        "one_minus_tr1_thermal_change_erg": 2.6718945393878985e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.7540991980063656
+      },
+      "ambient_le_1e-3": {
+        "cell_count": 328450549,
+        "volume_kpc3": 1604956.9327113503,
+        "thermal_change_erg": 2.6740677789223354e+58,
+        "thermal_change_over_delivery": 0.7547125598609732,
+        "one_minus_tr1_thermal_change_erg": 2.67406737175775e+58,
+        "one_minus_tr1_thermal_change_over_delivery": 0.7547124449453271
+      },
+      "bands": {
+        "unmarked": {
+          "cell_count": 299885333,
+          "volume_kpc3": 1568576.5984955514,
+          "thermal_change_erg": 2.569635553549102e+58,
+          "thermal_change_over_delivery": 0.7252382463208824,
+          "one_minus_tr1_thermal_change_erg": 2.569635553549102e+58,
+          "one_minus_tr1_thermal_change_over_delivery": 0.7252382463208824
+        },
+        "positive_le_1e-4": {
+          "cell_count": 27004701,
+          "volume_kpc3": 34411.118151553266,
+          "thermal_change_erg": 1.0225924677355944e+57,
+          "thermal_change_over_delivery": 0.02886102533011729,
+          "one_minus_tr1_thermal_change_erg": 1.0225898583879638e+57,
+          "one_minus_tr1_thermal_change_over_delivery": 0.028860951685483246
+        },
+        "gt_1e-4_le_1e-3": {
+          "cell_count": 1560515,
+          "volume_kpc3": 1969.2160642456329,
+          "thermal_change_erg": 2.1729785996739197e+55,
+          "thermal_change_over_delivery": 0.0006132882099734719,
+          "one_minus_tr1_thermal_change_erg": 2.1728323698517742e+55,
+          "one_minus_tr1_thermal_change_over_delivery": 0.0006132469389614694
+        },
+        "gt_1e-3": {
+          "cell_count": 10709091,
+          "volume_kpc3": 15130.637638369248,
+          "thermal_change_erg": -1.0414522331512006e+57,
+          "thermal_change_over_delivery": -0.029393311831880004,
+          "one_minus_tr1_thermal_change_erg": -9.796543660515392e+56,
+          "one_minus_tr1_thermal_change_over_delivery": -0.02764916656973075
+        }
+      }
+    },
+    "R100_minus_R300": {
+      "all": {
+        "cell_count": 37477304,
+        "volume_kpc3": 600674.1217031527,
+        "thermal_change_erg": 7.082767247346936e+57,
+        "thermal_change_over_delivery": 0.19989969746761294,
+        "one_minus_tr1_thermal_change_erg": 7.082767202386376e+57,
+        "one_minus_tr1_thermal_change_over_delivery": 0.1998996961986735
+      },
+      "ambient_le_1e-4": {
+        "cell_count": 37477304,
+        "volume_kpc3": 600674.1217031527,
+        "thermal_change_erg": 7.082767247346936e+57,
+        "thermal_change_over_delivery": 0.19989969746761294,
+        "one_minus_tr1_thermal_change_erg": 7.082767202386376e+57,
+        "one_minus_tr1_thermal_change_over_delivery": 0.1998996961986735
+      },
+      "ambient_le_1e-3": {
+        "cell_count": 37477304,
+        "volume_kpc3": 600674.1217031527,
+        "thermal_change_erg": 7.082767247346936e+57,
+        "thermal_change_over_delivery": 0.19989969746761294,
+        "one_minus_tr1_thermal_change_erg": 7.082767202386376e+57,
+        "one_minus_tr1_thermal_change_over_delivery": 0.1998996961986735
+      },
+      "bands": {
+        "unmarked": {
+          "cell_count": 35330222,
+          "volume_kpc3": 594689.8057233038,
+          "thermal_change_erg": 5.631363970697966e+57,
+          "thermal_change_over_delivery": 0.1589361777339509,
+          "one_minus_tr1_thermal_change_erg": 5.631363970697966e+57,
+          "one_minus_tr1_thermal_change_over_delivery": 0.1589361777339509
+        },
+        "positive_le_1e-4": {
+          "cell_count": 2147082,
+          "volume_kpc3": 5984.315979848816,
+          "thermal_change_erg": 1.4514032766489707e+57,
+          "thermal_change_over_delivery": 0.04096351973366203,
+          "one_minus_tr1_thermal_change_erg": 1.4514032316884097e+57,
+          "one_minus_tr1_thermal_change_over_delivery": 0.04096351846472261
+        },
+        "gt_1e-4_le_1e-3": {
+          "cell_count": 0,
+          "volume_kpc3": 0.0,
+          "thermal_change_erg": 0.0,
+          "thermal_change_over_delivery": 0.0,
+          "one_minus_tr1_thermal_change_erg": 0.0,
+          "one_minus_tr1_thermal_change_over_delivery": 0.0
+        },
+        "gt_1e-3": {
+          "cell_count": 0,
+          "volume_kpc3": 0.0,
+          "thermal_change_erg": 0.0,
+          "thermal_change_over_delivery": 0.0,
+          "one_minus_tr1_thermal_change_erg": 0.0,
+          "one_minus_tr1_thermal_change_over_delivery": 0.0
+        }
+      }
+    }
+  },
+  "radii_kpc": {
+    "R100": 80.93595106058375,
+    "R300": 72.85936973025494
+  },
+  "tracer_range_in_R100": [
+    0.0,
+    1.0
+  ]
+}

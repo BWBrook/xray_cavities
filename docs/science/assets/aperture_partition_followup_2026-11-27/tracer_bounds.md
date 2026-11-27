@@ -11,6 +11,8 @@ The G-HI ambient thermal gain inside R100 rises from 31.4% of net injector deliv
 
 Interval endpoints are rounded outward. The denominator for thermal gains is cumulative net gas energy delivered through the injector at the actual snapshot time. Thermal change compares the pressure of the same cells at the current age and time zero using the current tracer mask or weight. Gravitational potential does not enter this component. Continuous weighting is a convention for assigning the cell's thermal energy in proportion to its mass tracer. The simulation stores one pressure per cell and does not track the heat of jet and atmospheric material separately.
 
+The five subsequent native reads are reported in the [partition note](../../four_case_energy_partition_2026-11-26.md#two-ways-of-assigning-thermal-energy-to-the-atmosphere). The table above preserves the bounds available before those reads.
+
 ## Tracer mass
 
 The four native outer-tracer receipts in `outer_30myr.zip` contain the full-grid integrals of `rho × tr1 × V` for all positive tracer and for `0 < tr1 < 0.001`. Each case's precision receipt records zero cells exactly equal to 0.001 when the stored floats are promoted to double precision. Each aperture encloses every cell above that threshold. Any tracer beyond the aperture therefore reduces the dilute numerator and the total denominator by the same mass when restricting the count to R100. The whole-grid shares are exact native totals up to summation precision and give upper limits for the corresponding shares inside R100. A tracer-mass share alone does not specify local thermal energy.
