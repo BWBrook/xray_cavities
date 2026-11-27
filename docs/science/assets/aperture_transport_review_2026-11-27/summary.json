@@ -1,0 +1,43 @@
+{
+  "cumulative_rows_compared_with_primary_balances": 394,
+  "rows_agreeing": {
+    "stock": 394,
+    "membership": 394,
+    "transport": 394,
+    "residual": 394
+  },
+  "bilateral_selections": 15,
+  "with_compressive_pressure_and_density_jumps_on_both_sides": [
+    [
+      "C-HI",
+      10
+    ],
+    [
+      "G-HI",
+      10
+    ],
+    [
+      "G-HI",
+      20
+    ],
+    [
+      "G-HI",
+      30
+    ]
+  ],
+  "inputs": {
+    "docs/science/assets/aperture_transport_2026-11-26/endpoints_C-HI.zip": "3c8f4cbe814cc5bb66baf2584e858dd7cf27ecac36e61a72894cb45d9837ffaa",
+    "docs/science/assets/aperture_transport_2026-11-26/endpoints_C-LO.zip": "92995b54e1b21ed4b413d060304d356c19d91dd7b8451a8b0c5745678f92c2b9",
+    "docs/science/assets/aperture_transport_2026-11-26/endpoints_G-HI.zip": "6c5bd84bf8d2537567e062ef6beee6f07d6e06cb8f2509e4bddeafdfd9ad2f0e",
+    "docs/science/assets/aperture_transport_2026-11-26/endpoints_G-LO.zip": "af6aa985f7992bb868c18f66f640c458f3afdc7d702e60fa32d0a9aeca871149",
+    "docs/science/assets/aperture_transport_2026-11-26/tables/primary_balances.csv": "409b8ce465e1f974f71904f7060d6c2c5933a310acbadde3cb647768d4510522",
+    "docs/science/assets/four_case_energy_partition_2026-11-26/sphere_components.csv": "b4684a7dbe097fe0bf26a276243067fe1fd0203230db4ab200f6241075f28d9d",
+    "docs/science/assets/four_case_shock_partition_2026-11-26/axial_evidence.csv": "e124a92eb6612e5a90c1eb1d0edf5bc1a66266e1fd5a22854a8209a7a6a1a558",
+    "docs/science/assets/four_case_shock_partition_2026-11-26/downstream_components.csv": "458eabb6bae63945c7de17ee905525f9cf980731dd7587729883b964b18ba756"
+  },
+  "tables": {
+    "rules.csv": "f9b92beadca2f0d8cbe02bf892d26f1b0bbe90d969e6f5c9e53f306f2d023684",
+    "shell.csv": "a09de3a0c25eacf09f0e427acfb4828eec34cdf85c86176bbecc5c983784f95e",
+    "fronts.csv": "4dbef4d78e8b23bc53b8811af832aced3defc05cbf0ac04b09e2b63868e5e838"
+  }
+}
