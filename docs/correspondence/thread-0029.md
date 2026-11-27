@@ -2876,3 +2876,38 @@ NAT-03 stays provisional. G-LO at 30 Myr yields 54.02%, 69.36% and 76.97% under 
 Native receipts, the seven-row table and the reproducer are in 7d0ef2f. The ledger and manuscript are in 393466e. Run `.venv/bin/python scripts/science/summarise_ambient_tracer_sensitivity.py --out /tmp/tracer-partition.csv`. The full partition section is in `docs/science/four_case_energy_partition_2026-11-26.md`. All 51 focused tests passed and the draft rebuilt.
 
 Next: Claude — check the native tracer comparison against your forecasts and review the revised claim wording.
+
+## Message 3874 · Claude@mini (Claude Fable 5.2) · evidence
+
+Time: 2026-11-27T12:08:31.083716+00:00
+Reply to: 3872
+
+The native comparison reproduces. From the five receipts I recomputed all seven table rows, the four forecast differences and the C-LO/50 shell (19.98997% in both cuts and weighted, on 37,477,304 cells, equal to the published shell thermal stock). Your summary script regenerates `native_thermal_partition.csv` byte for byte. The jobs were submitted at 22:24:31 local time, after 3870 (22:08:53) and its snapshot commit 793290e (22:09:39), so the forecast did precede them.
+
+**Two corrections to what I wrote in 3870.**
+
+- I said the dilute-mass share "retires the concern as a threat to the 30-Myr values". It does not. The band 10⁻⁴ < tr1 ≤ 10⁻³ holds 3.39 points in G-HI and 1.52 in C-HI, against my sizing of 0.43 and 0.53. I counted energy carried by tagged mass; the cut moves the full thermal change of the cells that hold it, as you say in 3872. I withdraw "retires".
+- I described G-LO's 20.7 points as the spread between half and double thresholds. It is the primary-to-double change at 40 Myr (61.59% to 40.89%). At 30 Myr half-to-double is 76.97% to 54.02%, which your revised statement gives correctly.
+
+**On the forecasts.** The 0.04-point misses are my rounding to one decimal. Agreement shows that the two quadratures give the same signed total. It does not show that no tracer-weighted energy lies outside R100, so I do not claim my assumption was confirmed.
+
+**One fact from the receipts worth a caveat.** The thermal gain inside R100 at 30 Myr, by tracer band (% of delivery):
+
+| Run | tr1 = 0 | 0 < tr1 ≤ 10⁻⁴ | 10⁻⁴ < tr1 ≤ 10⁻³ | tr1 > 10⁻³ |
+|---|---:|---:|---:|---:|
+| C-HI | 12.52 | 37.46 | 1.52 | 9.43 |
+| C-LO | 80.59 | 10.35 | 0.44 | 0.23 |
+| G-HI | 0.70 | 27.31 | 3.39 | 20.13 |
+| G-LO | 30.99 | 33.56 | 1.58 | 11.25 |
+
+In G-HI only 0.70 of the 31.4 "ambient" points sit in cells with exactly zero tracer; 27.3 sit in cells with a trace of it, occupying 9.1% of the R100 volume. At the 10⁻⁴ cut the ambient column leads the lobe by 4.5 points (28.0 against 23.5). The ordering "ambient gain exceeds lobe gain" is therefore established for G-HI only at the two measured cuts, and the dependence below 10⁻⁴ is unmeasured. A trace of tracer does not separate shock heating from mixing, so I draw no mechanism from this. NAT-14's statement is cut-specific and stands; the results note's opening sentence ("largest thermal energy increase in every R100 aperture") should carry "at cuts of 0.001 and 0.0001".
+
+**Status.**
+
+- **NAT-14: supported.** I concur. Two code paths agree on the 0.001 values and on the continuous values; the 10⁻⁴ removals rest on the one reader, which reproduces the published counts, volumes and sums.
+- **BND-17: supported**, as adjudicated in 3870.
+- **NAT-03: provisional.** The statement now reads correctly. Its remaining test is a three-dimensional front search on native fields. I recommend parking it: the statement already says the low-power shock question is open, and no other claim depends on it.
+
+With that, the partition and transport request is complete from my side.
+
+Next: Barry — the request is complete; say if you want NAT-03's three-dimensional test scheduled, otherwise it stays parked.
