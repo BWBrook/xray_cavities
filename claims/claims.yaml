@@ -64,14 +64,17 @@ claims:
   - id: NAT-03
     status: provisional
     statement: >-
-      At 30 Myr the selected downstream ambient gas stores thermal, kinetic and
-      gravitational increases totalling 63.0% of reconstructed injector gas
-      delivery in C-HI, 54.3% in G-HI and 69.4% in G-LO. The sole bilateral
-      C-LO result is 20.6% at 10 Myr. Only four of 15 bilateral selections
-      have both compressive pressure and density jumps on both sides.
+      Ambient cells with an entropy excess connected to the candidate axial
+      front gain energy equal to 63.0%, 54.3% and 69.4% of cumulative injector
+      gas delivery at 30 Myr in C-HI, G-HI and G-LO. The only bilateral C-LO
+      selection gains 20.6% at 10 Myr. Four of 15 case-ages show compressive
+      pressure and density jumps on both sides (C-HI at 10 Myr and G-HI at
+      10, 20 and 30 Myr). Of 19 sides lacking either jump, 18 sampled edges
+      lie behind the projected tracer tip and one coincides with it. The
+      low-power measurements leave an atmospheric bow shock unresolved.
     evidence:
       - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
-      - {path: docs/science/four_case_shock_partition_2026-11-26.md, commit: 1e1e052}
+      - {path: docs/science/four_case_shock_partition_2026-11-26.md, commit: 58a87e2}
       - {path: docs/science/assets/four_case_shock_partition_2026-11-26/downstream_components.csv, commit: 1e1e052}
       - {path: docs/science/assets/four_case_shock_partition_2026-11-26/axial_evidence.csv, commit: 1e1e052}
       - {path: scripts/science/check_aperture_transport_rules.py, commit: 4e8cfa2}
@@ -79,10 +82,10 @@ claims:
     reproduce: .venv/bin/python scripts/science/four_case_shock_partition.py --out /tmp/four-case-shocks
     caveats:
       - The selection covers a connected subset of ambient cells in the domain. Its initial energy is measured at the same positions. Intersections with each velocity-defined sphere were not archived.
-      - The same-cell adiabatic comparison, axial jumps and propagation do not establish the total irreversible heat generated in a bow shock or internal jet shocks. In G-LO the axial cuts show no compressive pressure or density jump on either side at any of the five selected ages.
+      - All 12 low-power edges lie 1.1–4.7 kpc behind the farthest tracer-bearing pixel on the three central projected sightlines. The projection integrates through the full domain. It cannot identify the gas in individual three-dimensional jump samples. Inferring irreversible heat also requires the upstream state and the mass processed over time.
       - Halving or doubling the mask thresholds changes C-LO/10 by factors of 0.654 and 1.588 and matters in G-LO.
       - "Claude, 27 November 2026: the 15 bilateral selections and the four with both jumps compressive on both sides reproduce. The negatives are inconclusive, not evidence against a shock. Against the tracer rasters (projected through y, on sightlines through the jet axis), the axial front lies behind the farthest tracer-bearing gas on 18 of the 19 sides without both compressive jumps, and at it on the other. On all 12 low-power sides it lies 1.1–4.7 kpc behind, and 8 of 10 G-LO samples have downstream density at most 0.35 of upstream, so those samples straddle lobe gas. At late high-power ages the offset is one or two cells. On the 11 sides with both jumps the front is ahead of the tip on 7, at it on 3 and one cell behind on 1. Even there the measured pressure ratio is 5–49% of what a shock at the kinematic Mach number would give. All 30 sides advance at Mach 1.4–16 against the initial sound speed, though the two sides can differ (5.6 and 2.0 at G-LO/10). The low-power selections are ambient cells with excess entropy connected to a front inside the lobe head; downstream is not established for them."
-    test: Independently replay the component sums, signed propagation and jump classifications. Identifying physical dissipation would require the upstream state and mass processed over time.
+    test: Rebuild the regional component sums and locate the axial samples against the three-dimensional tracer and the evolving upstream state before interpreting a low-power selection as gas behind an atmospheric shock.
 
   - id: NAT-04
     status: supported
@@ -378,23 +381,29 @@ claims:
   - id: NAT-14
     status: provisional
     statement: >-
-      At 30 Myr the thermal energy change of ambient cells inside R100 amounts
-      to 51.5%, 91.4%, 31.4% and 66.1% of signed injector gas delivery in
-      C-HI, C-LO, G-HI and G-LO. At 50 Myr in C-LO the shell between R300
+      At 30 Myr the thermal energy change of R100 cells with jet tracer
+      at or below 0.001 amounts to 51.5%, 91.4%, 31.4% and 66.1% of signed
+      injector gas delivery in C-HI, C-LO, G-HI and G-LO. Weighting the
+      same-cell thermal change by the ambient fraction (1 − tr1) puts G-HI
+      between 47.57% and 47.82%. At 50 Myr in C-LO the shell between R300
       and R100 contains an ambient energy increase of 27.4% of delivery.
       Thermal, kinetic and gravitational energy contribute 20.0, 1.0 and
       6.5 percentage points, respectively, rounded separately.
     evidence:
-      - {path: docs/science/four_case_energy_partition_2026-11-26.md, commit: 1e1e052}
+      - {path: docs/science/four_case_energy_partition_2026-11-26.md, commit: 58a87e2}
+      - {path: scripts/science/bound_ambient_tracer_partition.py, commit: 58a87e2}
+      - {path: docs/science/assets/aperture_partition_followup_2026-11-27/thermal_tracer_30myr.csv, commit: 58a87e2}
+      - {path: docs/science/assets/aperture_partition_followup_2026-11-27/outer_30myr.zip, commit: 58a87e2}
       - {path: docs/science/assets/four_case_energy_partition_2026-11-26/native_fixed_stocks.json.gz, commit: 1e1e052}
       - {path: docs/science/assets/four_case_energy_partition_2026-11-26/sphere_components.csv, commit: 1e1e052}
       - {path: docs/science/assets/four_case_energy_partition_2026-11-26/verification.json, commit: 1e1e052}
     reproduce: .venv/bin/python scripts/science/four_case_energy_partition.py --out /tmp/four-case-energy
-    test: Independently integrate the signed delivery histories, rebuild the regional component sums and mass changes, and compare the two C-LO shell memberships with the tracer census.
+    test: Rebuild the native same-cell thermal changes at tracer cuts 0.001 and 0.0001 and with continuous ambient weights. Compare the 0.001 results with the published sums, the continuously weighted 30-Myr results with the archived bounds, and the C-LO shell with its two aperture stocks.
     caveats:
       - Current tracer selection, same positions at time zero, full cell weights, and centre-zero initial potential. The shell holds an instantaneous stock change. BND-17 measures transport separately and accounts for the changing set of cells inside each aperture.
       - Both high-power apertures extend beyond the grid from output 44 in C-HI and 40 in G-HI. G-HI ends when the tracer contacts a grid face at output 47.
       - The 50-Myr C-LO shell numerator was already measured in NAT-08 on the labelled-input basis. The current table uses the same physical stock difference and the matched measured delivery.
+      - The continuous bounds use the R100 stock, positive whole-grid pressure moments and the containment of all cells above the original cut. They also put C-HI at 56.91–59.61%, C-LO at 86.70–96.46% and G-LO at 68.74–80.55% of delivery. This weighting apportions one fluid pressure. Per gram, the injection speed constrains the initial kinetic energy. The energy of dilute gas at 30 Myr depends on its evolved state.
       - "Claude, 27 November 2026: the statement's values were read from sphere_components.csv, not rebuilt from native fields; the BND-17 review uses the same stocks. The shell's 6.5 gravitational points go with a mass gain of 8.6 × 10⁴¹ g and shift with the potential zero. Thermal plus kinetic is 21.0 points, and the thermal gain per unit of added mass is 1.57–1.60 times the specific thermal energy at the shell surfaces, close to the 5/3 of adiabatic compression."
       - "Claude, 27 November 2026, untested: ambient counts every cell with tr1 ≤ 0.001 at full weight. Jet gas enters at 0.1c with 4.5 × 10¹⁸ erg/g, about 900 times the specific thermal energy of C-LO's atmosphere at 70–80 kpc (5.2 × 10¹⁵ erg/g), so tracer fractions just under the cut could carry thermal energy comparable to the cell's own. How much sits there has not been measured. Test: repeat the R100 ambient thermal gain with the cut at 10⁻⁴ and with (1 − tr1) weighting. NAT-05 records the density of the 1e-3 to 5e-3 skin."
     depends_on: [NAT-04, NAT-05, BND-12]
@@ -893,16 +902,19 @@ claims:
   - id: BND-17
     status: provisional
     statement: >-
-      On the registered reconstruction from the four production series, net
-      outward energy through R100 / R300 by 30 Myr is 19.3% / 20.1%,
-      10.8% / 31.3%, 13.6% / 14.5% and 8.4% / 9.5% of cumulative signed
-      injector gas delivery in C-HI, C-LO, G-HI and G-LO. By 50 Myr in
-      C-LO it is 21.1% / 75.6%. The intervening shell receives a net
-      54.5% of delivery. Its changing membership contributes −27.7 points
-      and the difference in aperture residuals +0.6 points, giving the
-      measured 27.4% shell stock increase.
+      At 50 Myr in C-LO the gas between R300 and the fixed inset box stores
+      an excess of 32.4% of cumulative injector gas delivery. Beyond R100
+      the corresponding excess is 5.0%. The later-radius surface balances,
+      after subtracting energy already ahead of each surface, give 32.0%
+      and 5.1%. The intervening shell gains 27.4% of delivery. Earlier-
+      and later-radius balances give 54.50–54.59 points of net transport
+      into the shell, about −27.7 from changing membership and +0.46 to
+      +0.66 from the residual difference. In C-HI, G-HI and G-LO the
+      absolute change between either sphere and the box stays below 0.019%
+      of delivery at every saved age where the sphere fits inside it.
     evidence:
-      - {path: docs/science/four_case_aperture_transport_2026-11-26.md, commit: c9ae598}
+      - {path: docs/science/four_case_aperture_transport_2026-11-26.md, commit: 58a87e2}
+      - {path: scripts/science/plot_aperture_exterior_stocks.py, commit: 58a87e2}
       - {path: docs/science/four_case_aperture_transport_method_2026-11-26.md, commit: c9ae598}
       - {path: docs/science/assets/aperture_transport_2026-11-26/extraction_receipt.json, commit: c9ae598}
       - {path: docs/science/assets/aperture_transport_2026-11-26/tables/primary_balances.csv, commit: c9ae598}
@@ -916,16 +928,17 @@ claims:
       - {path: docs/science/assets/aperture_transport_review_2026-11-27/exterior.csv, commit: 4e8cfa2}
       - {path: docs/science/assets/aperture_transport_review_2026-11-27/shell.csv, commit: 3596284}
       - {path: docs/science/assets/aperture_transport_review_2026-11-27/summary.json, commit: 4e8cfa2}
-    reproduce: .venv/bin/python scripts/science/check_aperture_transport_history.py
+    reproduce: .venv/bin/python scripts/science/plot_aperture_exterior_stocks.py --out /tmp/aperture-exterior-stocks.png && .venv/bin/python scripts/science/check_aperture_transport_history.py
     test: >-
-      Independently recompute the C-LO shell transport, moving membership and
-      residual from the endpoint face components and stocks. Check the full
-      four-case histories, geometry flags, startup sensitivity and signed
-      mass balance against the public receipts.
+      Compare eligible exterior stocks from the independent spherical and
+      fixed-box integrations with the later-radius accounts. Recompute the
+      C-LO shell balance under each fixed-radius prescription. A history
+      of individual moving-surface crossings would require resolving the
+      aperture trajectory and flux together between the annual outputs.
     caveats:
       - The flux contains the pre-existing enthalpy and gravitational energy of moving ambient gas. Measured injector delivery sets its normalisation.
       - The primary time rule averages the two endpoint-radius fixed-surface trapezoids. The membership correction tracks excess storage relative to initial gas in the same positions. It excludes the initial energy of newly enclosed atmosphere.
-      - The individual surface histories depend strongly on the radius used within each annual interval. For C-HI at 30 Myr the R100 integral using each earlier radius is 38.52% of delivery, versus 0.025% using each later radius. The symmetric estimate is their mean.
+      - In C-HI, G-HI and G-LO the radii never shrink. The earlier surface can be interior by the next output, starting with the injector surface in the first interval. This invalidates the escape interpretation of the 26 November mean integrals and the associated G-LO shell-import figure. Exterior stocks constrain the signed energy present at output times within the fixed box. They leave exchanges between outputs and transport beyond the box unresolved.
       - The 50-Myr C-LO net transport into the shell spans 54.5–54.9% across the tested face and time rules. The old-radius and new-radius R100 integrals alone give 28.1% and 14.1%. The methods share annual snapshot times.
       - Two native implementations agree for the C-LO/30 surface rates. In the C-LO 10–11 Myr control, changing from 1 to 0.1 Myr samples shifts outward energy by 0.10 and 0.14 percentage points of delivery at R100 and R300. Signed mass residuals still reach −1.06 and −0.92 nominal interval jet masses.
       - The potential is zero at the centre. A shift by a constant changes the energy residual by that constant times the measured mass residual. The residual combines sources within the aperture and errors in reconstructing fluxes and integrating in time. The data do not resolve individual contributions.

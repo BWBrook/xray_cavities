@@ -17,7 +17,7 @@ separately, with true simulation age as a control. Existing radio-age
 diagnostics are separate archival work; see the
 [25 November scope decision](docs/exchange/logs/2026-11-25-cavity-age-scope-without-radio-ageing.md).
 
-> **Status, 26 November 2026.** Active research, developed in the open. The
+> **Status, 27 November 2026.** Active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
@@ -106,7 +106,7 @@ truth-assisted background diagnostic from an observer-only detector.
 
 ## Work in progress
 
-At 30 Myr the ambient thermal energy inside the 100 km/s sphere increased by 31–91% of measured injector delivery across the four runs. In the low-power cluster, the net flow of gas energy into the shell between the 300 and 100 km/s spheres by 50 Myr was equivalent to 54.5% of cumulative injector delivery on the primary reconstruction. As the surfaces moved, the changing shell membership contributed −27.7 percentage points. The ambient gas in the shell gained 27.4% of delivery. Separately, four of 15 bilateral downstream selections show compressive pressure and density jumps on both sides. These results await independent review. [Energy partition and figures](docs/science/four_case_energy_partition_2026-11-26.md) · [Transport across both surfaces](docs/science/four_case_aperture_transport_2026-11-26.md) · [Downstream gas and shock checks](docs/science/four_case_shock_partition_2026-11-26.md)
+At 50 Myr the low-power cluster stores energy equivalent to 32.4% of cumulative injector delivery outside the 300 km/s sphere and 5.0% outside the 100 km/s sphere, within the fixed inset box. The ambient shell between them holds the difference, 27.4%. In the other three runs the exterior change stays below 0.019% in magnitude at every age when the sphere fits inside the box. Four of 15 pairs of axial front samples have compressive pressure and density jumps on both sides. At low power the samples lie behind the projected lobe tip, leaving an atmospheric bow shock unresolved. All three claims remain provisional after review. [Regional energy partition](docs/science/four_case_energy_partition_2026-11-26.md) · [Exterior stocks and shell transport](docs/science/four_case_aperture_transport_2026-11-26.md) · [Front positions and jump checks](docs/science/four_case_shock_partition_2026-11-26.md)
 <!-- claims: NAT-03 NAT-14 BND-17 -->
 
 The [accounting pilots](docs/science/turn18_pilot_review_2026-11-14.md) all
