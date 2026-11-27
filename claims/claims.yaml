@@ -66,15 +66,16 @@ claims:
     statement: >-
       Ambient cells with an entropy excess connected to the candidate axial
       front gain energy equal to 63.0%, 54.3% and 69.4% of cumulative injector
-      gas delivery at 30 Myr in C-HI, G-HI and G-LO. The only bilateral C-LO
-      selection gains 20.6% at 10 Myr. Four of 15 case-ages show compressive
-      pressure and density jumps on both sides (C-HI at 10 Myr and G-HI at
+      gas delivery at 30 Myr in C-HI, G-HI and G-LO. In G-LO the 30-Myr
+      selection spans 54.0% at double the thresholds to 77.0% at half
+      the thresholds. The only bilateral C-LO selection gains 20.6% at 10 Myr.
+      Four of 15 case-ages show compressive pressure and density jumps on both sides (C-HI at 10 Myr and G-HI at
       10, 20 and 30 Myr). Of 19 sides lacking either jump, 18 sampled edges
       lie behind the projected tracer tip and one coincides with it. The
       low-power measurements leave an atmospheric bow shock unresolved.
     evidence:
       - {path: docs/science/q029_binary_native_refresh_2026-09-06.md, commit: 5e34fa3}
-      - {path: docs/science/four_case_shock_partition_2026-11-26.md, commit: 58a87e2}
+      - {path: docs/science/four_case_shock_partition_2026-11-26.md, commit: 7d0ef2f}
       - {path: docs/science/assets/four_case_shock_partition_2026-11-26/downstream_components.csv, commit: 1e1e052}
       - {path: docs/science/assets/four_case_shock_partition_2026-11-26/axial_evidence.csv, commit: 1e1e052}
       - {path: scripts/science/check_aperture_transport_rules.py, commit: 4e8cfa2}
@@ -83,7 +84,7 @@ claims:
     caveats:
       - The selection covers a connected subset of ambient cells in the domain. Its initial energy is measured at the same positions. Intersections with each velocity-defined sphere were not archived.
       - All 12 low-power edges lie 1.1–4.7 kpc behind the farthest tracer-bearing pixel on the three central projected sightlines. The projection integrates through the full domain. It cannot identify the gas in individual three-dimensional jump samples. Inferring irreversible heat also requires the upstream state and the mass processed over time.
-      - Halving or doubling the mask thresholds changes C-LO/10 by factors of 0.654 and 1.588 and matters in G-LO.
+      - At C-LO/10 the half and double thresholds yield 32.7% and 13.5% of delivery. The largest G-LO change from its primary threshold is 20.7 percentage points at 40 Myr (61.6% to 40.9% on doubling).
       - "Claude, 27 November 2026: the 15 bilateral selections and the four with both jumps compressive on both sides reproduce. The negatives are inconclusive, not evidence against a shock. Against the tracer rasters (projected through y, on sightlines through the jet axis), the axial front lies behind the farthest tracer-bearing gas on 18 of the 19 sides without both compressive jumps, and at it on the other. On all 12 low-power sides it lies 1.1–4.7 kpc behind, and 8 of 10 G-LO samples have downstream density at most 0.35 of upstream, so those samples straddle lobe gas. At late high-power ages the offset is one or two cells. On the 11 sides with both jumps the front is ahead of the tip on 7, at it on 3 and one cell behind on 1. Even there the measured pressure ratio is 5–49% of what a shock at the kinematic Mach number would give. All 30 sides advance at Mach 1.4–16 against the initial sound speed, though the two sides can differ (5.6 and 2.0 at G-LO/10). The low-power selections are ambient cells with excess entropy connected to a front inside the lobe head; downstream is not established for them."
     test: Rebuild the regional component sums and locate the axial samples against the three-dimensional tracer and the evolving upstream state before interpreting a low-power selection as gas behind an atmospheric shock.
 
@@ -379,25 +380,32 @@ claims:
     depends_on: [NAT-01, NAT-05, BND-15]
 
   - id: NAT-14
-    status: provisional
+    status: supported
     statement: >-
-      At 30 Myr the thermal energy change of R100 cells with jet tracer
-      at or below 0.001 amounts to 51.5%, 91.4%, 31.4% and 66.1% of signed
-      injector gas delivery in C-HI, C-LO, G-HI and G-LO. Weighting the
-      same-cell thermal change by the ambient fraction (1 − tr1) puts G-HI
-      between 47.57% and 47.82%. At 50 Myr in C-LO the shell between R300
-      and R100 contains an ambient energy increase of 27.4% of delivery.
-      Thermal, kinetic and gravitational energy contribute 20.0, 1.0 and
-      6.5 percentage points, respectively, rounded separately.
+      At 30 Myr the same-cell thermal energy gain in R100 cells with jet
+      tracer at or below 0.001 is 51.5%, 91.4%, 31.4% and 66.1% of net gas
+      delivery in C-HI, C-LO, G-HI and G-LO. Tightening the cut to 0.0001
+      removes 1.52, 0.44, 3.39 and 1.58 percentage points, respectively.
+      Weighting all cells by their current ambient fraction (1 − tr1)
+      allocates 58.24%, 91.56%, 47.69% and 74.30% of delivery to the
+      ambient column. At 50 Myr in C-LO, every cell between R300 and R100
+      satisfies both cuts. The shell gains 27.4% of delivery, including
+      20.0 thermal, 1.0 kinetic and 6.5 gravitational percentage points,
+      rounded separately.
     evidence:
-      - {path: docs/science/four_case_energy_partition_2026-11-26.md, commit: 58a87e2}
+      - {path: docs/science/four_case_energy_partition_2026-11-26.md, commit: 7d0ef2f}
+      - {path: docs/science/assets/aperture_partition_followup_2026-11-27/native_receipt.json, commit: 7d0ef2f}
+      - {path: docs/science/assets/aperture_partition_followup_2026-11-27/native_thermal_partition.csv, commit: 7d0ef2f}
+      - {path: scripts/science/summarise_ambient_tracer_sensitivity.py, commit: 7d0ef2f}
       - {path: scripts/science/bound_ambient_tracer_partition.py, commit: 58a87e2}
       - {path: docs/science/assets/aperture_partition_followup_2026-11-27/thermal_tracer_30myr.csv, commit: 58a87e2}
       - {path: docs/science/assets/aperture_partition_followup_2026-11-27/outer_30myr.zip, commit: 58a87e2}
       - {path: docs/science/assets/four_case_energy_partition_2026-11-26/native_fixed_stocks.json.gz, commit: 1e1e052}
       - {path: docs/science/assets/four_case_energy_partition_2026-11-26/sphere_components.csv, commit: 1e1e052}
       - {path: docs/science/assets/four_case_energy_partition_2026-11-26/verification.json, commit: 1e1e052}
-    reproduce: .venv/bin/python scripts/science/four_case_energy_partition.py --out /tmp/four-case-energy
+    reproduce: >-
+      .venv/bin/python scripts/science/four_case_energy_partition.py --out /tmp/four-case-energy &&
+      .venv/bin/python scripts/science/summarise_ambient_tracer_sensitivity.py --out /tmp/native-thermal-partition.csv
     test: Rebuild the native same-cell thermal changes at tracer cuts 0.001 and 0.0001 and with continuous ambient weights. Compare the 0.001 results with the published sums, the continuously weighted 30-Myr results with the archived bounds, and the C-LO shell with its two aperture stocks.
     caveats:
       - Current tracer selection, same positions at time zero, full cell weights, and centre-zero initial potential. The shell holds an instantaneous stock change. BND-17 measures transport separately and accounts for the changing set of cells inside each aperture.
@@ -407,6 +415,7 @@ claims:
       - "Claude, 27 November 2026: the statement's values were read from sphere_components.csv, not rebuilt from native fields; the BND-17 review uses the same stocks. The shell's 6.5 gravitational points go with a mass gain of 8.6 × 10⁴¹ g and shift with the potential zero. Thermal plus kinetic is 21.0 points, and the thermal gain per unit of added mass is 1.57–1.60 times the specific thermal energy at the shell surfaces, close to the 5/3 of adiabatic compression."
       - "Claude, 27 November 2026, untested: ambient counts every cell with tr1 ≤ 0.001 at full weight. Jet gas enters at 0.1c with 4.5 × 10¹⁸ erg/g, about 900 times the specific thermal energy of C-LO's atmosphere at 70–80 kpc (5.2 × 10¹⁵ erg/g), so tracer fractions just under the cut could carry thermal energy comparable to the cell's own. How much sits there has not been measured. Test: repeat the R100 ambient thermal gain with the cut at 10⁻⁴ and with (1 − tr1) weighting. NAT-05 records the density of the 1e-3 to 5e-3 skin."
       - "Claude, 27 November 2026: the continuous bounds reproduce from the census moments by separate arithmetic (all four intervals to four decimals), and Codex's script regenerates its table byte for byte. The shift is not the effect flagged in the previous line. It comes from cells above the cut: the binary cocoon's thermal change is 9.4%, 0.2%, 20.1% and 11.3% of delivery in C-HI, C-LO, G-HI and G-LO, the whole-grid tracer-weighted change is 2.7%, 0.04%, 3.8% and 3.1%, and the pressure-weighted mean tracer of the binary lobe is 0.10–0.22. Binary and continuous are two conventions, not two estimates of one quantity. If no tracer-weighted thermal energy lies outside R100, the continuous values are 58.2%, 91.6%, 47.7% and 74.3%; this prediction was posted before the native read (board 3870). The concern in the previous line is sized by the tagged mass in cells at or below the cut, 0.43–1.66% of the total, which at the average energy per tagged gram is at most 0.4–1.7% of delivery. That is a sizing, not a bound."
+      - "Codex, 27 November 2026: all five native reads reproduce the primary cell counts, volumes and thermal changes. A separate recombination of their compact tracer bands matches the published thermal stocks within 1.2e-15 of delivery. All four continuous results fall inside the bounds Claude recomputed before submission and within 0.043 percentage points of the four forecasts in board 3870. Most of the G-HI difference between conventions comes from allocating 16.297 points in cells above 0.001. The signed change in all gas in the band removed by the tighter cut is 3.387 points. Which material supplied that heat is unresolved in a single-pressure fluid."
     depends_on: [NAT-04, NAT-05, BND-12]
 
   - id: BND-01
@@ -901,7 +910,7 @@ claims:
     depends_on: [BND-12, BND-14, BND-15]
 
   - id: BND-17
-    status: provisional
+    status: supported
     statement: >-
       At 50 Myr in C-LO the gas between R300 and the fixed inset box stores
       an excess of 32.4% of cumulative injector gas delivery. Beyond R100
@@ -914,8 +923,9 @@ claims:
       absolute change between either sphere and the box stays below 0.019%
       of delivery at every saved age where the sphere fits inside it.
     evidence:
-      - {path: docs/science/four_case_aperture_transport_2026-11-26.md, commit: 58a87e2}
+      - {path: docs/science/four_case_aperture_transport_2026-11-26.md, commit: 7d0ef2f}
       - {path: scripts/science/plot_aperture_exterior_stocks.py, commit: 58a87e2}
+      - {path: docs/correspondence/thread-0029.md, commit: 793290e}
       - {path: docs/science/four_case_aperture_transport_method_2026-11-26.md, commit: c9ae598}
       - {path: docs/science/assets/aperture_transport_2026-11-26/extraction_receipt.json, commit: c9ae598}
       - {path: docs/science/assets/aperture_transport_2026-11-26/tables/primary_balances.csv, commit: c9ae598}
