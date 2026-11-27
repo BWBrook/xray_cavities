@@ -13,7 +13,10 @@ The registered rule is their mean. Here each is closed on its own and its
 residual is compared with the whole-grid residual of the same interval. The
 script also totals the flux on each snapshot's own surface, splits the
 transport into the C-LO shell by component, and replays the jump counts of
-the candidate fronts (NAT-03). With --slab-archive (the retained turn-34
+the candidate fronts (NAT-03). exterior.csv compares the energy stored
+between each aperture and the fixed inset box (an independent stock) with
+the net left outside by each transport account, at ages where the sphere
+lies inside that box. With --slab-archive (the retained turn-34
 projections) it also places each axial front against the farthest
 tracer-bearing gas on sightlines through the jet axis.
 
@@ -39,6 +42,7 @@ OUT = ASSETS / 'aperture_transport_review_2026-11-27'
 CASES = ('C-HI', 'C-LO', 'G-HI', 'G-LO')
 APERTURES = ('R100', 'R300')
 MYR = 3.15576e13
+BOX_HALF_WIDTH_KPC = 149.72422790527344
 PARTS = {'thermal_advective': 'thermal_advective_flux_outward_erg_s', 'pressure_work': 'pressure_work_outward_erg_s',
          'kinetic': 'kinetic_flux_outward_erg_s', 'gravitational': 'gravitational_flux_outward_erg_s',
          'total': 'total_energy_flux_outward_erg_s', 'mass': 'mass_flux_outward_g_s'}
@@ -68,12 +72,15 @@ def load(case):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--slab-archive', type=Path, help='private_archive/turn34_four_case_slabs')
+    parser.add_argument('--pilot-projection', type=Path, help='G-HI/20 projections.npz from the slab pilot')
     args = parser.parse_args()
     OUT.mkdir(exist_ok=True)
     stock = {(r['case'], int(r['snapshot_index']), r['aperture']): r for r in read(PARTITION / 'sphere_components.csv') if r['region'] == 'all'}
     published = {(r['case'], int(r['end_index']), r['aperture']): r for r in read(TRANSPORT / 'tables/primary_balances.csv')
                  if (r['face_method'], r['integration_rule']) == ('centered_primitives', 'symmetric_fixed')}
-    rules, shell, calibration = [], [], []
+    box = {(r['case'], int(r['snapshot_index'])): r for r in read(PARTITION / 'box_components.csv')
+           if (r['aperture'], r['region']) == ('fixed_inset_box', 'all')}
+    rules, shell, calibration, exterior = [], [], [], []
 
     for case in CASES:
         records = load(case)
@@ -121,8 +128,17 @@ def main():
                 d = run['delivery']
                 state = {'complete': complete, 'age': records[index]['identity']['actual_age_myr'],
                          'radius': after['surfaces']['current']['radius_kpc'], **run,
+                         'specific_thermal': flux(after, 'current', 'thermal_advective') / flux(after, 'current', 'mass') if flux(after, 'current', 'mass') else float('nan'),
                          **{f'stock_{part}': level(index, part) for part in COLUMNS}}
                 totals[aperture][index] = state
+                if complete and state['radius'] < BOX_HALF_WIDTH_KPC:
+                    outside = float(box[case, index]['total_delta_erg']) - level(index, 'total')
+                    exterior.append({
+                        'case': case, 'end_index': index, 'actual_age_myr': state['age'], 'aperture': aperture, 'radius_kpc': state['radius'],
+                        'stored_between_aperture_and_inset_box_over_delivery': outside / d,
+                        'later_radius_outward_minus_stored_ahead_over_delivery': (run['later_total'] - run['ahead_at_start_total']) / d,
+                        'registered_outward_minus_membership_over_delivery': (transport - membership) / d,
+                        'registered_outward_over_delivery': transport / d})
                 rules.append({
                     'case': case, 'end_index': index, 'actual_age_myr': state['age'], 'aperture': aperture,
                     'radius_kpc': state['radius'], 'spheres_complete_so_far': complete, 'delivered_gas_erg': d,
@@ -161,6 +177,9 @@ def main():
                 'shell_stock_over_delivery': (outer['stock_total'] - inner['stock_total']) / d,
                 **{f'shell_{part}_over_delivery': (outer[f'stock_{part}'] - inner[f'stock_{part}']) / d for part in ('thermal', 'kinetic', 'gravitational')},
                 'shell_mass_change_g': outer['stock_mass'] - inner['stock_mass'],
+                'shell_thermal_gain_per_mass_gain_erg_per_g': (outer['stock_thermal'] - inner['stock_thermal']) / (outer['stock_mass'] - inner['stock_mass'])
+                    if outer['stock_mass'] != inner['stock_mass'] else float('nan'),
+                'specific_thermal_energy_at_R300_erg_per_g': inner['specific_thermal'], 'specific_thermal_energy_at_R100_erg_per_g': outer['specific_thermal'],
                 'net_into_shell_earlier_radii': net('earlier') / d, 'net_into_shell_later_radii': net('later') / d,
                 'net_into_shell_registered_mean': mean() / d, 'net_into_shell_own_surfaces': net('own_surface') / d,
                 **{f'net_into_shell_{part}': mean(part) / d for part in ('thermal_advective', 'pressure_work', 'kinetic', 'gravitational')},
@@ -194,6 +213,8 @@ def main():
                 'pressure_ratio_expected_at_propagation_mach': (5 * number(r['signed_radial_mach']) ** 2 - 1) / 4,
                 'shock_distance_kpc': number(r['shock_distance_kpc'])})
             projection = args.slab_archive and args.slab_archive / f'native/{case}_{index:04d}/projections.npz'
+            if (case, index) == ('G-HI', 20) and args.pilot_projection:
+                projection = args.pilot_projection
             if projection and projection.exists():
                 with np.load(projection, allow_pickle=False) as data:
                     z, edges, x, path = data['z_axis_kpc'], data['z_edges_kpc'], data['horizontal_axis_kpc'], data['tracer_path_full']
@@ -207,7 +228,7 @@ def main():
             else:
                 fronts[-1].update({'tracer_tip_on_axis_sightlines_kpc': '', 'front_minus_tip_kpc': '', 'front_minus_tip_cells': ''})
 
-    for name, table in (('rules.csv', rules), ('shell.csv', shell), ('fronts.csv', fronts)):
+    for name, table in (('rules.csv', rules), ('shell.csv', shell), ('fronts.csv', fronts), ('exterior.csv', exterior)):
         write(name, table)
     digest = lambda p: hashlib.file_digest(p.open('rb'), 'sha256').hexdigest()
     checks = {key: int(sum(bool(r[key]) for r in calibration)) for key in ('stock', 'membership', 'transport', 'residual')}
@@ -219,7 +240,7 @@ def main():
         'inputs': {str(p.relative_to(ROOT)): digest(p) for p in (
             *(TRANSPORT / f'endpoints_{c}.zip' for c in CASES), TRANSPORT / 'tables/primary_balances.csv',
             PARTITION / 'sphere_components.csv', SHOCKS / 'axial_evidence.csv', SHOCKS / 'downstream_components.csv')},
-        'tables': {name: digest(OUT / name) for name in ('rules.csv', 'shell.csv', 'fronts.csv')}}, indent=2) + '\n')
+        'tables': {name: digest(OUT / name) for name in ('rules.csv', 'shell.csv', 'fronts.csv', 'exterior.csv')}}, indent=2) + '\n')
     print(len(calibration), checks, len(bilateral), both)
 
 

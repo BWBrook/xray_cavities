@@ -37,7 +37,8 @@
   },
   "tables": {
     "rules.csv": "f9b92beadca2f0d8cbe02bf892d26f1b0bbe90d969e6f5c9e53f306f2d023684",
-    "shell.csv": "a09de3a0c25eacf09f0e427acfb4828eec34cdf85c86176bbecc5c983784f95e",
-    "fronts.csv": "4dbef4d78e8b23bc53b8811af832aced3defc05cbf0ac04b09e2b63868e5e838"
+    "shell.csv": "fcba6592f7412b67e13ab1d73c2fe7ef360dd807e2b1f4104e49ecbb48d511bf",
+    "fronts.csv": "6b50eb782cc2286756010ed9e3bb6d5e497409dddab3e7573a5534b3511111a6",
+    "exterior.csv": "91092b1e434175c195803a45de34302af445eef395252bf441b9a77838ca42d9"
   }
 }
