@@ -95,14 +95,14 @@ def build(path):
                     markerfacecolor="white" if key == "comparison" else color, linewidth=width, ls=line,
                     zorder=3 if key == "primary" else 2, label=name)
         for jumps, face, name in (
-            (True, colors[3], "Downstream ambient ΔE, bilateral pressure and density jumps"),
-            (False, "none", "Downstream ambient ΔE, other candidate fronts"),
+            (True, colors[3], "Selected ambient ΔE, bilateral pressure and density jumps"),
+            (False, "none", "Selected ambient ΔE, other candidate fronts"),
         ):
             valid = [r for r in rows if r["downstream"] is not None and r["jumps"] == jumps]
             ax.plot([r["age"] for r in valid], [r["downstream"] for r in valid], marker="D", linestyle="none",
                     markersize=7, markeredgewidth=1.45, markeredgecolor=colors[3], markerfacecolor=face, label=name)
         if case == "C-LO":
-            ax.text(.04, .94, "Downstream unresolved at 20–50 Myr", color=colors[3], fontsize=8,
+            ax.text(.04, .94, "No bilateral selection at 20–50 Myr", color=colors[3], fontsize=8,
                     transform=ax.transAxes, va="top")
         ax.set(title=case, xlim=(7.5, 52.5), ylim=(-.25, 1.75), xticks=AGES, yticks=(-.25, 0, .5, 1, 1.5))
         ax.axhline(1, color=".38", ls=":", lw=1.0, zorder=0)

@@ -2,7 +2,7 @@
 
 The cluster (C, Stewart atmosphere 002003) and group (G, 002031) each received a high-power (HI, nominal bipolar power 2 × 10⁴⁵ erg/s) and low-power jet (LO, 2 × 10⁴³ erg/s). PLUTO evolved a single fluid with γ = 5/3 on a stretched 960 × 960 × 1,014 Cartesian grid, with 0.05-kpc central cells and outer faces at ±200 kpc in x and y and ±250 kpc in z. The 0.75-kpc injector contains two 15° half-opening-angle cones at 0.1c. The production scheme uses linear reconstruction, HLLC with shock-triggered HLL fallback, two Runge–Kutta stages and selective entropy recovery. The fluid snapshots have single-precision fields at approximately 1-Myr intervals. There are 201 retained snapshots from 0 to 50.000000 Myr in C-HI, C-LO and G-LO, and 0 to 46.999150 Myr in G-HI. The integration uses the actual time of each output. [Production setup](four_case_scientific_synthesis_2026-08-26.md) · [Injector reconstruction](injector_faces_2026-11-19.md) · [Actual ages and source digests](assets/four_case_energy_partition_2026-11-26/snapshots.csv)
 
-At 30 Myr, ambient gas accounts for the largest thermal energy increase in every R100 aperture. Its thermal energy rises by 31.4% of delivered energy in G-HI, 51.5% in C-HI, 66.1% in G-LO and 91.4% in C-LO. C-LO is also the case where the aperture matters most. At 50 Myr the ambient gas between R300 and R100 alone holds a signed increase equal to **27.4% of measured injector delivery**, including 20.0% in thermal energy. Both apertures contain every on-grid cocoon cell. [Two-aperture component histories](assets/four_case_energy_partition_2026-11-26/sphere_components.csv)
+At 30 Myr, cells assigned to the ambient atmosphere by the jet-tracer cut (tr1 ≤ 0.001) account for the largest thermal energy increase in every R100 aperture. Their thermal energy rises by 31.4% of delivered energy in G-HI, 51.5% in C-HI, 66.1% in G-LO and 91.4% in C-LO. C-LO is also the case where the aperture matters most. At 50 Myr the ambient gas between R300 and R100 alone holds a signed increase equal to **27.4% of measured injector delivery**, including 20.0% in thermal energy. Both apertures contain every on-grid cocoon cell. [Two-aperture component histories](assets/four_case_energy_partition_2026-11-26/sphere_components.csv)
 
 ## What the fractions measure
 
@@ -37,6 +37,19 @@ Within R100, the kinetic increase in the high-power cases is larger than in the 
 | G-LO | Ambient | +0.6613 | +0.1398 | +0.0979 | +0.8991 | +2.99 |
 
 The machine-readable table gives each component in erg and as a fraction of D for outputs near 10, 20, 30, 40 and 50 Myr where retained, plus the flagged G-HI endpoint. [Selected-age component table](assets/four_case_energy_partition_2026-11-26/selected_age_components.csv)
+
+## How tracer weighting changes the 30-Myr thermal partition
+
+The primary calculation gives each cell with jet tracer at or below 0.001 its full weight. An alternative assigns a share `1 − tr1` of every cell’s thermal change to ambient material, applying the current tracer weight to both the evolved and initial pressure at the same position. The archived pressure sums and the measured containment of all cells above 0.001 already bound this alternative.
+
+| Case | Thermal gain from the binary mask (% of delivery) | Thermal gain with continuous weights (% of delivery) | Fraction of all tagged mass at tracer ≤ 0.001, whole grid |
+| --- | ---: | ---: | ---: |
+| C-HI | 51.50 | 56.91–59.61 | 0.529% |
+| C-LO | 91.37 | 86.70–96.46 | 1.657% |
+| G-HI | 31.40 | 47.57–47.82 | 0.427% |
+| G-LO | 66.13 | 68.74–80.55 | 1.415% |
+
+The continuous intervals are algebraic bounds, rounded outwards. In G-HI, assigning mixed cells proportionally adds at least 16.17 percentage points to the ambient share. The cut and weighting also give distinct answers in C-HI and G-LO. The C-LO bounds contain its binary result. The dilute tracer-mass column measures marked mass on the whole grid and bounds its share inside R100. The single-fluid calculation stores one pressure per cell. Neither convention can recover separate temperatures for material of the two origins. The jet speed fixes the *kinetic* energy per gram at injection. Determining the thermal gain of cells with tracer between 0.0001 and 0.001 requires their current and initial pressures. [Derivation and source receipts](assets/aperture_partition_followup_2026-11-27/tracer_bounds.md) · [Numerical bounds](assets/aperture_partition_followup_2026-11-27/thermal_tracer_30myr.csv)
 
 ## Radius, outer gas and boundary contact
 

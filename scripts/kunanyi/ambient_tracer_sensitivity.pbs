@@ -1,0 +1,19 @@
+#!/bin/bash
+#PBS -q normal
+#PBS -l select=1:ncpus=1:mem=4gb
+#PBS -l walltime=01:00:00
+#PBS -m ae
+#PBS -j oe
+#PBS -r n
+set -euo pipefail
+umask 077
+cd "${PBS_O_WORKDIR:?}"
+printf '%s  stage.sha256\n' "${TRACER_STAGE_SHA:?}" | sha256sum --check --quiet -
+sha256sum --check --quiet stage.sha256
+ref="${TRACER_REFERENCE_STAGE:?}"
+(cd "$ref" && printf '%s  stage.sha256\n' '6d891b93b5905a686d7f6c457cba881bab4e1df6a892cdcc7da39d56cdca3215' | sha256sum --check --quiet - && sha256sum --check --quiet stage.sha256)
+export PYTHONPATH="$ref/science" PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+/share/apps/software/Anaconda3/2024.02-1/bin/python -u measure_ambient_tracer_sensitivity.py \
+  --stage "$ref" --stocks sphere_components.csv --case "${TRACER_CASE:?}" --index "${TRACER_INDEX:?}" \
+  --output "results/${TRACER_CASE}_${TRACER_INDEX}.json"
