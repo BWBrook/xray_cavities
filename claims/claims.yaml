@@ -45,7 +45,7 @@ claims:
       - "Net delivery measures what the free grid received. Dividing by cone delivery alone changes the high-power ratios by 0.1% and lowers C-LO to 0.545-0.956 and G-LO to 0.530-0.677."
       - "Tagged-mass closure discriminates between the reconstructions. Over intervals 20-47 the primary method closes to 4e-4 of an interval's labelled mass or better in G-HI and to 1e-4 or better in the other three cases; first-order states miss by 5.6-6.2% in every one of those intervals, so their rows are not an uncertainty envelope. Startup closure sums to -0.126 (C-LO) and +0.038 (G-LO) of one interval's labelled mass and the terminal interval over-predicts by 0.035-0.036. Applied to energy at the same scale these move C-LO's 50-Myr ratio by about 0.3% and 0.1%, and its 10-Myr ratio by about 1.3%."
       - "The high-power ratios come from runs with a measured exterior energy deficit. Per 1-Myr interval after 5 Myr it is 6–10% of labelled input in G-HI and 4–23% in C-HI, where it grows with age and depends on the outer-boundary flux reconstruction (BND-13). The paired restarts identify the entropy update at 10–12 Myr (BND-14). Over the two Myr that differ, lobe enthalpy gain divided by net gas delivered rises from 41.7% to 51.1% in G-HI and from 50.8% to 63.4% in C-HI with the update disabled. Counting the shared first ten Myr gives differences of 1.57 and 2.10 percentage points at age 12 (NAT-12). Its effect on the quoted later ages remains unmeasured."
-    depends_on: [NAT-05]
+    depends_on: [NAT-05, BND-12]
 
   - id: NAT-02
     status: supported
@@ -724,7 +724,6 @@ claims:
       - All sampled boundary transport of marked mass also vanishes through 50 Myr for C-HI, C-LO and G-LO. G-HI first reaches the negative-z face at 47 Myr. Its net outward transport under trapezoidal weighting for 46–47 Myr is 0.04185% of interval-labelled mass. Transport between output times is unmeasured.
       - The reconstructed nozzle surface mass is the signed flux of all gas. C-LO can have net inward mass transport while its inventory of marked material increases. The nozzle speed alone does not give the specific energy of the numerical interface flux or establish an energy sink outside the nozzle.
       - The historical source-tree bytes at compilation were not attested. The retained executable identities, configurations and build commands are checked. The G-HI comparison ends at the accepted index 47.
-    depends_on: [BND-08]
 
   - id: BND-11
     status: supported
@@ -806,7 +805,7 @@ claims:
       - C-HI's sampled absolute net gravitational work is 32.8% of the primary exterior deficit at 10–12 Myr and 51.9% at 29–30 Myr. In G-HI, 6.95–7.13 percentage points of the 10–12 Myr deficit lie beyond 0.85 kpc across the 24 matched methods. These saved-state spatial balances motivate the paired native-stage measurement of the entropy update.
       - Agreement between the two saved-state work estimates shows that the saved fields satisfy discrete continuity. It cannot detect an error in the solver's stage-resolved source term. The stronger exclusion is magnitude: at 29–30 Myr the whole exterior gravitational work is about −2.1% of labelled energy, a quarter of the −8.4% residual, and a second-order source-term error cannot exceed the term itself (Claude, 21 Nov 2026).
       - The production runs enable PLUTO's entropy switch (G-LO run log, `ENTROPY_SWITCH: ENABLED`; the paired-control definitions.h uses SELECTIVE). In cells it marks unshocked, pressure is recovered from conservatively advected entropy, so total energy is not conserved. The change is two-signed. Kinetic energy dissipated numerically in shear layers is not returned as heat, while mixing gas of different density at equal pressure raises the recovered pressure (Gemini's review, 21 November 2026; a factor 7.15 for an equal-volume 100:1 mix). BND-14 measures the net loss in the high-power restarts at 10–12 Myr. BND-15 measures a gain in C-LO and a loss in G-LO in that window. At later ages the numerical attribution remains open.
-    depends_on: [BND-08, BND-12]
+    depends_on: [BND-12]
 
   - id: BND-14
     status: supported
