@@ -1,0 +1,54 @@
+{
+  "case_ages": 19,
+  "geometry": "direct_native",
+  "max_pressure_split_ratio_width": 0.0,
+  "maximum_centroid_tilt_deg": 0.6702137048971447,
+  "maximum_gravity_relative_difference": 0.0011916264389091324,
+  "maximum_relative_buoyant_power_reduction": 0.08010043311824566,
+  "maximum_sound_relative_difference": 9.4468428706862e-05,
+  "median_silhouette_power_over_mean_delivery": 0.2398649201538245,
+  "powers": 57,
+  "primary_cross_section": "maximum native section normal to the bipolar z axis",
+  "ranges": {
+    "buoyant_rise": {
+      "effective_age_over_true": {
+        "max": 5.505699018072775,
+        "median": 2.4110056081826556,
+        "min": 1.2966668081073973
+      },
+      "power_over_mean_delivery": {
+        "max": 0.5258064647152492,
+        "median": 0.2542889180869488,
+        "min": 0.07820766973295704
+      }
+    },
+    "refill": {
+      "effective_age_over_true": {
+        "max": 17.610053174969163,
+        "median": 5.502204247970489,
+        "min": 2.025597031312287
+      },
+      "power_over_mean_delivery": {
+        "max": 0.4869508843987247,
+        "median": 0.09268456705408286,
+        "min": 0.024451254415661667
+      }
+    },
+    "sound_crossing": {
+      "effective_age_over_true": {
+        "max": 6.8619552204510095,
+        "median": 2.5490491501478845,
+        "min": 1.3675578808410065
+      },
+      "power_over_mean_delivery": {
+        "max": 0.7212610739564193,
+        "median": 0.2007097847034099,
+        "min": 0.06275002920030723
+      }
+    }
+  },
+  "side_clocks_above_true_age": 114,
+  "sides": 38,
+  "sides_contacting_domain": 0,
+  "sides_with_formal_buoyant_speed_above_sound": 23
+}

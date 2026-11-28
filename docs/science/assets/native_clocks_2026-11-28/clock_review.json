@@ -1,0 +1,88 @@
+{
+  "case_ages": 19,
+  "direct_native_receipts": true,
+  "heldout_eligibility": {
+    "ambient_replaced_refit/deficit_threshold_observer_radial_0.05": {
+      "bipolar_views": 6,
+      "passing_sides": 13,
+      "tested_sides": 108
+    },
+    "ambient_replaced_refit/seed_grow_goal045": {
+      "bipolar_views": 3,
+      "passing_sides": 6,
+      "tested_sides": 108
+    },
+    "observer_refit/deficit_threshold_observer_radial_0.05": {
+      "bipolar_views": 0,
+      "passing_sides": 0,
+      "tested_sides": 108
+    },
+    "observer_refit/seed_grow_goal045": {
+      "bipolar_views": 0,
+      "passing_sides": 0,
+      "tested_sides": 108
+    }
+  },
+  "maximum_relative_disagreement": {
+    "age": 0.0,
+    "effective_age": 1.1546319456101628e-14,
+    "factor_product": 4.440892098500626e-16,
+    "mean_actual_power": 2.220446049250313e-16,
+    "net_gas_delivery": 2.220446049250313e-16,
+    "power": 1.1546319456101628e-14,
+    "power_over_actual_mean": 1.1546319456101628e-14,
+    "powers_4pv": 1.1546319456101628e-14,
+    "side_power": 1.942890293094024e-14,
+    "side_time": 1.9317880628477724e-14,
+    "union_power": 1.1435297153639112e-14,
+    "whole_lobe_enthalpy": 2.220446049250313e-16
+  },
+  "pairs": 57,
+  "ranges": {
+    "buoyant_rise": {
+      "effective_age_over_true": {
+        "max": 5.505699018072777,
+        "median": 2.411005608182666,
+        "min": 1.2966668081073973
+      },
+      "power_over_mean_delivery": {
+        "max": 0.5258064647152492,
+        "median": 0.25428891808694853,
+        "min": 0.07820766973295701
+      }
+    },
+    "refill": {
+      "effective_age_over_true": {
+        "max": 17.610053174969163,
+        "median": 5.502204247970496,
+        "min": 2.0255970313122873
+      },
+      "power_over_mean_delivery": {
+        "max": 0.48695088439872447,
+        "median": 0.09268456705408296,
+        "min": 0.024451254415661657
+      }
+    },
+    "sound_crossing": {
+      "effective_age_over_true": {
+        "max": 6.861955220451009,
+        "median": 2.549049150147885,
+        "min": 1.3675578808410063
+      },
+      "power_over_mean_delivery": {
+        "max": 0.7212610739564191,
+        "median": 0.2007097847034099,
+        "min": 0.06275002920030724
+      }
+    }
+  },
+  "sensitivities": {
+    "archived_centroid_endpoint_side_age_max_fraction": 0.00010815424864052403,
+    "centroid_to_axis_max_deg": 0.6702137048971447,
+    "legacy_enthalpy_power_max_fraction": 7.014183361531146e-05,
+    "prescribed_vs_grid_side_age_max_fraction": 0.0005959908219868026,
+    "side_enthalpy_allocation_max_absolute_power_ratio_change": 9.228919627091159e-05,
+    "union_vs_max_section_power_max_fraction": 0.08010043311824522
+  },
+  "sides": 38
+}

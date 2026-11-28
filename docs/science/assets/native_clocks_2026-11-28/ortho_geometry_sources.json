@@ -1,0 +1,217 @@
+{
+  "cases_ages": 19,
+  "hemispheres": 38,
+  "binary_selection": "tr1 > 0.001 on current native cells; full line of sight and both signs of z",
+  "volume_section": "A(z)=sum(path*du), V=sum(A*dz); S is maximum native axial-normal A(z) on that side",
+  "centroid": "0-degree native edge midpoints for x,z; 90-degree u=-y with volume-weighted bin centres and a rigorous half-bin error bound",
+  "pressure_check": "Historical Q029 side pressure integrals use their original quadrature. The signed historical summed enthalpy difference is relative to the current exact whole-lobe turn-15 integral.",
+  "frame_check": "All bounding image rows and columns contain zero tracer for both views in each case-age",
+  "sha256": {
+    "released_truth_manifest": "7ad2cc4b8d46209931aded1ec206e884963fdf7cc30d024d044fa458f8ed170a",
+    "exposed_ghi20_receipt": "4ca1a4f445ae1d65d6a7aa7619ccea7745d545266656875ddfb469487affd31e",
+    "ortho_geometry_csv": "d895ac858b99ed1802be7fc394f0425d31fcfc68d264161597e3463fa294c548",
+    "source_tables": {
+      "docs/science/assets/native_delivery_restatement_2026-11-21/primary_selected_ages.csv": "dfaebebf21b1fcbb147a1c7d7a5f85e91c6440f4da2b5afda83ab3aaa5bda473",
+      "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-HI/native_energy_selected_age.csv": "8d8691c6183601e47836a08b859e0d151bc609f6fc96900be74aa7afd62c17b5",
+      "docs/science/assets/turn15_review_2026-11-11/budgets/C-HI/measurements.csv": "eaa10db7812a85704332f2de04897e3b82072831c2718b8537a6f35cf908b968",
+      "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/C-LO/native_energy_selected_age.csv": "a035de60355570ca2ee602706d31403e2e6fc17b8d566126718cf7f7f9bb7451",
+      "docs/science/assets/turn15_review_2026-11-11/budgets/C-LO/measurements.csv": "609a93b736faf194f9c440e438ee0de47da3fcc2310b6d528eabd9c362a6a6c6",
+      "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-HI/native_energy_selected_age.csv": "b98bfaf343b81790ac286ada258e12670526020ea0e50402b0e9cae5305abf1a",
+      "docs/science/assets/turn15_review_2026-11-11/budgets/G-HI/measurements.csv": "f3329d6ca83b8583827c028f58f96ba9f3c4179942b94eae135b67261267990d",
+      "docs/science/assets/q029_binary_native_refresh_2026-09-06/remote_analysis/G-LO/native_energy_selected_age.csv": "6254800d84ca5748f91c7d4aebb18282fb0de4b24ad15e7a23d6af19e617a16a",
+      "docs/science/assets/turn15_review_2026-11-11/budgets/G-LO/measurements.csv": "f3208616c90415857d7aad5476a3a46dcdbe314803ec2ad5b7e9f5671d2f69cf"
+    }
+  },
+  "inputs": [
+    {
+      "view": "C-HI_0010_0deg",
+      "projection_sha256": "976bbb700ed6792fe69fdbe0462e27159f5a80ac28be3a60b8e5828d2b018c86",
+      "producer_receipt_sha256": "a60f359c101fefe096999e5c6690e505338df21e9894fa2f5d2896afdc3af245"
+    },
+    {
+      "view": "C-HI_0010_90deg",
+      "projection_sha256": "be7e98d400d287f7c0267f7370740100c57c2f4569b4e22de103d37277d84d54",
+      "producer_receipt_sha256": "a60f359c101fefe096999e5c6690e505338df21e9894fa2f5d2896afdc3af245"
+    },
+    {
+      "view": "C-HI_0020_0deg",
+      "projection_sha256": "35e16a03cd7ac76e0fbb508112fdcc217780ecd7bad7ac06c7125f4defba6d2e",
+      "producer_receipt_sha256": "1122124ca5a08d4fdad4887cd3562ef77affc610f17b826b9ce3344db171d0ba"
+    },
+    {
+      "view": "C-HI_0020_90deg",
+      "projection_sha256": "676acc0c38ebbbcef5d4bafe09805c107a63f8f1969c08d6dc2ab1f6b55b60dc",
+      "producer_receipt_sha256": "1122124ca5a08d4fdad4887cd3562ef77affc610f17b826b9ce3344db171d0ba"
+    },
+    {
+      "view": "C-HI_0030_0deg",
+      "projection_sha256": "3298e2ddedbb1459f4875a367a9cd8d225931d9521d1a55da88d5f73b69c0a44",
+      "producer_receipt_sha256": "e017fe696871b1ff78aa3dc038e0a84dd49db30a4fa700254ccaf38ac84f4af1"
+    },
+    {
+      "view": "C-HI_0030_90deg",
+      "projection_sha256": "1e0115a72b27ac439729e0e824e5d25253eb4fbf8b9b9c25a05a9a8add54f9f1",
+      "producer_receipt_sha256": "e017fe696871b1ff78aa3dc038e0a84dd49db30a4fa700254ccaf38ac84f4af1"
+    },
+    {
+      "view": "C-HI_0040_0deg",
+      "projection_sha256": "f1de70315b746a2daf779fd17fe18c208b20388ad938a2bd0cd1060ef5bf0acf",
+      "producer_receipt_sha256": "500bb79c1148ffe221ba842058cc35268d05ddf8be474a0dfbaadd1c2c7a4bd0"
+    },
+    {
+      "view": "C-HI_0040_90deg",
+      "projection_sha256": "df0a258dd226e561fc373b3e5c13e3791bdc734987dfb2f77d6586000304cd36",
+      "producer_receipt_sha256": "500bb79c1148ffe221ba842058cc35268d05ddf8be474a0dfbaadd1c2c7a4bd0"
+    },
+    {
+      "view": "C-HI_0050_0deg",
+      "projection_sha256": "ae84f7433455e6b4accd54ef4ec072784bbd472ba333011e51dcbd73ec9976cc",
+      "producer_receipt_sha256": "0aa31a7a8ab78837736ff45ac91f0a473845d8f6366a7c9800d8eafa0d6bf234"
+    },
+    {
+      "view": "C-HI_0050_90deg",
+      "projection_sha256": "a7ae6087bbad3a18b035a39dd36dbe8d32abf781ff970e35bcf4530d53ef53e3",
+      "producer_receipt_sha256": "0aa31a7a8ab78837736ff45ac91f0a473845d8f6366a7c9800d8eafa0d6bf234"
+    },
+    {
+      "view": "C-LO_0010_0deg",
+      "projection_sha256": "014353f68823138aa338ffbac6f7f71821d30ec7cbaff805cef604591372f9b8",
+      "producer_receipt_sha256": "b7207b2c12a0a77fe2f6cc6c6492dcee11574c9b9346b551db91e5049ed018e8"
+    },
+    {
+      "view": "C-LO_0010_90deg",
+      "projection_sha256": "cdb6607f27fd7a71c0514e0fb414c8fc8113185971243a28b3de8a30e66dab65",
+      "producer_receipt_sha256": "b7207b2c12a0a77fe2f6cc6c6492dcee11574c9b9346b551db91e5049ed018e8"
+    },
+    {
+      "view": "C-LO_0020_0deg",
+      "projection_sha256": "a96139270411551639b5c93dcf7d83fcde81f7f3b5651aa29df37f1854669444",
+      "producer_receipt_sha256": "42a9fe6d0b7413e64a139a2bf2e939256287ff618ab7282593170964044a6739"
+    },
+    {
+      "view": "C-LO_0020_90deg",
+      "projection_sha256": "6535ba9602c4a2a42fc533cc385649fd5ccd01676eae426fa479ed58efe6b69e",
+      "producer_receipt_sha256": "42a9fe6d0b7413e64a139a2bf2e939256287ff618ab7282593170964044a6739"
+    },
+    {
+      "view": "C-LO_0030_0deg",
+      "projection_sha256": "33629434b5e60803b9e8145cdc6c5620e59bf74ff35a5163adaf3505bf20bac1",
+      "producer_receipt_sha256": "ab28785eebd9f4eea930328516c4ceb906324163e5321cc721ea42c10a293ada"
+    },
+    {
+      "view": "C-LO_0030_90deg",
+      "projection_sha256": "1560f87d82ee7dc0cece7a025043fe1c1d94002f1d63f4c529a5b0e371a5799c",
+      "producer_receipt_sha256": "ab28785eebd9f4eea930328516c4ceb906324163e5321cc721ea42c10a293ada"
+    },
+    {
+      "view": "C-LO_0040_0deg",
+      "projection_sha256": "8a0aa13f94d244e2f4dc0e8c42b863aa1bd62a8990c4b3f4912a811b4e4c8913",
+      "producer_receipt_sha256": "5fe8d654ff81cd3a0b93c5f3a13b11e25cd3941161f8b41b68661499bffbeba0"
+    },
+    {
+      "view": "C-LO_0040_90deg",
+      "projection_sha256": "5aef3f63056513d0bd7d9a67efd3aec4e5655ffd9dc59dc0dfa44e833d77c647",
+      "producer_receipt_sha256": "5fe8d654ff81cd3a0b93c5f3a13b11e25cd3941161f8b41b68661499bffbeba0"
+    },
+    {
+      "view": "C-LO_0050_0deg",
+      "projection_sha256": "b01d055fdb9c21fa8b99986190880c258a43ebb380a79a3b7322bf70d7cb99f0",
+      "producer_receipt_sha256": "03bd3b36000d8f2f547ee593ea47913a5b17e8aec76e57f20122038a0ce116a1"
+    },
+    {
+      "view": "C-LO_0050_90deg",
+      "projection_sha256": "f893b87253395184e2befe697cb23a50eab5eed48a827baf4cebe496d6dd278d",
+      "producer_receipt_sha256": "03bd3b36000d8f2f547ee593ea47913a5b17e8aec76e57f20122038a0ce116a1"
+    },
+    {
+      "view": "G-HI_0010_0deg",
+      "projection_sha256": "db3e6822953ac61dfd22977160f501258da8a5ad51efc99cc2d1f3e6bfb64a0c",
+      "producer_receipt_sha256": "54ac3ceb96674e5b72603f551b2d565fc56df5055941fb3ff89296487f99f8eb"
+    },
+    {
+      "view": "G-HI_0010_90deg",
+      "projection_sha256": "b3749a731bbd8d40906431d2004ea77289667d8ca208d3778abf377f00f8bbd2",
+      "producer_receipt_sha256": "54ac3ceb96674e5b72603f551b2d565fc56df5055941fb3ff89296487f99f8eb"
+    },
+    {
+      "view": "G-HI_0020_0deg",
+      "projection_sha256": "46935fca242ddc96c4ad8776db1b4e00e76ec27f9215a923308e29f323d99e80",
+      "producer_receipt_sha256": "4ca1a4f445ae1d65d6a7aa7619ccea7745d545266656875ddfb469487affd31e"
+    },
+    {
+      "view": "G-HI_0020_90deg",
+      "projection_sha256": "d77542fff88a0866e772623a6595f1a8babebb9a5d0dae5f349262b1576b5956",
+      "producer_receipt_sha256": "4ca1a4f445ae1d65d6a7aa7619ccea7745d545266656875ddfb469487affd31e"
+    },
+    {
+      "view": "G-HI_0030_0deg",
+      "projection_sha256": "4c9d766873c0175d801c63502176ed8ebce1d97e965b64dc5f6d823fac3783a8",
+      "producer_receipt_sha256": "5707c04e26c9af7a9c838e264ebd859163dee97dab18afd2284d068301d6d4a6"
+    },
+    {
+      "view": "G-HI_0030_90deg",
+      "projection_sha256": "cdeec47e4cc7cc7694e2ea4126f2025bbe82c5b7b85691b03cca371d9a96f8a4",
+      "producer_receipt_sha256": "5707c04e26c9af7a9c838e264ebd859163dee97dab18afd2284d068301d6d4a6"
+    },
+    {
+      "view": "G-HI_0040_0deg",
+      "projection_sha256": "41cea93de3703eab87770e5f68bf61086e3c44084da8236332ff674bb808a2fa",
+      "producer_receipt_sha256": "f63d0b59ee7e87307c7b878669c8caa77b0b30311fc6419350dc55f67eb442af"
+    },
+    {
+      "view": "G-HI_0040_90deg",
+      "projection_sha256": "705eba1394a5b8227b8aa01b07f6d234ca56eaf6998a0000322376b319455480",
+      "producer_receipt_sha256": "f63d0b59ee7e87307c7b878669c8caa77b0b30311fc6419350dc55f67eb442af"
+    },
+    {
+      "view": "G-LO_0010_0deg",
+      "projection_sha256": "33e92ffe15bf114eb2ba81ccce0ea61e703ae9821d206c2ebfb2da332b0c3194",
+      "producer_receipt_sha256": "a29f2c7007f710c0189023deb89fec4704d5e1b8f76a19e9281a35ce1402d2f8"
+    },
+    {
+      "view": "G-LO_0010_90deg",
+      "projection_sha256": "d3382bd1071499a3a9c503ee0f3ba962ea8a8a37a8a7d0228f24b53be52415c6",
+      "producer_receipt_sha256": "a29f2c7007f710c0189023deb89fec4704d5e1b8f76a19e9281a35ce1402d2f8"
+    },
+    {
+      "view": "G-LO_0020_0deg",
+      "projection_sha256": "a28b1e67f9e8f64f1028919ad7b531f2448afd0033fecd0b0a228d1e59d6037c",
+      "producer_receipt_sha256": "33811d01ece573d768355dbe8ab9d181defd858290bcc2173ae3bebd0612cde7"
+    },
+    {
+      "view": "G-LO_0020_90deg",
+      "projection_sha256": "dc915ea09439f223bcb6ecd8007f389664c6f71adb1b457b984bc6f5de390514",
+      "producer_receipt_sha256": "33811d01ece573d768355dbe8ab9d181defd858290bcc2173ae3bebd0612cde7"
+    },
+    {
+      "view": "G-LO_0030_0deg",
+      "projection_sha256": "747e537c290224addcf68a3abd6e958e22e45d48cdf554c11ff608e70b0061ac",
+      "producer_receipt_sha256": "a6baafd4895d6a52cb5c34a3f3323f7d5a410690dcbdb620c72ebfa85955ba2c"
+    },
+    {
+      "view": "G-LO_0030_90deg",
+      "projection_sha256": "4a963c97ff8179db6aae43017b0f2796821bb2bdbec0f418ffceb01c5eb862c7",
+      "producer_receipt_sha256": "a6baafd4895d6a52cb5c34a3f3323f7d5a410690dcbdb620c72ebfa85955ba2c"
+    },
+    {
+      "view": "G-LO_0040_0deg",
+      "projection_sha256": "4151b0c889e443d0cccbbb95ec4ec5837799d8b4c5b7ce6bbca2673e0e91a75a",
+      "producer_receipt_sha256": "1070ae2d32babc7b0ec718b996c099e7afcf3468933f425ac73547f2d7cdedbe"
+    },
+    {
+      "view": "G-LO_0040_90deg",
+      "projection_sha256": "83fe083cb83f8bbefc98f3dbf4b8efc538a488e41ab1932df8655d295717639e",
+      "producer_receipt_sha256": "1070ae2d32babc7b0ec718b996c099e7afcf3468933f425ac73547f2d7cdedbe"
+    },
+    {
+      "view": "G-LO_0050_0deg",
+      "projection_sha256": "9f96baf970ae4e2d68aace34dca2f6d8f1142bf32504e45b40e41fb5b18a2423",
+      "producer_receipt_sha256": "cd6baeccf983a507761aeaed0b46061f759c353c1251e679045996c424134b20"
+    },
+    {
+      "view": "G-LO_0050_90deg",
+      "projection_sha256": "3db8faf7afa610339ebce0ee3a4621a62e67989d4e75e42c7d4f5b845720d4d7",
+      "producer_receipt_sha256": "cd6baeccf983a507761aeaed0b46061f759c353c1251e679045996c424134b20"
+    }
+  ]
+}
