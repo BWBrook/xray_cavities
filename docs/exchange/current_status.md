@@ -1,9 +1,13 @@
 # Current Status
 
-Updated 28 November 2026. Stas’s four-case energy partition and transport request is complete following Claude’s review of the five native tracer receipts. The preceding independent slab review supports XR-07 and XR-08.
+Updated 28 November 2026. Stas’s native clock comparison covers all 19 case-ages. The four-case energy partition and transport request is complete.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
+
+## Native clocks and article scope, 28 November
+
+The 19 native pressure/tracer reads in PBS array 885822 finished successfully. Each of the three clock prescriptions overestimated the elapsed source age on all 38 sides. With native 2.5pV, the median sound-crossing, buoyant-rise and refill powers were 20.1%, 25.4% and 9.3% of reconstructed mean delivery. Neither image-only rule qualified any of the 54 held-out views. NAT-15 records the native result. NAT-03 remains provisional in the ledger, and its curve and interpretation have been removed from the article and Figure 1. The strict submission build passes. [Results and reproduction](../science/native_cavity_clocks_2026-11-28.md) · [Reviewed abstract and proposed scope for Barry](logs/2026-11-28-reviewed-abstract-and-scope.md)
 
 ## Four-case energy partition and transport, 26 November
 

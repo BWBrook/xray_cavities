@@ -25,6 +25,13 @@ the three clocks by a fixed spectral-to-buoyant ratio. Existing radio-age
 reports, code and supported evidence remain archival, not active priorities.
 See the [scope handover](docs/exchange/logs/2026-11-25-cavity-age-scope-without-radio-ageing.md).
 
+The 19 native case-ages now have separate side ages, bipolar powers and
+a true-age control. Median power relative to mean injector delivery is
+20.1% for sound crossing, 25.4% for buoyant rise and 9.3% for refill.
+The two image-only rules each qualified zero held-out lobe sides.
+[Clock tables and replay](docs/science/native_cavity_clocks_2026-11-28.md)
+<!-- claims: NAT-15 DET-05 -->
+
 ## The question
 
 How well do X-ray cavities measure the energy that radio jets deposit in

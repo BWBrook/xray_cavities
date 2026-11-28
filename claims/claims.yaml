@@ -419,6 +419,35 @@ claims:
       - "Codex, 27 November 2026: all five native reads reproduce the primary cell counts, volumes and thermal changes. A separate recombination of their compact tracer bands matches the published thermal stocks within 1.2e-15 of delivery. All four continuous results fall inside the bounds Claude recomputed before submission and within 0.043 percentage points of the four forecasts in board 3870. Most of the G-HI difference between conventions comes from allocating 16.297 points in cells above 0.001. The signed change in all gas in the band removed by the tighter cut is 3.387 points. Which material supplied that heat is unresolved in a single-pressure fluid."
     depends_on: [NAT-04, NAT-05, BND-12]
 
+  - id: NAT-15
+    status: supported
+    statement: >-
+      At 19 selected production case-ages, the sound-crossing, buoyant-rise
+      and refill estimates exceed the elapsed source age on all 38 native
+      lobe sides. Their median effective bipolar ages are 2.55, 2.41 and
+      5.50 times true age. Summing each side's 2.5pV divided by its own
+      clock age gives median powers of 20.1%, 25.4% and 9.3% of cumulative
+      net injector gas delivery divided by true age, respectively.
+    evidence:
+      - {path: docs/science/native_cavity_clocks_2026-11-28.md, commit: 4375f82}
+      - {path: docs/science/assets/native_clocks_2026-11-28/native_run.json, commit: 4375f82}
+      - {path: docs/science/assets/native_clocks_2026-11-28/native_receipts.zip, commit: 4375f82}
+      - {path: docs/science/assets/native_clocks_2026-11-28/side_clocks.csv, commit: 4375f82}
+      - {path: docs/science/assets/native_clocks_2026-11-28/bipolar_powers.csv, commit: 4375f82}
+      - {path: docs/science/assets/native_clocks_2026-11-28/clock_review.json, commit: 4375f82}
+    reproduce: .venv/bin/python scripts/science/native_cavity_clocks.py && .venv/bin/python scripts/science/review_native_cavity_clocks.py
+    test: >-
+      A separate implementation reconstructed delivery from the saved rates
+      and hydrostatic acceleration from the initial density and pressure.
+      All 57 powers reproduce to 2e-14 relative. Two orthogonal archives of
+      tracer path length check the direct native volumes, centroids within
+      the sky-bin bound, and transverse cross-sections.
+    caveats:
+      - Full cells with tracer above 0.001 and pressure-integrated native enthalpy. The denominator is a saved-state delivery reconstruction. The three cases other than G-HI extend to 50 Myr on this selected surface. G-HI contributes four ages through 40 Myr.
+      - The primary drag area is the maximum area occupied in a plane perpendicular to the bipolar axis. Using the whole axial silhouette instead gives a median buoyant power of 24.0% of delivery. The prescribed formal terminal speed exceeds local sound speed on 23 of 38 sides.
+      - These are active jets in four individual simulations. The 4pV comparator multiplies every power by 1.6. The sound estimate at C-LO/50 then exceeds mean delivery. DET-05 yielded zero qualifying held-out views under either image-only rule.
+    depends_on: [NAT-01, BND-12]
+
   - id: BND-01
     status: supported
     statement: >-

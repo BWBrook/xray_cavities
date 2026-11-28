@@ -17,7 +17,12 @@ separately, with true simulation age as a control. Existing radio-age
 diagnostics are separate archival work; see the
 [25 November scope decision](docs/exchange/logs/2026-11-25-cavity-age-scope-without-radio-ageing.md).
 
-> **Status, 27 November 2026.** Active research, developed in the open. The
+All three clocks overestimate the elapsed source age on every native lobe
+side. Across 19 case-ages, the median inferred powers are 20.1%, 25.4% and
+9.3% of reconstructed mean delivery, respectively.
+[Native clock results and X-ray eligibility](docs/science/native_cavity_clocks_2026-11-28.md)
+
+> **Status, 28 November 2026.** Active research, developed in the open. The
 > results below are bounded by the [claims ledger](claims/claims.yaml);
 > they are not a validated universal calibration of cavity power.
 
