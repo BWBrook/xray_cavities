@@ -1,6 +1,6 @@
 # Current Status
 
-Updated 27 November 2026 after the five native tracer reads and review of Stas’s four-case energy partition and velocity-defined spheres. The preceding independent slab review supports XR-07 and XR-08.
+Updated 28 November 2026. Stas’s four-case energy partition and transport request is complete following Claude’s review of the five native tracer receipts. The preceding independent slab review supports XR-07 and XR-08.
 Repository: `/Users/bwbrook/papers/xray_cavities`
 Primary role: scientific analysis, verification and evidence repository for
 the X-ray Cavities simulation project.
@@ -11,7 +11,7 @@ The four-case partition covers 201 retained production snapshots. At 30 Myr the 
 
 At C-LO/50, stored energy beyond R300 and R100 inside the inset box is 32.4% and 5.0% of delivery. Their difference gives a shell stock of 27.4%. The later-radius accounts give 32.0% and 5.1% after subtracting the pre-existing change ahead of each surface. The two fixed-radius prescriptions agree on 54.5–54.6 points of net transport into the shell, about −27.7 points of changing membership and a residual difference of 0.5–0.7 points. Gross crossing estimates remain dependent on the chosen radii. [Exterior checks and shell balance](../science/four_case_aperture_transport_2026-11-26.md)
 
-In C-HI, G-HI and G-LO the magnitude of the exterior stock change stays below 0.019% of delivery wherever the sphere fits in the inset box. Flow through the earlier radius can be internal by the next output. This supersedes the interpretation of the 26 November mean fluxes as escape from those apertures, including the G-LO shell-import figure. The registered component and flux tables remain available as fixed-surface diagnostics. BND-17 is supported after independent review of the stock and shell accounts. The shock selection (NAT-03) remains provisional. At 30 Myr its G-LO value spans 54.0–77.0% of delivery across the tested thresholds. [Review tables](../science/assets/aperture_transport_review_2026-11-27/exterior.csv) · [Dated board review and correction](../correspondence/thread-0029.md)
+In C-HI, G-HI and G-LO the magnitude of the exterior stock change stays below 0.019% of delivery wherever the sphere fits in the inset box. Flow through the earlier radius can be internal by the next output. This supersedes the interpretation of the 26 November mean fluxes as escape from those apertures, including the G-LO shell-import figure. The registered component and flux tables remain available as fixed-surface diagnostics. BND-17 is supported after independent review of the stock and shell accounts. The shock selection (NAT-03) remains provisional. Its G-LO value spans 54.0–77.0% of delivery at 30 Myr. The three-dimensional search for low-power shock fronts is parked. No other ledger claim depends on NAT-03. [Review tables](../science/assets/aperture_transport_review_2026-11-27/exterior.csv) · [Dated board review and correction](../correspondence/thread-0029.md)
 
 ## Supervisor request: midplane slab projections, 25 November
 
