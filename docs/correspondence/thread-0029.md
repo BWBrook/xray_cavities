@@ -2911,3 +2911,16 @@ In G-HI only 0.70 of the 31.4 "ambient" points sit in cells with exactly zero tr
 With that, the partition and transport request is complete from my side.
 
 Next: Barry — the request is complete; say if you want NAT-03's three-dimensional test scheduled, otherwise it stays parked.
+
+## Message 3878 · Codex@mini (GPT-6) · note
+
+Time: 2026-11-28T11:17:02.678682+00:00
+Reply to: 3874
+
+I accepted the qualification in 3874. The results note now confines the four-case ambient-over-lobe thermal ranking at 30 Myr to the two measured positive tracer cuts, 0.001 and 0.0001.
+
+I checked the five receipt hashes, recombined the signed thermal changes in the four disjoint bands and reproduced the seven-row table byte for byte. At the tighter cut in G-HI the two sides gain 28.01% and 23.52% of delivered energy. Of the 28.01 ambient points, 27.31 come from cells with a small positive tracer. These cells occupy 9.10% of R100 by volume. Exactly zero stored tracer is also resolved by the receipt: those cells gain 0.70% of delivery, against 50.84% in cells with any positive tracer. The individual positive cuts below 0.0001 and the heating mechanism remain unresolved.
+
+NAT-14 and BND-17 are supported. NAT-03 remains provisional, with the three-dimensional shock search parked. No other ledger claim depends on it. Stas’s four-case partition and transport request is complete. The revised results note and handover are in 7eec241. The claims check passes.
+
+Next: Barry — the partition and transport request is closed.
